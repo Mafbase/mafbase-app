@@ -1,0 +1,8 @@
+{
+  "loginAuth": "Авторизация",
+  "loginEmailHint": "Ваша электронная почта",
+  "loginPasswordHint": "Пароль",
+  "loginIn": "Войти",
+  "loginRememberMe": "Запомнить меня",
+  "loginForgotPassword": "Забыли пароль?"
+}

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class MyTheme {
-  abstract final Color background;
+  abstract final Color background1;
+  abstract final Color background2;
   abstract final Color btnColor1;
   abstract final Color btnColor2;
   abstract final Color btnColor3;
@@ -13,6 +14,7 @@ abstract class MyTheme {
   abstract final TextStyle fieldTextStyle;
   abstract final TextStyle btnTextStyle;
   abstract final TextStyle headerTextStyle;
+  abstract final Color checkColor;
 
   MyTheme();
 
@@ -30,7 +32,10 @@ class _LightTheme implements MyTheme {
   const _LightTheme._();
 
   @override
-  Color get background => const Color(0xFFF5F5F5);
+  Color get background1 => const Color(0xFFF5F5F5);
+
+  @override
+  Color get background2 => Colors.white;
 
   @override
   Color get btnColor1 => const Color(0xFF475264);
@@ -54,14 +59,13 @@ class _LightTheme implements MyTheme {
   TextStyle get btnTextStyle => _defaultTextStyle.copyWith(
         fontSize: 25,
         fontWeight: FontWeight.w600,
-        height: 34,
+        color: btnTextColor,
       );
 
   @override
   TextStyle get defaultTextStyle => _defaultTextStyle.copyWith(
         fontSize: 22,
         fontWeight: FontWeight.w400,
-        height: 30,
       );
 
   @override
@@ -71,6 +75,8 @@ class _LightTheme implements MyTheme {
   TextStyle get headerTextStyle => _defaultTextStyle.copyWith(
         fontSize: 40,
         fontWeight: FontWeight.w600,
-        height: 54,
       );
+
+  @override
+  Color get checkColor => const Color(0xFF1C2B40);
 }
