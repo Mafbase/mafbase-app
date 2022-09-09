@@ -1,0 +1,36 @@
+# Automatically generated on 2022-09-09 UTC from https://codemagic.io/app/631add6ae225ab49cbaf8e5b/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 60
+    environment:
+      flutter: default
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: '*'
+          include: true
+    scripts:
+      - flutter packages pub get
+      - flutter config --enable-web
+      - flutter analyze
+      - flutter test
+      - |
+        # build web
+        flutter build web --release
+        cd build/web
+        7z a -r ../web.zip ./*
+    artifacts:
+      - build/web.zip
+      - '*.snap'
+      - build/windows/**/*.msix
+      - flutter_drive.log
