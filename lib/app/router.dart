@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/assembly.dart';
+import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
 
 class AppRouter {
-  final AppAssembly _appAssembly;
-
-  AppRouter(this._appAssembly);
+  AppRouter();
 
   Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.loginPageRoute:
         return _createBaseRoute(
           builder: (context) => BlocProvider(
-            create: _appAssembly.createLoginBloc,
+            create: (context) => getIt.get<LoginBloc>(param1: context),
             child: const LoginPage(),
           ),
         );

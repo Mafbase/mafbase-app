@@ -1,0 +1,70 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/ui/login/login_bloc.dart';
+import 'package:seating_generator_web/ui/login/login_events.dart';
+import 'package:seating_generator_web/ui/login/login_state.dart';
+
+void main() {
+  registerGetItTest();
+  group('login bloc', () {
+    test('init value test', () {
+      final bloc = getIt<LoginBloc>();
+      expect(bloc.state is Login, true);
+      expect(bloc.state, LoginState.login(hasError: false));
+    });
+
+    test('test login', () async {
+      final bloc = getIt<LoginBloc>();
+      bloc.add(
+        const LoginEvent.loginButtonTapped(
+          email: "strelas",
+          password: "qwerty",
+        ),
+      );
+
+      final navigator = bloc.navigator as LoginBlocNavigationMock;
+      expect(
+        await navigator.mainPageOpened.first.timeout(
+          const Duration(seconds: 1),
+        ),
+        true,
+      );
+    });
+
+    test('test login with error', () async {
+      final bloc = getIt<LoginBloc>();
+
+      bloc.add(
+        const LoginEvent.loginButtonTapped(
+          email: "strelas",
+          password: "qwertyqwer",
+        ),
+      );
+
+      expect(
+        await bloc.stream.firstWhere(
+              (element) => element.map(
+            login: (login) => !login.isLoading,
+            signUp: (_) => false,
+          ),
+        ),
+        LoginState.login(hasError: true),
+      );
+    });
+
+    test('test forgot password event', () async {
+      final bloc = getIt<LoginBloc>();
+
+      bloc.add(const LoginEvent.forgotPasswordTapped());
+
+      final navigator = bloc.navigator as LoginBlocNavigationMock;
+
+      expect(
+        await navigator.forgotPasswordPageOpened.first.timeout(
+          const Duration(seconds: 1),
+        ),
+        true,
+      );
+    });
+  });
+}

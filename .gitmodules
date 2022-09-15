@@ -1,0 +1,3 @@
+[submodule "seating-generator-proto"]
+	path = seating-generator-proto
+	url = git@gitlab.com:strelas/seating-generator-proto.git

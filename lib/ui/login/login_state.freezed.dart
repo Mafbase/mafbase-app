@@ -18,20 +18,20 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool hasError) login,
+    required TResult Function(bool hasError, bool isLoading) login,
     required TResult Function(bool loginExistError, bool emailExistError)
         signUp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool hasError)? login,
+    TResult Function(bool hasError, bool isLoading)? login,
     TResult Function(bool loginExistError, bool emailExistError)? signUp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool hasError)? login,
+    TResult Function(bool hasError, bool isLoading)? login,
     TResult Function(bool loginExistError, bool emailExistError)? signUp,
     required TResult orElse(),
   }) =>
@@ -77,7 +77,7 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 abstract class _$$LoginCopyWith<$Res> {
   factory _$$LoginCopyWith(_$Login value, $Res Function(_$Login) then) =
       __$$LoginCopyWithImpl<$Res>;
-  $Res call({bool hasError});
+  $Res call({bool hasError, bool isLoading});
 }
 
 /// @nodoc
@@ -92,11 +92,16 @@ class __$$LoginCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? hasError = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_$Login(
       hasError: hasError == freezed
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -105,14 +110,17 @@ class __$$LoginCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Login implements Login {
-  _$Login({required this.hasError});
+  _$Login({required this.hasError, this.isLoading = false});
 
   @override
   final bool hasError;
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'LoginState.login(hasError: $hasError)';
+    return 'LoginState.login(hasError: $hasError, isLoading: $isLoading)';
   }
 
   @override
@@ -120,12 +128,15 @@ class _$Login implements Login {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Login &&
-            const DeepCollectionEquality().equals(other.hasError, hasError));
+            const DeepCollectionEquality().equals(other.hasError, hasError) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(hasError));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(hasError),
+      const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -135,31 +146,31 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool hasError) login,
+    required TResult Function(bool hasError, bool isLoading) login,
     required TResult Function(bool loginExistError, bool emailExistError)
         signUp,
   }) {
-    return login(hasError);
+    return login(hasError, isLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool hasError)? login,
+    TResult Function(bool hasError, bool isLoading)? login,
     TResult Function(bool loginExistError, bool emailExistError)? signUp,
   }) {
-    return login?.call(hasError);
+    return login?.call(hasError, isLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool hasError)? login,
+    TResult Function(bool hasError, bool isLoading)? login,
     TResult Function(bool loginExistError, bool emailExistError)? signUp,
     required TResult orElse(),
   }) {
     if (login != null) {
-      return login(hasError);
+      return login(hasError, isLoading);
     }
     return orElse();
   }
@@ -197,9 +208,10 @@ class _$Login implements Login {
 }
 
 abstract class Login implements LoginState {
-  factory Login({required final bool hasError}) = _$Login;
+  factory Login({required final bool hasError, final bool isLoading}) = _$Login;
 
   bool get hasError;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$LoginCopyWith<_$Login> get copyWith => throw _privateConstructorUsedError;
 }
@@ -278,7 +290,7 @@ class _$SignUp implements SignUp {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool hasError) login,
+    required TResult Function(bool hasError, bool isLoading) login,
     required TResult Function(bool loginExistError, bool emailExistError)
         signUp,
   }) {
@@ -288,7 +300,7 @@ class _$SignUp implements SignUp {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool hasError)? login,
+    TResult Function(bool hasError, bool isLoading)? login,
     TResult Function(bool loginExistError, bool emailExistError)? signUp,
   }) {
     return signUp?.call(loginExistError, emailExistError);
@@ -297,7 +309,7 @@ class _$SignUp implements SignUp {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool hasError)? login,
+    TResult Function(bool hasError, bool isLoading)? login,
     TResult Function(bool loginExistError, bool emailExistError)? signUp,
     required TResult orElse(),
   }) {

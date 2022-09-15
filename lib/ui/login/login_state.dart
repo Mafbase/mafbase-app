@@ -4,7 +4,7 @@ part 'login_state.freezed.dart';
 
 @freezed
 abstract class LoginState with _$LoginState {
-  factory LoginState.login({required bool hasError}) = Login;
+  factory LoginState.login({required bool hasError, @Default(false) bool isLoading}) = Login;
 
   factory LoginState.signUp({
     required bool loginExistError,

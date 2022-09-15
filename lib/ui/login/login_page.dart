@@ -6,6 +6,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
+import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -68,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildLoginBox(bool hasError) {
+  Widget _buildLoginBox(bool hasError, bool isLoading) {
     return Builder(builder: (context) {
       return Container(
         padding: const EdgeInsets.symmetric(
@@ -121,7 +122,9 @@ class _LoginPageState extends State<LoginPage> {
                 color: MyTheme.of(context).borderColor,
               ),
             ),
-            const SizedBox(height: 35,),
+            const SizedBox(
+              height: 35,
+            ),
             Row(
               children: [
                 Transform.translate(
@@ -178,6 +181,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onSubmit() {
-
+    context.read<LoginBloc>().add(
+          LoginEvent.loginButtonTapped(
+            email: _emailController.text,
+            password: _passwordController.text,
+          ),
+        );
   }
 }
