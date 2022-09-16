@@ -11,7 +11,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginInteractor _loginInteractor;
   final SignUpInteractor _signUpInteractor;
   @visibleForTesting
-  final LoginBlocNavigation navigator;
+  final LoginPageRouter navigator;
 
   LoginBloc(this._loginInteractor, this._signUpInteractor, this.navigator)
       : super(LoginState.login(hasError: false)) {
@@ -46,13 +46,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 }
 
-abstract class LoginBlocNavigation {
+abstract class LoginPageRouter {
   Future openMainPage();
 
   Future openForgotPasswordPage();
 }
 
-class LoginBlocNavigationMock implements LoginBlocNavigation {
+class LoginPageRouterMock implements LoginPageRouter {
   final _mainPageOpenedController = StreamController<bool>();
   final _forgotPasswordOpenedController = StreamController<bool>();
 
@@ -72,10 +72,10 @@ class LoginBlocNavigationMock implements LoginBlocNavigation {
   }
 }
 
-class LoginBlocNavigationImpl implements LoginBlocNavigation {
+class LoginPageRouterImpl implements LoginPageRouter {
   final BuildContext _context;
 
-  const LoginBlocNavigationImpl(this._context);
+  const LoginPageRouterImpl(this._context);
 
   @override
   Future openMainPage() {

@@ -27,7 +27,12 @@ class App extends StatelessWidget {
       ],
       child: Builder(
         builder: (context) {
-          return MaterialApp(
+          return MaterialApp.router(
+            routerDelegate: context.read<AppRouter>().router.routerDelegate,
+            routeInformationProvider:
+                context.read<AppRouter>().router.routeInformationProvider,
+            routeInformationParser:
+                context.read<AppRouter>().router.routeInformationParser,
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -35,8 +40,6 @@ class App extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: AppLocalizations.supportedLocales,
-            onGenerateRoute: context.read<AppRouter>().onGenerateRoute,
-            initialRoute: AppRoutes.loginPageRoute,
           );
         },
       ),

@@ -70,107 +70,110 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildLoginBox(bool hasError, bool isLoading) {
-    return Builder(builder: (context) {
-      return Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 40,
-          vertical: 26,
-        ),
-        key: const Key("loginBox"),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: MyTheme.of(context).borderColor,
-            width: 2,
+    return Builder(
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 26,
           ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.loginAuth,
-              style: MyTheme.of(context).headerTextStyle,
+          key: const Key("loginBox"),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: MyTheme.of(context).borderColor,
+              width: 2,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextField(
-              controller: _emailController,
-              hint: AppLocalizations.of(context)!.loginEmailHint,
-              focusNode: _emailFocusNode,
-              onSubmit: (_) {
-                _emailFocusNode.unfocus();
-                _passwordFocusNode.requestFocus();
-              },
-              icon: Icon(
-                Icons.email_outlined,
-                color: MyTheme.of(context).borderColor,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.loginAuth,
+                style: MyTheme.of(context).headerTextStyle,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextField(
-              controller: _passwordController,
-              focusNode: _passwordFocusNode,
-              hint: AppLocalizations.of(context)!.loginPasswordHint,
-              onSubmit: (_) {
-                _onSubmit();
-              },
-              canObscure: true,
-              icon: Icon(
-                Icons.lock_outline,
-                color: MyTheme.of(context).borderColor,
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 35,
-            ),
-            Row(
-              children: [
-                Transform.translate(
-                  offset: const Offset(-3, 0),
-                  child: Checkbox(
-                    splashRadius: 0,
-                    value: remember,
-                    checkColor: MyTheme.of(context).checkColor,
-                    fillColor: MaterialStatePropertyAll(
-                      MyTheme.of(context).borderColor,
+              CustomTextField(
+                controller: _emailController,
+                hint: AppLocalizations.of(context)!.loginEmailHint,
+                focusNode: _emailFocusNode,
+                onSubmit: (_) {
+                  _emailFocusNode.unfocus();
+                  _passwordFocusNode.requestFocus();
+                },
+                icon: Icon(
+                  Icons.email_outlined,
+                  color: MyTheme.of(context).borderColor,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomTextField(
+                controller: _passwordController,
+                focusNode: _passwordFocusNode,
+                hint: AppLocalizations.of(context)!.loginPasswordHint,
+                onSubmit: (_) {
+                  _onSubmit();
+                },
+                canObscure: true,
+                icon: Icon(
+                  Icons.lock_outline,
+                  color: MyTheme.of(context).borderColor,
+                ),
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              Row(
+                children: [
+                  Transform.translate(
+                    offset: const Offset(-3, 0),
+                    child: Checkbox(
+                      splashRadius: 0,
+                      value: remember,
+                      checkColor: MyTheme.of(context).checkColor,
+                      fillColor: MaterialStatePropertyAll(
+                        MyTheme.of(context).borderColor,
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          remember = value ?? remember;
+                        });
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        remember = value ?? remember;
-                      });
-                    },
                   ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  AppLocalizations.of(context)!.loginRememberMe,
-                  style: MyTheme.of(context).defaultTextStyle,
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: _onSubmit,
-                  child: Text(
-                    AppLocalizations.of(context)!.loginForgotPassword,
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.loginRememberMe,
                     style: MyTheme.of(context).defaultTextStyle,
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            CustomButton(
-              text: AppLocalizations.of(context)!.loginIn,
-              onTap: () {},
-            )
-          ],
-        ),
-      );
-    });
+                  const Spacer(),
+                  TextButton(
+                    onPressed: _onSubmit,
+                    child: Text(
+                      AppLocalizations.of(context)!.loginForgotPassword,
+                      style: MyTheme.of(context).defaultTextStyle,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              CustomButton(
+                disabled: isLoading,
+                text: AppLocalizations.of(context)!.loginIn,
+                onTap: () {},
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildSignUpBox(bool loginExistError, bool emailExistError) {

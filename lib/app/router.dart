@@ -3,31 +3,70 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/main_page.dart';
 
 class AppRouter {
-  AppRouter();
-
-  Route onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case AppRoutes.loginPageRoute:
-        return _createBaseRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt.get<LoginBloc>(param1: context),
-            child: const LoginPage(),
+  final router = GoRouter(
+    urlPathStrategy: UrlPathStrategy.path,
+    routes: [
+      GoRoute(
+        path: AppRoutes.loginPageRoute,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt.get<LoginBloc>(param1: context),
+          child: const LoginPage(),
+        ),
+      ),
+      GoRoute(
+        path: '/',
+        routes: [
+          GoRoute(
+            path: AppRoutes.mainPageTabRoute,
+            pageBuilder: (context, state) {
+              final tab = MainPageTab.values.firstWhere(
+                (element) => element.name == state.params["tab"],
+              );
+              return NoTransitionPage(
+                child: BlocProvider(
+                  create: (context) => getIt.get<MainBloc>(param1: context),
+                  child: MainPage(
+                    tab: tab,
+                  ),
+                ),
+              );
+            },
           ),
-        );
-      default:
-        return _createBaseRoute(
-          builder: (context) => Container(),
-        ); // TODO: create error route
-    }
-  }
+        ],
+        pageBuilder: (context, state) {
+          return NoTransitionPage(
+            child: BlocProvider(
+              create: (context) => getIt.get<MainBloc>(param1: context),
+              child: const MainPage(),
+            ),
+          );
+        },
+      ),
+    ],
+    errorBuilder: (context, state) {
+      return Scaffold(
+        body: Center(
+          child: Text(
+            state.path ?? "null",
+          ),
+        ),
+      );
+    },
+  );
 
-  Route _createBaseRoute({required WidgetBuilder builder}) {
-    return MaterialPageRoute(builder: builder);
-  }
+  AppRouter();
 }
 
 class AppRoutes {
+  AppRoutes._();
+
   static const loginPageRoute = '/login';
+  static const mainPageTabRoute = ':tab';
 }
+
+enum MainPageTab { tournaments, regulations, participants }

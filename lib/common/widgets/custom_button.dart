@@ -21,8 +21,8 @@ class CustomButton extends StatelessWidget {
         height: 57,
         decoration: BoxDecoration(
           color: disabled
-              ? MyTheme.of(context).btnColor2
-              : MyTheme.of(context).btnColor1,
+              ? MyTheme.of(context).btnColor1
+              : MyTheme.of(context).darkGreyColor,
         ),
         child: Center(
           child: Text(

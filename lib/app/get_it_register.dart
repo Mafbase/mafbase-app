@@ -9,6 +9,7 @@ import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
+import 'package:seating_generator_web/ui/main/main_bloc.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -16,15 +17,18 @@ void registerGetIt() {
   getIt
     ..registerLazySingleton<TokenStorage>(() => TokenStorageImpl())
     ..registerLazySingleton<MyHttpClient>(
-      () => MyHttpClient.autoForWeb(
+      () => MyHttpClient.withDefaultUrl(
         getIt(),
       ),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
     )
-    ..registerFactoryParam<LoginBlocNavigation, BuildContext, dynamic>(
-      (context, _) => LoginBlocNavigationImpl(context),
+    ..registerFactoryParam<LoginPageRouter, BuildContext, dynamic>(
+      (context, _) => LoginPageRouterImpl(context),
+    )
+    ..registerFactoryParam<MainPageRouter, BuildContext, dynamic>(
+      (context, _) => MainPageRouterImpl(context),
     );
   _registerSharedGetIt();
 }
@@ -33,7 +37,8 @@ void registerGetIt() {
 void registerGetItTest() {
   getIt
     ..registerLazySingleton<AuthRepository>(() => AuthRepositoryMock())
-    ..registerFactory<LoginBlocNavigation>(() => LoginBlocNavigationMock());
+    ..registerFactory<LoginPageRouter>(() => LoginPageRouterMock())
+    ..registerFactory<MainPageRouter>(() => MainPageRouterMock());
   _registerSharedGetIt();
 }
 
@@ -46,6 +51,11 @@ void _registerSharedGetIt() {
         getIt(),
         getIt(),
         getIt.call(param1: context),
+      ),
+    )
+    ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
+      (context, _) => MainBloc(
+        getIt.get<MainPageRouter>(param1: context),
       ),
     );
 }

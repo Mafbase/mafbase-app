@@ -6,7 +6,6 @@ abstract class MyTheme {
   abstract final Color background2;
   abstract final Color btnColor1;
   abstract final Color btnColor2;
-  abstract final Color btnColor3;
   abstract final Color btnTextColor;
   abstract final Color textColor;
   abstract final Color borderColor;
@@ -15,6 +14,10 @@ abstract class MyTheme {
   abstract final TextStyle btnTextStyle;
   abstract final TextStyle headerTextStyle;
   abstract final Color checkColor;
+  abstract final Color darkBlueColor;
+  abstract final Color redColor;
+  abstract final Color greyColor;
+  abstract final Color darkGreyColor;
 
   MyTheme();
 
@@ -38,13 +41,10 @@ class _LightTheme implements MyTheme {
   Color get background2 => Colors.white;
 
   @override
-  Color get btnColor1 => const Color(0xFF475264);
+  Color get btnColor1 => darkGreyColor.withOpacity(0.64);
 
   @override
-  Color get btnColor2 => btnColor1.withOpacity(0.64);
-
-  @override
-  Color get btnColor3 => const Color(0xFF4E6B9B);
+  Color get btnColor2 => const Color(0xFF4E6B9B);
 
   @override
   Color get btnTextColor => Colors.white;
@@ -79,4 +79,16 @@ class _LightTheme implements MyTheme {
 
   @override
   Color get checkColor => const Color(0xFF1C2B40);
+
+  @override
+  Color get darkBlueColor => const Color(0xFF1A2D42);
+
+  @override
+  Color get redColor => const Color(0xFFDF5650);
+
+  @override
+  Color get greyColor => const Color(0xFFCBCED3);
+
+  @override
+  Color get darkGreyColor => const Color(0xFF475264);
 }
