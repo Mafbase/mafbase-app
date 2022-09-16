@@ -556,3 +556,147 @@ class InsertSeatingEvent extends $pb.GeneratedMessage {
   void clearTournamentId() => clearField(2);
 }
 
+class GetTournamentsEventOut_Tournament extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetTournamentsEventOut.Tournament', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..e<GetTournamentsEventOut_Tournament_Status>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: GetTournamentsEventOut_Tournament_Status.waitForBilling, valueOf: GetTournamentsEventOut_Tournament_Status.valueOf, enumValues: GetTournamentsEventOut_Tournament_Status.values)
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateStart', protoName: 'dateStart')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateEnd', protoName: 'dateEnd')
+    ..hasRequiredFields = false
+  ;
+
+  GetTournamentsEventOut_Tournament._() : super();
+  factory GetTournamentsEventOut_Tournament({
+    $core.int? id,
+    $core.String? name,
+    GetTournamentsEventOut_Tournament_Status? status,
+    $core.String? dateStart,
+    $core.String? dateEnd,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (status != null) {
+      _result.status = status;
+    }
+    if (dateStart != null) {
+      _result.dateStart = dateStart;
+    }
+    if (dateEnd != null) {
+      _result.dateEnd = dateEnd;
+    }
+    return _result;
+  }
+  factory GetTournamentsEventOut_Tournament.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetTournamentsEventOut_Tournament.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetTournamentsEventOut_Tournament clone() => GetTournamentsEventOut_Tournament()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetTournamentsEventOut_Tournament copyWith(void Function(GetTournamentsEventOut_Tournament) updates) => super.copyWith((message) => updates(message as GetTournamentsEventOut_Tournament)) as GetTournamentsEventOut_Tournament; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetTournamentsEventOut_Tournament create() => GetTournamentsEventOut_Tournament._();
+  GetTournamentsEventOut_Tournament createEmptyInstance() => create();
+  static $pb.PbList<GetTournamentsEventOut_Tournament> createRepeated() => $pb.PbList<GetTournamentsEventOut_Tournament>();
+  @$core.pragma('dart2js:noInline')
+  static GetTournamentsEventOut_Tournament getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTournamentsEventOut_Tournament>(create);
+  static GetTournamentsEventOut_Tournament? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  GetTournamentsEventOut_Tournament_Status get status => $_getN(2);
+  @$pb.TagNumber(3)
+  set status(GetTournamentsEventOut_Tournament_Status v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasStatus() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStatus() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get dateStart => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set dateStart($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasDateStart() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDateStart() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get dateEnd => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set dateEnd($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasDateEnd() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDateEnd() => clearField(5);
+}
+
+class GetTournamentsEventOut extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetTournamentsEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<GetTournamentsEventOut_Tournament>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tournaments', $pb.PbFieldType.PM, subBuilder: GetTournamentsEventOut_Tournament.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetTournamentsEventOut._() : super();
+  factory GetTournamentsEventOut({
+    $core.Iterable<GetTournamentsEventOut_Tournament>? tournaments,
+  }) {
+    final _result = create();
+    if (tournaments != null) {
+      _result.tournaments.addAll(tournaments);
+    }
+    return _result;
+  }
+  factory GetTournamentsEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetTournamentsEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetTournamentsEventOut clone() => GetTournamentsEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetTournamentsEventOut copyWith(void Function(GetTournamentsEventOut) updates) => super.copyWith((message) => updates(message as GetTournamentsEventOut)) as GetTournamentsEventOut; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetTournamentsEventOut create() => GetTournamentsEventOut._();
+  GetTournamentsEventOut createEmptyInstance() => create();
+  static $pb.PbList<GetTournamentsEventOut> createRepeated() => $pb.PbList<GetTournamentsEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static GetTournamentsEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTournamentsEventOut>(create);
+  static GetTournamentsEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<GetTournamentsEventOut_Tournament> get tournaments => $_getList(0);
+}
+

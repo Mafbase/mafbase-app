@@ -26,3 +26,20 @@ class SignUpEventOut_Error extends $pb.ProtobufEnum {
   const SignUpEventOut_Error._($core.int v, $core.String n) : super(v, n);
 }
 
+class GetTournamentsEventOut_Tournament_Status extends $pb.ProtobufEnum {
+  static const GetTournamentsEventOut_Tournament_Status waitForBilling = GetTournamentsEventOut_Tournament_Status._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'waitForBilling');
+  static const GetTournamentsEventOut_Tournament_Status active = GetTournamentsEventOut_Tournament_Status._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'active');
+  static const GetTournamentsEventOut_Tournament_Status ended = GetTournamentsEventOut_Tournament_Status._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ended');
+
+  static const $core.List<GetTournamentsEventOut_Tournament_Status> values = <GetTournamentsEventOut_Tournament_Status> [
+    waitForBilling,
+    active,
+    ended,
+  ];
+
+  static final $core.Map<$core.int, GetTournamentsEventOut_Tournament_Status> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static GetTournamentsEventOut_Tournament_Status? valueOf($core.int value) => _byValue[value];
+
+  const GetTournamentsEventOut_Tournament_Status._($core.int v, $core.String n) : super(v, n);
+}
+

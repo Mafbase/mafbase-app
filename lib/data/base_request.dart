@@ -1,24 +1,28 @@
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 
-abstract class BaseRequest<E extends GeneratedMessage,
-    R extends GeneratedMessage> {
+abstract class BaseRequest<R extends GeneratedMessage> {
   final String method;
-  final E data;
+  final GeneratedMessage? data;
 
-  const BaseRequest(this.method, this.data);
+  const BaseRequest(this.method, [this.data]);
 
-  Future<R> execute(MyHttpClient client) {
-    return client
-        .post(
-      method,
-      data.toByteString(),
-    )
-        .then((value) {
-      return parse(_parseData(value.data));
-    });
+  Future<R> execute(MyHttpClient client) async {
+    final Response response;
+    if (data == null) {
+      response = await client.get(method);
+    } else {
+      response = await client
+          .post(
+        method,
+        data!.toByteString(),
+      );
+    }
+
+    return parse(_parseData(response.data));
   }
 
   R parse(List<int> bytes);
@@ -34,4 +38,8 @@ abstract class BaseRequest<E extends GeneratedMessage,
     }
     return list;
   }
+}
+
+enum Method {
+  post, get
 }

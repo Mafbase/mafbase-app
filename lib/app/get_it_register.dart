@@ -3,11 +3,15 @@ import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
+import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_mock.dart';
+import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
+import 'package:seating_generator_web/domain/repositories/tournaments_repository_impl.dart';
+import 'package:seating_generator_web/domain/repositories/tournaments_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 
@@ -29,7 +33,9 @@ void registerGetIt() {
     )
     ..registerFactoryParam<MainPageRouter, BuildContext, dynamic>(
       (context, _) => MainPageRouterImpl(context),
-    );
+    )
+    ..registerLazySingleton<TournamentsRepository>(
+        () => TournamentsRepositoryImpl(getIt()));
   _registerSharedGetIt();
 }
 
@@ -38,7 +44,10 @@ void registerGetItTest() {
   getIt
     ..registerLazySingleton<AuthRepository>(() => AuthRepositoryMock())
     ..registerFactory<LoginPageRouter>(() => LoginPageRouterMock())
-    ..registerFactory<MainPageRouter>(() => MainPageRouterMock());
+    ..registerFactory<MainPageRouter>(() => MainPageRouterMock())
+    ..registerLazySingleton<TournamentsRepository>(
+      () => TournamentsRepositoryMock(),
+    );
   _registerSharedGetIt();
 }
 
@@ -57,5 +66,7 @@ void _registerSharedGetIt() {
       (context, _) => MainBloc(
         getIt.get<MainPageRouter>(param1: context),
       ),
-    );
+    )
+    ..registerLazySingleton<GetTournamentsInteractor>(
+        () => GetTournamentsInteractor(getIt()));
 }

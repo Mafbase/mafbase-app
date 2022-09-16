@@ -118,3 +118,37 @@ const InsertSeatingEvent$json = const {
 
 /// Descriptor for `InsertSeatingEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List insertSeatingEventDescriptor = $convert.base64Decode('ChJJbnNlcnRTZWF0aW5nRXZlbnQSEAoDY3N2GAEgASgJUgNjc3YSIgoMdG91cm5hbWVudElkGAIgASgFUgx0b3VybmFtZW50SWQ=');
+@$core.Deprecated('Use getTournamentsEventOutDescriptor instead')
+const GetTournamentsEventOut$json = const {
+  '1': 'GetTournamentsEventOut',
+  '2': const [
+    const {'1': 'tournaments', '3': 1, '4': 3, '5': 11, '6': '.generated.GetTournamentsEventOut.Tournament', '10': 'tournaments'},
+  ],
+  '3': const [GetTournamentsEventOut_Tournament$json],
+};
+
+@$core.Deprecated('Use getTournamentsEventOutDescriptor instead')
+const GetTournamentsEventOut_Tournament$json = const {
+  '1': 'Tournament',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'status', '3': 3, '4': 1, '5': 14, '6': '.generated.GetTournamentsEventOut.Tournament.Status', '10': 'status'},
+    const {'1': 'dateStart', '3': 4, '4': 1, '5': 9, '10': 'dateStart'},
+    const {'1': 'dateEnd', '3': 5, '4': 1, '5': 9, '10': 'dateEnd'},
+  ],
+  '4': const [GetTournamentsEventOut_Tournament_Status$json],
+};
+
+@$core.Deprecated('Use getTournamentsEventOutDescriptor instead')
+const GetTournamentsEventOut_Tournament_Status$json = const {
+  '1': 'Status',
+  '2': const [
+    const {'1': 'waitForBilling', '2': 0},
+    const {'1': 'active', '2': 1},
+    const {'1': 'ended', '2': 2},
+  ],
+};
+
+/// Descriptor for `GetTournamentsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTournamentsEventOutDescriptor = $convert.base64Decode('ChZHZXRUb3VybmFtZW50c0V2ZW50T3V0Ek4KC3RvdXJuYW1lbnRzGAEgAygLMiwuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudFILdG91cm5hbWVudHMa6gEKClRvdXJuYW1lbnQSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSSwoGc3RhdHVzGAMgASgOMjMuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudC5TdGF0dXNSBnN0YXR1cxIcCglkYXRlU3RhcnQYBCABKAlSCWRhdGVTdGFydBIYCgdkYXRlRW5kGAUgASgJUgdkYXRlRW5kIjMKBlN0YXR1cxISCg53YWl0Rm9yQmlsbGluZxAAEgoKBmFjdGl2ZRABEgkKBWVuZGVkEAI=');
