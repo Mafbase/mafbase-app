@@ -4,5 +4,8 @@
   "loginPasswordHint": "Пароль",
   "loginIn": "Войти",
   "loginRememberMe": "Запомнить меня",
-  "loginForgotPassword": "Забыли пароль?"
+  "loginForgotPassword": "Забыли пароль?",
+  "mainProfileHint": "Настройки профиля",
+  "mainCreateTournamentHint": "Создать турнир",
+  "mainRegulationsHint": "Регламент турнира"
 }

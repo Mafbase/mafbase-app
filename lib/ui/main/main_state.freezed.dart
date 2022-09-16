@@ -16,46 +16,46 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainState {
-  bool get isLoading => throw _privateConstructorUsedError;
-  List<TournamentModel> get tournaments => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading, List<TournamentModel> tournaments)
         tournaments,
+    required TResult Function() regulations,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading, List<TournamentModel> tournaments)?
         tournaments,
+    TResult Function()? regulations,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading, List<TournamentModel> tournaments)?
         tournaments,
+    TResult Function()? regulations,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Tournaments value) tournaments,
+    required TResult Function(MainStateTournaments value) tournaments,
+    required TResult Function(MainStateRegulations value) regulations,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Tournaments value)? tournaments,
+    TResult Function(MainStateTournaments value)? tournaments,
+    TResult Function(MainStateRegulations value)? regulations,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Tournaments value)? tournaments,
+    TResult Function(MainStateTournaments value)? tournaments,
+    TResult Function(MainStateRegulations value)? regulations,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $MainStateCopyWith<MainState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -63,7 +63,6 @@ mixin _$MainState {
 abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, List<TournamentModel> tournaments});
 }
 
 /// @nodoc
@@ -73,51 +72,33 @@ class _$MainStateCopyWithImpl<$Res> implements $MainStateCopyWith<$Res> {
   final MainState _value;
   // ignore: unused_field
   final $Res Function(MainState) _then;
-
-  @override
-  $Res call({
-    Object? isLoading = freezed,
-    Object? tournaments = freezed,
-  }) {
-    return _then(_value.copyWith(
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      tournaments: tournaments == freezed
-          ? _value.tournaments
-          : tournaments // ignore: cast_nullable_to_non_nullable
-              as List<TournamentModel>,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$$TournamentsCopyWith<$Res>
-    implements $MainStateCopyWith<$Res> {
-  factory _$$TournamentsCopyWith(
-          _$Tournaments value, $Res Function(_$Tournaments) then) =
-      __$$TournamentsCopyWithImpl<$Res>;
-  @override
+abstract class _$$MainStateTournamentsCopyWith<$Res> {
+  factory _$$MainStateTournamentsCopyWith(_$MainStateTournaments value,
+          $Res Function(_$MainStateTournaments) then) =
+      __$$MainStateTournamentsCopyWithImpl<$Res>;
   $Res call({bool isLoading, List<TournamentModel> tournaments});
 }
 
 /// @nodoc
-class __$$TournamentsCopyWithImpl<$Res> extends _$MainStateCopyWithImpl<$Res>
-    implements _$$TournamentsCopyWith<$Res> {
-  __$$TournamentsCopyWithImpl(
-      _$Tournaments _value, $Res Function(_$Tournaments) _then)
-      : super(_value, (v) => _then(v as _$Tournaments));
+class __$$MainStateTournamentsCopyWithImpl<$Res>
+    extends _$MainStateCopyWithImpl<$Res>
+    implements _$$MainStateTournamentsCopyWith<$Res> {
+  __$$MainStateTournamentsCopyWithImpl(_$MainStateTournaments _value,
+      $Res Function(_$MainStateTournaments) _then)
+      : super(_value, (v) => _then(v as _$MainStateTournaments));
 
   @override
-  _$Tournaments get _value => super._value as _$Tournaments;
+  _$MainStateTournaments get _value => super._value as _$MainStateTournaments;
 
   @override
   $Res call({
     Object? isLoading = freezed,
     Object? tournaments = freezed,
   }) {
-    return _then(_$Tournaments(
+    return _then(_$MainStateTournaments(
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -132,8 +113,8 @@ class __$$TournamentsCopyWithImpl<$Res> extends _$MainStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Tournaments implements Tournaments {
-  const _$Tournaments(
+class _$MainStateTournaments implements MainStateTournaments {
+  const _$MainStateTournaments(
       {required this.isLoading,
       required final List<TournamentModel> tournaments})
       : _tournaments = tournaments;
@@ -156,7 +137,7 @@ class _$Tournaments implements Tournaments {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Tournaments &&
+            other is _$MainStateTournaments &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
                 .equals(other._tournaments, _tournaments));
@@ -170,14 +151,16 @@ class _$Tournaments implements Tournaments {
 
   @JsonKey(ignore: true)
   @override
-  _$$TournamentsCopyWith<_$Tournaments> get copyWith =>
-      __$$TournamentsCopyWithImpl<_$Tournaments>(this, _$identity);
+  _$$MainStateTournamentsCopyWith<_$MainStateTournaments> get copyWith =>
+      __$$MainStateTournamentsCopyWithImpl<_$MainStateTournaments>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading, List<TournamentModel> tournaments)
         tournaments,
+    required TResult Function() regulations,
   }) {
     return tournaments(isLoading, this.tournaments);
   }
@@ -187,6 +170,7 @@ class _$Tournaments implements Tournaments {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading, List<TournamentModel> tournaments)?
         tournaments,
+    TResult Function()? regulations,
   }) {
     return tournaments?.call(isLoading, this.tournaments);
   }
@@ -196,6 +180,7 @@ class _$Tournaments implements Tournaments {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading, List<TournamentModel> tournaments)?
         tournaments,
+    TResult Function()? regulations,
     required TResult orElse(),
   }) {
     if (tournaments != null) {
@@ -207,7 +192,8 @@ class _$Tournaments implements Tournaments {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Tournaments value) tournaments,
+    required TResult Function(MainStateTournaments value) tournaments,
+    required TResult Function(MainStateRegulations value) regulations,
   }) {
     return tournaments(this);
   }
@@ -215,7 +201,8 @@ class _$Tournaments implements Tournaments {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Tournaments value)? tournaments,
+    TResult Function(MainStateTournaments value)? tournaments,
+    TResult Function(MainStateRegulations value)? regulations,
   }) {
     return tournaments?.call(this);
   }
@@ -223,7 +210,8 @@ class _$Tournaments implements Tournaments {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Tournaments value)? tournaments,
+    TResult Function(MainStateTournaments value)? tournaments,
+    TResult Function(MainStateRegulations value)? regulations,
     required TResult orElse(),
   }) {
     if (tournaments != null) {
@@ -233,17 +221,123 @@ class _$Tournaments implements Tournaments {
   }
 }
 
-abstract class Tournaments implements MainState {
-  const factory Tournaments(
-      {required final bool isLoading,
-      required final List<TournamentModel> tournaments}) = _$Tournaments;
+abstract class MainStateTournaments implements MainState {
+  const factory MainStateTournaments(
+          {required final bool isLoading,
+          required final List<TournamentModel> tournaments}) =
+      _$MainStateTournaments;
+
+  bool get isLoading;
+  List<TournamentModel> get tournaments;
+  @JsonKey(ignore: true)
+  _$$MainStateTournamentsCopyWith<_$MainStateTournaments> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MainStateRegulationsCopyWith<$Res> {
+  factory _$$MainStateRegulationsCopyWith(_$MainStateRegulations value,
+          $Res Function(_$MainStateRegulations) then) =
+      __$$MainStateRegulationsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MainStateRegulationsCopyWithImpl<$Res>
+    extends _$MainStateCopyWithImpl<$Res>
+    implements _$$MainStateRegulationsCopyWith<$Res> {
+  __$$MainStateRegulationsCopyWithImpl(_$MainStateRegulations _value,
+      $Res Function(_$MainStateRegulations) _then)
+      : super(_value, (v) => _then(v as _$MainStateRegulations));
 
   @override
-  bool get isLoading;
+  _$MainStateRegulations get _value => super._value as _$MainStateRegulations;
+}
+
+/// @nodoc
+
+class _$MainStateRegulations implements MainStateRegulations {
+  const _$MainStateRegulations();
+
   @override
-  List<TournamentModel> get tournaments;
+  String toString() {
+    return 'MainState.regulations()';
+  }
+
   @override
-  @JsonKey(ignore: true)
-  _$$TournamentsCopyWith<_$Tournaments> get copyWith =>
-      throw _privateConstructorUsedError;
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$MainStateRegulations);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading, List<TournamentModel> tournaments)
+        tournaments,
+    required TResult Function() regulations,
+  }) {
+    return regulations();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading, List<TournamentModel> tournaments)?
+        tournaments,
+    TResult Function()? regulations,
+  }) {
+    return regulations?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading, List<TournamentModel> tournaments)?
+        tournaments,
+    TResult Function()? regulations,
+    required TResult orElse(),
+  }) {
+    if (regulations != null) {
+      return regulations();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MainStateTournaments value) tournaments,
+    required TResult Function(MainStateRegulations value) regulations,
+  }) {
+    return regulations(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MainStateTournaments value)? tournaments,
+    TResult Function(MainStateRegulations value)? regulations,
+  }) {
+    return regulations?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MainStateTournaments value)? tournaments,
+    TResult Function(MainStateRegulations value)? regulations,
+    required TResult orElse(),
+  }) {
+    if (regulations != null) {
+      return regulations(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MainStateRegulations implements MainState {
+  const factory MainStateRegulations() = _$MainStateRegulations;
 }

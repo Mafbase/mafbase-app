@@ -8,5 +8,7 @@ class MainState with _$MainState {
   const factory MainState.tournaments({
     required bool isLoading,
     required List<TournamentModel> tournaments,
-  }) = Tournaments;
+  }) = MainStateTournaments;
+
+  const factory MainState.regulations() = MainStateRegulations;
 }

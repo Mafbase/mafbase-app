@@ -55,6 +55,9 @@ void _registerSharedGetIt() {
   getIt
     ..registerLazySingleton<LoginInteractor>(() => LoginInteractor(getIt()))
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
+    ..registerLazySingleton<GetTournamentsInteractor>(
+      () => GetTournamentsInteractor(getIt()),
+    )
     ..registerFactoryParam<LoginBloc, BuildContext?, dynamic>(
       (context, _) => LoginBloc(
         getIt(),
@@ -65,8 +68,7 @@ void _registerSharedGetIt() {
     ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
       (context, _) => MainBloc(
         getIt.get<MainPageRouter>(param1: context),
+        getIt(),
       ),
-    )
-    ..registerLazySingleton<GetTournamentsInteractor>(
-        () => GetTournamentsInteractor(getIt()));
+    );
 }

@@ -7,4 +7,8 @@ part 'main_event.freezed.dart';
 class MainEvent with _$MainEvent {
   const factory MainEvent.switchTab({required MainPageTab tab}) =
       MainEventSwitchTab;
+
+  const factory MainEvent.init() = MainEventInit;
+
+  const factory MainEvent.backButtonPressed() = MainEventBackButtonPressed;
 }

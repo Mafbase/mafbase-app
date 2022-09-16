@@ -52,7 +52,7 @@ class AppRouter {
       return Scaffold(
         body: Center(
           child: Text(
-            state.path ?? "null",
+            "errorRoute: ${state.toString()}",
           ),
         ),
       );
@@ -69,4 +69,4 @@ class AppRoutes {
   static const mainPageTabRoute = ':tab';
 }
 
-enum MainPageTab { tournaments, regulations, participants }
+enum MainPageTab { regulations, profileSettings, addTournament }
