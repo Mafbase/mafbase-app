@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 
-abstract class BaseRequest<R extends GeneratedMessage> {
+abstract class BaseRequest<R> {
   final String method;
   final GeneratedMessage? data;
 

@@ -6,6 +6,8 @@ import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
+import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
+import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 
 class AppRouter {
   final router = GoRouter(
@@ -16,6 +18,13 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt.get<LoginBloc>(param1: context),
           child: const LoginPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.translationRoute,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt.get<SeatingInsertingBloc>(param1: context),
+          child: const SeatingInsertingPage(),
         ),
       ),
       GoRoute(
@@ -66,6 +75,7 @@ class AppRoutes {
   AppRoutes._();
 
   static const loginPageRoute = '/login';
+  static const translationRoute = '/translation';
   static const mainPageTabRoute = ':tab';
 }
 

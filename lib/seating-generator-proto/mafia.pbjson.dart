@@ -111,13 +111,13 @@ final $typed_data.Uint8List seatingForTranslationEventOutDescriptor = $convert.b
 const InsertSeatingEvent$json = const {
   '1': 'InsertSeatingEvent',
   '2': const [
-    const {'1': 'csv', '3': 1, '4': 1, '5': 9, '10': 'csv'},
+    const {'1': 'bytes', '3': 1, '4': 1, '5': 12, '10': 'bytes'},
     const {'1': 'tournamentId', '3': 2, '4': 1, '5': 5, '10': 'tournamentId'},
   ],
 };
 
 /// Descriptor for `InsertSeatingEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List insertSeatingEventDescriptor = $convert.base64Decode('ChJJbnNlcnRTZWF0aW5nRXZlbnQSEAoDY3N2GAEgASgJUgNjc3YSIgoMdG91cm5hbWVudElkGAIgASgFUgx0b3VybmFtZW50SWQ=');
+final $typed_data.Uint8List insertSeatingEventDescriptor = $convert.base64Decode('ChJJbnNlcnRTZWF0aW5nRXZlbnQSFAoFYnl0ZXMYASABKAxSBWJ5dGVzEiIKDHRvdXJuYW1lbnRJZBgCIAEoBVIMdG91cm5hbWVudElk');
 @$core.Deprecated('Use getTournamentsEventOutDescriptor instead')
 const GetTournamentsEventOut$json = const {
   '1': 'GetTournamentsEventOut',

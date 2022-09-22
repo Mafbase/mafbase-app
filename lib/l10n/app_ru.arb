@@ -7,5 +7,10 @@
   "loginForgotPassword": "Забыли пароль?",
   "mainProfileHint": "Настройки профиля",
   "mainCreateTournamentHint": "Создать турнир",
-  "mainRegulationsHint": "Регламент турнира"
+  "mainRegulationsHint": "Регламент турнира",
+  "insertSeatingSuccess": "Рассадка успешно сохранена",
+  "insertSeatingError": "Произошла какая-то ошибка при сохранении рассадки",
+  "send": "Отправить",
+  "seating": "Рассадка",
+  "idHint": "23"
 }

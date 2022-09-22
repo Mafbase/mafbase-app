@@ -497,19 +497,19 @@ class SeatingForTranslationEventOut extends $pb.GeneratedMessage {
 
 class InsertSeatingEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'InsertSeatingEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'csv')
+    ..a<$core.List<$core.int>>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bytes', $pb.PbFieldType.OY)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tournamentId', $pb.PbFieldType.O3, protoName: 'tournamentId')
     ..hasRequiredFields = false
   ;
 
   InsertSeatingEvent._() : super();
   factory InsertSeatingEvent({
-    $core.String? csv,
+    $core.List<$core.int>? bytes,
     $core.int? tournamentId,
   }) {
     final _result = create();
-    if (csv != null) {
-      _result.csv = csv;
+    if (bytes != null) {
+      _result.bytes = bytes;
     }
     if (tournamentId != null) {
       _result.tournamentId = tournamentId;
@@ -538,13 +538,13 @@ class InsertSeatingEvent extends $pb.GeneratedMessage {
   static InsertSeatingEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get csv => $_getSZ(0);
+  $core.List<$core.int> get bytes => $_getN(0);
   @$pb.TagNumber(1)
-  set csv($core.String v) { $_setString(0, v); }
+  set bytes($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCsv() => $_has(0);
+  $core.bool hasBytes() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCsv() => clearField(1);
+  void clearBytes() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get tournamentId => $_getIZ(1);
