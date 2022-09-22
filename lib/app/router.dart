@@ -11,7 +11,6 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_pag
 
 class AppRouter {
   final router = GoRouter(
-    urlPathStrategy: UrlPathStrategy.path,
     routes: [
       GoRoute(
         path: AppRoutes.loginPageRoute,

@@ -1,7 +1,7 @@
 flutter pub get
 flutter analyze
 flutter test
-flutter build web --base-href /client/ --release
+flutter build web --release
 cd build
 zip client.zip web/ -r
 scp -i ~/.ssh/id_rsa -P 2323 client.zip server-runner@mafia-generator.tomsk.ru:~/
