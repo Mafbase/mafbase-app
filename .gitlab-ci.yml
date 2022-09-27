@@ -3,6 +3,7 @@ code_quality:
   tags:
     - flutter
   before_script:
+    - export PATH="$PATH:~/flutter/bin" 
     - dart pub global activate dart_code_metrics
     - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
@@ -16,6 +17,7 @@ test:
     - flutter
   stage: test
   before_script:
+    - export PATH="$PATH:~/flutter/bin"
     - pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
