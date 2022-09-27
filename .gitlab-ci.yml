@@ -2,11 +2,10 @@ test:
   tags:
     - flutter
   stage: test
-  before_script:
-    - export PATH="$PATH:~/flutter/bin"
-    - pub global activate junitreport
-    - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
+    - export PATH="$PATH:~/flutter/bin"
+    - dart pub global activate junitreport
+    - export PATH="$PATH:$HOME/.pub-cache/bin"
     - flutter test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
