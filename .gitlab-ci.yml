@@ -4,7 +4,7 @@ test:
   stage: test
   script:
     - export PATH="$PATH:~/flutter/bin"
-    - flutter test --machine --coverage | tojunit -o report.xml
+    - flutter test --machine --coverage
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines\.*: \d+\.\d+\%/'
@@ -12,5 +12,3 @@ test:
     name: coverage
     paths:
       - $CI_PROJECT_DIR/coverage
-    reports:
-      junit: report.xml
