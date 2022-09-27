@@ -3,7 +3,7 @@ code_quality:
   tags:
     - flutter
   before_script:
-    - pub global activate dart_code_metrics
+    - dart pub global activate dart_code_metrics
     - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
     - metrics lib -r codeclimate  > gl-code-quality-report.json
