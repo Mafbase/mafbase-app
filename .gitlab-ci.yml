@@ -1,17 +1,3 @@
-code_quality:
-  stage: test
-  tags:
-    - flutter
-  before_script:
-    - export PATH="$PATH:~/flutter/bin" 
-    - dart pub global activate dart_code_metrics
-    - export PATH="$PATH:$HOME/.pub-cache/bin"
-  script:
-    - metrics lib -r codeclimate  > gl-code-quality-report.json
-  artifacts:
-    reports:
-      codequality: gl-code-quality-report.json
-
 test:
   tags:
     - flutter
