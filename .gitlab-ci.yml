@@ -4,7 +4,7 @@ test:
   stage: test
   script:
     - export PATH="$PATH:~/flutter/bin"
-    - flutter test --machine --coverage
+    - flutter test --coverage
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines\.*: \d+\.\d+\%/'
