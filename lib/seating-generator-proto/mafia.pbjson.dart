@@ -136,6 +136,7 @@ const GetTournamentsEventOut_Tournament$json = const {
     const {'1': 'status', '3': 3, '4': 1, '5': 14, '6': '.generated.GetTournamentsEventOut.Tournament.Status', '10': 'status'},
     const {'1': 'dateStart', '3': 4, '4': 1, '5': 9, '10': 'dateStart'},
     const {'1': 'dateEnd', '3': 5, '4': 1, '5': 9, '10': 'dateEnd'},
+    const {'1': 'gamesCount', '3': 6, '4': 1, '5': 5, '10': 'gamesCount'},
   ],
   '4': const [GetTournamentsEventOut_Tournament_Status$json],
 };
@@ -151,4 +152,4 @@ const GetTournamentsEventOut_Tournament_Status$json = const {
 };
 
 /// Descriptor for `GetTournamentsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getTournamentsEventOutDescriptor = $convert.base64Decode('ChZHZXRUb3VybmFtZW50c0V2ZW50T3V0Ek4KC3RvdXJuYW1lbnRzGAEgAygLMiwuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudFILdG91cm5hbWVudHMa6gEKClRvdXJuYW1lbnQSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSSwoGc3RhdHVzGAMgASgOMjMuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudC5TdGF0dXNSBnN0YXR1cxIcCglkYXRlU3RhcnQYBCABKAlSCWRhdGVTdGFydBIYCgdkYXRlRW5kGAUgASgJUgdkYXRlRW5kIjMKBlN0YXR1cxISCg53YWl0Rm9yQmlsbGluZxAAEgoKBmFjdGl2ZRABEgkKBWVuZGVkEAI=');
+final $typed_data.Uint8List getTournamentsEventOutDescriptor = $convert.base64Decode('ChZHZXRUb3VybmFtZW50c0V2ZW50T3V0Ek4KC3RvdXJuYW1lbnRzGAEgAygLMiwuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudFILdG91cm5hbWVudHMaigIKClRvdXJuYW1lbnQSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSSwoGc3RhdHVzGAMgASgOMjMuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudC5TdGF0dXNSBnN0YXR1cxIcCglkYXRlU3RhcnQYBCABKAlSCWRhdGVTdGFydBIYCgdkYXRlRW5kGAUgASgJUgdkYXRlRW5kEh4KCmdhbWVzQ291bnQYBiABKAVSCmdhbWVzQ291bnQiMwoGU3RhdHVzEhIKDndhaXRGb3JCaWxsaW5nEAASCgoGYWN0aXZlEAESCQoFZW5kZWQQAg==');

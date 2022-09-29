@@ -563,6 +563,7 @@ class GetTournamentsEventOut_Tournament extends $pb.GeneratedMessage {
     ..e<GetTournamentsEventOut_Tournament_Status>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: GetTournamentsEventOut_Tournament_Status.waitForBilling, valueOf: GetTournamentsEventOut_Tournament_Status.valueOf, enumValues: GetTournamentsEventOut_Tournament_Status.values)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateStart', protoName: 'dateStart')
     ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateEnd', protoName: 'dateEnd')
+    ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'gamesCount', $pb.PbFieldType.O3, protoName: 'gamesCount')
     ..hasRequiredFields = false
   ;
 
@@ -573,6 +574,7 @@ class GetTournamentsEventOut_Tournament extends $pb.GeneratedMessage {
     GetTournamentsEventOut_Tournament_Status? status,
     $core.String? dateStart,
     $core.String? dateEnd,
+    $core.int? gamesCount,
   }) {
     final _result = create();
     if (id != null) {
@@ -589,6 +591,9 @@ class GetTournamentsEventOut_Tournament extends $pb.GeneratedMessage {
     }
     if (dateEnd != null) {
       _result.dateEnd = dateEnd;
+    }
+    if (gamesCount != null) {
+      _result.gamesCount = gamesCount;
     }
     return _result;
   }
@@ -657,6 +662,15 @@ class GetTournamentsEventOut_Tournament extends $pb.GeneratedMessage {
   $core.bool hasDateEnd() => $_has(4);
   @$pb.TagNumber(5)
   void clearDateEnd() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get gamesCount => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set gamesCount($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasGamesCount() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearGamesCount() => clearField(6);
 }
 
 class GetTournamentsEventOut extends $pb.GeneratedMessage {
