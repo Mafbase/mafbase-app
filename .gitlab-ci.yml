@@ -35,6 +35,8 @@ test:
 
 deploy:
   stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   tags:
     - flutter
   script:
