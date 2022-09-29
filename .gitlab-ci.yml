@@ -15,7 +15,6 @@ test:
   tags:
     - flutter
   script:
-    - flutter analyze
     - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
     - flutter test --machine --coverage | tojunit -o report.xml
