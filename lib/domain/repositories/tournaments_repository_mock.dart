@@ -6,11 +6,12 @@ class TournamentsRepositoryMock implements TournamentsRepository {
   Future<List<TournamentModel>> getTournaments() async {
     return [
       TournamentModel(
-          id: 1,
-          name: "Хрустальная маска 2021",
-          status: TournamentStatus.ended,
-          dateStart: DateTime(2021, 9, 24),
-          dateEnd: DateTime(2021, 9, 25),
+        id: 1,
+        name: "Хрустальная маска 2021",
+        status: TournamentStatus.ended,
+        dateStart: DateTime(2021, 9, 24),
+        dateEnd: DateTime(2021, 9, 25),
+        gamesCount: 10,
       ),
       TournamentModel(
         id: 2,
@@ -18,6 +19,7 @@ class TournamentsRepositoryMock implements TournamentsRepository {
         status: TournamentStatus.active,
         dateStart: DateTime(2022, 9, 24),
         dateEnd: DateTime(2022, 9, 25),
+        gamesCount: 16,
       ),
     ];
   }

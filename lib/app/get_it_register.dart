@@ -18,6 +18,7 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/domain/repositories/translation_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
 
@@ -85,14 +86,15 @@ void _registerSharedGetIt() {
         getIt(),
         getIt(),
         getIt.call(param1: context),
+        getIt(),
       ),
     )
     ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
       (context, _) => MainBloc(
         getIt.get<MainPageRouter>(param1: context),
-        getIt(),
       ),
     )
+    ..registerFactory<TournamentsBloc>(() => TournamentsBloc(getIt()))
     ..registerFactoryParam<SeatingInsertingBloc, BuildContext?, dynamic>(
       (context, _) => SeatingInsertingBloc(
         getIt.get<SeatingInsertingRouter>(param1: context),

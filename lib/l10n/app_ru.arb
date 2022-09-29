@@ -12,5 +12,13 @@
   "insertSeatingError": "Произошла какая-то ошибка при сохранении рассадки",
   "send": "Отправить",
   "seating": "Рассадка",
-  "idHint": "23"
+  "idHint": "23",
+  "tournamentsListTitle": "Турниры",
+  "tournamentsListDateHeader": "Дата турнира",
+  "tournamentsListGamesCountHeader": "Количество игр",
+  "tournamentsListStatusHeader": "Статус",
+  "tournamentsListNameHeader": "Название турнира",
+  "tournamentStatusActive": "Активен",
+  "tournamentStatusWaitForBilling": "Ожидание оплаты",
+  "tournamentStatusEnded": "Завершён"
 }

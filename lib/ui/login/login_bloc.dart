@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
@@ -12,8 +14,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final SignUpInteractor _signUpInteractor;
   @visibleForTesting
   final LoginPageRouter navigator;
+  final TokenStorage _storage;
 
-  LoginBloc(this._loginInteractor, this._signUpInteractor, this.navigator)
+  LoginBloc(this._loginInteractor, this._signUpInteractor, this.navigator, this._storage)
       : super(LoginState.login(hasError: false)) {
     on<LoginButtonTapped>(_onLoginButtonTapped);
     on<ForgotPasswordTapped>(_onForgotPasswordTapped);
@@ -47,9 +50,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 }
 
 abstract class LoginPageRouter {
-  Future openMainPage();
+  void openMainPage();
 
-  Future openForgotPasswordPage();
+  void openForgotPasswordPage();
 }
 
 class LoginPageRouterMock implements LoginPageRouter {
@@ -62,12 +65,12 @@ class LoginPageRouterMock implements LoginPageRouter {
       _forgotPasswordOpenedController.stream;
 
   @override
-  Future openMainPage() async {
+  void openMainPage() {
     _mainPageOpenedController.add(true);
   }
 
   @override
-  Future openForgotPasswordPage() async {
+  void openForgotPasswordPage() {
     _forgotPasswordOpenedController.add(true);
   }
 }
@@ -78,13 +81,12 @@ class LoginPageRouterImpl implements LoginPageRouter {
   const LoginPageRouterImpl(this._context);
 
   @override
-  Future openMainPage() {
-    // TODO: implement openMainPage
-    throw UnimplementedError();
+  void openMainPage() {
+    GoRouter.of(_context).go('/');
   }
 
   @override
-  Future openForgotPasswordPage() {
+  void openForgotPasswordPage() {
     // TODO: implement openForgotPasswordPage
     throw UnimplementedError();
   }

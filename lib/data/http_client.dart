@@ -24,6 +24,7 @@ class MyHttpClient {
   );
 
   Future<Response> get(String method, {bool useRecoveryToken = true}) async {
+    debugPrint(await _storage.authToken);
     final response = await _client.get(
       method,
       options: Options(
@@ -44,7 +45,9 @@ class MyHttpClient {
       }
 
       await _storage.onTokensUpdated(
-          tokenLoginResponse.token, tokenLoginResponse.recoveryToken);
+        tokenLoginResponse.token,
+        tokenLoginResponse.recoveryToken,
+      );
       return get(method, useRecoveryToken: false);
     }
     return response;
@@ -84,10 +87,10 @@ class MyHttpClient {
   }
 
   Future<Response> putFile(String method, List<int> bytes) async {
-
     return _client.post(
       method,
-      data: FormData.fromMap({"file": MultipartFile.fromBytes(bytes, filename: "temp.csv")}),
+      data: FormData.fromMap(
+          {"file": MultipartFile.fromBytes(bytes, filename: "temp.csv")}),
       options: Options(
         headers: {
           HttpHeaders.contentTypeHeader: "multipart/*",

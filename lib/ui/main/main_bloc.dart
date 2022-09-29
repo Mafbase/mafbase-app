@@ -10,19 +10,15 @@ import 'package:seating_generator_web/ui/main/main_state.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   final MainPageRouter _router;
-  final GetTournamentsInteractor _getTournamentsInteractor;
 
   MainBloc(
     this._router,
-    this._getTournamentsInteractor,
   ) : super(
-          const MainState.tournaments(
-            isLoading: true,
-            tournaments: [],
+          const MainState(
+            isLoading: false,
           ),
         ) {
     on<MainEventSwitchTab>(_onSwitchTab);
-    on<MainEventInit>(_init);
     on<MainEventBackButtonPressed>(_onBackButtonPressed);
   }
 
@@ -38,23 +34,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     Emitter<MainState> emit,
   ) async {
     _router.switchTabTo(event.tab);
-  }
-
-  Future _init(MainEventInit event, Emitter<MainState> emit) async {
-    emit(
-      state.map(
-        tournaments: (state) => state.copyWith(isLoading: true),
-        regulations: (state) => state,
-      ),
-    );
-    final tournaments = await _getTournamentsInteractor.run();
-    emit(
-      state.map(
-        tournaments: (state) =>
-            state.copyWith(tournaments: tournaments, isLoading: false),
-        regulations: (state) => state,
-      ),
-    );
   }
 }
 
@@ -76,7 +55,7 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void pop() {
-    GoRouter.of(context).pop();
+    GoRouter.of(context).go("/");
   }
 }
 

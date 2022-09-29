@@ -19,21 +19,18 @@ mixin _$MainEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(MainPageTab tab) switchTab,
-    required TResult Function() init,
     required TResult Function() backButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
     TResult Function()? backButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
     TResult Function()? backButtonPressed,
     required TResult orElse(),
   }) =>
@@ -41,7 +38,6 @@ mixin _$MainEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(MainEventSwitchTab value) switchTab,
-    required TResult Function(MainEventInit value) init,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
   }) =>
@@ -49,14 +45,12 @@ mixin _$MainEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
     required TResult orElse(),
   }) =>
@@ -145,7 +139,6 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(MainPageTab tab) switchTab,
-    required TResult Function() init,
     required TResult Function() backButtonPressed,
   }) {
     return switchTab(tab);
@@ -155,7 +148,6 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
     TResult Function()? backButtonPressed,
   }) {
     return switchTab?.call(tab);
@@ -165,7 +157,6 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
     TResult Function()? backButtonPressed,
     required TResult orElse(),
   }) {
@@ -179,7 +170,6 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(MainEventSwitchTab value) switchTab,
-    required TResult Function(MainEventInit value) init,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
   }) {
@@ -190,7 +180,6 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
   }) {
     return switchTab?.call(this);
@@ -200,7 +189,6 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
     required TResult orElse(),
   }) {
@@ -219,117 +207,6 @@ abstract class MainEventSwitchTab implements MainEvent {
   @JsonKey(ignore: true)
   _$$MainEventSwitchTabCopyWith<_$MainEventSwitchTab> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$MainEventInitCopyWith<$Res> {
-  factory _$$MainEventInitCopyWith(
-          _$MainEventInit value, $Res Function(_$MainEventInit) then) =
-      __$$MainEventInitCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$MainEventInitCopyWithImpl<$Res> extends _$MainEventCopyWithImpl<$Res>
-    implements _$$MainEventInitCopyWith<$Res> {
-  __$$MainEventInitCopyWithImpl(
-      _$MainEventInit _value, $Res Function(_$MainEventInit) _then)
-      : super(_value, (v) => _then(v as _$MainEventInit));
-
-  @override
-  _$MainEventInit get _value => super._value as _$MainEventInit;
-}
-
-/// @nodoc
-
-class _$MainEventInit implements MainEventInit {
-  const _$MainEventInit();
-
-  @override
-  String toString() {
-    return 'MainEvent.init()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MainEventInit);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(MainPageTab tab) switchTab,
-    required TResult Function() init,
-    required TResult Function() backButtonPressed,
-  }) {
-    return init();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
-    TResult Function()? backButtonPressed,
-  }) {
-    return init?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
-    TResult Function()? backButtonPressed,
-    required TResult orElse(),
-  }) {
-    if (init != null) {
-      return init();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MainEventSwitchTab value) switchTab,
-    required TResult Function(MainEventInit value) init,
-    required TResult Function(MainEventBackButtonPressed value)
-        backButtonPressed,
-  }) {
-    return init(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
-    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-  }) {
-    return init?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
-    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    required TResult orElse(),
-  }) {
-    if (init != null) {
-      return init(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class MainEventInit implements MainEvent {
-  const factory MainEventInit() = _$MainEventInit;
 }
 
 /// @nodoc
@@ -378,7 +255,6 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(MainPageTab tab) switchTab,
-    required TResult Function() init,
     required TResult Function() backButtonPressed,
   }) {
     return backButtonPressed();
@@ -388,7 +264,6 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
     TResult Function()? backButtonPressed,
   }) {
     return backButtonPressed?.call();
@@ -398,7 +273,6 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? init,
     TResult Function()? backButtonPressed,
     required TResult orElse(),
   }) {
@@ -412,7 +286,6 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(MainEventSwitchTab value) switchTab,
-    required TResult Function(MainEventInit value) init,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
   }) {
@@ -423,7 +296,6 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
   }) {
     return backButtonPressed?.call(this);
@@ -433,7 +305,6 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventInit value)? init,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
     required TResult orElse(),
   }) {

@@ -22,8 +22,9 @@ class _CustomMenuState extends State<CustomMenu> {
             flex: 3,
             child: Container(
               color: MyTheme.of(context).darkBlueColor,
-              child: Center(
+              child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     ...widget.models.map((e) {
                       return Padding(
@@ -39,7 +40,6 @@ class _CustomMenuState extends State<CustomMenu> {
                         ),
                       );
                     }),
-                    const Spacer(),
                   ],
                 ),
               ),

@@ -21,6 +21,7 @@ mixin _$TournamentModel {
   TournamentStatus get status => throw _privateConstructorUsedError;
   DateTime get dateStart => throw _privateConstructorUsedError;
   DateTime get dateEnd => throw _privateConstructorUsedError;
+  int get gamesCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentModelCopyWith<TournamentModel> get copyWith =>
@@ -37,7 +38,8 @@ abstract class $TournamentModelCopyWith<$Res> {
       String name,
       TournamentStatus status,
       DateTime dateStart,
-      DateTime dateEnd});
+      DateTime dateEnd,
+      int gamesCount});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$TournamentModelCopyWithImpl<$Res>
     Object? status = freezed,
     Object? dateStart = freezed,
     Object? dateEnd = freezed,
+    Object? gamesCount = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -78,6 +81,10 @@ class _$TournamentModelCopyWithImpl<$Res>
           ? _value.dateEnd
           : dateEnd // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      gamesCount: gamesCount == freezed
+          ? _value.gamesCount
+          : gamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -94,7 +101,8 @@ abstract class _$$_TournamentModelCopyWith<$Res>
       String name,
       TournamentStatus status,
       DateTime dateStart,
-      DateTime dateEnd});
+      DateTime dateEnd,
+      int gamesCount});
 }
 
 /// @nodoc
@@ -115,6 +123,7 @@ class __$$_TournamentModelCopyWithImpl<$Res>
     Object? status = freezed,
     Object? dateStart = freezed,
     Object? dateEnd = freezed,
+    Object? gamesCount = freezed,
   }) {
     return _then(_$_TournamentModel(
       id: id == freezed
@@ -137,6 +146,10 @@ class __$$_TournamentModelCopyWithImpl<$Res>
           ? _value.dateEnd
           : dateEnd // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      gamesCount: gamesCount == freezed
+          ? _value.gamesCount
+          : gamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -149,7 +162,8 @@ class _$_TournamentModel implements _TournamentModel {
       required this.name,
       required this.status,
       required this.dateStart,
-      required this.dateEnd});
+      required this.dateEnd,
+      required this.gamesCount});
 
   @override
   final int id;
@@ -161,10 +175,12 @@ class _$_TournamentModel implements _TournamentModel {
   final DateTime dateStart;
   @override
   final DateTime dateEnd;
+  @override
+  final int gamesCount;
 
   @override
   String toString() {
-    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd)';
+    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount)';
   }
 
   @override
@@ -176,7 +192,9 @@ class _$_TournamentModel implements _TournamentModel {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.dateStart, dateStart) &&
-            const DeepCollectionEquality().equals(other.dateEnd, dateEnd));
+            const DeepCollectionEquality().equals(other.dateEnd, dateEnd) &&
+            const DeepCollectionEquality()
+                .equals(other.gamesCount, gamesCount));
   }
 
   @override
@@ -186,7 +204,8 @@ class _$_TournamentModel implements _TournamentModel {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(dateStart),
-      const DeepCollectionEquality().hash(dateEnd));
+      const DeepCollectionEquality().hash(dateEnd),
+      const DeepCollectionEquality().hash(gamesCount));
 
   @JsonKey(ignore: true)
   @override
@@ -200,7 +219,8 @@ abstract class _TournamentModel implements TournamentModel {
       required final String name,
       required final TournamentStatus status,
       required final DateTime dateStart,
-      required final DateTime dateEnd}) = _$_TournamentModel;
+      required final DateTime dateEnd,
+      required final int gamesCount}) = _$_TournamentModel;
 
   @override
   int get id;
@@ -212,6 +232,8 @@ abstract class _TournamentModel implements TournamentModel {
   DateTime get dateStart;
   @override
   DateTime get dateEnd;
+  @override
+  int get gamesCount;
   @override
   @JsonKey(ignore: true)
   _$$_TournamentModelCopyWith<_$_TournamentModel> get copyWith =>

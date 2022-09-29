@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
@@ -11,6 +12,7 @@ class TournamentsRepositoryImpl extends BaseRepository
   @override
   Future<List<TournamentModel>> getTournaments() {
     return GetTournamentsRequest().execute(client).then((value) {
+      debugPrint(value.toString());
       return value.tournaments.map((tournament) {
         return TournamentModel(
           id: tournament.id,
@@ -18,6 +20,7 @@ class TournamentsRepositoryImpl extends BaseRepository
           status: TournamentStatus.from(tournament.status),
           dateStart: DateFormat("dd-MM-yyyy").parse(tournament.dateStart),
           dateEnd: DateFormat("dd-MM-yyyy").parse(tournament.dateEnd),
+          gamesCount: tournament.gamesCount,
         );
       }).toList();
     });

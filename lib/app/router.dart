@@ -1,11 +1,20 @@
+import 'dart:html';
+
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/ui/main/add_tournament/add_tournament_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
+import 'package:seating_generator_web/ui/main/profile_settings/profile_settings_page.dart';
+import 'package:seating_generator_web/ui/main/regulations_page/regulations_page.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 
@@ -26,34 +35,59 @@ class AppRouter {
           child: const SeatingInsertingPage(),
         ),
       ),
-      GoRoute(
-        path: '/',
-        routes: [
-          GoRoute(
-            path: AppRoutes.mainPageTabRoute,
-            pageBuilder: (context, state) {
-              final tab = MainPageTab.values.firstWhere(
-                (element) => element.name == state.params["tab"],
-              );
-              return NoTransitionPage(
-                child: BlocProvider(
-                  create: (context) => getIt.get<MainBloc>(param1: context),
-                  child: MainPage(
-                    tab: tab,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
-        pageBuilder: (context, state) {
-          return NoTransitionPage(
-            child: BlocProvider(
-              create: (context) => getIt.get<MainBloc>(param1: context),
-              child: const MainPage(),
+      ShellRoute(
+        builder: (context, state, child) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<MainBloc>(
+                key: const Key("MainBlocProvider"),
+                create: (context) => getIt.get<MainBloc>(param1: context),
+              ),
+              BlocProvider<TournamentsBloc>(
+                key: const Key("TournamentsBlocProvider"),
+                create: (context) => getIt<TournamentsBloc>(),
+              ),
+            ],
+            child: MainPage(
+              tab: MainPageTab.values.firstWhereOrNull(
+                (element) => state.location.contains(element.name),
+              ),
+              child: child,
             ),
           );
         },
+        routes: [
+          GoRoute(
+            path: '/',
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: TournamentsPage()),
+            redirect: (context, state) async {
+              try {
+                final response = await getIt<MyHttpClient>().get("/api/auth");
+                if (response.statusCode == HttpStatus.ok) {
+                  return null;
+                }
+              } catch (_) {
+              }
+              return AppRoutes.loginPageRoute;
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.routeFromTab(MainPageTab.addTournament),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AddTournamentPage()),
+          ),
+          GoRoute(
+            path: AppRoutes.routeFromTab(MainPageTab.regulations),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: RegulationsPage()),
+          ),
+          GoRoute(
+            path: AppRoutes.routeFromTab(MainPageTab.profileSettings),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: ProfileSettingsPage()),
+          )
+        ],
       ),
     ],
     errorBuilder: (context, state) {
@@ -75,7 +109,8 @@ class AppRoutes {
 
   static const loginPageRoute = '/login';
   static const translationRoute = '/translation';
-  static const mainPageTabRoute = ':tab';
+
+  static String routeFromTab(MainPageTab tab) => "/${tab.name}";
 }
 
 enum MainPageTab { regulations, profileSettings, addTournament }

@@ -11,6 +11,7 @@ class TournamentModel with _$TournamentModel {
     required TournamentStatus status,
     required DateTime dateStart,
     required DateTime dateEnd,
+    required int gamesCount,
   }) = _TournamentModel;
 }
 
