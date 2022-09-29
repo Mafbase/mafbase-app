@@ -86,7 +86,6 @@ void _registerSharedGetIt() {
         getIt(),
         getIt(),
         getIt.call(param1: context),
-        getIt(),
       ),
     )
     ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(

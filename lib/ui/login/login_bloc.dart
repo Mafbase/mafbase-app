@@ -14,9 +14,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final SignUpInteractor _signUpInteractor;
   @visibleForTesting
   final LoginPageRouter navigator;
-  final TokenStorage _storage;
 
-  LoginBloc(this._loginInteractor, this._signUpInteractor, this.navigator, this._storage)
+  LoginBloc(this._loginInteractor, this._signUpInteractor, this.navigator)
       : super(LoginState.login(hasError: false)) {
     on<LoginButtonTapped>(_onLoginButtonTapped);
     on<ForgotPasswordTapped>(_onForgotPasswordTapped);
