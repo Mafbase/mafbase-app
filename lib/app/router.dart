@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,7 +62,7 @@ class AppRouter {
             redirect: (context, state) async {
               try {
                 final response = await getIt<MyHttpClient>().get("/api/auth");
-                if (response.statusCode == HttpStatus.ok) {
+                if (response.statusCode == 200) {
                   return null;
                 }
               } catch (_) {
