@@ -10,6 +10,6 @@ class RegulationsPage extends StatefulWidget {
 class _RegulationsPageState extends State<RegulationsPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("RegulationsPage"),);
+    return const Center(child: Text("RegulationsPage"),);
   }
 }

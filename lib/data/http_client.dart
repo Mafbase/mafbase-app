@@ -80,7 +80,9 @@ class MyHttpClient {
       }
 
       await _storage.onTokensUpdated(
-          tokenLoginResponse.token, tokenLoginResponse.recoveryToken);
+        tokenLoginResponse.token,
+        tokenLoginResponse.recoveryToken,
+      );
       return post(method, data, useRecoveryToken: false);
     }
     return response;
@@ -90,7 +92,8 @@ class MyHttpClient {
     return _client.post(
       method,
       data: FormData.fromMap(
-          {"file": MultipartFile.fromBytes(bytes, filename: "temp.csv")}),
+        {"file": MultipartFile.fromBytes(bytes, filename: "temp.csv")},
+      ),
       options: Options(
         headers: {
           HttpHeaders.contentTypeHeader: "multipart/*",
