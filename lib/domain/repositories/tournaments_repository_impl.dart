@@ -12,7 +12,6 @@ class TournamentsRepositoryImpl extends BaseRepository
   @override
   Future<List<TournamentModel>> getTournaments() {
     return GetTournamentsRequest().execute(client).then((value) {
-      debugPrint(value.toString());
       return value.tournaments.map((tournament) {
         return TournamentModel(
           id: tournament.id,

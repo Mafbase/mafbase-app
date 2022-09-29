@@ -24,7 +24,9 @@ class MyHttpClient {
   );
 
   Future<Response> get(String method, {bool useRecoveryToken = true}) async {
-    debugPrint(await _storage.authToken);
+    if (useRecoveryToken) {
+      debugPrint("sending request to $_baseUrl$method");
+    }
     final response = await _client.get(
       method,
       options: Options(
@@ -58,6 +60,9 @@ class MyHttpClient {
     dynamic data, {
     bool useRecoveryToken = true,
   }) async {
+    if (useRecoveryToken) {
+      debugPrint("sending request to $_baseUrl$method");
+    }
     final response = await _client.post(
       method,
       data: data,

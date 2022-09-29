@@ -27,7 +27,6 @@ class SeatingInsertingBloc
     try {
       bytes = await event.bytesStream
           .fold(<int>[], (previous, element) => previous..addAll(element));
-      debugPrint(bytes.join(", "));
     } catch (e) {
       _router.showErrorDialog();
     } finally {
@@ -48,7 +47,6 @@ class SeatingInsertingBloc
       );
       _router.showSuccessDialog();
     } catch (error, stacktrace) {
-      debugPrint(error.toString() + stacktrace.toString());
       _router.showErrorDialog();
     } finally {
       emit(state.copyWith(isLoading: false));

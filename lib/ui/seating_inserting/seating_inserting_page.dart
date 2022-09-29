@@ -61,14 +61,10 @@ class _SeatingInsertingPageState extends State<SeatingInsertingPage> {
                               final bloc = context.read<SeatingInsertingBloc>();
                               final files =
                                   await FilePicker.platform.pickFiles();
-                              debugPrint(
-                                (files!.files.first.bytes == null).toString(),
-                              );
-                              debugPrint(files.files.first.name);
                               bloc.add(
                                 SeatingInsertingFileSelectedEvent(
                                   bytesStream:
-                                      Stream.value(files.files.first.bytes!),
+                                      Stream.value(files!.files.first.bytes!),
                                 ),
                               );
                             },
