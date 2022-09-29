@@ -1,3 +1,15 @@
+build:
+  stage: build
+  tags:
+    - flutter
+  script:
+    - flutter build web --release
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+
 test:
   stage: test
   tags:
@@ -16,16 +28,9 @@ test:
       - $CI_PROJECT_DIR/coverage
     reports:
       junit: report.xml
-
-build:
-  stage: build
-  tags:
-    - flutter
-  script:
-    - flutter build web --release
   cache:
     key: "$CI_COMMIT_REF_NAME"
-    policy: push
+    policy: pull
     paths:
       - build
 
@@ -40,7 +45,7 @@ deploy:
     - ssh -i ~/.ssh/id_rsa server-runner@mafia-generator.tomsk.ru -p 2323 "./update_client.sh"
   cache:
     key: "$CI_COMMIT_REF_NAME"
-    policy: push
+    policy: pull
     paths:
       - build
 
