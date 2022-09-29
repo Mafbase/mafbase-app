@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const Spacer(),
                   TextButton(
-                    onPressed: _onSubmit,
+                    onPressed: () {},
                     child: Text(
                       AppLocalizations.of(context)!.loginForgotPassword,
                       style: MyTheme.of(context).defaultTextStyle,
@@ -167,8 +167,8 @@ class _LoginPageState extends State<LoginPage> {
               CustomButton(
                 disabled: isLoading,
                 text: AppLocalizations.of(context)!.loginIn,
-                onTap: () {},
-              )
+                onTap: _onSubmit,
+              ),
             ],
           ),
         );
