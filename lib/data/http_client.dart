@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:protobuf/protobuf.dart';
+import 'package:seating_generator_web/data/base_request.dart';
 import 'package:seating_generator_web/data/requests/login_by_token_request.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -16,6 +17,9 @@ class MyHttpClient {
     BaseOptions(
       responseType: ResponseType.bytes,
       baseUrl: _baseUrl,
+      validateStatus: (status) {
+        return status != null && status <= 500;
+      },
       headers: {
         "Content-Type": "application/protobuf",
         "Accept": "application/protobuf",
@@ -36,21 +40,27 @@ class MyHttpClient {
       ),
     );
 
+    _checkResponse(response);
+
     if (response.statusCode == HttpStatus.unauthorized) {
-      final tokenLoginResponse = await LoginByTokenRequest(
-        LoginByTokenEvent(token: await _storage.recoveryToken),
-      ).execute(this);
+      if (useRecoveryToken) {
+        final tokenLoginResponse = await LoginByTokenRequest(
+          LoginByTokenEvent(token: await _storage.recoveryToken),
+        ).execute(this);
 
-      if (tokenLoginResponse.token.isEmpty ||
-          tokenLoginResponse.token.isNotEmpty) {
-        return response;
+        if (tokenLoginResponse.token.isEmpty ||
+            tokenLoginResponse.token.isNotEmpty) {
+          return response;
+        }
+
+        await _storage.onTokensUpdated(
+          tokenLoginResponse.token,
+          tokenLoginResponse.recoveryToken,
+        );
+        return get(method, useRecoveryToken: false);
+      } else {
+        throw UnauthenticatedError("Authentication error");
       }
-
-      await _storage.onTokensUpdated(
-        tokenLoginResponse.token,
-        tokenLoginResponse.recoveryToken,
-      );
-      return get(method, useRecoveryToken: false);
     }
     return response;
   }
@@ -74,27 +84,34 @@ class MyHttpClient {
       ),
     );
 
+    _checkResponse(response);
+
     if (response.statusCode == HttpStatus.unauthorized) {
-      final tokenLoginResponse = await LoginByTokenRequest(
-        LoginByTokenEvent(token: await _storage.recoveryToken),
-      ).execute(this);
+      if (useRecoveryToken) {
+        final tokenLoginResponse = await LoginByTokenRequest(
+          LoginByTokenEvent(token: await _storage.recoveryToken),
+        ).execute(this);
 
-      if (tokenLoginResponse.token.isEmpty ||
-          tokenLoginResponse.token.isNotEmpty) {
-        return response;
+        if (tokenLoginResponse.token.isEmpty ||
+            tokenLoginResponse.token.isNotEmpty) {
+          return response;
+        }
+
+        await _storage.onTokensUpdated(
+          tokenLoginResponse.token,
+          tokenLoginResponse.recoveryToken,
+        );
+        return post(method, data, useRecoveryToken: false);
+      } else {
+        throw UnauthenticatedError("Authentication error");
       }
-
-      await _storage.onTokensUpdated(
-        tokenLoginResponse.token,
-        tokenLoginResponse.recoveryToken,
-      );
-      return post(method, data, useRecoveryToken: false);
     }
     return response;
   }
 
   Future<Response> putFile(String method, List<int> bytes) async {
-    return _client.post(
+    return _client
+        .post(
       method,
       data: FormData.fromMap(
         {"file": MultipartFile.fromBytes(bytes, filename: "temp.csv")},
@@ -104,7 +121,20 @@ class MyHttpClient {
           HttpHeaders.contentTypeHeader: "multipart/*",
         },
       ),
+    )
+        .then(
+      (value) {
+        _checkResponse(value);
+        return value;
+      },
     );
+  }
+
+  void _checkResponse(Response response) {
+    if (response.statusCode == 500) {
+      throw RequestError(
+          ErrorOut.fromBuffer(parseResponseData(response.data)).message);
+    }
   }
 
   MyHttpClient.withDefaultUrl(this._storage)
@@ -120,4 +150,12 @@ extension GeneratedExt on GeneratedMessage {
 
     return utf8.decode(bytes, allowMalformed: true);
   }
+}
+
+class RequestError extends HttpException {
+  RequestError(super.message);
+}
+
+class UnauthenticatedError extends HttpException {
+  UnauthenticatedError(super.message);
 }

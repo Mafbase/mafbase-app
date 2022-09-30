@@ -80,11 +80,42 @@ const SignUpEventOut_Error$json = const {
     const {'1': 'noError', '2': 0},
     const {'1': 'emailExist', '2': 1},
     const {'1': 'weakPassword', '2': 2},
+    const {'1': 'needVerification', '2': 4},
   ],
 };
 
 /// Descriptor for `SignUpEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List signUpEventOutDescriptor = $convert.base64Decode('Cg5TaWduVXBFdmVudE91dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SJAoNcmVjb3ZlcnlUb2tlbhgCIAEoCVINcmVjb3ZlcnlUb2tlbhI1CgVlcnJvchgDIAEoDjIfLmdlbmVyYXRlZC5TaWduVXBFdmVudE91dC5FcnJvclIFZXJyb3IiNgoFRXJyb3ISCwoHbm9FcnJvchAAEg4KCmVtYWlsRXhpc3QQARIQCgx3ZWFrUGFzc3dvcmQQAg==');
+final $typed_data.Uint8List signUpEventOutDescriptor = $convert.base64Decode('Cg5TaWduVXBFdmVudE91dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SJAoNcmVjb3ZlcnlUb2tlbhgCIAEoCVINcmVjb3ZlcnlUb2tlbhI1CgVlcnJvchgDIAEoDjIfLmdlbmVyYXRlZC5TaWduVXBFdmVudE91dC5FcnJvclIFZXJyb3IiTAoFRXJyb3ISCwoHbm9FcnJvchAAEg4KCmVtYWlsRXhpc3QQARIQCgx3ZWFrUGFzc3dvcmQQAhIUChBuZWVkVmVyaWZpY2F0aW9uEAQ=');
+@$core.Deprecated('Use emailVerificationEventDescriptor instead')
+const EmailVerificationEvent$json = const {
+  '1': 'EmailVerificationEvent',
+  '2': const [
+    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
+  ],
+};
+
+/// Descriptor for `EmailVerificationEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List emailVerificationEventDescriptor = $convert.base64Decode('ChZFbWFpbFZlcmlmaWNhdGlvbkV2ZW50EhQKBXRva2VuGAEgASgJUgV0b2tlbg==');
+@$core.Deprecated('Use emailVerificationEventOutDescriptor instead')
+const EmailVerificationEventOut$json = const {
+  '1': 'EmailVerificationEventOut',
+  '2': const [
+    const {'1': 'status', '3': 1, '4': 1, '5': 14, '6': '.generated.EmailVerificationEventOut.Status', '10': 'status'},
+  ],
+  '4': const [EmailVerificationEventOut_Status$json],
+};
+
+@$core.Deprecated('Use emailVerificationEventOutDescriptor instead')
+const EmailVerificationEventOut_Status$json = const {
+  '1': 'Status',
+  '2': const [
+    const {'1': 'success', '2': 0},
+    const {'1': 'incorrectToken', '2': 1},
+  ],
+};
+
+/// Descriptor for `EmailVerificationEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List emailVerificationEventOutDescriptor = $convert.base64Decode('ChlFbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0EkMKBnN0YXR1cxgBIAEoDjIrLmdlbmVyYXRlZC5FbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0LlN0YXR1c1IGc3RhdHVzIikKBlN0YXR1cxILCgdzdWNjZXNzEAASEgoOaW5jb3JyZWN0VG9rZW4QAQ==');
 @$core.Deprecated('Use seatingForTranslationEventDescriptor instead')
 const SeatingForTranslationEvent$json = const {
   '1': 'SeatingForTranslationEvent',
@@ -153,3 +184,13 @@ const GetTournamentsEventOut_Tournament_Status$json = const {
 
 /// Descriptor for `GetTournamentsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTournamentsEventOutDescriptor = $convert.base64Decode('ChZHZXRUb3VybmFtZW50c0V2ZW50T3V0Ek4KC3RvdXJuYW1lbnRzGAEgAygLMiwuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudFILdG91cm5hbWVudHMaigIKClRvdXJuYW1lbnQSDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSSwoGc3RhdHVzGAMgASgOMjMuZ2VuZXJhdGVkLkdldFRvdXJuYW1lbnRzRXZlbnRPdXQuVG91cm5hbWVudC5TdGF0dXNSBnN0YXR1cxIcCglkYXRlU3RhcnQYBCABKAlSCWRhdGVTdGFydBIYCgdkYXRlRW5kGAUgASgJUgdkYXRlRW5kEh4KCmdhbWVzQ291bnQYBiABKAVSCmdhbWVzQ291bnQiMwoGU3RhdHVzEhIKDndhaXRGb3JCaWxsaW5nEAASCgoGYWN0aXZlEAESCQoFZW5kZWQQAg==');
+@$core.Deprecated('Use errorOutDescriptor instead')
+const ErrorOut$json = const {
+  '1': 'ErrorOut',
+  '2': const [
+    const {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `ErrorOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List errorOutDescriptor = $convert.base64Decode('CghFcnJvck91dBIYCgdtZXNzYWdlGAEgASgJUgdtZXNzYWdl');

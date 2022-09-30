@@ -86,6 +86,7 @@ void _registerSharedGetIt() {
         getIt(),
         getIt(),
         getIt.call(param1: context),
+        context,
       ),
     )
     ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
@@ -93,7 +94,12 @@ void _registerSharedGetIt() {
         getIt.get<MainPageRouter>(param1: context),
       ),
     )
-    ..registerFactory<TournamentsBloc>(() => TournamentsBloc(getIt()))
+    ..registerFactoryParam<TournamentsBloc, BuildContext, dynamic>(
+      (context, _) => TournamentsBloc(
+        getIt(),
+        context,
+      ),
+    )
     ..registerFactoryParam<SeatingInsertingBloc, BuildContext?, dynamic>(
       (context, _) => SeatingInsertingBloc(
         getIt.get<SeatingInsertingRouter>(param1: context),

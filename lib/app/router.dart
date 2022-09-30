@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
@@ -65,8 +66,7 @@ class AppRouter {
                 if (response.statusCode == 200) {
                   return null;
                 }
-              } catch (_) {
-              }
+              } catch (_) {}
               return AppRoutes.loginPageRoute;
             },
           ),
@@ -100,6 +100,24 @@ class AppRouter {
   );
 
   AppRouter();
+
+  static void showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Error"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Cancel"),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class AppRoutes {

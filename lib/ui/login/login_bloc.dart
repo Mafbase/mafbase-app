@@ -3,19 +3,24 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
   final LoginInteractor _loginInteractor;
   final SignUpInteractor _signUpInteractor;
   @visibleForTesting
   final LoginPageRouter navigator;
 
-  LoginBloc(this._loginInteractor, this._signUpInteractor, this.navigator)
-      : super(LoginState.login(hasError: false)) {
+  LoginBloc(
+    this._loginInteractor,
+    this._signUpInteractor,
+    this.navigator, [
+    BuildContext? context,
+  ]) : super(LoginState.login(hasError: false), context) {
     on<LoginButtonTapped>(_onLoginButtonTapped);
     on<ForgotPasswordTapped>(_onForgotPasswordTapped);
   }

@@ -379,6 +379,100 @@ class SignUpEventOut extends $pb.GeneratedMessage {
   void clearError() => clearField(3);
 }
 
+class EmailVerificationEvent extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EmailVerificationEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..hasRequiredFields = false
+  ;
+
+  EmailVerificationEvent._() : super();
+  factory EmailVerificationEvent({
+    $core.String? token,
+  }) {
+    final _result = create();
+    if (token != null) {
+      _result.token = token;
+    }
+    return _result;
+  }
+  factory EmailVerificationEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EmailVerificationEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EmailVerificationEvent clone() => EmailVerificationEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EmailVerificationEvent copyWith(void Function(EmailVerificationEvent) updates) => super.copyWith((message) => updates(message as EmailVerificationEvent)) as EmailVerificationEvent; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EmailVerificationEvent create() => EmailVerificationEvent._();
+  EmailVerificationEvent createEmptyInstance() => create();
+  static $pb.PbList<EmailVerificationEvent> createRepeated() => $pb.PbList<EmailVerificationEvent>();
+  @$core.pragma('dart2js:noInline')
+  static EmailVerificationEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EmailVerificationEvent>(create);
+  static EmailVerificationEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get token => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set token($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearToken() => clearField(1);
+}
+
+class EmailVerificationEventOut extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EmailVerificationEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..e<EmailVerificationEventOut_Status>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: EmailVerificationEventOut_Status.success, valueOf: EmailVerificationEventOut_Status.valueOf, enumValues: EmailVerificationEventOut_Status.values)
+    ..hasRequiredFields = false
+  ;
+
+  EmailVerificationEventOut._() : super();
+  factory EmailVerificationEventOut({
+    EmailVerificationEventOut_Status? status,
+  }) {
+    final _result = create();
+    if (status != null) {
+      _result.status = status;
+    }
+    return _result;
+  }
+  factory EmailVerificationEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EmailVerificationEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EmailVerificationEventOut clone() => EmailVerificationEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EmailVerificationEventOut copyWith(void Function(EmailVerificationEventOut) updates) => super.copyWith((message) => updates(message as EmailVerificationEventOut)) as EmailVerificationEventOut; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EmailVerificationEventOut create() => EmailVerificationEventOut._();
+  EmailVerificationEventOut createEmptyInstance() => create();
+  static $pb.PbList<EmailVerificationEventOut> createRepeated() => $pb.PbList<EmailVerificationEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static EmailVerificationEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EmailVerificationEventOut>(create);
+  static EmailVerificationEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  EmailVerificationEventOut_Status get status => $_getN(0);
+  @$pb.TagNumber(1)
+  set status(EmailVerificationEventOut_Status v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+}
+
 class SeatingForTranslationEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SeatingForTranslationEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tournamentId', $pb.PbFieldType.O3, protoName: 'tournamentId')
@@ -712,5 +806,52 @@ class GetTournamentsEventOut extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<GetTournamentsEventOut_Tournament> get tournaments => $_getList(0);
+}
+
+class ErrorOut extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ErrorOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  ErrorOut._() : super();
+  factory ErrorOut({
+    $core.String? message,
+  }) {
+    final _result = create();
+    if (message != null) {
+      _result.message = message;
+    }
+    return _result;
+  }
+  factory ErrorOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ErrorOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ErrorOut clone() => ErrorOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ErrorOut copyWith(void Function(ErrorOut) updates) => super.copyWith((message) => updates(message as ErrorOut)) as ErrorOut; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ErrorOut create() => ErrorOut._();
+  ErrorOut createEmptyInstance() => create();
+  static $pb.PbList<ErrorOut> createRepeated() => $pb.PbList<ErrorOut>();
+  @$core.pragma('dart2js:noInline')
+  static ErrorOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ErrorOut>(create);
+  static ErrorOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get message => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set message($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMessage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMessage() => clearField(1);
 }
 

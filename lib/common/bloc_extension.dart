@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
+import 'package:seating_generator_web/data/http_client.dart';
 
 typedef EffectHandler<E> = void Function(E efffect);
 
@@ -43,4 +46,39 @@ mixin EffectListener<E, S, B extends EffectEmitter<E, S>,
   }
 
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {}
+}
+
+class CustomBloc<E, S> extends Bloc<E, S> {
+  final BuildContext? _context;
+
+  CustomBloc(super.initialState, [this._context]);
+
+  @override
+  void on<EV extends E>(EventHandler<EV, S> handler,
+      {EventTransformer<EV>? transformer}) {
+    super.on(
+      (event, emit) {
+        _functionWrapper(() async {
+          await handler(event, emit);
+        });
+      },
+      transformer: transformer,
+    );
+  }
+
+  FutureOr _functionWrapper(FutureOr Function() function) async {
+    try {
+      return await function();
+    } on RequestError catch (error) {
+      if (_context != null) {
+        AppRouter.showErrorDialog(_context!, error.message);
+      }
+      rethrow;
+    } on UnauthenticatedError catch (error) {
+      if (_context != null) {
+        _context!.go(AppRoutes.loginPageRoute);
+        AppRouter.showErrorDialog(_context!, error.message);
+      }
+    }
+  }
 }

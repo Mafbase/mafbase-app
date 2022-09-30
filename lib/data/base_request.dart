@@ -22,22 +22,22 @@ abstract class BaseRequest<R> {
       );
     }
 
-    return parse(_parseData(response.data));
+    return parse(parseResponseData(response.data));
   }
 
   R parse(List<int> bytes);
+}
 
-  List<int> _parseData(dynamic data) {
-    final List<int> list;
-    if (data is String) {
-      list = Uint16List.fromList(data.codeUnits);
-    } else if (data is List<int>) {
-      list = data;
-    } else {
-      throw FormatException("unsupported type: ${data.runtimeType}");
-    }
-    return list;
+List<int> parseResponseData(dynamic data) {
+  final List<int> list;
+  if (data is String) {
+    list = Uint16List.fromList(data.codeUnits);
+  } else if (data is List<int>) {
+    list = data;
+  } else {
+    throw FormatException("unsupported type: ${data.runtimeType}");
   }
+  return list;
 }
 
 enum Method {
