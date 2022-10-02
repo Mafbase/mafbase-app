@@ -71,13 +71,13 @@ class CustomBloc<E, S> extends Bloc<E, S> {
       return await function();
     } on RequestError catch (error) {
       if (_context != null) {
-        AppRouter.showErrorDialog(_context!, error.message);
+        AppRouter.showErrorDialog(_context!, error.message ?? "");
       }
       rethrow;
     } on UnauthenticatedError catch (error) {
       if (_context != null) {
         _context!.go(AppRoutes.loginPageRoute);
-        AppRouter.showErrorDialog(_context!, error.message);
+        AppRouter.showErrorDialog(_context!, error.message ?? "");
       }
     }
   }

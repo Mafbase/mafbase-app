@@ -152,10 +152,32 @@ extension GeneratedExt on GeneratedMessage {
   }
 }
 
-class RequestError extends HttpException {
-  RequestError(super.message);
+class RequestError extends Error {
+  final String? message;
+
+  RequestError([this.message]);
+
+  @override
+  String toString() {
+    if (message == null) {
+      return "RequestError";
+    } else {
+      return "RequestError: $message";
+    }
+  }
 }
 
-class UnauthenticatedError extends HttpException {
-  UnauthenticatedError(super.message);
+class UnauthenticatedError extends Error {
+  final String? message;
+
+  UnauthenticatedError([this.message]);
+
+  @override
+  String toString() {
+    if (message == null) {
+      return "UnauthenticatedError";
+    } else {
+      return "UnauthenticatedError: $message";
+    }
+  }
 }
