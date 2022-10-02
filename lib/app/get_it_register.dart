@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/data/http_client.dart';
@@ -28,9 +29,9 @@ void registerGetIt() {
   getIt
     ..registerLazySingleton<TokenStorage>(() => TokenStorageImpl())
     ..registerLazySingleton<MyHttpClient>(
-      () => MyHttpClient.withDefaultUrl(
-        getIt(),
-      ),
+      () => kDebugMode
+          ? MyHttpClient.withDefaultUrl(getIt())
+          : MyHttpClient.autoForWeb(getIt()),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
