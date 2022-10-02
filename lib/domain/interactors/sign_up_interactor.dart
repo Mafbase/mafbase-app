@@ -12,4 +12,7 @@ class SignUpInteractor extends BaseInteractor {
       return _authRepository.signUp(email, password);
     });
   }
+
+  @override
+  String get interactorName => "SignUpInteractor";
 }

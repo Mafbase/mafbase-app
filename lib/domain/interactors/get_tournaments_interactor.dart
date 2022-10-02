@@ -12,4 +12,7 @@ class GetTournamentsInteractor extends BaseInteractor {
       return await _repository.getTournaments();
     });
   }
+
+  @override
+  String get interactorName => "GetTournamentsInteractor";
 }

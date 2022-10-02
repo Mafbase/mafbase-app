@@ -12,4 +12,7 @@ class InsertSeatingInteractor extends BaseInteractor {
       return await _repository.insertSeating(bytes, tournamentId);
     });
   }
+
+  @override
+  String get interactorName => "InsertSeatingInteractor";
 }
