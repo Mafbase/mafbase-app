@@ -57,8 +57,8 @@ class CustomBloc<E, S> extends Bloc<E, S> {
   void on<EV extends E>(EventHandler<EV, S> handler,
       {EventTransformer<EV>? transformer}) {
     super.on(
-      (event, emit) {
-        _functionWrapper(() async {
+      (event, emit) async {
+        await _functionWrapper(() async {
           await handler(event, emit);
         });
       },

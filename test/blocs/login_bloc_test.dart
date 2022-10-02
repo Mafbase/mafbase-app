@@ -9,8 +9,7 @@ void main() {
   group('login bloc', () {
     test('init value test', () {
       final bloc = getIt<LoginBloc>();
-      expect(bloc.state is Login, true);
-      expect(bloc.state, LoginState.login(hasError: false));
+      expect(bloc.state, LoginState(hasError: false));
     });
 
     test('test login', () async {
@@ -43,12 +42,9 @@ void main() {
 
       expect(
         await bloc.stream.firstWhere(
-              (element) => element.map(
-            login: (login) => !login.isLoading,
-            signUp: (_) => false,
-          ),
+          (element) => !element.isLoading,
         ),
-        LoginState.login(hasError: true),
+        LoginState(hasError: true),
       );
     });
 

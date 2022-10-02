@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 
@@ -22,7 +23,10 @@ abstract class BaseRequest<R> {
       );
     }
 
-    return parse(parseResponseData(response.data));
+    final result = parse(parseResponseData(response.data));
+
+    debugPrint("Received: $result");
+    return result;
   }
 
   R parse(List<int> bytes);

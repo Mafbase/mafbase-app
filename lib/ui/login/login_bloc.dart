@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
+import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
 
@@ -20,35 +21,32 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     this._signUpInteractor,
     this.navigator, [
     BuildContext? context,
-  ]) : super(LoginState.login(hasError: false), context) {
+  ]) : super(LoginState(hasError: false), context) {
     on<LoginButtonTapped>(_onLoginButtonTapped);
     on<ForgotPasswordTapped>(_onForgotPasswordTapped);
   }
 
-  _onForgotPasswordTapped(
+  Future _onForgotPasswordTapped(
     ForgotPasswordTapped event,
     Emitter<LoginState> emit,
   ) async {
-    emit(LoginState.login(hasError: false, isLoading: true));
+    emit(LoginState(hasError: false, isLoading: true));
     navigator.openForgotPasswordPage();
-    emit(LoginState.login(hasError: false));
+    emit(LoginState(hasError: false));
   }
 
-  _onLoginButtonTapped(
+  Future _onLoginButtonTapped(
     LoginButtonTapped event,
     Emitter<LoginState> emit,
   ) async {
-    emit(LoginState.login(hasError: false, isLoading: true));
+    emit(LoginState(hasError: false, isLoading: true));
     final result = await _loginInteractor.run(event.email, event.password);
-    result.when(
-      success: () {
-        navigator.openMainPage();
-        emit(LoginState.login(hasError: false));
-      },
-      error: (message) {
-        emit(LoginState.login(hasError: true));
-      },
-    );
+    if (result is Success) {
+      navigator.openMainPage();
+      emit(LoginState(hasError: false));
+    } else {
+      emit(LoginState(hasError: true));
+    }
   }
 }
 

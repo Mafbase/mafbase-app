@@ -28,7 +28,7 @@ void registerGetIt() {
   getIt
     ..registerLazySingleton<TokenStorage>(() => TokenStorageImpl())
     ..registerLazySingleton<MyHttpClient>(
-      () => MyHttpClient.autoForWeb(
+      () => MyHttpClient.withDefaultUrl(
         getIt(),
       ),
     )

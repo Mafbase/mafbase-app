@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/ui/main/add_tournament/add_tournament_page.dart';
@@ -20,12 +21,26 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_pag
 class AppRouter {
   final router = GoRouter(
     routes: [
-      GoRoute(
-        path: AppRoutes.loginPageRoute,
-        builder: (context, state) => BlocProvider(
-          create: (context) => getIt.get<LoginBloc>(param1: context),
-          child: const LoginPage(),
-        ),
+      ShellRoute(
+        builder: (context, state, child) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<LoginBloc>(
+                key: const Key("LoginBlocProvider"),
+                create: (context) => getIt.get<LoginBloc>(param1: context),
+              ),
+            ],
+            child: LoginPage(
+              child: child,
+            ),
+          );
+        },
+        routes: [
+          GoRoute(
+            path: AppRoutes.loginPageRoute,
+            builder: (context, state) => const LoginPageBody(),
+          ),
+        ],
       ),
       GoRoute(
         path: AppRoutes.translationRoute,
@@ -44,7 +59,7 @@ class AppRouter {
               ),
               BlocProvider<TournamentsBloc>(
                 key: const Key("TournamentsBlocProvider"),
-                create: (context) => getIt<TournamentsBloc>(),
+                create: (context) => getIt<TournamentsBloc>(param1: context),
               ),
             ],
             child: MainPage(

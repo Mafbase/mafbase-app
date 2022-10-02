@@ -16,44 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool hasError, bool isLoading) login,
-    required TResult Function(bool loginExistError, bool emailExistError)
-        signUp,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool hasError, bool isLoading)? login,
-    TResult Function(bool loginExistError, bool emailExistError)? signUp,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool hasError, bool isLoading)? login,
-    TResult Function(bool loginExistError, bool emailExistError)? signUp,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Login value) login,
-    required TResult Function(SignUp value) signUp,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Login value)? login,
-    TResult Function(SignUp value)? signUp,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Login value)? login,
-    TResult Function(SignUp value)? signUp,
-    required TResult orElse(),
-  }) =>
+  bool get hasError => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $LoginStateCopyWith<LoginState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -62,6 +29,7 @@ abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res>;
+  $Res call({bool hasError, bool isLoading});
 }
 
 /// @nodoc
@@ -71,30 +39,51 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   final LoginState _value;
   // ignore: unused_field
   final $Res Function(LoginState) _then;
-}
-
-/// @nodoc
-abstract class _$$LoginCopyWith<$Res> {
-  factory _$$LoginCopyWith(_$Login value, $Res Function(_$Login) then) =
-      __$$LoginCopyWithImpl<$Res>;
-  $Res call({bool hasError, bool isLoading});
-}
-
-/// @nodoc
-class __$$LoginCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements _$$LoginCopyWith<$Res> {
-  __$$LoginCopyWithImpl(_$Login _value, $Res Function(_$Login) _then)
-      : super(_value, (v) => _then(v as _$Login));
-
-  @override
-  _$Login get _value => super._value as _$Login;
 
   @override
   $Res call({
     Object? hasError = freezed,
     Object? isLoading = freezed,
   }) {
-    return _then(_$Login(
+    return _then(_value.copyWith(
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_LoginStateCopyWith<$Res>
+    implements $LoginStateCopyWith<$Res> {
+  factory _$$_LoginStateCopyWith(
+          _$_LoginState value, $Res Function(_$_LoginState) then) =
+      __$$_LoginStateCopyWithImpl<$Res>;
+  @override
+  $Res call({bool hasError, bool isLoading});
+}
+
+/// @nodoc
+class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+    implements _$$_LoginStateCopyWith<$Res> {
+  __$$_LoginStateCopyWithImpl(
+      _$_LoginState _value, $Res Function(_$_LoginState) _then)
+      : super(_value, (v) => _then(v as _$_LoginState));
+
+  @override
+  _$_LoginState get _value => super._value as _$_LoginState;
+
+  @override
+  $Res call({
+    Object? hasError = freezed,
+    Object? isLoading = freezed,
+  }) {
+    return _then(_$_LoginState(
       hasError: hasError == freezed
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
@@ -109,8 +98,8 @@ class __$$LoginCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Login implements Login {
-  _$Login({required this.hasError, this.isLoading = false});
+class _$_LoginState implements _LoginState {
+  _$_LoginState({required this.hasError, this.isLoading = false});
 
   @override
   final bool hasError;
@@ -120,14 +109,14 @@ class _$Login implements Login {
 
   @override
   String toString() {
-    return 'LoginState.login(hasError: $hasError, isLoading: $isLoading)';
+    return 'LoginState(hasError: $hasError, isLoading: $isLoading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Login &&
+            other is _$_LoginState &&
             const DeepCollectionEquality().equals(other.hasError, hasError) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
@@ -140,225 +129,20 @@ class _$Login implements Login {
 
   @JsonKey(ignore: true)
   @override
-  _$$LoginCopyWith<_$Login> get copyWith =>
-      __$$LoginCopyWithImpl<_$Login>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool hasError, bool isLoading) login,
-    required TResult Function(bool loginExistError, bool emailExistError)
-        signUp,
-  }) {
-    return login(hasError, isLoading);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool hasError, bool isLoading)? login,
-    TResult Function(bool loginExistError, bool emailExistError)? signUp,
-  }) {
-    return login?.call(hasError, isLoading);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool hasError, bool isLoading)? login,
-    TResult Function(bool loginExistError, bool emailExistError)? signUp,
-    required TResult orElse(),
-  }) {
-    if (login != null) {
-      return login(hasError, isLoading);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Login value) login,
-    required TResult Function(SignUp value) signUp,
-  }) {
-    return login(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Login value)? login,
-    TResult Function(SignUp value)? signUp,
-  }) {
-    return login?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Login value)? login,
-    TResult Function(SignUp value)? signUp,
-    required TResult orElse(),
-  }) {
-    if (login != null) {
-      return login(this);
-    }
-    return orElse();
-  }
+  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
+      __$$_LoginStateCopyWithImpl<_$_LoginState>(this, _$identity);
 }
 
-abstract class Login implements LoginState {
-  factory Login({required final bool hasError, final bool isLoading}) = _$Login;
+abstract class _LoginState implements LoginState {
+  factory _LoginState({required final bool hasError, final bool isLoading}) =
+      _$_LoginState;
 
+  @override
   bool get hasError;
+  @override
   bool get isLoading;
+  @override
   @JsonKey(ignore: true)
-  _$$LoginCopyWith<_$Login> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SignUpCopyWith<$Res> {
-  factory _$$SignUpCopyWith(_$SignUp value, $Res Function(_$SignUp) then) =
-      __$$SignUpCopyWithImpl<$Res>;
-  $Res call({bool loginExistError, bool emailExistError});
-}
-
-/// @nodoc
-class __$$SignUpCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements _$$SignUpCopyWith<$Res> {
-  __$$SignUpCopyWithImpl(_$SignUp _value, $Res Function(_$SignUp) _then)
-      : super(_value, (v) => _then(v as _$SignUp));
-
-  @override
-  _$SignUp get _value => super._value as _$SignUp;
-
-  @override
-  $Res call({
-    Object? loginExistError = freezed,
-    Object? emailExistError = freezed,
-  }) {
-    return _then(_$SignUp(
-      loginExistError: loginExistError == freezed
-          ? _value.loginExistError
-          : loginExistError // ignore: cast_nullable_to_non_nullable
-              as bool,
-      emailExistError: emailExistError == freezed
-          ? _value.emailExistError
-          : emailExistError // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SignUp implements SignUp {
-  _$SignUp({required this.loginExistError, required this.emailExistError});
-
-  @override
-  final bool loginExistError;
-  @override
-  final bool emailExistError;
-
-  @override
-  String toString() {
-    return 'LoginState.signUp(loginExistError: $loginExistError, emailExistError: $emailExistError)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SignUp &&
-            const DeepCollectionEquality()
-                .equals(other.loginExistError, loginExistError) &&
-            const DeepCollectionEquality()
-                .equals(other.emailExistError, emailExistError));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(loginExistError),
-      const DeepCollectionEquality().hash(emailExistError));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$SignUpCopyWith<_$SignUp> get copyWith =>
-      __$$SignUpCopyWithImpl<_$SignUp>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool hasError, bool isLoading) login,
-    required TResult Function(bool loginExistError, bool emailExistError)
-        signUp,
-  }) {
-    return signUp(loginExistError, emailExistError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool hasError, bool isLoading)? login,
-    TResult Function(bool loginExistError, bool emailExistError)? signUp,
-  }) {
-    return signUp?.call(loginExistError, emailExistError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool hasError, bool isLoading)? login,
-    TResult Function(bool loginExistError, bool emailExistError)? signUp,
-    required TResult orElse(),
-  }) {
-    if (signUp != null) {
-      return signUp(loginExistError, emailExistError);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Login value) login,
-    required TResult Function(SignUp value) signUp,
-  }) {
-    return signUp(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Login value)? login,
-    TResult Function(SignUp value)? signUp,
-  }) {
-    return signUp?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Login value)? login,
-    TResult Function(SignUp value)? signUp,
-    required TResult orElse(),
-  }) {
-    if (signUp != null) {
-      return signUp(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SignUp implements LoginState {
-  factory SignUp(
-      {required final bool loginExistError,
-      required final bool emailExistError}) = _$SignUp;
-
-  bool get loginExistError;
-  bool get emailExistError;
-  @JsonKey(ignore: true)
-  _$$SignUpCopyWith<_$SignUp> get copyWith =>
+  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
       throw _privateConstructorUsedError;
 }
