@@ -8,10 +8,11 @@ import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
-  final MainPageRouter _router;
+  @visibleForTesting
+  final MainPageRouter router;
 
   MainBloc(
-    this._router,
+    this.router,
   ) : super(
           const MainState(
             isLoading: false,
@@ -25,14 +26,14 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     MainEventBackButtonPressed event,
     Emitter<MainState> emit,
   ) async {
-    _router.pop();
+    router.pop();
   }
 
   Future _onSwitchTab(
     MainEventSwitchTab event,
     Emitter<MainState> emit,
   ) async {
-    _router.switchTabTo(event.tab);
+    router.switchTabTo(event.tab);
   }
 }
 
@@ -59,7 +60,7 @@ class MainPageRouterImpl implements MainPageRouter {
 }
 
 class MainPageRouterMock implements MainPageRouter {
-  final _openedTabController = StreamController<MainPageTab?>();
+  final _openedTabController = StreamController<MainPageTab?>.broadcast();
 
   Stream<MainPageTab?> get openedTab => _openedTabController.stream;
 

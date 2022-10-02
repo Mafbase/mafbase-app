@@ -95,7 +95,7 @@ void _registerSharedGetIt() {
         getIt.get<MainPageRouter>(param1: context),
       ),
     )
-    ..registerFactoryParam<TournamentsBloc, BuildContext, dynamic>(
+    ..registerFactoryParam<TournamentsBloc, BuildContext?, dynamic>(
       (context, _) => TournamentsBloc(
         getIt(),
         context,
