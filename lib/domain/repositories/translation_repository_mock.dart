@@ -3,6 +3,6 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 class TranslationRepositoryMock implements TranslationRepository {
   @override
   Future<bool> insertSeating(List<int> bytes, int tournamentId) async {
-    return true;
+    return Future.microtask(() => true);
   }
 }

@@ -23,6 +23,6 @@ class TournamentsRepositoryMock implements TournamentsRepository {
 
   @override
   Future<List<TournamentModel>> getTournaments() async {
-    return fakeTournaments;
+    return Future.microtask(() => fakeTournaments);
   }
 }

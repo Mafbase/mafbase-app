@@ -4,22 +4,26 @@ import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryMock implements AuthRepository {
   @override
-  Future<LoginModel> login(String email, String password) async {
-    if (email == "strelas" && password == "qwerty") {
-      return const LoginModel.success();
-    } else {
-      return const LoginModel.error();
-    }
+  Future<LoginModel> login(String email, String password) {
+    return Future.microtask(() {
+      if (email == "strelas" && password == "qwerty") {
+        return const LoginModel.success();
+      } else {
+        return const LoginModel.error();
+      }
+    });
   }
 
   @override
   Future<SignUpModel> signUp(String email, String password) async {
-    if (email == "strelas") {
-      return const SignUpModel.success(error: ErrorEnum.emailExist);
-    } else if (password == "1234") {
-      return const SignUpModel.success(error: ErrorEnum.weakPassword);
-    } else {
-      return const SignUpModel.success();
-    }
+    return Future.microtask(() {
+      if (email == "strelas") {
+        return const SignUpModel.success(error: ErrorEnum.emailExist);
+      } else if (password == "1234") {
+        return const SignUpModel.success(error: ErrorEnum.weakPassword);
+      } else {
+        return const SignUpModel.success();
+      }
+    });
   }
 }
