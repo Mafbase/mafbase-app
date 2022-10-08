@@ -8,18 +8,20 @@ import 'package:seating_generator_web/data/http_client.dart';
 abstract class BaseRequest<R> {
   final String method;
   final GeneratedMessage? data;
+  final bool resendOnUnauth;
 
-  const BaseRequest(this.method, [this.data]);
+  const BaseRequest(this.method, [this.data, this.resendOnUnauth = true]);
 
   Future<R> execute(MyHttpClient client) async {
     final Response response;
     if (data == null) {
-      response = await client.get(method);
+      response = await client.get(method, useRecoveryToken: resendOnUnauth);
     } else {
       response = await client
           .post(
         method,
         data!.toByteString(),
+        useRecoveryToken: resendOnUnauth,
       );
     }
 

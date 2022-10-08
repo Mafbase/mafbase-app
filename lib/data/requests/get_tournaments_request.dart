@@ -6,6 +6,7 @@ class GetTournamentsRequest extends BaseRequest<GetTournamentsEventOut> {
 
   @override
   GetTournamentsEventOut parse(List<int> bytes) {
+
     return GetTournamentsEventOut.fromBuffer(bytes);
   }
 }
