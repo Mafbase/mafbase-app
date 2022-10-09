@@ -4,13 +4,23 @@ import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
+import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_mock.dart';
+import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
+import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository_impl.dart';
+import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository_mock.dart';
+import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/domain/repositories/players_repository_impl.dart';
+import 'package:seating_generator_web/domain/repositories/players_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository_mock.dart';
@@ -50,6 +60,12 @@ void registerGetIt() {
     )
     ..registerLazySingleton<TranslationRepository>(
       () => TranslationRepositoryImpl(getIt()),
+    )
+    ..registerLazySingleton<CannotMeetTournamentRepository>(
+      () => CannotMeetTournamentRepositoryImpl(getIt()),
+    )
+    ..registerLazySingleton<PlayersRepository>(
+      () => PlayersRepositoryImpl(getIt()),
     );
   _registerSharedGetIt();
 }
@@ -68,6 +84,12 @@ void registerGetItTest() {
     )
     ..registerFactory<SeatingInsertingRouter>(
       () => SeatingInsertingRouterMock(),
+    )
+    ..registerLazySingleton<CannotMeetTournamentRepository>(
+      () => CannotMeetTournamentRepositoryMock(),
+    )
+    ..registerLazySingleton<PlayersRepository>(
+      () => PlayersRepositoryMock(),
     );
   _registerSharedGetIt();
 }
@@ -76,6 +98,18 @@ void _registerSharedGetIt() {
   getIt
     ..registerLazySingleton<LoginInteractor>(() => LoginInteractor(getIt()))
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
+    ..registerLazySingleton<GetAllPlayersInteractor>(
+      () => GetAllPlayersInteractor(getIt()),
+    )
+    ..registerLazySingleton<DeletePlayerInteractor>(
+          () => DeletePlayerInteractor(getIt()),
+    )
+    ..registerLazySingleton<GetTournamentsPlayersInteractor>(
+          () => GetTournamentsPlayersInteractor(getIt()),
+    )
+    ..registerLazySingleton<AddPlayerInteractor>(
+          () => AddPlayerInteractor(getIt()),
+    )
     ..registerLazySingleton<InsertSeatingInteractor>(
       () => InsertSeatingInteractor(getIt()),
     )
