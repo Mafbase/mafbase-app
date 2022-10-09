@@ -20,13 +20,13 @@ enum TournamentStatus {
   waitForBilling,
   ended;
 
-  static TournamentStatus from(GetTournamentsEventOut_Tournament_Status status) {
+  static TournamentStatus from(Tournament_Status status) {
     switch (status) {
-      case GetTournamentsEventOut_Tournament_Status.active:
+      case Tournament_Status.active:
         return TournamentStatus.active;
-      case GetTournamentsEventOut_Tournament_Status.ended:
+      case Tournament_Status.ended:
         return TournamentStatus.ended;
-      case GetTournamentsEventOut_Tournament_Status.waitForBilling:
+      case Tournament_Status.waitForBilling:
         return TournamentStatus.waitForBilling;
     }
     throw FormatException("can't parse $status to TournamentStatus");

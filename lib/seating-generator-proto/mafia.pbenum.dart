@@ -9,6 +9,40 @@
 import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class LoginEventOut_Error extends $pb.ProtobufEnum {
+  static const LoginEventOut_Error noError = LoginEventOut_Error._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'noError');
+  static const LoginEventOut_Error needVerification = LoginEventOut_Error._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'needVerification');
+  static const LoginEventOut_Error invalidCredentials = LoginEventOut_Error._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'invalidCredentials');
+
+  static const $core.List<LoginEventOut_Error> values = <LoginEventOut_Error> [
+    noError,
+    needVerification,
+    invalidCredentials,
+  ];
+
+  static final $core.Map<$core.int, LoginEventOut_Error> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static LoginEventOut_Error? valueOf($core.int value) => _byValue[value];
+
+  const LoginEventOut_Error._($core.int v, $core.String n) : super(v, n);
+}
+
+class LoginByTokenEventOut_Error extends $pb.ProtobufEnum {
+  static const LoginByTokenEventOut_Error noError = LoginByTokenEventOut_Error._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'noError');
+  static const LoginByTokenEventOut_Error needVerification = LoginByTokenEventOut_Error._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'needVerification');
+  static const LoginByTokenEventOut_Error invalidCredentials = LoginByTokenEventOut_Error._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'invalidCredentials');
+
+  static const $core.List<LoginByTokenEventOut_Error> values = <LoginByTokenEventOut_Error> [
+    noError,
+    needVerification,
+    invalidCredentials,
+  ];
+
+  static final $core.Map<$core.int, LoginByTokenEventOut_Error> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static LoginByTokenEventOut_Error? valueOf($core.int value) => _byValue[value];
+
+  const LoginByTokenEventOut_Error._($core.int v, $core.String n) : super(v, n);
+}
+
 class SignUpEventOut_Error extends $pb.ProtobufEnum {
   static const SignUpEventOut_Error noError = SignUpEventOut_Error._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'noError');
   static const SignUpEventOut_Error emailExist = SignUpEventOut_Error._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'emailExist');
@@ -43,20 +77,20 @@ class EmailVerificationEventOut_Status extends $pb.ProtobufEnum {
   const EmailVerificationEventOut_Status._($core.int v, $core.String n) : super(v, n);
 }
 
-class GetTournamentsEventOut_Tournament_Status extends $pb.ProtobufEnum {
-  static const GetTournamentsEventOut_Tournament_Status waitForBilling = GetTournamentsEventOut_Tournament_Status._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'waitForBilling');
-  static const GetTournamentsEventOut_Tournament_Status active = GetTournamentsEventOut_Tournament_Status._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'active');
-  static const GetTournamentsEventOut_Tournament_Status ended = GetTournamentsEventOut_Tournament_Status._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ended');
+class Tournament_Status extends $pb.ProtobufEnum {
+  static const Tournament_Status waitForBilling = Tournament_Status._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'waitForBilling');
+  static const Tournament_Status active = Tournament_Status._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'active');
+  static const Tournament_Status ended = Tournament_Status._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ended');
 
-  static const $core.List<GetTournamentsEventOut_Tournament_Status> values = <GetTournamentsEventOut_Tournament_Status> [
+  static const $core.List<Tournament_Status> values = <Tournament_Status> [
     waitForBilling,
     active,
     ended,
   ];
 
-  static final $core.Map<$core.int, GetTournamentsEventOut_Tournament_Status> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static GetTournamentsEventOut_Tournament_Status? valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, Tournament_Status> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static Tournament_Status? valueOf($core.int value) => _byValue[value];
 
-  const GetTournamentsEventOut_Tournament_Status._($core.int v, $core.String n) : super(v, n);
+  const Tournament_Status._($core.int v, $core.String n) : super(v, n);
 }
 
