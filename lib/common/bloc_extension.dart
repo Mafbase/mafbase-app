@@ -49,9 +49,9 @@ mixin EffectListener<E, S, B extends EffectEmitter<E, S>,
 }
 
 class CustomBloc<E, S> extends Bloc<E, S> {
-  final BuildContext? _context;
+  final BuildContext? context;
 
-  CustomBloc(super.initialState, [this._context]);
+  CustomBloc(super.initialState, [this.context]);
 
   @override
   void on<EV extends E>(EventHandler<EV, S> handler,
@@ -70,14 +70,14 @@ class CustomBloc<E, S> extends Bloc<E, S> {
     try {
       return await function();
     } on RequestError catch (error) {
-      if (_context != null) {
-        AppRouter.showErrorDialog(_context!, error.message ?? "");
+      if (context != null) {
+        AppRouter.showErrorDialog(context!, error.message ?? "");
       }
       rethrow;
     } on UnauthenticatedError catch (error) {
-      if (_context != null) {
-        _context!.go(AppRoutes.loginPageRoute);
-        AppRouter.showErrorDialog(_context!, error.message ?? "");
+      if (context != null) {
+        context!.go(AppRoutes.loginPageRoute);
+        AppRouter.showErrorDialog(context!, error.message ?? "");
       }
     }
   }

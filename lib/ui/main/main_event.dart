@@ -9,4 +9,7 @@ class MainEvent with _$MainEvent {
       MainEventSwitchTab;
 
   const factory MainEvent.backButtonPressed() = MainEventBackButtonPressed;
+
+  const factory MainEvent.tournamentSelected({required int tournamentId}) =
+      MainEventTournamentSelected;
 }

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
+import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
@@ -19,6 +22,9 @@ class TournamentsPage extends StatefulWidget {
 }
 
 class _TournamentsPageState extends State<TournamentsPage> {
+  int tapped = -1;
+  int hovered = -1;
+
   @override
   void initState() {
     super.initState();
@@ -51,9 +57,12 @@ class _TournamentsPageState extends State<TournamentsPage> {
                           color: MyTheme.of(context).textColor.withOpacity(0.2),
                         ),
                         columns: [
-                          AppLocalizations.of(context)!.tournamentsListNameHeader,
-                          AppLocalizations.of(context)!.tournamentsListStatusHeader,
-                          AppLocalizations.of(context)!.tournamentsListDateHeader,
+                          AppLocalizations.of(context)!
+                              .tournamentsListNameHeader,
+                          AppLocalizations.of(context)!
+                              .tournamentsListStatusHeader,
+                          AppLocalizations.of(context)!
+                              .tournamentsListDateHeader,
                           AppLocalizations.of(context)!
                               .tournamentsListGamesCountHeader
                         ]
@@ -70,8 +79,15 @@ class _TournamentsPageState extends State<TournamentsPage> {
                             )
                             .toList(),
                         rows: [
-                          ...state.tournaments.map(
-                            (e) => DataRow(
+                          ...state.tournaments.mapIndexed(
+                            (index, e) => DataRow(
+                              color: MaterialStatePropertyAll(
+                                tapped == index
+                                    ? const Color(0xFFA7A7A7)
+                                    : (hovered == index
+                                        ? const Color(0xFFE3E3E3)
+                                        : null),
+                              ),
                               cells: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -97,7 +113,8 @@ class _TournamentsPageState extends State<TournamentsPage> {
                                       ),
                                       Text(
                                         getText(e.status),
-                                        style: MyTheme.of(context).defaultTextStyle,
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle,
                                       ),
                                     ],
                                   ),
@@ -116,7 +133,52 @@ class _TournamentsPageState extends State<TournamentsPage> {
                                     style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                 ),
-                              ].map((e) => DataCell(e)).toList(),
+                              ]
+                                  .map(
+                                    (e) => DataCell(
+                                      MouseRegion(
+                                        onEnter: (_) => setState(() {
+                                          hovered = index;
+                                        }),
+                                        onExit: (_) => setState(() {
+                                          hovered = -1;
+                                        }),
+                                        child: GestureDetector(
+                                          onTapDown: (_) => setState(() {
+                                            tapped = index;
+                                          }),
+                                          onTapUp: (_) => setState(
+                                            () {
+                                              tapped = -1;
+                                              context.read<MainBloc>().add(
+                                                    MainEvent
+                                                        .tournamentSelected(
+                                                      tournamentId: state
+                                                          .tournaments[index]
+                                                          .id,
+                                                    ),
+                                                  );
+                                            },
+                                          ),
+                                          onTapCancel: () => setState(() {
+                                            tapped = -1;
+                                          }),
+                                          child: Container(
+                                            color: const Color(0x00000000),
+                                            child: Center(
+                                              child: Row(
+                                                children: [
+                                                  e.child ?? Container(),
+                                                  const Spacer(),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
                             ),
                           )
                         ],

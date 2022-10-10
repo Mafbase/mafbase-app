@@ -20,6 +20,14 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         ) {
     on<MainEventSwitchTab>(_onSwitchTab);
     on<MainEventBackButtonPressed>(_onBackButtonPressed);
+    on<MainEventTournamentSelected>(_onTournamentSelected);
+  }
+
+  Future _onTournamentSelected(
+    MainEventTournamentSelected event,
+    Emitter<MainState> emit,
+  ) async {
+    router.openTournament(event.tournamentId);
   }
 
   Future _onBackButtonPressed(
@@ -41,6 +49,8 @@ abstract class MainPageRouter {
   void switchTabTo(MainPageTab tab);
 
   void pop();
+
+  void openTournament(int id);
 }
 
 class MainPageRouterImpl implements MainPageRouter {
@@ -57,10 +67,16 @@ class MainPageRouterImpl implements MainPageRouter {
   void pop() {
     GoRouter.of(context).go("/");
   }
+
+  @override
+  void openTournament(int id) {
+    GoRouter.of(context).go(AppRoutes.tournamentPlayersListRouteWithId(id));
+  }
 }
 
 class MainPageRouterMock implements MainPageRouter {
   final _openedTabController = StreamController<MainPageTab?>.broadcast();
+  final _openedTournament = StreamController<bool>.broadcast();
 
   Stream<MainPageTab?> get openedTab => _openedTabController.stream;
 
@@ -72,5 +88,10 @@ class MainPageRouterMock implements MainPageRouter {
   @override
   void pop() {
     _openedTabController.add(null);
+  }
+
+  @override
+  void openTournament(int id) {
+    _openedTournament.add(true);
   }
 }

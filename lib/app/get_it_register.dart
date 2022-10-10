@@ -29,6 +29,8 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/domain/repositories/translation_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
@@ -54,6 +56,9 @@ void registerGetIt() {
     )
     ..registerFactoryParam<SeatingInsertingRouter, BuildContext, dynamic>(
       (context, _) => SeatingInsertingRouterImpl(context),
+    )
+    ..registerFactoryParam<TournamentPageRouter, BuildContext, dynamic>(
+      (context, _) => TournamentPageRouterImpl(context),
     )
     ..registerLazySingleton<TournamentsRepository>(
       () => TournamentsRepositoryImpl(getIt()),
@@ -102,13 +107,13 @@ void _registerSharedGetIt() {
       () => GetAllPlayersInteractor(getIt()),
     )
     ..registerLazySingleton<DeletePlayerInteractor>(
-          () => DeletePlayerInteractor(getIt()),
+      () => DeletePlayerInteractor(getIt()),
     )
     ..registerLazySingleton<GetTournamentsPlayersInteractor>(
-          () => GetTournamentsPlayersInteractor(getIt()),
+      () => GetTournamentsPlayersInteractor(getIt()),
     )
     ..registerLazySingleton<AddPlayerInteractor>(
-          () => AddPlayerInteractor(getIt()),
+      () => AddPlayerInteractor(getIt()),
     )
     ..registerLazySingleton<InsertSeatingInteractor>(
       () => InsertSeatingInteractor(getIt()),
@@ -139,6 +144,12 @@ void _registerSharedGetIt() {
       (context, _) => SeatingInsertingBloc(
         getIt.get<SeatingInsertingRouter>(param1: context),
         getIt(),
+      ),
+    )
+    ..registerFactoryParam<TournamentPageBloc, BuildContext, int>(
+      (context, tournamentId) => TournamentPageBloc(
+        tournamentId: tournamentId,
+        context: context,
       ),
     );
 }

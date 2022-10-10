@@ -12,6 +12,7 @@ import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
 import 'package:seating_generator_web/ui/main/profile_settings/profile_settings_page.dart';
 import 'package:seating_generator_web/ui/main/regulations_page/regulations_page.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
@@ -98,7 +99,8 @@ class AppRouter {
             path: AppRoutes.routeFromTab(MainPageTab.profileSettings),
             pageBuilder: (context, state) =>
                 const NoTransitionPage(child: ProfileSettingsPage()),
-          )
+          ),
+          TournamentPage.createRoute(),
         ],
       ),
     ],
@@ -139,6 +141,9 @@ class AppRoutes {
 
   static const loginPageRoute = '/login';
   static const translationRoute = '/translation';
+  static const tournamentPlayersListRoute = '/tournament/:id';
+
+  static String tournamentPlayersListRouteWithId(int tournamentId) => '/tournament/$tournamentId';
 
   static String routeFromTab(MainPageTab tab) => "/${tab.name}";
 }

@@ -20,18 +20,21 @@ mixin _$MainEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(MainPageTab tab) switchTab,
     required TResult Function() backButtonPressed,
+    required TResult Function(int tournamentId) tournamentSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
     TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
     TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +43,22 @@ mixin _$MainEvent {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
+    required TResult Function(MainEventTournamentSelected value)
+        tournamentSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,6 +147,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   TResult when<TResult extends Object?>({
     required TResult Function(MainPageTab tab) switchTab,
     required TResult Function() backButtonPressed,
+    required TResult Function(int tournamentId) tournamentSelected,
   }) {
     return switchTab(tab);
   }
@@ -149,6 +157,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
     TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
   }) {
     return switchTab?.call(tab);
   }
@@ -158,6 +167,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
     TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
     required TResult orElse(),
   }) {
     if (switchTab != null) {
@@ -172,6 +182,8 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
+    required TResult Function(MainEventTournamentSelected value)
+        tournamentSelected,
   }) {
     return switchTab(this);
   }
@@ -181,6 +193,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
   }) {
     return switchTab?.call(this);
   }
@@ -190,6 +203,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     required TResult orElse(),
   }) {
     if (switchTab != null) {
@@ -256,6 +270,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   TResult when<TResult extends Object?>({
     required TResult Function(MainPageTab tab) switchTab,
     required TResult Function() backButtonPressed,
+    required TResult Function(int tournamentId) tournamentSelected,
   }) {
     return backButtonPressed();
   }
@@ -265,6 +280,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
     TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
   }) {
     return backButtonPressed?.call();
   }
@@ -274,6 +290,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MainPageTab tab)? switchTab,
     TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -288,6 +305,8 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
+    required TResult Function(MainEventTournamentSelected value)
+        tournamentSelected,
   }) {
     return backButtonPressed(this);
   }
@@ -297,6 +316,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
   }) {
     return backButtonPressed?.call(this);
   }
@@ -306,6 +326,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -317,4 +338,152 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
 
 abstract class MainEventBackButtonPressed implements MainEvent {
   const factory MainEventBackButtonPressed() = _$MainEventBackButtonPressed;
+}
+
+/// @nodoc
+abstract class _$$MainEventTournamentSelectedCopyWith<$Res> {
+  factory _$$MainEventTournamentSelectedCopyWith(
+          _$MainEventTournamentSelected value,
+          $Res Function(_$MainEventTournamentSelected) then) =
+      __$$MainEventTournamentSelectedCopyWithImpl<$Res>;
+  $Res call({int tournamentId});
+}
+
+/// @nodoc
+class __$$MainEventTournamentSelectedCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res>
+    implements _$$MainEventTournamentSelectedCopyWith<$Res> {
+  __$$MainEventTournamentSelectedCopyWithImpl(
+      _$MainEventTournamentSelected _value,
+      $Res Function(_$MainEventTournamentSelected) _then)
+      : super(_value, (v) => _then(v as _$MainEventTournamentSelected));
+
+  @override
+  _$MainEventTournamentSelected get _value =>
+      super._value as _$MainEventTournamentSelected;
+
+  @override
+  $Res call({
+    Object? tournamentId = freezed,
+  }) {
+    return _then(_$MainEventTournamentSelected(
+      tournamentId: tournamentId == freezed
+          ? _value.tournamentId
+          : tournamentId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MainEventTournamentSelected implements MainEventTournamentSelected {
+  const _$MainEventTournamentSelected({required this.tournamentId});
+
+  @override
+  final int tournamentId;
+
+  @override
+  String toString() {
+    return 'MainEvent.tournamentSelected(tournamentId: $tournamentId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MainEventTournamentSelected &&
+            const DeepCollectionEquality()
+                .equals(other.tournamentId, tournamentId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(tournamentId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MainEventTournamentSelectedCopyWith<_$MainEventTournamentSelected>
+      get copyWith => __$$MainEventTournamentSelectedCopyWithImpl<
+          _$MainEventTournamentSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(MainPageTab tab) switchTab,
+    required TResult Function() backButtonPressed,
+    required TResult Function(int tournamentId) tournamentSelected,
+  }) {
+    return tournamentSelected(tournamentId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(MainPageTab tab)? switchTab,
+    TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
+  }) {
+    return tournamentSelected?.call(tournamentId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MainPageTab tab)? switchTab,
+    TResult Function()? backButtonPressed,
+    TResult Function(int tournamentId)? tournamentSelected,
+    required TResult orElse(),
+  }) {
+    if (tournamentSelected != null) {
+      return tournamentSelected(tournamentId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MainEventSwitchTab value) switchTab,
+    required TResult Function(MainEventBackButtonPressed value)
+        backButtonPressed,
+    required TResult Function(MainEventTournamentSelected value)
+        tournamentSelected,
+  }) {
+    return tournamentSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MainEventSwitchTab value)? switchTab,
+    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+  }) {
+    return tournamentSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MainEventSwitchTab value)? switchTab,
+    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+    required TResult orElse(),
+  }) {
+    if (tournamentSelected != null) {
+      return tournamentSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MainEventTournamentSelected implements MainEvent {
+  const factory MainEventTournamentSelected({required final int tournamentId}) =
+      _$MainEventTournamentSelected;
+
+  int get tournamentId;
+  @JsonKey(ignore: true)
+  _$$MainEventTournamentSelectedCopyWith<_$MainEventTournamentSelected>
+      get copyWith => throw _privateConstructorUsedError;
 }

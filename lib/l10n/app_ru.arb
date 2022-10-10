@@ -20,5 +20,11 @@
   "tournamentsListNameHeader": "Название турнира",
   "tournamentStatusActive": "Активен",
   "tournamentStatusWaitForBilling": "Ожидание оплаты",
-  "tournamentStatusEnded": "Завершён"
+  "tournamentStatusEnded": "Завершён",
+  "addPlayer": "Добавить участника",
+  "nicknameHint": "Никнейм",
+  "fsmNicknameHint": "Никнейм в ФСМ",
+  "mafbankNicknameHint": "Никнейм как на мафбанке",
+  "addPlayerDialogTitle": "Добавление участника",
+  "add": "Добавить"
 }
