@@ -70,4 +70,9 @@ class TournamentPageBloc
     });
     return Future.wait([first, second]);
   }
+
+  @override
+  void emitOnError(Emitter<TournamentPageState> emit) {
+    emit(state.copyWith(isLoading: false));
+  }
 }

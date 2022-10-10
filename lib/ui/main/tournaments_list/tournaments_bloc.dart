@@ -23,4 +23,9 @@ class TournamentsBloc extends CustomBloc<TournamentsEvent, TournamentsState> {
     final tournaments = await _getTournamentsInteractor.run();
     emit(state.copyWith(tournaments: tournaments, isLoading: false));
   }
+
+  @override
+  void emitOnError(Emitter<TournamentsState> emit) {
+    emit(state.copyWith(isLoading: false));
+  }
 }

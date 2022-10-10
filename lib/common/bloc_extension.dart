@@ -48,7 +48,7 @@ mixin EffectListener<E, S, B extends EffectEmitter<E, S>,
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {}
 }
 
-class CustomBloc<E, S> extends Bloc<E, S> {
+abstract class CustomBloc<E, S> extends Bloc<E, S> {
   final BuildContext? context;
 
   CustomBloc(super.initialState, [this.context]);
@@ -58,27 +58,41 @@ class CustomBloc<E, S> extends Bloc<E, S> {
       {EventTransformer<EV>? transformer}) {
     super.on(
       (event, emit) async {
-        await _functionWrapper(() async {
-          await handler(event, emit);
-        });
+        await _functionWrapper(
+          () async {
+            await handler(event, emit);
+          },
+          emit,
+        );
       },
       transformer: transformer,
     );
   }
 
-  FutureOr _functionWrapper(FutureOr Function() function) async {
+  void emitOnError(Emitter<S> emit);
+
+  FutureOr _functionWrapper(
+    FutureOr Function() function,
+    Emitter<S> emit,
+  ) async {
     try {
-      return await function();
-    } on RequestError catch (error) {
-      if (context != null) {
-        AppRouter.showErrorDialog(context!, error.message ?? "");
+      try {
+        return await function();
+      } on RequestError catch (error) {
+        if (context != null) {
+          AppRouter.showErrorDialog(context!, error.message ?? "");
+        }
+        rethrow;
+      } on UnauthenticatedError catch (error) {
+        if (context != null) {
+          context!.go(AppRoutes.loginPageRoute);
+          AppRouter.showErrorDialog(context!, error.message ?? "");
+        }
+        rethrow;
       }
+    } catch (ignored) {
+      emitOnError(emit);  
       rethrow;
-    } on UnauthenticatedError catch (error) {
-      if (context != null) {
-        context!.go(AppRoutes.loginPageRoute);
-        AppRouter.showErrorDialog(context!, error.message ?? "");
-      }
     }
   }
 }

@@ -48,6 +48,11 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
       emit(LoginState(hasError: true));
     }
   }
+
+  @override
+  void emitOnError(Emitter<LoginState> emit) {
+    emit(state.copyWith(isLoading: false));
+  }
 }
 
 abstract class LoginPageRouter {
