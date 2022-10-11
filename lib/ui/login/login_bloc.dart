@@ -12,14 +12,12 @@ import 'package:seating_generator_web/ui/login/login_state.dart';
 
 class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
   final LoginInteractor _loginInteractor;
-  final SignUpInteractor _signUpInteractor;
   @visibleForTesting
-  final LoginPageRouter navigator;
+  final LoginPageRouter router;
 
   LoginBloc(
     this._loginInteractor,
-    this._signUpInteractor,
-    this.navigator, [
+    this.router, [
     BuildContext? context,
   ]) : super(LoginState(hasError: false), context) {
     on<LoginButtonTapped>(_onLoginButtonTapped);
@@ -31,7 +29,7 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     emit(LoginState(hasError: false, isLoading: true));
-    navigator.openForgotPasswordPage();
+    router.openForgotPasswordPage();
     emit(LoginState(hasError: false));
   }
 
@@ -42,7 +40,7 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     emit(LoginState(hasError: false, isLoading: true));
     final result = await _loginInteractor.run(event.email, event.password);
     if (result is Success) {
-      navigator.openMainPage();
+      router.openMainPage();
       emit(LoginState(hasError: false));
     } else {
       emit(LoginState(hasError: true));

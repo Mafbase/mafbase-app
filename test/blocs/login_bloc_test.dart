@@ -21,7 +21,7 @@ void main() {
         ),
       );
 
-      final navigator = bloc.navigator as LoginPageRouterMock;
+      final navigator = bloc.router as LoginPageRouterMock;
       expect(
         await navigator.mainPageOpened.first.timeout(
           const Duration(seconds: 1),
@@ -53,7 +53,7 @@ void main() {
 
       bloc.add(const LoginEvent.forgotPasswordTapped());
 
-      final navigator = bloc.navigator as LoginPageRouterMock;
+      final navigator = bloc.router as LoginPageRouterMock;
 
       expect(
         await navigator.forgotPasswordPageOpened.first.timeout(
