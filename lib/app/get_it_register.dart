@@ -124,7 +124,6 @@ void _registerSharedGetIt() {
     ..registerFactoryParam<LoginBloc, BuildContext?, dynamic>(
       (context, _) => LoginBloc(
         getIt(),
-        getIt(),
         getIt.call(param1: context),
         context,
       ),
