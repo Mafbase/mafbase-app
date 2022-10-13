@@ -168,7 +168,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                   _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
             ) ??
         PlayerModel(
-          id: -1,
+          id: 0,
           nickname: _controller.text,
           fsmNickaname:
               _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,

@@ -26,5 +26,9 @@
   "fsmNicknameHint": "Никнейм в ФСМ",
   "mafbankNicknameHint": "Никнейм как на мафбанке",
   "addPlayerDialogTitle": "Добавление участника",
-  "add": "Добавить"
+  "add": "Добавить",
+  "finalGamesHint": "Количество финальных игр",
+  "swissGamesHint": "Количество игр в швейцарке",
+  "defaultGamesHint": "Количество отборочных игр",
+  "settings": "Настройки"
 }

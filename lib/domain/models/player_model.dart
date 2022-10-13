@@ -15,9 +15,9 @@ class PlayerModel with _$PlayerModel {
   factory PlayerModel.fromProto(Player proto) => PlayerModel(
         id: proto.id,
         nickname: proto.nickname,
-        fsmNickaname: proto.hasFsmNickname() ? proto.fsmNickname : null,
+        fsmNickaname: proto.fsmNickname.isNotEmpty ? proto.fsmNickname : null,
         mafbankNickname:
-            proto.hasMafbankNickname() ? proto.mafbankNickname : null,
+            proto.mafbankNickname.isNotEmpty ? proto.mafbankNickname : null,
       );
 }
 

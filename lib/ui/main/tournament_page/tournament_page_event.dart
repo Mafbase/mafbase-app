@@ -8,4 +8,6 @@ class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.playersListOpened() = TournamentPagePlayerListOpenedEvent;
 
   const factory TournamentPageEvent.addPlayerTapped() = TournamentPageEventAddPlayer;
+
+  const factory TournamentPageEvent.editTournamentSettings() = TournamentPageEventEditSettings;
 }
