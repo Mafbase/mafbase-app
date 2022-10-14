@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -8,17 +9,23 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
-  await SentryFlutter.init(
-    (options) {
-      options.dsn =
-          'https://9d5e563b2cf94d10b64bff4708a169dc@o4503907503570944.ingest.sentry.io/4503907504685056';
-      options.tracesSampleRate = 1.0;
-    },
-    appRunner: () {
-      registerGetIt();
-      runApp(const App());
-    },
-  );
+  if (!kDebugMode) {
+    await SentryFlutter.init(
+          (options) {
+        options.dsn =
+        'https://9d5e563b2cf94d10b64bff4708a169dc@o4503907503570944.ingest.sentry.io/4503907504685056';
+        options.tracesSampleRate = 1.0;
+      },
+      appRunner: _startApp,
+    );
+  } else {
+    _startApp();
+  }
+}
+
+void _startApp() {
+  registerGetIt();
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
