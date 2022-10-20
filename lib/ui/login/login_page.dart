@@ -45,11 +45,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  Widget _buildSignUpBox(bool loginExistError, bool emailExistError) {
-    return Container(
-      key: const Key("signUpBox"),
-      color: Colors.blue,
-    );
-  }
 }

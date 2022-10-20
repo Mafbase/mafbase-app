@@ -132,19 +132,32 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                 text: AppLocalizations.of(context)!.loginIn,
                 onTap: _onSubmit,
               ),
+              const SizedBox(
+                height: 24,
+              ),
+              TextButton(
+                  onPressed: _onSignUpTapped,
+                  child: Text(
+                    AppLocalizations.of(context)!.loginRegistration,
+                    style: MyTheme.of(context).defaultTextStyle,
+                  ))
             ],
           ),
         );
-      }
+      },
     );
   }
 
   void _onSubmit() {
     context.read<LoginBloc>().add(
-      LoginEvent.loginButtonTapped(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ),
-    );
+          LoginEvent.loginButtonTapped(
+            email: _emailController.text,
+            password: _passwordController.text,
+          ),
+        );
+  }
+
+  void _onSignUpTapped() {
+    context.read<LoginBloc>().add(const LoginEvent.signUpButtonTapped());
   }
 }

@@ -20,18 +20,21 @@ mixin _$LoginEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) loginButtonTapped,
     required TResult Function() forgotPasswordTapped,
+    required TResult Function() signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$LoginEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoginButtonTapped value) loginButtonTapped,
     required TResult Function(ForgotPasswordTapped value) forgotPasswordTapped,
+    required TResult Function(SignUpButtonTapped value) signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoginButtonTapped value)? loginButtonTapped,
     TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoginButtonTapped value)? loginButtonTapped,
     TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,6 +155,7 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) loginButtonTapped,
     required TResult Function() forgotPasswordTapped,
+    required TResult Function() signUpButtonTapped,
   }) {
     return loginButtonTapped(email, password);
   }
@@ -158,6 +165,7 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
   }) {
     return loginButtonTapped?.call(email, password);
   }
@@ -167,6 +175,7 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
     required TResult orElse(),
   }) {
     if (loginButtonTapped != null) {
@@ -180,6 +189,7 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   TResult map<TResult extends Object?>({
     required TResult Function(LoginButtonTapped value) loginButtonTapped,
     required TResult Function(ForgotPasswordTapped value) forgotPasswordTapped,
+    required TResult Function(SignUpButtonTapped value) signUpButtonTapped,
   }) {
     return loginButtonTapped(this);
   }
@@ -189,6 +199,7 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoginButtonTapped value)? loginButtonTapped,
     TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) {
     return loginButtonTapped?.call(this);
   }
@@ -198,6 +209,7 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoginButtonTapped value)? loginButtonTapped,
     TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
     required TResult orElse(),
   }) {
     if (loginButtonTapped != null) {
@@ -262,6 +274,7 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) loginButtonTapped,
     required TResult Function() forgotPasswordTapped,
+    required TResult Function() signUpButtonTapped,
   }) {
     return forgotPasswordTapped();
   }
@@ -271,6 +284,7 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
   }) {
     return forgotPasswordTapped?.call();
   }
@@ -280,6 +294,7 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
     required TResult orElse(),
   }) {
     if (forgotPasswordTapped != null) {
@@ -293,6 +308,7 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   TResult map<TResult extends Object?>({
     required TResult Function(LoginButtonTapped value) loginButtonTapped,
     required TResult Function(ForgotPasswordTapped value) forgotPasswordTapped,
+    required TResult Function(SignUpButtonTapped value) signUpButtonTapped,
   }) {
     return forgotPasswordTapped(this);
   }
@@ -302,6 +318,7 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(LoginButtonTapped value)? loginButtonTapped,
     TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) {
     return forgotPasswordTapped?.call(this);
   }
@@ -311,6 +328,7 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoginButtonTapped value)? loginButtonTapped,
     TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
     required TResult orElse(),
   }) {
     if (forgotPasswordTapped != null) {
@@ -322,4 +340,115 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
 
 abstract class ForgotPasswordTapped implements LoginEvent {
   const factory ForgotPasswordTapped() = _$ForgotPasswordTapped;
+}
+
+/// @nodoc
+abstract class _$$SignUpButtonTappedCopyWith<$Res> {
+  factory _$$SignUpButtonTappedCopyWith(_$SignUpButtonTapped value,
+          $Res Function(_$SignUpButtonTapped) then) =
+      __$$SignUpButtonTappedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignUpButtonTappedCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res>
+    implements _$$SignUpButtonTappedCopyWith<$Res> {
+  __$$SignUpButtonTappedCopyWithImpl(
+      _$SignUpButtonTapped _value, $Res Function(_$SignUpButtonTapped) _then)
+      : super(_value, (v) => _then(v as _$SignUpButtonTapped));
+
+  @override
+  _$SignUpButtonTapped get _value => super._value as _$SignUpButtonTapped;
+}
+
+/// @nodoc
+
+class _$SignUpButtonTapped implements SignUpButtonTapped {
+  const _$SignUpButtonTapped();
+
+  @override
+  String toString() {
+    return 'LoginEvent.signUpButtonTapped()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SignUpButtonTapped);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) loginButtonTapped,
+    required TResult Function() forgotPasswordTapped,
+    required TResult Function() signUpButtonTapped,
+  }) {
+    return signUpButtonTapped();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String email, String password)? loginButtonTapped,
+    TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
+  }) {
+    return signUpButtonTapped?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? loginButtonTapped,
+    TResult Function()? forgotPasswordTapped,
+    TResult Function()? signUpButtonTapped,
+    required TResult orElse(),
+  }) {
+    if (signUpButtonTapped != null) {
+      return signUpButtonTapped();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoginButtonTapped value) loginButtonTapped,
+    required TResult Function(ForgotPasswordTapped value) forgotPasswordTapped,
+    required TResult Function(SignUpButtonTapped value) signUpButtonTapped,
+  }) {
+    return signUpButtonTapped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(LoginButtonTapped value)? loginButtonTapped,
+    TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+  }) {
+    return signUpButtonTapped?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoginButtonTapped value)? loginButtonTapped,
+    TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    required TResult orElse(),
+  }) {
+    if (signUpButtonTapped != null) {
+      return signUpButtonTapped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignUpButtonTapped implements LoginEvent {
+  const factory SignUpButtonTapped() = _$SignUpButtonTapped;
 }

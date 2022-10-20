@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
@@ -21,6 +22,7 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
   ]) : super(LoginState(hasError: false), context) {
     on<LoginButtonTapped>(_onLoginButtonTapped);
     on<ForgotPasswordTapped>(_onForgotPasswordTapped);
+    on<SignUpButtonTapped>(_onSignUpButtonTapped);
   }
 
   Future _onForgotPasswordTapped(
@@ -30,6 +32,13 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     emit(LoginState(hasError: false, isLoading: true));
     router.openForgotPasswordPage();
     emit(LoginState(hasError: false));
+  }
+
+  Future _onSignUpButtonTapped(
+    SignUpButtonTapped event,
+    Emitter<LoginState> emit,
+  ) async {
+    router.openSignUpPage();
   }
 
   Future _onLoginButtonTapped(
@@ -56,16 +65,21 @@ abstract class LoginPageRouter {
   void openMainPage();
 
   void openForgotPasswordPage();
+
+  void openSignUpPage();
 }
 
 class LoginPageRouterMock implements LoginPageRouter {
   final _mainPageOpenedController = StreamController<bool>();
   final _forgotPasswordOpenedController = StreamController<bool>();
+  final _signUpPageOpenedController = StreamController<bool>();
 
   Stream<bool> get mainPageOpened => _mainPageOpenedController.stream;
 
   Stream<bool> get forgotPasswordPageOpened =>
       _forgotPasswordOpenedController.stream;
+
+  Stream<bool> get signUpPageOpened => _signUpPageOpenedController.stream;
 
   @override
   void openMainPage() {
@@ -75,6 +89,11 @@ class LoginPageRouterMock implements LoginPageRouter {
   @override
   void openForgotPasswordPage() {
     _forgotPasswordOpenedController.add(true);
+  }
+
+  @override
+  void openSignUpPage() {
+    _signUpPageOpenedController.add(true);
   }
 }
 
@@ -92,5 +111,10 @@ class LoginPageRouterImpl implements LoginPageRouter {
   void openForgotPasswordPage() {
     // TODO: implement openForgotPasswordPage
     throw UnimplementedError();
+  }
+
+  @override
+  void openSignUpPage() {
+    GoRouter.of(_context).go(AppRoutes.signUpRoute);
   }
 }

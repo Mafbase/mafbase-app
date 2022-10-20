@@ -2,11 +2,14 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
+import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/main/add_tournament/add_tournament_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
@@ -29,6 +32,10 @@ class AppRouter {
                 key: const Key("LoginBlocProvider"),
                 create: (context) => getIt.get<LoginBloc>(param1: context),
               ),
+              BlocProvider<SignUpBloc>(
+                key: const Key('SignUpBlocProvider'),
+                create: (context) => getIt.get<SignUpBloc>(param1: context),
+              )
             ],
             child: LoginPage(
               child: child,
@@ -38,8 +45,12 @@ class AppRouter {
         routes: [
           GoRoute(
             path: AppRoutes.loginPageRoute,
-            builder: (context, state) => const LoginPageBody(),
+            pageBuilder: (context, state) => FadeTransitionPage(child: const LoginPageBody()),
           ),
+          GoRoute(
+            path: AppRoutes.signUpRoute,
+            pageBuilder: (context, state) => FadeTransitionPage(child: const SignUpPageBody()),
+          )
         ],
       ),
       GoRoute(
@@ -78,6 +89,7 @@ class AppRouter {
             redirect: (context, state) async {
               try {
                 final response = await getIt<MyHttpClient>().get("/api/auth");
+                print(response.statusCode);
                 if (response.statusCode == 200) {
                   return null;
                 }
@@ -141,6 +153,7 @@ class AppRoutes {
 
   static const loginPageRoute = '/login';
   static const translationRoute = '/translation';
+  static const signUpRoute = '/signUp';
   static const tournamentPlayersListRoute = '/tournament/:id';
 
   static String tournamentPlayersListRouteWithId(int tournamentId) => '/tournament/$tournamentId';

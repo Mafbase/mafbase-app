@@ -28,6 +28,7 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/domain/repositories/translation_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
+import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
@@ -53,6 +54,9 @@ void registerGetIt() {
     )
     ..registerFactoryParam<MainPageRouter, BuildContext, dynamic>(
       (context, _) => MainPageRouterImpl(context),
+    )
+    ..registerFactoryParam<SignUpPageRouter, BuildContext, dynamic>(
+          (context, _) => SignUpPageRouterImpl(context),
     )
     ..registerFactoryParam<SeatingInsertingRouter, BuildContext, dynamic>(
       (context, _) => SeatingInsertingRouterImpl(context),
@@ -80,6 +84,7 @@ void registerGetItTest() {
   getIt
     ..registerLazySingleton<AuthRepository>(() => AuthRepositoryMock())
     ..registerFactory<LoginPageRouter>(() => LoginPageRouterMock())
+    ..registerFactory<SignUpPageRouter>(() => SignUpPageRouterMock())
     ..registerFactory<MainPageRouter>(() => MainPageRouterMock())
     ..registerLazySingleton<TranslationRepository>(
       () => TranslationRepositoryMock(),
@@ -123,6 +128,13 @@ void _registerSharedGetIt() {
     )
     ..registerFactoryParam<LoginBloc, BuildContext?, dynamic>(
       (context, _) => LoginBloc(
+        getIt(),
+        getIt.call(param1: context),
+        context,
+      ),
+    )
+    ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(
+          (context, _) => SignUpBloc(
         getIt(),
         getIt.call(param1: context),
         context,

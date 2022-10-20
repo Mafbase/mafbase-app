@@ -18,7 +18,8 @@ class MyHttpClient {
       responseType: ResponseType.bytes,
       baseUrl: _baseUrl,
       validateStatus: (status) {
-        return status != null && status <= 500;
+        return status != null && status <= 300 && status == 401 ||
+            status == 500;
       },
       headers: {
         "Content-Type": "application/protobuf",
@@ -30,6 +31,8 @@ class MyHttpClient {
   Future<Response> get(String method, {bool useRecoveryToken = true}) async {
     if (useRecoveryToken) {
       debugPrint("sending request to $_baseUrl$method");
+      debugPrint(
+          "token: ${await _storage.authToken}\nrecovery token: ${await _storage.recoveryToken}");
     }
     final response = await _client.get(
       method,
