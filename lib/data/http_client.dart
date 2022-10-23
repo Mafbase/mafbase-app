@@ -141,7 +141,7 @@ class MyHttpClient {
       : _baseUrl = "http://mafia-generator.tomsk.ru";
 
   MyHttpClient.autoForWeb(this._storage)
-      : _baseUrl = "${Uri.base.scheme}://${Uri.base.host}";
+      : _baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";
 }
 
 extension GeneratedExt on GeneratedMessage {
