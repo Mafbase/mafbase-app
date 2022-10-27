@@ -57,6 +57,8 @@ build:
 deploy:
   image: ubuntu:latest
   stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   tags:
     - docker
   before_script:
