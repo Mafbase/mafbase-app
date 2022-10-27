@@ -62,7 +62,8 @@ deploy:
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
     - eval $(ssh-agent -s)
-    - echo "$SSH_KEY" | tr -d '\r' | ssh-add -
+    - echo "$SSH_KEY"
+    - ssh-add <(echo "$SSH_KEY")
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - ssh-keyscan mafia-generator.tomsk.ru >> ~/.ssh/known_hosts
