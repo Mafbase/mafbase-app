@@ -68,7 +68,7 @@ deploy:
     - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script: 
-    - scp -i .ssh/id_rsa -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
+    - scp -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
   environment: production
   cache:
     key: "$CI_COMMIT_REF_NAME"
