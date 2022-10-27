@@ -55,7 +55,7 @@ build:
     
 
 deploy:
-  image: ubuntu
+  image: ubuntu:latest
   stage: deploy
   tags:
     - docker
