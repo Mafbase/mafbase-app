@@ -18,11 +18,11 @@ class AuthRepositoryMock implements AuthRepository {
   Future<SignUpModel> signUp(String email, String password) async {
     return Future.microtask(() {
       if (email == "strelas") {
-        return const SignUpModel.success(error: ErrorEnum.emailExist);
+        return const SignUpModel(error: ErrorEnum.emailExist);
       } else if (password == "1234") {
-        return const SignUpModel.success(error: ErrorEnum.weakPassword);
+        return const SignUpModel(error: ErrorEnum.weakPassword);
       } else {
-        return const SignUpModel.success();
+        return const SignUpModel();
       }
     });
   }

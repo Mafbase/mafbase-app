@@ -4,12 +4,13 @@ part 'sign_up_model.freezed.dart';
 
 @freezed
 class SignUpModel with _$SignUpModel {
-  const factory SignUpModel.success({ErrorEnum? error}) = Success;
+  const factory SignUpModel({ErrorEnum? error}) = _SignUpModel;
 
-  const factory SignUpModel.error({String? message}) = Error;
+
 }
 
 enum ErrorEnum {
+  needVerification,
   emailExist,
   weakPassword,
 }

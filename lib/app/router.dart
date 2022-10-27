@@ -151,6 +151,7 @@ class AppRouter {
 class AppRoutes {
   AppRoutes._();
 
+  static const verificationPage = '/verification';
   static const loginPageRoute = '/login';
   static const translationRoute = '/translation';
   static const signUpRoute = '/signUp';

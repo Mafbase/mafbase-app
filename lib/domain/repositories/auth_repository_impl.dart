@@ -29,26 +29,20 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
   }
 
   @override
-  Future<SignUpModel> signUp(String email, String password) {
-    return SignUpRequest(SignUpEvent(email: email, password: password))
-        .execute(client)
-        .then(
-      (value) async {
-        switch (value.error) {
-          case SignUpEventOut_Error.emailExist:
-            return const SignUpModel.success();
-          case SignUpEventOut_Error.noError:
-            await _storage.onTokensUpdated(value.token, value.recoveryToken);
-            return const SignUpModel.success();
-          case SignUpEventOut_Error.weakPassword:
-            return const SignUpModel.success();
-        }
-        return const SignUpModel.error(message: "Invalid response");
-      },
-    ).onError(
-      (error, stackTrace) => SignUpModel.error(
-        message: error?.toString(),
-      ),
-    );
+  Future<SignUpModel> signUp(String email, String password) async {
+    final value = await SignUpRequest(SignUpEvent(email: email, password: password))
+        .execute(client);
+    switch (value.error) {
+      case SignUpEventOut_Error.emailExist:
+        return const SignUpModel(error: ErrorEnum.emailExist);
+      case SignUpEventOut_Error.noError:
+        await _storage.onTokensUpdated(value.token, value.recoveryToken);
+        return const SignUpModel();
+      case SignUpEventOut_Error.weakPassword:
+        return const SignUpModel(error: ErrorEnum.weakPassword);
+      case SignUpEventOut_Error.needVerification:
+        return const SignUpModel(error: ErrorEnum.needVerification);
+    }
+    return throw Exception('Invalid response');
   }
 }

@@ -96,7 +96,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     child: Checkbox(
                       splashRadius: 0,
                       value: remember,
-                      checkColor: MyTheme.of(context).checkColor,
+                      checkColor: MyTheme.of(context).borderColor,
                       fillColor: MaterialStatePropertyAll(
                         MyTheme.of(context).borderColor,
                       ),

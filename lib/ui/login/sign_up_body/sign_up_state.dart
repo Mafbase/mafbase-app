@@ -5,5 +5,5 @@ part 'sign_up_state.freezed.dart';
 
 @freezed
 class SignUpState with _$SignUpState {
-  factory SignUpState({required bool hasError, @Default(false) bool isLoading}) = _SignUpState;
+  factory SignUpState({@Default(false) bool isLoading, @Default(false) bool weakPassword, @Default(false) bool emailExist}) = _SignUpState;
 }

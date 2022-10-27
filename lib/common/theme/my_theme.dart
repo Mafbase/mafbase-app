@@ -13,7 +13,6 @@ abstract class MyTheme {
   abstract final TextStyle fieldTextStyle;
   abstract final TextStyle btnTextStyle;
   abstract final TextStyle headerTextStyle;
-  abstract final Color checkColor;
   abstract final Color darkBlueColor;
   abstract final Color redColor;
   abstract final Color greyColor;
@@ -76,9 +75,6 @@ class _LightTheme implements MyTheme {
         fontSize: 40,
         fontWeight: FontWeight.w600,
       );
-
-  @override
-  Color get checkColor => const Color(0xFF1C2B40);
 
   @override
   Color get darkBlueColor => const Color(0xFF1A2D42);

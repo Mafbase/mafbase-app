@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpState {
-  bool get hasError => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get weakPassword => throw _privateConstructorUsedError;
+  bool get emailExist => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpStateCopyWith<SignUpState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SignUpStateCopyWith<$Res> {
   factory $SignUpStateCopyWith(
           SignUpState value, $Res Function(SignUpState) then) =
       _$SignUpStateCopyWithImpl<$Res>;
-  $Res call({bool hasError, bool isLoading});
+  $Res call({bool isLoading, bool weakPassword, bool emailExist});
 }
 
 /// @nodoc
@@ -42,17 +43,22 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? hasError = freezed,
     Object? isLoading = freezed,
+    Object? weakPassword = freezed,
+    Object? emailExist = freezed,
   }) {
     return _then(_value.copyWith(
-      hasError: hasError == freezed
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      weakPassword: weakPassword == freezed
+          ? _value.weakPassword
+          : weakPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      emailExist: emailExist == freezed
+          ? _value.emailExist
+          : emailExist // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -65,7 +71,7 @@ abstract class _$$_SignUpStateCopyWith<$Res>
           _$_SignUpState value, $Res Function(_$_SignUpState) then) =
       __$$_SignUpStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool hasError, bool isLoading});
+  $Res call({bool isLoading, bool weakPassword, bool emailExist});
 }
 
 /// @nodoc
@@ -80,17 +86,22 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? hasError = freezed,
     Object? isLoading = freezed,
+    Object? weakPassword = freezed,
+    Object? emailExist = freezed,
   }) {
     return _then(_$_SignUpState(
-      hasError: hasError == freezed
-          ? _value.hasError
-          : hasError // ignore: cast_nullable_to_non_nullable
-              as bool,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      weakPassword: weakPassword == freezed
+          ? _value.weakPassword
+          : weakPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      emailExist: emailExist == freezed
+          ? _value.emailExist
+          : emailExist // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -99,17 +110,24 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SignUpState implements _SignUpState {
-  _$_SignUpState({required this.hasError, this.isLoading = false});
+  _$_SignUpState(
+      {this.isLoading = false,
+      this.weakPassword = false,
+      this.emailExist = false});
 
-  @override
-  final bool hasError;
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool weakPassword;
+  @override
+  @JsonKey()
+  final bool emailExist;
 
   @override
   String toString() {
-    return 'SignUpState(hasError: $hasError, isLoading: $isLoading)';
+    return 'SignUpState(isLoading: $isLoading, weakPassword: $weakPassword, emailExist: $emailExist)';
   }
 
   @override
@@ -117,15 +135,19 @@ class _$_SignUpState implements _SignUpState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SignUpState &&
-            const DeepCollectionEquality().equals(other.hasError, hasError) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.weakPassword, weakPassword) &&
+            const DeepCollectionEquality()
+                .equals(other.emailExist, emailExist));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(hasError),
-      const DeepCollectionEquality().hash(isLoading));
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(weakPassword),
+      const DeepCollectionEquality().hash(emailExist));
 
   @JsonKey(ignore: true)
   @override
@@ -134,13 +156,17 @@ class _$_SignUpState implements _SignUpState {
 }
 
 abstract class _SignUpState implements SignUpState {
-  factory _SignUpState({required final bool hasError, final bool isLoading}) =
-      _$_SignUpState;
+  factory _SignUpState(
+      {final bool isLoading,
+      final bool weakPassword,
+      final bool emailExist}) = _$_SignUpState;
 
   @override
-  bool get hasError;
-  @override
   bool get isLoading;
+  @override
+  bool get weakPassword;
+  @override
+  bool get emailExist;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpStateCopyWith<_$_SignUpState> get copyWith =>

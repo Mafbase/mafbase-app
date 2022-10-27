@@ -23,7 +23,6 @@
   "tournamentStatusEnded": "Завершён",
   "loginRegistration": "Зарегистрироваться",
   "loginRegister": "Регистрация",
-  "tournamentStatusEnded": "Завершён",
   "addPlayer": "Добавить участника",
   "nicknameHint": "Никнейм",
   "fsmNicknameHint": "Никнейм в ФСМ",
@@ -33,5 +32,13 @@
   "finalGamesHint": "Количество финальных игр",
   "swissGamesHint": "Количество игр в швейцарке",
   "defaultGamesHint": "Количество отборочных игр",
-  "settings": "Настройки"
+  "settings": "Настройки",
+  "yourEmail": "Ваша электронная почта",
+  "wrongEmail": "Профиль с такой почтой уже существует / Неверная почта",
+  "enterPassword": "Введите пароль",
+  "repeatPassword": "Повторите пароль",
+  "invalidPassword": "Слишком слабый пароль",
+  "notMatchPasswords": "Пароли не совпадают",
+  "requiredForEnter": "- обязательное поле для заполнения"
+
 }

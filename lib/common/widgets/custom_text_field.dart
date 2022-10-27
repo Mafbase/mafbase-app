@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -6,7 +8,10 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final bool canObscure;
   final String? errorText;
+  final Widget? suffixIcon;
   final String? hint;
+  final bool isRequiredField;
+  final double bottomPadding;
   final Function(String s)? onSubmit;
   final FocusNode? focusNode;
 
@@ -14,11 +19,14 @@ class CustomTextField extends StatefulWidget {
     Key? key,
     this.icon,
     required this.controller,
+    this.suffixIcon,
     this.hint,
     this.onSubmit,
     this.errorText,
     this.focusNode,
+    this.bottomPadding = 10,
     this.canObscure = false,
+    this.isRequiredField = false,
   }) : super(key: key);
 
   @override
@@ -53,27 +61,35 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     controller: widget.controller,
                     obscureText: obscureText,
                     decoration: InputDecoration(
+                      suffixIcon: widget.suffixIcon,
                       errorText: widget.errorText,
+                      errorMaxLines: 1,
                       hintText: widget.hint,
                       border: const UnderlineInputBorder(),
                     ),
                   ),
                 ),
-                if (widget.canObscure)
                   Positioned(
                     top: 0,
                     bottom: 0,
                     right: 0,
-                    child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obscureText = !obscureText;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.remove_red_eye_outlined,
-                        color: MyTheme.of(context).borderColor,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if(widget.canObscure) IconButton(
+                          onPressed: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: MyTheme.of(context).borderColor,
+                          ),
+                        ),
+                        const SizedBox(width: 10,),
+                        SvgPicture.asset(AppAssets.exclamationPoint, height: 18,),
+                      ],
                     ),
                   ),
               ],

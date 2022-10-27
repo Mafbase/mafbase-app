@@ -16,43 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpModel {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(ErrorEnum? error) success,
-    required TResult Function(String? message) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ErrorEnum? error)? success,
-    TResult Function(String? message)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ErrorEnum? error)? success,
-    TResult Function(String? message)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) =>
+  ErrorEnum? get error => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SignUpModelCopyWith<SignUpModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,6 +28,7 @@ abstract class $SignUpModelCopyWith<$Res> {
   factory $SignUpModelCopyWith(
           SignUpModel value, $Res Function(SignUpModel) then) =
       _$SignUpModelCopyWithImpl<$Res>;
+  $Res call({ErrorEnum? error});
 }
 
 /// @nodoc
@@ -70,29 +38,45 @@ class _$SignUpModelCopyWithImpl<$Res> implements $SignUpModelCopyWith<$Res> {
   final SignUpModel _value;
   // ignore: unused_field
   final $Res Function(SignUpModel) _then;
-}
-
-/// @nodoc
-abstract class _$$SuccessCopyWith<$Res> {
-  factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) =
-      __$$SuccessCopyWithImpl<$Res>;
-  $Res call({ErrorEnum? error});
-}
-
-/// @nodoc
-class __$$SuccessCopyWithImpl<$Res> extends _$SignUpModelCopyWithImpl<$Res>
-    implements _$$SuccessCopyWith<$Res> {
-  __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
-      : super(_value, (v) => _then(v as _$Success));
-
-  @override
-  _$Success get _value => super._value as _$Success;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_$Success(
+    return _then(_value.copyWith(
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as ErrorEnum?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_SignUpModelCopyWith<$Res>
+    implements $SignUpModelCopyWith<$Res> {
+  factory _$$_SignUpModelCopyWith(
+          _$_SignUpModel value, $Res Function(_$_SignUpModel) then) =
+      __$$_SignUpModelCopyWithImpl<$Res>;
+  @override
+  $Res call({ErrorEnum? error});
+}
+
+/// @nodoc
+class __$$_SignUpModelCopyWithImpl<$Res> extends _$SignUpModelCopyWithImpl<$Res>
+    implements _$$_SignUpModelCopyWith<$Res> {
+  __$$_SignUpModelCopyWithImpl(
+      _$_SignUpModel _value, $Res Function(_$_SignUpModel) _then)
+      : super(_value, (v) => _then(v as _$_SignUpModel));
+
+  @override
+  _$_SignUpModel get _value => super._value as _$_SignUpModel;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(_$_SignUpModel(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -103,22 +87,22 @@ class __$$SuccessCopyWithImpl<$Res> extends _$SignUpModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Success implements Success {
-  const _$Success({this.error});
+class _$_SignUpModel implements _SignUpModel {
+  const _$_SignUpModel({this.error});
 
   @override
   final ErrorEnum? error;
 
   @override
   String toString() {
-    return 'SignUpModel.success(error: $error)';
+    return 'SignUpModel(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Success &&
+            other is _$_SignUpModel &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -128,207 +112,17 @@ class _$Success implements Success {
 
   @JsonKey(ignore: true)
   @override
-  _$$SuccessCopyWith<_$Success> get copyWith =>
-      __$$SuccessCopyWithImpl<_$Success>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(ErrorEnum? error) success,
-    required TResult Function(String? message) error,
-  }) {
-    return success(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ErrorEnum? error)? success,
-    TResult Function(String? message)? error,
-  }) {
-    return success?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ErrorEnum? error)? success,
-    TResult Function(String? message)? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
+  _$$_SignUpModelCopyWith<_$_SignUpModel> get copyWith =>
+      __$$_SignUpModelCopyWithImpl<_$_SignUpModel>(this, _$identity);
 }
 
-abstract class Success implements SignUpModel {
-  const factory Success({final ErrorEnum? error}) = _$Success;
+abstract class _SignUpModel implements SignUpModel {
+  const factory _SignUpModel({final ErrorEnum? error}) = _$_SignUpModel;
 
+  @override
   ErrorEnum? get error;
+  @override
   @JsonKey(ignore: true)
-  _$$SuccessCopyWith<_$Success> get copyWith =>
+  _$$_SignUpModelCopyWith<_$_SignUpModel> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
-  $Res call({String? message});
-}
-
-/// @nodoc
-class __$$ErrorCopyWithImpl<$Res> extends _$SignUpModelCopyWithImpl<$Res>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
-      : super(_value, (v) => _then(v as _$Error));
-
-  @override
-  _$Error get _value => super._value as _$Error;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_$Error(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$Error implements Error {
-  const _$Error({this.message});
-
-  @override
-  final String? message;
-
-  @override
-  String toString() {
-    return 'SignUpModel.error(message: $message)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Error &&
-            const DeepCollectionEquality().equals(other.message, message));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$ErrorCopyWith<_$Error> get copyWith =>
-      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(ErrorEnum? error) success,
-    required TResult Function(String? message) error,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ErrorEnum? error)? success,
-    TResult Function(String? message)? error,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ErrorEnum? error)? success,
-    TResult Function(String? message)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Error implements SignUpModel {
-  const factory Error({final String? message}) = _$Error;
-
-  String? get message;
-  @JsonKey(ignore: true)
-  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
 }
