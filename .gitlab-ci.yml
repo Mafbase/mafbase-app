@@ -12,7 +12,7 @@ code_quality:
     - docker
   image: "cirrusci/flutter:latest"
   before_script:
-    - pub global activate dart_code_metrics
+    - flutter pub global activate dart_code_metrics
     - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
     - metrics lib -r codeclimate  > gl-code-quality-report.json
@@ -26,7 +26,7 @@ test:
     - docker
   image: "cirrusci/flutter:latest"
   before_script:
-    - pub global activate junitreport
+    - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
     - flutter test --machine --coverage | tojunit -o report.xml
