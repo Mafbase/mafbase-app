@@ -8,6 +8,8 @@
 
 code_quality:
   stage: test
+  tags:
+    - docker
   image: "cirrusci/flutter:1.22.5"
   before_script:
     - pub global activate dart_code_metrics
@@ -20,6 +22,8 @@ code_quality:
 
 test:
   stage: test
+  tags:
+    - docker
   image: "cirrusci/flutter:1.22.5"
   before_script:
     - pub global activate junitreport
@@ -38,6 +42,8 @@ test:
 
 deploy:
   stage: deploy
+  tags:
+    - docker
   script: echo "Define your deployment script!"
   environment: production
 
