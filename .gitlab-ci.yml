@@ -70,6 +70,7 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
   script: 
     - scp -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
+    - ssh strelas@mafia-generator.tomsk.ru "./update_client.sh"
   environment: production
   cache:
     key: "$CI_COMMIT_REF_NAME"
