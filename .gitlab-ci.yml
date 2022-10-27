@@ -55,7 +55,7 @@ build:
     
 
 deploy:
-  image: "lscr.io/linuxserver/openssh-server:latest"
+  image: ubuntu
   stage: deploy
   tags:
     - docker
