@@ -60,10 +60,13 @@ deploy:
   tags:
     - docker
   before_script:
-    - mkdir .ssh
-    - touch .ssh/id_rsa
-    - echo "$SSH_KEY" > .ssh/id_rsa
-    - chmod 600 .ssh/id_rsa
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
   script: 
     - scp -i .ssh/id_rsa -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
   environment: production
