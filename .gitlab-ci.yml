@@ -40,10 +40,29 @@ test:
     reports:
       junit: report.xml
 
+build:
+  stage: build
+  tags:
+    - docker
+  image: "cirrusci/flutter:latest"
+  script:
+    - flutter build web --release
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build/web
+    
+
 deploy:
   stage: deploy
   tags:
     - docker
-  script: echo "Define your deployment script!"
+  script: scp -i .ssh/id_rsa -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
   environment: production
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build/web
 
