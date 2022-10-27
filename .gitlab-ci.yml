@@ -60,6 +60,8 @@ deploy:
   tags:
     - docker
   before_script:
+    - mkdir .ssh
+    - touch .ssh/id_rsa
     - echo "$SSH_KEY" > .ssh/id_rsa
   script: 
     - scp -i .ssh/id_rsa -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
