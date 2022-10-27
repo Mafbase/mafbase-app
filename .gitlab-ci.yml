@@ -55,10 +55,14 @@ build:
     
 
 deploy:
+  image: "lscr.io/linuxserver/openssh-server:latest"
   stage: deploy
   tags:
     - docker
-  script: scp -i .ssh/id_rsa -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
+  before_script:
+    - echo "$SSH_KEY" > .ssh/id_rsa
+  script: 
+    - scp -i .ssh/id_rsa -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
   environment: production
   cache:
     key: "$CI_COMMIT_REF_NAME"
