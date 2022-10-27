@@ -65,7 +65,7 @@ deploy:
     - echo "$SSH_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    - ssh-keyscan mafia-generator.tomsk.ru >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script: 
     - scp -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
