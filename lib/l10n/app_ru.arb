@@ -66,7 +66,7 @@
   "defaultGamesHint": "Количество отборочных игр",
   "@defaultGamesHint": {},
   "settings": "Настройки",
-  "@settings": {}
+  "@settings": {},
   "yourEmail": "Ваша электронная почта",
   "@yourEmail": {},
   "wrongEmail": "Профиль с такой почтой уже существует / Неверная почта",
@@ -79,7 +79,6 @@
   "@invalidPassword": {},
   "notMatchPasswords": "Пароли не совпадают",
   "@notMatchPasswords": {},
-  "requiredForEnter": "- обязательное поле для заполнения"
-  "@requiredForEnter": {},
-
+  "requiredForEnter": "- обязательное поле для заполнения",
+  "@requiredForEnter": {}
 }
