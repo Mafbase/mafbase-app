@@ -10,6 +10,7 @@ import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/add_tournament/add_tournament_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
@@ -82,6 +83,7 @@ class AppRouter {
           );
         },
         routes: [
+          AddClubGamePage.route,
           GoRoute(
             path: '/',
             pageBuilder: (context, state) =>

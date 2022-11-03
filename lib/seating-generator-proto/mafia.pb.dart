@@ -149,6 +149,451 @@ class LoginEventOut extends $pb.GeneratedMessage {
   void clearError() => clearField(3);
 }
 
+class ChangeSeatingContent extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ChangeSeatingContent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'player', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'imageUrl', protoName: 'imageUrl')
+    ..e<PlayerRole>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: PlayerRole.citizen, valueOf: PlayerRole.valueOf, enumValues: PlayerRole.values)
+    ..e<PlayerStatus>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PlayerStatus.alive, valueOf: PlayerStatus.valueOf, enumValues: PlayerStatus.values)
+    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'selectedGame', $pb.PbFieldType.O3, protoName: 'selectedGame')
+    ..hasRequiredFields = false
+  ;
+
+  ChangeSeatingContent._() : super();
+  factory ChangeSeatingContent({
+    $core.int? player,
+    $core.String? imageUrl,
+    PlayerRole? role,
+    PlayerStatus? status,
+    $core.int? selectedGame,
+  }) {
+    final _result = create();
+    if (player != null) {
+      _result.player = player;
+    }
+    if (imageUrl != null) {
+      _result.imageUrl = imageUrl;
+    }
+    if (role != null) {
+      _result.role = role;
+    }
+    if (status != null) {
+      _result.status = status;
+    }
+    if (selectedGame != null) {
+      _result.selectedGame = selectedGame;
+    }
+    return _result;
+  }
+  factory ChangeSeatingContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChangeSeatingContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ChangeSeatingContent clone() => ChangeSeatingContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ChangeSeatingContent copyWith(void Function(ChangeSeatingContent) updates) => super.copyWith((message) => updates(message as ChangeSeatingContent)) as ChangeSeatingContent; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ChangeSeatingContent create() => ChangeSeatingContent._();
+  ChangeSeatingContent createEmptyInstance() => create();
+  static $pb.PbList<ChangeSeatingContent> createRepeated() => $pb.PbList<ChangeSeatingContent>();
+  @$core.pragma('dart2js:noInline')
+  static ChangeSeatingContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeSeatingContent>(create);
+  static ChangeSeatingContent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get player => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set player($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlayer() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlayer() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get imageUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set imageUrl($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasImageUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearImageUrl() => clearField(2);
+
+  @$pb.TagNumber(3)
+  PlayerRole get role => $_getN(2);
+  @$pb.TagNumber(3)
+  set role(PlayerRole v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRole() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRole() => clearField(3);
+
+  @$pb.TagNumber(4)
+  PlayerStatus get status => $_getN(3);
+  @$pb.TagNumber(4)
+  set status(PlayerStatus v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasStatus() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStatus() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get selectedGame => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set selectedGame($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasSelectedGame() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSelectedGame() => clearField(5);
+}
+
+class Club extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Club', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  Club._() : super();
+  factory Club({
+    $core.int? id,
+    $core.String? name,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    return _result;
+  }
+  factory Club.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Club.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Club clone() => Club()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Club copyWith(void Function(Club) updates) => super.copyWith((message) => updates(message as Club)) as Club; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Club create() => Club._();
+  Club createEmptyInstance() => create();
+  static $pb.PbList<Club> createRepeated() => $pb.PbList<Club>();
+  @$core.pragma('dart2js:noInline')
+  static Club getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Club>(create);
+  static Club? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+}
+
+class ClubGameResult extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ClubGameResult', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..p<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'addScore', $pb.PbFieldType.P3, protoName: 'addScore')
+    ..p<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'players', $pb.PbFieldType.P3)
+    ..e<ClubGameResult_GameWin>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'win', $pb.PbFieldType.OE, defaultOrMaker: ClubGameResult_GameWin.city, valueOf: ClubGameResult_GameWin.valueOf, enumValues: ClubGameResult_GameWin.values)
+    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstDie', $pb.PbFieldType.O3, protoName: 'firstDie')
+    ..e<ClubGameResult_BestMove>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bestMove', $pb.PbFieldType.OE, protoName: 'bestMove', defaultOrMaker: ClubGameResult_BestMove.miss, valueOf: ClubGameResult_BestMove.valueOf, enumValues: ClubGameResult_BestMove.values)
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'date')
+    ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'referee', $pb.PbFieldType.O3)
+    ..a<$core.int>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafia1', $pb.PbFieldType.O3)
+    ..a<$core.int>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafia2', $pb.PbFieldType.O3)
+    ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'don', $pb.PbFieldType.O3)
+    ..a<$core.int>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sheriff', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  ClubGameResult._() : super();
+  factory ClubGameResult({
+    $core.Iterable<$core.int>? addScore,
+    $core.Iterable<$core.int>? players,
+    ClubGameResult_GameWin? win,
+    $core.int? firstDie,
+    ClubGameResult_BestMove? bestMove,
+    $core.String? date,
+    $core.int? referee,
+    $core.int? mafia1,
+    $core.int? mafia2,
+    $core.int? don,
+    $core.int? sheriff,
+  }) {
+    final _result = create();
+    if (addScore != null) {
+      _result.addScore.addAll(addScore);
+    }
+    if (players != null) {
+      _result.players.addAll(players);
+    }
+    if (win != null) {
+      _result.win = win;
+    }
+    if (firstDie != null) {
+      _result.firstDie = firstDie;
+    }
+    if (bestMove != null) {
+      _result.bestMove = bestMove;
+    }
+    if (date != null) {
+      _result.date = date;
+    }
+    if (referee != null) {
+      _result.referee = referee;
+    }
+    if (mafia1 != null) {
+      _result.mafia1 = mafia1;
+    }
+    if (mafia2 != null) {
+      _result.mafia2 = mafia2;
+    }
+    if (don != null) {
+      _result.don = don;
+    }
+    if (sheriff != null) {
+      _result.sheriff = sheriff;
+    }
+    return _result;
+  }
+  factory ClubGameResult.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClubGameResult.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ClubGameResult clone() => ClubGameResult()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClubGameResult copyWith(void Function(ClubGameResult) updates) => super.copyWith((message) => updates(message as ClubGameResult)) as ClubGameResult; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ClubGameResult create() => ClubGameResult._();
+  ClubGameResult createEmptyInstance() => create();
+  static $pb.PbList<ClubGameResult> createRepeated() => $pb.PbList<ClubGameResult>();
+  @$core.pragma('dart2js:noInline')
+  static ClubGameResult getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubGameResult>(create);
+  static ClubGameResult? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get addScore => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.int> get players => $_getList(1);
+
+  @$pb.TagNumber(3)
+  ClubGameResult_GameWin get win => $_getN(2);
+  @$pb.TagNumber(3)
+  set win(ClubGameResult_GameWin v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasWin() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearWin() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get firstDie => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set firstDie($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasFirstDie() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFirstDie() => clearField(4);
+
+  @$pb.TagNumber(5)
+  ClubGameResult_BestMove get bestMove => $_getN(4);
+  @$pb.TagNumber(5)
+  set bestMove(ClubGameResult_BestMove v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBestMove() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBestMove() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get date => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set date($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDate() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get referee => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set referee($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasReferee() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearReferee() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.int get mafia1 => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set mafia1($core.int v) { $_setSignedInt32(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasMafia1() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearMafia1() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.int get mafia2 => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set mafia2($core.int v) { $_setSignedInt32(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasMafia2() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearMafia2() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.int get don => $_getIZ(9);
+  @$pb.TagNumber(10)
+  set don($core.int v) { $_setSignedInt32(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasDon() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearDon() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.int get sheriff => $_getIZ(10);
+  @$pb.TagNumber(11)
+  set sheriff($core.int v) { $_setSignedInt32(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasSheriff() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearSheriff() => clearField(11);
+}
+
+class ClubsEventOut extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ClubsEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<Club>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'club', $pb.PbFieldType.PM, subBuilder: Club.create)
+    ..hasRequiredFields = false
+  ;
+
+  ClubsEventOut._() : super();
+  factory ClubsEventOut({
+    $core.Iterable<Club>? club,
+  }) {
+    final _result = create();
+    if (club != null) {
+      _result.club.addAll(club);
+    }
+    return _result;
+  }
+  factory ClubsEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClubsEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ClubsEventOut clone() => ClubsEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClubsEventOut copyWith(void Function(ClubsEventOut) updates) => super.copyWith((message) => updates(message as ClubsEventOut)) as ClubsEventOut; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ClubsEventOut create() => ClubsEventOut._();
+  ClubsEventOut createEmptyInstance() => create();
+  static $pb.PbList<ClubsEventOut> createRepeated() => $pb.PbList<ClubsEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static ClubsEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubsEventOut>(create);
+  static ClubsEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Club> get club => $_getList(0);
+}
+
+class SeatingContent extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SeatingContent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<PlayerRole>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'roles', $pb.PbFieldType.PE, valueOf: PlayerRole.valueOf, enumValues: PlayerRole.values)
+    ..pc<PlayerStatus>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.PE, valueOf: PlayerStatus.valueOf, enumValues: PlayerStatus.values)
+    ..pPS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images')
+    ..pPS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'names')
+    ..hasRequiredFields = false
+  ;
+
+  SeatingContent._() : super();
+  factory SeatingContent({
+    $core.Iterable<PlayerRole>? roles,
+    $core.Iterable<PlayerStatus>? status,
+    $core.Iterable<$core.String>? images,
+    $core.Iterable<$core.String>? names,
+  }) {
+    final _result = create();
+    if (roles != null) {
+      _result.roles.addAll(roles);
+    }
+    if (status != null) {
+      _result.status.addAll(status);
+    }
+    if (images != null) {
+      _result.images.addAll(images);
+    }
+    if (names != null) {
+      _result.names.addAll(names);
+    }
+    return _result;
+  }
+  factory SeatingContent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SeatingContent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SeatingContent clone() => SeatingContent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SeatingContent copyWith(void Function(SeatingContent) updates) => super.copyWith((message) => updates(message as SeatingContent)) as SeatingContent; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SeatingContent create() => SeatingContent._();
+  SeatingContent createEmptyInstance() => create();
+  static $pb.PbList<SeatingContent> createRepeated() => $pb.PbList<SeatingContent>();
+  @$core.pragma('dart2js:noInline')
+  static SeatingContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SeatingContent>(create);
+  static SeatingContent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<PlayerRole> get roles => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.List<PlayerStatus> get status => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $core.List<$core.String> get images => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.String> get names => $_getList(3);
+}
+
 class LoginByTokenEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'LoginByTokenEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
@@ -948,6 +1393,67 @@ class TournamentSettings extends $pb.GeneratedMessage {
   $core.bool hasFinalGamesCount() => $_has(2);
   @$pb.TagNumber(3)
   void clearFinalGamesCount() => clearField(3);
+}
+
+class Profile extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Profile', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'firstName', protoName: 'firstName')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'secondName', protoName: 'secondName')
+    ..hasRequiredFields = false
+  ;
+
+  Profile._() : super();
+  factory Profile({
+    $core.String? firstName,
+    $core.String? secondName,
+  }) {
+    final _result = create();
+    if (firstName != null) {
+      _result.firstName = firstName;
+    }
+    if (secondName != null) {
+      _result.secondName = secondName;
+    }
+    return _result;
+  }
+  factory Profile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Profile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Profile clone() => Profile()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Profile copyWith(void Function(Profile) updates) => super.copyWith((message) => updates(message as Profile)) as Profile; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Profile create() => Profile._();
+  Profile createEmptyInstance() => create();
+  static $pb.PbList<Profile> createRepeated() => $pb.PbList<Profile>();
+  @$core.pragma('dart2js:noInline')
+  static Profile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Profile>(create);
+  static Profile? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get firstName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set firstName($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFirstName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFirstName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get secondName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set secondName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSecondName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSecondName() => clearField(2);
 }
 
 class Player extends $pb.GeneratedMessage {

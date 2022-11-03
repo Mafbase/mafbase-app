@@ -1,10 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/common/widgets/player_autocomplete.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -67,7 +69,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
             const SizedBox(
               height: 100,
             ),
-            _CustomAutoComplete(
+            CustomAutoComplete(
               hint: context.locale.nicknameHint,
               controller: _controller,
               displayStringForOption: (model) => model.nickname,
@@ -91,7 +93,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                 _focusNodeFsm.requestFocus();
               },
             ),
-            _CustomAutoComplete(
+            CustomAutoComplete(
               hint: context.locale.fsmNicknameHint,
               controller: _controllerFsm,
               displayStringForOption: (model) => model.fsmNickaname ?? "",
@@ -116,7 +118,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                 _focusNodeMafbank.requestFocus();
               },
             ),
-            _CustomAutoComplete(
+            CustomAutoComplete(
               hint: context.locale.mafbankNicknameHint,
               controller: _controllerMafbank,
               displayStringForOption: (model) => model.mafbankNickname ?? "",
@@ -176,97 +178,15 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,
         );
 
-    Navigator.pop(context, player);
-  }
-}
-
-class _CustomAutoComplete extends StatelessWidget {
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final String Function(PlayerModel model) displayStringForOption;
-  final List<PlayerModel> availablePlayers;
-  final Function(PlayerModel model) onSelected;
-  final VoidCallback onSubmit;
-  final Iterable<PlayerModel> Function(TextEditingValue text) optionsBuilder;
-  final String hint;
-
-  const _CustomAutoComplete({
-    Key? key,
-    required this.controller,
-    required this.displayStringForOption,
-    required this.focusNode,
-    required this.availablePlayers,
-    required this.onSelected,
-    required this.onSubmit,
-    required this.optionsBuilder,
-    required this.hint,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RawAutocomplete<PlayerModel>(
-      optionsBuilder: optionsBuilder,
-      key: key,
-      textEditingController: controller,
-      displayStringForOption: displayStringForOption,
-      focusNode: focusNode,
-      optionsViewBuilder: (
+    if (player.id == 0 &&
+        widget.availablePlayers
+            .any((element) => element.nickname == player.nickname)) {
+      AppRouter.showErrorDialog(
         context,
-        onSelected,
-        options,
-      ) {
-        return Align(
-          alignment: Alignment.topLeft,
-          child: Material(
-            elevation: 4.0,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: options.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final PlayerModel option = options.elementAt(index);
-                  return InkWell(
-                    onTap: () {
-                      onSelected(option);
-                    },
-                    child: Builder(
-                      builder: (BuildContext context) {
-                        final bool highlight =
-                            AutocompleteHighlightedOption.of(context) == index;
-                        if (highlight) {
-                          SchedulerBinding.instance
-                              .addPostFrameCallback((Duration timeStamp) {
-                            Scrollable.ensureVisible(context, alignment: 0.5);
-                          });
-                        }
-                        return Container(
-                          color:
-                              highlight ? Theme.of(context).focusColor : null,
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(displayStringForOption(option)),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        );
-      },
-      onSelected: onSelected,
-      fieldViewBuilder: (context, controller, focusNode, onSubmit) {
-        return CustomTextField(
-          focusNode: focusNode,
-          controller: controller,
-          hint: hint,
-          onSubmit: (text) {
-            onSubmit();
-          },
-        );
-      },
-    );
+        "Игрок с таким никнеймом уже существует",
+      );
+    } else {
+      Navigator.pop(context, player);
+    }
   }
 }

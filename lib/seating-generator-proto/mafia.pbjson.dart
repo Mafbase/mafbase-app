@@ -8,6 +8,31 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use playerRoleDescriptor instead')
+const PlayerRole$json = const {
+  '1': 'PlayerRole',
+  '2': const [
+    const {'1': 'citizen', '2': 0},
+    const {'1': 'mafia', '2': 1},
+    const {'1': 'don', '2': 2},
+    const {'1': 'sheriff', '2': 3},
+  ],
+};
+
+/// Descriptor for `PlayerRole`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List playerRoleDescriptor = $convert.base64Decode('CgpQbGF5ZXJSb2xlEgsKB2NpdGl6ZW4QABIJCgVtYWZpYRABEgcKA2RvbhACEgsKB3NoZXJpZmYQAw==');
+@$core.Deprecated('Use playerStatusDescriptor instead')
+const PlayerStatus$json = const {
+  '1': 'PlayerStatus',
+  '2': const [
+    const {'1': 'alive', '2': 0},
+    const {'1': 'voted', '2': 1},
+    const {'1': 'deleted', '2': 2},
+  ],
+};
+
+/// Descriptor for `PlayerStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List playerStatusDescriptor = $convert.base64Decode('CgxQbGF5ZXJTdGF0dXMSCQoFYWxpdmUQABIJCgV2b3RlZBABEgsKB2RlbGV0ZWQQAg==');
 @$core.Deprecated('Use loginEventDescriptor instead')
 const LoginEvent$json = const {
   '1': 'LoginEvent',
@@ -42,6 +67,111 @@ const LoginEventOut_Error$json = const {
 
 /// Descriptor for `LoginEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List loginEventOutDescriptor = $convert.base64Decode('Cg1Mb2dpbkV2ZW50T3V0EhQKBXRva2VuGAEgASgJUgV0b2tlbhIkCg1yZWNvdmVyeVRva2VuGAIgASgJUg1yZWNvdmVyeVRva2VuEjQKBWVycm9yGAMgASgOMh4uZ2VuZXJhdGVkLkxvZ2luRXZlbnRPdXQuRXJyb3JSBWVycm9yIkIKBUVycm9yEgsKB25vRXJyb3IQABIUChBuZWVkVmVyaWZpY2F0aW9uEAESFgoSaW52YWxpZENyZWRlbnRpYWxzEAI=');
+@$core.Deprecated('Use changeSeatingContentDescriptor instead')
+const ChangeSeatingContent$json = const {
+  '1': 'ChangeSeatingContent',
+  '2': const [
+    const {'1': 'player', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'player', '17': true},
+    const {'1': 'imageUrl', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'imageUrl', '17': true},
+    const {'1': 'role', '3': 3, '4': 1, '5': 14, '6': '.generated.PlayerRole', '9': 2, '10': 'role', '17': true},
+    const {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.generated.PlayerStatus', '9': 3, '10': 'status', '17': true},
+    const {'1': 'selectedGame', '3': 5, '4': 1, '5': 5, '9': 4, '10': 'selectedGame', '17': true},
+  ],
+  '8': const [
+    const {'1': '_player'},
+    const {'1': '_imageUrl'},
+    const {'1': '_role'},
+    const {'1': '_status'},
+    const {'1': '_selectedGame'},
+  ],
+};
+
+/// Descriptor for `ChangeSeatingContent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List changeSeatingContentDescriptor = $convert.base64Decode('ChRDaGFuZ2VTZWF0aW5nQ29udGVudBIbCgZwbGF5ZXIYASABKAVIAFIGcGxheWVyiAEBEh8KCGltYWdlVXJsGAIgASgJSAFSCGltYWdlVXJsiAEBEi4KBHJvbGUYAyABKA4yFS5nZW5lcmF0ZWQuUGxheWVyUm9sZUgCUgRyb2xliAEBEjQKBnN0YXR1cxgEIAEoDjIXLmdlbmVyYXRlZC5QbGF5ZXJTdGF0dXNIA1IGc3RhdHVziAEBEicKDHNlbGVjdGVkR2FtZRgFIAEoBUgEUgxzZWxlY3RlZEdhbWWIAQFCCQoHX3BsYXllckILCglfaW1hZ2VVcmxCBwoFX3JvbGVCCQoHX3N0YXR1c0IPCg1fc2VsZWN0ZWRHYW1l');
+@$core.Deprecated('Use clubDescriptor instead')
+const Club$json = const {
+  '1': 'Club',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'id', '17': true},
+    const {'1': 'name', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'name', '17': true},
+  ],
+  '8': const [
+    const {'1': '_id'},
+    const {'1': '_name'},
+  ],
+};
+
+/// Descriptor for `Club`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List clubDescriptor = $convert.base64Decode('CgRDbHViEhMKAmlkGAEgASgFSABSAmlkiAEBEhcKBG5hbWUYAiABKAlIAVIEbmFtZYgBAUIFCgNfaWRCBwoFX25hbWU=');
+@$core.Deprecated('Use clubGameResultDescriptor instead')
+const ClubGameResult$json = const {
+  '1': 'ClubGameResult',
+  '2': const [
+    const {'1': 'addScore', '3': 1, '4': 3, '5': 5, '10': 'addScore'},
+    const {'1': 'players', '3': 2, '4': 3, '5': 5, '10': 'players'},
+    const {'1': 'win', '3': 3, '4': 1, '5': 14, '6': '.generated.ClubGameResult.GameWin', '10': 'win'},
+    const {'1': 'firstDie', '3': 4, '4': 1, '5': 5, '9': 0, '10': 'firstDie', '17': true},
+    const {'1': 'bestMove', '3': 5, '4': 1, '5': 14, '6': '.generated.ClubGameResult.BestMove', '9': 1, '10': 'bestMove', '17': true},
+    const {'1': 'date', '3': 6, '4': 1, '5': 9, '9': 2, '10': 'date', '17': true},
+    const {'1': 'referee', '3': 7, '4': 1, '5': 5, '10': 'referee'},
+    const {'1': 'mafia1', '3': 8, '4': 1, '5': 5, '10': 'mafia1'},
+    const {'1': 'mafia2', '3': 9, '4': 1, '5': 5, '10': 'mafia2'},
+    const {'1': 'don', '3': 10, '4': 1, '5': 5, '10': 'don'},
+    const {'1': 'sheriff', '3': 11, '4': 1, '5': 5, '10': 'sheriff'},
+  ],
+  '4': const [ClubGameResult_BestMove$json, ClubGameResult_GameWin$json],
+  '8': const [
+    const {'1': '_firstDie'},
+    const {'1': '_bestMove'},
+    const {'1': '_date'},
+  ],
+};
+
+@$core.Deprecated('Use clubGameResultDescriptor instead')
+const ClubGameResult_BestMove$json = const {
+  '1': 'BestMove',
+  '2': const [
+    const {'1': 'miss', '2': 0},
+    const {'1': 'half', '2': 1},
+    const {'1': 'full', '2': 2},
+  ],
+};
+
+@$core.Deprecated('Use clubGameResultDescriptor instead')
+const ClubGameResult_GameWin$json = const {
+  '1': 'GameWin',
+  '2': const [
+    const {'1': 'city', '2': 0},
+    const {'1': 'mafia', '2': 1},
+    const {'1': 'draw', '2': 2},
+  ],
+};
+
+/// Descriptor for `ClubGameResult`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode('Cg5DbHViR2FtZVJlc3VsdBIaCghhZGRTY29yZRgBIAMoBVIIYWRkU2NvcmUSGAoHcGxheWVycxgCIAMoBVIHcGxheWVycxIzCgN3aW4YAyABKA4yIS5nZW5lcmF0ZWQuQ2x1YkdhbWVSZXN1bHQuR2FtZVdpblIDd2luEh8KCGZpcnN0RGllGAQgASgFSABSCGZpcnN0RGlliAEBEkMKCGJlc3RNb3ZlGAUgASgOMiIuZ2VuZXJhdGVkLkNsdWJHYW1lUmVzdWx0LkJlc3RNb3ZlSAFSCGJlc3RNb3ZliAEBEhcKBGRhdGUYBiABKAlIAlIEZGF0ZYgBARIYCgdyZWZlcmVlGAcgASgFUgdyZWZlcmVlEhYKBm1hZmlhMRgIIAEoBVIGbWFmaWExEhYKBm1hZmlhMhgJIAEoBVIGbWFmaWEyEhAKA2RvbhgKIAEoBVIDZG9uEhgKB3NoZXJpZmYYCyABKAVSB3NoZXJpZmYiKAoIQmVzdE1vdmUSCAoEbWlzcxAAEggKBGhhbGYQARIICgRmdWxsEAIiKAoHR2FtZVdpbhIICgRjaXR5EAASCQoFbWFmaWEQARIICgRkcmF3EAJCCwoJX2ZpcnN0RGllQgsKCV9iZXN0TW92ZUIHCgVfZGF0ZQ==');
+@$core.Deprecated('Use clubsEventOutDescriptor instead')
+const ClubsEventOut$json = const {
+  '1': 'ClubsEventOut',
+  '2': const [
+    const {'1': 'club', '3': 1, '4': 3, '5': 11, '6': '.generated.Club', '10': 'club'},
+  ],
+};
+
+/// Descriptor for `ClubsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List clubsEventOutDescriptor = $convert.base64Decode('Cg1DbHVic0V2ZW50T3V0EiMKBGNsdWIYASADKAsyDy5nZW5lcmF0ZWQuQ2x1YlIEY2x1Yg==');
+@$core.Deprecated('Use seatingContentDescriptor instead')
+const SeatingContent$json = const {
+  '1': 'SeatingContent',
+  '2': const [
+    const {'1': 'roles', '3': 1, '4': 3, '5': 14, '6': '.generated.PlayerRole', '10': 'roles'},
+    const {'1': 'status', '3': 2, '4': 3, '5': 14, '6': '.generated.PlayerStatus', '10': 'status'},
+    const {'1': 'images', '3': 3, '4': 3, '5': 9, '10': 'images'},
+    const {'1': 'names', '3': 4, '4': 3, '5': 9, '10': 'names'},
+  ],
+};
+
+/// Descriptor for `SeatingContent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List seatingContentDescriptor = $convert.base64Decode('Cg5TZWF0aW5nQ29udGVudBIrCgVyb2xlcxgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUgVyb2xlcxIvCgZzdGF0dXMYAiADKA4yFy5nZW5lcmF0ZWQuUGxheWVyU3RhdHVzUgZzdGF0dXMSFgoGaW1hZ2VzGAMgAygJUgZpbWFnZXMSFAoFbmFtZXMYBCADKAlSBW5hbWVz');
 @$core.Deprecated('Use loginByTokenEventDescriptor instead')
 const LoginByTokenEvent$json = const {
   '1': 'LoginByTokenEvent',
@@ -219,6 +349,21 @@ const TournamentSettings$json = const {
 
 /// Descriptor for `TournamentSettings`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode('ChJUb3VybmFtZW50U2V0dGluZ3MSMQoRZGVmYXVsdEdhbWVzQ291bnQYASABKAVIAFIRZGVmYXVsdEdhbWVzQ291bnSIAQESLQoPc3dpc3NHYW1lc0NvdW50GAIgASgFSAFSD3N3aXNzR2FtZXNDb3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBQhQKEl9kZWZhdWx0R2FtZXNDb3VudEISChBfc3dpc3NHYW1lc0NvdW50QhIKEF9maW5hbEdhbWVzQ291bnQ=');
+@$core.Deprecated('Use profileDescriptor instead')
+const Profile$json = const {
+  '1': 'Profile',
+  '2': const [
+    const {'1': 'firstName', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'firstName', '17': true},
+    const {'1': 'secondName', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'secondName', '17': true},
+  ],
+  '8': const [
+    const {'1': '_firstName'},
+    const {'1': '_secondName'},
+  ],
+};
+
+/// Descriptor for `Profile`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List profileDescriptor = $convert.base64Decode('CgdQcm9maWxlEiEKCWZpcnN0TmFtZRgBIAEoCUgAUglmaXJzdE5hbWWIAQESIwoKc2Vjb25kTmFtZRgCIAEoCUgBUgpzZWNvbmROYW1liAEBQgwKCl9maXJzdE5hbWVCDQoLX3NlY29uZE5hbWU=');
 @$core.Deprecated('Use playerDescriptor instead')
 const Player$json = const {
   '1': 'Player',
