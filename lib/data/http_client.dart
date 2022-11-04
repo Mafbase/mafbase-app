@@ -71,7 +71,8 @@ class MyHttpClient {
 
   Future<Response> post(
     String method,
-    dynamic data, {
+    dynamic data,
+    int contentLength, {
     bool useRecoveryToken = true,
   }) async {
     if (useRecoveryToken) {
@@ -82,6 +83,7 @@ class MyHttpClient {
       data: data,
       options: Options(
         headers: {
+          HttpHeaders.contentLengthHeader: contentLength,
           HttpHeaders.authorizationHeader: "Bearer ${await _storage.authToken}"
         },
       ),
@@ -104,7 +106,7 @@ class MyHttpClient {
           tokenLoginResponse.token,
           tokenLoginResponse.recoveryToken,
         );
-        return post(method, data, useRecoveryToken: false);
+        return post(method, data, contentLength, useRecoveryToken: false);
       } else {
         throw UnauthenticatedError("Authentication error");
       }
