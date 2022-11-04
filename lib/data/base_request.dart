@@ -20,7 +20,7 @@ abstract class BaseRequest<R> {
       response = await client
           .post(
         method,
-        data!.toByteString(),
+        Stream.fromIterable(data!.writeToBuffer().map((e) => [e])),
         useRecoveryToken: resendOnUnauth,
       );
     }

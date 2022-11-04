@@ -18,7 +18,8 @@ class MyHttpClient {
       responseType: ResponseType.bytes,
       baseUrl: _baseUrl,
       validateStatus: (status) {
-        return status != null && status <= 300 || status == 401 ||
+        return status != null && status <= 300 ||
+            status == 401 ||
             status == 500;
       },
       headers: {
@@ -81,7 +82,6 @@ class MyHttpClient {
       data: data,
       options: Options(
         headers: {
-          HttpHeaders.contentLengthHeader: data.toString().length,
           HttpHeaders.authorizationHeader: "Bearer ${await _storage.authToken}"
         },
       ),
@@ -136,7 +136,8 @@ class MyHttpClient {
   void _checkResponse(Response response) {
     if (response.statusCode == 500) {
       throw RequestError(
-          ErrorOut.fromBuffer(parseResponseData(response.data)).message);
+        ErrorOut.fromBuffer(parseResponseData(response.data)).message,
+      );
     }
   }
 
