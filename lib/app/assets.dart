@@ -8,4 +8,16 @@ class AppAssets {
   static const String exclamationPoint = 'assets/exclamation_point.svg';
   static const String smile = 'assets/smile.svg';
   static const String lock = 'assets/lock.svg';
+
+  static String donAsset({bool disabled = false}) =>
+      'assets/don${disabled ? '_disabled' : ''}.svg';
+
+  static String citizenAsset({bool disabled = false}) =>
+      'assets/citizen${disabled ? '_disabled' : ''}.svg';
+
+  static String mafiaAsset({bool disabled = false}) =>
+      'assets/mafia${disabled ? '_disabled' : ''}.svg';
+
+  static String sheriffAsset({bool disabled = false}) =>
+      'assets/sheriff${disabled ? '_disabled' : ''}.svg';
 }

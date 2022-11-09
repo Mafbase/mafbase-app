@@ -21,10 +21,12 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
+import 'package:seating_generator_web/ui/temp/temp_page.dart';
 
 class AppRouter {
   final router = GoRouter(
     routes: [
+      TempPage.route,
       ShellRoute(
         builder: (context, state, child) {
           return MultiBlocProvider(

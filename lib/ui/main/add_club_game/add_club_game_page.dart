@@ -1,8 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -56,7 +58,8 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
   ClubGameResult_GameWin? winSelected;
   int firstDie = -1;
   ClubGameResult_BestMove? bestMove;
-  final List<_Role> roles = List.generate(10, (index) => _Role.citizen);
+  final List<PlayerRole> roles =
+      List.generate(10, (index) => PlayerRole.citizen);
   DateTime date = DateTime.now();
 
   @override
@@ -90,66 +93,210 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
         return Stack(
           children: [
             SingleChildScrollView(
-              child: Column(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  for (int i = 0; i < 10; i++)
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: CustomAutoComplete(
-                                  controller: controllers[i],
-                                  displayStringForOption: (model) =>
-                                      "${model.nickname} (${model.id})",
-                                  focusNode: focusNodes[i],
-                                  availablePlayers: state.players,
-                                  onSelected: (playerModel) {
-                                    controllers[i].text = playerModel.nickname;
-                                    if (i < 9) {
-                                      focusNodes[i + 1].requestFocus();
-                                    } else {
-                                      refereeFocusNode.requestFocus();
-                                    }
-                                  },
-                                  onSubmit: () {},
-                                  optionsBuilder: (value) => state.players
-                                      .where(
-                                        (element) => element.nickname
-                                            .toLowerCase()
-                                            .contains(value.text.toLowerCase()),
-                                      )
-                                      .sortedBy<num>(
-                                        (element) => element.nickname.length,
-                                      ),
-                                  hint: "Игрок ${i + 1}",
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (int i = 0; i < 10; i++)
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            NicknameField(
+                              controller: controllers[i],
+                              focusNode: focusNodes[i],
+                              state: state,
+                              hint: "Игрок ${i + 1}",
+                              onSelected: () {
+                                if (i < 9) {
+                                  focusNodes[i + 1].requestFocus();
+                                } else {
+                                  refereeFocusNode.requestFocus();
+                                }
+                              },
+                            ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            RolePicker(
+                              playerRole: roles[i],
+                              onChange: (role) {
+                                roles[i] = role;
+                              },
+                            ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            SizedBox(
+                              width: 100,
+                              child: CustomTextField(
+                                controller: addScoreControllers[i],
+                                textInputType:
+                                    const TextInputType.numberWithOptions(
+                                  signed: true,
+                                  decimal: true,
                                 ),
+                                hint: "0.0",
                               ),
-                              DropdownButton<_Role>(
-                                value: roles[i],
-                                items: _Role.values.map((role) {
+                            )
+                          ],
+                        ),
+                      Row(
+                        children: [
+                          Text(
+                            "Результат:",
+                            style: MyTheme.of(context).defaultTextStyle,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          DropdownButton<ClubGameResult_GameWin>(
+                            value: winSelected,
+                            items: winValue.map((win) {
+                              final String text;
+                              switch (win) {
+                                case ClubGameResult_GameWin.city:
+                                  text = "Победа города";
+                                  break;
+                                case ClubGameResult_GameWin.draw:
+                                  text = "Ничья";
+                                  break;
+                                case ClubGameResult_GameWin.mafia:
+                                  text = "Победа мафии";
+                                  break;
+                                default:
+                                  text = "";
+                                  break;
+                              }
+                              return DropdownMenuItem(
+                                value: win,
+                                child: Text(
+                                  text,
+                                  style: MyTheme.of(context).defaultTextStyle,
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                winSelected = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                        child: Text(DateFormat("dd:MM:yyy HH:mm").format(date)),
+                        onTap: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: date,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime.now(),
+                          ).then((value) async {
+                            if (!mounted) return null;
+                            if (value != null) {
+                              final timeOfDay = await showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.fromDateTime(date),
+                                initialEntryMode: TimePickerEntryMode.input,
+                                builder: (context, child) => MediaQuery(
+                                  data: MediaQuery.of(context).copyWith(
+                                    alwaysUse24HourFormat: true,
+                                  ),
+                                  child: child ?? Container(),
+                                ),
+                              );
+                              if (timeOfDay != null) {
+                                return DateTime(
+                                  value.year,
+                                  value.month,
+                                  value.day,
+                                  timeOfDay.hour,
+                                  timeOfDay.minute,
+                                );
+                              }
+                            }
+                            return null;
+                          }).then((value) {
+                            setState(() {
+                              date = value ?? date;
+                            });
+                          });
+                        },
+                      ),
+                      CustomButton(
+                          text: "Сохранить", onTap: () => submit(state)),
+                    ],
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      border:
+                          Border(left: BorderSide(color: Colors.red, width: 3)),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Первый отстрел:",
+                              style: MyTheme.of(context).defaultTextStyle,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            DropdownButton<int>(
+                              value: firstDie,
+                              items: List.generate(
+                                11,
+                                (index) {
+                                  return DropdownMenuItem(
+                                    value: index - 1,
+                                    child: Text(
+                                      index == 0 ? "Промах" : index.toString(),
+                                      style:
+                                          MyTheme.of(context).defaultTextStyle,
+                                    ),
+                                  );
+                                },
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  firstDie = value ?? -1;
+                                  if (firstDie == -1) {
+                                    bestMove = ClubGameResult_BestMove.miss;
+                                  }
+                                });
+                              },
+                            ),
+                            if (firstDie != -1) ...[
+                              Text(
+                                "Лучший ход:",
+                                style: MyTheme.of(context).defaultTextStyle,
+                              ),
+                              DropdownButton<ClubGameResult_BestMove>(
+                                value: bestMove,
+                                items: ClubGameResult_BestMove.values
+                                    .map((bestMove) {
                                   final String text;
-                                  switch (role) {
-                                    case _Role.mafia:
-                                      text = "Мафия";
+                                  switch (bestMove) {
+                                    case ClubGameResult_BestMove.full:
+                                      text = "Полный лучший ход";
                                       break;
-                                    case _Role.don:
-                                      text = "Дон";
+                                    case ClubGameResult_BestMove.half:
+                                      text = "Двойка черных";
                                       break;
-                                    case _Role.sheriff:
-                                      text = "Шериф";
-                                      break;
-                                    case _Role.citizen:
-                                      text = "Мирный житель";
+                                    case ClubGameResult_BestMove.miss:
+                                      text = "Мимо";
                                       break;
                                     default:
                                       text = "";
                                       break;
                                   }
                                   return DropdownMenuItem(
-                                    value: role,
+                                    value: bestMove,
                                     child: Text(
                                       text,
                                       style:
@@ -159,201 +306,16 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
                                 }).toList(),
                                 onChanged: (value) {
                                   setState(() {
-                                    roles[i] = value ?? roles[i];
+                                    bestMove = value;
                                   });
                                 },
                               ),
                             ],
-                          ),
+                          ],
                         ),
-                        Flexible(
-                          child: CustomTextField(
-                            controller: addScoreControllers[i],
-                            textInputType: const TextInputType.numberWithOptions(
-                              signed: true,
-                              decimal: true,
-                            ),
-                            hint: "0.0",
-                          ),
-                        )
                       ],
                     ),
-                  CustomAutoComplete(
-                    controller: refereeController,
-                    displayStringForOption: (model) =>
-                        "${model.nickname} (${model.id})",
-                    focusNode: refereeFocusNode,
-                    availablePlayers: state.players,
-                    onSelected: (playerModel) {
-                      refereeController.text = playerModel.nickname;
-                      refereeFocusNode.unfocus();
-                    },
-                    onSubmit: () {},
-                    optionsBuilder: (value) => state.players
-                        .where(
-                          (element) => element.nickname
-                              .toLowerCase()
-                              .contains(value.text.toLowerCase()),
-                        )
-                        .sortedBy<num>((element) => element.nickname.length),
-                    hint: "Судья",
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "Первый отстрел:",
-                        style: MyTheme.of(context).defaultTextStyle,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      DropdownButton<int>(
-                        value: firstDie,
-                        items: List.generate(
-                          11,
-                          (index) {
-                            return DropdownMenuItem(
-                              value: index - 1,
-                              child: Text(
-                                index == 0 ? "Промах" : index.toString(),
-                                style: MyTheme.of(context).defaultTextStyle,
-                              ),
-                            );
-                          },
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            firstDie = value ?? -1;
-                            if (firstDie == -1) {
-                              bestMove = ClubGameResult_BestMove.miss;
-                            }
-                          });
-                        },
-                      ),
-                      if (firstDie != -1) ...[
-                        Text(
-                          "Лучший ход:",
-                          style: MyTheme.of(context).defaultTextStyle,
-                        ),
-                        DropdownButton<ClubGameResult_BestMove>(
-                          value: bestMove,
-                          items: ClubGameResult_BestMove.values.map((bestMove) {
-                            final String text;
-                            switch (bestMove) {
-                              case ClubGameResult_BestMove.full:
-                                text = "Полный лучший ход";
-                                break;
-                              case ClubGameResult_BestMove.half:
-                                text = "Двойка черных";
-                                break;
-                              case ClubGameResult_BestMove.miss:
-                                text = "Мимо";
-                                break;
-                              default:
-                                text = "";
-                                break;
-                            }
-                            return DropdownMenuItem(
-                              value: bestMove,
-                              child: Text(
-                                text,
-                                style: MyTheme.of(context).defaultTextStyle,
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              bestMove = value;
-                            });
-                          },
-                        ),
-                      ],
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Результат:",
-                        style: MyTheme.of(context).defaultTextStyle,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      DropdownButton<ClubGameResult_GameWin>(
-                        value: winSelected,
-                        items: winValue.map((win) {
-                          final String text;
-                          switch (win) {
-                            case ClubGameResult_GameWin.city:
-                              text = "Победа города";
-                              break;
-                            case ClubGameResult_GameWin.draw:
-                              text = "Ничья";
-                              break;
-                            case ClubGameResult_GameWin.mafia:
-                              text = "Победа мафии";
-                              break;
-                            default:
-                              text = "";
-                              break;
-                          }
-                          return DropdownMenuItem(
-                            value: win,
-                            child: Text(
-                              text,
-                              style: MyTheme.of(context).defaultTextStyle,
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            winSelected = value;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  InkWell(
-                    child: Text(DateFormat("dd:MM:yyy HH:mm").format(date)),
-                    onTap: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: date,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime.now(),
-                      ).then((value) async {
-                        if (!mounted) return null;
-                        if (value != null) {
-                          final timeOfDay = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.fromDateTime(date),
-                            initialEntryMode: TimePickerEntryMode.input,
-                            builder: (context, child) => MediaQuery(
-                              data: MediaQuery.of(context).copyWith(
-                                alwaysUse24HourFormat: true,
-                              ),
-                              child: child ?? Container(),
-                            ),
-                          );
-                          if (timeOfDay != null) {
-                            return DateTime(
-                              value.year,
-                              value.month,
-                              value.day,
-                              timeOfDay.hour,
-                              timeOfDay.minute,
-                            );
-                          }
-                        }
-                        return null;
-                      }).then((value) {
-                        setState(() {
-                          date = value ?? date;
-                        });
-                      });
-                    },
-                  ),
-                  CustomButton(text: "Сохранить", onTap: () => submit(state)),
                 ],
               ),
             ),
@@ -366,9 +328,9 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
 
   submit(AddClubGameState state) {
     if (winSelected == null ||
-        roles.where((element) => element == _Role.mafia).length != 2 ||
-        roles.where((element) => element == _Role.don).length != 1 ||
-        roles.where((element) => element == _Role.sheriff).length != 1 ||
+        roles.where((element) => element == PlayerRole.mafia).length != 2 ||
+        roles.where((element) => element == PlayerRole.don).length != 1 ||
+        roles.where((element) => element == PlayerRole.sheriff).length != 1 ||
         controllers
                 .map(
                   (e) => state.players.firstWhereOrNull(
@@ -389,15 +351,15 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
                     .firstWhere((element) => e.text == element.nickname)
                     .id,
               ),
-              mafia1: roles.indexOf(_Role.mafia),
-              mafia2: roles.lastIndexOf(_Role.mafia),
+              mafia1: roles.indexOf(PlayerRole.mafia),
+              mafia2: roles.lastIndexOf(PlayerRole.mafia),
               referee: state.players
                   .firstWhere(
                       (element) => refereeController.text == element.nickname)
                   .id,
               date: DateTime.now().toIso8601String(),
-              don: roles.indexOf(_Role.don),
-              sheriff: roles.indexOf(_Role.sheriff),
+              don: roles.indexOf(PlayerRole.don),
+              sheriff: roles.indexOf(PlayerRole.sheriff),
               firstDie: firstDie,
               win: winSelected,
               bestMove: bestMove,
@@ -407,9 +369,210 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
   }
 }
 
-enum _Role {
-  mafia,
-  don,
-  sheriff,
-  citizen;
+class NicknameField extends StatelessWidget {
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  final AddClubGameState state;
+  final VoidCallback? onSelected;
+  final String hint;
+
+  const NicknameField({
+    Key? key,
+    required this.controller,
+    required this.focusNode,
+    required this.state,
+    this.onSelected,
+    required this.hint,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 250,
+      child: CustomAutoComplete(
+        controller: controller,
+        displayStringForOption: (model) => "${model.nickname} (${model.id})",
+        focusNode: focusNode,
+        availablePlayers: state.players,
+        onSelected: (playerModel) {
+          controller.text = playerModel.nickname;
+          onSelected?.call();
+        },
+        onSubmit: () {},
+        optionsBuilder: (value) => state.players
+            .where(
+              (element) => element.nickname
+                  .toLowerCase()
+                  .contains(value.text.toLowerCase()),
+            )
+            .sortedBy<num>(
+              (element) => element.nickname.length,
+            ),
+        hint: hint,
+      ),
+    );
+  }
+}
+
+class RolePicker extends StatefulWidget {
+  final PlayerRole playerRole;
+  final Function(PlayerRole role) onChange;
+
+  const RolePicker({
+    Key? key,
+    required this.playerRole,
+    required this.onChange,
+  }) : super(key: key);
+
+  @override
+  State<RolePicker> createState() => _RolePickerState();
+}
+
+class _RolePickerState extends State<RolePicker> {
+  late PlayerRole playerRole;
+
+  @override
+  void didChangeDependencies() {
+    playerRole = widget.playerRole;
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.donAsset(),
+      ),
+      context,
+    );
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.donAsset(disabled: true),
+      ),
+      context,
+    );
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.citizenAsset(),
+      ),
+      context,
+    );
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.citizenAsset(disabled: true),
+      ),
+      context,
+    );
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.sheriffAsset(),
+      ),
+      context,
+    );
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.sheriffAsset(disabled: true),
+      ),
+      context,
+    );
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.mafiaAsset(),
+      ),
+      context,
+    );
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        AppAssets.mafiaAsset(disabled: true),
+      ),
+      context,
+    );
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () => onChange(PlayerRole.mafia),
+              child: SvgPicture.asset(
+                AppAssets.mafiaAsset(disabled: playerRole != PlayerRole.mafia),
+              ),
+            ),
+            Text(
+              "М",
+              style: MyTheme.of(context).defaultTextStyle,
+            ),
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () => onChange(PlayerRole.don),
+              child: SvgPicture.asset(
+                AppAssets.donAsset(disabled: playerRole != PlayerRole.don),
+              ),
+            ),
+            Text(
+              "Д",
+              style: MyTheme.of(context).defaultTextStyle,
+            ),
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () => onChange(PlayerRole.sheriff),
+              child: SvgPicture.asset(
+                AppAssets.sheriffAsset(
+                    disabled: playerRole != PlayerRole.sheriff),
+              ),
+            ),
+            Text(
+              "Ш",
+              style: MyTheme.of(context)
+                  .defaultTextStyle
+                  .copyWith(color: Colors.red),
+            ),
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () => onChange(PlayerRole.citizen),
+              child: SvgPicture.asset(
+                AppAssets.citizenAsset(
+                    disabled: playerRole != PlayerRole.citizen),
+              ),
+            ),
+            Text(
+              "К",
+              style: MyTheme.of(context)
+                  .defaultTextStyle
+                  .copyWith(color: Colors.red),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  onChange(PlayerRole role) {
+    setState(() {
+      playerRole = role;
+    });
+    widget.onChange(role);
+  }
 }

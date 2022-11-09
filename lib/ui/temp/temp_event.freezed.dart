@@ -1,0 +1,165 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+
+part of 'temp_event.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+mixin _$TempEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() generate,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? generate,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? generate,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TempEventGenerate value) generate,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TempEventGenerate value)? generate,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TempEventGenerate value)? generate,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TempEventCopyWith<$Res> {
+  factory $TempEventCopyWith(TempEvent value, $Res Function(TempEvent) then) =
+      _$TempEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$TempEventCopyWithImpl<$Res> implements $TempEventCopyWith<$Res> {
+  _$TempEventCopyWithImpl(this._value, this._then);
+
+  final TempEvent _value;
+  // ignore: unused_field
+  final $Res Function(TempEvent) _then;
+}
+
+/// @nodoc
+abstract class _$$TempEventGenerateCopyWith<$Res> {
+  factory _$$TempEventGenerateCopyWith(
+          _$TempEventGenerate value, $Res Function(_$TempEventGenerate) then) =
+      __$$TempEventGenerateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TempEventGenerateCopyWithImpl<$Res>
+    extends _$TempEventCopyWithImpl<$Res>
+    implements _$$TempEventGenerateCopyWith<$Res> {
+  __$$TempEventGenerateCopyWithImpl(
+      _$TempEventGenerate _value, $Res Function(_$TempEventGenerate) _then)
+      : super(_value, (v) => _then(v as _$TempEventGenerate));
+
+  @override
+  _$TempEventGenerate get _value => super._value as _$TempEventGenerate;
+}
+
+/// @nodoc
+
+class _$TempEventGenerate implements TempEventGenerate {
+  const _$TempEventGenerate();
+
+  @override
+  String toString() {
+    return 'TempEvent.generate()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$TempEventGenerate);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() generate,
+  }) {
+    return generate();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? generate,
+  }) {
+    return generate?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? generate,
+    required TResult orElse(),
+  }) {
+    if (generate != null) {
+      return generate();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TempEventGenerate value) generate,
+  }) {
+    return generate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TempEventGenerate value)? generate,
+  }) {
+    return generate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TempEventGenerate value)? generate,
+    required TResult orElse(),
+  }) {
+    if (generate != null) {
+      return generate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TempEventGenerate implements TempEvent {
+  const factory TempEventGenerate() = _$TempEventGenerate;
+}
