@@ -24,16 +24,27 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Transform.translate(
-              offset: const Offset(0, 25),
-              child: SvgPicture.asset(
-                AppAssets.logoAsset,
-                width: 250,
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) => Transform.translate(
+                  offset: const Offset(0, 25),
+                  child: SvgPicture.asset(
+                    AppAssets.logoAsset,
+                    width: constraints.maxHeight,
+                  ),
+                ),
               ),
             ),
             Expanded(
+              flex: 2,
               child: Container(
-                color: MyTheme.of(context).background2,
+                decoration: BoxDecoration(
+                  color: MyTheme.of(context).background2,
+                  border: Border.all(
+                    color: MyTheme.of(context).borderColor,
+                    width: 2,
+                  ),
+                ),
                 width: 620,
                 margin: const EdgeInsets.only(bottom: 20),
                 child: widget.child,

@@ -72,14 +72,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                   ),
                 ),
-                  Positioned(
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if(widget.canObscure) IconButton(
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (widget.canObscure)
+                        IconButton(
                           onPressed: () {
                             setState(() {
                               obscureText = !obscureText;
@@ -90,11 +91,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                             color: MyTheme.of(context).borderColor,
                           ),
                         ),
-                        const SizedBox(width: 10,),
-                        SvgPicture.asset(AppAssets.exclamationPoint, height: 18,),
-                      ],
-                    ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      if (widget.isRequiredField)
+                        SvgPicture.asset(
+                          AppAssets.exclamationPoint,
+                          height: 18,
+                        ),
+                    ],
                   ),
+                ),
               ],
             ),
           ),

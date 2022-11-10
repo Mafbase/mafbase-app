@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -142,161 +143,144 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
                             )
                           ],
                         ),
-                      Row(
-                        children: [
-                          Text(
-                            "Результат:",
-                            style: MyTheme.of(context).defaultTextStyle,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          DropdownButton<ClubGameResult_GameWin>(
-                            value: winSelected,
-                            items: winValue.map((win) {
-                              final String text;
-                              switch (win) {
-                                case ClubGameResult_GameWin.city:
-                                  text = "Победа города";
-                                  break;
-                                case ClubGameResult_GameWin.draw:
-                                  text = "Ничья";
-                                  break;
-                                case ClubGameResult_GameWin.mafia:
-                                  text = "Победа мафии";
-                                  break;
-                                default:
-                                  text = "";
-                                  break;
-                              }
-                              return DropdownMenuItem(
-                                value: win,
-                                child: Text(
-                                  text,
-                                  style: MyTheme.of(context).defaultTextStyle,
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                winSelected = value;
-                              });
-                            },
-                          ),
-                        ],
+                      Container(
+                        width: 400,
+                        padding: const EdgeInsets.all(20),
+                        child: CustomButton(
+                          text: "Сохранить",
+                          onTap: () => submit(state),
+                          disabled: state.isLoading,
+                        ),
                       ),
-                      InkWell(
-                        child: Text(DateFormat("dd:MM:yyy HH:mm").format(date)),
-                        onTap: () {
-                          showDatePicker(
-                            context: context,
-                            initialDate: date,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime.now(),
-                          ).then((value) async {
-                            if (!mounted) return null;
-                            if (value != null) {
-                              final timeOfDay = await showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay.fromDateTime(date),
-                                initialEntryMode: TimePickerEntryMode.input,
-                                builder: (context, child) => MediaQuery(
-                                  data: MediaQuery.of(context).copyWith(
-                                    alwaysUse24HourFormat: true,
-                                  ),
-                                  child: child ?? Container(),
-                                ),
-                              );
-                              if (timeOfDay != null) {
-                                return DateTime(
-                                  value.year,
-                                  value.month,
-                                  value.day,
-                                  timeOfDay.hour,
-                                  timeOfDay.minute,
-                                );
-                              }
-                            }
-                            return null;
-                          }).then((value) {
-                            setState(() {
-                              date = value ?? date;
-                            });
-                          });
-                        },
-                      ),
-                      CustomButton(
-                          text: "Сохранить", onTap: () => submit(state)),
                     ],
                   ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      border:
-                          Border(left: BorderSide(color: Colors.red, width: 3)),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Первый отстрел:",
-                              style: MyTheme.of(context).defaultTextStyle,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            DropdownButton<int>(
-                              value: firstDie,
-                              items: List.generate(
-                                11,
-                                (index) {
-                                  return DropdownMenuItem(
-                                    value: index - 1,
-                                    child: Text(
-                                      index == 0 ? "Промах" : index.toString(),
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
-                                    ),
-                                  );
-                                },
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  firstDie = value ?? -1;
-                                  if (firstDie == -1) {
-                                    bestMove = ClubGameResult_BestMove.miss;
-                                  }
-                                });
-                              },
-                            ),
-                            if (firstDie != -1) ...[
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      margin: const EdgeInsets.only(left: 30),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          left: BorderSide(
+                            color: Colors.red,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomTextField(
+                            controller: refereeController,
+                            focusNode: refereeFocusNode,
+                            hint: "Судья",
+                          ),
+                          Row(
+                            children: [
                               Text(
-                                "Лучший ход:",
+                                "Первый отстрел:",
                                 style: MyTheme.of(context).defaultTextStyle,
                               ),
-                              DropdownButton<ClubGameResult_BestMove>(
-                                value: bestMove,
-                                items: ClubGameResult_BestMove.values
-                                    .map((bestMove) {
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              DropdownButton<int>(
+                                value: firstDie,
+                                items: List.generate(
+                                  11,
+                                  (index) {
+                                    return DropdownMenuItem(
+                                      value: index - 1,
+                                      child: Text(
+                                        index == 0
+                                            ? "Промах"
+                                            : index.toString(),
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    firstDie = value ?? -1;
+                                    if (firstDie == -1) {
+                                      bestMove = ClubGameResult_BestMove.miss;
+                                    }
+                                  });
+                                },
+                              ),
+                              if (firstDie != -1) ...[
+                                Text(
+                                  "Лучший ход:",
+                                  style: MyTheme.of(context).defaultTextStyle,
+                                ),
+                                DropdownButton<ClubGameResult_BestMove>(
+                                  value: bestMove,
+                                  items: ClubGameResult_BestMove.values
+                                      .map((bestMove) {
+                                    final String text;
+                                    switch (bestMove) {
+                                      case ClubGameResult_BestMove.full:
+                                        text = "Полный лучший ход";
+                                        break;
+                                      case ClubGameResult_BestMove.half:
+                                        text = "Двойка черных";
+                                        break;
+                                      case ClubGameResult_BestMove.miss:
+                                        text = "Мимо";
+                                        break;
+                                      default:
+                                        text = "";
+                                        break;
+                                    }
+                                    return DropdownMenuItem(
+                                      value: bestMove,
+                                      child: Text(
+                                        text,
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      bestMove = value;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Результат:",
+                                style: MyTheme.of(context).defaultTextStyle,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              DropdownButton<ClubGameResult_GameWin>(
+                                value: winSelected,
+                                items: winValue.map((win) {
                                   final String text;
-                                  switch (bestMove) {
-                                    case ClubGameResult_BestMove.full:
-                                      text = "Полный лучший ход";
+                                  switch (win) {
+                                    case ClubGameResult_GameWin.city:
+                                      text = "Победа города";
                                       break;
-                                    case ClubGameResult_BestMove.half:
-                                      text = "Двойка черных";
+                                    case ClubGameResult_GameWin.draw:
+                                      text = "Ничья";
                                       break;
-                                    case ClubGameResult_BestMove.miss:
-                                      text = "Мимо";
+                                    case ClubGameResult_GameWin.mafia:
+                                      text = "Победа мафии";
                                       break;
                                     default:
                                       text = "";
                                       break;
                                   }
                                   return DropdownMenuItem(
-                                    value: bestMove,
+                                    value: win,
                                     child: Text(
                                       text,
                                       style:
@@ -306,14 +290,73 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
                                 }).toList(),
                                 onChanged: (value) {
                                   setState(() {
-                                    bestMove = value;
+                                    winSelected = value;
                                   });
                                 },
                               ),
                             ],
-                          ],
-                        ),
-                      ],
+                          ),
+                          InkWell(
+                            onTap: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: date,
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime.now(),
+                              ).then((value) async {
+                                if (!mounted) return null;
+                                if (value != null) {
+                                  final timeOfDay = await showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.fromDateTime(date),
+                                    initialEntryMode: TimePickerEntryMode.input,
+                                    builder: (context, child) => MediaQuery(
+                                      data: MediaQuery.of(context).copyWith(
+                                        alwaysUse24HourFormat: true,
+                                      ),
+                                      child: child ?? Container(),
+                                    ),
+                                  );
+                                  if (timeOfDay != null) {
+                                    return DateTime(
+                                      value.year,
+                                      value.month,
+                                      value.day,
+                                      timeOfDay.hour,
+                                      timeOfDay.minute,
+                                    );
+                                  }
+                                }
+                                return null;
+                              }).then((value) {
+                                setState(() {
+                                  date = value ?? date;
+                                });
+                              });
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Дата:",
+                                  style: MyTheme.of(context)
+                                      .defaultTextStyle
+                                      .copyWith(
+                                        color:
+                                            MyTheme.of(context).darkGreyColor,
+                                      ),
+                                ),
+                                const SizedBox(
+                                  width: 80,
+                                ),
+                                Text(
+                                  DateFormat("dd:MM:yyy HH:mm").format(date),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -334,7 +377,8 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
         controllers
                 .map(
                   (e) => state.players.firstWhereOrNull(
-                      (element) => e.text == element.nickname),
+                    (element) => e.text == element.nickname,
+                  ),
                 )
                 .whereNotNull()
                 .length !=
@@ -355,7 +399,8 @@ class _AddClubGamePageState extends State<AddClubGamePage> {
               mafia2: roles.lastIndexOf(PlayerRole.mafia),
               referee: state.players
                   .firstWhere(
-                      (element) => refereeController.text == element.nickname)
+                    (element) => refereeController.text == element.nickname,
+                  )
                   .id,
               date: DateTime.now().toIso8601String(),
               don: roles.indexOf(PlayerRole.don),
@@ -430,66 +475,11 @@ class RolePicker extends StatefulWidget {
 
 class _RolePickerState extends State<RolePicker> {
   late PlayerRole playerRole;
+  final Duration duration = const Duration(milliseconds: 100);
 
   @override
   void didChangeDependencies() {
     playerRole = widget.playerRole;
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.donAsset(),
-      ),
-      context,
-    );
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.donAsset(disabled: true),
-      ),
-      context,
-    );
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.citizenAsset(),
-      ),
-      context,
-    );
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.citizenAsset(disabled: true),
-      ),
-      context,
-    );
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.sheriffAsset(),
-      ),
-      context,
-    );
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.sheriffAsset(disabled: true),
-      ),
-      context,
-    );
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.mafiaAsset(),
-      ),
-      context,
-    );
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets.mafiaAsset(disabled: true),
-      ),
-      context,
-    );
     super.didChangeDependencies();
   }
 
@@ -504,8 +494,13 @@ class _RolePickerState extends State<RolePicker> {
           children: [
             InkWell(
               onTap: () => onChange(PlayerRole.mafia),
-              child: SvgPicture.asset(
-                AppAssets.mafiaAsset(disabled: playerRole != PlayerRole.mafia),
+              child: AnimatedOpacity(
+                opacity: playerRole == PlayerRole.mafia ? 1.0 : 0.3,
+                duration: duration,
+                child: SvgPicture.asset(
+                  AppAssets.mafiaAsset(),
+                  height: 40,
+                ),
               ),
             ),
             Text(
@@ -519,8 +514,13 @@ class _RolePickerState extends State<RolePicker> {
           children: [
             InkWell(
               onTap: () => onChange(PlayerRole.don),
-              child: SvgPicture.asset(
-                AppAssets.donAsset(disabled: playerRole != PlayerRole.don),
+              child: AnimatedOpacity(
+                opacity: playerRole == PlayerRole.don ? 1.0 : 0.3,
+                duration: duration,
+                child: SvgPicture.asset(
+                  AppAssets.donAsset(),
+                  height: 40,
+                ),
               ),
             ),
             Text(
@@ -534,9 +534,13 @@ class _RolePickerState extends State<RolePicker> {
           children: [
             InkWell(
               onTap: () => onChange(PlayerRole.sheriff),
-              child: SvgPicture.asset(
-                AppAssets.sheriffAsset(
-                    disabled: playerRole != PlayerRole.sheriff),
+              child: AnimatedOpacity(
+                opacity: playerRole == PlayerRole.sheriff ? 1.0 : 0.3,
+                duration: duration,
+                child: SvgPicture.asset(
+                  AppAssets.sheriffAsset(),
+                  height: 40,
+                ),
               ),
             ),
             Text(
@@ -552,9 +556,13 @@ class _RolePickerState extends State<RolePicker> {
           children: [
             InkWell(
               onTap: () => onChange(PlayerRole.citizen),
-              child: SvgPicture.asset(
-                AppAssets.citizenAsset(
-                    disabled: playerRole != PlayerRole.citizen),
+              child: AnimatedOpacity(
+                opacity: playerRole == PlayerRole.citizen ? 1.0 : 0.3,
+                duration: duration,
+                child: SvgPicture.asset(
+                  AppAssets.citizenAsset(),
+                  height: 40,
+                ),
               ),
             ),
             Text(
@@ -565,7 +573,14 @@ class _RolePickerState extends State<RolePicker> {
             ),
           ],
         ),
-      ],
+      ]
+          .map(
+            (child) => Container(
+              padding: const EdgeInsets.all(4),
+              child: child,
+            ),
+          )
+          .toList(),
     );
   }
 
