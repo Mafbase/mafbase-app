@@ -17,6 +17,9 @@ abstract class MyTheme {
   abstract final Color redColor;
   abstract final Color greyColor;
   abstract final Color darkGreyColor;
+  abstract final Color redForCard;
+  abstract final Color greenForCard;
+  abstract final Color blueForCard;
 
   MyTheme();
 
@@ -87,4 +90,13 @@ class _LightTheme implements MyTheme {
 
   @override
   Color get darkGreyColor => const Color(0xFF475264);
+
+  @override
+  Color get blueForCard => const Color(0xCC182D42);
+
+  @override
+  Color get greenForCard => const Color(0xCC285927);
+
+  @override
+  Color get redForCard => const Color(0xCC81332C);
 }

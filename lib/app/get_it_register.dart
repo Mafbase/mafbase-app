@@ -39,6 +39,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_ro
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
+import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -46,9 +47,9 @@ void registerGetIt() {
   getIt
     ..registerLazySingleton<TokenStorage>(() => TokenStorageImpl())
     ..registerLazySingleton<MyHttpClient>(
-      () => kDebugMode
-          ? MyHttpClient.withDefaultUrl(getIt())
-          : MyHttpClient.autoForWeb(getIt()),
+      () => kReleaseMode
+          ? MyHttpClient.autoForWeb(getIt())
+          : MyHttpClient.withDefaultUrl(getIt()),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
@@ -141,6 +142,9 @@ void _registerSharedGetIt() {
         getIt.call(param1: context),
         context,
       ),
+    )
+    ..registerFactoryParam<TranslationContentBloc, BuildContext?, TranslationContentBlocParams>(
+      (context, params) => TranslationContentBloc(params, context),
     )
     ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(
       (context, _) => SignUpBloc(
