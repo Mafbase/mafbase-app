@@ -48,9 +48,9 @@ class RatingPage extends StatefulWidget {
       final clubId = int.parse(state.params["clubId"]!);
       final dateStart =
           DateTime.tryParse(state.queryParams["date-start"] ?? "") ??
-              DateTime(2010);
+              DateTime.now().subtract(const Duration(days: 30));
       final dateEnd = DateTime.tryParse(state.queryParams["date-end"] ?? "") ??
-          DateTime(2100);
+          DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
 
       return BlocProvider<RatingBloc>(
