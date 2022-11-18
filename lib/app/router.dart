@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,99 +30,126 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 class AppRouter {
   final router = GoRouter(
     routes: [
-      TempPage.route,
-      TranslationContentPage.route,
       ShellRoute(
         builder: (context, state, child) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<LoginBloc>(
-                key: const Key("LoginBlocProvider"),
-                create: (context) => getIt.get<LoginBloc>(param1: context),
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final height = max(constraints.maxHeight, 600.0);
+              final width = max(constraints.maxWidth, 800.0);
+              return SingleChildScrollView(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SizedBox(
+                    width: width,
+                    height: height,
+                    child: child,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+        routes: [
+          TempPage.route,
+          TranslationContentPage.route,
+          ShellRoute(
+            builder: (context, state, child) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<LoginBloc>(
+                    key: const Key("LoginBlocProvider"),
+                    create: (context) => getIt.get<LoginBloc>(param1: context),
+                  ),
+                  BlocProvider<SignUpBloc>(
+                    key: const Key('SignUpBlocProvider'),
+                    create: (context) => getIt.get<SignUpBloc>(param1: context),
+                  )
+                ],
+                child: LoginPage(
+                  child: child,
+                ),
+              );
+            },
+            routes: [
+              GoRoute(
+                path: AppRoutes.loginPageRoute,
+                pageBuilder: (context, state) =>
+                    FadeTransitionPage(child: const LoginPageBody()),
               ),
-              BlocProvider<SignUpBloc>(
-                key: const Key('SignUpBlocProvider'),
-                create: (context) => getIt.get<SignUpBloc>(param1: context),
+              GoRoute(
+                path: AppRoutes.signUpRoute,
+                pageBuilder: (context, state) =>
+                    FadeTransitionPage(child: const SignUpPageBody()),
               )
             ],
-            child: LoginPage(
-              child: child,
-            ),
-          );
-        },
-        routes: [
-          GoRoute(
-            path: AppRoutes.loginPageRoute,
-            pageBuilder: (context, state) => FadeTransitionPage(child: const LoginPageBody()),
           ),
           GoRoute(
-            path: AppRoutes.signUpRoute,
-            pageBuilder: (context, state) => FadeTransitionPage(child: const SignUpPageBody()),
-          )
-        ],
-      ),
-      GoRoute(
-        path: AppRoutes.translationRoute,
-        builder: (context, state) => BlocProvider(
-          create: (context) => getIt.get<SeatingInsertingBloc>(param1: context),
-          child: const SeatingInsertingPage(),
-        ),
-      ),
-      RatingPage.route,
-      ShellRoute(
-        builder: (context, state, child) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<MainBloc>(
-                key: const Key("MainBlocProvider"),
-                create: (context) => getIt.get<MainBloc>(param1: context),
-              ),
-              BlocProvider<TournamentsBloc>(
-                key: const Key("TournamentsBlocProvider"),
-                create: (context) => getIt<TournamentsBloc>(param1: context),
-              ),
-            ],
-            child: MainPage(
-              tab: MainPageTab.values.firstWhereOrNull(
-                (element) => state.location.contains(element.name),
-              ),
-              child: child,
+            path: AppRoutes.translationRoute,
+            builder: (context, state) => BlocProvider(
+              create: (context) =>
+                  getIt.get<SeatingInsertingBloc>(param1: context),
+              child: const SeatingInsertingPage(),
             ),
-          );
-        },
-        routes: [
-          AddClubGamePage.route,
-          GoRoute(
-            path: '/',
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: TournamentsPage()),
-            redirect: (context, state) async {
-              try {
-                final response = await getIt<MyHttpClient>().get("/api/auth");
-                debugPrint(response.statusCode.toString());
-                if (response.statusCode == 200) {
-                  return null;
-                }
-              } catch (_) {}
-              return AppRoutes.loginPageRoute;
+          ),
+          RatingPage.route,
+          ShellRoute(
+            builder: (context, state, child) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<MainBloc>(
+                    key: const Key("MainBlocProvider"),
+                    create: (context) => getIt.get<MainBloc>(param1: context),
+                  ),
+                  BlocProvider<TournamentsBloc>(
+                    key: const Key("TournamentsBlocProvider"),
+                    create: (context) =>
+                        getIt<TournamentsBloc>(param1: context),
+                  ),
+                ],
+                child: MainPage(
+                  tab: MainPageTab.values.firstWhereOrNull(
+                    (element) => state.location.contains(element.name),
+                  ),
+                  child: child,
+                ),
+              );
             },
+            routes: [
+              AddClubGamePage.route,
+              GoRoute(
+                path: '/',
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: TournamentsPage()),
+                redirect: (context, state) async {
+                  try {
+                    final response =
+                        await getIt<MyHttpClient>().get("/api/auth");
+                    debugPrint(response.statusCode.toString());
+                    if (response.statusCode == 200) {
+                      return null;
+                    }
+                  } catch (_) {}
+                  return AppRoutes.loginPageRoute;
+                },
+              ),
+              GoRoute(
+                path: AppRoutes.routeFromTab(MainPageTab.addTournament),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: AddTournamentPage()),
+              ),
+              GoRoute(
+                path: AppRoutes.routeFromTab(MainPageTab.regulations),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: RegulationsPage()),
+              ),
+              GoRoute(
+                path: AppRoutes.routeFromTab(MainPageTab.profileSettings),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: ProfileSettingsPage()),
+              ),
+              TournamentPage.createRoute(),
+            ],
           ),
-          GoRoute(
-            path: AppRoutes.routeFromTab(MainPageTab.addTournament),
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: AddTournamentPage()),
-          ),
-          GoRoute(
-            path: AppRoutes.routeFromTab(MainPageTab.regulations),
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: RegulationsPage()),
-          ),
-          GoRoute(
-            path: AppRoutes.routeFromTab(MainPageTab.profileSettings),
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: ProfileSettingsPage()),
-          ),
-          TournamentPage.createRoute(),
         ],
       ),
     ],
@@ -165,7 +194,8 @@ class AppRoutes {
   static const signUpRoute = '/signUp';
   static const tournamentPlayersListRoute = '/tournament/:id';
 
-  static String tournamentPlayersListRouteWithId(int tournamentId) => '/tournament/$tournamentId';
+  static String tournamentPlayersListRouteWithId(int tournamentId) =>
+      '/tournament/$tournamentId';
 
   static String routeFromTab(MainPageTab tab) => "/${tab.name}";
 }
