@@ -156,6 +156,7 @@ class _RatingTableState extends State<RatingTable> {
           height: 50,
           child: ListView.builder(
             key: Key("GameHeader${widget.rows.length}/${widget.clubId}"),
+            physics: const ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             controller: controllers.first,
             itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
@@ -186,6 +187,7 @@ class _RatingTableState extends State<RatingTable> {
           height: 50,
           child: ListView.builder(
             key: Key("GameRow$rowIndex/${widget.rows.length}/${widget.clubId}"),
+            physics: const ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             controller: controllers[rowIndex + 1],
             itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
@@ -237,6 +239,7 @@ class _RatingTableState extends State<RatingTable> {
                       behavior: ScrollConfiguration.of(context)
                           .copyWith(scrollbars: false),
                       child: ListView.builder(
+                        physics: const ClampingScrollPhysics(),
                         controller: mainControllers[2],
                         itemCount: children.length,
                         itemBuilder: (context, index) => children[index],
@@ -305,6 +308,7 @@ class _RatingTableState extends State<RatingTable> {
                     behavior: ScrollConfiguration.of(context)
                         .copyWith(scrollbars: isLastColumn),
                     child: ListView.builder(
+                      physics: const ClampingScrollPhysics(),
                       controller: controller,
                       itemCount: widgets.length,
                       itemBuilder: (context, index) => widgets[index],

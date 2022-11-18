@@ -37,7 +37,9 @@ class AppRouter {
               final height = max(constraints.maxHeight, 600.0);
               final width = max(constraints.maxWidth, 800.0);
               return SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
                 child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: SizedBox(
                     width: width,
