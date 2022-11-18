@@ -424,6 +424,8 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'donWins', $pb.PbFieldType.O3, protoName: 'donWins')
     ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sheriffWins', $pb.PbFieldType.O3, protoName: 'sheriffWins')
     ..pc<ClubRatingRow_GameItem>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'item', $pb.PbFieldType.PM, subBuilder: ClubRatingRow_GameItem.create)
+    ..a<$core.int>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'wins', $pb.PbFieldType.O3)
+    ..a<$core.int>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ci', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -436,6 +438,8 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     $core.int? donWins,
     $core.int? sheriffWins,
     $core.Iterable<ClubRatingRow_GameItem>? item,
+    $core.int? wins,
+    $core.int? ci,
   }) {
     final _result = create();
     if (nickname != null) {
@@ -458,6 +462,12 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     }
     if (item != null) {
       _result.item.addAll(item);
+    }
+    if (wins != null) {
+      _result.wins = wins;
+    }
+    if (ci != null) {
+      _result.ci = ci;
     }
     return _result;
   }
@@ -538,6 +548,24 @@ class ClubRatingRow extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(7)
   $core.List<ClubRatingRow_GameItem> get item => $_getList(6);
+
+  @$pb.TagNumber(8)
+  $core.int get wins => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set wins($core.int v) { $_setSignedInt32(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasWins() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearWins() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.int get ci => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set ci($core.int v) { $_setSignedInt32(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasCi() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCi() => clearField(9);
 }
 
 class ClubGameResult extends $pb.GeneratedMessage {

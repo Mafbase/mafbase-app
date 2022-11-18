@@ -15,6 +15,7 @@ import 'package:seating_generator_web/ui/main/add_tournament/add_tournament_page
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
 import 'package:seating_generator_web/ui/main/profile_settings/profile_settings_page.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/regulations_page/regulations_page.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
@@ -65,6 +66,7 @@ class AppRouter {
           child: const SeatingInsertingPage(),
         ),
       ),
+      RatingPage.route,
       ShellRoute(
         builder: (context, state, child) {
           return MultiBlocProvider(
@@ -95,7 +97,7 @@ class AppRouter {
             redirect: (context, state) async {
               try {
                 final response = await getIt<MyHttpClient>().get("/api/auth");
-                print(response.statusCode);
+                debugPrint(response.statusCode.toString());
                 if (response.statusCode == 200) {
                   return null;
                 }

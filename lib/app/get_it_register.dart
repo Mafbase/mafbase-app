@@ -34,6 +34,8 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
@@ -50,6 +52,9 @@ void registerGetIt() {
       () => kReleaseMode
           ? MyHttpClient.autoForWeb(getIt())
           : MyHttpClient.withDefaultUrl(getIt()),
+    )
+    ..registerFactoryParam<RatingRouter, BuildContext, void>(
+      (context, _) => RatingRouterImpl(context),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
@@ -143,7 +148,8 @@ void _registerSharedGetIt() {
         context,
       ),
     )
-    ..registerFactoryParam<TranslationContentBloc, BuildContext?, TranslationContentBlocParams>(
+    ..registerFactoryParam<TranslationContentBloc, BuildContext?,
+        TranslationContentBlocParams>(
       (context, params) => TranslationContentBloc(params, context),
     )
     ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(
@@ -170,10 +176,13 @@ void _registerSharedGetIt() {
         getIt(),
       ),
     )
-    ..registerFactoryParam<TournamentPageBloc, BuildContext, int>(
+    ..registerFactoryParam<TournamentPageBloc, BuildContext?, int>(
       (context, tournamentId) => TournamentPageBloc(
         tournamentId: tournamentId,
         context: context,
       ),
+    )
+    ..registerFactoryParam<RatingBloc, BuildContext?, dynamic>(
+      (context, _) => RatingBloc(context),
     );
 }

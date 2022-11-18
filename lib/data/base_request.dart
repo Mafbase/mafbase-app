@@ -27,9 +27,10 @@ abstract class BaseRequest<R> {
       );
     }
 
-    final result = parse(parseResponseData(response.data));
+    final bytes = parseResponseData(response.data);
+    debugPrint("response length: ${bytes.length}");
+    final result = parse(bytes);
 
-    debugPrint("Received: $result");
     return result;
   }
 

@@ -54,6 +54,7 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_native_splash: ^2.2.14
   web_socket_channel: ^2.2.0
+  linked_scroll_controller: ^0.2.0
 
 dev_dependencies:
   flutter_test:
