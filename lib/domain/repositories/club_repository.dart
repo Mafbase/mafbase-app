@@ -9,4 +9,6 @@ abstract class ClubRepository {
     required int clubId,
     required DateTimeRange range,
   });
+
+  Future<ClubGameResult> getGame(int gameId, int clubId);
 }

@@ -8,7 +8,7 @@ class RatingEvent with _$RatingEvent {
   const factory RatingEvent.playerSelected({required int playerId}) =
       RatingEventPlayerSelected;
 
-  const factory RatingEvent.gameSelected({required int gameId}) =
+  const factory RatingEvent.gameSelected({required int gameId, required int clubId}) =
       RatingEventGameSelected;
 
   const factory RatingEvent.pageOpened({

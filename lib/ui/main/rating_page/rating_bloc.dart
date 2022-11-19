@@ -14,6 +14,11 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
   RatingBloc([BuildContext? context]) : super(const RatingState(), context) {
     on<RatingEventPageOpened>(_onPageOpened);
     on<RatingEventRangeChanged>(_onRangeChanged);
+    on<RatingEventGameSelected>(_onGameSelected);
+  }
+  
+  _onGameSelected(RatingEventGameSelected event, Emitter emit) {
+    _router.openGame(event.clubId, event.gameId);
   }
 
   _onRangeChanged(RatingEventRangeChanged event, Emitter emit) {

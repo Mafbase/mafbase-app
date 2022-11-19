@@ -19,7 +19,7 @@ mixin _$RatingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
-    required TResult Function(int gameId) gameSelected,
+    required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
     required TResult Function(DateTimeRange range, int clubId) rangeChanged,
   }) =>
@@ -27,7 +27,7 @@ mixin _$RatingEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
   }) =>
@@ -35,7 +35,7 @@ mixin _$RatingEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
     required TResult orElse(),
@@ -153,7 +153,7 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
-    required TResult Function(int gameId) gameSelected,
+    required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
     required TResult Function(DateTimeRange range, int clubId) rangeChanged,
   }) {
@@ -164,7 +164,7 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
   }) {
@@ -175,7 +175,7 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
     required TResult orElse(),
@@ -239,7 +239,7 @@ abstract class _$$RatingEventGameSelectedCopyWith<$Res> {
   factory _$$RatingEventGameSelectedCopyWith(_$RatingEventGameSelected value,
           $Res Function(_$RatingEventGameSelected) then) =
       __$$RatingEventGameSelectedCopyWithImpl<$Res>;
-  $Res call({int gameId});
+  $Res call({int gameId, int clubId});
 }
 
 /// @nodoc
@@ -257,11 +257,16 @@ class __$$RatingEventGameSelectedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? gameId = freezed,
+    Object? clubId = freezed,
   }) {
     return _then(_$RatingEventGameSelected(
       gameId: gameId == freezed
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
+              as int,
+      clubId: clubId == freezed
+          ? _value.clubId
+          : clubId // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -270,14 +275,16 @@ class __$$RatingEventGameSelectedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RatingEventGameSelected implements RatingEventGameSelected {
-  const _$RatingEventGameSelected({required this.gameId});
+  const _$RatingEventGameSelected({required this.gameId, required this.clubId});
 
   @override
   final int gameId;
+  @override
+  final int clubId;
 
   @override
   String toString() {
-    return 'RatingEvent.gameSelected(gameId: $gameId)';
+    return 'RatingEvent.gameSelected(gameId: $gameId, clubId: $clubId)';
   }
 
   @override
@@ -285,12 +292,15 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RatingEventGameSelected &&
-            const DeepCollectionEquality().equals(other.gameId, gameId));
+            const DeepCollectionEquality().equals(other.gameId, gameId) &&
+            const DeepCollectionEquality().equals(other.clubId, clubId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(gameId));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(gameId),
+      const DeepCollectionEquality().hash(clubId));
 
   @JsonKey(ignore: true)
   @override
@@ -302,35 +312,35 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
-    required TResult Function(int gameId) gameSelected,
+    required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
     required TResult Function(DateTimeRange range, int clubId) rangeChanged,
   }) {
-    return gameSelected(gameId);
+    return gameSelected(gameId, clubId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
   }) {
-    return gameSelected?.call(gameId);
+    return gameSelected?.call(gameId, clubId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
     required TResult orElse(),
   }) {
     if (gameSelected != null) {
-      return gameSelected(gameId);
+      return gameSelected(gameId, clubId);
     }
     return orElse();
   }
@@ -374,10 +384,12 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
 }
 
 abstract class RatingEventGameSelected implements RatingEvent {
-  const factory RatingEventGameSelected({required final int gameId}) =
-      _$RatingEventGameSelected;
+  const factory RatingEventGameSelected(
+      {required final int gameId,
+      required final int clubId}) = _$RatingEventGameSelected;
 
   int get gameId;
+  int get clubId;
   @JsonKey(ignore: true)
   _$$RatingEventGameSelectedCopyWith<_$RatingEventGameSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -460,7 +472,7 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
-    required TResult Function(int gameId) gameSelected,
+    required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
     required TResult Function(DateTimeRange range, int clubId) rangeChanged,
   }) {
@@ -471,7 +483,7 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
   }) {
@@ -482,7 +494,7 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
     required TResult orElse(),
@@ -621,7 +633,7 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
-    required TResult Function(int gameId) gameSelected,
+    required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
     required TResult Function(DateTimeRange range, int clubId) rangeChanged,
   }) {
@@ -632,7 +644,7 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
   }) {
@@ -643,7 +655,7 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
-    TResult Function(int gameId)? gameSelected,
+    TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
     TResult Function(DateTimeRange range, int clubId)? rangeChanged,
     required TResult orElse(),

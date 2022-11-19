@@ -22,9 +22,6 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
     return AddPlayerDialog.open(
       context: _context,
       availablePlayers: availablePlayers,
-    ).then((value) {
-      debugPrint(value.toString());
-      return value;
-    });
+    );
   }
 }

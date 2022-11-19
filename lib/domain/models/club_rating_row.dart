@@ -12,7 +12,7 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
     required int wins,
     required int roleWins,
     required int died,
-    required List<double?> games,
+    required List<GameRowItemModel> games,
   }) = _ClubRatingRowModel;
 
   factory ClubRatingRowModel.fromProto(ClubRatingRow proto) =>
@@ -23,6 +23,18 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
         wins: proto.wins,
         roleWins: proto.donWins + proto.sheriffWins,
         died: proto.firstDie,
-        games: proto.item.map((e) => e.hasScore() ? e.score : null).toList(),
+        games: proto.item.map((e) => GameRowItemModel.fromProto(e)).toList(),
+      );
+}
+
+@freezed
+class GameRowItemModel with _$GameRowItemModel {
+  const factory GameRowItemModel({double? score, required int gameId}) =
+      _GameRowItemModel;
+
+  factory GameRowItemModel.fromProto(ClubRatingRow_GameItem proto) =>
+      GameRowItemModel(
+        gameId: proto.gameId,
+        score: proto.hasScore() ? proto.score : null,
       );
 }

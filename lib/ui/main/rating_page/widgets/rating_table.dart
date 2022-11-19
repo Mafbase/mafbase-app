@@ -6,11 +6,13 @@ import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 class RatingTable extends StatefulWidget {
   final List<ClubRatingRowModel> rows;
   final int clubId;
+  final Function(int gameId) openGame;
 
   const RatingTable({
     Key? key,
     required this.rows,
     required this.clubId,
+    required this.openGame,
   }) : super(key: key);
 
   @override
@@ -192,17 +194,24 @@ class _RatingTableState extends State<RatingTable> {
             controller: controllers[rowIndex + 1],
             itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
             itemBuilder: (context, index) {
-              return Container(
-                width: width,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
-                    width: 0.5,
+              return InkWell(
+                onTap: widget.rows[rowIndex].games[index].score == null
+                    ? null
+                    : () => widget
+                        .openGame(widget.rows[rowIndex].games[index].gameId),
+                child: Container(
+                  width: width,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.2),
+                      width: 0.5,
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Text(
-                    widget.rows[rowIndex].games[index]?.toString() ?? "",
+                  child: Center(
+                    child: Text(
+                      widget.rows[rowIndex].games[index].score?.toString() ??
+                          "",
+                    ),
                   ),
                 ),
               );

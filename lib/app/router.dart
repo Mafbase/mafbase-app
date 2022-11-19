@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
@@ -41,10 +42,14 @@ class AppRouter {
                 child: SingleChildScrollView(
                   physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  child: SizedBox(
-                    width: width,
-                    height: height,
-                    child: child,
+                  child: SelectableRegion(
+                    focusNode: FocusNode(),
+                    selectionControls: desktopTextSelectionControls,
+                    child: SizedBox(
+                      width: width,
+                      height: height,
+                      child: child,
+                    ),
                   ),
                 ),
               );
@@ -54,6 +59,8 @@ class AppRouter {
         routes: [
           TempPage.route,
           TranslationContentPage.route,
+          AddClubGamePage.route,
+          RatingPage.route,
           ShellRoute(
             builder: (context, state, child) {
               return MultiBlocProvider(
@@ -93,7 +100,6 @@ class AppRouter {
               child: const SeatingInsertingPage(),
             ),
           ),
-          RatingPage.route,
           ShellRoute(
             builder: (context, state, child) {
               return MultiBlocProvider(
@@ -117,7 +123,6 @@ class AppRouter {
               );
             },
             routes: [
-              AddClubGamePage.route,
               GoRoute(
                 path: '/',
                 pageBuilder: (context, state) =>

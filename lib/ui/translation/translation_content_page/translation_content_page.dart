@@ -329,7 +329,6 @@ class _StatusWidgetState extends State<_StatusWidget>
         setState(() {
           oldStatus = status;
         });
-        debugPrint("test25: $oldStatus");
         controller.animateTo(1);
       });
     }

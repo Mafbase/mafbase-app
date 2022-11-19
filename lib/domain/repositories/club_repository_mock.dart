@@ -14,4 +14,9 @@ class ClubRepositoryMock implements ClubRepository {
   }) async {
     return [];
   }
+
+  @override
+  Future<ClubGameResult> getGame(int gameId, int clubId) async {
+    return ClubGameResult();
+  }
 }

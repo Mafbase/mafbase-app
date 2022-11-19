@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
+import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
 import 'package:seating_generator_web/domain/models/club_rating_row.dart';
@@ -26,5 +27,10 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
           .map((proto) => ClubRatingRowModel.fromProto(proto))
           .toList();
     });
+  }
+
+  @override
+  Future<ClubGameResult> getGame(int gameId, int clubId) {
+    return GetClubGameRequest(clubId: clubId, gameId: gameId).execute(client);
   }
 }

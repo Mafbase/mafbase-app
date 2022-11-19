@@ -15,11 +15,13 @@ class CustomTextField extends StatefulWidget {
   final Function(String s)? onSubmit;
   final FocusNode? focusNode;
   final TextInputType? textInputType;
+  final bool readOnly;
 
   const CustomTextField({
     Key? key,
     this.icon,
     this.textInputType,
+    this.readOnly = false,
     required this.controller,
     this.suffixIcon,
     this.hint,
@@ -58,6 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               children: [
                 Positioned.fill(
                   child: TextFormField(
+                    readOnly: widget.readOnly,
                     keyboardType: widget.textInputType,
                     onFieldSubmitted: widget.onSubmit,
                     focusNode: widget.focusNode,

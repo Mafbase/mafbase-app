@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddClubGameEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pageOpened,
+    required TResult Function(int? gameId) pageOpened,
     required TResult Function(ClubGameResult gameResult) submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(int? gameId)? pageOpened,
     TResult Function(ClubGameResult gameResult)? submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(int? gameId)? pageOpened,
     TResult Function(ClubGameResult gameResult)? submit,
     required TResult orElse(),
   }) =>
@@ -79,6 +79,7 @@ abstract class _$$AddClubGameEventPageOpenedCopyWith<$Res> {
           _$AddClubGameEventPageOpened value,
           $Res Function(_$AddClubGameEventPageOpened) then) =
       __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>;
+  $Res call({int? gameId});
 }
 
 /// @nodoc
@@ -93,55 +94,78 @@ class __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>
   @override
   _$AddClubGameEventPageOpened get _value =>
       super._value as _$AddClubGameEventPageOpened;
+
+  @override
+  $Res call({
+    Object? gameId = freezed,
+  }) {
+    return _then(_$AddClubGameEventPageOpened(
+      gameId: gameId == freezed
+          ? _value.gameId
+          : gameId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
-  const _$AddClubGameEventPageOpened();
+  const _$AddClubGameEventPageOpened({this.gameId});
+
+  @override
+  final int? gameId;
 
   @override
   String toString() {
-    return 'AddClubGameEvent.pageOpened()';
+    return 'AddClubGameEvent.pageOpened(gameId: $gameId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEventPageOpened);
+            other is _$AddClubGameEventPageOpened &&
+            const DeepCollectionEquality().equals(other.gameId, gameId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(gameId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$AddClubGameEventPageOpenedCopyWith<_$AddClubGameEventPageOpened>
+      get copyWith => __$$AddClubGameEventPageOpenedCopyWithImpl<
+          _$AddClubGameEventPageOpened>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pageOpened,
+    required TResult Function(int? gameId) pageOpened,
     required TResult Function(ClubGameResult gameResult) submit,
   }) {
-    return pageOpened();
+    return pageOpened(gameId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(int? gameId)? pageOpened,
     TResult Function(ClubGameResult gameResult)? submit,
   }) {
-    return pageOpened?.call();
+    return pageOpened?.call(gameId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(int? gameId)? pageOpened,
     TResult Function(ClubGameResult gameResult)? submit,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
-      return pageOpened();
+      return pageOpened(gameId);
     }
     return orElse();
   }
@@ -179,7 +203,13 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
 }
 
 abstract class AddClubGameEventPageOpened implements AddClubGameEvent {
-  const factory AddClubGameEventPageOpened() = _$AddClubGameEventPageOpened;
+  const factory AddClubGameEventPageOpened({final int? gameId}) =
+      _$AddClubGameEventPageOpened;
+
+  int? get gameId;
+  @JsonKey(ignore: true)
+  _$$AddClubGameEventPageOpenedCopyWith<_$AddClubGameEventPageOpened>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -250,7 +280,7 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pageOpened,
+    required TResult Function(int? gameId) pageOpened,
     required TResult Function(ClubGameResult gameResult) submit,
   }) {
     return submit(gameResult);
@@ -259,7 +289,7 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(int? gameId)? pageOpened,
     TResult Function(ClubGameResult gameResult)? submit,
   }) {
     return submit?.call(gameResult);
@@ -268,7 +298,7 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(int? gameId)? pageOpened,
     TResult Function(ClubGameResult gameResult)? submit,
     required TResult orElse(),
   }) {
