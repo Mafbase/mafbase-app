@@ -8,6 +8,9 @@ class AddClubGameEvent with _$AddClubGameEvent {
   const factory AddClubGameEvent.pageOpened({int? gameId}) =
       AddClubGameEventPageOpened;
 
-  const factory AddClubGameEvent.submit({required ClubGameResult gameResult}) =
+  const factory AddClubGameEvent.submit({required ClubGameResult gameResult, int? gameId}) =
       AddClubGameEventSubmit;
+
+  const factory AddClubGameEvent.edit({required int gameId}) =
+      AddClubGameEventPageEdit;
 }

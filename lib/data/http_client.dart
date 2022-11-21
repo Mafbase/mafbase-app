@@ -19,8 +19,9 @@ class MyHttpClient {
       baseUrl: _baseUrl,
       validateStatus: (status) {
         return status != null && status <= 300 ||
-            status == 401 ||
-            status == 500;
+            status == HttpStatus.unauthorized ||
+            status == HttpStatus.forbidden ||
+            status == HttpStatus.internalServerError;
       },
       headers: {
         "Content-Type": "application/protobuf",
@@ -136,15 +137,21 @@ class MyHttpClient {
   }
 
   void _checkResponse(Response response) {
-    if (response.statusCode == 500) {
+    if (response.statusCode == HttpStatus.internalServerError) {
       throw RequestError(
+        ErrorOut.fromBuffer(parseResponseData(response.data)).message,
+      );
+    }
+
+    if (response.statusCode == HttpStatus.forbidden) {
+      throw ForbiddenError(
         ErrorOut.fromBuffer(parseResponseData(response.data)).message,
       );
     }
   }
 
   MyHttpClient.withDefaultUrl(this._storage)
-      : _baseUrl = "http://mafia-generator.tomsk.ru";
+      : _baseUrl = "http://localhost:8080";
 
   MyHttpClient.autoForWeb(this._storage)
       : _baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";
@@ -185,5 +192,16 @@ class UnauthenticatedError extends Error {
     } else {
       return "UnauthenticatedError: $message";
     }
+  }
+}
+
+class ForbiddenError extends Error {
+  final String? message;
+
+  ForbiddenError([this.message]);
+
+  @override
+  String toString() {
+    return "UnauthenticatedError${message == null ? "" : ": $message"}";
   }
 }

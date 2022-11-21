@@ -8,6 +8,7 @@ import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
 
 class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
@@ -16,11 +17,17 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
   final AddClubGameInteractor _addClubGameInteractor = getIt();
   final ClubRepository _repository = getIt();
   final int clubId;
+  late final AddClubGameRouter router = getIt(param1: context);
 
   AddClubGameBloc(this.clubId, [BuildContext? context])
       : super(const AddClubGameState(), context) {
     on<AddClubGameEventPageOpened>(_onPageOpened);
     on<AddClubGameEventSubmit>(_onSubmit);
+    on<AddClubGameEventPageEdit>(_onEdit);
+  }
+
+  _onEdit(AddClubGameEventPageEdit event, Emitter emit) {
+    router.editPage(clubId, event.gameId);
   }
 
   _onSubmit(
@@ -28,7 +35,12 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     Emitter emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    await _addClubGameInteractor.run(clubId: clubId, result: event.gameResult);
+    if (event.gameId == null) {
+      await _addClubGameInteractor.run(
+          clubId: clubId, result: event.gameResult);
+    } else {
+      await _repository.editGame(event.gameResult, clubId, event.gameId!);
+    }
     // TODO: add result
     emit(state.copyWith(isLoading: false));
   }
@@ -42,6 +54,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     emit(state.copyWith(isLoading: event.gameId != null, players: players));
     if (event.gameId != null) {
       final game = await _repository.getGame(event.gameId!, clubId);
+      final isOwner = await _repository.isOwner(clubId);
       emitEffect(
         AddClubGameEffect.setValues(
           players: game.players
@@ -75,7 +88,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
           date: DateTime.parse(game.date),
         ),
       );
-      emit(state.copyWith(isLoading: false));
+      emit(state.copyWith(isLoading: false, canEdit: isOwner));
     }
   }
 

@@ -19,4 +19,12 @@ class ClubRepositoryMock implements ClubRepository {
   Future<ClubGameResult> getGame(int gameId, int clubId) async {
     return ClubGameResult();
   }
+
+  @override
+  Future<bool> isOwner(int clubId) async {
+    return true;
+  }
+
+  @override
+  Future editGame(ClubGameResult result, int clubId, int gameId) async {}
 }

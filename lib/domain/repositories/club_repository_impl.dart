@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
+import 'package:seating_generator_web/data/requests/club_check_request.dart';
+import 'package:seating_generator_web/data/requests/edit_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
@@ -32,5 +34,21 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   @override
   Future<ClubGameResult> getGame(int gameId, int clubId) {
     return GetClubGameRequest(clubId: clubId, gameId: gameId).execute(client);
+  }
+
+  @override
+  Future<bool> isOwner(int clubId) async {
+    return ClubCheckRequest(clubId: clubId)
+        .execute(client)
+        .then(
+          (value) => true,
+        )
+        .onError((error, stackTrace) => false);
+  }
+
+  @override
+  Future editGame(ClubGameResult result, int clubId, int gameId) {
+    return EditClubGameRequest(clubId: clubId, gameId: gameId, result: result)
+        .execute(client);
   }
 }

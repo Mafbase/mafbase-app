@@ -33,6 +33,7 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/domain/repositories/translation_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
@@ -82,6 +83,9 @@ void registerGetIt() {
     )
     ..registerLazySingleton<CannotMeetTournamentRepository>(
       () => CannotMeetTournamentRepositoryImpl(getIt()),
+    )
+    ..registerFactoryParam<AddClubGameRouter, BuildContext, dynamic>(
+      (context, _) => AddClubGameRouterImpl(context),
     )
     ..registerLazySingleton<PlayersRepository>(
       () => PlayersRepositoryImpl(getIt()),

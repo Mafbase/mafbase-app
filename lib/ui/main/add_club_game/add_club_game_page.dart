@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,12 +19,14 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.
 
 class AddClubGamePage extends StatefulWidget {
   final bool readOnly;
+  final bool editing;
   final int? gameId;
 
   const AddClubGamePage({
     Key? key,
     this.readOnly = false,
     this.gameId,
+    this.editing = true,
   }) : super(key: key);
 
   @override
@@ -54,12 +55,15 @@ class AddClubGamePage extends StatefulWidget {
           try {
             final clubId = int.parse(state.params["id"]!);
             final gameId = int.parse(state.params["gameId"]!);
+            final edit = state.queryParams["edit"] == true.toString();
+            debugPrint(state.location);
             return BlocProvider<AddClubGameBloc>(
               create: (context) => AddClubGameBloc(clubId, context),
               // TODO: REGISTER IN GET IT
               child: AddClubGamePage(
-                readOnly: true,
+                readOnly: !edit,
                 gameId: gameId,
+                editing: edit,
               ),
             );
           } catch (i) {
@@ -72,13 +76,18 @@ class AddClubGamePage extends StatefulWidget {
   );
 
   static String createViewLocation(
-      BuildContext context, int clubId, int gameId) {
+    BuildContext context,
+    int clubId,
+    int gameId, {
+    bool canEdit = false,
+  }) {
     return context.namedLocation(
       "viewGame",
       params: {
         "id": clubId.toString(),
         "gameId": gameId.toString(),
       },
+      queryParams: {"edit": canEdit.toString()},
     );
   }
 
@@ -209,7 +218,9 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                   readOnly: widget.readOnly,
                                   playerRole: roles[i],
                                   onChange: (role) {
-                                    roles[i] = role;
+                                    setState(() {
+                                      roles[i] = role;
+                                    });
                                   },
                                 ),
                                 const SizedBox(
@@ -230,15 +241,17 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                 )
                               ],
                             ),
-                          Container(
-                            width: 400,
-                            padding: const EdgeInsets.all(20),
-                            child: CustomButton(
-                              text: "Сохранить",
-                              onTap: () => submit(state),
-                              disabled: state.isLoading || widget.readOnly,
+                          if (state.canEdit)
+                            Container(
+                              width: 400,
+                              padding: const EdgeInsets.all(20),
+                              child: CustomButton(
+                                text:
+                                    widget.readOnly ? "Изменить" : "Сохранить",
+                                onTap: () => submit(state),
+                                disabled: state.isLoading,
+                              ),
                             ),
-                          ),
                         ],
                       ),
                       Expanded(
@@ -290,53 +303,60 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                         );
                                       },
                                     ),
-                                    onChanged: widget.readOnly ? null :(value) {
-                                      setState(() {
-                                        firstDie = value ?? -1;
-                                        if (firstDie == -1) {
-                                          bestMove = ClubGameResult_BestMove.miss;
-                                        }
-                                      });
-                                    },
+                                    onChanged: widget.readOnly
+                                        ? null
+                                        : (value) {
+                                            setState(() {
+                                              firstDie = value ?? -1;
+                                              if (firstDie == -1) {
+                                                bestMove =
+                                                    ClubGameResult_BestMove
+                                                        .miss;
+                                              }
+                                            });
+                                          },
                                   ),
                                   if (firstDie != -1) ...[
                                     Text(
                                       "Лучший ход:",
-                                      style: MyTheme.of(context).defaultTextStyle,
+                                      style:
+                                          MyTheme.of(context).defaultTextStyle,
                                     ),
                                     DropdownButton<ClubGameResult_BestMove>(
                                       value: bestMove,
                                       items: ClubGameResult_BestMove.values
-                                              .map((bestMove) {
-                                              final String text;
-                                              switch (bestMove) {
-                                                case ClubGameResult_BestMove.full:
-                                                  text = "Полный лучший ход";
-                                                  break;
-                                                case ClubGameResult_BestMove.half:
-                                                  text = "Двойка черных";
-                                                  break;
-                                                case ClubGameResult_BestMove.miss:
-                                                  text = "Мимо";
-                                                  break;
-                                                default:
-                                                  text = "";
-                                                  break;
-                                              }
-                                              return DropdownMenuItem(
-                                                value: bestMove,
-                                                child: Text(
-                                                  text,
-                                                  style: MyTheme.of(context)
-                                                      .defaultTextStyle,
-                                                ),
-                                              );
-                                            }).toList(),
-                                      onChanged: widget.readOnly ? null : (value) {
-                                        setState(() {
-                                          bestMove = value;
-                                        });
-                                      },
+                                          .map((bestMove) {
+                                        final String text;
+                                        switch (bestMove) {
+                                          case ClubGameResult_BestMove.full:
+                                            text = "Полный лучший ход";
+                                            break;
+                                          case ClubGameResult_BestMove.half:
+                                            text = "Двойка черных";
+                                            break;
+                                          case ClubGameResult_BestMove.miss:
+                                            text = "Мимо";
+                                            break;
+                                          default:
+                                            text = "";
+                                            break;
+                                        }
+                                        return DropdownMenuItem(
+                                          value: bestMove,
+                                          child: Text(
+                                            text,
+                                            style: MyTheme.of(context)
+                                                .defaultTextStyle,
+                                          ),
+                                        );
+                                      }).toList(),
+                                      onChanged: widget.readOnly
+                                          ? null
+                                          : (value) {
+                                              setState(() {
+                                                bestMove = value;
+                                              });
+                                            },
                                     ),
                                   ],
                                 ],
@@ -353,76 +373,85 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                   DropdownButton<ClubGameResult_GameWin>(
                                     value: winSelected,
                                     items: winValue.map((win) {
-                                            final String text;
-                                            switch (win) {
-                                              case ClubGameResult_GameWin.city:
-                                                text = "Победа города";
-                                                break;
-                                              case ClubGameResult_GameWin.draw:
-                                                text = "Ничья";
-                                                break;
-                                              case ClubGameResult_GameWin.mafia:
-                                                text = "Победа мафии";
-                                                break;
-                                              default:
-                                                text = "";
-                                                break;
-                                            }
-                                            return DropdownMenuItem(
-                                              value: win,
-                                              child: Text(
-                                                text,
-                                                style: MyTheme.of(context)
-                                                    .defaultTextStyle,
-                                              ),
-                                            );
-                                          }).toList(),
-                                    onChanged: widget.readOnly ? null : (value) {
-                                      setState(() {
-                                        winSelected = value;
-                                      });
-                                    },
+                                      final String text;
+                                      switch (win) {
+                                        case ClubGameResult_GameWin.city:
+                                          text = "Победа города";
+                                          break;
+                                        case ClubGameResult_GameWin.draw:
+                                          text = "Ничья";
+                                          break;
+                                        case ClubGameResult_GameWin.mafia:
+                                          text = "Победа мафии";
+                                          break;
+                                        default:
+                                          text = "";
+                                          break;
+                                      }
+                                      return DropdownMenuItem(
+                                        value: win,
+                                        child: Text(
+                                          text,
+                                          style: MyTheme.of(context)
+                                              .defaultTextStyle,
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: widget.readOnly
+                                        ? null
+                                        : (value) {
+                                            setState(() {
+                                              winSelected = value;
+                                            });
+                                          },
                                   ),
                                 ],
                               ),
                               InkWell(
-                                onTap: widget.readOnly ? null : () {
-                                  showDatePicker(
-                                    context: context,
-                                    initialDate: date,
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime.now(),
-                                  ).then((value) async {
-                                    if (!mounted) return null;
-                                    if (value != null) {
-                                      final timeOfDay = await showTimePicker(
-                                        context: context,
-                                        initialTime: TimeOfDay.fromDateTime(date),
-                                        initialEntryMode: TimePickerEntryMode.input,
-                                        builder: (context, child) => MediaQuery(
-                                          data: MediaQuery.of(context).copyWith(
-                                            alwaysUse24HourFormat: true,
-                                          ),
-                                          child: child ?? Container(),
-                                        ),
-                                      );
-                                      if (timeOfDay != null) {
-                                        return DateTime(
-                                          value.year,
-                                          value.month,
-                                          value.day,
-                                          timeOfDay.hour,
-                                          timeOfDay.minute,
-                                        );
-                                      }
-                                    }
-                                    return null;
-                                  }).then((value) {
-                                    setState(() {
-                                      date = value ?? date;
-                                    });
-                                  });
-                                },
+                                onTap: widget.readOnly
+                                    ? null
+                                    : () {
+                                        showDatePicker(
+                                          context: context,
+                                          initialDate: date,
+                                          firstDate: DateTime(2000),
+                                          lastDate: DateTime.now(),
+                                        ).then((value) async {
+                                          if (!mounted) return null;
+                                          if (value != null) {
+                                            final timeOfDay =
+                                                await showTimePicker(
+                                              context: context,
+                                              initialTime:
+                                                  TimeOfDay.fromDateTime(date),
+                                              initialEntryMode:
+                                                  TimePickerEntryMode.input,
+                                              builder: (context, child) =>
+                                                  MediaQuery(
+                                                data: MediaQuery.of(context)
+                                                    .copyWith(
+                                                  alwaysUse24HourFormat: true,
+                                                ),
+                                                child: child ?? Container(),
+                                              ),
+                                            );
+                                            if (timeOfDay != null) {
+                                              return DateTime(
+                                                value.year,
+                                                value.month,
+                                                value.day,
+                                                timeOfDay.hour,
+                                                timeOfDay.minute,
+                                              );
+                                            }
+                                          }
+                                          return null;
+                                        }).then((value) {
+                                          setState(() {
+                                            date = value ?? date;
+                                          });
+                                        });
+                                      },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -431,15 +460,16 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       style: MyTheme.of(context)
                                           .defaultTextStyle
                                           .copyWith(
-                                            color:
-                                                MyTheme.of(context).darkGreyColor,
+                                            color: MyTheme.of(context)
+                                                .darkGreyColor,
                                           ),
                                     ),
                                     const SizedBox(
                                       width: 80,
                                     ),
                                     Text(
-                                      DateFormat("dd:MM:yyy HH:mm").format(date),
+                                      DateFormat("dd:MM:yyy HH:mm")
+                                          .format(date),
                                     ),
                                   ],
                                 ),
@@ -461,6 +491,12 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   }
 
   submit(AddClubGameState state) {
+    if (widget.readOnly) {
+      context
+          .read<AddClubGameBloc>()
+          .add(AddClubGameEvent.edit(gameId: widget.gameId!));
+      return;
+    }
     if (winSelected == null ||
         roles.where((element) => element == PlayerRole.mafia).length != 2 ||
         roles.where((element) => element == PlayerRole.don).length != 1 ||
@@ -500,6 +536,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
               win: winSelected,
               bestMove: bestMove,
             ),
+            gameId: widget.gameId,
           ),
         );
   }

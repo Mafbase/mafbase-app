@@ -8,5 +8,6 @@ class AddClubGameState with _$AddClubGameState {
   const factory AddClubGameState({
     @Default(true) bool isLoading,
     @Default([]) List<PlayerModel> players,
+    @Default(false) bool canEdit,
   }) = _AddClubGameState;
 }

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddClubGameState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<PlayerModel> get players => throw _privateConstructorUsedError;
+  bool get canEdit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddClubGameStateCopyWith<AddClubGameState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $AddClubGameStateCopyWith<$Res> {
   factory $AddClubGameStateCopyWith(
           AddClubGameState value, $Res Function(AddClubGameState) then) =
       _$AddClubGameStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, List<PlayerModel> players});
+  $Res call({bool isLoading, List<PlayerModel> players, bool canEdit});
 }
 
 /// @nodoc
@@ -45,6 +46,7 @@ class _$AddClubGameStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? players = freezed,
+    Object? canEdit = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -55,6 +57,10 @@ class _$AddClubGameStateCopyWithImpl<$Res>
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
+      canEdit: canEdit == freezed
+          ? _value.canEdit
+          : canEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -66,7 +72,7 @@ abstract class _$$_AddClubGameStateCopyWith<$Res>
           _$_AddClubGameState value, $Res Function(_$_AddClubGameState) then) =
       __$$_AddClubGameStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isLoading, List<PlayerModel> players});
+  $Res call({bool isLoading, List<PlayerModel> players, bool canEdit});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = freezed,
     Object? players = freezed,
+    Object? canEdit = freezed,
   }) {
     return _then(_$_AddClubGameState(
       isLoading: isLoading == freezed
@@ -94,6 +101,10 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
+      canEdit: canEdit == freezed
+          ? _value.canEdit
+          : canEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -102,7 +113,9 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
 
 class _$_AddClubGameState implements _AddClubGameState {
   const _$_AddClubGameState(
-      {this.isLoading = true, final List<PlayerModel> players = const []})
+      {this.isLoading = true,
+      final List<PlayerModel> players = const [],
+      this.canEdit = false})
       : _players = players;
 
   @override
@@ -117,8 +130,12 @@ class _$_AddClubGameState implements _AddClubGameState {
   }
 
   @override
+  @JsonKey()
+  final bool canEdit;
+
+  @override
   String toString() {
-    return 'AddClubGameState(isLoading: $isLoading, players: $players)';
+    return 'AddClubGameState(isLoading: $isLoading, players: $players, canEdit: $canEdit)';
   }
 
   @override
@@ -127,14 +144,16 @@ class _$_AddClubGameState implements _AddClubGameState {
         (other.runtimeType == runtimeType &&
             other is _$_AddClubGameState &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality().equals(other._players, _players));
+            const DeepCollectionEquality().equals(other._players, _players) &&
+            const DeepCollectionEquality().equals(other.canEdit, canEdit));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(_players));
+      const DeepCollectionEquality().hash(_players),
+      const DeepCollectionEquality().hash(canEdit));
 
   @JsonKey(ignore: true)
   @override
@@ -145,12 +164,15 @@ class _$_AddClubGameState implements _AddClubGameState {
 abstract class _AddClubGameState implements AddClubGameState {
   const factory _AddClubGameState(
       {final bool isLoading,
-      final List<PlayerModel> players}) = _$_AddClubGameState;
+      final List<PlayerModel> players,
+      final bool canEdit}) = _$_AddClubGameState;
 
   @override
   bool get isLoading;
   @override
   List<PlayerModel> get players;
+  @override
+  bool get canEdit;
   @override
   @JsonKey(ignore: true)
   _$$_AddClubGameStateCopyWith<_$_AddClubGameState> get copyWith =>
