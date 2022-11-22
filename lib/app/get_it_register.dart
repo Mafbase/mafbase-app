@@ -12,6 +12,7 @@ import 'package:seating_generator_web/domain/interactors/get_tournaments_players
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_mock.dart';
@@ -29,6 +30,7 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/domain/repositories/translation_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
@@ -52,11 +54,13 @@ void registerGetIt() {
     ..registerFactoryParam<LoginPageRouter, BuildContext, dynamic>(
       (context, _) => LoginPageRouterImpl(context),
     )
+    ..registerFactoryParam<VerificationPageRouter, BuildContext, dynamic>(
+        (context, _) => VerificationPageRouterImpl(context))
     ..registerFactoryParam<MainPageRouter, BuildContext, dynamic>(
       (context, _) => MainPageRouterImpl(context),
     )
     ..registerFactoryParam<SignUpPageRouter, BuildContext, dynamic>(
-          (context, _) => SignUpPageRouterImpl(context),
+      (context, _) => SignUpPageRouterImpl(context),
     )
     ..registerFactoryParam<SeatingInsertingRouter, BuildContext, dynamic>(
       (context, _) => SeatingInsertingRouterImpl(context),
@@ -86,6 +90,8 @@ void registerGetItTest() {
     ..registerFactory<LoginPageRouter>(() => LoginPageRouterMock())
     ..registerFactory<SignUpPageRouter>(() => SignUpPageRouterMock())
     ..registerFactory<MainPageRouter>(() => MainPageRouterMock())
+    ..registerFactory<VerificationPageRouter>(
+        () => VerificationPageRouterMock())
     ..registerLazySingleton<TranslationRepository>(
       () => TranslationRepositoryMock(),
     )
@@ -108,6 +114,9 @@ void _registerSharedGetIt() {
   getIt
     ..registerLazySingleton<LoginInteractor>(() => LoginInteractor(getIt()))
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
+    ..registerLazySingleton<VerificationInteractor>(
+      () => VerificationInteractor(getIt()),
+    )
     ..registerLazySingleton<GetAllPlayersInteractor>(
       () => GetAllPlayersInteractor(getIt()),
     )
@@ -133,8 +142,19 @@ void _registerSharedGetIt() {
         context,
       ),
     )
+    ..registerFactoryParam<VerificationBloc, BuildContext?, int>(
+      (context, id) {
+        try {
+          return VerificationBloc(getIt(param1: context), getIt(), id, context);
+        } catch(e, stacktrace) {
+          debugPrint(e.toString());
+          debugPrintStack(stackTrace: stacktrace);
+          rethrow;
+        }
+      },
+    )
     ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(
-          (context, _) => SignUpBloc(
+      (context, _) => SignUpBloc(
         getIt(),
         getIt.call(param1: context),
         context,

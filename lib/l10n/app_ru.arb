@@ -39,6 +39,11 @@
   "repeatPassword": "Повторите пароль",
   "invalidPassword": "Слишком слабый пароль",
   "notMatchPasswords": "Пароли не совпадают",
-  "requiredForEnter": "- обязательное поле для заполнения"
+  "requiredForEnter": "- обязательное поле для заполнения",
+  "authorization": "Авторизоваться",
+  "sendOneMoreCode": "Отправить код повторно",
+  "verificationText": "На вашу почту отправлено письмо с кодом для подтверждения регистрации, введите его ниже.\n",
+  "confirmRegistration": "Подтверждение регистрации",
+  "enterCode": "Введите код"
 
 }

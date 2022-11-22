@@ -9,6 +9,7 @@ import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart
 import 'package:seating_generator_web/domain/models/sign_up_model.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
 import '../../../domain/models/login_model.dart';
 
@@ -30,7 +31,7 @@ class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
     switch (result.error) {
       case ErrorEnum.needVerification:
         emit(state.copyWith(isLoading: false));
-        router.openVerificationPage();
+        router.openVerificationPage(result.id!);
         break;
       case ErrorEnum.emailExist:
         debugPrint('test25');
@@ -63,7 +64,7 @@ abstract class SignUpPageRouter {
 
   void openLoginPage();
 
-  void openVerificationPage();
+  void openVerificationPage(int id);
 }
 
 class SignUpPageRouterImpl implements SignUpPageRouter {
@@ -82,8 +83,8 @@ class SignUpPageRouterImpl implements SignUpPageRouter {
   }
 
   @override
-  void openVerificationPage() {
-    GoRouter.of(_context).go(AppRoutes.verificationPage);
+  void openVerificationPage(int id) {
+    GoRouter.of(_context).go(VerificationPageBody.namedLocation(_context, id));
   }
 }
 
@@ -109,7 +110,7 @@ class SignUpPageRouterMock implements SignUpPageRouter {
   }
 
   @override
-  void openVerificationPage() {
+  void openVerificationPage(int id) {
     _verificationPageOpenedController.add(true);
   }
 }

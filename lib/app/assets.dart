@@ -8,4 +8,5 @@ class AppAssets {
   static const String exclamationPoint = 'assets/exclamation_point.svg';
   static const String smile = 'assets/smile.svg';
   static const String lock = 'assets/lock.svg';
+  static const String email = 'assets/email.svg';
 }

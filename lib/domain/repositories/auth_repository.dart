@@ -5,4 +5,6 @@ abstract class AuthRepository {
   Future<LoginModel> login(String email, String password);
 
   Future<SignUpModel> signUp(String email, String password);
+
+  Future<bool> verificate(int id, String token);
 }

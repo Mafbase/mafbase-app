@@ -10,6 +10,8 @@ import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 import 'package:seating_generator_web/ui/main/add_tournament/add_tournament_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
@@ -35,7 +37,7 @@ class AppRouter {
               BlocProvider<SignUpBloc>(
                 key: const Key('SignUpBlocProvider'),
                 create: (context) => getIt.get<SignUpBloc>(param1: context),
-              )
+              ),
             ],
             child: LoginPage(
               child: child,
@@ -45,12 +47,15 @@ class AppRouter {
         routes: [
           GoRoute(
             path: AppRoutes.loginPageRoute,
-            pageBuilder: (context, state) => FadeTransitionPage(child: const LoginPageBody()),
+            pageBuilder: (context, state) =>
+                FadeTransitionPage(child: const LoginPageBody()),
           ),
           GoRoute(
             path: AppRoutes.signUpRoute,
-            pageBuilder: (context, state) => FadeTransitionPage(child: const SignUpPageBody()),
-          )
+            pageBuilder: (context, state) =>
+                FadeTransitionPage(child: const SignUpPageBody()),
+          ),
+          VerificationPageBody.route,
         ],
       ),
       GoRoute(
@@ -157,7 +162,8 @@ class AppRoutes {
   static const signUpRoute = '/signUp';
   static const tournamentPlayersListRoute = '/tournament/:id';
 
-  static String tournamentPlayersListRouteWithId(int tournamentId) => '/tournament/$tournamentId';
+  static String tournamentPlayersListRouteWithId(int tournamentId) =>
+      '/tournament/$tournamentId';
 
   static String routeFromTab(MainPageTab tab) => "/${tab.name}";
 }

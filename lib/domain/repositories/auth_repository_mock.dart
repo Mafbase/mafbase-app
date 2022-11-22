@@ -26,4 +26,13 @@ class AuthRepositoryMock implements AuthRepository {
       }
     });
   }
+
+  @override
+  Future<bool> verificate(int id, String token) async {
+    if (token == '11') {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
