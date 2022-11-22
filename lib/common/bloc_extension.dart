@@ -54,8 +54,10 @@ abstract class CustomBloc<E, S> extends Bloc<E, S> {
   CustomBloc(super.initialState, [this.context]);
 
   @override
-  void on<EV extends E>(EventHandler<EV, S> handler,
-      {EventTransformer<EV>? transformer}) {
+  void on<EV extends E>(
+    EventHandler<EV, S> handler, {
+    EventTransformer<EV>? transformer,
+  }) {
     super.on(
       (event, emit) async {
         await _functionWrapper(
@@ -91,7 +93,7 @@ abstract class CustomBloc<E, S> extends Bloc<E, S> {
         rethrow;
       }
     } catch (ignored) {
-      emitOnError(emit);  
+      emitOnError(emit);
       rethrow;
     }
   }

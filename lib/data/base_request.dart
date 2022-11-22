@@ -17,10 +17,12 @@ abstract class BaseRequest<R> {
     if (data == null) {
       response = await client.get(method, useRecoveryToken: resendOnUnauth);
     } else {
+      final bytes = data!.writeToBuffer();
       response = await client
           .post(
         method,
-        data!.toByteString(),
+        Stream.fromIterable(bytes.map((e) => [e])),
+        bytes.length,
         useRecoveryToken: resendOnUnauth,
       );
     }

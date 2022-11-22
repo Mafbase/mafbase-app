@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
+import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
@@ -19,6 +20,9 @@ import 'package:seating_generator_web/domain/repositories/auth_repository_mock.d
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository_mock.dart';
+import 'package:seating_generator_web/domain/repositories/club_repository.dart';
+import 'package:seating_generator_web/domain/repositories/club_repository_impl.dart';
+import 'package:seating_generator_web/domain/repositories/club_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository_mock.dart';
@@ -79,7 +83,8 @@ void registerGetIt() {
     )
     ..registerLazySingleton<PlayersRepository>(
       () => PlayersRepositoryImpl(getIt()),
-    );
+    )
+    ..registerLazySingleton<ClubRepository>(() => ClubRepositoryImpl(getIt()));
   _registerSharedGetIt();
 }
 
@@ -88,6 +93,7 @@ void registerGetItTest() {
   getIt
     ..registerLazySingleton<AuthRepository>(() => AuthRepositoryMock())
     ..registerFactory<LoginPageRouter>(() => LoginPageRouterMock())
+    ..registerLazySingleton<ClubRepository>(() => ClubRepositoryMock())
     ..registerFactory<SignUpPageRouter>(() => SignUpPageRouterMock())
     ..registerFactory<MainPageRouter>(() => MainPageRouterMock())
     ..registerFactory<VerificationPageRouter>(
@@ -114,6 +120,9 @@ void _registerSharedGetIt() {
   getIt
     ..registerLazySingleton<LoginInteractor>(() => LoginInteractor(getIt()))
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
+    ..registerLazySingleton<AddClubGameInteractor>(
+      () => AddClubGameInteractor(),
+    )
     ..registerLazySingleton<VerificationInteractor>(
       () => VerificationInteractor(getIt()),
     )

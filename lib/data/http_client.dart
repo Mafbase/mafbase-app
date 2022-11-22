@@ -18,7 +18,8 @@ class MyHttpClient {
       responseType: ResponseType.bytes,
       baseUrl: _baseUrl,
       validateStatus: (status) {
-        return status != null && status <= 300 || status == 401 ||
+        return status != null && status <= 300 ||
+            status == 401 ||
             status == 500;
       },
       headers: {
@@ -70,7 +71,8 @@ class MyHttpClient {
 
   Future<Response> post(
     String method,
-    dynamic data, {
+    dynamic data,
+    int contentLength, {
     bool useRecoveryToken = true,
   }) async {
     if (useRecoveryToken) {
@@ -81,7 +83,7 @@ class MyHttpClient {
       data: data,
       options: Options(
         headers: {
-          HttpHeaders.contentLengthHeader: data.toString().length,
+          HttpHeaders.contentLengthHeader: contentLength,
           HttpHeaders.authorizationHeader: "Bearer ${await _storage.authToken}"
         },
       ),
@@ -104,7 +106,7 @@ class MyHttpClient {
           tokenLoginResponse.token,
           tokenLoginResponse.recoveryToken,
         );
-        return post(method, data, useRecoveryToken: false);
+        return post(method, data, contentLength, useRecoveryToken: false);
       } else {
         throw UnauthenticatedError("Authentication error");
       }
@@ -136,7 +138,8 @@ class MyHttpClient {
   void _checkResponse(Response response) {
     if (response.statusCode == 500) {
       throw RequestError(
-          ErrorOut.fromBuffer(parseResponseData(response.data)).message);
+        ErrorOut.fromBuffer(parseResponseData(response.data)).message,
+      );
     }
   }
 
@@ -144,7 +147,7 @@ class MyHttpClient {
       : _baseUrl = "http://mafia-generator.tomsk.ru";
 
   MyHttpClient.autoForWeb(this._storage)
-      : _baseUrl = "${Uri.base.scheme}://${Uri.base.host}";
+      : _baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";
 }
 
 extension GeneratedExt on GeneratedMessage {
