@@ -151,7 +151,7 @@ class MyHttpClient {
   }
 
   MyHttpClient.withDefaultUrl(this._storage)
-      : _baseUrl = "http://localhost:8080";
+      : _baseUrl = "http://mafia-generator.tomsk.ru";
 
   MyHttpClient.autoForWeb(this._storage)
       : _baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";

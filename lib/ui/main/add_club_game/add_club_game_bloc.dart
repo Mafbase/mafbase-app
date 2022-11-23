@@ -51,10 +51,16 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
   ) async {
     emit(state.copyWith(isLoading: true));
     final players = await _getAllPlayersInteractor.run();
-    emit(state.copyWith(isLoading: event.gameId != null, players: players));
+    final isOwner = await _repository.isOwner(clubId);
+    emit(
+      state.copyWith(
+        isLoading: event.gameId != null,
+        players: players,
+        canEdit: isOwner,
+      ),
+    );
     if (event.gameId != null) {
       final game = await _repository.getGame(event.gameId!, clubId);
-      final isOwner = await _repository.isOwner(clubId);
       emitEffect(
         AddClubGameEffect.setValues(
           players: game.players
@@ -88,7 +94,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
           date: DateTime.parse(game.date),
         ),
       );
-      emit(state.copyWith(isLoading: false, canEdit: isOwner));
+      emit(state.copyWith(isLoading: false));
     }
   }
 
