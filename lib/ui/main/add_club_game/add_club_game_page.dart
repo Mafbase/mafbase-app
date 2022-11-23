@@ -44,7 +44,7 @@ class AddClubGamePage extends StatefulWidget {
           return BlocProvider<AddClubGameBloc>(
             create: (context) => AddClubGameBloc(id, context),
             // TODO: REGISTER IN GET IT
-            child: const AddClubGamePage(),
+            child: const AddClubGamePage(editing: true,),
           );
         },
       ),
