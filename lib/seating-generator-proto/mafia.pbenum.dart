@@ -32,11 +32,13 @@ class PlayerStatus extends $pb.ProtobufEnum {
   static const PlayerStatus alive = PlayerStatus._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'alive');
   static const PlayerStatus voted = PlayerStatus._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'voted');
   static const PlayerStatus deleted = PlayerStatus._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'deleted');
+  static const PlayerStatus killed = PlayerStatus._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'killed');
 
   static const $core.List<PlayerStatus> values = <PlayerStatus> [
     alive,
     voted,
     deleted,
+    killed,
   ];
 
   static final $core.Map<$core.int, PlayerStatus> _byValue = $pb.ProtobufEnum.initByValue(values);

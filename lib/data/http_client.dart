@@ -11,16 +11,17 @@ import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 class MyHttpClient {
-  final String _baseUrl;
+  final String baseUrl;
   final TokenStorage _storage;
   late final _client = Dio(
     BaseOptions(
       responseType: ResponseType.bytes,
-      baseUrl: _baseUrl,
+      baseUrl: baseUrl,
       validateStatus: (status) {
         return status != null && status <= 300 ||
-            status == 401 ||
-            status == 500;
+            status == HttpStatus.unauthorized ||
+            status == HttpStatus.forbidden ||
+            status == HttpStatus.internalServerError;
       },
       headers: {
         "Content-Type": "application/protobuf",
@@ -31,7 +32,7 @@ class MyHttpClient {
 
   Future<Response> get(String method, {bool useRecoveryToken = true}) async {
     if (useRecoveryToken) {
-      debugPrint("sending request to $_baseUrl$method");
+      debugPrint("sending request to $baseUrl$method");
       debugPrint(
           "token: ${await _storage.authToken}\nrecovery token: ${await _storage.recoveryToken}");
     }
@@ -76,7 +77,7 @@ class MyHttpClient {
     bool useRecoveryToken = true,
   }) async {
     if (useRecoveryToken) {
-      debugPrint("sending request to $_baseUrl$method");
+      debugPrint("sending request to $baseUrl$method");
     }
     final response = await _client.post(
       method,
@@ -136,18 +137,24 @@ class MyHttpClient {
   }
 
   void _checkResponse(Response response) {
-    if (response.statusCode == 500) {
+    if (response.statusCode == HttpStatus.internalServerError) {
       throw RequestError(
+        ErrorOut.fromBuffer(parseResponseData(response.data)).message,
+      );
+    }
+
+    if (response.statusCode == HttpStatus.forbidden) {
+      throw ForbiddenError(
         ErrorOut.fromBuffer(parseResponseData(response.data)).message,
       );
     }
   }
 
   MyHttpClient.withDefaultUrl(this._storage)
-      : _baseUrl = "http://mafia-generator.tomsk.ru";
+      : baseUrl = "http://mafia-generator.tomsk.ru";
 
   MyHttpClient.autoForWeb(this._storage)
-      : _baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";
+      : baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";
 }
 
 extension GeneratedExt on GeneratedMessage {
@@ -185,5 +192,16 @@ class UnauthenticatedError extends Error {
     } else {
       return "UnauthenticatedError: $message";
     }
+  }
+}
+
+class ForbiddenError extends Error {
+  final String? message;
+
+  ForbiddenError([this.message]);
+
+  @override
+  String toString() {
+    return "UnauthenticatedError${message == null ? "" : ": $message"}";
   }
 }

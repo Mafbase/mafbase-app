@@ -12,6 +12,7 @@ class CustomAutoComplete extends StatelessWidget {
   final VoidCallback onSubmit;
   final Iterable<PlayerModel> Function(TextEditingValue text) optionsBuilder;
   final String hint;
+  final bool readOnly;
 
   const CustomAutoComplete({
     Key? key,
@@ -23,12 +24,13 @@ class CustomAutoComplete extends StatelessWidget {
     required this.onSubmit,
     required this.optionsBuilder,
     required this.hint,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RawAutocomplete<PlayerModel>(
-      optionsBuilder: optionsBuilder,
+      optionsBuilder: readOnly ? (_) => [] : optionsBuilder,
       key: key,
       textEditingController: controller,
       displayStringForOption: displayStringForOption,
@@ -82,6 +84,7 @@ class CustomAutoComplete extends StatelessWidget {
       onSelected: onSelected,
       fieldViewBuilder: (context, controller, focusNode, onSubmit) {
         return CustomTextField(
+          readOnly: readOnly,
           focusNode: focusNode,
           controller: controller,
           hint: hint,

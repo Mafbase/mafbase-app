@@ -35,12 +35,16 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
+import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -48,9 +52,12 @@ void registerGetIt() {
   getIt
     ..registerLazySingleton<TokenStorage>(() => TokenStorageImpl())
     ..registerLazySingleton<MyHttpClient>(
-      () => kDebugMode
-          ? MyHttpClient.withDefaultUrl(getIt())
-          : MyHttpClient.autoForWeb(getIt()),
+      () => kReleaseMode
+          ? MyHttpClient.autoForWeb(getIt())
+          : MyHttpClient.withDefaultUrl(getIt()),
+    )
+    ..registerFactoryParam<RatingRouter, BuildContext, void>(
+      (context, _) => RatingRouterImpl(context),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
@@ -80,6 +87,9 @@ void registerGetIt() {
     )
     ..registerLazySingleton<CannotMeetTournamentRepository>(
       () => CannotMeetTournamentRepositoryImpl(getIt()),
+    )
+    ..registerFactoryParam<AddClubGameRouter, BuildContext, dynamic>(
+      (context, _) => AddClubGameRouterImpl(context),
     )
     ..registerLazySingleton<PlayersRepository>(
       () => PlayersRepositoryImpl(getIt()),
@@ -151,6 +161,10 @@ void _registerSharedGetIt() {
         context,
       ),
     )
+    ..registerFactoryParam<TranslationContentBloc, BuildContext?,
+        TranslationContentBlocParams>(
+      (context, params) => TranslationContentBloc(params, context),
+    )
     ..registerFactoryParam<VerificationBloc, BuildContext?, int>(
       (context, id) {
         try {
@@ -186,10 +200,13 @@ void _registerSharedGetIt() {
         getIt(),
       ),
     )
-    ..registerFactoryParam<TournamentPageBloc, BuildContext, int>(
+    ..registerFactoryParam<TournamentPageBloc, BuildContext?, int>(
       (context, tournamentId) => TournamentPageBloc(
         tournamentId: tournamentId,
         context: context,
       ),
+    )
+    ..registerFactoryParam<RatingBloc, BuildContext?, dynamic>(
+      (context, _) => RatingBloc(context),
     );
 }

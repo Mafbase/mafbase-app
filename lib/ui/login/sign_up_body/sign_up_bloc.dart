@@ -34,7 +34,6 @@ class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
         router.openVerificationPage(result.id!);
         break;
       case ErrorEnum.emailExist:
-        debugPrint('test25');
         emit(state.copyWith(isLoading: false, emailExist: true),);
         break;
       case ErrorEnum.weakPassword:

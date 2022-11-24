@@ -15,11 +15,13 @@ class CustomTextField extends StatefulWidget {
   final Function(String s)? onSubmit;
   final FocusNode? focusNode;
   final TextInputType? textInputType;
+  final bool readOnly;
 
   const CustomTextField({
     Key? key,
     this.icon,
     this.textInputType,
+    this.readOnly = false,
     required this.controller,
     this.suffixIcon,
     this.hint,
@@ -58,6 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               children: [
                 Positioned.fill(
                   child: TextFormField(
+                    readOnly: widget.readOnly,
                     keyboardType: widget.textInputType,
                     onFieldSubmitted: widget.onSubmit,
                     focusNode: widget.focusNode,
@@ -72,14 +75,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                   ),
                 ),
-                  Positioned(
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if(widget.canObscure) IconButton(
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (widget.canObscure)
+                        IconButton(
                           onPressed: () {
                             setState(() {
                               obscureText = !obscureText;
@@ -90,11 +94,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                             color: MyTheme.of(context).borderColor,
                           ),
                         ),
-                        const SizedBox(width: 10,),
-                        SvgPicture.asset(AppAssets.exclamationPoint, height: 18,),
-                      ],
-                    ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      if (widget.isRequiredField)
+                        SvgPicture.asset(
+                          AppAssets.exclamationPoint,
+                          height: 18,
+                        ),
+                    ],
                   ),
+                ),
               ],
             ),
           ),
