@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/sockets/tournament_content_socket.dart';
@@ -64,6 +65,7 @@ class TranslationControlBloc
   }
 
   _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
+    debugPrint(event.event.toString());
     emit(
       TranslationContentState(
         roles: event.event.roles,

@@ -51,6 +51,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> {
                     items: List.generate(
                       state.totalGames,
                       (index) => DropdownMenuItem(
+                        value: index,
                         child: Text((index + 1).toString()),
                       ),
                     ),
