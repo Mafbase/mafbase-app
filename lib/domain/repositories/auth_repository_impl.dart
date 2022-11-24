@@ -1,5 +1,6 @@
 import 'package:seating_generator_web/data/requests/login_request.dart';
 import 'package:seating_generator_web/data/requests/sign_up_request.dart';
+import 'package:seating_generator_web/data/requests/verification_request.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
@@ -41,8 +42,21 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
       case SignUpEventOut_Error.weakPassword:
         return const SignUpModel(error: ErrorEnum.weakPassword);
       case SignUpEventOut_Error.needVerification:
-        return const SignUpModel(error: ErrorEnum.needVerification);
+        return SignUpModel(error: ErrorEnum.needVerification, id: value.id);
     }
     return throw Exception('Invalid response');
+  }
+
+  @override
+  Future<bool> verificate(int id, String token) async {
+    final value = await VerificationRequest(EmailVerificationEvent(id: id, token: token)).execute(client);
+    switch(value.status) {
+
+      case EmailVerificationEventOut_Status.incorrectToken:
+        return false;
+      case EmailVerificationEventOut_Status.success:
+        return true;
+    }
+    return false;
   }
 }

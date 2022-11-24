@@ -80,5 +80,15 @@
   "notMatchPasswords": "Пароли не совпадают",
   "@notMatchPasswords": {},
   "requiredForEnter": "- обязательное поле для заполнения",
-  "@requiredForEnter": {}
+  "@requiredForEnter": {},
+  "authorization": "Авторизоваться",
+  "@authorization": {},
+  "sendOneMoreCode": "Отправить код повторно",
+  "@sendOneMoreCode": {},
+  "verificationText": "На вашу почту отправлено письмо с кодом для подтверждения регистрации, введите его ниже.\n",
+  "@verificationText": {},
+  "confirmRegistration": "Подтверждение регистрации",
+  "@confirmRegistration": {},
+  "enterCode": "Введите код",
+  "@enterCode": {}
 }

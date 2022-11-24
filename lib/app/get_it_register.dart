@@ -13,6 +13,7 @@ import 'package:seating_generator_web/domain/interactors/get_tournaments_players
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_mock.dart';
@@ -33,6 +34,7 @@ import 'package:seating_generator_web/domain/repositories/translation_repository
 import 'package:seating_generator_web/domain/repositories/translation_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
@@ -64,6 +66,8 @@ void registerGetIt() {
     ..registerFactoryParam<LoginPageRouter, BuildContext, dynamic>(
       (context, _) => LoginPageRouterImpl(context),
     )
+    ..registerFactoryParam<VerificationPageRouter, BuildContext, dynamic>(
+        (context, _) => VerificationPageRouterImpl(context))
     ..registerFactoryParam<MainPageRouter, BuildContext, dynamic>(
       (context, _) => MainPageRouterImpl(context),
     )
@@ -103,6 +107,8 @@ void registerGetItTest() {
     ..registerLazySingleton<ClubRepository>(() => ClubRepositoryMock())
     ..registerFactory<SignUpPageRouter>(() => SignUpPageRouterMock())
     ..registerFactory<MainPageRouter>(() => MainPageRouterMock())
+    ..registerFactory<VerificationPageRouter>(
+        () => VerificationPageRouterMock())
     ..registerLazySingleton<TranslationRepository>(
       () => TranslationRepositoryMock(),
     )
@@ -127,6 +133,9 @@ void _registerSharedGetIt() {
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
     ..registerLazySingleton<AddClubGameInteractor>(
       () => AddClubGameInteractor(),
+    )
+    ..registerLazySingleton<VerificationInteractor>(
+      () => VerificationInteractor(getIt()),
     )
     ..registerLazySingleton<GetAllPlayersInteractor>(
       () => GetAllPlayersInteractor(getIt()),
@@ -156,6 +165,15 @@ void _registerSharedGetIt() {
     ..registerFactoryParam<TranslationContentBloc, BuildContext?,
         TranslationContentBlocParams>(
       (context, params) => TranslationContentBloc(params, context),
+    )
+    ..registerFactoryParam<VerificationBloc, BuildContext?, int>(
+      (context, id) {
+        try {
+          return VerificationBloc(getIt(param1: context), getIt(), id, context);
+        } catch(e, stacktrace) {
+          rethrow;
+        }
+      },
     )
     ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(
       (context, _) => SignUpBloc(

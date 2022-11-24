@@ -16,42 +16,49 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$VerificationEvents {
-  String get token => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String token) submit,
+    required TResult Function() signUpButtonTapped,
+    required TResult Function() loginButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(VerificationEventSubmit value) submit,
+    required TResult Function(OnSignUpButtonTapped value) signUpButtonTapped,
+    required TResult Function(OnLoginButtonTapped value) loginButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $VerificationEventsCopyWith<VerificationEvents> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,7 +67,6 @@ abstract class $VerificationEventsCopyWith<$Res> {
   factory $VerificationEventsCopyWith(
           VerificationEvents value, $Res Function(VerificationEvents) then) =
       _$VerificationEventsCopyWithImpl<$Res>;
-  $Res call({String token});
 }
 
 /// @nodoc
@@ -71,27 +77,13 @@ class _$VerificationEventsCopyWithImpl<$Res>
   final VerificationEvents _value;
   // ignore: unused_field
   final $Res Function(VerificationEvents) _then;
-
-  @override
-  $Res call({
-    Object? token = freezed,
-  }) {
-    return _then(_value.copyWith(
-      token: token == freezed
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$$VerificationEventSubmitCopyWith<$Res>
-    implements $VerificationEventsCopyWith<$Res> {
+abstract class _$$VerificationEventSubmitCopyWith<$Res> {
   factory _$$VerificationEventSubmitCopyWith(_$VerificationEventSubmit value,
           $Res Function(_$VerificationEventSubmit) then) =
       __$$VerificationEventSubmitCopyWithImpl<$Res>;
-  @override
   $Res call({String token});
 }
 
@@ -155,6 +147,8 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String token) submit,
+    required TResult Function() signUpButtonTapped,
+    required TResult Function() loginButtonTapped,
   }) {
     return submit(token);
   }
@@ -163,6 +157,8 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
   }) {
     return submit?.call(token);
   }
@@ -171,6 +167,8 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -183,6 +181,8 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(VerificationEventSubmit value) submit,
+    required TResult Function(OnSignUpButtonTapped value) signUpButtonTapped,
+    required TResult Function(OnLoginButtonTapped value) loginButtonTapped,
   }) {
     return submit(this);
   }
@@ -191,6 +191,8 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
   }) {
     return submit?.call(this);
   }
@@ -199,6 +201,8 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -212,10 +216,230 @@ abstract class VerificationEventSubmit implements VerificationEvents {
   const factory VerificationEventSubmit({required final String token}) =
       _$VerificationEventSubmit;
 
-  @override
   String get token;
-  @override
   @JsonKey(ignore: true)
   _$$VerificationEventSubmitCopyWith<_$VerificationEventSubmit> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnSignUpButtonTappedCopyWith<$Res> {
+  factory _$$OnSignUpButtonTappedCopyWith(_$OnSignUpButtonTapped value,
+          $Res Function(_$OnSignUpButtonTapped) then) =
+      __$$OnSignUpButtonTappedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OnSignUpButtonTappedCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res>
+    implements _$$OnSignUpButtonTappedCopyWith<$Res> {
+  __$$OnSignUpButtonTappedCopyWithImpl(_$OnSignUpButtonTapped _value,
+      $Res Function(_$OnSignUpButtonTapped) _then)
+      : super(_value, (v) => _then(v as _$OnSignUpButtonTapped));
+
+  @override
+  _$OnSignUpButtonTapped get _value => super._value as _$OnSignUpButtonTapped;
+}
+
+/// @nodoc
+
+class _$OnSignUpButtonTapped implements OnSignUpButtonTapped {
+  const _$OnSignUpButtonTapped();
+
+  @override
+  String toString() {
+    return 'VerificationEvents.signUpButtonTapped()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OnSignUpButtonTapped);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String token) submit,
+    required TResult Function() signUpButtonTapped,
+    required TResult Function() loginButtonTapped,
+  }) {
+    return signUpButtonTapped();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
+  }) {
+    return signUpButtonTapped?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
+    required TResult orElse(),
+  }) {
+    if (signUpButtonTapped != null) {
+      return signUpButtonTapped();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(VerificationEventSubmit value) submit,
+    required TResult Function(OnSignUpButtonTapped value) signUpButtonTapped,
+    required TResult Function(OnLoginButtonTapped value) loginButtonTapped,
+  }) {
+    return signUpButtonTapped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+  }) {
+    return signUpButtonTapped?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+    required TResult orElse(),
+  }) {
+    if (signUpButtonTapped != null) {
+      return signUpButtonTapped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnSignUpButtonTapped implements VerificationEvents {
+  const factory OnSignUpButtonTapped() = _$OnSignUpButtonTapped;
+}
+
+/// @nodoc
+abstract class _$$OnLoginButtonTappedCopyWith<$Res> {
+  factory _$$OnLoginButtonTappedCopyWith(_$OnLoginButtonTapped value,
+          $Res Function(_$OnLoginButtonTapped) then) =
+      __$$OnLoginButtonTappedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OnLoginButtonTappedCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res>
+    implements _$$OnLoginButtonTappedCopyWith<$Res> {
+  __$$OnLoginButtonTappedCopyWithImpl(
+      _$OnLoginButtonTapped _value, $Res Function(_$OnLoginButtonTapped) _then)
+      : super(_value, (v) => _then(v as _$OnLoginButtonTapped));
+
+  @override
+  _$OnLoginButtonTapped get _value => super._value as _$OnLoginButtonTapped;
+}
+
+/// @nodoc
+
+class _$OnLoginButtonTapped implements OnLoginButtonTapped {
+  const _$OnLoginButtonTapped();
+
+  @override
+  String toString() {
+    return 'VerificationEvents.loginButtonTapped()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OnLoginButtonTapped);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String token) submit,
+    required TResult Function() signUpButtonTapped,
+    required TResult Function() loginButtonTapped,
+  }) {
+    return loginButtonTapped();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
+  }) {
+    return loginButtonTapped?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String token)? submit,
+    TResult Function()? signUpButtonTapped,
+    TResult Function()? loginButtonTapped,
+    required TResult orElse(),
+  }) {
+    if (loginButtonTapped != null) {
+      return loginButtonTapped();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(VerificationEventSubmit value) submit,
+    required TResult Function(OnSignUpButtonTapped value) signUpButtonTapped,
+    required TResult Function(OnLoginButtonTapped value) loginButtonTapped,
+  }) {
+    return loginButtonTapped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+  }) {
+    return loginButtonTapped?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(VerificationEventSubmit value)? submit,
+    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+    required TResult orElse(),
+  }) {
+    if (loginButtonTapped != null) {
+      return loginButtonTapped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnLoginButtonTapped implements VerificationEvents {
+  const factory OnLoginButtonTapped() = _$OnLoginButtonTapped;
 }
