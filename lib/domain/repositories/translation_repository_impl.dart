@@ -50,7 +50,7 @@ class TranslationRepositoryImpl extends BaseRepository
     return ChangeSeatingContentRequest(
       tournamentId: tournamentId,
       table: table,
-      content: ChangeSeatingContent(selectedGame: gameIndex+1),
+      content: ChangeSeatingContent(selectedGame: gameIndex),
     ).execute(client);
   }
 }
