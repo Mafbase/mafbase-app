@@ -145,21 +145,37 @@ class _RatingPageState extends State<RatingPage> {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 16),
+                          IconButton(
+                            onPressed: () {
+                              context.read<RatingBloc>().add(
+                                    RatingEvent.downloadRating(
+                                      range: widget.range,
+                                      clubId: widget.clubId,
+                                    ),
+                                  );
+                            },
+                            icon: const Icon(
+                              Icons.download,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       Expanded(
-                        child: RatingTable(
-                          rows: state.rows,
-                          clubId: widget.clubId,
-                          openGame: (gameId) => context.read<RatingBloc>().add(
-                                RatingEvent.gameSelected(
-                                  gameId: gameId,
-                                  clubId: widget.clubId,
+                        child: Center(
+                          child: RatingTable(
+                            rows: state.rows,
+                            clubId: widget.clubId,
+                            openGame: (gameId) => context.read<RatingBloc>().add(
+                                  RatingEvent.gameSelected(
+                                    gameId: gameId,
+                                    clubId: widget.clubId,
+                                  ),
                                 ),
-                              ),
+                          ),
                         ),
                       ),
                     ],

@@ -27,4 +27,10 @@ class ClubRepositoryMock implements ClubRepository {
 
   @override
   Future editGame(ClubGameResult result, int clubId, int gameId) async {}
+
+  @override
+  Future downloadRating({
+    required int clubId,
+    required DateTimeRange range,
+  }) async {}
 }

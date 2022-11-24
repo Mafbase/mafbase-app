@@ -152,17 +152,12 @@ class _RatingTableState extends State<RatingTable> {
         ),
       );
 
-  Widget? gameHeader(double width) => widget.rows.isEmpty
+  Widget? gameHeader(double width, [bool expand = true]) => widget.rows.isEmpty
       ? null
       : SizedBox(
           height: 50,
-          child: ListView.builder(
-            key: Key("GameHeader${widget.rows.length}/${widget.clubId}"),
-            physics: const ClampingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            controller: controllers.first,
-            itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
-            itemBuilder: (context, index) {
+          child: Builder(builder: (context) {
+            builder(BuildContext context, int index) {
               return Container(
                 width: width,
                 decoration: BoxDecoration(
@@ -177,23 +172,36 @@ class _RatingTableState extends State<RatingTable> {
                   ),
                 ),
               );
-            },
-          ),
+            }
+
+            if (!expand) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  widget.rows.firstOrNull?.games.length ?? 0,
+                  (index) => builder(context, index),
+                ),
+              );
+            }
+            return ListView.builder(
+              key: Key("GameHeader${widget.rows.length}/${widget.clubId}"),
+              physics: const ClampingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              controller: controllers.first,
+              itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
+              itemBuilder: builder,
+            );
+          }),
         );
 
-  List<Widget> games(double width) {
+  List<Widget> games(double width, [bool expand = true]) {
     return List.generate(
       widget.rows.length,
       (rowIndex) {
         return SizedBox(
           height: 50,
-          child: ListView.builder(
-            key: Key("GameRow$rowIndex/${widget.rows.length}/${widget.clubId}"),
-            physics: const ClampingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            controller: controllers[rowIndex + 1],
-            itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
-            itemBuilder: (context, index) {
+          child: Builder(builder: (context) {
+            builder(BuildContext context, int index) {
               return InkWell(
                 onTap: widget.rows[rowIndex].games[index].score == null
                     ? null
@@ -215,8 +223,27 @@ class _RatingTableState extends State<RatingTable> {
                   ),
                 ),
               );
-            },
-          ),
+            }
+
+            if (!expand) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  widget.rows.firstOrNull?.games.length ?? 0,
+                  (index) => builder(context, index),
+                ),
+              );
+            }
+            return ListView.builder(
+              key: Key(
+                  "GameRow$rowIndex/${widget.rows.length}/${widget.clubId}"),
+              physics: const ClampingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              controller: controllers[rowIndex + 1],
+              itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
+              itemBuilder: builder,
+            );
+          }),
         );
       },
     );
@@ -225,6 +252,7 @@ class _RatingTableState extends State<RatingTable> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         column(indexWidgets, mainControllers[0], header: const Text("№")),
         column(
@@ -233,13 +261,22 @@ class _RatingTableState extends State<RatingTable> {
           header: const Text("Игрок"),
           boldRight: true,
         ),
-        Expanded(
+        Flexible(
+          fit: FlexFit.loose,
           child: LayoutBuilder(
             builder: (context, constraints) {
               final width =
                   constraints.maxWidth / (constraints.maxWidth / 60).floor();
-              final children = games(width);
-              final header = gameHeader(width);
+              final gamesCount = widget.rows.firstOrNull?.games.length ?? 0;
+              final expand = width * gamesCount > constraints.maxWidth;
+              final children = games(width, expand);
+              final header = gameHeader(width, expand);
+              final listView = ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                controller: mainControllers[2],
+                itemCount: children.length,
+                itemBuilder: (context, index) => children[index],
+              );
               return Column(
                 children: [
                   if (header != null) header,
@@ -247,12 +284,21 @@ class _RatingTableState extends State<RatingTable> {
                     child: ScrollConfiguration(
                       behavior: ScrollConfiguration.of(context)
                           .copyWith(scrollbars: false),
-                      child: ListView.builder(
-                        physics: const ClampingScrollPhysics(),
-                        controller: mainControllers[2],
-                        itemCount: children.length,
-                        itemBuilder: (context, index) => children[index],
-                      ),
+                      child: expand
+                          ? listView
+                          : Stack(
+                              children: [
+                                ...children.map(
+                                  (child) => IgnorePointer(
+                                    child: Opacity(
+                                      opacity: 0,
+                                      child: child,
+                                    ),
+                                  ),
+                                ),
+                                Positioned.fill(child: listView),
+                              ],
+                            ),
                     ),
                   ),
                 ],

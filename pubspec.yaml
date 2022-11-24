@@ -55,6 +55,8 @@ dependencies:
   flutter_native_splash: ^2.2.14
   web_socket_channel: ^2.2.0
   linked_scroll_controller: ^0.2.0
+  url_launcher: ^6.1.7
+  isolated_worker: ^0.1.1
 
 dev_dependencies:
   flutter_test:

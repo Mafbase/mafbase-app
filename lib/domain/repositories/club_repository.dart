@@ -15,4 +15,9 @@ abstract class ClubRepository {
   Future<ClubGameResult> getGame(int gameId, int clubId);
 
   Future<bool> isOwner(int clubId);
+
+  Future downloadRating({
+    required int clubId,
+    required DateTimeRange range,
+  });
 }

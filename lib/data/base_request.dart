@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -9,8 +10,14 @@ abstract class BaseRequest<R> {
   final String method;
   final GeneratedMessage? data;
   final bool resendOnUnauth;
+  final bool useJson;
 
-  const BaseRequest(this.method, [this.data, this.resendOnUnauth = true]);
+  const BaseRequest(
+    this.method, {
+    this.data,
+    this.resendOnUnauth = true,
+    this.useJson = false,
+  });
 
   Future<R> execute(MyHttpClient client) async {
     final Response response;
@@ -18,8 +25,7 @@ abstract class BaseRequest<R> {
       response = await client.get(method, useRecoveryToken: resendOnUnauth);
     } else {
       final bytes = data!.writeToBuffer();
-      response = await client
-          .post(
+      response = await client.post(
         method,
         Stream.fromIterable(bytes.map((e) => [e])),
         bytes.length,
@@ -29,12 +35,15 @@ abstract class BaseRequest<R> {
 
     final bytes = parseResponseData(response.data);
     debugPrint("response length: ${bytes.length}");
-    final result = parse(bytes);
+    final result = await parse(bytes);
 
     return result;
   }
 
-  R parse(List<int> bytes);
+  FutureOr<R> parse(List<int> bytes) => throw UnimplementedError();
+
+  FutureOr<R> parseFromJson(Map<String, Object?> json) =>
+      throw UnimplementedError();
 }
 
 List<int> parseResponseData(dynamic data) {
@@ -49,6 +58,4 @@ List<int> parseResponseData(dynamic data) {
   return list;
 }
 
-enum Method {
-  post, get
-}
+enum Method { post, get }

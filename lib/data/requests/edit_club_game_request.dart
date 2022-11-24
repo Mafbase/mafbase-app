@@ -6,7 +6,7 @@ class EditClubGameRequest extends BaseRequest<void> {
     required int clubId,
     required int gameId,
     required ClubGameResult result,
-  }) : super("/api/club/$clubId/editGame/$gameId", result);
+  }) : super("/api/club/$clubId/editGame/$gameId", data: result);
 
   @override
   void parse(List<int> bytes) {}

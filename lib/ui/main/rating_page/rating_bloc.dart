@@ -15,10 +15,21 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     on<RatingEventPageOpened>(_onPageOpened);
     on<RatingEventRangeChanged>(_onRangeChanged);
     on<RatingEventGameSelected>(_onGameSelected);
+    on<RatingEventDownload>(_onDownloadRatingClicked);
   }
-  
+
   _onGameSelected(RatingEventGameSelected event, Emitter emit) {
     _router.openGame(event.clubId, event.gameId);
+  }
+
+  _onDownloadRatingClicked(
+    RatingEventDownload event,
+    Emitter emit,
+  ) async {
+    await _clubRepository.downloadRating(
+      clubId: event.clubId,
+      range: event.range,
+    );
   }
 
   _onRangeChanged(RatingEventRangeChanged event, Emitter emit) {
