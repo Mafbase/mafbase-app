@@ -83,9 +83,7 @@
   "sendOneMoreCode": "Отправить код повторно",
   "verificationText": "На вашу почту отправлено письмо с кодом для подтверждения регистрации, введите его ниже.\n",
   "confirmRegistration": "Подтверждение регистрации",
-  "enterCode": "Введите код"
-
+  "enterCode": "Введите код",
   "@notMatchPasswords": {},
-  "requiredForEnter": "- обязательное поле для заполнения",
   "@requiredForEnter": {}
 }
