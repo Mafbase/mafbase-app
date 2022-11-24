@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SignUpModel {
   ErrorEnum? get error => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpModelCopyWith<SignUpModel> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $SignUpModelCopyWith<$Res> {
   factory $SignUpModelCopyWith(
           SignUpModel value, $Res Function(SignUpModel) then) =
       _$SignUpModelCopyWithImpl<$Res>;
-  $Res call({ErrorEnum? error});
+  $Res call({ErrorEnum? error, int? id});
 }
 
 /// @nodoc
@@ -42,12 +43,17 @@ class _$SignUpModelCopyWithImpl<$Res> implements $SignUpModelCopyWith<$Res> {
   @override
   $Res call({
     Object? error = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as ErrorEnum?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -59,7 +65,7 @@ abstract class _$$_SignUpModelCopyWith<$Res>
           _$_SignUpModel value, $Res Function(_$_SignUpModel) then) =
       __$$_SignUpModelCopyWithImpl<$Res>;
   @override
-  $Res call({ErrorEnum? error});
+  $Res call({ErrorEnum? error, int? id});
 }
 
 /// @nodoc
@@ -75,12 +81,17 @@ class __$$_SignUpModelCopyWithImpl<$Res> extends _$SignUpModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? error = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$_SignUpModel(
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as ErrorEnum?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -88,14 +99,16 @@ class __$$_SignUpModelCopyWithImpl<$Res> extends _$SignUpModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SignUpModel implements _SignUpModel {
-  const _$_SignUpModel({this.error});
+  const _$_SignUpModel({this.error, this.id});
 
   @override
   final ErrorEnum? error;
+  @override
+  final int? id;
 
   @override
   String toString() {
-    return 'SignUpModel(error: $error)';
+    return 'SignUpModel(error: $error, id: $id)';
   }
 
   @override
@@ -103,12 +116,15 @@ class _$_SignUpModel implements _SignUpModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SignUpModel &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality().equals(other.id, id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
   @override
@@ -117,10 +133,13 @@ class _$_SignUpModel implements _SignUpModel {
 }
 
 abstract class _SignUpModel implements SignUpModel {
-  const factory _SignUpModel({final ErrorEnum? error}) = _$_SignUpModel;
+  const factory _SignUpModel({final ErrorEnum? error, final int? id}) =
+      _$_SignUpModel;
 
   @override
   ErrorEnum? get error;
+  @override
+  int? get id;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpModelCopyWith<_$_SignUpModel> get copyWith =>
