@@ -170,8 +170,6 @@ void _registerSharedGetIt() {
         try {
           return VerificationBloc(getIt(param1: context), getIt(), id, context);
         } catch(e, stacktrace) {
-          debugPrint(e.toString());
-          debugPrintStack(stackTrace: stacktrace);
           rethrow;
         }
       },
