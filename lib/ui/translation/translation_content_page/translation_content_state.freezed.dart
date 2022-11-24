@@ -20,6 +20,8 @@ mixin _$TranslationContentState {
   List<PlayerStatus>? get statuses => throw _privateConstructorUsedError;
   List<String>? get images => throw _privateConstructorUsedError;
   List<String>? get nicknames => throw _privateConstructorUsedError;
+  int get game => throw _privateConstructorUsedError;
+  int get totalGames => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TranslationContentStateCopyWith<TranslationContentState> get copyWith =>
@@ -35,7 +37,9 @@ abstract class $TranslationContentStateCopyWith<$Res> {
       {List<PlayerRole>? roles,
       List<PlayerStatus>? statuses,
       List<String>? images,
-      List<String>? nicknames});
+      List<String>? nicknames,
+      int game,
+      int totalGames});
 }
 
 /// @nodoc
@@ -53,6 +57,8 @@ class _$TranslationContentStateCopyWithImpl<$Res>
     Object? statuses = freezed,
     Object? images = freezed,
     Object? nicknames = freezed,
+    Object? game = freezed,
+    Object? totalGames = freezed,
   }) {
     return _then(_value.copyWith(
       roles: roles == freezed
@@ -71,6 +77,14 @@ class _$TranslationContentStateCopyWithImpl<$Res>
           ? _value.nicknames
           : nicknames // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      game: game == freezed
+          ? _value.game
+          : game // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalGames: totalGames == freezed
+          ? _value.totalGames
+          : totalGames // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -86,7 +100,9 @@ abstract class _$$_TranslationContentStateCopyWith<$Res>
       {List<PlayerRole>? roles,
       List<PlayerStatus>? statuses,
       List<String>? images,
-      List<String>? nicknames});
+      List<String>? nicknames,
+      int game,
+      int totalGames});
 }
 
 /// @nodoc
@@ -107,6 +123,8 @@ class __$$_TranslationContentStateCopyWithImpl<$Res>
     Object? statuses = freezed,
     Object? images = freezed,
     Object? nicknames = freezed,
+    Object? game = freezed,
+    Object? totalGames = freezed,
   }) {
     return _then(_$_TranslationContentState(
       roles: roles == freezed
@@ -125,6 +143,14 @@ class __$$_TranslationContentStateCopyWithImpl<$Res>
           ? _value._nicknames
           : nicknames // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      game: game == freezed
+          ? _value.game
+          : game // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalGames: totalGames == freezed
+          ? _value.totalGames
+          : totalGames // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -136,7 +162,9 @@ class _$_TranslationContentState implements _TranslationContentState {
       {final List<PlayerRole>? roles,
       final List<PlayerStatus>? statuses,
       final List<String>? images,
-      final List<String>? nicknames})
+      final List<String>? nicknames,
+      this.game = 0,
+      this.totalGames = 0})
       : _roles = roles,
         _statuses = statuses,
         _images = images,
@@ -179,8 +207,15 @@ class _$_TranslationContentState implements _TranslationContentState {
   }
 
   @override
+  @JsonKey()
+  final int game;
+  @override
+  @JsonKey()
+  final int totalGames;
+
+  @override
   String toString() {
-    return 'TranslationContentState(roles: $roles, statuses: $statuses, images: $images, nicknames: $nicknames)';
+    return 'TranslationContentState(roles: $roles, statuses: $statuses, images: $images, nicknames: $nicknames, game: $game, totalGames: $totalGames)';
   }
 
   @override
@@ -192,7 +227,10 @@ class _$_TranslationContentState implements _TranslationContentState {
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality()
-                .equals(other._nicknames, _nicknames));
+                .equals(other._nicknames, _nicknames) &&
+            const DeepCollectionEquality().equals(other.game, game) &&
+            const DeepCollectionEquality()
+                .equals(other.totalGames, totalGames));
   }
 
   @override
@@ -201,7 +239,9 @@ class _$_TranslationContentState implements _TranslationContentState {
       const DeepCollectionEquality().hash(_roles),
       const DeepCollectionEquality().hash(_statuses),
       const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(_nicknames));
+      const DeepCollectionEquality().hash(_nicknames),
+      const DeepCollectionEquality().hash(game),
+      const DeepCollectionEquality().hash(totalGames));
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +256,9 @@ abstract class _TranslationContentState implements TranslationContentState {
       {final List<PlayerRole>? roles,
       final List<PlayerStatus>? statuses,
       final List<String>? images,
-      final List<String>? nicknames}) = _$_TranslationContentState;
+      final List<String>? nicknames,
+      final int game,
+      final int totalGames}) = _$_TranslationContentState;
 
   @override
   List<PlayerRole>? get roles;
@@ -226,6 +268,10 @@ abstract class _TranslationContentState implements TranslationContentState {
   List<String>? get images;
   @override
   List<String>? get nicknames;
+  @override
+  int get game;
+  @override
+  int get totalGames;
   @override
   @JsonKey(ignore: true)
   _$$_TranslationContentStateCopyWith<_$_TranslationContentState>

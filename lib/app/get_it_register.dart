@@ -43,6 +43,7 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -167,6 +168,10 @@ void _registerSharedGetIt() {
       (context, _) => MainBloc(
         getIt.get<MainPageRouter>(param1: context),
       ),
+    )
+    ..registerFactoryParam<TranslationControlBloc, BuildContext?,
+        TranslationContentBlocParams>(
+      (context, params) => TranslationControlBloc(params),
     )
     ..registerFactoryParam<TournamentsBloc, BuildContext?, dynamic>(
       (context, _) => TournamentsBloc(

@@ -790,6 +790,8 @@ class SeatingContent extends $pb.GeneratedMessage {
     ..pc<PlayerStatus>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.PE, valueOf: PlayerStatus.valueOf, enumValues: PlayerStatus.values)
     ..pPS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'images')
     ..pPS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'names')
+    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'game', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'totalGames', $pb.PbFieldType.O3, protoName: 'totalGames')
     ..hasRequiredFields = false
   ;
 
@@ -799,6 +801,8 @@ class SeatingContent extends $pb.GeneratedMessage {
     $core.Iterable<PlayerStatus>? status,
     $core.Iterable<$core.String>? images,
     $core.Iterable<$core.String>? names,
+    $core.int? game,
+    $core.int? totalGames,
   }) {
     final _result = create();
     if (roles != null) {
@@ -812,6 +816,12 @@ class SeatingContent extends $pb.GeneratedMessage {
     }
     if (names != null) {
       _result.names.addAll(names);
+    }
+    if (game != null) {
+      _result.game = game;
+    }
+    if (totalGames != null) {
+      _result.totalGames = totalGames;
     }
     return _result;
   }
@@ -847,6 +857,24 @@ class SeatingContent extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(4)
   $core.List<$core.String> get names => $_getList(3);
+
+  @$pb.TagNumber(5)
+  $core.int get game => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set game($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasGame() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearGame() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get totalGames => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set totalGames($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasTotalGames() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearTotalGames() => clearField(6);
 }
 
 class LoginByTokenEvent extends $pb.GeneratedMessage {

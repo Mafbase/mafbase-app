@@ -10,6 +10,8 @@ class TranslationContentState with _$TranslationContentState {
     List<PlayerStatus>? statuses,
     List<String>? images,
     List<String>? nicknames,
+    @Default(0) int game,
+    @Default(0) int totalGames,
   }) = _TranslationContentState;
 }
 

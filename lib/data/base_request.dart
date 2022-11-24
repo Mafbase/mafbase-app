@@ -40,10 +40,7 @@ abstract class BaseRequest<R> {
     return result;
   }
 
-  FutureOr<R> parse(List<int> bytes) => throw UnimplementedError();
-
-  FutureOr<R> parseFromJson(Map<String, Object?> json) =>
-      throw UnimplementedError();
+  FutureOr<R> parse(List<int> bytes);
 }
 
 List<int> parseResponseData(dynamic data) {

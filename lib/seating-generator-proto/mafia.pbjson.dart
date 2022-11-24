@@ -209,11 +209,13 @@ const SeatingContent$json = const {
     const {'1': 'status', '3': 2, '4': 3, '5': 14, '6': '.generated.PlayerStatus', '10': 'status'},
     const {'1': 'images', '3': 3, '4': 3, '5': 9, '10': 'images'},
     const {'1': 'names', '3': 4, '4': 3, '5': 9, '10': 'names'},
+    const {'1': 'game', '3': 5, '4': 1, '5': 5, '10': 'game'},
+    const {'1': 'totalGames', '3': 6, '4': 1, '5': 5, '10': 'totalGames'},
   ],
 };
 
 /// Descriptor for `SeatingContent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List seatingContentDescriptor = $convert.base64Decode('Cg5TZWF0aW5nQ29udGVudBIrCgVyb2xlcxgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUgVyb2xlcxIvCgZzdGF0dXMYAiADKA4yFy5nZW5lcmF0ZWQuUGxheWVyU3RhdHVzUgZzdGF0dXMSFgoGaW1hZ2VzGAMgAygJUgZpbWFnZXMSFAoFbmFtZXMYBCADKAlSBW5hbWVz');
+final $typed_data.Uint8List seatingContentDescriptor = $convert.base64Decode('Cg5TZWF0aW5nQ29udGVudBIrCgVyb2xlcxgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUgVyb2xlcxIvCgZzdGF0dXMYAiADKA4yFy5nZW5lcmF0ZWQuUGxheWVyU3RhdHVzUgZzdGF0dXMSFgoGaW1hZ2VzGAMgAygJUgZpbWFnZXMSFAoFbmFtZXMYBCADKAlSBW5hbWVzEhIKBGdhbWUYBSABKAVSBGdhbWUSHgoKdG90YWxHYW1lcxgGIAEoBVIKdG90YWxHYW1lcw==');
 @$core.Deprecated('Use loginByTokenEventDescriptor instead')
 const LoginByTokenEvent$json = const {
   '1': 'LoginByTokenEvent',

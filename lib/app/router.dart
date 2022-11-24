@@ -27,6 +27,7 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_blo
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_page.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 
 class AppRouter {
   final router = GoRouter(
@@ -59,6 +60,7 @@ class AppRouter {
         routes: [
           TempPage.route,
           TranslationContentPage.route,
+          TranslationControlPage.route,
           AddClubGamePage.route,
           RatingPage.route,
           ShellRoute(
