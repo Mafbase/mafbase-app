@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:seating_generator_web/data/requests/add_photo_request.dart';
 import 'package:seating_generator_web/data/requests/add_player_request.dart';
 import 'package:seating_generator_web/data/requests/delete_player_request.dart';
 import 'package:seating_generator_web/data/requests/get_all_players_request.dart';
@@ -42,5 +45,14 @@ class PlayersRepositoryImpl extends BaseRepository
           (value) =>
               value.players.map((e) => PlayerModel.fromProto(e)).toList(),
         );
+  }
+
+  @override
+  Future addPhoto(int playerId, Uint8List bytes, String filename) {
+    return AddPhotoRequest(
+      playerId: playerId,
+      bytes: bytes,
+      filename: filename,
+    ).execute(client);
   }
 }

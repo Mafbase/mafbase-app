@@ -115,21 +115,24 @@ class MyHttpClient {
     return response;
   }
 
-  Future<Response> putFile(String method, List<int> bytes) async {
+  Future<Response> putFile(String method, List<int> bytes, [String? fileName]) async {
+    print(method);
     return _client
         .post(
       method,
       data: FormData.fromMap(
-        {"file": MultipartFile.fromBytes(bytes, filename: "temp.csv")},
+        {"file": MultipartFile.fromBytes(bytes, filename: fileName ?? "temp.csv")},
       ),
       options: Options(
         headers: {
           HttpHeaders.contentTypeHeader: "multipart/*",
+          HttpHeaders.authorizationHeader: "Bearer ${await _storage.authToken}",
         },
       ),
     )
         .then(
       (value) {
+        print(value.statusCode);
         _checkResponse(value);
         return value;
       },

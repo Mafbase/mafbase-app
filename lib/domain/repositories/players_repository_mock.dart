@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 
@@ -30,4 +32,7 @@ class PlayersRepositoryMock implements PlayersRepository {
   Future<List<PlayerModel>> tournamentsPlayer(int tournamentId) async {
     return _tournamentPlayers;
   }
+
+  @override
+  Future addPhoto(int playerId, Uint8List bytes, String nickname) async {}
 }

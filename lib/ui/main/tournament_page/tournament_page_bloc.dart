@@ -6,6 +6,7 @@ import 'package:seating_generator_web/data/requests/get_tournaments_players_requ
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
+import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
@@ -16,6 +17,7 @@ class TournamentPageBloc
   final GetAllPlayersInteractor _getAllPlayersInteractor = getIt();
   final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
       getIt();
+  final PlayersRepository playerRepository = getIt();
 
   final AddPlayerInteractor _addPlayerInteractor = getIt();
 
@@ -27,6 +29,18 @@ class TournamentPageBloc
       : super(const TournamentPageState(), context) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);
+    on<TournamentPageEventAddPhoto>(_onAddPhoto);
+  }
+
+  _onAddPhoto(
+    TournamentPageEventAddPhoto event,
+    Emitter emit,
+  ) {
+    return playerRepository.addPhoto(
+      event.playerId,
+      event.bytes,
+      event.filename,
+    );
   }
 
   Future _onAddPlayerTapped(

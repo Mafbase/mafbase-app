@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
 abstract class PlayersRepository {
@@ -8,4 +10,6 @@ abstract class PlayersRepository {
   Future addPlayer(int tournamentId, PlayerModel player);
 
   Future deletePlayer(int tournamentId, PlayerModel player);
+
+  Future addPhoto(int playerId, Uint8List bytes, String filename);
 }
