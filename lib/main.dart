@@ -45,6 +45,7 @@ class App extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return MaterialApp.router(
+
             routerDelegate: context.read<AppRouter>().router.routerDelegate,
             routeInformationProvider:
                 context.read<AppRouter>().router.routeInformationProvider,

@@ -89,66 +89,100 @@ class _RatingTableState extends State<RatingTable> {
     );
   }
 
-  List<Widget> get indexWidgets => List.generate(
-        widget.rows.length,
-        (index) => wrap(
-          Text(
-            (index + 1).toString(),
-          ),
+  Widget get indexProtoype => wrap(Text(widget.rows.length.toString()));
+  Widget indexWidgets(int index) => wrap(
+        Text(
+          (index + 1).toString(),
         ),
       );
 
-  List<Widget> get nicknames => List.generate(
-        widget.rows.length,
-        (index) => wrap(
-          Text(widget.rows[index].nickname),
-          boldRight: true,
+  Widget get nicknamePrototype => wrap(
+        Text(
+          widget.rows
+                  .map((e) => e.nickname)
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              "",
+        ),
+      );
+  Widget nicknames(int index) => wrap(
+        Text(widget.rows[index].nickname),
+        boldRight: true,
+      );
+
+  Widget get scorePrototype => wrap(
+        Text(
+          widget.rows
+                  .map((e) => e.score.toString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              "",
+        ),
+      );
+  Widget scores(int index) => wrap(
+        Text(
+          widget.rows[index].score.toString(),
+        ),
+        boldLeft: true,
+      );
+
+  Widget get addScorePrototype => wrap(
+        Text(
+          widget.rows
+                  .map((e) => e.addScore.toString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              "",
+        ),
+      );
+  Widget addScores(int index) => wrap(
+        Text(
+          widget.rows[index].addScore.toString(),
         ),
       );
 
-  List<Widget> get scores => List.generate(
-        widget.rows.length,
-        (index) => wrap(
-          Text(
-            widget.rows[index].score.toString(),
-          ),
-          boldLeft: true,
+  Widget get winPrototype => wrap(
+        Text(
+          widget.rows
+                  .map((e) => e.wins.toString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              "",
+        ),
+      );
+  Widget wins(int index) => wrap(
+        Text(
+          widget.rows[index].wins.toString(),
         ),
       );
 
-  List<Widget> get addScores => List.generate(
-        widget.rows.length,
-        (index) => wrap(
-          Text(
-            widget.rows[index].addScore.toString(),
-          ),
+  Widget get roleWinPrototype => wrap(
+        Text(
+          widget.rows
+                  .map((e) => e.roleWins.toString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              "",
+        ),
+      );
+  Widget roleWins(int index) => wrap(
+        Text(
+          widget.rows[index].roleWins.toString(),
         ),
       );
 
-  List<Widget> get wins => List.generate(
-        widget.rows.length,
-        (index) => wrap(
-          Text(
-            widget.rows[index].wins.toString(),
-          ),
+  Widget get diesProtorype => wrap(
+        Text(
+          widget.rows
+                  .map((e) => e.died.toString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              "",
         ),
       );
-
-  List<Widget> get roleWins => List.generate(
-        widget.rows.length,
-        (index) => wrap(
-          Text(
-            widget.rows[index].roleWins.toString(),
-          ),
-        ),
-      );
-
-  List<Widget> get dies => List.generate(
-        widget.rows.length,
-        (index) => wrap(
-          Text(
-            widget.rows[index].died.toString(),
-          ),
+  Widget dies(int index) => wrap(
+        Text(
+          widget.rows[index].died.toString(),
         ),
       );
 
@@ -156,58 +190,10 @@ class _RatingTableState extends State<RatingTable> {
       ? null
       : SizedBox(
           height: 50,
-          child: Builder(builder: (context) {
-            builder(BuildContext context, int index) {
-              return Container(
-                width: width,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
-                    width: 0.5,
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    (index + 1).toString(),
-                  ),
-                ),
-              );
-            }
-
-            if (!expand) {
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  widget.rows.firstOrNull?.games.length ?? 0,
-                  (index) => builder(context, index),
-                ),
-              );
-            }
-            return ListView.builder(
-              key: Key("GameHeader${widget.rows.length}/${widget.clubId}"),
-              physics: const ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              controller: controllers.first,
-              itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
-              itemBuilder: builder,
-            );
-          }),
-        );
-
-  List<Widget> games(double width, [bool expand = true]) {
-    return List.generate(
-      widget.rows.length,
-      (rowIndex) {
-        return SizedBox(
-          height: 50,
-          child: Builder(builder: (context) {
-            builder(BuildContext context, int index) {
-              return InkWell(
-                onTap: widget.rows[rowIndex].games[index].score == null
-                    ? null
-                    : () => widget
-                        .openGame(widget.rows[rowIndex].games[index].gameId),
-                child: Container(
+          child: Builder(
+            builder: (context) {
+              builder(BuildContext context, int index) {
+                return Container(
                   width: width,
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -217,35 +203,80 @@ class _RatingTableState extends State<RatingTable> {
                   ),
                   child: Center(
                     child: Text(
-                      widget.rows[rowIndex].games[index].score?.toString() ??
-                          "",
+                      (index + 1).toString(),
                     ),
                   ),
-                ),
-              );
-            }
+                );
+              }
 
-            if (!expand) {
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  widget.rows.firstOrNull?.games.length ?? 0,
-                  (index) => builder(context, index),
-                ),
+              if (!expand) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(
+                    widget.rows.firstOrNull?.games.length ?? 0,
+                    (index) => builder(context, index),
+                  ),
+                );
+              }
+              return ListView.builder(
+                key: Key("GameHeader${widget.rows.length}/${widget.clubId}"),
+                physics: const ClampingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                controller: controllers.first,
+                itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
+                itemBuilder: builder,
               );
-            }
-            return ListView.builder(
-              key: Key(
-                  "GameRow$rowIndex/${widget.rows.length}/${widget.clubId}"),
-              physics: const ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              controller: controllers[rowIndex + 1],
-              itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
-              itemBuilder: builder,
-            );
-          }),
+            },
+          ),
         );
-      },
+
+  Widget games(double width, int rowIndex, [bool expand = true]) {
+    return SizedBox(
+      height: 50,
+      child: Builder(
+        builder: (context) {
+          builder(BuildContext context, int index) {
+            return InkWell(
+              onTap: widget.rows[rowIndex].games[index].score == null
+                  ? null
+                  : () => widget
+                      .openGame(widget.rows[rowIndex].games[index].gameId),
+              child: Container(
+                width: width,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.2),
+                    width: 0.5,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    widget.rows[rowIndex].games[index].score?.toString() ?? "",
+                  ),
+                ),
+              ),
+            );
+          }
+
+          if (!expand) {
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(
+                widget.rows.firstOrNull?.games.length ?? 0,
+                (index) => builder(context, index),
+              ),
+            );
+          }
+          return ListView.builder(
+            key: Key("GameRow$rowIndex/${widget.rows.length}/${widget.clubId}"),
+            physics: const ClampingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            controller: controllers[rowIndex + 1],
+            itemCount: (widget.rows.firstOrNull?.games.length ?? 0),
+            itemBuilder: builder,
+          );
+        },
+      ),
     );
   }
 
@@ -254,12 +285,16 @@ class _RatingTableState extends State<RatingTable> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        column(indexWidgets, mainControllers[0], header: const Text("№")),
+        column(mainControllers[0],
+            builder: indexWidgets,
+            header: const Text("№"),
+            prototype: indexProtoype),
         column(
-          nicknames,
           mainControllers[1],
+          builder: nicknames,
           header: const Text("Игрок"),
           boldRight: true,
+          prototype: nicknamePrototype,
         ),
         Flexible(
           fit: FlexFit.loose,
@@ -269,13 +304,12 @@ class _RatingTableState extends State<RatingTable> {
                   constraints.maxWidth / (constraints.maxWidth / 60).floor();
               final gamesCount = widget.rows.firstOrNull?.games.length ?? 0;
               final expand = width * gamesCount > constraints.maxWidth;
-              final children = games(width, expand);
               final header = gameHeader(width, expand);
               final listView = ListView.builder(
                 physics: const ClampingScrollPhysics(),
                 controller: mainControllers[2],
-                itemCount: children.length,
-                itemBuilder: (context, index) => children[index],
+                itemCount: widget.rows.length,
+                itemBuilder: (context, index) => games(width, index, expand),
               );
               return Column(
                 children: [
@@ -288,12 +322,10 @@ class _RatingTableState extends State<RatingTable> {
                           ? listView
                           : Stack(
                               children: [
-                                ...children.map(
-                                  (child) => IgnorePointer(
-                                    child: Opacity(
-                                      opacity: 0,
-                                      child: child,
-                                    ),
+                                IgnorePointer(
+                                  child: Opacity(
+                                    opacity: 0,
+                                    child: games(width, 0, expand),
                                   ),
                                 ),
                                 Positioned.fill(child: listView),
@@ -307,43 +339,71 @@ class _RatingTableState extends State<RatingTable> {
           ),
         ),
         column(
-          scores,
           mainControllers[3],
+          builder: scores,
           header: const Text("Очки"),
           boldLeft: true,
+          prototype: scorePrototype,
         ),
-        column(addScores, mainControllers[4], header: const Text("+")),
-        column(wins, mainControllers[5], header: const Text("п")),
-        column(roleWins, mainControllers[6], header: const Text("дк")),
         column(
-          dies,
+          mainControllers[4],
+          builder: addScores,
+          header: const Text("+"),
+          prototype: addScorePrototype,
+        ),
+        column(
+          mainControllers[5],
+          header: const Text("п"),
+          prototype: winPrototype,
+          builder: wins,
+        ),
+        column(
+          mainControllers[6],
+          header: const Text("дк"),
+          prototype: roleWinPrototype,
+          builder: roleWins,
+        ),
+        column(
           mainControllers[7],
+          builder: dies,
           isLastColumn: true,
           header: const Text("по"),
+          prototype: diesProtorype,
         ),
       ],
     );
   }
 
   Widget column(
-    List<Widget> widgets,
     ScrollController controller, {
+    List<Widget>? widgets,
+    Widget Function(int index)? builder,
+    Widget? prototype,
     bool isLastColumn = false,
     Widget? header,
     bool boldLeft = false,
     bool boldRight = false,
   }) {
+    assert((widgets == null) != (builder == null));
     return LayoutBuilder(builder: (context, constraints) {
       return Stack(
         children: [
-          ...[header, ...widgets].map(
-            (e) => IgnorePointer(
+          if (prototype != null)
+            IgnorePointer(
               child: Opacity(
                 opacity: 0,
-                child: e,
+                child: prototype,
+              ),
+            )
+          else
+            ...[header, ...widgets!].map(
+              (e) => IgnorePointer(
+                child: Opacity(
+                  opacity: 0,
+                  child: e,
+                ),
               ),
             ),
-          ),
           const SizedBox(
             height: double.infinity,
           ),
@@ -365,8 +425,9 @@ class _RatingTableState extends State<RatingTable> {
                     child: ListView.builder(
                       physics: const ClampingScrollPhysics(),
                       controller: controller,
-                      itemCount: widgets.length,
-                      itemBuilder: (context, index) => widgets[index],
+                      itemCount: widget.rows.length,
+                      itemBuilder: (context, index) =>
+                          builder != null ? builder(index) : widgets![index],
                     ),
                   ),
                 )
