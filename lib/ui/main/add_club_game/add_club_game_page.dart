@@ -516,6 +516,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
     context.read<AddClubGameBloc>().add(
           AddClubGameEvent.submit(
             gameResult: ClubGameResult(
+              date: date.toIso8601String(),
               addScore: addScoreControllers
                   .map((e) => (double.parse(e.text) * 100).floor()),
               players: controllers.map(
@@ -530,7 +531,6 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                     (element) => refereeController.text == element.nickname,
                   )
                   .id,
-              date: DateTime.now().toIso8601String(),
               don: roles.indexOf(PlayerRole.don),
               sheriff: roles.indexOf(PlayerRole.sheriff),
               firstDie: firstDie,
