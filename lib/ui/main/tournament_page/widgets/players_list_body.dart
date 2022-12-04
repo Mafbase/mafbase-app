@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/player_row.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class PlayersListBody extends StatefulWidget {
   const PlayersListBody({Key? key}) : super(key: key);
@@ -29,32 +31,44 @@ class _PlayersListBodyState extends State<PlayersListBody> {
       builder: (context, state) {
         return Stack(
           children: [
-            ListView.builder(
-              itemCount: state.tournamentPlayers.length,
-              itemBuilder: (context, index) => PlayerRow(
-                onTap: () async {
-                  context.read<TournamentPageBloc>().add(
-                        TournamentPageEvent.openProfileDialog(
-                          player: state.tournamentPlayers[index],
-                        ),
-                      );
-                },
-                onDelete: () {
-                  final bloc = context.read<TournamentPageBloc>();
-                  ConfirmDialog.open(context).then((value) {
-                    if (value == true) {
-                      bloc.add(
-                        TournamentPageEvent.deletePlayer(
-                          player: state.tournamentPlayers[index],
-                        ),
-                      );
-                    }
-                  });
-                },
-                nickname: state.tournamentPlayers[index].nickname,
-                imageUrl: state.tournamentPlayers[index].imageUrl ??
-                    "https://www.meme-arsenal.com/memes/a2060f59f1cbf8633c417fda93611194.jpg",
-              ),
+            Column(
+              children: [
+                const SizedBox(height: 8,),
+                Text(
+                  context.locale.participants,
+                  style: MyTheme.of(context).headerTextStyle,
+                ),
+                const SizedBox(height: 8,),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: state.tournamentPlayers.length,
+                    itemBuilder: (context, index) => PlayerRow(
+                      onTap: () async {
+                        context.read<TournamentPageBloc>().add(
+                              TournamentPageEvent.openProfileDialog(
+                                player: state.tournamentPlayers[index],
+                              ),
+                            );
+                      },
+                      onDelete: () {
+                        final bloc = context.read<TournamentPageBloc>();
+                        ConfirmDialog.open(context).then((value) {
+                          if (value == true) {
+                            bloc.add(
+                              TournamentPageEvent.deletePlayer(
+                                player: state.tournamentPlayers[index],
+                              ),
+                            );
+                          }
+                        });
+                      },
+                      nickname: state.tournamentPlayers[index].nickname,
+                      imageUrl: state.tournamentPlayers[index].imageUrl ??
+                          "https://www.meme-arsenal.com/memes/a2060f59f1cbf8633c417fda93611194.jpg",
+                    ),
+                  ),
+                ),
+              ],
             ),
             if (state.isLoading) const LoadingOverlayWidget(),
           ],

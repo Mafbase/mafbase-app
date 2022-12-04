@@ -98,8 +98,14 @@ class _ProfileDialogState extends State<ProfileDialog> {
                         width: 150,
                         height: 150,
                         child: state.imageUrl == null
-                            ? Image.asset(AppAssets.playerPhoto)
-                            : Image.network(state.imageUrl ?? ""),
+                            ? Image.asset(
+                                AppAssets.playerPhoto,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                state.imageUrl ?? "",
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     const SizedBox(

@@ -98,5 +98,7 @@
   "confirmText": "Вы уверены?",
   "@confirmText": {},
   "save": "Сохранить",
-  "@save": {}
+  "@save": {},
+  "participants": "Участники",
+  "@participants": {}
 }
