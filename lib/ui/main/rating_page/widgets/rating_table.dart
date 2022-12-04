@@ -392,7 +392,10 @@ class _RatingTableState extends State<RatingTable> {
             IgnorePointer(
               child: Opacity(
                 opacity: 0,
-                child: prototype,
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: prototype,
+                ),
               ),
             )
           else
