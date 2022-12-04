@@ -5,7 +5,7 @@ import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 abstract class ClubRepository {
-  Future addGame(ClubGameResult result, int clubId);
+  Future<int> addGame(ClubGameResult result, int clubId);
 
   Future editGame(ClubGameResult result, int clubId, int gameId);
 

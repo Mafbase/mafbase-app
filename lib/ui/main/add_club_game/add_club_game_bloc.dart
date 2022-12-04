@@ -69,15 +69,18 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     AddClubGameEventSubmit event,
     Emitter emit,
   ) async {
+    int? gameId;
     emit(state.copyWith(isLoading: true));
     if (event.gameId == null) {
-      await _addClubGameInteractor.run(
-          clubId: clubId, result: event.gameResult);
+      gameId = await _addClubGameInteractor.run(
+        clubId: clubId,
+        result: event.gameResult,
+      );
     } else {
       await _repository.editGame(event.gameResult, clubId, event.gameId!);
     }
-    // TODO: add result
     emit(state.copyWith(isLoading: false));
+    router.openGame(clubId, gameId ?? event.gameId!);
   }
 
   _onPageOpened(

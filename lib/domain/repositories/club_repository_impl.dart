@@ -18,8 +18,10 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   ClubRepositoryImpl(super.client);
 
   @override
-  Future addGame(ClubGameResult result, int clubId) {
-    return AddClubGameRequest(clubId: clubId, result: result).execute(client);
+  Future<int> addGame(ClubGameResult result, int clubId) {
+    return AddClubGameRequest(clubId: clubId, result: result)
+        .execute(client)
+        .then((value) => value.gameId);
   }
 
   @override

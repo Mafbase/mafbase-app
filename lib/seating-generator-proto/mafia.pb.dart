@@ -680,6 +680,53 @@ class ClubRatingRow extends $pb.GeneratedMessage {
   void clearCitizenWins() => clearField(16);
 }
 
+class AddGameEventOut extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AddGameEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'gameId', $pb.PbFieldType.O3, protoName: 'gameId')
+    ..hasRequiredFields = false
+  ;
+
+  AddGameEventOut._() : super();
+  factory AddGameEventOut({
+    $core.int? gameId,
+  }) {
+    final _result = create();
+    if (gameId != null) {
+      _result.gameId = gameId;
+    }
+    return _result;
+  }
+  factory AddGameEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AddGameEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AddGameEventOut clone() => AddGameEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AddGameEventOut copyWith(void Function(AddGameEventOut) updates) => super.copyWith((message) => updates(message as AddGameEventOut)) as AddGameEventOut; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AddGameEventOut create() => AddGameEventOut._();
+  AddGameEventOut createEmptyInstance() => create();
+  static $pb.PbList<AddGameEventOut> createRepeated() => $pb.PbList<AddGameEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static AddGameEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddGameEventOut>(create);
+  static AddGameEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get gameId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set gameId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGameId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGameId() => clearField(1);
+}
+
 class ClubGameResult extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ClubGameResult', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..p<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'addScore', $pb.PbFieldType.P3, protoName: 'addScore')

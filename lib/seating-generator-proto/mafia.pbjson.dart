@@ -153,6 +153,16 @@ const ClubRatingRow_GameItem$json = const {
 
 /// Descriptor for `ClubRatingRow`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List clubRatingRowDescriptor = $convert.base64Decode('Cg1DbHViUmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRIUCgVzY29yZRgCIAEoAVIFc2NvcmUSGgoIYWRkU2NvcmUYAyABKAFSCGFkZFNjb3JlEhoKCGZpcnN0RGllGAQgASgFUghmaXJzdERpZRIYCgdkb25XaW5zGAUgASgFUgdkb25XaW5zEiAKC3NoZXJpZmZXaW5zGAYgASgFUgtzaGVyaWZmV2lucxI1CgRpdGVtGAcgAygLMiEuZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3cuR2FtZUl0ZW1SBGl0ZW0SEgoEd2lucxgIIAEoBVIEd2lucxIOCgJjaRgJIAEoBVICY2kSHgoKdG90YWxHYW1lcxgKIAEoBVIKdG90YWxHYW1lcxIiCgxjaXRpemVuR2FtZXMYCyABKAVSDGNpdGl6ZW5HYW1lcxIaCghkb25HYW1lcxgMIAEoBVIIZG9uR2FtZXMSIgoMc2hlcmlmZkdhbWVzGA0gASgFUgxzaGVyaWZmR2FtZXMSHgoKbWFmaWFHYW1lcxgOIAEoBVIKbWFmaWFHYW1lcxIcCgltYWZpYVdpbnMYDyABKAVSCW1hZmlhV2lucxIgCgtjaXRpemVuV2lucxgQIAEoBVILY2l0aXplbldpbnMaRwoIR2FtZUl0ZW0SFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQSGQoFc2NvcmUYAiABKAFIAFIFc2NvcmWIAQFCCAoGX3Njb3Jl');
+@$core.Deprecated('Use addGameEventOutDescriptor instead')
+const AddGameEventOut$json = const {
+  '1': 'AddGameEventOut',
+  '2': const [
+    const {'1': 'gameId', '3': 1, '4': 1, '5': 5, '10': 'gameId'},
+  ],
+};
+
+/// Descriptor for `AddGameEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addGameEventOutDescriptor = $convert.base64Decode('Cg9BZGRHYW1lRXZlbnRPdXQSFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQ=');
 @$core.Deprecated('Use clubGameResultDescriptor instead')
 const ClubGameResult$json = const {
   '1': 'ClubGameResult',

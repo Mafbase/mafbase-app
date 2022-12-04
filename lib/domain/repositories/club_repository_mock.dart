@@ -6,7 +6,9 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 class ClubRepositoryMock implements ClubRepository {
   @override
-  Future addGame(ClubGameResult result, int clubId) async {}
+  Future<int> addGame(ClubGameResult result, int clubId) async {
+    return 13;
+  }
 
   @override
   Future<RatingModel> getRating({

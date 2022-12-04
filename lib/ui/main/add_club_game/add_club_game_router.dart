@@ -4,6 +4,8 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.d
 
 abstract class AddClubGameRouter {
   void editPage(int clubId, int gameId);
+
+  void openGame(int clubId, int gameId);
 }
 
 class AddClubGameRouterImpl implements AddClubGameRouter {
@@ -19,6 +21,18 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
         clubId,
         gameId,
         canEdit: true,
+      ),
+    );
+  }
+
+  @override
+  void openGame(int clubId, int gameId) {
+    context.go(
+      AddClubGamePage.createViewLocation(
+        context,
+        clubId,
+        gameId,
+        canEdit: false,
       ),
     );
   }

@@ -9,9 +9,9 @@ class AddClubGameInteractor extends BaseInteractor {
   @override
   String get interactorName => "AddClubGameInteractor";
 
-  Future run({required int clubId, required ClubGameResult result}) async {
-    await wrap(() async {
-      await _repository.addGame(result, clubId);
+  Future<int> run({required int clubId, required ClubGameResult result}) {
+    return wrap(() {
+      return _repository.addGame(result, clubId);
     });
   }
 }
