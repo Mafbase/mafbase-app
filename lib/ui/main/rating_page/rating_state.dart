@@ -6,6 +6,7 @@ part 'rating_state.freezed.dart';
 @freezed
 class RatingState with _$RatingState {
   const factory RatingState({
+    @Default("") String clubName,
     @Default([]) List<ClubRatingRowModel> rows,
     @Default(true) bool isLoading,
   }) = _RatingState;

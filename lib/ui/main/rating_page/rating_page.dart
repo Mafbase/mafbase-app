@@ -108,6 +108,11 @@ class _RatingPageState extends State<RatingPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Text(
+                        state.clubName,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -169,12 +174,13 @@ class _RatingPageState extends State<RatingPage> {
                           child: RatingTable(
                             rows: state.rows,
                             clubId: widget.clubId,
-                            openGame: (gameId) => context.read<RatingBloc>().add(
-                                  RatingEvent.gameSelected(
-                                    gameId: gameId,
-                                    clubId: widget.clubId,
-                                  ),
-                                ),
+                            openGame: (gameId) =>
+                                context.read<RatingBloc>().add(
+                                      RatingEvent.gameSelected(
+                                        gameId: gameId,
+                                        clubId: widget.clubId,
+                                      ),
+                                    ),
                           ),
                         ),
                       ),

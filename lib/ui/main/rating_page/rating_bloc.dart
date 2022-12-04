@@ -38,13 +38,15 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
 
   _onPageOpened(RatingEventPageOpened event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
+    final rating = await _clubRepository.getRating(
+      clubId: event.clubId,
+      range: event.range,
+    );
     emit(
       state.copyWith(
         isLoading: false,
-        rows: await _clubRepository.getRating(
-          clubId: event.clubId,
-          range: event.range,
-        ),
+        rows: rating.rows,
+        clubName: rating.clubName,
       ),
     );
   }

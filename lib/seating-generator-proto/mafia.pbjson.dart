@@ -109,11 +109,12 @@ const ClubRatingEventOut$json = const {
   '1': 'ClubRatingEventOut',
   '2': const [
     const {'1': 'row', '3': 1, '4': 3, '5': 11, '6': '.generated.ClubRatingRow', '10': 'row'},
+    const {'1': 'clubName', '3': 2, '4': 1, '5': 9, '10': 'clubName'},
   ],
 };
 
 /// Descriptor for `ClubRatingEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubRatingEventOutDescriptor = $convert.base64Decode('ChJDbHViUmF0aW5nRXZlbnRPdXQSKgoDcm93GAEgAygLMhguZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3dSA3Jvdw==');
+final $typed_data.Uint8List clubRatingEventOutDescriptor = $convert.base64Decode('ChJDbHViUmF0aW5nRXZlbnRPdXQSKgoDcm93GAEgAygLMhguZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3dSA3JvdxIaCghjbHViTmFtZRgCIAEoCVIIY2x1Yk5hbWU=');
 @$core.Deprecated('Use clubRatingRowDescriptor instead')
 const ClubRatingRow$json = const {
   '1': 'ClubRatingRow',

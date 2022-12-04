@@ -316,16 +316,21 @@ class Club extends $pb.GeneratedMessage {
 class ClubRatingEventOut extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ClubRatingEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..pc<ClubRatingRow>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'row', $pb.PbFieldType.PM, subBuilder: ClubRatingRow.create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clubName', protoName: 'clubName')
     ..hasRequiredFields = false
   ;
 
   ClubRatingEventOut._() : super();
   factory ClubRatingEventOut({
     $core.Iterable<ClubRatingRow>? row,
+    $core.String? clubName,
   }) {
     final _result = create();
     if (row != null) {
       _result.row.addAll(row);
+    }
+    if (clubName != null) {
+      _result.clubName = clubName;
     }
     return _result;
   }
@@ -352,6 +357,15 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<ClubRatingRow> get row => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get clubName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set clubName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasClubName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearClubName() => clearField(2);
 }
 
 class ClubRatingRow_GameItem extends $pb.GeneratedMessage {

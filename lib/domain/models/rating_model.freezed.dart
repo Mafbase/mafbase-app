@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'rating_state.dart';
+part of 'rating_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,37 +15,35 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$RatingState {
+mixin _$RatingModel {
   String get clubName => throw _privateConstructorUsedError;
   List<ClubRatingRowModel> get rows => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $RatingStateCopyWith<RatingState> get copyWith =>
+  $RatingModelCopyWith<RatingModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RatingStateCopyWith<$Res> {
-  factory $RatingStateCopyWith(
-          RatingState value, $Res Function(RatingState) then) =
-      _$RatingStateCopyWithImpl<$Res>;
-  $Res call({String clubName, List<ClubRatingRowModel> rows, bool isLoading});
+abstract class $RatingModelCopyWith<$Res> {
+  factory $RatingModelCopyWith(
+          RatingModel value, $Res Function(RatingModel) then) =
+      _$RatingModelCopyWithImpl<$Res>;
+  $Res call({String clubName, List<ClubRatingRowModel> rows});
 }
 
 /// @nodoc
-class _$RatingStateCopyWithImpl<$Res> implements $RatingStateCopyWith<$Res> {
-  _$RatingStateCopyWithImpl(this._value, this._then);
+class _$RatingModelCopyWithImpl<$Res> implements $RatingModelCopyWith<$Res> {
+  _$RatingModelCopyWithImpl(this._value, this._then);
 
-  final RatingState _value;
+  final RatingModel _value;
   // ignore: unused_field
-  final $Res Function(RatingState) _then;
+  final $Res Function(RatingModel) _then;
 
   @override
   $Res call({
     Object? clubName = freezed,
     Object? rows = freezed,
-    Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
       clubName: clubName == freezed
@@ -56,41 +54,36 @@ class _$RatingStateCopyWithImpl<$Res> implements $RatingStateCopyWith<$Res> {
           ? _value.rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_RatingStateCopyWith<$Res>
-    implements $RatingStateCopyWith<$Res> {
-  factory _$$_RatingStateCopyWith(
-          _$_RatingState value, $Res Function(_$_RatingState) then) =
-      __$$_RatingStateCopyWithImpl<$Res>;
+abstract class _$$_RatingModelCopyWith<$Res>
+    implements $RatingModelCopyWith<$Res> {
+  factory _$$_RatingModelCopyWith(
+          _$_RatingModel value, $Res Function(_$_RatingModel) then) =
+      __$$_RatingModelCopyWithImpl<$Res>;
   @override
-  $Res call({String clubName, List<ClubRatingRowModel> rows, bool isLoading});
+  $Res call({String clubName, List<ClubRatingRowModel> rows});
 }
 
 /// @nodoc
-class __$$_RatingStateCopyWithImpl<$Res> extends _$RatingStateCopyWithImpl<$Res>
-    implements _$$_RatingStateCopyWith<$Res> {
-  __$$_RatingStateCopyWithImpl(
-      _$_RatingState _value, $Res Function(_$_RatingState) _then)
-      : super(_value, (v) => _then(v as _$_RatingState));
+class __$$_RatingModelCopyWithImpl<$Res> extends _$RatingModelCopyWithImpl<$Res>
+    implements _$$_RatingModelCopyWith<$Res> {
+  __$$_RatingModelCopyWithImpl(
+      _$_RatingModel _value, $Res Function(_$_RatingModel) _then)
+      : super(_value, (v) => _then(v as _$_RatingModel));
 
   @override
-  _$_RatingState get _value => super._value as _$_RatingState;
+  _$_RatingModel get _value => super._value as _$_RatingModel;
 
   @override
   $Res call({
     Object? clubName = freezed,
     Object? rows = freezed,
-    Object? isLoading = freezed,
   }) {
-    return _then(_$_RatingState(
+    return _then(_$_RatingModel(
       clubName: clubName == freezed
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
@@ -99,80 +92,63 @@ class __$$_RatingStateCopyWithImpl<$Res> extends _$RatingStateCopyWithImpl<$Res>
           ? _value._rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_RatingState implements _RatingState {
-  const _$_RatingState(
-      {this.clubName = "",
-      final List<ClubRatingRowModel> rows = const [],
-      this.isLoading = true})
+class _$_RatingModel implements _RatingModel {
+  const _$_RatingModel(
+      {required this.clubName, required final List<ClubRatingRowModel> rows})
       : _rows = rows;
 
   @override
-  @JsonKey()
   final String clubName;
   final List<ClubRatingRowModel> _rows;
   @override
-  @JsonKey()
   List<ClubRatingRowModel> get rows {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rows);
   }
 
   @override
-  @JsonKey()
-  final bool isLoading;
-
-  @override
   String toString() {
-    return 'RatingState(clubName: $clubName, rows: $rows, isLoading: $isLoading)';
+    return 'RatingModel(clubName: $clubName, rows: $rows)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RatingState &&
+            other is _$_RatingModel &&
             const DeepCollectionEquality().equals(other.clubName, clubName) &&
-            const DeepCollectionEquality().equals(other._rows, _rows) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other._rows, _rows));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(clubName),
-      const DeepCollectionEquality().hash(_rows),
-      const DeepCollectionEquality().hash(isLoading));
+      const DeepCollectionEquality().hash(_rows));
 
   @JsonKey(ignore: true)
   @override
-  _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>
-      __$$_RatingStateCopyWithImpl<_$_RatingState>(this, _$identity);
+  _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
+      __$$_RatingModelCopyWithImpl<_$_RatingModel>(this, _$identity);
 }
 
-abstract class _RatingState implements RatingState {
-  const factory _RatingState(
-      {final String clubName,
-      final List<ClubRatingRowModel> rows,
-      final bool isLoading}) = _$_RatingState;
+abstract class _RatingModel implements RatingModel {
+  const factory _RatingModel(
+      {required final String clubName,
+      required final List<ClubRatingRowModel> rows}) = _$_RatingModel;
 
   @override
   String get clubName;
   @override
   List<ClubRatingRowModel> get rows;
   @override
-  bool get isLoading;
-  @override
   @JsonKey(ignore: true)
-  _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>
+  _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
