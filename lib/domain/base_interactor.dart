@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 abstract class BaseInteractor {
@@ -9,7 +8,8 @@ abstract class BaseInteractor {
   Future<T> wrap<T>(Future<T> Function() method) async {
     ISentrySpan? transaction;
     if (!kDebugMode) {
-      transaction = Sentry.startTransaction('$interactorName.run()', 'task')
+      transaction = Sentry.startTransaction('$interactorName.run()', 'task',
+          startTimestamp: DateTime.now())
         ..status = const SpanStatus.ok();
     }
     try {
@@ -19,7 +19,7 @@ abstract class BaseInteractor {
       transaction?.throwable = err;
       rethrow;
     } finally {
-      transaction?.finish();
+      transaction?.finish(endTimestamp: DateTime.now());
     }
   }
 }
