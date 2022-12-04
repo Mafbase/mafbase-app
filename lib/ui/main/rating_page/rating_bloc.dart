@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 
 class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
-  final ClubRepository _clubRepository = getIt();
+  final DownloadRatingInteractor _downloadRatingInteractor = getIt();
+  final GetRatingInteractor _getRatingRepository = getIt();
   late final RatingRouter _router = getIt(param1: context);
 
   RatingBloc([BuildContext? context]) : super(const RatingState(), context) {
@@ -26,7 +29,7 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     RatingEventDownload event,
     Emitter emit,
   ) async {
-    await _clubRepository.downloadRating(
+    await _downloadRatingInteractor.run(
       clubId: event.clubId,
       range: event.range,
     );
@@ -38,7 +41,7 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
 
   _onPageOpened(RatingEventPageOpened event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    final rating = await _clubRepository.getRating(
+    final rating = await _getRatingRepository.run(
       clubId: event.clubId,
       range: event.range,
     );

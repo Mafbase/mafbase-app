@@ -9,9 +9,11 @@ import 'package:seating_generator_web/domain/interactors/add_photo_interactor.da
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
@@ -182,6 +184,12 @@ void _registerSharedGetIt() {
     )
     ..registerFactoryParam<ProfileDialogBloc, BuildContext?, PlayerModel>(
       (context, player) => ProfileDialogBloc(player, context),
+    )
+    ..registerLazySingleton<DownloadRatingInteractor>(
+      () => DownloadRatingInteractor(getIt()),
+    )
+    ..registerLazySingleton<GetRatingInteractor>(
+      () => GetRatingInteractor(getIt()),
     )
     ..registerLazySingleton<EditPlayerInteractor>(
       () => EditPlayerInteractor(getIt()),
