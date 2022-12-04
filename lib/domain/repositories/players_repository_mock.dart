@@ -35,4 +35,10 @@ class PlayersRepositoryMock implements PlayersRepository {
 
   @override
   Future addPhoto(int playerId, Uint8List bytes, String nickname) async {}
+
+  @override
+  Future<int> createPlayer(PlayerModel player) async {
+    _fakePlayers.add(player.copyWith(id: 100));
+    return 100;
+  }
 }

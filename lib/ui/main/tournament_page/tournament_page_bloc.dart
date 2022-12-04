@@ -19,7 +19,7 @@ class TournamentPageBloc
       getIt();
   final PlayersRepository playerRepository = getIt();
 
-  final AddPlayerInteractor _addPlayerInteractor = getIt();
+  final AddTournamentPlayerInteractor _addPlayerInteractor = getIt();
 
   @visibleForTesting
   late final TournamentPageRouter router =

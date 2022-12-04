@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:seating_generator_web/data/requests/add_photo_request.dart';
 import 'package:seating_generator_web/data/requests/add_player_request.dart';
+import 'package:seating_generator_web/data/requests/create_player_request.dart';
 import 'package:seating_generator_web/data/requests/delete_player_request.dart';
 import 'package:seating_generator_web/data/requests/get_all_players_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_players_request.dart';
@@ -54,5 +55,14 @@ class PlayersRepositoryImpl extends BaseRepository
       bytes: bytes,
       filename: filename,
     ).execute(client);
+  }
+
+  @override
+  Future<int> createPlayer(PlayerModel player) {
+    return CreatePlayerRequest(
+            player: Player(
+                nickname: player.nickname, fsmNickname: player.fsmNickaname))
+        .execute(client)
+        .then((value) => value.id);
   }
 }

@@ -16,14 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddClubGameEffect {
-  List<String> get players => throw _privateConstructorUsedError;
-  List<double> get addScore => throw _privateConstructorUsedError;
-  List<PlayerRole> get roles => throw _privateConstructorUsedError;
-  ClubGameResult_GameWin get win => throw _privateConstructorUsedError;
-  ClubGameResult_BestMove get bestMove => throw _privateConstructorUsedError;
-  String get referee => throw _privateConstructorUsedError;
-  int get died => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -36,6 +28,7 @@ mixin _$AddClubGameEffect {
             int died,
             DateTime date)
         setValues,
+    required TResult Function(int index, PlayerModel player) setPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +43,7 @@ mixin _$AddClubGameEffect {
             int died,
             DateTime date)?
         setValues,
+    TResult Function(int index, PlayerModel player)? setPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,28 +58,28 @@ mixin _$AddClubGameEffect {
             int died,
             DateTime date)?
         setValues,
+    TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddClubGameEffectSetValues value) setValues,
+    required TResult Function(AddClubGameEffectSetPlayer value) setPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddClubGameEffectSetValues value)? setValues,
+    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddClubGameEffectSetValues value)? setValues,
+    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AddClubGameEffectCopyWith<AddClubGameEffect> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -94,15 +88,6 @@ abstract class $AddClubGameEffectCopyWith<$Res> {
   factory $AddClubGameEffectCopyWith(
           AddClubGameEffect value, $Res Function(AddClubGameEffect) then) =
       _$AddClubGameEffectCopyWithImpl<$Res>;
-  $Res call(
-      {List<String> players,
-      List<double> addScore,
-      List<PlayerRole> roles,
-      ClubGameResult_GameWin win,
-      ClubGameResult_BestMove bestMove,
-      String referee,
-      int died,
-      DateTime date});
 }
 
 /// @nodoc
@@ -113,63 +98,14 @@ class _$AddClubGameEffectCopyWithImpl<$Res>
   final AddClubGameEffect _value;
   // ignore: unused_field
   final $Res Function(AddClubGameEffect) _then;
-
-  @override
-  $Res call({
-    Object? players = freezed,
-    Object? addScore = freezed,
-    Object? roles = freezed,
-    Object? win = freezed,
-    Object? bestMove = freezed,
-    Object? referee = freezed,
-    Object? died = freezed,
-    Object? date = freezed,
-  }) {
-    return _then(_value.copyWith(
-      players: players == freezed
-          ? _value.players
-          : players // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      addScore: addScore == freezed
-          ? _value.addScore
-          : addScore // ignore: cast_nullable_to_non_nullable
-              as List<double>,
-      roles: roles == freezed
-          ? _value.roles
-          : roles // ignore: cast_nullable_to_non_nullable
-              as List<PlayerRole>,
-      win: win == freezed
-          ? _value.win
-          : win // ignore: cast_nullable_to_non_nullable
-              as ClubGameResult_GameWin,
-      bestMove: bestMove == freezed
-          ? _value.bestMove
-          : bestMove // ignore: cast_nullable_to_non_nullable
-              as ClubGameResult_BestMove,
-      referee: referee == freezed
-          ? _value.referee
-          : referee // ignore: cast_nullable_to_non_nullable
-              as String,
-      died: died == freezed
-          ? _value.died
-          : died // ignore: cast_nullable_to_non_nullable
-              as int,
-      date: date == freezed
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res>
-    implements $AddClubGameEffectCopyWith<$Res> {
+abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res> {
   factory _$$AddClubGameEffectSetValuesCopyWith(
           _$AddClubGameEffectSetValues value,
           $Res Function(_$AddClubGameEffectSetValues) then) =
       __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>;
-  @override
   $Res call(
       {List<String> players,
       List<double> addScore,
@@ -341,6 +277,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             int died,
             DateTime date)
         setValues,
+    required TResult Function(int index, PlayerModel player) setPlayer,
   }) {
     return setValues(
         players, addScore, roles, win, bestMove, referee, died, date);
@@ -359,6 +296,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             int died,
             DateTime date)?
         setValues,
+    TResult Function(int index, PlayerModel player)? setPlayer,
   }) {
     return setValues?.call(
         players, addScore, roles, win, bestMove, referee, died, date);
@@ -377,6 +315,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             int died,
             DateTime date)?
         setValues,
+    TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),
   }) {
     if (setValues != null) {
@@ -390,6 +329,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddClubGameEffectSetValues value) setValues,
+    required TResult Function(AddClubGameEffectSetPlayer value) setPlayer,
   }) {
     return setValues(this);
   }
@@ -398,6 +338,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(AddClubGameEffectSetValues value)? setValues,
+    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
   }) {
     return setValues?.call(this);
   }
@@ -406,6 +347,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddClubGameEffectSetValues value)? setValues,
+    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
     required TResult orElse(),
   }) {
     if (setValues != null) {
@@ -426,24 +368,203 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
       required final int died,
       required final DateTime date}) = _$AddClubGameEffectSetValues;
 
-  @override
   List<String> get players;
-  @override
   List<double> get addScore;
-  @override
   List<PlayerRole> get roles;
-  @override
   ClubGameResult_GameWin get win;
-  @override
   ClubGameResult_BestMove get bestMove;
-  @override
   String get referee;
-  @override
   int get died;
-  @override
   DateTime get date;
-  @override
   @JsonKey(ignore: true)
   _$$AddClubGameEffectSetValuesCopyWith<_$AddClubGameEffectSetValues>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
+  factory _$$AddClubGameEffectSetPlayerCopyWith(
+          _$AddClubGameEffectSetPlayer value,
+          $Res Function(_$AddClubGameEffectSetPlayer) then) =
+      __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>;
+  $Res call({int index, PlayerModel player});
+
+  $PlayerModelCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>
+    extends _$AddClubGameEffectCopyWithImpl<$Res>
+    implements _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
+  __$$AddClubGameEffectSetPlayerCopyWithImpl(
+      _$AddClubGameEffectSetPlayer _value,
+      $Res Function(_$AddClubGameEffectSetPlayer) _then)
+      : super(_value, (v) => _then(v as _$AddClubGameEffectSetPlayer));
+
+  @override
+  _$AddClubGameEffectSetPlayer get _value =>
+      super._value as _$AddClubGameEffectSetPlayer;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+    Object? player = freezed,
+  }) {
+    return _then(_$AddClubGameEffectSetPlayer(
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      player: player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as PlayerModel,
+    ));
+  }
+
+  @override
+  $PlayerModelCopyWith<$Res> get player {
+    return $PlayerModelCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
+  const _$AddClubGameEffectSetPlayer(
+      {required this.index, required this.player});
+
+  @override
+  final int index;
+  @override
+  final PlayerModel player;
+
+  @override
+  String toString() {
+    return 'AddClubGameEffect.setPlayer(index: $index, player: $player)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddClubGameEffectSetPlayer &&
+            const DeepCollectionEquality().equals(other.index, index) &&
+            const DeepCollectionEquality().equals(other.player, player));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(index),
+      const DeepCollectionEquality().hash(player));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$AddClubGameEffectSetPlayerCopyWith<_$AddClubGameEffectSetPlayer>
+      get copyWith => __$$AddClubGameEffectSetPlayerCopyWithImpl<
+          _$AddClubGameEffectSetPlayer>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<String> players,
+            List<double> addScore,
+            List<PlayerRole> roles,
+            ClubGameResult_GameWin win,
+            ClubGameResult_BestMove bestMove,
+            String referee,
+            int died,
+            DateTime date)
+        setValues,
+    required TResult Function(int index, PlayerModel player) setPlayer,
+  }) {
+    return setPlayer(index, player);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(
+            List<String> players,
+            List<double> addScore,
+            List<PlayerRole> roles,
+            ClubGameResult_GameWin win,
+            ClubGameResult_BestMove bestMove,
+            String referee,
+            int died,
+            DateTime date)?
+        setValues,
+    TResult Function(int index, PlayerModel player)? setPlayer,
+  }) {
+    return setPlayer?.call(index, player);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            List<String> players,
+            List<double> addScore,
+            List<PlayerRole> roles,
+            ClubGameResult_GameWin win,
+            ClubGameResult_BestMove bestMove,
+            String referee,
+            int died,
+            DateTime date)?
+        setValues,
+    TResult Function(int index, PlayerModel player)? setPlayer,
+    required TResult orElse(),
+  }) {
+    if (setPlayer != null) {
+      return setPlayer(index, player);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AddClubGameEffectSetValues value) setValues,
+    required TResult Function(AddClubGameEffectSetPlayer value) setPlayer,
+  }) {
+    return setPlayer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(AddClubGameEffectSetValues value)? setValues,
+    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
+  }) {
+    return setPlayer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AddClubGameEffectSetValues value)? setValues,
+    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
+    required TResult orElse(),
+  }) {
+    if (setPlayer != null) {
+      return setPlayer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddClubGameEffectSetPlayer implements AddClubGameEffect {
+  const factory AddClubGameEffectSetPlayer(
+      {required final int index,
+      required final PlayerModel player}) = _$AddClubGameEffectSetPlayer;
+
+  int get index;
+  PlayerModel get player;
+  @JsonKey(ignore: true)
+  _$$AddClubGameEffectSetPlayerCopyWith<_$AddClubGameEffectSetPlayer>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -6,6 +6,7 @@ import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
@@ -131,6 +132,9 @@ void _registerSharedGetIt() {
   getIt
     ..registerLazySingleton<LoginInteractor>(() => LoginInteractor(getIt()))
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
+    ..registerLazySingleton<CreatePlayerInteractor>(
+      () => CreatePlayerInteractor(getIt()),
+    )
     ..registerLazySingleton<AddClubGameInteractor>(
       () => AddClubGameInteractor(),
     )
@@ -146,8 +150,8 @@ void _registerSharedGetIt() {
     ..registerLazySingleton<GetTournamentsPlayersInteractor>(
       () => GetTournamentsPlayersInteractor(getIt()),
     )
-    ..registerLazySingleton<AddPlayerInteractor>(
-      () => AddPlayerInteractor(getIt()),
+    ..registerLazySingleton<AddTournamentPlayerInteractor>(
+      () => AddTournamentPlayerInteractor(getIt()),
     )
     ..registerLazySingleton<InsertSeatingInteractor>(
       () => InsertSeatingInteractor(getIt()),
@@ -168,11 +172,7 @@ void _registerSharedGetIt() {
     )
     ..registerFactoryParam<VerificationBloc, BuildContext?, int>(
       (context, id) {
-        try {
-          return VerificationBloc(getIt(param1: context), getIt(), id, context);
-        } catch(e, stacktrace) {
-          rethrow;
-        }
+        return VerificationBloc(getIt(param1: context), getIt(), id, context);
       },
     )
     ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(

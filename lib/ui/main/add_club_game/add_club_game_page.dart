@@ -12,11 +12,13 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete.dart';
 import 'package:seating_generator_web/common/widgets/role_picker.dart';
+import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_bloc.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
 
 class AddClubGamePage extends StatefulWidget {
   final bool readOnly;
@@ -45,7 +47,9 @@ class AddClubGamePage extends StatefulWidget {
           return BlocProvider<AddClubGameBloc>(
             create: (context) => AddClubGameBloc(id, context),
             // TODO: REGISTER IN GET IT
-            child: const AddClubGamePage(editing: true,),
+            child: const AddClubGamePage(
+              editing: true,
+            ),
           );
         },
       ),
@@ -151,6 +155,15 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   @override
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
     on<AddClubGameEffectSetValues>(onSetValues);
+    on<AddClubGameEffectSetPlayer>(onSetPlayer);
+  }
+
+  void onSetPlayer(AddClubGameEffectSetPlayer effect) {
+    if (effect.index == 10) {
+      refereeController.text = effect.player.nickname;
+    } else {
+      controllers[effect.index].text = effect.player.nickname;
+    }
   }
 
   void onSetValues(AddClubGameEffectSetValues effect) {
@@ -204,6 +217,14 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                   focusNode: focusNodes[i],
                                   state: state,
                                   hint: "Игрок ${i + 1}",
+                                  onNewPlayer: ({String? initValue}) async {
+                                    context.read<AddClubGameBloc>().add(
+                                          AddClubGameEvent.onNewPlayer(
+                                            nickname: initValue ?? "",
+                                            index: i,
+                                          ),
+                                        );
+                                  },
                                   onSelected: () {
                                     if (i < 9) {
                                       focusNodes[i + 1].requestFocus();
@@ -277,6 +298,14 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                 state: state,
                                 readOnly: widget.readOnly,
                                 hint: "Судья",
+                                onNewPlayer: ({String? initValue}) async {
+                                  context.read<AddClubGameBloc>().add(
+                                        AddClubGameEvent.onNewPlayer(
+                                          nickname: initValue ?? "",
+                                          index: 10,
+                                        ),
+                                      );
+                                },
                               ),
                               Row(
                                 children: [
@@ -548,6 +577,7 @@ class NicknameField extends StatelessWidget {
   final FocusNode focusNode;
   final AddClubGameState state;
   final VoidCallback? onSelected;
+  final Function({String? initValue})? onNewPlayer;
   final bool readOnly;
   final String hint;
 
@@ -557,6 +587,7 @@ class NicknameField extends StatelessWidget {
     required this.focusNode,
     required this.state,
     required this.readOnly,
+    this.onNewPlayer,
     this.onSelected,
     required this.hint,
   }) : super(key: key);
@@ -568,23 +599,30 @@ class NicknameField extends StatelessWidget {
       child: CustomAutoComplete(
         readOnly: readOnly,
         controller: controller,
-        displayStringForOption: (model) => "${model.nickname} (${model.id})",
+        displayStringForOption: (model) => model.id == -1 ? "+" : model.nickname,
         focusNode: focusNode,
-        availablePlayers: state.players,
-        onSelected: (playerModel) {
-          controller.text = playerModel.nickname;
-          onSelected?.call();
+        onSelected: (playerModel) async {
+          if (playerModel.id == -1) {
+            onNewPlayer?.call(initValue: playerModel.nickname);
+          } else {
+            controller.text = playerModel.nickname;
+            onSelected?.call();
+          }
         },
         onSubmit: () {},
-        optionsBuilder: (value) => state.players
-            .where(
-              (element) => element.nickname
-                  .toLowerCase()
-                  .contains(value.text.toLowerCase()),
-            )
-            .sortedBy<num>(
-              (element) => element.nickname.length,
-            ),
+        optionsBuilder: (value) =>
+            state.players
+                .where(
+                  (element) => element.nickname
+                      .toLowerCase()
+                      .contains(value.text.toLowerCase()),
+                )
+                .sortedBy<num>(
+                  (element) => element.nickname.length,
+                ) +
+            [
+              if (onNewPlayer != null) PlayerModel(id: -1, nickname: value.text),
+            ],
         hint: hint,
       ),
     );

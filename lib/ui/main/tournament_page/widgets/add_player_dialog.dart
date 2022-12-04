@@ -12,10 +12,14 @@ import 'package:seating_generator_web/utils.dart';
 
 class AddPlayerDialog extends StatefulWidget {
   final List<PlayerModel> availablePlayers;
+  final bool showAvailablePlayers;
+  final String? initValue;
 
   const AddPlayerDialog({
     Key? key,
     required this.availablePlayers,
+    this.initValue,
+    this.showAvailablePlayers = true,
   }) : super(key: key);
 
   @override
@@ -24,11 +28,15 @@ class AddPlayerDialog extends StatefulWidget {
   static Future<PlayerModel?> open({
     required BuildContext context,
     required List<PlayerModel> availablePlayers,
+    String? initValue,
+    bool showAvailablePlayers = true,
   }) =>
       showDialog(
         context: context,
         builder: (context) => AddPlayerDialog(
           availablePlayers: availablePlayers,
+          showAvailablePlayers: showAvailablePlayers,
+          initValue: initValue,
         ),
       );
 }
@@ -40,6 +48,12 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
   final _controller = TextEditingController();
   final _controllerMafbank = TextEditingController();
   final _controllerFsm = TextEditingController();
+
+  @override
+  void initState() {
+    _controller.text = widget.initValue ?? "";
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -74,20 +88,19 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               controller: _controller,
               displayStringForOption: (model) => model.nickname,
               focusNode: _focusNode,
-              availablePlayers: widget.availablePlayers,
               onSelected: (player) {
                 _controllerFsm.text = player.fsmNickaname ?? "";
                 _controllerMafbank.text = player.mafbankNickname ?? "";
                 _controller.text = player.nickname;
               },
               optionsBuilder: (text) {
-                return widget.availablePlayers
+                return widget.showAvailablePlayers ? widget.availablePlayers
                     .where(
                       (element) => element.nickname
                           .toLowerCase()
                           .contains(text.text.toLowerCase()),
                     )
-                    .sortedBy<num>((element) => element.nickname.length);
+                    .sortedBy<num>((element) => element.nickname.length) : [];
               },
               onSubmit: () {
                 _focusNodeFsm.requestFocus();
@@ -98,21 +111,19 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               controller: _controllerFsm,
               displayStringForOption: (model) => model.fsmNickaname ?? "",
               focusNode: _focusNodeFsm,
-              availablePlayers: widget.availablePlayers,
               onSelected: (player) {
                 _controllerFsm.text = player.fsmNickaname ?? "";
                 _controllerMafbank.text = player.mafbankNickname ?? "";
                 _controller.text = player.nickname;
               },
               optionsBuilder: (text) {
-                return widget.availablePlayers
-                    .where((element) => element.fsmNickaname != null)
+                return widget.showAvailablePlayers ? widget.availablePlayers
                     .where(
-                      (element) => (element.fsmNickaname ?? "")
-                          .toLowerCase()
-                          .contains(text.text.toLowerCase()),
-                    )
-                    .sortedBy<num>((element) => element.nickname.length);
+                      (element) => element.nickname
+                      .toLowerCase()
+                      .contains(text.text.toLowerCase()),
+                )
+                    .sortedBy<num>((element) => element.nickname.length) : [];
               },
               onSubmit: () {
                 _focusNodeMafbank.requestFocus();
@@ -123,21 +134,19 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               controller: _controllerMafbank,
               displayStringForOption: (model) => model.mafbankNickname ?? "",
               focusNode: _focusNodeMafbank,
-              availablePlayers: widget.availablePlayers,
               onSelected: (player) {
                 _controllerFsm.text = player.fsmNickaname ?? "";
                 _controllerMafbank.text = player.mafbankNickname ?? "";
                 _controller.text = player.nickname;
               },
               optionsBuilder: (text) {
-                return widget.availablePlayers
-                    .where((element) => element.mafbankNickname != null)
+                return widget.showAvailablePlayers ? widget.availablePlayers
                     .where(
-                      (element) => (element.mafbankNickname ?? "")
-                          .toLowerCase()
-                          .contains(text.text.toLowerCase()),
-                    )
-                    .sortedBy<num>((element) => element.nickname.length);
+                      (element) => element.nickname
+                      .toLowerCase()
+                      .contains(text.text.toLowerCase()),
+                )
+                    .sortedBy<num>((element) => element.nickname.length) : [];
               },
               onSubmit: onSubmit,
             ),

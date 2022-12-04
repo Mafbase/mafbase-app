@@ -7,7 +7,6 @@ class CustomAutoComplete extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final String Function(PlayerModel model) displayStringForOption;
-  final List<PlayerModel> availablePlayers;
   final Function(PlayerModel model) onSelected;
   final VoidCallback onSubmit;
   final Iterable<PlayerModel> Function(TextEditingValue text) optionsBuilder;
@@ -19,7 +18,6 @@ class CustomAutoComplete extends StatelessWidget {
     required this.controller,
     required this.displayStringForOption,
     required this.focusNode,
-    required this.availablePlayers,
     required this.onSelected,
     required this.onSubmit,
     required this.optionsBuilder,

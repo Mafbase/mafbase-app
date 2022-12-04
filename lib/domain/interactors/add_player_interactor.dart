@@ -2,10 +2,10 @@ import 'package:seating_generator_web/domain/base_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 
-class AddPlayerInteractor extends BaseInteractor {
+class AddTournamentPlayerInteractor extends BaseInteractor {
   final PlayersRepository _repository;
 
-  AddPlayerInteractor(this._repository);
+  AddTournamentPlayerInteractor(this._repository);
 
   @override
   String get interactorName => "AddPlayerInteractor";
