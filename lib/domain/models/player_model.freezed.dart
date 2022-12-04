@@ -20,6 +20,7 @@ mixin _$PlayerModel {
   String get nickname => throw _privateConstructorUsedError;
   String? get fsmNickaname => throw _privateConstructorUsedError;
   String? get mafbankNickname => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayerModelCopyWith<PlayerModel> get copyWith =>
@@ -32,7 +33,11 @@ abstract class $PlayerModelCopyWith<$Res> {
           PlayerModel value, $Res Function(PlayerModel) then) =
       _$PlayerModelCopyWithImpl<$Res>;
   $Res call(
-      {int id, String nickname, String? fsmNickaname, String? mafbankNickname});
+      {int id,
+      String nickname,
+      String? fsmNickaname,
+      String? mafbankNickname,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -49,6 +54,7 @@ class _$PlayerModelCopyWithImpl<$Res> implements $PlayerModelCopyWith<$Res> {
     Object? nickname = freezed,
     Object? fsmNickaname = freezed,
     Object? mafbankNickname = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -67,6 +73,10 @@ class _$PlayerModelCopyWithImpl<$Res> implements $PlayerModelCopyWith<$Res> {
           ? _value.mafbankNickname
           : mafbankNickname // ignore: cast_nullable_to_non_nullable
               as String?,
+      imageUrl: imageUrl == freezed
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -79,7 +89,11 @@ abstract class _$$_PlayerModelCopyWith<$Res>
       __$$_PlayerModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id, String nickname, String? fsmNickaname, String? mafbankNickname});
+      {int id,
+      String nickname,
+      String? fsmNickaname,
+      String? mafbankNickname,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$_PlayerModelCopyWithImpl<$Res> extends _$PlayerModelCopyWithImpl<$Res>
     Object? nickname = freezed,
     Object? fsmNickaname = freezed,
     Object? mafbankNickname = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$_PlayerModel(
       id: id == freezed
@@ -116,6 +131,10 @@ class __$$_PlayerModelCopyWithImpl<$Res> extends _$PlayerModelCopyWithImpl<$Res>
           ? _value.mafbankNickname
           : mafbankNickname // ignore: cast_nullable_to_non_nullable
               as String?,
+      imageUrl: imageUrl == freezed
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -127,7 +146,8 @@ class _$_PlayerModel implements _PlayerModel {
       {required this.id,
       required this.nickname,
       this.fsmNickaname,
-      this.mafbankNickname});
+      this.mafbankNickname,
+      this.imageUrl});
 
   @override
   final int id;
@@ -137,10 +157,12 @@ class _$_PlayerModel implements _PlayerModel {
   final String? fsmNickaname;
   @override
   final String? mafbankNickname;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'PlayerModel(id: $id, nickname: $nickname, fsmNickaname: $fsmNickaname, mafbankNickname: $mafbankNickname)';
+    return 'PlayerModel(id: $id, nickname: $nickname, fsmNickaname: $fsmNickaname, mafbankNickname: $mafbankNickname, imageUrl: $imageUrl)';
   }
 
   @override
@@ -153,7 +175,8 @@ class _$_PlayerModel implements _PlayerModel {
             const DeepCollectionEquality()
                 .equals(other.fsmNickaname, fsmNickaname) &&
             const DeepCollectionEquality()
-                .equals(other.mafbankNickname, mafbankNickname));
+                .equals(other.mafbankNickname, mafbankNickname) &&
+            const DeepCollectionEquality().equals(other.imageUrl, imageUrl));
   }
 
   @override
@@ -162,7 +185,8 @@ class _$_PlayerModel implements _PlayerModel {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(nickname),
       const DeepCollectionEquality().hash(fsmNickaname),
-      const DeepCollectionEquality().hash(mafbankNickname));
+      const DeepCollectionEquality().hash(mafbankNickname),
+      const DeepCollectionEquality().hash(imageUrl));
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +199,8 @@ abstract class _PlayerModel implements PlayerModel {
       {required final int id,
       required final String nickname,
       final String? fsmNickaname,
-      final String? mafbankNickname}) = _$_PlayerModel;
+      final String? mafbankNickname,
+      final String? imageUrl}) = _$_PlayerModel;
 
   @override
   int get id;
@@ -185,6 +210,8 @@ abstract class _PlayerModel implements PlayerModel {
   String? get fsmNickaname;
   @override
   String? get mafbankNickname;
+  @override
+  String? get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$$_PlayerModelCopyWith<_$_PlayerModel> get copyWith =>

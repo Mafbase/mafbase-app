@@ -2000,6 +2000,7 @@ class Player extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nickname')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fsmNickname', protoName: 'fsmNickname')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafbankNickname', protoName: 'mafbankNickname')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'image')
     ..hasRequiredFields = false
   ;
 
@@ -2009,6 +2010,7 @@ class Player extends $pb.GeneratedMessage {
     $core.String? nickname,
     $core.String? fsmNickname,
     $core.String? mafbankNickname,
+    $core.String? image,
   }) {
     final _result = create();
     if (id != null) {
@@ -2022,6 +2024,9 @@ class Player extends $pb.GeneratedMessage {
     }
     if (mafbankNickname != null) {
       _result.mafbankNickname = mafbankNickname;
+    }
+    if (image != null) {
+      _result.image = image;
     }
     return _result;
   }
@@ -2081,6 +2086,15 @@ class Player extends $pb.GeneratedMessage {
   $core.bool hasMafbankNickname() => $_has(3);
   @$pb.TagNumber(4)
   void clearMafbankNickname() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get image => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set image($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasImage() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearImage() => clearField(5);
 }
 
 class EmailVerificationEventOut extends $pb.GeneratedMessage {

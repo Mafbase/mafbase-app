@@ -4,6 +4,7 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_players_request.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
@@ -20,6 +21,7 @@ class TournamentPageBloc
   final PlayersRepository playerRepository = getIt();
 
   final AddTournamentPlayerInteractor _addPlayerInteractor = getIt();
+  final DeletePlayerInteractor _deletePlayerInteractor = getIt();
 
   @visibleForTesting
   late final TournamentPageRouter router =
@@ -30,6 +32,24 @@ class TournamentPageBloc
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);
     on<TournamentPageEventAddPhoto>(_onAddPhoto);
+    on<TournamentPageEventDeletePlayer>(_onDeletePlayer);
+  }
+
+  _onDeletePlayer(TournamentPageEventDeletePlayer event, Emitter emit) async {
+    emit(state.copyWith(isLoading: true));
+    await _deletePlayerInteractor.run(
+      tournamentId: tournamentId,
+      playerModel: event.player,
+    );
+    final players = await _getTournamentsPlayersInteractor.run(
+      tournamentId: tournamentId,
+    );
+    emit(
+      state.copyWith(
+        isLoading: false,
+        tournamentPlayers: players,
+      ),
+    );
   }
 
   _onAddPhoto(

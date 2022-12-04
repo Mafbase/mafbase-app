@@ -90,5 +90,11 @@
   "confirmRegistration": "Подтверждение регистрации",
   "@confirmRegistration": {},
   "enterCode": "Введите код",
-  "@enterCode": {}
+  "@enterCode": {},
+  "yes": "Да",
+  "@yes": {},
+  "no": "Нет",
+  "@no": {},
+  "confirmText": "Вы уверены?",
+  "@confirmText": {}
 }

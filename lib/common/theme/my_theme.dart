@@ -12,6 +12,7 @@ abstract class MyTheme {
   abstract final TextStyle defaultTextStyle;
   abstract final TextStyle fieldTextStyle;
   abstract final TextStyle btnTextStyle;
+  abstract final TextStyle textBtnTextStyle;
   abstract final TextStyle headerTextStyle;
   abstract final Color darkBlueColor;
   abstract final Color redColor;
@@ -77,6 +78,11 @@ class _LightTheme implements MyTheme {
   TextStyle get headerTextStyle => _defaultTextStyle.copyWith(
         fontSize: 40,
         fontWeight: FontWeight.w600,
+      );
+
+  @override
+  TextStyle get textBtnTextStyle => _defaultTextStyle.copyWith(
+        color: blueForCard,
       );
 
   @override

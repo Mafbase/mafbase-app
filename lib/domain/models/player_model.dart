@@ -10,6 +10,7 @@ class PlayerModel with _$PlayerModel {
     required String nickname,
     String? fsmNickaname,
     String? mafbankNickname,
+    String? imageUrl,
   }) = _PlayerModel;
 
   factory PlayerModel.fromProto(Player proto) => PlayerModel(
@@ -18,14 +19,15 @@ class PlayerModel with _$PlayerModel {
         fsmNickaname: proto.fsmNickname.isNotEmpty ? proto.fsmNickname : null,
         mafbankNickname:
             proto.mafbankNickname.isNotEmpty ? proto.mafbankNickname : null,
+        imageUrl: proto.hasImage() ? proto.image : null,
       );
 }
 
 extension PlayerModelExt on PlayerModel {
   Player toProto() => Player(
-    id: id,
-    nickname: nickname,
-    fsmNickname: fsmNickaname,
-    mafbankNickname: mafbankNickname,
-  );
+        id: id,
+        nickname: nickname,
+        fsmNickname: fsmNickaname,
+        mafbankNickname: mafbankNickname,
+      );
 }

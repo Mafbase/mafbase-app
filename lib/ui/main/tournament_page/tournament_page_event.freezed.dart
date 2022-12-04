@@ -22,6 +22,7 @@ mixin _$TournamentPageEvent {
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(int playerId, String filename, Uint8List bytes)
         addPhoto,
   }) =>
@@ -32,6 +33,7 @@ mixin _$TournamentPageEvent {
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
   }) =>
       throw _privateConstructorUsedError;
@@ -41,6 +43,7 @@ mixin _$TournamentPageEvent {
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
     required TResult orElse(),
   }) =>
@@ -55,6 +58,8 @@ mixin _$TournamentPageEvent {
         addPlayerTapped,
     required TResult Function(TournamentPageEventEditSettings value)
         editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
     required TResult Function(TournamentPageEventAddPhoto value) addPhoto,
   }) =>
       throw _privateConstructorUsedError;
@@ -67,6 +72,7 @@ mixin _$TournamentPageEvent {
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +85,7 @@ mixin _$TournamentPageEvent {
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
     required TResult orElse(),
   }) =>
@@ -153,6 +160,7 @@ class _$TournamentPageBackButtonPreesedEvent
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(int playerId, String filename, Uint8List bytes)
         addPhoto,
   }) {
@@ -166,6 +174,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
   }) {
     return backButtonPressed?.call();
@@ -178,6 +187,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
     required TResult orElse(),
   }) {
@@ -198,6 +208,8 @@ class _$TournamentPageBackButtonPreesedEvent
         addPlayerTapped,
     required TResult Function(TournamentPageEventEditSettings value)
         editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
     required TResult Function(TournamentPageEventAddPhoto value) addPhoto,
   }) {
     return backButtonPressed(this);
@@ -213,6 +225,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
   }) {
     return backButtonPressed?.call(this);
@@ -228,6 +241,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
     required TResult orElse(),
   }) {
@@ -294,6 +308,7 @@ class _$TournamentPagePlayerListOpenedEvent
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(int playerId, String filename, Uint8List bytes)
         addPhoto,
   }) {
@@ -307,6 +322,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
   }) {
     return playersListOpened?.call();
@@ -319,6 +335,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
     required TResult orElse(),
   }) {
@@ -339,6 +356,8 @@ class _$TournamentPagePlayerListOpenedEvent
         addPlayerTapped,
     required TResult Function(TournamentPageEventEditSettings value)
         editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
     required TResult Function(TournamentPageEventAddPhoto value) addPhoto,
   }) {
     return playersListOpened(this);
@@ -354,6 +373,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
   }) {
     return playersListOpened?.call(this);
@@ -369,6 +389,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
     required TResult orElse(),
   }) {
@@ -434,6 +455,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(int playerId, String filename, Uint8List bytes)
         addPhoto,
   }) {
@@ -447,6 +469,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
   }) {
     return addPlayerTapped?.call();
@@ -459,6 +482,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
     required TResult orElse(),
   }) {
@@ -479,6 +503,8 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
         addPlayerTapped,
     required TResult Function(TournamentPageEventEditSettings value)
         editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
     required TResult Function(TournamentPageEventAddPhoto value) addPhoto,
   }) {
     return addPlayerTapped(this);
@@ -494,6 +520,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
   }) {
     return addPlayerTapped?.call(this);
@@ -509,6 +536,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
     required TResult orElse(),
   }) {
@@ -573,6 +601,7 @@ class _$TournamentPageEventEditSettings
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(int playerId, String filename, Uint8List bytes)
         addPhoto,
   }) {
@@ -586,6 +615,7 @@ class _$TournamentPageEventEditSettings
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
   }) {
     return editTournamentSettings?.call();
@@ -598,6 +628,7 @@ class _$TournamentPageEventEditSettings
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
     required TResult orElse(),
   }) {
@@ -618,6 +649,8 @@ class _$TournamentPageEventEditSettings
         addPlayerTapped,
     required TResult Function(TournamentPageEventEditSettings value)
         editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
     required TResult Function(TournamentPageEventAddPhoto value) addPhoto,
   }) {
     return editTournamentSettings(this);
@@ -633,6 +666,7 @@ class _$TournamentPageEventEditSettings
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
   }) {
     return editTournamentSettings?.call(this);
@@ -648,6 +682,7 @@ class _$TournamentPageEventEditSettings
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
     required TResult orElse(),
   }) {
@@ -661,6 +696,191 @@ class _$TournamentPageEventEditSettings
 abstract class TournamentPageEventEditSettings implements TournamentPageEvent {
   const factory TournamentPageEventEditSettings() =
       _$TournamentPageEventEditSettings;
+}
+
+/// @nodoc
+abstract class _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
+  factory _$$TournamentPageEventDeletePlayerCopyWith(
+          _$TournamentPageEventDeletePlayer value,
+          $Res Function(_$TournamentPageEventDeletePlayer) then) =
+      __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>;
+  $Res call({PlayerModel player});
+
+  $PlayerModelCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res>
+    implements _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
+  __$$TournamentPageEventDeletePlayerCopyWithImpl(
+      _$TournamentPageEventDeletePlayer _value,
+      $Res Function(_$TournamentPageEventDeletePlayer) _then)
+      : super(_value, (v) => _then(v as _$TournamentPageEventDeletePlayer));
+
+  @override
+  _$TournamentPageEventDeletePlayer get _value =>
+      super._value as _$TournamentPageEventDeletePlayer;
+
+  @override
+  $Res call({
+    Object? player = freezed,
+  }) {
+    return _then(_$TournamentPageEventDeletePlayer(
+      player: player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as PlayerModel,
+    ));
+  }
+
+  @override
+  $PlayerModelCopyWith<$Res> get player {
+    return $PlayerModelCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$TournamentPageEventDeletePlayer
+    implements TournamentPageEventDeletePlayer {
+  const _$TournamentPageEventDeletePlayer({required this.player});
+
+  @override
+  final PlayerModel player;
+
+  @override
+  String toString() {
+    return 'TournamentPageEvent.deletePlayer(player: $player)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TournamentPageEventDeletePlayer &&
+            const DeepCollectionEquality().equals(other.player, player));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(player));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TournamentPageEventDeletePlayerCopyWith<_$TournamentPageEventDeletePlayer>
+      get copyWith => __$$TournamentPageEventDeletePlayerCopyWithImpl<
+          _$TournamentPageEventDeletePlayer>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() backButtonPressed,
+    required TResult Function() playersListOpened,
+    required TResult Function() addPlayerTapped,
+    required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
+    required TResult Function(int playerId, String filename, Uint8List bytes)
+        addPhoto,
+  }) {
+    return deletePlayer(player);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? backButtonPressed,
+    TResult Function()? playersListOpened,
+    TResult Function()? addPlayerTapped,
+    TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
+    TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
+  }) {
+    return deletePlayer?.call(player);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? backButtonPressed,
+    TResult Function()? playersListOpened,
+    TResult Function()? addPlayerTapped,
+    TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
+    TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
+    required TResult orElse(),
+  }) {
+    if (deletePlayer != null) {
+      return deletePlayer(player);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TournamentPageBackButtonPreesedEvent value)
+        backButtonPressed,
+    required TResult Function(TournamentPagePlayerListOpenedEvent value)
+        playersListOpened,
+    required TResult Function(TournamentPageEventAddPlayer value)
+        addPlayerTapped,
+    required TResult Function(TournamentPageEventEditSettings value)
+        editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
+    required TResult Function(TournamentPageEventAddPhoto value) addPhoto,
+  }) {
+    return deletePlayer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
+  }) {
+    return deletePlayer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
+    required TResult orElse(),
+  }) {
+    if (deletePlayer != null) {
+      return deletePlayer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TournamentPageEventDeletePlayer implements TournamentPageEvent {
+  const factory TournamentPageEventDeletePlayer(
+      {required final PlayerModel player}) = _$TournamentPageEventDeletePlayer;
+
+  PlayerModel get player;
+  @JsonKey(ignore: true)
+  _$$TournamentPageEventDeletePlayerCopyWith<_$TournamentPageEventDeletePlayer>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -756,6 +976,7 @@ class _$TournamentPageEventAddPhoto implements TournamentPageEventAddPhoto {
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(int playerId, String filename, Uint8List bytes)
         addPhoto,
   }) {
@@ -769,6 +990,7 @@ class _$TournamentPageEventAddPhoto implements TournamentPageEventAddPhoto {
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
   }) {
     return addPhoto?.call(playerId, filename, bytes);
@@ -781,6 +1003,7 @@ class _$TournamentPageEventAddPhoto implements TournamentPageEventAddPhoto {
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(int playerId, String filename, Uint8List bytes)? addPhoto,
     required TResult orElse(),
   }) {
@@ -801,6 +1024,8 @@ class _$TournamentPageEventAddPhoto implements TournamentPageEventAddPhoto {
         addPlayerTapped,
     required TResult Function(TournamentPageEventEditSettings value)
         editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
     required TResult Function(TournamentPageEventAddPhoto value) addPhoto,
   }) {
     return addPhoto(this);
@@ -816,6 +1041,7 @@ class _$TournamentPageEventAddPhoto implements TournamentPageEventAddPhoto {
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
   }) {
     return addPhoto?.call(this);
@@ -831,6 +1057,7 @@ class _$TournamentPageEventAddPhoto implements TournamentPageEventAddPhoto {
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
     TResult Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
     TResult Function(TournamentPageEventAddPhoto value)? addPhoto,
     required TResult orElse(),
   }) {

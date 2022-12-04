@@ -454,15 +454,17 @@ const Player$json = const {
     const {'1': 'nickname', '3': 2, '4': 1, '5': 9, '10': 'nickname'},
     const {'1': 'fsmNickname', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'fsmNickname', '17': true},
     const {'1': 'mafbankNickname', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'mafbankNickname', '17': true},
+    const {'1': 'image', '3': 5, '4': 1, '5': 9, '9': 2, '10': 'image', '17': true},
   ],
   '8': const [
     const {'1': '_fsmNickname'},
     const {'1': '_mafbankNickname'},
+    const {'1': '_image'},
   ],
 };
 
 /// Descriptor for `Player`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List playerDescriptor = $convert.base64Decode('CgZQbGF5ZXISDgoCaWQYASABKAVSAmlkEhoKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRIlCgtmc21OaWNrbmFtZRgDIAEoCUgAUgtmc21OaWNrbmFtZYgBARItCg9tYWZiYW5rTmlja25hbWUYBCABKAlIAVIPbWFmYmFua05pY2tuYW1liAEBQg4KDF9mc21OaWNrbmFtZUISChBfbWFmYmFua05pY2tuYW1l');
+final $typed_data.Uint8List playerDescriptor = $convert.base64Decode('CgZQbGF5ZXISDgoCaWQYASABKAVSAmlkEhoKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRIlCgtmc21OaWNrbmFtZRgDIAEoCUgAUgtmc21OaWNrbmFtZYgBARItCg9tYWZiYW5rTmlja25hbWUYBCABKAlIAVIPbWFmYmFua05pY2tuYW1liAEBEhkKBWltYWdlGAUgASgJSAJSBWltYWdliAEBQg4KDF9mc21OaWNrbmFtZUISChBfbWFmYmFua05pY2tuYW1lQggKBl9pbWFnZQ==');
 @$core.Deprecated('Use emailVerificationEventOutDescriptor instead')
 const EmailVerificationEventOut$json = const {
   '1': 'EmailVerificationEventOut',
