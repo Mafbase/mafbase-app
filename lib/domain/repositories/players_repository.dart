@@ -14,4 +14,6 @@ abstract class PlayersRepository {
   Future addPhoto(int playerId, Uint8List bytes, String filename);
 
   Future<int> createPlayer(PlayerModel player);
+
+  Future editPlayer(PlayerModel player);
 }

@@ -29,5 +29,6 @@ extension PlayerModelExt on PlayerModel {
         nickname: nickname,
         fsmNickname: fsmNickaname,
         mafbankNickname: mafbankNickname,
+        image: imageUrl,
       );
 }

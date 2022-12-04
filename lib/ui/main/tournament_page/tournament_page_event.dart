@@ -19,12 +19,11 @@ class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.editTournamentSettings() =
       TournamentPageEventEditSettings;
 
-  const factory TournamentPageEvent.deletePlayer({required PlayerModel player}) =
-      TournamentPageEventDeletePlayer;
+  const factory TournamentPageEvent.deletePlayer({
+    required PlayerModel player,
+  }) = TournamentPageEventDeletePlayer;
 
-  const factory TournamentPageEvent.addPhoto({
-    required int playerId,
-    required String filename,
-    required Uint8List bytes,
-  }) = TournamentPageEventAddPhoto;
+  const factory TournamentPageEvent.openProfileDialog({
+    required PlayerModel player,
+  }) = TournamentPageEventOpenProfileDialog;
 }

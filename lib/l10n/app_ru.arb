@@ -96,5 +96,7 @@
   "no": "Нет",
   "@no": {},
   "confirmText": "Вы уверены?",
-  "@confirmText": {}
+  "@confirmText": {},
+  "save": "Сохранить",
+  "@save": {}
 }

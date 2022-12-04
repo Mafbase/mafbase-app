@@ -10,6 +10,7 @@ class CustomTextField extends StatefulWidget {
   final String? errorText;
   final Widget? suffixIcon;
   final String? hint;
+  final String? label;
   final bool isRequiredField;
   final double bottomPadding;
   final Function(String s)? onSubmit;
@@ -20,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   const CustomTextField({
     Key? key,
     this.icon,
+    this.label,
     this.textInputType,
     this.readOnly = false,
     required this.controller,
@@ -71,6 +73,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       errorText: widget.errorText,
                       errorMaxLines: 1,
                       hintText: widget.hint,
+                      labelText: widget.label,
                       border: const UnderlineInputBorder(),
                     ),
                   ),

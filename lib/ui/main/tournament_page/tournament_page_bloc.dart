@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_players_request.dart';
+import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
@@ -31,8 +32,23 @@ class TournamentPageBloc
       : super(const TournamentPageState(), context) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);
-    on<TournamentPageEventAddPhoto>(_onAddPhoto);
     on<TournamentPageEventDeletePlayer>(_onDeletePlayer);
+    on<TournamentPageEventOpenProfileDialog>(_onOpenProfile);
+  }
+
+  _onOpenProfile(
+    TournamentPageEventOpenProfileDialog event,
+    Emitter emit,
+  ) async {
+    final hasChange =
+        await router.showPlayerProfileDialog(player: event.player);
+    if (hasChange) {
+      emit(state.copyWith(isLoading: true));
+      final players = await _getTournamentsPlayersInteractor.run(
+        tournamentId: tournamentId,
+      );
+      emit(state.copyWith(isLoading: false, tournamentPlayers: players));
+    }
   }
 
   _onDeletePlayer(TournamentPageEventDeletePlayer event, Emitter emit) async {
@@ -49,17 +65,6 @@ class TournamentPageBloc
         isLoading: false,
         tournamentPlayers: players,
       ),
-    );
-  }
-
-  _onAddPhoto(
-    TournamentPageEventAddPhoto event,
-    Emitter emit,
-  ) {
-    return playerRepository.addPhoto(
-      event.playerId,
-      event.bytes,
-      event.filename,
     );
   }
 

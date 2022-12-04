@@ -24,4 +24,6 @@ class AppAssets {
 
   static String sheriffAsset({bool disabled = false}) =>
       'assets/sheriff${disabled ? '_disabled' : ''}.svg';
+
+  static const playerPhoto = 'assets/player_photo.png';
 }

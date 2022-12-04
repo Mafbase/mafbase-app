@@ -41,4 +41,9 @@ class PlayersRepositoryMock implements PlayersRepository {
     _fakePlayers.add(player.copyWith(id: 100));
     return 100;
   }
+
+  @override
+  Future editPlayer(PlayerModel player) {
+    return Future.value();
+  }
 }
