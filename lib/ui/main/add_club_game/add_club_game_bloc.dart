@@ -5,6 +5,7 @@ import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
@@ -21,6 +22,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
   final int clubId;
   late final AddClubGameRouter router = getIt(param1: context);
   final CreatePlayerInteractor _createPlayerInteractor = getIt();
+  final GetClubInteractor _getClubInteractor = getIt();
 
   AddClubGameBloc(this.clubId, [BuildContext? context])
       : super(const AddClubGameState(), context) {
@@ -85,11 +87,13 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     emit(state.copyWith(isLoading: true));
     final players = await _getAllPlayersInteractor.run();
     final isOwner = await _repository.isOwner(clubId);
+    final club = await _repository.getClub(id: clubId);
     emit(
       state.copyWith(
         isLoading: event.gameId != null,
         players: players,
         canEdit: isOwner,
+        clubName: club.name,
       ),
     );
     if (event.gameId != null) {

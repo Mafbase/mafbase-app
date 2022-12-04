@@ -9,5 +9,6 @@ class AddClubGameState with _$AddClubGameState {
     @Default(true) bool isLoading,
     @Default([]) List<PlayerModel> players,
     @Default(false) bool canEdit,
+    @Default("") String clubName,
   }) = _AddClubGameState;
 }

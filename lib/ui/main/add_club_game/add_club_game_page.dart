@@ -201,312 +201,327 @@ class _AddClubGamePageState extends State<AddClubGamePage>
             child: Stack(
               children: [
                 SingleChildScrollView(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Column(
+                      Text(
+                        state.clubName,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
+                      Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          for (int i = 0; i < 10; i++)
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                NicknameField(
-                                  readOnly: widget.readOnly,
-                                  controller: controllers[i],
-                                  focusNode: focusNodes[i],
-                                  state: state,
-                                  hint: "Игрок ${i + 1}",
-                                  onNewPlayer: ({String? initValue}) async {
-                                    context.read<AddClubGameBloc>().add(
-                                          AddClubGameEvent.onNewPlayer(
-                                            nickname: initValue ?? "",
-                                            index: i,
-                                          ),
-                                        );
-                                  },
-                                  onSelected: () {
-                                    if (i < 9) {
-                                      focusNodes[i + 1].requestFocus();
-                                    } else {
-                                      refereeFocusNode.requestFocus();
-                                    }
-                                  },
-                                ),
-                                const SizedBox(
-                                  width: 40,
-                                ),
-                                RolePicker(
-                                  readOnly: widget.readOnly,
-                                  playerRole: roles[i],
-                                  onChange: (role) {
-                                    setState(() {
-                                      roles[i] = role;
-                                    });
-                                  },
-                                ),
-                                const SizedBox(
-                                  width: 40,
-                                ),
-                                SizedBox(
-                                  width: 100,
-                                  child: CustomTextField(
-                                    readOnly: widget.readOnly,
-                                    controller: addScoreControllers[i],
-                                    textInputType:
-                                        const TextInputType.numberWithOptions(
-                                      signed: true,
-                                      decimal: true,
-                                    ),
-                                    hint: "0.0",
-                                  ),
-                                )
-                              ],
-                            ),
-                          if (state.canEdit)
-                            Container(
-                              width: 400,
-                              padding: const EdgeInsets.all(20),
-                              child: CustomButton(
-                                text:
-                                    widget.readOnly ? "Изменить" : "Сохранить",
-                                onTap: () => submit(state),
-                                disabled: state.isLoading,
-                              ),
-                            ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 30, right: 30),
-                          margin: const EdgeInsets.only(left: 30),
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              left: BorderSide(
-                                color: Colors.red,
-                                width: 3,
-                              ),
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              NicknameField(
-                                controller: refereeController,
-                                focusNode: refereeFocusNode,
-                                state: state,
-                                readOnly: widget.readOnly,
-                                hint: "Судья",
-                                onNewPlayer: ({String? initValue}) async {
-                                  context.read<AddClubGameBloc>().add(
-                                        AddClubGameEvent.onNewPlayer(
-                                          nickname: initValue ?? "",
-                                          index: 10,
-                                        ),
-                                      );
-                                },
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Первый отстрел:",
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  DropdownButton<int>(
-                                    value: firstDie,
-                                    items: List.generate(
-                                      11,
-                                      (index) {
-                                        return DropdownMenuItem(
-                                          value: index - 1,
-                                          child: Text(
-                                            index == 0
-                                                ? "Промах"
-                                                : index.toString(),
-                                            style: MyTheme.of(context)
-                                                .defaultTextStyle,
-                                          ),
-                                        );
+                              for (int i = 0; i < 10; i++)
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    NicknameField(
+                                      readOnly: widget.readOnly,
+                                      controller: controllers[i],
+                                      focusNode: focusNodes[i],
+                                      state: state,
+                                      hint: "Игрок ${i + 1}",
+                                      onNewPlayer: ({String? initValue}) async {
+                                        context.read<AddClubGameBloc>().add(
+                                              AddClubGameEvent.onNewPlayer(
+                                                nickname: initValue ?? "",
+                                                index: i,
+                                              ),
+                                            );
+                                      },
+                                      onSelected: () {
+                                        if (i < 9) {
+                                          focusNodes[i + 1].requestFocus();
+                                        } else {
+                                          refereeFocusNode.requestFocus();
+                                        }
                                       },
                                     ),
-                                    onChanged: widget.readOnly
-                                        ? null
-                                        : (value) {
-                                            setState(() {
-                                              firstDie = value ?? -1;
-                                              if (firstDie == -1) {
-                                                bestMove =
-                                                    ClubGameResult_BestMove
-                                                        .miss;
-                                              }
-                                            });
-                                          },
-                                  ),
-                                  if (firstDie != -1) ...[
-                                    Text(
-                                      "Лучший ход:",
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
+                                    const SizedBox(
+                                      width: 40,
                                     ),
-                                    DropdownButton<ClubGameResult_BestMove>(
-                                      value: bestMove,
-                                      items: ClubGameResult_BestMove.values
-                                          .map((bestMove) {
-                                        final String text;
-                                        switch (bestMove) {
-                                          case ClubGameResult_BestMove.full:
-                                            text = "Полный лучший ход";
-                                            break;
-                                          case ClubGameResult_BestMove.half:
-                                            text = "Двойка черных";
-                                            break;
-                                          case ClubGameResult_BestMove.miss:
-                                            text = "Мимо";
-                                            break;
-                                          default:
-                                            text = "";
-                                            break;
-                                        }
-                                        return DropdownMenuItem(
-                                          value: bestMove,
-                                          child: Text(
-                                            text,
-                                            style: MyTheme.of(context)
-                                                .defaultTextStyle,
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: widget.readOnly
-                                          ? null
-                                          : (value) {
-                                              setState(() {
-                                                bestMove = value;
-                                              });
-                                            },
+                                    RolePicker(
+                                      readOnly: widget.readOnly,
+                                      playerRole: roles[i],
+                                      onChange: (role) {
+                                        setState(() {
+                                          roles[i] = role;
+                                        });
+                                      },
                                     ),
+                                    const SizedBox(
+                                      width: 40,
+                                    ),
+                                    SizedBox(
+                                      width: 100,
+                                      child: CustomTextField(
+                                        readOnly: widget.readOnly,
+                                        controller: addScoreControllers[i],
+                                        textInputType: const TextInputType
+                                            .numberWithOptions(
+                                          signed: true,
+                                          decimal: true,
+                                        ),
+                                        hint: "0.0",
+                                      ),
+                                    )
                                   ],
-                                ],
+                                ),
+                              if (state.canEdit)
+                                Container(
+                                  width: 400,
+                                  padding: const EdgeInsets.all(20),
+                                  child: CustomButton(
+                                    text: widget.readOnly
+                                        ? "Изменить"
+                                        : "Сохранить",
+                                    onTap: () => submit(state),
+                                    disabled: state.isLoading,
+                                  ),
+                                ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.only(left: 30, right: 30),
+                              margin: const EdgeInsets.only(left: 30),
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    color: Colors.red,
+                                    width: 3,
+                                  ),
+                                ),
                               ),
-                              Row(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    "Результат:",
-                                    style: MyTheme.of(context).defaultTextStyle,
+                                  NicknameField(
+                                    controller: refereeController,
+                                    focusNode: refereeFocusNode,
+                                    state: state,
+                                    readOnly: widget.readOnly,
+                                    hint: "Судья",
+                                    onNewPlayer: ({String? initValue}) async {
+                                      context.read<AddClubGameBloc>().add(
+                                            AddClubGameEvent.onNewPlayer(
+                                              nickname: initValue ?? "",
+                                              index: 10,
+                                            ),
+                                          );
+                                    },
                                   ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  DropdownButton<ClubGameResult_GameWin>(
-                                    value: winSelected,
-                                    items: winValue.map((win) {
-                                      final String text;
-                                      switch (win) {
-                                        case ClubGameResult_GameWin.city:
-                                          text = "Победа города";
-                                          break;
-                                        case ClubGameResult_GameWin.draw:
-                                          text = "Ничья";
-                                          break;
-                                        case ClubGameResult_GameWin.mafia:
-                                          text = "Победа мафии";
-                                          break;
-                                        default:
-                                          text = "";
-                                          break;
-                                      }
-                                      return DropdownMenuItem(
-                                        value: win,
-                                        child: Text(
-                                          text,
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Первый отстрел:",
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      DropdownButton<int>(
+                                        value: firstDie,
+                                        items: List.generate(
+                                          11,
+                                          (index) {
+                                            return DropdownMenuItem(
+                                              value: index - 1,
+                                              child: Text(
+                                                index == 0
+                                                    ? "Промах"
+                                                    : index.toString(),
+                                                style: MyTheme.of(context)
+                                                    .defaultTextStyle,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        onChanged: widget.readOnly
+                                            ? null
+                                            : (value) {
+                                                setState(() {
+                                                  firstDie = value ?? -1;
+                                                  if (firstDie == -1) {
+                                                    bestMove =
+                                                        ClubGameResult_BestMove
+                                                            .miss;
+                                                  }
+                                                });
+                                              },
+                                      ),
+                                      if (firstDie != -1) ...[
+                                        Text(
+                                          "Лучший ход:",
                                           style: MyTheme.of(context)
                                               .defaultTextStyle,
                                         ),
-                                      );
-                                    }).toList(),
-                                    onChanged: widget.readOnly
+                                        DropdownButton<ClubGameResult_BestMove>(
+                                          value: bestMove,
+                                          items: ClubGameResult_BestMove.values
+                                              .map((bestMove) {
+                                            final String text;
+                                            switch (bestMove) {
+                                              case ClubGameResult_BestMove.full:
+                                                text = "Полный лучший ход";
+                                                break;
+                                              case ClubGameResult_BestMove.half:
+                                                text = "Двойка черных";
+                                                break;
+                                              case ClubGameResult_BestMove.miss:
+                                                text = "Мимо";
+                                                break;
+                                              default:
+                                                text = "";
+                                                break;
+                                            }
+                                            return DropdownMenuItem(
+                                              value: bestMove,
+                                              child: Text(
+                                                text,
+                                                style: MyTheme.of(context)
+                                                    .defaultTextStyle,
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: widget.readOnly
+                                              ? null
+                                              : (value) {
+                                                  setState(() {
+                                                    bestMove = value;
+                                                  });
+                                                },
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Результат:",
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      DropdownButton<ClubGameResult_GameWin>(
+                                        value: winSelected,
+                                        items: winValue.map((win) {
+                                          final String text;
+                                          switch (win) {
+                                            case ClubGameResult_GameWin.city:
+                                              text = "Победа города";
+                                              break;
+                                            case ClubGameResult_GameWin.draw:
+                                              text = "Ничья";
+                                              break;
+                                            case ClubGameResult_GameWin.mafia:
+                                              text = "Победа мафии";
+                                              break;
+                                            default:
+                                              text = "";
+                                              break;
+                                          }
+                                          return DropdownMenuItem(
+                                            value: win,
+                                            child: Text(
+                                              text,
+                                              style: MyTheme.of(context)
+                                                  .defaultTextStyle,
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: widget.readOnly
+                                            ? null
+                                            : (value) {
+                                                setState(() {
+                                                  winSelected = value;
+                                                });
+                                              },
+                                      ),
+                                    ],
+                                  ),
+                                  InkWell(
+                                    onTap: widget.readOnly
                                         ? null
-                                        : (value) {
-                                            setState(() {
-                                              winSelected = value;
+                                        : () {
+                                            showDatePicker(
+                                              context: context,
+                                              initialDate: date,
+                                              firstDate: DateTime(2000),
+                                              lastDate: DateTime.now(),
+                                            ).then((value) async {
+                                              if (!mounted) return null;
+                                              if (value != null) {
+                                                final timeOfDay =
+                                                    await showTimePicker(
+                                                  context: context,
+                                                  initialTime:
+                                                      TimeOfDay.fromDateTime(
+                                                          date),
+                                                  initialEntryMode:
+                                                      TimePickerEntryMode.input,
+                                                  builder: (context, child) =>
+                                                      MediaQuery(
+                                                    data: MediaQuery.of(context)
+                                                        .copyWith(
+                                                      alwaysUse24HourFormat:
+                                                          true,
+                                                    ),
+                                                    child: child ?? Container(),
+                                                  ),
+                                                );
+                                                if (timeOfDay != null) {
+                                                  return DateTime(
+                                                    value.year,
+                                                    value.month,
+                                                    value.day,
+                                                    timeOfDay.hour,
+                                                    timeOfDay.minute,
+                                                  );
+                                                }
+                                              }
+                                              return null;
+                                            }).then((value) {
+                                              setState(() {
+                                                date = value ?? date;
+                                              });
                                             });
                                           },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Дата:",
+                                          style: MyTheme.of(context)
+                                              .defaultTextStyle
+                                              .copyWith(
+                                                color: MyTheme.of(context)
+                                                    .darkGreyColor,
+                                              ),
+                                        ),
+                                        const SizedBox(
+                                          width: 80,
+                                        ),
+                                        Text(
+                                          DateFormat("dd:MM:yyy HH:mm")
+                                              .format(date),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                              InkWell(
-                                onTap: widget.readOnly
-                                    ? null
-                                    : () {
-                                        showDatePicker(
-                                          context: context,
-                                          initialDate: date,
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime.now(),
-                                        ).then((value) async {
-                                          if (!mounted) return null;
-                                          if (value != null) {
-                                            final timeOfDay =
-                                                await showTimePicker(
-                                              context: context,
-                                              initialTime:
-                                                  TimeOfDay.fromDateTime(date),
-                                              initialEntryMode:
-                                                  TimePickerEntryMode.input,
-                                              builder: (context, child) =>
-                                                  MediaQuery(
-                                                data: MediaQuery.of(context)
-                                                    .copyWith(
-                                                  alwaysUse24HourFormat: true,
-                                                ),
-                                                child: child ?? Container(),
-                                              ),
-                                            );
-                                            if (timeOfDay != null) {
-                                              return DateTime(
-                                                value.year,
-                                                value.month,
-                                                value.day,
-                                                timeOfDay.hour,
-                                                timeOfDay.minute,
-                                              );
-                                            }
-                                          }
-                                          return null;
-                                        }).then((value) {
-                                          setState(() {
-                                            date = value ?? date;
-                                          });
-                                        });
-                                      },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      "Дата:",
-                                      style: MyTheme.of(context)
-                                          .defaultTextStyle
-                                          .copyWith(
-                                            color: MyTheme.of(context)
-                                                .darkGreyColor,
-                                          ),
-                                    ),
-                                    const SizedBox(
-                                      width: 80,
-                                    ),
-                                    Text(
-                                      DateFormat("dd:MM:yyy HH:mm")
-                                          .format(date),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
@@ -599,7 +614,8 @@ class NicknameField extends StatelessWidget {
       child: CustomAutoComplete(
         readOnly: readOnly,
         controller: controller,
-        displayStringForOption: (model) => model.id == -1 ? "+" : model.nickname,
+        displayStringForOption: (model) =>
+            model.id == -1 ? "+" : model.nickname,
         focusNode: focusNode,
         onSelected: (playerModel) async {
           if (playerModel.id == -1) {
@@ -621,7 +637,8 @@ class NicknameField extends StatelessWidget {
                   (element) => element.nickname.length,
                 ) +
             [
-              if (onNewPlayer != null) PlayerModel(id: -1, nickname: value.text),
+              if (onNewPlayer != null)
+                PlayerModel(id: -1, nickname: value.text),
             ],
         hint: hint,
       ),

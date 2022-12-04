@@ -9,6 +9,7 @@ import 'package:seating_generator_web/domain/interactors/add_player_interactor.d
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
@@ -135,6 +136,7 @@ void _registerSharedGetIt() {
     ..registerLazySingleton<CreatePlayerInteractor>(
       () => CreatePlayerInteractor(getIt()),
     )
+    ..registerLazySingleton<GetClubInteractor>(() => GetClubInteractor(getIt()))
     ..registerLazySingleton<AddClubGameInteractor>(
       () => AddClubGameInteractor(),
     )

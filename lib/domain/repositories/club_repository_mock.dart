@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/domain/models/club_rating_row.dart';
+import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -34,4 +34,9 @@ class ClubRepositoryMock implements ClubRepository {
     required int clubId,
     required DateTimeRange range,
   }) async {}
+
+  @override
+  Future<ClubModel> getClub({required int id}) {
+    return Future.value(const ClubModel(id: 1, name: "Club name"));
+  }
 }

@@ -5,7 +5,9 @@ import 'package:seating_generator_web/data/requests/club_check_request.dart';
 import 'package:seating_generator_web/data/requests/edit_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
+import 'package:seating_generator_web/data/requests/get_club_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
@@ -61,5 +63,12 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
         "${client.baseUrl}/api/club/$clubId/rating/download?date-start=${format.format(range.start)}&date-end=${format.format(range.end)}",
       ),
     );
+  }
+
+  @override
+  Future<ClubModel> getClub({required int id}) {
+    return GetClubRequest(id: id).execute(client).then(
+          (value) => ClubModel.fromProto(value),
+        );
   }
 }
