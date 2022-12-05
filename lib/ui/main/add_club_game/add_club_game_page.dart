@@ -222,7 +222,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       readOnly: widget.readOnly,
                                       controller: controllers[i],
                                       focusNode: focusNodes[i],
-                                      state: state,
+                                      availablePlayers: state.players,
                                       hint: "Игрок ${i + 1}",
                                       onNewPlayer: ({String? initValue}) async {
                                         context.read<AddClubGameBloc>().add(
@@ -304,7 +304,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                   NicknameField(
                                     controller: refereeController,
                                     focusNode: refereeFocusNode,
-                                    state: state,
+                                    availablePlayers: state.players,
                                     readOnly: widget.readOnly,
                                     hint: "Судья",
                                     onNewPlayer: ({String? initValue}) async {
@@ -590,7 +590,8 @@ class _AddClubGamePageState extends State<AddClubGamePage>
 class NicknameField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
-  final AddClubGameState state;
+  final List<PlayerModel> availablePlayers;
+
   final VoidCallback? onSelected;
   final Function({String? initValue})? onNewPlayer;
   final bool readOnly;
@@ -600,7 +601,7 @@ class NicknameField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.focusNode,
-    required this.state,
+    required this.availablePlayers,
     required this.readOnly,
     this.onNewPlayer,
     this.onSelected,
@@ -627,7 +628,7 @@ class NicknameField extends StatelessWidget {
         },
         onSubmit: () {},
         optionsBuilder: (value) =>
-            state.players
+            availablePlayers
                 .where(
                   (element) => element.nickname
                       .toLowerCase()

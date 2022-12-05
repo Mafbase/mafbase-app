@@ -100,5 +100,13 @@
   "save": "Сохранить",
   "@save": {},
   "participants": "Участники",
-  "@participants": {}
+  "@participants": {},
+  "seating": "Рассадка",
+  "@seating": {},
+  "separateTitle": "Рассадить",
+  "@separateTitle": {},
+  "addSeparationBtnText": "Добавить пару",
+  "@addSeparationBtnText": {},
+  "tournamentPageListOfPlayers": "Список участников",
+  "@tournamentPageListOfPlayers": {}
 }

@@ -1,0 +1,56 @@
+import 'package:seating_generator_web/data/requests/delete_separation_request.dart';
+import 'package:seating_generator_web/data/requests/get_separations_request.dart';
+import 'package:seating_generator_web/data/requests/separate_players_request.dart';
+import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/utils.dart';
+
+class TournamentEditRepositoryImpl extends BaseRepository
+    implements TournamentEditRepository {
+  TournamentEditRepositoryImpl(super.client);
+
+  @override
+  Future<List<Pair<PlayerModel, PlayerModel>>> getSeparations({
+    required int tournamentId,
+  }) {
+    return GetSeparationsRequest(tournamentId: tournamentId)
+        .execute(client)
+        .then(
+          (value) => value.pairs
+              .map(
+                (e) => Pair(
+                  PlayerModel.fromProto(e.player1),
+                  PlayerModel.fromProto(e.player2),
+                ),
+              )
+              .toList(),
+        );
+  }
+
+  @override
+  Future deleteSeparation({
+    required int tournamentId,
+    required PlayerModel player1,
+    required PlayerModel player2,
+  }) {
+    return DeleteSeparationRequest(
+      tournamentId: tournamentId,
+      first: player1.toProto(),
+      second: player2.toProto(),
+    ).execute(client);
+  }
+
+  @override
+  Future insertSeparation({
+    required int tournamentId,
+    required PlayerModel player1,
+    required PlayerModel player2,
+  }) {
+    return SeparatePlayersRequest(
+      tournamentId: tournamentId,
+      first: player1.toProto(),
+      second: player2.toProto(),
+    ).execute(client);
+  }
+}

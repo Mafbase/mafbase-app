@@ -8,9 +8,11 @@ abstract class BaseInteractor {
   Future<T> wrap<T>(Future<T> Function() method) async {
     ISentrySpan? transaction;
     if (!kDebugMode) {
-      transaction = Sentry.startTransaction('$interactorName.run()', 'task',
-          startTimestamp: DateTime.now())
-        ..status = const SpanStatus.ok();
+      transaction = Sentry.startTransaction(
+        '$interactorName.run()',
+        'task',
+        startTimestamp: DateTime.now(),
+      )..status = const SpanStatus.ok();
     }
     try {
       return await method.call();

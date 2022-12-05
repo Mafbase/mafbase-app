@@ -10,7 +10,12 @@ import 'package:seating_generator_web/ui/main/tournament_page/widgets/player_row
 import 'package:seating_generator_web/utils.dart';
 
 class PlayersListBody extends StatefulWidget {
-  const PlayersListBody({Key? key}) : super(key: key);
+  final int tournamentId;
+
+  const PlayersListBody({
+    Key? key,
+    required this.tournamentId,
+  }) : super(key: key);
 
   @override
   State<PlayersListBody> createState() => _PlayersListBodyState();
@@ -20,7 +25,8 @@ class _PlayersListBodyState extends State<PlayersListBody> {
   @override
   void initState() {
     context.read<TournamentPageBloc>().add(
-          const TournamentPageEvent.playersListOpened(),
+          TournamentPageEvent.playersListOpened(
+              tournamentId: widget.tournamentId),
         );
     super.initState();
   }
@@ -33,12 +39,16 @@ class _PlayersListBodyState extends State<PlayersListBody> {
           children: [
             Column(
               children: [
-                const SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 Text(
                   context.locale.participants,
                   style: MyTheme.of(context).headerTextStyle,
                 ),
-                const SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 Expanded(
                   child: ListView.builder(
                     itemCount: state.tournamentPlayers.length,

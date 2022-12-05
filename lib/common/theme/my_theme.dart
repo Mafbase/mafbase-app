@@ -83,6 +83,7 @@ class _LightTheme implements MyTheme {
   @override
   TextStyle get textBtnTextStyle => _defaultTextStyle.copyWith(
         color: blueForCard,
+        fontSize: 24,
       );
 
   @override

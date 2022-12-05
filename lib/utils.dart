@@ -99,3 +99,20 @@ String get sentryUrl => String.fromCharCodes([
       53,
       54
     ]);
+
+class Pair<F, S> {
+  final F first;
+  final S second;
+
+  Pair(this.first, this.second);
+
+  @override
+  bool operator ==(Object other) {
+    return other is Pair<F, S> &&
+        other.first == first &&
+        other.second == second;
+  }
+
+  @override
+  int get hashCode => first.hashCode ^ second.hashCode;
+}

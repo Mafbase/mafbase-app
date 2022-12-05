@@ -101,7 +101,7 @@ class __$$_ProfileDialogStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ProfileDialogState implements _ProfileDialogState {
-  const _$_ProfileDialogState({this.imageUrl, this.isLoading = true});
+  const _$_ProfileDialogState({this.imageUrl, this.isLoading = false});
 
   @override
   final String? imageUrl;

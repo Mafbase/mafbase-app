@@ -10,8 +10,11 @@ class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.backButtonPressed() =
       TournamentPageBackButtonPreesedEvent;
 
-  const factory TournamentPageEvent.playersListOpened() =
-      TournamentPagePlayerListOpenedEvent;
+  const factory TournamentPageEvent.playersListTapped() =
+      TournamentPageEventPlayersListTapped;
+
+  const factory TournamentPageEvent.playersListOpened(
+      {required int tournamentId}) = TournamentPagePlayerListOpenedEvent;
 
   const factory TournamentPageEvent.addPlayerTapped() =
       TournamentPageEventAddPlayer;
@@ -26,4 +29,7 @@ class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.openProfileDialog({
     required PlayerModel player,
   }) = TournamentPageEventOpenProfileDialog;
+
+  const factory TournamentPageEvent.openSeatingPage() =
+      TournamentPageEventOpenSeatingPage;
 }

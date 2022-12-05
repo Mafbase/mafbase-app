@@ -7,13 +7,16 @@ import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/delete_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
@@ -33,6 +36,9 @@ import 'package:seating_generator_web/domain/repositories/club_repository_mock.d
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository_mock.dart';
+import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/domain/repositories/tournament_edit_repository_impl.dart';
+import 'package:seating_generator_web/domain/repositories/tournament_edit_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository_mock.dart';
@@ -46,6 +52,8 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
@@ -69,6 +77,9 @@ void registerGetIt() {
     ..registerFactoryParam<RatingRouter, BuildContext, void>(
       (context, _) => RatingRouterImpl(context),
     )
+    ..registerLazySingleton<TournamentEditRepository>(
+      () => TournamentEditRepositoryImpl(getIt()),
+    )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
     )
@@ -76,12 +87,16 @@ void registerGetIt() {
       (context, _) => LoginPageRouterImpl(context),
     )
     ..registerFactoryParam<VerificationPageRouter, BuildContext, dynamic>(
-        (context, _) => VerificationPageRouterImpl(context))
+      (context, _) => VerificationPageRouterImpl(context),
+    )
     ..registerFactoryParam<MainPageRouter, BuildContext, dynamic>(
       (context, _) => MainPageRouterImpl(context),
     )
     ..registerFactoryParam<SignUpPageRouter, BuildContext, dynamic>(
       (context, _) => SignUpPageRouterImpl(context),
+    )
+    ..registerFactoryParam<SeatingPageRouter, BuildContext, dynamic>(
+      (context, _) => SeatingPageRouterImpl(context),
     )
     ..registerFactoryParam<SeatingInsertingRouter, BuildContext, dynamic>(
       (context, _) => SeatingInsertingRouterImpl(context),
@@ -119,8 +134,12 @@ void registerGetItTest() {
     ..registerLazySingleton<ClubRepository>(() => ClubRepositoryMock())
     ..registerFactory<SignUpPageRouter>(() => SignUpPageRouterMock())
     ..registerFactory<MainPageRouter>(() => MainPageRouterMock())
+    ..registerLazySingleton<TournamentEditRepository>(
+      () => TournamentEditRepositoryMock(),
+    )
     ..registerFactory<VerificationPageRouter>(
-        () => VerificationPageRouterMock())
+      () => VerificationPageRouterMock(),
+    )
     ..registerLazySingleton<TranslationRepository>(
       () => TranslationRepositoryMock(),
     )
@@ -141,6 +160,9 @@ void registerGetItTest() {
 
 void _registerSharedGetIt() {
   getIt
+    ..registerLazySingleton<GetSeparationInteractor>(
+      () => GetSeparationInteractor(getIt()),
+    )
     ..registerLazySingleton<LoginInteractor>(() => LoginInteractor(getIt()))
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
     ..registerLazySingleton<CreatePlayerInteractor>(
@@ -171,10 +193,21 @@ void _registerSharedGetIt() {
     ..registerLazySingleton<GetTournamentsInteractor>(
       () => GetTournamentsInteractor(getIt()),
     )
+    ..registerLazySingleton<AddSeparationInteractor>(
+      () => AddSeparationInteractor(getIt()),
+    )
+    ..registerLazySingleton<DeleteSeparationInteractor>(
+      () => DeleteSeparationInteractor(getIt()),
+    )
     ..registerFactoryParam<LoginBloc, BuildContext?, dynamic>(
       (context, _) => LoginBloc(
         getIt(),
         getIt.call(param1: context),
+        context,
+      ),
+    )
+    ..registerFactoryParam<SeatingPageBloc, BuildContext?, dynamic>(
+      (context, _) => SeatingPageBloc(
         context,
       ),
     )
@@ -230,9 +263,8 @@ void _registerSharedGetIt() {
         getIt(),
       ),
     )
-    ..registerFactoryParam<TournamentPageBloc, BuildContext?, int>(
-      (context, tournamentId) => TournamentPageBloc(
-        tournamentId: tournamentId,
+    ..registerFactoryParam<TournamentPageBloc, BuildContext?, dynamic>(
+      (context, _) => TournamentPageBloc(
         context: context,
       ),
     )

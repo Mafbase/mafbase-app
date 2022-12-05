@@ -15,7 +15,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_st
 
 class TournamentPageBloc
     extends CustomBloc<TournamentPageEvent, TournamentPageState> {
-  final int tournamentId;
+  late int tournamentId;
   final GetAllPlayersInteractor _getAllPlayersInteractor = getIt();
   final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
       getIt();
@@ -28,12 +28,28 @@ class TournamentPageBloc
   late final TournamentPageRouter router =
       getIt<TournamentPageRouter>(param1: context);
 
-  TournamentPageBloc({required this.tournamentId, BuildContext? context})
+  TournamentPageBloc({BuildContext? context})
       : super(const TournamentPageState(), context) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);
     on<TournamentPageEventDeletePlayer>(_onDeletePlayer);
     on<TournamentPageEventOpenProfileDialog>(_onOpenProfile);
+    on<TournamentPageEventOpenSeatingPage>(_onOpenSeatingPage);
+    on<TournamentPageEventPlayersListTapped>(_onPlayersListTapped);
+  }
+
+  _onPlayersListTapped(
+    TournamentPageEventPlayersListTapped event,
+    Emitter emit,
+  ) {
+    router.openPlayersList(tournamentId: tournamentId);
+  }
+
+  _onOpenSeatingPage(
+    TournamentPageEventOpenSeatingPage event,
+    Emitter emit,
+  ) {
+    router.openSeatingPage(tournamentId: tournamentId);
   }
 
   _onOpenProfile(
@@ -80,6 +96,7 @@ class TournamentPageBloc
     if (player == null) {
       return;
     }
+    router.openPlayersList(tournamentId: tournamentId);
     emit(state.copyWith(isLoading: true));
     await _addPlayerInteractor.run(
       tournamentId: tournamentId,
@@ -93,6 +110,7 @@ class TournamentPageBloc
     TournamentPagePlayerListOpenedEvent event,
     Emitter<TournamentPageState> emit,
   ) async {
+    tournamentId = event.tournamentId;
     emit(state.copyWith(isLoading: true));
     await _updatePlayers(emit);
     emit(state.copyWith(isLoading: false));
