@@ -1,7 +1,9 @@
 import 'package:seating_generator_web/data/requests/delete_separation_request.dart';
+import 'package:seating_generator_web/data/requests/get_ci_schemes_request.dart';
 import 'package:seating_generator_web/data/requests/get_separations_request.dart';
 import 'package:seating_generator_web/data/requests/separate_players_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -52,5 +54,16 @@ class TournamentEditRepositoryImpl extends BaseRepository
       first: player1.toProto(),
       second: player2.toProto(),
     ).execute(client);
+  }
+
+  @override
+  Future<List<CiSchemeModel>> getCiSchemeModels() {
+    return GetCiSchemesRequest().execute(client).then(
+          (value) => value.schemes
+              .map(
+                (e) => CiSchemeModel.fromProto(e),
+              )
+              .toList(),
+        );
   }
 }

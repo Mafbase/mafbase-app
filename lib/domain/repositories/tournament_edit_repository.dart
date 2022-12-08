@@ -1,3 +1,4 @@
+import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -17,4 +18,6 @@ abstract class TournamentEditRepository {
     required PlayerModel player1,
     required PlayerModel player2,
   });
+
+  Future<List<CiSchemeModel>> getCiSchemeModels();
 }

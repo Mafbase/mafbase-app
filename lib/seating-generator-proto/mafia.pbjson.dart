@@ -163,6 +163,27 @@ const AddGameEventOut$json = const {
 
 /// Descriptor for `AddGameEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addGameEventOutDescriptor = $convert.base64Decode('Cg9BZGRHYW1lRXZlbnRPdXQSFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQ=');
+@$core.Deprecated('Use ciSchemeDescriptor instead')
+const CiScheme$json = const {
+  '1': 'CiScheme',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `CiScheme`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List ciSchemeDescriptor = $convert.base64Decode('CghDaVNjaGVtZRIOCgJpZBgBIAEoBVICaWQSEgoEbmFtZRgCIAEoCVIEbmFtZQ==');
+@$core.Deprecated('Use availableCiEventOutDescriptor instead')
+const AvailableCiEventOut$json = const {
+  '1': 'AvailableCiEventOut',
+  '2': const [
+    const {'1': 'schemes', '3': 1, '4': 3, '5': 11, '6': '.generated.CiScheme', '10': 'schemes'},
+  ],
+};
+
+/// Descriptor for `AvailableCiEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List availableCiEventOutDescriptor = $convert.base64Decode('ChNBdmFpbGFibGVDaUV2ZW50T3V0Ei0KB3NjaGVtZXMYASADKAsyEy5nZW5lcmF0ZWQuQ2lTY2hlbWVSB3NjaGVtZXM=');
 @$core.Deprecated('Use clubGameResultDescriptor instead')
 const ClubGameResult$json = const {
   '1': 'ClubGameResult',
@@ -178,12 +199,14 @@ const ClubGameResult$json = const {
     const {'1': 'mafia2', '3': 9, '4': 1, '5': 5, '10': 'mafia2'},
     const {'1': 'don', '3': 10, '4': 1, '5': 5, '10': 'don'},
     const {'1': 'sheriff', '3': 11, '4': 1, '5': 5, '10': 'sheriff'},
+    const {'1': 'ciId', '3': 12, '4': 1, '5': 5, '9': 3, '10': 'ciId', '17': true},
   ],
   '4': const [ClubGameResult_BestMove$json, ClubGameResult_GameWin$json],
   '8': const [
     const {'1': '_firstDie'},
     const {'1': '_bestMove'},
     const {'1': '_date'},
+    const {'1': '_ciId'},
   ],
 };
 
@@ -208,7 +231,7 @@ const ClubGameResult_GameWin$json = const {
 };
 
 /// Descriptor for `ClubGameResult`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode('Cg5DbHViR2FtZVJlc3VsdBIaCghhZGRTY29yZRgBIAMoBVIIYWRkU2NvcmUSGAoHcGxheWVycxgCIAMoBVIHcGxheWVycxIzCgN3aW4YAyABKA4yIS5nZW5lcmF0ZWQuQ2x1YkdhbWVSZXN1bHQuR2FtZVdpblIDd2luEh8KCGZpcnN0RGllGAQgASgFSABSCGZpcnN0RGlliAEBEkMKCGJlc3RNb3ZlGAUgASgOMiIuZ2VuZXJhdGVkLkNsdWJHYW1lUmVzdWx0LkJlc3RNb3ZlSAFSCGJlc3RNb3ZliAEBEhcKBGRhdGUYBiABKAlIAlIEZGF0ZYgBARIYCgdyZWZlcmVlGAcgASgFUgdyZWZlcmVlEhYKBm1hZmlhMRgIIAEoBVIGbWFmaWExEhYKBm1hZmlhMhgJIAEoBVIGbWFmaWEyEhAKA2RvbhgKIAEoBVIDZG9uEhgKB3NoZXJpZmYYCyABKAVSB3NoZXJpZmYiKAoIQmVzdE1vdmUSCAoEbWlzcxAAEggKBGhhbGYQARIICgRmdWxsEAIiKAoHR2FtZVdpbhIICgRjaXR5EAASCQoFbWFmaWEQARIICgRkcmF3EAJCCwoJX2ZpcnN0RGllQgsKCV9iZXN0TW92ZUIHCgVfZGF0ZQ==');
+final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode('Cg5DbHViR2FtZVJlc3VsdBIaCghhZGRTY29yZRgBIAMoBVIIYWRkU2NvcmUSGAoHcGxheWVycxgCIAMoBVIHcGxheWVycxIzCgN3aW4YAyABKA4yIS5nZW5lcmF0ZWQuQ2x1YkdhbWVSZXN1bHQuR2FtZVdpblIDd2luEh8KCGZpcnN0RGllGAQgASgFSABSCGZpcnN0RGlliAEBEkMKCGJlc3RNb3ZlGAUgASgOMiIuZ2VuZXJhdGVkLkNsdWJHYW1lUmVzdWx0LkJlc3RNb3ZlSAFSCGJlc3RNb3ZliAEBEhcKBGRhdGUYBiABKAlIAlIEZGF0ZYgBARIYCgdyZWZlcmVlGAcgASgFUgdyZWZlcmVlEhYKBm1hZmlhMRgIIAEoBVIGbWFmaWExEhYKBm1hZmlhMhgJIAEoBVIGbWFmaWEyEhAKA2RvbhgKIAEoBVIDZG9uEhgKB3NoZXJpZmYYCyABKAVSB3NoZXJpZmYSFwoEY2lJZBgMIAEoBUgDUgRjaUlkiAEBIigKCEJlc3RNb3ZlEggKBG1pc3MQABIICgRoYWxmEAESCAoEZnVsbBACIigKB0dhbWVXaW4SCAoEY2l0eRAAEgkKBW1hZmlhEAESCAoEZHJhdxACQgsKCV9maXJzdERpZUILCglfYmVzdE1vdmVCBwoFX2RhdGVCBwoFX2NpSWQ=');
 @$core.Deprecated('Use clubsEventOutDescriptor instead')
 const ClubsEventOut$json = const {
   '1': 'ClubsEventOut',

@@ -12,6 +12,7 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete.dart';
 import 'package:seating_generator_web/common/widgets/role_picker.dart';
+import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_bloc.dart';
@@ -19,6 +20,7 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class AddClubGamePage extends StatefulWidget {
   final bool readOnly;
@@ -125,6 +127,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   ClubGameResult_BestMove? bestMove;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
   DateTime date = DateTime.now();
+  CiSchemeModel? ciSchemeModel;
 
   @override
   void dispose() {
@@ -443,6 +446,49 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                             : (value) {
                                                 setState(() {
                                                   winSelected = value;
+                                                });
+                                              },
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        context.locale.ci,
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle,
+                                      ),
+                                      const SizedBox(width: 8,),
+                                      DropdownButton<CiSchemeModel>(
+                                        value: ciSchemeModel,
+                                        items: List.generate(
+                                          state.ciSchemes.length + 1,
+                                          (index) {
+                                            if (index == 0) {
+                                              return DropdownMenuItem(
+                                                value: null,
+                                                child: Text(
+                                                  context.locale.withoutCi,
+                                                  style: MyTheme.of(context)
+                                                      .defaultTextStyle,
+                                                ),
+                                              );
+                                            }
+                                            return DropdownMenuItem(
+                                              value: state.ciSchemes[index - 1],
+                                              child: Text(
+                                                state.ciSchemes[index - 1].name,
+                                                style: MyTheme.of(context)
+                                                    .defaultTextStyle,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        onChanged: widget.readOnly
+                                            ? null
+                                            : (value) {
+                                                setState(() {
+                                                  ciSchemeModel = value;
                                                 });
                                               },
                                       ),

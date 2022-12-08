@@ -727,6 +727,108 @@ class AddGameEventOut extends $pb.GeneratedMessage {
   void clearGameId() => clearField(1);
 }
 
+class CiScheme extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CiScheme', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  CiScheme._() : super();
+  factory CiScheme({
+    $core.int? id,
+    $core.String? name,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    return _result;
+  }
+  factory CiScheme.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CiScheme.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CiScheme clone() => CiScheme()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CiScheme copyWith(void Function(CiScheme) updates) => super.copyWith((message) => updates(message as CiScheme)) as CiScheme; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CiScheme create() => CiScheme._();
+  CiScheme createEmptyInstance() => create();
+  static $pb.PbList<CiScheme> createRepeated() => $pb.PbList<CiScheme>();
+  @$core.pragma('dart2js:noInline')
+  static CiScheme getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CiScheme>(create);
+  static CiScheme? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+}
+
+class AvailableCiEventOut extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AvailableCiEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<CiScheme>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'schemes', $pb.PbFieldType.PM, subBuilder: CiScheme.create)
+    ..hasRequiredFields = false
+  ;
+
+  AvailableCiEventOut._() : super();
+  factory AvailableCiEventOut({
+    $core.Iterable<CiScheme>? schemes,
+  }) {
+    final _result = create();
+    if (schemes != null) {
+      _result.schemes.addAll(schemes);
+    }
+    return _result;
+  }
+  factory AvailableCiEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AvailableCiEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AvailableCiEventOut clone() => AvailableCiEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AvailableCiEventOut copyWith(void Function(AvailableCiEventOut) updates) => super.copyWith((message) => updates(message as AvailableCiEventOut)) as AvailableCiEventOut; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AvailableCiEventOut create() => AvailableCiEventOut._();
+  AvailableCiEventOut createEmptyInstance() => create();
+  static $pb.PbList<AvailableCiEventOut> createRepeated() => $pb.PbList<AvailableCiEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static AvailableCiEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AvailableCiEventOut>(create);
+  static AvailableCiEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<CiScheme> get schemes => $_getList(0);
+}
+
 class ClubGameResult extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ClubGameResult', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..p<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'addScore', $pb.PbFieldType.P3, protoName: 'addScore')
@@ -740,6 +842,7 @@ class ClubGameResult extends $pb.GeneratedMessage {
     ..a<$core.int>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafia2', $pb.PbFieldType.O3)
     ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'don', $pb.PbFieldType.O3)
     ..a<$core.int>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sheriff', $pb.PbFieldType.O3)
+    ..a<$core.int>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ciId', $pb.PbFieldType.O3, protoName: 'ciId')
     ..hasRequiredFields = false
   ;
 
@@ -756,6 +859,7 @@ class ClubGameResult extends $pb.GeneratedMessage {
     $core.int? mafia2,
     $core.int? don,
     $core.int? sheriff,
+    $core.int? ciId,
   }) {
     final _result = create();
     if (addScore != null) {
@@ -790,6 +894,9 @@ class ClubGameResult extends $pb.GeneratedMessage {
     }
     if (sheriff != null) {
       _result.sheriff = sheriff;
+    }
+    if (ciId != null) {
+      _result.ciId = ciId;
     }
     return _result;
   }
@@ -900,6 +1007,15 @@ class ClubGameResult extends $pb.GeneratedMessage {
   $core.bool hasSheriff() => $_has(10);
   @$pb.TagNumber(11)
   void clearSheriff() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.int get ciId => $_getIZ(11);
+  @$pb.TagNumber(12)
+  set ciId($core.int v) { $_setSignedInt32(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasCiId() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearCiId() => clearField(12);
 }
 
 class ClubsEventOut extends $pb.GeneratedMessage {

@@ -20,6 +20,7 @@ mixin _$AddClubGameState {
   List<PlayerModel> get players => throw _privateConstructorUsedError;
   bool get canEdit => throw _privateConstructorUsedError;
   String get clubName => throw _privateConstructorUsedError;
+  List<CiSchemeModel> get ciSchemes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddClubGameStateCopyWith<AddClubGameState> get copyWith =>
@@ -35,7 +36,8 @@ abstract class $AddClubGameStateCopyWith<$Res> {
       {bool isLoading,
       List<PlayerModel> players,
       bool canEdit,
-      String clubName});
+      String clubName,
+      List<CiSchemeModel> ciSchemes});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$AddClubGameStateCopyWithImpl<$Res>
     Object? players = freezed,
     Object? canEdit = freezed,
     Object? clubName = freezed,
+    Object? ciSchemes = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -71,6 +74,10 @@ class _$AddClubGameStateCopyWithImpl<$Res>
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
+      ciSchemes: ciSchemes == freezed
+          ? _value.ciSchemes
+          : ciSchemes // ignore: cast_nullable_to_non_nullable
+              as List<CiSchemeModel>,
     ));
   }
 }
@@ -86,7 +93,8 @@ abstract class _$$_AddClubGameStateCopyWith<$Res>
       {bool isLoading,
       List<PlayerModel> players,
       bool canEdit,
-      String clubName});
+      String clubName,
+      List<CiSchemeModel> ciSchemes});
 }
 
 /// @nodoc
@@ -106,6 +114,7 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
     Object? players = freezed,
     Object? canEdit = freezed,
     Object? clubName = freezed,
+    Object? ciSchemes = freezed,
   }) {
     return _then(_$_AddClubGameState(
       isLoading: isLoading == freezed
@@ -124,6 +133,10 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
+      ciSchemes: ciSchemes == freezed
+          ? _value._ciSchemes
+          : ciSchemes // ignore: cast_nullable_to_non_nullable
+              as List<CiSchemeModel>,
     ));
   }
 }
@@ -135,8 +148,10 @@ class _$_AddClubGameState implements _AddClubGameState {
       {this.isLoading = true,
       final List<PlayerModel> players = const [],
       this.canEdit = false,
-      this.clubName = ""})
-      : _players = players;
+      this.clubName = "",
+      final List<CiSchemeModel> ciSchemes = const []})
+      : _players = players,
+        _ciSchemes = ciSchemes;
 
   @override
   @JsonKey()
@@ -155,10 +170,17 @@ class _$_AddClubGameState implements _AddClubGameState {
   @override
   @JsonKey()
   final String clubName;
+  final List<CiSchemeModel> _ciSchemes;
+  @override
+  @JsonKey()
+  List<CiSchemeModel> get ciSchemes {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_ciSchemes);
+  }
 
   @override
   String toString() {
-    return 'AddClubGameState(isLoading: $isLoading, players: $players, canEdit: $canEdit, clubName: $clubName)';
+    return 'AddClubGameState(isLoading: $isLoading, players: $players, canEdit: $canEdit, clubName: $clubName, ciSchemes: $ciSchemes)';
   }
 
   @override
@@ -169,7 +191,9 @@ class _$_AddClubGameState implements _AddClubGameState {
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other._players, _players) &&
             const DeepCollectionEquality().equals(other.canEdit, canEdit) &&
-            const DeepCollectionEquality().equals(other.clubName, clubName));
+            const DeepCollectionEquality().equals(other.clubName, clubName) &&
+            const DeepCollectionEquality()
+                .equals(other._ciSchemes, _ciSchemes));
   }
 
   @override
@@ -178,7 +202,8 @@ class _$_AddClubGameState implements _AddClubGameState {
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(_players),
       const DeepCollectionEquality().hash(canEdit),
-      const DeepCollectionEquality().hash(clubName));
+      const DeepCollectionEquality().hash(clubName),
+      const DeepCollectionEquality().hash(_ciSchemes));
 
   @JsonKey(ignore: true)
   @override
@@ -191,7 +216,8 @@ abstract class _AddClubGameState implements AddClubGameState {
       {final bool isLoading,
       final List<PlayerModel> players,
       final bool canEdit,
-      final String clubName}) = _$_AddClubGameState;
+      final String clubName,
+      final List<CiSchemeModel> ciSchemes}) = _$_AddClubGameState;
 
   @override
   bool get isLoading;
@@ -201,6 +227,8 @@ abstract class _AddClubGameState implements AddClubGameState {
   bool get canEdit;
   @override
   String get clubName;
+  @override
+  List<CiSchemeModel> get ciSchemes;
   @override
   @JsonKey(ignore: true)
   _$$_AddClubGameStateCopyWith<_$_AddClubGameState> get copyWith =>

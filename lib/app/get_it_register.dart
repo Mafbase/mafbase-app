@@ -14,6 +14,7 @@ import 'package:seating_generator_web/domain/interactors/delete_separation_inter
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_ci_schemes_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
@@ -198,6 +199,9 @@ void _registerSharedGetIt() {
     )
     ..registerLazySingleton<DeleteSeparationInteractor>(
       () => DeleteSeparationInteractor(getIt()),
+    )
+    ..registerLazySingleton<GetCiSchemesInteractor>(
+      () => GetCiSchemesInteractor(getIt()),
     )
     ..registerFactoryParam<LoginBloc, BuildContext?, dynamic>(
       (context, _) => LoginBloc(

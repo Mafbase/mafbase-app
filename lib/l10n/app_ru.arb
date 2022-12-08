@@ -108,5 +108,9 @@
   "addSeparationBtnText": "Добавить пару",
   "@addSeparationBtnText": {},
   "tournamentPageListOfPlayers": "Список участников",
-  "@tournamentPageListOfPlayers": {}
+  "@tournamentPageListOfPlayers": {},
+  "withoutCi": "Без коменсации",
+  "@withoutCi": {},
+  "ci": "Компенсация",
+  "@ci": {}
 }
