@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 extension BuildContextLocaleExt on BuildContext {
   AppLocalizations get locale => AppLocalizations.of(this)!;
 }
 
+final dateFormatForRequests = DateFormat("yyyy-MM-dd");
 String get sentryUrl => String.fromCharCodes([
       104,
       116,

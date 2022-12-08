@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class RatingPage extends StatefulWidget {
   final int clubId;
@@ -28,13 +29,12 @@ class RatingPage extends StatefulWidget {
     required int clubId,
     required BuildContext context,
   }) {
-    final format = DateFormat("yyyy-MM-dd");
     return context.namedLocation(
       name,
       params: {"clubId": clubId.toString()},
       queryParams: {
-        "date-start": format.format(range.start),
-        "date-end": format.format(range.end)
+        "date-start": dateFormatForRequests.format(range.start),
+        "date-end": dateFormatForRequests.format(range.end)
       },
     );
   }

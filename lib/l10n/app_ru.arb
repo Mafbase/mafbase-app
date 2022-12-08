@@ -112,5 +112,11 @@
   "withoutCi": "Без коменсации",
   "@withoutCi": {},
   "ci": "Компенсация",
-  "@ci": {}
+  "@ci": {},
+  "createTournamentLabel": "Название турнира",
+  "@createTournamentLabel": {},
+  "create": "Создать",
+  "@create": {},
+  "dateTimeRangePlaceholder": "Даты турнира",
+  "@dateTimeRangePlaceholder": {}
 }

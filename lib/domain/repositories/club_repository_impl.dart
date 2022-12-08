@@ -12,6 +12,7 @@ import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
@@ -59,10 +60,9 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
 
   @override
   Future downloadRating({required int clubId, required DateTimeRange range}) {
-    final format = DateFormat("yyyy-MM-dd");
     return launchUrl(
       Uri.parse(
-        "${client.baseUrl}/api/club/$clubId/rating/download?date-start=${format.format(range.start)}&date-end=${format.format(range.end)}",
+        "${client.baseUrl}/api/club/$clubId/rating/download?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}",
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/src/material/date.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 
@@ -24,5 +25,10 @@ class TournamentsRepositoryMock implements TournamentsRepository {
   @override
   Future<List<TournamentModel>> getTournaments() async {
     return Future.microtask(() => fakeTournaments);
+  }
+
+  @override
+  Future<int> createTournament({required String name, required DateTimeRange range}) {
+    return Future.value(1);
   }
 }
