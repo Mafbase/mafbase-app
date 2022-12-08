@@ -626,6 +626,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
               firstDie: firstDie,
               win: winSelected,
               bestMove: bestMove,
+              ciId: ciSchemeModel?.id,
             ),
             gameId: widget.gameId,
           ),
