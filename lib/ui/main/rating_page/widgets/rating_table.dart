@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 
 class RatingTable extends StatefulWidget {
@@ -24,7 +25,7 @@ class _RatingTableState extends State<RatingTable> {
   final mainLinkedScrollControllerGroup = LinkedScrollControllerGroup();
   late List<ScrollController> controllers;
   late final List<ScrollController> mainControllers = List.generate(
-    8,
+    9,
     (index) => mainLinkedScrollControllerGroup.addAndGet(),
   );
 
@@ -90,6 +91,7 @@ class _RatingTableState extends State<RatingTable> {
   }
 
   Widget get indexProtoype => wrap(Text(widget.rows.length.toString()));
+
   Widget indexWidgets(int index) => wrap(
         Text(
           (index + 1).toString(),
@@ -105,6 +107,7 @@ class _RatingTableState extends State<RatingTable> {
               "",
         ),
       );
+
   Widget nicknames(int index) => wrap(
         Text(widget.rows[index].nickname),
         boldRight: true,
@@ -119,6 +122,7 @@ class _RatingTableState extends State<RatingTable> {
               "",
         ),
       );
+
   Widget scores(int index) => wrap(
         Text(
           widget.rows[index].score.toString(),
@@ -135,6 +139,7 @@ class _RatingTableState extends State<RatingTable> {
               "",
         ),
       );
+
   Widget addScores(int index) => wrap(
         Text(
           widget.rows[index].addScore.toString(),
@@ -150,6 +155,7 @@ class _RatingTableState extends State<RatingTable> {
               "",
         ),
       );
+
   Widget wins(int index) => wrap(
         Text(
           widget.rows[index].wins.toString(),
@@ -165,13 +171,26 @@ class _RatingTableState extends State<RatingTable> {
               "",
         ),
       );
+
   Widget roleWins(int index) => wrap(
         Text(
           widget.rows[index].roleWins.toString(),
         ),
       );
 
-  Widget get diesProtorype => wrap(
+  Widget get ciPrototype => wrap(
+        Text(
+          widget.rows
+                  .map((e) => e.ci.toString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              "",
+        ),
+      );
+
+  Widget ciWidget(int index) => Text((widget.rows[index].ci / 100).toString());
+
+  Widget get diesPrototype => wrap(
         Text(
           widget.rows
                   .map((e) => e.died.toString())
@@ -180,6 +199,7 @@ class _RatingTableState extends State<RatingTable> {
               "",
         ),
       );
+
   Widget dies(int index) => wrap(
         Text(
           widget.rows[index].died.toString(),
@@ -285,10 +305,12 @@ class _RatingTableState extends State<RatingTable> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        column(mainControllers[0],
-            builder: indexWidgets,
-            header: const Text("№"),
-            prototype: indexProtoype),
+        column(
+          mainControllers[0],
+          builder: indexWidgets,
+          header: const Text("№"),
+          prototype: indexProtoype,
+        ),
         column(
           mainControllers[1],
           builder: nicknames,
@@ -353,22 +375,28 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[5],
+          header: const Text("Ci"),
+          prototype: ciPrototype,
+          builder: ciWidget,
+        ),
+        column(
+          mainControllers[6],
           header: const Text("п"),
           prototype: winPrototype,
           builder: wins,
         ),
         column(
-          mainControllers[6],
+          mainControllers[7],
           header: const Text("дк"),
           prototype: roleWinPrototype,
           builder: roleWins,
         ),
         column(
-          mainControllers[7],
+          mainControllers[8],
           builder: dies,
           isLastColumn: true,
           header: const Text("по"),
-          prototype: diesProtorype,
+          prototype: diesPrototype,
         ),
       ],
     );
@@ -385,60 +413,62 @@ class _RatingTableState extends State<RatingTable> {
     bool boldRight = false,
   }) {
     assert((widgets == null) != (builder == null));
-    return LayoutBuilder(builder: (context, constraints) {
-      return Stack(
-        children: [
-          if (prototype != null)
-            IgnorePointer(
-              child: Opacity(
-                opacity: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: prototype,
-                ),
-              ),
-            )
-          else
-            ...[header, ...widgets!].map(
-              (e) => IgnorePointer(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Stack(
+          children: [
+            if (prototype != null)
+              IgnorePointer(
                 child: Opacity(
                   opacity: 0,
-                  child: e,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: prototype,
+                  ),
+                ),
+              )
+            else
+              ...[header, ...widgets!].map(
+                (e) => IgnorePointer(
+                  child: Opacity(
+                    opacity: 0,
+                    child: e,
+                  ),
                 ),
               ),
+            const SizedBox(
+              height: double.infinity,
             ),
-          const SizedBox(
-            height: double.infinity,
-          ),
-          Positioned.fill(
-            child: Column(
-              children: [
-                if (header != null)
-                  wrap(
-                    Center(
-                      child: header,
+            Positioned.fill(
+              child: Column(
+                children: [
+                  if (header != null)
+                    wrap(
+                      Center(
+                        child: header,
+                      ),
+                      boldLeft: boldLeft,
+                      boldRight: boldRight,
                     ),
-                    boldLeft: boldLeft,
-                    boldRight: boldRight,
-                  ),
-                Expanded(
-                  child: ScrollConfiguration(
-                    behavior: ScrollConfiguration.of(context)
-                        .copyWith(scrollbars: isLastColumn),
-                    child: ListView.builder(
-                      physics: const ClampingScrollPhysics(),
-                      controller: controller,
-                      itemCount: widget.rows.length,
-                      itemBuilder: (context, index) =>
-                          builder != null ? builder(index) : widgets![index],
+                  Expanded(
+                    child: ScrollConfiguration(
+                      behavior: ScrollConfiguration.of(context)
+                          .copyWith(scrollbars: isLastColumn),
+                      child: ListView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        controller: controller,
+                        itemCount: widget.rows.length,
+                        itemBuilder: (context, index) =>
+                            builder != null ? builder(index) : widgets![index],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
-      );
-    });
+          ],
+        );
+      },
+    );
   }
 }

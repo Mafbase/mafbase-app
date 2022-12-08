@@ -13,6 +13,7 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
     required int roleWins,
     required int died,
     required List<GameRowItemModel> games,
+    required int ci,
   }) = _ClubRatingRowModel;
 
   factory ClubRatingRowModel.fromProto(ClubRatingRow proto) =>
@@ -24,6 +25,7 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
         roleWins: proto.donWins + proto.sheriffWins,
         died: proto.firstDie,
         games: proto.item.map((e) => GameRowItemModel.fromProto(e)).toList(),
+        ci: proto.ci,
       );
 }
 

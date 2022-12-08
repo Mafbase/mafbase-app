@@ -23,6 +23,7 @@ mixin _$ClubRatingRowModel {
   int get roleWins => throw _privateConstructorUsedError;
   int get died => throw _privateConstructorUsedError;
   List<GameRowItemModel> get games => throw _privateConstructorUsedError;
+  int get ci => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClubRatingRowModelCopyWith<ClubRatingRowModel> get copyWith =>
@@ -41,7 +42,8 @@ abstract class $ClubRatingRowModelCopyWith<$Res> {
       int wins,
       int roleWins,
       int died,
-      List<GameRowItemModel> games});
+      List<GameRowItemModel> games,
+      int ci});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$ClubRatingRowModelCopyWithImpl<$Res>
     Object? roleWins = freezed,
     Object? died = freezed,
     Object? games = freezed,
+    Object? ci = freezed,
   }) {
     return _then(_value.copyWith(
       nickname: nickname == freezed
@@ -92,6 +95,10 @@ class _$ClubRatingRowModelCopyWithImpl<$Res>
           ? _value.games
           : games // ignore: cast_nullable_to_non_nullable
               as List<GameRowItemModel>,
+      ci: ci == freezed
+          ? _value.ci
+          : ci // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -110,7 +117,8 @@ abstract class _$$_ClubRatingRowModelCopyWith<$Res>
       int wins,
       int roleWins,
       int died,
-      List<GameRowItemModel> games});
+      List<GameRowItemModel> games,
+      int ci});
 }
 
 /// @nodoc
@@ -133,6 +141,7 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
     Object? roleWins = freezed,
     Object? died = freezed,
     Object? games = freezed,
+    Object? ci = freezed,
   }) {
     return _then(_$_ClubRatingRowModel(
       nickname: nickname == freezed
@@ -163,6 +172,10 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
           ? _value._games
           : games // ignore: cast_nullable_to_non_nullable
               as List<GameRowItemModel>,
+      ci: ci == freezed
+          ? _value.ci
+          : ci // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -177,7 +190,8 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
       required this.wins,
       required this.roleWins,
       required this.died,
-      required final List<GameRowItemModel> games})
+      required final List<GameRowItemModel> games,
+      required this.ci})
       : _games = games;
 
   @override
@@ -200,8 +214,11 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
   }
 
   @override
+  final int ci;
+
+  @override
   String toString() {
-    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, roleWins: $roleWins, died: $died, games: $games)';
+    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, roleWins: $roleWins, died: $died, games: $games, ci: $ci)';
   }
 
   @override
@@ -215,7 +232,8 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
             const DeepCollectionEquality().equals(other.wins, wins) &&
             const DeepCollectionEquality().equals(other.roleWins, roleWins) &&
             const DeepCollectionEquality().equals(other.died, died) &&
-            const DeepCollectionEquality().equals(other._games, _games));
+            const DeepCollectionEquality().equals(other._games, _games) &&
+            const DeepCollectionEquality().equals(other.ci, ci));
   }
 
   @override
@@ -227,7 +245,8 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
       const DeepCollectionEquality().hash(wins),
       const DeepCollectionEquality().hash(roleWins),
       const DeepCollectionEquality().hash(died),
-      const DeepCollectionEquality().hash(_games));
+      const DeepCollectionEquality().hash(_games),
+      const DeepCollectionEquality().hash(ci));
 
   @JsonKey(ignore: true)
   @override
@@ -244,7 +263,8 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
       required final int wins,
       required final int roleWins,
       required final int died,
-      required final List<GameRowItemModel> games}) = _$_ClubRatingRowModel;
+      required final List<GameRowItemModel> games,
+      required final int ci}) = _$_ClubRatingRowModel;
 
   @override
   String get nickname;
@@ -260,6 +280,8 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   int get died;
   @override
   List<GameRowItemModel> get games;
+  @override
+  int get ci;
   @override
   @JsonKey(ignore: true)
   _$$_ClubRatingRowModelCopyWith<_$_ClubRatingRowModel> get copyWith =>
