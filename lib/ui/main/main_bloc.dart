@@ -111,6 +111,7 @@ class MainPageRouterMock implements MainPageRouter {
   final _dialogOpened = StreamController<bool>.broadcast();
 
   Stream<MainPageTab?> get openedTab => _openedTabController.stream;
+  Stream<bool> get dialogOpened => _dialogOpened.stream;
 
   @override
   void switchTabTo(MainPageTab tab) {

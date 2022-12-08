@@ -22,13 +22,21 @@ void main() {
 
       var tab = router.openedTab.first;
 
-      bloc.add(const MainEvent.switchTab(tab: MainPageTab.addTournament));
-      expect(await tab, MainPageTab.addTournament);
+      bloc.add(const MainEvent.switchTab(tab: MainPageTab.profileSettings));
+      expect(await tab, MainPageTab.profileSettings);
 
       tab = router.openedTab.first;
 
       bloc.add(const MainEvent.backButtonPressed());
       expect(await tab, null);
+    });
+
+    test('open creation dialog', () async {
+      final bloc = getIt<MainBloc>();
+      final router = bloc.router as MainPageRouterMock;
+      final opened = router.dialogOpened.first;
+      bloc.add(const MainEvent.switchTab(tab: MainPageTab.addTournament));
+      expect(await opened, true);
     });
   });
 }
