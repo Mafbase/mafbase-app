@@ -118,5 +118,7 @@
   "create": "Создать",
   "@create": {},
   "dateTimeRangePlaceholder": "Даты турнира",
-  "@dateTimeRangePlaceholder": {}
+  "@dateTimeRangePlaceholder": {},
+  "fsmSeatingHeader": "Загрузка рассадки с ФСМ турнира",
+  "@fsmSeatingHeader": {}
 }

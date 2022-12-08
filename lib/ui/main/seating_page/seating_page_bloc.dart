@@ -24,6 +24,11 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
+    on<SeatingPageEventFsmSeatingTapped>(_onFsm);
+  }
+
+  _onFsm(SeatingPageEventFsmSeatingTapped event, Emitter emit) {
+    router.openFsmSeatingPage(id: tournamentId);
   }
 
   _onAddPair(SeatingPageEventAddPair event, Emitter emit) async {

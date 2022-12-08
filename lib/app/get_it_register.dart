@@ -266,10 +266,11 @@ void _registerSharedGetIt() {
         context,
       ),
     )
-    ..registerFactoryParam<SeatingInsertingBloc, BuildContext?, dynamic>(
-      (context, _) => SeatingInsertingBloc(
+    ..registerFactoryParam<SeatingInsertingBloc, BuildContext?, int>(
+      (context, id) => SeatingInsertingBloc(
         getIt.get<SeatingInsertingRouter>(param1: context),
-        getIt(),
+        id,
+        context,
       ),
     )
     ..registerFactoryParam<TournamentPageBloc, BuildContext?, dynamic>(

@@ -23,7 +23,6 @@ import 'package:seating_generator_web/ui/main/regulations_page/regulations_page.
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
-import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_page.dart';
@@ -32,12 +31,13 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 class AppRouter {
   final router = GoRouter(
     routes: [
+      TempPage.route,
       ShellRoute(
         builder: (context, state, child) {
           return LayoutBuilder(
             builder: (context, constraints) {
-              final height = max(constraints.maxHeight, 600.0);
-              final width = max(constraints.maxWidth, 800.0);
+              final height = max(constraints.maxHeight, 720.0);
+              final width = max(constraints.maxWidth, 1280.0);
               return SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
                 child: SingleChildScrollView(
@@ -58,7 +58,6 @@ class AppRouter {
           );
         },
         routes: [
-          TempPage.route,
           TranslationContentPage.route,
           TranslationControlPage.route,
           AddClubGamePage.route,
@@ -95,14 +94,7 @@ class AppRouter {
               VerificationPageBody.route,
             ],
           ),
-          GoRoute(
-            path: AppRoutes.translationRoute,
-            builder: (context, state) => BlocProvider(
-              create: (context) =>
-                  getIt.get<SeatingInsertingBloc>(param1: context),
-              child: const SeatingInsertingPage(),
-            ),
-          ),
+          SeatingInsertingPage.route,
           ShellRoute(
             builder: (context, state, child) {
               return MultiBlocProvider(
@@ -197,10 +189,7 @@ class AppRouter {
 
 class AppRoutes {
   AppRoutes._();
-
-  static const verificationPage = '/verification';
   static const loginPageRoute = '/login';
-  static const translationRoute = '/translation';
   static const signUpRoute = '/signUp';
   static const tournamentPlayersListRoute = '/tournament/:id';
 

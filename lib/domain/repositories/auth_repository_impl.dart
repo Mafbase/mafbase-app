@@ -20,6 +20,14 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
         .then(
       (value) async {
         await _storage.onTokensUpdated(value.token, value.recoveryToken);
+        switch (value.error) {
+          case LoginEventOut_Error.invalidCredentials:
+            return const LoginModel.error();
+          case LoginEventOut_Error.needVerification:
+            return LoginModel.needVerification(id: value.id);
+          case LoginEventOut_Error.noError:
+            return const LoginModel.success();
+        }
         return const LoginModel.success();
       },
     ).onError(
@@ -31,8 +39,9 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
 
   @override
   Future<SignUpModel> signUp(String email, String password) async {
-    final value = await SignUpRequest(SignUpEvent(email: email, password: password))
-        .execute(client);
+    final value =
+        await SignUpRequest(SignUpEvent(email: email, password: password))
+            .execute(client);
     switch (value.error) {
       case SignUpEventOut_Error.emailExist:
         return const SignUpModel(error: ErrorEnum.emailExist);
@@ -49,9 +58,10 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
 
   @override
   Future<bool> verificate(int id, String token) async {
-    final value = await VerificationRequest(EmailVerificationEvent(id: id, token: token)).execute(client);
-    switch(value.status) {
-
+    final value =
+        await VerificationRequest(EmailVerificationEvent(id: id, token: token))
+            .execute(client);
+    switch (value.status) {
       case EmailVerificationEventOut_Status.incorrectToken:
         return false;
       case EmailVerificationEventOut_Status.success:

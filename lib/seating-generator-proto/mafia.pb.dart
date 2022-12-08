@@ -79,6 +79,7 @@ class LoginEventOut extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'recoveryToken', protoName: 'recoveryToken')
     ..e<LoginEventOut_Error>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error', $pb.PbFieldType.OE, defaultOrMaker: LoginEventOut_Error.noError, valueOf: LoginEventOut_Error.valueOf, enumValues: LoginEventOut_Error.values)
+    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -87,6 +88,7 @@ class LoginEventOut extends $pb.GeneratedMessage {
     $core.String? token,
     $core.String? recoveryToken,
     LoginEventOut_Error? error,
+    $core.int? id,
   }) {
     final _result = create();
     if (token != null) {
@@ -97,6 +99,9 @@ class LoginEventOut extends $pb.GeneratedMessage {
     }
     if (error != null) {
       _result.error = error;
+    }
+    if (id != null) {
+      _result.id = id;
     }
     return _result;
   }
@@ -147,6 +152,15 @@ class LoginEventOut extends $pb.GeneratedMessage {
   $core.bool hasError() => $_has(2);
   @$pb.TagNumber(3)
   void clearError() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get id => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set id($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearId() => clearField(4);
 }
 
 class ChangeSeatingContent extends $pb.GeneratedMessage {

@@ -52,8 +52,12 @@ const LoginEventOut$json = const {
     const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
     const {'1': 'recoveryToken', '3': 2, '4': 1, '5': 9, '10': 'recoveryToken'},
     const {'1': 'error', '3': 3, '4': 1, '5': 14, '6': '.generated.LoginEventOut.Error', '10': 'error'},
+    const {'1': 'id', '3': 4, '4': 1, '5': 5, '9': 0, '10': 'id', '17': true},
   ],
   '4': const [LoginEventOut_Error$json],
+  '8': const [
+    const {'1': '_id'},
+  ],
 };
 
 @$core.Deprecated('Use loginEventOutDescriptor instead')
@@ -67,7 +71,7 @@ const LoginEventOut_Error$json = const {
 };
 
 /// Descriptor for `LoginEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List loginEventOutDescriptor = $convert.base64Decode('Cg1Mb2dpbkV2ZW50T3V0EhQKBXRva2VuGAEgASgJUgV0b2tlbhIkCg1yZWNvdmVyeVRva2VuGAIgASgJUg1yZWNvdmVyeVRva2VuEjQKBWVycm9yGAMgASgOMh4uZ2VuZXJhdGVkLkxvZ2luRXZlbnRPdXQuRXJyb3JSBWVycm9yIkIKBUVycm9yEgsKB25vRXJyb3IQABIUChBuZWVkVmVyaWZpY2F0aW9uEAESFgoSaW52YWxpZENyZWRlbnRpYWxzEAI=');
+final $typed_data.Uint8List loginEventOutDescriptor = $convert.base64Decode('Cg1Mb2dpbkV2ZW50T3V0EhQKBXRva2VuGAEgASgJUgV0b2tlbhIkCg1yZWNvdmVyeVRva2VuGAIgASgJUg1yZWNvdmVyeVRva2VuEjQKBWVycm9yGAMgASgOMh4uZ2VuZXJhdGVkLkxvZ2luRXZlbnRPdXQuRXJyb3JSBWVycm9yEhMKAmlkGAQgASgFSABSAmlkiAEBIkIKBUVycm9yEgsKB25vRXJyb3IQABIUChBuZWVkVmVyaWZpY2F0aW9uEAESFgoSaW52YWxpZENyZWRlbnRpYWxzEAJCBQoDX2lk');
 @$core.Deprecated('Use changeSeatingContentDescriptor instead')
 const ChangeSeatingContent$json = const {
   '1': 'ChangeSeatingContent',

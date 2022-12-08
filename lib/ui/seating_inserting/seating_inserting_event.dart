@@ -4,9 +4,7 @@ part 'seating_inserting_event.freezed.dart';
 
 @freezed
 class SeatingInsertingEvent with _$SeatingInsertingEvent {
-  const factory SeatingInsertingEvent.save({
-    required int tournamentId,
-  }) = SeatingInsertingSaveEvent;
+  const factory SeatingInsertingEvent.save() = SeatingInsertingSaveEvent;
 
   const factory SeatingInsertingEvent.onFileSelected({
     required Stream<List<int>> bytesStream,

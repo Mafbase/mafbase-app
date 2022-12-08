@@ -19,6 +19,7 @@ mixin _$SeatingPageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() addPair,
+    required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
   }) =>
@@ -26,6 +27,7 @@ mixin _$SeatingPageEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
   }) =>
@@ -33,6 +35,7 @@ mixin _$SeatingPageEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     required TResult orElse(),
@@ -41,6 +44,8 @@ mixin _$SeatingPageEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
   }) =>
@@ -48,6 +53,7 @@ mixin _$SeatingPageEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
   }) =>
@@ -55,6 +61,7 @@ mixin _$SeatingPageEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
@@ -123,6 +130,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() addPair,
+    required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
   }) {
@@ -133,6 +141,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
   }) {
@@ -143,6 +152,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     required TResult orElse(),
@@ -157,6 +167,8 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
   }) {
@@ -167,6 +179,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
@@ -177,6 +190,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
@@ -190,6 +204,130 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
 
 abstract class SeatingPageEventAddPair implements SeatingPageEvent {
   const factory SeatingPageEventAddPair() = _$SeatingPageEventAddPair;
+}
+
+/// @nodoc
+abstract class _$$SeatingPageEventFsmSeatingTappedCopyWith<$Res> {
+  factory _$$SeatingPageEventFsmSeatingTappedCopyWith(
+          _$SeatingPageEventFsmSeatingTapped value,
+          $Res Function(_$SeatingPageEventFsmSeatingTapped) then) =
+      __$$SeatingPageEventFsmSeatingTappedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SeatingPageEventFsmSeatingTappedCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res>
+    implements _$$SeatingPageEventFsmSeatingTappedCopyWith<$Res> {
+  __$$SeatingPageEventFsmSeatingTappedCopyWithImpl(
+      _$SeatingPageEventFsmSeatingTapped _value,
+      $Res Function(_$SeatingPageEventFsmSeatingTapped) _then)
+      : super(_value, (v) => _then(v as _$SeatingPageEventFsmSeatingTapped));
+
+  @override
+  _$SeatingPageEventFsmSeatingTapped get _value =>
+      super._value as _$SeatingPageEventFsmSeatingTapped;
+}
+
+/// @nodoc
+
+class _$SeatingPageEventFsmSeatingTapped
+    implements SeatingPageEventFsmSeatingTapped {
+  const _$SeatingPageEventFsmSeatingTapped();
+
+  @override
+  String toString() {
+    return 'SeatingPageEvent.fsmSeatingTapped()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SeatingPageEventFsmSeatingTapped);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() addPair,
+    required TResult Function() fsmSeatingTapped,
+    required TResult Function(PlayerModel first, PlayerModel second) deletePair,
+    required TResult Function(int tournamentId) pageOpened,
+  }) {
+    return fsmSeatingTapped();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
+    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult Function(int tournamentId)? pageOpened,
+  }) {
+    return fsmSeatingTapped?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
+    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult Function(int tournamentId)? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (fsmSeatingTapped != null) {
+      return fsmSeatingTapped();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
+    required TResult Function(SeatingPageEventDeletePair value) deletePair,
+    required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+  }) {
+    return fsmSeatingTapped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+  }) {
+    return fsmSeatingTapped?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (fsmSeatingTapped != null) {
+      return fsmSeatingTapped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SeatingPageEventFsmSeatingTapped implements SeatingPageEvent {
+  const factory SeatingPageEventFsmSeatingTapped() =
+      _$SeatingPageEventFsmSeatingTapped;
 }
 
 /// @nodoc
@@ -290,6 +428,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() addPair,
+    required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
   }) {
@@ -300,6 +439,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
   }) {
@@ -310,6 +450,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     required TResult orElse(),
@@ -324,6 +465,8 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
   }) {
@@ -334,6 +477,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
@@ -344,6 +488,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
@@ -438,6 +583,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() addPair,
+    required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
   }) {
@@ -448,6 +594,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
   }) {
@@ -458,6 +605,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? addPair,
+    TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     required TResult orElse(),
@@ -472,6 +620,8 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
   }) {
@@ -482,6 +632,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
@@ -492,6 +643,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     required TResult orElse(),

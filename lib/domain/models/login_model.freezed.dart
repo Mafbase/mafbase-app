@@ -19,18 +19,21 @@ mixin _$LoginModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
+    required TResult Function(int id) needVerification,
     required TResult Function(String? message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
+    TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
+    TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) =>
@@ -38,18 +41,21 @@ mixin _$LoginModel {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Success value) success,
+    required TResult Function(NeedVerification value) needVerification,
     required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
     TResult Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) =>
@@ -111,6 +117,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
+    required TResult Function(int id) needVerification,
     required TResult Function(String? message) error,
   }) {
     return success();
@@ -120,6 +127,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
+    TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
   }) {
     return success?.call();
@@ -129,6 +137,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
+    TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -142,6 +151,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Success value) success,
+    required TResult Function(NeedVerification value) needVerification,
     required TResult Function(Error value) error,
   }) {
     return success(this);
@@ -151,6 +161,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
     TResult Function(Error value)? error,
   }) {
     return success?.call(this);
@@ -160,6 +171,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -172,6 +184,146 @@ class _$Success implements Success {
 
 abstract class Success implements LoginModel {
   const factory Success() = _$Success;
+}
+
+/// @nodoc
+abstract class _$$NeedVerificationCopyWith<$Res> {
+  factory _$$NeedVerificationCopyWith(
+          _$NeedVerification value, $Res Function(_$NeedVerification) then) =
+      __$$NeedVerificationCopyWithImpl<$Res>;
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$NeedVerificationCopyWithImpl<$Res>
+    extends _$LoginModelCopyWithImpl<$Res>
+    implements _$$NeedVerificationCopyWith<$Res> {
+  __$$NeedVerificationCopyWithImpl(
+      _$NeedVerification _value, $Res Function(_$NeedVerification) _then)
+      : super(_value, (v) => _then(v as _$NeedVerification));
+
+  @override
+  _$NeedVerification get _value => super._value as _$NeedVerification;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_$NeedVerification(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NeedVerification implements NeedVerification {
+  const _$NeedVerification({required this.id});
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'LoginModel.needVerification(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NeedVerification &&
+            const DeepCollectionEquality().equals(other.id, id));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$NeedVerificationCopyWith<_$NeedVerification> get copyWith =>
+      __$$NeedVerificationCopyWithImpl<_$NeedVerification>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() success,
+    required TResult Function(int id) needVerification,
+    required TResult Function(String? message) error,
+  }) {
+    return needVerification(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? success,
+    TResult Function(int id)? needVerification,
+    TResult Function(String? message)? error,
+  }) {
+    return needVerification?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? success,
+    TResult Function(int id)? needVerification,
+    TResult Function(String? message)? error,
+    required TResult orElse(),
+  }) {
+    if (needVerification != null) {
+      return needVerification(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Success value) success,
+    required TResult Function(NeedVerification value) needVerification,
+    required TResult Function(Error value) error,
+  }) {
+    return needVerification(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
+    TResult Function(Error value)? error,
+  }) {
+    return needVerification?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (needVerification != null) {
+      return needVerification(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NeedVerification implements LoginModel {
+  const factory NeedVerification({required final int id}) = _$NeedVerification;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$NeedVerificationCopyWith<_$NeedVerification> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -237,6 +389,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
+    required TResult Function(int id) needVerification,
     required TResult Function(String? message) error,
   }) {
     return error(message);
@@ -246,6 +399,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
+    TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
   }) {
     return error?.call(message);
@@ -255,6 +409,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
+    TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -268,6 +423,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Success value) success,
+    required TResult Function(NeedVerification value) needVerification,
     required TResult Function(Error value) error,
   }) {
     return error(this);
@@ -277,6 +433,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
     TResult Function(Error value)? error,
   }) {
     return error?.call(this);
@@ -286,6 +443,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Success value)? success,
+    TResult Function(NeedVerification value)? needVerification,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {

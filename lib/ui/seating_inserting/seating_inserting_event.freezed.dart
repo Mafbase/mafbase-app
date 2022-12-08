@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SeatingInsertingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int tournamentId) save,
+    required TResult Function() save,
     required TResult Function(Stream<List<int>> bytesStream) onFileSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int tournamentId)? save,
+    TResult Function()? save,
     TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int tournamentId)? save,
+    TResult Function()? save,
     TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
     required TResult orElse(),
   }) =>
@@ -80,7 +80,6 @@ abstract class _$$SeatingInsertingSaveEventCopyWith<$Res> {
           _$SeatingInsertingSaveEvent value,
           $Res Function(_$SeatingInsertingSaveEvent) then) =
       __$$SeatingInsertingSaveEventCopyWithImpl<$Res>;
-  $Res call({int tournamentId});
 }
 
 /// @nodoc
@@ -94,79 +93,55 @@ class __$$SeatingInsertingSaveEventCopyWithImpl<$Res>
   @override
   _$SeatingInsertingSaveEvent get _value =>
       super._value as _$SeatingInsertingSaveEvent;
-
-  @override
-  $Res call({
-    Object? tournamentId = freezed,
-  }) {
-    return _then(_$SeatingInsertingSaveEvent(
-      tournamentId: tournamentId == freezed
-          ? _value.tournamentId
-          : tournamentId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$SeatingInsertingSaveEvent implements SeatingInsertingSaveEvent {
-  const _$SeatingInsertingSaveEvent({required this.tournamentId});
-
-  @override
-  final int tournamentId;
+  const _$SeatingInsertingSaveEvent();
 
   @override
   String toString() {
-    return 'SeatingInsertingEvent.save(tournamentId: $tournamentId)';
+    return 'SeatingInsertingEvent.save()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingInsertingSaveEvent &&
-            const DeepCollectionEquality()
-                .equals(other.tournamentId, tournamentId));
+            other is _$SeatingInsertingSaveEvent);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(tournamentId));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$SeatingInsertingSaveEventCopyWith<_$SeatingInsertingSaveEvent>
-      get copyWith => __$$SeatingInsertingSaveEventCopyWithImpl<
-          _$SeatingInsertingSaveEvent>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int tournamentId) save,
+    required TResult Function() save,
     required TResult Function(Stream<List<int>> bytesStream) onFileSelected,
   }) {
-    return save(tournamentId);
+    return save();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int tournamentId)? save,
+    TResult Function()? save,
     TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
   }) {
-    return save?.call(tournamentId);
+    return save?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int tournamentId)? save,
+    TResult Function()? save,
     TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
     required TResult orElse(),
   }) {
     if (save != null) {
-      return save(tournamentId);
+      return save();
     }
     return orElse();
   }
@@ -205,13 +180,7 @@ class _$SeatingInsertingSaveEvent implements SeatingInsertingSaveEvent {
 }
 
 abstract class SeatingInsertingSaveEvent implements SeatingInsertingEvent {
-  const factory SeatingInsertingSaveEvent({required final int tournamentId}) =
-      _$SeatingInsertingSaveEvent;
-
-  int get tournamentId;
-  @JsonKey(ignore: true)
-  _$$SeatingInsertingSaveEventCopyWith<_$SeatingInsertingSaveEvent>
-      get copyWith => throw _privateConstructorUsedError;
+  const factory SeatingInsertingSaveEvent() = _$SeatingInsertingSaveEvent;
 }
 
 /// @nodoc
@@ -286,7 +255,7 @@ class _$SeatingInsertingFileSelectedEvent
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int tournamentId) save,
+    required TResult Function() save,
     required TResult Function(Stream<List<int>> bytesStream) onFileSelected,
   }) {
     return onFileSelected(bytesStream);
@@ -295,7 +264,7 @@ class _$SeatingInsertingFileSelectedEvent
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int tournamentId)? save,
+    TResult Function()? save,
     TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
   }) {
     return onFileSelected?.call(bytesStream);
@@ -304,7 +273,7 @@ class _$SeatingInsertingFileSelectedEvent
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int tournamentId)? save,
+    TResult Function()? save,
     TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
     required TResult orElse(),
   }) {

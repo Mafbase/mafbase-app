@@ -59,7 +59,9 @@ class _SeatingPageState extends State<SeatingPage> {
                     context.locale.separateTitle,
                     style: MyTheme.of(context).headerTextStyle,
                   ),
-                  const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Flexible(
                     child: ListView.builder(
                       shrinkWrap: true,
@@ -140,7 +142,22 @@ class _SeatingPageState extends State<SeatingPage> {
                         style: MyTheme.of(context).textBtnTextStyle,
                       ),
                     ),
-                  )
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      context.read<SeatingPageBloc>().add(
+                            const SeatingPageEvent.fsmSeatingTapped(),
+                          );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Загрузить готовую рассадку",
+                        style: MyTheme.of(context).textBtnTextStyle,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

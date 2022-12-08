@@ -9,6 +9,7 @@ import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
 class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
   final LoginInteractor _loginInteractor;
@@ -50,6 +51,9 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     if (result is Success) {
       router.openMainPage();
       emit(LoginState(hasError: false));
+    } else if (result is NeedVerification) {
+      router.openVerificationPage(result.id);
+      emit(LoginState(hasError: false));
     } else {
       emit(LoginState(hasError: true));
     }
@@ -65,6 +69,8 @@ abstract class LoginPageRouter {
   void openMainPage();
 
   void openForgotPasswordPage();
+
+  void openVerificationPage(int id);
 
   void openSignUpPage();
 }
@@ -95,6 +101,11 @@ class LoginPageRouterMock implements LoginPageRouter {
   void openSignUpPage() {
     _signUpPageOpenedController.add(true);
   }
+
+  @override
+  void openVerificationPage(int id) {
+    // TODO: implement openVerificationPage
+  }
 }
 
 class LoginPageRouterImpl implements LoginPageRouter {
@@ -116,5 +127,10 @@ class LoginPageRouterImpl implements LoginPageRouter {
   @override
   void openSignUpPage() {
     GoRouter.of(_context).go(AppRoutes.signUpRoute);
+  }
+
+  @override
+  void openVerificationPage(int id) {
+    _context.go(VerificationPageBody.namedLocation(_context, id));
   }
 }
