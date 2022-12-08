@@ -188,7 +188,9 @@ class _RatingTableState extends State<RatingTable> {
         ),
       );
 
-  Widget ciWidget(int index) => Text((widget.rows[index].ci / 100).toString());
+  Widget ciWidget(int index) => wrap(
+        Text((widget.rows[index].ci / 100).toString()),
+      );
 
   Widget get diesPrototype => wrap(
         Text(
