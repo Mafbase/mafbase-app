@@ -7,6 +7,8 @@ part 'seating_page_event.freezed.dart';
 class SeatingPageEvent with _$SeatingPageEvent {
   const factory SeatingPageEvent.addPair() = SeatingPageEventAddPair;
 
+  const factory SeatingPageEvent.createSeating() = SeatingPageEventCreateSeating;
+
   const factory SeatingPageEvent.fsmSeatingTapped() =
       SeatingPageEventFsmSeatingTapped;
 

@@ -9,6 +9,7 @@ import 'package:seating_generator_web/domain/interactors/add_photo_interactor.da
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/create_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_separation_interactor.dart';
@@ -182,6 +183,9 @@ void _registerSharedGetIt() {
     )
     ..registerLazySingleton<DeletePlayerInteractor>(
       () => DeletePlayerInteractor(getIt()),
+    )
+    ..registerLazySingleton<CreateSeatingInteractor>(
+      () => CreateSeatingInteractor(getIt()),
     )
     ..registerLazySingleton<GetTournamentsPlayersInteractor>(
       () => GetTournamentsPlayersInteractor(getIt()),

@@ -1,5 +1,6 @@
 import 'package:flutter/src/material/date.dart';
 import 'package:intl/intl.dart';
+import 'package:seating_generator_web/data/requests/create_seating_request.dart';
 import 'package:seating_generator_web/data/requests/create_tournament_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
@@ -34,5 +35,10 @@ class TournamentsRepositoryImpl extends BaseRepository
     return CreateTournamentRequest(name: name, dateTimeRange: range)
         .execute(client)
         .then((value) => value.id);
+  }
+
+  @override
+  Future createSeating({required int id}) {
+    return CreateSeatingRequest(tournamentId: id).execute(client);
   }
 }

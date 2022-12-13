@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/create_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
@@ -17,6 +18,7 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
       getIt();
   final AddSeparationInteractor _addSeparationInteractor = getIt();
   final DeleteSeparationInteractor _deleteSeparationInteractor = getIt();
+  final CreateSeatingInteractor _createSeatingInteractor = getIt();
   late final SeatingPageRouter router = getIt(param1: context);
 
   SeatingPageBloc([BuildContext? context])
@@ -25,6 +27,14 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
     on<SeatingPageEventFsmSeatingTapped>(_onFsm);
+    on<SeatingPageEventCreateSeating>(_onCreateSeating);
+  }
+
+  _onCreateSeating(
+    SeatingPageEventCreateSeating event,
+    Emitter emit,
+  ) async {
+    return _createSeatingInteractor.run(tournamentId: tournamentId);
   }
 
   _onFsm(SeatingPageEventFsmSeatingTapped event, Emitter emit) {

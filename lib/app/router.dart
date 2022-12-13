@@ -32,6 +32,8 @@ class AppRouter {
   final router = GoRouter(
     routes: [
       TempPage.route,
+      TranslationContentPage.route,
+      TranslationControlPage.route,
       ShellRoute(
         builder: (context, state, child) {
           return LayoutBuilder(
@@ -46,9 +48,11 @@ class AppRouter {
                   child: SelectableRegion(
                     focusNode: FocusNode(),
                     selectionControls: desktopTextSelectionControls,
-                    child: SizedBox(
-                      width: width,
-                      height: height,
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: width,
+                        maxHeight: height,
+                      ),
                       child: child,
                     ),
                   ),
@@ -58,8 +62,6 @@ class AppRouter {
           );
         },
         routes: [
-          TranslationContentPage.route,
-          TranslationControlPage.route,
           AddClubGamePage.route,
           RatingPage.route,
           ShellRoute(
@@ -189,6 +191,7 @@ class AppRouter {
 
 class AppRoutes {
   AppRoutes._();
+
   static const loginPageRoute = '/login';
   static const signUpRoute = '/signUp';
   static const tournamentPlayersListRoute = '/tournament/:id';

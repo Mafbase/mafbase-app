@@ -8,4 +8,6 @@ abstract class TournamentsRepository {
     required String name,
     required DateTimeRange range,
   });
+
+  Future createSeating({required int id});
 }

@@ -120,5 +120,13 @@
   "dateTimeRangePlaceholder": "Даты турнира",
   "@dateTimeRangePlaceholder": {},
   "fsmSeatingHeader": "Загрузка рассадки с ФСМ турнира",
-  "@fsmSeatingHeader": {}
+  "@fsmSeatingHeader": {},
+  "tournamentSettingsTitle": "Настройки турнира",
+  "@tournamentSettingsTitle": {},
+  "defaultGamesLabel": "Количество обычных игр",
+  "@defaultGamesLabel": {},
+  "swissGamesLabel": "Количество игр по швейцарке",
+  "@swissGamesLabel": {},
+  "finalGamesLabel": "Количество финальных игр",
+  "@finalGamesLabel": {}
 }

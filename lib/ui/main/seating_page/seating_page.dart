@@ -143,7 +143,20 @@ class _SeatingPageState extends State<SeatingPage> {
                       ),
                     ),
                   ),
-                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      context.read<SeatingPageBloc>().add(
+                        const SeatingPageEvent.createSeating(),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Сгенерировать рассадку",
+                        style: MyTheme.of(context).textBtnTextStyle,
+                      ),
+                    ),
+                  ),
                   TextButton(
                     onPressed: () {
                       context.read<SeatingPageBloc>().add(

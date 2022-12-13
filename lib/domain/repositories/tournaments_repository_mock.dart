@@ -31,4 +31,9 @@ class TournamentsRepositoryMock implements TournamentsRepository {
   Future<int> createTournament({required String name, required DateTimeRange range}) {
     return Future.value(1);
   }
+
+  @override
+  Future createSeating({required int id}) {
+    return Future.value();
+  }
 }
