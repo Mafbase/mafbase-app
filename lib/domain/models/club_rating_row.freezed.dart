@@ -20,7 +20,15 @@ mixin _$ClubRatingRowModel {
   double get score => throw _privateConstructorUsedError;
   double get addScore => throw _privateConstructorUsedError;
   int get wins => throw _privateConstructorUsedError;
-  int get roleWins => throw _privateConstructorUsedError;
+  int get gamesCount => throw _privateConstructorUsedError;
+  int get citizenGamesCount => throw _privateConstructorUsedError;
+  int get donsGamesCount => throw _privateConstructorUsedError;
+  int get sheriffGamesCount => throw _privateConstructorUsedError;
+  int get mafiaGamesCount => throw _privateConstructorUsedError;
+  int get citizenWinsCount => throw _privateConstructorUsedError;
+  int get donsWinsCount => throw _privateConstructorUsedError;
+  int get sheriffWinsCount => throw _privateConstructorUsedError;
+  int get mafiaWinsCount => throw _privateConstructorUsedError;
   int get died => throw _privateConstructorUsedError;
   List<GameRowItemModel> get games => throw _privateConstructorUsedError;
   int get ci => throw _privateConstructorUsedError;
@@ -40,7 +48,15 @@ abstract class $ClubRatingRowModelCopyWith<$Res> {
       double score,
       double addScore,
       int wins,
-      int roleWins,
+      int gamesCount,
+      int citizenGamesCount,
+      int donsGamesCount,
+      int sheriffGamesCount,
+      int mafiaGamesCount,
+      int citizenWinsCount,
+      int donsWinsCount,
+      int sheriffWinsCount,
+      int mafiaWinsCount,
       int died,
       List<GameRowItemModel> games,
       int ci});
@@ -61,7 +77,15 @@ class _$ClubRatingRowModelCopyWithImpl<$Res>
     Object? score = freezed,
     Object? addScore = freezed,
     Object? wins = freezed,
-    Object? roleWins = freezed,
+    Object? gamesCount = freezed,
+    Object? citizenGamesCount = freezed,
+    Object? donsGamesCount = freezed,
+    Object? sheriffGamesCount = freezed,
+    Object? mafiaGamesCount = freezed,
+    Object? citizenWinsCount = freezed,
+    Object? donsWinsCount = freezed,
+    Object? sheriffWinsCount = freezed,
+    Object? mafiaWinsCount = freezed,
     Object? died = freezed,
     Object? games = freezed,
     Object? ci = freezed,
@@ -83,9 +107,41 @@ class _$ClubRatingRowModelCopyWithImpl<$Res>
           ? _value.wins
           : wins // ignore: cast_nullable_to_non_nullable
               as int,
-      roleWins: roleWins == freezed
-          ? _value.roleWins
-          : roleWins // ignore: cast_nullable_to_non_nullable
+      gamesCount: gamesCount == freezed
+          ? _value.gamesCount
+          : gamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenGamesCount: citizenGamesCount == freezed
+          ? _value.citizenGamesCount
+          : citizenGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      donsGamesCount: donsGamesCount == freezed
+          ? _value.donsGamesCount
+          : donsGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sheriffGamesCount: sheriffGamesCount == freezed
+          ? _value.sheriffGamesCount
+          : sheriffGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaGamesCount: mafiaGamesCount == freezed
+          ? _value.mafiaGamesCount
+          : mafiaGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenWinsCount: citizenWinsCount == freezed
+          ? _value.citizenWinsCount
+          : citizenWinsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      donsWinsCount: donsWinsCount == freezed
+          ? _value.donsWinsCount
+          : donsWinsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sheriffWinsCount: sheriffWinsCount == freezed
+          ? _value.sheriffWinsCount
+          : sheriffWinsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaWinsCount: mafiaWinsCount == freezed
+          ? _value.mafiaWinsCount
+          : mafiaWinsCount // ignore: cast_nullable_to_non_nullable
               as int,
       died: died == freezed
           ? _value.died
@@ -115,7 +171,15 @@ abstract class _$$_ClubRatingRowModelCopyWith<$Res>
       double score,
       double addScore,
       int wins,
-      int roleWins,
+      int gamesCount,
+      int citizenGamesCount,
+      int donsGamesCount,
+      int sheriffGamesCount,
+      int mafiaGamesCount,
+      int citizenWinsCount,
+      int donsWinsCount,
+      int sheriffWinsCount,
+      int mafiaWinsCount,
       int died,
       List<GameRowItemModel> games,
       int ci});
@@ -138,7 +202,15 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
     Object? score = freezed,
     Object? addScore = freezed,
     Object? wins = freezed,
-    Object? roleWins = freezed,
+    Object? gamesCount = freezed,
+    Object? citizenGamesCount = freezed,
+    Object? donsGamesCount = freezed,
+    Object? sheriffGamesCount = freezed,
+    Object? mafiaGamesCount = freezed,
+    Object? citizenWinsCount = freezed,
+    Object? donsWinsCount = freezed,
+    Object? sheriffWinsCount = freezed,
+    Object? mafiaWinsCount = freezed,
     Object? died = freezed,
     Object? games = freezed,
     Object? ci = freezed,
@@ -160,9 +232,41 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
           ? _value.wins
           : wins // ignore: cast_nullable_to_non_nullable
               as int,
-      roleWins: roleWins == freezed
-          ? _value.roleWins
-          : roleWins // ignore: cast_nullable_to_non_nullable
+      gamesCount: gamesCount == freezed
+          ? _value.gamesCount
+          : gamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenGamesCount: citizenGamesCount == freezed
+          ? _value.citizenGamesCount
+          : citizenGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      donsGamesCount: donsGamesCount == freezed
+          ? _value.donsGamesCount
+          : donsGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sheriffGamesCount: sheriffGamesCount == freezed
+          ? _value.sheriffGamesCount
+          : sheriffGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaGamesCount: mafiaGamesCount == freezed
+          ? _value.mafiaGamesCount
+          : mafiaGamesCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenWinsCount: citizenWinsCount == freezed
+          ? _value.citizenWinsCount
+          : citizenWinsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      donsWinsCount: donsWinsCount == freezed
+          ? _value.donsWinsCount
+          : donsWinsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      sheriffWinsCount: sheriffWinsCount == freezed
+          ? _value.sheriffWinsCount
+          : sheriffWinsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaWinsCount: mafiaWinsCount == freezed
+          ? _value.mafiaWinsCount
+          : mafiaWinsCount // ignore: cast_nullable_to_non_nullable
               as int,
       died: died == freezed
           ? _value.died
@@ -188,7 +292,15 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
       required this.score,
       required this.addScore,
       required this.wins,
-      required this.roleWins,
+      required this.gamesCount,
+      required this.citizenGamesCount,
+      required this.donsGamesCount,
+      required this.sheriffGamesCount,
+      required this.mafiaGamesCount,
+      required this.citizenWinsCount,
+      required this.donsWinsCount,
+      required this.sheriffWinsCount,
+      required this.mafiaWinsCount,
       required this.died,
       required final List<GameRowItemModel> games,
       required this.ci})
@@ -203,7 +315,23 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
   @override
   final int wins;
   @override
-  final int roleWins;
+  final int gamesCount;
+  @override
+  final int citizenGamesCount;
+  @override
+  final int donsGamesCount;
+  @override
+  final int sheriffGamesCount;
+  @override
+  final int mafiaGamesCount;
+  @override
+  final int citizenWinsCount;
+  @override
+  final int donsWinsCount;
+  @override
+  final int sheriffWinsCount;
+  @override
+  final int mafiaWinsCount;
   @override
   final int died;
   final List<GameRowItemModel> _games;
@@ -218,7 +346,7 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
 
   @override
   String toString() {
-    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, roleWins: $roleWins, died: $died, games: $games, ci: $ci)';
+    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, gamesCount: $gamesCount, citizenGamesCount: $citizenGamesCount, donsGamesCount: $donsGamesCount, sheriffGamesCount: $sheriffGamesCount, mafiaGamesCount: $mafiaGamesCount, citizenWinsCount: $citizenWinsCount, donsWinsCount: $donsWinsCount, sheriffWinsCount: $sheriffWinsCount, mafiaWinsCount: $mafiaWinsCount, died: $died, games: $games, ci: $ci)';
   }
 
   @override
@@ -230,7 +358,24 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.addScore, addScore) &&
             const DeepCollectionEquality().equals(other.wins, wins) &&
-            const DeepCollectionEquality().equals(other.roleWins, roleWins) &&
+            const DeepCollectionEquality()
+                .equals(other.gamesCount, gamesCount) &&
+            const DeepCollectionEquality()
+                .equals(other.citizenGamesCount, citizenGamesCount) &&
+            const DeepCollectionEquality()
+                .equals(other.donsGamesCount, donsGamesCount) &&
+            const DeepCollectionEquality()
+                .equals(other.sheriffGamesCount, sheriffGamesCount) &&
+            const DeepCollectionEquality()
+                .equals(other.mafiaGamesCount, mafiaGamesCount) &&
+            const DeepCollectionEquality()
+                .equals(other.citizenWinsCount, citizenWinsCount) &&
+            const DeepCollectionEquality()
+                .equals(other.donsWinsCount, donsWinsCount) &&
+            const DeepCollectionEquality()
+                .equals(other.sheriffWinsCount, sheriffWinsCount) &&
+            const DeepCollectionEquality()
+                .equals(other.mafiaWinsCount, mafiaWinsCount) &&
             const DeepCollectionEquality().equals(other.died, died) &&
             const DeepCollectionEquality().equals(other._games, _games) &&
             const DeepCollectionEquality().equals(other.ci, ci));
@@ -243,7 +388,15 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
       const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(addScore),
       const DeepCollectionEquality().hash(wins),
-      const DeepCollectionEquality().hash(roleWins),
+      const DeepCollectionEquality().hash(gamesCount),
+      const DeepCollectionEquality().hash(citizenGamesCount),
+      const DeepCollectionEquality().hash(donsGamesCount),
+      const DeepCollectionEquality().hash(sheriffGamesCount),
+      const DeepCollectionEquality().hash(mafiaGamesCount),
+      const DeepCollectionEquality().hash(citizenWinsCount),
+      const DeepCollectionEquality().hash(donsWinsCount),
+      const DeepCollectionEquality().hash(sheriffWinsCount),
+      const DeepCollectionEquality().hash(mafiaWinsCount),
       const DeepCollectionEquality().hash(died),
       const DeepCollectionEquality().hash(_games),
       const DeepCollectionEquality().hash(ci));
@@ -261,7 +414,15 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
       required final double score,
       required final double addScore,
       required final int wins,
-      required final int roleWins,
+      required final int gamesCount,
+      required final int citizenGamesCount,
+      required final int donsGamesCount,
+      required final int sheriffGamesCount,
+      required final int mafiaGamesCount,
+      required final int citizenWinsCount,
+      required final int donsWinsCount,
+      required final int sheriffWinsCount,
+      required final int mafiaWinsCount,
       required final int died,
       required final List<GameRowItemModel> games,
       required final int ci}) = _$_ClubRatingRowModel;
@@ -275,7 +436,23 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   @override
   int get wins;
   @override
-  int get roleWins;
+  int get gamesCount;
+  @override
+  int get citizenGamesCount;
+  @override
+  int get donsGamesCount;
+  @override
+  int get sheriffGamesCount;
+  @override
+  int get mafiaGamesCount;
+  @override
+  int get citizenWinsCount;
+  @override
+  int get donsWinsCount;
+  @override
+  int get sheriffWinsCount;
+  @override
+  int get mafiaWinsCount;
   @override
   int get died;
   @override

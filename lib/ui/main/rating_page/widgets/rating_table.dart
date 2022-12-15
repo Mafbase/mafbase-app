@@ -1,20 +1,27 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
-import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/domain/models/club_rating_row.dart';
+
+enum RatingTableStyle {
+  full,
+  stats;
+}
 
 class RatingTable extends StatefulWidget {
   final List<ClubRatingRowModel> rows;
   final int clubId;
   final Function(int gameId) openGame;
+  final RatingTableStyle style;
 
   const RatingTable({
     Key? key,
     required this.rows,
     required this.clubId,
     required this.openGame,
-  }) : super(key: key);
+    RatingTableStyle? style,
+  })  : style = style ?? RatingTableStyle.full,
+        super(key: key);
 
   @override
   State<RatingTable> createState() => _RatingTableState();
@@ -22,16 +29,20 @@ class RatingTable extends StatefulWidget {
 
 class _RatingTableState extends State<RatingTable> {
   late LinkedScrollControllerGroup linkedScrollControllerGroup;
-  final mainLinkedScrollControllerGroup = LinkedScrollControllerGroup();
+  late LinkedScrollControllerGroup mainLinkedScrollControllerGroup;
   late List<ScrollController> controllers;
-  late final List<ScrollController> mainControllers = List.generate(
-    9,
-    (index) => mainLinkedScrollControllerGroup.addAndGet(),
-  );
+  late List<ScrollController> mainControllers;
+
+  int get mainControllersSize => widget.style == RatingTableStyle.full ? 9 : 8;
 
   @override
   void initState() {
     linkedScrollControllerGroup = LinkedScrollControllerGroup();
+    mainLinkedScrollControllerGroup = LinkedScrollControllerGroup();
+    mainControllers = List.generate(
+      mainControllersSize,
+      (index) => mainLinkedScrollControllerGroup.addAndGet(),
+    );
     controllers = List.generate(
       (widget.rows.firstOrNull?.games.length ?? 0) + 1,
       (index) => linkedScrollControllerGroup.addAndGet(),
@@ -49,6 +60,16 @@ class _RatingTableState extends State<RatingTable> {
       controllers = List.generate(
         widget.rows.length + 1,
         (index) => linkedScrollControllerGroup.addAndGet(),
+      );
+    }
+    if (oldWidget.style != widget.style) {
+      for (final controller in mainControllers) {
+        controller.dispose();
+      }
+      mainLinkedScrollControllerGroup = LinkedScrollControllerGroup();
+      mainControllers = List.generate(
+        mainControllersSize,
+        (index) => mainLinkedScrollControllerGroup.addAndGet(),
       );
     }
     super.didUpdateWidget(oldWidget);
@@ -108,9 +129,9 @@ class _RatingTableState extends State<RatingTable> {
         ),
       );
 
-  Widget nicknames(int index) => wrap(
+  Widget nicknames(int index, {bool? boldRight}) => wrap(
         Text(widget.rows[index].nickname),
-        boldRight: true,
+        boldRight: boldRight ?? false,
       );
 
   Widget get scorePrototype => wrap(
@@ -302,20 +323,211 @@ class _RatingTableState extends State<RatingTable> {
     );
   }
 
+  Widget winRatePrototype() {
+    final element = widget.rows
+        .sortedBy<num>(
+          (element) =>
+              element.gamesCount.toString().length +
+              element.wins.toString().length,
+        )
+        .lastOrNull;
+    if (element == null) return Container();
+    return winRateFromModel(element);
+  }
+
+  Widget winRateFromModel(ClubRatingRowModel model) => wrap(
+        Text(
+          "${(customDivide(model.wins, model.gamesCount)).round()}% (${model.wins}/${model.gamesCount})",
+        ),
+      );
+
+  Widget winRate(int index) => winRateFromModel(widget.rows[index]);
+
+  Widget citizenWinRatePrototype() {
+    final element = widget.rows
+        .sortedBy<num>(
+          (element) =>
+              element.citizenGamesCount.toString().length +
+              element.citizenWinsCount.toString().length,
+        )
+        .lastOrNull;
+    if (element == null) return Container();
+    return citizenWinRateFromModel(element);
+  }
+
+  Widget citizenWinRateFromModel(ClubRatingRowModel model) => wrap(
+        Text(
+          "${(customDivide(model.citizenWinsCount, model.citizenGamesCount)).round()}% (${model.citizenWinsCount}/${model.citizenGamesCount})",
+        ),
+      );
+
+  Widget citizenWinRate(int index) =>
+      citizenWinRateFromModel(widget.rows[index]);
+
+  Widget donWinRatePrototype() {
+    final element = widget.rows
+        .sortedBy<num>(
+          (element) =>
+              element.donsGamesCount.toString().length +
+              element.donsWinsCount.toString().length,
+        )
+        .lastOrNull;
+    if (element == null) return Container();
+    return donWinRateFromModel(element);
+  }
+
+  Widget donWinRateFromModel(ClubRatingRowModel model) => wrap(
+        Text(
+          "${(customDivide(model.donsWinsCount, model.donsGamesCount)).round()}% (${model.donsWinsCount}/${model.donsGamesCount})",
+        ),
+      );
+
+  Widget donWinRate(int index) => donWinRateFromModel(widget.rows[index]);
+
+  Widget sheriffWinRatePrototype() {
+    final element = widget.rows
+        .sortedBy<num>(
+          (element) =>
+              element.sheriffGamesCount.toString().length +
+              element.sheriffWinsCount.toString().length,
+        )
+        .lastOrNull;
+    if (element == null) return Container();
+    return sheriffWinRateFromModel(element);
+  }
+
+  Widget sheriffWinRateFromModel(ClubRatingRowModel model) => wrap(
+        Text(
+          "${(customDivide(model.sheriffWinsCount, model.sheriffGamesCount)).round()}% (${model.sheriffWinsCount}/${model.sheriffGamesCount})",
+        ),
+      );
+
+  Widget sheriffWinRate(int index) =>
+      sheriffWinRateFromModel(widget.rows[index]);
+
+  Widget mafiaWinRatePrototype() {
+    final element = widget.rows
+        .sortedBy<num>(
+          (element) =>
+              element.mafiaGamesCount.toString().length +
+              element.mafiaWinsCount.toString().length,
+        )
+        .lastOrNull;
+    if (element == null) return Container();
+    return mafiaWinRateFromModel(element);
+  }
+
+  Widget mafiaWinRateFromModel(ClubRatingRowModel model) => wrap(
+        Text(
+          "${(customDivide(model.mafiaWinsCount, model.mafiaGamesCount)).round()}% (${model.mafiaWinsCount}/${model.mafiaGamesCount})",
+        ),
+      );
+
+  Widget mafiaWinRate(int index) => mafiaWinRateFromModel(widget.rows[index]);
+
+  Widget diesStatPrototype() {
+    final element = widget.rows
+        .sortedBy<num>(
+          (element) =>
+              (element.citizenGamesCount + element.sheriffGamesCount)
+                  .toString()
+                  .length +
+              element.died.toString().length,
+        )
+        .lastOrNull;
+    if (element == null) return Container();
+    return diesStatFromModel(element);
+  }
+
+  Widget diesStatFromModel(ClubRatingRowModel model) => wrap(
+        Text(
+          "${(customDivide(model.died, model.citizenGamesCount + model.sheriffGamesCount)).round()}% (${model.died}/${model.citizenGamesCount + model.sheriffGamesCount})",
+        ),
+      );
+
+  Widget diesStat(int index) => diesStatFromModel(widget.rows[index]);
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children:
+          widget.style == RatingTableStyle.full ? fullColumns : statsColumn,
+    );
+  }
+
+  List<Widget> get statsColumn => [
         column(
           mainControllers[0],
+          key: const Key("statsColumn0"),
           builder: indexWidgets,
           header: const Text("№"),
           prototype: indexProtoype,
         ),
         column(
           mainControllers[1],
+          key: const Key("statsColumn0"),
           builder: nicknames,
+          header: const Text("Игрок"),
+          prototype: nicknamePrototype,
+        ),
+        column(
+          mainControllers[2],
+          key: const Key("statsColumn2"),
+          builder: winRate,
+          header: const Text("Винрейт"),
+          prototype: winRatePrototype(),
+        ),
+        column(
+          mainControllers[3],
+          key: const Key("statsColumn3"),
+          builder: citizenWinRate,
+          header: const Text("Винрейт за мирного"),
+          prototype: citizenWinRatePrototype(),
+        ),
+        column(
+          mainControllers[4],
+          key: const Key("statsColumn4"),
+          builder: sheriffWinRate,
+          header: const Text("Винрейт за шерифа"),
+          prototype: sheriffWinRatePrototype(),
+        ),
+        column(
+          mainControllers[5],
+          key: const Key("statsColumn5"),
+          builder: mafiaWinRate,
+          header: const Text("Винрейт за мафию"),
+          prototype: mafiaWinRatePrototype(),
+        ),
+        column(
+          mainControllers[6],
+          key: const Key("statsColumn6"),
+          builder: donWinRate,
+          header: const Text("Винрейт за дона"),
+          prototype: donWinRatePrototype(),
+        ),
+        column(
+          mainControllers[7],
+          key: const Key("statsColumn7"),
+          builder: diesStat,
+          header: const Text("Процент убийств"),
+          isLastColumn: true,
+          prototype: diesStatPrototype(),
+        ),
+      ];
+
+  List<Widget> get fullColumns => [
+        column(
+          mainControllers[0],
+          key: const Key("fullColumns0"),
+          builder: indexWidgets,
+          header: const Text("№"),
+          prototype: indexProtoype,
+        ),
+        column(
+          mainControllers[1],
+          key: const Key("fullColumns1"),
+          builder: (index) => nicknames(index, boldRight: true),
           header: const Text("Игрок"),
           boldRight: true,
           prototype: nicknamePrototype,
@@ -330,6 +542,7 @@ class _RatingTableState extends State<RatingTable> {
               final expand = width * gamesCount > constraints.maxWidth;
               final header = gameHeader(width, expand);
               final listView = ListView.builder(
+                key: const Key("fullColumns2"),
                 physics: const ClampingScrollPhysics(),
                 controller: mainControllers[2],
                 itemCount: widget.rows.length,
@@ -364,6 +577,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[3],
+          key: const Key("fullColumns3"),
           builder: scores,
           header: const Text("Очки"),
           boldLeft: true,
@@ -371,23 +585,27 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[4],
+          key: const Key("fullColumns4"),
           builder: addScores,
           header: const Text("+"),
           prototype: addScorePrototype,
         ),
         column(
           mainControllers[5],
+          key: const Key("fullColumns5"),
           header: const Text("Ci"),
           prototype: ciPrototype,
           builder: ciWidget,
         ),
         column(
           mainControllers[6],
+          key: const Key("fullColumns6"),
           header: const Text("п"),
           prototype: winPrototype,
           builder: wins,
         ),
         column(
+          key: const Key("fullColumns7"),
           mainControllers[7],
           header: const Text("дк"),
           prototype: roleWinPrototype,
@@ -395,17 +613,17 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[8],
+          key: const Key("fullColumns8"),
           builder: dies,
           isLastColumn: true,
           header: const Text("по"),
           prototype: diesPrototype,
         ),
-      ],
-    );
-  }
+      ];
 
   Widget column(
     ScrollController controller, {
+    required Key key,
     List<Widget>? widgets,
     Widget Function(int index)? builder,
     Widget? prototype,
@@ -420,12 +638,14 @@ class _RatingTableState extends State<RatingTable> {
         return Stack(
           children: [
             if (prototype != null)
-              IgnorePointer(
-                child: Opacity(
-                  opacity: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: prototype,
+              ...[wrap(header ?? Container()), prototype].map(
+                (e) => IgnorePointer(
+                  child: Opacity(
+                    opacity: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: e,
+                    ),
                   ),
                 ),
               )
@@ -457,6 +677,7 @@ class _RatingTableState extends State<RatingTable> {
                       behavior: ScrollConfiguration.of(context)
                           .copyWith(scrollbars: isLastColumn),
                       child: ListView.builder(
+                        key: key,
                         physics: const ClampingScrollPhysics(),
                         controller: controller,
                         itemCount: widget.rows.length,
@@ -474,3 +695,5 @@ class _RatingTableState extends State<RatingTable> {
     );
   }
 }
+
+num customDivide(num a, num b) => b == 0 ? 0 : (a * 100) / b.toDouble();

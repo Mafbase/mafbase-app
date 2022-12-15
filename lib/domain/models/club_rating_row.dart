@@ -10,7 +10,15 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
     required double score,
     required double addScore,
     required int wins,
-    required int roleWins,
+    required int gamesCount,
+    required int citizenGamesCount,
+    required int donsGamesCount,
+    required int sheriffGamesCount,
+    required int mafiaGamesCount,
+    required int citizenWinsCount,
+    required int donsWinsCount,
+    required int sheriffWinsCount,
+    required int mafiaWinsCount,
     required int died,
     required List<GameRowItemModel> games,
     required int ci,
@@ -22,11 +30,23 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
         score: proto.score,
         addScore: proto.addScore,
         wins: proto.wins,
-        roleWins: proto.donWins + proto.sheriffWins,
+        gamesCount: proto.totalGames,
+        citizenGamesCount: proto.citizenGames,
+        donsGamesCount: proto.donGames,
+        sheriffGamesCount: proto.sheriffGames,
+        mafiaGamesCount: proto.mafiaGames,
+        citizenWinsCount: proto.citizenWins,
+        donsWinsCount: proto.donWins,
+        sheriffWinsCount: proto.sheriffWins,
+        mafiaWinsCount: proto.mafiaWins,
         died: proto.firstDie,
         games: proto.item.map((e) => GameRowItemModel.fromProto(e)).toList(),
         ci: proto.ci,
       );
+}
+
+extension ClubRatingRowModelExt on ClubRatingRowModel {
+  int get roleWins => donsWinsCount + sheriffWinsCount;
 }
 
 @freezed

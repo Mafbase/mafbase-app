@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,11 +15,13 @@ import 'package:seating_generator_web/utils.dart';
 class RatingPage extends StatefulWidget {
   final int clubId;
   final DateTimeRange range;
+  final RatingTableStyle? style;
 
   const RatingPage({
     Key? key,
     required this.clubId,
     required this.range,
+    this.style,
   }) : super(key: key);
 
   @override
@@ -28,13 +31,15 @@ class RatingPage extends StatefulWidget {
     required DateTimeRange range,
     required int clubId,
     required BuildContext context,
+    RatingTableStyle tableStyle = RatingTableStyle.full,
   }) {
     return context.namedLocation(
       name,
       params: {"clubId": clubId.toString()},
       queryParams: {
         "date-start": dateFormatForRequests.format(range.start),
-        "date-end": dateFormatForRequests.format(range.end)
+        "date-end": dateFormatForRequests.format(range.end),
+        "style": tableStyle.name,
       },
     );
   }
@@ -52,12 +57,19 @@ class RatingPage extends StatefulWidget {
       final dateEnd = DateTime.tryParse(state.queryParams["date-end"] ?? "") ??
           DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
+      final style = RatingTableStyle.values.firstWhereOrNull(
+        (element) => state.queryParams["style"] == element.name,
+      );
 
       return BlocProvider<RatingBloc>(
         create: (context) {
           return getIt(param1: context);
         },
-        child: RatingPage(clubId: clubId, range: range),
+        child: RatingPage(
+          clubId: clubId,
+          range: range,
+          style: style,
+        ),
       );
     },
   );
@@ -132,6 +144,7 @@ class _RatingPageState extends State<RatingPage> {
                                   RatingEvent.rangeChanged(
                                     range: range,
                                     clubId: widget.clubId,
+                                    style: widget.style ?? RatingTableStyle.full,
                                   ),
                                 );
                               }
@@ -172,6 +185,7 @@ class _RatingPageState extends State<RatingPage> {
                       Expanded(
                         child: Center(
                           child: RatingTable(
+                            style: widget.style,
                             rows: state.rows,
                             clubId: widget.clubId,
                             openGame: (gameId) =>

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 
 part 'rating_event.freezed.dart';
 
@@ -26,5 +27,6 @@ class RatingEvent with _$RatingEvent {
   const factory RatingEvent.rangeChanged({
     required DateTimeRange range,
     required int clubId,
+    required RatingTableStyle style,
   }) = RatingEventRangeChanged;
 }

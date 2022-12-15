@@ -22,7 +22,9 @@ mixin _$RatingEvent {
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
     required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
-    required TResult Function(DateTimeRange range, int clubId) rangeChanged,
+    required TResult Function(
+            DateTimeRange range, int clubId, RatingTableStyle style)
+        rangeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +33,8 @@ mixin _$RatingEvent {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +43,8 @@ mixin _$RatingEvent {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,7 +166,9 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
     required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
-    required TResult Function(DateTimeRange range, int clubId) rangeChanged,
+    required TResult Function(
+            DateTimeRange range, int clubId, RatingTableStyle style)
+        rangeChanged,
   }) {
     return playerSelected(playerId);
   }
@@ -174,7 +180,8 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
   }) {
     return playerSelected?.call(playerId);
   }
@@ -186,7 +193,8 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
     required TResult orElse(),
   }) {
     if (playerSelected != null) {
@@ -326,7 +334,9 @@ class _$RatingEventDownload implements RatingEventDownload {
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
     required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
-    required TResult Function(DateTimeRange range, int clubId) rangeChanged,
+    required TResult Function(
+            DateTimeRange range, int clubId, RatingTableStyle style)
+        rangeChanged,
   }) {
     return downloadRating(range, clubId);
   }
@@ -338,7 +348,8 @@ class _$RatingEventDownload implements RatingEventDownload {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
   }) {
     return downloadRating?.call(range, clubId);
   }
@@ -350,7 +361,8 @@ class _$RatingEventDownload implements RatingEventDownload {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
     required TResult orElse(),
   }) {
     if (downloadRating != null) {
@@ -493,7 +505,9 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
     required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
-    required TResult Function(DateTimeRange range, int clubId) rangeChanged,
+    required TResult Function(
+            DateTimeRange range, int clubId, RatingTableStyle style)
+        rangeChanged,
   }) {
     return gameSelected(gameId, clubId);
   }
@@ -505,7 +519,8 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
   }) {
     return gameSelected?.call(gameId, clubId);
   }
@@ -517,7 +532,8 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
     required TResult orElse(),
   }) {
     if (gameSelected != null) {
@@ -659,7 +675,9 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
     required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
-    required TResult Function(DateTimeRange range, int clubId) rangeChanged,
+    required TResult Function(
+            DateTimeRange range, int clubId, RatingTableStyle style)
+        rangeChanged,
   }) {
     return pageOpened(range, clubId);
   }
@@ -671,7 +689,8 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
   }) {
     return pageOpened?.call(range, clubId);
   }
@@ -683,7 +702,8 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -750,7 +770,7 @@ abstract class _$$RatingEventRangeChangedCopyWith<$Res> {
   factory _$$RatingEventRangeChangedCopyWith(_$RatingEventRangeChanged value,
           $Res Function(_$RatingEventRangeChanged) then) =
       __$$RatingEventRangeChangedCopyWithImpl<$Res>;
-  $Res call({DateTimeRange range, int clubId});
+  $Res call({DateTimeRange range, int clubId, RatingTableStyle style});
 }
 
 /// @nodoc
@@ -769,6 +789,7 @@ class __$$RatingEventRangeChangedCopyWithImpl<$Res>
   $Res call({
     Object? range = freezed,
     Object? clubId = freezed,
+    Object? style = freezed,
   }) {
     return _then(_$RatingEventRangeChanged(
       range: range == freezed
@@ -779,6 +800,10 @@ class __$$RatingEventRangeChangedCopyWithImpl<$Res>
           ? _value.clubId
           : clubId // ignore: cast_nullable_to_non_nullable
               as int,
+      style: style == freezed
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as RatingTableStyle,
     ));
   }
 }
@@ -786,16 +811,19 @@ class __$$RatingEventRangeChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RatingEventRangeChanged implements RatingEventRangeChanged {
-  const _$RatingEventRangeChanged({required this.range, required this.clubId});
+  const _$RatingEventRangeChanged(
+      {required this.range, required this.clubId, required this.style});
 
   @override
   final DateTimeRange range;
   @override
   final int clubId;
+  @override
+  final RatingTableStyle style;
 
   @override
   String toString() {
-    return 'RatingEvent.rangeChanged(range: $range, clubId: $clubId)';
+    return 'RatingEvent.rangeChanged(range: $range, clubId: $clubId, style: $style)';
   }
 
   @override
@@ -804,14 +832,16 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
         (other.runtimeType == runtimeType &&
             other is _$RatingEventRangeChanged &&
             const DeepCollectionEquality().equals(other.range, range) &&
-            const DeepCollectionEquality().equals(other.clubId, clubId));
+            const DeepCollectionEquality().equals(other.clubId, clubId) &&
+            const DeepCollectionEquality().equals(other.style, style));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(range),
-      const DeepCollectionEquality().hash(clubId));
+      const DeepCollectionEquality().hash(clubId),
+      const DeepCollectionEquality().hash(style));
 
   @JsonKey(ignore: true)
   @override
@@ -826,9 +856,11 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
     required TResult Function(int gameId, int clubId) gameSelected,
     required TResult Function(DateTimeRange range, int clubId) pageOpened,
-    required TResult Function(DateTimeRange range, int clubId) rangeChanged,
+    required TResult Function(
+            DateTimeRange range, int clubId, RatingTableStyle style)
+        rangeChanged,
   }) {
-    return rangeChanged(range, clubId);
+    return rangeChanged(range, clubId, style);
   }
 
   @override
@@ -838,9 +870,10 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
   }) {
-    return rangeChanged?.call(range, clubId);
+    return rangeChanged?.call(range, clubId, style);
   }
 
   @override
@@ -850,11 +883,12 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
     TResult Function(int gameId, int clubId)? gameSelected,
     TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId)? rangeChanged,
+    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style)?
+        rangeChanged,
     required TResult orElse(),
   }) {
     if (rangeChanged != null) {
-      return rangeChanged(range, clubId);
+      return rangeChanged(range, clubId, style);
     }
     return orElse();
   }
@@ -903,10 +937,12 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
 abstract class RatingEventRangeChanged implements RatingEvent {
   const factory RatingEventRangeChanged(
       {required final DateTimeRange range,
-      required final int clubId}) = _$RatingEventRangeChanged;
+      required final int clubId,
+      required final RatingTableStyle style}) = _$RatingEventRangeChanged;
 
   DateTimeRange get range;
   int get clubId;
+  RatingTableStyle get style;
   @JsonKey(ignore: true)
   _$$RatingEventRangeChangedCopyWith<_$RatingEventRangeChanged> get copyWith =>
       throw _privateConstructorUsedError;
