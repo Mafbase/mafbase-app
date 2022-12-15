@@ -11,14 +11,15 @@ import 'package:seating_generator_web/ui/login/verification_body/verification_st
 
 class VerificationBloc
     extends CustomBloc<VerificationEvents, VerificationState> {
+  @visibleForTesting
   final VerificationPageRouter router;
-  final VerificationInteractor interactor;
-  final int id;
+  final VerificationInteractor _interactor;
+  final int _id;
 
   VerificationBloc(
     this.router,
-    this.interactor,
-    this.id, [
+    this._interactor,
+    this._id, [
     BuildContext? context,
   ]) : super(const VerificationState(isLoading: false), context) {
     on<VerificationEventSubmit>(_onSubmit);
@@ -31,7 +32,7 @@ class VerificationBloc
     Emitter<VerificationState> emit,
   ) async {
     emit(state.copyWith(isLoading: true, hasError: false));
-    final result = await interactor.run(id, event.token.trim());
+    final result = await _interactor.run(_id, event.token.trim());
     switch (result) {
       case false:
         emit(state.copyWith(isLoading: false, hasError: true));

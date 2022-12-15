@@ -9,3 +9,10 @@ void main() {
     );
   });
 }
+
+Future expectState<T>(bool Function(T data) check, Stream<T> stream) async {
+  final state = await stream
+      .firstWhere((element) => check(element))
+      .timeout(const Duration(milliseconds: 500));
+  expect(check(state), true);
+}

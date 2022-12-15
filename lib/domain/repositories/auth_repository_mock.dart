@@ -22,7 +22,7 @@ class AuthRepositoryMock implements AuthRepository {
       } else if (password == "1234") {
         return const SignUpModel(error: ErrorEnum.weakPassword);
       } else {
-        return const SignUpModel();
+        return const SignUpModel(error: ErrorEnum.needVerification, id: 123);
       }
     });
   }
@@ -30,9 +30,9 @@ class AuthRepositoryMock implements AuthRepository {
   @override
   Future<bool> verificate(int id, String token) async {
     if (token == '11') {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 }
