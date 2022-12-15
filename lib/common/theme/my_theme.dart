@@ -22,6 +22,8 @@ abstract class MyTheme {
   abstract final Color greenForCard;
   abstract final Color blueForCard;
   abstract final Color buttonDisabledColor;
+  abstract final Color btnRedColor;
+  abstract final Color btnRedColor1;
 
   MyTheme();
 
@@ -110,4 +112,10 @@ class _LightTheme implements MyTheme {
 
   @override
   Color get buttonDisabledColor => const Color(0xFFB4B9BF);
+
+  @override
+  Color get btnRedColor => const Color(0xFFDF5650);
+
+  @override
+  Color get btnRedColor1 => btnRedColor.withOpacity(0.7);
 }

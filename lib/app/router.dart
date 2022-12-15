@@ -111,9 +111,7 @@ class AppRouter {
                   ),
                 ],
                 child: MainPage(
-                  tab: MainPageTab.values.firstWhereOrNull(
-                    (element) => state.location.contains(element.name),
-                  ),
+                  hasBackButton: !state.location.endsWith('/'),
                   child: child,
                 ),
               );

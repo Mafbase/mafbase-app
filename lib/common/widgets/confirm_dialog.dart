@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -29,26 +30,31 @@ class ConfirmDialog extends StatelessWidget {
               ),
               const Spacer(),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                    },
-                    child: Text(
-                      context.locale.no,
-                      style: MyTheme.of(context).textBtnTextStyle,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomButton(
+                        isRed: true,
+                        onTap: () {
+                          Navigator.pop(context, true);
+                        },
+                        text: context.locale.yes,
+                      ),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, true);
-                    },
-                    child: Text(
-                      context.locale.yes,
-                      style: MyTheme.of(context).textBtnTextStyle,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomButton(
+                        onTap: () {
+                          Navigator.pop(context, false);
+                        },
+                        text: context.locale.no,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],

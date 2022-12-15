@@ -5,11 +5,13 @@ class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final bool disabled;
+  final bool isRed;
 
   const CustomButton({
     Key? key,
     required this.text,
     required this.onTap,
+    this.isRed = false,
     this.disabled = false,
   }) : super(key: key);
 
@@ -23,9 +25,17 @@ class CustomButton extends StatelessWidget {
               return MyTheme.of(context).buttonDisabledColor;
             }
             if (states.contains(MaterialState.pressed)) {
-              return MyTheme.of(context).btnColor1;
+              if (isRed) {
+                return MyTheme.of(context).btnRedColor1;
+              } else {
+                return MyTheme.of(context).btnColor1;
+              }
             }
-            return MyTheme.of(context).darkGreyColor;
+            if (isRed) {
+              return MyTheme.of(context).btnRedColor;
+            } else {
+              return MyTheme.of(context).darkGreyColor;
+            }
           },
         ),
       ),

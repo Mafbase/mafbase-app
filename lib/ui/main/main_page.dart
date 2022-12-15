@@ -10,10 +10,10 @@ import 'package:seating_generator_web/ui/main/widgets/custom_menu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainPage extends StatefulWidget {
-  final MainPageTab? tab;
+  final bool hasBackButton;
   final Widget? child;
 
-  const MainPage({Key? key, this.tab, this.child}) : super(key: key);
+  const MainPage({Key? key, this.hasBackButton = false, this.child}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -73,7 +73,7 @@ class _MainPageState extends State<MainPage> {
                       },
                       AppLocalizations.of(context)!.mainCreateTournamentHint,
                     ),
-                    if (widget.tab != null)
+                    if (widget.hasBackButton)
                       CustomMenuItemModel(
                         SvgPicture.asset(AppAssets.backArrowAsset),
                         () {
