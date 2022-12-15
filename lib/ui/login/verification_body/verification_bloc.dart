@@ -31,7 +31,7 @@ class VerificationBloc
     Emitter<VerificationState> emit,
   ) async {
     emit(state.copyWith(isLoading: true, hasError: false));
-    final result = await interactor.run(id, event.token);
+    final result = await interactor.run(id, event.token.trim());
     switch (result) {
       case false:
         emit(state.copyWith(isLoading: false, hasError: true));
