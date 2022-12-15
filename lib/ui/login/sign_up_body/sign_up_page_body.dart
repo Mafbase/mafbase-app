@@ -5,7 +5,7 @@ import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
@@ -37,105 +37,118 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpBloc, SignUpState>(
       builder: (context, state) {
-        debugPrint(state.toString());
-        return SingleChildScrollView(
-          child: Stack(
-            children: [
-              Positioned(
-                left: 44,
-                top: 41,
-                child: IconButton(
-                  onPressed: _onBackButtonTapped,
-                  icon: const Icon(Icons.arrow_back_ios),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 40,
-                  right: 40,
-                  top: 36,
-                  bottom: 45,
-                ),
-                child: Column(
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: SingleChildScrollView(
+                child: Stack(
                   children: [
-                    const Center(
-                      child: Text(
-                        'Регистрация',
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
+                    Positioned(
+                      left: 44,
+                      top: 41,
+                      child: IconButton(
+                        onPressed: _onBackButtonTapped,
+                        icon: const Icon(Icons.arrow_back_ios),
                       ),
                     ),
-                    const SizedBox(
-                      height: 45,
-                    ),
-                    CustomTextField(
-                      controller: _emailController,
-                      isRequiredField: true,
-                      icon: Icon(
-                        Icons.email_outlined,
-                        color: MyTheme.of(context).borderColor,
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 40,
+                        right: 40,
+                        top: 36,
+                        bottom: 45,
                       ),
-                      hint: context.locale.yourEmail,
-                      errorText: state.emailExist ? context.locale.wrongEmail : null,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextField(
-                      canObscure: true,
-                      isRequiredField: true,
-                      controller: _passwordController,
-                      icon: SvgPicture.asset(AppAssets.lock),
-                      hint: context.locale.enterPassword,
-                      errorText: state.weakPassword ? context.locale.invalidPassword : null,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    CustomTextField(
-                      canObscure: true,
-                      isRequiredField: true,
-                      controller: _repeatPasswordController,
-                      icon: SvgPicture.asset(AppAssets.lock),
-                      hint: context.locale.repeatPassword,
-                      errorText: setRepeatError
-                          ? context.locale.notMatchPasswords
-                          : null,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          AppAssets.exclamationPoint,
-                          width: 3.2,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          context.locale.requiredForEnter,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                      child: Column(
+                        children: [
+                          const Center(
+                            child: Text(
+                              'Регистрация',
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            height: 45,
+                          ),
+                          CustomTextField(
+                            controller: _emailController,
+                            isRequiredField: true,
+                            icon: Icon(
+                              Icons.email_outlined,
+                              color: MyTheme.of(context).borderColor,
+                            ),
+                            hint: context.locale.yourEmail,
+                            errorText: state.emailExist
+                                ? context.locale.wrongEmail
+                                : null,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          CustomTextField(
+                            canObscure: true,
+                            isRequiredField: true,
+                            controller: _passwordController,
+                            icon: SvgPicture.asset(AppAssets.lock),
+                            hint: context.locale.enterPassword,
+                            errorText: state.weakPassword
+                                ? context.locale.invalidPassword
+                                : null,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          CustomTextField(
+                            canObscure: true,
+                            isRequiredField: true,
+                            controller: _repeatPasswordController,
+                            icon: SvgPicture.asset(AppAssets.lock),
+                            hint: context.locale.repeatPassword,
+                            errorText: setRepeatError
+                                ? context.locale.notMatchPasswords
+                                : null,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                AppAssets.exclamationPoint,
+                                width: 3.2,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                context.locale.requiredForEnter,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          CustomButton(
+                            text: 'Зарегистрироваться',
+                            onTap: _onSubmit,
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    CustomButton(text: 'Зарегистрироваться', onTap: _onSubmit),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+            if (state.isLoading) const LoadingOverlayWidget(),
+          ],
         );
       },
     );

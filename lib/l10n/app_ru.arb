@@ -128,5 +128,7 @@
   "swissGamesLabel": "Количество игр по швейцарке",
   "@swissGamesLabel": {},
   "finalGamesLabel": "Количество финальных игр",
-  "@finalGamesLabel": {}
+  "@finalGamesLabel": {},
+  "invalidCode": "Неверный код",
+  "@invalidCode": {}
 }

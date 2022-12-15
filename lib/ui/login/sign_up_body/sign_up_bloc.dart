@@ -11,8 +11,6 @@ import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart'
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
-import '../../../domain/models/login_model.dart';
-
 class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
   final SignUpInteractor _signUpInteractor;
   final SignUpPageRouter router;
@@ -24,17 +22,24 @@ class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
   }
 
   Future _onSignUpButtonTapped(
-      SignUpButtonTapped event, Emitter<SignUpState> emit) async {
+    SignUpButtonTapped event,
+    Emitter<SignUpState> emit,
+  ) async {
     emit(SignUpState(isLoading: true, emailExist: false, weakPassword: false));
+
     final result = await _signUpInteractor.run(event.email, event.password);
+
     debugPrint(result.toString());
+
     switch (result.error) {
       case ErrorEnum.needVerification:
         emit(state.copyWith(isLoading: false));
         router.openVerificationPage(result.id!);
         break;
       case ErrorEnum.emailExist:
-        emit(state.copyWith(isLoading: false, emailExist: true),);
+        emit(
+          state.copyWith(isLoading: false, emailExist: true),
+        );
         break;
       case ErrorEnum.weakPassword:
         emit(state.copyWith(isLoading: false, weakPassword: true));
@@ -96,7 +101,8 @@ class SignUpPageRouterMock implements SignUpPageRouter {
 
   Stream<bool> get loginPageOpened => _loginPageOpenedController.stream;
 
-  Stream<bool> get verificationPageOpened => _verificationPageOpenedController.stream;
+  Stream<bool> get verificationPageOpened =>
+      _verificationPageOpenedController.stream;
 
   @override
   void openMainPage() {

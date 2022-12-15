@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/src/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
@@ -15,36 +15,45 @@ class VerificationBloc
   final VerificationInteractor interactor;
   final int id;
 
-  VerificationBloc(this.router, this.interactor, this.id,
-      [BuildContext? context,])
-      : super (const VerificationState(isLoading: false), context) {
+  VerificationBloc(
+    this.router,
+    this.interactor,
+    this.id, [
+    BuildContext? context,
+  ]) : super(const VerificationState(isLoading: false), context) {
     on<VerificationEventSubmit>(_onSubmit);
     on<OnSignUpButtonTapped>(onRegistrationButtonTapped);
     on<OnLoginButtonTapped>(onAuthButtonTapped);
   }
 
   Future _onSubmit(
-      VerificationEventSubmit event, Emitter<VerificationState> emit,) async {
+    VerificationEventSubmit event,
+    Emitter<VerificationState> emit,
+  ) async {
     emit(state.copyWith(isLoading: true, hasError: false));
     final result = await interactor.run(id, event.token);
     switch (result) {
       case false:
-        state.copyWith(isLoading: false, hasError: true);
+        emit(state.copyWith(isLoading: false, hasError: true));
         break;
       case true:
-        state.copyWith(isLoading: false, hasError: false);
+        emit(state.copyWith(isLoading: false, hasError: false));
         router.openMainPage();
         break;
     }
   }
 
   Future onAuthButtonTapped(
-      OnLoginButtonTapped event, Emitter<VerificationState> emit,) async {
+    OnLoginButtonTapped event,
+    Emitter<VerificationState> emit,
+  ) async {
     router.openLoginPage();
   }
 
   Future onRegistrationButtonTapped(
-      OnSignUpButtonTapped event, Emitter<VerificationState> emit,) async {
+    OnSignUpButtonTapped event,
+    Emitter<VerificationState> emit,
+  ) async {
     router.openSignUpPage();
   }
 
