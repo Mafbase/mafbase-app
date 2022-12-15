@@ -48,7 +48,11 @@ class AppRouter {
                 child: child,
               );
               return SingleChildScrollView(
+                primary: true,
+                physics: const ClampingScrollPhysics(),
                 child: SingleChildScrollView(
+                  primary: true,
+                  physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: mainChild,
                 ),
