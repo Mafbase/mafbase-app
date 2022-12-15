@@ -58,6 +58,7 @@ dependencies:
   url_launcher: ^6.1.7
   isolated_worker: ^0.1.1
   image_picker: ^0.8.6
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:

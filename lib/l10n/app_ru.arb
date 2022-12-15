@@ -130,5 +130,7 @@
   "finalGamesLabel": "Количество финальных игр",
   "@finalGamesLabel": {},
   "invalidCode": "Неверный код",
-  "@invalidCode": {}
+  "@invalidCode": {},
+  "addGame": "Добавить новую игру",
+  "@addGame": {}
 }

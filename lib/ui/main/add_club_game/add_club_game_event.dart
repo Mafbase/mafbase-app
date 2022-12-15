@@ -20,4 +20,6 @@ class AddClubGameEvent with _$AddClubGameEvent {
     required int index,
     required String nickname,
   }) = AddClubGameEventNewPlayer;
+
+  const factory AddClubGameEvent.newGame() = AddClubGameEventNewGame;
 }

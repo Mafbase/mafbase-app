@@ -6,6 +6,8 @@ abstract class AddClubGameRouter {
   void editPage(int clubId, int gameId);
 
   void openGame(int clubId, int gameId);
+
+  void openNewGame(int clubId);
 }
 
 class AddClubGameRouterImpl implements AddClubGameRouter {
@@ -35,5 +37,10 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
         canEdit: false,
       ),
     );
+  }
+
+  @override
+  void openNewGame(int clubId) {
+    context.go(AddClubGamePage.createLocation(context, clubId));
   }
 }

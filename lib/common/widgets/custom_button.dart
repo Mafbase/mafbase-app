@@ -15,15 +15,23 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: disabled ? null : onTap,
-      child: Container(
-        height: 57,
-        decoration: BoxDecoration(
-          color: disabled
-              ? MyTheme.of(context).btnColor1
-              : MyTheme.of(context).darkGreyColor,
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith(
+          (states) {
+            if (states.contains(MaterialState.disabled)) {
+              return MyTheme.of(context).buttonDisabledColor;
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return MyTheme.of(context).btnColor1;
+            }
+            return MyTheme.of(context).darkGreyColor;
+          },
         ),
+      ),
+      onPressed: disabled ? null : onTap,
+      child: SizedBox(
+        height: 57,
         child: Center(
           child: Text(
             text,

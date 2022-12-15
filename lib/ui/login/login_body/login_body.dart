@@ -131,11 +131,12 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                   height: 24,
                 ),
                 TextButton(
-                    onPressed: _onSignUpTapped,
-                    child: Text(
-                      AppLocalizations.of(context)!.loginRegistration,
-                      style: MyTheme.of(context).defaultTextStyle,
-                    ))
+                  onPressed: _onSignUpTapped,
+                  child: Text(
+                    AppLocalizations.of(context)!.loginRegistration,
+                    style: MyTheme.of(context).defaultTextStyle,
+                  ),
+                )
               ],
             ),
           ),

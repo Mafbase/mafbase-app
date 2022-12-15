@@ -273,7 +273,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                     )
                                   ],
                                 ),
-                              if (state.canEdit)
+                              if (state.canEdit) ...[
                                 Container(
                                   width: 400,
                                   padding: const EdgeInsets.all(20),
@@ -285,6 +285,23 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                     disabled: state.isLoading,
                                   ),
                                 ),
+                                if (widget.readOnly)
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        context.read<AddClubGameBloc>().add(
+                                              const AddClubGameEvent.newGame(),
+                                            );
+                                      },
+                                      child: Text(
+                                        context.locale.addGame,
+                                        style:
+                                            MyTheme.of(context).textBtnTextStyle,
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ],
                           ),
                           Expanded(
@@ -458,7 +475,9 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                         style: MyTheme.of(context)
                                             .defaultTextStyle,
                                       ),
-                                      const SizedBox(width: 8,),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
                                       DropdownButton<CiSchemeModel>(
                                         value: ciSchemeModel,
                                         items: List.generate(

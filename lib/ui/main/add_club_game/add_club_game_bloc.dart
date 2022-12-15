@@ -35,6 +35,11 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     on<AddClubGameEventSubmit>(_onSubmit);
     on<AddClubGameEventPageEdit>(_onEdit);
     on<AddClubGameEventNewPlayer>(_onNewPlayer);
+    on<AddClubGameEventNewGame>(_onNewGame);
+  }
+
+  _onNewGame(AddClubGameEventNewGame event, Emitter emit) async {
+    router.openNewGame(clubId);
   }
 
   _onNewPlayer(AddClubGameEventNewPlayer event, Emitter emit) async {
