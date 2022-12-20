@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -137,6 +138,8 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
                             height: 24,
                           ),
                           CustomButton(
+                            disabled:
+                                !EmailValidator.validate(_emailController.text),
                             text: 'Зарегистрироваться',
                             onTap: _onSubmit,
                           ),

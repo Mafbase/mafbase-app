@@ -7,6 +7,7 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class LoginPageBody extends StatefulWidget {
   const LoginPageBody({Key? key}) : super(key: key);
@@ -55,6 +56,9 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                 CustomTextField(
                   controller: _emailController,
                   hint: AppLocalizations.of(context)!.loginEmailHint,
+                  errorText: state.hasError
+                      ? context.locale.invalidEmailOrPassword
+                      : null,
                   focusNode: _emailFocusNode,
                   onSubmit: (_) {
                     _emailFocusNode.unfocus();
@@ -136,7 +140,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     AppLocalizations.of(context)!.loginRegistration,
                     style: MyTheme.of(context).defaultTextStyle,
                   ),
-                )
+                ),
               ],
             ),
           ),

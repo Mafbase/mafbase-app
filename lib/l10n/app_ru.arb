@@ -132,5 +132,7 @@
   "invalidCode": "Неверный код",
   "@invalidCode": {},
   "addGame": "Добавить новую игру",
-  "@addGame": {}
+  "@addGame": {},
+  "invalidEmailOrPassword": "Неверная почта или пароль",
+  "@invalidEmailOrPassword": {}
 }
