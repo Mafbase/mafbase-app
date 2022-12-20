@@ -59,7 +59,7 @@ class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
 
   @override
   void emitOnError(Emitter<SignUpState> emit) {
-    // TODO: implement emitOnError
+    emit(state.copyWith(isLoading: false));
   }
 }
 
