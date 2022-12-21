@@ -25,6 +25,13 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
       TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   bool setRepeatError = false;
+  @override
+  void initState() {
+    _emailController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
