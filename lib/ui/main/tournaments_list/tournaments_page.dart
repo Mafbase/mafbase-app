@@ -122,7 +122,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    DateFormat('dd:MM:yyyy').format(e.dateStart),
+                                    DateFormat('dd-MM-yyyy').format(e.dateStart),
                                     style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                 ),
