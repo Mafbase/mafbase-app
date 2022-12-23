@@ -157,7 +157,7 @@ class _TranslationPlayerCard extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: MyTheme.of(context)
                             .defaultTextStyle
-                            .copyWith(fontSize: constraints.maxWidth / 8),
+                            .copyWith(fontSize: constraints.maxWidth / 10),
                       ),
                     ),
                   ),
