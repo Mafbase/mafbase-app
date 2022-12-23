@@ -68,7 +68,7 @@ class _TranslationContentPageState extends State<TranslationContentPage> {
     return BlocBuilder<TranslationContentBloc, TranslationContentState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.greenAccent,
+          backgroundColor: const Color.fromARGB(255, 0, 255, 0),
           body: Column(
             children: [
               const Spacer(),

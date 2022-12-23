@@ -8,12 +8,14 @@ class RolePicker extends StatefulWidget {
   final PlayerRole playerRole;
   final Function(PlayerRole role) onChange;
   final bool readOnly;
+  final bool hideText;
 
   const RolePicker({
     Key? key,
     required this.playerRole,
     required this.onChange,
     required this.readOnly,
+    this.hideText = false,
   }) : super(key: key);
 
   @override
@@ -43,7 +45,7 @@ class _RolePickerState extends State<RolePicker> {
                 ),
               ),
             ),
-            Text(
+            if (!widget.hideText) Text(
               "М",
               style: MyTheme.of(context).defaultTextStyle,
             ),
