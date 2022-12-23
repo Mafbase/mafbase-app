@@ -164,11 +164,7 @@ class AppRouter {
     },
   );
 
-  AppRouter() {
-    Future.delayed(Duration(seconds: 5), () {
-      router.go('/translationControl?tournamentId=41&table=1');
-    });
-  }
+  AppRouter();
 
   static void showErrorDialog(BuildContext context, String message) {
     showDialog(
