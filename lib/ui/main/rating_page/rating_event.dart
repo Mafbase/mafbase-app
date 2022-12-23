@@ -14,6 +14,13 @@ class RatingEvent with _$RatingEvent {
     required int clubId,
   }) = RatingEventDownload;
 
+  const factory RatingEvent.changeSort({
+    required DateTimeRange range,
+    required int clubId,
+    required RatingTableStyle style,
+    required RatingSort sort,
+  }) = RatingEventChangeSort;
+
   const factory RatingEvent.gameSelected({
     required int gameId,
     required int clubId,
@@ -28,5 +35,6 @@ class RatingEvent with _$RatingEvent {
     required DateTimeRange range,
     required int clubId,
     required RatingTableStyle style,
+    required RatingSort sort,
   }) = RatingEventRangeChanged;
 }

@@ -36,7 +36,7 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
   }
 
   _onRangeChanged(RatingEventRangeChanged event, Emitter emit) {
-    _router.changeRange(event.range, event.clubId, event.style);
+    _router.changeRange(event.range, event.clubId, event.style, event.sort);
   }
 
   _onPageOpened(RatingEventPageOpened event, Emitter emit) async {

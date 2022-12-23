@@ -16,12 +16,14 @@ class RatingPage extends StatefulWidget {
   final int clubId;
   final DateTimeRange range;
   final RatingTableStyle? style;
+  final RatingSort? sort;
 
   const RatingPage({
     Key? key,
     required this.clubId,
     required this.range,
     this.style,
+    this.sort,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class RatingPage extends StatefulWidget {
     required int clubId,
     required BuildContext context,
     RatingTableStyle tableStyle = RatingTableStyle.full,
+    RatingSort sort = RatingSort.score,
   }) {
     return context.namedLocation(
       name,
@@ -40,6 +43,7 @@ class RatingPage extends StatefulWidget {
         "date-start": dateFormatForRequests.format(range.start),
         "date-end": dateFormatForRequests.format(range.end),
         "style": tableStyle.name,
+        "sort": sort.name,
       },
     );
   }
@@ -60,7 +64,9 @@ class RatingPage extends StatefulWidget {
       final style = RatingTableStyle.values.firstWhereOrNull(
         (element) => state.queryParams["style"] == element.name,
       );
-
+      final sort = RatingSort.values.firstWhereOrNull(
+        (element) => state.queryParams["sort"] == element.name,
+      );
       return BlocProvider<RatingBloc>(
         create: (context) {
           return getIt(param1: context);
@@ -69,6 +75,7 @@ class RatingPage extends StatefulWidget {
           clubId: clubId,
           range: range,
           style: style,
+          sort: sort,
         ),
       );
     },
@@ -144,7 +151,9 @@ class _RatingPageState extends State<RatingPage> {
                                   RatingEvent.rangeChanged(
                                     range: range,
                                     clubId: widget.clubId,
-                                    style: widget.style ?? RatingTableStyle.full,
+                                    style:
+                                        widget.style ?? RatingTableStyle.full,
+                                    sort: widget.sort ?? RatingSort.score,
                                   ),
                                 );
                               }
@@ -188,6 +197,7 @@ class _RatingPageState extends State<RatingPage> {
                             style: widget.style,
                             rows: state.rows,
                             clubId: widget.clubId,
+                            sort: widget.sort,
                             openGame: (gameId) =>
                                 context.read<RatingBloc>().add(
                                       RatingEvent.gameSelected(
@@ -195,6 +205,17 @@ class _RatingPageState extends State<RatingPage> {
                                         clubId: widget.clubId,
                                       ),
                                     ),
+                            changeSort: (RatingSort sort) {
+                              context.read<RatingBloc>().add(
+                                    RatingEvent.rangeChanged(
+                                      range: widget.range,
+                                      clubId: widget.clubId,
+                                      style:
+                                          widget.style ?? RatingTableStyle.full,
+                                      sort: sort,
+                                    ),
+                                  );
+                            },
                           ),
                         ),
                       ),

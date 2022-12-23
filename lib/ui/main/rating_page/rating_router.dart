@@ -5,7 +5,12 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 
 abstract class RatingRouter {
-  void changeRange(DateTimeRange range, int clubId,RatingTableStyle style);
+  void changeRange(
+    DateTimeRange range,
+    int clubId,
+    RatingTableStyle style,
+    RatingSort sort,
+  );
 
   void openGame(int clubId, int gameId);
 }
@@ -16,12 +21,18 @@ class RatingRouterImpl implements RatingRouter {
   RatingRouterImpl(this.context);
 
   @override
-  void changeRange(DateTimeRange range, int clubId, RatingTableStyle style) {
+  void changeRange(
+    DateTimeRange range,
+    int clubId,
+    RatingTableStyle style,
+    RatingSort sort,
+  ) {
     final location = RatingPage.createLocation(
       range: range,
       clubId: clubId,
       context: context,
       tableStyle: style,
+      sort: sort,
     );
     context.go(location);
   }
