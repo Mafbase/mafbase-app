@@ -29,6 +29,7 @@ class RatingTable extends StatefulWidget {
   final RatingTableStyle style;
   final RatingSort sort;
   final List<ClubRatingRowModel> sortedRows;
+  final int gameFilter;
 
   RatingTable({
     Key? key,
@@ -37,14 +38,26 @@ class RatingTable extends StatefulWidget {
     required this.openGame,
     RatingTableStyle? style,
     RatingSort? sort,
+    int? gameFilter,
     required this.changeSort,
   })  : style = style ?? RatingTableStyle.full,
         sort = sort ?? RatingSort.score,
-        sortedRows = createSortedRows(rows, sort ?? RatingSort.score),
-        super(key: key);
+        gameFilter = gameFilter ?? 0,
+        sortedRows = createSortedRows(rows, sort ?? RatingSort.score)
+            .where(
+              (element) =>
+                  element.gamesCount >=
+                  (gameFilter ?? 0),
+            )
+            .toList(),
+        super(key: key) {
+    print(gameFilter);
+  }
 
   static List<ClubRatingRowModel> createSortedRows(
-      List<ClubRatingRowModel> rows, RatingSort sort) {
+    List<ClubRatingRowModel> rows,
+    RatingSort sort,
+  ) {
     switch (sort) {
       case RatingSort.score:
         return rows;

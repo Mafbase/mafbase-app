@@ -10,6 +10,7 @@ abstract class RatingRouter {
     int clubId,
     RatingTableStyle style,
     RatingSort sort,
+    int gameFilter,
   );
 
   void openGame(int clubId, int gameId);
@@ -26,6 +27,7 @@ class RatingRouterImpl implements RatingRouter {
     int clubId,
     RatingTableStyle style,
     RatingSort sort,
+    int gameFilter,
   ) {
     final location = RatingPage.createLocation(
       range: range,
@@ -33,6 +35,7 @@ class RatingRouterImpl implements RatingRouter {
       context: context,
       tableStyle: style,
       sort: sort,
+      gameFilter: gameFilter,
     );
     context.go(location);
   }
