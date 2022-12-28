@@ -50,9 +50,7 @@ class RatingTable extends StatefulWidget {
                   (gameFilter ?? 0),
             )
             .toList(),
-        super(key: key) {
-    print(gameFilter);
-  }
+        super(key: key);
 
   static List<ClubRatingRowModel> createSortedRows(
     List<ClubRatingRowModel> rows,
@@ -550,12 +548,14 @@ class _RatingTableState extends State<RatingTable> {
           header: const Text("№"),
           prototype: indexProtoype,
         ),
-        column(
-          mainControllers[1],
-          key: const Key("statsColumn0"),
-          builder: nicknames,
-          header: const Text("Игрок"),
-          prototype: nicknamePrototype,
+        SelectionArea(
+          child: column(
+            mainControllers[1],
+            key: const Key("statsColumn0"),
+            builder: nicknames,
+            header: const Text("Игрок"),
+            prototype: nicknamePrototype,
+          ),
         ),
         column(
           mainControllers[2],
@@ -640,13 +640,15 @@ class _RatingTableState extends State<RatingTable> {
           header: const Text("№"),
           prototype: indexProtoype,
         ),
-        column(
-          mainControllers[1],
-          key: const Key("fullColumns1"),
-          builder: (index) => nicknames(index, boldRight: true),
-          header: const Text("Игрок"),
-          boldRight: true,
-          prototype: nicknamePrototype,
+        SelectionArea(
+          child: column(
+            mainControllers[1],
+            key: const Key("fullColumns1"),
+            builder: (index) => nicknames(index, boldRight: true),
+            header: const Text("Игрок"),
+            boldRight: true,
+            prototype: nicknamePrototype,
+          ),
         ),
         Flexible(
           fit: FlexFit.loose,
