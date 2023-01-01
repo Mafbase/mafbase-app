@@ -8,7 +8,7 @@ class GameResultModel with _$GameResultModel {
     List<PlayerRole>? roles,
     required List<String> nicknames,
     required String referee,
-    ClubGameResult_GameWin? gameWin,
+    GameWin? gameWin,
     required List<double> scores,
     List<PlayerResultStatus?>? statuses,
     required int table,

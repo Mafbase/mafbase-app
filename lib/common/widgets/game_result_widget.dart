@@ -215,7 +215,7 @@ class _RoleWidget extends StatelessWidget {
         return "Мир";
       case PlayerRole.don:
         return "Дон";
-      case PlayerRole.mafia:
+      case PlayerRole.maf:
         return "Маф";
       case PlayerRole.sheriff:
         return "Шер";
@@ -225,7 +225,7 @@ class _RoleWidget extends StatelessWidget {
 }
 
 class _GameResultWidget extends StatelessWidget {
-  final ClubGameResult_GameWin? win;
+  final GameWin? win;
 
   const _GameResultWidget({
     Key? key,
@@ -252,11 +252,11 @@ class _GameResultWidget extends StatelessWidget {
 
   Color color(BuildContext context) {
     switch (win) {
-      case ClubGameResult_GameWin.city:
+      case GameWin.city:
         return context.theme.redColor;
-      case ClubGameResult_GameWin.draw:
+      case GameWin.draw:
         return context.theme.diedPositiveColor;
-      case ClubGameResult_GameWin.mafia:
+      case GameWin.mafia:
         return context.theme.diedColor;
     }
     return const Color(0x00000000);
@@ -264,11 +264,11 @@ class _GameResultWidget extends StatelessWidget {
 
   String text(BuildContext context) {
     switch (win) {
-      case ClubGameResult_GameWin.city:
+      case GameWin.city:
         return context.locale.cityWon;
-      case ClubGameResult_GameWin.draw:
+      case GameWin.draw:
         return context.locale.draw;
-      case ClubGameResult_GameWin.mafia:
+      case GameWin.mafia:
         return context.locale.mafiaWon;
       default:
         return context.locale.draw;

@@ -139,7 +139,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
                 return PlayerRole.don;
               }
               if (game.mafia1 == index || game.mafia2 == index) {
-                return PlayerRole.mafia;
+                return PlayerRole.maf;
               }
               return PlayerRole.citizen;
             },

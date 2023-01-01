@@ -20,7 +20,7 @@ mixin _$GameResultModel {
   List<PlayerRole>? get roles => throw _privateConstructorUsedError;
   List<String> get nicknames => throw _privateConstructorUsedError;
   String get referee => throw _privateConstructorUsedError;
-  ClubGameResult_GameWin? get gameWin => throw _privateConstructorUsedError;
+  GameWin? get gameWin => throw _privateConstructorUsedError;
   List<double> get scores => throw _privateConstructorUsedError;
   List<PlayerResultStatus?>? get statuses => throw _privateConstructorUsedError;
   int get table => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $GameResultModelCopyWith<$Res> {
       List<PlayerRole>? roles,
       List<String> nicknames,
       String referee,
-      ClubGameResult_GameWin? gameWin,
+      GameWin? gameWin,
       List<double> scores,
       List<PlayerResultStatus?>? statuses,
       int table});
@@ -89,7 +89,7 @@ class _$GameResultModelCopyWithImpl<$Res, $Val extends GameResultModel>
       gameWin: freezed == gameWin
           ? _value.gameWin
           : gameWin // ignore: cast_nullable_to_non_nullable
-              as ClubGameResult_GameWin?,
+              as GameWin?,
       scores: null == scores
           ? _value.scores
           : scores // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ abstract class _$$_GameResultModelCopyWith<$Res>
       List<PlayerRole>? roles,
       List<String> nicknames,
       String referee,
-      ClubGameResult_GameWin? gameWin,
+      GameWin? gameWin,
       List<double> scores,
       List<PlayerResultStatus?>? statuses,
       int table});
@@ -165,7 +165,7 @@ class __$$_GameResultModelCopyWithImpl<$Res>
       gameWin: freezed == gameWin
           ? _value.gameWin
           : gameWin // ignore: cast_nullable_to_non_nullable
-              as ClubGameResult_GameWin?,
+              as GameWin?,
       scores: null == scores
           ? _value._scores
           : scores // ignore: cast_nullable_to_non_nullable
@@ -222,7 +222,7 @@ class _$_GameResultModel implements _GameResultModel {
   @override
   final String referee;
   @override
-  final ClubGameResult_GameWin? gameWin;
+  final GameWin? gameWin;
   final List<double> _scores;
   @override
   List<double> get scores {
@@ -290,7 +290,7 @@ abstract class _GameResultModel implements GameResultModel {
       final List<PlayerRole>? roles,
       required final List<String> nicknames,
       required final String referee,
-      final ClubGameResult_GameWin? gameWin,
+      final GameWin? gameWin,
       required final List<double> scores,
       final List<PlayerResultStatus?>? statuses,
       required final int table}) = _$_GameResultModel;
@@ -304,7 +304,7 @@ abstract class _GameResultModel implements GameResultModel {
   @override
   String get referee;
   @override
-  ClubGameResult_GameWin? get gameWin;
+  GameWin? get gameWin;
   @override
   List<double> get scores;
   @override

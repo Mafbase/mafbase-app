@@ -9,15 +9,49 @@
 import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class BestMove extends $pb.ProtobufEnum {
+  static const BestMove miss = BestMove._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'miss');
+  static const BestMove half = BestMove._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'half');
+  static const BestMove full = BestMove._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'full');
+
+  static const $core.List<BestMove> values = <BestMove> [
+    miss,
+    half,
+    full,
+  ];
+
+  static final $core.Map<$core.int, BestMove> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static BestMove? valueOf($core.int value) => _byValue[value];
+
+  const BestMove._($core.int v, $core.String n) : super(v, n);
+}
+
+class GameWin extends $pb.ProtobufEnum {
+  static const GameWin city = GameWin._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'city');
+  static const GameWin mafia = GameWin._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'mafia');
+  static const GameWin draw = GameWin._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'draw');
+
+  static const $core.List<GameWin> values = <GameWin> [
+    city,
+    mafia,
+    draw,
+  ];
+
+  static final $core.Map<$core.int, GameWin> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static GameWin? valueOf($core.int value) => _byValue[value];
+
+  const GameWin._($core.int v, $core.String n) : super(v, n);
+}
+
 class PlayerRole extends $pb.ProtobufEnum {
   static const PlayerRole citizen = PlayerRole._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'citizen');
-  static const PlayerRole mafia = PlayerRole._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'mafia');
+  static const PlayerRole maf = PlayerRole._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'maf');
   static const PlayerRole don = PlayerRole._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'don');
   static const PlayerRole sheriff = PlayerRole._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'sheriff');
 
   static const $core.List<PlayerRole> values = <PlayerRole> [
     citizen,
-    mafia,
+    maf,
     don,
     sheriff,
   ];
@@ -62,40 +96,6 @@ class LoginEventOut_Error extends $pb.ProtobufEnum {
   static LoginEventOut_Error? valueOf($core.int value) => _byValue[value];
 
   const LoginEventOut_Error._($core.int v, $core.String n) : super(v, n);
-}
-
-class ClubGameResult_BestMove extends $pb.ProtobufEnum {
-  static const ClubGameResult_BestMove miss = ClubGameResult_BestMove._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'miss');
-  static const ClubGameResult_BestMove half = ClubGameResult_BestMove._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'half');
-  static const ClubGameResult_BestMove full = ClubGameResult_BestMove._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'full');
-
-  static const $core.List<ClubGameResult_BestMove> values = <ClubGameResult_BestMove> [
-    miss,
-    half,
-    full,
-  ];
-
-  static final $core.Map<$core.int, ClubGameResult_BestMove> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static ClubGameResult_BestMove? valueOf($core.int value) => _byValue[value];
-
-  const ClubGameResult_BestMove._($core.int v, $core.String n) : super(v, n);
-}
-
-class ClubGameResult_GameWin extends $pb.ProtobufEnum {
-  static const ClubGameResult_GameWin city = ClubGameResult_GameWin._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'city');
-  static const ClubGameResult_GameWin mafia = ClubGameResult_GameWin._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'mafia');
-  static const ClubGameResult_GameWin draw = ClubGameResult_GameWin._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'draw');
-
-  static const $core.List<ClubGameResult_GameWin> values = <ClubGameResult_GameWin> [
-    city,
-    mafia,
-    draw,
-  ];
-
-  static final $core.Map<$core.int, ClubGameResult_GameWin> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static ClubGameResult_GameWin? valueOf($core.int value) => _byValue[value];
-
-  const ClubGameResult_GameWin._($core.int v, $core.String n) : super(v, n);
 }
 
 class LoginByTokenEventOut_Error extends $pb.ProtobufEnum {

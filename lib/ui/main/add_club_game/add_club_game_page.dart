@@ -1,10 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -19,7 +17,6 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_bloc.d
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class AddClubGamePage extends StatefulWidget {
@@ -121,10 +118,10 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   final refereeFocusNode = FocusNode();
   final focusNodes = List.generate(10, (index) => FocusNode());
   final addScoreFocusNodes = List.generate(10, (index) => FocusNode());
-  final winValue = ClubGameResult_GameWin.values;
-  ClubGameResult_GameWin? winSelected;
+  final winValue = GameWin.values;
+  GameWin? winSelected;
   int firstDie = -1;
-  ClubGameResult_BestMove? bestMove;
+  BestMove? bestMove;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
   DateTime date = DateTime.now();
   CiSchemeModel? ciSchemeModel;
@@ -370,7 +367,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                                   firstDie = value ?? -1;
                                                   if (firstDie == -1) {
                                                     bestMove =
-                                                        ClubGameResult_BestMove
+                                                        BestMove
                                                             .miss;
                                                   }
                                                 });
@@ -382,19 +379,19 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                           style: MyTheme.of(context)
                                               .defaultTextStyle,
                                         ),
-                                        DropdownButton<ClubGameResult_BestMove>(
+                                        DropdownButton<BestMove>(
                                           value: bestMove,
-                                          items: ClubGameResult_BestMove.values
+                                          items: BestMove.values
                                               .map((bestMove) {
                                             final String text;
                                             switch (bestMove) {
-                                              case ClubGameResult_BestMove.full:
+                                              case BestMove.full:
                                                 text = "Полный лучший ход";
                                                 break;
-                                              case ClubGameResult_BestMove.half:
+                                              case BestMove.half:
                                                 text = "Двойка черных";
                                                 break;
-                                              case ClubGameResult_BestMove.miss:
+                                              case BestMove.miss:
                                                 text = "Мимо";
                                                 break;
                                               default:
@@ -431,18 +428,18 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      DropdownButton<ClubGameResult_GameWin>(
+                                      DropdownButton<GameWin>(
                                         value: winSelected,
                                         items: winValue.map((win) {
                                           final String text;
                                           switch (win) {
-                                            case ClubGameResult_GameWin.city:
+                                            case GameWin.city:
                                               text = "Победа города";
                                               break;
-                                            case ClubGameResult_GameWin.draw:
+                                            case GameWin.draw:
                                               text = "Ничья";
                                               break;
-                                            case ClubGameResult_GameWin.mafia:
+                                            case GameWin.mafia:
                                               text = "Победа мафии";
                                               break;
                                             default:
@@ -608,7 +605,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
       return;
     }
     if (winSelected == null ||
-        roles.where((element) => element == PlayerRole.mafia).length != 2 ||
+        roles.where((element) => element == PlayerRole.maf).length != 2 ||
         roles.where((element) => element == PlayerRole.don).length != 1 ||
         roles.where((element) => element == PlayerRole.sheriff).length != 1 ||
         controllers
@@ -633,8 +630,8 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                     .firstWhere((element) => e.text == element.nickname)
                     .id,
               ),
-              mafia1: roles.indexOf(PlayerRole.mafia),
-              mafia2: roles.lastIndexOf(PlayerRole.mafia),
+              mafia1: roles.indexOf(PlayerRole.maf),
+              mafia2: roles.lastIndexOf(PlayerRole.maf),
               referee: state.players
                   .firstWhere(
                     (element) => refereeController.text == element.nickname,

@@ -22,8 +22,8 @@ mixin _$AddClubGameEffect {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)
@@ -37,8 +37,8 @@ mixin _$AddClubGameEffect {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)?
@@ -52,8 +52,8 @@ mixin _$AddClubGameEffect {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)?
@@ -112,8 +112,8 @@ abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res> {
       {List<String> players,
       List<double> addScore,
       List<PlayerRole> roles,
-      ClubGameResult_GameWin win,
-      ClubGameResult_BestMove bestMove,
+      GameWin win,
+      BestMove bestMove,
       String referee,
       int died,
       DateTime date});
@@ -156,11 +156,11 @@ class __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>
       win: null == win
           ? _value.win
           : win // ignore: cast_nullable_to_non_nullable
-              as ClubGameResult_GameWin,
+              as GameWin,
       bestMove: null == bestMove
           ? _value.bestMove
           : bestMove // ignore: cast_nullable_to_non_nullable
-              as ClubGameResult_BestMove,
+              as BestMove,
       referee: null == referee
           ? _value.referee
           : referee // ignore: cast_nullable_to_non_nullable
@@ -218,9 +218,9 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   }
 
   @override
-  final ClubGameResult_GameWin win;
+  final GameWin win;
   @override
-  final ClubGameResult_BestMove bestMove;
+  final BestMove bestMove;
   @override
   final String referee;
   @override
@@ -275,8 +275,8 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)
@@ -294,8 +294,8 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)?
@@ -313,8 +313,8 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)?
@@ -366,8 +366,8 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
       {required final List<String> players,
       required final List<double> addScore,
       required final List<PlayerRole> roles,
-      required final ClubGameResult_GameWin win,
-      required final ClubGameResult_BestMove bestMove,
+      required final GameWin win,
+      required final BestMove bestMove,
       required final String referee,
       required final int died,
       required final DateTime date}) = _$AddClubGameEffectSetValues;
@@ -375,8 +375,8 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
   List<String> get players;
   List<double> get addScore;
   List<PlayerRole> get roles;
-  ClubGameResult_GameWin get win;
-  ClubGameResult_BestMove get bestMove;
+  GameWin get win;
+  BestMove get bestMove;
   String get referee;
   int get died;
   DateTime get date;
@@ -475,8 +475,8 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)
@@ -493,8 +493,8 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)?
@@ -511,8 +511,8 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
-            ClubGameResult_GameWin win,
-            ClubGameResult_BestMove bestMove,
+            GameWin win,
+            BestMove bestMove,
             String referee,
             int died,
             DateTime date)?

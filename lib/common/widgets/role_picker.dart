@@ -35,9 +35,9 @@ class _RolePickerState extends State<RolePicker> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InkWell(
-              onTap: widget.readOnly ? null : () => onChange(PlayerRole.mafia),
+              onTap: widget.readOnly ? null : () => onChange(PlayerRole.maf),
               child: AnimatedOpacity(
-                opacity: widget.playerRole == PlayerRole.mafia ? 1.0 : 0.3,
+                opacity: widget.playerRole == PlayerRole.maf ? 1.0 : 0.3,
                 duration: duration,
                 child: SvgPicture.asset(
                   AppAssets.mafiaAsset(),

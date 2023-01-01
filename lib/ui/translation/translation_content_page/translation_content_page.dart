@@ -236,7 +236,7 @@ class _RoleWidgetState extends State<_RoleWidget>
     switch (role) {
       case PlayerRole.don:
         return AppAssets.donAsset();
-      case PlayerRole.mafia:
+      case PlayerRole.maf:
         return AppAssets.mafiaAsset();
       case PlayerRole.sheriff:
         return AppAssets.sheriffAsset();
