@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'login_events.dart';
 
@@ -25,9 +25,9 @@ mixin _$LoginEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password)? loginButtonTapped,
-    TResult Function()? forgotPasswordTapped,
-    TResult Function()? signUpButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
+    TResult? Function()? forgotPasswordTapped,
+    TResult? Function()? signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$LoginEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoginButtonTapped value)? loginButtonTapped,
-    TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
-    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(LoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult? Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,16 +66,18 @@ mixin _$LoginEvent {
 abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
-      _$LoginEventCopyWithImpl<$Res>;
+      _$LoginEventCopyWithImpl<$Res, LoginEvent>;
 }
 
 /// @nodoc
-class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
+class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
+    implements $LoginEventCopyWith<$Res> {
   _$LoginEventCopyWithImpl(this._value, this._then);
 
-  final LoginEvent _value;
   // ignore: unused_field
-  final $Res Function(LoginEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -83,31 +85,30 @@ abstract class _$$LoginButtonTappedCopyWith<$Res> {
   factory _$$LoginButtonTappedCopyWith(
           _$LoginButtonTapped value, $Res Function(_$LoginButtonTapped) then) =
       __$$LoginButtonTappedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
 class __$$LoginButtonTappedCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LoginButtonTapped>
     implements _$$LoginButtonTappedCopyWith<$Res> {
   __$$LoginButtonTappedCopyWithImpl(
       _$LoginButtonTapped _value, $Res Function(_$LoginButtonTapped) _then)
-      : super(_value, (v) => _then(v as _$LoginButtonTapped));
+      : super(_value, _then);
 
-  @override
-  _$LoginButtonTapped get _value => super._value as _$LoginButtonTapped;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_$LoginButtonTapped(
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
@@ -135,18 +136,17 @@ class _$LoginButtonTapped implements LoginButtonTapped {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginButtonTapped &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password));
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoginButtonTappedCopyWith<_$LoginButtonTapped> get copyWith =>
       __$$LoginButtonTappedCopyWithImpl<_$LoginButtonTapped>(this, _$identity);
 
@@ -163,9 +163,9 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password)? loginButtonTapped,
-    TResult Function()? forgotPasswordTapped,
-    TResult Function()? signUpButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
+    TResult? Function()? forgotPasswordTapped,
+    TResult? Function()? signUpButtonTapped,
   }) {
     return loginButtonTapped?.call(email, password);
   }
@@ -197,9 +197,9 @@ class _$LoginButtonTapped implements LoginButtonTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoginButtonTapped value)? loginButtonTapped,
-    TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
-    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(LoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult? Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) {
     return loginButtonTapped?.call(this);
   }
@@ -240,14 +240,11 @@ abstract class _$$ForgotPasswordTappedCopyWith<$Res> {
 
 /// @nodoc
 class __$$ForgotPasswordTappedCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$ForgotPasswordTapped>
     implements _$$ForgotPasswordTappedCopyWith<$Res> {
   __$$ForgotPasswordTappedCopyWithImpl(_$ForgotPasswordTapped _value,
       $Res Function(_$ForgotPasswordTapped) _then)
-      : super(_value, (v) => _then(v as _$ForgotPasswordTapped));
-
-  @override
-  _$ForgotPasswordTapped get _value => super._value as _$ForgotPasswordTapped;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -282,9 +279,9 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password)? loginButtonTapped,
-    TResult Function()? forgotPasswordTapped,
-    TResult Function()? signUpButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
+    TResult? Function()? forgotPasswordTapped,
+    TResult? Function()? signUpButtonTapped,
   }) {
     return forgotPasswordTapped?.call();
   }
@@ -316,9 +313,9 @@ class _$ForgotPasswordTapped implements ForgotPasswordTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoginButtonTapped value)? loginButtonTapped,
-    TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
-    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(LoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult? Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) {
     return forgotPasswordTapped?.call(this);
   }
@@ -351,14 +348,11 @@ abstract class _$$SignUpButtonTappedCopyWith<$Res> {
 
 /// @nodoc
 class __$$SignUpButtonTappedCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$SignUpButtonTapped>
     implements _$$SignUpButtonTappedCopyWith<$Res> {
   __$$SignUpButtonTappedCopyWithImpl(
       _$SignUpButtonTapped _value, $Res Function(_$SignUpButtonTapped) _then)
-      : super(_value, (v) => _then(v as _$SignUpButtonTapped));
-
-  @override
-  _$SignUpButtonTapped get _value => super._value as _$SignUpButtonTapped;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -393,9 +387,9 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password)? loginButtonTapped,
-    TResult Function()? forgotPasswordTapped,
-    TResult Function()? signUpButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
+    TResult? Function()? forgotPasswordTapped,
+    TResult? Function()? signUpButtonTapped,
   }) {
     return signUpButtonTapped?.call();
   }
@@ -427,9 +421,9 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LoginButtonTapped value)? loginButtonTapped,
-    TResult Function(ForgotPasswordTapped value)? forgotPasswordTapped,
-    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(LoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(ForgotPasswordTapped value)? forgotPasswordTapped,
+    TResult? Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) {
     return signUpButtonTapped?.call(this);
   }

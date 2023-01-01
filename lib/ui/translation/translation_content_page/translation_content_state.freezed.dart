@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'translation_content_state.dart';
 
@@ -32,7 +32,8 @@ mixin _$TranslationContentState {
 abstract class $TranslationContentStateCopyWith<$Res> {
   factory $TranslationContentStateCopyWith(TranslationContentState value,
           $Res Function(TranslationContentState) then) =
-      _$TranslationContentStateCopyWithImpl<$Res>;
+      _$TranslationContentStateCopyWithImpl<$Res, TranslationContentState>;
+  @useResult
   $Res call(
       {List<PlayerRole>? roles,
       List<PlayerStatus>? statuses,
@@ -43,49 +44,52 @@ abstract class $TranslationContentStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TranslationContentStateCopyWithImpl<$Res>
+class _$TranslationContentStateCopyWithImpl<$Res,
+        $Val extends TranslationContentState>
     implements $TranslationContentStateCopyWith<$Res> {
   _$TranslationContentStateCopyWithImpl(this._value, this._then);
 
-  final TranslationContentState _value;
   // ignore: unused_field
-  final $Res Function(TranslationContentState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? roles = freezed,
     Object? statuses = freezed,
     Object? images = freezed,
     Object? nicknames = freezed,
-    Object? game = freezed,
-    Object? totalGames = freezed,
+    Object? game = null,
+    Object? totalGames = null,
   }) {
     return _then(_value.copyWith(
-      roles: roles == freezed
+      roles: freezed == roles
           ? _value.roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<PlayerRole>?,
-      statuses: statuses == freezed
+      statuses: freezed == statuses
           ? _value.statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<PlayerStatus>?,
-      images: images == freezed
+      images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      nicknames: nicknames == freezed
+      nicknames: freezed == nicknames
           ? _value.nicknames
           : nicknames // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      game: game == freezed
+      game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
               as int,
-      totalGames: totalGames == freezed
+      totalGames: null == totalGames
           ? _value.totalGames
           : totalGames // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +100,7 @@ abstract class _$$_TranslationContentStateCopyWith<$Res>
           $Res Function(_$_TranslationContentState) then) =
       __$$_TranslationContentStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<PlayerRole>? roles,
       List<PlayerStatus>? statuses,
@@ -107,47 +112,45 @@ abstract class _$$_TranslationContentStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_TranslationContentStateCopyWithImpl<$Res>
-    extends _$TranslationContentStateCopyWithImpl<$Res>
+    extends _$TranslationContentStateCopyWithImpl<$Res,
+        _$_TranslationContentState>
     implements _$$_TranslationContentStateCopyWith<$Res> {
   __$$_TranslationContentStateCopyWithImpl(_$_TranslationContentState _value,
       $Res Function(_$_TranslationContentState) _then)
-      : super(_value, (v) => _then(v as _$_TranslationContentState));
+      : super(_value, _then);
 
-  @override
-  _$_TranslationContentState get _value =>
-      super._value as _$_TranslationContentState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? roles = freezed,
     Object? statuses = freezed,
     Object? images = freezed,
     Object? nicknames = freezed,
-    Object? game = freezed,
-    Object? totalGames = freezed,
+    Object? game = null,
+    Object? totalGames = null,
   }) {
     return _then(_$_TranslationContentState(
-      roles: roles == freezed
+      roles: freezed == roles
           ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<PlayerRole>?,
-      statuses: statuses == freezed
+      statuses: freezed == statuses
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
               as List<PlayerStatus>?,
-      images: images == freezed
+      images: freezed == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      nicknames: nicknames == freezed
+      nicknames: freezed == nicknames
           ? _value._nicknames
           : nicknames // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      game: game == freezed
+      game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
               as int,
-      totalGames: totalGames == freezed
+      totalGames: null == totalGames
           ? _value.totalGames
           : totalGames // ignore: cast_nullable_to_non_nullable
               as int,
@@ -175,6 +178,7 @@ class _$_TranslationContentState implements _TranslationContentState {
   List<PlayerRole>? get roles {
     final value = _roles;
     if (value == null) return null;
+    if (_roles is EqualUnmodifiableListView) return _roles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -184,6 +188,7 @@ class _$_TranslationContentState implements _TranslationContentState {
   List<PlayerStatus>? get statuses {
     final value = _statuses;
     if (value == null) return null;
+    if (_statuses is EqualUnmodifiableListView) return _statuses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -193,6 +198,7 @@ class _$_TranslationContentState implements _TranslationContentState {
   List<String>? get images {
     final value = _images;
     if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -202,6 +208,7 @@ class _$_TranslationContentState implements _TranslationContentState {
   List<String>? get nicknames {
     final value = _nicknames;
     if (value == null) return null;
+    if (_nicknames is EqualUnmodifiableListView) return _nicknames;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -228,9 +235,9 @@ class _$_TranslationContentState implements _TranslationContentState {
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality()
                 .equals(other._nicknames, _nicknames) &&
-            const DeepCollectionEquality().equals(other.game, game) &&
-            const DeepCollectionEquality()
-                .equals(other.totalGames, totalGames));
+            (identical(other.game, game) || other.game == game) &&
+            (identical(other.totalGames, totalGames) ||
+                other.totalGames == totalGames));
   }
 
   @override
@@ -240,11 +247,12 @@ class _$_TranslationContentState implements _TranslationContentState {
       const DeepCollectionEquality().hash(_statuses),
       const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(_nicknames),
-      const DeepCollectionEquality().hash(game),
-      const DeepCollectionEquality().hash(totalGames));
+      game,
+      totalGames);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TranslationContentStateCopyWith<_$_TranslationContentState>
       get copyWith =>
           __$$_TranslationContentStateCopyWithImpl<_$_TranslationContentState>(

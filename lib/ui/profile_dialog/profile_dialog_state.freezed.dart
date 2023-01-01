@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_dialog_state.dart';
 
@@ -28,34 +28,37 @@ mixin _$ProfileDialogState {
 abstract class $ProfileDialogStateCopyWith<$Res> {
   factory $ProfileDialogStateCopyWith(
           ProfileDialogState value, $Res Function(ProfileDialogState) then) =
-      _$ProfileDialogStateCopyWithImpl<$Res>;
+      _$ProfileDialogStateCopyWithImpl<$Res, ProfileDialogState>;
+  @useResult
   $Res call({String? imageUrl, bool isLoading});
 }
 
 /// @nodoc
-class _$ProfileDialogStateCopyWithImpl<$Res>
+class _$ProfileDialogStateCopyWithImpl<$Res, $Val extends ProfileDialogState>
     implements $ProfileDialogStateCopyWith<$Res> {
   _$ProfileDialogStateCopyWithImpl(this._value, this._then);
 
-  final ProfileDialogState _value;
   // ignore: unused_field
-  final $Res Function(ProfileDialogState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? imageUrl = freezed,
-    Object? isLoading = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      imageUrl: imageUrl == freezed
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,31 +69,30 @@ abstract class _$$_ProfileDialogStateCopyWith<$Res>
           $Res Function(_$_ProfileDialogState) then) =
       __$$_ProfileDialogStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String? imageUrl, bool isLoading});
 }
 
 /// @nodoc
 class __$$_ProfileDialogStateCopyWithImpl<$Res>
-    extends _$ProfileDialogStateCopyWithImpl<$Res>
+    extends _$ProfileDialogStateCopyWithImpl<$Res, _$_ProfileDialogState>
     implements _$$_ProfileDialogStateCopyWith<$Res> {
   __$$_ProfileDialogStateCopyWithImpl(
       _$_ProfileDialogState _value, $Res Function(_$_ProfileDialogState) _then)
-      : super(_value, (v) => _then(v as _$_ProfileDialogState));
+      : super(_value, _then);
 
-  @override
-  _$_ProfileDialogState get _value => super._value as _$_ProfileDialogState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? imageUrl = freezed,
-    Object? isLoading = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_$_ProfileDialogState(
-      imageUrl: imageUrl == freezed
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -119,18 +121,18 @@ class _$_ProfileDialogState implements _ProfileDialogState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProfileDialogState &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(imageUrl),
-      const DeepCollectionEquality().hash(isLoading));
+  int get hashCode => Object.hash(runtimeType, imageUrl, isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ProfileDialogStateCopyWith<_$_ProfileDialogState> get copyWith =>
       __$$_ProfileDialogStateCopyWithImpl<_$_ProfileDialogState>(
           this, _$identity);

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tournament_model.dart';
 
@@ -32,7 +32,8 @@ mixin _$TournamentModel {
 abstract class $TournamentModelCopyWith<$Res> {
   factory $TournamentModelCopyWith(
           TournamentModel value, $Res Function(TournamentModel) then) =
-      _$TournamentModelCopyWithImpl<$Res>;
+      _$TournamentModelCopyWithImpl<$Res, TournamentModel>;
+  @useResult
   $Res call(
       {int id,
       String name,
@@ -43,49 +44,51 @@ abstract class $TournamentModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TournamentModelCopyWithImpl<$Res>
+class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
     implements $TournamentModelCopyWith<$Res> {
   _$TournamentModelCopyWithImpl(this._value, this._then);
 
-  final TournamentModel _value;
   // ignore: unused_field
-  final $Res Function(TournamentModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? dateStart = freezed,
-    Object? dateEnd = freezed,
-    Object? gamesCount = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? status = null,
+    Object? dateStart = null,
+    Object? dateEnd = null,
+    Object? gamesCount = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TournamentStatus,
-      dateStart: dateStart == freezed
+      dateStart: null == dateStart
           ? _value.dateStart
           : dateStart // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dateEnd: dateEnd == freezed
+      dateEnd: null == dateEnd
           ? _value.dateEnd
           : dateEnd // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      gamesCount: gamesCount == freezed
+      gamesCount: null == gamesCount
           ? _value.gamesCount
           : gamesCount // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +99,7 @@ abstract class _$$_TournamentModelCopyWith<$Res>
           _$_TournamentModel value, $Res Function(_$_TournamentModel) then) =
       __$$_TournamentModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       String name,
@@ -107,46 +111,44 @@ abstract class _$$_TournamentModelCopyWith<$Res>
 
 /// @nodoc
 class __$$_TournamentModelCopyWithImpl<$Res>
-    extends _$TournamentModelCopyWithImpl<$Res>
+    extends _$TournamentModelCopyWithImpl<$Res, _$_TournamentModel>
     implements _$$_TournamentModelCopyWith<$Res> {
   __$$_TournamentModelCopyWithImpl(
       _$_TournamentModel _value, $Res Function(_$_TournamentModel) _then)
-      : super(_value, (v) => _then(v as _$_TournamentModel));
+      : super(_value, _then);
 
-  @override
-  _$_TournamentModel get _value => super._value as _$_TournamentModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? dateStart = freezed,
-    Object? dateEnd = freezed,
-    Object? gamesCount = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? status = null,
+    Object? dateStart = null,
+    Object? dateEnd = null,
+    Object? gamesCount = null,
   }) {
     return _then(_$_TournamentModel(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TournamentStatus,
-      dateStart: dateStart == freezed
+      dateStart: null == dateStart
           ? _value.dateStart
           : dateStart // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dateEnd: dateEnd == freezed
+      dateEnd: null == dateEnd
           ? _value.dateEnd
           : dateEnd // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      gamesCount: gamesCount == freezed
+      gamesCount: null == gamesCount
           ? _value.gamesCount
           : gamesCount // ignore: cast_nullable_to_non_nullable
               as int,
@@ -188,27 +190,23 @@ class _$_TournamentModel implements _TournamentModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TournamentModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.dateStart, dateStart) &&
-            const DeepCollectionEquality().equals(other.dateEnd, dateEnd) &&
-            const DeepCollectionEquality()
-                .equals(other.gamesCount, gamesCount));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.dateStart, dateStart) ||
+                other.dateStart == dateStart) &&
+            (identical(other.dateEnd, dateEnd) || other.dateEnd == dateEnd) &&
+            (identical(other.gamesCount, gamesCount) ||
+                other.gamesCount == gamesCount));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(dateStart),
-      const DeepCollectionEquality().hash(dateEnd),
-      const DeepCollectionEquality().hash(gamesCount));
+      runtimeType, id, name, status, dateStart, dateEnd, gamesCount);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TournamentModelCopyWith<_$_TournamentModel> get copyWith =>
       __$$_TournamentModelCopyWithImpl<_$_TournamentModel>(this, _$identity);
 }

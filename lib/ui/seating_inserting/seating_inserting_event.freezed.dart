@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'seating_inserting_event.dart';
 
@@ -24,8 +24,8 @@ mixin _$SeatingInsertingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? save,
-    TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
+    TResult? Function()? save,
+    TResult? Function(Stream<List<int>> bytesStream)? onFileSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,8 +44,8 @@ mixin _$SeatingInsertingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingInsertingSaveEvent value)? save,
-    TResult Function(SeatingInsertingFileSelectedEvent value)? onFileSelected,
+    TResult? Function(SeatingInsertingSaveEvent value)? save,
+    TResult? Function(SeatingInsertingFileSelectedEvent value)? onFileSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,17 +61,19 @@ mixin _$SeatingInsertingEvent {
 abstract class $SeatingInsertingEventCopyWith<$Res> {
   factory $SeatingInsertingEventCopyWith(SeatingInsertingEvent value,
           $Res Function(SeatingInsertingEvent) then) =
-      _$SeatingInsertingEventCopyWithImpl<$Res>;
+      _$SeatingInsertingEventCopyWithImpl<$Res, SeatingInsertingEvent>;
 }
 
 /// @nodoc
-class _$SeatingInsertingEventCopyWithImpl<$Res>
+class _$SeatingInsertingEventCopyWithImpl<$Res,
+        $Val extends SeatingInsertingEvent>
     implements $SeatingInsertingEventCopyWith<$Res> {
   _$SeatingInsertingEventCopyWithImpl(this._value, this._then);
 
-  final SeatingInsertingEvent _value;
   // ignore: unused_field
-  final $Res Function(SeatingInsertingEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -84,15 +86,12 @@ abstract class _$$SeatingInsertingSaveEventCopyWith<$Res> {
 
 /// @nodoc
 class __$$SeatingInsertingSaveEventCopyWithImpl<$Res>
-    extends _$SeatingInsertingEventCopyWithImpl<$Res>
+    extends _$SeatingInsertingEventCopyWithImpl<$Res,
+        _$SeatingInsertingSaveEvent>
     implements _$$SeatingInsertingSaveEventCopyWith<$Res> {
   __$$SeatingInsertingSaveEventCopyWithImpl(_$SeatingInsertingSaveEvent _value,
       $Res Function(_$SeatingInsertingSaveEvent) _then)
-      : super(_value, (v) => _then(v as _$SeatingInsertingSaveEvent));
-
-  @override
-  _$SeatingInsertingSaveEvent get _value =>
-      super._value as _$SeatingInsertingSaveEvent;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -127,8 +126,8 @@ class _$SeatingInsertingSaveEvent implements SeatingInsertingSaveEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? save,
-    TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
+    TResult? Function()? save,
+    TResult? Function(Stream<List<int>> bytesStream)? onFileSelected,
   }) {
     return save?.call();
   }
@@ -159,8 +158,8 @@ class _$SeatingInsertingSaveEvent implements SeatingInsertingSaveEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingInsertingSaveEvent value)? save,
-    TResult Function(SeatingInsertingFileSelectedEvent value)? onFileSelected,
+    TResult? Function(SeatingInsertingSaveEvent value)? save,
+    TResult? Function(SeatingInsertingFileSelectedEvent value)? onFileSelected,
   }) {
     return save?.call(this);
   }
@@ -189,28 +188,27 @@ abstract class _$$SeatingInsertingFileSelectedEventCopyWith<$Res> {
           _$SeatingInsertingFileSelectedEvent value,
           $Res Function(_$SeatingInsertingFileSelectedEvent) then) =
       __$$SeatingInsertingFileSelectedEventCopyWithImpl<$Res>;
+  @useResult
   $Res call({Stream<List<int>> bytesStream});
 }
 
 /// @nodoc
 class __$$SeatingInsertingFileSelectedEventCopyWithImpl<$Res>
-    extends _$SeatingInsertingEventCopyWithImpl<$Res>
+    extends _$SeatingInsertingEventCopyWithImpl<$Res,
+        _$SeatingInsertingFileSelectedEvent>
     implements _$$SeatingInsertingFileSelectedEventCopyWith<$Res> {
   __$$SeatingInsertingFileSelectedEventCopyWithImpl(
       _$SeatingInsertingFileSelectedEvent _value,
       $Res Function(_$SeatingInsertingFileSelectedEvent) _then)
-      : super(_value, (v) => _then(v as _$SeatingInsertingFileSelectedEvent));
+      : super(_value, _then);
 
-  @override
-  _$SeatingInsertingFileSelectedEvent get _value =>
-      super._value as _$SeatingInsertingFileSelectedEvent;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bytesStream = freezed,
+    Object? bytesStream = null,
   }) {
     return _then(_$SeatingInsertingFileSelectedEvent(
-      bytesStream: bytesStream == freezed
+      bytesStream: null == bytesStream
           ? _value.bytesStream
           : bytesStream // ignore: cast_nullable_to_non_nullable
               as Stream<List<int>>,
@@ -237,16 +235,16 @@ class _$SeatingInsertingFileSelectedEvent
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SeatingInsertingFileSelectedEvent &&
-            const DeepCollectionEquality()
-                .equals(other.bytesStream, bytesStream));
+            (identical(other.bytesStream, bytesStream) ||
+                other.bytesStream == bytesStream));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(bytesStream));
+  int get hashCode => Object.hash(runtimeType, bytesStream);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SeatingInsertingFileSelectedEventCopyWith<
           _$SeatingInsertingFileSelectedEvent>
       get copyWith => __$$SeatingInsertingFileSelectedEventCopyWithImpl<
@@ -264,8 +262,8 @@ class _$SeatingInsertingFileSelectedEvent
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? save,
-    TResult Function(Stream<List<int>> bytesStream)? onFileSelected,
+    TResult? Function()? save,
+    TResult? Function(Stream<List<int>> bytesStream)? onFileSelected,
   }) {
     return onFileSelected?.call(bytesStream);
   }
@@ -296,8 +294,8 @@ class _$SeatingInsertingFileSelectedEvent
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingInsertingSaveEvent value)? save,
-    TResult Function(SeatingInsertingFileSelectedEvent value)? onFileSelected,
+    TResult? Function(SeatingInsertingSaveEvent value)? save,
+    TResult? Function(SeatingInsertingFileSelectedEvent value)? onFileSelected,
   }) {
     return onFileSelected?.call(this);
   }

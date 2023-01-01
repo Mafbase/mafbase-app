@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tournaments_state.dart';
 
@@ -28,34 +28,37 @@ mixin _$TournamentsState {
 abstract class $TournamentsStateCopyWith<$Res> {
   factory $TournamentsStateCopyWith(
           TournamentsState value, $Res Function(TournamentsState) then) =
-      _$TournamentsStateCopyWithImpl<$Res>;
+      _$TournamentsStateCopyWithImpl<$Res, TournamentsState>;
+  @useResult
   $Res call({List<TournamentModel> tournaments, bool isLoading});
 }
 
 /// @nodoc
-class _$TournamentsStateCopyWithImpl<$Res>
+class _$TournamentsStateCopyWithImpl<$Res, $Val extends TournamentsState>
     implements $TournamentsStateCopyWith<$Res> {
   _$TournamentsStateCopyWithImpl(this._value, this._then);
 
-  final TournamentsState _value;
   // ignore: unused_field
-  final $Res Function(TournamentsState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tournaments = freezed,
-    Object? isLoading = freezed,
+    Object? tournaments = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      tournaments: tournaments == freezed
+      tournaments: null == tournaments
           ? _value.tournaments
           : tournaments // ignore: cast_nullable_to_non_nullable
               as List<TournamentModel>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,31 +69,30 @@ abstract class _$$_TournamentsStateCopyWith<$Res>
           _$_TournamentsState value, $Res Function(_$_TournamentsState) then) =
       __$$_TournamentsStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<TournamentModel> tournaments, bool isLoading});
 }
 
 /// @nodoc
 class __$$_TournamentsStateCopyWithImpl<$Res>
-    extends _$TournamentsStateCopyWithImpl<$Res>
+    extends _$TournamentsStateCopyWithImpl<$Res, _$_TournamentsState>
     implements _$$_TournamentsStateCopyWith<$Res> {
   __$$_TournamentsStateCopyWithImpl(
       _$_TournamentsState _value, $Res Function(_$_TournamentsState) _then)
-      : super(_value, (v) => _then(v as _$_TournamentsState));
+      : super(_value, _then);
 
-  @override
-  _$_TournamentsState get _value => super._value as _$_TournamentsState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tournaments = freezed,
-    Object? isLoading = freezed,
+    Object? tournaments = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_TournamentsState(
-      tournaments: tournaments == freezed
+      tournaments: null == tournaments
           ? _value._tournaments
           : tournaments // ignore: cast_nullable_to_non_nullable
               as List<TournamentModel>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -109,6 +111,7 @@ class _$_TournamentsState implements _TournamentsState {
   final List<TournamentModel> _tournaments;
   @override
   List<TournamentModel> get tournaments {
+    if (_tournaments is EqualUnmodifiableListView) return _tournaments;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tournaments);
   }
@@ -128,17 +131,17 @@ class _$_TournamentsState implements _TournamentsState {
             other is _$_TournamentsState &&
             const DeepCollectionEquality()
                 .equals(other._tournaments, _tournaments) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_tournaments),
-      const DeepCollectionEquality().hash(isLoading));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_tournaments), isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TournamentsStateCopyWith<_$_TournamentsState> get copyWith =>
       __$$_TournamentsStateCopyWithImpl<_$_TournamentsState>(this, _$identity);
 }

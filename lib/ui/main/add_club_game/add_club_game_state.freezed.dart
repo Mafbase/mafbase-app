@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'add_club_game_state.dart';
 
@@ -31,7 +31,8 @@ mixin _$AddClubGameState {
 abstract class $AddClubGameStateCopyWith<$Res> {
   factory $AddClubGameStateCopyWith(
           AddClubGameState value, $Res Function(AddClubGameState) then) =
-      _$AddClubGameStateCopyWithImpl<$Res>;
+      _$AddClubGameStateCopyWithImpl<$Res, AddClubGameState>;
+  @useResult
   $Res call(
       {bool isLoading,
       List<PlayerModel> players,
@@ -41,44 +42,46 @@ abstract class $AddClubGameStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AddClubGameStateCopyWithImpl<$Res>
+class _$AddClubGameStateCopyWithImpl<$Res, $Val extends AddClubGameState>
     implements $AddClubGameStateCopyWith<$Res> {
   _$AddClubGameStateCopyWithImpl(this._value, this._then);
 
-  final AddClubGameState _value;
   // ignore: unused_field
-  final $Res Function(AddClubGameState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
-    Object? players = freezed,
-    Object? canEdit = freezed,
-    Object? clubName = freezed,
-    Object? ciSchemes = freezed,
+    Object? isLoading = null,
+    Object? players = null,
+    Object? canEdit = null,
+    Object? clubName = null,
+    Object? ciSchemes = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      players: players == freezed
+      players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
-      canEdit: canEdit == freezed
+      canEdit: null == canEdit
           ? _value.canEdit
           : canEdit // ignore: cast_nullable_to_non_nullable
               as bool,
-      clubName: clubName == freezed
+      clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
-      ciSchemes: ciSchemes == freezed
+      ciSchemes: null == ciSchemes
           ? _value.ciSchemes
           : ciSchemes // ignore: cast_nullable_to_non_nullable
               as List<CiSchemeModel>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -89,6 +92,7 @@ abstract class _$$_AddClubGameStateCopyWith<$Res>
           _$_AddClubGameState value, $Res Function(_$_AddClubGameState) then) =
       __$$_AddClubGameStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool isLoading,
       List<PlayerModel> players,
@@ -99,41 +103,39 @@ abstract class _$$_AddClubGameStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_AddClubGameStateCopyWithImpl<$Res>
-    extends _$AddClubGameStateCopyWithImpl<$Res>
+    extends _$AddClubGameStateCopyWithImpl<$Res, _$_AddClubGameState>
     implements _$$_AddClubGameStateCopyWith<$Res> {
   __$$_AddClubGameStateCopyWithImpl(
       _$_AddClubGameState _value, $Res Function(_$_AddClubGameState) _then)
-      : super(_value, (v) => _then(v as _$_AddClubGameState));
+      : super(_value, _then);
 
-  @override
-  _$_AddClubGameState get _value => super._value as _$_AddClubGameState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
-    Object? players = freezed,
-    Object? canEdit = freezed,
-    Object? clubName = freezed,
-    Object? ciSchemes = freezed,
+    Object? isLoading = null,
+    Object? players = null,
+    Object? canEdit = null,
+    Object? clubName = null,
+    Object? ciSchemes = null,
   }) {
     return _then(_$_AddClubGameState(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      players: players == freezed
+      players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<PlayerModel>,
-      canEdit: canEdit == freezed
+      canEdit: null == canEdit
           ? _value.canEdit
           : canEdit // ignore: cast_nullable_to_non_nullable
               as bool,
-      clubName: clubName == freezed
+      clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
-      ciSchemes: ciSchemes == freezed
+      ciSchemes: null == ciSchemes
           ? _value._ciSchemes
           : ciSchemes // ignore: cast_nullable_to_non_nullable
               as List<CiSchemeModel>,
@@ -160,6 +162,7 @@ class _$_AddClubGameState implements _AddClubGameState {
   @override
   @JsonKey()
   List<PlayerModel> get players {
+    if (_players is EqualUnmodifiableListView) return _players;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_players);
   }
@@ -174,6 +177,7 @@ class _$_AddClubGameState implements _AddClubGameState {
   @override
   @JsonKey()
   List<CiSchemeModel> get ciSchemes {
+    if (_ciSchemes is EqualUnmodifiableListView) return _ciSchemes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_ciSchemes);
   }
@@ -188,10 +192,12 @@ class _$_AddClubGameState implements _AddClubGameState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddClubGameState &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other._players, _players) &&
-            const DeepCollectionEquality().equals(other.canEdit, canEdit) &&
-            const DeepCollectionEquality().equals(other.clubName, clubName) &&
+            (identical(other.canEdit, canEdit) || other.canEdit == canEdit) &&
+            (identical(other.clubName, clubName) ||
+                other.clubName == clubName) &&
             const DeepCollectionEquality()
                 .equals(other._ciSchemes, _ciSchemes));
   }
@@ -199,14 +205,15 @@ class _$_AddClubGameState implements _AddClubGameState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isLoading),
+      isLoading,
       const DeepCollectionEquality().hash(_players),
-      const DeepCollectionEquality().hash(canEdit),
-      const DeepCollectionEquality().hash(clubName),
+      canEdit,
+      clubName,
       const DeepCollectionEquality().hash(_ciSchemes));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AddClubGameStateCopyWith<_$_AddClubGameState> get copyWith =>
       __$$_AddClubGameStateCopyWithImpl<_$_AddClubGameState>(this, _$identity);
 }

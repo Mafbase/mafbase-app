@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'login_model.dart';
 
@@ -25,9 +25,9 @@ mixin _$LoginModel {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? success,
-    TResult Function(int id)? needVerification,
-    TResult Function(String? message)? error,
+    TResult? Function()? success,
+    TResult? Function(int id)? needVerification,
+    TResult? Function(String? message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$LoginModel {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(NeedVerification value)? needVerification,
-    TResult Function(Error value)? error,
+    TResult? Function(Success value)? success,
+    TResult? Function(NeedVerification value)? needVerification,
+    TResult? Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,16 +66,18 @@ mixin _$LoginModel {
 abstract class $LoginModelCopyWith<$Res> {
   factory $LoginModelCopyWith(
           LoginModel value, $Res Function(LoginModel) then) =
-      _$LoginModelCopyWithImpl<$Res>;
+      _$LoginModelCopyWithImpl<$Res, LoginModel>;
 }
 
 /// @nodoc
-class _$LoginModelCopyWithImpl<$Res> implements $LoginModelCopyWith<$Res> {
+class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
+    implements $LoginModelCopyWith<$Res> {
   _$LoginModelCopyWithImpl(this._value, this._then);
 
-  final LoginModel _value;
   // ignore: unused_field
-  final $Res Function(LoginModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -85,13 +87,11 @@ abstract class _$$SuccessCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SuccessCopyWithImpl<$Res> extends _$LoginModelCopyWithImpl<$Res>
+class __$$SuccessCopyWithImpl<$Res>
+    extends _$LoginModelCopyWithImpl<$Res, _$Success>
     implements _$$SuccessCopyWith<$Res> {
   __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
-      : super(_value, (v) => _then(v as _$Success));
-
-  @override
-  _$Success get _value => super._value as _$Success;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -126,9 +126,9 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? success,
-    TResult Function(int id)? needVerification,
-    TResult Function(String? message)? error,
+    TResult? Function()? success,
+    TResult? Function(int id)? needVerification,
+    TResult? Function(String? message)? error,
   }) {
     return success?.call();
   }
@@ -160,9 +160,9 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(NeedVerification value)? needVerification,
-    TResult Function(Error value)? error,
+    TResult? Function(Success value)? success,
+    TResult? Function(NeedVerification value)? needVerification,
+    TResult? Function(Error value)? error,
   }) {
     return success?.call(this);
   }
@@ -191,26 +191,25 @@ abstract class _$$NeedVerificationCopyWith<$Res> {
   factory _$$NeedVerificationCopyWith(
           _$NeedVerification value, $Res Function(_$NeedVerification) then) =
       __$$NeedVerificationCopyWithImpl<$Res>;
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
 class __$$NeedVerificationCopyWithImpl<$Res>
-    extends _$LoginModelCopyWithImpl<$Res>
+    extends _$LoginModelCopyWithImpl<$Res, _$NeedVerification>
     implements _$$NeedVerificationCopyWith<$Res> {
   __$$NeedVerificationCopyWithImpl(
       _$NeedVerification _value, $Res Function(_$NeedVerification) _then)
-      : super(_value, (v) => _then(v as _$NeedVerification));
+      : super(_value, _then);
 
-  @override
-  _$NeedVerification get _value => super._value as _$NeedVerification;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_$NeedVerification(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
@@ -236,15 +235,15 @@ class _$NeedVerification implements NeedVerification {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NeedVerification &&
-            const DeepCollectionEquality().equals(other.id, id));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$NeedVerificationCopyWith<_$NeedVerification> get copyWith =>
       __$$NeedVerificationCopyWithImpl<_$NeedVerification>(this, _$identity);
 
@@ -261,9 +260,9 @@ class _$NeedVerification implements NeedVerification {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? success,
-    TResult Function(int id)? needVerification,
-    TResult Function(String? message)? error,
+    TResult? Function()? success,
+    TResult? Function(int id)? needVerification,
+    TResult? Function(String? message)? error,
   }) {
     return needVerification?.call(id);
   }
@@ -295,9 +294,9 @@ class _$NeedVerification implements NeedVerification {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(NeedVerification value)? needVerification,
-    TResult Function(Error value)? error,
+    TResult? Function(Success value)? success,
+    TResult? Function(NeedVerification value)? needVerification,
+    TResult? Function(Error value)? error,
   }) {
     return needVerification?.call(this);
   }
@@ -330,24 +329,24 @@ abstract class NeedVerification implements LoginModel {
 abstract class _$$ErrorCopyWith<$Res> {
   factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
       __$$ErrorCopyWithImpl<$Res>;
+  @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res> extends _$LoginModelCopyWithImpl<$Res>
+class __$$ErrorCopyWithImpl<$Res>
+    extends _$LoginModelCopyWithImpl<$Res, _$Error>
     implements _$$ErrorCopyWith<$Res> {
   __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
-      : super(_value, (v) => _then(v as _$Error));
+      : super(_value, _then);
 
-  @override
-  _$Error get _value => super._value as _$Error;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
   }) {
     return _then(_$Error(
-      message: message == freezed
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -373,15 +372,15 @@ class _$Error implements Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Error &&
-            const DeepCollectionEquality().equals(other.message, message));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ErrorCopyWith<_$Error> get copyWith =>
       __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
 
@@ -398,9 +397,9 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? success,
-    TResult Function(int id)? needVerification,
-    TResult Function(String? message)? error,
+    TResult? Function()? success,
+    TResult? Function(int id)? needVerification,
+    TResult? Function(String? message)? error,
   }) {
     return error?.call(message);
   }
@@ -432,9 +431,9 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Success value)? success,
-    TResult Function(NeedVerification value)? needVerification,
-    TResult Function(Error value)? error,
+    TResult? Function(Success value)? success,
+    TResult? Function(NeedVerification value)? needVerification,
+    TResult? Function(Error value)? error,
   }) {
     return error?.call(this);
   }

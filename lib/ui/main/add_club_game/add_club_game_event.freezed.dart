@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'add_club_game_event.dart';
 
@@ -27,11 +27,11 @@ mixin _$AddClubGameEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
-    TResult Function(ClubGameResult gameResult, int? gameId)? submit,
-    TResult Function(int gameId)? edit,
-    TResult Function(int index, String nickname)? onNewPlayer,
-    TResult Function()? newGame,
+    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult? Function(int gameId)? edit,
+    TResult? Function(int index, String nickname)? onNewPlayer,
+    TResult? Function()? newGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,11 +55,11 @@ mixin _$AddClubGameEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEventPageOpened value)? pageOpened,
-    TResult Function(AddClubGameEventSubmit value)? submit,
-    TResult Function(AddClubGameEventPageEdit value)? edit,
-    TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
-    TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult? Function(AddClubGameEventSubmit value)? submit,
+    TResult? Function(AddClubGameEventPageEdit value)? edit,
+    TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult? Function(AddClubGameEventNewGame value)? newGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,17 +78,18 @@ mixin _$AddClubGameEvent {
 abstract class $AddClubGameEventCopyWith<$Res> {
   factory $AddClubGameEventCopyWith(
           AddClubGameEvent value, $Res Function(AddClubGameEvent) then) =
-      _$AddClubGameEventCopyWithImpl<$Res>;
+      _$AddClubGameEventCopyWithImpl<$Res, AddClubGameEvent>;
 }
 
 /// @nodoc
-class _$AddClubGameEventCopyWithImpl<$Res>
+class _$AddClubGameEventCopyWithImpl<$Res, $Val extends AddClubGameEvent>
     implements $AddClubGameEventCopyWith<$Res> {
   _$AddClubGameEventCopyWithImpl(this._value, this._then);
 
-  final AddClubGameEvent _value;
   // ignore: unused_field
-  final $Res Function(AddClubGameEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -97,28 +98,26 @@ abstract class _$$AddClubGameEventPageOpenedCopyWith<$Res> {
           _$AddClubGameEventPageOpened value,
           $Res Function(_$AddClubGameEventPageOpened) then) =
       __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>;
+  @useResult
   $Res call({int? gameId});
 }
 
 /// @nodoc
 class __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventPageOpened>
     implements _$$AddClubGameEventPageOpenedCopyWith<$Res> {
   __$$AddClubGameEventPageOpenedCopyWithImpl(
       _$AddClubGameEventPageOpened _value,
       $Res Function(_$AddClubGameEventPageOpened) _then)
-      : super(_value, (v) => _then(v as _$AddClubGameEventPageOpened));
+      : super(_value, _then);
 
-  @override
-  _$AddClubGameEventPageOpened get _value =>
-      super._value as _$AddClubGameEventPageOpened;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? gameId = freezed,
   }) {
     return _then(_$AddClubGameEventPageOpened(
-      gameId: gameId == freezed
+      gameId: freezed == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -144,15 +143,15 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddClubGameEventPageOpened &&
-            const DeepCollectionEquality().equals(other.gameId, gameId));
+            (identical(other.gameId, gameId) || other.gameId == gameId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(gameId));
+  int get hashCode => Object.hash(runtimeType, gameId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddClubGameEventPageOpenedCopyWith<_$AddClubGameEventPageOpened>
       get copyWith => __$$AddClubGameEventPageOpenedCopyWithImpl<
           _$AddClubGameEventPageOpened>(this, _$identity);
@@ -172,11 +171,11 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
-    TResult Function(ClubGameResult gameResult, int? gameId)? submit,
-    TResult Function(int gameId)? edit,
-    TResult Function(int index, String nickname)? onNewPlayer,
-    TResult Function()? newGame,
+    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult? Function(int gameId)? edit,
+    TResult? Function(int index, String nickname)? onNewPlayer,
+    TResult? Function()? newGame,
   }) {
     return pageOpened?.call(gameId);
   }
@@ -212,11 +211,11 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEventPageOpened value)? pageOpened,
-    TResult Function(AddClubGameEventSubmit value)? submit,
-    TResult Function(AddClubGameEventPageEdit value)? edit,
-    TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
-    TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult? Function(AddClubGameEventSubmit value)? submit,
+    TResult? Function(AddClubGameEventPageEdit value)? edit,
+    TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult? Function(AddClubGameEventNewGame value)? newGame,
   }) {
     return pageOpened?.call(this);
   }
@@ -253,32 +252,30 @@ abstract class _$$AddClubGameEventSubmitCopyWith<$Res> {
   factory _$$AddClubGameEventSubmitCopyWith(_$AddClubGameEventSubmit value,
           $Res Function(_$AddClubGameEventSubmit) then) =
       __$$AddClubGameEventSubmitCopyWithImpl<$Res>;
+  @useResult
   $Res call({ClubGameResult gameResult, int? gameId});
 }
 
 /// @nodoc
 class __$$AddClubGameEventSubmitCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventSubmit>
     implements _$$AddClubGameEventSubmitCopyWith<$Res> {
   __$$AddClubGameEventSubmitCopyWithImpl(_$AddClubGameEventSubmit _value,
       $Res Function(_$AddClubGameEventSubmit) _then)
-      : super(_value, (v) => _then(v as _$AddClubGameEventSubmit));
+      : super(_value, _then);
 
-  @override
-  _$AddClubGameEventSubmit get _value =>
-      super._value as _$AddClubGameEventSubmit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? gameResult = freezed,
+    Object? gameResult = null,
     Object? gameId = freezed,
   }) {
     return _then(_$AddClubGameEventSubmit(
-      gameResult: gameResult == freezed
+      gameResult: null == gameResult
           ? _value.gameResult
           : gameResult // ignore: cast_nullable_to_non_nullable
               as ClubGameResult,
-      gameId: gameId == freezed
+      gameId: freezed == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -306,19 +303,17 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddClubGameEventSubmit &&
-            const DeepCollectionEquality()
-                .equals(other.gameResult, gameResult) &&
-            const DeepCollectionEquality().equals(other.gameId, gameId));
+            (identical(other.gameResult, gameResult) ||
+                other.gameResult == gameResult) &&
+            (identical(other.gameId, gameId) || other.gameId == gameId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(gameResult),
-      const DeepCollectionEquality().hash(gameId));
+  int get hashCode => Object.hash(runtimeType, gameResult, gameId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddClubGameEventSubmitCopyWith<_$AddClubGameEventSubmit> get copyWith =>
       __$$AddClubGameEventSubmitCopyWithImpl<_$AddClubGameEventSubmit>(
           this, _$identity);
@@ -338,11 +333,11 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
-    TResult Function(ClubGameResult gameResult, int? gameId)? submit,
-    TResult Function(int gameId)? edit,
-    TResult Function(int index, String nickname)? onNewPlayer,
-    TResult Function()? newGame,
+    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult? Function(int gameId)? edit,
+    TResult? Function(int index, String nickname)? onNewPlayer,
+    TResult? Function()? newGame,
   }) {
     return submit?.call(gameResult, gameId);
   }
@@ -378,11 +373,11 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEventPageOpened value)? pageOpened,
-    TResult Function(AddClubGameEventSubmit value)? submit,
-    TResult Function(AddClubGameEventPageEdit value)? edit,
-    TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
-    TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult? Function(AddClubGameEventSubmit value)? submit,
+    TResult? Function(AddClubGameEventPageEdit value)? edit,
+    TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult? Function(AddClubGameEventNewGame value)? newGame,
   }) {
     return submit?.call(this);
   }
@@ -421,27 +416,25 @@ abstract class _$$AddClubGameEventPageEditCopyWith<$Res> {
   factory _$$AddClubGameEventPageEditCopyWith(_$AddClubGameEventPageEdit value,
           $Res Function(_$AddClubGameEventPageEdit) then) =
       __$$AddClubGameEventPageEditCopyWithImpl<$Res>;
+  @useResult
   $Res call({int gameId});
 }
 
 /// @nodoc
 class __$$AddClubGameEventPageEditCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventPageEdit>
     implements _$$AddClubGameEventPageEditCopyWith<$Res> {
   __$$AddClubGameEventPageEditCopyWithImpl(_$AddClubGameEventPageEdit _value,
       $Res Function(_$AddClubGameEventPageEdit) _then)
-      : super(_value, (v) => _then(v as _$AddClubGameEventPageEdit));
+      : super(_value, _then);
 
-  @override
-  _$AddClubGameEventPageEdit get _value =>
-      super._value as _$AddClubGameEventPageEdit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? gameId = freezed,
+    Object? gameId = null,
   }) {
     return _then(_$AddClubGameEventPageEdit(
-      gameId: gameId == freezed
+      gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -467,15 +460,15 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddClubGameEventPageEdit &&
-            const DeepCollectionEquality().equals(other.gameId, gameId));
+            (identical(other.gameId, gameId) || other.gameId == gameId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(gameId));
+  int get hashCode => Object.hash(runtimeType, gameId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddClubGameEventPageEditCopyWith<_$AddClubGameEventPageEdit>
       get copyWith =>
           __$$AddClubGameEventPageEditCopyWithImpl<_$AddClubGameEventPageEdit>(
@@ -496,11 +489,11 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
-    TResult Function(ClubGameResult gameResult, int? gameId)? submit,
-    TResult Function(int gameId)? edit,
-    TResult Function(int index, String nickname)? onNewPlayer,
-    TResult Function()? newGame,
+    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult? Function(int gameId)? edit,
+    TResult? Function(int index, String nickname)? onNewPlayer,
+    TResult? Function()? newGame,
   }) {
     return edit?.call(gameId);
   }
@@ -536,11 +529,11 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEventPageOpened value)? pageOpened,
-    TResult Function(AddClubGameEventSubmit value)? submit,
-    TResult Function(AddClubGameEventPageEdit value)? edit,
-    TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
-    TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult? Function(AddClubGameEventSubmit value)? submit,
+    TResult? Function(AddClubGameEventPageEdit value)? edit,
+    TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult? Function(AddClubGameEventNewGame value)? newGame,
   }) {
     return edit?.call(this);
   }
@@ -578,32 +571,30 @@ abstract class _$$AddClubGameEventNewPlayerCopyWith<$Res> {
           _$AddClubGameEventNewPlayer value,
           $Res Function(_$AddClubGameEventNewPlayer) then) =
       __$$AddClubGameEventNewPlayerCopyWithImpl<$Res>;
+  @useResult
   $Res call({int index, String nickname});
 }
 
 /// @nodoc
 class __$$AddClubGameEventNewPlayerCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventNewPlayer>
     implements _$$AddClubGameEventNewPlayerCopyWith<$Res> {
   __$$AddClubGameEventNewPlayerCopyWithImpl(_$AddClubGameEventNewPlayer _value,
       $Res Function(_$AddClubGameEventNewPlayer) _then)
-      : super(_value, (v) => _then(v as _$AddClubGameEventNewPlayer));
+      : super(_value, _then);
 
-  @override
-  _$AddClubGameEventNewPlayer get _value =>
-      super._value as _$AddClubGameEventNewPlayer;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = freezed,
-    Object? nickname = freezed,
+    Object? index = null,
+    Object? nickname = null,
   }) {
     return _then(_$AddClubGameEventNewPlayer(
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-      nickname: nickname == freezed
+      nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
@@ -632,18 +623,17 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddClubGameEventNewPlayer &&
-            const DeepCollectionEquality().equals(other.index, index) &&
-            const DeepCollectionEquality().equals(other.nickname, nickname));
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(index),
-      const DeepCollectionEquality().hash(nickname));
+  int get hashCode => Object.hash(runtimeType, index, nickname);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddClubGameEventNewPlayerCopyWith<_$AddClubGameEventNewPlayer>
       get copyWith => __$$AddClubGameEventNewPlayerCopyWithImpl<
           _$AddClubGameEventNewPlayer>(this, _$identity);
@@ -663,11 +653,11 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
-    TResult Function(ClubGameResult gameResult, int? gameId)? submit,
-    TResult Function(int gameId)? edit,
-    TResult Function(int index, String nickname)? onNewPlayer,
-    TResult Function()? newGame,
+    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult? Function(int gameId)? edit,
+    TResult? Function(int index, String nickname)? onNewPlayer,
+    TResult? Function()? newGame,
   }) {
     return onNewPlayer?.call(index, nickname);
   }
@@ -703,11 +693,11 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEventPageOpened value)? pageOpened,
-    TResult Function(AddClubGameEventSubmit value)? submit,
-    TResult Function(AddClubGameEventPageEdit value)? edit,
-    TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
-    TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult? Function(AddClubGameEventSubmit value)? submit,
+    TResult? Function(AddClubGameEventPageEdit value)? edit,
+    TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult? Function(AddClubGameEventNewGame value)? newGame,
   }) {
     return onNewPlayer?.call(this);
   }
@@ -750,15 +740,11 @@ abstract class _$$AddClubGameEventNewGameCopyWith<$Res> {
 
 /// @nodoc
 class __$$AddClubGameEventNewGameCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventNewGame>
     implements _$$AddClubGameEventNewGameCopyWith<$Res> {
   __$$AddClubGameEventNewGameCopyWithImpl(_$AddClubGameEventNewGame _value,
       $Res Function(_$AddClubGameEventNewGame) _then)
-      : super(_value, (v) => _then(v as _$AddClubGameEventNewGame));
-
-  @override
-  _$AddClubGameEventNewGame get _value =>
-      super._value as _$AddClubGameEventNewGame;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -796,11 +782,11 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
-    TResult Function(ClubGameResult gameResult, int? gameId)? submit,
-    TResult Function(int gameId)? edit,
-    TResult Function(int index, String nickname)? onNewPlayer,
-    TResult Function()? newGame,
+    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult? Function(int gameId)? edit,
+    TResult? Function(int index, String nickname)? onNewPlayer,
+    TResult? Function()? newGame,
   }) {
     return newGame?.call();
   }
@@ -836,11 +822,11 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEventPageOpened value)? pageOpened,
-    TResult Function(AddClubGameEventSubmit value)? submit,
-    TResult Function(AddClubGameEventPageEdit value)? edit,
-    TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
-    TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult? Function(AddClubGameEventSubmit value)? submit,
+    TResult? Function(AddClubGameEventPageEdit value)? edit,
+    TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult? Function(AddClubGameEventNewGame value)? newGame,
   }) {
     return newGame?.call(this);
   }

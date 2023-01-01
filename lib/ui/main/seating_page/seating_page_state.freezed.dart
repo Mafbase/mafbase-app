@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'seating_page_state.dart';
 
@@ -29,34 +29,37 @@ mixin _$SeatingPageState {
 abstract class $SeatingPageStateCopyWith<$Res> {
   factory $SeatingPageStateCopyWith(
           SeatingPageState value, $Res Function(SeatingPageState) then) =
-      _$SeatingPageStateCopyWithImpl<$Res>;
+      _$SeatingPageStateCopyWithImpl<$Res, SeatingPageState>;
+  @useResult
   $Res call({List<Pair<PlayerModel, PlayerModel>> cannotMeet, bool isLoading});
 }
 
 /// @nodoc
-class _$SeatingPageStateCopyWithImpl<$Res>
+class _$SeatingPageStateCopyWithImpl<$Res, $Val extends SeatingPageState>
     implements $SeatingPageStateCopyWith<$Res> {
   _$SeatingPageStateCopyWithImpl(this._value, this._then);
 
-  final SeatingPageState _value;
   // ignore: unused_field
-  final $Res Function(SeatingPageState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cannotMeet = freezed,
-    Object? isLoading = freezed,
+    Object? cannotMeet = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      cannotMeet: cannotMeet == freezed
+      cannotMeet: null == cannotMeet
           ? _value.cannotMeet
           : cannotMeet // ignore: cast_nullable_to_non_nullable
               as List<Pair<PlayerModel, PlayerModel>>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -67,31 +70,30 @@ abstract class _$$_SeatingPageStateCopyWith<$Res>
           _$_SeatingPageState value, $Res Function(_$_SeatingPageState) then) =
       __$$_SeatingPageStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<Pair<PlayerModel, PlayerModel>> cannotMeet, bool isLoading});
 }
 
 /// @nodoc
 class __$$_SeatingPageStateCopyWithImpl<$Res>
-    extends _$SeatingPageStateCopyWithImpl<$Res>
+    extends _$SeatingPageStateCopyWithImpl<$Res, _$_SeatingPageState>
     implements _$$_SeatingPageStateCopyWith<$Res> {
   __$$_SeatingPageStateCopyWithImpl(
       _$_SeatingPageState _value, $Res Function(_$_SeatingPageState) _then)
-      : super(_value, (v) => _then(v as _$_SeatingPageState));
+      : super(_value, _then);
 
-  @override
-  _$_SeatingPageState get _value => super._value as _$_SeatingPageState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cannotMeet = freezed,
-    Object? isLoading = freezed,
+    Object? cannotMeet = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_SeatingPageState(
-      cannotMeet: cannotMeet == freezed
+      cannotMeet: null == cannotMeet
           ? _value._cannotMeet
           : cannotMeet // ignore: cast_nullable_to_non_nullable
               as List<Pair<PlayerModel, PlayerModel>>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -111,6 +113,7 @@ class _$_SeatingPageState implements _SeatingPageState {
   @override
   @JsonKey()
   List<Pair<PlayerModel, PlayerModel>> get cannotMeet {
+    if (_cannotMeet is EqualUnmodifiableListView) return _cannotMeet;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cannotMeet);
   }
@@ -131,17 +134,17 @@ class _$_SeatingPageState implements _SeatingPageState {
             other is _$_SeatingPageState &&
             const DeepCollectionEquality()
                 .equals(other._cannotMeet, _cannotMeet) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_cannotMeet),
-      const DeepCollectionEquality().hash(isLoading));
+      runtimeType, const DeepCollectionEquality().hash(_cannotMeet), isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SeatingPageStateCopyWith<_$_SeatingPageState> get copyWith =>
       __$$_SeatingPageStateCopyWithImpl<_$_SeatingPageState>(this, _$identity);
 }

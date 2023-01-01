@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_dialog_event.dart';
 
@@ -26,10 +26,10 @@ mixin _$ProfileDialogEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             String nickname, String mafbankNickname, String fsmNickname)?
         onSubmit,
-    TResult Function(Uint8List bytes, String fileName)? editImage,
+    TResult? Function(Uint8List bytes, String fileName)? editImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,8 +49,8 @@ mixin _$ProfileDialogEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProfileDialogEventSubmit value)? onSubmit,
-    TResult Function(ProfileDialogEventEditImage value)? editImage,
+    TResult? Function(ProfileDialogEventSubmit value)? onSubmit,
+    TResult? Function(ProfileDialogEventEditImage value)? editImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,17 +66,18 @@ mixin _$ProfileDialogEvent {
 abstract class $ProfileDialogEventCopyWith<$Res> {
   factory $ProfileDialogEventCopyWith(
           ProfileDialogEvent value, $Res Function(ProfileDialogEvent) then) =
-      _$ProfileDialogEventCopyWithImpl<$Res>;
+      _$ProfileDialogEventCopyWithImpl<$Res, ProfileDialogEvent>;
 }
 
 /// @nodoc
-class _$ProfileDialogEventCopyWithImpl<$Res>
+class _$ProfileDialogEventCopyWithImpl<$Res, $Val extends ProfileDialogEvent>
     implements $ProfileDialogEventCopyWith<$Res> {
   _$ProfileDialogEventCopyWithImpl(this._value, this._then);
 
-  final ProfileDialogEvent _value;
   // ignore: unused_field
-  final $Res Function(ProfileDialogEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -84,37 +85,35 @@ abstract class _$$ProfileDialogEventSubmitCopyWith<$Res> {
   factory _$$ProfileDialogEventSubmitCopyWith(_$ProfileDialogEventSubmit value,
           $Res Function(_$ProfileDialogEventSubmit) then) =
       __$$ProfileDialogEventSubmitCopyWithImpl<$Res>;
+  @useResult
   $Res call({String nickname, String mafbankNickname, String fsmNickname});
 }
 
 /// @nodoc
 class __$$ProfileDialogEventSubmitCopyWithImpl<$Res>
-    extends _$ProfileDialogEventCopyWithImpl<$Res>
+    extends _$ProfileDialogEventCopyWithImpl<$Res, _$ProfileDialogEventSubmit>
     implements _$$ProfileDialogEventSubmitCopyWith<$Res> {
   __$$ProfileDialogEventSubmitCopyWithImpl(_$ProfileDialogEventSubmit _value,
       $Res Function(_$ProfileDialogEventSubmit) _then)
-      : super(_value, (v) => _then(v as _$ProfileDialogEventSubmit));
+      : super(_value, _then);
 
-  @override
-  _$ProfileDialogEventSubmit get _value =>
-      super._value as _$ProfileDialogEventSubmit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? nickname = freezed,
-    Object? mafbankNickname = freezed,
-    Object? fsmNickname = freezed,
+    Object? nickname = null,
+    Object? mafbankNickname = null,
+    Object? fsmNickname = null,
   }) {
     return _then(_$ProfileDialogEventSubmit(
-      nickname: nickname == freezed
+      nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      mafbankNickname: mafbankNickname == freezed
+      mafbankNickname: null == mafbankNickname
           ? _value.mafbankNickname
           : mafbankNickname // ignore: cast_nullable_to_non_nullable
               as String,
-      fsmNickname: fsmNickname == freezed
+      fsmNickname: null == fsmNickname
           ? _value.fsmNickname
           : fsmNickname // ignore: cast_nullable_to_non_nullable
               as String,
@@ -147,22 +146,21 @@ class _$ProfileDialogEventSubmit implements ProfileDialogEventSubmit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProfileDialogEventSubmit &&
-            const DeepCollectionEquality().equals(other.nickname, nickname) &&
-            const DeepCollectionEquality()
-                .equals(other.mafbankNickname, mafbankNickname) &&
-            const DeepCollectionEquality()
-                .equals(other.fsmNickname, fsmNickname));
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.mafbankNickname, mafbankNickname) ||
+                other.mafbankNickname == mafbankNickname) &&
+            (identical(other.fsmNickname, fsmNickname) ||
+                other.fsmNickname == fsmNickname));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(nickname),
-      const DeepCollectionEquality().hash(mafbankNickname),
-      const DeepCollectionEquality().hash(fsmNickname));
+  int get hashCode =>
+      Object.hash(runtimeType, nickname, mafbankNickname, fsmNickname);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProfileDialogEventSubmitCopyWith<_$ProfileDialogEventSubmit>
       get copyWith =>
           __$$ProfileDialogEventSubmitCopyWithImpl<_$ProfileDialogEventSubmit>(
@@ -182,10 +180,10 @@ class _$ProfileDialogEventSubmit implements ProfileDialogEventSubmit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             String nickname, String mafbankNickname, String fsmNickname)?
         onSubmit,
-    TResult Function(Uint8List bytes, String fileName)? editImage,
+    TResult? Function(Uint8List bytes, String fileName)? editImage,
   }) {
     return onSubmit?.call(nickname, mafbankNickname, fsmNickname);
   }
@@ -217,8 +215,8 @@ class _$ProfileDialogEventSubmit implements ProfileDialogEventSubmit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProfileDialogEventSubmit value)? onSubmit,
-    TResult Function(ProfileDialogEventEditImage value)? editImage,
+    TResult? Function(ProfileDialogEventSubmit value)? onSubmit,
+    TResult? Function(ProfileDialogEventEditImage value)? editImage,
   }) {
     return onSubmit?.call(this);
   }
@@ -257,33 +255,32 @@ abstract class _$$ProfileDialogEventEditImageCopyWith<$Res> {
           _$ProfileDialogEventEditImage value,
           $Res Function(_$ProfileDialogEventEditImage) then) =
       __$$ProfileDialogEventEditImageCopyWithImpl<$Res>;
+  @useResult
   $Res call({Uint8List bytes, String fileName});
 }
 
 /// @nodoc
 class __$$ProfileDialogEventEditImageCopyWithImpl<$Res>
-    extends _$ProfileDialogEventCopyWithImpl<$Res>
+    extends _$ProfileDialogEventCopyWithImpl<$Res,
+        _$ProfileDialogEventEditImage>
     implements _$$ProfileDialogEventEditImageCopyWith<$Res> {
   __$$ProfileDialogEventEditImageCopyWithImpl(
       _$ProfileDialogEventEditImage _value,
       $Res Function(_$ProfileDialogEventEditImage) _then)
-      : super(_value, (v) => _then(v as _$ProfileDialogEventEditImage));
+      : super(_value, _then);
 
-  @override
-  _$ProfileDialogEventEditImage get _value =>
-      super._value as _$ProfileDialogEventEditImage;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bytes = freezed,
-    Object? fileName = freezed,
+    Object? bytes = null,
+    Object? fileName = null,
   }) {
     return _then(_$ProfileDialogEventEditImage(
-      bytes: bytes == freezed
+      bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
               as Uint8List,
-      fileName: fileName == freezed
+      fileName: null == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -313,17 +310,17 @@ class _$ProfileDialogEventEditImage implements ProfileDialogEventEditImage {
         (other.runtimeType == runtimeType &&
             other is _$ProfileDialogEventEditImage &&
             const DeepCollectionEquality().equals(other.bytes, bytes) &&
-            const DeepCollectionEquality().equals(other.fileName, fileName));
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(bytes),
-      const DeepCollectionEquality().hash(fileName));
+      runtimeType, const DeepCollectionEquality().hash(bytes), fileName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProfileDialogEventEditImageCopyWith<_$ProfileDialogEventEditImage>
       get copyWith => __$$ProfileDialogEventEditImageCopyWithImpl<
           _$ProfileDialogEventEditImage>(this, _$identity);
@@ -342,10 +339,10 @@ class _$ProfileDialogEventEditImage implements ProfileDialogEventEditImage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             String nickname, String mafbankNickname, String fsmNickname)?
         onSubmit,
-    TResult Function(Uint8List bytes, String fileName)? editImage,
+    TResult? Function(Uint8List bytes, String fileName)? editImage,
   }) {
     return editImage?.call(bytes, fileName);
   }
@@ -377,8 +374,8 @@ class _$ProfileDialogEventEditImage implements ProfileDialogEventEditImage {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProfileDialogEventSubmit value)? onSubmit,
-    TResult Function(ProfileDialogEventEditImage value)? editImage,
+    TResult? Function(ProfileDialogEventSubmit value)? onSubmit,
+    TResult? Function(ProfileDialogEventEditImage value)? editImage,
   }) {
     return editImage?.call(this);
   }

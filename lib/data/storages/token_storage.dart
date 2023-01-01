@@ -1,7 +1,9 @@
-abstract class TokenStorage {
-  Future<String?> get authToken;
+import 'dart:async';
 
-  Future<String?> get recoveryToken;
+abstract class TokenStorage {
+  FutureOr<String?> get authToken;
+
+  FutureOr<String?> get recoveryToken;
 
   Future onTokensUpdated(String authToken, String recoveryToken);
 }

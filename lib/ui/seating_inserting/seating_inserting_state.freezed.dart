@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'seating_inserting_state.dart';
 
@@ -27,29 +27,33 @@ mixin _$SeatingInsertingState {
 abstract class $SeatingInsertingStateCopyWith<$Res> {
   factory $SeatingInsertingStateCopyWith(SeatingInsertingState value,
           $Res Function(SeatingInsertingState) then) =
-      _$SeatingInsertingStateCopyWithImpl<$Res>;
+      _$SeatingInsertingStateCopyWithImpl<$Res, SeatingInsertingState>;
+  @useResult
   $Res call({bool isLoading});
 }
 
 /// @nodoc
-class _$SeatingInsertingStateCopyWithImpl<$Res>
+class _$SeatingInsertingStateCopyWithImpl<$Res,
+        $Val extends SeatingInsertingState>
     implements $SeatingInsertingStateCopyWith<$Res> {
   _$SeatingInsertingStateCopyWithImpl(this._value, this._then);
 
-  final SeatingInsertingState _value;
   // ignore: unused_field
-  final $Res Function(SeatingInsertingState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -60,27 +64,25 @@ abstract class _$$_SeatingInsertingStateCopyWith<$Res>
           $Res Function(_$_SeatingInsertingState) then) =
       __$$_SeatingInsertingStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool isLoading});
 }
 
 /// @nodoc
 class __$$_SeatingInsertingStateCopyWithImpl<$Res>
-    extends _$SeatingInsertingStateCopyWithImpl<$Res>
+    extends _$SeatingInsertingStateCopyWithImpl<$Res, _$_SeatingInsertingState>
     implements _$$_SeatingInsertingStateCopyWith<$Res> {
   __$$_SeatingInsertingStateCopyWithImpl(_$_SeatingInsertingState _value,
       $Res Function(_$_SeatingInsertingState) _then)
-      : super(_value, (v) => _then(v as _$_SeatingInsertingState));
+      : super(_value, _then);
 
-  @override
-  _$_SeatingInsertingState get _value =>
-      super._value as _$_SeatingInsertingState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_$_SeatingInsertingState(
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -107,15 +109,16 @@ class _$_SeatingInsertingState implements _SeatingInsertingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SeatingInsertingState &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(isLoading));
+  int get hashCode => Object.hash(runtimeType, isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SeatingInsertingStateCopyWith<_$_SeatingInsertingState> get copyWith =>
       __$$_SeatingInsertingStateCopyWithImpl<_$_SeatingInsertingState>(
           this, _$identity);

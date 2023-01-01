@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'temp_state.dart';
 
@@ -26,28 +26,32 @@ mixin _$TempState {
 /// @nodoc
 abstract class $TempStateCopyWith<$Res> {
   factory $TempStateCopyWith(TempState value, $Res Function(TempState) then) =
-      _$TempStateCopyWithImpl<$Res>;
+      _$TempStateCopyWithImpl<$Res, TempState>;
+  @useResult
   $Res call({TempStyle style});
 }
 
 /// @nodoc
-class _$TempStateCopyWithImpl<$Res> implements $TempStateCopyWith<$Res> {
+class _$TempStateCopyWithImpl<$Res, $Val extends TempState>
+    implements $TempStateCopyWith<$Res> {
   _$TempStateCopyWithImpl(this._value, this._then);
 
-  final TempState _value;
   // ignore: unused_field
-  final $Res Function(TempState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? style = freezed,
+    Object? style = null,
   }) {
     return _then(_value.copyWith(
-      style: style == freezed
+      style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as TempStyle,
-    ));
+    ) as $Val);
   }
 }
 
@@ -57,25 +61,25 @@ abstract class _$$_TempStateCopyWith<$Res> implements $TempStateCopyWith<$Res> {
           _$_TempState value, $Res Function(_$_TempState) then) =
       __$$_TempStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({TempStyle style});
 }
 
 /// @nodoc
-class __$$_TempStateCopyWithImpl<$Res> extends _$TempStateCopyWithImpl<$Res>
+class __$$_TempStateCopyWithImpl<$Res>
+    extends _$TempStateCopyWithImpl<$Res, _$_TempState>
     implements _$$_TempStateCopyWith<$Res> {
   __$$_TempStateCopyWithImpl(
       _$_TempState _value, $Res Function(_$_TempState) _then)
-      : super(_value, (v) => _then(v as _$_TempState));
+      : super(_value, _then);
 
-  @override
-  _$_TempState get _value => super._value as _$_TempState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? style = freezed,
+    Object? style = null,
   }) {
     return _then(_$_TempState(
-      style: style == freezed
+      style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as TempStyle,
@@ -101,15 +105,15 @@ class _$_TempState implements _TempState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TempState &&
-            const DeepCollectionEquality().equals(other.style, style));
+            (identical(other.style, style) || other.style == style));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(style));
+  int get hashCode => Object.hash(runtimeType, style);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TempStateCopyWith<_$_TempState> get copyWith =>
       __$$_TempStateCopyWithImpl<_$_TempState>(this, _$identity);
 }

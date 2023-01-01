@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'rating_model.dart';
 
@@ -28,33 +28,37 @@ mixin _$RatingModel {
 abstract class $RatingModelCopyWith<$Res> {
   factory $RatingModelCopyWith(
           RatingModel value, $Res Function(RatingModel) then) =
-      _$RatingModelCopyWithImpl<$Res>;
+      _$RatingModelCopyWithImpl<$Res, RatingModel>;
+  @useResult
   $Res call({String clubName, List<ClubRatingRowModel> rows});
 }
 
 /// @nodoc
-class _$RatingModelCopyWithImpl<$Res> implements $RatingModelCopyWith<$Res> {
+class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
+    implements $RatingModelCopyWith<$Res> {
   _$RatingModelCopyWithImpl(this._value, this._then);
 
-  final RatingModel _value;
   // ignore: unused_field
-  final $Res Function(RatingModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clubName = freezed,
-    Object? rows = freezed,
+    Object? clubName = null,
+    Object? rows = null,
   }) {
     return _then(_value.copyWith(
-      clubName: clubName == freezed
+      clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
-      rows: rows == freezed
+      rows: null == rows
           ? _value.rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -65,30 +69,30 @@ abstract class _$$_RatingModelCopyWith<$Res>
           _$_RatingModel value, $Res Function(_$_RatingModel) then) =
       __$$_RatingModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String clubName, List<ClubRatingRowModel> rows});
 }
 
 /// @nodoc
-class __$$_RatingModelCopyWithImpl<$Res> extends _$RatingModelCopyWithImpl<$Res>
+class __$$_RatingModelCopyWithImpl<$Res>
+    extends _$RatingModelCopyWithImpl<$Res, _$_RatingModel>
     implements _$$_RatingModelCopyWith<$Res> {
   __$$_RatingModelCopyWithImpl(
       _$_RatingModel _value, $Res Function(_$_RatingModel) _then)
-      : super(_value, (v) => _then(v as _$_RatingModel));
+      : super(_value, _then);
 
-  @override
-  _$_RatingModel get _value => super._value as _$_RatingModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clubName = freezed,
-    Object? rows = freezed,
+    Object? clubName = null,
+    Object? rows = null,
   }) {
     return _then(_$_RatingModel(
-      clubName: clubName == freezed
+      clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
-      rows: rows == freezed
+      rows: null == rows
           ? _value._rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
@@ -108,6 +112,7 @@ class _$_RatingModel implements _RatingModel {
   final List<ClubRatingRowModel> _rows;
   @override
   List<ClubRatingRowModel> get rows {
+    if (_rows is EqualUnmodifiableListView) return _rows;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rows);
   }
@@ -122,18 +127,18 @@ class _$_RatingModel implements _RatingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RatingModel &&
-            const DeepCollectionEquality().equals(other.clubName, clubName) &&
+            (identical(other.clubName, clubName) ||
+                other.clubName == clubName) &&
             const DeepCollectionEquality().equals(other._rows, _rows));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(clubName),
-      const DeepCollectionEquality().hash(_rows));
+      runtimeType, clubName, const DeepCollectionEquality().hash(_rows));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
       __$$_RatingModelCopyWithImpl<_$_RatingModel>(this, _$identity);
 }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'sign_up_events.dart';
 
@@ -24,8 +24,8 @@ mixin _$SignUpEvents {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonTapped,
-    TResult Function(String email, String password)? signUpButtonTapped,
+    TResult? Function()? backButtonTapped,
+    TResult? Function(String email, String password)? signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$SignUpEvents {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BackButtonTapped value)? backButtonTapped,
-    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(BackButtonTapped value)? backButtonTapped,
+    TResult? Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,16 +60,18 @@ mixin _$SignUpEvents {
 abstract class $SignUpEventsCopyWith<$Res> {
   factory $SignUpEventsCopyWith(
           SignUpEvents value, $Res Function(SignUpEvents) then) =
-      _$SignUpEventsCopyWithImpl<$Res>;
+      _$SignUpEventsCopyWithImpl<$Res, SignUpEvents>;
 }
 
 /// @nodoc
-class _$SignUpEventsCopyWithImpl<$Res> implements $SignUpEventsCopyWith<$Res> {
+class _$SignUpEventsCopyWithImpl<$Res, $Val extends SignUpEvents>
+    implements $SignUpEventsCopyWith<$Res> {
   _$SignUpEventsCopyWithImpl(this._value, this._then);
 
-  final SignUpEvents _value;
   // ignore: unused_field
-  final $Res Function(SignUpEvents) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -81,14 +83,11 @@ abstract class _$$BackButtonTappedCopyWith<$Res> {
 
 /// @nodoc
 class __$$BackButtonTappedCopyWithImpl<$Res>
-    extends _$SignUpEventsCopyWithImpl<$Res>
+    extends _$SignUpEventsCopyWithImpl<$Res, _$BackButtonTapped>
     implements _$$BackButtonTappedCopyWith<$Res> {
   __$$BackButtonTappedCopyWithImpl(
       _$BackButtonTapped _value, $Res Function(_$BackButtonTapped) _then)
-      : super(_value, (v) => _then(v as _$BackButtonTapped));
-
-  @override
-  _$BackButtonTapped get _value => super._value as _$BackButtonTapped;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -122,8 +121,8 @@ class _$BackButtonTapped implements BackButtonTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonTapped,
-    TResult Function(String email, String password)? signUpButtonTapped,
+    TResult? Function()? backButtonTapped,
+    TResult? Function(String email, String password)? signUpButtonTapped,
   }) {
     return backButtonTapped?.call();
   }
@@ -153,8 +152,8 @@ class _$BackButtonTapped implements BackButtonTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BackButtonTapped value)? backButtonTapped,
-    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(BackButtonTapped value)? backButtonTapped,
+    TResult? Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) {
     return backButtonTapped?.call(this);
   }
@@ -182,31 +181,30 @@ abstract class _$$SignUpButtonTappedCopyWith<$Res> {
   factory _$$SignUpButtonTappedCopyWith(_$SignUpButtonTapped value,
           $Res Function(_$SignUpButtonTapped) then) =
       __$$SignUpButtonTappedCopyWithImpl<$Res>;
+  @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
 class __$$SignUpButtonTappedCopyWithImpl<$Res>
-    extends _$SignUpEventsCopyWithImpl<$Res>
+    extends _$SignUpEventsCopyWithImpl<$Res, _$SignUpButtonTapped>
     implements _$$SignUpButtonTappedCopyWith<$Res> {
   __$$SignUpButtonTappedCopyWithImpl(
       _$SignUpButtonTapped _value, $Res Function(_$SignUpButtonTapped) _then)
-      : super(_value, (v) => _then(v as _$SignUpButtonTapped));
+      : super(_value, _then);
 
-  @override
-  _$SignUpButtonTapped get _value => super._value as _$SignUpButtonTapped;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_$SignUpButtonTapped(
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
@@ -234,18 +232,17 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpButtonTapped &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password));
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SignUpButtonTappedCopyWith<_$SignUpButtonTapped> get copyWith =>
       __$$SignUpButtonTappedCopyWithImpl<_$SignUpButtonTapped>(
           this, _$identity);
@@ -262,8 +259,8 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonTapped,
-    TResult Function(String email, String password)? signUpButtonTapped,
+    TResult? Function()? backButtonTapped,
+    TResult? Function(String email, String password)? signUpButtonTapped,
   }) {
     return signUpButtonTapped?.call(email, password);
   }
@@ -293,8 +290,8 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(BackButtonTapped value)? backButtonTapped,
-    TResult Function(SignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(BackButtonTapped value)? backButtonTapped,
+    TResult? Function(SignUpButtonTapped value)? signUpButtonTapped,
   }) {
     return signUpButtonTapped?.call(this);
   }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'verification_events.dart';
 
@@ -25,9 +25,9 @@ mixin _$VerificationEvents {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String token)? submit,
-    TResult Function()? signUpButtonTapped,
-    TResult Function()? loginButtonTapped,
+    TResult? Function(String token)? submit,
+    TResult? Function()? signUpButtonTapped,
+    TResult? Function()? loginButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$VerificationEvents {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(VerificationEventSubmit value)? submit,
-    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
-    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(VerificationEventSubmit value)? submit,
+    TResult? Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(OnLoginButtonTapped value)? loginButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,17 +66,18 @@ mixin _$VerificationEvents {
 abstract class $VerificationEventsCopyWith<$Res> {
   factory $VerificationEventsCopyWith(
           VerificationEvents value, $Res Function(VerificationEvents) then) =
-      _$VerificationEventsCopyWithImpl<$Res>;
+      _$VerificationEventsCopyWithImpl<$Res, VerificationEvents>;
 }
 
 /// @nodoc
-class _$VerificationEventsCopyWithImpl<$Res>
+class _$VerificationEventsCopyWithImpl<$Res, $Val extends VerificationEvents>
     implements $VerificationEventsCopyWith<$Res> {
   _$VerificationEventsCopyWithImpl(this._value, this._then);
 
-  final VerificationEvents _value;
   // ignore: unused_field
-  final $Res Function(VerificationEvents) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -84,27 +85,25 @@ abstract class _$$VerificationEventSubmitCopyWith<$Res> {
   factory _$$VerificationEventSubmitCopyWith(_$VerificationEventSubmit value,
           $Res Function(_$VerificationEventSubmit) then) =
       __$$VerificationEventSubmitCopyWithImpl<$Res>;
+  @useResult
   $Res call({String token});
 }
 
 /// @nodoc
 class __$$VerificationEventSubmitCopyWithImpl<$Res>
-    extends _$VerificationEventsCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res, _$VerificationEventSubmit>
     implements _$$VerificationEventSubmitCopyWith<$Res> {
   __$$VerificationEventSubmitCopyWithImpl(_$VerificationEventSubmit _value,
       $Res Function(_$VerificationEventSubmit) _then)
-      : super(_value, (v) => _then(v as _$VerificationEventSubmit));
+      : super(_value, _then);
 
-  @override
-  _$VerificationEventSubmit get _value =>
-      super._value as _$VerificationEventSubmit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = freezed,
+    Object? token = null,
   }) {
     return _then(_$VerificationEventSubmit(
-      token: token == freezed
+      token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
@@ -130,15 +129,15 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VerificationEventSubmit &&
-            const DeepCollectionEquality().equals(other.token, token));
+            (identical(other.token, token) || other.token == token));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(token));
+  int get hashCode => Object.hash(runtimeType, token);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$VerificationEventSubmitCopyWith<_$VerificationEventSubmit> get copyWith =>
       __$$VerificationEventSubmitCopyWithImpl<_$VerificationEventSubmit>(
           this, _$identity);
@@ -156,9 +155,9 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String token)? submit,
-    TResult Function()? signUpButtonTapped,
-    TResult Function()? loginButtonTapped,
+    TResult? Function(String token)? submit,
+    TResult? Function()? signUpButtonTapped,
+    TResult? Function()? loginButtonTapped,
   }) {
     return submit?.call(token);
   }
@@ -190,9 +189,9 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(VerificationEventSubmit value)? submit,
-    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
-    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(VerificationEventSubmit value)? submit,
+    TResult? Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(OnLoginButtonTapped value)? loginButtonTapped,
   }) {
     return submit?.call(this);
   }
@@ -231,14 +230,11 @@ abstract class _$$OnSignUpButtonTappedCopyWith<$Res> {
 
 /// @nodoc
 class __$$OnSignUpButtonTappedCopyWithImpl<$Res>
-    extends _$VerificationEventsCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res, _$OnSignUpButtonTapped>
     implements _$$OnSignUpButtonTappedCopyWith<$Res> {
   __$$OnSignUpButtonTappedCopyWithImpl(_$OnSignUpButtonTapped _value,
       $Res Function(_$OnSignUpButtonTapped) _then)
-      : super(_value, (v) => _then(v as _$OnSignUpButtonTapped));
-
-  @override
-  _$OnSignUpButtonTapped get _value => super._value as _$OnSignUpButtonTapped;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -273,9 +269,9 @@ class _$OnSignUpButtonTapped implements OnSignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String token)? submit,
-    TResult Function()? signUpButtonTapped,
-    TResult Function()? loginButtonTapped,
+    TResult? Function(String token)? submit,
+    TResult? Function()? signUpButtonTapped,
+    TResult? Function()? loginButtonTapped,
   }) {
     return signUpButtonTapped?.call();
   }
@@ -307,9 +303,9 @@ class _$OnSignUpButtonTapped implements OnSignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(VerificationEventSubmit value)? submit,
-    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
-    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(VerificationEventSubmit value)? submit,
+    TResult? Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(OnLoginButtonTapped value)? loginButtonTapped,
   }) {
     return signUpButtonTapped?.call(this);
   }
@@ -342,14 +338,11 @@ abstract class _$$OnLoginButtonTappedCopyWith<$Res> {
 
 /// @nodoc
 class __$$OnLoginButtonTappedCopyWithImpl<$Res>
-    extends _$VerificationEventsCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res, _$OnLoginButtonTapped>
     implements _$$OnLoginButtonTappedCopyWith<$Res> {
   __$$OnLoginButtonTappedCopyWithImpl(
       _$OnLoginButtonTapped _value, $Res Function(_$OnLoginButtonTapped) _then)
-      : super(_value, (v) => _then(v as _$OnLoginButtonTapped));
-
-  @override
-  _$OnLoginButtonTapped get _value => super._value as _$OnLoginButtonTapped;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -384,9 +377,9 @@ class _$OnLoginButtonTapped implements OnLoginButtonTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String token)? submit,
-    TResult Function()? signUpButtonTapped,
-    TResult Function()? loginButtonTapped,
+    TResult? Function(String token)? submit,
+    TResult? Function()? signUpButtonTapped,
+    TResult? Function()? loginButtonTapped,
   }) {
     return loginButtonTapped?.call();
   }
@@ -418,9 +411,9 @@ class _$OnLoginButtonTapped implements OnLoginButtonTapped {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(VerificationEventSubmit value)? submit,
-    TResult Function(OnSignUpButtonTapped value)? signUpButtonTapped,
-    TResult Function(OnLoginButtonTapped value)? loginButtonTapped,
+    TResult? Function(VerificationEventSubmit value)? submit,
+    TResult? Function(OnSignUpButtonTapped value)? signUpButtonTapped,
+    TResult? Function(OnLoginButtonTapped value)? loginButtonTapped,
   }) {
     return loginButtonTapped?.call(this);
   }

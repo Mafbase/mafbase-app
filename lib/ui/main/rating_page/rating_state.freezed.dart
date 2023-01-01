@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'rating_state.dart';
 
@@ -29,38 +29,42 @@ mixin _$RatingState {
 abstract class $RatingStateCopyWith<$Res> {
   factory $RatingStateCopyWith(
           RatingState value, $Res Function(RatingState) then) =
-      _$RatingStateCopyWithImpl<$Res>;
+      _$RatingStateCopyWithImpl<$Res, RatingState>;
+  @useResult
   $Res call({String clubName, List<ClubRatingRowModel> rows, bool isLoading});
 }
 
 /// @nodoc
-class _$RatingStateCopyWithImpl<$Res> implements $RatingStateCopyWith<$Res> {
+class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
+    implements $RatingStateCopyWith<$Res> {
   _$RatingStateCopyWithImpl(this._value, this._then);
 
-  final RatingState _value;
   // ignore: unused_field
-  final $Res Function(RatingState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clubName = freezed,
-    Object? rows = freezed,
-    Object? isLoading = freezed,
+    Object? clubName = null,
+    Object? rows = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      clubName: clubName == freezed
+      clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
-      rows: rows == freezed
+      rows: null == rows
           ? _value.rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -71,35 +75,35 @@ abstract class _$$_RatingStateCopyWith<$Res>
           _$_RatingState value, $Res Function(_$_RatingState) then) =
       __$$_RatingStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String clubName, List<ClubRatingRowModel> rows, bool isLoading});
 }
 
 /// @nodoc
-class __$$_RatingStateCopyWithImpl<$Res> extends _$RatingStateCopyWithImpl<$Res>
+class __$$_RatingStateCopyWithImpl<$Res>
+    extends _$RatingStateCopyWithImpl<$Res, _$_RatingState>
     implements _$$_RatingStateCopyWith<$Res> {
   __$$_RatingStateCopyWithImpl(
       _$_RatingState _value, $Res Function(_$_RatingState) _then)
-      : super(_value, (v) => _then(v as _$_RatingState));
+      : super(_value, _then);
 
-  @override
-  _$_RatingState get _value => super._value as _$_RatingState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clubName = freezed,
-    Object? rows = freezed,
-    Object? isLoading = freezed,
+    Object? clubName = null,
+    Object? rows = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_RatingState(
-      clubName: clubName == freezed
+      clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
               as String,
-      rows: rows == freezed
+      rows: null == rows
           ? _value._rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -123,6 +127,7 @@ class _$_RatingState implements _RatingState {
   @override
   @JsonKey()
   List<ClubRatingRowModel> get rows {
+    if (_rows is EqualUnmodifiableListView) return _rows;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_rows);
   }
@@ -141,20 +146,20 @@ class _$_RatingState implements _RatingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RatingState &&
-            const DeepCollectionEquality().equals(other.clubName, clubName) &&
+            (identical(other.clubName, clubName) ||
+                other.clubName == clubName) &&
             const DeepCollectionEquality().equals(other._rows, _rows) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(clubName),
-      const DeepCollectionEquality().hash(_rows),
-      const DeepCollectionEquality().hash(isLoading));
+  int get hashCode => Object.hash(runtimeType, clubName,
+      const DeepCollectionEquality().hash(_rows), isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>
       __$$_RatingStateCopyWithImpl<_$_RatingState>(this, _$identity);
 }

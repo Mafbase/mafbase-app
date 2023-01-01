@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'temp_event.dart';
 
@@ -23,7 +23,7 @@ mixin _$TempEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? generate,
+    TResult? Function()? generate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,7 +39,7 @@ mixin _$TempEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TempEventGenerate value)? generate,
+    TResult? Function(TempEventGenerate value)? generate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,16 +53,18 @@ mixin _$TempEvent {
 /// @nodoc
 abstract class $TempEventCopyWith<$Res> {
   factory $TempEventCopyWith(TempEvent value, $Res Function(TempEvent) then) =
-      _$TempEventCopyWithImpl<$Res>;
+      _$TempEventCopyWithImpl<$Res, TempEvent>;
 }
 
 /// @nodoc
-class _$TempEventCopyWithImpl<$Res> implements $TempEventCopyWith<$Res> {
+class _$TempEventCopyWithImpl<$Res, $Val extends TempEvent>
+    implements $TempEventCopyWith<$Res> {
   _$TempEventCopyWithImpl(this._value, this._then);
 
-  final TempEvent _value;
   // ignore: unused_field
-  final $Res Function(TempEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -74,14 +76,11 @@ abstract class _$$TempEventGenerateCopyWith<$Res> {
 
 /// @nodoc
 class __$$TempEventGenerateCopyWithImpl<$Res>
-    extends _$TempEventCopyWithImpl<$Res>
+    extends _$TempEventCopyWithImpl<$Res, _$TempEventGenerate>
     implements _$$TempEventGenerateCopyWith<$Res> {
   __$$TempEventGenerateCopyWithImpl(
       _$TempEventGenerate _value, $Res Function(_$TempEventGenerate) _then)
-      : super(_value, (v) => _then(v as _$TempEventGenerate));
-
-  @override
-  _$TempEventGenerate get _value => super._value as _$TempEventGenerate;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -114,7 +113,7 @@ class _$TempEventGenerate implements TempEventGenerate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? generate,
+    TResult? Function()? generate,
   }) {
     return generate?.call();
   }
@@ -142,7 +141,7 @@ class _$TempEventGenerate implements TempEventGenerate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TempEventGenerate value)? generate,
+    TResult? Function(TempEventGenerate value)? generate,
   }) {
     return generate?.call(this);
   }

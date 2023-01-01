@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'player_model.dart';
 
@@ -31,7 +31,8 @@ mixin _$PlayerModel {
 abstract class $PlayerModelCopyWith<$Res> {
   factory $PlayerModelCopyWith(
           PlayerModel value, $Res Function(PlayerModel) then) =
-      _$PlayerModelCopyWithImpl<$Res>;
+      _$PlayerModelCopyWithImpl<$Res, PlayerModel>;
+  @useResult
   $Res call(
       {int id,
       String nickname,
@@ -41,43 +42,46 @@ abstract class $PlayerModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PlayerModelCopyWithImpl<$Res> implements $PlayerModelCopyWith<$Res> {
+class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
+    implements $PlayerModelCopyWith<$Res> {
   _$PlayerModelCopyWithImpl(this._value, this._then);
 
-  final PlayerModel _value;
   // ignore: unused_field
-  final $Res Function(PlayerModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? nickname = freezed,
+    Object? id = null,
+    Object? nickname = null,
     Object? fsmNickaname = freezed,
     Object? mafbankNickname = freezed,
     Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nickname: nickname == freezed
+      nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      fsmNickaname: fsmNickaname == freezed
+      fsmNickaname: freezed == fsmNickaname
           ? _value.fsmNickaname
           : fsmNickaname // ignore: cast_nullable_to_non_nullable
               as String?,
-      mafbankNickname: mafbankNickname == freezed
+      mafbankNickname: freezed == mafbankNickname
           ? _value.mafbankNickname
           : mafbankNickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: imageUrl == freezed
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -88,6 +92,7 @@ abstract class _$$_PlayerModelCopyWith<$Res>
           _$_PlayerModel value, $Res Function(_$_PlayerModel) then) =
       __$$_PlayerModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       String nickname,
@@ -97,41 +102,40 @@ abstract class _$$_PlayerModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PlayerModelCopyWithImpl<$Res> extends _$PlayerModelCopyWithImpl<$Res>
+class __$$_PlayerModelCopyWithImpl<$Res>
+    extends _$PlayerModelCopyWithImpl<$Res, _$_PlayerModel>
     implements _$$_PlayerModelCopyWith<$Res> {
   __$$_PlayerModelCopyWithImpl(
       _$_PlayerModel _value, $Res Function(_$_PlayerModel) _then)
-      : super(_value, (v) => _then(v as _$_PlayerModel));
+      : super(_value, _then);
 
-  @override
-  _$_PlayerModel get _value => super._value as _$_PlayerModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? nickname = freezed,
+    Object? id = null,
+    Object? nickname = null,
     Object? fsmNickaname = freezed,
     Object? mafbankNickname = freezed,
     Object? imageUrl = freezed,
   }) {
     return _then(_$_PlayerModel(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nickname: nickname == freezed
+      nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      fsmNickaname: fsmNickaname == freezed
+      fsmNickaname: freezed == fsmNickaname
           ? _value.fsmNickaname
           : fsmNickaname // ignore: cast_nullable_to_non_nullable
               as String?,
-      mafbankNickname: mafbankNickname == freezed
+      mafbankNickname: freezed == mafbankNickname
           ? _value.mafbankNickname
           : mafbankNickname // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: imageUrl == freezed
+      imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -170,26 +174,24 @@ class _$_PlayerModel implements _PlayerModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PlayerModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.nickname, nickname) &&
-            const DeepCollectionEquality()
-                .equals(other.fsmNickaname, fsmNickaname) &&
-            const DeepCollectionEquality()
-                .equals(other.mafbankNickname, mafbankNickname) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.fsmNickaname, fsmNickaname) ||
+                other.fsmNickaname == fsmNickaname) &&
+            (identical(other.mafbankNickname, mafbankNickname) ||
+                other.mafbankNickname == mafbankNickname) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(nickname),
-      const DeepCollectionEquality().hash(fsmNickaname),
-      const DeepCollectionEquality().hash(mafbankNickname),
-      const DeepCollectionEquality().hash(imageUrl));
+      runtimeType, id, nickname, fsmNickaname, mafbankNickname, imageUrl);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PlayerModelCopyWith<_$_PlayerModel> get copyWith =>
       __$$_PlayerModelCopyWithImpl<_$_PlayerModel>(this, _$identity);
 }

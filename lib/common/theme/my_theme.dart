@@ -24,6 +24,10 @@ abstract class MyTheme {
   abstract final Color buttonDisabledColor;
   abstract final Color btnRedColor;
   abstract final Color btnRedColor1;
+  abstract final Color diedPositiveColor;
+  abstract final Color positiveColor;
+  abstract final Color negativeColor;
+  abstract final Color diedColor;
 
   MyTheme();
 
@@ -63,7 +67,7 @@ class _LightTheme implements MyTheme {
 
   @override
   TextStyle get btnTextStyle => _defaultTextStyle.copyWith(
-        fontSize: 25,
+        fontSize: 24,
         fontWeight: FontWeight.w600,
         color: btnTextColor,
       );
@@ -118,4 +122,16 @@ class _LightTheme implements MyTheme {
 
   @override
   Color get btnRedColor1 => btnRedColor.withOpacity(0.7);
+
+  @override
+  Color get diedColor => darkGreyColor;
+
+  @override
+  Color get diedPositiveColor => const Color(0xFF47644A);
+
+  @override
+  Color get negativeColor => redColor;
+
+  @override
+  Color get positiveColor => const Color(0xFFC8B75E);
 }

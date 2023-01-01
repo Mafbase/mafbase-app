@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'translation_content_event.dart';
 
@@ -24,8 +24,8 @@ mixin _$TranslationContentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(SeatingContent content)? stateReceived,
-    TResult Function()? pageOpened,
+    TResult? Function(SeatingContent content)? stateReceived,
+    TResult? Function()? pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,8 +45,9 @@ mixin _$TranslationContentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationContentEventStateReceived value)? stateReceived,
-    TResult Function(TranslationContentEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationContentEventStateReceived value)?
+        stateReceived,
+    TResult? Function(TranslationContentEventPageOpened value)? pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,17 +63,19 @@ mixin _$TranslationContentEvent {
 abstract class $TranslationContentEventCopyWith<$Res> {
   factory $TranslationContentEventCopyWith(TranslationContentEvent value,
           $Res Function(TranslationContentEvent) then) =
-      _$TranslationContentEventCopyWithImpl<$Res>;
+      _$TranslationContentEventCopyWithImpl<$Res, TranslationContentEvent>;
 }
 
 /// @nodoc
-class _$TranslationContentEventCopyWithImpl<$Res>
+class _$TranslationContentEventCopyWithImpl<$Res,
+        $Val extends TranslationContentEvent>
     implements $TranslationContentEventCopyWith<$Res> {
   _$TranslationContentEventCopyWithImpl(this._value, this._then);
 
-  final TranslationContentEvent _value;
   // ignore: unused_field
-  final $Res Function(TranslationContentEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -81,29 +84,27 @@ abstract class _$$TranslationContentEventStateReceivedCopyWith<$Res> {
           _$TranslationContentEventStateReceived value,
           $Res Function(_$TranslationContentEventStateReceived) then) =
       __$$TranslationContentEventStateReceivedCopyWithImpl<$Res>;
+  @useResult
   $Res call({SeatingContent content});
 }
 
 /// @nodoc
 class __$$TranslationContentEventStateReceivedCopyWithImpl<$Res>
-    extends _$TranslationContentEventCopyWithImpl<$Res>
+    extends _$TranslationContentEventCopyWithImpl<$Res,
+        _$TranslationContentEventStateReceived>
     implements _$$TranslationContentEventStateReceivedCopyWith<$Res> {
   __$$TranslationContentEventStateReceivedCopyWithImpl(
       _$TranslationContentEventStateReceived _value,
       $Res Function(_$TranslationContentEventStateReceived) _then)
-      : super(
-            _value, (v) => _then(v as _$TranslationContentEventStateReceived));
+      : super(_value, _then);
 
-  @override
-  _$TranslationContentEventStateReceived get _value =>
-      super._value as _$TranslationContentEventStateReceived;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = freezed,
+    Object? content = null,
   }) {
     return _then(_$TranslationContentEventStateReceived(
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as SeatingContent,
@@ -130,15 +131,15 @@ class _$TranslationContentEventStateReceived
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TranslationContentEventStateReceived &&
-            const DeepCollectionEquality().equals(other.content, content));
+            (identical(other.content, content) || other.content == content));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(content));
+  int get hashCode => Object.hash(runtimeType, content);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TranslationContentEventStateReceivedCopyWith<
           _$TranslationContentEventStateReceived>
       get copyWith => __$$TranslationContentEventStateReceivedCopyWithImpl<
@@ -156,8 +157,8 @@ class _$TranslationContentEventStateReceived
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(SeatingContent content)? stateReceived,
-    TResult Function()? pageOpened,
+    TResult? Function(SeatingContent content)? stateReceived,
+    TResult? Function()? pageOpened,
   }) {
     return stateReceived?.call(content);
   }
@@ -189,8 +190,9 @@ class _$TranslationContentEventStateReceived
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationContentEventStateReceived value)? stateReceived,
-    TResult Function(TranslationContentEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationContentEventStateReceived value)?
+        stateReceived,
+    TResult? Function(TranslationContentEventPageOpened value)? pageOpened,
   }) {
     return stateReceived?.call(this);
   }
@@ -232,16 +234,13 @@ abstract class _$$TranslationContentEventPageOpenedCopyWith<$Res> {
 
 /// @nodoc
 class __$$TranslationContentEventPageOpenedCopyWithImpl<$Res>
-    extends _$TranslationContentEventCopyWithImpl<$Res>
+    extends _$TranslationContentEventCopyWithImpl<$Res,
+        _$TranslationContentEventPageOpened>
     implements _$$TranslationContentEventPageOpenedCopyWith<$Res> {
   __$$TranslationContentEventPageOpenedCopyWithImpl(
       _$TranslationContentEventPageOpened _value,
       $Res Function(_$TranslationContentEventPageOpened) _then)
-      : super(_value, (v) => _then(v as _$TranslationContentEventPageOpened));
-
-  @override
-  _$TranslationContentEventPageOpened get _value =>
-      super._value as _$TranslationContentEventPageOpened;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -277,8 +276,8 @@ class _$TranslationContentEventPageOpened
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(SeatingContent content)? stateReceived,
-    TResult Function()? pageOpened,
+    TResult? Function(SeatingContent content)? stateReceived,
+    TResult? Function()? pageOpened,
   }) {
     return pageOpened?.call();
   }
@@ -310,8 +309,9 @@ class _$TranslationContentEventPageOpened
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationContentEventStateReceived value)? stateReceived,
-    TResult Function(TranslationContentEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationContentEventStateReceived value)?
+        stateReceived,
+    TResult? Function(TranslationContentEventPageOpened value)? pageOpened,
   }) {
     return pageOpened?.call(this);
   }

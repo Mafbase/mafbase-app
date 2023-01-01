@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'add_club_game_effect.dart';
 
@@ -33,7 +33,7 @@ mixin _$AddClubGameEffect {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
@@ -43,7 +43,7 @@ mixin _$AddClubGameEffect {
             int died,
             DateTime date)?
         setValues,
-    TResult Function(int index, PlayerModel player)? setPlayer,
+    TResult? Function(int index, PlayerModel player)? setPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,8 +70,8 @@ mixin _$AddClubGameEffect {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEffectSetValues value)? setValues,
-    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
+    TResult? Function(AddClubGameEffectSetValues value)? setValues,
+    TResult? Function(AddClubGameEffectSetPlayer value)? setPlayer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,17 +87,18 @@ mixin _$AddClubGameEffect {
 abstract class $AddClubGameEffectCopyWith<$Res> {
   factory $AddClubGameEffectCopyWith(
           AddClubGameEffect value, $Res Function(AddClubGameEffect) then) =
-      _$AddClubGameEffectCopyWithImpl<$Res>;
+      _$AddClubGameEffectCopyWithImpl<$Res, AddClubGameEffect>;
 }
 
 /// @nodoc
-class _$AddClubGameEffectCopyWithImpl<$Res>
+class _$AddClubGameEffectCopyWithImpl<$Res, $Val extends AddClubGameEffect>
     implements $AddClubGameEffectCopyWith<$Res> {
   _$AddClubGameEffectCopyWithImpl(this._value, this._then);
 
-  final AddClubGameEffect _value;
   // ignore: unused_field
-  final $Res Function(AddClubGameEffect) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -106,6 +107,7 @@ abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res> {
           _$AddClubGameEffectSetValues value,
           $Res Function(_$AddClubGameEffectSetValues) then) =
       __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {List<String> players,
       List<double> addScore,
@@ -119,58 +121,55 @@ abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res> {
 
 /// @nodoc
 class __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>
-    extends _$AddClubGameEffectCopyWithImpl<$Res>
+    extends _$AddClubGameEffectCopyWithImpl<$Res, _$AddClubGameEffectSetValues>
     implements _$$AddClubGameEffectSetValuesCopyWith<$Res> {
   __$$AddClubGameEffectSetValuesCopyWithImpl(
       _$AddClubGameEffectSetValues _value,
       $Res Function(_$AddClubGameEffectSetValues) _then)
-      : super(_value, (v) => _then(v as _$AddClubGameEffectSetValues));
+      : super(_value, _then);
 
-  @override
-  _$AddClubGameEffectSetValues get _value =>
-      super._value as _$AddClubGameEffectSetValues;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? players = freezed,
-    Object? addScore = freezed,
-    Object? roles = freezed,
-    Object? win = freezed,
-    Object? bestMove = freezed,
-    Object? referee = freezed,
-    Object? died = freezed,
-    Object? date = freezed,
+    Object? players = null,
+    Object? addScore = null,
+    Object? roles = null,
+    Object? win = null,
+    Object? bestMove = null,
+    Object? referee = null,
+    Object? died = null,
+    Object? date = null,
   }) {
     return _then(_$AddClubGameEffectSetValues(
-      players: players == freezed
+      players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      addScore: addScore == freezed
+      addScore: null == addScore
           ? _value._addScore
           : addScore // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      roles: roles == freezed
+      roles: null == roles
           ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<PlayerRole>,
-      win: win == freezed
+      win: null == win
           ? _value.win
           : win // ignore: cast_nullable_to_non_nullable
               as ClubGameResult_GameWin,
-      bestMove: bestMove == freezed
+      bestMove: null == bestMove
           ? _value.bestMove
           : bestMove // ignore: cast_nullable_to_non_nullable
               as ClubGameResult_BestMove,
-      referee: referee == freezed
+      referee: null == referee
           ? _value.referee
           : referee // ignore: cast_nullable_to_non_nullable
               as String,
-      died: died == freezed
+      died: null == died
           ? _value.died
           : died // ignore: cast_nullable_to_non_nullable
               as int,
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -197,6 +196,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   final List<String> _players;
   @override
   List<String> get players {
+    if (_players is EqualUnmodifiableListView) return _players;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_players);
   }
@@ -204,6 +204,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   final List<double> _addScore;
   @override
   List<double> get addScore {
+    if (_addScore is EqualUnmodifiableListView) return _addScore;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_addScore);
   }
@@ -211,6 +212,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   final List<PlayerRole> _roles;
   @override
   List<PlayerRole> get roles {
+    if (_roles is EqualUnmodifiableListView) return _roles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_roles);
   }
@@ -239,11 +241,12 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             const DeepCollectionEquality().equals(other._players, _players) &&
             const DeepCollectionEquality().equals(other._addScore, _addScore) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
-            const DeepCollectionEquality().equals(other.win, win) &&
-            const DeepCollectionEquality().equals(other.bestMove, bestMove) &&
-            const DeepCollectionEquality().equals(other.referee, referee) &&
-            const DeepCollectionEquality().equals(other.died, died) &&
-            const DeepCollectionEquality().equals(other.date, date));
+            (identical(other.win, win) || other.win == win) &&
+            (identical(other.bestMove, bestMove) ||
+                other.bestMove == bestMove) &&
+            (identical(other.referee, referee) || other.referee == referee) &&
+            (identical(other.died, died) || other.died == died) &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @override
@@ -252,14 +255,15 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
       const DeepCollectionEquality().hash(_players),
       const DeepCollectionEquality().hash(_addScore),
       const DeepCollectionEquality().hash(_roles),
-      const DeepCollectionEquality().hash(win),
-      const DeepCollectionEquality().hash(bestMove),
-      const DeepCollectionEquality().hash(referee),
-      const DeepCollectionEquality().hash(died),
-      const DeepCollectionEquality().hash(date));
+      win,
+      bestMove,
+      referee,
+      died,
+      date);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddClubGameEffectSetValuesCopyWith<_$AddClubGameEffectSetValues>
       get copyWith => __$$AddClubGameEffectSetValuesCopyWithImpl<
           _$AddClubGameEffectSetValues>(this, _$identity);
@@ -286,7 +290,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
@@ -296,7 +300,7 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             int died,
             DateTime date)?
         setValues,
-    TResult Function(int index, PlayerModel player)? setPlayer,
+    TResult? Function(int index, PlayerModel player)? setPlayer,
   }) {
     return setValues?.call(
         players, addScore, roles, win, bestMove, referee, died, date);
@@ -337,8 +341,8 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEffectSetValues value)? setValues,
-    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
+    TResult? Function(AddClubGameEffectSetValues value)? setValues,
+    TResult? Function(AddClubGameEffectSetPlayer value)? setPlayer,
   }) {
     return setValues?.call(this);
   }
@@ -387,6 +391,7 @@ abstract class _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
           _$AddClubGameEffectSetPlayer value,
           $Res Function(_$AddClubGameEffectSetPlayer) then) =
       __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>;
+  @useResult
   $Res call({int index, PlayerModel player});
 
   $PlayerModelCopyWith<$Res> get player;
@@ -394,28 +399,25 @@ abstract class _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
 
 /// @nodoc
 class __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>
-    extends _$AddClubGameEffectCopyWithImpl<$Res>
+    extends _$AddClubGameEffectCopyWithImpl<$Res, _$AddClubGameEffectSetPlayer>
     implements _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
   __$$AddClubGameEffectSetPlayerCopyWithImpl(
       _$AddClubGameEffectSetPlayer _value,
       $Res Function(_$AddClubGameEffectSetPlayer) _then)
-      : super(_value, (v) => _then(v as _$AddClubGameEffectSetPlayer));
+      : super(_value, _then);
 
-  @override
-  _$AddClubGameEffectSetPlayer get _value =>
-      super._value as _$AddClubGameEffectSetPlayer;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = freezed,
-    Object? player = freezed,
+    Object? index = null,
+    Object? player = null,
   }) {
     return _then(_$AddClubGameEffectSetPlayer(
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-      player: player == freezed
+      player: null == player
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as PlayerModel,
@@ -423,6 +425,7 @@ class __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get player {
     return $PlayerModelCopyWith<$Res>(_value.player, (value) {
       return _then(_value.copyWith(player: value));
@@ -451,18 +454,16 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddClubGameEffectSetPlayer &&
-            const DeepCollectionEquality().equals(other.index, index) &&
-            const DeepCollectionEquality().equals(other.player, player));
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.player, player) || other.player == player));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(index),
-      const DeepCollectionEquality().hash(player));
+  int get hashCode => Object.hash(runtimeType, index, player);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AddClubGameEffectSetPlayerCopyWith<_$AddClubGameEffectSetPlayer>
       get copyWith => __$$AddClubGameEffectSetPlayerCopyWithImpl<
           _$AddClubGameEffectSetPlayer>(this, _$identity);
@@ -488,7 +489,7 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             List<String> players,
             List<double> addScore,
             List<PlayerRole> roles,
@@ -498,7 +499,7 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
             int died,
             DateTime date)?
         setValues,
-    TResult Function(int index, PlayerModel player)? setPlayer,
+    TResult? Function(int index, PlayerModel player)? setPlayer,
   }) {
     return setPlayer?.call(index, player);
   }
@@ -537,8 +538,8 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddClubGameEffectSetValues value)? setValues,
-    TResult Function(AddClubGameEffectSetPlayer value)? setPlayer,
+    TResult? Function(AddClubGameEffectSetValues value)? setValues,
+    TResult? Function(AddClubGameEffectSetPlayer value)? setPlayer,
   }) {
     return setPlayer?.call(this);
   }

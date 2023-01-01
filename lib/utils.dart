@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 
 extension BuildContextLocaleExt on BuildContext {
   AppLocalizations get locale => AppLocalizations.of(this)!;
+
+  MyTheme get theme => MyTheme.of(this);
 }
 
 final dateFormatForRequests = DateFormat("yyyy-MM-dd");

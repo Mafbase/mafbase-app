@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'rating_event.dart';
 
@@ -29,11 +29,11 @@ mixin _$RatingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int playerId)? playerSelected,
-    TResult Function(DateTimeRange range, int clubId)? downloadRating,
-    TResult Function(int gameId, int clubId)? gameSelected,
-    TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style,
+    TResult? Function(int playerId)? playerSelected,
+    TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(int gameId, int clubId)? gameSelected,
+    TResult? Function(DateTimeRange range, int clubId)? pageOpened,
+    TResult? Function(DateTimeRange range, int clubId, RatingTableStyle style,
             RatingSort sort, int gameFilter)?
         rangeChanged,
   }) =>
@@ -61,11 +61,11 @@ mixin _$RatingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RatingEventPlayerSelected value)? playerSelected,
-    TResult Function(RatingEventDownload value)? downloadRating,
-    TResult Function(RatingEventGameSelected value)? gameSelected,
-    TResult Function(RatingEventPageOpened value)? pageOpened,
-    TResult Function(RatingEventRangeChanged value)? rangeChanged,
+    TResult? Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventGameSelected value)? gameSelected,
+    TResult? Function(RatingEventPageOpened value)? pageOpened,
+    TResult? Function(RatingEventRangeChanged value)? rangeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,16 +84,18 @@ mixin _$RatingEvent {
 abstract class $RatingEventCopyWith<$Res> {
   factory $RatingEventCopyWith(
           RatingEvent value, $Res Function(RatingEvent) then) =
-      _$RatingEventCopyWithImpl<$Res>;
+      _$RatingEventCopyWithImpl<$Res, RatingEvent>;
 }
 
 /// @nodoc
-class _$RatingEventCopyWithImpl<$Res> implements $RatingEventCopyWith<$Res> {
+class _$RatingEventCopyWithImpl<$Res, $Val extends RatingEvent>
+    implements $RatingEventCopyWith<$Res> {
   _$RatingEventCopyWithImpl(this._value, this._then);
 
-  final RatingEvent _value;
   // ignore: unused_field
-  final $Res Function(RatingEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -102,27 +104,25 @@ abstract class _$$RatingEventPlayerSelectedCopyWith<$Res> {
           _$RatingEventPlayerSelected value,
           $Res Function(_$RatingEventPlayerSelected) then) =
       __$$RatingEventPlayerSelectedCopyWithImpl<$Res>;
+  @useResult
   $Res call({int playerId});
 }
 
 /// @nodoc
 class __$$RatingEventPlayerSelectedCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$RatingEventPlayerSelected>
     implements _$$RatingEventPlayerSelectedCopyWith<$Res> {
   __$$RatingEventPlayerSelectedCopyWithImpl(_$RatingEventPlayerSelected _value,
       $Res Function(_$RatingEventPlayerSelected) _then)
-      : super(_value, (v) => _then(v as _$RatingEventPlayerSelected));
+      : super(_value, _then);
 
-  @override
-  _$RatingEventPlayerSelected get _value =>
-      super._value as _$RatingEventPlayerSelected;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? playerId = freezed,
+    Object? playerId = null,
   }) {
     return _then(_$RatingEventPlayerSelected(
-      playerId: playerId == freezed
+      playerId: null == playerId
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -148,15 +148,16 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RatingEventPlayerSelected &&
-            const DeepCollectionEquality().equals(other.playerId, playerId));
+            (identical(other.playerId, playerId) ||
+                other.playerId == playerId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(playerId));
+  int get hashCode => Object.hash(runtimeType, playerId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$RatingEventPlayerSelectedCopyWith<_$RatingEventPlayerSelected>
       get copyWith => __$$RatingEventPlayerSelectedCopyWithImpl<
           _$RatingEventPlayerSelected>(this, _$identity);
@@ -178,11 +179,11 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int playerId)? playerSelected,
-    TResult Function(DateTimeRange range, int clubId)? downloadRating,
-    TResult Function(int gameId, int clubId)? gameSelected,
-    TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style,
+    TResult? Function(int playerId)? playerSelected,
+    TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(int gameId, int clubId)? gameSelected,
+    TResult? Function(DateTimeRange range, int clubId)? pageOpened,
+    TResult? Function(DateTimeRange range, int clubId, RatingTableStyle style,
             RatingSort sort, int gameFilter)?
         rangeChanged,
   }) {
@@ -222,11 +223,11 @@ class _$RatingEventPlayerSelected implements RatingEventPlayerSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RatingEventPlayerSelected value)? playerSelected,
-    TResult Function(RatingEventDownload value)? downloadRating,
-    TResult Function(RatingEventGameSelected value)? gameSelected,
-    TResult Function(RatingEventPageOpened value)? pageOpened,
-    TResult Function(RatingEventRangeChanged value)? rangeChanged,
+    TResult? Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventGameSelected value)? gameSelected,
+    TResult? Function(RatingEventPageOpened value)? pageOpened,
+    TResult? Function(RatingEventRangeChanged value)? rangeChanged,
   }) {
     return playerSelected?.call(this);
   }
@@ -263,31 +264,30 @@ abstract class _$$RatingEventDownloadCopyWith<$Res> {
   factory _$$RatingEventDownloadCopyWith(_$RatingEventDownload value,
           $Res Function(_$RatingEventDownload) then) =
       __$$RatingEventDownloadCopyWithImpl<$Res>;
+  @useResult
   $Res call({DateTimeRange range, int clubId});
 }
 
 /// @nodoc
 class __$$RatingEventDownloadCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$RatingEventDownload>
     implements _$$RatingEventDownloadCopyWith<$Res> {
   __$$RatingEventDownloadCopyWithImpl(
       _$RatingEventDownload _value, $Res Function(_$RatingEventDownload) _then)
-      : super(_value, (v) => _then(v as _$RatingEventDownload));
+      : super(_value, _then);
 
-  @override
-  _$RatingEventDownload get _value => super._value as _$RatingEventDownload;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? range = freezed,
-    Object? clubId = freezed,
+    Object? range = null,
+    Object? clubId = null,
   }) {
     return _then(_$RatingEventDownload(
-      range: range == freezed
+      range: null == range
           ? _value.range
           : range // ignore: cast_nullable_to_non_nullable
               as DateTimeRange,
-      clubId: clubId == freezed
+      clubId: null == clubId
           ? _value.clubId
           : clubId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -315,18 +315,16 @@ class _$RatingEventDownload implements RatingEventDownload {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RatingEventDownload &&
-            const DeepCollectionEquality().equals(other.range, range) &&
-            const DeepCollectionEquality().equals(other.clubId, clubId));
+            (identical(other.range, range) || other.range == range) &&
+            (identical(other.clubId, clubId) || other.clubId == clubId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(range),
-      const DeepCollectionEquality().hash(clubId));
+  int get hashCode => Object.hash(runtimeType, range, clubId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$RatingEventDownloadCopyWith<_$RatingEventDownload> get copyWith =>
       __$$RatingEventDownloadCopyWithImpl<_$RatingEventDownload>(
           this, _$identity);
@@ -348,11 +346,11 @@ class _$RatingEventDownload implements RatingEventDownload {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int playerId)? playerSelected,
-    TResult Function(DateTimeRange range, int clubId)? downloadRating,
-    TResult Function(int gameId, int clubId)? gameSelected,
-    TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style,
+    TResult? Function(int playerId)? playerSelected,
+    TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(int gameId, int clubId)? gameSelected,
+    TResult? Function(DateTimeRange range, int clubId)? pageOpened,
+    TResult? Function(DateTimeRange range, int clubId, RatingTableStyle style,
             RatingSort sort, int gameFilter)?
         rangeChanged,
   }) {
@@ -392,11 +390,11 @@ class _$RatingEventDownload implements RatingEventDownload {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RatingEventPlayerSelected value)? playerSelected,
-    TResult Function(RatingEventDownload value)? downloadRating,
-    TResult Function(RatingEventGameSelected value)? gameSelected,
-    TResult Function(RatingEventPageOpened value)? pageOpened,
-    TResult Function(RatingEventRangeChanged value)? rangeChanged,
+    TResult? Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventGameSelected value)? gameSelected,
+    TResult? Function(RatingEventPageOpened value)? pageOpened,
+    TResult? Function(RatingEventRangeChanged value)? rangeChanged,
   }) {
     return downloadRating?.call(this);
   }
@@ -435,32 +433,30 @@ abstract class _$$RatingEventGameSelectedCopyWith<$Res> {
   factory _$$RatingEventGameSelectedCopyWith(_$RatingEventGameSelected value,
           $Res Function(_$RatingEventGameSelected) then) =
       __$$RatingEventGameSelectedCopyWithImpl<$Res>;
+  @useResult
   $Res call({int gameId, int clubId});
 }
 
 /// @nodoc
 class __$$RatingEventGameSelectedCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$RatingEventGameSelected>
     implements _$$RatingEventGameSelectedCopyWith<$Res> {
   __$$RatingEventGameSelectedCopyWithImpl(_$RatingEventGameSelected _value,
       $Res Function(_$RatingEventGameSelected) _then)
-      : super(_value, (v) => _then(v as _$RatingEventGameSelected));
+      : super(_value, _then);
 
-  @override
-  _$RatingEventGameSelected get _value =>
-      super._value as _$RatingEventGameSelected;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? gameId = freezed,
-    Object? clubId = freezed,
+    Object? gameId = null,
+    Object? clubId = null,
   }) {
     return _then(_$RatingEventGameSelected(
-      gameId: gameId == freezed
+      gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
               as int,
-      clubId: clubId == freezed
+      clubId: null == clubId
           ? _value.clubId
           : clubId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -488,18 +484,16 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RatingEventGameSelected &&
-            const DeepCollectionEquality().equals(other.gameId, gameId) &&
-            const DeepCollectionEquality().equals(other.clubId, clubId));
+            (identical(other.gameId, gameId) || other.gameId == gameId) &&
+            (identical(other.clubId, clubId) || other.clubId == clubId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(gameId),
-      const DeepCollectionEquality().hash(clubId));
+  int get hashCode => Object.hash(runtimeType, gameId, clubId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$RatingEventGameSelectedCopyWith<_$RatingEventGameSelected> get copyWith =>
       __$$RatingEventGameSelectedCopyWithImpl<_$RatingEventGameSelected>(
           this, _$identity);
@@ -521,11 +515,11 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int playerId)? playerSelected,
-    TResult Function(DateTimeRange range, int clubId)? downloadRating,
-    TResult Function(int gameId, int clubId)? gameSelected,
-    TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style,
+    TResult? Function(int playerId)? playerSelected,
+    TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(int gameId, int clubId)? gameSelected,
+    TResult? Function(DateTimeRange range, int clubId)? pageOpened,
+    TResult? Function(DateTimeRange range, int clubId, RatingTableStyle style,
             RatingSort sort, int gameFilter)?
         rangeChanged,
   }) {
@@ -565,11 +559,11 @@ class _$RatingEventGameSelected implements RatingEventGameSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RatingEventPlayerSelected value)? playerSelected,
-    TResult Function(RatingEventDownload value)? downloadRating,
-    TResult Function(RatingEventGameSelected value)? gameSelected,
-    TResult Function(RatingEventPageOpened value)? pageOpened,
-    TResult Function(RatingEventRangeChanged value)? rangeChanged,
+    TResult? Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventGameSelected value)? gameSelected,
+    TResult? Function(RatingEventPageOpened value)? pageOpened,
+    TResult? Function(RatingEventRangeChanged value)? rangeChanged,
   }) {
     return gameSelected?.call(this);
   }
@@ -608,31 +602,30 @@ abstract class _$$RatingEventPageOpenedCopyWith<$Res> {
   factory _$$RatingEventPageOpenedCopyWith(_$RatingEventPageOpened value,
           $Res Function(_$RatingEventPageOpened) then) =
       __$$RatingEventPageOpenedCopyWithImpl<$Res>;
+  @useResult
   $Res call({DateTimeRange range, int clubId});
 }
 
 /// @nodoc
 class __$$RatingEventPageOpenedCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$RatingEventPageOpened>
     implements _$$RatingEventPageOpenedCopyWith<$Res> {
   __$$RatingEventPageOpenedCopyWithImpl(_$RatingEventPageOpened _value,
       $Res Function(_$RatingEventPageOpened) _then)
-      : super(_value, (v) => _then(v as _$RatingEventPageOpened));
+      : super(_value, _then);
 
-  @override
-  _$RatingEventPageOpened get _value => super._value as _$RatingEventPageOpened;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? range = freezed,
-    Object? clubId = freezed,
+    Object? range = null,
+    Object? clubId = null,
   }) {
     return _then(_$RatingEventPageOpened(
-      range: range == freezed
+      range: null == range
           ? _value.range
           : range // ignore: cast_nullable_to_non_nullable
               as DateTimeRange,
-      clubId: clubId == freezed
+      clubId: null == clubId
           ? _value.clubId
           : clubId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -660,18 +653,16 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RatingEventPageOpened &&
-            const DeepCollectionEquality().equals(other.range, range) &&
-            const DeepCollectionEquality().equals(other.clubId, clubId));
+            (identical(other.range, range) || other.range == range) &&
+            (identical(other.clubId, clubId) || other.clubId == clubId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(range),
-      const DeepCollectionEquality().hash(clubId));
+  int get hashCode => Object.hash(runtimeType, range, clubId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$RatingEventPageOpenedCopyWith<_$RatingEventPageOpened> get copyWith =>
       __$$RatingEventPageOpenedCopyWithImpl<_$RatingEventPageOpened>(
           this, _$identity);
@@ -693,11 +684,11 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int playerId)? playerSelected,
-    TResult Function(DateTimeRange range, int clubId)? downloadRating,
-    TResult Function(int gameId, int clubId)? gameSelected,
-    TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style,
+    TResult? Function(int playerId)? playerSelected,
+    TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(int gameId, int clubId)? gameSelected,
+    TResult? Function(DateTimeRange range, int clubId)? pageOpened,
+    TResult? Function(DateTimeRange range, int clubId, RatingTableStyle style,
             RatingSort sort, int gameFilter)?
         rangeChanged,
   }) {
@@ -737,11 +728,11 @@ class _$RatingEventPageOpened implements RatingEventPageOpened {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RatingEventPlayerSelected value)? playerSelected,
-    TResult Function(RatingEventDownload value)? downloadRating,
-    TResult Function(RatingEventGameSelected value)? gameSelected,
-    TResult Function(RatingEventPageOpened value)? pageOpened,
-    TResult Function(RatingEventRangeChanged value)? rangeChanged,
+    TResult? Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventGameSelected value)? gameSelected,
+    TResult? Function(RatingEventPageOpened value)? pageOpened,
+    TResult? Function(RatingEventRangeChanged value)? rangeChanged,
   }) {
     return pageOpened?.call(this);
   }
@@ -780,6 +771,7 @@ abstract class _$$RatingEventRangeChangedCopyWith<$Res> {
   factory _$$RatingEventRangeChangedCopyWith(_$RatingEventRangeChanged value,
           $Res Function(_$RatingEventRangeChanged) then) =
       __$$RatingEventRangeChangedCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {DateTimeRange range,
       int clubId,
@@ -790,42 +782,39 @@ abstract class _$$RatingEventRangeChangedCopyWith<$Res> {
 
 /// @nodoc
 class __$$RatingEventRangeChangedCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$RatingEventRangeChanged>
     implements _$$RatingEventRangeChangedCopyWith<$Res> {
   __$$RatingEventRangeChangedCopyWithImpl(_$RatingEventRangeChanged _value,
       $Res Function(_$RatingEventRangeChanged) _then)
-      : super(_value, (v) => _then(v as _$RatingEventRangeChanged));
+      : super(_value, _then);
 
-  @override
-  _$RatingEventRangeChanged get _value =>
-      super._value as _$RatingEventRangeChanged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? range = freezed,
-    Object? clubId = freezed,
-    Object? style = freezed,
-    Object? sort = freezed,
-    Object? gameFilter = freezed,
+    Object? range = null,
+    Object? clubId = null,
+    Object? style = null,
+    Object? sort = null,
+    Object? gameFilter = null,
   }) {
     return _then(_$RatingEventRangeChanged(
-      range: range == freezed
+      range: null == range
           ? _value.range
           : range // ignore: cast_nullable_to_non_nullable
               as DateTimeRange,
-      clubId: clubId == freezed
+      clubId: null == clubId
           ? _value.clubId
           : clubId // ignore: cast_nullable_to_non_nullable
               as int,
-      style: style == freezed
+      style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as RatingTableStyle,
-      sort: sort == freezed
+      sort: null == sort
           ? _value.sort
           : sort // ignore: cast_nullable_to_non_nullable
               as RatingSort,
-      gameFilter: gameFilter == freezed
+      gameFilter: null == gameFilter
           ? _value.gameFilter
           : gameFilter // ignore: cast_nullable_to_non_nullable
               as int,
@@ -864,25 +853,21 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RatingEventRangeChanged &&
-            const DeepCollectionEquality().equals(other.range, range) &&
-            const DeepCollectionEquality().equals(other.clubId, clubId) &&
-            const DeepCollectionEquality().equals(other.style, style) &&
-            const DeepCollectionEquality().equals(other.sort, sort) &&
-            const DeepCollectionEquality()
-                .equals(other.gameFilter, gameFilter));
+            (identical(other.range, range) || other.range == range) &&
+            (identical(other.clubId, clubId) || other.clubId == clubId) &&
+            (identical(other.style, style) || other.style == style) &&
+            (identical(other.sort, sort) || other.sort == sort) &&
+            (identical(other.gameFilter, gameFilter) ||
+                other.gameFilter == gameFilter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(range),
-      const DeepCollectionEquality().hash(clubId),
-      const DeepCollectionEquality().hash(style),
-      const DeepCollectionEquality().hash(sort),
-      const DeepCollectionEquality().hash(gameFilter));
+  int get hashCode =>
+      Object.hash(runtimeType, range, clubId, style, sort, gameFilter);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$RatingEventRangeChangedCopyWith<_$RatingEventRangeChanged> get copyWith =>
       __$$RatingEventRangeChangedCopyWithImpl<_$RatingEventRangeChanged>(
           this, _$identity);
@@ -904,11 +889,11 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int playerId)? playerSelected,
-    TResult Function(DateTimeRange range, int clubId)? downloadRating,
-    TResult Function(int gameId, int clubId)? gameSelected,
-    TResult Function(DateTimeRange range, int clubId)? pageOpened,
-    TResult Function(DateTimeRange range, int clubId, RatingTableStyle style,
+    TResult? Function(int playerId)? playerSelected,
+    TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(int gameId, int clubId)? gameSelected,
+    TResult? Function(DateTimeRange range, int clubId)? pageOpened,
+    TResult? Function(DateTimeRange range, int clubId, RatingTableStyle style,
             RatingSort sort, int gameFilter)?
         rangeChanged,
   }) {
@@ -948,11 +933,11 @@ class _$RatingEventRangeChanged implements RatingEventRangeChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RatingEventPlayerSelected value)? playerSelected,
-    TResult Function(RatingEventDownload value)? downloadRating,
-    TResult Function(RatingEventGameSelected value)? gameSelected,
-    TResult Function(RatingEventPageOpened value)? pageOpened,
-    TResult Function(RatingEventRangeChanged value)? rangeChanged,
+    TResult? Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventGameSelected value)? gameSelected,
+    TResult? Function(RatingEventPageOpened value)? pageOpened,
+    TResult? Function(RatingEventRangeChanged value)? rangeChanged,
   }) {
     return rangeChanged?.call(this);
   }

@@ -134,5 +134,20 @@
   "addGame": "Добавить новую игру",
   "@addGame": {},
   "invalidEmailOrPassword": "Неверная почта или пароль",
-  "@invalidEmailOrPassword": {}
+  "@invalidEmailOrPassword": {},
+  "table": "Стол {number}",
+  "@table": {
+    "placeholders" : {
+        "number": {
+            "type": "int",
+            "example": "1"
+        }
+    }
+  },
+  "mafiaWon": "Победа мафии",
+  "@mafiaWon": {},
+  "cityWon": "Победа города",
+  "@cityWon": {},
+  "draw": "Ничья",
+  "@draw": {}
 }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'translation_control_event.dart';
 
@@ -26,10 +26,10 @@ mixin _$TranslationControlEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int index, PlayerRole role)? changeRole,
-    TResult Function(int index, PlayerStatus status)? changeStatus,
-    TResult Function(int gameIndex)? selectGame,
-    TResult Function(SeatingContent event)? stateReceived,
+    TResult? Function(int index, PlayerRole role)? changeRole,
+    TResult? Function(int index, PlayerStatus status)? changeStatus,
+    TResult? Function(int gameIndex)? selectGame,
+    TResult? Function(SeatingContent event)? stateReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,10 +55,11 @@ mixin _$TranslationControlEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationControlEventChangeRole value)? changeRole,
-    TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
-    TResult Function(TranslationControlEventSelectGame value)? selectGame,
-    TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult? Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult? Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult? Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult? Function(TranslationControlEventStateReceived value)?
+        stateReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,17 +77,19 @@ mixin _$TranslationControlEvent {
 abstract class $TranslationControlEventCopyWith<$Res> {
   factory $TranslationControlEventCopyWith(TranslationControlEvent value,
           $Res Function(TranslationControlEvent) then) =
-      _$TranslationControlEventCopyWithImpl<$Res>;
+      _$TranslationControlEventCopyWithImpl<$Res, TranslationControlEvent>;
 }
 
 /// @nodoc
-class _$TranslationControlEventCopyWithImpl<$Res>
+class _$TranslationControlEventCopyWithImpl<$Res,
+        $Val extends TranslationControlEvent>
     implements $TranslationControlEventCopyWith<$Res> {
   _$TranslationControlEventCopyWithImpl(this._value, this._then);
 
-  final TranslationControlEvent _value;
   // ignore: unused_field
-  final $Res Function(TranslationControlEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -95,33 +98,32 @@ abstract class _$$TranslationControlEventChangeRoleCopyWith<$Res> {
           _$TranslationControlEventChangeRole value,
           $Res Function(_$TranslationControlEventChangeRole) then) =
       __$$TranslationControlEventChangeRoleCopyWithImpl<$Res>;
+  @useResult
   $Res call({int index, PlayerRole role});
 }
 
 /// @nodoc
 class __$$TranslationControlEventChangeRoleCopyWithImpl<$Res>
-    extends _$TranslationControlEventCopyWithImpl<$Res>
+    extends _$TranslationControlEventCopyWithImpl<$Res,
+        _$TranslationControlEventChangeRole>
     implements _$$TranslationControlEventChangeRoleCopyWith<$Res> {
   __$$TranslationControlEventChangeRoleCopyWithImpl(
       _$TranslationControlEventChangeRole _value,
       $Res Function(_$TranslationControlEventChangeRole) _then)
-      : super(_value, (v) => _then(v as _$TranslationControlEventChangeRole));
+      : super(_value, _then);
 
-  @override
-  _$TranslationControlEventChangeRole get _value =>
-      super._value as _$TranslationControlEventChangeRole;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = freezed,
-    Object? role = freezed,
+    Object? index = null,
+    Object? role = null,
   }) {
     return _then(_$TranslationControlEventChangeRole(
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as PlayerRole,
@@ -151,18 +153,16 @@ class _$TranslationControlEventChangeRole
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TranslationControlEventChangeRole &&
-            const DeepCollectionEquality().equals(other.index, index) &&
-            const DeepCollectionEquality().equals(other.role, role));
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(index),
-      const DeepCollectionEquality().hash(role));
+  int get hashCode => Object.hash(runtimeType, index, role);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TranslationControlEventChangeRoleCopyWith<
           _$TranslationControlEventChangeRole>
       get copyWith => __$$TranslationControlEventChangeRoleCopyWithImpl<
@@ -182,10 +182,10 @@ class _$TranslationControlEventChangeRole
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int index, PlayerRole role)? changeRole,
-    TResult Function(int index, PlayerStatus status)? changeStatus,
-    TResult Function(int gameIndex)? selectGame,
-    TResult Function(SeatingContent event)? stateReceived,
+    TResult? Function(int index, PlayerRole role)? changeRole,
+    TResult? Function(int index, PlayerStatus status)? changeStatus,
+    TResult? Function(int gameIndex)? selectGame,
+    TResult? Function(SeatingContent event)? stateReceived,
   }) {
     return changeRole?.call(index, role);
   }
@@ -223,10 +223,11 @@ class _$TranslationControlEventChangeRole
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationControlEventChangeRole value)? changeRole,
-    TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
-    TResult Function(TranslationControlEventSelectGame value)? selectGame,
-    TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult? Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult? Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult? Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult? Function(TranslationControlEventStateReceived value)?
+        stateReceived,
   }) {
     return changeRole?.call(this);
   }
@@ -267,33 +268,32 @@ abstract class _$$TranslationControlEventChangeStatusCopyWith<$Res> {
           _$TranslationControlEventChangeStatus value,
           $Res Function(_$TranslationControlEventChangeStatus) then) =
       __$$TranslationControlEventChangeStatusCopyWithImpl<$Res>;
+  @useResult
   $Res call({int index, PlayerStatus status});
 }
 
 /// @nodoc
 class __$$TranslationControlEventChangeStatusCopyWithImpl<$Res>
-    extends _$TranslationControlEventCopyWithImpl<$Res>
+    extends _$TranslationControlEventCopyWithImpl<$Res,
+        _$TranslationControlEventChangeStatus>
     implements _$$TranslationControlEventChangeStatusCopyWith<$Res> {
   __$$TranslationControlEventChangeStatusCopyWithImpl(
       _$TranslationControlEventChangeStatus _value,
       $Res Function(_$TranslationControlEventChangeStatus) _then)
-      : super(_value, (v) => _then(v as _$TranslationControlEventChangeStatus));
+      : super(_value, _then);
 
-  @override
-  _$TranslationControlEventChangeStatus get _value =>
-      super._value as _$TranslationControlEventChangeStatus;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = freezed,
-    Object? status = freezed,
+    Object? index = null,
+    Object? status = null,
   }) {
     return _then(_$TranslationControlEventChangeStatus(
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as PlayerStatus,
@@ -323,18 +323,16 @@ class _$TranslationControlEventChangeStatus
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TranslationControlEventChangeStatus &&
-            const DeepCollectionEquality().equals(other.index, index) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(index),
-      const DeepCollectionEquality().hash(status));
+  int get hashCode => Object.hash(runtimeType, index, status);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TranslationControlEventChangeStatusCopyWith<
           _$TranslationControlEventChangeStatus>
       get copyWith => __$$TranslationControlEventChangeStatusCopyWithImpl<
@@ -354,10 +352,10 @@ class _$TranslationControlEventChangeStatus
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int index, PlayerRole role)? changeRole,
-    TResult Function(int index, PlayerStatus status)? changeStatus,
-    TResult Function(int gameIndex)? selectGame,
-    TResult Function(SeatingContent event)? stateReceived,
+    TResult? Function(int index, PlayerRole role)? changeRole,
+    TResult? Function(int index, PlayerStatus status)? changeStatus,
+    TResult? Function(int gameIndex)? selectGame,
+    TResult? Function(SeatingContent event)? stateReceived,
   }) {
     return changeStatus?.call(index, status);
   }
@@ -395,10 +393,11 @@ class _$TranslationControlEventChangeStatus
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationControlEventChangeRole value)? changeRole,
-    TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
-    TResult Function(TranslationControlEventSelectGame value)? selectGame,
-    TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult? Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult? Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult? Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult? Function(TranslationControlEventStateReceived value)?
+        stateReceived,
   }) {
     return changeStatus?.call(this);
   }
@@ -439,28 +438,27 @@ abstract class _$$TranslationControlEventSelectGameCopyWith<$Res> {
           _$TranslationControlEventSelectGame value,
           $Res Function(_$TranslationControlEventSelectGame) then) =
       __$$TranslationControlEventSelectGameCopyWithImpl<$Res>;
+  @useResult
   $Res call({int gameIndex});
 }
 
 /// @nodoc
 class __$$TranslationControlEventSelectGameCopyWithImpl<$Res>
-    extends _$TranslationControlEventCopyWithImpl<$Res>
+    extends _$TranslationControlEventCopyWithImpl<$Res,
+        _$TranslationControlEventSelectGame>
     implements _$$TranslationControlEventSelectGameCopyWith<$Res> {
   __$$TranslationControlEventSelectGameCopyWithImpl(
       _$TranslationControlEventSelectGame _value,
       $Res Function(_$TranslationControlEventSelectGame) _then)
-      : super(_value, (v) => _then(v as _$TranslationControlEventSelectGame));
+      : super(_value, _then);
 
-  @override
-  _$TranslationControlEventSelectGame get _value =>
-      super._value as _$TranslationControlEventSelectGame;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? gameIndex = freezed,
+    Object? gameIndex = null,
   }) {
     return _then(_$TranslationControlEventSelectGame(
-      gameIndex: gameIndex == freezed
+      gameIndex: null == gameIndex
           ? _value.gameIndex
           : gameIndex // ignore: cast_nullable_to_non_nullable
               as int,
@@ -487,15 +485,16 @@ class _$TranslationControlEventSelectGame
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TranslationControlEventSelectGame &&
-            const DeepCollectionEquality().equals(other.gameIndex, gameIndex));
+            (identical(other.gameIndex, gameIndex) ||
+                other.gameIndex == gameIndex));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(gameIndex));
+  int get hashCode => Object.hash(runtimeType, gameIndex);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TranslationControlEventSelectGameCopyWith<
           _$TranslationControlEventSelectGame>
       get copyWith => __$$TranslationControlEventSelectGameCopyWithImpl<
@@ -515,10 +514,10 @@ class _$TranslationControlEventSelectGame
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int index, PlayerRole role)? changeRole,
-    TResult Function(int index, PlayerStatus status)? changeStatus,
-    TResult Function(int gameIndex)? selectGame,
-    TResult Function(SeatingContent event)? stateReceived,
+    TResult? Function(int index, PlayerRole role)? changeRole,
+    TResult? Function(int index, PlayerStatus status)? changeStatus,
+    TResult? Function(int gameIndex)? selectGame,
+    TResult? Function(SeatingContent event)? stateReceived,
   }) {
     return selectGame?.call(gameIndex);
   }
@@ -556,10 +555,11 @@ class _$TranslationControlEventSelectGame
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationControlEventChangeRole value)? changeRole,
-    TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
-    TResult Function(TranslationControlEventSelectGame value)? selectGame,
-    TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult? Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult? Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult? Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult? Function(TranslationControlEventStateReceived value)?
+        stateReceived,
   }) {
     return selectGame?.call(this);
   }
@@ -598,29 +598,27 @@ abstract class _$$TranslationControlEventStateReceivedCopyWith<$Res> {
           _$TranslationControlEventStateReceived value,
           $Res Function(_$TranslationControlEventStateReceived) then) =
       __$$TranslationControlEventStateReceivedCopyWithImpl<$Res>;
+  @useResult
   $Res call({SeatingContent event});
 }
 
 /// @nodoc
 class __$$TranslationControlEventStateReceivedCopyWithImpl<$Res>
-    extends _$TranslationControlEventCopyWithImpl<$Res>
+    extends _$TranslationControlEventCopyWithImpl<$Res,
+        _$TranslationControlEventStateReceived>
     implements _$$TranslationControlEventStateReceivedCopyWith<$Res> {
   __$$TranslationControlEventStateReceivedCopyWithImpl(
       _$TranslationControlEventStateReceived _value,
       $Res Function(_$TranslationControlEventStateReceived) _then)
-      : super(
-            _value, (v) => _then(v as _$TranslationControlEventStateReceived));
+      : super(_value, _then);
 
-  @override
-  _$TranslationControlEventStateReceived get _value =>
-      super._value as _$TranslationControlEventStateReceived;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? event = freezed,
+    Object? event = null,
   }) {
     return _then(_$TranslationControlEventStateReceived(
-      event: event == freezed
+      event: null == event
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
               as SeatingContent,
@@ -647,15 +645,15 @@ class _$TranslationControlEventStateReceived
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TranslationControlEventStateReceived &&
-            const DeepCollectionEquality().equals(other.event, event));
+            (identical(other.event, event) || other.event == event));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(event));
+  int get hashCode => Object.hash(runtimeType, event);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TranslationControlEventStateReceivedCopyWith<
           _$TranslationControlEventStateReceived>
       get copyWith => __$$TranslationControlEventStateReceivedCopyWithImpl<
@@ -675,10 +673,10 @@ class _$TranslationControlEventStateReceived
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int index, PlayerRole role)? changeRole,
-    TResult Function(int index, PlayerStatus status)? changeStatus,
-    TResult Function(int gameIndex)? selectGame,
-    TResult Function(SeatingContent event)? stateReceived,
+    TResult? Function(int index, PlayerRole role)? changeRole,
+    TResult? Function(int index, PlayerStatus status)? changeStatus,
+    TResult? Function(int gameIndex)? selectGame,
+    TResult? Function(SeatingContent event)? stateReceived,
   }) {
     return stateReceived?.call(event);
   }
@@ -716,10 +714,11 @@ class _$TranslationControlEventStateReceived
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TranslationControlEventChangeRole value)? changeRole,
-    TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
-    TResult Function(TranslationControlEventSelectGame value)? selectGame,
-    TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult? Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult? Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult? Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult? Function(TranslationControlEventStateReceived value)?
+        stateReceived,
   }) {
     return stateReceived?.call(this);
   }

@@ -68,11 +68,11 @@ deploy:
     - ssh-add <(echo "$SSH_KEY")
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh-keyscan -p 2424 mafia-generator.tomsk.ru >> ~/.ssh/known_hosts
+    - ssh-keyscan -p 2424 mafbase.ru >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script: 
-    - scp -P 2424 -r build/web strelas@mafia-generator.tomsk.ru:~/client
-    - ssh strelas@mafia-generator.tomsk.ru -p 2424 "./update_client.sh"
+    - scp -P 2424 -r build/web strelas@mafbase.ru:~/client
+    - ssh strelas@mafbase.ru -p 2424 "./update_client.sh"
   environment: production
   cache:
     key: "$CI_COMMIT_REF_NAME"

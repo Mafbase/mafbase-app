@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'main_event.dart';
 
@@ -25,9 +25,9 @@ mixin _$MainEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? backButtonPressed,
-    TResult Function(int tournamentId)? tournamentSelected,
+    TResult? Function(MainPageTab tab)? switchTab,
+    TResult? Function()? backButtonPressed,
+    TResult? Function(int tournamentId)? tournamentSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,9 +49,9 @@ mixin _$MainEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult? Function(MainEventSwitchTab value)? switchTab,
+    TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,16 +67,18 @@ mixin _$MainEvent {
 /// @nodoc
 abstract class $MainEventCopyWith<$Res> {
   factory $MainEventCopyWith(MainEvent value, $Res Function(MainEvent) then) =
-      _$MainEventCopyWithImpl<$Res>;
+      _$MainEventCopyWithImpl<$Res, MainEvent>;
 }
 
 /// @nodoc
-class _$MainEventCopyWithImpl<$Res> implements $MainEventCopyWith<$Res> {
+class _$MainEventCopyWithImpl<$Res, $Val extends MainEvent>
+    implements $MainEventCopyWith<$Res> {
   _$MainEventCopyWithImpl(this._value, this._then);
 
-  final MainEvent _value;
   // ignore: unused_field
-  final $Res Function(MainEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -84,26 +86,25 @@ abstract class _$$MainEventSwitchTabCopyWith<$Res> {
   factory _$$MainEventSwitchTabCopyWith(_$MainEventSwitchTab value,
           $Res Function(_$MainEventSwitchTab) then) =
       __$$MainEventSwitchTabCopyWithImpl<$Res>;
+  @useResult
   $Res call({MainPageTab tab});
 }
 
 /// @nodoc
 class __$$MainEventSwitchTabCopyWithImpl<$Res>
-    extends _$MainEventCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res, _$MainEventSwitchTab>
     implements _$$MainEventSwitchTabCopyWith<$Res> {
   __$$MainEventSwitchTabCopyWithImpl(
       _$MainEventSwitchTab _value, $Res Function(_$MainEventSwitchTab) _then)
-      : super(_value, (v) => _then(v as _$MainEventSwitchTab));
+      : super(_value, _then);
 
-  @override
-  _$MainEventSwitchTab get _value => super._value as _$MainEventSwitchTab;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tab = freezed,
+    Object? tab = null,
   }) {
     return _then(_$MainEventSwitchTab(
-      tab: tab == freezed
+      tab: null == tab
           ? _value.tab
           : tab // ignore: cast_nullable_to_non_nullable
               as MainPageTab,
@@ -129,15 +130,15 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainEventSwitchTab &&
-            const DeepCollectionEquality().equals(other.tab, tab));
+            (identical(other.tab, tab) || other.tab == tab));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tab));
+  int get hashCode => Object.hash(runtimeType, tab);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$MainEventSwitchTabCopyWith<_$MainEventSwitchTab> get copyWith =>
       __$$MainEventSwitchTabCopyWithImpl<_$MainEventSwitchTab>(
           this, _$identity);
@@ -155,9 +156,9 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? backButtonPressed,
-    TResult Function(int tournamentId)? tournamentSelected,
+    TResult? Function(MainPageTab tab)? switchTab,
+    TResult? Function()? backButtonPressed,
+    TResult? Function(int tournamentId)? tournamentSelected,
   }) {
     return switchTab?.call(tab);
   }
@@ -191,9 +192,9 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult? Function(MainEventSwitchTab value)? switchTab,
+    TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
   }) {
     return switchTab?.call(this);
   }
@@ -233,16 +234,12 @@ abstract class _$$MainEventBackButtonPressedCopyWith<$Res> {
 
 /// @nodoc
 class __$$MainEventBackButtonPressedCopyWithImpl<$Res>
-    extends _$MainEventCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res, _$MainEventBackButtonPressed>
     implements _$$MainEventBackButtonPressedCopyWith<$Res> {
   __$$MainEventBackButtonPressedCopyWithImpl(
       _$MainEventBackButtonPressed _value,
       $Res Function(_$MainEventBackButtonPressed) _then)
-      : super(_value, (v) => _then(v as _$MainEventBackButtonPressed));
-
-  @override
-  _$MainEventBackButtonPressed get _value =>
-      super._value as _$MainEventBackButtonPressed;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -278,9 +275,9 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? backButtonPressed,
-    TResult Function(int tournamentId)? tournamentSelected,
+    TResult? Function(MainPageTab tab)? switchTab,
+    TResult? Function()? backButtonPressed,
+    TResult? Function(int tournamentId)? tournamentSelected,
   }) {
     return backButtonPressed?.call();
   }
@@ -314,9 +311,9 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult? Function(MainEventSwitchTab value)? switchTab,
+    TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
   }) {
     return backButtonPressed?.call(this);
   }
@@ -346,28 +343,26 @@ abstract class _$$MainEventTournamentSelectedCopyWith<$Res> {
           _$MainEventTournamentSelected value,
           $Res Function(_$MainEventTournamentSelected) then) =
       __$$MainEventTournamentSelectedCopyWithImpl<$Res>;
+  @useResult
   $Res call({int tournamentId});
 }
 
 /// @nodoc
 class __$$MainEventTournamentSelectedCopyWithImpl<$Res>
-    extends _$MainEventCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res, _$MainEventTournamentSelected>
     implements _$$MainEventTournamentSelectedCopyWith<$Res> {
   __$$MainEventTournamentSelectedCopyWithImpl(
       _$MainEventTournamentSelected _value,
       $Res Function(_$MainEventTournamentSelected) _then)
-      : super(_value, (v) => _then(v as _$MainEventTournamentSelected));
+      : super(_value, _then);
 
-  @override
-  _$MainEventTournamentSelected get _value =>
-      super._value as _$MainEventTournamentSelected;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tournamentId = freezed,
+    Object? tournamentId = null,
   }) {
     return _then(_$MainEventTournamentSelected(
-      tournamentId: tournamentId == freezed
+      tournamentId: null == tournamentId
           ? _value.tournamentId
           : tournamentId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -393,16 +388,16 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainEventTournamentSelected &&
-            const DeepCollectionEquality()
-                .equals(other.tournamentId, tournamentId));
+            (identical(other.tournamentId, tournamentId) ||
+                other.tournamentId == tournamentId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(tournamentId));
+  int get hashCode => Object.hash(runtimeType, tournamentId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$MainEventTournamentSelectedCopyWith<_$MainEventTournamentSelected>
       get copyWith => __$$MainEventTournamentSelectedCopyWithImpl<
           _$MainEventTournamentSelected>(this, _$identity);
@@ -420,9 +415,9 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(MainPageTab tab)? switchTab,
-    TResult Function()? backButtonPressed,
-    TResult Function(int tournamentId)? tournamentSelected,
+    TResult? Function(MainPageTab tab)? switchTab,
+    TResult? Function()? backButtonPressed,
+    TResult? Function(int tournamentId)? tournamentSelected,
   }) {
     return tournamentSelected?.call(tournamentId);
   }
@@ -456,9 +451,9 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult? Function(MainEventSwitchTab value)? switchTab,
+    TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
   }) {
     return tournamentSelected?.call(this);
   }

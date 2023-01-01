@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'verification_state.dart';
 
@@ -28,34 +28,37 @@ mixin _$VerificationState {
 abstract class $VerificationStateCopyWith<$Res> {
   factory $VerificationStateCopyWith(
           VerificationState value, $Res Function(VerificationState) then) =
-      _$VerificationStateCopyWithImpl<$Res>;
+      _$VerificationStateCopyWithImpl<$Res, VerificationState>;
+  @useResult
   $Res call({bool hasError, bool isLoading});
 }
 
 /// @nodoc
-class _$VerificationStateCopyWithImpl<$Res>
+class _$VerificationStateCopyWithImpl<$Res, $Val extends VerificationState>
     implements $VerificationStateCopyWith<$Res> {
   _$VerificationStateCopyWithImpl(this._value, this._then);
 
-  final VerificationState _value;
   // ignore: unused_field
-  final $Res Function(VerificationState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hasError = freezed,
-    Object? isLoading = freezed,
+    Object? hasError = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      hasError: hasError == freezed
+      hasError: null == hasError
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,31 +69,30 @@ abstract class _$$_VerificationStateCopyWith<$Res>
           $Res Function(_$_VerificationState) then) =
       __$$_VerificationStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool hasError, bool isLoading});
 }
 
 /// @nodoc
 class __$$_VerificationStateCopyWithImpl<$Res>
-    extends _$VerificationStateCopyWithImpl<$Res>
+    extends _$VerificationStateCopyWithImpl<$Res, _$_VerificationState>
     implements _$$_VerificationStateCopyWith<$Res> {
   __$$_VerificationStateCopyWithImpl(
       _$_VerificationState _value, $Res Function(_$_VerificationState) _then)
-      : super(_value, (v) => _then(v as _$_VerificationState));
+      : super(_value, _then);
 
-  @override
-  _$_VerificationState get _value => super._value as _$_VerificationState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hasError = freezed,
-    Object? isLoading = freezed,
+    Object? hasError = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_VerificationState(
-      hasError: hasError == freezed
+      hasError: null == hasError
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoading: isLoading == freezed
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -119,18 +121,18 @@ class _$_VerificationState implements _VerificationState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_VerificationState &&
-            const DeepCollectionEquality().equals(other.hasError, hasError) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            (identical(other.hasError, hasError) ||
+                other.hasError == hasError) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(hasError),
-      const DeepCollectionEquality().hash(isLoading));
+  int get hashCode => Object.hash(runtimeType, hasError, isLoading);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_VerificationStateCopyWith<_$_VerificationState> get copyWith =>
       __$$_VerificationStateCopyWithImpl<_$_VerificationState>(
           this, _$identity);

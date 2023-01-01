@@ -5,7 +5,7 @@
 import FlutterMacOS
 import Foundation
 
-import package_info_plus_macos
+import package_info_plus
 import sentry_flutter
 import shared_preferences_macos
 import url_launcher_macos

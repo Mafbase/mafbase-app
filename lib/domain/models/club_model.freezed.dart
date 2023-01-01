@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'club_model.dart';
 
@@ -27,33 +27,37 @@ mixin _$ClubModel {
 /// @nodoc
 abstract class $ClubModelCopyWith<$Res> {
   factory $ClubModelCopyWith(ClubModel value, $Res Function(ClubModel) then) =
-      _$ClubModelCopyWithImpl<$Res>;
+      _$ClubModelCopyWithImpl<$Res, ClubModel>;
+  @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class _$ClubModelCopyWithImpl<$Res> implements $ClubModelCopyWith<$Res> {
+class _$ClubModelCopyWithImpl<$Res, $Val extends ClubModel>
+    implements $ClubModelCopyWith<$Res> {
   _$ClubModelCopyWithImpl(this._value, this._then);
 
-  final ClubModel _value;
   // ignore: unused_field
-  final $Res Function(ClubModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -63,30 +67,30 @@ abstract class _$$_ClubModelCopyWith<$Res> implements $ClubModelCopyWith<$Res> {
           _$_ClubModel value, $Res Function(_$_ClubModel) then) =
       __$$_ClubModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class __$$_ClubModelCopyWithImpl<$Res> extends _$ClubModelCopyWithImpl<$Res>
+class __$$_ClubModelCopyWithImpl<$Res>
+    extends _$ClubModelCopyWithImpl<$Res, _$_ClubModel>
     implements _$$_ClubModelCopyWith<$Res> {
   __$$_ClubModelCopyWithImpl(
       _$_ClubModel _value, $Res Function(_$_ClubModel) _then)
-      : super(_value, (v) => _then(v as _$_ClubModel));
+      : super(_value, _then);
 
-  @override
-  _$_ClubModel get _value => super._value as _$_ClubModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
   }) {
     return _then(_$_ClubModel(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -114,18 +118,16 @@ class _$_ClubModel implements _ClubModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ClubModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ClubModelCopyWith<_$_ClubModel> get copyWith =>
       __$$_ClubModelCopyWithImpl<_$_ClubModel>(this, _$identity);
 }

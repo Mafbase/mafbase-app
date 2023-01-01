@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
+import 'package:seating_generator_web/data/storages/token_storage_hive_impl.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
@@ -68,10 +69,13 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
 
 GetIt getIt = GetIt.instance;
+const _useHiveStorage = true;
 
 void registerGetIt() {
   getIt
-    ..registerLazySingleton<TokenStorage>(() => TokenStorageImpl())
+    ..registerLazySingleton<TokenStorage>(
+      () => _useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl(),
+    )
     ..registerLazySingleton<MyHttpClient>(
       () => kReleaseMode
           ? MyHttpClient.autoForWeb(getIt())

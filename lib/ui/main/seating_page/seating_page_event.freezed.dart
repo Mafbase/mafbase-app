@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'seating_page_event.dart';
 
@@ -27,11 +27,11 @@ mixin _$SeatingPageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? addPair,
-    TResult Function()? createSeating,
-    TResult Function()? fsmSeatingTapped,
-    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
-    TResult Function(int tournamentId)? pageOpened,
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,11 +57,11 @@ mixin _$SeatingPageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingPageEventAddPair value)? addPair,
-    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
-    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
-    TResult Function(SeatingPageEventDeletePair value)? deletePair,
-    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,17 +80,18 @@ mixin _$SeatingPageEvent {
 abstract class $SeatingPageEventCopyWith<$Res> {
   factory $SeatingPageEventCopyWith(
           SeatingPageEvent value, $Res Function(SeatingPageEvent) then) =
-      _$SeatingPageEventCopyWithImpl<$Res>;
+      _$SeatingPageEventCopyWithImpl<$Res, SeatingPageEvent>;
 }
 
 /// @nodoc
-class _$SeatingPageEventCopyWithImpl<$Res>
+class _$SeatingPageEventCopyWithImpl<$Res, $Val extends SeatingPageEvent>
     implements $SeatingPageEventCopyWith<$Res> {
   _$SeatingPageEventCopyWithImpl(this._value, this._then);
 
-  final SeatingPageEvent _value;
   // ignore: unused_field
-  final $Res Function(SeatingPageEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -102,15 +103,11 @@ abstract class _$$SeatingPageEventAddPairCopyWith<$Res> {
 
 /// @nodoc
 class __$$SeatingPageEventAddPairCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventAddPair>
     implements _$$SeatingPageEventAddPairCopyWith<$Res> {
   __$$SeatingPageEventAddPairCopyWithImpl(_$SeatingPageEventAddPair _value,
       $Res Function(_$SeatingPageEventAddPair) _then)
-      : super(_value, (v) => _then(v as _$SeatingPageEventAddPair));
-
-  @override
-  _$SeatingPageEventAddPair get _value =>
-      super._value as _$SeatingPageEventAddPair;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -148,11 +145,11 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? addPair,
-    TResult Function()? createSeating,
-    TResult Function()? fsmSeatingTapped,
-    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
-    TResult Function(int tournamentId)? pageOpened,
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
   }) {
     return addPair?.call();
   }
@@ -190,11 +187,11 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingPageEventAddPair value)? addPair,
-    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
-    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
-    TResult Function(SeatingPageEventDeletePair value)? deletePair,
-    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
     return addPair?.call(this);
   }
@@ -230,16 +227,13 @@ abstract class _$$SeatingPageEventCreateSeatingCopyWith<$Res> {
 
 /// @nodoc
 class __$$SeatingPageEventCreateSeatingCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventCreateSeating>
     implements _$$SeatingPageEventCreateSeatingCopyWith<$Res> {
   __$$SeatingPageEventCreateSeatingCopyWithImpl(
       _$SeatingPageEventCreateSeating _value,
       $Res Function(_$SeatingPageEventCreateSeating) _then)
-      : super(_value, (v) => _then(v as _$SeatingPageEventCreateSeating));
-
-  @override
-  _$SeatingPageEventCreateSeating get _value =>
-      super._value as _$SeatingPageEventCreateSeating;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -277,11 +271,11 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? addPair,
-    TResult Function()? createSeating,
-    TResult Function()? fsmSeatingTapped,
-    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
-    TResult Function(int tournamentId)? pageOpened,
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
   }) {
     return createSeating?.call();
   }
@@ -319,11 +313,11 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingPageEventAddPair value)? addPair,
-    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
-    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
-    TResult Function(SeatingPageEventDeletePair value)? deletePair,
-    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
     return createSeating?.call(this);
   }
@@ -360,16 +354,13 @@ abstract class _$$SeatingPageEventFsmSeatingTappedCopyWith<$Res> {
 
 /// @nodoc
 class __$$SeatingPageEventFsmSeatingTappedCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventFsmSeatingTapped>
     implements _$$SeatingPageEventFsmSeatingTappedCopyWith<$Res> {
   __$$SeatingPageEventFsmSeatingTappedCopyWithImpl(
       _$SeatingPageEventFsmSeatingTapped _value,
       $Res Function(_$SeatingPageEventFsmSeatingTapped) _then)
-      : super(_value, (v) => _then(v as _$SeatingPageEventFsmSeatingTapped));
-
-  @override
-  _$SeatingPageEventFsmSeatingTapped get _value =>
-      super._value as _$SeatingPageEventFsmSeatingTapped;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -408,11 +399,11 @@ class _$SeatingPageEventFsmSeatingTapped
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? addPair,
-    TResult Function()? createSeating,
-    TResult Function()? fsmSeatingTapped,
-    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
-    TResult Function(int tournamentId)? pageOpened,
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
   }) {
     return fsmSeatingTapped?.call();
   }
@@ -450,11 +441,11 @@ class _$SeatingPageEventFsmSeatingTapped
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingPageEventAddPair value)? addPair,
-    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
-    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
-    TResult Function(SeatingPageEventDeletePair value)? deletePair,
-    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
     return fsmSeatingTapped?.call(this);
   }
@@ -487,6 +478,7 @@ abstract class _$$SeatingPageEventDeletePairCopyWith<$Res> {
           _$SeatingPageEventDeletePair value,
           $Res Function(_$SeatingPageEventDeletePair) then) =
       __$$SeatingPageEventDeletePairCopyWithImpl<$Res>;
+  @useResult
   $Res call({PlayerModel first, PlayerModel second});
 
   $PlayerModelCopyWith<$Res> get first;
@@ -495,28 +487,25 @@ abstract class _$$SeatingPageEventDeletePairCopyWith<$Res> {
 
 /// @nodoc
 class __$$SeatingPageEventDeletePairCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventDeletePair>
     implements _$$SeatingPageEventDeletePairCopyWith<$Res> {
   __$$SeatingPageEventDeletePairCopyWithImpl(
       _$SeatingPageEventDeletePair _value,
       $Res Function(_$SeatingPageEventDeletePair) _then)
-      : super(_value, (v) => _then(v as _$SeatingPageEventDeletePair));
+      : super(_value, _then);
 
-  @override
-  _$SeatingPageEventDeletePair get _value =>
-      super._value as _$SeatingPageEventDeletePair;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? first = freezed,
-    Object? second = freezed,
+    Object? first = null,
+    Object? second = null,
   }) {
     return _then(_$SeatingPageEventDeletePair(
-      first: first == freezed
+      first: null == first
           ? _value.first
           : first // ignore: cast_nullable_to_non_nullable
               as PlayerModel,
-      second: second == freezed
+      second: null == second
           ? _value.second
           : second // ignore: cast_nullable_to_non_nullable
               as PlayerModel,
@@ -524,6 +513,7 @@ class __$$SeatingPageEventDeletePairCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get first {
     return $PlayerModelCopyWith<$Res>(_value.first, (value) {
       return _then(_value.copyWith(first: value));
@@ -531,6 +521,7 @@ class __$$SeatingPageEventDeletePairCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get second {
     return $PlayerModelCopyWith<$Res>(_value.second, (value) {
       return _then(_value.copyWith(second: value));
@@ -559,18 +550,16 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SeatingPageEventDeletePair &&
-            const DeepCollectionEquality().equals(other.first, first) &&
-            const DeepCollectionEquality().equals(other.second, second));
+            (identical(other.first, first) || other.first == first) &&
+            (identical(other.second, second) || other.second == second));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(first),
-      const DeepCollectionEquality().hash(second));
+  int get hashCode => Object.hash(runtimeType, first, second);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SeatingPageEventDeletePairCopyWith<_$SeatingPageEventDeletePair>
       get copyWith => __$$SeatingPageEventDeletePairCopyWithImpl<
           _$SeatingPageEventDeletePair>(this, _$identity);
@@ -590,11 +579,11 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? addPair,
-    TResult Function()? createSeating,
-    TResult Function()? fsmSeatingTapped,
-    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
-    TResult Function(int tournamentId)? pageOpened,
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
   }) {
     return deletePair?.call(first, second);
   }
@@ -632,11 +621,11 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingPageEventAddPair value)? addPair,
-    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
-    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
-    TResult Function(SeatingPageEventDeletePair value)? deletePair,
-    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
     return deletePair?.call(this);
   }
@@ -676,28 +665,26 @@ abstract class _$$SeatingPageEventPageOpenedCopyWith<$Res> {
           _$SeatingPageEventPageOpened value,
           $Res Function(_$SeatingPageEventPageOpened) then) =
       __$$SeatingPageEventPageOpenedCopyWithImpl<$Res>;
+  @useResult
   $Res call({int tournamentId});
 }
 
 /// @nodoc
 class __$$SeatingPageEventPageOpenedCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventPageOpened>
     implements _$$SeatingPageEventPageOpenedCopyWith<$Res> {
   __$$SeatingPageEventPageOpenedCopyWithImpl(
       _$SeatingPageEventPageOpened _value,
       $Res Function(_$SeatingPageEventPageOpened) _then)
-      : super(_value, (v) => _then(v as _$SeatingPageEventPageOpened));
+      : super(_value, _then);
 
-  @override
-  _$SeatingPageEventPageOpened get _value =>
-      super._value as _$SeatingPageEventPageOpened;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tournamentId = freezed,
+    Object? tournamentId = null,
   }) {
     return _then(_$SeatingPageEventPageOpened(
-      tournamentId: tournamentId == freezed
+      tournamentId: null == tournamentId
           ? _value.tournamentId
           : tournamentId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -723,16 +710,16 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SeatingPageEventPageOpened &&
-            const DeepCollectionEquality()
-                .equals(other.tournamentId, tournamentId));
+            (identical(other.tournamentId, tournamentId) ||
+                other.tournamentId == tournamentId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(tournamentId));
+  int get hashCode => Object.hash(runtimeType, tournamentId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SeatingPageEventPageOpenedCopyWith<_$SeatingPageEventPageOpened>
       get copyWith => __$$SeatingPageEventPageOpenedCopyWithImpl<
           _$SeatingPageEventPageOpened>(this, _$identity);
@@ -752,11 +739,11 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? addPair,
-    TResult Function()? createSeating,
-    TResult Function()? fsmSeatingTapped,
-    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
-    TResult Function(int tournamentId)? pageOpened,
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
   }) {
     return pageOpened?.call(tournamentId);
   }
@@ -794,11 +781,11 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SeatingPageEventAddPair value)? addPair,
-    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
-    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
-    TResult Function(SeatingPageEventDeletePair value)? deletePair,
-    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
   }) {
     return pageOpened?.call(this);
   }

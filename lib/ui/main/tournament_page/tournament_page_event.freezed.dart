@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tournament_page_event.dart';
 
@@ -30,14 +30,14 @@ mixin _$TournamentPageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,19 +75,20 @@ mixin _$TournamentPageEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,17 +115,18 @@ mixin _$TournamentPageEvent {
 abstract class $TournamentPageEventCopyWith<$Res> {
   factory $TournamentPageEventCopyWith(
           TournamentPageEvent value, $Res Function(TournamentPageEvent) then) =
-      _$TournamentPageEventCopyWithImpl<$Res>;
+      _$TournamentPageEventCopyWithImpl<$Res, TournamentPageEvent>;
 }
 
 /// @nodoc
-class _$TournamentPageEventCopyWithImpl<$Res>
+class _$TournamentPageEventCopyWithImpl<$Res, $Val extends TournamentPageEvent>
     implements $TournamentPageEventCopyWith<$Res> {
   _$TournamentPageEventCopyWithImpl(this._value, this._then);
 
-  final TournamentPageEvent _value;
   // ignore: unused_field
-  final $Res Function(TournamentPageEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -137,17 +139,13 @@ abstract class _$$TournamentPageBackButtonPreesedEventCopyWith<$Res> {
 
 /// @nodoc
 class __$$TournamentPageBackButtonPreesedEventCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageBackButtonPreesedEvent>
     implements _$$TournamentPageBackButtonPreesedEventCopyWith<$Res> {
   __$$TournamentPageBackButtonPreesedEventCopyWithImpl(
       _$TournamentPageBackButtonPreesedEvent _value,
       $Res Function(_$TournamentPageBackButtonPreesedEvent) _then)
-      : super(
-            _value, (v) => _then(v as _$TournamentPageBackButtonPreesedEvent));
-
-  @override
-  _$TournamentPageBackButtonPreesedEvent get _value =>
-      super._value as _$TournamentPageBackButtonPreesedEvent;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -189,14 +187,14 @@ class _$TournamentPageBackButtonPreesedEvent
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return backButtonPressed?.call();
   }
@@ -246,19 +244,20 @@ class _$TournamentPageBackButtonPreesedEvent
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return backButtonPressed?.call(this);
   }
@@ -304,17 +303,13 @@ abstract class _$$TournamentPageEventPlayersListTappedCopyWith<$Res> {
 
 /// @nodoc
 class __$$TournamentPageEventPlayersListTappedCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventPlayersListTapped>
     implements _$$TournamentPageEventPlayersListTappedCopyWith<$Res> {
   __$$TournamentPageEventPlayersListTappedCopyWithImpl(
       _$TournamentPageEventPlayersListTapped _value,
       $Res Function(_$TournamentPageEventPlayersListTapped) _then)
-      : super(
-            _value, (v) => _then(v as _$TournamentPageEventPlayersListTapped));
-
-  @override
-  _$TournamentPageEventPlayersListTapped get _value =>
-      super._value as _$TournamentPageEventPlayersListTapped;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -356,14 +351,14 @@ class _$TournamentPageEventPlayersListTapped
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return playersListTapped?.call();
   }
@@ -413,19 +408,20 @@ class _$TournamentPageEventPlayersListTapped
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return playersListTapped?.call(this);
   }
@@ -467,28 +463,27 @@ abstract class _$$TournamentPagePlayerListOpenedEventCopyWith<$Res> {
           _$TournamentPagePlayerListOpenedEvent value,
           $Res Function(_$TournamentPagePlayerListOpenedEvent) then) =
       __$$TournamentPagePlayerListOpenedEventCopyWithImpl<$Res>;
+  @useResult
   $Res call({int tournamentId});
 }
 
 /// @nodoc
 class __$$TournamentPagePlayerListOpenedEventCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPagePlayerListOpenedEvent>
     implements _$$TournamentPagePlayerListOpenedEventCopyWith<$Res> {
   __$$TournamentPagePlayerListOpenedEventCopyWithImpl(
       _$TournamentPagePlayerListOpenedEvent _value,
       $Res Function(_$TournamentPagePlayerListOpenedEvent) _then)
-      : super(_value, (v) => _then(v as _$TournamentPagePlayerListOpenedEvent));
+      : super(_value, _then);
 
-  @override
-  _$TournamentPagePlayerListOpenedEvent get _value =>
-      super._value as _$TournamentPagePlayerListOpenedEvent;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tournamentId = freezed,
+    Object? tournamentId = null,
   }) {
     return _then(_$TournamentPagePlayerListOpenedEvent(
-      tournamentId: tournamentId == freezed
+      tournamentId: null == tournamentId
           ? _value.tournamentId
           : tournamentId // ignore: cast_nullable_to_non_nullable
               as int,
@@ -515,16 +510,16 @@ class _$TournamentPagePlayerListOpenedEvent
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TournamentPagePlayerListOpenedEvent &&
-            const DeepCollectionEquality()
-                .equals(other.tournamentId, tournamentId));
+            (identical(other.tournamentId, tournamentId) ||
+                other.tournamentId == tournamentId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(tournamentId));
+  int get hashCode => Object.hash(runtimeType, tournamentId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TournamentPagePlayerListOpenedEventCopyWith<
           _$TournamentPagePlayerListOpenedEvent>
       get copyWith => __$$TournamentPagePlayerListOpenedEventCopyWithImpl<
@@ -548,14 +543,14 @@ class _$TournamentPagePlayerListOpenedEvent
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return playersListOpened?.call(tournamentId);
   }
@@ -605,19 +600,20 @@ class _$TournamentPagePlayerListOpenedEvent
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return playersListOpened?.call(this);
   }
@@ -670,16 +666,13 @@ abstract class _$$TournamentPageEventAddPlayerCopyWith<$Res> {
 
 /// @nodoc
 class __$$TournamentPageEventAddPlayerCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventAddPlayer>
     implements _$$TournamentPageEventAddPlayerCopyWith<$Res> {
   __$$TournamentPageEventAddPlayerCopyWithImpl(
       _$TournamentPageEventAddPlayer _value,
       $Res Function(_$TournamentPageEventAddPlayer) _then)
-      : super(_value, (v) => _then(v as _$TournamentPageEventAddPlayer));
-
-  @override
-  _$TournamentPageEventAddPlayer get _value =>
-      super._value as _$TournamentPageEventAddPlayer;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -720,14 +713,14 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return addPlayerTapped?.call();
   }
@@ -777,19 +770,20 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return addPlayerTapped?.call(this);
   }
@@ -833,16 +827,13 @@ abstract class _$$TournamentPageEventEditSettingsCopyWith<$Res> {
 
 /// @nodoc
 class __$$TournamentPageEventEditSettingsCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventEditSettings>
     implements _$$TournamentPageEventEditSettingsCopyWith<$Res> {
   __$$TournamentPageEventEditSettingsCopyWithImpl(
       _$TournamentPageEventEditSettings _value,
       $Res Function(_$TournamentPageEventEditSettings) _then)
-      : super(_value, (v) => _then(v as _$TournamentPageEventEditSettings));
-
-  @override
-  _$TournamentPageEventEditSettings get _value =>
-      super._value as _$TournamentPageEventEditSettings;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -884,14 +875,14 @@ class _$TournamentPageEventEditSettings
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return editTournamentSettings?.call();
   }
@@ -941,19 +932,20 @@ class _$TournamentPageEventEditSettings
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return editTournamentSettings?.call(this);
   }
@@ -994,6 +986,7 @@ abstract class _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
           _$TournamentPageEventDeletePlayer value,
           $Res Function(_$TournamentPageEventDeletePlayer) then) =
       __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>;
+  @useResult
   $Res call({PlayerModel player});
 
   $PlayerModelCopyWith<$Res> get player;
@@ -1001,23 +994,21 @@ abstract class _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
 
 /// @nodoc
 class __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventDeletePlayer>
     implements _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
   __$$TournamentPageEventDeletePlayerCopyWithImpl(
       _$TournamentPageEventDeletePlayer _value,
       $Res Function(_$TournamentPageEventDeletePlayer) _then)
-      : super(_value, (v) => _then(v as _$TournamentPageEventDeletePlayer));
+      : super(_value, _then);
 
-  @override
-  _$TournamentPageEventDeletePlayer get _value =>
-      super._value as _$TournamentPageEventDeletePlayer;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? player = freezed,
+    Object? player = null,
   }) {
     return _then(_$TournamentPageEventDeletePlayer(
-      player: player == freezed
+      player: null == player
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as PlayerModel,
@@ -1025,6 +1016,7 @@ class __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get player {
     return $PlayerModelCopyWith<$Res>(_value.player, (value) {
       return _then(_value.copyWith(player: value));
@@ -1051,15 +1043,15 @@ class _$TournamentPageEventDeletePlayer
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TournamentPageEventDeletePlayer &&
-            const DeepCollectionEquality().equals(other.player, player));
+            (identical(other.player, player) || other.player == player));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(player));
+  int get hashCode => Object.hash(runtimeType, player);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TournamentPageEventDeletePlayerCopyWith<_$TournamentPageEventDeletePlayer>
       get copyWith => __$$TournamentPageEventDeletePlayerCopyWithImpl<
           _$TournamentPageEventDeletePlayer>(this, _$identity);
@@ -1082,14 +1074,14 @@ class _$TournamentPageEventDeletePlayer
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return deletePlayer?.call(player);
   }
@@ -1139,19 +1131,20 @@ class _$TournamentPageEventDeletePlayer
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return deletePlayer?.call(this);
   }
@@ -1197,6 +1190,7 @@ abstract class _$$TournamentPageEventOpenProfileDialogCopyWith<$Res> {
           _$TournamentPageEventOpenProfileDialog value,
           $Res Function(_$TournamentPageEventOpenProfileDialog) then) =
       __$$TournamentPageEventOpenProfileDialogCopyWithImpl<$Res>;
+  @useResult
   $Res call({PlayerModel player});
 
   $PlayerModelCopyWith<$Res> get player;
@@ -1204,24 +1198,21 @@ abstract class _$$TournamentPageEventOpenProfileDialogCopyWith<$Res> {
 
 /// @nodoc
 class __$$TournamentPageEventOpenProfileDialogCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventOpenProfileDialog>
     implements _$$TournamentPageEventOpenProfileDialogCopyWith<$Res> {
   __$$TournamentPageEventOpenProfileDialogCopyWithImpl(
       _$TournamentPageEventOpenProfileDialog _value,
       $Res Function(_$TournamentPageEventOpenProfileDialog) _then)
-      : super(
-            _value, (v) => _then(v as _$TournamentPageEventOpenProfileDialog));
+      : super(_value, _then);
 
-  @override
-  _$TournamentPageEventOpenProfileDialog get _value =>
-      super._value as _$TournamentPageEventOpenProfileDialog;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? player = freezed,
+    Object? player = null,
   }) {
     return _then(_$TournamentPageEventOpenProfileDialog(
-      player: player == freezed
+      player: null == player
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
               as PlayerModel,
@@ -1229,6 +1220,7 @@ class __$$TournamentPageEventOpenProfileDialogCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get player {
     return $PlayerModelCopyWith<$Res>(_value.player, (value) {
       return _then(_value.copyWith(player: value));
@@ -1255,15 +1247,15 @@ class _$TournamentPageEventOpenProfileDialog
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TournamentPageEventOpenProfileDialog &&
-            const DeepCollectionEquality().equals(other.player, player));
+            (identical(other.player, player) || other.player == player));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(player));
+  int get hashCode => Object.hash(runtimeType, player);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$TournamentPageEventOpenProfileDialogCopyWith<
           _$TournamentPageEventOpenProfileDialog>
       get copyWith => __$$TournamentPageEventOpenProfileDialogCopyWithImpl<
@@ -1287,14 +1279,14 @@ class _$TournamentPageEventOpenProfileDialog
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return openProfileDialog?.call(player);
   }
@@ -1344,19 +1336,20 @@ class _$TournamentPageEventOpenProfileDialog
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return openProfileDialog?.call(this);
   }
@@ -1409,16 +1402,13 @@ abstract class _$$TournamentPageEventOpenSeatingPageCopyWith<$Res> {
 
 /// @nodoc
 class __$$TournamentPageEventOpenSeatingPageCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventOpenSeatingPage>
     implements _$$TournamentPageEventOpenSeatingPageCopyWith<$Res> {
   __$$TournamentPageEventOpenSeatingPageCopyWithImpl(
       _$TournamentPageEventOpenSeatingPage _value,
       $Res Function(_$TournamentPageEventOpenSeatingPage) _then)
-      : super(_value, (v) => _then(v as _$TournamentPageEventOpenSeatingPage));
-
-  @override
-  _$TournamentPageEventOpenSeatingPage get _value =>
-      super._value as _$TournamentPageEventOpenSeatingPage;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -1460,14 +1450,14 @@ class _$TournamentPageEventOpenSeatingPage
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(int tournamentId)? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
   }) {
     return openSeatingPage?.call();
   }
@@ -1517,19 +1507,20 @@ class _$TournamentPageEventOpenSeatingPage
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
         backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
         editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
   }) {
     return openSeatingPage?.call(this);
   }
