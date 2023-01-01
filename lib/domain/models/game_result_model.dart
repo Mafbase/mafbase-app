@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+
 part 'game_result_model.freezed.dart';
+
 @freezed
 class GameResultModel with _$GameResultModel {
   const factory GameResultModel({
@@ -9,10 +11,42 @@ class GameResultModel with _$GameResultModel {
     required List<String> nicknames,
     required String referee,
     GameWin? gameWin,
-    required List<double> scores,
+    List<double>? scores,
     List<PlayerResultStatus?>? statuses,
     required int table,
+    required int game,
   }) = _GameResultModel;
+
+  factory GameResultModel.fromProto(TableSeatingItem proto) {
+    return GameResultModel(
+      gameId: proto.gameId,
+      nicknames: proto.seating.nickname,
+      referee: proto.seating.referee,
+      table: proto.seating.table,
+      scores: proto.hasResult() ? proto.result.score : null,
+      gameWin: proto.hasResult() ? proto.result.win : null,
+      roles: proto.hasResult() ? proto.result.role : null,
+      game: proto.game,
+      statuses: proto.hasResult()
+          ? List.generate(10, (index) {
+              if (proto.result.died == index) {
+                if (proto.result.bestMove != BestMove.miss) {
+                  return PlayerResultStatus.diedPositive;
+                } else {
+                  return PlayerResultStatus.died;
+                }
+              }
+              if (proto.result.addScore[index] > 0) {
+                return PlayerResultStatus.positive;
+              }
+              if (proto.result.addScore[index] < 0) {
+                return PlayerResultStatus.negative;
+              }
+              return null;
+            })
+          : null,
+    );
+  }
 }
 
 enum PlayerResultStatus {

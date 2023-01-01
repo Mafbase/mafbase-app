@@ -89,20 +89,19 @@ const TableSeatingResult$json = const {
   '1': 'TableSeatingResult',
   '2': const [
     const {'1': 'role', '3': 1, '4': 3, '5': 14, '6': '.generated.PlayerRole', '10': 'role'},
-    const {'1': 'addScore', '3': 2, '4': 3, '5': 1, '10': 'addScore'},
+    const {'1': 'score', '3': 2, '4': 3, '5': 1, '10': 'score'},
     const {'1': 'died', '3': 3, '4': 1, '5': 5, '9': 0, '10': 'died', '17': true},
     const {'1': 'win', '3': 4, '4': 1, '5': 14, '6': '.generated.GameWin', '10': 'win'},
     const {'1': 'bestMove', '3': 5, '4': 1, '5': 14, '6': '.generated.BestMove', '10': 'bestMove'},
-    const {'1': 'ci', '3': 6, '4': 1, '5': 1, '9': 1, '10': 'ci', '17': true},
+    const {'1': 'addScore', '3': 6, '4': 3, '5': 1, '10': 'addScore'},
   ],
   '8': const [
     const {'1': '_died'},
-    const {'1': '_ci'},
   ],
 };
 
 /// Descriptor for `TableSeatingResult`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tableSeatingResultDescriptor = $convert.base64Decode('ChJUYWJsZVNlYXRpbmdSZXN1bHQSKQoEcm9sZRgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUgRyb2xlEhoKCGFkZFNjb3JlGAIgAygBUghhZGRTY29yZRIXCgRkaWVkGAMgASgFSABSBGRpZWSIAQESJAoDd2luGAQgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5SA3dpbhIvCghiZXN0TW92ZRgFIAEoDjITLmdlbmVyYXRlZC5CZXN0TW92ZVIIYmVzdE1vdmUSEwoCY2kYBiABKAFIAVICY2mIAQFCBwoFX2RpZWRCBQoDX2Np');
+final $typed_data.Uint8List tableSeatingResultDescriptor = $convert.base64Decode('ChJUYWJsZVNlYXRpbmdSZXN1bHQSKQoEcm9sZRgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUgRyb2xlEhQKBXNjb3JlGAIgAygBUgVzY29yZRIXCgRkaWVkGAMgASgFSABSBGRpZWSIAQESJAoDd2luGAQgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5SA3dpbhIvCghiZXN0TW92ZRgFIAEoDjITLmdlbmVyYXRlZC5CZXN0TW92ZVIIYmVzdE1vdmUSGgoIYWRkU2NvcmUYBiADKAFSCGFkZFNjb3JlQgcKBV9kaWVk');
 @$core.Deprecated('Use tableSeatingItemDescriptor instead')
 const TableSeatingItem$json = const {
   '1': 'TableSeatingItem',

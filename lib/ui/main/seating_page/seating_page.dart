@@ -7,6 +7,7 @@ import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class SeatingPage extends StatefulWidget {
@@ -62,7 +63,8 @@ class _SeatingPageState extends State<SeatingPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Flexible(
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 100),
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: state.cannotMeet.length,
@@ -143,11 +145,25 @@ class _SeatingPageState extends State<SeatingPage> {
                       ),
                     ),
                   ),
+                  Expanded(
+                    flex: 100,
+                    child: SeatingList(
+                      models: state.games,
+                    ),
+                  ),
                   TextButton(
                     onPressed: () {
-                      context.read<SeatingPageBloc>().add(
-                        const SeatingPageEvent.createSeating(),
-                      );
+                      ConfirmDialog.open(
+                        context,
+                        "Новая рассадка заменит старую",
+                      ).then((value) {
+                        if (value == true) {
+                          if (!mounted) return;
+                          context.read<SeatingPageBloc>().add(
+                                const SeatingPageEvent.createSeating(),
+                              );
+                        }
+                      });
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

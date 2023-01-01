@@ -19,6 +19,7 @@ mixin _$SeatingPageState {
   List<Pair<PlayerModel, PlayerModel>> get cannotMeet =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  List<List<GameResultModel>> get games => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SeatingPageStateCopyWith<SeatingPageState> get copyWith =>
@@ -31,7 +32,10 @@ abstract class $SeatingPageStateCopyWith<$Res> {
           SeatingPageState value, $Res Function(SeatingPageState) then) =
       _$SeatingPageStateCopyWithImpl<$Res, SeatingPageState>;
   @useResult
-  $Res call({List<Pair<PlayerModel, PlayerModel>> cannotMeet, bool isLoading});
+  $Res call(
+      {List<Pair<PlayerModel, PlayerModel>> cannotMeet,
+      bool isLoading,
+      List<List<GameResultModel>> games});
 }
 
 /// @nodoc
@@ -49,6 +53,7 @@ class _$SeatingPageStateCopyWithImpl<$Res, $Val extends SeatingPageState>
   $Res call({
     Object? cannotMeet = null,
     Object? isLoading = null,
+    Object? games = null,
   }) {
     return _then(_value.copyWith(
       cannotMeet: null == cannotMeet
@@ -59,6 +64,10 @@ class _$SeatingPageStateCopyWithImpl<$Res, $Val extends SeatingPageState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      games: null == games
+          ? _value.games
+          : games // ignore: cast_nullable_to_non_nullable
+              as List<List<GameResultModel>>,
     ) as $Val);
   }
 }
@@ -71,7 +80,10 @@ abstract class _$$_SeatingPageStateCopyWith<$Res>
       __$$_SeatingPageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Pair<PlayerModel, PlayerModel>> cannotMeet, bool isLoading});
+  $Res call(
+      {List<Pair<PlayerModel, PlayerModel>> cannotMeet,
+      bool isLoading,
+      List<List<GameResultModel>> games});
 }
 
 /// @nodoc
@@ -87,6 +99,7 @@ class __$$_SeatingPageStateCopyWithImpl<$Res>
   $Res call({
     Object? cannotMeet = null,
     Object? isLoading = null,
+    Object? games = null,
   }) {
     return _then(_$_SeatingPageState(
       cannotMeet: null == cannotMeet
@@ -97,6 +110,10 @@ class __$$_SeatingPageStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      games: null == games
+          ? _value._games
+          : games // ignore: cast_nullable_to_non_nullable
+              as List<List<GameResultModel>>,
     ));
   }
 }
@@ -106,8 +123,10 @@ class __$$_SeatingPageStateCopyWithImpl<$Res>
 class _$_SeatingPageState implements _SeatingPageState {
   const _$_SeatingPageState(
       {final List<Pair<PlayerModel, PlayerModel>> cannotMeet = const [],
-      this.isLoading = true})
-      : _cannotMeet = cannotMeet;
+      this.isLoading = true,
+      final List<List<GameResultModel>> games = const []})
+      : _cannotMeet = cannotMeet,
+        _games = games;
 
   final List<Pair<PlayerModel, PlayerModel>> _cannotMeet;
   @override
@@ -121,10 +140,18 @@ class _$_SeatingPageState implements _SeatingPageState {
   @override
   @JsonKey()
   final bool isLoading;
+  final List<List<GameResultModel>> _games;
+  @override
+  @JsonKey()
+  List<List<GameResultModel>> get games {
+    if (_games is EqualUnmodifiableListView) return _games;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_games);
+  }
 
   @override
   String toString() {
-    return 'SeatingPageState(cannotMeet: $cannotMeet, isLoading: $isLoading)';
+    return 'SeatingPageState(cannotMeet: $cannotMeet, isLoading: $isLoading, games: $games)';
   }
 
   @override
@@ -135,12 +162,16 @@ class _$_SeatingPageState implements _SeatingPageState {
             const DeepCollectionEquality()
                 .equals(other._cannotMeet, _cannotMeet) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other._games, _games));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_cannotMeet), isLoading);
+      runtimeType,
+      const DeepCollectionEquality().hash(_cannotMeet),
+      isLoading,
+      const DeepCollectionEquality().hash(_games));
 
   @JsonKey(ignore: true)
   @override
@@ -152,12 +183,15 @@ class _$_SeatingPageState implements _SeatingPageState {
 abstract class _SeatingPageState implements SeatingPageState {
   const factory _SeatingPageState(
       {final List<Pair<PlayerModel, PlayerModel>> cannotMeet,
-      final bool isLoading}) = _$_SeatingPageState;
+      final bool isLoading,
+      final List<List<GameResultModel>> games}) = _$_SeatingPageState;
 
   @override
   List<Pair<PlayerModel, PlayerModel>> get cannotMeet;
   @override
   bool get isLoading;
+  @override
+  List<List<GameResultModel>> get games;
   @override
   @JsonKey(ignore: true)
   _$$_SeatingPageStateCopyWith<_$_SeatingPageState> get copyWith =>

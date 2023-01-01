@@ -1,9 +1,12 @@
+import 'package:collection/collection.dart';
 import 'package:seating_generator_web/data/requests/delete_separation_request.dart';
 import 'package:seating_generator_web/data/requests/get_ci_schemes_request.dart';
+import 'package:seating_generator_web/data/requests/get_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_separations_request.dart';
 import 'package:seating_generator_web/data/requests/separate_players_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
+import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -65,5 +68,18 @@ class TournamentEditRepositoryImpl extends BaseRepository
               )
               .toList(),
         );
+  }
+
+  Future<List<List<GameResultModel>>> getResultModels({
+    required int tournamentId,
+  }) {
+    return GetSeatingRequest(tournamentId: tournamentId)
+        .execute(client)
+        .then((value) {
+      return value.item
+          .splitBetween((first, second) => first.game != second.game)
+          .map((e) => e.map((e) => GameResultModel.fromProto(e)).toList())
+          .toList();
+    });
   }
 }

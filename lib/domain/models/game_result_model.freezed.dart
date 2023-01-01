@@ -21,9 +21,10 @@ mixin _$GameResultModel {
   List<String> get nicknames => throw _privateConstructorUsedError;
   String get referee => throw _privateConstructorUsedError;
   GameWin? get gameWin => throw _privateConstructorUsedError;
-  List<double> get scores => throw _privateConstructorUsedError;
+  List<double>? get scores => throw _privateConstructorUsedError;
   List<PlayerResultStatus?>? get statuses => throw _privateConstructorUsedError;
   int get table => throw _privateConstructorUsedError;
+  int get game => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GameResultModelCopyWith<GameResultModel> get copyWith =>
@@ -42,9 +43,10 @@ abstract class $GameResultModelCopyWith<$Res> {
       List<String> nicknames,
       String referee,
       GameWin? gameWin,
-      List<double> scores,
+      List<double>? scores,
       List<PlayerResultStatus?>? statuses,
-      int table});
+      int table,
+      int game});
 }
 
 /// @nodoc
@@ -65,9 +67,10 @@ class _$GameResultModelCopyWithImpl<$Res, $Val extends GameResultModel>
     Object? nicknames = null,
     Object? referee = null,
     Object? gameWin = freezed,
-    Object? scores = null,
+    Object? scores = freezed,
     Object? statuses = freezed,
     Object? table = null,
+    Object? game = null,
   }) {
     return _then(_value.copyWith(
       gameId: null == gameId
@@ -90,10 +93,10 @@ class _$GameResultModelCopyWithImpl<$Res, $Val extends GameResultModel>
           ? _value.gameWin
           : gameWin // ignore: cast_nullable_to_non_nullable
               as GameWin?,
-      scores: null == scores
+      scores: freezed == scores
           ? _value.scores
           : scores // ignore: cast_nullable_to_non_nullable
-              as List<double>,
+              as List<double>?,
       statuses: freezed == statuses
           ? _value.statuses
           : statuses // ignore: cast_nullable_to_non_nullable
@@ -101,6 +104,10 @@ class _$GameResultModelCopyWithImpl<$Res, $Val extends GameResultModel>
       table: null == table
           ? _value.table
           : table // ignore: cast_nullable_to_non_nullable
+              as int,
+      game: null == game
+          ? _value.game
+          : game // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -120,9 +127,10 @@ abstract class _$$_GameResultModelCopyWith<$Res>
       List<String> nicknames,
       String referee,
       GameWin? gameWin,
-      List<double> scores,
+      List<double>? scores,
       List<PlayerResultStatus?>? statuses,
-      int table});
+      int table,
+      int game});
 }
 
 /// @nodoc
@@ -141,9 +149,10 @@ class __$$_GameResultModelCopyWithImpl<$Res>
     Object? nicknames = null,
     Object? referee = null,
     Object? gameWin = freezed,
-    Object? scores = null,
+    Object? scores = freezed,
     Object? statuses = freezed,
     Object? table = null,
+    Object? game = null,
   }) {
     return _then(_$_GameResultModel(
       gameId: null == gameId
@@ -166,10 +175,10 @@ class __$$_GameResultModelCopyWithImpl<$Res>
           ? _value.gameWin
           : gameWin // ignore: cast_nullable_to_non_nullable
               as GameWin?,
-      scores: null == scores
+      scores: freezed == scores
           ? _value._scores
           : scores // ignore: cast_nullable_to_non_nullable
-              as List<double>,
+              as List<double>?,
       statuses: freezed == statuses
           ? _value._statuses
           : statuses // ignore: cast_nullable_to_non_nullable
@@ -177,6 +186,10 @@ class __$$_GameResultModelCopyWithImpl<$Res>
       table: null == table
           ? _value.table
           : table // ignore: cast_nullable_to_non_nullable
+              as int,
+      game: null == game
+          ? _value.game
+          : game // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -191,9 +204,10 @@ class _$_GameResultModel implements _GameResultModel {
       required final List<String> nicknames,
       required this.referee,
       this.gameWin,
-      required final List<double> scores,
+      final List<double>? scores,
       final List<PlayerResultStatus?>? statuses,
-      required this.table})
+      required this.table,
+      required this.game})
       : _roles = roles,
         _nicknames = nicknames,
         _scores = scores,
@@ -223,12 +237,14 @@ class _$_GameResultModel implements _GameResultModel {
   final String referee;
   @override
   final GameWin? gameWin;
-  final List<double> _scores;
+  final List<double>? _scores;
   @override
-  List<double> get scores {
+  List<double>? get scores {
+    final value = _scores;
+    if (value == null) return null;
     if (_scores is EqualUnmodifiableListView) return _scores;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_scores);
+    return EqualUnmodifiableListView(value);
   }
 
   final List<PlayerResultStatus?>? _statuses;
@@ -243,10 +259,12 @@ class _$_GameResultModel implements _GameResultModel {
 
   @override
   final int table;
+  @override
+  final int game;
 
   @override
   String toString() {
-    return 'GameResultModel(gameId: $gameId, roles: $roles, nicknames: $nicknames, referee: $referee, gameWin: $gameWin, scores: $scores, statuses: $statuses, table: $table)';
+    return 'GameResultModel(gameId: $gameId, roles: $roles, nicknames: $nicknames, referee: $referee, gameWin: $gameWin, scores: $scores, statuses: $statuses, table: $table, game: $game)';
   }
 
   @override
@@ -262,7 +280,8 @@ class _$_GameResultModel implements _GameResultModel {
             (identical(other.gameWin, gameWin) || other.gameWin == gameWin) &&
             const DeepCollectionEquality().equals(other._scores, _scores) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
-            (identical(other.table, table) || other.table == table));
+            (identical(other.table, table) || other.table == table) &&
+            (identical(other.game, game) || other.game == game));
   }
 
   @override
@@ -275,7 +294,8 @@ class _$_GameResultModel implements _GameResultModel {
       gameWin,
       const DeepCollectionEquality().hash(_scores),
       const DeepCollectionEquality().hash(_statuses),
-      table);
+      table,
+      game);
 
   @JsonKey(ignore: true)
   @override
@@ -291,9 +311,10 @@ abstract class _GameResultModel implements GameResultModel {
       required final List<String> nicknames,
       required final String referee,
       final GameWin? gameWin,
-      required final List<double> scores,
+      final List<double>? scores,
       final List<PlayerResultStatus?>? statuses,
-      required final int table}) = _$_GameResultModel;
+      required final int table,
+      required final int game}) = _$_GameResultModel;
 
   @override
   int get gameId;
@@ -306,11 +327,13 @@ abstract class _GameResultModel implements GameResultModel {
   @override
   GameWin? get gameWin;
   @override
-  List<double> get scores;
+  List<double>? get scores;
   @override
   List<PlayerResultStatus?>? get statuses;
   @override
   int get table;
+  @override
+  int get game;
   @override
   @JsonKey(ignore: true)
   _$$_GameResultModelCopyWith<_$_GameResultModel> get copyWith =>

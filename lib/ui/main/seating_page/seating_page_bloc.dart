@@ -5,6 +5,7 @@ import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_separation_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
@@ -19,6 +20,7 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
   final AddSeparationInteractor _addSeparationInteractor = getIt();
   final DeleteSeparationInteractor _deleteSeparationInteractor = getIt();
   final CreateSeatingInteractor _createSeatingInteractor = getIt();
+  final GetSeatingInteractor _getSeatingInteractor = getIt();
   late final SeatingPageRouter router = getIt(param1: context);
 
   SeatingPageBloc([BuildContext? context])
@@ -34,7 +36,10 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     SeatingPageEventCreateSeating event,
     Emitter emit,
   ) async {
-    return _createSeatingInteractor.run(tournamentId: tournamentId);
+    emit(state.copyWith(isLoading: true));
+    await _createSeatingInteractor.run(tournamentId: tournamentId);
+    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId);
+    emit(state.copyWith(isLoading: false, games: seating));
   }
 
   _onFsm(SeatingPageEventFsmSeatingTapped event, Emitter emit) {
@@ -83,12 +88,13 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     final pairs = await _getSeparationInteractor.run(
       tournamentId: tournamentId,
     );
+    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId);
 
-    emit(state.copyWith(isLoading: false, cannotMeet: pairs));
+    emit(state.copyWith(isLoading: false, cannotMeet: pairs, games: seating));
   }
 
   @override
   void emitOnError(Emitter<SeatingPageState> emit) {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: false));
   }
 }

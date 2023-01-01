@@ -5,12 +5,16 @@ import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class ConfirmDialog extends StatelessWidget {
-  static Future<bool?> open(BuildContext context) => showDialog(
+  final String? text;
+
+  static Future<bool?> open(BuildContext context, [String? text]) => showDialog(
         context: context,
-        builder: (context) => const ConfirmDialog(),
+        builder: (context) => ConfirmDialog(
+          text: text,
+        ),
       );
 
-  const ConfirmDialog({Key? key}) : super(key: key);
+  const ConfirmDialog({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +22,29 @@ class ConfirmDialog extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
-          width: 300,
-          height: 150,
+          width: 350,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Spacer(),
+              const SizedBox(
+                height: 8,
+              ),
               Text(
                 context.locale.confirmText,
-                style: MyTheme.of(context).defaultTextStyle,
+                style: MyTheme.of(context).headerTextStyle,
               ),
-              const Spacer(),
+              const SizedBox(
+                height: 16,
+              ),
+              if (text != null)
+                Text(
+                  text!,
+                  textAlign: TextAlign.center,
+                  style: context.theme.defaultTextStyle,
+                ),
+              const SizedBox(
+                height: 16,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

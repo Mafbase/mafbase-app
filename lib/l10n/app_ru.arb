@@ -135,10 +135,14 @@
   "@addGame": {},
   "invalidEmailOrPassword": "Неверная почта или пароль",
   "@invalidEmailOrPassword": {},
-  "table": "Стол {number}",
-  "@table": {
+  "tableAndGame": "Игра {game}, Стол {table}",
+  "@tableAndGame": {
     "placeholders" : {
-        "number": {
+        "table": {
+            "type": "int",
+            "example": "1"
+        },
+        "game": {
             "type": "int",
             "example": "1"
         }

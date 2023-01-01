@@ -146,29 +146,29 @@ class TableSeating extends $pb.GeneratedMessage {
 class TableSeatingResult extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TableSeatingResult', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..pc<PlayerRole>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'role', $pb.PbFieldType.PE, valueOf: PlayerRole.valueOf, enumValues: PlayerRole.values)
-    ..p<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'addScore', $pb.PbFieldType.PD, protoName: 'addScore')
+    ..p<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'score', $pb.PbFieldType.PD)
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'died', $pb.PbFieldType.O3)
     ..e<GameWin>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'win', $pb.PbFieldType.OE, defaultOrMaker: GameWin.city, valueOf: GameWin.valueOf, enumValues: GameWin.values)
     ..e<BestMove>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bestMove', $pb.PbFieldType.OE, protoName: 'bestMove', defaultOrMaker: BestMove.miss, valueOf: BestMove.valueOf, enumValues: BestMove.values)
-    ..a<$core.double>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ci', $pb.PbFieldType.OD)
+    ..p<$core.double>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'addScore', $pb.PbFieldType.PD, protoName: 'addScore')
     ..hasRequiredFields = false
   ;
 
   TableSeatingResult._() : super();
   factory TableSeatingResult({
     $core.Iterable<PlayerRole>? role,
-    $core.Iterable<$core.double>? addScore,
+    $core.Iterable<$core.double>? score,
     $core.int? died,
     GameWin? win,
     BestMove? bestMove,
-    $core.double? ci,
+    $core.Iterable<$core.double>? addScore,
   }) {
     final _result = create();
     if (role != null) {
       _result.role.addAll(role);
     }
-    if (addScore != null) {
-      _result.addScore.addAll(addScore);
+    if (score != null) {
+      _result.score.addAll(score);
     }
     if (died != null) {
       _result.died = died;
@@ -179,8 +179,8 @@ class TableSeatingResult extends $pb.GeneratedMessage {
     if (bestMove != null) {
       _result.bestMove = bestMove;
     }
-    if (ci != null) {
-      _result.ci = ci;
+    if (addScore != null) {
+      _result.addScore.addAll(addScore);
     }
     return _result;
   }
@@ -209,7 +209,7 @@ class TableSeatingResult extends $pb.GeneratedMessage {
   $core.List<PlayerRole> get role => $_getList(0);
 
   @$pb.TagNumber(2)
-  $core.List<$core.double> get addScore => $_getList(1);
+  $core.List<$core.double> get score => $_getList(1);
 
   @$pb.TagNumber(3)
   $core.int get died => $_getIZ(2);
@@ -239,13 +239,7 @@ class TableSeatingResult extends $pb.GeneratedMessage {
   void clearBestMove() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.double get ci => $_getN(5);
-  @$pb.TagNumber(6)
-  set ci($core.double v) { $_setDouble(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasCi() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearCi() => clearField(6);
+  $core.List<$core.double> get addScore => $_getList(5);
 }
 
 class TableSeatingItem extends $pb.GeneratedMessage {

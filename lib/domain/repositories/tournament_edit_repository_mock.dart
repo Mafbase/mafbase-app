@@ -1,4 +1,5 @@
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
+import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -31,6 +32,11 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
 
   @override
   Future<List<CiSchemeModel>> getCiSchemeModels() {
+    return Future.value([]);
+  }
+
+  @override
+  Future<List<List<GameResultModel>>> getResultModels({required int tournamentId}) {
     return Future.value([]);
   }
 }
