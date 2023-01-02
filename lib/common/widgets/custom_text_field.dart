@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 
+String? _validate(String? value) => null;
+
 class CustomTextField extends StatefulWidget {
   final Widget? icon;
   final TextEditingController controller;
@@ -17,6 +19,7 @@ class CustomTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final TextInputType? textInputType;
   final bool readOnly;
+  final String? Function(String? value) validate;
 
   const CustomTextField({
     Key? key,
@@ -33,6 +36,7 @@ class CustomTextField extends StatefulWidget {
     this.bottomPadding = 10,
     this.canObscure = false,
     this.isRequiredField = false,
+    this.validate = _validate,
   }) : super(key: key);
 
   @override
@@ -62,6 +66,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               children: [
                 Positioned.fill(
                   child: TextFormField(
+                    validator: widget.validate,
                     readOnly: widget.readOnly,
                     keyboardType: widget.textInputType,
                     onFieldSubmitted: widget.onSubmit,
