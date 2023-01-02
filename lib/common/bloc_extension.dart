@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/data/http_client.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 typedef EffectHandler<E> = void Function(E efffect);
 
@@ -28,14 +29,17 @@ mixin EffectListener<E, S, B extends EffectEmitter<E, S>,
   final Map<Type, StreamSubscription> _subscriptions = {};
   final Map<Type, EffectHandler> map = {};
 
-
   @override
   void initState() {
     super.initState();
     registerEffectHandlers(
-      <T>(handler)  {
+      <T>(handler) {
         _subscriptions[T]?.cancel();
-        _subscriptions[T] = context.read<B>().effectsStream.where((event) => event is T).listen((event) {
+        _subscriptions[T] = context
+            .read<B>()
+            .effectsStream
+            .where((event) => event is T)
+            .listen((event) {
           map[T]?.call(event as T);
         });
         map[T] = (effect) => handler(effect);
@@ -105,9 +109,9 @@ abstract class CustomBloc<E, S> extends Bloc<E, S> {
         }
         rethrow;
       }
-    } catch (ignored) {
+    } catch (ignored, stacktrace) {
       emitOnError(emit);
-      rethrow;
+      Sentry.captureException(ignored, stackTrace: stacktrace);
     }
   }
 }
