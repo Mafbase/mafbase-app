@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 abstract class BaseSocket {
@@ -19,7 +18,7 @@ abstract class BaseSocket {
     _socket?.stream.listen(_onMessage);
     _socket?.sink.done.then((_) async {
       if (!_manualDone) {
-        Future.delayed(const Duration(seconds: 5));
+        await Future.delayed(const Duration(seconds: 3));
         connect();
       }
     });

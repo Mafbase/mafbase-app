@@ -98,7 +98,6 @@ abstract class CustomBloc<E, S> extends Bloc<E, S> {
       } on UnauthenticatedError catch (error) {
         if (context != null) {
           final location = GoRouter.of(context!).location;
-          print(location);
           context!.go(AppRoutes.loginPageRoute, extra: location);
           AppRouter.showErrorDialog(context!, error.message ?? "");
         }
