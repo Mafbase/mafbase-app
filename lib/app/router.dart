@@ -66,10 +66,6 @@ class AppRouter {
             builder: (context, state, child) {
               return MultiBlocProvider(
                 providers: [
-                  BlocProvider<LoginBloc>(
-                    key: const Key("LoginBlocProvider"),
-                    create: (context) => getIt.get<LoginBloc>(param1: context),
-                  ),
                   BlocProvider<SignUpBloc>(
                     key: const Key('SignUpBlocProvider'),
                     create: (context) => getIt.get<SignUpBloc>(param1: context),
@@ -83,8 +79,15 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: AppRoutes.loginPageRoute,
-                pageBuilder: (context, state) =>
-                    FadeTransitionPage(child: const LoginPageBody()),
+                pageBuilder: (context, state) => FadeTransitionPage(
+                  child: BlocProvider(
+                    create: (context) => getIt.get<LoginBloc>(
+                      param1: context,
+                      param2: state.extra,
+                    ),
+                    child: const LoginPageBody(),
+                  ),
+                ),
               ),
               GoRoute(
                 path: AppRoutes.signUpRoute,

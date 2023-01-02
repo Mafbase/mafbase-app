@@ -91,8 +91,8 @@ void registerGetIt() {
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
     )
-    ..registerFactoryParam<LoginPageRouter, BuildContext, dynamic>(
-      (context, _) => LoginPageRouterImpl(context),
+    ..registerFactoryParam<LoginPageRouter, BuildContext, String?>(
+      (context, nextPath) => LoginPageRouterImpl(context, nextPath),
     )
     ..registerFactoryParam<VerificationPageRouter, BuildContext, dynamic>(
       (context, _) => VerificationPageRouterImpl(context),
@@ -219,10 +219,10 @@ void _registerSharedGetIt() {
     ..registerLazySingleton<CreateTournamentInteractor>(
       () => CreateTournamentInteractor(getIt()),
     )
-    ..registerFactoryParam<LoginBloc, BuildContext?, dynamic>(
-      (context, _) => LoginBloc(
+    ..registerFactoryParam<LoginBloc, BuildContext?, String?>(
+      (context, nextPath) => LoginBloc(
         getIt(),
-        getIt.call(param1: context),
+        getIt.call(param1: context, param2: nextPath),
         context,
       ),
     )

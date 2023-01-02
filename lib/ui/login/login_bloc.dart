@@ -110,12 +110,12 @@ class LoginPageRouterMock implements LoginPageRouter {
 
 class LoginPageRouterImpl implements LoginPageRouter {
   final BuildContext _context;
-
-  const LoginPageRouterImpl(this._context);
+  final String? _nextPath;
+  const LoginPageRouterImpl(this._context, [this._nextPath]);
 
   @override
   void openMainPage() {
-    GoRouter.of(_context).go('/');
+    GoRouter.of(_context).go(_nextPath ?? '/');
   }
 
   @override
