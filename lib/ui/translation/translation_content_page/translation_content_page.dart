@@ -1,9 +1,11 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -127,13 +129,19 @@ class _TranslationPlayerCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: Image.network(
-                  image.isEmpty
-                      ? "https://st.depositphotos.com/1594920/2878/i/600/depositphotos_28781557-stock-photo-domestic-goose-anser-anser-domesticus.jpg"
-                      : image,
-                  fit: BoxFit.cover,
-                  width: constraints.maxWidth,
-                  height: constraints.maxWidth * 4 / 3,
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    color(context) ?? const Color(0x00000000),
+                    BlendMode.color,
+                  ),
+                  child: Image.network(
+                    image.isEmpty
+                        ? "https://st.depositphotos.com/1594920/2878/i/600/depositphotos_28781557-stock-photo-domestic-goose-anser-anser-domesticus.jpg"
+                        : image,
+                    fit: BoxFit.cover,
+                    width: constraints.maxWidth,
+                    height: constraints.maxWidth * 4 / 3,
+                  ),
                 ),
               ),
               Positioned.fill(child: _StatusOverlay(status: status)),
@@ -211,6 +219,19 @@ class _TranslationPlayerCard extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Color? color(BuildContext context) {
+    switch (status) {
+      case PlayerStatus.deleted:
+        return MyTheme.of(context).blueForCard;
+      case PlayerStatus.killed:
+        return MyTheme.of(context).redForCard;
+      case PlayerStatus.voted:
+        return MyTheme.of(context).greenForCard;
+      default:
+        return null;
+    }
   }
 }
 
@@ -408,7 +429,6 @@ class _StatusOverlayState extends State<_StatusOverlay>
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          color: color,
           borderRadius: BorderRadius.circular(4),
         ),
         child: Center(
@@ -417,9 +437,17 @@ class _StatusOverlayState extends State<_StatusOverlay>
             child: LayoutBuilder(
               builder: (context, constraints) => Text(
                 text,
-                style: MyTheme.of(context)
-                    .btnTextStyle
-                    .copyWith(fontSize: constraints.maxWidth / 7),
+                style: MyTheme.of(context).btnTextStyle.copyWith(
+                  fontSize: constraints.maxWidth / 7,
+                  shadows: [
+                    const BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 10,
+                      spreadRadius: 10,
+                      offset: Offset(2, 2),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -438,19 +466,6 @@ class _StatusOverlayState extends State<_StatusOverlay>
         return "Заголосован";
       default:
         return "";
-    }
-  }
-
-  Color? get color {
-    switch (status) {
-      case PlayerStatus.deleted:
-        return MyTheme.of(context).blueForCard;
-      case PlayerStatus.killed:
-        return MyTheme.of(context).redForCard;
-      case PlayerStatus.voted:
-        return MyTheme.of(context).greenForCard;
-      default:
-        return null;
     }
   }
 }
