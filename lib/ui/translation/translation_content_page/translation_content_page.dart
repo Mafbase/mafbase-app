@@ -1,11 +1,9 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -132,7 +130,7 @@ class _TranslationPlayerCard extends StatelessWidget {
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                     color(context) ?? const Color(0x00000000),
-                    BlendMode.color,
+                    color(context) == null ? BlendMode.color : BlendMode.modulate,
                   ),
                   child: Image.network(
                     image.isEmpty
@@ -164,7 +162,7 @@ class _TranslationPlayerCard extends StatelessWidget {
                         nickname,
                         textAlign: TextAlign.center,
                         style: MyTheme.of(context)
-                            .defaultTextStyle
+                            .headerTextStyle
                             .copyWith(fontSize: constraints.maxWidth / 10),
                       ),
                     ),
@@ -189,7 +187,7 @@ class _TranslationPlayerCard extends StatelessWidget {
                         ),
                         child: Text(
                           place.toString(),
-                          style: MyTheme.of(context).defaultTextStyle.copyWith(
+                          style: MyTheme.of(context).headerTextStyle.copyWith(
                                 fontSize: constraints.maxWidth / 10,
                               ),
                         ),
