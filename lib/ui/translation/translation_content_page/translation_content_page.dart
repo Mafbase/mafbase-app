@@ -130,7 +130,7 @@ class _TranslationPlayerCard extends StatelessWidget {
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                     color(context) ?? const Color(0x00000000),
-                    color(context) == null ? BlendMode.color : BlendMode.modulate,
+                    BlendMode.color,
                   ),
                   child: Image.network(
                     image.isEmpty
