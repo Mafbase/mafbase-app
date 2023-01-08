@@ -622,16 +622,34 @@ class _AddClubGamePageState extends State<AddClubGamePage>
           null,
     )) {
       AppRouter.showErrorDialog(
-          context,
-          "Не найден игрок: ${controllers.firstWhere(
-                (e) =>
-                    state.players.firstWhereOrNull(
-                      (element) => e.text == element.nickname,
-                    ) ==
-                    null,
-              ).text}");
+        context,
+        "Не найден игрок: ${controllers.firstWhere(
+              (e) =>
+                  state.players.firstWhereOrNull(
+                    (element) => e.text == element.nickname,
+                  ) ==
+                  null,
+            ).text}",
+      );
       return;
     }
+
+    if (state.players.firstWhereOrNull(
+          (element) => refereeController.text == element.nickname,
+        ) ==
+        null) {
+      AppRouter.showErrorDialog(
+        context,
+        "Не найден судья: ${refereeController.text}",
+      );
+      return;
+    }
+
+    if (firstDie == -1 && bestMove == null) {
+      AppRouter.showErrorDialog(context, "Установите лучший ход");
+      return;
+    }
+
     context.read<AddClubGameBloc>().add(
           AddClubGameEvent.submit(
             gameResult: ClubGameResult(
