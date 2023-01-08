@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -293,8 +294,8 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       },
                                       child: Text(
                                         context.locale.addGame,
-                                        style:
-                                            MyTheme.of(context).textBtnTextStyle,
+                                        style: MyTheme.of(context)
+                                            .textBtnTextStyle,
                                       ),
                                     ),
                                   ),
@@ -366,9 +367,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                                 setState(() {
                                                   firstDie = value ?? -1;
                                                   if (firstDie == -1) {
-                                                    bestMove =
-                                                        BestMove
-                                                            .miss;
+                                                    bestMove = BestMove.miss;
                                                   }
                                                 });
                                               },
@@ -381,8 +380,8 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                         ),
                                         DropdownButton<BestMove>(
                                           value: bestMove,
-                                          items: BestMove.values
-                                              .map((bestMove) {
+                                          items:
+                                              BestMove.values.map((bestMove) {
                                             final String text;
                                             switch (bestMove) {
                                               case BestMove.full:
@@ -604,19 +603,33 @@ class _AddClubGamePageState extends State<AddClubGamePage>
           .add(AddClubGameEvent.edit(gameId: widget.gameId!));
       return;
     }
-    if (winSelected == null ||
-        roles.where((element) => element == PlayerRole.maf).length != 2 ||
+    if (roles.where((element) => element == PlayerRole.maf).length != 2 ||
         roles.where((element) => element == PlayerRole.don).length != 1 ||
-        roles.where((element) => element == PlayerRole.sheriff).length != 1 ||
-        controllers
-                .map(
-                  (e) => state.players.firstWhereOrNull(
-                    (element) => e.text == element.nickname,
-                  ),
-                )
-                .whereNotNull()
-                .length !=
-            10) {
+        roles.where((element) => element == PlayerRole.sheriff).length != 1) {
+      AppRouter.showErrorDialog(context, "Проверьте роли");
+      return;
+    }
+    if (winSelected == null) {
+      AppRouter.showErrorDialog(context, "Не выбран результат игры");
+      return;
+    }
+
+    if (controllers.any(
+      (e) =>
+          state.players.firstWhereOrNull(
+            (element) => e.text == element.nickname,
+          ) ==
+          null,
+    )) {
+      AppRouter.showErrorDialog(
+          context,
+          "Не найден игрок: ${controllers.firstWhere(
+                (e) =>
+                    state.players.firstWhereOrNull(
+                      (element) => e.text == element.nickname,
+                    ) ==
+                    null,
+              ).text}");
       return;
     }
     context.read<AddClubGameBloc>().add(
