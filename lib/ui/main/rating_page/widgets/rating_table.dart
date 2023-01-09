@@ -969,7 +969,7 @@ class _RatingTableState extends State<RatingTable> {
             else
               ...[
                 wrap(header ?? Container()),
-                ...widgets ?? List.generate(widget.rows.length, builder!)
+                ...widgets ?? List.generate(widget.sortedRows.length, builder!)
               ].map(
                 (e) => IgnorePointer(
                   child: Opacity(
