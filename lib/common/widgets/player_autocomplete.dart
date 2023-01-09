@@ -85,7 +85,7 @@ class CustomAutoComplete extends StatelessWidget {
           readOnly: readOnly,
           focusNode: focusNode,
           controller: controller,
-          hint: hint,
+          label: hint,
           onSubmit: (text) {
             onSubmit();
           },

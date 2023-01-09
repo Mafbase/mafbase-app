@@ -110,6 +110,7 @@ const TableSeatingItem$json = const {
     const {'1': 'seating', '3': 2, '4': 1, '5': 11, '6': '.generated.TableSeating', '10': 'seating'},
     const {'1': 'result', '3': 3, '4': 1, '5': 11, '6': '.generated.TableSeatingResult', '9': 0, '10': 'result', '17': true},
     const {'1': 'game', '3': 4, '4': 1, '5': 5, '10': 'game'},
+    const {'1': 'table', '3': 5, '4': 1, '5': 5, '10': 'table'},
   ],
   '8': const [
     const {'1': '_result'},
@@ -117,7 +118,7 @@ const TableSeatingItem$json = const {
 };
 
 /// Descriptor for `TableSeatingItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tableSeatingItemDescriptor = $convert.base64Decode('ChBUYWJsZVNlYXRpbmdJdGVtEhYKBmdhbWVJZBgBIAEoBVIGZ2FtZUlkEjEKB3NlYXRpbmcYAiABKAsyFy5nZW5lcmF0ZWQuVGFibGVTZWF0aW5nUgdzZWF0aW5nEjoKBnJlc3VsdBgDIAEoCzIdLmdlbmVyYXRlZC5UYWJsZVNlYXRpbmdSZXN1bHRIAFIGcmVzdWx0iAEBEhIKBGdhbWUYBCABKAVSBGdhbWVCCQoHX3Jlc3VsdA==');
+final $typed_data.Uint8List tableSeatingItemDescriptor = $convert.base64Decode('ChBUYWJsZVNlYXRpbmdJdGVtEhYKBmdhbWVJZBgBIAEoBVIGZ2FtZUlkEjEKB3NlYXRpbmcYAiABKAsyFy5nZW5lcmF0ZWQuVGFibGVTZWF0aW5nUgdzZWF0aW5nEjoKBnJlc3VsdBgDIAEoCzIdLmdlbmVyYXRlZC5UYWJsZVNlYXRpbmdSZXN1bHRIAFIGcmVzdWx0iAEBEhIKBGdhbWUYBCABKAVSBGdhbWUSFAoFdGFibGUYBSABKAVSBXRhYmxlQgkKB19yZXN1bHQ=');
 @$core.Deprecated('Use seatingEventOutDescriptor instead')
 const SeatingEventOut$json = const {
   '1': 'SeatingEventOut',
@@ -222,6 +223,14 @@ const ClubRatingRow$json = const {
     const {'1': 'mafiaGames', '3': 14, '4': 1, '5': 5, '10': 'mafiaGames'},
     const {'1': 'mafiaWins', '3': 15, '4': 1, '5': 5, '10': 'mafiaWins'},
     const {'1': 'citizenWins', '3': 16, '4': 1, '5': 5, '10': 'citizenWins'},
+    const {'1': 'citizenAddScore', '3': 17, '4': 1, '5': 1, '10': 'citizenAddScore'},
+    const {'1': 'mafiaAddScore', '3': 18, '4': 1, '5': 1, '10': 'mafiaAddScore'},
+    const {'1': 'donAddScore', '3': 19, '4': 1, '5': 1, '10': 'donAddScore'},
+    const {'1': 'sheriffAddScore', '3': 20, '4': 1, '5': 1, '10': 'sheriffAddScore'},
+    const {'1': 'citizenScore', '3': 21, '4': 1, '5': 1, '10': 'citizenScore'},
+    const {'1': 'mafiaScore', '3': 22, '4': 1, '5': 1, '10': 'mafiaScore'},
+    const {'1': 'donScore', '3': 23, '4': 1, '5': 1, '10': 'donScore'},
+    const {'1': 'sheriffScore', '3': 24, '4': 1, '5': 1, '10': 'sheriffScore'},
   ],
   '3': const [ClubRatingRow_GameItem$json],
 };
@@ -239,7 +248,7 @@ const ClubRatingRow_GameItem$json = const {
 };
 
 /// Descriptor for `ClubRatingRow`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubRatingRowDescriptor = $convert.base64Decode('Cg1DbHViUmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRIUCgVzY29yZRgCIAEoAVIFc2NvcmUSGgoIYWRkU2NvcmUYAyABKAFSCGFkZFNjb3JlEhoKCGZpcnN0RGllGAQgASgFUghmaXJzdERpZRIYCgdkb25XaW5zGAUgASgFUgdkb25XaW5zEiAKC3NoZXJpZmZXaW5zGAYgASgFUgtzaGVyaWZmV2lucxI1CgRpdGVtGAcgAygLMiEuZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3cuR2FtZUl0ZW1SBGl0ZW0SEgoEd2lucxgIIAEoBVIEd2lucxIOCgJjaRgJIAEoBVICY2kSHgoKdG90YWxHYW1lcxgKIAEoBVIKdG90YWxHYW1lcxIiCgxjaXRpemVuR2FtZXMYCyABKAVSDGNpdGl6ZW5HYW1lcxIaCghkb25HYW1lcxgMIAEoBVIIZG9uR2FtZXMSIgoMc2hlcmlmZkdhbWVzGA0gASgFUgxzaGVyaWZmR2FtZXMSHgoKbWFmaWFHYW1lcxgOIAEoBVIKbWFmaWFHYW1lcxIcCgltYWZpYVdpbnMYDyABKAVSCW1hZmlhV2lucxIgCgtjaXRpemVuV2lucxgQIAEoBVILY2l0aXplbldpbnMaRwoIR2FtZUl0ZW0SFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQSGQoFc2NvcmUYAiABKAFIAFIFc2NvcmWIAQFCCAoGX3Njb3Jl');
+final $typed_data.Uint8List clubRatingRowDescriptor = $convert.base64Decode('Cg1DbHViUmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRIUCgVzY29yZRgCIAEoAVIFc2NvcmUSGgoIYWRkU2NvcmUYAyABKAFSCGFkZFNjb3JlEhoKCGZpcnN0RGllGAQgASgFUghmaXJzdERpZRIYCgdkb25XaW5zGAUgASgFUgdkb25XaW5zEiAKC3NoZXJpZmZXaW5zGAYgASgFUgtzaGVyaWZmV2lucxI1CgRpdGVtGAcgAygLMiEuZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3cuR2FtZUl0ZW1SBGl0ZW0SEgoEd2lucxgIIAEoBVIEd2lucxIOCgJjaRgJIAEoBVICY2kSHgoKdG90YWxHYW1lcxgKIAEoBVIKdG90YWxHYW1lcxIiCgxjaXRpemVuR2FtZXMYCyABKAVSDGNpdGl6ZW5HYW1lcxIaCghkb25HYW1lcxgMIAEoBVIIZG9uR2FtZXMSIgoMc2hlcmlmZkdhbWVzGA0gASgFUgxzaGVyaWZmR2FtZXMSHgoKbWFmaWFHYW1lcxgOIAEoBVIKbWFmaWFHYW1lcxIcCgltYWZpYVdpbnMYDyABKAVSCW1hZmlhV2lucxIgCgtjaXRpemVuV2lucxgQIAEoBVILY2l0aXplbldpbnMSKAoPY2l0aXplbkFkZFNjb3JlGBEgASgBUg9jaXRpemVuQWRkU2NvcmUSJAoNbWFmaWFBZGRTY29yZRgSIAEoAVINbWFmaWFBZGRTY29yZRIgCgtkb25BZGRTY29yZRgTIAEoAVILZG9uQWRkU2NvcmUSKAoPc2hlcmlmZkFkZFNjb3JlGBQgASgBUg9zaGVyaWZmQWRkU2NvcmUSIgoMY2l0aXplblNjb3JlGBUgASgBUgxjaXRpemVuU2NvcmUSHgoKbWFmaWFTY29yZRgWIAEoAVIKbWFmaWFTY29yZRIaCghkb25TY29yZRgXIAEoAVIIZG9uU2NvcmUSIgoMc2hlcmlmZlNjb3JlGBggASgBUgxzaGVyaWZmU2NvcmUaRwoIR2FtZUl0ZW0SFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQSGQoFc2NvcmUYAiABKAFIAFIFc2NvcmWIAQFCCAoGX3Njb3Jl');
 @$core.Deprecated('Use addGameEventOutDescriptor instead')
 const AddGameEventOut$json = const {
   '1': 'AddGameEventOut',

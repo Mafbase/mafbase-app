@@ -22,6 +22,14 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
     required int died,
     required List<GameRowItemModel> games,
     required int ci,
+    required double citizenAddScore,
+    required double sheriffAddScore,
+    required double donAddScore,
+    required double mafiaAddScore,
+    required double citizenScore,
+    required double sheriffScore,
+    required double donScore,
+    required double mafiaScore,
   }) = _ClubRatingRowModel;
 
   factory ClubRatingRowModel.fromProto(ClubRatingRow proto) =>
@@ -42,6 +50,14 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
         died: proto.firstDie,
         games: proto.item.map((e) => GameRowItemModel.fromProto(e)).toList(),
         ci: proto.ci,
+        citizenAddScore: proto.citizenAddScore,
+        sheriffAddScore: proto.sheriffAddScore,
+        donAddScore: proto.donAddScore,
+        mafiaAddScore: proto.mafiaAddScore,
+        citizenScore: proto.citizenScore,
+        sheriffScore: proto.sheriffScore,
+        donScore: proto.donScore,
+        mafiaScore: proto.mafiaScore,
       );
 }
 

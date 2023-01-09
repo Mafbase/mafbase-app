@@ -32,6 +32,14 @@ mixin _$ClubRatingRowModel {
   int get died => throw _privateConstructorUsedError;
   List<GameRowItemModel> get games => throw _privateConstructorUsedError;
   int get ci => throw _privateConstructorUsedError;
+  double get citizenAddScore => throw _privateConstructorUsedError;
+  double get sheriffAddScore => throw _privateConstructorUsedError;
+  double get donAddScore => throw _privateConstructorUsedError;
+  double get mafiaAddScore => throw _privateConstructorUsedError;
+  double get citizenScore => throw _privateConstructorUsedError;
+  double get sheriffScore => throw _privateConstructorUsedError;
+  double get donScore => throw _privateConstructorUsedError;
+  double get mafiaScore => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClubRatingRowModelCopyWith<ClubRatingRowModel> get copyWith =>
@@ -60,7 +68,15 @@ abstract class $ClubRatingRowModelCopyWith<$Res> {
       int mafiaWinsCount,
       int died,
       List<GameRowItemModel> games,
-      int ci});
+      int ci,
+      double citizenAddScore,
+      double sheriffAddScore,
+      double donAddScore,
+      double mafiaAddScore,
+      double citizenScore,
+      double sheriffScore,
+      double donScore,
+      double mafiaScore});
 }
 
 /// @nodoc
@@ -92,6 +108,14 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
     Object? died = null,
     Object? games = null,
     Object? ci = null,
+    Object? citizenAddScore = null,
+    Object? sheriffAddScore = null,
+    Object? donAddScore = null,
+    Object? mafiaAddScore = null,
+    Object? citizenScore = null,
+    Object? sheriffScore = null,
+    Object? donScore = null,
+    Object? mafiaScore = null,
   }) {
     return _then(_value.copyWith(
       nickname: null == nickname
@@ -158,6 +182,38 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
               as int,
+      citizenAddScore: null == citizenAddScore
+          ? _value.citizenAddScore
+          : citizenAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      sheriffAddScore: null == sheriffAddScore
+          ? _value.sheriffAddScore
+          : sheriffAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      donAddScore: null == donAddScore
+          ? _value.donAddScore
+          : donAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      mafiaAddScore: null == mafiaAddScore
+          ? _value.mafiaAddScore
+          : mafiaAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      citizenScore: null == citizenScore
+          ? _value.citizenScore
+          : citizenScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      sheriffScore: null == sheriffScore
+          ? _value.sheriffScore
+          : sheriffScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      donScore: null == donScore
+          ? _value.donScore
+          : donScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      mafiaScore: null == mafiaScore
+          ? _value.mafiaScore
+          : mafiaScore // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -186,7 +242,15 @@ abstract class _$$_ClubRatingRowModelCopyWith<$Res>
       int mafiaWinsCount,
       int died,
       List<GameRowItemModel> games,
-      int ci});
+      int ci,
+      double citizenAddScore,
+      double sheriffAddScore,
+      double donAddScore,
+      double mafiaAddScore,
+      double citizenScore,
+      double sheriffScore,
+      double donScore,
+      double mafiaScore});
 }
 
 /// @nodoc
@@ -216,6 +280,14 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
     Object? died = null,
     Object? games = null,
     Object? ci = null,
+    Object? citizenAddScore = null,
+    Object? sheriffAddScore = null,
+    Object? donAddScore = null,
+    Object? mafiaAddScore = null,
+    Object? citizenScore = null,
+    Object? sheriffScore = null,
+    Object? donScore = null,
+    Object? mafiaScore = null,
   }) {
     return _then(_$_ClubRatingRowModel(
       nickname: null == nickname
@@ -282,6 +354,38 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
           ? _value.ci
           : ci // ignore: cast_nullable_to_non_nullable
               as int,
+      citizenAddScore: null == citizenAddScore
+          ? _value.citizenAddScore
+          : citizenAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      sheriffAddScore: null == sheriffAddScore
+          ? _value.sheriffAddScore
+          : sheriffAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      donAddScore: null == donAddScore
+          ? _value.donAddScore
+          : donAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      mafiaAddScore: null == mafiaAddScore
+          ? _value.mafiaAddScore
+          : mafiaAddScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      citizenScore: null == citizenScore
+          ? _value.citizenScore
+          : citizenScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      sheriffScore: null == sheriffScore
+          ? _value.sheriffScore
+          : sheriffScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      donScore: null == donScore
+          ? _value.donScore
+          : donScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      mafiaScore: null == mafiaScore
+          ? _value.mafiaScore
+          : mafiaScore // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -305,7 +409,15 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
       required this.mafiaWinsCount,
       required this.died,
       required final List<GameRowItemModel> games,
-      required this.ci})
+      required this.ci,
+      required this.citizenAddScore,
+      required this.sheriffAddScore,
+      required this.donAddScore,
+      required this.mafiaAddScore,
+      required this.citizenScore,
+      required this.sheriffScore,
+      required this.donScore,
+      required this.mafiaScore})
       : _games = games;
 
   @override
@@ -346,10 +458,26 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
 
   @override
   final int ci;
+  @override
+  final double citizenAddScore;
+  @override
+  final double sheriffAddScore;
+  @override
+  final double donAddScore;
+  @override
+  final double mafiaAddScore;
+  @override
+  final double citizenScore;
+  @override
+  final double sheriffScore;
+  @override
+  final double donScore;
+  @override
+  final double mafiaScore;
 
   @override
   String toString() {
-    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, gamesCount: $gamesCount, citizenGamesCount: $citizenGamesCount, donsGamesCount: $donsGamesCount, sheriffGamesCount: $sheriffGamesCount, mafiaGamesCount: $mafiaGamesCount, citizenWinsCount: $citizenWinsCount, donsWinsCount: $donsWinsCount, sheriffWinsCount: $sheriffWinsCount, mafiaWinsCount: $mafiaWinsCount, died: $died, games: $games, ci: $ci)';
+    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, gamesCount: $gamesCount, citizenGamesCount: $citizenGamesCount, donsGamesCount: $donsGamesCount, sheriffGamesCount: $sheriffGamesCount, mafiaGamesCount: $mafiaGamesCount, citizenWinsCount: $citizenWinsCount, donsWinsCount: $donsWinsCount, sheriffWinsCount: $sheriffWinsCount, mafiaWinsCount: $mafiaWinsCount, died: $died, games: $games, ci: $ci, citizenAddScore: $citizenAddScore, sheriffAddScore: $sheriffAddScore, donAddScore: $donAddScore, mafiaAddScore: $mafiaAddScore, citizenScore: $citizenScore, sheriffScore: $sheriffScore, donScore: $donScore, mafiaScore: $mafiaScore)';
   }
 
   @override
@@ -383,28 +511,53 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
                 other.mafiaWinsCount == mafiaWinsCount) &&
             (identical(other.died, died) || other.died == died) &&
             const DeepCollectionEquality().equals(other._games, _games) &&
-            (identical(other.ci, ci) || other.ci == ci));
+            (identical(other.ci, ci) || other.ci == ci) &&
+            (identical(other.citizenAddScore, citizenAddScore) ||
+                other.citizenAddScore == citizenAddScore) &&
+            (identical(other.sheriffAddScore, sheriffAddScore) ||
+                other.sheriffAddScore == sheriffAddScore) &&
+            (identical(other.donAddScore, donAddScore) ||
+                other.donAddScore == donAddScore) &&
+            (identical(other.mafiaAddScore, mafiaAddScore) ||
+                other.mafiaAddScore == mafiaAddScore) &&
+            (identical(other.citizenScore, citizenScore) ||
+                other.citizenScore == citizenScore) &&
+            (identical(other.sheriffScore, sheriffScore) ||
+                other.sheriffScore == sheriffScore) &&
+            (identical(other.donScore, donScore) ||
+                other.donScore == donScore) &&
+            (identical(other.mafiaScore, mafiaScore) ||
+                other.mafiaScore == mafiaScore));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      nickname,
-      score,
-      addScore,
-      wins,
-      gamesCount,
-      citizenGamesCount,
-      donsGamesCount,
-      sheriffGamesCount,
-      mafiaGamesCount,
-      citizenWinsCount,
-      donsWinsCount,
-      sheriffWinsCount,
-      mafiaWinsCount,
-      died,
-      const DeepCollectionEquality().hash(_games),
-      ci);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        nickname,
+        score,
+        addScore,
+        wins,
+        gamesCount,
+        citizenGamesCount,
+        donsGamesCount,
+        sheriffGamesCount,
+        mafiaGamesCount,
+        citizenWinsCount,
+        donsWinsCount,
+        sheriffWinsCount,
+        mafiaWinsCount,
+        died,
+        const DeepCollectionEquality().hash(_games),
+        ci,
+        citizenAddScore,
+        sheriffAddScore,
+        donAddScore,
+        mafiaAddScore,
+        citizenScore,
+        sheriffScore,
+        donScore,
+        mafiaScore
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -431,7 +584,15 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
       required final int mafiaWinsCount,
       required final int died,
       required final List<GameRowItemModel> games,
-      required final int ci}) = _$_ClubRatingRowModel;
+      required final int ci,
+      required final double citizenAddScore,
+      required final double sheriffAddScore,
+      required final double donAddScore,
+      required final double mafiaAddScore,
+      required final double citizenScore,
+      required final double sheriffScore,
+      required final double donScore,
+      required final double mafiaScore}) = _$_ClubRatingRowModel;
 
   @override
   String get nickname;
@@ -465,6 +626,22 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   List<GameRowItemModel> get games;
   @override
   int get ci;
+  @override
+  double get citizenAddScore;
+  @override
+  double get sheriffAddScore;
+  @override
+  double get donAddScore;
+  @override
+  double get mafiaAddScore;
+  @override
+  double get citizenScore;
+  @override
+  double get sheriffScore;
+  @override
+  double get donScore;
+  @override
+  double get mafiaScore;
   @override
   @JsonKey(ignore: true)
   _$$_ClubRatingRowModelCopyWith<_$_ClubRatingRowModel> get copyWith =>

@@ -248,6 +248,7 @@ class TableSeatingItem extends $pb.GeneratedMessage {
     ..aOM<TableSeating>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'seating', subBuilder: TableSeating.create)
     ..aOM<TableSeatingResult>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'result', subBuilder: TableSeatingResult.create)
     ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'game', $pb.PbFieldType.O3)
+    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'table', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -257,6 +258,7 @@ class TableSeatingItem extends $pb.GeneratedMessage {
     TableSeating? seating,
     TableSeatingResult? result,
     $core.int? game,
+    $core.int? table,
   }) {
     final _result = create();
     if (gameId != null) {
@@ -270,6 +272,9 @@ class TableSeatingItem extends $pb.GeneratedMessage {
     }
     if (game != null) {
       _result.game = game;
+    }
+    if (table != null) {
+      _result.table = table;
     }
     return _result;
   }
@@ -333,6 +338,15 @@ class TableSeatingItem extends $pb.GeneratedMessage {
   $core.bool hasGame() => $_has(3);
   @$pb.TagNumber(4)
   void clearGame() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get table => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set table($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTable() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTable() => clearField(5);
 }
 
 class SeatingEventOut extends $pb.GeneratedMessage {
@@ -763,6 +777,14 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     ..a<$core.int>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafiaGames', $pb.PbFieldType.O3, protoName: 'mafiaGames')
     ..a<$core.int>(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafiaWins', $pb.PbFieldType.O3, protoName: 'mafiaWins')
     ..a<$core.int>(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'citizenWins', $pb.PbFieldType.O3, protoName: 'citizenWins')
+    ..a<$core.double>(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'citizenAddScore', $pb.PbFieldType.OD, protoName: 'citizenAddScore')
+    ..a<$core.double>(18, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafiaAddScore', $pb.PbFieldType.OD, protoName: 'mafiaAddScore')
+    ..a<$core.double>(19, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'donAddScore', $pb.PbFieldType.OD, protoName: 'donAddScore')
+    ..a<$core.double>(20, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sheriffAddScore', $pb.PbFieldType.OD, protoName: 'sheriffAddScore')
+    ..a<$core.double>(21, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'citizenScore', $pb.PbFieldType.OD, protoName: 'citizenScore')
+    ..a<$core.double>(22, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafiaScore', $pb.PbFieldType.OD, protoName: 'mafiaScore')
+    ..a<$core.double>(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'donScore', $pb.PbFieldType.OD, protoName: 'donScore')
+    ..a<$core.double>(24, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sheriffScore', $pb.PbFieldType.OD, protoName: 'sheriffScore')
     ..hasRequiredFields = false
   ;
 
@@ -784,6 +806,14 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     $core.int? mafiaGames,
     $core.int? mafiaWins,
     $core.int? citizenWins,
+    $core.double? citizenAddScore,
+    $core.double? mafiaAddScore,
+    $core.double? donAddScore,
+    $core.double? sheriffAddScore,
+    $core.double? citizenScore,
+    $core.double? mafiaScore,
+    $core.double? donScore,
+    $core.double? sheriffScore,
   }) {
     final _result = create();
     if (nickname != null) {
@@ -833,6 +863,30 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     }
     if (citizenWins != null) {
       _result.citizenWins = citizenWins;
+    }
+    if (citizenAddScore != null) {
+      _result.citizenAddScore = citizenAddScore;
+    }
+    if (mafiaAddScore != null) {
+      _result.mafiaAddScore = mafiaAddScore;
+    }
+    if (donAddScore != null) {
+      _result.donAddScore = donAddScore;
+    }
+    if (sheriffAddScore != null) {
+      _result.sheriffAddScore = sheriffAddScore;
+    }
+    if (citizenScore != null) {
+      _result.citizenScore = citizenScore;
+    }
+    if (mafiaScore != null) {
+      _result.mafiaScore = mafiaScore;
+    }
+    if (donScore != null) {
+      _result.donScore = donScore;
+    }
+    if (sheriffScore != null) {
+      _result.sheriffScore = sheriffScore;
     }
     return _result;
   }
@@ -994,6 +1048,78 @@ class ClubRatingRow extends $pb.GeneratedMessage {
   $core.bool hasCitizenWins() => $_has(15);
   @$pb.TagNumber(16)
   void clearCitizenWins() => clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.double get citizenAddScore => $_getN(16);
+  @$pb.TagNumber(17)
+  set citizenAddScore($core.double v) { $_setDouble(16, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasCitizenAddScore() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearCitizenAddScore() => clearField(17);
+
+  @$pb.TagNumber(18)
+  $core.double get mafiaAddScore => $_getN(17);
+  @$pb.TagNumber(18)
+  set mafiaAddScore($core.double v) { $_setDouble(17, v); }
+  @$pb.TagNumber(18)
+  $core.bool hasMafiaAddScore() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearMafiaAddScore() => clearField(18);
+
+  @$pb.TagNumber(19)
+  $core.double get donAddScore => $_getN(18);
+  @$pb.TagNumber(19)
+  set donAddScore($core.double v) { $_setDouble(18, v); }
+  @$pb.TagNumber(19)
+  $core.bool hasDonAddScore() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearDonAddScore() => clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.double get sheriffAddScore => $_getN(19);
+  @$pb.TagNumber(20)
+  set sheriffAddScore($core.double v) { $_setDouble(19, v); }
+  @$pb.TagNumber(20)
+  $core.bool hasSheriffAddScore() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearSheriffAddScore() => clearField(20);
+
+  @$pb.TagNumber(21)
+  $core.double get citizenScore => $_getN(20);
+  @$pb.TagNumber(21)
+  set citizenScore($core.double v) { $_setDouble(20, v); }
+  @$pb.TagNumber(21)
+  $core.bool hasCitizenScore() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearCitizenScore() => clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.double get mafiaScore => $_getN(21);
+  @$pb.TagNumber(22)
+  set mafiaScore($core.double v) { $_setDouble(21, v); }
+  @$pb.TagNumber(22)
+  $core.bool hasMafiaScore() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearMafiaScore() => clearField(22);
+
+  @$pb.TagNumber(23)
+  $core.double get donScore => $_getN(22);
+  @$pb.TagNumber(23)
+  set donScore($core.double v) { $_setDouble(22, v); }
+  @$pb.TagNumber(23)
+  $core.bool hasDonScore() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearDonScore() => clearField(23);
+
+  @$pb.TagNumber(24)
+  $core.double get sheriffScore => $_getN(23);
+  @$pb.TagNumber(24)
+  set sheriffScore($core.double v) { $_setDouble(23, v); }
+  @$pb.TagNumber(24)
+  $core.bool hasSheriffScore() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearSheriffScore() => clearField(24);
 }
 
 class AddGameEventOut extends $pb.GeneratedMessage {
