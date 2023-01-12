@@ -222,11 +222,13 @@ class _TranslationPlayerCard extends StatelessWidget {
   Color? color(BuildContext context) {
     switch (status) {
       case PlayerStatus.deleted:
-        return MyTheme.of(context).blueForCard;
       case PlayerStatus.killed:
-        return MyTheme.of(context).redForCard;
       case PlayerStatus.voted:
-        return MyTheme.of(context).greenForCard;
+        return MyTheme.of(context).blueForCard;
+      // case PlayerStatus.killed:
+      //   return MyTheme.of(context).redForCard;
+      // case PlayerStatus.voted:
+      //   return MyTheme.of(context).greenForCard;
       default:
         return null;
     }
