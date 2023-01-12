@@ -42,9 +42,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
               left: 0,
               right: 0,
               child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
+                child: ListView(
                   children: [
                     Text(
                       AppLocalizations.of(context)!.tournamentsListTitle,
