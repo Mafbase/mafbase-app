@@ -37,16 +37,15 @@ class _TournamentsPageState extends State<TournamentsPage> {
       builder: (context, state) {
         return Stack(
           children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
+            Positioned.fill(
               child: Center(
                 child: ListView(
                   children: [
-                    Text(
-                      AppLocalizations.of(context)!.tournamentsListTitle,
-                      style: MyTheme.of(context).headerTextStyle,
+                    Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.tournamentsListTitle,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
