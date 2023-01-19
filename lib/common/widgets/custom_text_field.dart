@@ -8,6 +8,7 @@ String? _validate(String? value) => null;
 class CustomTextField extends StatefulWidget {
   final Widget? icon;
   final TextEditingController controller;
+  final Iterable<String>? autoFillHints;
   final bool canObscure;
   final String? errorText;
   final Widget? suffixIcon;
@@ -33,6 +34,7 @@ class CustomTextField extends StatefulWidget {
     this.onSubmit,
     this.errorText,
     this.focusNode,
+    this.autoFillHints,
     this.bottomPadding = 10,
     this.canObscure = false,
     this.isRequiredField = false,
@@ -66,6 +68,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               children: [
                 Positioned.fill(
                   child: TextFormField(
+                    autofillHints: widget.autoFillHints,
                     validator: widget.validate,
                     readOnly: widget.readOnly,
                     keyboardType: widget.textInputType,

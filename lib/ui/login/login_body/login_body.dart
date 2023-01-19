@@ -58,6 +58,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     height: 20,
                   ),
                   CustomTextField(
+                    autoFillHints: const [AutofillHints.username],
                     validate: (value) {
                       if (value != null) {
                         if (EmailValidator.validate(value)) {
@@ -85,6 +86,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     height: 20,
                   ),
                   CustomTextField(
+                    autoFillHints: const [AutofillHints.password],
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     hint: AppLocalizations.of(context)!.loginPasswordHint,
