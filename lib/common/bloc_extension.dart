@@ -110,6 +110,8 @@ abstract class CustomBloc<E, S> extends Bloc<E, S> {
       }
     } catch (ignored, stacktrace) {
       emitOnError(emit);
+      debugPrint(ignored.toString());
+      debugPrint(stacktrace.toString());
       Sentry.captureException(ignored, stackTrace: stacktrace);
     }
   }
