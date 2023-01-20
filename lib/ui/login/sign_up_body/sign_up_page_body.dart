@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seating_generator_web/app/assets.dart';
@@ -25,6 +26,7 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
       TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   bool setRepeatError = false;
+
   @override
   void initState() {
     _emailController.addListener(() {
@@ -48,112 +50,120 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
         return Stack(
           children: [
             Positioned.fill(
-              child: SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 44,
-                      top: 41,
-                      child: IconButton(
-                        onPressed: _onBackButtonTapped,
-                        icon: const Icon(Icons.arrow_back_ios),
+              child: AutofillGroup(
+                child: SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 44,
+                        top: 41,
+                        child: IconButton(
+                          onPressed: _onBackButtonTapped,
+                          icon: const Icon(Icons.arrow_back_ios),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 40,
-                        right: 40,
-                        top: 36,
-                        bottom: 45,
-                      ),
-                      child: Column(
-                        children: [
-                          const Center(
-                            child: Text(
-                              'Регистрация',
-                              style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 45,
-                          ),
-                          CustomTextField(
-                            controller: _emailController,
-                            isRequiredField: true,
-                            icon: Icon(
-                              Icons.email_outlined,
-                              color: MyTheme.of(context).borderColor,
-                            ),
-                            hint: context.locale.yourEmail,
-                            errorText: state.emailExist
-                                ? context.locale.wrongEmail
-                                : null,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          CustomTextField(
-                            canObscure: true,
-                            isRequiredField: true,
-                            controller: _passwordController,
-                            icon: SvgPicture.asset(AppAssets.lock),
-                            hint: context.locale.enterPassword,
-                            errorText: state.weakPassword
-                                ? context.locale.invalidPassword
-                                : null,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CustomTextField(
-                            canObscure: true,
-                            isRequiredField: true,
-                            controller: _repeatPasswordController,
-                            icon: SvgPicture.asset(AppAssets.lock),
-                            hint: context.locale.repeatPassword,
-                            errorText: setRepeatError
-                                ? context.locale.notMatchPasswords
-                                : null,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                AppAssets.exclamationPoint,
-                                width: 3.2,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                context.locale.requiredForEnter,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 40,
+                          right: 40,
+                          top: 36,
+                          bottom: 45,
+                        ),
+                        child: Column(
+                          children: [
+                            const Center(
+                              child: Text(
+                                'Регистрация',
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
                                 ),
                               ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          CustomButton(
-                            disabled:
-                                !EmailValidator.validate(_emailController.text),
-                            text: 'Зарегистрироваться',
-                            onTap: _onSubmit,
-                          ),
-                        ],
+                            ),
+                            const SizedBox(
+                              height: 45,
+                            ),
+                            CustomTextField(
+                              controller: _emailController,
+                              autoFillHints: const [
+                                AutofillHints.newUsername,
+                                AutofillHints.email,
+                              ],
+                              isRequiredField: true,
+                              icon: Icon(
+                                Icons.email_outlined,
+                                color: MyTheme.of(context).borderColor,
+                              ),
+                              hint: context.locale.yourEmail,
+                              errorText: state.emailExist
+                                  ? context.locale.wrongEmail
+                                  : null,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            CustomTextField(
+                              canObscure: true,
+                              isRequiredField: true,
+                              controller: _passwordController,
+                              autoFillHints: const [AutofillHints.newPassword],
+                              icon: SvgPicture.asset(AppAssets.lock),
+                              hint: context.locale.enterPassword,
+                              errorText: state.weakPassword
+                                  ? context.locale.invalidPassword
+                                  : null,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            CustomTextField(
+                              canObscure: true,
+                              isRequiredField: true,
+                              controller: _repeatPasswordController,
+                              autoFillHints: const [AutofillHints.newPassword],
+                              icon: SvgPicture.asset(AppAssets.lock),
+                              hint: context.locale.repeatPassword,
+                              errorText: setRepeatError
+                                  ? context.locale.notMatchPasswords
+                                  : null,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  AppAssets.exclamationPoint,
+                                  width: 3.2,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  context.locale.requiredForEnter,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            CustomButton(
+                              disabled: !EmailValidator.validate(
+                                  _emailController.text),
+                              text: 'Зарегистрироваться',
+                              onTap: _onSubmit,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -170,6 +180,7 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
         setRepeatError = true;
       });
     } else {
+      TextInput.finishAutofillContext();
       context.read<SignUpBloc>().add(
             SignUpEvents.signUpButtonTapped(
               email: _emailController.text,

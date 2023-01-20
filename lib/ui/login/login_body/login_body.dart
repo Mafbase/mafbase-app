@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -47,115 +48,120 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                 vertical: 26,
               ),
               key: const Key("loginBox"),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.loginAuth,
-                    style: MyTheme.of(context).headerTextStyle,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomTextField(
-                    autoFillHints: const [AutofillHints.username],
-                    validate: (value) {
-                      if (value != null) {
-                        if (EmailValidator.validate(value)) {
-                          return null;
+              child: AutofillGroup(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.loginAuth,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      autoFillHints: const [
+                        AutofillHints.username,
+                        AutofillHints.email,
+                      ],
+                      validate: (value) {
+                        if (value != null) {
+                          if (EmailValidator.validate(value)) {
+                            return null;
+                          }
                         }
-                      }
-                      return "Введите корректный адресс электронной почты";
-                    },
-                    controller: _emailController,
-                    hint: AppLocalizations.of(context)!.loginEmailHint,
-                    errorText: state.hasError
-                        ? context.locale.invalidEmailOrPassword
-                        : null,
-                    focusNode: _emailFocusNode,
-                    onSubmit: (_) {
-                      _emailFocusNode.unfocus();
-                      _passwordFocusNode.requestFocus();
-                    },
-                    icon: Icon(
-                      Icons.email_outlined,
-                      color: MyTheme.of(context).borderColor,
+                        return "Введите корректный адресс электронной почты";
+                      },
+                      controller: _emailController,
+                      hint: AppLocalizations.of(context)!.loginEmailHint,
+                      errorText: state.hasError
+                          ? context.locale.invalidEmailOrPassword
+                          : null,
+                      focusNode: _emailFocusNode,
+                      onSubmit: (_) {
+                        _emailFocusNode.unfocus();
+                        _passwordFocusNode.requestFocus();
+                      },
+                      icon: Icon(
+                        Icons.email_outlined,
+                        color: MyTheme.of(context).borderColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomTextField(
-                    autoFillHints: const [AutofillHints.password],
-                    controller: _passwordController,
-                    focusNode: _passwordFocusNode,
-                    hint: AppLocalizations.of(context)!.loginPasswordHint,
-                    onSubmit: (_) {
-                      _onSubmit();
-                    },
-                    canObscure: true,
-                    icon: Icon(
-                      Icons.lock_outline,
-                      color: MyTheme.of(context).borderColor,
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  Row(
-                    children: [
-                      Transform.translate(
-                        offset: const Offset(-3, 0),
-                        child: Checkbox(
-                          splashRadius: 0,
-                          value: remember,
-                          checkColor: MyTheme.of(context).borderColor,
-                          fillColor: MaterialStatePropertyAll(
-                            MyTheme.of(context).borderColor,
+                    CustomTextField(
+                      autoFillHints: const [AutofillHints.password],
+                      controller: _passwordController,
+                      focusNode: _passwordFocusNode,
+                      hint: AppLocalizations.of(context)!.loginPasswordHint,
+                      onSubmit: (_) {
+                        _onSubmit();
+                      },
+                      canObscure: true,
+                      icon: Icon(
+                        Icons.lock_outline,
+                        color: MyTheme.of(context).borderColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 35,
+                    ),
+                    Row(
+                      children: [
+                        Transform.translate(
+                          offset: const Offset(-3, 0),
+                          child: Checkbox(
+                            splashRadius: 0,
+                            value: remember,
+                            checkColor: MyTheme.of(context).borderColor,
+                            fillColor: MaterialStatePropertyAll(
+                              MyTheme.of(context).borderColor,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                remember = value ?? remember;
+                              });
+                            },
                           ),
-                          onChanged: (value) {
-                            setState(() {
-                              remember = value ?? remember;
-                            });
-                          },
                         ),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.loginRememberMe,
-                        style: MyTheme.of(context).defaultTextStyle,
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          AppLocalizations.of(context)!.loginForgotPassword,
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.loginRememberMe,
                           style: MyTheme.of(context).defaultTextStyle,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  CustomButton(
-                    disabled: state.isLoading,
-                    text: AppLocalizations.of(context)!.loginIn,
-                    onTap: _onSubmit,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  TextButton(
-                    onPressed: _onSignUpTapped,
-                    child: Text(
-                      AppLocalizations.of(context)!.loginRegistration,
-                      style: MyTheme.of(context).defaultTextStyle,
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            AppLocalizations.of(context)!.loginForgotPassword,
+                            style: MyTheme.of(context).defaultTextStyle,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    CustomButton(
+                      disabled: state.isLoading,
+                      text: AppLocalizations.of(context)!.loginIn,
+                      onTap: _onSubmit,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    TextButton(
+                      onPressed: _onSignUpTapped,
+                      child: Text(
+                        AppLocalizations.of(context)!.loginRegistration,
+                        style: MyTheme.of(context).defaultTextStyle,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -166,12 +172,13 @@ class _LoginPageBodyState extends State<LoginPageBody> {
 
   void _onSubmit() {
     if (_formKey.currentState?.validate() == true) {
+      TextInput.finishAutofillContext();
       context.read<LoginBloc>().add(
-        LoginEvent.loginButtonTapped(
-          email: _emailController.text,
-          password: _passwordController.text,
-        ),
-      );
+            LoginEvent.loginButtonTapped(
+              email: _emailController.text,
+              password: _passwordController.text,
+            ),
+          );
     }
   }
 
