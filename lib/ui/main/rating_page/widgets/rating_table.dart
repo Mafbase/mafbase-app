@@ -955,7 +955,7 @@ class _RatingTableState extends State<RatingTable> {
         return Stack(
           children: [
             if (prototype != null)
-              ...[wrap(header ?? Container()), prototype].map(
+              ...[wrap(header ?? Container()), wrap(prototype)].map(
                 (e) => IgnorePointer(
                   child: Opacity(
                     opacity: 0,
