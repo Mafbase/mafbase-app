@@ -7,6 +7,7 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
+import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete.dart';
@@ -119,7 +120,6 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   final refereeFocusNode = FocusNode();
   final focusNodes = List.generate(10, (index) => FocusNode());
   final addScoreFocusNodes = List.generate(10, (index) => FocusNode());
-  final winValue = GameWin.values;
   GameWin? winSelected;
   int firstDie = -1;
   BestMove? bestMove;
@@ -267,6 +267,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                           decimal: true,
                                         ),
                                         hint: "0.0",
+                                        label: "Доп балл",
                                       ),
                                     )
                                   ],
@@ -344,23 +345,17 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      DropdownButton<int>(
-                                        value: firstDie,
+                                      CustomDropdown<int>(
+                                        initValue: firstDie,
                                         items: List.generate(
                                           11,
                                           (index) {
-                                            return DropdownMenuItem(
-                                              value: index - 1,
-                                              child: Text(
-                                                index == 0
-                                                    ? "Промах"
-                                                    : index.toString(),
-                                                style: MyTheme.of(context)
-                                                    .defaultTextStyle,
-                                              ),
-                                            );
+                                            return index - 1;
                                           },
                                         ),
+                                        mapToString: (index) => index == -1
+                                            ? "Промах"
+                                            : index.toString(),
                                         onChanged: widget.readOnly
                                             ? null
                                             : (value) {
@@ -378,10 +373,10 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                           style: MyTheme.of(context)
                                               .defaultTextStyle,
                                         ),
-                                        DropdownButton<BestMove>(
-                                          value: bestMove,
-                                          items:
-                                              BestMove.values.map((bestMove) {
+                                        CustomDropdown<BestMove>(
+                                          initValue: bestMove ?? BestMove.miss,
+                                          items: BestMove.values,
+                                          mapToString: (bestMove) {
                                             final String text;
                                             switch (bestMove) {
                                               case BestMove.full:
@@ -397,22 +392,11 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                                 text = "";
                                                 break;
                                             }
-                                            return DropdownMenuItem(
-                                              value: bestMove,
-                                              child: Text(
-                                                text,
-                                                style: MyTheme.of(context)
-                                                    .defaultTextStyle,
-                                              ),
-                                            );
-                                          }).toList(),
+                                            return text;
+                                          },
                                           onChanged: widget.readOnly
                                               ? null
-                                              : (value) {
-                                                  setState(() {
-                                                    bestMove = value;
-                                                  });
-                                                },
+                                              : (value) => bestMove = value,
                                         ),
                                       ],
                                     ],
@@ -427,9 +411,9 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      DropdownButton<GameWin>(
-                                        value: winSelected,
-                                        items: winValue.map((win) {
+                                      CustomDropdown<GameWin>(
+                                        initValue: winSelected,
+                                        mapToString: (win) {
                                           final String text;
                                           switch (win) {
                                             case GameWin.city:
@@ -445,15 +429,9 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                               text = "";
                                               break;
                                           }
-                                          return DropdownMenuItem(
-                                            value: win,
-                                            child: Text(
-                                              text,
-                                              style: MyTheme.of(context)
-                                                  .defaultTextStyle,
-                                            ),
-                                          );
-                                        }).toList(),
+                                          return text;
+                                        },
+                                        items: GameWin.values,
                                         onChanged: widget.readOnly
                                             ? null
                                             : (value) {
@@ -474,29 +452,19 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      DropdownButton<CiSchemeModel>(
-                                        value: ciSchemeModel,
+                                      CustomDropdown<CiSchemeModel>(
+                                        initValue: ciSchemeModel,
+                                        mapToString: (model) {
+                                          return model?.name ??
+                                              context.locale.withoutCi;
+                                        },
                                         items: List.generate(
                                           state.ciSchemes.length + 1,
                                           (index) {
                                             if (index == 0) {
-                                              return DropdownMenuItem(
-                                                value: null,
-                                                child: Text(
-                                                  context.locale.withoutCi,
-                                                  style: MyTheme.of(context)
-                                                      .defaultTextStyle,
-                                                ),
-                                              );
+                                              return null;
                                             }
-                                            return DropdownMenuItem(
-                                              value: state.ciSchemes[index - 1],
-                                              child: Text(
-                                                state.ciSchemes[index - 1].name,
-                                                style: MyTheme.of(context)
-                                                    .defaultTextStyle,
-                                              ),
-                                            );
+                                            return state.ciSchemes[index - 1];
                                           },
                                         ),
                                         onChanged: widget.readOnly
@@ -556,26 +524,23 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                               });
                                             });
                                           },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          "Дата:",
-                                          style: MyTheme.of(context)
-                                              .defaultTextStyle
-                                              .copyWith(
-                                                color: MyTheme.of(context)
-                                                    .darkGreyColor,
-                                              ),
-                                        ),
-                                        const SizedBox(
-                                          width: 80,
-                                        ),
-                                        Text(
-                                          DateFormat("dd:MM:yyy HH:mm")
-                                              .format(date),
-                                        ),
-                                      ],
+                                    child: DefaultTextStyle(
+                                      style: MyTheme.of(context)
+                                          .defaultTextStyle
+                                          .copyWith(
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Text("Дата:"),
+                                          const SizedBox(width: 80),
+                                          Text(
+                                            DateFormat("dd:MM:yyy HH:mm")
+                                                .format(date),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],

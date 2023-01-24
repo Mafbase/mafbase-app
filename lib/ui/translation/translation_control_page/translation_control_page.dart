@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/common/widgets/role_picker.dart';
 import 'package:seating_generator_web/common/widgets/status_picker.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
@@ -47,19 +48,20 @@ class _TranslationControlPageState extends State<TranslationControlPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Center(
-                    child: DropdownButton<int>(
-                      value: state.game,
+                    child: CustomDropdown<int>(
+                      initValue: state.game,
+                      mapToString: (index) =>
+                          index == null ? "" : (index + 1).toString(),
                       items: List.generate(
                         state.totalGames,
-                        (index) => DropdownMenuItem(
-                          value: index,
-                          child: Text((index + 1).toString()),
-                        ),
+                        (index) => index,
                       ),
                       onChanged: (index) {
                         if (index != null) {
                           context.read<TranslationControlBloc>().add(
-                                TranslationControlEvent.selectGame(gameIndex: index),
+                                TranslationControlEvent.selectGame(
+                                  gameIndex: index,
+                                ),
                               );
                         }
                       },
@@ -72,7 +74,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Flexible(
-                            child: Text("${index+1}."),
+                            child: Text("${index + 1}."),
                           ),
                           Transform.scale(
                             scale: 0.9,

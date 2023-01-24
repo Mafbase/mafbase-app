@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
@@ -143,7 +144,7 @@ class _RatingPageState extends State<RatingPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Период: "),
-                          InkWell(
+                          CustomButton(
                             onTap: () async {
                               final bloc = context.read<RatingBloc>();
                               final range = await showDateRangePicker(
@@ -159,26 +160,14 @@ class _RatingPageState extends State<RatingPage> {
                                     range: range,
                                     clubId: widget.clubId,
                                     style:
-                                        widget.style ?? RatingTableStyle.full,
+                                    widget.style ?? RatingTableStyle.full,
                                     sort: widget.sort ?? RatingSort.score,
                                     gameFilter: widget.gameFilter ?? 0,
                                   ),
                                 );
                               }
                             },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: MyTheme.of(context).darkGreyColor,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
-                                style: MyTheme.of(context)
-                                    .btnTextStyle
-                                    .copyWith(fontSize: 16),
-                              ),
-                            ),
+                            text: "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
                           ),
                           const SizedBox(width: 16),
                           IconButton(
