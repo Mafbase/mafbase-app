@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
@@ -13,8 +11,9 @@ class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.playersListTapped() =
       TournamentPageEventPlayersListTapped;
 
-  const factory TournamentPageEvent.playersListOpened(
-      {required int tournamentId}) = TournamentPagePlayerListOpenedEvent;
+  const factory TournamentPageEvent.playersListOpened({
+    required int tournamentId,
+  }) = TournamentPagePlayerListOpenedEvent;
 
   const factory TournamentPageEvent.addPlayerTapped() =
       TournamentPageEventAddPlayer;

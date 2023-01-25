@@ -4,7 +4,7 @@ import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 
 class PlayersRepositoryMock implements PlayersRepository {
-  var _fakePlayers = const [
+  final _fakePlayers = const [
     PlayerModel(id: 1, nickname: "Strelas"),
     PlayerModel(id: 2, nickname: "Sam"),
   ];

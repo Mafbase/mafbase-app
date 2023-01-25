@@ -61,10 +61,11 @@ class PlayersRepositoryImpl extends BaseRepository
   @override
   Future<int> createPlayer(PlayerModel player) {
     return CreatePlayerRequest(
-            player: Player(
-                nickname: player.nickname, fsmNickname: player.fsmNickaname))
-        .execute(client)
-        .then((value) => value.id);
+      player: Player(
+        nickname: player.nickname,
+        fsmNickname: player.fsmNickaname,
+      ),
+    ).execute(client).then((value) => value.id);
   }
 
   @override

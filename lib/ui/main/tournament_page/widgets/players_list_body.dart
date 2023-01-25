@@ -26,7 +26,8 @@ class _PlayersListBodyState extends State<PlayersListBody> {
   void initState() {
     context.read<TournamentPageBloc>().add(
           TournamentPageEvent.playersListOpened(
-              tournamentId: widget.tournamentId),
+            tournamentId: widget.tournamentId,
+          ),
         );
     super.initState();
   }

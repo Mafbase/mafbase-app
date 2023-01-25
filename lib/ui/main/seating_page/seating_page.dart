@@ -64,7 +64,7 @@ class _SeatingPageState extends State<SeatingPage> {
                     height: 16,
                   ),
                   Container(
-                    constraints: BoxConstraints(maxHeight: 100),
+                    constraints: const BoxConstraints(maxHeight: 100),
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: state.cannotMeet.length,

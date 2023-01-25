@@ -494,7 +494,8 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                                   context: context,
                                                   initialTime:
                                                       TimeOfDay.fromDateTime(
-                                                          date),
+                                                    date,
+                                                  ),
                                                   initialEntryMode:
                                                       TimePickerEntryMode.input,
                                                   builder: (context, child) =>

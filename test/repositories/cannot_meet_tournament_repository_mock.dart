@@ -1,6 +1,6 @@
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
-import '../../lib/domain/repositories/cannot_meet_tournament_repository.dart';
+import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
 
 class CannotMeetTournamentRepositoryMock
     implements CannotMeetTournamentRepository {

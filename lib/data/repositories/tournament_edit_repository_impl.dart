@@ -70,6 +70,7 @@ class TournamentEditRepositoryImpl extends BaseRepository
         );
   }
 
+  @override
   Future<List<List<GameResultModel>>> getResultModels({
     required int tournamentId,
   }) {

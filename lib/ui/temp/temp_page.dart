@@ -72,7 +72,7 @@ class _TempPageState extends State<TempPage> {
                       color: Colors.black.withOpacity(0.2),
                       offset: const Offset(2, 2),
                       spreadRadius: 3,
-                      blurRadius: 5
+                      blurRadius: 5,
                     ),
                   ],
                 ),

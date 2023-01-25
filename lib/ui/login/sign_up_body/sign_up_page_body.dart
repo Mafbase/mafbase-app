@@ -17,7 +17,7 @@ class SignUpPageBody extends StatefulWidget {
   const SignUpPageBody({Key? key}) : super(key: key);
 
   @override
-  _SignUpPageBodyState createState() => _SignUpPageBodyState();
+  State<SignUpPageBody> createState() => _SignUpPageBodyState();
 }
 
 class _SignUpPageBodyState extends State<SignUpPageBody> {
@@ -155,7 +155,8 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
                             ),
                             CustomButton(
                               disabled: !EmailValidator.validate(
-                                  _emailController.text),
+                                _emailController.text,
+                              ),
                               text: 'Зарегистрироваться',
                               onTap: _onSubmit,
                             ),

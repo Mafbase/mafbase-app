@@ -114,7 +114,6 @@ class MyHttpClient {
   }
 
   Future<Response> putFile(String method, List<int> bytes, [String? fileName]) async {
-    print(method);
     return _client
         .post(
       method,
@@ -130,7 +129,7 @@ class MyHttpClient {
     )
         .then(
       (value) {
-        print(value.statusCode);
+        debugPrint(value.statusCode.toString());
         _checkResponse(value);
         return value;
       },

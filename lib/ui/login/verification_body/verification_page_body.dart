@@ -39,7 +39,7 @@ class VerificationPageBody extends StatefulWidget {
   const VerificationPageBody({Key? key}) : super(key: key);
 
   @override
-  _VerificationPageBodyState createState() => _VerificationPageBodyState();
+  State<VerificationPageBody> createState() => _VerificationPageBodyState();
 }
 
 class _VerificationPageBodyState extends State<VerificationPageBody> {
@@ -61,7 +61,11 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      left: 42, right: 42, bottom: 42, top: 26),
+                    left: 42,
+                    right: 42,
+                    bottom: 42,
+                    top: 26,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,11 +91,11 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                           children: [
                             TextSpan(
                               text: context.locale.verificationText,
-                              style: MyTheme.of(context)
-                                  .defaultTextStyle
-                                  .copyWith(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
+                              style:
+                                  MyTheme.of(context).defaultTextStyle.copyWith(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                             ),
                             TextSpan(
                               text: context.locale.sendOneMoreCode,
@@ -122,8 +126,10 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                         disabled: state.isLoading,
                         onTap: () {
                           context.read<VerificationBloc>().add(
-                              VerificationEvents.submit(
-                                  token: codeController.text));
+                                VerificationEvents.submit(
+                                  token: codeController.text,
+                                ),
+                              );
                         },
                       ),
                       const SizedBox(
@@ -132,7 +138,8 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                       TextButton(
                         onPressed: () {
                           context.read<VerificationBloc>().add(
-                              const VerificationEvents.loginButtonTapped());
+                                const VerificationEvents.loginButtonTapped(),
+                              );
                         },
                         child: Text(
                           context.locale.authorization,
@@ -147,7 +154,8 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                       TextButton(
                         onPressed: () {
                           context.read<VerificationBloc>().add(
-                              const VerificationEvents.signUpButtonTapped());
+                                const VerificationEvents.signUpButtonTapped(),
+                              );
                         },
                         child: Text(
                           context.locale.loginRegistration,

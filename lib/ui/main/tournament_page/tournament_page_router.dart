@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
-import 'package:seating_generator_web/common/widgets/custom_button.dart';
-import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
