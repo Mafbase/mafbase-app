@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/club_check_request.dart';
 import 'package:seating_generator_web/data/requests/edit_club_game_request.dart';
@@ -8,7 +7,6 @@ import 'package:seating_generator_web/data/requests/get_club_rating_request.dart
 import 'package:seating_generator_web/data/requests/get_club_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
-import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
