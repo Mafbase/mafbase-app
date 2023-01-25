@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
-import 'package:seating_generator_web/domain/repositories/tournaments_repository_mock.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
+
+import '../get_it_register.dart';
+import '../repositories/tournaments_repository_mock.dart';
 
 void main() {
   registerGetItTest();

@@ -5,6 +5,9 @@ import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 
+import '../get_it_register.dart';
+import '../routers/main_router_mock.dart';
+
 void main() {
   registerGetItTest();
   group('Main bloc', () {

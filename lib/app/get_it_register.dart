@@ -31,25 +31,18 @@ import 'package:seating_generator_web/domain/interactors/verification_interactor
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/club_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/players_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_edit_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/tournaments_repository_mock.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/translation_repository_mock.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
@@ -131,42 +124,11 @@ void registerGetIt() {
       (context, _) => ProfileDialogRouterImpl(context),
     )
     ..registerLazySingleton<ClubRepository>(() => ClubRepositoryImpl(getIt()));
-  _registerSharedGetIt();
+  registerSharedGetIt();
 }
 
 @visibleForTesting
-void registerGetItTest() {
-  getIt
-    ..registerLazySingleton<AuthRepository>(() => AuthRepositoryMock())
-    ..registerFactory<LoginPageRouter>(() => LoginPageRouterMock())
-    ..registerLazySingleton<ClubRepository>(() => ClubRepositoryMock())
-    ..registerFactory<SignUpPageRouter>(() => SignUpPageRouterMock())
-    ..registerFactory<MainPageRouter>(() => MainPageRouterMock())
-    ..registerLazySingleton<TournamentEditRepository>(
-      () => TournamentEditRepositoryMock(),
-    )
-    ..registerFactory<VerificationPageRouter>(
-      () => VerificationPageRouterMock(),
-    )
-    ..registerLazySingleton<TranslationRepository>(
-      () => TranslationRepositoryMock(),
-    )
-    ..registerLazySingleton<TournamentsRepository>(
-      () => TournamentsRepositoryMock(),
-    )
-    ..registerFactory<SeatingInsertingRouter>(
-      () => SeatingInsertingRouterMock(),
-    )
-    ..registerLazySingleton<CannotMeetTournamentRepository>(
-      () => CannotMeetTournamentRepositoryMock(),
-    )
-    ..registerLazySingleton<PlayersRepository>(
-      () => PlayersRepositoryMock(),
-    );
-  _registerSharedGetIt();
-}
-
-void _registerSharedGetIt() {
+void registerSharedGetIt() {
   getIt
     ..registerLazySingleton<GetSeparationInteractor>(
       () => GetSeparationInteractor(getIt()),

@@ -3,6 +3,8 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_events.dart';
 
+import '../get_it_register.dart';
+import '../routers/verification_router_mock.dart';
 import '../util_test.dart';
 
 void main() {

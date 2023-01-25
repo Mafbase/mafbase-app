@@ -104,33 +104,3 @@ class MainPageRouterImpl implements MainPageRouter {
     return CreateTournamentDialog.open(context);
   }
 }
-
-class MainPageRouterMock implements MainPageRouter {
-  final _openedTabController = StreamController<MainPageTab?>.broadcast();
-  final _openedTournament = StreamController<bool>.broadcast();
-  final _dialogOpened = StreamController<bool>.broadcast();
-
-  Stream<MainPageTab?> get openedTab => _openedTabController.stream;
-  Stream<bool> get dialogOpened => _dialogOpened.stream;
-
-  @override
-  void switchTabTo(MainPageTab tab) {
-    _openedTabController.add(tab);
-  }
-
-  @override
-  void pop() {
-    _openedTabController.add(null);
-  }
-
-  @override
-  void openTournament(int id) {
-    _openedTournament.add(true);
-  }
-
-  @override
-  Future<CreateTournamentData?> openCreateTournamentDialog() {
-    _dialogOpened.add(true);
-    return Future.value(null);
-  }
-}

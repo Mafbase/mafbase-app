@@ -3,6 +3,8 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 
+import '../get_it_register.dart';
+import '../routers/sign_up_router_mock.dart';
 import '../util_test.dart';
 
 void main() {
