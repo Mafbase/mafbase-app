@@ -31,6 +31,15 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
   }
 
   @override
+  void didUpdateWidget(covariant CustomDropdown<T> oldWidget) {
+    if (oldWidget.initValue != widget.initValue) {
+      setState(() {
+        value = widget.initValue;
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+  @override
   Widget build(BuildContext context) {
     return DropdownButton<T>(
       value: value,

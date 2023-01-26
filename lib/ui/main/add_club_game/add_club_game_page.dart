@@ -121,8 +121,8 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   final focusNodes = List.generate(10, (index) => FocusNode());
   final addScoreFocusNodes = List.generate(10, (index) => FocusNode());
   GameWin? winSelected;
-  int firstDie = -1;
-  BestMove? bestMove;
+  int firstDie = 0;
+  BestMove? bestMove = BestMove.miss;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
   DateTime date = DateTime.now();
   CiSchemeModel? ciSchemeModel;
@@ -179,6 +179,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
       firstDie = effect.died;
       date = effect.date;
       roles = effect.roles.toList();
+      ciSchemeModel = effect.ciModel;
     });
   }
 
@@ -355,7 +356,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                         ),
                                         mapToString: (index) => index == -1
                                             ? "Промах"
-                                            : index.toString(),
+                                            : ((index ?? 0) + 1).toString(),
                                         onChanged: widget.readOnly
                                             ? null
                                             : (value) {
@@ -611,7 +612,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
       return;
     }
 
-    if (firstDie == -1 && bestMove == null) {
+    if (firstDie != -1 && bestMove == null) {
       AppRouter.showErrorDialog(context, "Установите лучший ход");
       return;
     }

@@ -26,7 +26,8 @@ mixin _$AddClubGameEffect {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)
+            DateTime date,
+            CiSchemeModel? ciModel)
         setValues,
     required TResult Function(int index, PlayerModel player) setPlayer,
   }) =>
@@ -41,7 +42,8 @@ mixin _$AddClubGameEffect {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)?
+            DateTime date,
+            CiSchemeModel? ciModel)?
         setValues,
     TResult? Function(int index, PlayerModel player)? setPlayer,
   }) =>
@@ -56,7 +58,8 @@ mixin _$AddClubGameEffect {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)?
+            DateTime date,
+            CiSchemeModel? ciModel)?
         setValues,
     TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),
@@ -116,7 +119,10 @@ abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res> {
       BestMove bestMove,
       String referee,
       int died,
-      DateTime date});
+      DateTime date,
+      CiSchemeModel? ciModel});
+
+  $CiSchemeModelCopyWith<$Res>? get ciModel;
 }
 
 /// @nodoc
@@ -139,6 +145,7 @@ class __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>
     Object? referee = null,
     Object? died = null,
     Object? date = null,
+    Object? ciModel = freezed,
   }) {
     return _then(_$AddClubGameEffectSetValues(
       players: null == players
@@ -173,7 +180,23 @@ class __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      ciModel: freezed == ciModel
+          ? _value.ciModel
+          : ciModel // ignore: cast_nullable_to_non_nullable
+              as CiSchemeModel?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CiSchemeModelCopyWith<$Res>? get ciModel {
+    if (_value.ciModel == null) {
+      return null;
+    }
+
+    return $CiSchemeModelCopyWith<$Res>(_value.ciModel!, (value) {
+      return _then(_value.copyWith(ciModel: value));
+    });
   }
 }
 
@@ -188,7 +211,8 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
       required this.bestMove,
       required this.referee,
       required this.died,
-      required this.date})
+      required this.date,
+      this.ciModel})
       : _players = players,
         _addScore = addScore,
         _roles = roles;
@@ -227,10 +251,12 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   final int died;
   @override
   final DateTime date;
+  @override
+  final CiSchemeModel? ciModel;
 
   @override
   String toString() {
-    return 'AddClubGameEffect.setValues(players: $players, addScore: $addScore, roles: $roles, win: $win, bestMove: $bestMove, referee: $referee, died: $died, date: $date)';
+    return 'AddClubGameEffect.setValues(players: $players, addScore: $addScore, roles: $roles, win: $win, bestMove: $bestMove, referee: $referee, died: $died, date: $date, ciModel: $ciModel)';
   }
 
   @override
@@ -246,7 +272,8 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
                 other.bestMove == bestMove) &&
             (identical(other.referee, referee) || other.referee == referee) &&
             (identical(other.died, died) || other.died == died) &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.ciModel, ciModel) || other.ciModel == ciModel));
   }
 
   @override
@@ -259,7 +286,8 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
       bestMove,
       referee,
       died,
-      date);
+      date,
+      ciModel);
 
   @JsonKey(ignore: true)
   @override
@@ -279,12 +307,13 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)
+            DateTime date,
+            CiSchemeModel? ciModel)
         setValues,
     required TResult Function(int index, PlayerModel player) setPlayer,
   }) {
     return setValues(
-        players, addScore, roles, win, bestMove, referee, died, date);
+        players, addScore, roles, win, bestMove, referee, died, date, ciModel);
   }
 
   @override
@@ -298,12 +327,13 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)?
+            DateTime date,
+            CiSchemeModel? ciModel)?
         setValues,
     TResult? Function(int index, PlayerModel player)? setPlayer,
   }) {
     return setValues?.call(
-        players, addScore, roles, win, bestMove, referee, died, date);
+        players, addScore, roles, win, bestMove, referee, died, date, ciModel);
   }
 
   @override
@@ -317,14 +347,15 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)?
+            DateTime date,
+            CiSchemeModel? ciModel)?
         setValues,
     TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),
   }) {
     if (setValues != null) {
-      return setValues(
-          players, addScore, roles, win, bestMove, referee, died, date);
+      return setValues(players, addScore, roles, win, bestMove, referee, died,
+          date, ciModel);
     }
     return orElse();
   }
@@ -370,7 +401,8 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
       required final BestMove bestMove,
       required final String referee,
       required final int died,
-      required final DateTime date}) = _$AddClubGameEffectSetValues;
+      required final DateTime date,
+      final CiSchemeModel? ciModel}) = _$AddClubGameEffectSetValues;
 
   List<String> get players;
   List<double> get addScore;
@@ -380,6 +412,7 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
   String get referee;
   int get died;
   DateTime get date;
+  CiSchemeModel? get ciModel;
   @JsonKey(ignore: true)
   _$$AddClubGameEffectSetValuesCopyWith<_$AddClubGameEffectSetValues>
       get copyWith => throw _privateConstructorUsedError;
@@ -479,7 +512,8 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)
+            DateTime date,
+            CiSchemeModel? ciModel)
         setValues,
     required TResult Function(int index, PlayerModel player) setPlayer,
   }) {
@@ -497,7 +531,8 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)?
+            DateTime date,
+            CiSchemeModel? ciModel)?
         setValues,
     TResult? Function(int index, PlayerModel player)? setPlayer,
   }) {
@@ -515,7 +550,8 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
             BestMove bestMove,
             String referee,
             int died,
-            DateTime date)?
+            DateTime date,
+            CiSchemeModel? ciModel)?
         setValues,
     TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),

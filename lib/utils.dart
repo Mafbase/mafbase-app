@@ -10,6 +10,7 @@ extension BuildContextLocaleExt on BuildContext {
 }
 
 final dateFormatForRequests = DateFormat("yyyy-MM-dd");
+
 String get sentryUrl => String.fromCharCodes([
       104,
       116,
@@ -102,7 +103,7 @@ String get sentryUrl => String.fromCharCodes([
       53,
       48,
       53,
-      54
+      54,
     ]);
 
 class Pair<F, S> {

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
@@ -15,6 +16,7 @@ class AddClubGameEffect with _$AddClubGameEffect {
     required String referee,
     required int died,
     required DateTime date,
+    CiSchemeModel? ciModel,
   }) = AddClubGameEffectSetValues;
 
   const factory AddClubGameEffect.setPlayer({
