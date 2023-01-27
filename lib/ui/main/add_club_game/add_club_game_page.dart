@@ -688,22 +688,77 @@ class NicknameField extends StatelessWidget {
           }
         },
         onSubmit: () {},
-        optionsBuilder: (value) =>
-            availablePlayers
-                .where(
-                  (element) => element.nickname
-                      .toLowerCase()
-                      .contains(value.text.toLowerCase()),
-                )
-                .sortedBy<num>(
-                  (element) => element.nickname.length,
-                ) +
-            [
-              if (onNewPlayer != null)
-                PlayerModel(id: -1, nickname: value.text),
-            ],
+        optionsBuilder: (value) {
+          var players = availablePlayers
+              .where(
+                (element) => element.nickname
+                    .toLowerCase()
+                    .contains(value.text.toLowerCase()),
+              )
+              .sortedBy<num>(
+                (element) => element.nickname.length,
+              );
+
+          players += availablePlayers
+              .where(
+                (element) => map(element.nickname)
+                .toLowerCase()
+                .contains(map(value.text.toLowerCase())),
+          )
+              .where((element) => !players.contains(element))
+              .sortedBy<num>(
+                (element) => element.nickname.length,
+          );
+
+          return players +
+              [
+                if (onNewPlayer != null)
+                  PlayerModel(id: -1, nickname: value.text),
+              ];
+        },
         hint: hint,
       ),
     );
+  }
+
+  String map(String value) {
+    final map = {
+      "q": "й",
+      "w": "ц",
+      "e": "у",
+      "r": "к",
+      "t": "е",
+      "y": "н",
+      "u": "г",
+      "i": "ш",
+      "o": "щ",
+      "p": "з",
+      "[": "х",
+      "]": "ъ",
+      "a": "ф",
+      "s": "ы",
+      "d": "в",
+      "f": "а",
+      "g": "п",
+      "h": "р",
+      "j": "о",
+      "k": "л",
+      "l": "д",
+      ";": "ж",
+      "'": "э",
+      "\\": "й",
+      "z": "я",
+      "x": "ч",
+      "c": "с",
+      "v": "м",
+      "b": "и",
+      "n": "т",
+      "m": "ь",
+      ",": "б",
+      ".": "ю",
+    };
+    return value.characters.map((e) {
+      return map[e.toLowerCase()] ?? e.toLowerCase();
+    }).fold("",(value, element) => value + element);
   }
 }
