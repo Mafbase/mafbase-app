@@ -124,10 +124,12 @@ class AppRouter {
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: TournamentsPage()),
                 redirect: (context, state) async {
+                  if (!state.location.endsWith('/')) {
+                    return null;
+                  }
                   try {
                     final response =
                         await getIt<MyHttpClient>().get("/api/auth");
-                    debugPrint(response.statusCode.toString());
                     if (response.statusCode == 200) {
                       return null;
                     }
