@@ -29,6 +29,19 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 
 class AppRouter {
   final router = GoRouter(
+    redirect: (context, state) async {
+      if (!state.location.endsWith('/')) {
+        return null;
+      }
+      try {
+        final response =
+        await getIt<MyHttpClient>().get("/api/auth");
+        if (response.statusCode == 200) {
+          return null;
+        }
+      } catch (_) {}
+      return AppRoutes.loginPageRoute;
+    },
     routes: [
       TempPage.route,
       TranslationContentPage.route,
@@ -123,19 +136,6 @@ class AppRouter {
                 path: '/',
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: TournamentsPage()),
-                redirect: (context, state) async {
-                  if (!state.location.endsWith('/')) {
-                    return null;
-                  }
-                  try {
-                    final response =
-                        await getIt<MyHttpClient>().get("/api/auth");
-                    if (response.statusCode == 200) {
-                      return null;
-                    }
-                  } catch (_) {}
-                  return AppRoutes.loginPageRoute;
-                },
               ),
               GoRoute(
                 path: AppRoutes.routeFromTab(MainPageTab.addTournament),
