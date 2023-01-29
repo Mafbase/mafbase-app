@@ -15,37 +15,26 @@ class SeatingList extends StatelessWidget {
     return ListView.separated(
       itemCount: models.length,
       itemBuilder: (context, columnIndex) {
-        return Stack(
-          children: [
-            const SizedBox(
-              width: double.infinity,
-            ),
-            IgnorePointer(
-              ignoring: true,
-              child: Opacity(
-                opacity: 0,
-                child: models[columnIndex].isNotEmpty
-                    ? GameResultWidget(model: models[columnIndex].first)
-                    : Container(),
+        return LayoutBuilder(
+          builder: (context, layout) => SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              constraints: BoxConstraints(
+                minWidth: layout.maxWidth,
               ),
-            ),
-            Positioned.fill(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: models[columnIndex].length,
-                itemBuilder: (context, index) {
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: models[columnIndex].map((model) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Center(
-                      child: GameResultWidget(
-                        model: models[columnIndex][index],
-                      ),
+                    child: GameResultWidget(
+                      model: model,
                     ),
                   );
-                },
+                }).toList(),
               ),
             ),
-          ],
+          ),
         );
       },
       separatorBuilder: (BuildContext context, int index) {
