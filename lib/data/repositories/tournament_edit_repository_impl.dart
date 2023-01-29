@@ -3,11 +3,14 @@ import 'package:seating_generator_web/data/requests/delete_separation_request.da
 import 'package:seating_generator_web/data/requests/get_ci_schemes_request.dart';
 import 'package:seating_generator_web/data/requests/get_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_separations_request.dart';
+import 'package:seating_generator_web/data/requests/get_settings_request.dart';
 import 'package:seating_generator_web/data/requests/separate_players_request.dart';
+import 'package:seating_generator_web/data/requests/update_settings_request.dart';
 import 'package:seating_generator_web/domain/base_repository.dart';
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -83,4 +86,21 @@ class TournamentEditRepositoryImpl extends BaseRepository
           .toList();
     });
   }
+
+  @override
+  Future<TournamentSettingsModel> getSettings({required int tournamentId}) {
+    return GetSettingsRequest(tournamentId: tournamentId)
+        .execute(client)
+        .then((value) => TournamentSettingsModel.fromProto(value));
+  }
+
+  @override
+  Future updateSetting({
+    required int tournamentId,
+    required TournamentSettingsModel settings,
+  }) {
+    return UpdateSettingsRequest(
+      tournamentId: tournamentId,
+      settings: settings.toProto(),
+    ).execute(client);}
 }

@@ -23,11 +23,13 @@ import 'package:seating_generator_web/domain/interactors/get_club_interactor.dar
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
@@ -254,5 +256,11 @@ void registerSharedGetIt() {
     )
     ..registerFactoryParam<RatingBloc, BuildContext?, dynamic>(
       (context, _) => RatingBloc(context),
+    )
+    ..registerLazySingleton<GetSettingsInteractor>(
+      () => GetSettingsInteractor(getIt()),
+    )
+    ..registerLazySingleton<UpdateSettingsInteractor>(
+      () => UpdateSettingsInteractor(getIt()),
     );
 }

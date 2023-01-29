@@ -153,5 +153,7 @@
   "cityWon": "Победа города",
   "@cityWon": {},
   "draw": "Ничья",
-  "@draw": {}
+  "@draw": {},
+  "tournamentSettingsUpdateSuccess": "Настройки турнира успешно обновлены",
+  "@tournamentSettingsUpdateSuccess": {}
 }

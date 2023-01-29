@@ -20,6 +20,7 @@ mixin _$TournamentPageState {
   List<PlayerModel> get players => throw _privateConstructorUsedError;
   List<PlayerModel> get tournamentPlayers => throw _privateConstructorUsedError;
   List<List<PlayerModel>> get cannotMeet => throw _privateConstructorUsedError;
+  TournamentSettingsModel get settings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentPageStateCopyWith<TournamentPageState> get copyWith =>
@@ -36,7 +37,10 @@ abstract class $TournamentPageStateCopyWith<$Res> {
       {bool isLoading,
       List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
-      List<List<PlayerModel>> cannotMeet});
+      List<List<PlayerModel>> cannotMeet,
+      TournamentSettingsModel settings});
+
+  $TournamentSettingsModelCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -56,6 +60,7 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     Object? players = null,
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
+    Object? settings = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -74,7 +79,19 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.cannotMeet
           : cannotMeet // ignore: cast_nullable_to_non_nullable
               as List<List<PlayerModel>>,
+      settings: null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as TournamentSettingsModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TournamentSettingsModelCopyWith<$Res> get settings {
+    return $TournamentSettingsModelCopyWith<$Res>(_value.settings, (value) {
+      return _then(_value.copyWith(settings: value) as $Val);
+    });
   }
 }
 
@@ -90,7 +107,11 @@ abstract class _$$_TournamentPageStateCopyWith<$Res>
       {bool isLoading,
       List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
-      List<List<PlayerModel>> cannotMeet});
+      List<List<PlayerModel>> cannotMeet,
+      TournamentSettingsModel settings});
+
+  @override
+  $TournamentSettingsModelCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -108,6 +129,7 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
     Object? players = null,
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
+    Object? settings = null,
   }) {
     return _then(_$_TournamentPageState(
       isLoading: null == isLoading
@@ -126,6 +148,10 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
           ? _value._cannotMeet
           : cannotMeet // ignore: cast_nullable_to_non_nullable
               as List<List<PlayerModel>>,
+      settings: null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as TournamentSettingsModel,
     ));
   }
 }
@@ -137,7 +163,9 @@ class _$_TournamentPageState implements _TournamentPageState {
       {this.isLoading = true,
       final List<PlayerModel> players = const [],
       final List<PlayerModel> tournamentPlayers = const [],
-      final List<List<PlayerModel>> cannotMeet = const []})
+      final List<List<PlayerModel>> cannotMeet = const [],
+      this.settings = const TournamentSettingsModel(
+          defaultGames: 0, swissGames: 0, finalGames: 0)})
       : _players = players,
         _tournamentPlayers = tournamentPlayers,
         _cannotMeet = cannotMeet;
@@ -174,8 +202,12 @@ class _$_TournamentPageState implements _TournamentPageState {
   }
 
   @override
+  @JsonKey()
+  final TournamentSettingsModel settings;
+
+  @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet)';
+    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, settings: $settings)';
   }
 
   @override
@@ -189,7 +221,9 @@ class _$_TournamentPageState implements _TournamentPageState {
             const DeepCollectionEquality()
                 .equals(other._tournamentPlayers, _tournamentPlayers) &&
             const DeepCollectionEquality()
-                .equals(other._cannotMeet, _cannotMeet));
+                .equals(other._cannotMeet, _cannotMeet) &&
+            (identical(other.settings, settings) ||
+                other.settings == settings));
   }
 
   @override
@@ -198,7 +232,8 @@ class _$_TournamentPageState implements _TournamentPageState {
       isLoading,
       const DeepCollectionEquality().hash(_players),
       const DeepCollectionEquality().hash(_tournamentPlayers),
-      const DeepCollectionEquality().hash(_cannotMeet));
+      const DeepCollectionEquality().hash(_cannotMeet),
+      settings);
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +248,8 @@ abstract class _TournamentPageState implements TournamentPageState {
       {final bool isLoading,
       final List<PlayerModel> players,
       final List<PlayerModel> tournamentPlayers,
-      final List<List<PlayerModel>> cannotMeet}) = _$_TournamentPageState;
+      final List<List<PlayerModel>> cannotMeet,
+      final TournamentSettingsModel settings}) = _$_TournamentPageState;
 
   @override
   bool get isLoading;
@@ -223,6 +259,8 @@ abstract class _TournamentPageState implements TournamentPageState {
   List<PlayerModel> get tournamentPlayers;
   @override
   List<List<PlayerModel>> get cannotMeet;
+  @override
+  TournamentSettingsModel get settings;
   @override
   @JsonKey(ignore: true)
   _$$_TournamentPageStateCopyWith<_$_TournamentPageState> get copyWith =>

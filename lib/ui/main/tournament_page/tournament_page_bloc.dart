@@ -5,14 +5,18 @@ import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
 
 class TournamentPageBloc
-    extends CustomBloc<TournamentPageEvent, TournamentPageState> {
+    extends CustomBloc<TournamentPageEvent, TournamentPageState>
+    with EffectEmitter<TournamentPageEffect, TournamentPageState> {
   late int tournamentId;
   final GetAllPlayersInteractor _getAllPlayersInteractor = getIt();
   final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
@@ -21,6 +25,8 @@ class TournamentPageBloc
 
   final AddTournamentPlayerInteractor _addPlayerInteractor = getIt();
   final DeletePlayerInteractor _deletePlayerInteractor = getIt();
+  final GetSettingsInteractor _getSettingsInteractor = getIt();
+  final UpdateSettingsInteractor _updateSettingsInteractor = getIt();
 
   @visibleForTesting
   late final TournamentPageRouter router =
@@ -34,6 +40,7 @@ class TournamentPageBloc
     on<TournamentPageEventOpenProfileDialog>(_onOpenProfile);
     on<TournamentPageEventOpenSeatingPage>(_onOpenSeatingPage);
     on<TournamentPageEventPlayersListTapped>(_onPlayersListTapped);
+    on<TournamentPageEventUpdateSettings>(_onUpdateSettings);
   }
 
   _onPlayersListTapped(
@@ -104,13 +111,42 @@ class TournamentPageBloc
     emit(state.copyWith(isLoading: false));
   }
 
+  Future _onUpdateSettings(
+    TournamentPageEventUpdateSettings event,
+    Emitter emit,
+  ) async {
+    emit(
+      state.copyWith(
+        settings: await _updateSettingsInteractor
+            .run(
+              tournamentId: tournamentId,
+              model: event.settings,
+            )
+            .then(
+              (_) => _getSettingsInteractor.run(
+                tournamentId: tournamentId,
+              ),
+            )
+            .then((settings) {
+          emitEffect(const TournamentPageEffect.showUpdateSettingsSuccess());
+          return settings;
+        }),
+      ),
+    );
+  }
+
   Future _onPlayerListOpened(
     TournamentPagePlayerListOpenedEvent event,
     Emitter<TournamentPageState> emit,
   ) async {
     tournamentId = event.tournamentId;
     emit(state.copyWith(isLoading: true));
-    await _updatePlayers(emit);
+    await Future.wait([
+      _updatePlayers(emit),
+      _getSettingsInteractor.run(tournamentId: tournamentId).then((settings) {
+        emit(state.copyWith(settings: settings));
+      })
+    ]);
     emit(state.copyWith(isLoading: false));
   }
 

@@ -15,8 +15,8 @@ class CustomTextField extends StatefulWidget {
   final String? hint;
   final String? label;
   final bool isRequiredField;
-  final double bottomPadding;
   final Function(String s)? onSubmit;
+  final Function(String s)? onChanged;
   final FocusNode? focusNode;
   final TextInputType? textInputType;
   final bool readOnly;
@@ -35,10 +35,10 @@ class CustomTextField extends StatefulWidget {
     this.errorText,
     this.focusNode,
     this.autoFillHints,
-    this.bottomPadding = 10,
     this.canObscure = false,
     this.isRequiredField = false,
     this.validate = _validate,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -52,75 +52,71 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: Row(
-        children: [
-          if (widget.icon != null)
-            Padding(
-              padding: const EdgeInsets.only(
-                right: 24,
+    return Stack(
+      children: [
+        Row(
+          children: [
+            if (widget.icon != null)
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 24,
+                ),
+                child: widget.icon!,
               ),
-              child: widget.icon!,
+            Expanded(
+              child: TextFormField(
+                onChanged: widget.onChanged,
+                autofillHints: widget.autoFillHints,
+                validator: widget.validate,
+                readOnly: widget.readOnly,
+                keyboardType: widget.textInputType,
+                onFieldSubmitted: widget.onSubmit,
+                focusNode: widget.focusNode,
+                controller: widget.controller,
+                obscureText: obscureText,
+                decoration: InputDecoration(
+                  suffixIcon: widget.suffixIcon,
+                  errorText: widget.errorText,
+                  errorMaxLines: 1,
+                  hintText: widget.hint,
+                  labelText: widget.label,
+                  border: const UnderlineInputBorder(),
+                ),
+              ),
             ),
-          Expanded(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: TextFormField(
-                    autofillHints: widget.autoFillHints,
-                    validator: widget.validate,
-                    readOnly: widget.readOnly,
-                    keyboardType: widget.textInputType,
-                    onFieldSubmitted: widget.onSubmit,
-                    focusNode: widget.focusNode,
-                    controller: widget.controller,
-                    obscureText: obscureText,
-                    decoration: InputDecoration(
-                      suffixIcon: widget.suffixIcon,
-                      errorText: widget.errorText,
-                      errorMaxLines: 1,
-                      hintText: widget.hint,
-                      labelText: widget.label,
-                      border: const UnderlineInputBorder(),
-                    ),
+          ],
+        ),
+        Positioned(
+          top: 0,
+          bottom: 0,
+          right: 0,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.canObscure)
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.remove_red_eye_outlined,
+                    color: MyTheme.of(context).borderColor,
                   ),
                 ),
-                Positioned(
-                  top: 0,
-                  bottom: 0,
-                  right: 0,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (widget.canObscure)
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              obscureText = !obscureText;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: MyTheme.of(context).borderColor,
-                          ),
-                        ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      if (widget.isRequiredField)
-                        SvgPicture.asset(
-                          AppAssets.exclamationPoint,
-                          height: 18,
-                        ),
-                    ],
-                  ),
+              const SizedBox(
+                width: 10,
+              ),
+              if (widget.isRequiredField)
+                SvgPicture.asset(
+                  AppAssets.exclamationPoint,
+                  height: 18,
                 ),
-              ],
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

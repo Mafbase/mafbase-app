@@ -1,6 +1,7 @@
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
 abstract class TournamentEditRepository {
@@ -24,5 +25,12 @@ abstract class TournamentEditRepository {
 
   Future<List<List<GameResultModel>>> getResultModels({
     required int tournamentId,
+  });
+
+  Future<TournamentSettingsModel> getSettings({required int tournamentId});
+
+  Future updateSetting({
+    required int tournamentId,
+    required TournamentSettingsModel settings,
   });
 }
