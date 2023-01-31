@@ -109,6 +109,10 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     final isOwner = list[1] as bool;
     final club = list[2] as ClubModel;
     final ciSchemes = list[3] as List<CiSchemeModel>;
+    if (!event.viewOnly && !isOwner) {
+      router.openLoginPage();
+      return;
+    }
 
     emit(
       state.copyWith(

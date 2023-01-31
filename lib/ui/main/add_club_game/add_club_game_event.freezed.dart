@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddClubGameEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? gameId) pageOpened,
+    required TResult Function(int? gameId, bool viewOnly) pageOpened,
     required TResult Function(ClubGameResult gameResult, int? gameId) submit,
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
@@ -27,7 +27,7 @@ mixin _$AddClubGameEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(int? gameId, bool viewOnly)? pageOpened,
     TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
@@ -36,7 +36,7 @@ mixin _$AddClubGameEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
+    TResult Function(int? gameId, bool viewOnly)? pageOpened,
     TResult Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
@@ -99,7 +99,7 @@ abstract class _$$AddClubGameEventPageOpenedCopyWith<$Res> {
           $Res Function(_$AddClubGameEventPageOpened) then) =
       __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>;
   @useResult
-  $Res call({int? gameId});
+  $Res call({int? gameId, bool viewOnly});
 }
 
 /// @nodoc
@@ -115,12 +115,17 @@ class __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? gameId = freezed,
+    Object? viewOnly = null,
   }) {
     return _then(_$AddClubGameEventPageOpened(
       gameId: freezed == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
               as int?,
+      viewOnly: null == viewOnly
+          ? _value.viewOnly
+          : viewOnly // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -128,14 +133,16 @@ class __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
-  const _$AddClubGameEventPageOpened({this.gameId});
+  const _$AddClubGameEventPageOpened({this.gameId, required this.viewOnly});
 
   @override
   final int? gameId;
+  @override
+  final bool viewOnly;
 
   @override
   String toString() {
-    return 'AddClubGameEvent.pageOpened(gameId: $gameId)';
+    return 'AddClubGameEvent.pageOpened(gameId: $gameId, viewOnly: $viewOnly)';
   }
 
   @override
@@ -143,11 +150,13 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddClubGameEventPageOpened &&
-            (identical(other.gameId, gameId) || other.gameId == gameId));
+            (identical(other.gameId, gameId) || other.gameId == gameId) &&
+            (identical(other.viewOnly, viewOnly) ||
+                other.viewOnly == viewOnly));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, gameId);
+  int get hashCode => Object.hash(runtimeType, gameId, viewOnly);
 
   @JsonKey(ignore: true)
   @override
@@ -159,31 +168,31 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? gameId) pageOpened,
+    required TResult Function(int? gameId, bool viewOnly) pageOpened,
     required TResult Function(ClubGameResult gameResult, int? gameId) submit,
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
     required TResult Function() newGame,
   }) {
-    return pageOpened(gameId);
+    return pageOpened(gameId, viewOnly);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(int? gameId, bool viewOnly)? pageOpened,
     TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
     TResult? Function()? newGame,
   }) {
-    return pageOpened?.call(gameId);
+    return pageOpened?.call(gameId, viewOnly);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
+    TResult Function(int? gameId, bool viewOnly)? pageOpened,
     TResult Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
@@ -191,7 +200,7 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
-      return pageOpened(gameId);
+      return pageOpened(gameId, viewOnly);
     }
     return orElse();
   }
@@ -238,10 +247,12 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
 }
 
 abstract class AddClubGameEventPageOpened implements AddClubGameEvent {
-  const factory AddClubGameEventPageOpened({final int? gameId}) =
-      _$AddClubGameEventPageOpened;
+  const factory AddClubGameEventPageOpened(
+      {final int? gameId,
+      required final bool viewOnly}) = _$AddClubGameEventPageOpened;
 
   int? get gameId;
+  bool get viewOnly;
   @JsonKey(ignore: true)
   _$$AddClubGameEventPageOpenedCopyWith<_$AddClubGameEventPageOpened>
       get copyWith => throw _privateConstructorUsedError;
@@ -321,7 +332,7 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? gameId) pageOpened,
+    required TResult Function(int? gameId, bool viewOnly) pageOpened,
     required TResult Function(ClubGameResult gameResult, int? gameId) submit,
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
@@ -333,7 +344,7 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(int? gameId, bool viewOnly)? pageOpened,
     TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
@@ -345,7 +356,7 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
+    TResult Function(int? gameId, bool viewOnly)? pageOpened,
     TResult Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
@@ -477,7 +488,7 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? gameId) pageOpened,
+    required TResult Function(int? gameId, bool viewOnly) pageOpened,
     required TResult Function(ClubGameResult gameResult, int? gameId) submit,
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
@@ -489,7 +500,7 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(int? gameId, bool viewOnly)? pageOpened,
     TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
@@ -501,7 +512,7 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
+    TResult Function(int? gameId, bool viewOnly)? pageOpened,
     TResult Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
@@ -641,7 +652,7 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? gameId) pageOpened,
+    required TResult Function(int? gameId, bool viewOnly) pageOpened,
     required TResult Function(ClubGameResult gameResult, int? gameId) submit,
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
@@ -653,7 +664,7 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(int? gameId, bool viewOnly)? pageOpened,
     TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
@@ -665,7 +676,7 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
+    TResult Function(int? gameId, bool viewOnly)? pageOpened,
     TResult Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
@@ -770,7 +781,7 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? gameId) pageOpened,
+    required TResult Function(int? gameId, bool viewOnly) pageOpened,
     required TResult Function(ClubGameResult gameResult, int? gameId) submit,
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
@@ -782,7 +793,7 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? gameId)? pageOpened,
+    TResult? Function(int? gameId, bool viewOnly)? pageOpened,
     TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
@@ -794,7 +805,7 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? gameId)? pageOpened,
+    TResult Function(int? gameId, bool viewOnly)? pageOpened,
     TResult Function(ClubGameResult gameResult, int? gameId)? submit,
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,

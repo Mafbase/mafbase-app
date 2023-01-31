@@ -147,9 +147,10 @@ class _AddClubGamePageState extends State<AddClubGamePage>
 
   @override
   void initState() {
-    context
-        .read<AddClubGameBloc>()
-        .add(AddClubGameEvent.pageOpened(gameId: widget.gameId));
+    context.read<AddClubGameBloc>().add(AddClubGameEvent.pageOpened(
+          gameId: widget.gameId,
+          viewOnly: widget.readOnly,
+        ));
     super.initState();
   }
 
@@ -186,9 +187,12 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   @override
   void didUpdateWidget(covariant AddClubGamePage oldWidget) {
     if (oldWidget.gameId != widget.gameId) {
-      context
-          .read<AddClubGameBloc>()
-          .add(AddClubGameEvent.pageOpened(gameId: widget.gameId));
+      context.read<AddClubGameBloc>().add(
+            AddClubGameEvent.pageOpened(
+              gameId: widget.gameId,
+              viewOnly: widget.readOnly,
+            ),
+          );
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -702,13 +706,13 @@ class NicknameField extends StatelessWidget {
           players += availablePlayers
               .where(
                 (element) => map(element.nickname)
-                .toLowerCase()
-                .contains(map(value.text.toLowerCase())),
-          )
+                    .toLowerCase()
+                    .contains(map(value.text.toLowerCase())),
+              )
               .where((element) => !players.contains(element))
               .sortedBy<num>(
                 (element) => element.nickname.length,
-          );
+              );
 
           return players +
               [
@@ -759,6 +763,6 @@ class NicknameField extends StatelessWidget {
     };
     return value.characters.map((e) {
       return map[e.toLowerCase()] ?? e.toLowerCase();
-    }).fold("",(value, element) => value + element);
+    }).fold("", (value, element) => value + element);
   }
 }
