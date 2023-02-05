@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/repositories/tournament_edit_repository_impl.dart';
+import 'package:seating_generator_web/data/storages/credential_secure_storage_impl.dart';
+import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_hive_impl.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
@@ -72,10 +74,13 @@ void registerGetIt() {
     ..registerLazySingleton<TokenStorage>(
       () => _useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl(),
     )
+    ..registerLazySingleton<CredentialStorage>(
+      () => CredentialSecureStorageImpl(),
+    )
     ..registerLazySingleton<MyHttpClient>(
       () => kReleaseMode
-          ? MyHttpClient.autoForWeb(getIt())
-          : MyHttpClient.withDefaultUrl(getIt()),
+          ? MyHttpClient.autoForWeb(getIt(), getIt())
+          : MyHttpClient.withDefaultUrl(getIt(), getIt()),
     )
     ..registerFactoryParam<RatingRouter, BuildContext, void>(
       (context, _) => RatingRouterImpl(context),
@@ -135,7 +140,12 @@ void registerSharedGetIt() {
     ..registerLazySingleton<GetSeparationInteractor>(
       () => GetSeparationInteractor(getIt()),
     )
-    ..registerLazySingleton<LoginInteractor>(() => LoginInteractor(getIt()))
+    ..registerLazySingleton<LoginInteractor>(
+      () => LoginInteractor(
+        getIt(),
+        getIt(),
+      ),
+    )
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
     ..registerLazySingleton<CreatePlayerInteractor>(
       () => CreatePlayerInteractor(getIt()),

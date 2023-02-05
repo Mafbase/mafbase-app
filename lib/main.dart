@@ -46,6 +46,15 @@ class App extends StatelessWidget {
         builder: (context) {
           return MaterialApp.router(
             title: 'Mafbase',
+            theme: ThemeData.light(useMaterial3: true).copyWith(
+              colorScheme:
+                  ThemeData.light(useMaterial3: true).colorScheme.copyWith(
+                        primary: MyTheme.of(context).darkGreyColor,
+                        primaryContainer: MyTheme.of(context).darkBlueColor,
+                        secondary: MyTheme.of(context).redColor,
+                        secondaryContainer: MyTheme.of(context).redColor,
+                      ),
+            ),
             routerDelegate: context.read<AppRouter>().router.routerDelegate,
             routeInformationProvider:
                 context.read<AppRouter>().router.routeInformationProvider,

@@ -1,4 +1,5 @@
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
@@ -24,6 +25,7 @@ import 'routers/main_router_mock.dart';
 import 'routers/seating_inserting_router_mock.dart';
 import 'routers/sign_up_router_mock.dart';
 import 'routers/verification_router_mock.dart';
+import 'storages/credential_storage_mock.dart';
 
 void registerGetItTest() {
   getIt
@@ -52,6 +54,9 @@ void registerGetItTest() {
     )
     ..registerLazySingleton<PlayersRepository>(
       () => PlayersRepositoryMock(),
+    )
+    ..registerLazySingleton<CredentialStorage>(
+      () => CredentialStorageMock(),
     );
   registerSharedGetIt();
 }

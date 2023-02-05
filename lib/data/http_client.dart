@@ -7,12 +7,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/base_request.dart';
 import 'package:seating_generator_web/data/requests/login_by_token_request.dart';
+import 'package:seating_generator_web/data/requests/login_request.dart';
+import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 class MyHttpClient {
   final String baseUrl;
   final TokenStorage _storage;
+  final CredentialStorage _credentialStorage;
+
   late final _client = Dio(
     BaseOptions(
       responseType: ResponseType.bytes,
@@ -51,15 +55,31 @@ class MyHttpClient {
           LoginByTokenEvent(token: await _storage.recoveryToken),
         ).execute(this);
 
-        if (tokenLoginResponse.token.isEmpty ||
-            tokenLoginResponse.token.isNotEmpty) {
-          return response;
-        }
+        if (tokenLoginResponse.token.isEmpty) {
+          final credentials = await _credentialStorage.read();
+          if (credentials != null) {
+            final authResponse = await LoginRequest(
+              LoginEvent(
+                email: credentials.login,
+                password: credentials.password,
+              ),
+            ).execute(this);
 
-        await _storage.onTokensUpdated(
-          tokenLoginResponse.token,
-          tokenLoginResponse.recoveryToken,
-        );
+            if (authResponse.token.isEmpty) {
+              return response;
+            } else {
+              await _storage.onTokensUpdated(
+                authResponse.token,
+                authResponse.recoveryToken,
+              );
+            }
+          }
+        } else {
+          await _storage.onTokensUpdated(
+            tokenLoginResponse.token,
+            tokenLoginResponse.recoveryToken,
+          );
+        }
         return get(method, useRecoveryToken: false);
       } else {
         throw UnauthenticatedError("Authentication error");
@@ -113,12 +133,16 @@ class MyHttpClient {
     return response;
   }
 
-  Future<Response> putFile(String method, List<int> bytes, [String? fileName]) async {
+  Future<Response> putFile(String method, List<int> bytes,
+      [String? fileName]) async {
     return _client
         .post(
       method,
       data: FormData.fromMap(
-        {"file": MultipartFile.fromBytes(bytes, filename: fileName ?? "temp.csv")},
+        {
+          "file":
+              MultipartFile.fromBytes(bytes, filename: fileName ?? "temp.csv")
+        },
       ),
       options: Options(
         headers: {
@@ -150,10 +174,10 @@ class MyHttpClient {
     }
   }
 
-  MyHttpClient.withDefaultUrl(this._storage)
+  MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage)
       : baseUrl = "https://mafbase.ru";
 
-  MyHttpClient.autoForWeb(this._storage)
+  MyHttpClient.autoForWeb(this._storage, this._credentialStorage)
       : baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";
 }
 

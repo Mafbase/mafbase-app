@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
@@ -21,6 +22,7 @@ void main() {
         const LoginEvent.loginButtonTapped(
           email: "strelas",
           password: "qwerty",
+          rememberMe: true,
         ),
       );
 
@@ -40,6 +42,7 @@ void main() {
         const LoginEvent.loginButtonTapped(
           email: "strelas",
           password: "qwertyqwer",
+          rememberMe: true,
         ),
       );
 
@@ -64,6 +67,41 @@ void main() {
         ),
         true,
       );
+    });
+
+    test('remember me test', () async {
+      final bloc = getIt<LoginBloc>();
+      final storage = getIt<CredentialStorage>();
+      await storage.cleanup();
+      bloc.add(
+        const LoginEvent.loginButtonTapped(
+          email: "strelas",
+          password: "qwerty",
+          rememberMe: true,
+        ),
+      );
+
+      await Future.delayed(const Duration(milliseconds: 10));
+      final credential = await storage.read();
+      expect(credential?.login, "strelas");
+      expect(credential?.password, "qwerty");
+    });
+
+    test('remember me off', () async {
+      final bloc = getIt<LoginBloc>();
+      final storage = getIt<CredentialStorage>();
+      await storage.cleanup();
+      bloc.add(
+        const LoginEvent.loginButtonTapped(
+          email: "strelas",
+          password: "qwerty",
+          rememberMe: false,
+        ),
+      );
+
+      await Future.delayed(const Duration(milliseconds: 10));
+      final credential = await storage.read();
+      expect(credential, null);
     });
   });
 }

@@ -47,7 +47,12 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     emit(LoginState(hasError: false, isLoading: true));
-    final result = await _loginInteractor.run(event.email, event.password);
+
+    final result = await _loginInteractor.run(
+      event.email,
+      event.password,
+      rememberMe: event.rememberMe,
+    );
     if (result is Success) {
       router.openMainPage();
       emit(LoginState(hasError: false));
@@ -78,6 +83,7 @@ abstract class LoginPageRouter {
 class LoginPageRouterImpl implements LoginPageRouter {
   final BuildContext _context;
   final String? _nextPath;
+
   const LoginPageRouterImpl(this._context, [this._nextPath]);
 
   @override

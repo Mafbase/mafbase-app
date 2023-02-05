@@ -34,7 +34,7 @@ class _GameResultWidgetState extends State<GameResultWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                height: 100,
+                height: 120,
                 child: SizedBox(
                   width: width,
                   child: Row(

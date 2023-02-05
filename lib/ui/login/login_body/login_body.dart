@@ -177,6 +177,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
             LoginEvent.loginButtonTapped(
               email: _emailController.text,
               password: _passwordController.text,
+              rememberMe: remember,
             ),
           );
     }
