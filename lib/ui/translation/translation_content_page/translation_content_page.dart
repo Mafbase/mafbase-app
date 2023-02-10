@@ -297,7 +297,7 @@ class _RoleWidgetState extends State<_RoleWidget>
           child: child,
         );
       },
-      child: asset == null ? Container() : SvgPicture.asset(asset),
+      child: asset == null ? Container() : Image.asset(asset),
     );
   }
 }
@@ -372,7 +372,7 @@ class _StatusWidgetState extends State<_StatusWidget>
           child: child,
         );
       },
-      child: asset == null ? Container() : SvgPicture.asset(asset!),
+      child: asset == null ? Container() : Image.asset(asset!),
     );
   }
 }
