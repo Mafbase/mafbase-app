@@ -39,7 +39,7 @@ class _RolePickerState extends State<RolePicker> {
               child: AnimatedOpacity(
                 opacity: widget.playerRole == PlayerRole.maf ? 1.0 : 0.3,
                 duration: duration,
-                child: SvgPicture.asset(
+                child: Image.asset(
                   AppAssets.mafiaAsset(),
                   height: 40,
                 ),
@@ -59,7 +59,7 @@ class _RolePickerState extends State<RolePicker> {
               child: AnimatedOpacity(
                 opacity: widget.playerRole == PlayerRole.don ? 1.0 : 0.3,
                 duration: duration,
-                child: SvgPicture.asset(
+                child: Image.asset(
                   AppAssets.donAsset(),
                   height: 40,
                 ),
@@ -80,7 +80,7 @@ class _RolePickerState extends State<RolePicker> {
               child: AnimatedOpacity(
                 opacity: widget.playerRole == PlayerRole.sheriff ? 1.0 : 0.3,
                 duration: duration,
-                child: SvgPicture.asset(
+                child: Image.asset(
                   AppAssets.sheriffAsset(),
                   height: 40,
                 ),
@@ -103,7 +103,7 @@ class _RolePickerState extends State<RolePicker> {
               child: AnimatedOpacity(
                 opacity: widget.playerRole == PlayerRole.citizen ? 1.0 : 0.3,
                 duration: duration,
-                child: SvgPicture.asset(
+                child: Image.asset(
                   AppAssets.citizenAsset(),
                   height: 40,
                 ),

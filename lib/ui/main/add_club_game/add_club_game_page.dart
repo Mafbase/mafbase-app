@@ -147,10 +147,12 @@ class _AddClubGamePageState extends State<AddClubGamePage>
 
   @override
   void initState() {
-    context.read<AddClubGameBloc>().add(AddClubGameEvent.pageOpened(
-          gameId: widget.gameId,
-          viewOnly: widget.readOnly,
-        ));
+    context.read<AddClubGameBloc>().add(
+          AddClubGameEvent.pageOpened(
+            gameId: widget.gameId,
+            viewOnly: widget.readOnly,
+          ),
+        );
     super.initState();
   }
 
@@ -221,91 +223,39 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               for (int i = 0; i < 10; i++)
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    NicknameField(
-                                      readOnly: widget.readOnly,
-                                      controller: controllers[i],
-                                      focusNode: focusNodes[i],
-                                      availablePlayers: state.players,
-                                      hint: "Игрок ${i + 1}",
-                                      onNewPlayer: ({String? initValue}) async {
-                                        context.read<AddClubGameBloc>().add(
-                                              AddClubGameEvent.onNewPlayer(
-                                                nickname: initValue ?? "",
-                                                index: i,
-                                              ),
-                                            );
-                                      },
-                                      onSelected: () {
-                                        if (i < 9) {
-                                          focusNodes[i + 1].requestFocus();
-                                        } else {
-                                          refereeFocusNode.requestFocus();
-                                        }
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      width: 40,
-                                    ),
-                                    RolePicker(
-                                      readOnly: widget.readOnly,
-                                      playerRole: roles[i],
-                                      onChange: (role) {
-                                        setState(() {
-                                          roles[i] = role;
-                                        });
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      width: 40,
-                                    ),
-                                    SizedBox(
-                                      width: 100,
-                                      child: CustomTextField(
-                                        readOnly: widget.readOnly,
-                                        controller: addScoreControllers[i],
-                                        textInputType: const TextInputType
-                                            .numberWithOptions(
-                                          signed: true,
-                                          decimal: true,
-                                        ),
-                                        hint: "0.0",
-                                        label: "Доп балл",
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              if (state.canEdit) ...[
-                                Container(
-                                  width: 400,
-                                  padding: const EdgeInsets.all(20),
-                                  child: CustomButton(
-                                    text: widget.readOnly
-                                        ? "Изменить"
-                                        : "Сохранить",
-                                    onTap: () => submit(state),
-                                    disabled: state.isLoading,
+                                StatefulBuilder(
+                                  builder: (context, setState) =>
+                                      PlayerRowWidget(
+                                    onRoleChanged: (role) {
+                                      setState(() {
+                                        roles[i] = role;
+                                      });
+                                    },
+                                    addScoreFocusNode: addScoreFocusNodes[i],
+                                    addScoreController: addScoreControllers[i],
+                                    nicknameController: controllers[i],
+                                    focusNode: focusNodes[i],
+                                    readOnly: widget.readOnly,
+                                    availablePlayers: state.players,
+                                    hint: "Игрок ${i + 1}",
+                                    onSelected: () {
+                                      if (i < 9) {
+                                        focusNodes[i + 1].requestFocus();
+                                      } else {
+                                        refereeFocusNode.requestFocus();
+                                      }
+                                    },
+                                    role: roles[i],
+                                    onNewPlayer: ({String? initValue}) async {
+                                      context.read<AddClubGameBloc>().add(
+                                            AddClubGameEvent.onNewPlayer(
+                                              nickname: initValue ?? "",
+                                              index: i,
+                                            ),
+                                          );
+                                    },
                                   ),
                                 ),
-                                if (widget.readOnly)
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        context.read<AddClubGameBloc>().add(
-                                              const AddClubGameEvent.newGame(),
-                                            );
-                                      },
-                                      child: Text(
-                                        context.locale.addGame,
-                                        style: MyTheme.of(context)
-                                            .textBtnTextStyle,
-                                      ),
-                                    ),
-                                  ),
-                              ],
                             ],
                           ),
                           Expanded(
@@ -350,27 +300,30 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      CustomDropdown<int>(
-                                        initValue: firstDie,
-                                        items: List.generate(
-                                          11,
-                                          (index) {
-                                            return index - 1;
-                                          },
+                                      StatefulBuilder(
+                                        builder: (context, setState) =>
+                                            CustomDropdown<int>(
+                                          initValue: firstDie,
+                                          items: List.generate(
+                                            11,
+                                            (index) {
+                                              return index - 1;
+                                            },
+                                          ),
+                                          mapToString: (index) => index == -1
+                                              ? "Промах"
+                                              : ((index ?? 0) + 1).toString(),
+                                          onChanged: widget.readOnly
+                                              ? null
+                                              : (value) {
+                                                  setState(() {
+                                                    firstDie = value ?? -1;
+                                                    if (firstDie == -1) {
+                                                      bestMove = BestMove.miss;
+                                                    }
+                                                  });
+                                                },
                                         ),
-                                        mapToString: (index) => index == -1
-                                            ? "Промах"
-                                            : ((index ?? 0) + 1).toString(),
-                                        onChanged: widget.readOnly
-                                            ? null
-                                            : (value) {
-                                                setState(() {
-                                                  firstDie = value ?? -1;
-                                                  if (firstDie == -1) {
-                                                    bestMove = BestMove.miss;
-                                                  }
-                                                });
-                                              },
                                       ),
                                       if (firstDie != -1) ...[
                                         Text(
@@ -416,34 +369,38 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      CustomDropdown<GameWin>(
-                                        initValue: winSelected,
-                                        mapToString: (win) {
-                                          final String text;
-                                          switch (win) {
-                                            case GameWin.city:
-                                              text = "Победа города";
-                                              break;
-                                            case GameWin.draw:
-                                              text = "Ничья";
-                                              break;
-                                            case GameWin.mafia:
-                                              text = "Победа мафии";
-                                              break;
-                                            default:
-                                              text = "";
-                                              break;
-                                          }
-                                          return text;
+                                      StatefulBuilder(
+                                        builder: (context, setState) {
+                                          return CustomDropdown<GameWin>(
+                                            initValue: winSelected,
+                                            mapToString: (win) {
+                                              final String text;
+                                              switch (win) {
+                                                case GameWin.city:
+                                                  text = "Победа города";
+                                                  break;
+                                                case GameWin.draw:
+                                                  text = "Ничья";
+                                                  break;
+                                                case GameWin.mafia:
+                                                  text = "Победа мафии";
+                                                  break;
+                                                default:
+                                                  text = "";
+                                                  break;
+                                              }
+                                              return text;
+                                            },
+                                            items: GameWin.values,
+                                            onChanged: widget.readOnly
+                                                ? null
+                                                : (value) {
+                                                    setState(() {
+                                                      winSelected = value;
+                                                    });
+                                                  },
+                                          );
                                         },
-                                        items: GameWin.values,
-                                        onChanged: widget.readOnly
-                                            ? null
-                                            : (value) {
-                                                setState(() {
-                                                  winSelected = value;
-                                                });
-                                              },
                                       ),
                                     ],
                                   ),
@@ -457,98 +414,139 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      CustomDropdown<CiSchemeModel>(
-                                        initValue: ciSchemeModel,
-                                        mapToString: (model) {
-                                          return model?.name ??
-                                              context.locale.withoutCi;
-                                        },
-                                        items: List.generate(
-                                          state.ciSchemes.length + 1,
-                                          (index) {
-                                            if (index == 0) {
-                                              return null;
-                                            }
-                                            return state.ciSchemes[index - 1];
-                                          },
-                                        ),
-                                        onChanged: widget.readOnly
-                                            ? null
-                                            : (value) {
-                                                setState(() {
-                                                  ciSchemeModel = value;
-                                                });
+                                      StatefulBuilder(
+                                        builder: (context, setState) {
+                                          return CustomDropdown<CiSchemeModel>(
+                                            initValue: ciSchemeModel,
+                                            mapToString: (model) {
+                                              return model?.name ??
+                                                  context.locale.withoutCi;
+                                            },
+                                            items: List.generate(
+                                              state.ciSchemes.length + 1,
+                                              (index) {
+                                                if (index == 0) {
+                                                  return null;
+                                                }
+                                                return state
+                                                    .ciSchemes[index - 1];
                                               },
+                                            ),
+                                            onChanged: widget.readOnly
+                                                ? null
+                                                : (value) {
+                                                    setState(() {
+                                                      ciSchemeModel = value;
+                                                    });
+                                                  },
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
-                                  InkWell(
-                                    onTap: widget.readOnly
-                                        ? null
-                                        : () {
-                                            showDatePicker(
-                                              context: context,
-                                              initialDate: date,
-                                              firstDate: DateTime(2000),
-                                              lastDate: DateTime.now(),
-                                            ).then((value) async {
-                                              if (!mounted) return null;
-                                              if (value != null) {
-                                                final timeOfDay =
-                                                    await showTimePicker(
-                                                  context: context,
-                                                  initialTime:
-                                                      TimeOfDay.fromDateTime(
-                                                    date,
-                                                  ),
-                                                  initialEntryMode:
-                                                      TimePickerEntryMode.input,
-                                                  builder: (context, child) =>
-                                                      MediaQuery(
-                                                    data: MediaQuery.of(context)
-                                                        .copyWith(
-                                                      alwaysUse24HourFormat:
-                                                          true,
+                                  StatefulBuilder(
+                                    builder: (context, setState) => InkWell(
+                                      onTap: widget.readOnly
+                                          ? null
+                                          : () {
+                                              showDatePicker(
+                                                context: context,
+                                                initialDate: date,
+                                                firstDate: DateTime(2000),
+                                                lastDate: DateTime.now(),
+                                              ).then((value) async {
+                                                if (!mounted) return null;
+                                                if (value != null) {
+                                                  final timeOfDay =
+                                                      await showTimePicker(
+                                                    context: context,
+                                                    initialTime:
+                                                        TimeOfDay.fromDateTime(
+                                                      date,
                                                     ),
-                                                    child: child ?? Container(),
-                                                  ),
-                                                );
-                                                if (timeOfDay != null) {
-                                                  return DateTime(
-                                                    value.year,
-                                                    value.month,
-                                                    value.day,
-                                                    timeOfDay.hour,
-                                                    timeOfDay.minute,
+                                                    initialEntryMode:
+                                                        TimePickerEntryMode
+                                                            .input,
+                                                    builder: (context, child) =>
+                                                        MediaQuery(
+                                                      data:
+                                                          MediaQuery.of(context)
+                                                              .copyWith(
+                                                        alwaysUse24HourFormat:
+                                                            true,
+                                                      ),
+                                                      child:
+                                                          child ?? Container(),
+                                                    ),
                                                   );
+                                                  if (timeOfDay != null) {
+                                                    return DateTime(
+                                                      value.year,
+                                                      value.month,
+                                                      value.day,
+                                                      timeOfDay.hour,
+                                                      timeOfDay.minute,
+                                                    );
+                                                  }
                                                 }
-                                              }
-                                              return null;
-                                            }).then((value) {
-                                              setState(() {
-                                                date = value ?? date;
+                                                return null;
+                                              }).then((value) {
+                                                setState(() {
+                                                  date = value ?? date;
+                                                });
                                               });
-                                            });
-                                          },
-                                    child: DefaultTextStyle(
-                                      style: MyTheme.of(context)
-                                          .defaultTextStyle
-                                          .copyWith(
-                                            color: Theme.of(context).hintColor,
-                                          ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Text("Дата:"),
-                                          const SizedBox(width: 80),
-                                          Text(
-                                            DateFormat("dd:MM:yyy HH:mm")
-                                                .format(date),
-                                          ),
-                                        ],
+                                            },
+                                      child: DefaultTextStyle(
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle
+                                            .copyWith(
+                                              color:
+                                                  Theme.of(context).hintColor,
+                                            ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            const Text("Дата:"),
+                                            const SizedBox(width: 80),
+                                            Text(
+                                              DateFormat("dd:MM:yyy HH:mm")
+                                                  .format(date),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
+                                  if (state.canEdit) ...[
+                                    Container(
+                                      width: 400,
+                                      padding: const EdgeInsets.all(20),
+                                      child: CustomButton(
+                                        text: widget.readOnly
+                                            ? "Изменить"
+                                            : "Сохранить",
+                                        onTap: () => submit(state),
+                                        disabled: state.isLoading,
+                                      ),
+                                    ),
+                                    if (widget.readOnly)
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: TextButton(
+                                          onPressed: () {
+                                            context.read<AddClubGameBloc>().add(
+                                                  const AddClubGameEvent
+                                                      .newGame(),
+                                                );
+                                          },
+                                          child: Text(
+                                            context.locale.addGame,
+                                            style: MyTheme.of(context)
+                                                .textBtnTextStyle,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -764,5 +762,77 @@ class NicknameField extends StatelessWidget {
     return value.characters.map((e) {
       return map[e.toLowerCase()] ?? e.toLowerCase();
     }).fold("", (value, element) => value + element);
+  }
+}
+
+class PlayerRowWidget extends StatelessWidget {
+  final void Function(PlayerRole role) onRoleChanged;
+  final TextEditingController addScoreController;
+  final TextEditingController nicknameController;
+  final VoidCallback onSelected;
+  final FocusNode focusNode;
+  final FocusNode addScoreFocusNode;
+  final bool readOnly;
+  final List<PlayerModel> availablePlayers;
+  final String hint;
+  final PlayerRole role;
+  final Function({String? initValue}) onNewPlayer;
+
+  const PlayerRowWidget({
+    Key? key,
+    required this.onRoleChanged,
+    required this.addScoreController,
+    required this.nicknameController,
+    required this.focusNode,
+    required this.readOnly,
+    required this.availablePlayers,
+    required this.hint,
+    required this.onSelected,
+    required this.role,
+    required this.onNewPlayer,
+    required this.addScoreFocusNode,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        NicknameField(
+          readOnly: readOnly,
+          controller: nicknameController,
+          focusNode: focusNode,
+          availablePlayers: availablePlayers,
+          hint: hint,
+          onNewPlayer: onNewPlayer,
+          onSelected: onSelected,
+        ),
+        const SizedBox(
+          width: 40,
+        ),
+        RolePicker(
+          readOnly: readOnly,
+          playerRole: role,
+          onChange: onRoleChanged,
+        ),
+        const SizedBox(
+          width: 40,
+        ),
+        SizedBox(
+          width: 100,
+          child: CustomTextField(
+            focusNode: addScoreFocusNode,
+            readOnly: readOnly,
+            controller: addScoreController,
+            textInputType: const TextInputType.numberWithOptions(
+              signed: true,
+              decimal: true,
+            ),
+            hint: "0.0",
+            label: "Доп балл",
+          ),
+        )
+      ],
+    );
   }
 }
