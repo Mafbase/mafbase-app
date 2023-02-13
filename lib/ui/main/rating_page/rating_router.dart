@@ -42,6 +42,6 @@ class RatingRouterImpl implements RatingRouter {
 
   @override
   void openGame(int clubId, int gameId) {
-    context.go(AddClubGamePage.createViewLocation(context, clubId, gameId));
+    context.push(AddClubGamePage.createViewLocation(context, clubId, gameId));
   }
 }
