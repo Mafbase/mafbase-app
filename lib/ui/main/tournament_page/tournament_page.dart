@@ -14,6 +14,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/widgets/players_li
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_menu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_settings_dialog.dart';
+import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentPage extends StatefulWidget {
@@ -24,12 +25,27 @@ class TournamentPage extends StatefulWidget {
   @override
   State<TournamentPage> createState() => _TournamentPageState();
 
+  static String createLocation({
+    required BuildContext context,
+    required int tournamentId,
+  }) {
+    return context.namedLocation(
+      "tournament_page",
+      params: {
+        "id": "$tournamentId",
+      },
+    );
+
+  }
+
   static RouteBase createRoute() => ShellRoute(
         routes: [
           GoRoute(
-            path: AppRoutes.tournamentPlayersListRoute,
+            name: "tournament_page",
+            path: ":id",
             routes: [
               SeatingPage.route,
+              SeatingInsertingPage.route,
             ],
             builder: (context, state) {
               return PlayersListBody(

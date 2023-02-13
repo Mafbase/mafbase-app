@@ -17,7 +17,7 @@ import 'package:seating_generator_web/utils.dart';
 class VerificationPageBody extends StatefulWidget {
   static const String name = 'verification';
   static GoRoute route = GoRoute(
-    path: '/verification/:id',
+    path: 'verification/:id',
     name: name,
     pageBuilder: (context, state) {
       final id = int.parse(state.params["id"]!);

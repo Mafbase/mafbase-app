@@ -19,32 +19,38 @@ mixin _$TournamentsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() opened,
+    required TResult Function() create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? opened,
+    TResult? Function()? create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? opened,
+    TResult Function()? create,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TournamentOpenedEvent value) opened,
+    required TResult Function(TournamentsEventCreate value) create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TournamentOpenedEvent value)? opened,
+    TResult? Function(TournamentsEventCreate value)? create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TournamentOpenedEvent value)? opened,
+    TResult Function(TournamentsEventCreate value)? create,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +113,7 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() opened,
+    required TResult Function() create,
   }) {
     return opened();
   }
@@ -115,6 +122,7 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? opened,
+    TResult? Function()? create,
   }) {
     return opened?.call();
   }
@@ -123,6 +131,7 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? opened,
+    TResult Function()? create,
     required TResult orElse(),
   }) {
     if (opened != null) {
@@ -135,6 +144,7 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TournamentOpenedEvent value) opened,
+    required TResult Function(TournamentsEventCreate value) create,
   }) {
     return opened(this);
   }
@@ -143,6 +153,7 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TournamentOpenedEvent value)? opened,
+    TResult? Function(TournamentsEventCreate value)? create,
   }) {
     return opened?.call(this);
   }
@@ -151,6 +162,7 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TournamentOpenedEvent value)? opened,
+    TResult Function(TournamentsEventCreate value)? create,
     required TResult orElse(),
   }) {
     if (opened != null) {
@@ -162,4 +174,106 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
 
 abstract class TournamentOpenedEvent implements TournamentsEvent {
   const factory TournamentOpenedEvent() = _$TournamentOpenedEvent;
+}
+
+/// @nodoc
+abstract class _$$TournamentsEventCreateCopyWith<$Res> {
+  factory _$$TournamentsEventCreateCopyWith(_$TournamentsEventCreate value,
+          $Res Function(_$TournamentsEventCreate) then) =
+      __$$TournamentsEventCreateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TournamentsEventCreateCopyWithImpl<$Res>
+    extends _$TournamentsEventCopyWithImpl<$Res, _$TournamentsEventCreate>
+    implements _$$TournamentsEventCreateCopyWith<$Res> {
+  __$$TournamentsEventCreateCopyWithImpl(_$TournamentsEventCreate _value,
+      $Res Function(_$TournamentsEventCreate) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TournamentsEventCreate implements TournamentsEventCreate {
+  const _$TournamentsEventCreate();
+
+  @override
+  String toString() {
+    return 'TournamentsEvent.create()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$TournamentsEventCreate);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() opened,
+    required TResult Function() create,
+  }) {
+    return create();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? opened,
+    TResult? Function()? create,
+  }) {
+    return create?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? opened,
+    TResult Function()? create,
+    required TResult orElse(),
+  }) {
+    if (create != null) {
+      return create();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TournamentOpenedEvent value) opened,
+    required TResult Function(TournamentsEventCreate value) create,
+  }) {
+    return create(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TournamentOpenedEvent value)? opened,
+    TResult? Function(TournamentsEventCreate value)? create,
+  }) {
+    return create?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TournamentOpenedEvent value)? opened,
+    TResult Function(TournamentsEventCreate value)? create,
+    required TResult orElse(),
+  }) {
+    if (create != null) {
+      return create(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TournamentsEventCreate implements TournamentsEvent {
+  const factory TournamentsEventCreate() = _$TournamentsEventCreate;
 }

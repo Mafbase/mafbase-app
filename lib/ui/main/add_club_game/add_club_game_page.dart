@@ -37,7 +37,7 @@ class AddClubGamePage extends StatefulWidget {
   State<AddClubGamePage> createState() => _AddClubGamePageState();
 
   static final GoRoute route = GoRoute(
-    path: '/club/:id',
+    path: ':id',
     builder: (_, __) => Container(),
     routes: [
       GoRoute(

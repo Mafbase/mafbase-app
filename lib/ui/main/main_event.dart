@@ -5,11 +5,18 @@ part 'main_event.freezed.dart';
 
 @freezed
 class MainEvent with _$MainEvent {
-  const factory MainEvent.switchTab({required MainPageTab tab}) =
-      MainEventSwitchTab;
+  const factory MainEvent.switchTab({
+    required MainPageTab tab,
+    @Default(false) disableNavigate,
+    @Default(true) bool hasBackButton,
+  }) = MainEventSwitchTab;
 
   const factory MainEvent.backButtonPressed() = MainEventBackButtonPressed;
 
+  const factory MainEvent.onPageOpened() = MainEventPageOpened;
+
   const factory MainEvent.tournamentSelected({required int tournamentId}) =
       MainEventTournamentSelected;
+
+  const factory MainEvent.onTitleTapped() = MainEventTitleTapped;
 }

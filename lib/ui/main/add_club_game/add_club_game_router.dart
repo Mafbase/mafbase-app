@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 
 abstract class AddClubGameRouter {
@@ -49,6 +50,9 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
 
   @override
   void openLoginPage() {
-    context.go(AppRoutes.loginPageRoute, extra: GoRouter.of(context).location);
+    LoginPageBody.open(
+      context: context,
+      nextPath: GoRouter.of(context).location,
+    );
   }
 }

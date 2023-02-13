@@ -59,6 +59,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.d
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_bloc.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_router.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
@@ -129,6 +130,9 @@ void registerGetIt() {
     )
     ..registerFactoryParam<ProfileDialogRouter, BuildContext, dynamic>(
       (context, _) => ProfileDialogRouterImpl(context),
+    )
+    ..registerFactoryParam<TournamentsRouter, BuildContext, dynamic>(
+      (context, _) => TournamentsRouterImpl(context),
     )
     ..registerLazySingleton<ClubRepository>(() => ClubRepositoryImpl(getIt()));
   registerSharedGetIt();
@@ -248,6 +252,7 @@ void registerSharedGetIt() {
     )
     ..registerFactoryParam<TournamentsBloc, BuildContext?, dynamic>(
       (context, _) => TournamentsBloc(
+        getIt(),
         getIt(),
         context,
       ),

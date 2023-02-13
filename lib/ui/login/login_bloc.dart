@@ -9,6 +9,7 @@ import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
+import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
 class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
@@ -99,7 +100,7 @@ class LoginPageRouterImpl implements LoginPageRouter {
 
   @override
   void openSignUpPage() {
-    GoRouter.of(_context).go(AppRoutes.signUpRoute);
+    SignUpPageBody.open(context: _context);
   }
 
   @override

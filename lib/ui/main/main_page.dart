@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -8,12 +10,14 @@ import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 import 'package:seating_generator_web/ui/main/widgets/custom_menu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class MainPage extends StatefulWidget {
   final bool hasBackButton;
   final Widget? child;
 
-  const MainPage({Key? key, this.hasBackButton = false, this.child}) : super(key: key);
+  const MainPage({Key? key, this.hasBackButton = false, this.child})
+      : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -21,71 +25,108 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   @override
+  void initState() {
+    context.read<MainBloc>().add(const MainEvent.onPageOpened());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) {
+        int selectedIndex =
+            state.selectedTab == MainPageTab.tournaments ? 0 : 1;
+        debugPrint(state.toString());
         return Scaffold(
-          body: Stack(
-            children: [
-              Positioned(
-                left: 160,
-                top: 0,
-                bottom: 0,
-                right: 0,
-                child: widget.child ?? Container(),
-              ),
-              Positioned(
-                left: 0,
-                top: 0,
-                bottom: 0,
-                child: CustomMenu(
-                  models: [
-                    CustomMenuItemModel(
-                      SvgPicture.asset(AppAssets.contactAsset),
-                      () {
-                        context.read<MainBloc>().add(
-                              const MainEventSwitchTab(
-                                tab: MainPageTab.profileSettings,
-                              ),
-                            );
-                      },
-                      AppLocalizations.of(context)!.mainProfileHint,
-                    ),
-                    CustomMenuItemModel(
-                      SvgPicture.asset(AppAssets.checkersAsset),
-                      () {
-                        context.read<MainBloc>().add(
-                              const MainEventSwitchTab(
-                                tab: MainPageTab.regulations,
-                              ),
-                            );
-                      },
-                      AppLocalizations.of(context)!.mainRegulationsHint,
-                    ),
-                    CustomMenuItemModel(
-                      SvgPicture.asset(AppAssets.circledPlusAsset),
-                      () {
-                        context.read<MainBloc>().add(
-                              const MainEventSwitchTab(
-                                tab: MainPageTab.addTournament,
-                              ),
-                            );
-                      },
-                      AppLocalizations.of(context)!.mainCreateTournamentHint,
-                    ),
-                    if (widget.hasBackButton)
-                      CustomMenuItemModel(
-                        SvgPicture.asset(AppAssets.backArrowAsset),
-                        () {
-                          context.read<MainBloc>().add(
-                                const MainEvent.backButtonPressed(),
-                              );
-                        },
-                        null,
-                      ),
-                  ],
+          appBar: AppBar(
+            leading: IgnorePointer(
+              ignoring: !state.hasBackButton,
+              child: Opacity(
+                opacity: state.hasBackButton ? 1 : 0,
+                child: BackButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    GoRouter.of(context).pop();
+                  },
                 ),
               ),
+            ),
+            backgroundColor: context.theme.darkBlueColor,
+            title: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    context
+                        .read<MainBloc>()
+                        .add(const MainEvent.onTitleTapped());
+                  },
+                  child: Text(
+                    "mafbase",
+                    style: GoogleFonts.balooBhai2(
+                      color: Colors.white,
+                      fontSize: 48,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+          body: Row(
+            children: [
+              NavigationRail(
+                useIndicator: true,
+                unselectedIconTheme: const IconThemeData(
+                  color: Colors.white,
+                ),
+                selectedIconTheme: const IconThemeData(
+                  color: Colors.white,
+                ),
+                indicatorColor: context.theme.darkBlueColor,
+                labelType: NavigationRailLabelType.all,
+                elevation: 5,
+                backgroundColor: context.theme.darkGreyColor,
+                onDestinationSelected: (index) {
+                  MainPageTab? tab;
+                  switch (index) {
+                    case 0:
+                      tab = MainPageTab.tournaments;
+                      break;
+                    case 1:
+                      tab = MainPageTab.clubs;
+                      break;
+                  }
+                  if (tab != null) {
+                    context.read<MainBloc>().add(
+                          MainEvent.switchTab(
+                            tab: tab,
+                            hasBackButton: false,
+                          ),
+                        );
+                  }
+                },
+                destinations: [
+                  NavigationRailDestination(
+                    icon: const Icon(Icons.table_chart_outlined),
+                    label: Text(
+                      "Турниры",
+                      style: const TextStyle()
+                          .copyWith(color: context.theme.background1),
+                    ),
+                  ),
+                  NavigationRailDestination(
+                    icon: const Icon(Icons.people_alt_outlined),
+                    label: Text(
+                      "Клубы",
+                      style: const TextStyle()
+                          .copyWith(color: context.theme.background1),
+                    ),
+                  ),
+                ],
+                selectedIndex: selectedIndex,
+              ),
+              Expanded(child: widget.child ?? Container()),
             ],
           ),
         );

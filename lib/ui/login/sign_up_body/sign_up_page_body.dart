@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
@@ -18,6 +20,18 @@ class SignUpPageBody extends StatefulWidget {
 
   @override
   State<SignUpPageBody> createState() => _SignUpPageBodyState();
+
+  static void open({required BuildContext context}) {
+    context.goNamed('signUp');
+  }
+
+  static final route = GoRoute(
+    path: 'signUp',
+    name: 'signUp',
+    pageBuilder: (context, state) => FadeTransitionPage(
+      child: const SignUpPageBody(),
+    ),
+  );
 }
 
 class _SignUpPageBodyState extends State<SignUpPageBody> {

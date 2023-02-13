@@ -10,6 +10,7 @@ class MainPageRouterMock implements MainPageRouter {
   final _dialogOpened = StreamController<bool>.broadcast();
 
   Stream<MainPageTab?> get openedTab => _openedTabController.stream;
+
   Stream<bool> get dialogOpened => _dialogOpened.stream;
 
   @override
@@ -28,8 +29,19 @@ class MainPageRouterMock implements MainPageRouter {
   }
 
   @override
-  Future<CreateTournamentData?> openCreateTournamentDialog() {
-    _dialogOpened.add(true);
-    return Future.value(null);
+  void dispose() {
+    _openedTabController.close();
   }
+
+  @override
+  Stream<String?> get routesStream => const Stream.empty();
+
+  @override
+  void initState() {}
+
+  @override
+  bool get canPop => false;
+
+  @override
+  void openDefaultPage() {}
 }

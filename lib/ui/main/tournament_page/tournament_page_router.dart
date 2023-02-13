@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog.dart';
 
@@ -50,6 +51,11 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openPlayersList({required int tournamentId}) {
-    _context.go(AppRoutes.tournamentPlayersListRouteWithId(tournamentId));
+    _context.go(
+      TournamentPage.createLocation(
+        context: _context,
+        tournamentId: tournamentId,
+      ),
+    );
   }
 }

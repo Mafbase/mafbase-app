@@ -8,7 +8,6 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   if (!kDebugMode) {

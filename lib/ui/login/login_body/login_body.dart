@@ -2,10 +2,14 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
@@ -16,6 +20,29 @@ class LoginPageBody extends StatefulWidget {
 
   @override
   State<LoginPageBody> createState() => _LoginPageBodyState();
+
+  static void open({
+    required BuildContext context,
+    String? nextPath,
+  }) =>
+      context.go(
+        context.namedLocation('login'),
+        extra: nextPath,
+      );
+
+  static final GoRoute route = GoRoute(
+    path: 'login',
+    name: 'login',
+    pageBuilder: (context, state) => FadeTransitionPage(
+      child: BlocProvider(
+        create: (context) => getIt.get<LoginBloc>(
+          param1: context,
+          param2: state.extra,
+        ),
+        child: const LoginPageBody(),
+      ),
+    ),
+  );
 }
 
 class _LoginPageBodyState extends State<LoginPageBody> {

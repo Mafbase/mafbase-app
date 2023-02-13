@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/data/http_client.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 typedef EffectHandler<E> = void Function(E efffect);
@@ -98,7 +99,7 @@ abstract class CustomBloc<E, S> extends Bloc<E, S> {
       } on UnauthenticatedError catch (error) {
         if (context != null) {
           final location = GoRouter.of(context!).location;
-          context!.go(AppRoutes.loginPageRoute, extra: location);
+          LoginPageBody.open(context: context!, nextPath: location);
           AppRouter.showErrorDialog(context!, error.message ?? "");
         }
         rethrow;

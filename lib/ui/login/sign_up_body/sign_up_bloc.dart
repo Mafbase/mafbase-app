@@ -7,6 +7,7 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/domain/models/sign_up_model.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
@@ -83,7 +84,7 @@ class SignUpPageRouterImpl implements SignUpPageRouter {
 
   @override
   void openLoginPage() {
-    GoRouter.of(_context).go(AppRoutes.loginPageRoute);
+    LoginPageBody.open(context: _context);
   }
 
   @override

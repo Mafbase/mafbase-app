@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MainState {
   bool get isLoading => throw _privateConstructorUsedError;
+  MainPageTab get selectedTab => throw _privateConstructorUsedError;
+  bool get hasBackButton => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainStateCopyWith<MainState> get copyWith =>
@@ -28,7 +30,7 @@ abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, MainPageTab selectedTab, bool hasBackButton});
 }
 
 /// @nodoc
@@ -45,11 +47,21 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? selectedTab = null,
+    Object? hasBackButton = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedTab: null == selectedTab
+          ? _value.selectedTab
+          : selectedTab // ignore: cast_nullable_to_non_nullable
+              as MainPageTab,
+      hasBackButton: null == hasBackButton
+          ? _value.hasBackButton
+          : hasBackButton // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -62,7 +74,7 @@ abstract class _$$_MainStateCopyWith<$Res> implements $MainStateCopyWith<$Res> {
       __$$_MainStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, MainPageTab selectedTab, bool hasBackButton});
 }
 
 /// @nodoc
@@ -77,11 +89,21 @@ class __$$_MainStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? selectedTab = null,
+    Object? hasBackButton = null,
   }) {
     return _then(_$_MainState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedTab: null == selectedTab
+          ? _value.selectedTab
+          : selectedTab // ignore: cast_nullable_to_non_nullable
+              as MainPageTab,
+      hasBackButton: null == hasBackButton
+          ? _value.hasBackButton
+          : hasBackButton // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -90,14 +112,21 @@ class __$$_MainStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MainState implements _MainState {
-  const _$_MainState({required this.isLoading});
+  const _$_MainState(
+      {required this.isLoading,
+      required this.selectedTab,
+      required this.hasBackButton});
 
   @override
   final bool isLoading;
+  @override
+  final MainPageTab selectedTab;
+  @override
+  final bool hasBackButton;
 
   @override
   String toString() {
-    return 'MainState(isLoading: $isLoading)';
+    return 'MainState(isLoading: $isLoading, selectedTab: $selectedTab, hasBackButton: $hasBackButton)';
   }
 
   @override
@@ -106,11 +135,16 @@ class _$_MainState implements _MainState {
         (other.runtimeType == runtimeType &&
             other is _$_MainState &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.selectedTab, selectedTab) ||
+                other.selectedTab == selectedTab) &&
+            (identical(other.hasBackButton, hasBackButton) ||
+                other.hasBackButton == hasBackButton));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, selectedTab, hasBackButton);
 
   @JsonKey(ignore: true)
   @override
@@ -120,10 +154,17 @@ class _$_MainState implements _MainState {
 }
 
 abstract class _MainState implements MainState {
-  const factory _MainState({required final bool isLoading}) = _$_MainState;
+  const factory _MainState(
+      {required final bool isLoading,
+      required final MainPageTab selectedTab,
+      required final bool hasBackButton}) = _$_MainState;
 
   @override
   bool get isLoading;
+  @override
+  MainPageTab get selectedTab;
+  @override
+  bool get hasBackButton;
   @override
   @JsonKey(ignore: true)
   _$$_MainStateCopyWith<_$_MainState> get copyWith =>

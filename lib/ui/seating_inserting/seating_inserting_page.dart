@@ -17,7 +17,7 @@ class SeatingInsertingPage extends StatefulWidget {
   static const name = "fsm_seating";
   static final route = GoRoute(
     name: name,
-    path: '/tournament/:id/fsmSeating',
+    path: 'fsmSeating',
     builder: (context, state) {
       final id = int.parse(state.params["id"]!);
       return BlocProvider<SeatingInsertingBloc>(
