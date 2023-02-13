@@ -155,7 +155,7 @@ class _RatingTableState extends State<RatingTable> {
   late List<ScrollController> controllers;
   late List<ScrollController> mainControllers;
 
-  int get mainControllersSize => widget.style == RatingTableStyle.full ? 9 : 8;
+  int get mainControllersSize => widget.style == RatingTableStyle.full ? 10 : 8;
 
   @override
   void initState() {
@@ -333,6 +333,12 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget ciWidget(int index) => wrap(
         Text((widget.sortedRows[index].ci / 100).toString()),
+      );
+
+  Widget totalGamesWidget(int index) => wrap(
+        Text(
+          widget.sortedRows[index].gamesCount.toString(),
+        ),
       );
 
   Widget get diesPrototype => wrap(
@@ -932,9 +938,15 @@ class _RatingTableState extends State<RatingTable> {
           mainControllers[8],
           key: const Key("fullColumns8"),
           builder: dies,
-          isLastColumn: true,
           header: const Text("по"),
           prototype: diesPrototype,
+        ),
+        column(
+          mainControllers[9],
+          key: const Key("fullColumns9"),
+          builder: totalGamesWidget,
+          isLastColumn: true,
+          header: const Text("и"),
         ),
       ];
 
@@ -955,7 +967,7 @@ class _RatingTableState extends State<RatingTable> {
         return Stack(
           children: [
             if (prototype != null)
-              ...[wrap(header ?? Container()), wrap(prototype)].map(
+              ...[wrap(header ?? Container()), prototype].map(
                 (e) => IgnorePointer(
                   child: Opacity(
                     opacity: 0,

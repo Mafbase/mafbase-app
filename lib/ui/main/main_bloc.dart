@@ -125,18 +125,19 @@ abstract class MainPageRouter {
 
 class MainPageRouterImpl implements MainPageRouter {
   final BuildContext context;
+  GoRouter? _goRouter;
   final StreamController<String?> controller = StreamController.broadcast();
 
   MainPageRouterImpl(this.context);
 
   @override
   void initState() {
-    GoRouter.of(context).addListener(routeListener);
+    _goRouter = GoRouter.of(context)..addListener(routeListener);
   }
 
   @override
   void dispose() {
-    GoRouter.of(context).removeListener(routeListener);
+    _goRouter?.removeListener(routeListener);
   }
 
   void routeListener() {
