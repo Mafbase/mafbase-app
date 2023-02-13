@@ -11,6 +11,7 @@ import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
 
 import 'repositories/auth_repository_mock.dart';
@@ -24,6 +25,7 @@ import 'routers/login_router_mock.dart';
 import 'routers/main_router_mock.dart';
 import 'routers/seating_inserting_router_mock.dart';
 import 'routers/sign_up_router_mock.dart';
+import 'routers/tournaments_router_mock.dart';
 import 'routers/verification_router_mock.dart';
 import 'storages/credential_storage_mock.dart';
 
@@ -40,6 +42,7 @@ void registerGetItTest() {
     ..registerFactory<VerificationPageRouter>(
       () => VerificationPageRouterMock(),
     )
+    ..registerFactory<TournamentsRouter>(() => TournamentsRouterMock())
     ..registerLazySingleton<TranslationRepository>(
       () => TranslationRepositoryMock(),
     )
