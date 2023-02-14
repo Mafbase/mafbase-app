@@ -68,6 +68,7 @@ class AppRouter {
                   if (defaultTargetPlatform == TargetPlatform.android ||
                       defaultTargetPlatform == TargetPlatform.iOS) {
                     return InteractiveViewer(
+                      constrained: false,
                       minScale: 0.5,
                       child: mainChild,
                     );
