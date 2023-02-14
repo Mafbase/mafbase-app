@@ -70,7 +70,6 @@ class AppRouter {
                         final widthScale = constraints.maxWidth/1280;
                         return InteractiveViewer(
                           constrained: false,
-                          boundaryMargin: const EdgeInsets.all(double.infinity),
                           minScale: widthScale,
                           maxScale: 1,
                           child: mainChild,
