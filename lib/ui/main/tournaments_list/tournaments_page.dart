@@ -35,6 +35,8 @@ class _TournamentsPageState extends State<TournamentsPage> {
       builder: (context, state) {
         return Scaffold(
           body: ListView.builder(
+            itemCount: state.tournaments.length,
+            padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
               if (index == 0) {
                 return Center(
@@ -47,36 +49,18 @@ class _TournamentsPageState extends State<TournamentsPage> {
                   ),
                 );
               } else {
-                return MouseRegion(
-                  onEnter: (_) => setState(() {
-                    hovered = index;
-                  }),
-                  onExit: (_) => setState(() {
-                    hovered = -1;
-                  }),
-                  child: GestureDetector(
-                    onTapDown: (_) => setState(() {
-                      tapped = index;
-                    }),
-                    onTapUp: (_) => setState(
-                      () {
-                        tapped = -1;
-                        context.read<MainBloc>().add(
-                              MainEvent.tournamentSelected(
-                                tournamentId: state.tournaments[index].id,
-                              ),
-                            );
-                      },
-                    ),
-                    onTapCancel: () => setState(() {
-                      tapped = -1;
-                    }),
+                return Padding(
+                  padding: const EdgeInsets.only(left: 270, right: 270, bottom: 10,),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () {
+                      context.read<MainBloc>().add(
+                        MainEvent.tournamentSelected(
+                          tournamentId: state.tournaments[index].id,
+                        ),
+                      );
+                    },
                     child: Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 10,
-                        left: 270,
-                        right: 270,
-                      ),
                       padding: const EdgeInsets.symmetric(
                         vertical: 15,
                         horizontal: 25,
@@ -87,10 +71,10 @@ class _TournamentsPageState extends State<TournamentsPage> {
                           tapped == index
                               ? const Color(0xFFA7A7A7)
                               : (hovered == index
-                                  ? const Color(0xFFE3E3E3)
-                                  : MyTheme.of(context)
-                                      .greyColor
-                                      .withOpacity(0.16)),
+                              ? const Color(0xFFE3E3E3)
+                              : MyTheme.of(context)
+                              .greyColor
+                              .withOpacity(0.16)),
                         ).value,
                       ),
                       child: Row(
@@ -139,11 +123,8 @@ class _TournamentsPageState extends State<TournamentsPage> {
                 );
               }
             },
-            itemCount: state.tournaments.length,
-            padding: EdgeInsets.zero,
           ),
           floatingActionButton: FloatingActionButton.large(
-            backgroundColor: MyTheme.of(context).redColor,
             elevation: 10,
             onPressed: () {
               context
