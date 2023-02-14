@@ -67,10 +67,16 @@ class AppRouter {
                   );
                   if (defaultTargetPlatform == TargetPlatform.android ||
                       defaultTargetPlatform == TargetPlatform.iOS) {
-                    return InteractiveViewer(
-                      constrained: false,
-                      minScale: 0.5,
-                      child: mainChild,
+                    return LayoutBuilder(
+                      builder: (context, constraints) {
+                        final widthScale = constraints.maxWidth/1280;
+                        final heightScale = constraints.maxHeight/720;
+                        return InteractiveViewer(
+                          constrained: false,
+                          minScale: max(widthScale, heightScale),
+                          child: mainChild,
+                        );
+                      },
                     );
                   }
                   return SingleChildScrollView(
