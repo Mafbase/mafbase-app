@@ -24,7 +24,6 @@ import 'package:seating_generator_web/ui/main/regulations_page/regulations_page.
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
-import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
@@ -65,15 +64,15 @@ class AppRouter {
                     ),
                     child: child,
                   );
-                  if (defaultTargetPlatform == TargetPlatform.android ||
-                      defaultTargetPlatform == TargetPlatform.iOS) {
+                  if (state.queryParams["zoom"] == "true") {
                     return LayoutBuilder(
                       builder: (context, constraints) {
                         final widthScale = constraints.maxWidth/1280;
-                        final heightScale = constraints.maxHeight/720;
                         return InteractiveViewer(
                           constrained: false,
-                          minScale: max(widthScale, heightScale),
+                          boundaryMargin: const EdgeInsets.all(double.infinity),
+                          minScale: widthScale,
+                          maxScale: 1,
                           child: mainChild,
                         );
                       },

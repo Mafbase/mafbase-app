@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/app/router.dart';
@@ -25,6 +26,9 @@ void main() async {
 
 void _startApp() {
   registerGetIt();
+  if (!kIsWeb) {
+    Hive.init('mafbase');
+  }
   runApp(const App());
 }
 
