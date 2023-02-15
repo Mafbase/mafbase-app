@@ -155,5 +155,7 @@
   "draw": "Ничья",
   "@draw": {},
   "tournamentSettingsUpdateSuccess": "Настройки турнира успешно обновлены",
-  "@tournamentSettingsUpdateSuccess": {}
+  "@tournamentSettingsUpdateSuccess": {},
+  "clubsHeader": "Клубы",
+  "@clubsHeader": {}
 }

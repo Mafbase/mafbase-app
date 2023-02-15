@@ -32,6 +32,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    const double railWidth = 72;
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) {
         int selectedIndex =
@@ -73,60 +74,72 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          body: Row(
+          body: Stack(
             children: [
-              NavigationRail(
-                useIndicator: true,
-                unselectedIconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                selectedIconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                indicatorColor: context.theme.darkBlueColor,
-                labelType: NavigationRailLabelType.all,
-                elevation: 5,
-                backgroundColor: context.theme.darkGreyColor,
-                onDestinationSelected: (index) {
-                  MainPageTab? tab;
-                  switch (index) {
-                    case 0:
-                      tab = MainPageTab.tournaments;
-                      break;
-                    case 1:
-                      tab = MainPageTab.clubs;
-                      break;
-                  }
-                  if (tab != null) {
-                    context.read<MainBloc>().add(
-                          MainEvent.switchTab(
-                            tab: tab,
-                            hasBackButton: false,
-                          ),
-                        );
-                  }
-                },
-                destinations: [
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.table_chart_outlined),
-                    label: Text(
-                      "Турниры",
-                      style: const TextStyle()
-                          .copyWith(color: context.theme.background1),
-                    ),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.people_alt_outlined),
-                    label: Text(
-                      "Клубы",
-                      style: const TextStyle()
-                          .copyWith(color: context.theme.background1),
-                    ),
-                  ),
-                ],
-                selectedIndex: selectedIndex,
+              Positioned(
+                top: 0,
+                left: railWidth,
+                right: 0,
+                bottom: 0,
+                child: widget.child ?? Container(),
               ),
-              Expanded(child: widget.child ?? Container()),
+              Positioned(
+                top: 0,
+                left: 0,
+                bottom: 0,
+                width: railWidth,
+                child: NavigationRail(
+                  useIndicator: true,
+                  unselectedIconTheme: const IconThemeData(
+                    color: Colors.white,
+                  ),
+                  selectedIconTheme: const IconThemeData(
+                    color: Colors.white,
+                  ),
+                  indicatorColor: context.theme.darkBlueColor,
+                  labelType: NavigationRailLabelType.all,
+                  elevation: 5,
+                  backgroundColor: context.theme.darkGreyColor,
+                  onDestinationSelected: (index) {
+                    MainPageTab? tab;
+                    switch (index) {
+                      case 0:
+                        tab = MainPageTab.tournaments;
+                        break;
+                      case 1:
+                        tab = MainPageTab.clubs;
+                        break;
+                    }
+                    if (tab != null) {
+                      context.read<MainBloc>().add(
+                            MainEvent.switchTab(
+                              tab: tab,
+                              hasBackButton: false,
+                            ),
+                          );
+                    }
+                  },
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: const Icon(Icons.table_chart_outlined),
+                      label: Text(
+                        "Турниры",
+                        style: const TextStyle()
+                            .copyWith(color: context.theme.background1),
+                      ),
+                    ),
+                    NavigationRailDestination(
+                      icon: const Icon(Icons.people_alt_outlined),
+                      label: Text(
+                        "Клубы",
+                        style: const TextStyle()
+                            .copyWith(color: context.theme.background1),
+                      ),
+                    ),
+                  ],
+                  selectedIndex: selectedIndex,
+                ),
+              ),
             ],
           ),
         );
