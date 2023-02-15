@@ -157,5 +157,9 @@
   "tournamentSettingsUpdateSuccess": "Настройки турнира успешно обновлены",
   "@tournamentSettingsUpdateSuccess": {},
   "clubsHeader": "Клубы",
-  "@clubsHeader": {}
+  "@clubsHeader": {},
+  "description": "Описание",
+  "@description": {},
+  "openRating": "Открыть рейтинг клуба",
+  "@openRating": {}
 }

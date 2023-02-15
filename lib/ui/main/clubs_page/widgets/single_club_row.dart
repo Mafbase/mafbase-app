@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/common/widgets/club_avatar.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -25,18 +26,10 @@ class SingleClubRow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Row(
           children: [
-            if (model.imageUrl != null)
-              Image.network(
-                model.imageUrl!,
-                height: 70,
-                width: 70,
-                loadingBuilder: (context, child, progress) {
-                  if (progress == null) return child;
-                  return _ImagePlaceholder(clubName: model.name);
-                },
-              )
-            else
-              _ImagePlaceholder(clubName: model.name),
+            ClubAvatar(
+              clubModel: model,
+              size: 70,
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Text(
@@ -60,31 +53,6 @@ class SingleClubRow extends StatelessWidget {
             else
               const Spacer(),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ImagePlaceholder extends StatelessWidget {
-  final String clubName;
-
-  const _ImagePlaceholder({Key? key, required this.clubName}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child: Container(
-        height: 70,
-        width: 70,
-        decoration: BoxDecoration(
-          color: context.theme.greyColor,
-        ),
-        child: Center(
-          child: Text(
-            clubName.substring(0, 1).toUpperCase(),
-            style: context.theme.defaultTextStyle,
-          ),
         ),
       ),
     );

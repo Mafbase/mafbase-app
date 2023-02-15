@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 
 class ClubPage extends StatefulWidget {
-  const ClubPage({Key? key}) : super(key: key);
+  const ClubPage._({Key? key}) : super(key: key);
 
   @override
   State<ClubPage> createState() => _ClubPageState();
@@ -25,7 +31,16 @@ class ClubPage extends StatefulWidget {
   static final route = GoRoute(
     name: 'club',
     path: ':clubId',
-    builder: (context, state) => const ClubPage(),
+    builder: (context, state) => BlocProvider<ClubBloc>(
+      create: (context) {
+        final args = ClubBlocArgs(
+          clubId: int.parse(state.params["clubId"]!),
+          cachedModel: state.extra as ClubModel?,
+        );
+        return getIt(param1: context, param2: args);
+      },
+      child: const ClubPage._(),
+    ),
     routes: [
       ...AddClubGamePage.routes,
       RatingPage.route,
@@ -35,7 +50,28 @@ class ClubPage extends StatefulWidget {
 
 class _ClubPageState extends State<ClubPage> {
   @override
+  void initState() {
+    context.read<ClubBloc>().add(const ClubEvent.pageOpened());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return BlocBuilder<ClubBloc, ClubState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: Row(
+            children: [
+              if (state.model != null)
+                Expanded(
+                  child: ClubInfoWidget(
+                    clubModel: state.model!,
+                  ),
+                )
+            ],
+          ),
+        );
+      },
+    );
   }
 }
