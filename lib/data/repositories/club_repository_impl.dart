@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/club_check_request.dart';
+import 'package:seating_generator_web/data/requests/clubs_list_request.dart';
+import 'package:seating_generator_web/data/requests/clubs_my_request.dart';
 import 'package:seating_generator_web/data/requests/edit_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
@@ -70,5 +72,18 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
     return GetClubRequest(id: id).execute(client).then(
           (value) => ClubModel.fromProto(value),
         );
+  }
+
+  @override
+  Future<List<ClubModel>> getClubs({bool onlyMy = false}) {
+    final Future<ClubsEventOut> result;
+    if (onlyMy) {
+      result = ClubsMyRequest().execute(client);
+    } else {
+      result = ClubsListRequest().execute(client);
+    }
+    return result.then(
+      (value) => value.club.map((e) => ClubModel.fromProto(e)).toList(),
+    );
   }
 }

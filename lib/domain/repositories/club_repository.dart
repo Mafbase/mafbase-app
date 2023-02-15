@@ -13,6 +13,8 @@ abstract class ClubRepository {
     required DateTimeRange range,
   });
 
+  Future<List<ClubModel>> getClubs({bool onlyMy = false});
+
   Future<ClubGameResult> getGame(int gameId, int clubId);
 
   Future<bool> isOwner(int clubId);

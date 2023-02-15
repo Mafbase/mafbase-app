@@ -36,50 +36,46 @@ class AddClubGamePage extends StatefulWidget {
   @override
   State<AddClubGamePage> createState() => _AddClubGamePageState();
 
-  static final GoRoute route = GoRoute(
-    path: ':id',
-    builder: (_, __) => Container(),
-    routes: [
-      GoRoute(
-        path: 'addGame',
-        name: "addGame",
-        builder: (context, state) {
-          final id = int.parse(state.params["id"]!);
+  static final List<GoRoute> routes = [
+    GoRoute(
+      path: 'addGame',
+      name: "addGame",
+      builder: (context, state) {
+        final id = int.parse(state.params["id"]!);
+        return BlocProvider<AddClubGameBloc>(
+          create: (context) => AddClubGameBloc(id, context),
+          // TODO: REGISTER IN GET IT
+          child: const AddClubGamePage(
+            editing: true,
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      name: 'viewGame',
+      path: "game/:gameId",
+      builder: (context, state) {
+        try {
+          final clubId = int.parse(state.params["id"]!);
+          final gameId = int.parse(state.params["gameId"]!);
+          final edit = state.queryParams["edit"] == true.toString();
+          debugPrint(state.location);
           return BlocProvider<AddClubGameBloc>(
-            create: (context) => AddClubGameBloc(id, context),
+            create: (context) => AddClubGameBloc(clubId, context),
             // TODO: REGISTER IN GET IT
-            child: const AddClubGamePage(
-              editing: true,
+            child: AddClubGamePage(
+              readOnly: !edit,
+              gameId: gameId,
+              editing: edit,
             ),
           );
-        },
-      ),
-      GoRoute(
-        name: 'viewGame',
-        path: "game/:gameId",
-        builder: (context, state) {
-          try {
-            final clubId = int.parse(state.params["id"]!);
-            final gameId = int.parse(state.params["gameId"]!);
-            final edit = state.queryParams["edit"] == true.toString();
-            debugPrint(state.location);
-            return BlocProvider<AddClubGameBloc>(
-              create: (context) => AddClubGameBloc(clubId, context),
-              // TODO: REGISTER IN GET IT
-              child: AddClubGamePage(
-                readOnly: !edit,
-                gameId: gameId,
-                editing: edit,
-              ),
-            );
-          } catch (i) {
-            debugPrint(i.toString());
-            rethrow;
-          }
-        },
-      ),
-    ],
-  );
+        } catch (i) {
+          debugPrint(i.toString());
+          rethrow;
+        }
+      },
+    ),
+  ];
 
   static String createViewLocation(
     BuildContext context,

@@ -39,6 +39,11 @@ class ClubRepositoryMock implements ClubRepository {
 
   @override
   Future<ClubModel> getClub({required int id}) {
-    return Future.value(const ClubModel(id: 1, name: "Club name"));
+    return Future.value(ClubModel(id: id, name: "Club name"));
+  }
+
+  @override
+  Future<List<ClubModel>> getClubs({bool onlyMy = false}) async {
+    return [await getClub(id: 1)];
   }
 }
