@@ -8,10 +8,12 @@ class CustomDropdown<T> extends StatefulWidget {
   final T? initValue;
   final List<T?> items;
   final String Function(T? item) mapToString;
+  final bool readOnly;
 
   const CustomDropdown({
     Key? key,
     this.onChanged,
+    this.readOnly = false,
     this.mapToString = _mapToString,
     required this.items,
     required this.initValue,
@@ -39,6 +41,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
     }
     super.didUpdateWidget(oldWidget);
   }
+
   @override
   Widget build(BuildContext context) {
     return DropdownButton<T>(
@@ -55,12 +58,14 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
           ),
         );
       }).toList(),
-      onChanged: (newValue) {
-        setState(() {
-          value = newValue ?? value;
-        });
-        widget.onChanged?.call(newValue);
-      },
+      onChanged: widget.readOnly
+          ? null
+          : (newValue) {
+              setState(() {
+                value = newValue ?? value;
+              });
+              widget.onChanged?.call(newValue);
+            },
     );
   }
 }

@@ -41,9 +41,9 @@ class AddClubGamePage extends StatefulWidget {
       path: 'addGame',
       name: "addGame",
       builder: (context, state) {
-        final id = int.parse(state.params["id"]!);
+        final clubId = int.parse(state.params["clubId"]!);
         return BlocProvider<AddClubGameBloc>(
-          create: (context) => AddClubGameBloc(id, context),
+          create: (context) => AddClubGameBloc(clubId, context),
           // TODO: REGISTER IN GET IT
           child: const AddClubGamePage(
             editing: true,
@@ -56,7 +56,7 @@ class AddClubGamePage extends StatefulWidget {
       path: "game/:gameId",
       builder: (context, state) {
         try {
-          final clubId = int.parse(state.params["id"]!);
+          final clubId = int.parse(state.params["clubId"]!);
           final gameId = int.parse(state.params["gameId"]!);
           final edit = state.queryParams["edit"] == true.toString();
           debugPrint(state.location);
@@ -86,7 +86,7 @@ class AddClubGamePage extends StatefulWidget {
     return context.namedLocation(
       "viewGame",
       params: {
-        "id": clubId.toString(),
+        "clubId": clubId.toString(),
         "gameId": gameId.toString(),
       },
       queryParams: {"edit": canEdit.toString()},
@@ -204,143 +204,182 @@ class _AddClubGamePageState extends State<AddClubGamePage>
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
             child: Stack(
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        state.clubName,
-                        style: MyTheme.of(context).headerTextStyle,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      state.clubName,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                    Expanded(
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceAround,
+                        runSpacing: 20,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        direction: Axis.vertical,
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              for (int i = 0; i < 10; i++)
-                                StatefulBuilder(
-                                  builder: (context, setState) =>
-                                      PlayerRowWidget(
-                                    onRoleChanged: (role) {
-                                      setState(() {
-                                        roles[i] = role;
-                                      });
-                                    },
-                                    addScoreFocusNode: addScoreFocusNodes[i],
-                                    addScoreController: addScoreControllers[i],
-                                    nicknameController: controllers[i],
-                                    focusNode: focusNodes[i],
-                                    readOnly: widget.readOnly,
-                                    availablePlayers: state.players,
-                                    hint: "Игрок ${i + 1}",
-                                    onSelected: () {
-                                      if (i < 9) {
-                                        focusNodes[i + 1].requestFocus();
-                                      } else {
-                                        refereeFocusNode.requestFocus();
-                                      }
-                                    },
-                                    role: roles[i],
-                                    onNewPlayer: ({String? initValue}) async {
-                                      context.read<AddClubGameBloc>().add(
-                                            AddClubGameEvent.onNewPlayer(
-                                              nickname: initValue ?? "",
-                                              index: i,
-                                            ),
-                                          );
-                                    },
-                                  ),
-                                ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.only(left: 30, right: 30),
-                              margin: const EdgeInsets.only(left: 30),
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                    color: Colors.red,
-                                    width: 3,
-                                  ),
+                          for (int i = 0; i < 10; i++)
+                            StatefulBuilder(
+                              builder: (context, setState) => PlayerRowWidget(
+                                onRoleChanged: (role) {
+                                  setState(() {
+                                    roles[i] = role;
+                                  });
+                                },
+                                addScoreFocusNode: addScoreFocusNodes[i],
+                                addScoreController: addScoreControllers[i],
+                                nicknameController: controllers[i],
+                                focusNode: focusNodes[i],
+                                readOnly: widget.readOnly,
+                                availablePlayers: state.players,
+                                hint: "Игрок ${i + 1}",
+                                onSelected: () {
+                                  if (i < 9) {
+                                    focusNodes[i + 1].requestFocus();
+                                  } else {
+                                    refereeFocusNode.requestFocus();
+                                  }
+                                },
+                                role: roles[i],
+                                onNewPlayer: ({String? initValue}) async {
+                                  context.read<AddClubGameBloc>().add(
+                                        AddClubGameEvent.onNewPlayer(
+                                          nickname: initValue ?? "",
+                                          index: i,
+                                        ),
+                                      );
+                                },
+                              ),
+                            ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 30, right: 30),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                left: BorderSide(
+                                  color: Colors.red,
+                                  width: 3,
                                 ),
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  NicknameField(
-                                    controller: refereeController,
-                                    focusNode: refereeFocusNode,
-                                    availablePlayers: state.players,
-                                    readOnly: widget.readOnly,
-                                    hint: "Судья",
-                                    onNewPlayer: ({String? initValue}) async {
-                                      context.read<AddClubGameBloc>().add(
-                                            AddClubGameEvent.onNewPlayer(
-                                              nickname: initValue ?? "",
-                                              index: 10,
-                                            ),
-                                          );
-                                    },
-                                  ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                NicknameField(
+                                  controller: refereeController,
+                                  focusNode: refereeFocusNode,
+                                  availablePlayers: state.players,
+                                  readOnly: widget.readOnly,
+                                  hint: "Судья",
+                                  onNewPlayer: ({String? initValue}) async {
+                                    context.read<AddClubGameBloc>().add(
+                                          AddClubGameEvent.onNewPlayer(
+                                            nickname: initValue ?? "",
+                                            index: 10,
+                                          ),
+                                        );
+                                  },
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Первый отстрел:",
+                                      style:
+                                          MyTheme.of(context).defaultTextStyle,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    StatefulBuilder(
+                                      builder: (context, setState) =>
+                                          CustomDropdown<int>(
+                                        readOnly: widget.readOnly,
+                                        initValue: firstDie,
+                                        items: List.generate(
+                                          11,
+                                          (index) {
+                                            return index - 1;
+                                          },
+                                        ),
+                                        mapToString: (index) => index == -1
+                                            ? "Промах"
+                                            : ((index ?? 0) + 1).toString(),
+                                        onChanged: widget.readOnly
+                                            ? null
+                                            : (value) {
+                                                setState(() {
+                                                  firstDie = value ?? -1;
+                                                  if (firstDie == -1) {
+                                                    bestMove = BestMove.miss;
+                                                  }
+                                                });
+                                              },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                if (firstDie != -1)
                                   Row(
                                     children: [
                                       Text(
-                                        "Первый отстрел:",
+                                        "Лучший ход:",
                                         style: MyTheme.of(context)
                                             .defaultTextStyle,
                                       ),
-                                      const SizedBox(
-                                        width: 8,
+                                      CustomDropdown<BestMove>(
+                                        readOnly: widget.readOnly,
+                                        initValue: bestMove ?? BestMove.miss,
+                                        items: BestMove.values,
+                                        mapToString: (bestMove) {
+                                          final String text;
+                                          switch (bestMove) {
+                                            case BestMove.full:
+                                              text = "Полный лучший ход";
+                                              break;
+                                            case BestMove.half:
+                                              text = "Двойка черных";
+                                              break;
+                                            case BestMove.miss:
+                                              text = "Мимо";
+                                              break;
+                                            default:
+                                              text = "";
+                                              break;
+                                          }
+                                          return text;
+                                        },
+                                        onChanged: widget.readOnly
+                                            ? null
+                                            : (value) => bestMove = value,
                                       ),
-                                      StatefulBuilder(
-                                        builder: (context, setState) =>
-                                            CustomDropdown<int>(
-                                          initValue: firstDie,
-                                          items: List.generate(
-                                            11,
-                                            (index) {
-                                              return index - 1;
-                                            },
-                                          ),
-                                          mapToString: (index) => index == -1
-                                              ? "Промах"
-                                              : ((index ?? 0) + 1).toString(),
-                                          onChanged: widget.readOnly
-                                              ? null
-                                              : (value) {
-                                                  setState(() {
-                                                    firstDie = value ?? -1;
-                                                    if (firstDie == -1) {
-                                                      bestMove = BestMove.miss;
-                                                    }
-                                                  });
-                                                },
-                                        ),
-                                      ),
-                                      if (firstDie != -1) ...[
-                                        Text(
-                                          "Лучший ход:",
-                                          style: MyTheme.of(context)
-                                              .defaultTextStyle,
-                                        ),
-                                        CustomDropdown<BestMove>(
-                                          initValue: bestMove ?? BestMove.miss,
-                                          items: BestMove.values,
-                                          mapToString: (bestMove) {
+                                    ],
+                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Результат:",
+                                      style:
+                                          MyTheme.of(context).defaultTextStyle,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    StatefulBuilder(
+                                      builder: (context, setState) {
+                                        return CustomDropdown<GameWin>(
+                                          readOnly: widget.readOnly,
+                                          initValue: winSelected,
+                                          mapToString: (win) {
                                             final String text;
-                                            switch (bestMove) {
-                                              case BestMove.full:
-                                                text = "Полный лучший ход";
+                                            switch (win) {
+                                              case GameWin.city:
+                                                text = "Победа города";
                                                 break;
-                                              case BestMove.half:
-                                                text = "Двойка черных";
+                                              case GameWin.draw:
+                                                text = "Ничья";
                                                 break;
-                                              case BestMove.miss:
-                                                text = "Мимо";
+                                              case GameWin.mafia:
+                                                text = "Победа мафии";
                                                 break;
                                               default:
                                                 text = "";
@@ -348,209 +387,172 @@ class _AddClubGamePageState extends State<AddClubGamePage>
                                             }
                                             return text;
                                           },
+                                          items: GameWin.values,
                                           onChanged: widget.readOnly
                                               ? null
-                                              : (value) => bestMove = value,
-                                        ),
-                                      ],
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Результат:",
-                                        style: MyTheme.of(context)
-                                            .defaultTextStyle,
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      StatefulBuilder(
-                                        builder: (context, setState) {
-                                          return CustomDropdown<GameWin>(
-                                            initValue: winSelected,
-                                            mapToString: (win) {
-                                              final String text;
-                                              switch (win) {
-                                                case GameWin.city:
-                                                  text = "Победа города";
-                                                  break;
-                                                case GameWin.draw:
-                                                  text = "Ничья";
-                                                  break;
-                                                case GameWin.mafia:
-                                                  text = "Победа мафии";
-                                                  break;
-                                                default:
-                                                  text = "";
-                                                  break;
-                                              }
-                                              return text;
-                                            },
-                                            items: GameWin.values,
-                                            onChanged: widget.readOnly
-                                                ? null
-                                                : (value) {
-                                                    setState(() {
-                                                      winSelected = value;
-                                                    });
-                                                  },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        context.locale.ci,
-                                        style: MyTheme.of(context)
-                                            .defaultTextStyle,
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      StatefulBuilder(
-                                        builder: (context, setState) {
-                                          return CustomDropdown<CiSchemeModel>(
-                                            initValue: ciSchemeModel,
-                                            mapToString: (model) {
-                                              return model?.name ??
-                                                  context.locale.withoutCi;
-                                            },
-                                            items: List.generate(
-                                              state.ciSchemes.length + 1,
-                                              (index) {
-                                                if (index == 0) {
-                                                  return null;
-                                                }
-                                                return state
-                                                    .ciSchemes[index - 1];
-                                              },
-                                            ),
-                                            onChanged: widget.readOnly
-                                                ? null
-                                                : (value) {
-                                                    setState(() {
-                                                      ciSchemeModel = value;
-                                                    });
-                                                  },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  StatefulBuilder(
-                                    builder: (context, setState) => InkWell(
-                                      onTap: widget.readOnly
-                                          ? null
-                                          : () {
-                                              showDatePicker(
-                                                context: context,
-                                                initialDate: date,
-                                                firstDate: DateTime(2000),
-                                                lastDate: DateTime.now(),
-                                              ).then((value) async {
-                                                if (!mounted) return null;
-                                                if (value != null) {
-                                                  final timeOfDay =
-                                                      await showTimePicker(
-                                                    context: context,
-                                                    initialTime:
-                                                        TimeOfDay.fromDateTime(
-                                                      date,
-                                                    ),
-                                                    initialEntryMode:
-                                                        TimePickerEntryMode
-                                                            .input,
-                                                    builder: (context, child) =>
-                                                        MediaQuery(
-                                                      data:
-                                                          MediaQuery.of(context)
-                                                              .copyWith(
-                                                        alwaysUse24HourFormat:
-                                                            true,
-                                                      ),
-                                                      child:
-                                                          child ?? Container(),
-                                                    ),
-                                                  );
-                                                  if (timeOfDay != null) {
-                                                    return DateTime(
-                                                      value.year,
-                                                      value.month,
-                                                      value.day,
-                                                      timeOfDay.hour,
-                                                      timeOfDay.minute,
-                                                    );
-                                                  }
-                                                }
-                                                return null;
-                                              }).then((value) {
-                                                setState(() {
-                                                  date = value ?? date;
-                                                });
-                                              });
-                                            },
-                                      child: DefaultTextStyle(
-                                        style: MyTheme.of(context)
-                                            .defaultTextStyle
-                                            .copyWith(
-                                              color:
-                                                  Theme.of(context).hintColor,
-                                            ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            const Text("Дата:"),
-                                            const SizedBox(width: 80),
-                                            Text(
-                                              DateFormat("dd:MM:yyy HH:mm")
-                                                  .format(date),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                              : (value) {
+                                                  setState(() {
+                                                    winSelected = value;
+                                                  });
+                                                },
+                                        );
+                                      },
                                     ),
-                                  ),
-                                  if (state.canEdit) ...[
-                                    Container(
-                                      width: 400,
-                                      padding: const EdgeInsets.all(20),
-                                      child: CustomButton(
-                                        text: widget.readOnly
-                                            ? "Изменить"
-                                            : "Сохранить",
-                                        onTap: () => submit(state),
-                                        disabled: state.isLoading,
-                                      ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      context.locale.ci,
+                                      style:
+                                          MyTheme.of(context).defaultTextStyle,
                                     ),
-                                    if (widget.readOnly)
-                                      Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: TextButton(
-                                          onPressed: () {
-                                            context.read<AddClubGameBloc>().add(
-                                                  const AddClubGameEvent
-                                                      .newGame(),
-                                                );
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    StatefulBuilder(
+                                      builder: (context, setState) {
+                                        return CustomDropdown<CiSchemeModel>(
+                                          readOnly: widget.readOnly,
+                                          initValue: ciSchemeModel,
+                                          mapToString: (model) {
+                                            return model?.name ??
+                                                context.locale.withoutCi;
                                           },
-                                          child: Text(
-                                            context.locale.addGame,
-                                            style: MyTheme.of(context)
-                                                .textBtnTextStyle,
+                                          items: List.generate(
+                                            state.ciSchemes.length + 1,
+                                            (index) {
+                                              if (index == 0) {
+                                                return null;
+                                              }
+                                              return state.ciSchemes[index - 1];
+                                            },
+                                          ),
+                                          onChanged: widget.readOnly
+                                              ? null
+                                              : (value) {
+                                                  setState(() {
+                                                    ciSchemeModel = value;
+                                                  });
+                                                },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                StatefulBuilder(
+                                  builder: (context, setState) => InkWell(
+                                    onTap: widget.readOnly
+                                        ? null
+                                        : () {
+                                            showDatePicker(
+                                              context: context,
+                                              initialDate: date,
+                                              firstDate: DateTime(2000),
+                                              lastDate: DateTime.now(),
+                                            ).then((value) async {
+                                              if (!mounted) return null;
+                                              if (value != null) {
+                                                final timeOfDay =
+                                                    await showTimePicker(
+                                                  context: context,
+                                                  initialTime:
+                                                      TimeOfDay.fromDateTime(
+                                                    date,
+                                                  ),
+                                                  initialEntryMode:
+                                                      TimePickerEntryMode.input,
+                                                  builder: (context, child) =>
+                                                      MediaQuery(
+                                                    data: MediaQuery.of(context)
+                                                        .copyWith(
+                                                      alwaysUse24HourFormat:
+                                                          true,
+                                                    ),
+                                                    child: child ?? Container(),
+                                                  ),
+                                                );
+                                                if (timeOfDay != null) {
+                                                  return DateTime(
+                                                    value.year,
+                                                    value.month,
+                                                    value.day,
+                                                    timeOfDay.hour,
+                                                    timeOfDay.minute,
+                                                  );
+                                                }
+                                              }
+                                              return null;
+                                            }).then((value) {
+                                              setState(() {
+                                                date = value ?? date;
+                                              });
+                                            });
+                                          },
+                                    child: DefaultTextStyle(
+                                      style: MyTheme.of(context)
+                                          .defaultTextStyle
+                                          .copyWith(
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Text("Дата:"),
+                                          const SizedBox(width: 80),
+                                          Text(
+                                            DateFormat("dd:MM:yyy HH:mm")
+                                                .format(date),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                if (state.canEdit)
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 400,
+                                        padding: const EdgeInsets.all(20),
+                                        child: CustomButton(
+                                          text: widget.readOnly
+                                              ? "Изменить"
+                                              : "Сохранить",
+                                          onTap: () => submit(state),
+                                          disabled: state.isLoading,
+                                        ),
+                                      ),
+                                      if (widget.readOnly)
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: TextButton(
+                                            onPressed: () {
+                                              context
+                                                  .read<AddClubGameBloc>()
+                                                  .add(
+                                                    const AddClubGameEvent
+                                                        .newGame(),
+                                                  );
+                                            },
+                                            child: Text(
+                                              context.locale.addGame,
+                                              style: MyTheme.of(context)
+                                                  .textBtnTextStyle,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                  ],
-                                ],
-                              ),
+                                    ],
+                                  ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 if (state.isLoading) const LoadingOverlayWidget(),
               ],
