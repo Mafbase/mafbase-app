@@ -52,6 +52,7 @@ test:
     - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
     - flutter test --machine --coverage | tojunit -o report.xml
+    - flutter test integration_test/
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines\.*: \d+\.\d+\%/'
