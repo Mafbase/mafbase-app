@@ -20,9 +20,6 @@ class TournamentsPage extends StatefulWidget {
 }
 
 class _TournamentsPageState extends State<TournamentsPage> {
-  int tapped = -1;
-  int hovered = -1;
-
   @override
   void initState() {
     super.initState();
@@ -34,95 +31,99 @@ class _TournamentsPageState extends State<TournamentsPage> {
     return BlocBuilder<TournamentsBloc, TournamentsState>(
       builder: (context, state) {
         return Scaffold(
-          body: ListView.builder(
-            itemCount: state.tournaments.length,
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return Center(
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 50),
-                    child: Text(
-                      AppLocalizations.of(context)!.tournamentsListTitle,
-                      style: MyTheme.of(context).headerTextStyle,
-                    ),
-                  ),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 270, right: 270, bottom: 10,),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(50),
-                    onTap: () {
-                      context.read<MainBloc>().add(
-                        MainEvent.tournamentSelected(
-                          tournamentId: state.tournaments[index].id,
+          resizeToAvoidBottomInset: false,
+          body: CustomScrollView(
+            slivers: [
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Center(
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 50),
+                        child: Text(
+                          AppLocalizations.of(context)!.tournamentsListTitle,
+                          style: MyTheme.of(context).headerTextStyle,
                         ),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 25,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: MaterialStatePropertyAll(
-                          tapped == index
-                              ? const Color(0xFFA7A7A7)
-                              : (hovered == index
-                              ? const Color(0xFFE3E3E3)
-                              : MyTheme.of(context)
-                              .greyColor
-                              .withOpacity(0.16)),
-                        ).value,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            DateFormat('dd-MM-yyyy')
-                                .format(state.tournaments[index].dateStart),
-                            style: MyTheme.of(context).defaultTextStyle,
-                          ),
-                          const SizedBox(
-                            width: 35,
-                          ),
-                          Text(
-                            state.tournaments[index].name,
-                            style: MyTheme.of(context).defaultTextStyle,
-                          ),
-                          const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 18,
-                                  width: 18,
-                                  decoration: BoxDecoration(
-                                    color: getColor(
-                                      state.tournaments[index].status,
-                                    ),
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  getText(state.tournaments[index].status),
-                                  style: MyTheme.of(context).defaultTextStyle,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
                       ),
                     ),
-                  ),
-                );
-              }
-            },
+                  ],
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                    childCount: state.tournaments.length, (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      left: 270,
+                      right: 270,
+                      bottom: 10,
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(50),
+                      onTap: () {
+                        context.read<MainBloc>().add(
+                              MainEvent.tournamentSelected(
+                                tournamentId: state.tournaments[index].id,
+                              ),
+                            );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15,
+                          horizontal: 25,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color:
+                              MyTheme.of(context).greyColor.withOpacity(0.16),
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              DateFormat('dd-MM-yyyy')
+                                  .format(state.tournaments[index].dateStart),
+                              style: MyTheme.of(context).defaultTextStyle,
+                            ),
+                            const SizedBox(
+                              width: 35,
+                            ),
+                            Text(
+                              state.tournaments[index].name,
+                              style: MyTheme.of(context).defaultTextStyle,
+                            ),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 18,
+                                    width: 18,
+                                    decoration: BoxDecoration(
+                                      color: getColor(
+                                        state.tournaments[index].status,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    getText(state.tournaments[index].status),
+                                    style: MyTheme.of(context).defaultTextStyle,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ],
           ),
           floatingActionButton: FloatingActionButton.large(
             elevation: 10,
