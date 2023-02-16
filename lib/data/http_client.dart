@@ -161,6 +161,7 @@ class MyHttpClient {
   }
 
   void _checkResponse(Response response) {
+    debugPrint("Status code: ${response.statusCode}");
     if (response.statusCode == HttpStatus.internalServerError) {
       throw RequestError(
         ErrorOut.fromBuffer(parseResponseData(response.data)).message,

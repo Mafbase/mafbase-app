@@ -56,7 +56,7 @@ class RatingPage extends StatefulWidget {
   static const name = 'club_rating';
 
   static final GoRoute route = GoRoute(
-    path: ":clubId/rating",
+    path: "rating",
     name: name,
     builder: (context, state) {
       final clubId = int.parse(state.params["clubId"]!);
@@ -122,6 +122,7 @@ class _RatingPageState extends State<RatingPage> {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               Positioned.fill(

@@ -5,6 +5,7 @@ import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/repositories/tournament_edit_repository_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_secure_storage_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
+import 'package:seating_generator_web/data/storages/token_in_memory_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_hive_impl.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
@@ -22,6 +23,7 @@ import 'package:seating_generator_web/domain/interactors/edit_player_interactor.
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_ci_schemes_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_clubs_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
@@ -51,6 +53,8 @@ import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
+import 'package:seating_generator_web/ui/main/clubs_page/clubs_bloc.dart';
+import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
@@ -70,10 +74,12 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 GetIt getIt = GetIt.instance;
 const _useHiveStorage = true;
 
-void registerGetIt() {
+void registerGetIt({bool isIntegrationTest = false}) {
   getIt
     ..registerLazySingleton<TokenStorage>(
-      () => _useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl(),
+      () => isIntegrationTest
+          ? TokenInMemoryStorage()
+          : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl()),
     )
     ..registerLazySingleton<CredentialStorage>(
       () => CredentialSecureStorageImpl(),
@@ -88,6 +94,9 @@ void registerGetIt() {
     )
     ..registerLazySingleton<TournamentEditRepository>(
       () => TournamentEditRepositoryImpl(getIt()),
+    )
+    ..registerFactoryParam<ClubsRouter, BuildContext, dynamic>(
+      (context, _) => ClubsRouterImpl(context),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
@@ -148,6 +157,13 @@ void registerSharedGetIt() {
       () => LoginInteractor(
         getIt(),
         getIt(),
+      ),
+    )
+    ..registerFactoryParam<ClubsBloc, BuildContext?, dynamic>(
+      (context, _) => ClubsBloc(
+        context: context,
+        getClubsInteractor: getIt(),
+        router: getIt(param1: context),
       ),
     )
     ..registerLazySingleton<SignUpInteractor>(() => SignUpInteractor(getIt()))
@@ -221,6 +237,9 @@ void registerSharedGetIt() {
     )
     ..registerLazySingleton<GetRatingInteractor>(
       () => GetRatingInteractor(getIt()),
+    )
+    ..registerLazySingleton<GetClubsInteractor>(
+      () => GetClubsInteractor(getIt()),
     )
     ..registerLazySingleton<EditPlayerInteractor>(
       () => EditPlayerInteractor(getIt()),

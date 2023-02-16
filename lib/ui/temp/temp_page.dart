@@ -61,6 +61,7 @@ class _TempPageState extends State<TempPage> {
             break;
         }
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Center(
             child: FlipWidget(
               child: Container(

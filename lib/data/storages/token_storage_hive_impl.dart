@@ -8,7 +8,7 @@ class TokenStorageHiveImpl implements TokenStorage {
   static const _recoveryTokenKey = 'recovery_token';
   static const _boxName = 'auth_tokens_box';
 
-  Future<Box<String>> get _box => Hive.openBox<String>(_boxName);
+  late final Future<Box<String>> _box = Hive.openBox<String>(_boxName);
 
   @override
   FutureOr<String?> get authToken =>

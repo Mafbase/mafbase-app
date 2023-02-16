@@ -3,7 +3,7 @@
 //  source: seating-generator-proto/mafia.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields,deprecated_member_use_from_same_package
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,deprecated_member_use_from_same_package,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
@@ -181,17 +181,23 @@ final $typed_data.Uint8List changeSeatingContentDescriptor = $convert.base64Deco
 const Club$json = const {
   '1': 'Club',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'id', '17': true},
-    const {'1': 'name', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'name', '17': true},
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'description', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'description', '17': true},
+    const {'1': 'imageUrl', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'imageUrl', '17': true},
+    const {'1': 'groupLink', '3': 5, '4': 1, '5': 9, '9': 2, '10': 'groupLink', '17': true},
+    const {'1': 'city', '3': 6, '4': 1, '5': 9, '9': 3, '10': 'city', '17': true},
   ],
   '8': const [
-    const {'1': '_id'},
-    const {'1': '_name'},
+    const {'1': '_description'},
+    const {'1': '_imageUrl'},
+    const {'1': '_groupLink'},
+    const {'1': '_city'},
   ],
 };
 
 /// Descriptor for `Club`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubDescriptor = $convert.base64Decode('CgRDbHViEhMKAmlkGAEgASgFSABSAmlkiAEBEhcKBG5hbWUYAiABKAlIAVIEbmFtZYgBAUIFCgNfaWRCBwoFX25hbWU=');
+final $typed_data.Uint8List clubDescriptor = $convert.base64Decode('CgRDbHViEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiUKC2Rlc2NyaXB0aW9uGAMgASgJSABSC2Rlc2NyaXB0aW9uiAEBEh8KCGltYWdlVXJsGAQgASgJSAFSCGltYWdlVXJsiAEBEiEKCWdyb3VwTGluaxgFIAEoCUgCUglncm91cExpbmuIAQESFwoEY2l0eRgGIAEoCUgDUgRjaXR5iAEBQg4KDF9kZXNjcmlwdGlvbkILCglfaW1hZ2VVcmxCDAoKX2dyb3VwTGlua0IHCgVfY2l0eQ==');
 @$core.Deprecated('Use clubRatingEventOutDescriptor instead')
 const ClubRatingEventOut$json = const {
   '1': 'ClubRatingEventOut',
@@ -662,3 +668,25 @@ const ErrorOut$json = const {
 
 /// Descriptor for `ErrorOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List errorOutDescriptor = $convert.base64Decode('CghFcnJvck91dBIYCgdtZXNzYWdlGAEgASgJUgdtZXNzYWdl');
+@$core.Deprecated('Use billTournamentEventDescriptor instead')
+const BillTournamentEvent$json = const {
+  '1': 'BillTournamentEvent',
+  '2': const [
+    const {'1': 'players', '3': 1, '4': 1, '5': 5, '10': 'players'},
+    const {'1': 'hasTranslation', '3': 2, '4': 1, '5': 8, '10': 'hasTranslation'},
+    const {'1': 'redirectPath', '3': 3, '4': 1, '5': 9, '10': 'redirectPath'},
+  ],
+};
+
+/// Descriptor for `BillTournamentEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List billTournamentEventDescriptor = $convert.base64Decode('ChNCaWxsVG91cm5hbWVudEV2ZW50EhgKB3BsYXllcnMYASABKAVSB3BsYXllcnMSJgoOaGFzVHJhbnNsYXRpb24YAiABKAhSDmhhc1RyYW5zbGF0aW9uEiIKDHJlZGlyZWN0UGF0aBgDIAEoCVIMcmVkaXJlY3RQYXRo');
+@$core.Deprecated('Use billTournamentEventOutDescriptor instead')
+const BillTournamentEventOut$json = const {
+  '1': 'BillTournamentEventOut',
+  '2': const [
+    const {'1': 'redirectLink', '3': 1, '4': 1, '5': 9, '10': 'redirectLink'},
+  ],
+};
+
+/// Descriptor for `BillTournamentEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List billTournamentEventOutDescriptor = $convert.base64Decode('ChZCaWxsVG91cm5hbWVudEV2ZW50T3V0EiIKDHJlZGlyZWN0TGluaxgBIAEoCVIMcmVkaXJlY3RMaW5r');

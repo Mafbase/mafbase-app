@@ -29,7 +29,9 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 
 class AppRouter {
-  final router = GoRouter(
+  final String initLocation;
+  late final router = GoRouter(
+    initialLocation: initLocation,
     redirect: (context, state) async {
       if (!state.location.endsWith('/')) {
         return null;
@@ -55,7 +57,10 @@ class AppRouter {
             builder: (context, state, child) {
               return LayoutBuilder(
                 builder: (context, constraints) {
-                  final height = max(constraints.maxHeight, 720.0);
+                  final height = min(
+                    max(constraints.maxHeight, 720.0),
+                    MediaQuery.of(context).size.height,
+                  );
                   final width = max(constraints.maxWidth, 1280.0);
                   final mainChild = Container(
                     constraints: BoxConstraints(
@@ -67,10 +72,9 @@ class AppRouter {
                   if (state.queryParams["zoom"] == "true") {
                     return LayoutBuilder(
                       builder: (context, constraints) {
-                        final widthScale = constraints.maxWidth/1280;
+                        final widthScale = constraints.maxWidth / 1280;
                         return InteractiveViewer(
                           constrained: false,
-                          boundaryMargin: const EdgeInsets.all(double.infinity),
                           minScale: widthScale,
                           maxScale: 1,
                           child: mainChild,
@@ -143,7 +147,7 @@ class AppRouter {
     },
   );
 
-  AppRouter();
+  AppRouter(this.initLocation);
 
   static void showErrorDialog(BuildContext context, String message) {
     showDialog(

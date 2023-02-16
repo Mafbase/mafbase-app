@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/base_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
