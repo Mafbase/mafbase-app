@@ -20,6 +20,7 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class AddClubGamePage extends StatefulWidget {
   final bool readOnly;
@@ -103,10 +104,12 @@ class AddClubGamePage extends StatefulWidget {
   }
 }
 
-class _AddClubGamePageState extends State<AddClubGamePage>
+class _AddClubGamePageState extends CustomState<AddClubGamePage>
     with
         EffectListener<AddClubGameEffect, AddClubGameState, AddClubGameBloc,
             AddClubGamePage> {
+  @override
+  bool get expanded => true;
   final controllers = List.generate(10, (index) => TextEditingController());
   final addScoreControllers = List.generate(
     10,
@@ -196,7 +199,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDesktop(BuildContext context) {
     return BlocBuilder<AddClubGameBloc, AddClubGameState>(
       builder: (context, state) {
         return Padding(

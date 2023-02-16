@@ -12,6 +12,7 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class RatingPage extends StatefulWidget {
   final int clubId;
@@ -90,7 +91,9 @@ class RatingPage extends StatefulWidget {
   );
 }
 
-class _RatingPageState extends State<RatingPage> {
+class _RatingPageState extends CustomState<RatingPage> {
+  @override
+  bool get expanded => true;
   final format = DateFormat("dd:MM:yyyy");
 
   @override
@@ -118,7 +121,7 @@ class _RatingPageState extends State<RatingPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDesktop(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
         return Stack(
@@ -129,7 +132,7 @@ class _RatingPageState extends State<RatingPage> {
                   left: 20,
                   right: 20,
                   top: 20,
-                  bottom: 0,
+                  bottom: 20,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

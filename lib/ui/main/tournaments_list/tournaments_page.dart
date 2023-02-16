@@ -10,6 +10,7 @@ import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class TournamentsPage extends StatefulWidget {
   const TournamentsPage({
@@ -20,7 +21,9 @@ class TournamentsPage extends StatefulWidget {
   State<TournamentsPage> createState() => _TournamentsPageState();
 }
 
-class _TournamentsPageState extends State<TournamentsPage> {
+class _TournamentsPageState extends CustomState<TournamentsPage> {
+  @override
+  bool get expanded => true;
   @override
   void initState() {
     super.initState();
@@ -28,7 +31,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDesktop(BuildContext context) {
     return BlocBuilder<TournamentsBloc, TournamentsState>(
       builder: (context, state) {
         return Stack(

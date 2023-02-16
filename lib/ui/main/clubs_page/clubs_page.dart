@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/main/clubs_page/clubs_event.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_state.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/widgets/single_club_row.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubsPage extends StatefulWidget {
   const ClubsPage({Key? key}) : super(key: key);
@@ -33,7 +34,9 @@ class ClubsPage extends StatefulWidget {
   );
 }
 
-class _ClubsPageState extends State<ClubsPage> {
+class _ClubsPageState extends CustomState<ClubsPage> {
+  @override
+  bool get expanded => true;
   @override
   void initState() {
     context.read<ClubsBloc>().add(const ClubsEvent.pageOpened());
@@ -41,7 +44,7 @@ class _ClubsPageState extends State<ClubsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDesktop(BuildContext context) {
     return BlocBuilder<ClubsBloc, ClubsState>(
       builder: (context, state) {
         if (state.isLoading) {

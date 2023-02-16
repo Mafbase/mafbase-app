@@ -53,83 +53,41 @@ class AppRouter {
         redirect: (_, state) => state.location == '/' ? '/tournament' : null,
         builder: (context, state) => const Placeholder(),
         routes: [
+          LoginPage.route,
           ShellRoute(
             builder: (context, state, child) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  final height = max(constraints.maxHeight, 720.0);
-                  final width = max(constraints.maxWidth, 1280.0);
-                  final mainChild = Container(
-                    constraints: BoxConstraints(
-                      maxWidth: width,
-                      maxHeight: height,
-                    ),
-                    child: child,
-                  );
-                  if (state.queryParams["zoom"] == "true") {
-                    return LayoutBuilder(
-                      builder: (context, constraints) {
-                        final widthScale = constraints.maxWidth / 1280;
-                        return InteractiveViewer(
-                          constrained: false,
-                          minScale: widthScale,
-                          maxScale: 1,
-                          child: mainChild,
-                        );
-                      },
-                    );
-                  }
-                  return SingleChildScrollView(
-                    primary: true,
-                    physics: const ClampingScrollPhysics(),
-                    child: SingleChildScrollView(
-                      primary: true,
-                      physics: const ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: mainChild,
-                    ),
-                  );
-                },
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<MainBloc>(
+                    key: const Key("MainBlocProvider"),
+                    create: (context) =>
+                        getIt.get<MainBloc>(param1: context),
+                  ),
+                  BlocProvider<TournamentsBloc>(
+                    key: const Key("TournamentsBlocProvider"),
+                    create: (context) =>
+                        getIt<TournamentsBloc>(param1: context),
+                  ),
+                ],
+                child: MainPage(
+                  hasBackButton: !state.location.endsWith('/'),
+                  child: child,
+                ),
               );
             },
             routes: [
-              LoginPage.route,
-              ShellRoute(
-                builder: (context, state, child) {
-                  return MultiBlocProvider(
-                    providers: [
-                      BlocProvider<MainBloc>(
-                        key: const Key("MainBlocProvider"),
-                        create: (context) =>
-                            getIt.get<MainBloc>(param1: context),
-                      ),
-                      BlocProvider<TournamentsBloc>(
-                        key: const Key("TournamentsBlocProvider"),
-                        create: (context) =>
-                            getIt<TournamentsBloc>(param1: context),
-                      ),
-                    ],
-                    child: MainPage(
-                      hasBackButton: !state.location.endsWith('/'),
-                      child: child,
-                    ),
-                  );
-                },
+              GoRoute(
+                path: 'tournament',
                 routes: [
-                  GoRoute(
-                    path: 'tournament',
-                    routes: [
-                      TournamentPage.createRoute(),
-                    ],
-                    pageBuilder: (context, state) => const NoTransitionPage(
-                      child: TournamentsPage(),
-                    ),
-                  ),
-                  ClubsPage.route,
+                  TournamentPage.createRoute(),
                 ],
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: TournamentsPage(),
+                ),
               ),
+              ClubsPage.route,
             ],
-          )
+          ),
         ],
       ),
     ],
