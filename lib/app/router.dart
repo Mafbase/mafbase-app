@@ -57,10 +57,7 @@ class AppRouter {
             builder: (context, state, child) {
               return LayoutBuilder(
                 builder: (context, constraints) {
-                  final height = min(
-                    max(constraints.maxHeight, 720.0),
-                    MediaQuery.of(context).size.height,
-                  );
+                  final height = max(constraints.maxHeight, 720.0);
                   final width = max(constraints.maxWidth, 1280.0);
                   final mainChild = Container(
                     constraints: BoxConstraints(
