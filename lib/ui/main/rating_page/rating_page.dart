@@ -56,7 +56,7 @@ class RatingPage extends StatefulWidget {
   static const name = 'club_rating';
 
   static final GoRoute route = GoRoute(
-    path: ":rating",
+    path: "rating",
     name: name,
     builder: (context, state) {
       final clubId = int.parse(state.params["clubId"]!);
