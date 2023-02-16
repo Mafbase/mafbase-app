@@ -198,6 +198,7 @@ class _AddClubGamePageState extends State<AddClubGamePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: BlocBuilder<AddClubGameBloc, AddClubGameState>(
         builder: (context, state) {
           return Padding(
