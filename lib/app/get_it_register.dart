@@ -72,7 +72,7 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
 
 GetIt getIt = GetIt.instance;
-const _useHiveStorage = false;
+const _useHiveStorage = true;
 
 void registerGetIt({bool isIntegrationTest = false}) {
   getIt

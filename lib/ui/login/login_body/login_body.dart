@@ -137,7 +137,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       height: 35,
                     ),
                     Wrap(
-                      alignment: WrapAlignment.spaceBetween,
+                      runAlignment: WrapAlignment.spaceBetween,
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.min,
