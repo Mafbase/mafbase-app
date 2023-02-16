@@ -45,6 +45,7 @@ class _SeatingInsertingPageState extends State<SeatingInsertingPage> {
     return BlocBuilder<SeatingInsertingBloc, SeatingInsertingState>(
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(50),

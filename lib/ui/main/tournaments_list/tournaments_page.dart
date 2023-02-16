@@ -36,6 +36,7 @@ class _TournamentsPageState extends State<TournamentsPage> {
     return BlocBuilder<TournamentsBloc, TournamentsState>(
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               Positioned.fill(

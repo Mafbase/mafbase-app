@@ -48,6 +48,7 @@ class _ClubsPageState extends State<ClubsPage> {
           return const LoadingOverlayWidget();
         }
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: CustomScrollView(
             slivers: [
               SliverList(

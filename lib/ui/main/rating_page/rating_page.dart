@@ -122,6 +122,7 @@ class _RatingPageState extends State<RatingPage> {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               Positioned.fill(
