@@ -28,14 +28,17 @@ class _TournamentMenuState extends State<TournamentMenu> {
               child: Column(
                 children: widget.items.map(
                   (e) {
-                    return InkWell(
-                      onTap: e.onTap,
-                      child: SizedBox(
-                        height: 64,
-                        child: Center(
-                          child: Text(
-                            e.text,
-                            style: MyTheme.of(context).btnTextStyle,
+                    return Material(
+                      color: MyTheme.of(context).darkGreyColor,
+                      child: InkWell(
+                        onTap: e.onTap,
+                        child: SizedBox(
+                          height: 64,
+                          child: Center(
+                            child: Text(
+                              e.text,
+                              style: MyTheme.of(context).btnTextStyle,
+                            ),
                           ),
                         ),
                       ),

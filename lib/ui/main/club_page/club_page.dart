@@ -60,20 +60,18 @@ class _ClubPageState extends CustomState<ClubPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDesktop(BuildContext context) {
     return BlocBuilder<ClubBloc, ClubState>(
       builder: (context, state) {
-        return Scaffold(
-          body: Row(
-            children: [
-              if (state.model != null)
-                Expanded(
-                  child: ClubInfoWidget(
-                    clubModel: state.model!,
-                  ),
+        return Row(
+          children: [
+            if (state.model != null)
+              Expanded(
+                child: ClubInfoWidget(
+                  clubModel: state.model!,
                 ),
-            ],
-          ),
+              ),
+          ],
         );
       },
     );
