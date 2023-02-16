@@ -51,6 +51,7 @@ class App extends StatelessWidget {
           return MaterialApp.router(
             title: 'Mafbase',
             theme: ThemeData.light(useMaterial3: true).copyWith(
+              scaffoldBackgroundColor: context.theme.background2,
               colorScheme:
                   ThemeData.light(useMaterial3: true).colorScheme.copyWith(
                         primary: MyTheme.of(context).darkGreyColor,
