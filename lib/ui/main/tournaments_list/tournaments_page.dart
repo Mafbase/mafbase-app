@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,9 +21,6 @@ class TournamentsPage extends StatefulWidget {
 }
 
 class _TournamentsPageState extends State<TournamentsPage> {
-  int tapped = -1;
-  int hovered = -1;
-
   @override
   void initState() {
     super.initState();
@@ -37,62 +33,68 @@ class _TournamentsPageState extends State<TournamentsPage> {
       builder: (context, state) {
         return Stack(
           children: [
-            Positioned.fill(
-              child: Center(
-                child: ListView(
-                  children: [
-                    Center(
-                      child: Text(
-                        AppLocalizations.of(context)!.tournamentsListTitle,
-                        style: MyTheme.of(context).headerTextStyle,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: DataTable(
-                        border: TableBorder.all(
-                          color: MyTheme.of(context).textColor.withOpacity(0.2),
+            CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 50),
+                          child: Text(
+                            AppLocalizations.of(context)!.tournamentsListTitle,
+                            style: MyTheme.of(context).headerTextStyle,
+                          ),
                         ),
-                        columns: [
-                          AppLocalizations.of(context)!
-                              .tournamentsListNameHeader,
-                          AppLocalizations.of(context)!
-                              .tournamentsListStatusHeader,
-                          AppLocalizations.of(context)!
-                              .tournamentsListDateHeader,
-                          AppLocalizations.of(context)!
-                              .tournamentsListGamesCountHeader
-                        ]
-                            .map(
-                              (e) => DataColumn(
-                                label: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    e,
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
-                                ),
+                      ),
+                    ],
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      childCount: state.tournaments.length, (context, index) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 10,
+                        ),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(50),
+                          onTap: () {
+                            context.read<MainBloc>().add(
+                              MainEvent.tournamentSelected(
+                                tournamentId: state.tournaments[index].id,
                               ),
-                            )
-                            .toList(),
-                        rows: [
-                          ...state.tournaments.mapIndexed(
-                            (index, e) => DataRow(
-                              color: MaterialStatePropertyAll(
-                                tapped == index
-                                    ? const Color(0xFFA7A7A7)
-                                    : (hovered == index
-                                        ? const Color(0xFFE3E3E3)
-                                        : null),
-                              ),
-                              cells: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    e.name,
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
+                            );
+                          },
+                          child: Container(
+                            constraints: const BoxConstraints(
+                              maxWidth: 900,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 25,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color:
+                              MyTheme.of(context).greyColor.withOpacity(0.16),
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  DateFormat('dd-MM-yyyy')
+                                      .format(state.tournaments[index].dateStart),
+                                  style: MyTheme.of(context).defaultTextStyle,
                                 ),
+                                const SizedBox(
+                                  width: 35,
+                                ),
+                                Text(
+                                  state.tournaments[index].name,
+                                  style: MyTheme.of(context).defaultTextStyle,
+                                ),
+                                const Spacer(),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
@@ -101,7 +103,9 @@ class _TournamentsPageState extends State<TournamentsPage> {
                                         height: 18,
                                         width: 18,
                                         decoration: BoxDecoration(
-                                          color: getColor(e.status),
+                                          color: getColor(
+                                            state.tournaments[index].status,
+                                          ),
                                           shape: BoxShape.circle,
                                         ),
                                       ),
@@ -109,87 +113,27 @@ class _TournamentsPageState extends State<TournamentsPage> {
                                         width: 5,
                                       ),
                                       Text(
-                                        getText(e.status),
-                                        style: MyTheme.of(context)
-                                            .defaultTextStyle,
+                                        getText(state.tournaments[index].status),
+                                        style: MyTheme.of(context).defaultTextStyle,
                                       ),
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    DateFormat('dd-MM-yyyy')
-                                        .format(e.dateStart),
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    e.gamesCount.toString(),
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
-                                ),
-                              ]
-                                  .map(
-                                    (e) => DataCell(
-                                      MouseRegion(
-                                        onEnter: (_) => setState(() {
-                                          hovered = index;
-                                        }),
-                                        onExit: (_) => setState(() {
-                                          hovered = -1;
-                                        }),
-                                        child: GestureDetector(
-                                          onTapDown: (_) => setState(() {
-                                            tapped = index;
-                                          }),
-                                          onTapUp: (_) => setState(
-                                            () {
-                                              tapped = -1;
-                                              context.read<MainBloc>().add(
-                                                    MainEvent
-                                                        .tournamentSelected(
-                                                      tournamentId: state
-                                                          .tournaments[index]
-                                                          .id,
-                                                    ),
-                                                  );
-                                            },
-                                          ),
-                                          onTapCancel: () => setState(() {
-                                            tapped = -1;
-                                          }),
-                                          child: Container(
-                                            color: const Color(0x00000000),
-                                            child: Center(
-                                              child: Row(
-                                                children: [
-                                                  e.child ?? Container(),
-                                                  const Spacer(),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
+                              ],
                             ),
-                          )
-                        ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    );
+                  }),
                 ),
-              ),
+              ],
             ),
             Positioned(
               bottom: 35,
               right: 35,
               child: FloatingActionButton.large(
+                elevation: 10,
                 onPressed: () {
                   context
                       .read<TournamentsBloc>()
