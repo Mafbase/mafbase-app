@@ -29,7 +29,9 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 
 class AppRouter {
-  final router = GoRouter(
+  final String initLocation;
+  late final router = GoRouter(
+    initialLocation: initLocation,
     redirect: (context, state) async {
       if (!state.location.endsWith('/')) {
         return null;
@@ -142,7 +144,7 @@ class AppRouter {
     },
   );
 
-  AppRouter();
+  AppRouter(this.initLocation);
 
   static void showErrorDialog(BuildContext context, String message) {
     showDialog(
