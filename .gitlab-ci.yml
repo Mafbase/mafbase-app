@@ -50,11 +50,11 @@ test:
   before_script:
     - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
-    #- apt update
-    #- apt install cmake
+    - apt update
+    - apt install cmake -y
   script:
-    - flutter test --machine --coverage | tojunit -o report.xml
-    #- flutter test integration_test/
+    - flutter test --machine --coverage
+    - flutter test integration_test/ --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines\.*: \d+\.\d+\%/'
