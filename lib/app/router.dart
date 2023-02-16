@@ -57,7 +57,10 @@ class AppRouter {
             builder: (context, state, child) {
               return LayoutBuilder(
                 builder: (context, constraints) {
-                  final height = max(constraints.maxHeight, 720.0);
+                  final height = min(
+                    max(constraints.maxHeight, 720.0),
+                    MediaQuery.of(context).size.height,
+                  );
                   final width = max(constraints.maxWidth, 1280.0);
                   final mainChild = Container(
                     constraints: BoxConstraints(
@@ -69,7 +72,7 @@ class AppRouter {
                   if (state.queryParams["zoom"] == "true") {
                     return LayoutBuilder(
                       builder: (context, constraints) {
-                        final widthScale = constraints.maxWidth/1280;
+                        final widthScale = constraints.maxWidth / 1280;
                         return InteractiveViewer(
                           constrained: false,
                           minScale: widthScale,
