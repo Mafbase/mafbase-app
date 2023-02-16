@@ -47,43 +47,40 @@ class _ClubsPageState extends State<ClubsPage> {
         if (state.isLoading) {
           return const LoadingOverlayWidget();
         }
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Center(
-                      child: Text(
-                        context.locale.clubsHeader,
-                        style: context.theme.headerTextStyle,
-                      ),
+        return CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Center(
+                    child: Text(
+                      context.locale.clubsHeader,
+                      style: context.theme.headerTextStyle,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: state.clubs.length,
-                  (context, index) {
-                    return Center(
-                      child: SingleClubRow(
-                        model: state.clubs[index],
-                        onTap: () {
-                          context.read<ClubsBloc>().add(
-                                ClubsEvent.clubSelected(
-                                  clubModel: state.clubs[index],
-                                ),
-                              );
-                        },
-                      ),
-                    );
-                  },
-                ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: state.clubs.length,
+                    (context, index) {
+                  return Center(
+                    child: SingleClubRow(
+                      model: state.clubs[index],
+                      onTap: () {
+                        context.read<ClubsBloc>().add(
+                          ClubsEvent.clubSelected(
+                            clubModel: state.clubs[index],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
