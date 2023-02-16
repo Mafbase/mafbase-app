@@ -97,7 +97,7 @@ class AddClubGamePage extends StatefulWidget {
     return context.namedLocation(
       "addGame",
       params: {
-        "id": clubId.toString(),
+        "clubId": clubId.toString(),
       },
     );
   }
