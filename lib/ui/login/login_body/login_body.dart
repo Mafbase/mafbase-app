@@ -87,6 +87,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       height: 20,
                     ),
                     CustomTextField(
+                      key: const Key("login_field"),
                       autoFillHints: const [
                         AutofillHints.username,
                         AutofillHints.email,
@@ -118,6 +119,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       height: 20,
                     ),
                     CustomTextField(
+                      key: const Key("password_field"),
                       autoFillHints: const [AutofillHints.password],
                       controller: _passwordController,
                       focusNode: _passwordFocusNode,
@@ -134,32 +136,37 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     const SizedBox(
                       height: 35,
                     ),
-                    Row(
+                    Wrap(
+                      runAlignment: WrapAlignment.spaceBetween,
                       children: [
-                        Transform.translate(
-                          offset: const Offset(-3, 0),
-                          child: Checkbox(
-                            splashRadius: 0,
-                            value: remember,
-                            checkColor: MyTheme.of(context).borderColor,
-                            fillColor: MaterialStatePropertyAll(
-                              MyTheme.of(context).borderColor,
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Transform.translate(
+                              offset: const Offset(-3, 0),
+                              child: Checkbox(
+                                splashRadius: 0,
+                                value: remember,
+                                checkColor: MyTheme.of(context).borderColor,
+                                fillColor: MaterialStatePropertyAll(
+                                  MyTheme.of(context).borderColor,
+                                ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    remember = value ?? remember;
+                                  });
+                                },
+                              ),
                             ),
-                            onChanged: (value) {
-                              setState(() {
-                                remember = value ?? remember;
-                              });
-                            },
-                          ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.loginRememberMe,
+                              style: MyTheme.of(context).defaultTextStyle,
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.loginRememberMe,
-                          style: MyTheme.of(context).defaultTextStyle,
-                        ),
-                        const Spacer(),
                         TextButton(
                           onPressed: () {},
                           child: Text(
@@ -174,6 +181,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     ),
                     CustomButton(
                       disabled: state.isLoading,
+                      key: const Key("auth_button"),
                       text: AppLocalizations.of(context)!.loginIn,
                       onTap: _onSubmit,
                     ),
@@ -187,6 +195,11 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                         style: MyTheme.of(context).defaultTextStyle,
                       ),
                     ),
+                    if (state.isLoading)
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(),
+                      ),
                   ],
                 ),
               ),

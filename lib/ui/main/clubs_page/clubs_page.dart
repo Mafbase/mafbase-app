@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/main/clubs_page/clubs_event.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_state.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/widgets/single_club_row.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubsPage extends StatefulWidget {
   const ClubsPage({Key? key}) : super(key: key);
@@ -33,7 +34,9 @@ class ClubsPage extends StatefulWidget {
   );
 }
 
-class _ClubsPageState extends State<ClubsPage> {
+class _ClubsPageState extends CustomState<ClubsPage> {
+  @override
+  bool get expanded => true;
   @override
   void initState() {
     context.read<ClubsBloc>().add(const ClubsEvent.pageOpened());
@@ -41,14 +44,15 @@ class _ClubsPageState extends State<ClubsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ClubsBloc, ClubsState>(
-      builder: (context, state) {
-        if (state.isLoading) {
-          return const LoadingOverlayWidget();
-        }
-        return Scaffold(
-          body: CustomScrollView(
+  Widget buildDesktop(BuildContext context) {
+    return Container(
+      color: context.theme.background2,
+      child: BlocBuilder<ClubsBloc, ClubsState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const LoadingOverlayWidget();
+          }
+          return CustomScrollView(
             slivers: [
               SliverList(
                 delegate: SliverChildListDelegate(
@@ -65,16 +69,16 @@ class _ClubsPageState extends State<ClubsPage> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.clubs.length,
-                  (context, index) {
+                      (context, index) {
                     return Center(
                       child: SingleClubRow(
                         model: state.clubs[index],
                         onTap: () {
                           context.read<ClubsBloc>().add(
-                                ClubsEvent.clubSelected(
-                                  clubModel: state.clubs[index],
-                                ),
-                              );
+                            ClubsEvent.clubSelected(
+                              clubModel: state.clubs[index],
+                            ),
+                          );
                         },
                       ),
                     );
@@ -82,9 +86,9 @@ class _ClubsPageState extends State<ClubsPage> {
                 ),
               ),
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

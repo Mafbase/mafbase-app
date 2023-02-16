@@ -12,6 +12,7 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class RatingPage extends StatefulWidget {
   final int clubId;
@@ -92,7 +93,9 @@ class RatingPage extends StatefulWidget {
   );
 }
 
-class _RatingPageState extends State<RatingPage> {
+class _RatingPageState extends CustomState<RatingPage> {
+  @override
+  bool get expanded => true;
   final format = DateFormat("dd:MM:yyyy");
 
   @override
@@ -120,114 +123,111 @@ class _RatingPageState extends State<RatingPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildDesktop(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
-        return Scaffold(
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                    bottom: 0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        state.clubName,
-                        style: MyTheme.of(context).headerTextStyle,
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text("Период: "),
-                          CustomButton(
-                            onTap: () async {
-                              final bloc = context.read<RatingBloc>();
-                              final range = await showDateRangePicker(
-                                context: context,
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(3000),
-                                initialDateRange: widget.range,
-                                initialEntryMode: DatePickerEntryMode.input,
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 20,
+                  bottom: 20,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      state.clubName,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Период: "),
+                        CustomButton(
+                          onTap: () async {
+                            final bloc = context.read<RatingBloc>();
+                            final range = await showDateRangePicker(
+                              context: context,
+                              firstDate: DateTime(2000),
+                              lastDate: DateTime(3000),
+                              initialDateRange: widget.range,
+                              initialEntryMode: DatePickerEntryMode.input,
+                            );
+                            if (range != null) {
+                              bloc.add(
+                                RatingEvent.rangeChanged(
+                                  range: range,
+                                  clubId: widget.clubId,
+                                  style:
+                                  widget.style ?? RatingTableStyle.full,
+                                  sort: widget.sort ?? RatingSort.score,
+                                  gameFilter: widget.gameFilter ?? 0,
+                                ),
                               );
-                              if (range != null) {
-                                bloc.add(
-                                  RatingEvent.rangeChanged(
-                                    range: range,
-                                    clubId: widget.clubId,
-                                    style:
-                                        widget.style ?? RatingTableStyle.full,
-                                    sort: widget.sort ?? RatingSort.score,
-                                    gameFilter: widget.gameFilter ?? 0,
-                                  ),
-                                );
-                              }
-                            },
-                            text:
-                                "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
-                          ),
-                          const SizedBox(width: 16),
-                          IconButton(
-                            onPressed: () {
-                              context.read<RatingBloc>().add(
-                                    RatingEvent.downloadRating(
-                                      range: widget.range,
-                                      clubId: widget.clubId,
-                                    ),
-                                  );
-                            },
-                            icon: const Icon(
-                              Icons.download,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: RatingTable(
-                            style: widget.style,
-                            rows: state.rows,
-                            clubId: widget.clubId,
-                            sort: widget.sort,
-                            gameFilter: widget.gameFilter,
-                            openGame: (gameId) =>
-                                context.read<RatingBloc>().add(
-                                      RatingEvent.gameSelected(
-                                        gameId: gameId,
-                                        clubId: widget.clubId,
-                                      ),
-                                    ),
-                            changeSort: (RatingSort sort) {
-                              context.read<RatingBloc>().add(
-                                    RatingEvent.rangeChanged(
-                                      range: widget.range,
-                                      clubId: widget.clubId,
-                                      style:
-                                          widget.style ?? RatingTableStyle.full,
-                                      sort: sort,
-                                      gameFilter: widget.gameFilter ?? 0,
-                                    ),
-                                  );
-                            },
+                            }
+                          },
+                          text: "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
+                        ),
+                        const SizedBox(width: 16),
+                        IconButton(
+                          onPressed: () {
+                            context.read<RatingBloc>().add(
+                              RatingEvent.downloadRating(
+                                range: widget.range,
+                                clubId: widget.clubId,
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.download,
                           ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: RatingTable(
+                          style: widget.style,
+                          rows: state.rows,
+                          clubId: widget.clubId,
+                          sort: widget.sort,
+                          gameFilter: widget.gameFilter,
+                          openGame: (gameId) =>
+                              context.read<RatingBloc>().add(
+                                RatingEvent.gameSelected(
+                                  gameId: gameId,
+                                  clubId: widget.clubId,
+                                ),
+                              ),
+                          changeSort: (RatingSort sort) {
+                            context.read<RatingBloc>().add(
+                              RatingEvent.rangeChanged(
+                                range: widget.range,
+                                clubId: widget.clubId,
+                                style:
+                                widget.style ?? RatingTableStyle.full,
+                                sort: sort,
+                                gameFilter: widget.gameFilter ?? 0,
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
-          ),
+            ),
+            if (state.isLoading) const LoadingOverlayWidget(),
+          ],
         );
       },
     );

@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubPage extends StatefulWidget {
   const ClubPage._({Key? key}) : super(key: key);
@@ -48,7 +49,10 @@ class ClubPage extends StatefulWidget {
   );
 }
 
-class _ClubPageState extends State<ClubPage> {
+class _ClubPageState extends CustomState<ClubPage> {
+  @override
+  bool get expanded => true;
+
   @override
   void initState() {
     context.read<ClubBloc>().add(const ClubEvent.pageOpened());
@@ -67,7 +71,7 @@ class _ClubPageState extends State<ClubPage> {
                   child: ClubInfoWidget(
                     clubModel: state.model!,
                   ),
-                )
+                ),
             ],
           ),
         );

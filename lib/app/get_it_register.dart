@@ -5,6 +5,7 @@ import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/repositories/tournament_edit_repository_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_secure_storage_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
+import 'package:seating_generator_web/data/storages/token_in_memory_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_hive_impl.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
@@ -76,10 +77,12 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 GetIt getIt = GetIt.instance;
 const _useHiveStorage = true;
 
-void registerGetIt() {
+void registerGetIt({bool isIntegrationTest = false}) {
   getIt
     ..registerLazySingleton<TokenStorage>(
-      () => _useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl(),
+      () => isIntegrationTest
+          ? TokenInMemoryStorage()
+          : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl()),
     )
     ..registerLazySingleton<CredentialStorage>(
       () => CredentialSecureStorageImpl(),

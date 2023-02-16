@@ -4,14 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
-import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
-import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class LoginPage extends StatefulWidget {
   final Widget child;
@@ -46,10 +44,14 @@ class LoginPage extends StatefulWidget {
   );
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends CustomState<LoginPage> {
   @override
-  Widget build(BuildContext context) {
+  bool get expanded => true;
+
+  @override
+  Widget buildDesktop(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: MyTheme.of(context).background1,
       body: Center(
         child: Column(

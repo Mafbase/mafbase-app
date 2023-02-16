@@ -16,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_settings_dialog.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class TournamentPage extends StatefulWidget {
   final Widget child;
@@ -76,12 +77,15 @@ class TournamentPage extends StatefulWidget {
       );
 }
 
-class _TournamentPageState extends State<TournamentPage>
+class _TournamentPageState extends CustomState<TournamentPage>
     with
         EffectListener<TournamentPageEffect, TournamentPageState,
             TournamentPageBloc, TournamentPage> {
   @override
-  Widget build(BuildContext context) {
+  bool get expanded => true;
+
+  @override
+  Widget buildDesktop(BuildContext context) {
     return Row(
       children: [
         Expanded(child: widget.child),
