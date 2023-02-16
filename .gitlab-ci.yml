@@ -50,8 +50,8 @@ test:
   before_script:
     - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
-    - apt update
-    - apt install cmake
+    #- apt update
+    #- apt install cmake
   script:
     - flutter test --machine --coverage | tojunit -o report.xml
     #- flutter test integration_test/
