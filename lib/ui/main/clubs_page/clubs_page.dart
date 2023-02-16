@@ -45,47 +45,50 @@ class _ClubsPageState extends CustomState<ClubsPage> {
 
   @override
   Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<ClubsBloc, ClubsState>(
-      builder: (context, state) {
-        if (state.isLoading) {
-          return const LoadingOverlayWidget();
-        }
-        return CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Center(
-                    child: Text(
-                      context.locale.clubsHeader,
-                      style: context.theme.headerTextStyle,
+    return Container(
+      color: context.theme.background2,
+      child: BlocBuilder<ClubsBloc, ClubsState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const LoadingOverlayWidget();
+          }
+          return CustomScrollView(
+            slivers: [
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Center(
+                      child: Text(
+                        context.locale.clubsHeader,
+                        style: context.theme.headerTextStyle,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                childCount: state.clubs.length,
-                    (context, index) {
-                  return Center(
-                    child: SingleClubRow(
-                      model: state.clubs[index],
-                      onTap: () {
-                        context.read<ClubsBloc>().add(
-                          ClubsEvent.clubSelected(
-                            clubModel: state.clubs[index],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: state.clubs.length,
+                      (context, index) {
+                    return Center(
+                      child: SingleClubRow(
+                        model: state.clubs[index],
+                        onTap: () {
+                          context.read<ClubsBloc>().add(
+                            ClubsEvent.clubSelected(
+                              clubModel: state.clubs[index],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 }
