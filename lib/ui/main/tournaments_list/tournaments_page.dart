@@ -35,178 +35,174 @@ class _TournamentsPageState extends State<TournamentsPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<TournamentsBloc, TournamentsState>(
       builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: Center(
-                  child: ListView(
-                    children: [
-                      Center(
-                        child: Text(
-                          AppLocalizations.of(context)!.tournamentsListTitle,
-                          style: MyTheme.of(context).headerTextStyle,
-                        ),
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: Center(
+                child: ListView(
+                  children: [
+                    Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.tournamentsListTitle,
+                        style: MyTheme.of(context).headerTextStyle,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: DataTable(
-                          border: TableBorder.all(
-                            color:
-                                MyTheme.of(context).textColor.withOpacity(0.2),
-                          ),
-                          columns: [
-                            AppLocalizations.of(context)!
-                                .tournamentsListNameHeader,
-                            AppLocalizations.of(context)!
-                                .tournamentsListStatusHeader,
-                            AppLocalizations.of(context)!
-                                .tournamentsListDateHeader,
-                            AppLocalizations.of(context)!
-                                .tournamentsListGamesCountHeader
-                          ]
-                              .map(
-                                (e) => DataColumn(
-                                  label: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      e,
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
-                                    ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DataTable(
+                        border: TableBorder.all(
+                          color: MyTheme.of(context).textColor.withOpacity(0.2),
+                        ),
+                        columns: [
+                          AppLocalizations.of(context)!
+                              .tournamentsListNameHeader,
+                          AppLocalizations.of(context)!
+                              .tournamentsListStatusHeader,
+                          AppLocalizations.of(context)!
+                              .tournamentsListDateHeader,
+                          AppLocalizations.of(context)!
+                              .tournamentsListGamesCountHeader
+                        ]
+                            .map(
+                              (e) => DataColumn(
+                                label: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    e,
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                 ),
-                              )
-                              .toList(),
-                          rows: [
-                            ...state.tournaments.mapIndexed(
-                              (index, e) => DataRow(
-                                color: MaterialStatePropertyAll(
-                                  tapped == index
-                                      ? const Color(0xFFA7A7A7)
-                                      : (hovered == index
-                                          ? const Color(0xFFE3E3E3)
-                                          : null),
+                              ),
+                            )
+                            .toList(),
+                        rows: [
+                          ...state.tournaments.mapIndexed(
+                            (index, e) => DataRow(
+                              color: MaterialStatePropertyAll(
+                                tapped == index
+                                    ? const Color(0xFFA7A7A7)
+                                    : (hovered == index
+                                        ? const Color(0xFFE3E3E3)
+                                        : null),
+                              ),
+                              cells: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    e.name,
+                                    style: MyTheme.of(context).defaultTextStyle,
+                                  ),
                                 ),
-                                cells: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      e.name,
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: 18,
-                                          width: 18,
-                                          decoration: BoxDecoration(
-                                            color: getColor(e.status),
-                                            shape: BoxShape.circle,
-                                          ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 18,
+                                        width: 18,
+                                        decoration: BoxDecoration(
+                                          color: getColor(e.status),
+                                          shape: BoxShape.circle,
                                         ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          getText(e.status),
-                                          style: MyTheme.of(context)
-                                              .defaultTextStyle,
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        getText(e.status),
+                                        style: MyTheme.of(context)
+                                            .defaultTextStyle,
+                                      ),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      DateFormat('dd-MM-yyyy')
-                                          .format(e.dateStart),
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
-                                    ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    DateFormat('dd-MM-yyyy')
+                                        .format(e.dateStart),
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      e.gamesCount.toString(),
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
-                                    ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    e.gamesCount.toString(),
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
-                                ]
-                                    .map(
-                                      (e) => DataCell(
-                                        MouseRegion(
-                                          onEnter: (_) => setState(() {
-                                            hovered = index;
+                                ),
+                              ]
+                                  .map(
+                                    (e) => DataCell(
+                                      MouseRegion(
+                                        onEnter: (_) => setState(() {
+                                          hovered = index;
+                                        }),
+                                        onExit: (_) => setState(() {
+                                          hovered = -1;
+                                        }),
+                                        child: GestureDetector(
+                                          onTapDown: (_) => setState(() {
+                                            tapped = index;
                                           }),
-                                          onExit: (_) => setState(() {
-                                            hovered = -1;
-                                          }),
-                                          child: GestureDetector(
-                                            onTapDown: (_) => setState(() {
-                                              tapped = index;
-                                            }),
-                                            onTapUp: (_) => setState(
-                                              () {
-                                                tapped = -1;
-                                                context.read<MainBloc>().add(
-                                                      MainEvent
-                                                          .tournamentSelected(
-                                                        tournamentId: state
-                                                            .tournaments[index]
-                                                            .id,
-                                                      ),
-                                                    );
-                                              },
-                                            ),
-                                            onTapCancel: () => setState(() {
+                                          onTapUp: (_) => setState(
+                                            () {
                                               tapped = -1;
-                                            }),
-                                            child: Container(
-                                              color: const Color(0x00000000),
-                                              child: Center(
-                                                child: Row(
-                                                  children: [
-                                                    e.child ?? Container(),
-                                                    const Spacer(),
-                                                  ],
-                                                ),
+                                              context.read<MainBloc>().add(
+                                                    MainEvent
+                                                        .tournamentSelected(
+                                                      tournamentId: state
+                                                          .tournaments[index]
+                                                          .id,
+                                                    ),
+                                                  );
+                                            },
+                                          ),
+                                          onTapCancel: () => setState(() {
+                                            tapped = -1;
+                                          }),
+                                          child: Container(
+                                            color: const Color(0x00000000),
+                                            child: Center(
+                                              child: Row(
+                                                children: [
+                                                  e.child ?? Container(),
+                                                  const Spacer(),
+                                                ],
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    )
-                                    .toList(),
-                              ),
-                            )
-                          ],
-                        ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
-          ),
-          floatingActionButton: FloatingActionButton.large(
-            onPressed: () {
-              context
-                  .read<TournamentsBloc>()
-                  .add(const TournamentsEvent.create());
-            },
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
             ),
-          ),
+            Positioned(
+              bottom: 35,
+              right: 35,
+              child: FloatingActionButton.large(
+                onPressed: () {
+                  context
+                      .read<TournamentsBloc>()
+                      .add(const TournamentsEvent.create());
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            if (state.isLoading) const LoadingOverlayWidget(),
+          ],
         );
       },
     );

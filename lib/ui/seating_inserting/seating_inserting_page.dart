@@ -44,47 +44,44 @@ class _SeatingInsertingPageState extends State<SeatingInsertingPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<SeatingInsertingBloc, SeatingInsertingState>(
       builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(50),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    context.locale.fsmSeatingHeader,
-                    style: MyTheme.of(context).headerTextStyle,
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.all(50),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  context.locale.fsmSeatingHeader,
+                  style: MyTheme.of(context).headerTextStyle,
+                ),
+                TextButton(
+                  onPressed: state.isLoading
+                      ? null
+                      : () async {
+                    final bloc = context.read<SeatingInsertingBloc>();
+                    final files = await FilePicker.platform.pickFiles();
+                    bloc.add(
+                      SeatingInsertingFileSelectedEvent(
+                        bytesStream: Stream.value(
+                          files!.files.first.bytes!,
+                        ),
+                      ),
+                    );
+                    setState(() {
+                      name = files.files.first.name;
+                    });
+                  },
+                  child: Text(
+                    name ?? "Загрузить файл",
+                    style: MyTheme.of(context).textBtnTextStyle,
                   ),
-                  TextButton(
-                    onPressed: state.isLoading
-                        ? null
-                        : () async {
-                            final bloc = context.read<SeatingInsertingBloc>();
-                            final files = await FilePicker.platform.pickFiles();
-                            bloc.add(
-                              SeatingInsertingFileSelectedEvent(
-                                bytesStream: Stream.value(
-                                  files!.files.first.bytes!,
-                                ),
-                              ),
-                            );
-                            setState(() {
-                              name = files.files.first.name;
-                            });
-                          },
-                    child: Text(
-                      name ?? "Загрузить файл",
-                      style: MyTheme.of(context).textBtnTextStyle,
-                    ),
-                  ),
-                  CustomButton(
-                    onTap: onSubmit,
-                    disabled: state.isLoading,
-                    text: AppLocalizations.of(context)!.send,
-                  ),
-                ],
-              ),
+                ),
+                CustomButton(
+                  onTap: onSubmit,
+                  disabled: state.isLoading,
+                  text: AppLocalizations.of(context)!.send,
+                ),
+              ],
             ),
           ),
         );

@@ -39,6 +39,7 @@ class _MainPageState extends State<MainPage> {
             state.selectedTab == MainPageTab.tournaments ? 0 : 1;
         debugPrint(state.toString());
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading: IgnorePointer(
               ignoring: !state.hasBackButton,
