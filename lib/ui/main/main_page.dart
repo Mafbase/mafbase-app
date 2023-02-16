@@ -142,9 +142,9 @@ class _MainPageState extends CustomState<MainPage> {
                       color: Colors.white,
                     ),
                     indicatorColor: context.theme.darkBlueColor,
+                    backgroundColor: context.theme.darkGreyColor,
                     labelType: NavigationRailLabelType.all,
                     elevation: 5,
-                    backgroundColor: context.theme.darkGreyColor,
                     onDestinationSelected: onDestinationSelected,
                     destinations: [
                       NavigationRailDestination(

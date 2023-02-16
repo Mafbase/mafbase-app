@@ -68,6 +68,18 @@ class App extends StatelessWidget {
             title: 'Mafbase',
             theme: ThemeData.light(useMaterial3: true).copyWith(
               scaffoldBackgroundColor: context.theme.background2,
+              navigationBarTheme: NavigationBarThemeData(
+                indicatorColor: context.theme.darkBlueColor,
+                backgroundColor: context.theme.darkGreyColor,
+                labelTextStyle: MaterialStatePropertyAll(
+                  const TextStyle().copyWith(color: context.theme.background1),
+                ),
+                iconTheme: MaterialStateProperty.all(
+                  const IconThemeData(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
               colorScheme:
                   ThemeData.light(useMaterial3: true).colorScheme.copyWith(
                         primary: MyTheme.of(context).darkGreyColor,
