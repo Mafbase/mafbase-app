@@ -87,6 +87,9 @@ class App extends StatelessWidget {
                         secondary: MyTheme.of(context).redColor,
                         secondaryContainer: MyTheme.of(context).redColor,
                       ),
+              iconTheme: IconThemeData(
+                color: context.theme.darkBlueColor,
+              ),
             ),
             routerDelegate: context.read<AppRouter>().router.routerDelegate,
             routeInformationProvider:

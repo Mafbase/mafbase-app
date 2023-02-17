@@ -36,130 +36,132 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
   Widget buildDesktop(BuildContext context) {
     return Container(
       color: context.theme.background2,
-      child: BlocBuilder<TournamentsBloc, TournamentsState>(
-        builder: (context, state) {
-          return Stack(
-            children: [
-              CustomScrollView(
-                slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        Center(
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 50),
-                            child: Text(
-                              AppLocalizations.of(context)!
-                                  .tournamentsListTitle,
-                              style: MyTheme.of(context).headerTextStyle,
+      child: Material(
+        child: BlocBuilder<TournamentsBloc, TournamentsState>(
+          builder: (context, state) {
+            return Stack(
+              children: [
+                CustomScrollView(
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          Center(
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 50),
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .tournamentsListTitle,
+                                style: MyTheme.of(context).headerTextStyle,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          childCount: state.tournaments.length, (context, index) {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 10,
+                            ),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(50),
+                              onTap: () {
+                                context.read<MainBloc>().add(
+                                      MainEvent.tournamentSelected(
+                                        tournamentId: state.tournaments[index].id,
+                                      ),
+                                    );
+                              },
+                              child: Container(
+                                constraints: const BoxConstraints(
+                                  maxWidth: 900,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 15,
+                                  horizontal: 25,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: MyTheme.of(context)
+                                      .greyColor
+                                      .withOpacity(0.16),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      DateFormat('dd-MM-yyyy').format(
+                                          state.tournaments[index].dateStart),
+                                      style: MyTheme.of(context).defaultTextStyle,
+                                    ),
+                                    const SizedBox(
+                                      width: 35,
+                                    ),
+                                    Text(
+                                      state.tournaments[index].name,
+                                      style: MyTheme.of(context).defaultTextStyle,
+                                    ),
+                                    const Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: BoxDecoration(
+                                              color: getColor(
+                                                state.tournaments[index].status,
+                                              ),
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            getText(
+                                                state.tournaments[index].status),
+                                            style: MyTheme.of(context)
+                                                .defaultTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
+                Positioned(
+                  bottom: 35,
+                  right: 35,
+                  child: FloatingActionButton.large(
+                    elevation: 10,
+                    onPressed: () {
+                      context
+                          .read<TournamentsBloc>()
+                          .add(const TournamentsEvent.create());
+                    },
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
                     ),
                   ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        childCount: state.tournaments.length, (context, index) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 10,
-                          ),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(50),
-                            onTap: () {
-                              context.read<MainBloc>().add(
-                                    MainEvent.tournamentSelected(
-                                      tournamentId: state.tournaments[index].id,
-                                    ),
-                                  );
-                            },
-                            child: Container(
-                              constraints: const BoxConstraints(
-                                maxWidth: 900,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 15,
-                                horizontal: 25,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: MyTheme.of(context)
-                                    .greyColor
-                                    .withOpacity(0.16),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    DateFormat('dd-MM-yyyy').format(
-                                        state.tournaments[index].dateStart),
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
-                                  const SizedBox(
-                                    width: 35,
-                                  ),
-                                  Text(
-                                    state.tournaments[index].name,
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
-                                  const Spacer(),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: 18,
-                                          width: 18,
-                                          decoration: BoxDecoration(
-                                            color: getColor(
-                                              state.tournaments[index].status,
-                                            ),
-                                            shape: BoxShape.circle,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          getText(
-                                              state.tournaments[index].status),
-                                          style: MyTheme.of(context)
-                                              .defaultTextStyle,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ],
-              ),
-              Positioned(
-                bottom: 35,
-                right: 35,
-                child: FloatingActionButton.large(
-                  elevation: 10,
-                  onPressed: () {
-                    context
-                        .read<TournamentsBloc>()
-                        .add(const TournamentsEvent.create());
-                  },
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
                 ),
-              ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
-          );
-        },
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

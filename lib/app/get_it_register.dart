@@ -35,6 +35,7 @@ import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
+import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/data/repositories/auth_repository_impl.dart';
@@ -53,6 +54,8 @@ import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_bloc.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -100,6 +103,9 @@ void registerGetIt({bool isIntegrationTest = false}) {
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(getIt(), getIt()),
+    )
+    ..registerFactoryParam<ClubRouter, BuildContext, dynamic>(
+      (context, _) => ClubRouterImpl(context),
     )
     ..registerFactoryParam<LoginPageRouter, BuildContext, String?>(
       (context, nextPath) => LoginPageRouterImpl(context, nextPath),
@@ -157,6 +163,14 @@ void registerSharedGetIt() {
       () => LoginInteractor(
         getIt(),
         getIt(),
+      ),
+    )
+    ..registerFactoryParam<ClubBloc, BuildContext?, ClubBlocArgs>(
+      (context, args) => ClubBloc(
+        getClubInteractor: getIt(),
+        router: getIt(param1: context),
+        args: args,
+        context: context,
       ),
     )
     ..registerFactoryParam<ClubsBloc, BuildContext?, dynamic>(

@@ -34,7 +34,7 @@ class RatingPage extends StatefulWidget {
   State<RatingPage> createState() => _RatingPageState();
 
   static String createLocation({
-    required DateTimeRange range,
+    DateTimeRange? range,
     required int clubId,
     required BuildContext context,
     RatingTableStyle tableStyle = RatingTableStyle.full,
@@ -45,8 +45,10 @@ class RatingPage extends StatefulWidget {
       name,
       params: {"clubId": clubId.toString()},
       queryParams: {
-        "date-start": dateFormatForRequests.format(range.start),
-        "date-end": dateFormatForRequests.format(range.end),
+        "date-start":
+            range == null ? null : dateFormatForRequests.format(range.start),
+        "date-end":
+            range == null ? null : dateFormatForRequests.format(range.end),
         "style": tableStyle.name,
         "sort": sort.name,
         "game-filter": gameFilter.toString()
