@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubPage extends StatefulWidget {
   const ClubPage({Key? key}) : super(key: key);
@@ -33,9 +34,11 @@ class ClubPage extends StatefulWidget {
   );
 }
 
-class _ClubPageState extends State<ClubPage> {
+class _ClubPageState extends CustomState<ClubPage> {
   @override
-  Widget build(BuildContext context) {
+  bool get expanded => true;
+  @override
+  Widget buildDesktop(BuildContext context) {
     return const Placeholder();
   }
 }
