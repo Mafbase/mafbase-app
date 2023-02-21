@@ -53,7 +53,7 @@ test:
     - apt update
     - apt install cmake -y
   script:
-    - flutter test --machine --coverage | tojunit -o report.xml
+    - flutter test integration_test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines\.*: \d+\.\d+\%/'
@@ -91,12 +91,12 @@ deploy:
     - ssh-add <(echo "$SSH_KEY")
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh-keyscan -p 22 95.163.236.145 >> ~/.ssh/known_hosts
+    - ssh-keyscan -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script: 
-    - scp flutter-image.tar root@95.163.236.145:~/flutter-image.tar
-    - ssh root@95.163.236.145 "./load_flutter.sh"
-    - ssh root@95.163.236.145 "./update_flutter.sh"
+    - scp flutter-image.tar root@"$DEPLOY_HOST":~/flutter-image.tar
+    - ssh root@"$DEPLOY_HOST" "./load_flutter.sh"
+    - ssh root@"$DEPLOY_HOST" "./update_flutter.sh"
   environment: production
   cache:
     key: "$CI_COMMIT_REF_NAME"
