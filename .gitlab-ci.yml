@@ -51,7 +51,7 @@ test:
     - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
     - apt update
-    - apt install libsecret-1-dev libsecret-tools libsecret-1-0 -y
+    - apt install libjsoncpp1 libsecret-1-0 libjsoncpp-dev libsecret-1-dev -y
   script:
     - flutter test integration_test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
