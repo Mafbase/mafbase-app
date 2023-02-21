@@ -133,8 +133,11 @@ class MyHttpClient {
     return response;
   }
 
-  Future<Response> putFile(String method, List<int> bytes,
-      [String? fileName]) async {
+  Future<Response> putFile(
+    String method,
+    List<int> bytes, [
+    String? fileName,
+  ]) async {
     return _client
         .post(
       method,
@@ -176,7 +179,7 @@ class MyHttpClient {
   }
 
   MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage)
-      : baseUrl = "https://mafbase.ru";
+      : baseUrl = "http://31.211.71.43";
 
   MyHttpClient.autoForWeb(this._storage, this._credentialStorage)
       : baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";

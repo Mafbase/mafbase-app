@@ -4,13 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
@@ -35,13 +38,12 @@ void main() async {
 }
 
 void _startApp() {
-  WidgetsFlutterBinding.ensureInitialized();
   if (!kIsWeb) {
     Hive.init(Directory.current.path);
   }
 
   registerGetIt();
-
+  SplashManager.deferSplash(WidgetsFlutterBinding.ensureInitialized());
   runApp(const App());
 }
 
@@ -54,12 +56,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => getIt<AuthNotifier>(),
+        ),
         Provider(
           create: (context) => AppRouter(initLocation),
         ),
         Provider<MyTheme>(
           create: (context) => MyTheme.light(),
-        )
+        ),
       ],
       child: Builder(
         builder: (context) {

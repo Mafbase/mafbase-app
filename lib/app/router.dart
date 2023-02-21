@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/data/http_client.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
@@ -27,22 +29,31 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
+import 'package:seating_generator_web/utils/splash_manager.dart';
 
 class AppRouter {
   final String initLocation;
   late final router = GoRouter(
     initialLocation: initLocation,
-    redirect: (context, state) async {
-      if (!state.location.endsWith('/')) {
-        return null;
-      }
-      try {
-        final response = await getIt<MyHttpClient>().get("/api/auth");
-        if (response.statusCode == 200) {
+    redirect: (context, state) {
+      return Future<String?>.microtask(() async {
+        final authNotifier = context.read<AuthNotifier>();
+        if (authNotifier.value is AuthNotifierLoadingModel) {
+          try {
+            final response = await getIt<MyHttpClient>().get("/api/auth");
+            if (response.statusCode == 200) {
+              authNotifier.value = const AuthNotifierModel.authorized();
+            }
+          } catch (_) {
+            authNotifier.value = const AuthNotifierModel.unauthorized();
+          }
           return null;
         }
-      } catch (_) {}
-      return '/login';
+        return null;
+      }).then((value) {
+        SplashManager.removeSplash();
+        return value;
+      });
     },
     routes: [
       TempPage.route,
@@ -60,8 +71,7 @@ class AppRouter {
                 providers: [
                   BlocProvider<MainBloc>(
                     key: const Key("MainBlocProvider"),
-                    create: (context) =>
-                        getIt.get<MainBloc>(param1: context),
+                    create: (context) => getIt.get<MainBloc>(param1: context),
                   ),
                   BlocProvider<TournamentsBloc>(
                     key: const Key("TournamentsBlocProvider"),

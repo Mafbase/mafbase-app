@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/base_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
@@ -7,8 +9,13 @@ import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 class LoginInteractor extends BaseInteractor {
   final AuthRepository _authRepository;
   final CredentialStorage _credentialStorage;
+  final AuthNotifier _authNotifier;
 
-  LoginInteractor(this._authRepository, this._credentialStorage);
+  LoginInteractor(
+    this._authRepository,
+    this._credentialStorage,
+    this._authNotifier,
+  );
 
   Future<LoginModel> run(
     String email,
@@ -19,6 +26,9 @@ class LoginInteractor extends BaseInteractor {
       final model = await _authRepository.login(email, password);
       if (model is Success && rememberMe) {
         await _credentialStorage.save(Credentials(email, password));
+      }
+      if (model is Success) {
+        _authNotifier.value = const AuthNotifierModel.authorized();
       }
       return model;
     });

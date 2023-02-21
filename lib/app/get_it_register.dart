@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/data/http_client.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/repositories/tournament_edit_repository_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_secure_storage_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
@@ -73,6 +74,7 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_blo
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
+import 'package:seating_generator_web/utils/splash_manager.dart';
 
 GetIt getIt = GetIt.instance;
 const _useHiveStorage = true;
@@ -163,6 +165,7 @@ void registerSharedGetIt() {
       () => LoginInteractor(
         getIt(),
         getIt(),
+        getIt(),
       ),
     )
     ..registerFactoryParam<ClubBloc, BuildContext?, ClubBlocArgs>(
@@ -200,6 +203,7 @@ void registerSharedGetIt() {
     ..registerLazySingleton<DeletePlayerInteractor>(
       () => DeletePlayerInteractor(getIt()),
     )
+    ..registerLazySingleton<AuthNotifier>(() => AuthNotifier())
     ..registerLazySingleton<CreateSeatingInteractor>(
       () => CreateSeatingInteractor(getIt()),
     )
