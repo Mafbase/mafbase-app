@@ -50,6 +50,7 @@ test:
   before_script:
     - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
+    - apt install libsecret-1-dev libsecret-tools libsecret-1-0 -y
   script:
     - flutter test integration_test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
