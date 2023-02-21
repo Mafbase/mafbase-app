@@ -92,9 +92,9 @@ deploy:
     - ssh-keyscan -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script: 
-    - scp flutter-image.tar root@"$DEPLOY_HOST":~/flutter-image.tar
-    - ssh root@"$DEPLOY_HOST" "./load_flutter.sh"
-    - ssh root@"$DEPLOY_HOST" "./update_flutter.sh"
+    - scp flutter-image.tar "$DEPLOY_USER"@"$DEPLOY_HOST":~/flutter-image.tar
+    - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./load_flutter.sh"
+    - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./update_flutter.sh"
   environment: production
   cache:
     key: "$CI_COMMIT_REF_NAME"
