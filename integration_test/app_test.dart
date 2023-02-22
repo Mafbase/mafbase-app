@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/main.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -11,6 +12,12 @@ void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() => registerGetIt(isIntegrationTest: true));
   testWidgets('clubs page flow', (tester) async {
+    await getIt<CredentialStorage>().save(
+      Credentials(
+        "test@mail.ru",
+        "testtest",
+      ),
+    );
     await tester.pumpWidget(
       const App(),
     );
@@ -31,7 +38,17 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('tournament add and delete player flow', (tester) async {
-    await loginFlow(tester);
+    await getIt<CredentialStorage>().save(
+      Credentials(
+        "test@mail.ru",
+        "testtest",
+      ),
+    );
+    await tester.pumpWidget(
+      const App(),
+    );
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
     final tournament = find.text('Турнир');
     expect(tournament, findsOneWidget);
     await tester.tap(tournament);
@@ -67,7 +84,6 @@ void main() {
     final delete = find.byIcon(Icons.delete).last;
     await tester.tap(delete, warnIfMissed: false);
     await tester.pumpAndSettle();
-
 
     final confirmButton = find.text("Да");
     expect(confirmButton, findsOneWidget);
