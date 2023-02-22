@@ -165,7 +165,6 @@ void registerSharedGetIt() {
       () => LoginInteractor(
         getIt(),
         getIt(),
-        getIt(),
       ),
     )
     ..registerFactoryParam<ClubBloc, BuildContext?, ClubBlocArgs>(
@@ -203,7 +202,6 @@ void registerSharedGetIt() {
     ..registerLazySingleton<DeletePlayerInteractor>(
       () => DeletePlayerInteractor(getIt()),
     )
-    ..registerLazySingleton<AuthNotifier>(() => AuthNotifier())
     ..registerLazySingleton<CreateSeatingInteractor>(
       () => CreateSeatingInteractor(getIt()),
     )

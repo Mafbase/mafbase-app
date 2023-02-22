@@ -12,10 +12,13 @@ void main() {
   setUpAll(() => registerGetIt(isIntegrationTest: true));
   testWidgets('clubs page flow', (tester) async {
     await tester.pumpWidget(
-      const App(
-        initLocation: '/club',
-      ),
+      const App(),
     );
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
+    final navClubIcon = find.byIcon(Icons.people_alt_outlined);
+    expect(navClubIcon, findsOneWidget);
+    await tester.tap(navClubIcon);
     await tester.pumpAndSettle();
     final clubRow = find.text('MASONS');
     expect(clubRow, findsOneWidget);
@@ -24,6 +27,8 @@ void main() {
 
     final openRatingButton = find.text("Открыть рейтинг клуба");
     expect(openRatingButton, findsOneWidget);
+    await tester.tap(openRatingButton);
+    await tester.pumpAndSettle();
   });
   testWidgets('tournament add and delete player flow', (tester) async {
     await loginFlow(tester);
@@ -51,9 +56,18 @@ void main() {
     expect(addButton, findsOneWidget);
     await tester.tap(addButton, warnIfMissed: false);
     await tester.pumpAndSettle();
+
+    final row = find.text("Strelas");
+    expect(row, findsOneWidget);
+    await tester.tap(row);
+    await tester.pumpAndSettle();
+    await tester.tapAt(const Offset(2, 2));
+    await tester.pumpAndSettle();
+
     final delete = find.byIcon(Icons.delete).last;
     await tester.tap(delete, warnIfMissed: false);
     await tester.pumpAndSettle();
+
 
     final confirmButton = find.text("Да");
     expect(confirmButton, findsOneWidget);
