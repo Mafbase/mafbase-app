@@ -11,4 +11,9 @@ class Credentials {
   final String password;
 
   Credentials(this.login, this.password);
+
+  @override
+  String toString() {
+    return "Credentials { login: $login, password: $password }";
+  }
 }

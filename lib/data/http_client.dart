@@ -51,34 +51,24 @@ class MyHttpClient {
 
     if (response.statusCode == HttpStatus.unauthorized) {
       if (useRecoveryToken) {
-        final tokenLoginResponse = await LoginByTokenRequest(
-          LoginByTokenEvent(token: await _storage.recoveryToken),
-        ).execute(this);
+        final credentials = await _credentialStorage.read();
+        debugPrint("test25: $credentials");
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(
+              email: credentials.login,
+              password: credentials.password,
+            ),
+          ).execute(this);
 
-        if (tokenLoginResponse.token.isEmpty) {
-          final credentials = await _credentialStorage.read();
-          if (credentials != null) {
-            final authResponse = await LoginRequest(
-              LoginEvent(
-                email: credentials.login,
-                password: credentials.password,
-              ),
-            ).execute(this);
-
-            if (authResponse.token.isEmpty) {
-              return response;
-            } else {
-              await _storage.onTokensUpdated(
-                authResponse.token,
-                authResponse.recoveryToken,
-              );
-            }
+          if (authResponse.token.isEmpty) {
+            return response;
+          } else {
+            await _storage.onTokensUpdated(
+              authResponse.token,
+              authResponse.recoveryToken,
+            );
           }
-        } else {
-          await _storage.onTokensUpdated(
-            tokenLoginResponse.token,
-            tokenLoginResponse.recoveryToken,
-          );
         }
         return get(method, useRecoveryToken: false);
       } else {
@@ -112,19 +102,26 @@ class MyHttpClient {
 
     if (response.statusCode == HttpStatus.unauthorized) {
       if (useRecoveryToken) {
-        final tokenLoginResponse = await LoginByTokenRequest(
-          LoginByTokenEvent(token: await _storage.recoveryToken),
-        ).execute(this);
 
-        if (tokenLoginResponse.token.isEmpty ||
-            tokenLoginResponse.token.isNotEmpty) {
-          return response;
+        final credentials = await _credentialStorage.read();
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(
+              email: credentials.login,
+              password: credentials.password,
+            ),
+          ).execute(this);
+
+          if (authResponse.token.isEmpty) {
+            return response;
+          } else {
+            await _storage.onTokensUpdated(
+              authResponse.token,
+              authResponse.recoveryToken,
+            );
+          }
         }
 
-        await _storage.onTokensUpdated(
-          tokenLoginResponse.token,
-          tokenLoginResponse.recoveryToken,
-        );
         return post(method, data, contentLength, useRecoveryToken: false);
       } else {
         throw UnauthenticatedError("Authentication error");
@@ -133,8 +130,11 @@ class MyHttpClient {
     return response;
   }
 
-  Future<Response> putFile(String method, List<int> bytes,
-      [String? fileName]) async {
+  Future<Response> putFile(
+    String method,
+    List<int> bytes, [
+    String? fileName,
+  ]) async {
     return _client
         .post(
       method,
@@ -176,7 +176,7 @@ class MyHttpClient {
   }
 
   MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage)
-      : baseUrl = "https://mafbase.ru";
+      : baseUrl = "http://31.211.71.43";
 
   MyHttpClient.autoForWeb(this._storage, this._credentialStorage)
       : baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";

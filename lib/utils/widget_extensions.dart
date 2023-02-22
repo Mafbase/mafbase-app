@@ -24,7 +24,6 @@ abstract class CustomState<W extends StatefulWidget> extends State<W> {
         builder: (context, constraints) {
           final height = max(constraints.maxHeight, 720.0);
           final width = max(constraints.maxWidth, 1280.0);
-          debugPrint("test25: $constraints");
           final mainChild = Container(
             constraints: BoxConstraints(
               maxWidth: width,

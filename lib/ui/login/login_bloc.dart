@@ -53,6 +53,7 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
       event.email,
       event.password,
       rememberMe: event.rememberMe,
+      context: context,
     );
     if (result is Success) {
       router.openMainPage();
