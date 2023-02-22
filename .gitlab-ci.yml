@@ -42,6 +42,21 @@ code_quality:
     reports:
       codequality: gl-code-quality-report.json
 
+integration_test:
+  stage: test
+  tags:
+    - docker
+  image: "cirrusci/flutter:latest"
+  before_script:
+    - apt-get install -y wget
+    - wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - apt-get install ./google-chrome-stable_current_amd64.deb
+    - wget -q https://chromedriver.storage.googleapis.com/111.0.5563.19/chromedriver_linux64.zip
+    - unzip chromedriver_linux64.zip
+    - ./chromedriver_linux64/chromedriver --port=4444 &
+  script:
+    - flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d chrome
+
 test:
   stage: test
   tags:
