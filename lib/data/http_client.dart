@@ -71,9 +71,8 @@ class MyHttpClient {
           }
         }
         return get(method, useRecoveryToken: false);
-      } else {
-        throw UnauthenticatedError("Authentication error");
       }
+      throw UnauthenticatedError("Authentication error");
     }
     return response;
   }
@@ -123,9 +122,8 @@ class MyHttpClient {
         }
 
         return post(method, data, contentLength, useRecoveryToken: false);
-      } else {
-        throw UnauthenticatedError("Authentication error");
       }
+      throw UnauthenticatedError("Authentication error");
     }
     return response;
   }
