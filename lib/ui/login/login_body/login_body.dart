@@ -77,11 +77,14 @@ class _LoginPageBodyState extends State<LoginPageBody> {
               key: const Key("loginBox"),
               child: AutofillGroup(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      AppLocalizations.of(context)!.loginAuth,
-                      style: MyTheme.of(context).headerTextStyle,
+                    Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.loginAuth,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -136,45 +139,47 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     const SizedBox(
                       height: 35,
                     ),
-                    Wrap(
-                      runAlignment: WrapAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Transform.translate(
-                              offset: const Offset(-3, 0),
-                              child: Checkbox(
-                                splashRadius: 0,
-                                value: remember,
-                                checkColor: MyTheme.of(context).borderColor,
-                                fillColor: MaterialStatePropertyAll(
-                                  MyTheme.of(context).borderColor,
+                    Container(
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Transform.translate(
+                                offset: const Offset(-3, 0),
+                                child: Checkbox(
+                                  splashRadius: 0,
+                                  value: remember,
+                                  checkColor: MyTheme.of(context).borderColor,
+                                  fillColor: MaterialStatePropertyAll(
+                                    MyTheme.of(context).borderColor,
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      remember = value ?? remember;
+                                    });
+                                  },
                                 ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    remember = value ?? remember;
-                                  });
-                                },
                               ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              AppLocalizations.of(context)!.loginRememberMe,
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              Text(
+                                AppLocalizations.of(context)!.loginRememberMe,
+                                style: MyTheme.of(context).defaultTextStyle,
+                              ),
+                            ],
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              AppLocalizations.of(context)!.loginForgotPassword,
                               style: MyTheme.of(context).defaultTextStyle,
                             ),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            AppLocalizations.of(context)!.loginForgotPassword,
-                            style: MyTheme.of(context).defaultTextStyle,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 32,
