@@ -22,6 +22,8 @@ mixin _$TournamentModel {
   DateTime get dateStart => throw _privateConstructorUsedError;
   DateTime get dateEnd => throw _privateConstructorUsedError;
   int get gamesCount => throw _privateConstructorUsedError;
+  int get billedPlayers => throw _privateConstructorUsedError;
+  bool get billedTranslation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentModelCopyWith<TournamentModel> get copyWith =>
@@ -40,7 +42,9 @@ abstract class $TournamentModelCopyWith<$Res> {
       TournamentStatus status,
       DateTime dateStart,
       DateTime dateEnd,
-      int gamesCount});
+      int gamesCount,
+      int billedPlayers,
+      bool billedTranslation});
 }
 
 /// @nodoc
@@ -62,6 +66,8 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
     Object? dateStart = null,
     Object? dateEnd = null,
     Object? gamesCount = null,
+    Object? billedPlayers = null,
+    Object? billedTranslation = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,6 +94,14 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
           ? _value.gamesCount
           : gamesCount // ignore: cast_nullable_to_non_nullable
               as int,
+      billedPlayers: null == billedPlayers
+          ? _value.billedPlayers
+          : billedPlayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      billedTranslation: null == billedTranslation
+          ? _value.billedTranslation
+          : billedTranslation // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -106,7 +120,9 @@ abstract class _$$_TournamentModelCopyWith<$Res>
       TournamentStatus status,
       DateTime dateStart,
       DateTime dateEnd,
-      int gamesCount});
+      int gamesCount,
+      int billedPlayers,
+      bool billedTranslation});
 }
 
 /// @nodoc
@@ -126,6 +142,8 @@ class __$$_TournamentModelCopyWithImpl<$Res>
     Object? dateStart = null,
     Object? dateEnd = null,
     Object? gamesCount = null,
+    Object? billedPlayers = null,
+    Object? billedTranslation = null,
   }) {
     return _then(_$_TournamentModel(
       id: null == id
@@ -152,6 +170,14 @@ class __$$_TournamentModelCopyWithImpl<$Res>
           ? _value.gamesCount
           : gamesCount // ignore: cast_nullable_to_non_nullable
               as int,
+      billedPlayers: null == billedPlayers
+          ? _value.billedPlayers
+          : billedPlayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      billedTranslation: null == billedTranslation
+          ? _value.billedTranslation
+          : billedTranslation // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -165,7 +191,9 @@ class _$_TournamentModel implements _TournamentModel {
       required this.status,
       required this.dateStart,
       required this.dateEnd,
-      required this.gamesCount});
+      required this.gamesCount,
+      required this.billedPlayers,
+      required this.billedTranslation});
 
   @override
   final int id;
@@ -179,10 +207,14 @@ class _$_TournamentModel implements _TournamentModel {
   final DateTime dateEnd;
   @override
   final int gamesCount;
+  @override
+  final int billedPlayers;
+  @override
+  final bool billedTranslation;
 
   @override
   String toString() {
-    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount)';
+    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation)';
   }
 
   @override
@@ -197,12 +229,16 @@ class _$_TournamentModel implements _TournamentModel {
                 other.dateStart == dateStart) &&
             (identical(other.dateEnd, dateEnd) || other.dateEnd == dateEnd) &&
             (identical(other.gamesCount, gamesCount) ||
-                other.gamesCount == gamesCount));
+                other.gamesCount == gamesCount) &&
+            (identical(other.billedPlayers, billedPlayers) ||
+                other.billedPlayers == billedPlayers) &&
+            (identical(other.billedTranslation, billedTranslation) ||
+                other.billedTranslation == billedTranslation));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, status, dateStart, dateEnd, gamesCount);
+  int get hashCode => Object.hash(runtimeType, id, name, status, dateStart,
+      dateEnd, gamesCount, billedPlayers, billedTranslation);
 
   @JsonKey(ignore: true)
   @override
@@ -218,7 +254,9 @@ abstract class _TournamentModel implements TournamentModel {
       required final TournamentStatus status,
       required final DateTime dateStart,
       required final DateTime dateEnd,
-      required final int gamesCount}) = _$_TournamentModel;
+      required final int gamesCount,
+      required final int billedPlayers,
+      required final bool billedTranslation}) = _$_TournamentModel;
 
   @override
   int get id;
@@ -232,6 +270,10 @@ abstract class _TournamentModel implements TournamentModel {
   DateTime get dateEnd;
   @override
   int get gamesCount;
+  @override
+  int get billedPlayers;
+  @override
+  bool get billedTranslation;
   @override
   @JsonKey(ignore: true)
   _$$_TournamentModelCopyWith<_$_TournamentModel> get copyWith =>

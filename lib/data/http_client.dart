@@ -174,7 +174,7 @@ class MyHttpClient {
   }
 
   MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage)
-      : baseUrl = "http://31.211.71.43";
+      : baseUrl = "https://mafbase.ru";
 
   MyHttpClient.autoForWeb(this._storage, this._credentialStorage)
       : baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";

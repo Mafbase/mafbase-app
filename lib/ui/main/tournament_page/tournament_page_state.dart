@@ -23,5 +23,9 @@ class TournamentPageState with _$TournamentPageState {
       ),
     )
         TournamentSettingsModel settings,
+    @Default(10)
+        int billedPlayers,
+    @Default(false)
+        bool billedTranslation,
   }) = _TournamentPageState;
 }

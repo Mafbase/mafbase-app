@@ -7,7 +7,7 @@ import 'package:seating_generator_web/data/requests/delete_player_request.dart';
 import 'package:seating_generator_web/data/requests/edit_player_request.dart';
 import 'package:seating_generator_web/data/requests/get_all_players_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_players_request.dart';
-import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';

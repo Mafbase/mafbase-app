@@ -16,9 +16,8 @@ class TournamentPageEvent with _$TournamentPageEvent {
     required TournamentSettingsModel settings,
   }) = TournamentPageEventUpdateSettings;
 
-  const factory TournamentPageEvent.playersListOpened({
-    required int tournamentId,
-  }) = TournamentPagePlayerListOpenedEvent;
+  const factory TournamentPageEvent.playersListOpened() =
+      TournamentPagePlayerListOpenedEvent;
 
   const factory TournamentPageEvent.addPlayerTapped() =
       TournamentPageEventAddPlayer;
@@ -36,4 +35,12 @@ class TournamentPageEvent with _$TournamentPageEvent {
 
   const factory TournamentPageEvent.openSeatingPage() =
       TournamentPageEventOpenSeatingPage;
+
+  const factory TournamentPageEvent.bill({
+    required int playersCount,
+    required bool billedTranlsation,
+  }) = TournamentPageEventBill;
+
+  const factory TournamentPageEvent.pageOpened() =
+      TournamentPageEventPageOpened;
 }

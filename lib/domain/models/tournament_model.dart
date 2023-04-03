@@ -12,6 +12,8 @@ class TournamentModel with _$TournamentModel {
     required DateTime dateStart,
     required DateTime dateEnd,
     required int gamesCount,
+    required int billedPlayers,
+    required bool billedTranslation,
   }) = _TournamentModel;
 }
 

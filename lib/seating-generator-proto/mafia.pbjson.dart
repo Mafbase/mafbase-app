@@ -642,6 +642,8 @@ const Tournament$json = const {
     const {'1': 'dateStart', '3': 4, '4': 1, '5': 9, '10': 'dateStart'},
     const {'1': 'dateEnd', '3': 5, '4': 1, '5': 9, '10': 'dateEnd'},
     const {'1': 'gamesCount', '3': 6, '4': 1, '5': 5, '10': 'gamesCount'},
+    const {'1': 'billedPlayers', '3': 7, '4': 1, '5': 5, '10': 'billedPlayers'},
+    const {'1': 'billedTranslation', '3': 8, '4': 1, '5': 8, '10': 'billedTranslation'},
   ],
   '4': const [Tournament_Status$json],
 };
@@ -657,7 +659,7 @@ const Tournament_Status$json = const {
 };
 
 /// Descriptor for `Tournament`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tournamentDescriptor = $convert.base64Decode('CgpUb3VybmFtZW50Eg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEjQKBnN0YXR1cxgDIAEoDjIcLmdlbmVyYXRlZC5Ub3VybmFtZW50LlN0YXR1c1IGc3RhdHVzEhwKCWRhdGVTdGFydBgEIAEoCVIJZGF0ZVN0YXJ0EhgKB2RhdGVFbmQYBSABKAlSB2RhdGVFbmQSHgoKZ2FtZXNDb3VudBgGIAEoBVIKZ2FtZXNDb3VudCIzCgZTdGF0dXMSEgoOd2FpdEZvckJpbGxpbmcQABIKCgZhY3RpdmUQARIJCgVlbmRlZBAC');
+final $typed_data.Uint8List tournamentDescriptor = $convert.base64Decode('CgpUb3VybmFtZW50Eg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEjQKBnN0YXR1cxgDIAEoDjIcLmdlbmVyYXRlZC5Ub3VybmFtZW50LlN0YXR1c1IGc3RhdHVzEhwKCWRhdGVTdGFydBgEIAEoCVIJZGF0ZVN0YXJ0EhgKB2RhdGVFbmQYBSABKAlSB2RhdGVFbmQSHgoKZ2FtZXNDb3VudBgGIAEoBVIKZ2FtZXNDb3VudBIkCg1iaWxsZWRQbGF5ZXJzGAcgASgFUg1iaWxsZWRQbGF5ZXJzEiwKEWJpbGxlZFRyYW5zbGF0aW9uGAggASgIUhFiaWxsZWRUcmFuc2xhdGlvbiIzCgZTdGF0dXMSEgoOd2FpdEZvckJpbGxpbmcQABIKCgZhY3RpdmUQARIJCgVlbmRlZBAC');
 @$core.Deprecated('Use errorOutDescriptor instead')
 const ErrorOut$json = const {
   '1': 'ErrorOut',

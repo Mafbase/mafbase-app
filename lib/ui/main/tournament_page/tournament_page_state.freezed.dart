@@ -21,6 +21,8 @@ mixin _$TournamentPageState {
   List<PlayerModel> get tournamentPlayers => throw _privateConstructorUsedError;
   List<List<PlayerModel>> get cannotMeet => throw _privateConstructorUsedError;
   TournamentSettingsModel get settings => throw _privateConstructorUsedError;
+  int get billedPlayers => throw _privateConstructorUsedError;
+  bool get billedTranslation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentPageStateCopyWith<TournamentPageState> get copyWith =>
@@ -38,7 +40,9 @@ abstract class $TournamentPageStateCopyWith<$Res> {
       List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
       List<List<PlayerModel>> cannotMeet,
-      TournamentSettingsModel settings});
+      TournamentSettingsModel settings,
+      int billedPlayers,
+      bool billedTranslation});
 
   $TournamentSettingsModelCopyWith<$Res> get settings;
 }
@@ -61,6 +65,8 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
     Object? settings = null,
+    Object? billedPlayers = null,
+    Object? billedTranslation = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -83,6 +89,14 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as TournamentSettingsModel,
+      billedPlayers: null == billedPlayers
+          ? _value.billedPlayers
+          : billedPlayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      billedTranslation: null == billedTranslation
+          ? _value.billedTranslation
+          : billedTranslation // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -108,7 +122,9 @@ abstract class _$$_TournamentPageStateCopyWith<$Res>
       List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
       List<List<PlayerModel>> cannotMeet,
-      TournamentSettingsModel settings});
+      TournamentSettingsModel settings,
+      int billedPlayers,
+      bool billedTranslation});
 
   @override
   $TournamentSettingsModelCopyWith<$Res> get settings;
@@ -130,6 +146,8 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
     Object? settings = null,
+    Object? billedPlayers = null,
+    Object? billedTranslation = null,
   }) {
     return _then(_$_TournamentPageState(
       isLoading: null == isLoading
@@ -152,6 +170,14 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as TournamentSettingsModel,
+      billedPlayers: null == billedPlayers
+          ? _value.billedPlayers
+          : billedPlayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      billedTranslation: null == billedTranslation
+          ? _value.billedTranslation
+          : billedTranslation // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -165,7 +191,9 @@ class _$_TournamentPageState implements _TournamentPageState {
       final List<PlayerModel> tournamentPlayers = const [],
       final List<List<PlayerModel>> cannotMeet = const [],
       this.settings = const TournamentSettingsModel(
-          defaultGames: 0, swissGames: 0, finalGames: 0)})
+          defaultGames: 0, swissGames: 0, finalGames: 0),
+      this.billedPlayers = 10,
+      this.billedTranslation = false})
       : _players = players,
         _tournamentPlayers = tournamentPlayers,
         _cannotMeet = cannotMeet;
@@ -204,10 +232,16 @@ class _$_TournamentPageState implements _TournamentPageState {
   @override
   @JsonKey()
   final TournamentSettingsModel settings;
+  @override
+  @JsonKey()
+  final int billedPlayers;
+  @override
+  @JsonKey()
+  final bool billedTranslation;
 
   @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, settings: $settings)';
+    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation)';
   }
 
   @override
@@ -223,7 +257,11 @@ class _$_TournamentPageState implements _TournamentPageState {
             const DeepCollectionEquality()
                 .equals(other._cannotMeet, _cannotMeet) &&
             (identical(other.settings, settings) ||
-                other.settings == settings));
+                other.settings == settings) &&
+            (identical(other.billedPlayers, billedPlayers) ||
+                other.billedPlayers == billedPlayers) &&
+            (identical(other.billedTranslation, billedTranslation) ||
+                other.billedTranslation == billedTranslation));
   }
 
   @override
@@ -233,7 +271,9 @@ class _$_TournamentPageState implements _TournamentPageState {
       const DeepCollectionEquality().hash(_players),
       const DeepCollectionEquality().hash(_tournamentPlayers),
       const DeepCollectionEquality().hash(_cannotMeet),
-      settings);
+      settings,
+      billedPlayers,
+      billedTranslation);
 
   @JsonKey(ignore: true)
   @override
@@ -249,7 +289,9 @@ abstract class _TournamentPageState implements TournamentPageState {
       final List<PlayerModel> players,
       final List<PlayerModel> tournamentPlayers,
       final List<List<PlayerModel>> cannotMeet,
-      final TournamentSettingsModel settings}) = _$_TournamentPageState;
+      final TournamentSettingsModel settings,
+      final int billedPlayers,
+      final bool billedTranslation}) = _$_TournamentPageState;
 
   @override
   bool get isLoading;
@@ -261,6 +303,10 @@ abstract class _TournamentPageState implements TournamentPageState {
   List<List<PlayerModel>> get cannotMeet;
   @override
   TournamentSettingsModel get settings;
+  @override
+  int get billedPlayers;
+  @override
+  bool get billedTranslation;
   @override
   @JsonKey(ignore: true)
   _$$_TournamentPageStateCopyWith<_$_TournamentPageState> get copyWith =>

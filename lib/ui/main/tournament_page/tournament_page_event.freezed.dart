@@ -21,12 +21,14 @@ mixin _$TournamentPageEvent {
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,12 +36,14 @@ mixin _$TournamentPageEvent {
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,12 +51,14 @@ mixin _$TournamentPageEvent {
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +82,8 @@ mixin _$TournamentPageEvent {
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +103,8 @@ mixin _$TournamentPageEvent {
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -113,6 +123,8 @@ mixin _$TournamentPageEvent {
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -182,12 +194,14 @@ class _$TournamentPageBackButtonPreesedEvent
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return backButtonPressed();
   }
@@ -198,12 +212,14 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return backButtonPressed?.call();
   }
@@ -214,12 +230,14 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -249,6 +267,8 @@ class _$TournamentPageBackButtonPreesedEvent
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return backButtonPressed(this);
   }
@@ -271,6 +291,8 @@ class _$TournamentPageBackButtonPreesedEvent
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return backButtonPressed?.call(this);
   }
@@ -292,6 +314,8 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -353,12 +377,14 @@ class _$TournamentPageEventPlayersListTapped
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return playersListTapped();
   }
@@ -369,12 +395,14 @@ class _$TournamentPageEventPlayersListTapped
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return playersListTapped?.call();
   }
@@ -385,12 +413,14 @@ class _$TournamentPageEventPlayersListTapped
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (playersListTapped != null) {
@@ -420,6 +450,8 @@ class _$TournamentPageEventPlayersListTapped
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return playersListTapped(this);
   }
@@ -442,6 +474,8 @@ class _$TournamentPageEventPlayersListTapped
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return playersListTapped?.call(this);
   }
@@ -463,6 +497,8 @@ class _$TournamentPageEventPlayersListTapped
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (playersListTapped != null) {
@@ -562,12 +598,14 @@ class _$TournamentPageEventUpdateSettings
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return updateSettings(settings);
   }
@@ -578,12 +616,14 @@ class _$TournamentPageEventUpdateSettings
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return updateSettings?.call(settings);
   }
@@ -594,12 +634,14 @@ class _$TournamentPageEventUpdateSettings
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -629,6 +671,8 @@ class _$TournamentPageEventUpdateSettings
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return updateSettings(this);
   }
@@ -651,6 +695,8 @@ class _$TournamentPageEventUpdateSettings
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return updateSettings?.call(this);
   }
@@ -672,6 +718,8 @@ class _$TournamentPageEventUpdateSettings
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -700,8 +748,6 @@ abstract class _$$TournamentPagePlayerListOpenedEventCopyWith<$Res> {
           _$TournamentPagePlayerListOpenedEvent value,
           $Res Function(_$TournamentPagePlayerListOpenedEvent) then) =
       __$$TournamentPagePlayerListOpenedEventCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int tournamentId});
 }
 
 /// @nodoc
@@ -713,54 +759,28 @@ class __$$TournamentPagePlayerListOpenedEventCopyWithImpl<$Res>
       _$TournamentPagePlayerListOpenedEvent _value,
       $Res Function(_$TournamentPagePlayerListOpenedEvent) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tournamentId = null,
-  }) {
-    return _then(_$TournamentPagePlayerListOpenedEvent(
-      tournamentId: null == tournamentId
-          ? _value.tournamentId
-          : tournamentId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$TournamentPagePlayerListOpenedEvent
     implements TournamentPagePlayerListOpenedEvent {
-  const _$TournamentPagePlayerListOpenedEvent({required this.tournamentId});
-
-  @override
-  final int tournamentId;
+  const _$TournamentPagePlayerListOpenedEvent();
 
   @override
   String toString() {
-    return 'TournamentPageEvent.playersListOpened(tournamentId: $tournamentId)';
+    return 'TournamentPageEvent.playersListOpened()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPagePlayerListOpenedEvent &&
-            (identical(other.tournamentId, tournamentId) ||
-                other.tournamentId == tournamentId));
+            other is _$TournamentPagePlayerListOpenedEvent);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tournamentId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TournamentPagePlayerListOpenedEventCopyWith<
-          _$TournamentPagePlayerListOpenedEvent>
-      get copyWith => __$$TournamentPagePlayerListOpenedEventCopyWithImpl<
-          _$TournamentPagePlayerListOpenedEvent>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -768,14 +788,16 @@ class _$TournamentPagePlayerListOpenedEvent
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
-    return playersListOpened(tournamentId);
+    return playersListOpened();
   }
 
   @override
@@ -784,14 +806,16 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
-    return playersListOpened?.call(tournamentId);
+    return playersListOpened?.call();
   }
 
   @override
@@ -800,16 +824,18 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (playersListOpened != null) {
-      return playersListOpened(tournamentId);
+      return playersListOpened();
     }
     return orElse();
   }
@@ -835,6 +861,8 @@ class _$TournamentPagePlayerListOpenedEvent
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return playersListOpened(this);
   }
@@ -857,6 +885,8 @@ class _$TournamentPagePlayerListOpenedEvent
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return playersListOpened?.call(this);
   }
@@ -878,6 +908,8 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (playersListOpened != null) {
@@ -889,15 +921,8 @@ class _$TournamentPagePlayerListOpenedEvent
 
 abstract class TournamentPagePlayerListOpenedEvent
     implements TournamentPageEvent {
-  const factory TournamentPagePlayerListOpenedEvent(
-          {required final int tournamentId}) =
+  const factory TournamentPagePlayerListOpenedEvent() =
       _$TournamentPagePlayerListOpenedEvent;
-
-  int get tournamentId;
-  @JsonKey(ignore: true)
-  _$$TournamentPagePlayerListOpenedEventCopyWith<
-          _$TournamentPagePlayerListOpenedEvent>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -945,12 +970,14 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return addPlayerTapped();
   }
@@ -961,12 +988,14 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return addPlayerTapped?.call();
   }
@@ -977,12 +1006,14 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (addPlayerTapped != null) {
@@ -1012,6 +1043,8 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return addPlayerTapped(this);
   }
@@ -1034,6 +1067,8 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return addPlayerTapped?.call(this);
   }
@@ -1055,6 +1090,8 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (addPlayerTapped != null) {
@@ -1114,12 +1151,14 @@ class _$TournamentPageEventEditSettings
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return editTournamentSettings();
   }
@@ -1130,12 +1169,14 @@ class _$TournamentPageEventEditSettings
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return editTournamentSettings?.call();
   }
@@ -1146,12 +1187,14 @@ class _$TournamentPageEventEditSettings
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (editTournamentSettings != null) {
@@ -1181,6 +1224,8 @@ class _$TournamentPageEventEditSettings
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return editTournamentSettings(this);
   }
@@ -1203,6 +1248,8 @@ class _$TournamentPageEventEditSettings
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return editTournamentSettings?.call(this);
   }
@@ -1224,6 +1271,8 @@ class _$TournamentPageEventEditSettings
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (editTournamentSettings != null) {
@@ -1320,12 +1369,14 @@ class _$TournamentPageEventDeletePlayer
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return deletePlayer(player);
   }
@@ -1336,12 +1387,14 @@ class _$TournamentPageEventDeletePlayer
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return deletePlayer?.call(player);
   }
@@ -1352,12 +1405,14 @@ class _$TournamentPageEventDeletePlayer
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (deletePlayer != null) {
@@ -1387,6 +1442,8 @@ class _$TournamentPageEventDeletePlayer
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return deletePlayer(this);
   }
@@ -1409,6 +1466,8 @@ class _$TournamentPageEventDeletePlayer
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return deletePlayer?.call(this);
   }
@@ -1430,6 +1489,8 @@ class _$TournamentPageEventDeletePlayer
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (deletePlayer != null) {
@@ -1532,12 +1593,14 @@ class _$TournamentPageEventOpenProfileDialog
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return openProfileDialog(player);
   }
@@ -1548,12 +1611,14 @@ class _$TournamentPageEventOpenProfileDialog
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return openProfileDialog?.call(player);
   }
@@ -1564,12 +1629,14 @@ class _$TournamentPageEventOpenProfileDialog
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (openProfileDialog != null) {
@@ -1599,6 +1666,8 @@ class _$TournamentPageEventOpenProfileDialog
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return openProfileDialog(this);
   }
@@ -1621,6 +1690,8 @@ class _$TournamentPageEventOpenProfileDialog
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return openProfileDialog?.call(this);
   }
@@ -1642,6 +1713,8 @@ class _$TournamentPageEventOpenProfileDialog
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (openProfileDialog != null) {
@@ -1710,12 +1783,14 @@ class _$TournamentPageEventOpenSeatingPage
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function(int tournamentId) playersListOpened,
+    required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
     required TResult Function(PlayerModel player) deletePlayer,
     required TResult Function(PlayerModel player) openProfileDialog,
     required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
   }) {
     return openSeatingPage();
   }
@@ -1726,12 +1801,14 @@ class _$TournamentPageEventOpenSeatingPage
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function(int tournamentId)? playersListOpened,
+    TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
     TResult? Function(PlayerModel player)? deletePlayer,
     TResult? Function(PlayerModel player)? openProfileDialog,
     TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
   }) {
     return openSeatingPage?.call();
   }
@@ -1742,12 +1819,14 @@ class _$TournamentPageEventOpenSeatingPage
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function(int tournamentId)? playersListOpened,
+    TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
     TResult Function(PlayerModel player)? deletePlayer,
     TResult Function(PlayerModel player)? openProfileDialog,
     TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
     required TResult orElse(),
   }) {
     if (openSeatingPage != null) {
@@ -1777,6 +1856,8 @@ class _$TournamentPageEventOpenSeatingPage
         openProfileDialog,
     required TResult Function(TournamentPageEventOpenSeatingPage value)
         openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
   }) {
     return openSeatingPage(this);
   }
@@ -1799,6 +1880,8 @@ class _$TournamentPageEventOpenSeatingPage
         openProfileDialog,
     TResult? Function(TournamentPageEventOpenSeatingPage value)?
         openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
   }) {
     return openSeatingPage?.call(this);
   }
@@ -1820,6 +1903,8 @@ class _$TournamentPageEventOpenSeatingPage
     TResult Function(TournamentPageEventOpenProfileDialog value)?
         openProfileDialog,
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
     required TResult orElse(),
   }) {
     if (openSeatingPage != null) {
@@ -1833,4 +1918,407 @@ abstract class TournamentPageEventOpenSeatingPage
     implements TournamentPageEvent {
   const factory TournamentPageEventOpenSeatingPage() =
       _$TournamentPageEventOpenSeatingPage;
+}
+
+/// @nodoc
+abstract class _$$TournamentPageEventBillCopyWith<$Res> {
+  factory _$$TournamentPageEventBillCopyWith(_$TournamentPageEventBill value,
+          $Res Function(_$TournamentPageEventBill) then) =
+      __$$TournamentPageEventBillCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int playersCount, bool billedTranlsation});
+}
+
+/// @nodoc
+class __$$TournamentPageEventBillCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res, _$TournamentPageEventBill>
+    implements _$$TournamentPageEventBillCopyWith<$Res> {
+  __$$TournamentPageEventBillCopyWithImpl(_$TournamentPageEventBill _value,
+      $Res Function(_$TournamentPageEventBill) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playersCount = null,
+    Object? billedTranlsation = null,
+  }) {
+    return _then(_$TournamentPageEventBill(
+      playersCount: null == playersCount
+          ? _value.playersCount
+          : playersCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      billedTranlsation: null == billedTranlsation
+          ? _value.billedTranlsation
+          : billedTranlsation // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TournamentPageEventBill implements TournamentPageEventBill {
+  const _$TournamentPageEventBill(
+      {required this.playersCount, required this.billedTranlsation});
+
+  @override
+  final int playersCount;
+  @override
+  final bool billedTranlsation;
+
+  @override
+  String toString() {
+    return 'TournamentPageEvent.bill(playersCount: $playersCount, billedTranlsation: $billedTranlsation)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TournamentPageEventBill &&
+            (identical(other.playersCount, playersCount) ||
+                other.playersCount == playersCount) &&
+            (identical(other.billedTranlsation, billedTranlsation) ||
+                other.billedTranlsation == billedTranlsation));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, playersCount, billedTranlsation);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TournamentPageEventBillCopyWith<_$TournamentPageEventBill> get copyWith =>
+      __$$TournamentPageEventBillCopyWithImpl<_$TournamentPageEventBill>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() backButtonPressed,
+    required TResult Function() playersListTapped,
+    required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() playersListOpened,
+    required TResult Function() addPlayerTapped,
+    required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
+    required TResult Function(PlayerModel player) openProfileDialog,
+    required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
+  }) {
+    return bill(playersCount, billedTranlsation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
+  }) {
+    return bill?.call(playersCount, billedTranlsation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? backButtonPressed,
+    TResult Function()? playersListTapped,
+    TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? playersListOpened,
+    TResult Function()? addPlayerTapped,
+    TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
+    TResult Function(PlayerModel player)? openProfileDialog,
+    TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (bill != null) {
+      return bill(playersCount, billedTranlsation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TournamentPageBackButtonPreesedEvent value)
+        backButtonPressed,
+    required TResult Function(TournamentPageEventPlayersListTapped value)
+        playersListTapped,
+    required TResult Function(TournamentPageEventUpdateSettings value)
+        updateSettings,
+    required TResult Function(TournamentPagePlayerListOpenedEvent value)
+        playersListOpened,
+    required TResult Function(TournamentPageEventAddPlayer value)
+        addPlayerTapped,
+    required TResult Function(TournamentPageEventEditSettings value)
+        editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
+    required TResult Function(TournamentPageEventOpenProfileDialog value)
+        openProfileDialog,
+    required TResult Function(TournamentPageEventOpenSeatingPage value)
+        openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+  }) {
+    return bill(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+  }) {
+    return bill?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (bill != null) {
+      return bill(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TournamentPageEventBill implements TournamentPageEvent {
+  const factory TournamentPageEventBill(
+      {required final int playersCount,
+      required final bool billedTranlsation}) = _$TournamentPageEventBill;
+
+  int get playersCount;
+  bool get billedTranlsation;
+  @JsonKey(ignore: true)
+  _$$TournamentPageEventBillCopyWith<_$TournamentPageEventBill> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TournamentPageEventPageOpenedCopyWith<$Res> {
+  factory _$$TournamentPageEventPageOpenedCopyWith(
+          _$TournamentPageEventPageOpened value,
+          $Res Function(_$TournamentPageEventPageOpened) then) =
+      __$$TournamentPageEventPageOpenedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TournamentPageEventPageOpenedCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventPageOpened>
+    implements _$$TournamentPageEventPageOpenedCopyWith<$Res> {
+  __$$TournamentPageEventPageOpenedCopyWithImpl(
+      _$TournamentPageEventPageOpened _value,
+      $Res Function(_$TournamentPageEventPageOpened) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
+  const _$TournamentPageEventPageOpened();
+
+  @override
+  String toString() {
+    return 'TournamentPageEvent.pageOpened()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TournamentPageEventPageOpened);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() backButtonPressed,
+    required TResult Function() playersListTapped,
+    required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() playersListOpened,
+    required TResult Function() addPlayerTapped,
+    required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
+    required TResult Function(PlayerModel player) openProfileDialog,
+    required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
+  }) {
+    return pageOpened();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
+  }) {
+    return pageOpened?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? backButtonPressed,
+    TResult Function()? playersListTapped,
+    TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? playersListOpened,
+    TResult Function()? addPlayerTapped,
+    TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
+    TResult Function(PlayerModel player)? openProfileDialog,
+    TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (pageOpened != null) {
+      return pageOpened();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TournamentPageBackButtonPreesedEvent value)
+        backButtonPressed,
+    required TResult Function(TournamentPageEventPlayersListTapped value)
+        playersListTapped,
+    required TResult Function(TournamentPageEventUpdateSettings value)
+        updateSettings,
+    required TResult Function(TournamentPagePlayerListOpenedEvent value)
+        playersListOpened,
+    required TResult Function(TournamentPageEventAddPlayer value)
+        addPlayerTapped,
+    required TResult Function(TournamentPageEventEditSettings value)
+        editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
+    required TResult Function(TournamentPageEventOpenProfileDialog value)
+        openProfileDialog,
+    required TResult Function(TournamentPageEventOpenSeatingPage value)
+        openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+  }) {
+    return pageOpened(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+  }) {
+    return pageOpened?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (pageOpened != null) {
+      return pageOpened(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TournamentPageEventPageOpened implements TournamentPageEvent {
+  const factory TournamentPageEventPageOpened() =
+      _$TournamentPageEventPageOpened;
 }

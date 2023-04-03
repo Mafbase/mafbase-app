@@ -11,6 +11,8 @@ class TournamentsRepositoryMock implements TournamentsRepository {
       dateStart: DateTime(2021, 9, 24),
       dateEnd: DateTime(2021, 9, 25),
       gamesCount: 10,
+      billedPlayers: 10,
+      billedTranslation: false,
     ),
     TournamentModel(
       id: 2,
@@ -19,6 +21,8 @@ class TournamentsRepositoryMock implements TournamentsRepository {
       dateStart: DateTime(2022, 9, 24),
       dateEnd: DateTime(2022, 9, 25),
       gamesCount: 16,
+      billedPlayers: 70,
+      billedTranslation: true,
     ),
   ];
 
@@ -28,12 +32,20 @@ class TournamentsRepositoryMock implements TournamentsRepository {
   }
 
   @override
-  Future<int> createTournament({required String name, required DateTimeRange range}) {
+  Future<int> createTournament({
+    required String name,
+    required DateTimeRange range,
+  }) {
     return Future.value(1);
   }
 
   @override
   Future createSeating({required int id}) {
     return Future.value();
+  }
+
+  @override
+  Future<TournamentModel> getTournament({required int tournamentId}) async {
+    return fakeTournaments.firstWhere((element) => element.id == tournamentId);
   }
 }

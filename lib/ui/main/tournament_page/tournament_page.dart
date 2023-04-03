@@ -11,6 +11,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_ef
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/players_list_body.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_billing_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_menu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_settings_dialog.dart';
@@ -36,7 +37,6 @@ class TournamentPage extends StatefulWidget {
         "id": "$tournamentId",
       },
     );
-
   }
 
   static RouteBase createRoute() => ShellRoute(
@@ -62,6 +62,7 @@ class TournamentPage extends StatefulWidget {
                 key: const Key("TournamentPageBloc"),
                 create: (context) => getIt<TournamentPageBloc>(
                   param1: context,
+                  param2: int.parse(state.params["id"] ?? ""),
                 ),
               ),
               BlocProvider<SeatingPageBloc>(
@@ -85,55 +86,83 @@ class _TournamentPageState extends CustomState<TournamentPage>
   bool get expanded => true;
 
   @override
+  void initState() {
+    context
+        .read<TournamentPageBloc>()
+        .add(const TournamentPageEvent.pageOpened());
+    super.initState();
+  }
+
+  @override
   Widget buildDesktop(BuildContext context) {
     return Row(
       children: [
         Expanded(child: widget.child),
-        TournamentMenu(
-          items: [
-            MenuItemModel(
-              text: context.locale.tournamentPageListOfPlayers,
-              onTap: () {
-                context
-                    .read<TournamentPageBloc>()
-                    .add(const TournamentPageEvent.playersListTapped());
-              },
-            ),
-            MenuItemModel(
-              text: AppLocalizations.of(context)!.addPlayer,
-              onTap: () {
-                context.read<TournamentPageBloc>().add(
-                      const TournamentPageEvent.addPlayerTapped(),
-                    );
-              },
-            ),
-            MenuItemModel(
-              text: context.locale.seating,
-              onTap: () {
-                context
-                    .read<TournamentPageBloc>()
-                    .add(const TournamentPageEvent.openSeatingPage());
-              },
-            ),
-            MenuItemModel(
-              text: context.locale.tournamentSettingsTitle,
-              onTap: () async {
-                final oldSettings =
-                    context.read<TournamentPageBloc>().state.settings;
-                final settings = await TournamentSettingsDialog.open(
-                  context: context,
-                  initValue: oldSettings,
-                );
-                if (mounted && settings != null && settings != oldSettings) {
+        BlocBuilder<TournamentPageBloc, TournamentPageState>(
+          builder: (context, state) => TournamentMenu(
+            items: [
+              MenuItemModel(
+                text: context.locale.tournamentPageListOfPlayers,
+                onTap: () {
+                  context
+                      .read<TournamentPageBloc>()
+                      .add(const TournamentPageEvent.playersListTapped());
+                },
+              ),
+              MenuItemModel(
+                text: AppLocalizations.of(context)!.addPlayer,
+                onTap: () {
                   context.read<TournamentPageBloc>().add(
-                        TournamentPageEvent.updateSettings(
-                          settings: settings,
-                        ),
+                        const TournamentPageEvent.addPlayerTapped(),
                       );
-                }
-              },
-            ),
-          ],
+                },
+              ),
+              MenuItemModel(
+                text: context.locale.seating,
+                onTap: () {
+                  context
+                      .read<TournamentPageBloc>()
+                      .add(const TournamentPageEvent.openSeatingPage());
+                },
+              ),
+              MenuItemModel(
+                text: context.locale.tournamentSettingsTitle,
+                onTap: () async {
+                  final oldSettings =
+                      context.read<TournamentPageBloc>().state.settings;
+                  final settings = await TournamentSettingsDialog.open(
+                    context: context,
+                    initValue: oldSettings,
+                  );
+                  if (mounted && settings != null && settings != oldSettings) {
+                    context.read<TournamentPageBloc>().add(
+                          TournamentPageEvent.updateSettings(
+                            settings: settings,
+                          ),
+                        );
+                  }
+                },
+              ),
+              MenuItemModel(
+                text: 'Оплата',
+                onTap: () async {
+                  final result = await TournamentBillingDialog.open(
+                    context: context,
+                    billedPlayers: state.billedPlayers,
+                    hasTranslation: state.billedTranslation,
+                  );
+                  if (result != null && mounted) {
+                    context.read<TournamentPageBloc>().add(
+                          TournamentPageEvent.bill(
+                            playersCount: result.billedPlayers,
+                            billedTranlsation: result.billedTranslation,
+                          ),
+                        );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ],
     );

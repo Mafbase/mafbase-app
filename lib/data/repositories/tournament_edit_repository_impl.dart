@@ -6,7 +6,7 @@ import 'package:seating_generator_web/data/requests/get_separations_request.dart
 import 'package:seating_generator_web/data/requests/get_settings_request.dart';
 import 'package:seating_generator_web/data/requests/separate_players_request.dart';
 import 'package:seating_generator_web/data/requests/update_settings_request.dart';
-import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';

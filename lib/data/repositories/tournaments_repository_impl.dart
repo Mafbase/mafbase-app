@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/requests/create_seating_request.dart';
 import 'package:seating_generator_web/data/requests/create_tournament_request.dart';
+import 'package:seating_generator_web/data/requests/get_tournament_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_request.dart';
-import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentsRepositoryImpl extends BaseRepository
@@ -13,17 +15,9 @@ class TournamentsRepositoryImpl extends BaseRepository
 
   @override
   Future<List<TournamentModel>> getTournaments() {
-
     return GetTournamentsRequest().execute(client).then((value) {
       return value.tournaments.map((tournament) {
-        return TournamentModel(
-          id: tournament.id,
-          name: tournament.name,
-          status: TournamentStatus.from(tournament.status),
-          dateStart: dateFormatForRequests.parse(tournament.dateStart),
-          dateEnd: dateFormatForRequests.parse(tournament.dateEnd),
-          gamesCount: tournament.gamesCount,
-        );
+        return tournament.toDomainModel();
       }).toList();
     });
   }
@@ -42,4 +36,24 @@ class TournamentsRepositoryImpl extends BaseRepository
   Future createSeating({required int id}) {
     return CreateSeatingRequest(tournamentId: id).execute(client);
   }
+
+  @override
+  Future<TournamentModel> getTournament({required int tournamentId}) {
+    return GetTournamentRequest(id: tournamentId)
+        .execute(client)
+        .then((value) => value.toDomainModel());
+  }
+}
+
+extension TournamentExt on Tournament {
+  TournamentModel toDomainModel() => TournamentModel(
+        id: id,
+        name: name,
+        status: TournamentStatus.from(status),
+        dateStart: dateFormatForRequests.parse(dateStart),
+        dateEnd: dateFormatForRequests.parse(dateEnd),
+        gamesCount: gamesCount,
+        billedTranslation: billedTranslation,
+        billedPlayers: billedPlayers,
+      );
 }

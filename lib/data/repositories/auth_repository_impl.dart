@@ -2,7 +2,7 @@ import 'package:seating_generator_web/data/requests/login_request.dart';
 import 'package:seating_generator_web/data/requests/sign_up_request.dart';
 import 'package:seating_generator_web/data/requests/verification_request.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
-import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/domain/models/sign_up_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';

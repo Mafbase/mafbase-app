@@ -1,7 +1,7 @@
 import 'package:seating_generator_web/data/requests/delete_cannot_meet_request.dart';
 import 'package:seating_generator_web/data/requests/get_cannot_meet_pairs_request.dart';
 import 'package:seating_generator_web/data/requests/insert_cannot_meet_request.dart';
-import 'package:seating_generator_web/domain/base_repository.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';

@@ -25,9 +25,7 @@ class _PlayersListBodyState extends State<PlayersListBody> {
   @override
   void initState() {
     context.read<TournamentPageBloc>().add(
-          TournamentPageEvent.playersListOpened(
-            tournamentId: widget.tournamentId,
-          ),
+          const TournamentPageEvent.playersListOpened(),
         );
     super.initState();
   }

@@ -2984,6 +2984,8 @@ class Tournament extends $pb.GeneratedMessage {
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateStart', protoName: 'dateStart')
     ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateEnd', protoName: 'dateEnd')
     ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'gamesCount', $pb.PbFieldType.O3, protoName: 'gamesCount')
+    ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'billedPlayers', $pb.PbFieldType.O3, protoName: 'billedPlayers')
+    ..aOB(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'billedTranslation', protoName: 'billedTranslation')
     ..hasRequiredFields = false
   ;
 
@@ -2995,6 +2997,8 @@ class Tournament extends $pb.GeneratedMessage {
     $core.String? dateStart,
     $core.String? dateEnd,
     $core.int? gamesCount,
+    $core.int? billedPlayers,
+    $core.bool? billedTranslation,
   }) {
     final _result = create();
     if (id != null) {
@@ -3014,6 +3018,12 @@ class Tournament extends $pb.GeneratedMessage {
     }
     if (gamesCount != null) {
       _result.gamesCount = gamesCount;
+    }
+    if (billedPlayers != null) {
+      _result.billedPlayers = billedPlayers;
+    }
+    if (billedTranslation != null) {
+      _result.billedTranslation = billedTranslation;
     }
     return _result;
   }
@@ -3091,6 +3101,24 @@ class Tournament extends $pb.GeneratedMessage {
   $core.bool hasGamesCount() => $_has(5);
   @$pb.TagNumber(6)
   void clearGamesCount() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get billedPlayers => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set billedPlayers($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasBilledPlayers() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearBilledPlayers() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.bool get billedTranslation => $_getBF(7);
+  @$pb.TagNumber(8)
+  set billedTranslation($core.bool v) { $_setBool(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasBilledTranslation() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBilledTranslation() => clearField(8);
 }
 
 class ErrorOut extends $pb.GeneratedMessage {
