@@ -142,6 +142,8 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                 width: 400,
                 child: CustomButton(
                   text: 'Оплатить',
+                  disabled: widget.billedTranslation == enableTranslation &&
+                      widget.playersCount == count,
                   onTap: () {
                     formKey.currentState?.save();
                     Navigator.pop(
