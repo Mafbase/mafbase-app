@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -97,6 +98,13 @@ class _RatingPageState extends CustomState<RatingPage> {
   @override
   bool get expanded => true;
   final format = DateFormat("dd:MM:yyyy");
+  List<RatingTableStyle> items = [
+    RatingTableStyle.score,
+    RatingTableStyle.full,
+    RatingTableStyle.stats
+  ];
+  int carouselIndex = 1;
+  final CarouselController _carouselController = CarouselController();
 
   @override
   void initState() {
@@ -107,6 +115,19 @@ class _RatingPageState extends CustomState<RatingPage> {
           ),
         );
     super.initState();
+  }
+
+  getTextFrom(RatingTableStyle style) {
+    switch (style) {
+      case RatingTableStyle.full:
+        return 'Рейтинг';
+      case RatingTableStyle.stats:
+        return "Винрейт";
+      case RatingTableStyle.score:
+        return "MVP";
+      case RatingTableStyle.addScore:
+        return "Баллы";
+    }
   }
 
   @override
@@ -163,25 +184,111 @@ class _RatingPageState extends CustomState<RatingPage> {
                                 RatingEvent.rangeChanged(
                                   range: range,
                                   clubId: widget.clubId,
-                                  style:
-                                  widget.style ?? RatingTableStyle.full,
+                                  style: widget.style ?? RatingTableStyle.full,
                                   sort: widget.sort ?? RatingSort.score,
                                   gameFilter: widget.gameFilter ?? 0,
                                 ),
                               );
                             }
                           },
-                          text: "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
+                          text:
+                              "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
                         ),
                         const SizedBox(width: 16),
+                        Stack(
+                          children: [
+                            Container(
+                              width: 162,
+                              height: 56,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: MyTheme.of(context).darkGreyColor,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Row(
+                                children: [
+                                  IgnorePointer(
+                                    ignoring: widget.style == items.first,
+                                    child: Opacity(
+                                      opacity:
+                                          widget.style == items.first ? 0 : 1,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          _carouselController.previousPage();
+                                        },
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_left,
+                                          color:
+                                              MyTheme.of(context).darkGreyColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CarouselSlider(
+                                      carouselController: _carouselController,
+                                      items: items
+                                          .map(
+                                            (element) => Center(
+                                              child: Text(getTextFrom(element)),
+                                            ),
+                                          )
+                                          .toList(),
+                                      options: CarouselOptions(
+                                        enableInfiniteScroll: false,
+                                        initialPage: widget.style != null
+                                            ? items.indexOf(widget.style!)
+                                            : 1,
+                                        viewportFraction: 1,
+                                        height: 56,
+                                        onPageChanged: (index, controller) {
+                                          context.read<RatingBloc>().add(
+                                                RatingEvent.rangeChanged(
+                                                  range: widget.range,
+                                                  clubId: widget.clubId,
+                                                  style: items[index],
+                                                  sort: widget.sort ??
+                                                      RatingSort.score,
+                                                  gameFilter:
+                                                      widget.gameFilter ?? 0,
+                                                ),
+                                              );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  IgnorePointer(
+                                    ignoring: widget.style == items.last,
+                                    child: Opacity(
+                                      opacity:
+                                          widget.style == items.last ? 0 : 1,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          _carouselController.nextPage();
+                                        },
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_right,
+                                          color:
+                                              MyTheme.of(context).darkGreyColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                         IconButton(
                           onPressed: () {
                             context.read<RatingBloc>().add(
-                              RatingEvent.downloadRating(
-                                range: widget.range,
-                                clubId: widget.clubId,
-                              ),
-                            );
+                                  RatingEvent.downloadRating(
+                                    range: widget.range,
+                                    clubId: widget.clubId,
+                                  ),
+                                );
                           },
                           icon: const Icon(
                             Icons.download,
@@ -200,8 +307,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                           clubId: widget.clubId,
                           sort: widget.sort,
                           gameFilter: widget.gameFilter,
-                          openGame: (gameId) =>
-                              context.read<RatingBloc>().add(
+                          openGame: (gameId) => context.read<RatingBloc>().add(
                                 RatingEvent.gameSelected(
                                   gameId: gameId,
                                   clubId: widget.clubId,
@@ -209,15 +315,15 @@ class _RatingPageState extends CustomState<RatingPage> {
                               ),
                           changeSort: (RatingSort sort) {
                             context.read<RatingBloc>().add(
-                              RatingEvent.rangeChanged(
-                                range: widget.range,
-                                clubId: widget.clubId,
-                                style:
-                                widget.style ?? RatingTableStyle.full,
-                                sort: sort,
-                                gameFilter: widget.gameFilter ?? 0,
-                              ),
-                            );
+                                  RatingEvent.rangeChanged(
+                                    range: widget.range,
+                                    clubId: widget.clubId,
+                                    style:
+                                        widget.style ?? RatingTableStyle.full,
+                                    sort: sort,
+                                    gameFilter: widget.gameFilter ?? 0,
+                                  ),
+                                );
                           },
                         ),
                       ),
