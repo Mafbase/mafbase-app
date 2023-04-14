@@ -95,8 +95,6 @@ class RatingPage extends StatefulWidget {
 }
 
 class _RatingPageState extends CustomState<RatingPage> {
-  @override
-  bool get expanded => true;
   final format = DateFormat("dd:MM:yyyy");
   List<RatingTableStyle> items = [
     RatingTableStyle.score,
@@ -144,6 +142,81 @@ class _RatingPageState extends CustomState<RatingPage> {
   }
 
   @override
+  Widget buildMobile(BuildContext context) {
+    return BlocBuilder<RatingBloc, RatingState>(
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const LoadingOverlayWidget();
+        }
+        return Column(
+          children: [
+            Center(
+              child: Text(
+                state.clubName,
+                style: context.theme.headerTextStyle,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Период: "),
+                CustomButton(
+                  onTap: onChangeRangeTap,
+                  text:
+                  "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
+                ),
+              ],
+            ),
+            const SizedBox(height: 16,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: styleSwitcher(),
+            ),
+            const SizedBox(height: 16,),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 16,),
+                    RatingTable(
+                      isMobile: true,
+                      style: widget.style,
+                      rows: state.rows,
+                      clubId: widget.clubId,
+                      sort: widget.sort,
+                      gameFilter: widget.gameFilter,
+                      openGame: (gameId) => context.read<RatingBloc>().add(
+                        RatingEvent.gameSelected(
+                          gameId: gameId,
+                          clubId: widget.clubId,
+                        ),
+                      ),
+                      changeSort: (RatingSort sort) {
+                        context.read<RatingBloc>().add(
+                          RatingEvent.rangeChanged(
+                            range: widget.range,
+                            clubId: widget.clubId,
+                            style:
+                            widget.style ?? RatingTableStyle.full,
+                            sort: sort,
+                            gameFilter: widget.gameFilter ?? 0,
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 16,),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
   Widget buildDesktop(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
@@ -170,115 +243,14 @@ class _RatingPageState extends CustomState<RatingPage> {
                       children: [
                         const Text("Период: "),
                         CustomButton(
-                          onTap: () async {
-                            final bloc = context.read<RatingBloc>();
-                            final range = await showDateRangePicker(
-                              context: context,
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime(3000),
-                              initialDateRange: widget.range,
-                              initialEntryMode: DatePickerEntryMode.input,
-                            );
-                            if (range != null) {
-                              bloc.add(
-                                RatingEvent.rangeChanged(
-                                  range: range,
-                                  clubId: widget.clubId,
-                                  style: widget.style ?? RatingTableStyle.full,
-                                  sort: widget.sort ?? RatingSort.score,
-                                  gameFilter: widget.gameFilter ?? 0,
-                                ),
-                              );
-                            }
-                          },
+                          onTap: onChangeRangeTap,
                           text:
                               "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
                         ),
                         const SizedBox(width: 16),
                         Stack(
                           children: [
-                            Container(
-                              width: 162,
-                              height: 56,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: MyTheme.of(context).darkGreyColor,
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Row(
-                                children: [
-                                  IgnorePointer(
-                                    ignoring: widget.style == items.first,
-                                    child: Opacity(
-                                      opacity:
-                                          widget.style == items.first ? 0 : 1,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          _carouselController.previousPage();
-                                        },
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_left,
-                                          color:
-                                              MyTheme.of(context).darkGreyColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: CarouselSlider(
-                                      carouselController: _carouselController,
-                                      items: items
-                                          .map(
-                                            (element) => Center(
-                                              child: Text(getTextFrom(element)),
-                                            ),
-                                          )
-                                          .toList(),
-                                      options: CarouselOptions(
-                                        enableInfiniteScroll: false,
-                                        initialPage: widget.style != null
-                                            ? items.indexOf(widget.style!)
-                                            : 1,
-                                        viewportFraction: 1,
-                                        height: 56,
-                                        onPageChanged: (index, controller) {
-                                          context.read<RatingBloc>().add(
-                                                RatingEvent.rangeChanged(
-                                                  range: widget.range,
-                                                  clubId: widget.clubId,
-                                                  style: items[index],
-                                                  sort: widget.sort ??
-                                                      RatingSort.score,
-                                                  gameFilter:
-                                                      widget.gameFilter ?? 0,
-                                                ),
-                                              );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  IgnorePointer(
-                                    ignoring: widget.style == items.last,
-                                    child: Opacity(
-                                      opacity:
-                                          widget.style == items.last ? 0 : 1,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          _carouselController.nextPage();
-                                        },
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_right,
-                                          color:
-                                              MyTheme.of(context).darkGreyColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            styleSwitcher(),
                           ],
                         ),
                         IconButton(
@@ -336,6 +308,113 @@ class _RatingPageState extends CustomState<RatingPage> {
           ],
         );
       },
+    );
+  }
+
+  onChangeRangeTap() async {
+    final bloc = context.read<RatingBloc>();
+    final range = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(3000),
+      initialDateRange: widget.range,
+      initialEntryMode: DatePickerEntryMode.input,
+    );
+    if (range != null) {
+      bloc.add(
+        RatingEvent.rangeChanged(
+          range: range,
+          clubId: widget.clubId,
+          style: widget.style ?? RatingTableStyle.full,
+          sort: widget.sort ?? RatingSort.score,
+          gameFilter: widget.gameFilter ?? 0,
+        ),
+      );
+    }
+  }
+
+  Widget styleSwitcher() {
+    return Container(
+      width: 162,
+      height: 56,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: MyTheme.of(context).darkGreyColor,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Row(
+        children: [
+          IgnorePointer(
+            ignoring: widget.style == items.first,
+            child: Opacity(
+              opacity:
+              widget.style == items.first ? 0 : 1,
+              child: IconButton(
+                onPressed: () {
+                  _carouselController.previousPage();
+                },
+                icon: Icon(
+                  Icons.keyboard_arrow_left,
+                  color:
+                  MyTheme.of(context).darkGreyColor,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: CarouselSlider(
+              carouselController: _carouselController,
+              items: items
+                  .map(
+                    (element) => Center(
+                  child: Text(getTextFrom(element)),
+                ),
+              )
+                  .toList(),
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                initialPage: widget.style != null
+                    ? items.indexOf(widget.style!)
+                    : 1,
+                viewportFraction: 1,
+                height: 56,
+                onPageChanged: (index, controller) {
+                  context.read<RatingBloc>().add(
+                    RatingEvent.rangeChanged(
+                      range: widget.range,
+                      clubId: widget.clubId,
+                      style: items[index],
+                      sort: widget.sort ??
+                          RatingSort.score,
+                      gameFilter:
+                      widget.gameFilter ?? 0,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          IgnorePointer(
+            ignoring: widget.style == items.last,
+            child: Opacity(
+              opacity:
+              widget.style == items.last ? 0 : 1,
+              child: IconButton(
+                onPressed: () {
+                  _carouselController.nextPage();
+                },
+                icon: Icon(
+                  Icons.keyboard_arrow_right,
+                  color:
+                  MyTheme.of(context).darkGreyColor,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

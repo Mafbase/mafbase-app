@@ -29,6 +29,7 @@ enum RatingSort {
 class RatingTable extends StatefulWidget {
   final List<ClubRatingRowModel> rows;
   final int clubId;
+  final bool isMobile;
   final Function(int gameId) openGame;
   final Function(RatingSort sort) changeSort;
   final RatingTableStyle style;
@@ -42,6 +43,7 @@ class RatingTable extends StatefulWidget {
     required this.clubId,
     required this.openGame,
     RatingTableStyle? style,
+    this.isMobile = false,
     RatingSort? sort,
     int? gameFilter,
     required this.changeSort,
@@ -859,16 +861,17 @@ class _RatingTableState extends State<RatingTable> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final width =
-                  constraints.maxWidth / (constraints.maxWidth / 60).floor();
+                  constraints.maxWidth.isFinite ? constraints.maxWidth / (constraints.maxWidth / 60).floor() : 60.0;
               final gamesCount =
                   widget.sortedRows.firstOrNull?.games.length ?? 0;
-              final expand = width * gamesCount > constraints.maxWidth;
+              final expand = width * gamesCount > constraints.maxWidth && !widget.isMobile;
               final header = gameHeader(width, expand);
               final listView = ListView.builder(
                 key: const Key("fullColumns2"),
                 physics: const ClampingScrollPhysics(),
                 controller: mainControllers[2],
                 itemCount: widget.sortedRows.length,
+                shrinkWrap: widget.isMobile,
                 itemBuilder: (context, index) => games(width, index, expand),
               );
               return Column(
