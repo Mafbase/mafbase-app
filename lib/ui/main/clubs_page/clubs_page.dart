@@ -36,11 +36,43 @@ class ClubsPage extends StatefulWidget {
 
 class _ClubsPageState extends CustomState<ClubsPage> {
   @override
-  bool get expanded => true;
-  @override
   void initState() {
     context.read<ClubsBloc>().add(const ClubsEvent.pageOpened());
     super.initState();
+  }
+
+  @override
+  Widget? buildMobile(BuildContext context) {
+    debugPrint("test25: im here");
+    return BlocBuilder<ClubsBloc, ClubsState>(
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const LoadingOverlayWidget();
+        }
+        return ListView.builder(
+          itemCount: state.clubs.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
+              child: SingleClubRow(
+                style: ClubRowStyle.mobile,
+                model: state.clubs[index],
+                onTap: () {
+                  context.read<ClubsBloc>().add(
+                        ClubsEvent.clubSelected(
+                          clubModel: state.clubs[index],
+                        ),
+                      );
+                },
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -70,16 +102,16 @@ class _ClubsPageState extends CustomState<ClubsPage> {
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.clubs.length,
-                        (context, index) {
+                    (context, index) {
                       return Center(
                         child: SingleClubRow(
                           model: state.clubs[index],
                           onTap: () {
                             context.read<ClubsBloc>().add(
-                              ClubsEvent.clubSelected(
-                                clubModel: state.clubs[index],
-                              ),
-                            );
+                                  ClubsEvent.clubSelected(
+                                    clubModel: state.clubs[index],
+                                  ),
+                                );
                           },
                         ),
                       );

@@ -124,9 +124,9 @@ class _RatingPageState extends CustomState<RatingPage> {
       case RatingTableStyle.stats:
         return "Винрейт";
       case RatingTableStyle.score:
-        return "MVP";
-      case RatingTableStyle.addScore:
         return "Баллы";
+      case RatingTableStyle.addScore:
+        return "MVP";
     }
   }
 

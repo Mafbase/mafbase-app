@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubPage extends StatefulWidget {
@@ -40,7 +41,10 @@ class ClubPage extends StatefulWidget {
         );
         return getIt(param1: context, param2: args);
       },
-      child: const ClubPage._(),
+      child: Container(
+        color: context.theme.background1,
+        child: const ClubPage._(),
+      ),
     ),
     routes: [
       ...AddClubGamePage.routes,

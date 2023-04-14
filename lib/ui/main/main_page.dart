@@ -72,7 +72,8 @@ class _MainPageState extends CustomState<MainPage> {
     }
   }
 
-  int selectedIndex(MainState state) =>state.selectedTab == MainPageTab.tournaments ? 0 : 1;
+  int selectedIndex(MainState state) =>
+      state.selectedTab == MainPageTab.tournaments ? 0 : 1;
 
   @override
   Widget buildDesktop(BuildContext context) {
