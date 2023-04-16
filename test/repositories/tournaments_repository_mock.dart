@@ -48,4 +48,9 @@ class TournamentsRepositoryMock implements TournamentsRepository {
   Future<TournamentModel> getTournament({required int tournamentId}) async {
     return fakeTournaments.firstWhere((element) => element.id == tournamentId);
   }
+
+  @override
+  Future<List<TournamentModel>> getMyTournaments() {
+    return Future.microtask(() => fakeTournaments);
+  }
 }

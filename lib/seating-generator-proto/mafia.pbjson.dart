@@ -682,6 +682,17 @@ const BillTournamentEvent$json = const {
 
 /// Descriptor for `BillTournamentEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List billTournamentEventDescriptor = $convert.base64Decode('ChNCaWxsVG91cm5hbWVudEV2ZW50EhgKB3BsYXllcnMYASABKAVSB3BsYXllcnMSJgoOaGFzVHJhbnNsYXRpb24YAiABKAhSDmhhc1RyYW5zbGF0aW9uEiIKDHJlZGlyZWN0UGF0aBgDIAEoCVIMcmVkaXJlY3RQYXRo');
+@$core.Deprecated('Use billClubEventDescriptor instead')
+const BillClubEvent$json = const {
+  '1': 'BillClubEvent',
+  '2': const [
+    const {'1': 'days', '3': 1, '4': 1, '5': 5, '10': 'days'},
+    const {'1': 'redirectPath', '3': 2, '4': 1, '5': 9, '10': 'redirectPath'},
+  ],
+};
+
+/// Descriptor for `BillClubEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List billClubEventDescriptor = $convert.base64Decode('Cg1CaWxsQ2x1YkV2ZW50EhIKBGRheXMYASABKAVSBGRheXMSIgoMcmVkaXJlY3RQYXRoGAIgASgJUgxyZWRpcmVjdFBhdGg=');
 @$core.Deprecated('Use billTournamentEventOutDescriptor instead')
 const BillTournamentEventOut$json = const {
   '1': 'BillTournamentEventOut',

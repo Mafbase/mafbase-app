@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_my_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
 
 class TournamentsBloc extends CustomBloc<TournamentsEvent, TournamentsState> {
-  final GetTournamentsInteractor _getTournamentsInteractor;
+  final GetMyTournamentsInteractor _getTournamentsInteractor;
   final CreateTournamentInteractor _createTournamentInteractor;
   @visibleForTesting
   final TournamentsRouter router;
@@ -45,7 +46,7 @@ class TournamentsBloc extends CustomBloc<TournamentsEvent, TournamentsState> {
     TournamentOpenedEvent event,
     Emitter<TournamentsState> emit,
   ) async {
-    final tournaments = await _getTournamentsInteractor.run();
+    final tournaments = await _getTournamentsInteractor();
     emit(state.copyWith(tournaments: tournaments, isLoading: false));
   }
 

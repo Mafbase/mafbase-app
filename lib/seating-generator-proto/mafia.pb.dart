@@ -3243,6 +3243,67 @@ class BillTournamentEvent extends $pb.GeneratedMessage {
   void clearRedirectPath() => clearField(3);
 }
 
+class BillClubEvent extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'BillClubEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'days', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'redirectPath', protoName: 'redirectPath')
+    ..hasRequiredFields = false
+  ;
+
+  BillClubEvent._() : super();
+  factory BillClubEvent({
+    $core.int? days,
+    $core.String? redirectPath,
+  }) {
+    final _result = create();
+    if (days != null) {
+      _result.days = days;
+    }
+    if (redirectPath != null) {
+      _result.redirectPath = redirectPath;
+    }
+    return _result;
+  }
+  factory BillClubEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory BillClubEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  BillClubEvent clone() => BillClubEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BillClubEvent copyWith(void Function(BillClubEvent) updates) => super.copyWith((message) => updates(message as BillClubEvent)) as BillClubEvent; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static BillClubEvent create() => BillClubEvent._();
+  BillClubEvent createEmptyInstance() => create();
+  static $pb.PbList<BillClubEvent> createRepeated() => $pb.PbList<BillClubEvent>();
+  @$core.pragma('dart2js:noInline')
+  static BillClubEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BillClubEvent>(create);
+  static BillClubEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get days => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set days($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDays() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDays() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get redirectPath => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set redirectPath($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRedirectPath() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRedirectPath() => clearField(2);
+}
+
 class BillTournamentEventOut extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'BillTournamentEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'redirectLink', protoName: 'redirectLink')

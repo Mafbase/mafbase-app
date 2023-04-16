@@ -48,7 +48,7 @@ class AppRouter {
       TranslationControlPage.route,
       GoRoute(
         path: '/',
-        redirect: (_, state) => state.location == '/' ? '/tournament' : null,
+        redirect: (_, state) => state.location == '/' ? '/club' : null,
         builder: (context, state) => const Placeholder(),
         routes: [
           LoginPage.route,

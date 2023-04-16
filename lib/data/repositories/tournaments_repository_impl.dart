@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/requests/create_seating_request.dart';
 import 'package:seating_generator_web/data/requests/create_tournament_request.dart';
+import 'package:seating_generator_web/data/requests/get_my_tournaments_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournament_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_request.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
@@ -42,6 +43,15 @@ class TournamentsRepositoryImpl extends BaseRepository
     return GetTournamentRequest(id: tournamentId)
         .execute(client)
         .then((value) => value.toDomainModel());
+  }
+
+  @override
+  Future<List<TournamentModel>> getMyTournaments() {
+    return GetMyTournamentsRequest().execute(client).then((value) {
+      return value.tournaments.map((tournament) {
+        return tournament.toDomainModel();
+      }).toList();
+    });
   }
 }
 

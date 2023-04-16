@@ -12,4 +12,6 @@ abstract class TournamentsRepository {
   Future createSeating({required int id});
 
   Future<TournamentModel> getTournament({required int tournamentId});
+
+  Future<List<TournamentModel>> getMyTournaments();
 }
