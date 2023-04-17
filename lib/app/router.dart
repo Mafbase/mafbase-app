@@ -73,15 +73,7 @@ class AppRouter {
               );
             },
             routes: [
-              GoRoute(
-                path: 'tournament',
-                routes: [
-                  TournamentPage.createRoute(),
-                ],
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: TournamentsPage(),
-                ),
-              ),
+              TournamentsPage.route,
               ClubsPage.route,
             ],
           ),
