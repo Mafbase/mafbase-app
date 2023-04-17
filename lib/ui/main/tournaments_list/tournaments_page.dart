@@ -42,9 +42,7 @@ class TournamentsPage extends StatefulWidget {
     const NoTransitionPage(
       child: TournamentsPage._(),
     ),
-  )
-
-  ,
+  );
 }
 
 class _TournamentsPageState extends CustomState<TournamentsPage> {
