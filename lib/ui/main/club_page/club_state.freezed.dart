@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'club_state.dart';
 
@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ClubState {
   dynamic get isLoading => throw _privateConstructorUsedError;
   ClubModel? get model => throw _privateConstructorUsedError;
+  dynamic get isOwner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClubStateCopyWith<ClubState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $ClubStateCopyWith<$Res> {
   factory $ClubStateCopyWith(ClubState value, $Res Function(ClubState) then) =
       _$ClubStateCopyWithImpl<$Res, ClubState>;
   @useResult
-  $Res call({dynamic isLoading, ClubModel? model});
+  $Res call({dynamic isLoading, ClubModel? model, dynamic isOwner});
 
   $ClubModelCopyWith<$Res>? get model;
 }
@@ -47,11 +48,12 @@ class _$ClubStateCopyWithImpl<$Res, $Val extends ClubState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
+    Object? isLoading = null,
     Object? model = freezed,
+    Object? isOwner = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: freezed == isLoading
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -59,6 +61,10 @@ class _$ClubStateCopyWithImpl<$Res, $Val extends ClubState>
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as ClubModel?,
+      isOwner: null == isOwner
+          ? _value.isOwner
+          : isOwner // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 
@@ -82,7 +88,7 @@ abstract class _$$_ClubStateCopyWith<$Res> implements $ClubStateCopyWith<$Res> {
       __$$_ClubStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic isLoading, ClubModel? model});
+  $Res call({dynamic isLoading, ClubModel? model, dynamic isOwner});
 
   @override
   $ClubModelCopyWith<$Res>? get model;
@@ -99,15 +105,17 @@ class __$$_ClubStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
+    Object? isLoading = null,
     Object? model = freezed,
+    Object? isOwner = null,
   }) {
     return _then(_$_ClubState(
-      isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isLoading: null == isLoading ? _value.isLoading : isLoading,
       model: freezed == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as ClubModel?,
+      isOwner: null == isOwner ? _value.isOwner : isOwner,
     ));
   }
 }
@@ -115,17 +123,20 @@ class __$$_ClubStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ClubState implements _ClubState {
-  const _$_ClubState({this.isLoading = true, this.model});
+  const _$_ClubState({this.isLoading = true, this.model, this.isOwner = false});
 
   @override
   @JsonKey()
   final dynamic isLoading;
   @override
   final ClubModel? model;
+  @override
+  @JsonKey()
+  final dynamic isOwner;
 
   @override
   String toString() {
-    return 'ClubState(isLoading: $isLoading, model: $model)';
+    return 'ClubState(isLoading: $isLoading, model: $model, isOwner: $isOwner)';
   }
 
   @override
@@ -134,12 +145,16 @@ class _$_ClubState implements _ClubState {
         (other.runtimeType == runtimeType &&
             other is _$_ClubState &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            (identical(other.model, model) || other.model == model));
+            (identical(other.model, model) || other.model == model) &&
+            const DeepCollectionEquality().equals(other.isOwner, isOwner));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(isLoading), model);
+      runtimeType,
+      const DeepCollectionEquality().hash(isLoading),
+      model,
+      const DeepCollectionEquality().hash(isOwner));
 
   @JsonKey(ignore: true)
   @override
@@ -149,13 +164,17 @@ class _$_ClubState implements _ClubState {
 }
 
 abstract class _ClubState implements ClubState {
-  const factory _ClubState({final dynamic isLoading, final ClubModel? model}) =
-      _$_ClubState;
+  const factory _ClubState(
+      {final dynamic isLoading,
+      final ClubModel? model,
+      final dynamic isOwner}) = _$_ClubState;
 
   @override
   dynamic get isLoading;
   @override
   ClubModel? get model;
+  @override
+  dynamic get isOwner;
   @override
   @JsonKey(ignore: true)
   _$$_ClubStateCopyWith<_$_ClubState> get copyWith =>

@@ -1,11 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
+import 'package:seating_generator_web/domain/models/login_model.dart';
+import 'package:seating_generator_web/domain/models/sign_up_model.dart';
+import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
 
 import '../get_it_register.dart';
+import '../repositories/auth_repository_mock.mocks.dart';
 import '../routers/login_router_mock.dart';
 
 void main() {
@@ -18,6 +23,12 @@ void main() {
 
     test('test login', () async {
       final bloc = getIt<LoginBloc>();
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.login(any, any)).thenAnswer(
+        (_) => Future.value(
+          const LoginModel.success(),
+        ),
+      );
       bloc.add(
         const LoginEvent.loginButtonTapped(
           email: "strelas",
@@ -37,6 +48,12 @@ void main() {
 
     test('test login with error', () async {
       final bloc = getIt<LoginBloc>();
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.login(any, any)).thenAnswer(
+        (_) => Future.value(
+          const LoginModel.error(),
+        ),
+      );
 
       bloc.add(
         const LoginEvent.loginButtonTapped(
@@ -72,6 +89,12 @@ void main() {
     test('remember me test', () async {
       final bloc = getIt<LoginBloc>();
       final storage = getIt<CredentialStorage>();
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.login(any, any)).thenAnswer(
+        (_) => Future.value(
+          const LoginModel.success(),
+        ),
+      );
       await storage.cleanup();
       bloc.add(
         const LoginEvent.loginButtonTapped(

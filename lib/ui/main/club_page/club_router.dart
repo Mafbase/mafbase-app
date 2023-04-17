@@ -4,6 +4,8 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 
 abstract class ClubRouter {
   void openRating({required int clubId});
+
+  String getLocation();
 }
 
 class ClubRouterImpl implements ClubRouter {
@@ -19,5 +21,10 @@ class ClubRouterImpl implements ClubRouter {
         context: context,
       ),
     );
+  }
+
+  @override
+  String getLocation() {
+    return GoRouterState.of(context).location;
   }
 }

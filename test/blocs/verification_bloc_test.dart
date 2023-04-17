@@ -1,9 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_events.dart';
 
 import '../get_it_register.dart';
+import '../repositories/auth_repository_mock.mocks.dart';
 import '../routers/verification_router_mock.dart';
 import '../util_test.dart';
 
@@ -19,6 +22,10 @@ void main() {
 
     test('Test verification success', () async {
       final bloc = getIt<VerificationBloc>(param2: 1);
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.verificate(any, any)).thenAnswer(
+        (_) => Future.value(true),
+      );
       final router = bloc.router as VerificationPageRouterMock;
       final loginPageOpened = router.mainPageOpened.first
           .then((value) => true)
@@ -30,7 +37,10 @@ void main() {
 
     test('Test verification incorrect', () async {
       final bloc = getIt<VerificationBloc>(param2: 1);
-
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.verificate(any, any)).thenAnswer(
+        (_) => Future.value(false),
+      );
       bloc.add(const VerificationEvents.submit(token: '22'));
 
       expectState((data) => !data.isLoading && data.hasError, bloc.stream);

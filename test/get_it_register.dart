@@ -13,9 +13,8 @@ import 'package:seating_generator_web/ui/login/verification_body/verification_bl
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
-
-import 'repositories/auth_repository_mock.dart';
-import 'repositories/cannot_meet_tournament_repository_mock.dart';
+import 'repositories/auth_repository_mock.mocks.dart';
+import 'repositories/cannot_meet_tournament_repository_mock.mocks.dart';
 import 'repositories/club_repository_mock.dart';
 import 'repositories/players_repository_mock.dart';
 import 'repositories/tournament_edit_repository_mock.dart';
@@ -31,7 +30,7 @@ import 'storages/credential_storage_mock.dart';
 
 void registerGetItTest() {
   getIt
-    ..registerLazySingleton<AuthRepository>(() => AuthRepositoryMock())
+    ..registerLazySingleton<AuthRepository>(() => MockAuthRepository())
     ..registerFactory<LoginPageRouter>(() => LoginPageRouterMock())
     ..registerLazySingleton<ClubRepository>(() => ClubRepositoryMock())
     ..registerFactory<SignUpPageRouter>(() => SignUpPageRouterMock())
@@ -53,7 +52,7 @@ void registerGetItTest() {
       () => SeatingInsertingRouterMock(),
     )
     ..registerLazySingleton<CannotMeetTournamentRepository>(
-      () => CannotMeetTournamentRepositoryMock(),
+      () => MockCannotMeetTournamentRepository(),
     )
     ..registerLazySingleton<PlayersRepository>(
       () => PlayersRepositoryMock(),

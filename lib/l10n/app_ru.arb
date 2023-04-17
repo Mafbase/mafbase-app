@@ -161,5 +161,25 @@
   "description": "Описание",
   "@description": {},
   "openRating": "Открыть рейтинг клуба",
-  "@openRating": {}
+  "@openRating": {},
+  "billClubButtonText" : "Оплатить {amount}₽",
+  "@billClubButtonText": {
+    "placeholders" : {
+        "amount": {
+            "type": "int",
+            "example": "100"
+        }
+    }
+  },
+  "billClubButtonDisabledText": "Оплатить",
+  "@billClubButtonDisabledText": {},
+  "billClubDialogOption": "{days} дней",
+  "@billClubDialogOption": {
+    "placeholders" : {
+        "days": {
+            "type": "int",
+            "example": "30"
+        }
+    }
+  }
 }

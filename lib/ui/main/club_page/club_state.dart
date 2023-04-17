@@ -8,5 +8,6 @@ class ClubState with _$ClubState {
   const factory ClubState({
     @Default(true) isLoading,
     ClubModel? model,
+    @Default(false) isOwner,
   }) = _ClubState;
 }

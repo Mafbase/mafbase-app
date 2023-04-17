@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'club_event.dart';
 
@@ -20,18 +20,21 @@ mixin _$ClubEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() pageOpened,
     required TResult Function() openRating,
+    required TResult Function(int days) billClub,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? pageOpened,
     TResult? Function()? openRating,
+    TResult? Function(int days)? billClub,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pageOpened,
     TResult Function()? openRating,
+    TResult Function(int days)? billClub,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ClubEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(ClubEventPageOpened value) pageOpened,
     required TResult Function(ClubEventOpenRating value) openRating,
+    required TResult Function(ClubEventBillClub value) billClub,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ClubEventPageOpened value)? pageOpened,
     TResult? Function(ClubEventOpenRating value)? openRating,
+    TResult? Function(ClubEventBillClub value)? billClub,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ClubEventPageOpened value)? pageOpened,
     TResult Function(ClubEventOpenRating value)? openRating,
+    TResult Function(ClubEventBillClub value)? billClub,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +119,7 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
   TResult when<TResult extends Object?>({
     required TResult Function() pageOpened,
     required TResult Function() openRating,
+    required TResult Function(int days) billClub,
   }) {
     return pageOpened();
   }
@@ -122,6 +129,7 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? pageOpened,
     TResult? Function()? openRating,
+    TResult? Function(int days)? billClub,
   }) {
     return pageOpened?.call();
   }
@@ -131,6 +139,7 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pageOpened,
     TResult Function()? openRating,
+    TResult Function(int days)? billClub,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -144,6 +153,7 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
   TResult map<TResult extends Object?>({
     required TResult Function(ClubEventPageOpened value) pageOpened,
     required TResult Function(ClubEventOpenRating value) openRating,
+    required TResult Function(ClubEventBillClub value) billClub,
   }) {
     return pageOpened(this);
   }
@@ -153,6 +163,7 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ClubEventPageOpened value)? pageOpened,
     TResult? Function(ClubEventOpenRating value)? openRating,
+    TResult? Function(ClubEventBillClub value)? billClub,
   }) {
     return pageOpened?.call(this);
   }
@@ -162,6 +173,7 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ClubEventPageOpened value)? pageOpened,
     TResult Function(ClubEventOpenRating value)? openRating,
+    TResult Function(ClubEventBillClub value)? billClub,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -215,6 +227,7 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
   TResult when<TResult extends Object?>({
     required TResult Function() pageOpened,
     required TResult Function() openRating,
+    required TResult Function(int days) billClub,
   }) {
     return openRating();
   }
@@ -224,6 +237,7 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? pageOpened,
     TResult? Function()? openRating,
+    TResult? Function(int days)? billClub,
   }) {
     return openRating?.call();
   }
@@ -233,6 +247,7 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pageOpened,
     TResult Function()? openRating,
+    TResult Function(int days)? billClub,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -246,6 +261,7 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
   TResult map<TResult extends Object?>({
     required TResult Function(ClubEventPageOpened value) pageOpened,
     required TResult Function(ClubEventOpenRating value) openRating,
+    required TResult Function(ClubEventBillClub value) billClub,
   }) {
     return openRating(this);
   }
@@ -255,6 +271,7 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ClubEventPageOpened value)? pageOpened,
     TResult? Function(ClubEventOpenRating value)? openRating,
+    TResult? Function(ClubEventBillClub value)? billClub,
   }) {
     return openRating?.call(this);
   }
@@ -264,6 +281,7 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ClubEventPageOpened value)? pageOpened,
     TResult Function(ClubEventOpenRating value)? openRating,
+    TResult Function(ClubEventBillClub value)? billClub,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -275,4 +293,144 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
 
 abstract class ClubEventOpenRating implements ClubEvent {
   const factory ClubEventOpenRating() = _$ClubEventOpenRating;
+}
+
+/// @nodoc
+abstract class _$$ClubEventBillClubCopyWith<$Res> {
+  factory _$$ClubEventBillClubCopyWith(
+          _$ClubEventBillClub value, $Res Function(_$ClubEventBillClub) then) =
+      __$$ClubEventBillClubCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int days});
+}
+
+/// @nodoc
+class __$$ClubEventBillClubCopyWithImpl<$Res>
+    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventBillClub>
+    implements _$$ClubEventBillClubCopyWith<$Res> {
+  __$$ClubEventBillClubCopyWithImpl(
+      _$ClubEventBillClub _value, $Res Function(_$ClubEventBillClub) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? days = null,
+  }) {
+    return _then(_$ClubEventBillClub(
+      days: null == days
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ClubEventBillClub implements ClubEventBillClub {
+  const _$ClubEventBillClub({required this.days});
+
+  @override
+  final int days;
+
+  @override
+  String toString() {
+    return 'ClubEvent.billClub(days: $days)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClubEventBillClub &&
+            (identical(other.days, days) || other.days == days));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, days);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClubEventBillClubCopyWith<_$ClubEventBillClub> get copyWith =>
+      __$$ClubEventBillClubCopyWithImpl<_$ClubEventBillClub>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pageOpened,
+    required TResult Function() openRating,
+    required TResult Function(int days) billClub,
+  }) {
+    return billClub(days);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pageOpened,
+    TResult? Function()? openRating,
+    TResult? Function(int days)? billClub,
+  }) {
+    return billClub?.call(days);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pageOpened,
+    TResult Function()? openRating,
+    TResult Function(int days)? billClub,
+    required TResult orElse(),
+  }) {
+    if (billClub != null) {
+      return billClub(days);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ClubEventPageOpened value) pageOpened,
+    required TResult Function(ClubEventOpenRating value) openRating,
+    required TResult Function(ClubEventBillClub value) billClub,
+  }) {
+    return billClub(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ClubEventPageOpened value)? pageOpened,
+    TResult? Function(ClubEventOpenRating value)? openRating,
+    TResult? Function(ClubEventBillClub value)? billClub,
+  }) {
+    return billClub?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ClubEventPageOpened value)? pageOpened,
+    TResult Function(ClubEventOpenRating value)? openRating,
+    TResult Function(ClubEventBillClub value)? billClub,
+    required TResult orElse(),
+  }) {
+    if (billClub != null) {
+      return billClub(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClubEventBillClub implements ClubEvent {
+  const factory ClubEventBillClub({required final int days}) =
+      _$ClubEventBillClub;
+
+  int get days;
+  @JsonKey(ignore: true)
+  _$$ClubEventBillClubCopyWith<_$ClubEventBillClub> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -5,4 +5,10 @@ abstract class PurchaseRepository {
     required bool billedTranslation,
     required String redirectPath,
   });
+
+  Future<String> billClub({
+    required int clubId,
+    required int days,
+    required String redirectPath,
+  });
 }

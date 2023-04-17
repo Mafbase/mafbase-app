@@ -7,6 +7,7 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.d
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_bill_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -60,6 +61,7 @@ class _ClubPageState extends CustomState<ClubPage> {
   @override
   void initState() {
     context.read<ClubBloc>().add(const ClubEvent.pageOpened());
+
     super.initState();
   }
 
@@ -67,12 +69,37 @@ class _ClubPageState extends CustomState<ClubPage> {
   Widget buildDesktop(BuildContext context) {
     return BlocBuilder<ClubBloc, ClubState>(
       builder: (context, state) {
-        return Row(
+        return Stack(
           children: [
-            if (state.model != null)
-              Expanded(
-                child: ClubInfoWidget(
-                  clubModel: state.model!,
+            Row(
+              children: [
+                if (state.model != null)
+                  Expanded(
+                    child: ClubInfoWidget(
+                      clubModel: state.model!,
+                    ),
+                  ),
+              ],
+            ),
+            if (state.isOwner)
+              Positioned(
+                bottom: 20,
+                right: 20,
+                child: FloatingActionButton.large(
+                  backgroundColor: context.theme.redColor,
+                  onPressed: () {
+                    final bloc = context.read<ClubBloc>();
+                    ClubBillDialog.open(context).then((option) {
+                      if (option != null) {
+                        bloc.add(
+                          ClubEvent.billClub(
+                            days: option.days,
+                          ),
+                        );
+                      }
+                    });
+                  },
+                  child: const Icon(Icons.monetization_on_outlined),
                 ),
               ),
           ],

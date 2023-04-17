@@ -14,7 +14,9 @@ import 'package:seating_generator_web/domain/interactors/add_club_game_interacto
 import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/bill_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/bill_tournament_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/check_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
@@ -178,9 +180,14 @@ void registerSharedGetIt() {
         getIt(),
       ),
     )
+    ..registerLazySingleton<CheckClubInteractor>(
+      () => CheckClubInteractor(getIt()),
+    )
     ..registerFactoryParam<ClubBloc, BuildContext?, ClubBlocArgs>(
       (context, args) => ClubBloc(
         getClubInteractor: getIt(),
+        billClubInteractor: getIt(),
+        checkClubInteractor: getIt(),
         router: getIt(param1: context),
         args: args,
         context: context,
@@ -276,6 +283,11 @@ void registerSharedGetIt() {
     )
     ..registerLazySingleton<AddPhotoInteractor>(
       () => AddPhotoInteractor(getIt()),
+    )
+    ..registerLazySingleton<BillClubInteractor>(
+      () => BillClubInteractor(
+        getIt(),
+      ),
     )
     ..registerFactoryParam<VerificationBloc, BuildContext?, int>(
       (context, id) {

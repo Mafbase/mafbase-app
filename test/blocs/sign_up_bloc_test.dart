@@ -1,9 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/domain/models/sign_up_model.dart';
+import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 
 import '../get_it_register.dart';
+import '../repositories/auth_repository_mock.mocks.dart';
 import '../routers/sign_up_router_mock.dart';
 import '../util_test.dart';
 
@@ -32,6 +36,15 @@ void main() {
 
     test('Sign up tapped success test', () async {
       final bloc = getIt<SignUpBloc>();
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.signUp(any, any)).thenAnswer(
+        (_) => Future.value(
+          const SignUpModel(
+            error: ErrorEnum.needVerification,
+            id: 123,
+          ),
+        ),
+      );
       final router = bloc.router as SignUpPageRouterMock;
       const event = SignUpEvents.signUpButtonTapped(
         email: "strelas123",
@@ -46,6 +59,12 @@ void main() {
 
     test('Sign up tapped email exist test', () async {
       final bloc = getIt<SignUpBloc>();
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.signUp(any, any)).thenAnswer(
+        (_) => Future.value(
+          const SignUpModel(error: ErrorEnum.emailExist),
+        ),
+      );
       const event = SignUpEvents.signUpButtonTapped(
         email: "strelas",
         password: "1234567",
@@ -59,6 +78,12 @@ void main() {
 
     test('Sign up tapped weak password test', () async {
       final bloc = getIt<SignUpBloc>();
+      final authRepository = getIt<AuthRepository>() as MockAuthRepository;
+      when(authRepository.signUp(any, any)).thenAnswer(
+        (_) => Future.value(
+          const SignUpModel(error: ErrorEnum.weakPassword),
+        ),
+      );
       const event = SignUpEvents.signUpButtonTapped(
         email: "strelas123",
         password: "1234",
