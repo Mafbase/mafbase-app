@@ -11,6 +11,7 @@ import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/main/widgets/create_tournament_dialog.dart';
 
 class MainBloc extends CustomBloc<MainEvent, MainState> {
@@ -152,7 +153,7 @@ class MainPageRouterImpl implements MainPageRouter {
         context.go(ClubsPage.createLocation(context));
         break;
       case MainPageTab.tournaments:
-        context.go('/'); // TODO: replace
+        context.go(TournamentsPage.createLocation(context));
         break;
     }
   }
