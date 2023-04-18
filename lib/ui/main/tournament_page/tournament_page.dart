@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
-import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
@@ -13,7 +13,6 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_st
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/players_list_body.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_billing_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_menu.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_settings_dialog.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/utils.dart';

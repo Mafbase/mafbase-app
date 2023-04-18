@@ -3,7 +3,6 @@ import 'package:mockito/mockito.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
-import 'package:seating_generator_web/domain/models/sign_up_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';

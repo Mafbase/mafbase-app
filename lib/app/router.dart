@@ -1,16 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
-import 'package:seating_generator_web/ui/main/widgets/create_tournament_dialog.dart';
 
 class MainPageRouterMock implements MainPageRouter {
   final _openedTabController = StreamController<MainPageTab?>.broadcast();

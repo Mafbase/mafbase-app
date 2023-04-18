@@ -3,16 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
-import 'package:seating_generator_web/ui/main/widgets/create_tournament_dialog.dart';
 
 class MainBloc extends CustomBloc<MainEvent, MainState> {
   @visibleForTesting

@@ -37,8 +37,9 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
   }
 
   @override
-  Future<List<List<GameResultModel>>> getResultModels(
-      {required int tournamentId}) {
+  Future<List<List<GameResultModel>>> getResultModels({
+    required int tournamentId,
+  }) {
     return Future.value([]);
   }
 

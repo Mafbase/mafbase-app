@@ -105,7 +105,7 @@ class SingleClubRow extends StatelessWidget {
             if (model.city != null)
               Expanded(
                 child: Text(
-                  "г. ${model.city}" ?? "",
+                  "г. ${model.city}",
                   style: context.theme.defaultTextStyle,
                 ),
               )

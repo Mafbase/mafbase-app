@@ -2,12 +2,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
-import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
@@ -139,47 +138,45 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     const SizedBox(
                       height: 35,
                     ),
-                    Container(
-                      child: Wrap(
-                        alignment: WrapAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Transform.translate(
-                                offset: const Offset(-3, 0),
-                                child: Checkbox(
-                                  splashRadius: 0,
-                                  value: remember,
-                                  checkColor: MyTheme.of(context).borderColor,
-                                  fillColor: MaterialStatePropertyAll(
-                                    MyTheme.of(context).borderColor,
-                                  ),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      remember = value ?? remember;
-                                    });
-                                  },
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Transform.translate(
+                              offset: const Offset(-3, 0),
+                              child: Checkbox(
+                                splashRadius: 0,
+                                value: remember,
+                                checkColor: MyTheme.of(context).borderColor,
+                                fillColor: MaterialStatePropertyAll(
+                                  MyTheme.of(context).borderColor,
                                 ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    remember = value ?? remember;
+                                  });
+                                },
                               ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.loginRememberMe,
-                                style: MyTheme.of(context).defaultTextStyle,
-                              ),
-                            ],
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              AppLocalizations.of(context)!.loginForgotPassword,
+                            ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.loginRememberMe,
                               style: MyTheme.of(context).defaultTextStyle,
                             ),
+                          ],
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            AppLocalizations.of(context)!.loginForgotPassword,
+                            style: MyTheme.of(context).defaultTextStyle,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     const SizedBox(
                       height: 32,

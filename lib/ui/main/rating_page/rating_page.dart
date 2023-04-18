@@ -18,17 +18,17 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 class RatingPage extends StatefulWidget {
   final int clubId;
   final DateTimeRange range;
-  final RatingTableStyle? style;
-  final RatingSort? sort;
-  final int? gameFilter;
+  final RatingTableStyle style;
+  final RatingSort sort;
+  final int gameFilter;
 
   const RatingPage({
     Key? key,
     required this.clubId,
     required this.range,
-    this.style,
-    this.sort,
-    this.gameFilter,
+    this.style = RatingTableStyle.full,
+    this.sort = RatingSort.score,
+    this.gameFilter = 0,
   }) : super(key: key);
 
   @override
@@ -71,11 +71,13 @@ class RatingPage extends StatefulWidget {
           DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
       final style = RatingTableStyle.values.firstWhereOrNull(
-        (element) => state.queryParams["style"] == element.name,
-      );
+            (element) => state.queryParams["style"] == element.name,
+          ) ??
+          RatingTableStyle.full;
       final sort = RatingSort.values.firstWhereOrNull(
-        (element) => state.queryParams["sort"] == element.name,
-      );
+            (element) => state.queryParams["sort"] == element.name,
+          ) ??
+          RatingSort.score;
       final gameFilter =
           int.tryParse(state.queryParams["game-filter"] ?? "") ?? 0;
       return BlocProvider<RatingBloc>(
@@ -163,22 +165,28 @@ class _RatingPageState extends CustomState<RatingPage> {
                 CustomButton(
                   onTap: onChangeRangeTap,
                   text:
-                  "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
+                      "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
                 ),
               ],
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: styleSwitcher(),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    const SizedBox(width: 16,),
+                    const SizedBox(
+                      width: 16,
+                    ),
                     RatingTable(
                       isMobile: true,
                       style: widget.style,
@@ -187,25 +195,26 @@ class _RatingPageState extends CustomState<RatingPage> {
                       sort: widget.sort,
                       gameFilter: widget.gameFilter,
                       openGame: (gameId) => context.read<RatingBloc>().add(
-                        RatingEvent.gameSelected(
-                          gameId: gameId,
-                          clubId: widget.clubId,
-                        ),
-                      ),
+                            RatingEvent.gameSelected(
+                              gameId: gameId,
+                              clubId: widget.clubId,
+                            ),
+                          ),
                       changeSort: (RatingSort sort) {
                         context.read<RatingBloc>().add(
-                          RatingEvent.rangeChanged(
-                            range: widget.range,
-                            clubId: widget.clubId,
-                            style:
-                            widget.style ?? RatingTableStyle.full,
-                            sort: sort,
-                            gameFilter: widget.gameFilter ?? 0,
-                          ),
-                        );
+                              RatingEvent.rangeChanged(
+                                range: widget.range,
+                                clubId: widget.clubId,
+                                style: widget.style,
+                                sort: sort,
+                                gameFilter: widget.gameFilter,
+                              ),
+                            );
                       },
                     ),
-                    const SizedBox(width: 16,),
+                    const SizedBox(
+                      width: 16,
+                    ),
                   ],
                 ),
               ),
@@ -290,10 +299,9 @@ class _RatingPageState extends CustomState<RatingPage> {
                                   RatingEvent.rangeChanged(
                                     range: widget.range,
                                     clubId: widget.clubId,
-                                    style:
-                                        widget.style ?? RatingTableStyle.full,
+                                    style: widget.style,
                                     sort: sort,
-                                    gameFilter: widget.gameFilter ?? 0,
+                                    gameFilter: widget.gameFilter,
                                   ),
                                 );
                           },
@@ -325,9 +333,9 @@ class _RatingPageState extends CustomState<RatingPage> {
         RatingEvent.rangeChanged(
           range: range,
           clubId: widget.clubId,
-          style: widget.style ?? RatingTableStyle.full,
-          sort: widget.sort ?? RatingSort.score,
-          gameFilter: widget.gameFilter ?? 0,
+          style: widget.style,
+          sort: widget.sort,
+          gameFilter: widget.gameFilter,
         ),
       );
     }
@@ -349,16 +357,14 @@ class _RatingPageState extends CustomState<RatingPage> {
           IgnorePointer(
             ignoring: widget.style == items.first,
             child: Opacity(
-              opacity:
-              widget.style == items.first ? 0 : 1,
+              opacity: widget.style == items.first ? 0 : 1,
               child: IconButton(
                 onPressed: () {
                   _carouselController.previousPage();
                 },
                 icon: Icon(
                   Icons.keyboard_arrow_left,
-                  color:
-                  MyTheme.of(context).darkGreyColor,
+                  color: MyTheme.of(context).darkGreyColor,
                 ),
               ),
             ),
@@ -369,29 +375,25 @@ class _RatingPageState extends CustomState<RatingPage> {
               items: items
                   .map(
                     (element) => Center(
-                  child: Text(getTextFrom(element)),
-                ),
-              )
+                      child: Text(getTextFrom(element)),
+                    ),
+                  )
                   .toList(),
               options: CarouselOptions(
                 enableInfiniteScroll: false,
-                initialPage: widget.style != null
-                    ? items.indexOf(widget.style!)
-                    : 1,
+                initialPage: items.indexOf(widget.style),
                 viewportFraction: 1,
                 height: 56,
                 onPageChanged: (index, controller) {
                   context.read<RatingBloc>().add(
-                    RatingEvent.rangeChanged(
-                      range: widget.range,
-                      clubId: widget.clubId,
-                      style: items[index],
-                      sort: widget.sort ??
-                          RatingSort.score,
-                      gameFilter:
-                      widget.gameFilter ?? 0,
-                    ),
-                  );
+                        RatingEvent.rangeChanged(
+                          range: widget.range,
+                          clubId: widget.clubId,
+                          style: items[index],
+                          sort: widget.sort,
+                          gameFilter: widget.gameFilter,
+                        ),
+                      );
                 },
               ),
             ),
@@ -399,16 +401,14 @@ class _RatingPageState extends CustomState<RatingPage> {
           IgnorePointer(
             ignoring: widget.style == items.last,
             child: Opacity(
-              opacity:
-              widget.style == items.last ? 0 : 1,
+              opacity: widget.style == items.last ? 0 : 1,
               child: IconButton(
                 onPressed: () {
                   _carouselController.nextPage();
                 },
                 icon: Icon(
                   Icons.keyboard_arrow_right,
-                  color:
-                  MyTheme.of(context).darkGreyColor,
+                  color: MyTheme.of(context).darkGreyColor,
                 ),
               ),
             ),

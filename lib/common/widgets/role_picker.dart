@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 
 class RolePicker extends StatefulWidget {
@@ -83,8 +81,7 @@ class _RolePickerState extends State<RolePicker> {
           message: "Мирный житель",
           child: InkWell(
             borderRadius: BorderRadius.circular(500),
-            onTap:
-                widget.readOnly ? null : () => onChange(PlayerRole.citizen),
+            onTap: widget.readOnly ? null : () => onChange(PlayerRole.citizen),
             child: AnimatedOpacity(
               opacity: widget.playerRole == PlayerRole.citizen ? 1.0 : 0.3,
               duration: duration,

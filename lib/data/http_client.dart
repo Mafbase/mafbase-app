@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/base_request.dart';
-import 'package:seating_generator_web/data/requests/login_by_token_request.dart';
 import 'package:seating_generator_web/data/requests/login_request.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
@@ -101,7 +100,6 @@ class MyHttpClient {
 
     if (response.statusCode == HttpStatus.unauthorized) {
       if (useRecoveryToken) {
-
         final credentials = await _credentialStorage.read();
         if (credentials != null) {
           final authResponse = await LoginRequest(

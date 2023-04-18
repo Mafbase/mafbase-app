@@ -25,7 +25,6 @@ class TournamentsPage extends StatefulWidget {
   @override
   State<TournamentsPage> createState() => _TournamentsPageState();
 
-
   static const String _name = 'tournaments';
 
   static String createLocation(BuildContext context) {
@@ -38,8 +37,7 @@ class TournamentsPage extends StatefulWidget {
     routes: [
       TournamentPage.createRoute(),
     ],
-    pageBuilder: (context, state) =>
-    const NoTransitionPage(
+    pageBuilder: (context, state) => const NoTransitionPage(
       child: TournamentsPage._(),
     ),
   );
@@ -100,9 +98,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                             child: Text(
                               AppLocalizations.of(context)!
                                   .tournamentsListTitle,
-                              style: MyTheme
-                                  .of(context)
-                                  .headerTextStyle,
+                              style: MyTheme.of(context).headerTextStyle,
                             ),
                           ),
                         ),
@@ -121,10 +117,10 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                             borderRadius: BorderRadius.circular(50),
                             onTap: () {
                               context.read<MainBloc>().add(
-                                MainEvent.tournamentSelected(
-                                  tournamentId: state.tournaments[index].id,
-                                ),
-                              );
+                                    MainEvent.tournamentSelected(
+                                      tournamentId: state.tournaments[index].id,
+                                    ),
+                                  );
                             },
                             child: Container(
                               constraints: const BoxConstraints(
@@ -136,8 +132,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: MyTheme
-                                    .of(context)
+                                color: MyTheme.of(context)
                                     .greyColor
                                     .withOpacity(0.16),
                               ),
@@ -145,19 +140,16 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                                 children: [
                                   Text(
                                     DateFormat('dd-MM-yyyy').format(
-                                        state.tournaments[index].dateStart),
-                                    style: MyTheme
-                                        .of(context)
-                                        .defaultTextStyle,
+                                      state.tournaments[index].dateStart,
+                                    ),
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                   const SizedBox(
                                     width: 35,
                                   ),
                                   Text(
                                     state.tournaments[index].name,
-                                    style: MyTheme
-                                        .of(context)
-                                        .defaultTextStyle,
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                   const Spacer(),
                                   Padding(
@@ -179,9 +171,9 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                                         ),
                                         Text(
                                           getText(
-                                              state.tournaments[index].status),
-                                          style: MyTheme
-                                              .of(context)
+                                            state.tournaments[index].status,
+                                          ),
+                                          style: MyTheme.of(context)
                                               .defaultTextStyle,
                                         ),
                                       ],
