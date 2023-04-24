@@ -37,11 +37,14 @@ class MyHttpClient {
     if (useRecoveryToken) {
       debugPrint("sending request to $baseUrl$method");
     }
+    final token = await _storage.authToken;
+
     final response = await _client.get(
       method,
       options: Options(
         headers: {
-          HttpHeaders.authorizationHeader: "Bearer ${await _storage.authToken}"
+          if (token != null && token.isNotEmpty)
+            HttpHeaders.authorizationHeader: "Bearer $token"
         },
       ),
     );
@@ -85,13 +88,15 @@ class MyHttpClient {
     if (useRecoveryToken) {
       debugPrint("sending request to $baseUrl$method");
     }
+    final token = await _storage.authToken;
     final response = await _client.post(
       method,
       data: data,
       options: Options(
         headers: {
           HttpHeaders.contentLengthHeader: contentLength,
-          HttpHeaders.authorizationHeader: "Bearer ${await _storage.authToken}"
+          if (token != null && token.isNotEmpty)
+            HttpHeaders.authorizationHeader: "Bearer $token"
         },
       ),
     );
