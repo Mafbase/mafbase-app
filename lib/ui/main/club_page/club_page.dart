@@ -56,9 +56,6 @@ class ClubPage extends StatefulWidget {
 
 class _ClubPageState extends CustomState<ClubPage> {
   @override
-  bool get expanded => true;
-
-  @override
   void initState() {
     context.read<ClubBloc>().add(const ClubEvent.pageOpened());
 

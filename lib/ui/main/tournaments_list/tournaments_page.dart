@@ -45,9 +45,6 @@ class TournamentsPage extends StatefulWidget {
 
 class _TournamentsPageState extends CustomState<TournamentsPage> {
   @override
-  bool get expanded => true;
-
-  @override
   void initState() {
     super.initState();
     context.read<TournamentsBloc>().add(const TournamentsEvent.opened());

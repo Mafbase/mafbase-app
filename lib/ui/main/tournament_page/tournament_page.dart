@@ -82,9 +82,6 @@ class _TournamentPageState extends CustomState<TournamentPage>
         EffectListener<TournamentPageEffect, TournamentPageState,
             TournamentPageBloc, TournamentPage> {
   @override
-  bool get expanded => true;
-
-  @override
   void initState() {
     context
         .read<TournamentPageBloc>()

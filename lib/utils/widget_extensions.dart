@@ -4,18 +4,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 abstract class CustomState<W extends StatefulWidget> extends State<W> {
-  bool get expanded => false;
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     Widget child;
+    bool expanded = true;
     final mobile = buildMobile(context);
     final desktop = buildDesktop(context);
     if (screenWidth < 500) {
       child = mobile ?? desktop;
+      if (mobile != null) {
+        expanded = false;
+      }
     } else {
       child = desktop;
+      expanded = false;
     }
 
     Widget resultChild = child;

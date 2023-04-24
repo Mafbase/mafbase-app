@@ -46,9 +46,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends CustomState<LoginPage> {
   @override
-  bool get expanded => true;
-
-  @override
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,

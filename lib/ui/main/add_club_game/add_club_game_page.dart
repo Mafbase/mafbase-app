@@ -108,8 +108,6 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     with
         EffectListener<AddClubGameEffect, AddClubGameState, AddClubGameBloc,
             AddClubGamePage> {
-  @override
-  bool get expanded => true;
   final controllers = List.generate(10, (index) => TextEditingController());
   final addScoreControllers = List.generate(
     10,
@@ -245,11 +243,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                               role: roles[i],
                               onNewPlayer: ({String? initValue}) async {
                                 context.read<AddClubGameBloc>().add(
-                                  AddClubGameEvent.onNewPlayer(
-                                    nickname: initValue ?? "",
-                                    index: i,
-                                  ),
-                                );
+                                      AddClubGameEvent.onNewPlayer(
+                                        nickname: initValue ?? "",
+                                        index: i,
+                                      ),
+                                    );
                               },
                             ),
                           ),
@@ -275,19 +273,18 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                 hint: "Судья",
                                 onNewPlayer: ({String? initValue}) async {
                                   context.read<AddClubGameBloc>().add(
-                                    AddClubGameEvent.onNewPlayer(
-                                      nickname: initValue ?? "",
-                                      index: 10,
-                                    ),
-                                  );
+                                        AddClubGameEvent.onNewPlayer(
+                                          nickname: initValue ?? "",
+                                          index: 10,
+                                        ),
+                                      );
                                 },
                               ),
                               Row(
                                 children: [
                                   Text(
                                     "Первый отстрел:",
-                                    style:
-                                    MyTheme.of(context).defaultTextStyle,
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                   const SizedBox(
                                     width: 8,
@@ -295,28 +292,28 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   StatefulBuilder(
                                     builder: (context, setState) =>
                                         CustomDropdown<int>(
-                                          readOnly: widget.readOnly,
-                                          initValue: firstDie,
-                                          items: List.generate(
-                                            11,
-                                                (index) {
-                                              return index - 1;
+                                      readOnly: widget.readOnly,
+                                      initValue: firstDie,
+                                      items: List.generate(
+                                        11,
+                                        (index) {
+                                          return index - 1;
+                                        },
+                                      ),
+                                      mapToString: (index) => index == -1
+                                          ? "Промах"
+                                          : ((index ?? 0) + 1).toString(),
+                                      onChanged: widget.readOnly
+                                          ? null
+                                          : (value) {
+                                              setState(() {
+                                                firstDie = value ?? -1;
+                                                if (firstDie == -1) {
+                                                  bestMove = BestMove.miss;
+                                                }
+                                              });
                                             },
-                                          ),
-                                          mapToString: (index) => index == -1
-                                              ? "Промах"
-                                              : ((index ?? 0) + 1).toString(),
-                                          onChanged: widget.readOnly
-                                              ? null
-                                              : (value) {
-                                            setState(() {
-                                              firstDie = value ?? -1;
-                                              if (firstDie == -1) {
-                                                bestMove = BestMove.miss;
-                                              }
-                                            });
-                                          },
-                                        ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -325,8 +322,8 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   children: [
                                     Text(
                                       "Лучший ход:",
-                                      style: MyTheme.of(context)
-                                          .defaultTextStyle,
+                                      style:
+                                          MyTheme.of(context).defaultTextStyle,
                                     ),
                                     CustomDropdown<BestMove>(
                                       readOnly: widget.readOnly,
@@ -360,8 +357,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                 children: [
                                   Text(
                                     "Результат:",
-                                    style:
-                                    MyTheme.of(context).defaultTextStyle,
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                   const SizedBox(
                                     width: 8,
@@ -393,10 +389,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                         onChanged: widget.readOnly
                                             ? null
                                             : (value) {
-                                          setState(() {
-                                            winSelected = value;
-                                          });
-                                        },
+                                                setState(() {
+                                                  winSelected = value;
+                                                });
+                                              },
                                       );
                                     },
                                   ),
@@ -406,8 +402,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                 children: [
                                   Text(
                                     context.locale.ci,
-                                    style:
-                                    MyTheme.of(context).defaultTextStyle,
+                                    style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                   const SizedBox(
                                     width: 8,
@@ -423,7 +418,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                         },
                                         items: List.generate(
                                           state.ciSchemes.length + 1,
-                                              (index) {
+                                          (index) {
                                             if (index == 0) {
                                               return null;
                                             }
@@ -433,10 +428,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                         onChanged: widget.readOnly
                                             ? null
                                             : (value) {
-                                          setState(() {
-                                            ciSchemeModel = value;
-                                          });
-                                        },
+                                                setState(() {
+                                                  ciSchemeModel = value;
+                                                });
+                                              },
                                       );
                                     },
                                   ),
@@ -447,56 +442,55 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   onTap: widget.readOnly
                                       ? null
                                       : () {
-                                    showDatePicker(
-                                      context: context,
-                                      initialDate: date,
-                                      firstDate: DateTime(2000),
-                                      lastDate: DateTime.now(),
-                                    ).then((value) async {
-                                      if (!mounted) return null;
-                                      if (value != null) {
-                                        final timeOfDay =
-                                        await showTimePicker(
-                                          context: context,
-                                          initialTime:
-                                          TimeOfDay.fromDateTime(
-                                            date,
-                                          ),
-                                          initialEntryMode:
-                                          TimePickerEntryMode.input,
-                                          builder: (context, child) =>
-                                              MediaQuery(
-                                                data: MediaQuery.of(context)
-                                                    .copyWith(
-                                                  alwaysUse24HourFormat:
-                                                  true,
+                                          showDatePicker(
+                                            context: context,
+                                            initialDate: date,
+                                            firstDate: DateTime(2000),
+                                            lastDate: DateTime.now(),
+                                          ).then((value) async {
+                                            if (!mounted) return null;
+                                            if (value != null) {
+                                              final timeOfDay =
+                                                  await showTimePicker(
+                                                context: context,
+                                                initialTime:
+                                                    TimeOfDay.fromDateTime(
+                                                  date,
                                                 ),
-                                                child: child ?? Container(),
-                                              ),
-                                        );
-                                        if (timeOfDay != null) {
-                                          return DateTime(
-                                            value.year,
-                                            value.month,
-                                            value.day,
-                                            timeOfDay.hour,
-                                            timeOfDay.minute,
-                                          );
-                                        }
-                                      }
-                                      return null;
-                                    }).then((value) {
-                                      setState(() {
-                                        date = value ?? date;
-                                      });
-                                    });
-                                  },
+                                                initialEntryMode:
+                                                    TimePickerEntryMode.input,
+                                                builder: (context, child) =>
+                                                    MediaQuery(
+                                                  data: MediaQuery.of(context)
+                                                      .copyWith(
+                                                    alwaysUse24HourFormat: true,
+                                                  ),
+                                                  child: child ?? Container(),
+                                                ),
+                                              );
+                                              if (timeOfDay != null) {
+                                                return DateTime(
+                                                  value.year,
+                                                  value.month,
+                                                  value.day,
+                                                  timeOfDay.hour,
+                                                  timeOfDay.minute,
+                                                );
+                                              }
+                                            }
+                                            return null;
+                                          }).then((value) {
+                                            setState(() {
+                                              date = value ?? date;
+                                            });
+                                          });
+                                        },
                                   child: DefaultTextStyle(
                                     style: MyTheme.of(context)
                                         .defaultTextStyle
                                         .copyWith(
-                                      color: Theme.of(context).hintColor,
-                                    ),
+                                          color: Theme.of(context).hintColor,
+                                        ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -532,12 +526,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                         padding: const EdgeInsets.all(16.0),
                                         child: TextButton(
                                           onPressed: () {
-                                            context
-                                                .read<AddClubGameBloc>()
-                                                .add(
-                                              const AddClubGameEvent
-                                                  .newGame(),
-                                            );
+                                            context.read<AddClubGameBloc>().add(
+                                                  const AddClubGameEvent
+                                                      .newGame(),
+                                                );
                                           },
                                           child: Text(
                                             context.locale.addGame,
