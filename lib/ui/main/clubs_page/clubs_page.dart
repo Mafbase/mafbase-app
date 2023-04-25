@@ -43,7 +43,6 @@ class _ClubsPageState extends CustomState<ClubsPage> {
 
   @override
   Widget? buildMobile(BuildContext context) {
-    debugPrint("test25: im here");
     return BlocBuilder<ClubsBloc, ClubsState>(
       builder: (context, state) {
         if (state.isLoading) {

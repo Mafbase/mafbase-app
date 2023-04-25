@@ -54,7 +54,6 @@ class MyHttpClient {
     if (response.statusCode == HttpStatus.unauthorized) {
       if (useRecoveryToken) {
         final credentials = await _credentialStorage.read();
-        debugPrint("test25: $credentials");
         if (credentials != null) {
           final authResponse = await LoginRequest(
             LoginEvent(
