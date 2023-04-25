@@ -93,7 +93,7 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
   script: 
     - scp flutter-image.tar "$DEPLOY_USER"@"$DEPLOY_HOST":~/flutter-image.tar
-    - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./load_flutter.sh"
+    #- ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "docker load < flutter-image.tar;rm flutter-image.tar"
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
   cache:
