@@ -32,7 +32,7 @@ class TournamentsPage extends StatefulWidget {
   }
 
   static final GoRoute route = GoRoute(
-    path: 'tournament',
+    path: '/tournament',
     name: _name,
     routes: [
       TournamentPage.createRoute(),

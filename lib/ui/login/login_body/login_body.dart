@@ -12,6 +12,9 @@ import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
+import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
+import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class LoginPageBody extends StatefulWidget {
@@ -30,8 +33,12 @@ class LoginPageBody extends StatefulWidget {
       );
 
   static final GoRoute route = GoRoute(
-    path: 'login',
+    path: '/auth',
     name: 'login',
+    routes: [
+      SignUpPageBody.route,
+      VerificationPageBody.route,
+    ],
     pageBuilder: (context, state) => FadeTransitionPage(
       child: BlocProvider(
         create: (context) => getIt.get<LoginBloc>(
@@ -65,7 +72,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        return SingleChildScrollView(
+        return WrapperLoginPage(
           child: Form(
             key: _formKey,
             child: Container(

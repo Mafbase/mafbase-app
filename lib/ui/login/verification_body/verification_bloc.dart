@@ -90,6 +90,6 @@ class VerificationPageRouterImpl implements VerificationPageRouter {
 
   @override
   void openSignUpPage() {
-    SignUpPageBody.open(context: _context);
+    _context.push(SignUpPageBody.createLocation(context: _context));
   }
 }
