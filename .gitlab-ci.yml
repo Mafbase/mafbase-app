@@ -67,7 +67,7 @@ build-job:       # This job runs in the build stage, which runs first.
   tags:
     - docker
   script:
-    - docker build --no-cache --pull --rm -f "Dockerfile" -t seating-generator-flutter:latest "."
+    - docker build --no-cache -t seating-generator-flutter:latest .
     - docker save seating-generator-flutter:latest > flutter-image.tar
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -93,7 +93,7 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
   script: 
     - scp flutter-image.tar "$DEPLOY_USER"@"$DEPLOY_HOST":~/flutter-image.tar
-    - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./load_flutter.sh"
+    - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "docker load < flutter-image.tar;rm flutter-image.tar"
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
   cache:
