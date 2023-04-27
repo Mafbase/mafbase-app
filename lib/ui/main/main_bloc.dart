@@ -179,7 +179,6 @@ class MainPageRouterImpl implements MainPageRouter {
   @override
   bool get canPop {
     try {
-      debugPrint("test255 ${GoRouter.of(context).canPop()}");
       return GoRouter.of(context).canPop();
     } catch (_) {
       return false;

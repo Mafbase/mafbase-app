@@ -44,6 +44,7 @@ class RailWrapper extends StatefulWidget {
 }
 
 class _RailWrapperState extends CustomState<RailWrapper> {
+  double railWidth = 100;
   int selectedIndex(MainState state) =>
       state.selectedTab == MainPageTab.tournaments ? 0 : 1;
 
@@ -76,14 +77,14 @@ class _RailWrapperState extends CustomState<RailWrapper> {
           bottomNavigationBar: NavigationBar(
             onDestinationSelected: onDestinationSelected,
             selectedIndex: selectedIndex(state),
-            destinations: const [
+            destinations: [
               NavigationDestination(
-                icon: Icon(Icons.table_chart_outlined),
-                label: "Турниры",
+                icon: const Icon(Icons.table_chart_outlined),
+                label: context.locale.tournamentsListTitle,
               ),
               NavigationDestination(
-                icon: Icon(Icons.people_alt_outlined),
-                label: "Клубы",
+                icon: const Icon(Icons.people_alt_outlined),
+                label: context.locale.clubsHeader,
               ),
             ],
           ),
@@ -100,7 +101,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
           children: [
             Positioned(
               top: 0,
-              left: 100,
+              left: railWidth,
               right: 0,
               bottom: 0,
               child: widget.child ?? Container(),
@@ -127,7 +128,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
                   NavigationRailDestination(
                     icon: const Icon(Icons.table_chart_outlined),
                     label: Text(
-                      "Турниры",
+                      context.locale.tournamentsListTitle,
                       style: const TextStyle()
                           .copyWith(color: context.theme.background1),
                     ),
@@ -135,7 +136,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
                   NavigationRailDestination(
                     icon: const Icon(Icons.people_alt_outlined),
                     label: Text(
-                      "Клубы",
+                      context.locale.clubsHeader,
                       style: const TextStyle()
                           .copyWith(color: context.theme.background1),
                     ),
