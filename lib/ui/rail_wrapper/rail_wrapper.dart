@@ -110,7 +110,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
               top: 0,
               left: 0,
               bottom: 0,
-              width: 100,
+              width: railWidth,
               child: NavigationRail(
                 useIndicator: true,
                 unselectedIconTheme: const IconThemeData(
