@@ -10,13 +10,23 @@ class CredentialSecureStorageImpl implements CredentialStorage {
 
   @override
   Future<Credentials?> read() async {
-    final login = await _storage.read(key: _loginKey);
-    final password = await _storage.read(key: _passwordKey);
-    if (login == null || password == null) {
-      return null;
-    }
+    try {
+      if (await Future.wait([
+        _storage.containsKey(key: _loginKey),
+        _storage.containsKey(key: _passwordKey)
+      ]).then((value) => value.any((element) => !element))) {
+        return null;
+      }
+      final login = await _storage.read(key: _loginKey);
+      final password = await _storage.read(key: _passwordKey);
+      if (login == null || password == null) {
+        return null;
+      }
 
-    return Credentials(login, password);
+      return Credentials(login, password);
+    } catch (_) {
+      return cleanup().then((value) => null);
+    }
   }
 
   @override
