@@ -137,15 +137,15 @@
   "@invalidEmailOrPassword": {},
   "tableAndGame": "Игра {game}, Стол {table}",
   "@tableAndGame": {
-    "placeholders" : {
-        "table": {
-            "type": "int",
-            "example": "1"
-        },
-        "game": {
-            "type": "int",
-            "example": "1"
-        }
+    "placeholders": {
+      "table": {
+        "type": "int",
+        "example": "1"
+      },
+      "game": {
+        "type": "int",
+        "example": "1"
+      }
     }
   },
   "mafiaWon": "Победа мафии",
@@ -162,24 +162,26 @@
   "@description": {},
   "openRating": "Открыть рейтинг клуба",
   "@openRating": {},
-  "billClubButtonText" : "Оплатить {amount}₽",
+  "billClubButtonText": "Оплатить {amount}₽",
   "@billClubButtonText": {
-    "placeholders" : {
-        "amount": {
-            "type": "int",
-            "example": "100"
-        }
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "example": "100"
+      }
     }
   },
   "billClubButtonDisabledText": "Оплатить",
   "@billClubButtonDisabledText": {},
   "billClubDialogOption": "{days} дней",
   "@billClubDialogOption": {
-    "placeholders" : {
-        "days": {
-            "type": "int",
-            "example": "30"
-        }
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "30"
+      }
     }
-  }
+  },
+  "clubDescription": "Описание клуба",
+  "@clubDescription": {}
 }

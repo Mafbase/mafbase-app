@@ -20,13 +20,15 @@ class LoginPageBody extends StatefulWidget {
   @override
   State<LoginPageBody> createState() => _LoginPageBodyState();
 
-  static void open({
+  static String createLocation({
     required BuildContext context,
     String? nextPath,
   }) =>
-      context.go(
-        context.namedLocation('login'),
-        extra: nextPath,
+      context.namedLocation(
+        'login',
+        queryParams: {
+          if (nextPath != null) 'next': nextPath,
+        },
       );
 
   static final GoRoute route = GoRoute(
@@ -36,7 +38,7 @@ class LoginPageBody extends StatefulWidget {
       child: BlocProvider(
         create: (context) => getIt.get<LoginBloc>(
           param1: context,
-          param2: state.extra,
+          param2: state.queryParams['next'],
         ),
         child: const LoginPageBody(),
       ),

@@ -83,7 +83,7 @@ class SignUpPageRouterImpl implements SignUpPageRouter {
 
   @override
   void openLoginPage() {
-    LoginPageBody.open(context: _context);
+    GoRouter.of(_context).go(LoginPageBody.createLocation(context: _context));
   }
 
   @override

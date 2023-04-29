@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/main.dart';
 
 void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() => registerGetIt(isIntegrationTest: true));
   testWidgets('clubs page flow', (tester) async {
     await getIt<CredentialStorage>().save(
@@ -16,7 +18,7 @@ void main() {
       ),
     );
     await tester.pumpWidget(
-      const App(),
+      const MafbaseApp(),
     );
     await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
@@ -42,7 +44,7 @@ void main() {
       ),
     );
     await tester.pumpWidget(
-      const App(),
+      const MafbaseApp(),
     );
     await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
@@ -96,7 +98,7 @@ void main() {
 
 Future loginFlow(WidgetTester tester) async {
   await tester.pumpWidget(
-    const App(
+    const MafbaseApp(
       initLocation: '/login',
     ),
   );

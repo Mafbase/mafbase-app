@@ -58,8 +58,24 @@ class _ClubPageState extends CustomState<ClubPage> {
   @override
   void initState() {
     context.read<ClubBloc>().add(const ClubEvent.pageOpened());
-
     super.initState();
+  }
+
+  @override
+  Widget? buildMobile(BuildContext context) {
+    return BlocBuilder<ClubBloc, ClubState>(
+      builder: (context, state) {
+        return Stack(
+          children: [
+            if (state.model != null)
+              ClubInfoWidget(
+                clubModel: state.model!,
+                isMobile: true,
+              ),
+          ],
+        );
+      },
+    );
   }
 
   @override

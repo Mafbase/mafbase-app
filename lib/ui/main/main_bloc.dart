@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
@@ -15,11 +16,11 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
   @visibleForTesting
   final MainPageRouter router;
 
-  MainBloc(this.router, [BuildContext? context])
+  MainBloc(this.router, MainPageTab tab, [BuildContext? context])
       : super(
-          const MainState(
+          MainState(
             isLoading: false,
-            selectedTab: MainPageTab.tournaments,
+            selectedTab: tab,
             hasBackButton: false,
           ),
           context,
@@ -29,6 +30,7 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventTournamentSelected>(_onTournamentSelected);
     on<MainEventPageOpened>(_onPageOpened);
     on<MainEventTitleTapped>(_onTitleTapped);
+    on<MainEventEnterPressed>(_onEnterPressed);
     router.routesStream.listen((route) {
       if (route == null) {
         return;
@@ -52,6 +54,10 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
         );
       }
     });
+  }
+
+  _onEnterPressed(MainEventEnterPressed event, Emitter emit) {
+    router.openAuthPage();
   }
 
   _onTitleTapped(MainEventTitleTapped event, Emitter emit) {
@@ -118,6 +124,8 @@ abstract class MainPageRouter {
 
   void openDefaultPage();
 
+  void openAuthPage();
+
   bool get canPop;
 }
 
@@ -180,4 +188,14 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   bool get canPop => GoRouter.of(context).location.split("/").length > 2;
+
+  @override
+  void openAuthPage() {
+    context.go(
+      LoginPageBody.createLocation(
+        context: context,
+        nextPath: GoRouter.of(context).location,
+      ),
+    );
+  }
 }

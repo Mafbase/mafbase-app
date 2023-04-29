@@ -80,7 +80,7 @@ class VerificationPageRouterImpl implements VerificationPageRouter {
 
   @override
   void openLoginPage() {
-    LoginPageBody.open(context: _context);
+    _context.go(LoginPageBody.createLocation(context: _context));
   }
 
   @override

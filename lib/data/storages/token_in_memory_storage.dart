@@ -11,10 +11,9 @@ class TokenInMemoryStorage implements TokenStorage {
   @override
   Future onTokensUpdated(String authToken, String recoveryToken) async {
     _authToken = authToken;
-    recoveryToken = recoveryToken;
+    _recoveryToken = recoveryToken;
   }
 
   @override
   FutureOr<String?> get recoveryToken => _recoveryToken;
-
 }

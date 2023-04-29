@@ -174,7 +174,14 @@ class _RatingPageState extends CustomState<RatingPage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: styleSwitcher(),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  styleSwitcher(),
+                  const SizedBox(width: 8),
+                  downloadRatingButton(),
+                ],
+              ),
             ),
             const SizedBox(
               height: 16,
@@ -262,19 +269,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                             styleSwitcher(),
                           ],
                         ),
-                        IconButton(
-                          onPressed: () {
-                            context.read<RatingBloc>().add(
-                                  RatingEvent.downloadRating(
-                                    range: widget.range,
-                                    clubId: widget.clubId,
-                                  ),
-                                );
-                          },
-                          icon: const Icon(
-                            Icons.download,
-                          ),
-                        ),
+                        downloadRatingButton(),
                       ],
                     ),
                     const SizedBox(
@@ -318,6 +313,20 @@ class _RatingPageState extends CustomState<RatingPage> {
       },
     );
   }
+
+  Widget downloadRatingButton() => IconButton(
+        onPressed: () {
+          context.read<RatingBloc>().add(
+                RatingEvent.downloadRating(
+                  range: widget.range,
+                  clubId: widget.clubId,
+                ),
+              );
+        },
+        icon: const Icon(
+          Icons.download,
+        ),
+      );
 
   onChangeRangeTap() async {
     final bloc = context.read<RatingBloc>();

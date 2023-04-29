@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/app/router.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
@@ -78,102 +80,125 @@ class _MainPageState extends CustomState<MainPage> {
   @override
   Widget buildDesktop(BuildContext context) {
     const double railWidth = 100;
-    return ChangeNotifierProvider.value(
-      value: titleProvider,
-      child: BlocBuilder<MainBloc, MainState>(
-        builder: (context, state) {
-          debugPrint(state.toString());
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-              leading: IgnorePointer(
-                ignoring: !state.hasBackButton,
-                child: Opacity(
-                  opacity: state.hasBackButton ? 1 : 0,
-                  child: BackButton(
+    return BlocBuilder<MainBloc, MainState>(
+      builder: (context, state) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: buildAppBar(
+            context: context,
+            state: state,
+          ),
+          body: Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: railWidth,
+                right: 0,
+                bottom: 0,
+                child: widget.child ?? Container(),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                bottom: 0,
+                width: railWidth,
+                child: NavigationRail(
+                  useIndicator: true,
+                  unselectedIconTheme: const IconThemeData(
                     color: Colors.white,
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
                   ),
+                  selectedIconTheme: const IconThemeData(
+                    color: Colors.white,
+                  ),
+                  indicatorColor: context.theme.darkBlueColor,
+                  backgroundColor: context.theme.darkGreyColor,
+                  labelType: NavigationRailLabelType.all,
+                  elevation: 5,
+                  onDestinationSelected: onDestinationSelected,
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: const Icon(Icons.table_chart_outlined),
+                      label: Text(
+                        "Турниры",
+                        style: const TextStyle()
+                            .copyWith(color: context.theme.background1),
+                      ),
+                    ),
+                    NavigationRailDestination(
+                      icon: const Icon(Icons.people_alt_outlined),
+                      label: Text(
+                        "Клубы",
+                        style: const TextStyle()
+                            .copyWith(color: context.theme.background1),
+                      ),
+                    ),
+                  ],
+                  selectedIndex: selectedIndex(state),
                 ),
               ),
-              backgroundColor: context.theme.darkBlueColor,
-              title: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      context
-                          .read<MainBloc>()
-                          .add(const MainEvent.onTitleTapped());
-                    },
-                    child: Text(
-                      "mafbase",
-                      style: GoogleFonts.balooBhai2(
-                        color: Colors.white,
-                        fontSize: 48,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ),
-            body: Stack(
-              children: [
-                Positioned(
-                  top: 0,
-                  left: railWidth,
-                  right: 0,
-                  bottom: 0,
-                  child: widget.child ?? Container(),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  bottom: 0,
-                  width: railWidth,
-                  child: NavigationRail(
-                    useIndicator: true,
-                    unselectedIconTheme: const IconThemeData(
-                      color: Colors.white,
-                    ),
-                    selectedIconTheme: const IconThemeData(
-                      color: Colors.white,
-                    ),
-                    indicatorColor: context.theme.darkBlueColor,
-                    backgroundColor: context.theme.darkGreyColor,
-                    labelType: NavigationRailLabelType.all,
-                    elevation: 5,
-                    onDestinationSelected: onDestinationSelected,
-                    destinations: [
-                      NavigationRailDestination(
-                        icon: const Icon(Icons.table_chart_outlined),
-                        label: Text(
-                          "Турниры",
-                          style: const TextStyle()
-                              .copyWith(color: context.theme.background1),
-                        ),
-                      ),
-                      NavigationRailDestination(
-                        icon: const Icon(Icons.people_alt_outlined),
-                        label: Text(
-                          "Клубы",
-                          style: const TextStyle()
-                              .copyWith(color: context.theme.background1),
-                        ),
-                      ),
-                    ],
-                    selectedIndex: selectedIndex(state),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  AppBar buildAppBar({
+    required BuildContext context,
+    required MainState state,
+  }) {
+    return AppBar(
+      leading: IgnorePointer(
+        ignoring: !state.hasBackButton,
+        child: Opacity(
+          opacity: state.hasBackButton ? 1 : 0,
+          child: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
+          ),
+        ),
+      ),
+      backgroundColor: context.theme.darkBlueColor,
+      actions: getProfileAction(context.watch<AuthNotifier>().value),
+      title: Text(
+        titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
+        style: GoogleFonts.balooBhai2(
+          color: Colors.white,
+          fontSize: 48,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
+  }
+
+  List<Widget> getProfileAction(AuthNotifierModel model) {
+    return [
+      model.map(
+        unauthorized: (_) => TextButton(
+          onPressed: () {
+            context.read<MainBloc>().add(const MainEvent.onEnterPressed());
+          },
+          child: Text(
+            context.locale.loginIn,
+            style: context.theme.defaultTextStyle.copyWith(
+              color: context.theme.background1,
+            ),
+          ),
+        ),
+        loading: (_) => Container(),
+        authorized: (_) => IconButton(
+          onPressed: () {},
+          hoverColor: context.theme.background1.withOpacity(0.2),
+          icon: Icon(
+            Icons.person,
+            color: context.theme.background1,
+          ),
+        ),
+      ),
+      const SizedBox(width: 8),
+    ];
   }
 
   @override
@@ -183,28 +208,9 @@ class _MainPageState extends CustomState<MainPage> {
       child: BlocBuilder<MainBloc, MainState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              leading: IgnorePointer(
-                ignoring: !state.hasBackButton,
-                child: Opacity(
-                  opacity: state.hasBackButton ? 1 : 0,
-                  child: BackButton(
-                    color: Colors.white,
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                  ),
-                ),
-              ),
-              backgroundColor: context.theme.darkBlueColor,
-              title: Text(
-                titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
-                style: GoogleFonts.balooBhai2(
-                  color: Colors.white,
-                  fontSize: 48,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+            appBar: buildAppBar(
+              context: context,
+              state: state,
             ),
             body: widget.child,
             bottomNavigationBar: NavigationBar(

@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/app/router.dart';
@@ -36,20 +35,21 @@ void main() async {
   }
 }
 
-void _startApp() {
+void _startApp() async {
   if (!kIsWeb) {
-    Hive.init(Directory.current.path);
+    WidgetsFlutterBinding.ensureInitialized();
+    final directory = await getApplicationDocumentsDirectory();
+    await Hive.initFlutter(directory.path);
   }
-
   registerGetIt();
   SplashManager.deferSplash(WidgetsFlutterBinding.ensureInitialized());
-  runApp(const App());
+  runApp(const MafbaseApp());
 }
 
-class App extends StatelessWidget {
+class MafbaseApp extends StatelessWidget {
   final String initLocation;
 
-  const App({Key? key, this.initLocation = '/'}) : super(key: key);
+  const MafbaseApp({Key? key, this.initLocation = '/'}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +70,11 @@ class App extends StatelessWidget {
           return MaterialApp.router(
             scrollBehavior: MyCustomScrollBehavior(),
             title: 'Mafbase',
+            debugShowCheckedModeBanner: false,
             theme: ThemeData.light(useMaterial3: true).copyWith(
               scaffoldBackgroundColor: context.theme.background2,
               dividerTheme: const DividerThemeData(
-                color: Color(0x47526480),
+                color: Color(0xFFCAC4D0),
                 thickness: 1,
                 space: 0,
                 indent: 0,

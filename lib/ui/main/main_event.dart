@@ -19,4 +19,6 @@ class MainEvent with _$MainEvent {
       MainEventTournamentSelected;
 
   const factory MainEvent.onTitleTapped() = MainEventTitleTapped;
+
+  const factory MainEvent.onEnterPressed() = MainEventEnterPressed;
 }

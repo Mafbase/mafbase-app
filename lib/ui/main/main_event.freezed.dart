@@ -25,6 +25,7 @@ mixin _$MainEvent {
     required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +37,7 @@ mixin _$MainEvent {
     TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +49,7 @@ mixin _$MainEvent {
     TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +62,7 @@ mixin _$MainEvent {
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +72,7 @@ mixin _$MainEvent {
     TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +82,7 @@ mixin _$MainEvent {
     TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -193,6 +199,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
   }) {
     return switchTab(tab, disableNavigate, hasBackButton);
   }
@@ -207,6 +214,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
   }) {
     return switchTab?.call(tab, disableNavigate, hasBackButton);
   }
@@ -221,6 +229,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
     required TResult orElse(),
   }) {
     if (switchTab != null) {
@@ -239,6 +248,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
   }) {
     return switchTab(this);
   }
@@ -251,6 +261,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
   }) {
     return switchTab?.call(this);
   }
@@ -263,6 +274,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
     required TResult orElse(),
   }) {
     if (switchTab != null) {
@@ -334,6 +346,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
   }) {
     return backButtonPressed();
   }
@@ -348,6 +361,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
   }) {
     return backButtonPressed?.call();
   }
@@ -362,6 +376,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -380,6 +395,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
   }) {
     return backButtonPressed(this);
   }
@@ -392,6 +408,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
   }) {
     return backButtonPressed?.call(this);
   }
@@ -404,6 +421,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -462,6 +480,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
   }) {
     return onPageOpened();
   }
@@ -476,6 +495,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
   }) {
     return onPageOpened?.call();
   }
@@ -490,6 +510,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -508,6 +529,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
   }) {
     return onPageOpened(this);
   }
@@ -520,6 +542,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
   }) {
     return onPageOpened?.call(this);
   }
@@ -532,6 +555,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -620,6 +644,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
   }) {
     return tournamentSelected(tournamentId);
   }
@@ -634,6 +659,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
   }) {
     return tournamentSelected?.call(tournamentId);
   }
@@ -648,6 +674,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
     required TResult orElse(),
   }) {
     if (tournamentSelected != null) {
@@ -666,6 +693,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
   }) {
     return tournamentSelected(this);
   }
@@ -678,6 +706,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
   }) {
     return tournamentSelected?.call(this);
   }
@@ -690,6 +719,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
     required TResult orElse(),
   }) {
     if (tournamentSelected != null) {
@@ -754,6 +784,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
   }) {
     return onTitleTapped();
   }
@@ -768,6 +799,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
   }) {
     return onTitleTapped?.call();
   }
@@ -782,6 +814,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
     required TResult orElse(),
   }) {
     if (onTitleTapped != null) {
@@ -800,6 +833,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
   }) {
     return onTitleTapped(this);
   }
@@ -812,6 +846,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
   }) {
     return onTitleTapped?.call(this);
   }
@@ -824,6 +859,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
     required TResult orElse(),
   }) {
     if (onTitleTapped != null) {
@@ -835,4 +871,138 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
 
 abstract class MainEventTitleTapped implements MainEvent {
   const factory MainEventTitleTapped() = _$MainEventTitleTapped;
+}
+
+/// @nodoc
+abstract class _$$MainEventEnterPressedCopyWith<$Res> {
+  factory _$$MainEventEnterPressedCopyWith(_$MainEventEnterPressed value,
+          $Res Function(_$MainEventEnterPressed) then) =
+      __$$MainEventEnterPressedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MainEventEnterPressedCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res, _$MainEventEnterPressed>
+    implements _$$MainEventEnterPressedCopyWith<$Res> {
+  __$$MainEventEnterPressedCopyWithImpl(_$MainEventEnterPressed _value,
+      $Res Function(_$MainEventEnterPressed) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MainEventEnterPressed implements MainEventEnterPressed {
+  const _$MainEventEnterPressed();
+
+  @override
+  String toString() {
+    return 'MainEvent.onEnterPressed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$MainEventEnterPressed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
+        switchTab,
+    required TResult Function() backButtonPressed,
+    required TResult Function() onPageOpened,
+    required TResult Function(int tournamentId) tournamentSelected,
+    required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
+  }) {
+    return onEnterPressed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
+        switchTab,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? onPageOpened,
+    TResult? Function(int tournamentId)? tournamentSelected,
+    TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
+  }) {
+    return onEnterPressed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
+        switchTab,
+    TResult Function()? backButtonPressed,
+    TResult Function()? onPageOpened,
+    TResult Function(int tournamentId)? tournamentSelected,
+    TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
+    required TResult orElse(),
+  }) {
+    if (onEnterPressed != null) {
+      return onEnterPressed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MainEventSwitchTab value) switchTab,
+    required TResult Function(MainEventBackButtonPressed value)
+        backButtonPressed,
+    required TResult Function(MainEventPageOpened value) onPageOpened,
+    required TResult Function(MainEventTournamentSelected value)
+        tournamentSelected,
+    required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
+  }) {
+    return onEnterPressed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MainEventSwitchTab value)? switchTab,
+    TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult? Function(MainEventPageOpened value)? onPageOpened,
+    TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
+  }) {
+    return onEnterPressed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MainEventSwitchTab value)? switchTab,
+    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventPageOpened value)? onPageOpened,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
+    required TResult orElse(),
+  }) {
+    if (onEnterPressed != null) {
+      return onEnterPressed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MainEventEnterPressed implements MainEvent {
+  const factory MainEventEnterPressed() = _$MainEventEnterPressed;
 }

@@ -56,7 +56,12 @@ class AppRouter {
                 providers: [
                   BlocProvider<MainBloc>(
                     key: const Key("MainBlocProvider"),
-                    create: (context) => getIt.get<MainBloc>(param1: context),
+                    create: (context) => getIt.get<MainBloc>(
+                      param1: context,
+                      param2: state.location.startsWith('/club')
+                          ? MainPageTab.clubs
+                          : MainPageTab.tournaments,
+                    ),
                   ),
                   BlocProvider<TournamentsBloc>(
                     key: const Key("TournamentsBlocProvider"),

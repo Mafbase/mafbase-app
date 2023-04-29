@@ -49,9 +49,11 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
 
   @override
   void openLoginPage() {
-    LoginPageBody.open(
-      context: context,
-      nextPath: GoRouter.of(context).location,
+    context.go(
+      LoginPageBody.createLocation(
+        context: context,
+        nextPath: GoRouter.of(context).location,
+      ),
     );
   }
 }

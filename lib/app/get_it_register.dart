@@ -1,9 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/data/http_client.dart';
+import 'package:seating_generator_web/data/repositories/auth_repository_impl.dart';
+import 'package:seating_generator_web/data/repositories/cannot_meet_tournament_repository_impl.dart';
+import 'package:seating_generator_web/data/repositories/club_repository_impl.dart';
+import 'package:seating_generator_web/data/repositories/players_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/purchase_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/tournament_edit_repository_impl.dart';
+import 'package:seating_generator_web/data/repositories/tournaments_repository_impl.dart';
+import 'package:seating_generator_web/data/repositories/translation_repository_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_secure_storage_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/data/storages/token_in_memory_storage.dart';
@@ -43,19 +50,13 @@ import 'package:seating_generator_web/domain/interactors/update_settings_interac
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
-import 'package:seating_generator_web/data/repositories/auth_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
-import 'package:seating_generator_web/data/repositories/cannot_meet_tournament_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
-import 'package:seating_generator_web/data/repositories/club_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
-import 'package:seating_generator_web/data/repositories/players_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/purchase_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
-import 'package:seating_generator_web/data/repositories/tournaments_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
-import 'package:seating_generator_web/data/repositories/translation_repository_impl.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
@@ -301,9 +302,10 @@ void registerSharedGetIt() {
         context,
       ),
     )
-    ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
-      (context, _) => MainBloc(
+    ..registerFactoryParam<MainBloc, BuildContext?, MainPageTab?>(
+      (context, tab) => MainBloc(
         getIt.get<MainPageRouter>(param1: context),
+        tab ?? MainPageTab.clubs,
         context,
       ),
     )

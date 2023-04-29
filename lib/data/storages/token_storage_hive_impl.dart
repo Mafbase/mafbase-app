@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 
 class TokenStorageHiveImpl implements TokenStorage {
@@ -8,7 +8,7 @@ class TokenStorageHiveImpl implements TokenStorage {
   static const _recoveryTokenKey = 'recovery_token';
   static const _boxName = 'auth_tokens_box';
 
-  late final Future<Box<String>> _box = Hive.openBox<String>(_boxName);
+  late final Future<LazyBox<String>> _box = Hive.openLazyBox<String>(_boxName);
 
   @override
   FutureOr<String?> get authToken =>
