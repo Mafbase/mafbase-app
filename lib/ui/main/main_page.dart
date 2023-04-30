@@ -187,7 +187,9 @@ class _MainPageState extends CustomState<MainPage> {
         ),
         loading: (_) => Container(),
         authorized: (_) => IconButton(
-          onPressed: () {},
+          onPressed: () {
+            context.read<MainBloc>().add(const MainEvent.onProfilePressed());
+          },
           hoverColor: context.theme.background1.withOpacity(0.2),
           icon: Icon(
             Icons.person,

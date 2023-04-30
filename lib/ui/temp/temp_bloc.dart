@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/ui/temp/temp_event.dart';
 import 'package:seating_generator_web/ui/temp/temp_state.dart';

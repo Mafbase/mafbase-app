@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
@@ -9,6 +8,7 @@ import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 
@@ -31,6 +31,7 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventPageOpened>(_onPageOpened);
     on<MainEventTitleTapped>(_onTitleTapped);
     on<MainEventEnterPressed>(_onEnterPressed);
+    on<MainEventProfilePressed>(_onProfilePressed);
     router.routesStream.listen((route) {
       if (route == null) {
         return;
@@ -54,6 +55,10 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
         );
       }
     });
+  }
+
+  _onProfilePressed(MainEventProfilePressed event, Emitter emit) {
+    router.openProfilePage();
   }
 
   _onEnterPressed(MainEventEnterPressed event, Emitter emit) {
@@ -126,6 +131,8 @@ abstract class MainPageRouter {
 
   void openAuthPage();
 
+  void openProfilePage();
+
   bool get canPop;
 }
 
@@ -197,5 +204,10 @@ class MainPageRouterImpl implements MainPageRouter {
         nextPath: GoRouter.of(context).location,
       ),
     );
+  }
+
+  @override
+  void openProfilePage() {
+    context.push(ProfilePage.createLocation(context));
   }
 }

@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
@@ -157,7 +156,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
           died: game.firstDie,
           date: DateTime.parse(game.date),
           ciModel: state.ciSchemes.firstWhereOrNull(
-                (element) => element.id == game.ciId,
+            (element) => element.id == game.ciId,
           ),
         ),
       );

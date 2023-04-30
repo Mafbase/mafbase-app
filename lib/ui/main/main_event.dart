@@ -21,4 +21,6 @@ class MainEvent with _$MainEvent {
   const factory MainEvent.onTitleTapped() = MainEventTitleTapped;
 
   const factory MainEvent.onEnterPressed() = MainEventEnterPressed;
+
+  const factory MainEvent.onProfilePressed() = MainEventProfilePressed;
 }

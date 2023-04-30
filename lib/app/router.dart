@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
@@ -74,6 +75,7 @@ class AppRouter {
             routes: [
               TournamentsPage.route,
               ClubsPage.route,
+              ProfilePage.route,
             ],
           ),
         ],

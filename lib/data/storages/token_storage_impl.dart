@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,4 +21,16 @@ class TokenStorageImpl implements TokenStorage {
   @override
   Future<String?> get recoveryToken =>
       _storage.then((value) => value.getString(_recoveryTokenKey));
+
+  @override
+  FutureOr clear() {
+    return _storage.then(
+      (value) => Future.wait(
+        [
+          value.remove(_recoveryTokenKey),
+          value.remove(_authTokenKey),
+        ],
+      ),
+    );
+  }
 }

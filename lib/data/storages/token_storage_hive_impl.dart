@@ -25,4 +25,9 @@ class TokenStorageHiveImpl implements TokenStorage {
   @override
   FutureOr<String?> get recoveryToken =>
       _box.then((value) => value.get(_recoveryTokenKey));
+
+  @override
+  FutureOr clear() {
+    return _box.then((value) => value.clear());
+  }
 }

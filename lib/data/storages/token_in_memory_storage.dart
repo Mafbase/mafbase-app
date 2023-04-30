@@ -16,4 +16,10 @@ class TokenInMemoryStorage implements TokenStorage {
 
   @override
   FutureOr<String?> get recoveryToken => _recoveryToken;
+
+  @override
+  FutureOr clear() {
+    _authToken = null;
+    _recoveryToken = null;
+  }
 }

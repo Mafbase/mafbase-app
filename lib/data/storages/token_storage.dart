@@ -6,4 +6,6 @@ abstract class TokenStorage {
   FutureOr<String?> get recoveryToken;
 
   Future onTokensUpdated(String authToken, String recoveryToken);
+
+  FutureOr clear();
 }

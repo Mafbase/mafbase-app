@@ -183,5 +183,7 @@
     }
   },
   "clubDescription": "Описание клуба",
-  "@clubDescription": {}
+  "@clubDescription": {},
+  "logout": "Выйти из аккаунта",
+  "@logout": {}
 }

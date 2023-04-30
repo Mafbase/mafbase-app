@@ -6,6 +6,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool disabled;
   final bool isRed;
+  final bool minimize;
 
   const CustomButton({
     Key? key,
@@ -13,10 +14,21 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     this.isRed = false,
     this.disabled = false,
+    this.minimize = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final textWidget = Column(
+      children: [
+        const Spacer(),
+        Text(
+          text,
+          style: MyTheme.of(context).btnTextStyle,
+        ),
+        const Spacer(),
+      ],
+    );
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith(
@@ -42,12 +54,7 @@ class CustomButton extends StatelessWidget {
       onPressed: disabled ? null : onTap,
       child: SizedBox(
         height: 57,
-        child: Center(
-          child: Text(
-            text,
-            style: MyTheme.of(context).btnTextStyle,
-          ),
-        ),
+        child: minimize ? textWidget : Center(child: textWidget),
       ),
     );
   }

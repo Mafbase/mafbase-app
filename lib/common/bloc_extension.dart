@@ -8,6 +8,8 @@ import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+export 'package:flutter_bloc/flutter_bloc.dart';
+
 typedef EffectHandler<E> = void Function(E efffect);
 
 mixin EffectEmitter<E, S> on BlocBase<S> {

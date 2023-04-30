@@ -46,4 +46,7 @@ class MainPageRouterMock implements MainPageRouter {
 
   @override
   void openAuthPage() {}
+
+  @override
+  void openProfilePage() {}
 }

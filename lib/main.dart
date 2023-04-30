@@ -56,7 +56,7 @@ class MafbaseApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => AuthNotifier(),
+          create: (_) => getIt<AuthNotifier>(),
         ),
         Provider(
           create: (context) => AppRouter(initLocation),

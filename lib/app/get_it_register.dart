@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/data/http_client.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/repositories/auth_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/cannot_meet_tournament_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/club_repository_impl.dart';
@@ -45,6 +46,7 @@ import 'package:seating_generator_web/domain/interactors/get_tournaments_interac
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
@@ -66,6 +68,7 @@ import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_bloc.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
@@ -276,6 +279,10 @@ void registerSharedGetIt() {
     ..registerLazySingleton<GetRatingInteractor>(
       () => GetRatingInteractor(getIt()),
     )
+    ..registerLazySingleton<LogoutInteractor>(
+      () => LogoutInteractor(getIt<TokenStorage>(), getIt<AuthNotifier>()),
+    )
+    ..registerLazySingleton(() => AuthNotifier())
     ..registerLazySingleton<GetClubsInteractor>(
       () => GetClubsInteractor(getIt()),
     )
@@ -301,6 +308,9 @@ void registerSharedGetIt() {
         getIt.call(param1: context),
         context,
       ),
+    )
+    ..registerFactoryParam<ProfileBloc, BuildContext?, dynamic>(
+      (context, _) => ProfileBloc(getIt<LogoutInteractor>(), context),
     )
     ..registerFactoryParam<MainBloc, BuildContext?, MainPageTab?>(
       (context, tab) => MainBloc(
