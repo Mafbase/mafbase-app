@@ -24,11 +24,9 @@ class TitleProvider extends ValueNotifier<String> {
 }
 
 class MainPage extends StatefulWidget {
-  final bool hasBackButton;
   final Widget? child;
 
-  const MainPage({Key? key, this.hasBackButton = false, this.child})
-      : super(key: key);
+  const MainPage({Key? key, this.child}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();

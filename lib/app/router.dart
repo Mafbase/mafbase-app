@@ -36,9 +36,8 @@ class AppRouter {
         }
         return null;
       }).then((value) {
-        SplashManager.removeSplash();
         return value;
-      });
+      }).whenComplete(() => SplashManager.removeSplash());
     },
     routes: [
       TempPage.route,
@@ -69,10 +68,7 @@ class AppRouter {
                         getIt<TournamentsBloc>(param1: context),
                   ),
                 ],
-                child: MainPage(
-                  hasBackButton: !state.location.endsWith('/'),
-                  child: child,
-                ),
+                child: MainPage(child: child),
               );
             },
             routes: [
