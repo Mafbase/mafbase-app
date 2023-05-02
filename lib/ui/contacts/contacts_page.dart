@@ -11,7 +11,7 @@ class ContactsPage extends StatefulWidget {
       context.namedLocation('contacts');
 
   static final route = GoRoute(
-    path: 'contacts',
+    path: '/contacts',
     name: 'contacts',
     builder: (context, state) => const ContactsPage._(),
   );

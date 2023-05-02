@@ -18,7 +18,7 @@ class ProfilePage extends StatefulWidget {
       context.namedLocation('profile');
 
   static final GoRoute route = GoRoute(
-    path: 'profile',
+    path: '/profile',
     name: 'profile',
     pageBuilder: (context, state) => FadeTransitionPage(
       child: BlocProvider<ProfileBloc>(
@@ -38,31 +38,33 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(40),
-            child: Placeholder(),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(40),
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: 400),
-            child: CustomButton(
-              text: context.locale.logout,
-              onTap: () {
-                context
-                    .read<ProfileBloc>()
-                    .add(const ProfileEvent.onLogoutPressed());
-              },
-              isRed: true,
-              minimize: true,
+    return Scaffold(
+      body: Column(
+        children: [
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(40),
+              child: Placeholder(),
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(40),
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 400),
+              child: CustomButton(
+                text: context.locale.logout,
+                onTap: () {
+                  context
+                      .read<ProfileBloc>()
+                      .add(const ProfileEvent.onLogoutPressed());
+                },
+                isRed: true,
+                minimize: true,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

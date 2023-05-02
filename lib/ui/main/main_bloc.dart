@@ -35,7 +35,14 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventEnterPressed>(_onEnterPressed);
     on<MainEventProfilePressed>(_onProfilePressed);
     on<MainEventOpenContacts>(_onOpenContacts);
-    router.routesStream.asyncMap((event) => Future.delayed(const Duration(milliseconds: 10), () => event))listen((route) {
+    router.routesStream
+        .asyncMap(
+      (event) => Future.delayed(
+        const Duration(milliseconds: 10),
+        () => event,
+      ),
+    )
+        .listen((route) {
       final hasBackButton = router.canPop;
       if (route?.startsWith('/club') ?? true) {
         add(

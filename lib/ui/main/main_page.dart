@@ -154,6 +154,7 @@ class _MainPageState extends CustomState<MainPage> {
       ),
       const SizedBox(width: 8),
       PopupMenuButton(
+        splashRadius: 24,
         color: theme.darkBlueColor,
         child: Icon(
           Icons.more_vert_outlined,
