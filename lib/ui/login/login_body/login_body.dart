@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPageBody extends StatefulWidget {
   const LoginPageBody({Key? key}) : super(key: key);
@@ -189,9 +191,36 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       text: AppLocalizations.of(context)!.loginIn,
                       onTap: _onSubmit,
                     ),
-                    const SizedBox(
-                      height: 24,
+                    const SizedBox(height: 8),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: context.theme.defaultTextStyle.copyWith(
+                          color: context.theme.defaultTextStyle.color
+                              ?.withOpacity(0.5),
+                          fontSize: 14,
+                        ),
+                        children: [
+                          TextSpan(text: context.locale.politicaAlert),
+                          TextSpan(
+                            text: context.locale.politicaHref,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrl(
+                                  Uri.parse(
+                                    // TODO: replace
+                                    "https://mafbase.ru/images/politika.pdf",
+                                  ),
+                                );
+                              },
+                            style: const TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(height: 24),
                     TextButton(
                       onPressed: _onSignUpTapped,
                       child: Text(

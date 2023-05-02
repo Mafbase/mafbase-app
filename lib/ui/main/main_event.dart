@@ -23,4 +23,6 @@ class MainEvent with _$MainEvent {
   const factory MainEvent.onEnterPressed() = MainEventEnterPressed;
 
   const factory MainEvent.onProfilePressed() = MainEventProfilePressed;
+
+  const factory MainEvent.openContacts() = MainEventOpenContacts;
 }

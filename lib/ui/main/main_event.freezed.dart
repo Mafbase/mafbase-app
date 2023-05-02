@@ -27,6 +27,7 @@ mixin _$MainEvent {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +41,7 @@ mixin _$MainEvent {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$MainEvent {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,6 +70,7 @@ mixin _$MainEvent {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +82,7 @@ mixin _$MainEvent {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,6 +94,7 @@ mixin _$MainEvent {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -207,6 +213,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) {
     return switchTab(tab, disableNavigate, hasBackButton);
   }
@@ -223,6 +230,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) {
     return switchTab?.call(tab, disableNavigate, hasBackButton);
   }
@@ -239,6 +247,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) {
     if (switchTab != null) {
@@ -259,6 +268,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) {
     return switchTab(this);
   }
@@ -273,6 +283,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) {
     return switchTab?.call(this);
   }
@@ -287,6 +298,7 @@ class _$MainEventSwitchTab implements MainEventSwitchTab {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) {
     if (switchTab != null) {
@@ -360,6 +372,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) {
     return backButtonPressed();
   }
@@ -376,6 +389,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) {
     return backButtonPressed?.call();
   }
@@ -392,6 +406,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -412,6 +427,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) {
     return backButtonPressed(this);
   }
@@ -426,6 +442,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) {
     return backButtonPressed?.call(this);
   }
@@ -440,6 +457,7 @@ class _$MainEventBackButtonPressed implements MainEventBackButtonPressed {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -500,6 +518,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) {
     return onPageOpened();
   }
@@ -516,6 +535,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) {
     return onPageOpened?.call();
   }
@@ -532,6 +552,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -552,6 +573,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) {
     return onPageOpened(this);
   }
@@ -566,6 +588,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) {
     return onPageOpened?.call(this);
   }
@@ -580,6 +603,7 @@ class _$MainEventPageOpened implements MainEventPageOpened {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -670,6 +694,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) {
     return tournamentSelected(tournamentId);
   }
@@ -686,6 +711,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) {
     return tournamentSelected?.call(tournamentId);
   }
@@ -702,6 +728,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) {
     if (tournamentSelected != null) {
@@ -722,6 +749,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) {
     return tournamentSelected(this);
   }
@@ -736,6 +764,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) {
     return tournamentSelected?.call(this);
   }
@@ -750,6 +779,7 @@ class _$MainEventTournamentSelected implements MainEventTournamentSelected {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) {
     if (tournamentSelected != null) {
@@ -816,6 +846,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) {
     return onTitleTapped();
   }
@@ -832,6 +863,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) {
     return onTitleTapped?.call();
   }
@@ -848,6 +880,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) {
     if (onTitleTapped != null) {
@@ -868,6 +901,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) {
     return onTitleTapped(this);
   }
@@ -882,6 +916,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) {
     return onTitleTapped?.call(this);
   }
@@ -896,6 +931,7 @@ class _$MainEventTitleTapped implements MainEventTitleTapped {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) {
     if (onTitleTapped != null) {
@@ -956,6 +992,7 @@ class _$MainEventEnterPressed implements MainEventEnterPressed {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) {
     return onEnterPressed();
   }
@@ -972,6 +1009,7 @@ class _$MainEventEnterPressed implements MainEventEnterPressed {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) {
     return onEnterPressed?.call();
   }
@@ -988,6 +1026,7 @@ class _$MainEventEnterPressed implements MainEventEnterPressed {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) {
     if (onEnterPressed != null) {
@@ -1008,6 +1047,7 @@ class _$MainEventEnterPressed implements MainEventEnterPressed {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) {
     return onEnterPressed(this);
   }
@@ -1022,6 +1062,7 @@ class _$MainEventEnterPressed implements MainEventEnterPressed {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) {
     return onEnterPressed?.call(this);
   }
@@ -1036,6 +1077,7 @@ class _$MainEventEnterPressed implements MainEventEnterPressed {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) {
     if (onEnterPressed != null) {
@@ -1097,6 +1139,7 @@ class _$MainEventProfilePressed implements MainEventProfilePressed {
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
     required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
   }) {
     return onProfilePressed();
   }
@@ -1113,6 +1156,7 @@ class _$MainEventProfilePressed implements MainEventProfilePressed {
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
     TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
   }) {
     return onProfilePressed?.call();
   }
@@ -1129,6 +1173,7 @@ class _$MainEventProfilePressed implements MainEventProfilePressed {
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
     TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
     required TResult orElse(),
   }) {
     if (onProfilePressed != null) {
@@ -1149,6 +1194,7 @@ class _$MainEventProfilePressed implements MainEventProfilePressed {
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
     required TResult Function(MainEventEnterPressed value) onEnterPressed,
     required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
   }) {
     return onProfilePressed(this);
   }
@@ -1163,6 +1209,7 @@ class _$MainEventProfilePressed implements MainEventProfilePressed {
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
     TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
   }) {
     return onProfilePressed?.call(this);
   }
@@ -1177,6 +1224,7 @@ class _$MainEventProfilePressed implements MainEventProfilePressed {
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
     TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
     required TResult orElse(),
   }) {
     if (onProfilePressed != null) {
@@ -1188,4 +1236,150 @@ class _$MainEventProfilePressed implements MainEventProfilePressed {
 
 abstract class MainEventProfilePressed implements MainEvent {
   const factory MainEventProfilePressed() = _$MainEventProfilePressed;
+}
+
+/// @nodoc
+abstract class _$$MainEventOpenContactsCopyWith<$Res> {
+  factory _$$MainEventOpenContactsCopyWith(_$MainEventOpenContacts value,
+          $Res Function(_$MainEventOpenContacts) then) =
+      __$$MainEventOpenContactsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MainEventOpenContactsCopyWithImpl<$Res>
+    extends _$MainEventCopyWithImpl<$Res, _$MainEventOpenContacts>
+    implements _$$MainEventOpenContactsCopyWith<$Res> {
+  __$$MainEventOpenContactsCopyWithImpl(_$MainEventOpenContacts _value,
+      $Res Function(_$MainEventOpenContacts) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MainEventOpenContacts implements MainEventOpenContacts {
+  const _$MainEventOpenContacts();
+
+  @override
+  String toString() {
+    return 'MainEvent.openContacts()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$MainEventOpenContacts);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
+        switchTab,
+    required TResult Function() backButtonPressed,
+    required TResult Function() onPageOpened,
+    required TResult Function(int tournamentId) tournamentSelected,
+    required TResult Function() onTitleTapped,
+    required TResult Function() onEnterPressed,
+    required TResult Function() onProfilePressed,
+    required TResult Function() openContacts,
+  }) {
+    return openContacts();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
+        switchTab,
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? onPageOpened,
+    TResult? Function(int tournamentId)? tournamentSelected,
+    TResult? Function()? onTitleTapped,
+    TResult? Function()? onEnterPressed,
+    TResult? Function()? onProfilePressed,
+    TResult? Function()? openContacts,
+  }) {
+    return openContacts?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
+        switchTab,
+    TResult Function()? backButtonPressed,
+    TResult Function()? onPageOpened,
+    TResult Function(int tournamentId)? tournamentSelected,
+    TResult Function()? onTitleTapped,
+    TResult Function()? onEnterPressed,
+    TResult Function()? onProfilePressed,
+    TResult Function()? openContacts,
+    required TResult orElse(),
+  }) {
+    if (openContacts != null) {
+      return openContacts();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MainEventSwitchTab value) switchTab,
+    required TResult Function(MainEventBackButtonPressed value)
+        backButtonPressed,
+    required TResult Function(MainEventPageOpened value) onPageOpened,
+    required TResult Function(MainEventTournamentSelected value)
+        tournamentSelected,
+    required TResult Function(MainEventTitleTapped value) onTitleTapped,
+    required TResult Function(MainEventEnterPressed value) onEnterPressed,
+    required TResult Function(MainEventProfilePressed value) onProfilePressed,
+    required TResult Function(MainEventOpenContacts value) openContacts,
+  }) {
+    return openContacts(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MainEventSwitchTab value)? switchTab,
+    TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult? Function(MainEventPageOpened value)? onPageOpened,
+    TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult? Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
+    TResult? Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult? Function(MainEventOpenContacts value)? openContacts,
+  }) {
+    return openContacts?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MainEventSwitchTab value)? switchTab,
+    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
+    TResult Function(MainEventPageOpened value)? onPageOpened,
+    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
+    TResult Function(MainEventTitleTapped value)? onTitleTapped,
+    TResult Function(MainEventEnterPressed value)? onEnterPressed,
+    TResult Function(MainEventProfilePressed value)? onProfilePressed,
+    TResult Function(MainEventOpenContacts value)? openContacts,
+    required TResult orElse(),
+  }) {
+    if (openContacts != null) {
+      return openContacts(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MainEventOpenContacts implements MainEvent {
+  const factory MainEventOpenContacts() = _$MainEventOpenContacts;
 }

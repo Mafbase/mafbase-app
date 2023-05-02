@@ -5,6 +5,7 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -76,6 +77,7 @@ class AppRouter {
               TournamentsPage.route,
               ClubsPage.route,
               ProfilePage.route,
+              ContactsPage.route,
             ],
           ),
         ],

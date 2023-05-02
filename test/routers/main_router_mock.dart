@@ -49,4 +49,7 @@ class MainPageRouterMock implements MainPageRouter {
 
   @override
   void openProfilePage() {}
+
+  @override
+  void openContactsPage() {}
 }

@@ -101,8 +101,6 @@
   "@save": {},
   "participants": "Участники",
   "@participants": {},
-  "seating": "Рассадка",
-  "@seating": {},
   "separateTitle": "Рассадить",
   "@separateTitle": {},
   "addSeparationBtnText": "Добавить пару",
@@ -185,5 +183,17 @@
   "clubDescription": "Описание клуба",
   "@clubDescription": {},
   "logout": "Выйти из аккаунта",
-  "@logout": {}
+  "@logout": {},
+  "contacts": "Контакты",
+  "@contacts": {},
+  "aboutApp": "О приложении",
+  "@aboutApp": {},
+  "politicaAlert": "Нажимая кнопку Войти, Вы полностью принимаете ",
+  "@politicaAlert": {},
+  "politicaHref": "Политику персональных данных",
+  "@politicaHref": {},
+  "playersCount": "Количество игроков",
+  "@playersCount": {},
+  "translationHelp": "Помощь с оформлением трансляции",
+  "@translationHelp": {}
 }

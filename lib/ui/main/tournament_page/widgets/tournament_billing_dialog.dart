@@ -37,6 +37,14 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
+  void initState() {
+    count = widget.playersCount;
+    enableTranslation = widget.billedTranslation;
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomDialog(
       child: Form(
@@ -47,10 +55,10 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
           });
         },
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(40.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FormField<int>(
                 initialValue: widget.playersCount,
@@ -63,6 +71,11 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                   return Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Text(
+                        context.locale.playersCount,
+                        style: context.theme.defaultTextStyle,
+                      ),
+                      const SizedBox(width: 16),
                       TextButton(
                         onPressed: () {
                           final value = field.value;
@@ -119,7 +132,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Плашки для трансляции",
+                        context.locale.translationHelp,
                         style: context.theme.defaultTextStyle,
                       ),
                       const SizedBox(
@@ -140,17 +153,35 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
               const SizedBox(height: 20),
               SizedBox(
                 width: 400,
-                child: CustomButton(
-                  text: 'Оплатить',
-                  disabled: widget.billedTranslation == enableTranslation &&
-                      widget.playersCount == count,
-                  onTap: () {
-                    formKey.currentState?.save();
-                    Navigator.pop(
-                      context,
-                      TournamentBillingDialogResult(
-                        billedTranslation: enableTranslation,
-                        billedPlayers: count,
+                child: Builder(
+                  builder: (context) {
+                    final price = widget.playersCount != count ||
+                            widget.billedTranslation != enableTranslation
+                        ? calculatePrice(
+                              count,
+                              enableTranslation,
+                            ) -
+                            calculatePrice(
+                              widget.playersCount,
+                              widget.billedTranslation,
+                            )
+                        : null;
+                    return Center(
+                      child: CustomButton(
+                        text: 'Оплатить${price == null ? '' : ' $price₽'}',
+                        disabled:
+                            widget.billedTranslation == enableTranslation &&
+                                widget.playersCount == count,
+                        onTap: () {
+                          formKey.currentState?.save();
+                          Navigator.pop(
+                            context,
+                            TournamentBillingDialogResult(
+                              billedTranslation: enableTranslation,
+                              billedPlayers: count,
+                            ),
+                          );
+                        },
                       ),
                     );
                   },
@@ -161,6 +192,21 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
         ),
       ),
     );
+  }
+}
+
+int calculatePrice(int count, bool translation) {
+  if (count == 10 && translation) {
+    return 500;
+  } else if (count == 10) {
+    return 0;
+  }
+
+  final tens = count ~/ 10;
+  if (translation) {
+    return tens * 400;
+  } else {
+    return tens * 300;
   }
 }
 

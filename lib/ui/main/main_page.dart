@@ -172,6 +172,7 @@ class _MainPageState extends CustomState<MainPage> {
   }
 
   List<Widget> getProfileAction(AuthNotifierModel model) {
+    final theme = context.theme;
     return [
       model.map(
         unauthorized: (_) => TextButton(
@@ -196,6 +197,51 @@ class _MainPageState extends CustomState<MainPage> {
             color: context.theme.background1,
           ),
         ),
+      ),
+      const SizedBox(width: 8),
+      PopupMenuButton(
+        color: theme.darkBlueColor,
+        child: Icon(
+          Icons.more_vert_outlined,
+          color: context.theme.btnTextColor,
+        ),
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+              onTap: () {
+                context.read<MainBloc>().add(const MainEvent.openContacts());
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.contacts_outlined,
+                    color: theme.btnTextColor,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    context.locale.contacts,
+                    style: theme.btnTextStyle.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+            PopupMenuItem(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.contact_support_outlined,
+                    color: theme.btnTextColor,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    context.locale.aboutApp,
+                    style: theme.btnTextStyle.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+          ];
+        },
       ),
       const SizedBox(width: 8),
     ];

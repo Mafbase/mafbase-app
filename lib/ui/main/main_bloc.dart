@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
@@ -32,6 +33,7 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventTitleTapped>(_onTitleTapped);
     on<MainEventEnterPressed>(_onEnterPressed);
     on<MainEventProfilePressed>(_onProfilePressed);
+    on<MainEventOpenContacts>(_onOpenContacts);
     router.routesStream.listen((route) {
       if (route == null) {
         return;
@@ -55,6 +57,10 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
         );
       }
     });
+  }
+
+  _onOpenContacts(MainEventOpenContacts event, Emitter emit) {
+    router.openContactsPage();
   }
 
   _onProfilePressed(MainEventProfilePressed event, Emitter emit) {
@@ -133,6 +139,8 @@ abstract class MainPageRouter {
 
   void openProfilePage();
 
+  void openContactsPage();
+
   bool get canPop;
 }
 
@@ -209,5 +217,10 @@ class MainPageRouterImpl implements MainPageRouter {
   @override
   void openProfilePage() {
     context.push(ProfilePage.createLocation(context));
+  }
+
+  @override
+  void openContactsPage() {
+    context.push(ContactsPage.createLocation(context));
   }
 }
