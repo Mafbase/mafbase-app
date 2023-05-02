@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
@@ -34,12 +35,9 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventEnterPressed>(_onEnterPressed);
     on<MainEventProfilePressed>(_onProfilePressed);
     on<MainEventOpenContacts>(_onOpenContacts);
-    router.routesStream.listen((route) {
-      if (route == null) {
-        return;
-      }
+    router.routesStream.asyncMap((event) => Future.delayed(const Duration(milliseconds: 10), () => event))listen((route) {
       final hasBackButton = router.canPop;
-      if (route.startsWith('/club')) {
+      if (route?.startsWith('/club') ?? true) {
         add(
           MainEvent.switchTab(
             tab: MainPageTab.clubs,
@@ -147,7 +145,7 @@ abstract class MainPageRouter {
 class MainPageRouterImpl implements MainPageRouter {
   final BuildContext context;
   GoRouter? _goRouter;
-  final StreamController<String?> controller = StreamController.broadcast();
+  final controller = BehaviorSubject<String?>.seeded(null);
 
   MainPageRouterImpl(this.context);
 
@@ -202,7 +200,13 @@ class MainPageRouterImpl implements MainPageRouter {
   }
 
   @override
-  bool get canPop => GoRouter.of(context).location.split("/").length > 2;
+  bool get canPop {
+    try {
+      return GoRouter.of(context).canPop();
+    } catch (_) {
+      return false;
+    }
+  }
 
   @override
   void openAuthPage() {

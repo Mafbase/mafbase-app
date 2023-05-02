@@ -6,13 +6,11 @@ import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
-import 'package:seating_generator_web/ui/login/login_page.dart';
-import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
-import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
+import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
@@ -49,37 +47,25 @@ class AppRouter {
         path: '/',
         redirect: (_, state) => state.location == '/' ? '/club' : null,
         builder: (context, state) => const Placeholder(),
+      ),
+      ShellRoute(
+        builder: (context, state, child) {
+          return BlocProvider(
+            key: const Key("MainBlocProvider"),
+            create: (context) => getIt.get<MainBloc>(
+              param1: context,
+              param2: state.location.startsWith('/club')
+                  ? MainPageTab.clubs
+                  : MainPageTab.tournaments,
+            ),
+            child: MainPage(child: child),
+          );
+        },
         routes: [
-          LoginPage.route,
-          ShellRoute(
-            builder: (context, state, child) {
-              return MultiBlocProvider(
-                providers: [
-                  BlocProvider<MainBloc>(
-                    key: const Key("MainBlocProvider"),
-                    create: (context) => getIt.get<MainBloc>(
-                      param1: context,
-                      param2: state.location.startsWith('/club')
-                          ? MainPageTab.clubs
-                          : MainPageTab.tournaments,
-                    ),
-                  ),
-                  BlocProvider<TournamentsBloc>(
-                    key: const Key("TournamentsBlocProvider"),
-                    create: (context) =>
-                        getIt<TournamentsBloc>(param1: context),
-                  ),
-                ],
-                child: MainPage(child: child),
-              );
-            },
-            routes: [
-              TournamentsPage.route,
-              ClubsPage.route,
-              ProfilePage.route,
-              ContactsPage.route,
-            ],
-          ),
+          RailWrapper.route,
+          LoginPageBody.route,
+          ProfilePage.route,
+          ContactsPage.route,
         ],
       ),
     ],

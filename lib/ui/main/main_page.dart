@@ -78,66 +78,20 @@ class _MainPageState extends CustomState<MainPage> {
   @override
   Widget buildDesktop(BuildContext context) {
     const double railWidth = 100;
-    return BlocBuilder<MainBloc, MainState>(
-      builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: buildAppBar(
-            context: context,
-            state: state,
-          ),
-          body: Stack(
-            children: [
-              Positioned(
-                top: 0,
-                left: railWidth,
-                right: 0,
-                bottom: 0,
-                child: widget.child ?? Container(),
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                bottom: 0,
-                width: railWidth,
-                child: NavigationRail(
-                  useIndicator: true,
-                  unselectedIconTheme: const IconThemeData(
-                    color: Colors.white,
-                  ),
-                  selectedIconTheme: const IconThemeData(
-                    color: Colors.white,
-                  ),
-                  indicatorColor: context.theme.darkBlueColor,
-                  backgroundColor: context.theme.darkGreyColor,
-                  labelType: NavigationRailLabelType.all,
-                  elevation: 5,
-                  onDestinationSelected: onDestinationSelected,
-                  destinations: [
-                    NavigationRailDestination(
-                      icon: const Icon(Icons.table_chart_outlined),
-                      label: Text(
-                        "Турниры",
-                        style: const TextStyle()
-                            .copyWith(color: context.theme.background1),
-                      ),
-                    ),
-                    NavigationRailDestination(
-                      icon: const Icon(Icons.people_alt_outlined),
-                      label: Text(
-                        "Клубы",
-                        style: const TextStyle()
-                            .copyWith(color: context.theme.background1),
-                      ),
-                    ),
-                  ],
-                  selectedIndex: selectedIndex(state),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+    return ChangeNotifierProvider.value(
+      value: titleProvider,
+      child: BlocBuilder<MainBloc, MainState>(
+        builder: (context, state) {
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: buildAppBar(
+              context: context,
+              state: state,
+            ),
+            body: widget.child,
+          );
+        },
+      ),
     );
   }
 
@@ -259,20 +213,6 @@ class _MainPageState extends CustomState<MainPage> {
               state: state,
             ),
             body: widget.child,
-            bottomNavigationBar: NavigationBar(
-              onDestinationSelected: onDestinationSelected,
-              selectedIndex: selectedIndex(state),
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(Icons.table_chart_outlined),
-                  label: "Турниры",
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.people_alt_outlined),
-                  label: "Клубы",
-                ),
-              ],
-            ),
           );
         },
       ),

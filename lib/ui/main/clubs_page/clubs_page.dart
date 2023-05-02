@@ -22,7 +22,7 @@ class ClubsPage extends StatefulWidget {
   }
 
   static final GoRoute route = GoRoute(
-    path: 'club',
+    path: '/club',
     name: 'clubs',
     builder: (context, state) => BlocProvider<ClubsBloc>(
       create: (context) => getIt(param1: context),

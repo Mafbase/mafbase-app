@@ -70,6 +70,7 @@ dependencies:
   mockito: ^5.4.0
   path_provider: ^2.0.14
   hive_flutter: ^1.1.0
+  rxdart: ^0.27.7
 
 dev_dependencies:
   integration_test:
