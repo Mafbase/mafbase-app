@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
@@ -37,23 +38,16 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventOpenContacts>(_onOpenContacts);
     router.routesStream.listen((route) {
       final hasBackButton = router.canPop;
-      if (route?.startsWith('/club') ?? true) {
-        add(
-          MainEvent.switchTab(
-            tab: MainPageTab.clubs,
-            disableNavigate: true,
-            hasBackButton: hasBackButton,
-          ),
-        );
-      } else {
-        add(
-          MainEvent.switchTab(
-            tab: MainPageTab.tournaments,
-            disableNavigate: true,
-            hasBackButton: hasBackButton,
-          ),
-        );
-      }
+      final tab = MainPageTab.values.firstWhereOrNull(
+        (element) => route?.startsWith('/${element.name}') == true,
+      );
+      add(
+        MainEvent.switchTab(
+          tab: tab ?? state.selectedTab,
+          disableNavigate: true,
+          hasBackButton: hasBackButton,
+        ),
+      );
     });
   }
 
