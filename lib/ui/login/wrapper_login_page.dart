@@ -20,7 +20,6 @@ class _WrapperLoginPageState extends CustomState<WrapperLoginPage> {
   @override
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: MyTheme.of(context).background1,
       body: Center(
         child: CustomScrollView(
