@@ -142,6 +142,7 @@ class _MainPageState extends CustomState<MainPage> {
         ),
         loading: (_) => Container(),
         authorized: (_) => IconButton(
+          tooltip: context.locale.profile,
           onPressed: () {
             context.read<MainBloc>().add(const MainEvent.onProfilePressed());
           },

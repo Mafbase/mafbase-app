@@ -35,14 +35,7 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventEnterPressed>(_onEnterPressed);
     on<MainEventProfilePressed>(_onProfilePressed);
     on<MainEventOpenContacts>(_onOpenContacts);
-    router.routesStream
-        .asyncMap(
-      (event) => Future.delayed(
-        const Duration(milliseconds: 10),
-        () => event,
-      ),
-    )
-        .listen((route) {
+    router.routesStream.listen((route) {
       final hasBackButton = router.canPop;
       if (route?.startsWith('/club') ?? true) {
         add(
@@ -167,8 +160,11 @@ class MainPageRouterImpl implements MainPageRouter {
   }
 
   void routeListener() {
-    controller
-        .add(GoRouter.of(context).routeInformationProvider.value.location);
+    Future.delayed(
+      const Duration(milliseconds: 50),
+      () => controller
+          .add(GoRouter.of(context).routeInformationProvider.value.location),
+    );
   }
 
   @override

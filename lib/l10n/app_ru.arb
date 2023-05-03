@@ -195,5 +195,7 @@
   "playersCount": "Количество игроков",
   "@playersCount": {},
   "translationHelp": "Помощь с оформлением трансляции",
-  "@translationHelp": {}
+  "@translationHelp": {},
+  "profile": "Профиль",
+  "@profile": {}
 }
