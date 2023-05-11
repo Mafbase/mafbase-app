@@ -7,7 +7,8 @@ part 'seating_page_event.freezed.dart';
 class SeatingPageEvent with _$SeatingPageEvent {
   const factory SeatingPageEvent.addPair() = SeatingPageEventAddPair;
 
-  const factory SeatingPageEvent.createSeating() = SeatingPageEventCreateSeating;
+  const factory SeatingPageEvent.createSeating() =
+      SeatingPageEventCreateSeating;
 
   const factory SeatingPageEvent.fsmSeatingTapped() =
       SeatingPageEventFsmSeatingTapped;
@@ -19,4 +20,7 @@ class SeatingPageEvent with _$SeatingPageEvent {
 
   const factory SeatingPageEvent.pageOpened({required int tournamentId}) =
       SeatingPageEventPageOpened;
+
+  const factory SeatingPageEvent.openGameEditing({required int gameId}) =
+      SeatingPageEventGameEditing;
 }

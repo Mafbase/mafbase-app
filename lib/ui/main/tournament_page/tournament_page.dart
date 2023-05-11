@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
@@ -45,6 +47,8 @@ class TournamentPage extends StatefulWidget {
             routes: [
               SeatingPage.route,
               SeatingInsertingPage.route,
+              AddClubGamePage.tournamentEditRoute,
+              RatingPage.tournamentRoute,
             ],
             builder: (context, state) {
               return PlayersListBody(
@@ -136,6 +140,14 @@ class _TournamentPageState extends CustomState<TournamentPage>
                           ),
                         );
                   }
+                },
+              ),
+              MenuItemModel(
+                text: 'Таблица',
+                onTap: () {
+                  context
+                      .read<TournamentPageBloc>()
+                      .add(const TournamentPageEvent.openRating());
                 },
               ),
               MenuItemModel(

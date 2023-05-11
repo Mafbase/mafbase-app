@@ -21,6 +21,7 @@ mixin _$AddClubGameState {
   bool get canEdit => throw _privateConstructorUsedError;
   String get clubName => throw _privateConstructorUsedError;
   List<CiSchemeModel> get ciSchemes => throw _privateConstructorUsedError;
+  bool get isTournament => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddClubGameStateCopyWith<AddClubGameState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $AddClubGameStateCopyWith<$Res> {
       List<PlayerModel> players,
       bool canEdit,
       String clubName,
-      List<CiSchemeModel> ciSchemes});
+      List<CiSchemeModel> ciSchemes,
+      bool isTournament});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$AddClubGameStateCopyWithImpl<$Res, $Val extends AddClubGameState>
     Object? canEdit = null,
     Object? clubName = null,
     Object? ciSchemes = null,
+    Object? isTournament = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -81,6 +84,10 @@ class _$AddClubGameStateCopyWithImpl<$Res, $Val extends AddClubGameState>
           ? _value.ciSchemes
           : ciSchemes // ignore: cast_nullable_to_non_nullable
               as List<CiSchemeModel>,
+      isTournament: null == isTournament
+          ? _value.isTournament
+          : isTournament // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$_AddClubGameStateCopyWith<$Res>
       List<PlayerModel> players,
       bool canEdit,
       String clubName,
-      List<CiSchemeModel> ciSchemes});
+      List<CiSchemeModel> ciSchemes,
+      bool isTournament});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
     Object? canEdit = null,
     Object? clubName = null,
     Object? ciSchemes = null,
+    Object? isTournament = null,
   }) {
     return _then(_$_AddClubGameState(
       isLoading: null == isLoading
@@ -139,6 +148,10 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
           ? _value._ciSchemes
           : ciSchemes // ignore: cast_nullable_to_non_nullable
               as List<CiSchemeModel>,
+      isTournament: null == isTournament
+          ? _value.isTournament
+          : isTournament // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$_AddClubGameState implements _AddClubGameState {
       final List<PlayerModel> players = const [],
       this.canEdit = false,
       this.clubName = "",
-      final List<CiSchemeModel> ciSchemes = const []})
+      final List<CiSchemeModel> ciSchemes = const [],
+      this.isTournament = false})
       : _players = players,
         _ciSchemes = ciSchemes;
 
@@ -181,8 +195,12 @@ class _$_AddClubGameState implements _AddClubGameState {
   }
 
   @override
+  @JsonKey()
+  final bool isTournament;
+
+  @override
   String toString() {
-    return 'AddClubGameState(isLoading: $isLoading, players: $players, canEdit: $canEdit, clubName: $clubName, ciSchemes: $ciSchemes)';
+    return 'AddClubGameState(isLoading: $isLoading, players: $players, canEdit: $canEdit, clubName: $clubName, ciSchemes: $ciSchemes, isTournament: $isTournament)';
   }
 
   @override
@@ -197,7 +215,9 @@ class _$_AddClubGameState implements _AddClubGameState {
             (identical(other.clubName, clubName) ||
                 other.clubName == clubName) &&
             const DeepCollectionEquality()
-                .equals(other._ciSchemes, _ciSchemes));
+                .equals(other._ciSchemes, _ciSchemes) &&
+            (identical(other.isTournament, isTournament) ||
+                other.isTournament == isTournament));
   }
 
   @override
@@ -207,7 +227,8 @@ class _$_AddClubGameState implements _AddClubGameState {
       const DeepCollectionEquality().hash(_players),
       canEdit,
       clubName,
-      const DeepCollectionEquality().hash(_ciSchemes));
+      const DeepCollectionEquality().hash(_ciSchemes),
+      isTournament);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +243,8 @@ abstract class _AddClubGameState implements AddClubGameState {
       final List<PlayerModel> players,
       final bool canEdit,
       final String clubName,
-      final List<CiSchemeModel> ciSchemes}) = _$_AddClubGameState;
+      final List<CiSchemeModel> ciSchemes,
+      final bool isTournament}) = _$_AddClubGameState;
 
   @override
   bool get isLoading;
@@ -234,6 +256,8 @@ abstract class _AddClubGameState implements AddClubGameState {
   String get clubName;
   @override
   List<CiSchemeModel> get ciSchemes;
+  @override
+  bool get isTournament;
   @override
   @JsonKey(ignore: true)
   _$$_AddClubGameStateCopyWith<_$_AddClubGameState> get copyWith =>

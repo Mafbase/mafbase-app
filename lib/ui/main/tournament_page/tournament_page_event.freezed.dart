@@ -21,6 +21,7 @@ mixin _$TournamentPageEvent {
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -36,6 +37,7 @@ mixin _$TournamentPageEvent {
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -51,6 +53,7 @@ mixin _$TournamentPageEvent {
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -70,6 +73,7 @@ mixin _$TournamentPageEvent {
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -93,6 +97,7 @@ mixin _$TournamentPageEvent {
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -114,6 +119,7 @@ mixin _$TournamentPageEvent {
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -194,6 +200,7 @@ class _$TournamentPageBackButtonPreesedEvent
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -212,6 +219,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -230,6 +238,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -255,6 +264,7 @@ class _$TournamentPageBackButtonPreesedEvent
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -281,6 +291,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -305,6 +316,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -377,6 +389,7 @@ class _$TournamentPageEventPlayersListTapped
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -395,6 +408,7 @@ class _$TournamentPageEventPlayersListTapped
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -413,6 +427,7 @@ class _$TournamentPageEventPlayersListTapped
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -438,6 +453,7 @@ class _$TournamentPageEventPlayersListTapped
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -464,6 +480,7 @@ class _$TournamentPageEventPlayersListTapped
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -488,6 +505,7 @@ class _$TournamentPageEventPlayersListTapped
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -598,6 +616,7 @@ class _$TournamentPageEventUpdateSettings
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -616,6 +635,7 @@ class _$TournamentPageEventUpdateSettings
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -634,6 +654,7 @@ class _$TournamentPageEventUpdateSettings
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -659,6 +680,7 @@ class _$TournamentPageEventUpdateSettings
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -685,6 +707,7 @@ class _$TournamentPageEventUpdateSettings
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -709,6 +732,7 @@ class _$TournamentPageEventUpdateSettings
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -740,6 +764,193 @@ abstract class TournamentPageEventUpdateSettings
   _$$TournamentPageEventUpdateSettingsCopyWith<
           _$TournamentPageEventUpdateSettings>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TournamentPageEventOpenRatingCopyWith<$Res> {
+  factory _$$TournamentPageEventOpenRatingCopyWith(
+          _$TournamentPageEventOpenRating value,
+          $Res Function(_$TournamentPageEventOpenRating) then) =
+      __$$TournamentPageEventOpenRatingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TournamentPageEventOpenRatingCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventOpenRating>
+    implements _$$TournamentPageEventOpenRatingCopyWith<$Res> {
+  __$$TournamentPageEventOpenRatingCopyWithImpl(
+      _$TournamentPageEventOpenRating _value,
+      $Res Function(_$TournamentPageEventOpenRating) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
+  const _$TournamentPageEventOpenRating();
+
+  @override
+  String toString() {
+    return 'TournamentPageEvent.openRating()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TournamentPageEventOpenRating);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() backButtonPressed,
+    required TResult Function() playersListTapped,
+    required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
+    required TResult Function() playersListOpened,
+    required TResult Function() addPlayerTapped,
+    required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
+    required TResult Function(PlayerModel player) openProfileDialog,
+    required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
+  }) {
+    return openRating();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
+    TResult? Function()? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
+  }) {
+    return openRating?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? backButtonPressed,
+    TResult Function()? playersListTapped,
+    TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
+    TResult Function()? playersListOpened,
+    TResult Function()? addPlayerTapped,
+    TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
+    TResult Function(PlayerModel player)? openProfileDialog,
+    TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (openRating != null) {
+      return openRating();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TournamentPageBackButtonPreesedEvent value)
+        backButtonPressed,
+    required TResult Function(TournamentPageEventPlayersListTapped value)
+        playersListTapped,
+    required TResult Function(TournamentPageEventUpdateSettings value)
+        updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
+    required TResult Function(TournamentPagePlayerListOpenedEvent value)
+        playersListOpened,
+    required TResult Function(TournamentPageEventAddPlayer value)
+        addPlayerTapped,
+    required TResult Function(TournamentPageEventEditSettings value)
+        editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
+    required TResult Function(TournamentPageEventOpenProfileDialog value)
+        openProfileDialog,
+    required TResult Function(TournamentPageEventOpenSeatingPage value)
+        openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+  }) {
+    return openRating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+  }) {
+    return openRating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
+    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    required TResult orElse(),
+  }) {
+    if (openRating != null) {
+      return openRating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TournamentPageEventOpenRating implements TournamentPageEvent {
+  const factory TournamentPageEventOpenRating() =
+      _$TournamentPageEventOpenRating;
 }
 
 /// @nodoc
@@ -788,6 +999,7 @@ class _$TournamentPagePlayerListOpenedEvent
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -806,6 +1018,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -824,6 +1037,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -849,6 +1063,7 @@ class _$TournamentPagePlayerListOpenedEvent
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -875,6 +1090,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -899,6 +1115,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -970,6 +1187,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -988,6 +1206,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -1006,6 +1225,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -1031,6 +1251,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -1057,6 +1278,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1081,6 +1303,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1151,6 +1374,7 @@ class _$TournamentPageEventEditSettings
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -1169,6 +1393,7 @@ class _$TournamentPageEventEditSettings
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -1187,6 +1412,7 @@ class _$TournamentPageEventEditSettings
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -1212,6 +1438,7 @@ class _$TournamentPageEventEditSettings
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -1238,6 +1465,7 @@ class _$TournamentPageEventEditSettings
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1262,6 +1490,7 @@ class _$TournamentPageEventEditSettings
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1369,6 +1598,7 @@ class _$TournamentPageEventDeletePlayer
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -1387,6 +1617,7 @@ class _$TournamentPageEventDeletePlayer
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -1405,6 +1636,7 @@ class _$TournamentPageEventDeletePlayer
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -1430,6 +1662,7 @@ class _$TournamentPageEventDeletePlayer
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -1456,6 +1689,7 @@ class _$TournamentPageEventDeletePlayer
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1480,6 +1714,7 @@ class _$TournamentPageEventDeletePlayer
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1593,6 +1828,7 @@ class _$TournamentPageEventOpenProfileDialog
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -1611,6 +1847,7 @@ class _$TournamentPageEventOpenProfileDialog
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -1629,6 +1866,7 @@ class _$TournamentPageEventOpenProfileDialog
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -1654,6 +1892,7 @@ class _$TournamentPageEventOpenProfileDialog
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -1680,6 +1919,7 @@ class _$TournamentPageEventOpenProfileDialog
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1704,6 +1944,7 @@ class _$TournamentPageEventOpenProfileDialog
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1783,6 +2024,7 @@ class _$TournamentPageEventOpenSeatingPage
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -1801,6 +2043,7 @@ class _$TournamentPageEventOpenSeatingPage
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -1819,6 +2062,7 @@ class _$TournamentPageEventOpenSeatingPage
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -1844,6 +2088,7 @@ class _$TournamentPageEventOpenSeatingPage
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -1870,6 +2115,7 @@ class _$TournamentPageEventOpenSeatingPage
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1894,6 +2140,7 @@ class _$TournamentPageEventOpenSeatingPage
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -1999,6 +2246,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -2017,6 +2265,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -2035,6 +2284,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -2060,6 +2310,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -2086,6 +2337,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -2110,6 +2362,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -2187,6 +2440,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     required TResult Function() backButtonPressed,
     required TResult Function() playersListTapped,
     required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
     required TResult Function() playersListOpened,
     required TResult Function() addPlayerTapped,
     required TResult Function() editTournamentSettings,
@@ -2205,6 +2459,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     TResult? Function()? backButtonPressed,
     TResult? Function()? playersListTapped,
     TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
     TResult? Function()? playersListOpened,
     TResult? Function()? addPlayerTapped,
     TResult? Function()? editTournamentSettings,
@@ -2223,6 +2478,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     TResult Function()? backButtonPressed,
     TResult Function()? playersListTapped,
     TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
     TResult Function()? playersListOpened,
     TResult Function()? addPlayerTapped,
     TResult Function()? editTournamentSettings,
@@ -2248,6 +2504,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
         playersListTapped,
     required TResult Function(TournamentPageEventUpdateSettings value)
         updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
     required TResult Function(TournamentPagePlayerListOpenedEvent value)
         playersListOpened,
     required TResult Function(TournamentPageEventAddPlayer value)
@@ -2274,6 +2531,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     TResult? Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
     TResult? Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
@@ -2298,6 +2556,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     TResult Function(TournamentPageEventPlayersListTapped value)?
         playersListTapped,
     TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
     TResult Function(TournamentPagePlayerListOpenedEvent value)?
         playersListOpened,
     TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,

@@ -49,7 +49,7 @@ class ClubPage extends StatefulWidget {
     ),
     routes: [
       ...AddClubGamePage.routes,
-      RatingPage.route,
+      RatingPage.clubRoute,
     ],
   );
 }

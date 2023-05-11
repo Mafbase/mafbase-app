@@ -3,6 +3,8 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_tournament_rating_interactor.dart';
+import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
@@ -10,6 +12,7 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
   final DownloadRatingInteractor _downloadRatingInteractor = getIt();
   final GetRatingInteractor _getRatingRepository = getIt();
+  final GetTournamentRatingInteractor _getTournamentRatingInteractor = getIt();
   late final RatingRouter _router = getIt(param1: context);
 
   RatingBloc([BuildContext? context]) : super(const RatingState(), context) {
@@ -37,6 +40,7 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     _router.changeRange(
       event.range,
       event.clubId,
+      event.tournamentId,
       event.style,
       event.sort,
       event.gameFilter,
@@ -45,10 +49,19 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
 
   _onPageOpened(RatingEventPageOpened event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    final rating = await _getRatingRepository.run(
-      clubId: event.clubId,
-      range: event.range,
-    );
+    final RatingModel rating;
+    if (event.clubId != null) {
+      rating = await _getRatingRepository.run(
+        clubId: event.clubId!,
+        range: event.range,
+      );
+    } else if (event.tournamentId != null) {
+      rating = await _getTournamentRatingInteractor(
+        tournamentId: event.tournamentId!,
+      );
+    } else {
+      throw ArgumentError();
+    }
     emit(
       state.copyWith(
         isLoading: false,

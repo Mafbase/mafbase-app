@@ -16,7 +16,8 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class RatingPage extends StatefulWidget {
-  final int clubId;
+  final int? clubId;
+  final int? tournamentId;
   final DateTimeRange range;
   final RatingTableStyle style;
   final RatingSort sort;
@@ -24,17 +25,33 @@ class RatingPage extends StatefulWidget {
 
   const RatingPage({
     Key? key,
-    required this.clubId,
+    this.clubId,
+    this.tournamentId,
     required this.range,
     this.style = RatingTableStyle.full,
     this.sort = RatingSort.score,
     this.gameFilter = 0,
-  }) : super(key: key);
+  })  : assert((clubId == null) != (tournamentId == null)),
+        super(key: key);
 
   @override
   State<RatingPage> createState() => _RatingPageState();
 
-  static String createLocation({
+  static String createTournamentLocation({
+    required int tournamentId,
+    required BuildContext context,
+    RatingTableStyle tableStyle = RatingTableStyle.full,
+    RatingSort sort = RatingSort.score,
+  }) {
+    return context.namedLocation(
+      _tournamentName,
+      params: {
+        "id": tournamentId.toString(),
+      },
+    );
+  }
+
+  static String createClubLocation({
     DateTimeRange? range,
     required int clubId,
     required BuildContext context,
@@ -43,7 +60,7 @@ class RatingPage extends StatefulWidget {
     int gameFilter = 0,
   }) {
     return context.namedLocation(
-      name,
+      _clubName,
       params: {"clubId": clubId.toString()},
       queryParams: {
         "date-start":
@@ -57,11 +74,47 @@ class RatingPage extends StatefulWidget {
     );
   }
 
-  static const name = 'club_rating';
+  static const _tournamentName = 'tournament_rating';
+  static const _clubName = 'club_rating';
 
-  static final GoRoute route = GoRoute(
+  static final GoRoute tournamentRoute = GoRoute(
+    path: 'rating',
+    name: _tournamentName,
+    builder: (context, state) {
+      final tournamentId = int.parse(state.params["id"]!);
+      final dateStart =
+          DateTime.tryParse(state.queryParams["date-start"] ?? "") ??
+              DateTime.now().subtract(const Duration(days: 30));
+      final dateEnd = DateTime.tryParse(state.queryParams["date-end"] ?? "") ??
+          DateTime.now();
+      final range = DateTimeRange(start: dateStart, end: dateEnd);
+      final style = RatingTableStyle.values.firstWhereOrNull(
+            (element) => state.queryParams["style"] == element.name,
+          ) ??
+          RatingTableStyle.full;
+      final sort = RatingSort.values.firstWhereOrNull(
+            (element) => state.queryParams["sort"] == element.name,
+          ) ??
+          RatingSort.score;
+      final gameFilter =
+          int.tryParse(state.queryParams["game-filter"] ?? "") ?? 0;
+      return BlocProvider<RatingBloc>(
+        create: (context) {
+          return getIt(param1: context);
+        },
+        child: RatingPage(
+          tournamentId: tournamentId,
+          range: range,
+          style: style,
+          sort: sort,
+          gameFilter: gameFilter,
+        ),
+      );
+    },
+  );
+  static final GoRoute clubRoute = GoRoute(
     path: "rating",
-    name: name,
+    name: _clubName,
     builder: (context, state) {
       final clubId = int.parse(state.params["clubId"]!);
       final dateStart =
@@ -112,6 +165,7 @@ class _RatingPageState extends CustomState<RatingPage> {
           RatingEvent.pageOpened(
             range: widget.range,
             clubId: widget.clubId,
+            tournamentId: widget.tournamentId,
           ),
         );
     super.initState();
@@ -137,6 +191,7 @@ class _RatingPageState extends CustomState<RatingPage> {
             RatingEvent.pageOpened(
               range: widget.range,
               clubId: widget.clubId,
+              tournamentId: widget.tournamentId,
             ),
           );
     }
@@ -164,6 +219,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                 const Text("Период: "),
                 CustomButton(
                   onTap: onChangeRangeTap,
+                  disabled: widget.tournamentId != null,
                   text:
                       "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
                 ),
@@ -201,23 +257,29 @@ class _RatingPageState extends CustomState<RatingPage> {
                       clubId: widget.clubId,
                       sort: widget.sort,
                       gameFilter: widget.gameFilter,
-                      openGame: (gameId) => context.read<RatingBloc>().add(
-                            RatingEvent.gameSelected(
-                              gameId: gameId,
-                              clubId: widget.clubId,
-                            ),
-                          ),
+                      openGame: (gameId) {
+                        if (widget.clubId != null) {
+                          context.read<RatingBloc>().add(
+                                RatingEvent.gameSelected(
+                                  gameId: gameId,
+                                  clubId: widget.clubId!,
+                                ),
+                              );
+                        }
+                      },
                       changeSort: (RatingSort sort) {
                         context.read<RatingBloc>().add(
                               RatingEvent.rangeChanged(
                                 range: widget.range,
                                 clubId: widget.clubId,
+                                tournamentId: widget.tournamentId,
                                 style: widget.style,
                                 sort: sort,
                                 gameFilter: widget.gameFilter,
                               ),
                             );
                       },
+                      tournamentId: widget.tournamentId,
                     ),
                     const SizedBox(
                       width: 16,
@@ -260,6 +322,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                         const Text("Период: "),
                         CustomButton(
                           onTap: onChangeRangeTap,
+                          disabled: widget.tournamentId != null,
                           text:
                               "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
                         ),
@@ -283,23 +346,29 @@ class _RatingPageState extends CustomState<RatingPage> {
                           clubId: widget.clubId,
                           sort: widget.sort,
                           gameFilter: widget.gameFilter,
-                          openGame: (gameId) => context.read<RatingBloc>().add(
-                                RatingEvent.gameSelected(
-                                  gameId: gameId,
-                                  clubId: widget.clubId,
-                                ),
-                              ),
+                          openGame: (gameId) {
+                            if (widget.clubId != null) {
+                              context.read<RatingBloc>().add(
+                                    RatingEvent.gameSelected(
+                                      gameId: gameId,
+                                      clubId: widget.clubId!,
+                                    ),
+                                  );
+                            }
+                          },
                           changeSort: (RatingSort sort) {
                             context.read<RatingBloc>().add(
                                   RatingEvent.rangeChanged(
                                     range: widget.range,
                                     clubId: widget.clubId,
                                     style: widget.style,
+                                    tournamentId: widget.tournamentId,
                                     sort: sort,
                                     gameFilter: widget.gameFilter,
                                   ),
                                 );
                           },
+                          tournamentId: widget.tournamentId,
                         ),
                       ),
                     ),
@@ -314,19 +383,21 @@ class _RatingPageState extends CustomState<RatingPage> {
     );
   }
 
-  Widget downloadRatingButton() => IconButton(
-        onPressed: () {
-          context.read<RatingBloc>().add(
-                RatingEvent.downloadRating(
-                  range: widget.range,
-                  clubId: widget.clubId,
-                ),
-              );
-        },
-        icon: const Icon(
-          Icons.download,
-        ),
-      );
+  Widget downloadRatingButton() => widget.clubId == null
+      ? Container()
+      : IconButton(
+          onPressed: () {
+            context.read<RatingBloc>().add(
+                  RatingEvent.downloadRating(
+                    range: widget.range,
+                    clubId: widget.clubId!,
+                  ),
+                );
+          },
+          icon: const Icon(
+            Icons.download,
+          ),
+        );
 
   onChangeRangeTap() async {
     final bloc = context.read<RatingBloc>();
@@ -342,6 +413,7 @@ class _RatingPageState extends CustomState<RatingPage> {
         RatingEvent.rangeChanged(
           range: range,
           clubId: widget.clubId,
+          tournamentId: widget.tournamentId,
           style: widget.style,
           sort: widget.sort,
           gameFilter: widget.gameFilter,
@@ -398,6 +470,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                         RatingEvent.rangeChanged(
                           range: widget.range,
                           clubId: widget.clubId,
+                          tournamentId: widget.tournamentId,
                           style: items[index],
                           sort: widget.sort,
                           gameFilter: widget.gameFilter,

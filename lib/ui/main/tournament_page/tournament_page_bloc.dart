@@ -49,6 +49,11 @@ class TournamentPageBloc
     on<TournamentPageEventUpdateSettings>(_onUpdateSettings);
     on<TournamentPageEventBill>(_onBill);
     on<TournamentPageEventPageOpened>(_onPageOpened);
+    on<TournamentPageEventOpenRating>(_openRating);
+  }
+
+  _openRating(TournamentPageEventOpenRating event, Emitter emit) async {
+    router.openRating(tournamentId: tournamentId);
   }
 
   _onBill(TournamentPageEventBill event, Emitter emit) async {

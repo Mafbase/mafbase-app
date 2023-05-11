@@ -23,6 +23,7 @@ mixin _$SeatingPageEvent {
     required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$SeatingPageEvent {
     TResult? Function()? fsmSeatingTapped,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$SeatingPageEvent {
     TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +56,8 @@ mixin _$SeatingPageEvent {
         fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +67,7 @@ mixin _$SeatingPageEvent {
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +77,7 @@ mixin _$SeatingPageEvent {
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,6 +145,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
     required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
   }) {
     return addPair();
   }
@@ -150,6 +158,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
     TResult? Function()? fsmSeatingTapped,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
   }) {
     return addPair?.call();
   }
@@ -162,6 +171,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
     TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
     required TResult orElse(),
   }) {
     if (addPair != null) {
@@ -180,6 +190,8 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
         fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
   }) {
     return addPair(this);
   }
@@ -192,6 +204,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
   }) {
     return addPair?.call(this);
   }
@@ -204,6 +217,7 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
     required TResult orElse(),
   }) {
     if (addPair != null) {
@@ -264,6 +278,7 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
     required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
   }) {
     return createSeating();
   }
@@ -276,6 +291,7 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
     TResult? Function()? fsmSeatingTapped,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
   }) {
     return createSeating?.call();
   }
@@ -288,6 +304,7 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
     TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
     required TResult orElse(),
   }) {
     if (createSeating != null) {
@@ -306,6 +323,8 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
         fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
   }) {
     return createSeating(this);
   }
@@ -318,6 +337,7 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
   }) {
     return createSeating?.call(this);
   }
@@ -330,6 +350,7 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
     required TResult orElse(),
   }) {
     if (createSeating != null) {
@@ -392,6 +413,7 @@ class _$SeatingPageEventFsmSeatingTapped
     required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
   }) {
     return fsmSeatingTapped();
   }
@@ -404,6 +426,7 @@ class _$SeatingPageEventFsmSeatingTapped
     TResult? Function()? fsmSeatingTapped,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
   }) {
     return fsmSeatingTapped?.call();
   }
@@ -416,6 +439,7 @@ class _$SeatingPageEventFsmSeatingTapped
     TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
     required TResult orElse(),
   }) {
     if (fsmSeatingTapped != null) {
@@ -434,6 +458,8 @@ class _$SeatingPageEventFsmSeatingTapped
         fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
   }) {
     return fsmSeatingTapped(this);
   }
@@ -446,6 +472,7 @@ class _$SeatingPageEventFsmSeatingTapped
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
   }) {
     return fsmSeatingTapped?.call(this);
   }
@@ -458,6 +485,7 @@ class _$SeatingPageEventFsmSeatingTapped
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
     required TResult orElse(),
   }) {
     if (fsmSeatingTapped != null) {
@@ -572,6 +600,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
     required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
   }) {
     return deletePair(first, second);
   }
@@ -584,6 +613,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
     TResult? Function()? fsmSeatingTapped,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
   }) {
     return deletePair?.call(first, second);
   }
@@ -596,6 +626,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
     TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
     required TResult orElse(),
   }) {
     if (deletePair != null) {
@@ -614,6 +645,8 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
         fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
   }) {
     return deletePair(this);
   }
@@ -626,6 +659,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
   }) {
     return deletePair?.call(this);
   }
@@ -638,6 +672,7 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
     required TResult orElse(),
   }) {
     if (deletePair != null) {
@@ -732,6 +767,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
     required TResult Function() fsmSeatingTapped,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
   }) {
     return pageOpened(tournamentId);
   }
@@ -744,6 +780,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
     TResult? Function()? fsmSeatingTapped,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
   }) {
     return pageOpened?.call(tournamentId);
   }
@@ -756,6 +793,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
     TResult Function()? fsmSeatingTapped,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -774,6 +812,8 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
         fsmSeatingTapped,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
   }) {
     return pageOpened(this);
   }
@@ -786,6 +826,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
   }) {
     return pageOpened?.call(this);
   }
@@ -798,6 +839,7 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -814,5 +856,169 @@ abstract class SeatingPageEventPageOpened implements SeatingPageEvent {
   int get tournamentId;
   @JsonKey(ignore: true)
   _$$SeatingPageEventPageOpenedCopyWith<_$SeatingPageEventPageOpened>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SeatingPageEventGameEditingCopyWith<$Res> {
+  factory _$$SeatingPageEventGameEditingCopyWith(
+          _$SeatingPageEventGameEditing value,
+          $Res Function(_$SeatingPageEventGameEditing) then) =
+      __$$SeatingPageEventGameEditingCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int gameId});
+}
+
+/// @nodoc
+class __$$SeatingPageEventGameEditingCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventGameEditing>
+    implements _$$SeatingPageEventGameEditingCopyWith<$Res> {
+  __$$SeatingPageEventGameEditingCopyWithImpl(
+      _$SeatingPageEventGameEditing _value,
+      $Res Function(_$SeatingPageEventGameEditing) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gameId = null,
+  }) {
+    return _then(_$SeatingPageEventGameEditing(
+      gameId: null == gameId
+          ? _value.gameId
+          : gameId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SeatingPageEventGameEditing implements SeatingPageEventGameEditing {
+  const _$SeatingPageEventGameEditing({required this.gameId});
+
+  @override
+  final int gameId;
+
+  @override
+  String toString() {
+    return 'SeatingPageEvent.openGameEditing(gameId: $gameId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SeatingPageEventGameEditing &&
+            (identical(other.gameId, gameId) || other.gameId == gameId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, gameId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SeatingPageEventGameEditingCopyWith<_$SeatingPageEventGameEditing>
+      get copyWith => __$$SeatingPageEventGameEditingCopyWithImpl<
+          _$SeatingPageEventGameEditing>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() addPair,
+    required TResult Function() createSeating,
+    required TResult Function() fsmSeatingTapped,
+    required TResult Function(PlayerModel first, PlayerModel second) deletePair,
+    required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
+  }) {
+    return openGameEditing(gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
+  }) {
+    return openGameEditing?.call(gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? addPair,
+    TResult Function()? createSeating,
+    TResult Function()? fsmSeatingTapped,
+    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
+    required TResult orElse(),
+  }) {
+    if (openGameEditing != null) {
+      return openGameEditing(gameId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventCreateSeating value)
+        createSeating,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
+    required TResult Function(SeatingPageEventDeletePair value) deletePair,
+    required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
+  }) {
+    return openGameEditing(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
+  }) {
+    return openGameEditing?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
+    required TResult orElse(),
+  }) {
+    if (openGameEditing != null) {
+      return openGameEditing(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SeatingPageEventGameEditing implements SeatingPageEvent {
+  const factory SeatingPageEventGameEditing({required final int gameId}) =
+      _$SeatingPageEventGameEditing;
+
+  int get gameId;
+  @JsonKey(ignore: true)
+  _$$SeatingPageEventGameEditingCopyWith<_$SeatingPageEventGameEditing>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -16,6 +16,9 @@ class TournamentPageEvent with _$TournamentPageEvent {
     required TournamentSettingsModel settings,
   }) = TournamentPageEventUpdateSettings;
 
+  const factory TournamentPageEvent.openRating() =
+      TournamentPageEventOpenRating;
+
   const factory TournamentPageEvent.playersListOpened() =
       TournamentPagePlayerListOpenedEvent;
 

@@ -28,7 +28,8 @@ enum RatingSort {
 
 class RatingTable extends StatefulWidget {
   final List<ClubRatingRowModel> rows;
-  final int clubId;
+  final int? clubId;
+  final int? tournamentId;
   final bool isMobile;
   final Function(int gameId) openGame;
   final Function(RatingSort sort) changeSort;
@@ -41,6 +42,7 @@ class RatingTable extends StatefulWidget {
     Key? key,
     required this.rows,
     required this.clubId,
+    required this.tournamentId,
     required this.openGame,
     RatingTableStyle? style,
     this.isMobile = false,
@@ -394,7 +396,7 @@ class _RatingTableState extends State<RatingTable> {
                   }
                   return ListView.builder(
                     key: Key(
-                      "GameHeader${widget.sortedRows.length}/${widget.clubId}",
+                      "GameHeader${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}",
                     ),
                     physics: const ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
@@ -449,7 +451,7 @@ class _RatingTableState extends State<RatingTable> {
           }
           return ListView.builder(
             key: Key(
-              "GameRow$rowIndex/${widget.sortedRows.length}/${widget.clubId}",
+              "GameRow$rowIndex/${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}",
             ),
             physics: const ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -860,11 +862,13 @@ class _RatingTableState extends State<RatingTable> {
           fit: FlexFit.loose,
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final width =
-                  constraints.maxWidth.isFinite ? constraints.maxWidth / (constraints.maxWidth / 60).floor() : 60.0;
+              final width = constraints.maxWidth.isFinite
+                  ? constraints.maxWidth / (constraints.maxWidth / 60).floor()
+                  : 60.0;
               final gamesCount =
                   widget.sortedRows.firstOrNull?.games.length ?? 0;
-              final expand = width * gamesCount > constraints.maxWidth && !widget.isMobile;
+              final expand =
+                  width * gamesCount > constraints.maxWidth && !widget.isMobile;
               final header = gameHeader(width, expand);
               final listView = ListView.builder(
                 key: const Key("fullColumns2"),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
@@ -16,6 +17,8 @@ abstract class TournamentPageRouter {
   void openSeatingPage({required int tournamentId});
 
   void openPlayersList({required int tournamentId});
+
+  void openRating({required int tournamentId});
 }
 
 class TournamentPageRouterImpl implements TournamentPageRouter {
@@ -54,6 +57,16 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
       TournamentPage.createLocation(
         context: _context,
         tournamentId: tournamentId,
+      ),
+    );
+  }
+
+  @override
+  void openRating({required int tournamentId}) {
+    _context.go(
+      RatingPage.createTournamentLocation(
+        tournamentId: tournamentId,
+        context: _context,
       ),
     );
   }

@@ -13,11 +13,13 @@ class BestMove extends $pb.ProtobufEnum {
   static const BestMove miss = BestMove._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'miss');
   static const BestMove half = BestMove._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'half');
   static const BestMove full = BestMove._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'full');
+  static const BestMove one = BestMove._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'one');
 
   static const $core.List<BestMove> values = <BestMove> [
     miss,
     half,
     full,
+    one,
   ];
 
   static final $core.Map<$core.int, BestMove> _byValue = $pb.ProtobufEnum.initByValue(values);

@@ -15,11 +15,12 @@ const BestMove$json = const {
     const {'1': 'miss', '2': 0},
     const {'1': 'half', '2': 1},
     const {'1': 'full', '2': 2},
+    const {'1': 'one', '2': 3},
   ],
 };
 
 /// Descriptor for `BestMove`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List bestMoveDescriptor = $convert.base64Decode('CghCZXN0TW92ZRIICgRtaXNzEAASCAoEaGFsZhABEggKBGZ1bGwQAg==');
+final $typed_data.Uint8List bestMoveDescriptor = $convert.base64Decode('CghCZXN0TW92ZRIICgRtaXNzEAASCAoEaGFsZhABEggKBGZ1bGwQAhIHCgNvbmUQAw==');
 @$core.Deprecated('Use gameWinDescriptor instead')
 const GameWin$json = const {
   '1': 'GameWin',
@@ -292,27 +293,32 @@ const ClubGameResult$json = const {
   '2': const [
     const {'1': 'addScore', '3': 1, '4': 3, '5': 5, '10': 'addScore'},
     const {'1': 'players', '3': 2, '4': 3, '5': 5, '10': 'players'},
-    const {'1': 'win', '3': 3, '4': 1, '5': 14, '6': '.generated.GameWin', '10': 'win'},
-    const {'1': 'firstDie', '3': 4, '4': 1, '5': 5, '9': 0, '10': 'firstDie', '17': true},
-    const {'1': 'bestMove', '3': 5, '4': 1, '5': 14, '6': '.generated.BestMove', '9': 1, '10': 'bestMove', '17': true},
-    const {'1': 'date', '3': 6, '4': 1, '5': 9, '9': 2, '10': 'date', '17': true},
+    const {'1': 'win', '3': 3, '4': 1, '5': 14, '6': '.generated.GameWin', '9': 0, '10': 'win', '17': true},
+    const {'1': 'firstDie', '3': 4, '4': 1, '5': 5, '9': 1, '10': 'firstDie', '17': true},
+    const {'1': 'bestMove', '3': 5, '4': 1, '5': 14, '6': '.generated.BestMove', '9': 2, '10': 'bestMove', '17': true},
+    const {'1': 'date', '3': 6, '4': 1, '5': 9, '9': 3, '10': 'date', '17': true},
     const {'1': 'referee', '3': 7, '4': 1, '5': 5, '10': 'referee'},
-    const {'1': 'mafia1', '3': 8, '4': 1, '5': 5, '10': 'mafia1'},
-    const {'1': 'mafia2', '3': 9, '4': 1, '5': 5, '10': 'mafia2'},
-    const {'1': 'don', '3': 10, '4': 1, '5': 5, '10': 'don'},
-    const {'1': 'sheriff', '3': 11, '4': 1, '5': 5, '10': 'sheriff'},
-    const {'1': 'ciId', '3': 12, '4': 1, '5': 5, '9': 3, '10': 'ciId', '17': true},
+    const {'1': 'mafia1', '3': 8, '4': 1, '5': 5, '9': 4, '10': 'mafia1', '17': true},
+    const {'1': 'mafia2', '3': 9, '4': 1, '5': 5, '9': 5, '10': 'mafia2', '17': true},
+    const {'1': 'don', '3': 10, '4': 1, '5': 5, '9': 6, '10': 'don', '17': true},
+    const {'1': 'sheriff', '3': 11, '4': 1, '5': 5, '9': 7, '10': 'sheriff', '17': true},
+    const {'1': 'ciId', '3': 12, '4': 1, '5': 5, '9': 8, '10': 'ciId', '17': true},
   ],
   '8': const [
+    const {'1': '_win'},
     const {'1': '_firstDie'},
     const {'1': '_bestMove'},
     const {'1': '_date'},
+    const {'1': '_mafia1'},
+    const {'1': '_mafia2'},
+    const {'1': '_don'},
+    const {'1': '_sheriff'},
     const {'1': '_ciId'},
   ],
 };
 
 /// Descriptor for `ClubGameResult`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode('Cg5DbHViR2FtZVJlc3VsdBIaCghhZGRTY29yZRgBIAMoBVIIYWRkU2NvcmUSGAoHcGxheWVycxgCIAMoBVIHcGxheWVycxIkCgN3aW4YAyABKA4yEi5nZW5lcmF0ZWQuR2FtZVdpblIDd2luEh8KCGZpcnN0RGllGAQgASgFSABSCGZpcnN0RGlliAEBEjQKCGJlc3RNb3ZlGAUgASgOMhMuZ2VuZXJhdGVkLkJlc3RNb3ZlSAFSCGJlc3RNb3ZliAEBEhcKBGRhdGUYBiABKAlIAlIEZGF0ZYgBARIYCgdyZWZlcmVlGAcgASgFUgdyZWZlcmVlEhYKBm1hZmlhMRgIIAEoBVIGbWFmaWExEhYKBm1hZmlhMhgJIAEoBVIGbWFmaWEyEhAKA2RvbhgKIAEoBVIDZG9uEhgKB3NoZXJpZmYYCyABKAVSB3NoZXJpZmYSFwoEY2lJZBgMIAEoBUgDUgRjaUlkiAEBQgsKCV9maXJzdERpZUILCglfYmVzdE1vdmVCBwoFX2RhdGVCBwoFX2NpSWQ=');
+final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode('Cg5DbHViR2FtZVJlc3VsdBIaCghhZGRTY29yZRgBIAMoBVIIYWRkU2NvcmUSGAoHcGxheWVycxgCIAMoBVIHcGxheWVycxIpCgN3aW4YAyABKA4yEi5nZW5lcmF0ZWQuR2FtZVdpbkgAUgN3aW6IAQESHwoIZmlyc3REaWUYBCABKAVIAVIIZmlyc3REaWWIAQESNAoIYmVzdE1vdmUYBSABKA4yEy5nZW5lcmF0ZWQuQmVzdE1vdmVIAlIIYmVzdE1vdmWIAQESFwoEZGF0ZRgGIAEoCUgDUgRkYXRliAEBEhgKB3JlZmVyZWUYByABKAVSB3JlZmVyZWUSGwoGbWFmaWExGAggASgFSARSBm1hZmlhMYgBARIbCgZtYWZpYTIYCSABKAVIBVIGbWFmaWEyiAEBEhUKA2RvbhgKIAEoBUgGUgNkb26IAQESHQoHc2hlcmlmZhgLIAEoBUgHUgdzaGVyaWZmiAEBEhcKBGNpSWQYDCABKAVICFIEY2lJZIgBAUIGCgRfd2luQgsKCV9maXJzdERpZUILCglfYmVzdE1vdmVCBwoFX2RhdGVCCQoHX21hZmlhMUIJCgdfbWFmaWEyQgYKBF9kb25CCgoIX3NoZXJpZmZCBwoFX2NpSWQ=');
 @$core.Deprecated('Use clubsEventOutDescriptor instead')
 const ClubsEventOut$json = const {
   '1': 'ClubsEventOut',

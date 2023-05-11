@@ -10,6 +10,7 @@ import 'package:seating_generator_web/data/repositories/club_repository_impl.dar
 import 'package:seating_generator_web/data/repositories/players_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/purchase_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/tournament_edit_repository_impl.dart';
+import 'package:seating_generator_web/data/repositories/tournament_result_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/tournaments_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/translation_repository_impl.dart';
 import 'package:seating_generator_web/data/storages/credential_secure_storage_impl.dart';
@@ -32,6 +33,7 @@ import 'package:seating_generator_web/domain/interactors/delete_player_interacto
 import 'package:seating_generator_web/domain/interactors/delete_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_player_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/edit_tournament_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_ci_schemes_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
@@ -41,7 +43,9 @@ import 'package:seating_generator_web/domain/interactors/get_rating_interactor.d
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_tournament_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_tournament_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
@@ -57,6 +61,7 @@ import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/domain/repositories/purchase_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/domain/repositories/tournament_result_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
@@ -104,6 +109,24 @@ void registerGetIt({bool isIntegrationTest = false}) {
     )
     ..registerFactoryParam<RatingRouter, BuildContext, void>(
       (context, _) => RatingRouterImpl(context),
+    )
+    ..registerLazySingleton<EditTournamentGameInteractor>(
+      () => EditTournamentGameInteractor(
+        getIt(),
+      ),
+    )
+    ..registerLazySingleton<TournamentResultRepository>(
+      () => TournamentResultRepositoryImpl(
+        getIt(),
+      ),
+    )
+    ..registerLazySingleton<GetTournamentGameInteractor>(
+      () => GetTournamentGameInteractor(
+        getIt(),
+      ),
+    )
+    ..registerLazySingleton<GetTournamentRatingInteractor>(
+      () => GetTournamentRatingInteractor(getIt()),
     )
     ..registerLazySingleton<TournamentEditRepository>(
       () => TournamentEditRepositoryImpl(getIt()),

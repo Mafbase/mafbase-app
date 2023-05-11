@@ -7,7 +7,8 @@ import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.d
 abstract class RatingRouter {
   void changeRange(
     DateTimeRange range,
-    int clubId,
+    int? clubId,
+    int? tournamentId,
     RatingTableStyle style,
     RatingSort sort,
     int gameFilter,
@@ -24,19 +25,32 @@ class RatingRouterImpl implements RatingRouter {
   @override
   void changeRange(
     DateTimeRange range,
-    int clubId,
+    int? clubId,
+    int? tournamentId,
     RatingTableStyle style,
     RatingSort sort,
     int gameFilter,
   ) {
-    final location = RatingPage.createLocation(
-      range: range,
-      clubId: clubId,
-      context: context,
-      tableStyle: style,
-      sort: sort,
-      gameFilter: gameFilter,
-    );
+    final String location;
+    if (clubId != null) {
+      location = RatingPage.createClubLocation(
+        range: range,
+        clubId: clubId,
+        context: context,
+        tableStyle: style,
+        sort: sort,
+        gameFilter: gameFilter,
+      );
+    } else if (tournamentId != null) {
+      location = RatingPage.createTournamentLocation(
+        context: context,
+        tableStyle: style,
+        sort: sort,
+        tournamentId: tournamentId,
+      );
+    } else {
+      throw ArgumentError();
+    }
     context.go(location);
   }
 

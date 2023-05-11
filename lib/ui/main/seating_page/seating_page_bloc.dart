@@ -29,6 +29,20 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     on<SeatingPageEventAddPair>(_onAddPair);
     on<SeatingPageEventFsmSeatingTapped>(_onFsm);
     on<SeatingPageEventCreateSeating>(_onCreateSeating);
+    on<SeatingPageEventGameEditing>(_onOpenGameEditing);
+  }
+
+  _onOpenGameEditing(SeatingPageEventGameEditing event, Emitter emit) {
+    router
+        .openGameEditing(
+          gameId: event.gameId,
+          tournamentId: tournamentId,
+        )
+        .then(
+          (value) => add(
+            SeatingPageEvent.pageOpened(tournamentId: tournamentId),
+          ),
+        );
   }
 
   _onCreateSeating(

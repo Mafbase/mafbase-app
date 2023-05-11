@@ -8,6 +8,8 @@ abstract class AddClubGameRouter {
 
   void openGame(int clubId, int gameId);
 
+  void pop();
+
   void openNewGame(int clubId);
 
   void openLoginPage();
@@ -55,5 +57,10 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
         nextPath: GoRouter.of(context).location,
       ),
     );
+  }
+
+  @override
+  void pop() {
+    context.pop();
   }
 }

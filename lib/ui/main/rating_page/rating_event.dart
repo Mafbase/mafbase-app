@@ -21,12 +21,14 @@ class RatingEvent with _$RatingEvent {
 
   const factory RatingEvent.pageOpened({
     required DateTimeRange range,
-    required int clubId,
+    required int? clubId,
+    required int? tournamentId,
   }) = RatingEventPageOpened;
 
   const factory RatingEvent.rangeChanged({
     required DateTimeRange range,
-    required int clubId,
+    required int? clubId,
+    required int? tournamentId,
     required RatingTableStyle style,
     required RatingSort sort,
     required int gameFilter,

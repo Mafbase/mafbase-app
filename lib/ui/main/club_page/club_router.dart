@@ -16,7 +16,7 @@ class ClubRouterImpl implements ClubRouter {
   @override
   void openRating({required int clubId}) {
     context.go(
-      RatingPage.createLocation(
+      RatingPage.createClubLocation(
         clubId: clubId,
         context: context,
       ),

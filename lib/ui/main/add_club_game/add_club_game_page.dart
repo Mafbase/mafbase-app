@@ -36,6 +36,40 @@ class AddClubGamePage extends StatefulWidget {
   @override
   State<AddClubGamePage> createState() => _AddClubGamePageState();
 
+  static String createTournamentEditLocation({
+    required BuildContext context,
+    required int tournamentId,
+    required int gameId,
+  }) {
+    return context.namedLocation(
+      'editTournamentGame',
+      params: {
+        'id': tournamentId.toString(),
+        'gameId': gameId.toString(),
+      },
+    );
+  }
+
+  static final GoRoute tournamentEditRoute = GoRoute(
+    path: 'editGame/:gameId',
+    name: 'editTournamentGame',
+    builder: (context, state) {
+      final gameId = int.parse(state.params["gameId"]!);
+      final tournamentId = int.parse(state.params["id"]!);
+      return BlocProvider<AddClubGameBloc>(
+        create: (context) => AddClubGameBloc(
+          context: context,
+          tournamentId: tournamentId,
+        ),
+        child: AddClubGamePage(
+          readOnly: false,
+          gameId: gameId,
+          editing: true,
+        ),
+      );
+    },
+  );
+
   static final List<GoRoute> routes = [
     GoRoute(
       path: 'addGame',
@@ -43,7 +77,10 @@ class AddClubGamePage extends StatefulWidget {
       builder: (context, state) {
         final clubId = int.parse(state.params["clubId"]!);
         return BlocProvider<AddClubGameBloc>(
-          create: (context) => AddClubGameBloc(clubId, context),
+          create: (context) => AddClubGameBloc(
+            clubId: clubId,
+            context: context,
+          ),
           // TODO: REGISTER IN GET IT
           child: const AddClubGamePage(
             editing: true,
@@ -59,9 +96,11 @@ class AddClubGamePage extends StatefulWidget {
           final clubId = int.parse(state.params["clubId"]!);
           final gameId = int.parse(state.params["gameId"]!);
           final edit = state.queryParams["edit"] == true.toString();
-          debugPrint(state.location);
           return BlocProvider<AddClubGameBloc>(
-            create: (context) => AddClubGameBloc(clubId, context),
+            create: (context) => AddClubGameBloc(
+              clubId: clubId,
+              context: context,
+            ),
             // TODO: REGISTER IN GET IT
             child: AddClubGamePage(
               readOnly: !edit,
@@ -168,7 +207,9 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 
   void onSetValues(AddClubGameEffectSetValues effect) {
     for (int i = 0; i < 10; i++) {
-      addScoreControllers[i].text = effect.addScore[i].toString();
+      if (effect.addScore.length > i) {
+        addScoreControllers[i].text = effect.addScore[i].toString();
+      }
       controllers[i].text = effect.players[i].toString();
     }
     refereeController.text = effect.referee;
@@ -225,6 +266,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   roles[i] = role;
                                 });
                               },
+                              isTournament: state.isTournament,
                               addScoreFocusNode: addScoreFocusNodes[i],
                               addScoreController: addScoreControllers[i],
                               nicknameController: controllers[i],
@@ -268,7 +310,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                 controller: refereeController,
                                 focusNode: refereeFocusNode,
                                 availablePlayers: state.players,
-                                readOnly: widget.readOnly,
+                                readOnly: widget.readOnly || state.isTournament,
                                 hint: "Судья",
                                 onNewPlayer: ({String? initValue}) async {
                                   context.read<AddClubGameBloc>().add(
@@ -327,7 +369,12 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                     CustomDropdown<BestMove>(
                                       readOnly: widget.readOnly,
                                       initValue: bestMove ?? BestMove.miss,
-                                      items: BestMove.values,
+                                      items: const [
+                                        BestMove.miss,
+                                        BestMove.one,
+                                        BestMove.half,
+                                        BestMove.full,
+                                      ],
                                       mapToString: (bestMove) {
                                         final String text;
                                         switch (bestMove) {
@@ -339,6 +386,9 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                             break;
                                           case BestMove.miss:
                                             text = "Мимо";
+                                            break;
+                                          case BestMove.one:
+                                            text = "Один маф";
                                             break;
                                           default:
                                             text = "";
@@ -409,7 +459,8 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   StatefulBuilder(
                                     builder: (context, setState) {
                                       return CustomDropdown<CiSchemeModel>(
-                                        readOnly: widget.readOnly,
+                                        readOnly: widget.readOnly ||
+                                            state.isTournament,
                                         initValue: ciSchemeModel,
                                         mapToString: (model) {
                                           return model?.name ??
@@ -424,13 +475,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                             return state.ciSchemes[index - 1];
                                           },
                                         ),
-                                        onChanged: widget.readOnly
-                                            ? null
-                                            : (value) {
-                                                setState(() {
-                                                  ciSchemeModel = value;
-                                                });
-                                              },
+                                        onChanged: (value) {
+                                          setState(() {
+                                            ciSchemeModel = value;
+                                          });
+                                        },
                                       );
                                     },
                                   ),
@@ -438,7 +487,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                               ),
                               StatefulBuilder(
                                 builder: (context, setState) => InkWell(
-                                  onTap: widget.readOnly
+                                  onTap: widget.readOnly || state.isTournament
                                       ? null
                                       : () {
                                           showDatePicker(
@@ -594,9 +643,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     }
 
     if (state.players.firstWhereOrNull(
-          (element) => refereeController.text == element.nickname,
-        ) ==
-        null) {
+              (element) => refereeController.text == element.nickname,
+            ) ==
+            null &&
+        !state.isTournament) {
       AppRouter.showErrorDialog(
         context,
         "Не найден судья: ${refereeController.text}",
@@ -623,10 +673,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               mafia1: roles.indexOf(PlayerRole.maf),
               mafia2: roles.lastIndexOf(PlayerRole.maf),
               referee: state.players
-                  .firstWhere(
+                  .firstWhereOrNull(
                     (element) => refereeController.text == element.nickname,
                   )
-                  .id,
+                  ?.id,
               don: roles.indexOf(PlayerRole.don),
               sheriff: roles.indexOf(PlayerRole.sheriff),
               firstDie: firstDie,
@@ -763,6 +813,7 @@ class PlayerRowWidget extends StatelessWidget {
   final FocusNode focusNode;
   final FocusNode addScoreFocusNode;
   final bool readOnly;
+  final bool isTournament;
   final List<PlayerModel> availablePlayers;
   final String hint;
   final PlayerRole role;
@@ -781,6 +832,7 @@ class PlayerRowWidget extends StatelessWidget {
     required this.role,
     required this.onNewPlayer,
     required this.addScoreFocusNode,
+    required this.isTournament,
   }) : super(key: key);
 
   @override
@@ -789,7 +841,7 @@ class PlayerRowWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         NicknameField(
-          readOnly: readOnly,
+          readOnly: readOnly || isTournament,
           controller: nicknameController,
           focusNode: focusNode,
           availablePlayers: availablePlayers,
