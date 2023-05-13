@@ -28,6 +28,19 @@ stages:          # List of stages for jobs, and their order of execution
   - test
   - deploy
 
+build_job:
+  stage: build
+  tags:
+    - docker
+  script:
+    - docker build -t seating-generator-flutter:latest .
+    - docker save seating-generator-flutter:latest > flutter-image.tar
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - flutter-image.tar
+
 code_quality:
   stage: test
   tags:
