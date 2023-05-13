@@ -80,18 +80,6 @@ class MafbaseApp extends StatelessWidget {
                 indent: 0,
                 endIndent: 0,
               ),
-              navigationBarTheme: NavigationBarThemeData(
-                indicatorColor: context.theme.darkBlueColor,
-                backgroundColor: context.theme.darkGreyColor,
-                labelTextStyle: MaterialStatePropertyAll(
-                  const TextStyle().copyWith(color: context.theme.background1),
-                ),
-                iconTheme: MaterialStateProperty.all(
-                  const IconThemeData(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
               colorScheme:
                   ThemeData.light(useMaterial3: true).colorScheme.copyWith(
                         primary: MyTheme.of(context).darkGreyColor,
@@ -99,8 +87,25 @@ class MafbaseApp extends StatelessWidget {
                         secondary: MyTheme.of(context).redColor,
                         secondaryContainer: MyTheme.of(context).redColor,
                       ),
+              bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                selectedItemColor: context.theme.darkGreyColor,
+                elevation: 5,
+                backgroundColor: context.theme.darkBlueColor,
+                selectedLabelStyle: const TextStyle().copyWith(
+                  color: Colors.white,
+                ),
+                unselectedLabelStyle: const TextStyle().copyWith(
+                  color: Colors.white,
+                ),
+                selectedIconTheme: const IconThemeData(
+                  color: Colors.white,
+                ),
+                unselectedIconTheme: const IconThemeData(
+                  color: Colors.white60,
+                ),
+              ),
               iconTheme: IconThemeData(
-                color: context.theme.darkBlueColor,
+                color: context.theme.darkGreyColor,
               ),
             ),
             routerDelegate: context.read<AppRouter>().router.routerDelegate,

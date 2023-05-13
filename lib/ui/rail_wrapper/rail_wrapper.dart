@@ -45,6 +45,7 @@ class RailWrapper extends StatefulWidget {
 
 class _RailWrapperState extends CustomState<RailWrapper> {
   double railWidth = 100;
+
   int selectedIndex(MainState state) =>
       state.selectedTab == MainPageTab.tournaments ? 0 : 1;
 
@@ -74,18 +75,19 @@ class _RailWrapperState extends CustomState<RailWrapper> {
       builder: (context, state) {
         return Scaffold(
           body: widget.child,
-          bottomNavigationBar: NavigationBar(
-            onDestinationSelected: onDestinationSelected,
-            selectedIndex: selectedIndex(state),
-            destinations: [
-              NavigationDestination(
+          bottomNavigationBar: BottomNavigationBar(
+            useLegacyColorScheme: false,
+            currentIndex: selectedIndex(state),
+            onTap: onDestinationSelected,
+            items: [
+              BottomNavigationBarItem(
                 icon: const Icon(Icons.table_chart_outlined),
                 label: context.locale.tournamentsListTitle,
               ),
-              NavigationDestination(
+              BottomNavigationBarItem(
                 icon: const Icon(Icons.people_alt_outlined),
                 label: context.locale.clubsHeader,
-              ),
+              )
             ],
           ),
         );
