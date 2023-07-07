@@ -45,7 +45,7 @@ code_quality:
   stage: test
   tags:
     - docker
-  image: "cirrusci/flutter:latest"
+  image: "ghcr.io/cirruslabs/flutter:3.10.5"
   before_script:
     - flutter pub global activate dart_code_metrics
     - export PATH="$PATH:$HOME/.pub-cache/bin"
@@ -59,7 +59,7 @@ test:
   stage: test
   tags:
     - docker
-  image: "cirrusci/flutter:latest"
+  image: "ghcr.io/cirruslabs/flutter:3.10.5"
   before_script:
     - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
