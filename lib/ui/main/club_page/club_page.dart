@@ -102,7 +102,10 @@ class _ClubPageState extends CustomState<ClubPage> {
                   backgroundColor: context.theme.redColor,
                   onPressed: () {
                     final bloc = context.read<ClubBloc>();
-                    ClubBillDialog.open(context).then((option) {
+                    ClubBillDialog.open(
+                      context: context,
+                      billedFor: state.model?.billedFor,
+                    ).then((option) {
                       if (option != null) {
                         bloc.add(
                           ClubEvent.billClub(

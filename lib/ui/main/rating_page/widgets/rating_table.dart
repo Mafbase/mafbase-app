@@ -909,7 +909,12 @@ class _RatingTableState extends State<RatingTable> {
           mainControllers[3],
           key: const Key("fullColumns3"),
           builder: scores,
-          header: const Text("Очки"),
+          header: InkWell(
+            onTap: () {
+              widget.changeSort(RatingSort.score);
+            },
+            child: const Text("Очки"),
+          ),
           boldLeft: true,
           prototype: scorePrototype,
         ),

@@ -188,17 +188,19 @@ const Club$json = const {
     const {'1': 'imageUrl', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'imageUrl', '17': true},
     const {'1': 'groupLink', '3': 5, '4': 1, '5': 9, '9': 2, '10': 'groupLink', '17': true},
     const {'1': 'city', '3': 6, '4': 1, '5': 9, '9': 3, '10': 'city', '17': true},
+    const {'1': 'billedFor', '3': 7, '4': 1, '5': 9, '9': 4, '10': 'billedFor', '17': true},
   ],
   '8': const [
     const {'1': '_description'},
     const {'1': '_imageUrl'},
     const {'1': '_groupLink'},
     const {'1': '_city'},
+    const {'1': '_billedFor'},
   ],
 };
 
 /// Descriptor for `Club`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubDescriptor = $convert.base64Decode('CgRDbHViEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiUKC2Rlc2NyaXB0aW9uGAMgASgJSABSC2Rlc2NyaXB0aW9uiAEBEh8KCGltYWdlVXJsGAQgASgJSAFSCGltYWdlVXJsiAEBEiEKCWdyb3VwTGluaxgFIAEoCUgCUglncm91cExpbmuIAQESFwoEY2l0eRgGIAEoCUgDUgRjaXR5iAEBQg4KDF9kZXNjcmlwdGlvbkILCglfaW1hZ2VVcmxCDAoKX2dyb3VwTGlua0IHCgVfY2l0eQ==');
+final $typed_data.Uint8List clubDescriptor = $convert.base64Decode('CgRDbHViEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiUKC2Rlc2NyaXB0aW9uGAMgASgJSABSC2Rlc2NyaXB0aW9uiAEBEh8KCGltYWdlVXJsGAQgASgJSAFSCGltYWdlVXJsiAEBEiEKCWdyb3VwTGluaxgFIAEoCUgCUglncm91cExpbmuIAQESFwoEY2l0eRgGIAEoCUgDUgRjaXR5iAEBEiEKCWJpbGxlZEZvchgHIAEoCUgEUgliaWxsZWRGb3KIAQFCDgoMX2Rlc2NyaXB0aW9uQgsKCV9pbWFnZVVybEIMCgpfZ3JvdXBMaW5rQgcKBV9jaXR5QgwKCl9iaWxsZWRGb3I=');
 @$core.Deprecated('Use clubRatingEventOutDescriptor instead')
 const ClubRatingEventOut$json = const {
   '1': 'ClubRatingEventOut',
@@ -287,6 +289,16 @@ const AvailableCiEventOut$json = const {
 
 /// Descriptor for `AvailableCiEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List availableCiEventOutDescriptor = $convert.base64Decode('ChNBdmFpbGFibGVDaUV2ZW50T3V0Ei0KB3NjaGVtZXMYASADKAsyEy5nZW5lcmF0ZWQuQ2lTY2hlbWVSB3NjaGVtZXM=');
+@$core.Deprecated('Use setFinalPlayersEventDescriptor instead')
+const SetFinalPlayersEvent$json = const {
+  '1': 'SetFinalPlayersEvent',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 3, '5': 5, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `SetFinalPlayersEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setFinalPlayersEventDescriptor = $convert.base64Decode('ChRTZXRGaW5hbFBsYXllcnNFdmVudBIOCgJpZBgBIAMoBVICaWQ=');
 @$core.Deprecated('Use clubGameResultDescriptor instead')
 const ClubGameResult$json = const {
   '1': 'ClubGameResult',

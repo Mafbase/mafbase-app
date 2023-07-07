@@ -8,6 +8,7 @@ class ClubModel with _$ClubModel {
   const factory ClubModel({
     required int id,
     required String name,
+    DateTime? billedFor,
     String? description,
     String? imageUrl,
     String? groupLink,
@@ -21,5 +22,6 @@ class ClubModel with _$ClubModel {
         imageUrl: club.hasImageUrl() ? club.imageUrl : null,
         groupLink: club.hasGroupLink() ? club.groupLink : null,
         city: club.hasCity() ? club.city : null,
+        billedFor: DateTime.tryParse(club.billedFor),
       );
 }

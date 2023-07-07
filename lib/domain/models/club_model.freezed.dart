@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ClubModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  DateTime? get billedFor => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get groupLink => throw _privateConstructorUsedError;
@@ -36,6 +37,7 @@ abstract class $ClubModelCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
+      DateTime? billedFor,
       String? description,
       String? imageUrl,
       String? groupLink,
@@ -57,6 +59,7 @@ class _$ClubModelCopyWithImpl<$Res, $Val extends ClubModel>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? billedFor = freezed,
     Object? description = freezed,
     Object? imageUrl = freezed,
     Object? groupLink = freezed,
@@ -71,6 +74,10 @@ class _$ClubModelCopyWithImpl<$Res, $Val extends ClubModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      billedFor: freezed == billedFor
+          ? _value.billedFor
+          : billedFor // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -101,6 +108,7 @@ abstract class _$$_ClubModelCopyWith<$Res> implements $ClubModelCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
+      DateTime? billedFor,
       String? description,
       String? imageUrl,
       String? groupLink,
@@ -120,6 +128,7 @@ class __$$_ClubModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? billedFor = freezed,
     Object? description = freezed,
     Object? imageUrl = freezed,
     Object? groupLink = freezed,
@@ -134,6 +143,10 @@ class __$$_ClubModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      billedFor: freezed == billedFor
+          ? _value.billedFor
+          : billedFor // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -160,6 +173,7 @@ class _$_ClubModel implements _ClubModel {
   const _$_ClubModel(
       {required this.id,
       required this.name,
+      this.billedFor,
       this.description,
       this.imageUrl,
       this.groupLink,
@@ -169,6 +183,8 @@ class _$_ClubModel implements _ClubModel {
   final int id;
   @override
   final String name;
+  @override
+  final DateTime? billedFor;
   @override
   final String? description;
   @override
@@ -180,7 +196,7 @@ class _$_ClubModel implements _ClubModel {
 
   @override
   String toString() {
-    return 'ClubModel(id: $id, name: $name, description: $description, imageUrl: $imageUrl, groupLink: $groupLink, city: $city)';
+    return 'ClubModel(id: $id, name: $name, billedFor: $billedFor, description: $description, imageUrl: $imageUrl, groupLink: $groupLink, city: $city)';
   }
 
   @override
@@ -190,6 +206,8 @@ class _$_ClubModel implements _ClubModel {
             other is _$_ClubModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.billedFor, billedFor) ||
+                other.billedFor == billedFor) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -201,7 +219,7 @@ class _$_ClubModel implements _ClubModel {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, description, imageUrl, groupLink, city);
+      runtimeType, id, name, billedFor, description, imageUrl, groupLink, city);
 
   @JsonKey(ignore: true)
   @override
@@ -214,6 +232,7 @@ abstract class _ClubModel implements ClubModel {
   const factory _ClubModel(
       {required final int id,
       required final String name,
+      final DateTime? billedFor,
       final String? description,
       final String? imageUrl,
       final String? groupLink,
@@ -223,6 +242,8 @@ abstract class _ClubModel implements ClubModel {
   int get id;
   @override
   String get name;
+  @override
+  DateTime? get billedFor;
   @override
   String? get description;
   @override

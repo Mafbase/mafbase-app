@@ -197,5 +197,14 @@
   "translationHelp": "Помощь с оформлением трансляции",
   "@translationHelp": {},
   "profile": "Профиль",
-  "@profile": {}
+  "@profile": {},
+  "billedFor": "Оплачено до {date}",
+  "@billedFor": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "16 мая 2022"
+      }
+    }
+  }
 }

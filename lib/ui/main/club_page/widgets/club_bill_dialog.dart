@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -16,15 +17,20 @@ enum ClubBillOptions {
 }
 
 class ClubBillDialog extends StatefulWidget {
-  const ClubBillDialog._({Key? key}) : super(key: key);
+  final DateTime? billedFor;
+
+  const ClubBillDialog._({Key? key, this.billedFor}) : super(key: key);
 
   @override
   State<ClubBillDialog> createState() => _ClubBillDialogState();
 
-  static Future<ClubBillOptions?> open(BuildContext context) {
+  static Future<ClubBillOptions?> open({
+    required BuildContext context,
+    required DateTime? billedFor,
+  }) {
     return showDialog(
       context: context,
-      builder: (context) => const ClubBillDialog._(),
+      builder: (context) => ClubBillDialog._(billedFor: billedFor),
     );
   }
 }
@@ -41,6 +47,15 @@ class _ClubBillDialogState extends State<ClubBillDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (widget.billedFor != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Text(
+                  context.locale.billedFor(
+                    DateFormat("dd MMMM yyyy").format(widget.billedFor!),
+                  ),
+                ),
+              ),
             ...ClubBillOptions.values.map(
               (value) => RadioListTile(
                 title: Text(
