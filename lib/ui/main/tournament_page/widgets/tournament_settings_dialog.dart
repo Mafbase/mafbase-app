@@ -10,12 +10,14 @@ class TournamentSettingsDialog extends StatefulWidget {
   final int defaultGames;
   final int swissGames;
   final int finalGames;
+  final VoidCallback onFinalPlayersTapped;
 
   const TournamentSettingsDialog({
     Key? key,
     this.defaultGames = 0,
     this.swissGames = 0,
     this.finalGames = 0,
+    required this.onFinalPlayersTapped,
   }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class TournamentSettingsDialog extends StatefulWidget {
 
   static Future<TournamentSettingsModel?> open({
     required BuildContext context,
+    required VoidCallback onFinalPlayersTapped,
     required TournamentSettingsModel initValue,
   }) {
     return showDialog(
@@ -32,6 +35,7 @@ class TournamentSettingsDialog extends StatefulWidget {
         defaultGames: initValue.defaultGames,
         swissGames: initValue.swissGames,
         finalGames: initValue.finalGames,
+        onFinalPlayersTapped: onFinalPlayersTapped,
       ),
     );
   }
@@ -108,13 +112,23 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                 const SizedBox(
                   height: 16,
                 ),
-                CustomTextField(
-                  hint: "6",
-                  validate: (value) => int.tryParse(value ?? "") == null
-                      ? "Неверный формат числа"
-                      : null,
-                  label: context.locale.finalGamesLabel,
-                  controller: finalGamesController,
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        hint: "6",
+                        validate: (value) => int.tryParse(value ?? "") == null
+                            ? "Неверный формат числа"
+                            : null,
+                        label: context.locale.finalGamesLabel,
+                        controller: finalGamesController,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: widget.onFinalPlayersTapped,
+                      icon: const Icon(Icons.person),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 16,

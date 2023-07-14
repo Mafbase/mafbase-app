@@ -8,6 +8,8 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dar
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class SeatingPage extends StatefulWidget {
@@ -48,153 +50,182 @@ class _SeatingPageState extends State<SeatingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SeatingPageBloc, SeatingPageState>(
-      builder: (context, state) {
-        return Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Text(
-                    context.locale.separateTitle,
-                    style: MyTheme.of(context).headerTextStyle,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Container(
-                    constraints: const BoxConstraints(maxHeight: 100),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.cannotMeet.length,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                                state.cannotMeet[index].first,
-                                state.cannotMeet[index].second
-                              ]
-                                  .map<Widget>(
-                                    (playerModel) => Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color:
-                                                MyTheme.of(context).borderColor,
+    return BlocBuilder<TournamentPageBloc, TournamentPageState>(
+      builder: (context, tournamentState) =>
+          BlocBuilder<SeatingPageBloc, SeatingPageState>(
+        builder: (context, state) {
+          return Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Text(
+                      context.locale.separateTitle,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      constraints: const BoxConstraints(maxHeight: 100),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.cannotMeet.length,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                                  state.cannotMeet[index].first,
+                                  state.cannotMeet[index].second
+                                ]
+                                    .map<Widget>(
+                                      (playerModel) => Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: MyTheme.of(context)
+                                                  .borderColor,
+                                            ),
                                           ),
-                                        ),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              playerModel.nickname,
-                                              style: MyTheme.of(context)
-                                                  .defaultTextStyle,
+                                          child: Center(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                playerModel.nickname,
+                                                style: MyTheme.of(context)
+                                                    .defaultTextStyle,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
+                                    )
+                                    .toList() +
+                                <Widget>[
+                                  IconButton(
+                                    onPressed: () {
+                                      final bloc =
+                                          context.read<SeatingPageBloc>();
+                                      showDialog<bool>(
+                                        context: context,
+                                        builder: (context) =>
+                                            const ConfirmDialog(),
+                                      ).then(
+                                        (value) {
+                                          if (value == true) {
+                                            bloc.add(
+                                              SeatingPageEvent.deletePair(
+                                                first: state
+                                                    .cannotMeet[index].first,
+                                                second: state
+                                                    .cannotMeet[index].second,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: MyTheme.of(context).redColor,
                                     ),
                                   )
-                                  .toList() +
-                              <Widget>[
-                                IconButton(
-                                  onPressed: () {
-                                    final bloc =
-                                        context.read<SeatingPageBloc>();
-                                    showDialog<bool>(
-                                      context: context,
-                                      builder: (context) =>
-                                          const ConfirmDialog(),
-                                    ).then(
-                                      (value) {
-                                        if (value == true) {
-                                          bloc.add(
-                                            SeatingPageEvent.deletePair(
-                                              first:
-                                                  state.cannotMeet[index].first,
-                                              second: state
-                                                  .cannotMeet[index].second,
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: MyTheme.of(context).redColor,
-                                  ),
-                                )
-                              ],
-                        );
+                                ],
+                          );
+                        },
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        context.read<SeatingPageBloc>().add(
+                              const SeatingPageEvent.addPair(),
+                            );
                       },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          context.locale.addSeparationBtnText,
+                          style: MyTheme.of(context).textBtnTextStyle,
+                        ),
+                      ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.read<SeatingPageBloc>().add(
-                            const SeatingPageEvent.addPair(),
+                    Expanded(
+                      flex: 100,
+                      child: SeatingList(
+                        models: state.games,
+                      ),
+                    ),
+                    if (tournamentState.finalPlayers.length == 10)
+                      TextButton(
+                        onPressed: () {
+                          ConfirmDialog.open(
+                            context,
+                            "Новая рассадка заменит старую",
+                          ).then(
+                            (value) {
+                              if (value == true && context.mounted) {
+                                context.read<SeatingPageBloc>().add(
+                                      const SeatingPageEvent
+                                          .createFinalSeating(),
+                                    );
+                              }
+                            },
                           );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        context.locale.addSeparationBtnText,
-                        style: MyTheme.of(context).textBtnTextStyle,
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Сгенерировать рассадку на финал",
+                            style: MyTheme.of(context).textBtnTextStyle,
+                          ),
+                        ),
+                      ),
+                    TextButton(
+                      onPressed: () {
+                        ConfirmDialog.open(
+                          context,
+                          "Новая рассадка заменит старую",
+                        ).then((value) {
+                          if (value == true) {
+                            if (!mounted) return;
+                            context.read<SeatingPageBloc>().add(
+                                  const SeatingPageEvent.createSeating(),
+                                );
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Сгенерировать рассадку",
+                          style: MyTheme.of(context).textBtnTextStyle,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 100,
-                    child: SeatingList(
-                      models: state.games,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      ConfirmDialog.open(
-                        context,
-                        "Новая рассадка заменит старую",
-                      ).then((value) {
-                        if (value == true) {
-                          if (!mounted) return;
-                          context.read<SeatingPageBloc>().add(
-                                const SeatingPageEvent.createSeating(),
-                              );
-                        }
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Сгенерировать рассадку",
-                        style: MyTheme.of(context).textBtnTextStyle,
+                    TextButton(
+                      onPressed: () {
+                        context.read<SeatingPageBloc>().add(
+                              const SeatingPageEvent.fsmSeatingTapped(),
+                            );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Загрузить готовую рассадку",
+                          style: MyTheme.of(context).textBtnTextStyle,
+                        ),
                       ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.read<SeatingPageBloc>().add(
-                            const SeatingPageEvent.fsmSeatingTapped(),
-                          );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Загрузить готовую рассадку",
-                        style: MyTheme.of(context).textBtnTextStyle,
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            if (state.isLoading)
-              const Positioned.fill(child: LoadingOverlayWidget()),
-          ],
-        );
-      },
+              if (state.isLoading)
+                const Positioned.fill(child: LoadingOverlayWidget()),
+            ],
+          );
+        },
+      ),
     );
   }
 }

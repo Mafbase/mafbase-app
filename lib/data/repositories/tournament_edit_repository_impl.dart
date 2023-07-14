@@ -1,12 +1,15 @@
 import 'package:collection/collection.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/requests/delete_separation_request.dart';
+import 'package:seating_generator_web/data/requests/generate_final_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_ci_schemes_request.dart';
+import 'package:seating_generator_web/data/requests/get_final_players_request.dart';
 import 'package:seating_generator_web/data/requests/get_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_separations_request.dart';
 import 'package:seating_generator_web/data/requests/get_settings_request.dart';
 import 'package:seating_generator_web/data/requests/separate_players_request.dart';
+import 'package:seating_generator_web/data/requests/set_final_players_request.dart';
 import 'package:seating_generator_web/data/requests/update_settings_request.dart';
-import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
@@ -102,5 +105,31 @@ class TournamentEditRepositoryImpl extends BaseRepository
     return UpdateSettingsRequest(
       tournamentId: tournamentId,
       settings: settings.toProto(),
-    ).execute(client);}
+    ).execute(client);
+  }
+
+  @override
+  Future setFinalPlayers({
+    required List<PlayerModel> players,
+    required int tournamentId,
+  }) {
+    return SetFinalPlayersRequest(
+      tournamentId: tournamentId,
+      players: players.map((e) => e.id).toList(),
+    ).execute(client);
+  }
+
+  @override
+  Future<List<PlayerModel>> getFinalPlayers({required int tournamentId}) {
+    return GetFinalPlayersRequest(tournamentId: tournamentId)
+        .execute(client)
+        .then((value) =>
+            value.player.map((e) => PlayerModel.fromProto(e)).toList());
+  }
+
+  @override
+  Future generateFinalGames({required int tournamentId}) {
+    return GenerateFinalSeatingRequest(tournamentId: tournamentId)
+        .execute(client);
+  }
 }

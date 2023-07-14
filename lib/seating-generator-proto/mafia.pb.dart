@@ -2813,6 +2813,47 @@ class EmailVerificationEventOut extends $pb.GeneratedMessage {
   void clearStatus() => clearField(1);
 }
 
+class GetFinalPlayersOut extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetFinalPlayersOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<Player>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'player', $pb.PbFieldType.PM, subBuilder: Player.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetFinalPlayersOut._() : super();
+  factory GetFinalPlayersOut({
+    $core.Iterable<Player>? player,
+  }) {
+    final _result = create();
+    if (player != null) {
+      _result.player.addAll(player);
+    }
+    return _result;
+  }
+  factory GetFinalPlayersOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetFinalPlayersOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetFinalPlayersOut clone() => GetFinalPlayersOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetFinalPlayersOut copyWith(void Function(GetFinalPlayersOut) updates) => super.copyWith((message) => updates(message as GetFinalPlayersOut)) as GetFinalPlayersOut; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetFinalPlayersOut create() => GetFinalPlayersOut._();
+  GetFinalPlayersOut createEmptyInstance() => create();
+  static $pb.PbList<GetFinalPlayersOut> createRepeated() => $pb.PbList<GetFinalPlayersOut>();
+  @$core.pragma('dart2js:noInline')
+  static GetFinalPlayersOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFinalPlayersOut>(create);
+  static GetFinalPlayersOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Player> get player => $_getList(0);
+}
+
 class SeatingForTranslationEvent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SeatingForTranslationEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'tournamentId', $pb.PbFieldType.O3, protoName: 'tournamentId')

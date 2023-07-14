@@ -20,6 +20,7 @@ mixin _$TournamentPageState {
   List<PlayerModel> get players => throw _privateConstructorUsedError;
   List<PlayerModel> get tournamentPlayers => throw _privateConstructorUsedError;
   List<List<PlayerModel>> get cannotMeet => throw _privateConstructorUsedError;
+  List<PlayerModel> get finalPlayers => throw _privateConstructorUsedError;
   TournamentSettingsModel get settings => throw _privateConstructorUsedError;
   int get billedPlayers => throw _privateConstructorUsedError;
   bool get billedTranslation => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $TournamentPageStateCopyWith<$Res> {
       List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
       List<List<PlayerModel>> cannotMeet,
+      List<PlayerModel> finalPlayers,
       TournamentSettingsModel settings,
       int billedPlayers,
       bool billedTranslation});
@@ -64,6 +66,7 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     Object? players = null,
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
+    Object? finalPlayers = null,
     Object? settings = null,
     Object? billedPlayers = null,
     Object? billedTranslation = null,
@@ -85,6 +88,10 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.cannotMeet
           : cannotMeet // ignore: cast_nullable_to_non_nullable
               as List<List<PlayerModel>>,
+      finalPlayers: null == finalPlayers
+          ? _value.finalPlayers
+          : finalPlayers // ignore: cast_nullable_to_non_nullable
+              as List<PlayerModel>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -122,6 +129,7 @@ abstract class _$$_TournamentPageStateCopyWith<$Res>
       List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
       List<List<PlayerModel>> cannotMeet,
+      List<PlayerModel> finalPlayers,
       TournamentSettingsModel settings,
       int billedPlayers,
       bool billedTranslation});
@@ -145,6 +153,7 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
     Object? players = null,
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
+    Object? finalPlayers = null,
     Object? settings = null,
     Object? billedPlayers = null,
     Object? billedTranslation = null,
@@ -166,6 +175,10 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
           ? _value._cannotMeet
           : cannotMeet // ignore: cast_nullable_to_non_nullable
               as List<List<PlayerModel>>,
+      finalPlayers: null == finalPlayers
+          ? _value._finalPlayers
+          : finalPlayers // ignore: cast_nullable_to_non_nullable
+              as List<PlayerModel>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -190,13 +203,15 @@ class _$_TournamentPageState implements _TournamentPageState {
       final List<PlayerModel> players = const [],
       final List<PlayerModel> tournamentPlayers = const [],
       final List<List<PlayerModel>> cannotMeet = const [],
+      final List<PlayerModel> finalPlayers = const [],
       this.settings = const TournamentSettingsModel(
           defaultGames: 0, swissGames: 0, finalGames: 0),
       this.billedPlayers = 10,
       this.billedTranslation = false})
       : _players = players,
         _tournamentPlayers = tournamentPlayers,
-        _cannotMeet = cannotMeet;
+        _cannotMeet = cannotMeet,
+        _finalPlayers = finalPlayers;
 
   @override
   @JsonKey()
@@ -225,6 +240,14 @@ class _$_TournamentPageState implements _TournamentPageState {
     return EqualUnmodifiableListView(_cannotMeet);
   }
 
+  final List<PlayerModel> _finalPlayers;
+  @override
+  @JsonKey()
+  List<PlayerModel> get finalPlayers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_finalPlayers);
+  }
+
   @override
   @JsonKey()
   final TournamentSettingsModel settings;
@@ -237,7 +260,7 @@ class _$_TournamentPageState implements _TournamentPageState {
 
   @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation)';
+    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation)';
   }
 
   @override
@@ -252,6 +275,8 @@ class _$_TournamentPageState implements _TournamentPageState {
                 .equals(other._tournamentPlayers, _tournamentPlayers) &&
             const DeepCollectionEquality()
                 .equals(other._cannotMeet, _cannotMeet) &&
+            const DeepCollectionEquality()
+                .equals(other._finalPlayers, _finalPlayers) &&
             (identical(other.settings, settings) ||
                 other.settings == settings) &&
             (identical(other.billedPlayers, billedPlayers) ||
@@ -267,6 +292,7 @@ class _$_TournamentPageState implements _TournamentPageState {
       const DeepCollectionEquality().hash(_players),
       const DeepCollectionEquality().hash(_tournamentPlayers),
       const DeepCollectionEquality().hash(_cannotMeet),
+      const DeepCollectionEquality().hash(_finalPlayers),
       settings,
       billedPlayers,
       billedTranslation);
@@ -285,6 +311,7 @@ abstract class _TournamentPageState implements TournamentPageState {
       final List<PlayerModel> players,
       final List<PlayerModel> tournamentPlayers,
       final List<List<PlayerModel>> cannotMeet,
+      final List<PlayerModel> finalPlayers,
       final TournamentSettingsModel settings,
       final int billedPlayers,
       final bool billedTranslation}) = _$_TournamentPageState;
@@ -297,6 +324,8 @@ abstract class _TournamentPageState implements TournamentPageState {
   List<PlayerModel> get tournamentPlayers;
   @override
   List<List<PlayerModel>> get cannotMeet;
+  @override
+  List<PlayerModel> get finalPlayers;
   @override
   TournamentSettingsModel get settings;
   @override

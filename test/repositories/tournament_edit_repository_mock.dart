@@ -61,4 +61,22 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
   }) {
     return Future.value();
   }
+
+  @override
+  Future setFinalPlayers({
+    required List<PlayerModel> players,
+    required int tournamentId,
+  }) {
+    return Future.value();
+  }
+
+  @override
+  Future<List<PlayerModel>> getFinalPlayers({required int tournamentId}) {
+    return Future.value([]);
+  }
+
+  @override
+  Future generateFinalGames({required int tournamentId}) {
+    return Future.value();
+  }
 }

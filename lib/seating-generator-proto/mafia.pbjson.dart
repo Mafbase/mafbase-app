@@ -607,6 +607,16 @@ const EmailVerificationEventOut_Status$json = const {
 
 /// Descriptor for `EmailVerificationEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List emailVerificationEventOutDescriptor = $convert.base64Decode('ChlFbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0EkMKBnN0YXR1cxgBIAEoDjIrLmdlbmVyYXRlZC5FbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0LlN0YXR1c1IGc3RhdHVzIikKBlN0YXR1cxILCgdzdWNjZXNzEAASEgoOaW5jb3JyZWN0VG9rZW4QAQ==');
+@$core.Deprecated('Use getFinalPlayersOutDescriptor instead')
+const GetFinalPlayersOut$json = const {
+  '1': 'GetFinalPlayersOut',
+  '2': const [
+    const {'1': 'player', '3': 1, '4': 3, '5': 11, '6': '.generated.Player', '10': 'player'},
+  ],
+};
+
+/// Descriptor for `GetFinalPlayersOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getFinalPlayersOutDescriptor = $convert.base64Decode('ChJHZXRGaW5hbFBsYXllcnNPdXQSKQoGcGxheWVyGAEgAygLMhEuZ2VuZXJhdGVkLlBsYXllclIGcGxheWVy');
 @$core.Deprecated('Use seatingForTranslationEventDescriptor instead')
 const SeatingForTranslationEvent$json = const {
   '1': 'SeatingForTranslationEvent',

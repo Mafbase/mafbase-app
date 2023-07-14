@@ -5,9 +5,11 @@ import 'package:seating_generator_web/domain/interactors/add_player_interactor.d
 import 'package:seating_generator_web/domain/interactors/bill_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_final_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/set_final_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
@@ -30,6 +32,8 @@ class TournamentPageBloc
   final GetSettingsInteractor _getSettingsInteractor = getIt();
   final UpdateSettingsInteractor _updateSettingsInteractor = getIt();
   final GetTournamentInteractor _getTournamentInteractor = getIt();
+  final GetFinalPlayersInteractor _getFinalPlayersInteractor = getIt();
+  final SetFinalPlayersInteractor _setFinalPlayersInteractor = getIt();
   late final BillTournamentInteractor _billTournamentInteractor = getIt(
     param1: context,
   );
@@ -50,6 +54,25 @@ class TournamentPageBloc
     on<TournamentPageEventBill>(_onBill);
     on<TournamentPageEventPageOpened>(_onPageOpened);
     on<TournamentPageEventOpenRating>(_openRating);
+    on<TournamentPageEventSetFinalPlayers>(_onSetFinalPlayers);
+  }
+
+  Future _updateFinalPlayers(Emitter emit) async {
+    final finalPlayer = await _getFinalPlayersInteractor(
+      tournamentId: tournamentId,
+    );
+    emit(state.copyWith(finalPlayers: finalPlayer));
+  }
+
+  _onSetFinalPlayers(
+    TournamentPageEventSetFinalPlayers event,
+    Emitter emit,
+  ) async {
+    await _setFinalPlayersInteractor(
+      players: event.players,
+      tournamentId: tournamentId,
+    );
+    await _updateFinalPlayers(emit);
   }
 
   _openRating(TournamentPageEventOpenRating event, Emitter emit) async {
@@ -69,16 +92,21 @@ class TournamentPageBloc
   }
 
   _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {
-    final tournament = await _getTournamentInteractor(
-      tournamentId: tournamentId,
-    );
+    await Future.wait([
+      Future(() async {
+        final tournament = await _getTournamentInteractor(
+          tournamentId: tournamentId,
+        );
 
-    emit(
-      state.copyWith(
-        billedPlayers: tournament.billedPlayers,
-        billedTranslation: tournament.billedTranslation,
-      ),
-    );
+        emit(
+          state.copyWith(
+            billedPlayers: tournament.billedPlayers,
+            billedTranslation: tournament.billedTranslation,
+          ),
+        );
+      }),
+      _updateFinalPlayers(emit),
+    ]);
   }
 
   _onPlayersListTapped(

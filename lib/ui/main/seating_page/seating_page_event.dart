@@ -23,4 +23,7 @@ class SeatingPageEvent with _$SeatingPageEvent {
 
   const factory SeatingPageEvent.openGameEditing({required int gameId}) =
       SeatingPageEventGameEditing;
+
+  const factory SeatingPageEvent.createFinalSeating() =
+      SeatingPageEventCreateFinalSeating;
 }

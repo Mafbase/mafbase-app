@@ -11,6 +11,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bl
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/widgets/final_players_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/players_list_body.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_billing_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_menu.dart';
@@ -92,6 +93,22 @@ class _TournamentPageState extends CustomState<TournamentPage>
     super.initState();
   }
 
+  void openFinalPlayersDialog(TournamentPageState state) {
+    FinalPlayersDialog.open(
+      context: context,
+      initValue: state.finalPlayers,
+      players: state.tournamentPlayers,
+    ).then((value) {
+      if (value != null) {
+        context.read<TournamentPageBloc>().add(
+              TournamentPageEvent.setFinalPlayers(
+                players: value,
+              ),
+            );
+      }
+    });
+  }
+
   @override
   Widget buildDesktop(BuildContext context) {
     return Row(
@@ -132,6 +149,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
                   final settings = await TournamentSettingsDialog.open(
                     context: context,
                     initValue: oldSettings,
+                    onFinalPlayersTapped: () => openFinalPlayersDialog(state),
                   );
                   if (mounted && settings != null && settings != oldSettings) {
                     context.read<TournamentPageBloc>().add(

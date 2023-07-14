@@ -30,6 +30,7 @@ mixin _$TournamentPageEvent {
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,6 +47,7 @@ mixin _$TournamentPageEvent {
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +64,7 @@ mixin _$TournamentPageEvent {
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -88,6 +91,8 @@ mixin _$TournamentPageEvent {
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +115,8 @@ mixin _$TournamentPageEvent {
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -131,6 +138,7 @@ mixin _$TournamentPageEvent {
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -209,6 +217,7 @@ class _$TournamentPageBackButtonPreesedEvent
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return backButtonPressed();
   }
@@ -228,6 +237,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return backButtonPressed?.call();
   }
@@ -247,6 +257,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -279,6 +290,8 @@ class _$TournamentPageBackButtonPreesedEvent
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return backButtonPressed(this);
   }
@@ -304,6 +317,8 @@ class _$TournamentPageBackButtonPreesedEvent
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return backButtonPressed?.call(this);
   }
@@ -328,6 +343,7 @@ class _$TournamentPageBackButtonPreesedEvent
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (backButtonPressed != null) {
@@ -398,6 +414,7 @@ class _$TournamentPageEventPlayersListTapped
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return playersListTapped();
   }
@@ -417,6 +434,7 @@ class _$TournamentPageEventPlayersListTapped
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return playersListTapped?.call();
   }
@@ -436,6 +454,7 @@ class _$TournamentPageEventPlayersListTapped
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (playersListTapped != null) {
@@ -468,6 +487,8 @@ class _$TournamentPageEventPlayersListTapped
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return playersListTapped(this);
   }
@@ -493,6 +514,8 @@ class _$TournamentPageEventPlayersListTapped
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return playersListTapped?.call(this);
   }
@@ -517,6 +540,7 @@ class _$TournamentPageEventPlayersListTapped
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (playersListTapped != null) {
@@ -625,6 +649,7 @@ class _$TournamentPageEventUpdateSettings
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return updateSettings(settings);
   }
@@ -644,6 +669,7 @@ class _$TournamentPageEventUpdateSettings
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return updateSettings?.call(settings);
   }
@@ -663,6 +689,7 @@ class _$TournamentPageEventUpdateSettings
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -695,6 +722,8 @@ class _$TournamentPageEventUpdateSettings
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return updateSettings(this);
   }
@@ -720,6 +749,8 @@ class _$TournamentPageEventUpdateSettings
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return updateSettings?.call(this);
   }
@@ -744,6 +775,7 @@ class _$TournamentPageEventUpdateSettings
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (updateSettings != null) {
@@ -820,6 +852,7 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return openRating();
   }
@@ -839,6 +872,7 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return openRating?.call();
   }
@@ -858,6 +892,7 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -890,6 +925,8 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return openRating(this);
   }
@@ -915,6 +952,8 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return openRating?.call(this);
   }
@@ -939,6 +978,7 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -1008,6 +1048,7 @@ class _$TournamentPagePlayerListOpenedEvent
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return playersListOpened();
   }
@@ -1027,6 +1068,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return playersListOpened?.call();
   }
@@ -1046,6 +1088,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (playersListOpened != null) {
@@ -1078,6 +1121,8 @@ class _$TournamentPagePlayerListOpenedEvent
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return playersListOpened(this);
   }
@@ -1103,6 +1148,8 @@ class _$TournamentPagePlayerListOpenedEvent
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return playersListOpened?.call(this);
   }
@@ -1127,6 +1174,7 @@ class _$TournamentPagePlayerListOpenedEvent
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (playersListOpened != null) {
@@ -1196,6 +1244,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return addPlayerTapped();
   }
@@ -1215,6 +1264,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return addPlayerTapped?.call();
   }
@@ -1234,6 +1284,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (addPlayerTapped != null) {
@@ -1266,6 +1317,8 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return addPlayerTapped(this);
   }
@@ -1291,6 +1344,8 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return addPlayerTapped?.call(this);
   }
@@ -1315,6 +1370,7 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (addPlayerTapped != null) {
@@ -1383,6 +1439,7 @@ class _$TournamentPageEventEditSettings
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return editTournamentSettings();
   }
@@ -1402,6 +1459,7 @@ class _$TournamentPageEventEditSettings
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return editTournamentSettings?.call();
   }
@@ -1421,6 +1479,7 @@ class _$TournamentPageEventEditSettings
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (editTournamentSettings != null) {
@@ -1453,6 +1512,8 @@ class _$TournamentPageEventEditSettings
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return editTournamentSettings(this);
   }
@@ -1478,6 +1539,8 @@ class _$TournamentPageEventEditSettings
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return editTournamentSettings?.call(this);
   }
@@ -1502,6 +1565,7 @@ class _$TournamentPageEventEditSettings
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (editTournamentSettings != null) {
@@ -1607,6 +1671,7 @@ class _$TournamentPageEventDeletePlayer
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return deletePlayer(player);
   }
@@ -1626,6 +1691,7 @@ class _$TournamentPageEventDeletePlayer
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return deletePlayer?.call(player);
   }
@@ -1645,6 +1711,7 @@ class _$TournamentPageEventDeletePlayer
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (deletePlayer != null) {
@@ -1677,6 +1744,8 @@ class _$TournamentPageEventDeletePlayer
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return deletePlayer(this);
   }
@@ -1702,6 +1771,8 @@ class _$TournamentPageEventDeletePlayer
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return deletePlayer?.call(this);
   }
@@ -1726,6 +1797,7 @@ class _$TournamentPageEventDeletePlayer
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (deletePlayer != null) {
@@ -1837,6 +1909,7 @@ class _$TournamentPageEventOpenProfileDialog
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return openProfileDialog(player);
   }
@@ -1856,6 +1929,7 @@ class _$TournamentPageEventOpenProfileDialog
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return openProfileDialog?.call(player);
   }
@@ -1875,6 +1949,7 @@ class _$TournamentPageEventOpenProfileDialog
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (openProfileDialog != null) {
@@ -1907,6 +1982,8 @@ class _$TournamentPageEventOpenProfileDialog
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return openProfileDialog(this);
   }
@@ -1932,6 +2009,8 @@ class _$TournamentPageEventOpenProfileDialog
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return openProfileDialog?.call(this);
   }
@@ -1956,6 +2035,7 @@ class _$TournamentPageEventOpenProfileDialog
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (openProfileDialog != null) {
@@ -2033,6 +2113,7 @@ class _$TournamentPageEventOpenSeatingPage
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return openSeatingPage();
   }
@@ -2052,6 +2133,7 @@ class _$TournamentPageEventOpenSeatingPage
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return openSeatingPage?.call();
   }
@@ -2071,6 +2153,7 @@ class _$TournamentPageEventOpenSeatingPage
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (openSeatingPage != null) {
@@ -2103,6 +2186,8 @@ class _$TournamentPageEventOpenSeatingPage
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return openSeatingPage(this);
   }
@@ -2128,6 +2213,8 @@ class _$TournamentPageEventOpenSeatingPage
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return openSeatingPage?.call(this);
   }
@@ -2152,6 +2239,7 @@ class _$TournamentPageEventOpenSeatingPage
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (openSeatingPage != null) {
@@ -2255,6 +2343,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return bill(playersCount, billedTranlsation);
   }
@@ -2274,6 +2363,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return bill?.call(playersCount, billedTranlsation);
   }
@@ -2293,6 +2383,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (bill != null) {
@@ -2325,6 +2416,8 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return bill(this);
   }
@@ -2350,6 +2443,8 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return bill?.call(this);
   }
@@ -2374,6 +2469,7 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (bill != null) {
@@ -2449,6 +2545,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     required TResult Function() openSeatingPage,
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
   }) {
     return pageOpened();
   }
@@ -2468,6 +2565,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     TResult? Function()? openSeatingPage,
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
   }) {
     return pageOpened?.call();
   }
@@ -2487,6 +2585,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     TResult Function()? openSeatingPage,
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -2519,6 +2618,8 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
         openSeatingPage,
     required TResult Function(TournamentPageEventBill value) bill,
     required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
   }) {
     return pageOpened(this);
   }
@@ -2544,6 +2645,8 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
         openSeatingPage,
     TResult? Function(TournamentPageEventBill value)? bill,
     TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
   }) {
     return pageOpened?.call(this);
   }
@@ -2568,6 +2671,7 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
     TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
     TResult Function(TournamentPageEventBill value)? bill,
     TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -2580,4 +2684,242 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
 abstract class TournamentPageEventPageOpened implements TournamentPageEvent {
   const factory TournamentPageEventPageOpened() =
       _$TournamentPageEventPageOpened;
+}
+
+/// @nodoc
+abstract class _$$TournamentPageEventSetFinalPlayersCopyWith<$Res> {
+  factory _$$TournamentPageEventSetFinalPlayersCopyWith(
+          _$TournamentPageEventSetFinalPlayers value,
+          $Res Function(_$TournamentPageEventSetFinalPlayers) then) =
+      __$$TournamentPageEventSetFinalPlayersCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PlayerModel> players});
+}
+
+/// @nodoc
+class __$$TournamentPageEventSetFinalPlayersCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventSetFinalPlayers>
+    implements _$$TournamentPageEventSetFinalPlayersCopyWith<$Res> {
+  __$$TournamentPageEventSetFinalPlayersCopyWithImpl(
+      _$TournamentPageEventSetFinalPlayers _value,
+      $Res Function(_$TournamentPageEventSetFinalPlayers) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? players = null,
+  }) {
+    return _then(_$TournamentPageEventSetFinalPlayers(
+      players: null == players
+          ? _value._players
+          : players // ignore: cast_nullable_to_non_nullable
+              as List<PlayerModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TournamentPageEventSetFinalPlayers
+    implements TournamentPageEventSetFinalPlayers {
+  const _$TournamentPageEventSetFinalPlayers(
+      {required final List<PlayerModel> players})
+      : _players = players;
+
+  final List<PlayerModel> _players;
+  @override
+  List<PlayerModel> get players {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_players);
+  }
+
+  @override
+  String toString() {
+    return 'TournamentPageEvent.setFinalPlayers(players: $players)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TournamentPageEventSetFinalPlayers &&
+            const DeepCollectionEquality().equals(other._players, _players));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_players));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TournamentPageEventSetFinalPlayersCopyWith<
+          _$TournamentPageEventSetFinalPlayers>
+      get copyWith => __$$TournamentPageEventSetFinalPlayersCopyWithImpl<
+          _$TournamentPageEventSetFinalPlayers>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() backButtonPressed,
+    required TResult Function() playersListTapped,
+    required TResult Function(TournamentSettingsModel settings) updateSettings,
+    required TResult Function() openRating,
+    required TResult Function() playersListOpened,
+    required TResult Function() addPlayerTapped,
+    required TResult Function() editTournamentSettings,
+    required TResult Function(PlayerModel player) deletePlayer,
+    required TResult Function(PlayerModel player) openProfileDialog,
+    required TResult Function() openSeatingPage,
+    required TResult Function(int playersCount, bool billedTranlsation) bill,
+    required TResult Function() pageOpened,
+    required TResult Function(List<PlayerModel> players) setFinalPlayers,
+  }) {
+    return setFinalPlayers(players);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? backButtonPressed,
+    TResult? Function()? playersListTapped,
+    TResult? Function(TournamentSettingsModel settings)? updateSettings,
+    TResult? Function()? openRating,
+    TResult? Function()? playersListOpened,
+    TResult? Function()? addPlayerTapped,
+    TResult? Function()? editTournamentSettings,
+    TResult? Function(PlayerModel player)? deletePlayer,
+    TResult? Function(PlayerModel player)? openProfileDialog,
+    TResult? Function()? openSeatingPage,
+    TResult? Function(int playersCount, bool billedTranlsation)? bill,
+    TResult? Function()? pageOpened,
+    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
+  }) {
+    return setFinalPlayers?.call(players);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? backButtonPressed,
+    TResult Function()? playersListTapped,
+    TResult Function(TournamentSettingsModel settings)? updateSettings,
+    TResult Function()? openRating,
+    TResult Function()? playersListOpened,
+    TResult Function()? addPlayerTapped,
+    TResult Function()? editTournamentSettings,
+    TResult Function(PlayerModel player)? deletePlayer,
+    TResult Function(PlayerModel player)? openProfileDialog,
+    TResult Function()? openSeatingPage,
+    TResult Function(int playersCount, bool billedTranlsation)? bill,
+    TResult Function()? pageOpened,
+    TResult Function(List<PlayerModel> players)? setFinalPlayers,
+    required TResult orElse(),
+  }) {
+    if (setFinalPlayers != null) {
+      return setFinalPlayers(players);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TournamentPageBackButtonPreesedEvent value)
+        backButtonPressed,
+    required TResult Function(TournamentPageEventPlayersListTapped value)
+        playersListTapped,
+    required TResult Function(TournamentPageEventUpdateSettings value)
+        updateSettings,
+    required TResult Function(TournamentPageEventOpenRating value) openRating,
+    required TResult Function(TournamentPagePlayerListOpenedEvent value)
+        playersListOpened,
+    required TResult Function(TournamentPageEventAddPlayer value)
+        addPlayerTapped,
+    required TResult Function(TournamentPageEventEditSettings value)
+        editTournamentSettings,
+    required TResult Function(TournamentPageEventDeletePlayer value)
+        deletePlayer,
+    required TResult Function(TournamentPageEventOpenProfileDialog value)
+        openProfileDialog,
+    required TResult Function(TournamentPageEventOpenSeatingPage value)
+        openSeatingPage,
+    required TResult Function(TournamentPageEventBill value) bill,
+    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
+    required TResult Function(TournamentPageEventSetFinalPlayers value)
+        setFinalPlayers,
+  }) {
+    return setFinalPlayers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult? Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult? Function(TournamentPageEventOpenRating value)? openRating,
+    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult? Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult? Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult? Function(TournamentPageEventOpenSeatingPage value)?
+        openSeatingPage,
+    TResult? Function(TournamentPageEventBill value)? bill,
+    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult? Function(TournamentPageEventSetFinalPlayers value)?
+        setFinalPlayers,
+  }) {
+    return setFinalPlayers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TournamentPageBackButtonPreesedEvent value)?
+        backButtonPressed,
+    TResult Function(TournamentPageEventPlayersListTapped value)?
+        playersListTapped,
+    TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
+    TResult Function(TournamentPageEventOpenRating value)? openRating,
+    TResult Function(TournamentPagePlayerListOpenedEvent value)?
+        playersListOpened,
+    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
+    TResult Function(TournamentPageEventEditSettings value)?
+        editTournamentSettings,
+    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
+    TResult Function(TournamentPageEventOpenProfileDialog value)?
+        openProfileDialog,
+    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
+    TResult Function(TournamentPageEventBill value)? bill,
+    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
+    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
+    required TResult orElse(),
+  }) {
+    if (setFinalPlayers != null) {
+      return setFinalPlayers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TournamentPageEventSetFinalPlayers
+    implements TournamentPageEvent {
+  const factory TournamentPageEventSetFinalPlayers(
+          {required final List<PlayerModel> players}) =
+      _$TournamentPageEventSetFinalPlayers;
+
+  List<PlayerModel> get players;
+  @JsonKey(ignore: true)
+  _$$TournamentPageEventSetFinalPlayersCopyWith<
+          _$TournamentPageEventSetFinalPlayers>
+      get copyWith => throw _privateConstructorUsedError;
 }

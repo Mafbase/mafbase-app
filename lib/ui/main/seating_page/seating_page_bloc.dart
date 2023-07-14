@@ -4,6 +4,7 @@ import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_separation_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/generate_final_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
@@ -20,6 +21,8 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
   final DeleteSeparationInteractor _deleteSeparationInteractor = getIt();
   final CreateSeatingInteractor _createSeatingInteractor = getIt();
   final GetSeatingInteractor _getSeatingInteractor = getIt();
+  final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
+      getIt();
   late final SeatingPageRouter router = getIt(param1: context);
 
   SeatingPageBloc([BuildContext? context])
@@ -30,6 +33,15 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     on<SeatingPageEventFsmSeatingTapped>(_onFsm);
     on<SeatingPageEventCreateSeating>(_onCreateSeating);
     on<SeatingPageEventGameEditing>(_onOpenGameEditing);
+    on<SeatingPageEventCreateFinalSeating>(_onGenerateFinalSeating);
+  }
+
+  _onGenerateFinalSeating(
+    SeatingPageEventCreateFinalSeating event,
+    Emitter emit,
+  ) async {
+    await _generateFinalSeatingInteractor(tournamentId: tournamentId);
+    await _updateSeating(emit);
   }
 
   _onOpenGameEditing(SeatingPageEventGameEditing event, Emitter emit) {
@@ -45,14 +57,18 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
         );
   }
 
+  _updateSeating(Emitter emit) async {
+    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId);
+    emit(state.copyWith(isLoading: false, games: seating));
+  }
+
   _onCreateSeating(
     SeatingPageEventCreateSeating event,
     Emitter emit,
   ) async {
     emit(state.copyWith(isLoading: true));
     await _createSeatingInteractor.run(tournamentId: tournamentId);
-    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId);
-    emit(state.copyWith(isLoading: false, games: seating));
+    await _updateSeating(emit);
   }
 
   _onFsm(SeatingPageEventFsmSeatingTapped event, Emitter emit) {

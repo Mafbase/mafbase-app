@@ -7,14 +7,11 @@ part 'tournament_page_state.freezed.dart';
 @freezed
 class TournamentPageState with _$TournamentPageState {
   const factory TournamentPageState({
-    @Default(true)
-        bool isLoading,
-    @Default([])
-        List<PlayerModel> players,
-    @Default([])
-        List<PlayerModel> tournamentPlayers,
-    @Default([])
-        List<List<PlayerModel>> cannotMeet,
+    @Default(true) bool isLoading,
+    @Default([]) List<PlayerModel> players,
+    @Default([]) List<PlayerModel> tournamentPlayers,
+    @Default([]) List<List<PlayerModel>> cannotMeet,
+    @Default([]) List<PlayerModel> finalPlayers,
     @Default(
       TournamentSettingsModel(
         defaultGames: 0,
@@ -22,10 +19,8 @@ class TournamentPageState with _$TournamentPageState {
         finalGames: 0,
       ),
     )
-        TournamentSettingsModel settings,
-    @Default(10)
-        int billedPlayers,
-    @Default(false)
-        bool billedTranslation,
+    TournamentSettingsModel settings,
+    @Default(10) int billedPlayers,
+    @Default(false) bool billedTranslation,
   }) = _TournamentPageState;
 }

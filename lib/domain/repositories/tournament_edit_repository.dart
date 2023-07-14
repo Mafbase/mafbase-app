@@ -33,4 +33,13 @@ abstract class TournamentEditRepository {
     required int tournamentId,
     required TournamentSettingsModel settings,
   });
+
+  Future setFinalPlayers({
+    required List<PlayerModel> players,
+    required int tournamentId,
+  });
+
+  Future<List<PlayerModel>> getFinalPlayers({required int tournamentId});
+
+  Future generateFinalGames({required int tournamentId});
 }

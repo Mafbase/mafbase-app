@@ -46,4 +46,8 @@ class TournamentPageEvent with _$TournamentPageEvent {
 
   const factory TournamentPageEvent.pageOpened() =
       TournamentPageEventPageOpened;
+
+  const factory TournamentPageEvent.setFinalPlayers({
+    required List<PlayerModel> players,
+  }) = TournamentPageEventSetFinalPlayers;
 }

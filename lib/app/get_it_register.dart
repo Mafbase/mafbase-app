@@ -34,10 +34,12 @@ import 'package:seating_generator_web/domain/interactors/delete_separation_inter
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_tournament_game_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/generate_final_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_ci_schemes_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_clubs_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_final_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_my_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
@@ -51,6 +53,7 @@ import 'package:seating_generator_web/domain/interactors/get_tournaments_players
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/set_final_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
@@ -206,6 +209,15 @@ void registerSharedGetIt() {
         getIt(),
         getIt(),
       ),
+    )
+    ..registerLazySingleton<SetFinalPlayersInteractor>(
+      () => SetFinalPlayersInteractor(getIt()),
+    )
+    ..registerLazySingleton<GetFinalPlayersInteractor>(
+      () => GetFinalPlayersInteractor(getIt()),
+    )
+    ..registerLazySingleton<GenerateFinalSeatingInteractor>(
+      () => GenerateFinalSeatingInteractor(getIt()),
     )
     ..registerLazySingleton<CheckClubInteractor>(
       () => CheckClubInteractor(getIt()),
