@@ -52,7 +52,10 @@ class _ClubBillDialogState extends State<ClubBillDialog> {
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Text(
                   context.locale.billedFor(
-                    DateFormat("dd MMMM yyyy").format(widget.billedFor!),
+                    DateFormat(
+                      "dd MMMM yyyy",
+                      Localizations.localeOf(context).languageCode,
+                    ).format(widget.billedFor!),
                   ),
                 ),
               ),
