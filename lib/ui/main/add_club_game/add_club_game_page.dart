@@ -663,8 +663,8 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
           AddClubGameEvent.submit(
             gameResult: ClubGameResult(
               date: date.toIso8601String(),
-              addScore: addScoreControllers
-                  .map((e) => (double.parse(e.text) * 100).floor()),
+              addScore: addScoreControllers.map((e) =>
+                  (double.parse(e.text.replaceAll(",", ".")) * 100).floor()),
               players: controllers.map(
                 (e) => state.players
                     .firstWhere((element) => e.text == element.nickname)
