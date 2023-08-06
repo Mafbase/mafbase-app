@@ -37,6 +37,7 @@ class RatingTable extends StatefulWidget {
   final RatingSort sort;
   final List<ClubRatingRowModel> sortedRows;
   final int gameFilter;
+  final bool isTournament;
 
   RatingTable({
     Key? key,
@@ -49,10 +50,11 @@ class RatingTable extends StatefulWidget {
     RatingSort? sort,
     int? gameFilter,
     required this.changeSort,
+    required this.isTournament,
   })  : style = style ?? RatingTableStyle.full,
         sort = sort ?? RatingSort.score,
         gameFilter = gameFilter ?? 0,
-        sortedRows = createSortedRows(rows, sort ?? RatingSort.score)
+        sortedRows = createSortedRows(rows, sort ?? RatingSort.score, isTournament)
             .where(
               (element) => element.gamesCount >= (gameFilter ?? 0),
             )
@@ -62,6 +64,7 @@ class RatingTable extends StatefulWidget {
   static List<ClubRatingRowModel> createSortedRows(
     List<ClubRatingRowModel> rows,
     RatingSort sort,
+    bool isTournament,
   ) {
     switch (sort) {
       case RatingSort.score:
@@ -106,31 +109,39 @@ class RatingTable extends StatefulWidget {
         );
       case RatingSort.citizenAddScorePerGame:
         return rows.sortedBy<num>(
-          (element) => -customDivide(
-            element.citizenAddScore,
-            element.citizenGamesCount,
-          ),
+          (element) => isTournament
+              ? -element.citizenAddScore
+              : -customDivide(
+                  element.citizenAddScore,
+                  element.citizenGamesCount,
+                ),
         );
       case RatingSort.mafiaAddScorePerGame:
         return rows.sortedBy<num>(
-          (element) => -customDivide(
-            element.mafiaAddScore,
-            element.mafiaGamesCount,
-          ),
+          (element) => isTournament
+              ? -element.mafiaAddScore
+              : -customDivide(
+                  element.mafiaAddScore,
+                  element.mafiaGamesCount,
+                ),
         );
       case RatingSort.donAddScorePerGame:
         return rows.sortedBy<num>(
-          (element) => -customDivide(
-            element.donAddScore,
-            element.donsGamesCount,
-          ),
+          (element) => isTournament
+              ? -element.donAddScore
+              : -customDivide(
+                  element.donAddScore,
+                  element.donsGamesCount,
+                ),
         );
       case RatingSort.sheriffAddScorePerGame:
         return rows.sortedBy<num>(
-          (element) => -customDivide(
-            element.sheriffAddScore,
-            element.sheriffGamesCount,
-          ),
+          (element) => isTournament
+              ? -element.sheriffAddScore
+              : -customDivide(
+                  element.sheriffAddScore,
+                  element.sheriffGamesCount,
+                ),
         );
       case RatingSort.scorePerGame:
         return rows.sortedBy<num>(
@@ -619,31 +630,35 @@ class _RatingTableState extends State<RatingTable> {
       );
 
   Widget citizenAddScorePerGame(int index) => wrap(
-        Text("${customDivide(
-          widget.sortedRows[index].citizenAddScore,
-          widget.sortedRows[index].citizenGamesCount,
-        )}"),
+        Text(
+            "${widget.isTournament ? widget.sortedRows[index].citizenAddScore : customDivide(
+                widget.sortedRows[index].citizenAddScore,
+                widget.sortedRows[index].citizenGamesCount,
+              )}"),
       );
 
   Widget sheriffAddScorePerGame(int index) => wrap(
-        Text("${customDivide(
-          widget.sortedRows[index].sheriffAddScore,
-          widget.sortedRows[index].sheriffGamesCount,
-        )}"),
+        Text(
+            "${widget.isTournament ? widget.sortedRows[index].sheriffAddScore : customDivide(
+                widget.sortedRows[index].sheriffAddScore,
+                widget.sortedRows[index].sheriffGamesCount,
+              )}"),
       );
 
   Widget donAddScorePerGame(int index) => wrap(
-        Text("${customDivide(
-          widget.sortedRows[index].donAddScore,
-          widget.sortedRows[index].donsGamesCount,
-        )}"),
+        Text(
+            "${widget.isTournament ? widget.sortedRows[index].donAddScore : customDivide(
+                widget.sortedRows[index].donAddScore,
+                widget.sortedRows[index].donsGamesCount,
+              )}"),
       );
 
   Widget mafiaAddScorePerGame(int index) => wrap(
-        Text("${customDivide(
-          widget.sortedRows[index].mafiaAddScore,
-          widget.sortedRows[index].mafiaGamesCount,
-        )}"),
+        Text(
+            "${widget.isTournament ? widget.sortedRows[index].mafiaAddScore : customDivide(
+                widget.sortedRows[index].mafiaAddScore,
+                widget.sortedRows[index].mafiaGamesCount,
+              )}"),
       );
 
   @override

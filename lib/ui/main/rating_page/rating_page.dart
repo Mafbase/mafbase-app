@@ -18,7 +18,7 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 class RatingPage extends StatefulWidget {
   final int? clubId;
   final int? tournamentId;
-  final DateTimeRange range;
+  final DateTimeRange? range;
   final RatingTableStyle style;
   final RatingSort sort;
   final int gameFilter;
@@ -27,7 +27,7 @@ class RatingPage extends StatefulWidget {
     Key? key,
     this.clubId,
     this.tournamentId,
-    required this.range,
+    this.range,
     this.style = RatingTableStyle.full,
     this.sort = RatingSort.score,
     this.gameFilter = 0,
@@ -48,7 +48,10 @@ class RatingPage extends StatefulWidget {
       params: {
         "id": tournamentId.toString(),
       },
-      queryParams: {"style": tableStyle.name, "sort": sort.name},
+      queryParams: {
+        "style": tableStyle.name,
+        "sort": sort.name,
+      },
     );
   }
 
@@ -83,12 +86,6 @@ class RatingPage extends StatefulWidget {
     name: _tournamentName,
     builder: (context, state) {
       final tournamentId = int.parse(state.params["id"]!);
-      final dateStart =
-          DateTime.tryParse(state.queryParams["date-start"] ?? "") ??
-              DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd = DateTime.tryParse(state.queryParams["date-end"] ?? "") ??
-          DateTime.now();
-      final range = DateTimeRange(start: dateStart, end: dateEnd);
       final style = RatingTableStyle.values.firstWhereOrNull(
             (element) => state.queryParams["style"] == element.name,
           ) ??
@@ -105,7 +102,6 @@ class RatingPage extends StatefulWidget {
         },
         child: RatingPage(
           tournamentId: tournamentId,
-          range: range,
           style: style,
           sort: sort,
           gameFilter: gameFilter,
@@ -188,7 +184,9 @@ class _RatingPageState extends CustomState<RatingPage> {
 
   @override
   void didUpdateWidget(covariant RatingPage oldWidget) {
-    if (oldWidget.range != widget.range || oldWidget.clubId != widget.clubId) {
+    if (oldWidget.range != widget.range ||
+        oldWidget.clubId != widget.clubId ||
+        oldWidget.tournamentId != widget.tournamentId) {
       context.read<RatingBloc>().add(
             RatingEvent.pageOpened(
               range: widget.range,
@@ -215,21 +213,22 @@ class _RatingPageState extends CustomState<RatingPage> {
                 style: context.theme.headerTextStyle,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Период: "),
-                CustomButton(
-                  onTap: onChangeRangeTap,
-                  disabled: widget.tournamentId != null,
-                  text:
-                      "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
+            if (widget.range != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Период: "),
+                    CustomButton(
+                      onTap: onChangeRangeTap,
+                      disabled: widget.tournamentId != null,
+                      text:
+                          "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
+              ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -253,6 +252,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                       width: 16,
                     ),
                     RatingTable(
+                      isTournament: widget.tournamentId != null,
                       isMobile: true,
                       style: widget.style,
                       rows: state.rows,
@@ -321,14 +321,22 @@ class _RatingPageState extends CustomState<RatingPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Период: "),
-                        CustomButton(
-                          onTap: onChangeRangeTap,
-                          disabled: widget.tournamentId != null,
-                          text:
-                              "${format.format(widget.range.start)} - ${format.format(widget.range.end)}",
-                        ),
-                        const SizedBox(width: 16),
+                        if (widget.range != null)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text("Период: "),
+                                CustomButton(
+                                  onTap: onChangeRangeTap,
+                                  disabled: widget.tournamentId != null,
+                                  text:
+                                      "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
+                                ),
+                              ],
+                            ),
+                          ),
                         Stack(
                           children: [
                             styleSwitcher(),
@@ -371,6 +379,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                                 );
                           },
                           tournamentId: widget.tournamentId,
+                          isTournament: widget.tournamentId != null,
                         ),
                       ),
                     ),
@@ -391,7 +400,7 @@ class _RatingPageState extends CustomState<RatingPage> {
           onPressed: () {
             context.read<RatingBloc>().add(
                   RatingEvent.downloadRating(
-                    range: widget.range,
+                    range: widget.range!,
                     clubId: widget.clubId!,
                   ),
                 );

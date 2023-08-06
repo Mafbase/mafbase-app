@@ -53,7 +53,7 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     if (event.clubId != null) {
       rating = await _getRatingRepository.run(
         clubId: event.clubId!,
-        range: event.range,
+        range: event.range!,
       );
     } else if (event.tournamentId != null) {
       rating = await _getTournamentRatingInteractor(

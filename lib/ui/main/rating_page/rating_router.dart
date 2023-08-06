@@ -6,7 +6,7 @@ import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.d
 
 abstract class RatingRouter {
   void changeRange(
-    DateTimeRange range,
+    DateTimeRange? range,
     int? clubId,
     int? tournamentId,
     RatingTableStyle style,
@@ -24,7 +24,7 @@ class RatingRouterImpl implements RatingRouter {
 
   @override
   void changeRange(
-    DateTimeRange range,
+    DateTimeRange? range,
     int? clubId,
     int? tournamentId,
     RatingTableStyle style,
