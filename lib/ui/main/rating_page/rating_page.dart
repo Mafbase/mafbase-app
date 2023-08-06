@@ -43,11 +43,13 @@ class RatingPage extends StatefulWidget {
     RatingTableStyle tableStyle = RatingTableStyle.full,
     RatingSort sort = RatingSort.score,
   }) {
-    return context.namedLocation(_tournamentName, params: {
-      "id": tournamentId.toString(),
-    }, queryParams: {
-      "style": tableStyle.name,
-    });
+    return context.namedLocation(
+      _tournamentName,
+      params: {
+        "id": tournamentId.toString(),
+      },
+      queryParams: {"style": tableStyle.name, "sort": sort.name},
+    );
   }
 
   static String createClubLocation({
@@ -111,6 +113,7 @@ class RatingPage extends StatefulWidget {
       );
     },
   );
+
   static final GoRoute clubRoute = GoRoute(
     path: "rating",
     name: _clubName,
