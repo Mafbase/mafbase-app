@@ -14,4 +14,6 @@ abstract class TournamentsRepository {
   Future<TournamentModel> getTournament({required int tournamentId});
 
   Future<List<TournamentModel>> getMyTournaments();
+
+  Future<bool> isOwner(int tournamentId);
 }

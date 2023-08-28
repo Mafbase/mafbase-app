@@ -206,5 +206,11 @@
         "example": "16 мая 2022"
       }
     }
-  }
+  },
+  "translationDialogTitle": "Трансляция",
+  "@translationDialogTitle": {},
+  "translationContentLink": "Ссылка для встраивания в обс",
+  "@translationContentLink": {},
+  "translationControlLink": "Ссылка для управления",
+  "@translationControlLink": {}
 }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tournament_page_state.dart';
 
@@ -24,6 +24,7 @@ mixin _$TournamentPageState {
   TournamentSettingsModel get settings => throw _privateConstructorUsedError;
   int get billedPlayers => throw _privateConstructorUsedError;
   bool get billedTranslation => throw _privateConstructorUsedError;
+  bool get isMyTournament => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentPageStateCopyWith<TournamentPageState> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $TournamentPageStateCopyWith<$Res> {
       List<PlayerModel> finalPlayers,
       TournamentSettingsModel settings,
       int billedPlayers,
-      bool billedTranslation});
+      bool billedTranslation,
+      bool isMyTournament});
 
   $TournamentSettingsModelCopyWith<$Res> get settings;
 }
@@ -70,6 +72,7 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     Object? settings = null,
     Object? billedPlayers = null,
     Object? billedTranslation = null,
+    Object? isMyTournament = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -104,6 +107,10 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.billedTranslation
           : billedTranslation // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMyTournament: null == isMyTournament
+          ? _value.isMyTournament
+          : isMyTournament // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -132,7 +139,8 @@ abstract class _$$_TournamentPageStateCopyWith<$Res>
       List<PlayerModel> finalPlayers,
       TournamentSettingsModel settings,
       int billedPlayers,
-      bool billedTranslation});
+      bool billedTranslation,
+      bool isMyTournament});
 
   @override
   $TournamentSettingsModelCopyWith<$Res> get settings;
@@ -157,6 +165,7 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
     Object? settings = null,
     Object? billedPlayers = null,
     Object? billedTranslation = null,
+    Object? isMyTournament = null,
   }) {
     return _then(_$_TournamentPageState(
       isLoading: null == isLoading
@@ -191,6 +200,10 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
           ? _value.billedTranslation
           : billedTranslation // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMyTournament: null == isMyTournament
+          ? _value.isMyTournament
+          : isMyTournament // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -207,7 +220,8 @@ class _$_TournamentPageState implements _TournamentPageState {
       this.settings = const TournamentSettingsModel(
           defaultGames: 0, swissGames: 0, finalGames: 0),
       this.billedPlayers = 10,
-      this.billedTranslation = false})
+      this.billedTranslation = false,
+      this.isMyTournament = false})
       : _players = players,
         _tournamentPlayers = tournamentPlayers,
         _cannotMeet = cannotMeet,
@@ -220,6 +234,7 @@ class _$_TournamentPageState implements _TournamentPageState {
   @override
   @JsonKey()
   List<PlayerModel> get players {
+    if (_players is EqualUnmodifiableListView) return _players;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_players);
   }
@@ -228,6 +243,8 @@ class _$_TournamentPageState implements _TournamentPageState {
   @override
   @JsonKey()
   List<PlayerModel> get tournamentPlayers {
+    if (_tournamentPlayers is EqualUnmodifiableListView)
+      return _tournamentPlayers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tournamentPlayers);
   }
@@ -236,6 +253,7 @@ class _$_TournamentPageState implements _TournamentPageState {
   @override
   @JsonKey()
   List<List<PlayerModel>> get cannotMeet {
+    if (_cannotMeet is EqualUnmodifiableListView) return _cannotMeet;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cannotMeet);
   }
@@ -244,6 +262,7 @@ class _$_TournamentPageState implements _TournamentPageState {
   @override
   @JsonKey()
   List<PlayerModel> get finalPlayers {
+    if (_finalPlayers is EqualUnmodifiableListView) return _finalPlayers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_finalPlayers);
   }
@@ -257,10 +276,13 @@ class _$_TournamentPageState implements _TournamentPageState {
   @override
   @JsonKey()
   final bool billedTranslation;
+  @override
+  @JsonKey()
+  final bool isMyTournament;
 
   @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation)';
+    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament)';
   }
 
   @override
@@ -282,7 +304,9 @@ class _$_TournamentPageState implements _TournamentPageState {
             (identical(other.billedPlayers, billedPlayers) ||
                 other.billedPlayers == billedPlayers) &&
             (identical(other.billedTranslation, billedTranslation) ||
-                other.billedTranslation == billedTranslation));
+                other.billedTranslation == billedTranslation) &&
+            (identical(other.isMyTournament, isMyTournament) ||
+                other.isMyTournament == isMyTournament));
   }
 
   @override
@@ -295,7 +319,8 @@ class _$_TournamentPageState implements _TournamentPageState {
       const DeepCollectionEquality().hash(_finalPlayers),
       settings,
       billedPlayers,
-      billedTranslation);
+      billedTranslation,
+      isMyTournament);
 
   @JsonKey(ignore: true)
   @override
@@ -314,7 +339,8 @@ abstract class _TournamentPageState implements TournamentPageState {
       final List<PlayerModel> finalPlayers,
       final TournamentSettingsModel settings,
       final int billedPlayers,
-      final bool billedTranslation}) = _$_TournamentPageState;
+      final bool billedTranslation,
+      final bool isMyTournament}) = _$_TournamentPageState;
 
   @override
   bool get isLoading;
@@ -332,6 +358,8 @@ abstract class _TournamentPageState implements TournamentPageState {
   int get billedPlayers;
   @override
   bool get billedTranslation;
+  @override
+  bool get isMyTournament;
   @override
   @JsonKey(ignore: true)
   _$$_TournamentPageStateCopyWith<_$_TournamentPageState> get copyWith =>

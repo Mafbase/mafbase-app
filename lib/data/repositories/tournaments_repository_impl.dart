@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/requests/create_seating_request.dart';
 import 'package:seating_generator_web/data/requests/create_tournament_request.dart';
 import 'package:seating_generator_web/data/requests/get_my_tournaments_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournament_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_request.dart';
-import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/data/requests/tournament_check_request.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -52,6 +54,16 @@ class TournamentsRepositoryImpl extends BaseRepository
         return tournament.toDomainModel();
       }).toList();
     });
+  }
+
+  @override
+  Future<bool> isOwner(int tournamentId) {
+    return TournamentCheckRequest(tournamentId: tournamentId)
+        .execute(client)
+        .then(
+          (value) => value,
+          onError: (err) => err is UnauthenticatedError ? false : throw err,
+        );
   }
 }
 

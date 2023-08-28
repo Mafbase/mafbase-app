@@ -55,6 +55,7 @@ import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/set_final_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/tournament_check_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
@@ -288,6 +289,9 @@ void registerSharedGetIt() {
     )
     ..registerLazySingleton<CreateTournamentInteractor>(
       () => CreateTournamentInteractor(getIt()),
+    )
+    ..registerLazySingleton<TournamentCheckInteractor>(
+      () => TournamentCheckInteractor(getIt()),
     )
     ..registerFactoryParam<LoginBloc, BuildContext?, String?>(
       (context, nextPath) => LoginBloc(

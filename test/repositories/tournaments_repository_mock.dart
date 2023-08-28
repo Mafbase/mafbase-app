@@ -53,4 +53,9 @@ class TournamentsRepositoryMock implements TournamentsRepository {
   Future<List<TournamentModel>> getMyTournaments() {
     return Future.microtask(() => fakeTournaments);
   }
+
+  @override
+  Future<bool> isOwner(int tournamentId) {
+    return Future.value(true);
+  }
 }

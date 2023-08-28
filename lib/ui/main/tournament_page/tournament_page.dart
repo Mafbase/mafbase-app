@@ -16,14 +16,20 @@ import 'package:seating_generator_web/ui/main/tournament_page/widgets/players_li
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_billing_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_menu.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_settings_dialog.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/widgets/translation_dialog.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class TournamentPage extends StatefulWidget {
   final Widget child;
+  final int tournamentId;
 
-  const TournamentPage({Key? key, required this.child}) : super(key: key);
+  const TournamentPage({
+    Key? key,
+    required this.child,
+    required this.tournamentId,
+  }) : super(key: key);
 
   @override
   State<TournamentPage> createState() => _TournamentPageState();
@@ -75,7 +81,10 @@ class TournamentPage extends StatefulWidget {
                 ),
               ),
             ],
-            child: TournamentPage(child: child),
+            child: TournamentPage(
+              tournamentId: int.parse(state.params["id"] ?? ""),
+              child: child,
+            ),
           );
         },
       );
@@ -168,6 +177,18 @@ class _TournamentPageState extends CustomState<TournamentPage>
                       .add(const TournamentPageEvent.openRating());
                 },
               ),
+              if (state.billedTranslation && state.isMyTournament)
+                MenuItemModel(
+                  text: context.locale.translationDialogTitle,
+                  onTap: () {
+                    TranslationDialog.open(
+                      context: context,
+                      tournamentId: widget.tournamentId,
+                      tablesCount:
+                          (state.tournamentPlayers.length / 10).floor(),
+                    );
+                  },
+                ),
               MenuItemModel(
                 text: 'Оплата',
                 onTap: () async {

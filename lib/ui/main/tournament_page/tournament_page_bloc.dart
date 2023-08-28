@@ -10,6 +10,7 @@ import 'package:seating_generator_web/domain/interactors/get_settings_interactor
 import 'package:seating_generator_web/domain/interactors/get_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/set_final_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/tournament_check_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
@@ -31,6 +32,8 @@ class TournamentPageBloc
   final DeletePlayerInteractor _deletePlayerInteractor = getIt();
   final GetSettingsInteractor _getSettingsInteractor = getIt();
   final UpdateSettingsInteractor _updateSettingsInteractor = getIt();
+  final TournamentCheckInteractor _tournamentCheckInteractor = getIt();
+
   final GetTournamentInteractor _getTournamentInteractor = getIt();
   final GetFinalPlayersInteractor _getFinalPlayersInteractor = getIt();
   final SetFinalPlayersInteractor _setFinalPlayersInteractor = getIt();
@@ -93,6 +96,11 @@ class TournamentPageBloc
 
   _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {
     await Future.wait([
+      _tournamentCheckInteractor(tournamentId: tournamentId).then(
+        (value) => emit(
+          state.copyWith(isMyTournament: value),
+        ),
+      ),
       Future(() async {
         final tournament = await _getTournamentInteractor(
           tournamentId: tournamentId,
@@ -210,7 +218,7 @@ class TournamentPageBloc
       _updatePlayers(emit),
       _getSettingsInteractor.run(tournamentId: tournamentId).then((settings) {
         emit(state.copyWith(settings: settings));
-      })
+      }),
     ]);
     emit(state.copyWith(isLoading: false));
   }
