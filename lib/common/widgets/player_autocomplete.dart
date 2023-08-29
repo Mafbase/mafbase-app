@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
@@ -34,10 +36,10 @@ class CustomAutoComplete extends StatelessWidget {
       displayStringForOption: displayStringForOption,
       focusNode: focusNode,
       optionsViewBuilder: (
-          context,
-          onSelected,
-          options,
-          ) {
+        context,
+        onSelected,
+        options,
+      ) {
         return Align(
           alignment: Alignment.topLeft,
           child: Material(
@@ -66,9 +68,30 @@ class CustomAutoComplete extends StatelessWidget {
                         }
                         return Container(
                           color:
-                          highlight ? Theme.of(context).focusColor : null,
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(displayStringForOption(option)),
+                              highlight ? Theme.of(context).focusColor : null,
+                          padding: const EdgeInsets.only(
+                            right: 16.0,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: option.imageUrl == null
+                                    ? Image.asset(
+                                        AppAssets.playerPhoto,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: option.imageUrl!,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                              const SizedBox(width: 16),
+                              Text(displayStringForOption(option)),
+                            ],
+                          ),
                         );
                       },
                     ),
