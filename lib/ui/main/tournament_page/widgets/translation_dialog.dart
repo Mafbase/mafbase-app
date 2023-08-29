@@ -41,7 +41,7 @@ class _TranslationDialogState extends State<TranslationDialog> {
   @override
   Widget build(BuildContext context) {
     final root = kIsWeb && !kDebugMode
-        ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 ? ':${Uri.base.port}' : ''}'
+        ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 433 ? ':${Uri.base.port}' : ''}'
         : 'https://mafbase.ru';
     final contentLink =
         '$root/translation?tournamentId=${widget.tournamentId}&table=$table';
