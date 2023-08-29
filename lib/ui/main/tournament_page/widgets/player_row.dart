@@ -8,10 +8,12 @@ class PlayerRow extends StatelessWidget {
   final VoidCallback onDelete;
   final String nickname;
   final String? imageUrl;
+  final int index;
 
   const PlayerRow({
     Key? key,
     required this.onTap,
+    required this.index,
     required this.onDelete,
     required this.nickname,
     this.imageUrl,
@@ -39,7 +41,7 @@ class PlayerRow extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
             const SizedBox(width: 8),
-            Text(nickname),
+            Text("${index + 1}. $nickname"),
             const Spacer(),
             Center(
               child: IconButton(

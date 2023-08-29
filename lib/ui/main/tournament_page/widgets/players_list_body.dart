@@ -52,6 +52,7 @@ class _PlayersListBodyState extends State<PlayersListBody> {
                   child: ListView.builder(
                     itemCount: state.tournamentPlayers.length,
                     itemBuilder: (context, index) => PlayerRow(
+                      index: index,
                       onTap: () async {
                         context.read<TournamentPageBloc>().add(
                               TournamentPageEvent.openProfileDialog(
