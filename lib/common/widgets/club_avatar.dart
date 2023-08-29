@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -15,17 +16,14 @@ class ClubAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (clubModel.imageUrl != null) {
-      return Image.network(
-        clubModel.imageUrl!,
+      return CachedNetworkImage(
+        imageUrl: clubModel.imageUrl!,
         height: size,
         width: size,
-        loadingBuilder: (context, child, progress) {
-          if (progress == null) return child;
-          return _ImagePlaceholder(
-            clubName: clubModel.name,
-            size: size,
-          );
-        },
+        placeholder: (_, __) => _ImagePlaceholder(
+          clubName: clubModel.name,
+          size: size,
+        ),
       );
     } else {
       return _ImagePlaceholder(

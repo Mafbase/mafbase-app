@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -102,8 +103,8 @@ class _ProfileDialogState extends State<ProfileDialog> {
                                 AppAssets.playerPhoto,
                                 fit: BoxFit.cover,
                               )
-                            : Image.network(
-                                state.imageUrl ?? "",
+                            : CachedNetworkImage(
+                                imageUrl: state.imageUrl ?? "",
                                 fit: BoxFit.cover,
                               ),
                       ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 
@@ -28,8 +29,8 @@ class PlayerRow extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Image.network(
-              imageUrl,
+            CachedNetworkImage(
+              imageUrl: imageUrl,
               width: 60,
               height: 60,
               fit: BoxFit.cover,
