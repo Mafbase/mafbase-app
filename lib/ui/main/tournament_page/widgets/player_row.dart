@@ -33,7 +33,12 @@ class PlayerRow extends StatelessWidget {
         child: Row(
           children: [
             imageUrl == null
-                ? Image.asset(AppAssets.playerPhoto)
+                ? Image.asset(
+                    AppAssets.playerPhoto,
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  )
                 : CachedNetworkImage(
                     imageUrl: imageUrl!,
                     width: 60,
@@ -41,7 +46,7 @@ class PlayerRow extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
             const SizedBox(width: 8),
-            Text("${index + 1}. $nickname"),
+            Text("${index + 1}.\t$nickname"),
             const Spacer(),
             Center(
               child: IconButton(
