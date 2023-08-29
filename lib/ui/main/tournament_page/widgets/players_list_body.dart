@@ -72,8 +72,7 @@ class _PlayersListBodyState extends State<PlayersListBody> {
                         });
                       },
                       nickname: state.tournamentPlayers[index].nickname,
-                      imageUrl: state.tournamentPlayers[index].imageUrl ??
-                          "https://www.meme-arsenal.com/memes/a2060f59f1cbf8633c417fda93611194.jpg",
+                      imageUrl: state.tournamentPlayers[index].imageUrl,
                     ),
                   ),
                 ),

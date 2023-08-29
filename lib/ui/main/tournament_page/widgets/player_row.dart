@@ -1,19 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 
 class PlayerRow extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback onDelete;
   final String nickname;
-  final String imageUrl;
+  final String? imageUrl;
 
   const PlayerRow({
     Key? key,
     required this.onTap,
     required this.onDelete,
     required this.nickname,
-    required this.imageUrl,
+    this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -29,12 +30,14 @@ class PlayerRow extends StatelessWidget {
         ),
         child: Row(
           children: [
-            CachedNetworkImage(
-              imageUrl: imageUrl,
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-            ),
+            imageUrl == null
+                ? Image.asset(AppAssets.playerPhoto)
+                : CachedNetworkImage(
+                    imageUrl: imageUrl!,
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  ),
             const SizedBox(width: 8),
             Text(nickname),
             const Spacer(),
