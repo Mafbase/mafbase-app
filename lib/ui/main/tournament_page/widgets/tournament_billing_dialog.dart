@@ -68,8 +68,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                         : "Некорректное значение",
                 onSaved: (value) => count = value ?? count,
                 builder: (field) {
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
+                  return Wrap(
                     children: [
                       Text(
                         context.locale.playersCount,
@@ -128,8 +127,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                 onSaved: (value) =>
                     enableTranslation = value ?? enableTranslation,
                 builder: (field) {
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
+                  return Wrap(
                     children: [
                       Text(
                         context.locale.translationHelp,

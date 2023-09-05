@@ -7,10 +7,11 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournament_item_row.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournament_status_widget.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
@@ -48,6 +49,61 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
   void initState() {
     super.initState();
     context.read<TournamentsBloc>().add(const TournamentsEvent.opened());
+  }
+
+  @override
+  Widget? buildMobile(BuildContext context) {
+    return Container(
+      color: context.theme.background2,
+      child: Material(
+        child: BlocBuilder<TournamentsBloc, TournamentsState>(
+          builder: (context, state) {
+            return ValueListenableBuilder(
+              valueListenable: context.read<AuthNotifier>(),
+              builder: (context, authModel, child) {
+                return Stack(
+                  children: [
+                    child ?? Container(),
+                    if (authModel is AuthNotifierAuthorizedModel)
+                      Positioned(
+                        bottom: 8,
+                        right: 8,
+                        child: FloatingActionButton(
+                          elevation: 10,
+                          onPressed: () {
+                            context
+                                .read<TournamentsBloc>()
+                                .add(const TournamentsEvent.create());
+                          },
+                          child: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    if (state.isLoading) const LoadingOverlayWidget(),
+                  ],
+                );
+              },
+              child: ListView.builder(
+                itemCount: state.tournaments.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    child: TournamentItemRow(
+                      tournamentModel: state.tournaments[index],
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -151,29 +207,8 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                                   const Spacer(),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: 18,
-                                          width: 18,
-                                          decoration: BoxDecoration(
-                                            color: getColor(
-                                              state.tournaments[index].status,
-                                            ),
-                                            shape: BoxShape.circle,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          getText(
-                                            state.tournaments[index].status,
-                                          ),
-                                          style: MyTheme.of(context)
-                                              .defaultTextStyle,
-                                        ),
-                                      ],
+                                    child: TournamentStatusWidget(
+                                      status: state.tournaments[index].status,
                                     ),
                                   ),
                                 ],
@@ -191,27 +226,5 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
         ),
       ),
     );
-  }
-
-  String getText(TournamentStatus status) {
-    switch (status) {
-      case TournamentStatus.active:
-        return AppLocalizations.of(context)!.tournamentStatusActive;
-      case TournamentStatus.waitForBilling:
-        return AppLocalizations.of(context)!.tournamentStatusWaitForBilling;
-      case TournamentStatus.ended:
-        return AppLocalizations.of(context)!.tournamentStatusEnded;
-    }
-  }
-
-  Color getColor(TournamentStatus status) {
-    switch (status) {
-      case TournamentStatus.active:
-        return const Color(0xFF66CCA7);
-      case TournamentStatus.waitForBilling:
-        return const Color(0xFFFFE600);
-      case TournamentStatus.ended:
-        return const Color(0xFFDE5462);
-    }
   }
 }
