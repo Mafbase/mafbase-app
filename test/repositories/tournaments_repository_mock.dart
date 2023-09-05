@@ -13,6 +13,7 @@ class TournamentsRepositoryMock implements TournamentsRepository {
       gamesCount: 10,
       billedPlayers: 10,
       billedTranslation: false,
+      notificationEnabled: false,
     ),
     TournamentModel(
       id: 2,
@@ -23,6 +24,7 @@ class TournamentsRepositoryMock implements TournamentsRepository {
       gamesCount: 16,
       billedPlayers: 70,
       billedTranslation: true,
+      notificationEnabled: false,
     ),
   ];
 

@@ -50,4 +50,10 @@ class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.setFinalPlayers({
     required List<PlayerModel> players,
   }) = TournamentPageEventSetFinalPlayers;
+
+  const factory TournamentPageEvent.startGameInfo({required int game}) =
+      TournamentPageEventStartGameInfo;
+
+  const factory TournamentPageEvent.customTextInfo({required String text}) =
+      TournamentPageEventCustomTextInfo;
 }

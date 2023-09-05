@@ -14,6 +14,7 @@ class TournamentModel with _$TournamentModel {
     required int gamesCount,
     required int billedPlayers,
     required bool billedTranslation,
+    required bool notificationEnabled,
   }) = _TournamentModel;
 }
 

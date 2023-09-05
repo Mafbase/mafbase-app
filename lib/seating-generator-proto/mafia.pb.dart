@@ -3082,6 +3082,7 @@ class Tournament extends $pb.GeneratedMessage {
     ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'gamesCount', $pb.PbFieldType.O3, protoName: 'gamesCount')
     ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'billedPlayers', $pb.PbFieldType.O3, protoName: 'billedPlayers')
     ..aOB(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'billedTranslation', protoName: 'billedTranslation')
+    ..aOB(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'notificationEnabled', protoName: 'notificationEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -3095,6 +3096,7 @@ class Tournament extends $pb.GeneratedMessage {
     $core.int? gamesCount,
     $core.int? billedPlayers,
     $core.bool? billedTranslation,
+    $core.bool? notificationEnabled,
   }) {
     final _result = create();
     if (id != null) {
@@ -3120,6 +3122,9 @@ class Tournament extends $pb.GeneratedMessage {
     }
     if (billedTranslation != null) {
       _result.billedTranslation = billedTranslation;
+    }
+    if (notificationEnabled != null) {
+      _result.notificationEnabled = notificationEnabled;
     }
     return _result;
   }
@@ -3215,6 +3220,15 @@ class Tournament extends $pb.GeneratedMessage {
   $core.bool hasBilledTranslation() => $_has(7);
   @$pb.TagNumber(8)
   void clearBilledTranslation() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.bool get notificationEnabled => $_getBF(8);
+  @$pb.TagNumber(9)
+  set notificationEnabled($core.bool v) { $_setBool(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasNotificationEnabled() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearNotificationEnabled() => clearField(9);
 }
 
 class ErrorOut extends $pb.GeneratedMessage {
@@ -3445,5 +3459,99 @@ class BillTournamentEventOut extends $pb.GeneratedMessage {
   $core.bool hasRedirectLink() => $_has(0);
   @$pb.TagNumber(1)
   void clearRedirectLink() => clearField(1);
+}
+
+class StartGameInfoEvent extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'StartGameInfoEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'game', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  StartGameInfoEvent._() : super();
+  factory StartGameInfoEvent({
+    $core.int? game,
+  }) {
+    final _result = create();
+    if (game != null) {
+      _result.game = game;
+    }
+    return _result;
+  }
+  factory StartGameInfoEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StartGameInfoEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  StartGameInfoEvent clone() => StartGameInfoEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  StartGameInfoEvent copyWith(void Function(StartGameInfoEvent) updates) => super.copyWith((message) => updates(message as StartGameInfoEvent)) as StartGameInfoEvent; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static StartGameInfoEvent create() => StartGameInfoEvent._();
+  StartGameInfoEvent createEmptyInstance() => create();
+  static $pb.PbList<StartGameInfoEvent> createRepeated() => $pb.PbList<StartGameInfoEvent>();
+  @$core.pragma('dart2js:noInline')
+  static StartGameInfoEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartGameInfoEvent>(create);
+  static StartGameInfoEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get game => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set game($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGame() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGame() => clearField(1);
+}
+
+class CustomTextInfoEvent extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CustomTextInfoEvent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'text')
+    ..hasRequiredFields = false
+  ;
+
+  CustomTextInfoEvent._() : super();
+  factory CustomTextInfoEvent({
+    $core.String? text,
+  }) {
+    final _result = create();
+    if (text != null) {
+      _result.text = text;
+    }
+    return _result;
+  }
+  factory CustomTextInfoEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CustomTextInfoEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CustomTextInfoEvent clone() => CustomTextInfoEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CustomTextInfoEvent copyWith(void Function(CustomTextInfoEvent) updates) => super.copyWith((message) => updates(message as CustomTextInfoEvent)) as CustomTextInfoEvent; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CustomTextInfoEvent create() => CustomTextInfoEvent._();
+  CustomTextInfoEvent createEmptyInstance() => create();
+  static $pb.PbList<CustomTextInfoEvent> createRepeated() => $pb.PbList<CustomTextInfoEvent>();
+  @$core.pragma('dart2js:noInline')
+  static CustomTextInfoEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomTextInfoEvent>(create);
+  static CustomTextInfoEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get text => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set text($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasText() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearText() => clearField(1);
 }
 

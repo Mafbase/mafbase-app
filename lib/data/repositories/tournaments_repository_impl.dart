@@ -77,5 +77,6 @@ extension TournamentExt on Tournament {
         gamesCount: gamesCount,
         billedTranslation: billedTranslation,
         billedPlayers: billedPlayers,
+        notificationEnabled: notificationEnabled,
       );
 }

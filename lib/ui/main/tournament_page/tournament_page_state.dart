@@ -23,5 +23,6 @@ class TournamentPageState with _$TournamentPageState {
     @Default(10) int billedPlayers,
     @Default(false) bool billedTranslation,
     @Default(false) bool isMyTournament,
+    @Default(false) bool notificationEnabled,
   }) = _TournamentPageState;
 }

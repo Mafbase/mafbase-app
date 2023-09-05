@@ -672,6 +672,7 @@ const Tournament$json = const {
     const {'1': 'gamesCount', '3': 6, '4': 1, '5': 5, '10': 'gamesCount'},
     const {'1': 'billedPlayers', '3': 7, '4': 1, '5': 5, '10': 'billedPlayers'},
     const {'1': 'billedTranslation', '3': 8, '4': 1, '5': 8, '10': 'billedTranslation'},
+    const {'1': 'notificationEnabled', '3': 9, '4': 1, '5': 8, '10': 'notificationEnabled'},
   ],
   '4': const [Tournament_Status$json],
 };
@@ -687,7 +688,7 @@ const Tournament_Status$json = const {
 };
 
 /// Descriptor for `Tournament`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tournamentDescriptor = $convert.base64Decode('CgpUb3VybmFtZW50Eg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEjQKBnN0YXR1cxgDIAEoDjIcLmdlbmVyYXRlZC5Ub3VybmFtZW50LlN0YXR1c1IGc3RhdHVzEhwKCWRhdGVTdGFydBgEIAEoCVIJZGF0ZVN0YXJ0EhgKB2RhdGVFbmQYBSABKAlSB2RhdGVFbmQSHgoKZ2FtZXNDb3VudBgGIAEoBVIKZ2FtZXNDb3VudBIkCg1iaWxsZWRQbGF5ZXJzGAcgASgFUg1iaWxsZWRQbGF5ZXJzEiwKEWJpbGxlZFRyYW5zbGF0aW9uGAggASgIUhFiaWxsZWRUcmFuc2xhdGlvbiIzCgZTdGF0dXMSEgoOd2FpdEZvckJpbGxpbmcQABIKCgZhY3RpdmUQARIJCgVlbmRlZBAC');
+final $typed_data.Uint8List tournamentDescriptor = $convert.base64Decode('CgpUb3VybmFtZW50Eg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEjQKBnN0YXR1cxgDIAEoDjIcLmdlbmVyYXRlZC5Ub3VybmFtZW50LlN0YXR1c1IGc3RhdHVzEhwKCWRhdGVTdGFydBgEIAEoCVIJZGF0ZVN0YXJ0EhgKB2RhdGVFbmQYBSABKAlSB2RhdGVFbmQSHgoKZ2FtZXNDb3VudBgGIAEoBVIKZ2FtZXNDb3VudBIkCg1iaWxsZWRQbGF5ZXJzGAcgASgFUg1iaWxsZWRQbGF5ZXJzEiwKEWJpbGxlZFRyYW5zbGF0aW9uGAggASgIUhFiaWxsZWRUcmFuc2xhdGlvbhIwChNub3RpZmljYXRpb25FbmFibGVkGAkgASgIUhNub3RpZmljYXRpb25FbmFibGVkIjMKBlN0YXR1cxISCg53YWl0Rm9yQmlsbGluZxAAEgoKBmFjdGl2ZRABEgkKBWVuZGVkEAI=');
 @$core.Deprecated('Use errorOutDescriptor instead')
 const ErrorOut$json = const {
   '1': 'ErrorOut',
@@ -731,3 +732,23 @@ const BillTournamentEventOut$json = const {
 
 /// Descriptor for `BillTournamentEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List billTournamentEventOutDescriptor = $convert.base64Decode('ChZCaWxsVG91cm5hbWVudEV2ZW50T3V0EiIKDHJlZGlyZWN0TGluaxgBIAEoCVIMcmVkaXJlY3RMaW5r');
+@$core.Deprecated('Use startGameInfoEventDescriptor instead')
+const StartGameInfoEvent$json = const {
+  '1': 'StartGameInfoEvent',
+  '2': const [
+    const {'1': 'game', '3': 1, '4': 1, '5': 5, '10': 'game'},
+  ],
+};
+
+/// Descriptor for `StartGameInfoEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startGameInfoEventDescriptor = $convert.base64Decode('ChJTdGFydEdhbWVJbmZvRXZlbnQSEgoEZ2FtZRgBIAEoBVIEZ2FtZQ==');
+@$core.Deprecated('Use customTextInfoEventDescriptor instead')
+const CustomTextInfoEvent$json = const {
+  '1': 'CustomTextInfoEvent',
+  '2': const [
+    const {'1': 'text', '3': 1, '4': 1, '5': 9, '10': 'text'},
+  ],
+};
+
+/// Descriptor for `CustomTextInfoEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List customTextInfoEventDescriptor = $convert.base64Decode('ChNDdXN0b21UZXh0SW5mb0V2ZW50EhIKBHRleHQYASABKAlSBHRleHQ=');

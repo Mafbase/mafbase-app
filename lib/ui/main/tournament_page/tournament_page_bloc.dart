@@ -3,6 +3,7 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/bill_tournament_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/custom_text_info_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_final_players_interactor.dart';
@@ -10,6 +11,7 @@ import 'package:seating_generator_web/domain/interactors/get_settings_interactor
 import 'package:seating_generator_web/domain/interactors/get_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/set_final_players_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/start_game_info_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/tournament_check_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
@@ -37,6 +39,10 @@ class TournamentPageBloc
   final GetTournamentInteractor _getTournamentInteractor = getIt();
   final GetFinalPlayersInteractor _getFinalPlayersInteractor = getIt();
   final SetFinalPlayersInteractor _setFinalPlayersInteractor = getIt();
+
+  final CustomTextInfoInteractor _customTextInfoInteractor = getIt();
+  final StartGameInfoInteractor _startGameInfoInteractor = getIt();
+
   late final BillTournamentInteractor _billTournamentInteractor = getIt(
     param1: context,
   );
@@ -58,6 +64,28 @@ class TournamentPageBloc
     on<TournamentPageEventPageOpened>(_onPageOpened);
     on<TournamentPageEventOpenRating>(_openRating);
     on<TournamentPageEventSetFinalPlayers>(_onSetFinalPlayers);
+    on<TournamentPageEventStartGameInfo>(_onStartGameInfo);
+    on<TournamentPageEventCustomTextInfo>(_onCustomTextInfo);
+  }
+
+  Future _onStartGameInfo(
+    TournamentPageEventStartGameInfo event,
+    Emitter emit,
+  ) {
+    return _startGameInfoInteractor(
+      tournamentId: tournamentId,
+      game: event.game,
+    );
+  }
+
+  Future _onCustomTextInfo(
+    TournamentPageEventCustomTextInfo event,
+    Emitter emit,
+  ) {
+    return _customTextInfoInteractor(
+      tournamentId: tournamentId,
+      text: event.text,
+    );
   }
 
   Future _updateFinalPlayers(Emitter emit) async {
@@ -110,6 +138,7 @@ class TournamentPageBloc
           state.copyWith(
             billedPlayers: tournament.billedPlayers,
             billedTranslation: tournament.billedTranslation,
+            notificationEnabled: tournament.notificationEnabled,
           ),
         );
       }),

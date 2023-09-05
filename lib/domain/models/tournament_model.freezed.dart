@@ -24,6 +24,7 @@ mixin _$TournamentModel {
   int get gamesCount => throw _privateConstructorUsedError;
   int get billedPlayers => throw _privateConstructorUsedError;
   bool get billedTranslation => throw _privateConstructorUsedError;
+  bool get notificationEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentModelCopyWith<TournamentModel> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $TournamentModelCopyWith<$Res> {
       DateTime dateEnd,
       int gamesCount,
       int billedPlayers,
-      bool billedTranslation});
+      bool billedTranslation,
+      bool notificationEnabled});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
     Object? gamesCount = null,
     Object? billedPlayers = null,
     Object? billedTranslation = null,
+    Object? notificationEnabled = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -102,6 +105,10 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
           ? _value.billedTranslation
           : billedTranslation // ignore: cast_nullable_to_non_nullable
               as bool,
+      notificationEnabled: null == notificationEnabled
+          ? _value.notificationEnabled
+          : notificationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$_TournamentModelCopyWith<$Res>
       DateTime dateEnd,
       int gamesCount,
       int billedPlayers,
-      bool billedTranslation});
+      bool billedTranslation,
+      bool notificationEnabled});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$_TournamentModelCopyWithImpl<$Res>
     Object? gamesCount = null,
     Object? billedPlayers = null,
     Object? billedTranslation = null,
+    Object? notificationEnabled = null,
   }) {
     return _then(_$_TournamentModel(
       id: null == id
@@ -178,6 +187,10 @@ class __$$_TournamentModelCopyWithImpl<$Res>
           ? _value.billedTranslation
           : billedTranslation // ignore: cast_nullable_to_non_nullable
               as bool,
+      notificationEnabled: null == notificationEnabled
+          ? _value.notificationEnabled
+          : notificationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$_TournamentModel implements _TournamentModel {
       required this.dateEnd,
       required this.gamesCount,
       required this.billedPlayers,
-      required this.billedTranslation});
+      required this.billedTranslation,
+      required this.notificationEnabled});
 
   @override
   final int id;
@@ -211,10 +225,12 @@ class _$_TournamentModel implements _TournamentModel {
   final int billedPlayers;
   @override
   final bool billedTranslation;
+  @override
+  final bool notificationEnabled;
 
   @override
   String toString() {
-    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation)';
+    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, notificationEnabled: $notificationEnabled)';
   }
 
   @override
@@ -233,12 +249,23 @@ class _$_TournamentModel implements _TournamentModel {
             (identical(other.billedPlayers, billedPlayers) ||
                 other.billedPlayers == billedPlayers) &&
             (identical(other.billedTranslation, billedTranslation) ||
-                other.billedTranslation == billedTranslation));
+                other.billedTranslation == billedTranslation) &&
+            (identical(other.notificationEnabled, notificationEnabled) ||
+                other.notificationEnabled == notificationEnabled));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, status, dateStart,
-      dateEnd, gamesCount, billedPlayers, billedTranslation);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      status,
+      dateStart,
+      dateEnd,
+      gamesCount,
+      billedPlayers,
+      billedTranslation,
+      notificationEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +283,8 @@ abstract class _TournamentModel implements TournamentModel {
       required final DateTime dateEnd,
       required final int gamesCount,
       required final int billedPlayers,
-      required final bool billedTranslation}) = _$_TournamentModel;
+      required final bool billedTranslation,
+      required final bool notificationEnabled}) = _$_TournamentModel;
 
   @override
   int get id;
@@ -274,6 +302,8 @@ abstract class _TournamentModel implements TournamentModel {
   int get billedPlayers;
   @override
   bool get billedTranslation;
+  @override
+  bool get notificationEnabled;
   @override
   @JsonKey(ignore: true)
   _$$_TournamentModelCopyWith<_$_TournamentModel> get copyWith =>

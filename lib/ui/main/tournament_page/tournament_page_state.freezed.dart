@@ -25,6 +25,7 @@ mixin _$TournamentPageState {
   int get billedPlayers => throw _privateConstructorUsedError;
   bool get billedTranslation => throw _privateConstructorUsedError;
   bool get isMyTournament => throw _privateConstructorUsedError;
+  bool get notificationEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentPageStateCopyWith<TournamentPageState> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $TournamentPageStateCopyWith<$Res> {
       TournamentSettingsModel settings,
       int billedPlayers,
       bool billedTranslation,
-      bool isMyTournament});
+      bool isMyTournament,
+      bool notificationEnabled});
 
   $TournamentSettingsModelCopyWith<$Res> get settings;
 }
@@ -73,6 +75,7 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     Object? billedPlayers = null,
     Object? billedTranslation = null,
     Object? isMyTournament = null,
+    Object? notificationEnabled = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -111,6 +114,10 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.isMyTournament
           : isMyTournament // ignore: cast_nullable_to_non_nullable
               as bool,
+      notificationEnabled: null == notificationEnabled
+          ? _value.notificationEnabled
+          : notificationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -140,7 +147,8 @@ abstract class _$$_TournamentPageStateCopyWith<$Res>
       TournamentSettingsModel settings,
       int billedPlayers,
       bool billedTranslation,
-      bool isMyTournament});
+      bool isMyTournament,
+      bool notificationEnabled});
 
   @override
   $TournamentSettingsModelCopyWith<$Res> get settings;
@@ -166,6 +174,7 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
     Object? billedPlayers = null,
     Object? billedTranslation = null,
     Object? isMyTournament = null,
+    Object? notificationEnabled = null,
   }) {
     return _then(_$_TournamentPageState(
       isLoading: null == isLoading
@@ -204,6 +213,10 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
           ? _value.isMyTournament
           : isMyTournament // ignore: cast_nullable_to_non_nullable
               as bool,
+      notificationEnabled: null == notificationEnabled
+          ? _value.notificationEnabled
+          : notificationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -221,7 +234,8 @@ class _$_TournamentPageState implements _TournamentPageState {
           defaultGames: 0, swissGames: 0, finalGames: 0),
       this.billedPlayers = 10,
       this.billedTranslation = false,
-      this.isMyTournament = false})
+      this.isMyTournament = false,
+      this.notificationEnabled = false})
       : _players = players,
         _tournamentPlayers = tournamentPlayers,
         _cannotMeet = cannotMeet,
@@ -279,10 +293,13 @@ class _$_TournamentPageState implements _TournamentPageState {
   @override
   @JsonKey()
   final bool isMyTournament;
+  @override
+  @JsonKey()
+  final bool notificationEnabled;
 
   @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament)';
+    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament, notificationEnabled: $notificationEnabled)';
   }
 
   @override
@@ -306,7 +323,9 @@ class _$_TournamentPageState implements _TournamentPageState {
             (identical(other.billedTranslation, billedTranslation) ||
                 other.billedTranslation == billedTranslation) &&
             (identical(other.isMyTournament, isMyTournament) ||
-                other.isMyTournament == isMyTournament));
+                other.isMyTournament == isMyTournament) &&
+            (identical(other.notificationEnabled, notificationEnabled) ||
+                other.notificationEnabled == notificationEnabled));
   }
 
   @override
@@ -320,7 +339,8 @@ class _$_TournamentPageState implements _TournamentPageState {
       settings,
       billedPlayers,
       billedTranslation,
-      isMyTournament);
+      isMyTournament,
+      notificationEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -340,7 +360,8 @@ abstract class _TournamentPageState implements TournamentPageState {
       final TournamentSettingsModel settings,
       final int billedPlayers,
       final bool billedTranslation,
-      final bool isMyTournament}) = _$_TournamentPageState;
+      final bool isMyTournament,
+      final bool notificationEnabled}) = _$_TournamentPageState;
 
   @override
   bool get isLoading;
@@ -360,6 +381,8 @@ abstract class _TournamentPageState implements TournamentPageState {
   bool get billedTranslation;
   @override
   bool get isMyTournament;
+  @override
+  bool get notificationEnabled;
   @override
   @JsonKey(ignore: true)
   _$$_TournamentPageStateCopyWith<_$_TournamentPageState> get copyWith =>

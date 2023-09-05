@@ -25,26 +25,28 @@ class _TournamentMenuState extends State<TournamentMenu> {
           Expanded(
             child: Container(
               color: MyTheme.of(context).darkGreyColor,
-              child: Column(
-                children: widget.items.map(
-                  (e) {
-                    return Material(
-                      color: MyTheme.of(context).darkGreyColor,
-                      child: InkWell(
-                        onTap: e.onTap,
-                        child: SizedBox(
-                          height: 64,
-                          child: Center(
-                            child: Text(
-                              e.text,
-                              style: MyTheme.of(context).btnTextStyle,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: widget.items.map(
+                    (e) {
+                      return Material(
+                        color: MyTheme.of(context).darkGreyColor,
+                        child: InkWell(
+                          onTap: e.onTap,
+                          child: SizedBox(
+                            height: 64,
+                            child: Center(
+                              child: Text(
+                                e.text,
+                                style: MyTheme.of(context).btnTextStyle,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ).toList(),
+                      );
+                    },
+                  ).toList(),
+                ),
               ),
             ),
           ),

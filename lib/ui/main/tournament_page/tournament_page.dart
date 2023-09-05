@@ -11,8 +11,10 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bl
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/widgets/custom_text_info_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/final_players_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/players_list_body.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/widgets/start_game_info_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_billing_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_menu.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_settings_dialog.dart';
@@ -207,6 +209,40 @@ class _TournamentPageState extends CustomState<TournamentPage>
                   }
                 },
               ),
+              if (state.isMyTournament && state.notificationEnabled) ...[
+                MenuItemModel(
+                  text: 'Оповещение об игре',
+                  onTap: () {
+                    StartGameInfoDialog.show(
+                      context: context,
+                      maxGame: state.settings.defaultGames +
+                          state.settings.swissGames +
+                          state.settings.finalGames,
+                    ).then((game) {
+                      if (game == null || !context.mounted) {
+                        return;
+                      }
+                      context
+                          .read<TournamentPageBloc>()
+                          .add(TournamentPageEvent.startGameInfo(game: game));
+                    });
+                  },
+                ),
+                MenuItemModel(
+                  text: 'Текстовое оповещение',
+                  onTap: () {
+                    CustomTextInfoDialog.show(context: context).then((text) {
+                      if (text == null || !context.mounted) {
+                        return;
+                      }
+
+                      context
+                          .read<TournamentPageBloc>()
+                          .add(TournamentPageEvent.customTextInfo(text: text));
+                    });
+                  },
+                ),
+              ],
             ],
           ),
         ),
