@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RatingModel {
   String get clubName => throw _privateConstructorUsedError;
   List<ClubRatingRowModel> get rows => throw _privateConstructorUsedError;
+  int get games => throw _privateConstructorUsedError;
+  int get citizenWins => throw _privateConstructorUsedError;
+  int get mafiaWins => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RatingModelCopyWith<RatingModel> get copyWith =>
@@ -30,7 +33,12 @@ abstract class $RatingModelCopyWith<$Res> {
           RatingModel value, $Res Function(RatingModel) then) =
       _$RatingModelCopyWithImpl<$Res, RatingModel>;
   @useResult
-  $Res call({String clubName, List<ClubRatingRowModel> rows});
+  $Res call(
+      {String clubName,
+      List<ClubRatingRowModel> rows,
+      int games,
+      int citizenWins,
+      int mafiaWins});
 }
 
 /// @nodoc
@@ -48,6 +56,9 @@ class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
   $Res call({
     Object? clubName = null,
     Object? rows = null,
+    Object? games = null,
+    Object? citizenWins = null,
+    Object? mafiaWins = null,
   }) {
     return _then(_value.copyWith(
       clubName: null == clubName
@@ -58,6 +69,18 @@ class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
           ? _value.rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
+      games: null == games
+          ? _value.games
+          : games // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenWins: null == citizenWins
+          ? _value.citizenWins
+          : citizenWins // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaWins: null == mafiaWins
+          ? _value.mafiaWins
+          : mafiaWins // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -70,7 +93,12 @@ abstract class _$$_RatingModelCopyWith<$Res>
       __$$_RatingModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String clubName, List<ClubRatingRowModel> rows});
+  $Res call(
+      {String clubName,
+      List<ClubRatingRowModel> rows,
+      int games,
+      int citizenWins,
+      int mafiaWins});
 }
 
 /// @nodoc
@@ -86,6 +114,9 @@ class __$$_RatingModelCopyWithImpl<$Res>
   $Res call({
     Object? clubName = null,
     Object? rows = null,
+    Object? games = null,
+    Object? citizenWins = null,
+    Object? mafiaWins = null,
   }) {
     return _then(_$_RatingModel(
       clubName: null == clubName
@@ -96,6 +127,18 @@ class __$$_RatingModelCopyWithImpl<$Res>
           ? _value._rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
+      games: null == games
+          ? _value.games
+          : games // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenWins: null == citizenWins
+          ? _value.citizenWins
+          : citizenWins // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaWins: null == mafiaWins
+          ? _value.mafiaWins
+          : mafiaWins // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -104,7 +147,11 @@ class __$$_RatingModelCopyWithImpl<$Res>
 
 class _$_RatingModel implements _RatingModel {
   const _$_RatingModel(
-      {required this.clubName, required final List<ClubRatingRowModel> rows})
+      {required this.clubName,
+      required final List<ClubRatingRowModel> rows,
+      required this.games,
+      required this.citizenWins,
+      required this.mafiaWins})
       : _rows = rows;
 
   @override
@@ -118,8 +165,15 @@ class _$_RatingModel implements _RatingModel {
   }
 
   @override
+  final int games;
+  @override
+  final int citizenWins;
+  @override
+  final int mafiaWins;
+
+  @override
   String toString() {
-    return 'RatingModel(clubName: $clubName, rows: $rows)';
+    return 'RatingModel(clubName: $clubName, rows: $rows, games: $games, citizenWins: $citizenWins, mafiaWins: $mafiaWins)';
   }
 
   @override
@@ -129,12 +183,22 @@ class _$_RatingModel implements _RatingModel {
             other is _$_RatingModel &&
             (identical(other.clubName, clubName) ||
                 other.clubName == clubName) &&
-            const DeepCollectionEquality().equals(other._rows, _rows));
+            const DeepCollectionEquality().equals(other._rows, _rows) &&
+            (identical(other.games, games) || other.games == games) &&
+            (identical(other.citizenWins, citizenWins) ||
+                other.citizenWins == citizenWins) &&
+            (identical(other.mafiaWins, mafiaWins) ||
+                other.mafiaWins == mafiaWins));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, clubName, const DeepCollectionEquality().hash(_rows));
+      runtimeType,
+      clubName,
+      const DeepCollectionEquality().hash(_rows),
+      games,
+      citizenWins,
+      mafiaWins);
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +210,21 @@ class _$_RatingModel implements _RatingModel {
 abstract class _RatingModel implements RatingModel {
   const factory _RatingModel(
       {required final String clubName,
-      required final List<ClubRatingRowModel> rows}) = _$_RatingModel;
+      required final List<ClubRatingRowModel> rows,
+      required final int games,
+      required final int citizenWins,
+      required final int mafiaWins}) = _$_RatingModel;
 
   @override
   String get clubName;
   @override
   List<ClubRatingRowModel> get rows;
+  @override
+  int get games;
+  @override
+  int get citizenWins;
+  @override
+  int get mafiaWins;
   @override
   @JsonKey(ignore: true)
   _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>

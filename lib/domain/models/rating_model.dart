@@ -9,6 +9,9 @@ class RatingModel with _$RatingModel {
   const factory RatingModel({
     required String clubName,
     required List<ClubRatingRowModel> rows,
+    required int games,
+    required int citizenWins,
+    required int mafiaWins,
   }) = _RatingModel;
 
   factory RatingModel.fromProto(ClubRatingEventOut event) {
@@ -17,6 +20,9 @@ class RatingModel with _$RatingModel {
       rows: event.row
           .map((fromProto) => ClubRatingRowModel.fromProto(fromProto))
           .toList(),
+      games: event.games,
+      citizenWins: event.citizenWins,
+      mafiaWins: event.mafiaWins,
     );
   }
 }

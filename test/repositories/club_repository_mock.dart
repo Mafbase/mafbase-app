@@ -15,7 +15,13 @@ class ClubRepositoryMock implements ClubRepository {
     required int clubId,
     required DateTimeRange range,
   }) async {
-    return const RatingModel(clubName: "clubName", rows: []);
+    return const RatingModel(
+      clubName: "clubName",
+      rows: [],
+      games: 0,
+      citizenWins: 0,
+      mafiaWins: 0,
+    );
   }
 
   @override

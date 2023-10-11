@@ -8,6 +8,9 @@ class RatingState with _$RatingState {
   const factory RatingState({
     @Default("") String clubName,
     @Default([]) List<ClubRatingRowModel> rows,
+    @Default(0) int games,
+    @Default(0) int mafiaWins,
+    @Default(0) int citizenWins,
     @Default(true) bool isLoading,
   }) = _RatingState;
 }

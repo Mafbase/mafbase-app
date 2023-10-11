@@ -717,6 +717,9 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ClubRatingEventOut', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
     ..pc<ClubRatingRow>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'row', $pb.PbFieldType.PM, subBuilder: ClubRatingRow.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clubName', protoName: 'clubName')
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'games', $pb.PbFieldType.O3)
+    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafiaWins', $pb.PbFieldType.O3, protoName: 'mafiaWins')
+    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'citizenWins', $pb.PbFieldType.O3, protoName: 'citizenWins')
     ..hasRequiredFields = false
   ;
 
@@ -724,6 +727,9 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
   factory ClubRatingEventOut({
     $core.Iterable<ClubRatingRow>? row,
     $core.String? clubName,
+    $core.int? games,
+    $core.int? mafiaWins,
+    $core.int? citizenWins,
   }) {
     final _result = create();
     if (row != null) {
@@ -731,6 +737,15 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
     }
     if (clubName != null) {
       _result.clubName = clubName;
+    }
+    if (games != null) {
+      _result.games = games;
+    }
+    if (mafiaWins != null) {
+      _result.mafiaWins = mafiaWins;
+    }
+    if (citizenWins != null) {
+      _result.citizenWins = citizenWins;
     }
     return _result;
   }
@@ -766,6 +781,33 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
   $core.bool hasClubName() => $_has(1);
   @$pb.TagNumber(2)
   void clearClubName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get games => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set games($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasGames() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearGames() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get mafiaWins => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set mafiaWins($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMafiaWins() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMafiaWins() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get citizenWins => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set citizenWins($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCitizenWins() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCitizenWins() => clearField(5);
 }
 
 class ClubRatingRow_GameItem extends $pb.GeneratedMessage {

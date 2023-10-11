@@ -73,7 +73,7 @@ class RatingPage extends StatefulWidget {
             range == null ? null : dateFormatForRequests.format(range.end),
         "style": tableStyle.name,
         "sort": sort.name,
-        "game-filter": gameFilter.toString()
+        "game-filter": gameFilter.toString(),
       },
     );
   }
@@ -152,7 +152,7 @@ class _RatingPageState extends CustomState<RatingPage> {
   List<RatingTableStyle> items = [
     RatingTableStyle.score,
     RatingTableStyle.full,
-    RatingTableStyle.stats
+    RatingTableStyle.stats,
   ];
   int carouselIndex = 1;
   final CarouselController _carouselController = CarouselController();
@@ -241,6 +241,10 @@ class _RatingPageState extends CustomState<RatingPage> {
               ),
             ),
             const SizedBox(
+              height: 8,
+            ),
+            winRate(state),
+            const SizedBox(
               height: 16,
             ),
             Expanded(
@@ -323,7 +327,8 @@ class _RatingPageState extends CustomState<RatingPage> {
                       children: [
                         if (widget.range != null)
                           Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
+                            padding:
+                                const EdgeInsets.only(left: 16.0, right: 8),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -337,14 +342,12 @@ class _RatingPageState extends CustomState<RatingPage> {
                               ],
                             ),
                           ),
-                        Stack(
-                          children: [
-                            styleSwitcher(),
-                          ],
-                        ),
+                        styleSwitcher(),
                         downloadRatingButton(),
                       ],
                     ),
+                    const SizedBox(height: 8),
+                    winRate(state),
                     const SizedBox(
                       height: 16,
                     ),
@@ -431,6 +434,22 @@ class _RatingPageState extends CustomState<RatingPage> {
         ),
       );
     }
+  }
+
+  Widget winRate(RatingState model) {
+    if (model.games == 0) return const SizedBox.shrink();
+    final citizenWinRate = ((model.citizenWins / model.games) * 100).round();
+    final mafiaWinRate = ((model.mafiaWins / model.games) * 100).round();
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+            "Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})"),
+        const SizedBox(height: 4),
+        Text(
+            "Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})"),
+      ],
+    );
   }
 
   Widget styleSwitcher() {

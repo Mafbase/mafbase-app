@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RatingState {
   String get clubName => throw _privateConstructorUsedError;
   List<ClubRatingRowModel> get rows => throw _privateConstructorUsedError;
+  int get games => throw _privateConstructorUsedError;
+  int get mafiaWins => throw _privateConstructorUsedError;
+  int get citizenWins => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +34,13 @@ abstract class $RatingStateCopyWith<$Res> {
           RatingState value, $Res Function(RatingState) then) =
       _$RatingStateCopyWithImpl<$Res, RatingState>;
   @useResult
-  $Res call({String clubName, List<ClubRatingRowModel> rows, bool isLoading});
+  $Res call(
+      {String clubName,
+      List<ClubRatingRowModel> rows,
+      int games,
+      int mafiaWins,
+      int citizenWins,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -49,6 +58,9 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
   $Res call({
     Object? clubName = null,
     Object? rows = null,
+    Object? games = null,
+    Object? mafiaWins = null,
+    Object? citizenWins = null,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
@@ -60,6 +72,18 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
           ? _value.rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
+      games: null == games
+          ? _value.games
+          : games // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaWins: null == mafiaWins
+          ? _value.mafiaWins
+          : mafiaWins // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenWins: null == citizenWins
+          ? _value.citizenWins
+          : citizenWins // ignore: cast_nullable_to_non_nullable
+              as int,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -76,7 +100,13 @@ abstract class _$$_RatingStateCopyWith<$Res>
       __$$_RatingStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String clubName, List<ClubRatingRowModel> rows, bool isLoading});
+  $Res call(
+      {String clubName,
+      List<ClubRatingRowModel> rows,
+      int games,
+      int mafiaWins,
+      int citizenWins,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -92,6 +122,9 @@ class __$$_RatingStateCopyWithImpl<$Res>
   $Res call({
     Object? clubName = null,
     Object? rows = null,
+    Object? games = null,
+    Object? mafiaWins = null,
+    Object? citizenWins = null,
     Object? isLoading = null,
   }) {
     return _then(_$_RatingState(
@@ -103,6 +136,18 @@ class __$$_RatingStateCopyWithImpl<$Res>
           ? _value._rows
           : rows // ignore: cast_nullable_to_non_nullable
               as List<ClubRatingRowModel>,
+      games: null == games
+          ? _value.games
+          : games // ignore: cast_nullable_to_non_nullable
+              as int,
+      mafiaWins: null == mafiaWins
+          ? _value.mafiaWins
+          : mafiaWins // ignore: cast_nullable_to_non_nullable
+              as int,
+      citizenWins: null == citizenWins
+          ? _value.citizenWins
+          : citizenWins // ignore: cast_nullable_to_non_nullable
+              as int,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -117,6 +162,9 @@ class _$_RatingState implements _RatingState {
   const _$_RatingState(
       {this.clubName = "",
       final List<ClubRatingRowModel> rows = const [],
+      this.games = 0,
+      this.mafiaWins = 0,
+      this.citizenWins = 0,
       this.isLoading = true})
       : _rows = rows;
 
@@ -134,11 +182,20 @@ class _$_RatingState implements _RatingState {
 
   @override
   @JsonKey()
+  final int games;
+  @override
+  @JsonKey()
+  final int mafiaWins;
+  @override
+  @JsonKey()
+  final int citizenWins;
+  @override
+  @JsonKey()
   final bool isLoading;
 
   @override
   String toString() {
-    return 'RatingState(clubName: $clubName, rows: $rows, isLoading: $isLoading)';
+    return 'RatingState(clubName: $clubName, rows: $rows, games: $games, mafiaWins: $mafiaWins, citizenWins: $citizenWins, isLoading: $isLoading)';
   }
 
   @override
@@ -149,13 +206,24 @@ class _$_RatingState implements _RatingState {
             (identical(other.clubName, clubName) ||
                 other.clubName == clubName) &&
             const DeepCollectionEquality().equals(other._rows, _rows) &&
+            (identical(other.games, games) || other.games == games) &&
+            (identical(other.mafiaWins, mafiaWins) ||
+                other.mafiaWins == mafiaWins) &&
+            (identical(other.citizenWins, citizenWins) ||
+                other.citizenWins == citizenWins) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, clubName,
-      const DeepCollectionEquality().hash(_rows), isLoading);
+  int get hashCode => Object.hash(
+      runtimeType,
+      clubName,
+      const DeepCollectionEquality().hash(_rows),
+      games,
+      mafiaWins,
+      citizenWins,
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -168,12 +236,21 @@ abstract class _RatingState implements RatingState {
   const factory _RatingState(
       {final String clubName,
       final List<ClubRatingRowModel> rows,
+      final int games,
+      final int mafiaWins,
+      final int citizenWins,
       final bool isLoading}) = _$_RatingState;
 
   @override
   String get clubName;
   @override
   List<ClubRatingRowModel> get rows;
+  @override
+  int get games;
+  @override
+  int get mafiaWins;
+  @override
+  int get citizenWins;
   @override
   bool get isLoading;
   @override

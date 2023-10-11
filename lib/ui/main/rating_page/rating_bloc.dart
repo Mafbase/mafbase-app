@@ -62,11 +62,15 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     } else {
       throw ArgumentError();
     }
+    rating;
     emit(
       state.copyWith(
         isLoading: false,
         rows: rating.rows,
         clubName: rating.clubName,
+        games: rating.games,
+        mafiaWins: rating.mafiaWins,
+        citizenWins: rating.citizenWins,
       ),
     );
   }
