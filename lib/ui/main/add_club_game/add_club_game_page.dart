@@ -79,7 +79,6 @@ class AddClubGamePage extends StatefulWidget {
       builder: (context, state) {
         final clubId = int.parse(state.params["clubId"]!);
         final initDateTime = state.extra as DateTime?;
-        print("test25: $initDateTime");
         return BlocProvider<AddClubGameBloc>(
           create: (context) => AddClubGameBloc(
             clubId: clubId,
