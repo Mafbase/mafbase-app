@@ -54,7 +54,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     if (clubId == null) {
       return;
     }
-    router.openNewGame(clubId!);
+    router.openNewGame(clubId!, event.dateTime);
   }
 
   _onNewPlayer(AddClubGameEventNewPlayer event, Emitter emit) async {

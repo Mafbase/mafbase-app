@@ -10,7 +10,7 @@ abstract class AddClubGameRouter {
 
   void pop();
 
-  void openNewGame(int clubId);
+  void openNewGame(int clubId, [DateTime? initDateTime]);
 
   void openLoginPage();
 }
@@ -45,8 +45,11 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
   }
 
   @override
-  void openNewGame(int clubId) {
-    context.go(AddClubGamePage.createLocation(context, clubId));
+  void openNewGame(int clubId, [DateTime? initDateTime]) {
+    context.go(
+      AddClubGamePage.createLocation(context, clubId),
+      extra: initDateTime,
+    );
   }
 
   @override

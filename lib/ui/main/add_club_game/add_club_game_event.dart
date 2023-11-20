@@ -23,5 +23,7 @@ class AddClubGameEvent with _$AddClubGameEvent {
     required String nickname,
   }) = AddClubGameEventNewPlayer;
 
-  const factory AddClubGameEvent.newGame() = AddClubGameEventNewGame;
+  const factory AddClubGameEvent.newGame({
+    required DateTime dateTime,
+  }) = AddClubGameEventNewGame;
 }

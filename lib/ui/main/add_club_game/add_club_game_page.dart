@@ -25,12 +25,14 @@ class AddClubGamePage extends StatefulWidget {
   final bool readOnly;
   final bool editing;
   final int? gameId;
+  final DateTime? initDateTime;
 
   const AddClubGamePage({
     Key? key,
     this.readOnly = false,
     this.gameId,
     this.editing = true,
+    this.initDateTime,
   }) : super(key: key);
 
   @override
@@ -76,14 +78,17 @@ class AddClubGamePage extends StatefulWidget {
       name: "addGame",
       builder: (context, state) {
         final clubId = int.parse(state.params["clubId"]!);
+        final initDateTime = state.extra as DateTime?;
+        print("test25: $initDateTime");
         return BlocProvider<AddClubGameBloc>(
           create: (context) => AddClubGameBloc(
             clubId: clubId,
             context: context,
           ),
           // TODO: REGISTER IN GET IT
-          child: const AddClubGamePage(
+          child: AddClubGamePage(
             editing: true,
+            initDateTime: initDateTime,
           ),
         );
       },
@@ -132,7 +137,10 @@ class AddClubGamePage extends StatefulWidget {
     );
   }
 
-  static String createLocation(BuildContext context, int clubId) {
+  static String createLocation(
+    BuildContext context,
+    int clubId,
+  ) {
     return context.namedLocation(
       "addGame",
       params: {
@@ -159,7 +167,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   int firstDie = 0;
   BestMove? bestMove = BestMove.miss;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
-  DateTime date = DateTime.now();
+  late DateTime date = widget.initDateTime ?? DateTime.now();
   CiSchemeModel? ciSchemeModel;
 
   @override
@@ -575,8 +583,9 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                         child: TextButton(
                                           onPressed: () {
                                             context.read<AddClubGameBloc>().add(
-                                                  const AddClubGameEvent
-                                                      .newGame(),
+                                                  AddClubGameEvent.newGame(
+                                                    dateTime: date,
+                                                  ),
                                                 );
                                           },
                                           child: Text(
