@@ -20,9 +20,6 @@ image: docker:20.10.16
 before_script:
   - docker info
 
-services:
-  - docker:20.10.16-dind
-
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
