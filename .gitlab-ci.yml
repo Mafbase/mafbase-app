@@ -78,7 +78,7 @@ deploy:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
     - eval $(ssh-agent -s)
     - echo "$SSH_KEY"
-    - ssh-add <(echo "$SSH_KEY")
+    - ssh-add < "$SSH_KEY"
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - ssh-keyscan -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
