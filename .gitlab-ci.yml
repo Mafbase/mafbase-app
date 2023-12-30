@@ -89,7 +89,6 @@ deploy:
   script:
     - scp flutter-image.tar "$DEPLOY_USER"@"$DEPLOY_HOST":~/
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./load_flutter.sh"
-    - scp docker-compose.yml "$DEPLOY_USER"@"$DEPLOY_HOST":~/
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
   cache:
