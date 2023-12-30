@@ -79,4 +79,10 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
   Future generateFinalGames({required int tournamentId}) {
     return Future.value();
   }
+
+  @override
+  Future<void> generateSwissGame(
+      {required int tournamentId, required int game}) {
+    return Future.value();
+  }
 }

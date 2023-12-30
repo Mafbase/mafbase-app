@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/data/requests/create_swiss_game_request.dart';
 import 'package:seating_generator_web/data/requests/delete_separation_request.dart';
 import 'package:seating_generator_web/data/requests/generate_final_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_ci_schemes_request.dart';
@@ -123,13 +124,23 @@ class TournamentEditRepositoryImpl extends BaseRepository
   Future<List<PlayerModel>> getFinalPlayers({required int tournamentId}) {
     return GetFinalPlayersRequest(tournamentId: tournamentId)
         .execute(client)
-        .then((value) =>
-            value.player.map((e) => PlayerModel.fromProto(e)).toList(),);
+        .then(
+          (value) => value.player.map((e) => PlayerModel.fromProto(e)).toList(),
+        );
   }
 
   @override
   Future generateFinalGames({required int tournamentId}) {
     return GenerateFinalSeatingRequest(tournamentId: tournamentId)
+        .execute(client);
+  }
+
+  @override
+  Future<void> generateSwissGame({
+    required int tournamentId,
+    required int game,
+  }) async {
+    await CreateSwissGameRequest(tournamentId: tournamentId, game: game)
         .execute(client);
   }
 }

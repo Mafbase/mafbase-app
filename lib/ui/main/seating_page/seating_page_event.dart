@@ -26,4 +26,7 @@ class SeatingPageEvent with _$SeatingPageEvent {
 
   const factory SeatingPageEvent.createFinalSeating() =
       SeatingPageEventCreateFinalSeating;
+
+  const factory SeatingPageEvent.createSwissGame({required int game}) =
+      SeatingPageEventCreateSwissGame;
 }

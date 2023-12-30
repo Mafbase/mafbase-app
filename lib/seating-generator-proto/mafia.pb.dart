@@ -897,6 +897,7 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     ..a<$core.double>(22, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mafiaScore', $pb.PbFieldType.OD, protoName: 'mafiaScore')
     ..a<$core.double>(23, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'donScore', $pb.PbFieldType.OD, protoName: 'donScore')
     ..a<$core.double>(24, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sheriffScore', $pb.PbFieldType.OD, protoName: 'sheriffScore')
+    ..a<$core.int>(25, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'playerId', $pb.PbFieldType.O3, protoName: 'playerId')
     ..hasRequiredFields = false
   ;
 
@@ -926,6 +927,7 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     $core.double? mafiaScore,
     $core.double? donScore,
     $core.double? sheriffScore,
+    $core.int? playerId,
   }) {
     final _result = create();
     if (nickname != null) {
@@ -999,6 +1001,9 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     }
     if (sheriffScore != null) {
       _result.sheriffScore = sheriffScore;
+    }
+    if (playerId != null) {
+      _result.playerId = playerId;
     }
     return _result;
   }
@@ -1232,6 +1237,15 @@ class ClubRatingRow extends $pb.GeneratedMessage {
   $core.bool hasSheriffScore() => $_has(23);
   @$pb.TagNumber(24)
   void clearSheriffScore() => clearField(24);
+
+  @$pb.TagNumber(25)
+  $core.int get playerId => $_getIZ(24);
+  @$pb.TagNumber(25)
+  set playerId($core.int v) { $_setSignedInt32(24, v); }
+  @$pb.TagNumber(25)
+  $core.bool hasPlayerId() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearPlayerId() => clearField(25);
 }
 
 class AddGameEventOut extends $pb.GeneratedMessage {
@@ -2478,6 +2492,7 @@ class TournamentSettings extends $pb.GeneratedMessage {
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'defaultGamesCount', $pb.PbFieldType.O3, protoName: 'defaultGamesCount')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'swissGamesCount', $pb.PbFieldType.O3, protoName: 'swissGamesCount')
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'finalGamesCount', $pb.PbFieldType.O3, protoName: 'finalGamesCount')
+    ..p<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'buckets', $pb.PbFieldType.K3)
     ..hasRequiredFields = false
   ;
 
@@ -2486,6 +2501,7 @@ class TournamentSettings extends $pb.GeneratedMessage {
     $core.int? defaultGamesCount,
     $core.int? swissGamesCount,
     $core.int? finalGamesCount,
+    $core.Iterable<$core.int>? buckets,
   }) {
     final _result = create();
     if (defaultGamesCount != null) {
@@ -2496,6 +2512,9 @@ class TournamentSettings extends $pb.GeneratedMessage {
     }
     if (finalGamesCount != null) {
       _result.finalGamesCount = finalGamesCount;
+    }
+    if (buckets != null) {
+      _result.buckets.addAll(buckets);
     }
     return _result;
   }
@@ -2546,6 +2565,9 @@ class TournamentSettings extends $pb.GeneratedMessage {
   $core.bool hasFinalGamesCount() => $_has(2);
   @$pb.TagNumber(3)
   void clearFinalGamesCount() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get buckets => $_getList(3);
 }
 
 class Profile extends $pb.GeneratedMessage {
@@ -2806,6 +2828,53 @@ class Player extends $pb.GeneratedMessage {
   $core.bool hasImage() => $_has(4);
   @$pb.TagNumber(5)
   void clearImage() => clearField(5);
+}
+
+class CreateSwissRound extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateSwissRound', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'game', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  CreateSwissRound._() : super();
+  factory CreateSwissRound({
+    $core.int? game,
+  }) {
+    final _result = create();
+    if (game != null) {
+      _result.game = game;
+    }
+    return _result;
+  }
+  factory CreateSwissRound.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateSwissRound.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CreateSwissRound clone() => CreateSwissRound()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreateSwissRound copyWith(void Function(CreateSwissRound) updates) => super.copyWith((message) => updates(message as CreateSwissRound)) as CreateSwissRound; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateSwissRound create() => CreateSwissRound._();
+  CreateSwissRound createEmptyInstance() => create();
+  static $pb.PbList<CreateSwissRound> createRepeated() => $pb.PbList<CreateSwissRound>();
+  @$core.pragma('dart2js:noInline')
+  static CreateSwissRound getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateSwissRound>(create);
+  static CreateSwissRound? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get game => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set game($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGame() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGame() => clearField(1);
 }
 
 class EmailVerificationEventOut extends $pb.GeneratedMessage {

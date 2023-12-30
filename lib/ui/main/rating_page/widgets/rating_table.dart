@@ -54,11 +54,12 @@ class RatingTable extends StatefulWidget {
   })  : style = style ?? RatingTableStyle.full,
         sort = sort ?? RatingSort.score,
         gameFilter = gameFilter ?? 0,
-        sortedRows = createSortedRows(rows, sort ?? RatingSort.score, isTournament)
-            .where(
-              (element) => element.gamesCount >= (gameFilter ?? 0),
-            )
-            .toList(),
+        sortedRows =
+            createSortedRows(rows, sort ?? RatingSort.score, isTournament)
+                .where(
+                  (element) => element.gamesCount >= (gameFilter ?? 0),
+                )
+                .toList(),
         super(key: key);
 
   static List<ClubRatingRowModel> createSortedRows(
@@ -426,6 +427,10 @@ class _RatingTableState extends State<RatingTable> {
       child: Builder(
         builder: (context) {
           builder(BuildContext context, int index) {
+            if (widget.sortedRows[rowIndex].games.length <= index) {
+              return const SizedBox.shrink();
+            }
+
             return InkWell(
               onTap: widget.sortedRows[rowIndex].games[index].score == null
                   ? null

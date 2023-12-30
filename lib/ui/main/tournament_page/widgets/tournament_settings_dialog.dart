@@ -10,6 +10,7 @@ class TournamentSettingsDialog extends StatefulWidget {
   final int defaultGames;
   final int swissGames;
   final int finalGames;
+  final List<int>? buckets;
   final VoidCallback onFinalPlayersTapped;
 
   const TournamentSettingsDialog({
@@ -17,6 +18,7 @@ class TournamentSettingsDialog extends StatefulWidget {
     this.defaultGames = 0,
     this.swissGames = 0,
     this.finalGames = 0,
+    this.buckets,
     required this.onFinalPlayersTapped,
   }) : super(key: key);
 
@@ -35,6 +37,7 @@ class TournamentSettingsDialog extends StatefulWidget {
         defaultGames: initValue.defaultGames,
         swissGames: initValue.swissGames,
         finalGames: initValue.finalGames,
+        buckets: initValue.buckets,
         onFinalPlayersTapped: onFinalPlayersTapped,
       ),
     );
@@ -45,6 +48,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
   final defaultGamesController = TextEditingController();
   final finalGamesController = TextEditingController();
   final swissGamesController = TextEditingController();
+  final bucketsController = TextEditingController();
 
   final formState = GlobalKey<FormState>();
 
@@ -53,9 +57,17 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
     defaultGamesController.text = widget.defaultGames.toString();
     finalGamesController.text = widget.finalGames.toString();
     swissGamesController.text = widget.swissGames.toString();
-    defaultGamesController.addListener(() {
+    bucketsController.text = widget.buckets?.join(';') ?? '';
+
+    Listenable.merge([
+      defaultGamesController,
+      finalGamesController,
+      swissGamesController,
+      bucketsController,
+    ]).addListener(() {
       setState(() {});
     });
+
     super.initState();
   }
 
@@ -64,6 +76,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
     defaultGamesController.dispose();
     swissGamesController.dispose();
     finalGamesController.dispose();
+    bucketsController.dispose();
     super.dispose();
   }
 
@@ -98,9 +111,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                   label: context.locale.defaultGamesLabel,
                   controller: defaultGamesController,
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 CustomTextField(
                   validate: (value) => int.tryParse(value ?? "") == null
                       ? "Неверный формат числа"
@@ -109,9 +120,35 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                   label: context.locale.swissGamesLabel,
                   controller: swissGamesController,
                 ),
-                const SizedBox(
-                  height: 16,
+                const SizedBox(height: 16),
+                IgnorePointer(
+                  ignoring: (int.tryParse(swissGamesController.text) ?? 0) == 0,
+                  child: Opacity(
+                    opacity: (int.tryParse(swissGamesController.text) ?? 0) == 0
+                        ? 0.5
+                        : 1,
+                    child: CustomTextField(
+                      label: context.locale.bucketFieldTitle,
+                      hint: context.locale.bucketFieldHint,
+                      readOnly:
+                          (int.tryParse(swissGamesController.text) ?? 0) == 0,
+                      controller: bucketsController,
+                      validate: (value) =>
+                          (int.tryParse(swissGamesController.text) ?? 0) != 0 &&
+                                  (value?.split(";").any(
+                                        (element) {
+                                          final count = int.tryParse(element);
+                                          return count == null ||
+                                              count % 10 > 0;
+                                        },
+                                      ) ??
+                                      true)
+                              ? 'Неверный формат корзин'
+                              : null,
+                    ),
+                  ),
                 ),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Expanded(
@@ -130,9 +167,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 CustomButton(
                   text: context.locale.save,
                   disabled: formState.currentState?.validate() != true,
@@ -142,6 +177,10 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                         defaultGames: int.parse(defaultGamesController.text),
                         swissGames: int.parse(swissGamesController.text),
                         finalGames: int.parse(finalGamesController.text),
+                        buckets: bucketsController.text
+                            .split(';')
+                            .map((e) => int.parse(e))
+                            .toList(),
                       ),
                     );
                   },

@@ -147,7 +147,6 @@ class _SeatingPageState extends State<SeatingPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             context.locale.addSeparationBtnText,
-                            style: MyTheme.of(context).textBtnTextStyle,
                           ),
                         ),
                       ),
@@ -158,69 +157,107 @@ class _SeatingPageState extends State<SeatingPage> {
                         models: state.games,
                       ),
                     ),
-                    if (tournamentState.isMyTournament) ...[
-                      if (tournamentState.finalPlayers.length == 10)
-                        TextButton(
-                          onPressed: () {
-                            ConfirmDialog.open(
-                              context,
-                              "Новая рассадка заменит старую",
-                            ).then(
-                              (value) {
-                                if (value == true && context.mounted) {
+                    if (tournamentState.isMyTournament)
+                      Wrap(
+                        children: [
+                          if (state.games.lastOrNull
+                                  ?.any((element) => element.gameWin == null) ==
+                              false)
+                            TextButton(
+                              onPressed: () {
+                                onSwissGameCreate(state, true);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Сгенерировать следующий полуфинальный тур',
+                                ),
+                              ),
+                            )
+                          else
+                            TextButton(
+                              onPressed: state.games.lastOrNull?.any(
+                                        (element) => element.gameWin == null,
+                                      ) ==
+                                      true
+                                  ? null
+                                  : () {
+                                      ConfirmDialog.open(
+                                        context,
+                                        "Новая рассадка заменит старую",
+                                      ).then((value) {
+                                        if (value == true) {
+                                          onSwissGameCreate(state, false);
+                                        }
+                                      });
+                                    },
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Перегенерировать текущий полуфинальный тур',
+                                ),
+                              ),
+                            ),
+                          if (tournamentState.finalPlayers.length == 10)
+                            TextButton(
+                              onPressed: () {
+                                ConfirmDialog.open(
+                                  context,
+                                  "Новая рассадка заменит старую",
+                                ).then(
+                                  (value) {
+                                    if (value == true && context.mounted) {
+                                      context.read<SeatingPageBloc>().add(
+                                            const SeatingPageEvent
+                                                .createFinalSeating(),
+                                          );
+                                    }
+                                  },
+                                );
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Сгенерировать рассадку на финал",
+                                ),
+                              ),
+                            ),
+                          TextButton(
+                            onPressed: () {
+                              ConfirmDialog.open(
+                                context,
+                                "Новая рассадка заменит старую",
+                              ).then((value) {
+                                if (value == true) {
+                                  if (!mounted) return;
                                   context.read<SeatingPageBloc>().add(
-                                        const SeatingPageEvent
-                                            .createFinalSeating(),
+                                        const SeatingPageEvent.createSeating(),
                                       );
                                 }
-                              },
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Сгенерировать рассадку на финал",
-                              style: MyTheme.of(context).textBtnTextStyle,
+                              });
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Сгенерировать рассадку",
+                              ),
                             ),
                           ),
-                        ),
-                      TextButton(
-                        onPressed: () {
-                          ConfirmDialog.open(
-                            context,
-                            "Новая рассадка заменит старую",
-                          ).then((value) {
-                            if (value == true) {
-                              if (!mounted) return;
+                          TextButton(
+                            onPressed: () {
                               context.read<SeatingPageBloc>().add(
-                                    const SeatingPageEvent.createSeating(),
+                                    const SeatingPageEvent.fsmSeatingTapped(),
                                   );
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Сгенерировать рассадку",
-                            style: MyTheme.of(context).textBtnTextStyle,
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Загрузить готовую рассадку",
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      TextButton(
-                        onPressed: () {
-                          context.read<SeatingPageBloc>().add(
-                                const SeatingPageEvent.fsmSeatingTapped(),
-                              );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Загрузить готовую рассадку",
-                            style: MyTheme.of(context).textBtnTextStyle,
-                          ),
-                        ),
-                      ),
-                    ],
                   ],
                 ),
               ),
@@ -231,5 +268,13 @@ class _SeatingPageState extends State<SeatingPage> {
         },
       ),
     );
+  }
+
+  Future<void> onSwissGameCreate(SeatingPageState state, bool next) async {
+    context.read<SeatingPageBloc>().add(
+          SeatingPageEvent.createSwissGame(
+            game: state.games.length + (next ? 1 : 0),
+          ),
+        );
   }
 }

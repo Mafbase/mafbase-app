@@ -212,5 +212,7 @@
   "translationContentLink": "Ссылка для встраивания в обс",
   "@translationContentLink": {},
   "translationControlLink": "Ссылка для управления",
-  "@translationControlLink": {}
+  "@translationControlLink": {},
+  "bucketFieldTitle": "Корзины для полуфинального этапа",
+  "bucketFieldHint": "30;20;30"
 }

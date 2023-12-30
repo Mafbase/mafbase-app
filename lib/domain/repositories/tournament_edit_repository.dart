@@ -42,4 +42,9 @@ abstract class TournamentEditRepository {
   Future<List<PlayerModel>> getFinalPlayers({required int tournamentId});
 
   Future generateFinalGames({required int tournamentId});
+
+  Future<void> generateSwissGame({
+    required int tournamentId,
+    required int game,
+  });
 }

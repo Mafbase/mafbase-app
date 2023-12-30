@@ -243,6 +243,7 @@ const ClubRatingRow$json = const {
     const {'1': 'mafiaScore', '3': 22, '4': 1, '5': 1, '10': 'mafiaScore'},
     const {'1': 'donScore', '3': 23, '4': 1, '5': 1, '10': 'donScore'},
     const {'1': 'sheriffScore', '3': 24, '4': 1, '5': 1, '10': 'sheriffScore'},
+    const {'1': 'playerId', '3': 25, '4': 1, '5': 5, '10': 'playerId'},
   ],
   '3': const [ClubRatingRow_GameItem$json],
 };
@@ -260,7 +261,7 @@ const ClubRatingRow_GameItem$json = const {
 };
 
 /// Descriptor for `ClubRatingRow`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubRatingRowDescriptor = $convert.base64Decode('Cg1DbHViUmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRIUCgVzY29yZRgCIAEoAVIFc2NvcmUSGgoIYWRkU2NvcmUYAyABKAFSCGFkZFNjb3JlEhoKCGZpcnN0RGllGAQgASgFUghmaXJzdERpZRIYCgdkb25XaW5zGAUgASgFUgdkb25XaW5zEiAKC3NoZXJpZmZXaW5zGAYgASgFUgtzaGVyaWZmV2lucxI1CgRpdGVtGAcgAygLMiEuZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3cuR2FtZUl0ZW1SBGl0ZW0SEgoEd2lucxgIIAEoBVIEd2lucxIOCgJjaRgJIAEoBVICY2kSHgoKdG90YWxHYW1lcxgKIAEoBVIKdG90YWxHYW1lcxIiCgxjaXRpemVuR2FtZXMYCyABKAVSDGNpdGl6ZW5HYW1lcxIaCghkb25HYW1lcxgMIAEoBVIIZG9uR2FtZXMSIgoMc2hlcmlmZkdhbWVzGA0gASgFUgxzaGVyaWZmR2FtZXMSHgoKbWFmaWFHYW1lcxgOIAEoBVIKbWFmaWFHYW1lcxIcCgltYWZpYVdpbnMYDyABKAVSCW1hZmlhV2lucxIgCgtjaXRpemVuV2lucxgQIAEoBVILY2l0aXplbldpbnMSKAoPY2l0aXplbkFkZFNjb3JlGBEgASgBUg9jaXRpemVuQWRkU2NvcmUSJAoNbWFmaWFBZGRTY29yZRgSIAEoAVINbWFmaWFBZGRTY29yZRIgCgtkb25BZGRTY29yZRgTIAEoAVILZG9uQWRkU2NvcmUSKAoPc2hlcmlmZkFkZFNjb3JlGBQgASgBUg9zaGVyaWZmQWRkU2NvcmUSIgoMY2l0aXplblNjb3JlGBUgASgBUgxjaXRpemVuU2NvcmUSHgoKbWFmaWFTY29yZRgWIAEoAVIKbWFmaWFTY29yZRIaCghkb25TY29yZRgXIAEoAVIIZG9uU2NvcmUSIgoMc2hlcmlmZlNjb3JlGBggASgBUgxzaGVyaWZmU2NvcmUaRwoIR2FtZUl0ZW0SFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQSGQoFc2NvcmUYAiABKAFIAFIFc2NvcmWIAQFCCAoGX3Njb3Jl');
+final $typed_data.Uint8List clubRatingRowDescriptor = $convert.base64Decode('Cg1DbHViUmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRIUCgVzY29yZRgCIAEoAVIFc2NvcmUSGgoIYWRkU2NvcmUYAyABKAFSCGFkZFNjb3JlEhoKCGZpcnN0RGllGAQgASgFUghmaXJzdERpZRIYCgdkb25XaW5zGAUgASgFUgdkb25XaW5zEiAKC3NoZXJpZmZXaW5zGAYgASgFUgtzaGVyaWZmV2lucxI1CgRpdGVtGAcgAygLMiEuZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3cuR2FtZUl0ZW1SBGl0ZW0SEgoEd2lucxgIIAEoBVIEd2lucxIOCgJjaRgJIAEoBVICY2kSHgoKdG90YWxHYW1lcxgKIAEoBVIKdG90YWxHYW1lcxIiCgxjaXRpemVuR2FtZXMYCyABKAVSDGNpdGl6ZW5HYW1lcxIaCghkb25HYW1lcxgMIAEoBVIIZG9uR2FtZXMSIgoMc2hlcmlmZkdhbWVzGA0gASgFUgxzaGVyaWZmR2FtZXMSHgoKbWFmaWFHYW1lcxgOIAEoBVIKbWFmaWFHYW1lcxIcCgltYWZpYVdpbnMYDyABKAVSCW1hZmlhV2lucxIgCgtjaXRpemVuV2lucxgQIAEoBVILY2l0aXplbldpbnMSKAoPY2l0aXplbkFkZFNjb3JlGBEgASgBUg9jaXRpemVuQWRkU2NvcmUSJAoNbWFmaWFBZGRTY29yZRgSIAEoAVINbWFmaWFBZGRTY29yZRIgCgtkb25BZGRTY29yZRgTIAEoAVILZG9uQWRkU2NvcmUSKAoPc2hlcmlmZkFkZFNjb3JlGBQgASgBUg9zaGVyaWZmQWRkU2NvcmUSIgoMY2l0aXplblNjb3JlGBUgASgBUgxjaXRpemVuU2NvcmUSHgoKbWFmaWFTY29yZRgWIAEoAVIKbWFmaWFTY29yZRIaCghkb25TY29yZRgXIAEoAVIIZG9uU2NvcmUSIgoMc2hlcmlmZlNjb3JlGBggASgBUgxzaGVyaWZmU2NvcmUSGgoIcGxheWVySWQYGSABKAVSCHBsYXllcklkGkcKCEdhbWVJdGVtEhYKBmdhbWVJZBgBIAEoBVIGZ2FtZUlkEhkKBXNjb3JlGAIgASgBSABSBXNjb3JliAEBQggKBl9zY29yZQ==');
 @$core.Deprecated('Use addGameEventOutDescriptor instead')
 const AddGameEventOut$json = const {
   '1': 'AddGameEventOut',
@@ -526,6 +527,7 @@ const TournamentSettings$json = const {
     const {'1': 'defaultGamesCount', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'defaultGamesCount', '17': true},
     const {'1': 'swissGamesCount', '3': 2, '4': 1, '5': 5, '9': 1, '10': 'swissGamesCount', '17': true},
     const {'1': 'finalGamesCount', '3': 3, '4': 1, '5': 5, '9': 2, '10': 'finalGamesCount', '17': true},
+    const {'1': 'buckets', '3': 4, '4': 3, '5': 5, '10': 'buckets'},
   ],
   '8': const [
     const {'1': '_defaultGamesCount'},
@@ -535,7 +537,7 @@ const TournamentSettings$json = const {
 };
 
 /// Descriptor for `TournamentSettings`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode('ChJUb3VybmFtZW50U2V0dGluZ3MSMQoRZGVmYXVsdEdhbWVzQ291bnQYASABKAVIAFIRZGVmYXVsdEdhbWVzQ291bnSIAQESLQoPc3dpc3NHYW1lc0NvdW50GAIgASgFSAFSD3N3aXNzR2FtZXNDb3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBQhQKEl9kZWZhdWx0R2FtZXNDb3VudEISChBfc3dpc3NHYW1lc0NvdW50QhIKEF9maW5hbEdhbWVzQ291bnQ=');
+final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode('ChJUb3VybmFtZW50U2V0dGluZ3MSMQoRZGVmYXVsdEdhbWVzQ291bnQYASABKAVIAFIRZGVmYXVsdEdhbWVzQ291bnSIAQESLQoPc3dpc3NHYW1lc0NvdW50GAIgASgFSAFSD3N3aXNzR2FtZXNDb3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBEhgKB2J1Y2tldHMYBCADKAVSB2J1Y2tldHNCFAoSX2RlZmF1bHRHYW1lc0NvdW50QhIKEF9zd2lzc0dhbWVzQ291bnRCEgoQX2ZpbmFsR2FtZXNDb3VudA==');
 @$core.Deprecated('Use profileDescriptor instead')
 const Profile$json = const {
   '1': 'Profile',
@@ -590,6 +592,16 @@ const Player$json = const {
 
 /// Descriptor for `Player`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List playerDescriptor = $convert.base64Decode('CgZQbGF5ZXISDgoCaWQYASABKAVSAmlkEhoKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRIlCgtmc21OaWNrbmFtZRgDIAEoCUgAUgtmc21OaWNrbmFtZYgBARItCg9tYWZiYW5rTmlja25hbWUYBCABKAlIAVIPbWFmYmFua05pY2tuYW1liAEBEhkKBWltYWdlGAUgASgJSAJSBWltYWdliAEBQg4KDF9mc21OaWNrbmFtZUISChBfbWFmYmFua05pY2tuYW1lQggKBl9pbWFnZQ==');
+@$core.Deprecated('Use createSwissRoundDescriptor instead')
+const CreateSwissRound$json = const {
+  '1': 'CreateSwissRound',
+  '2': const [
+    const {'1': 'game', '3': 1, '4': 1, '5': 5, '10': 'game'},
+  ],
+};
+
+/// Descriptor for `CreateSwissRound`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createSwissRoundDescriptor = $convert.base64Decode('ChBDcmVhdGVTd2lzc1JvdW5kEhIKBGdhbWUYASABKAVSBGdhbWU=');
 @$core.Deprecated('Use emailVerificationEventOutDescriptor instead')
 const EmailVerificationEventOut$json = const {
   '1': 'EmailVerificationEventOut',

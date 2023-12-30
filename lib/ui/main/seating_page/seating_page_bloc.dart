@@ -8,6 +8,7 @@ import 'package:seating_generator_web/domain/interactors/generate_final_seating_
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
+import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
@@ -23,6 +24,7 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
   final GetSeatingInteractor _getSeatingInteractor = getIt();
   final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
       getIt();
+  final TournamentEditRepository _tournamentEditRepository = getIt();
   late final SeatingPageRouter router = getIt(param1: context);
 
   SeatingPageBloc([BuildContext? context])
@@ -34,6 +36,19 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     on<SeatingPageEventCreateSeating>(_onCreateSeating);
     on<SeatingPageEventGameEditing>(_onOpenGameEditing);
     on<SeatingPageEventCreateFinalSeating>(_onGenerateFinalSeating);
+    on<SeatingPageEventCreateSwissGame>(_onSwissGameCreate);
+  }
+
+  Future<void> _onSwissGameCreate(
+    SeatingPageEventCreateSwissGame event,
+    Emitter emit,
+  ) async {
+    await _tournamentEditRepository.generateSwissGame(
+      tournamentId: tournamentId,
+      game: event.game,
+    );
+
+    return _updateSeating(emit);
   }
 
   _onGenerateFinalSeating(

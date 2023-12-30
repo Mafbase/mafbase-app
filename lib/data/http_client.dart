@@ -21,17 +21,14 @@ class MyHttpClient {
       responseType: ResponseType.bytes,
       baseUrl: baseUrl,
       validateStatus: (status) {
-        return status != null && status <= 300 ||
-            status == HttpStatus.unauthorized ||
-            status == HttpStatus.forbidden ||
-            status == HttpStatus.internalServerError;
+        return status != null && status <= 500;
       },
       headers: {
-        "Content-Type": "application/protobuf",
+        "Content-Type": "application/json",
         "Accept": "application/protobuf",
       },
     ),
-  );
+  )..interceptors.add(LogInterceptor(requestBody: true));
 
   Future<Response> get(String method, {bool useRecoveryToken = true}) async {
     if (useRecoveryToken) {
@@ -48,8 +45,6 @@ class MyHttpClient {
         },
       ),
     );
-
-    _checkResponse(response);
 
     if (response.statusCode == HttpStatus.unauthorized) {
       if (useRecoveryToken) {
@@ -75,6 +70,8 @@ class MyHttpClient {
       }
       throw UnauthenticatedError("Authentication error");
     }
+    _checkResponse(response);
+
     return response;
   }
 
@@ -99,8 +96,6 @@ class MyHttpClient {
         },
       ),
     );
-
-    _checkResponse(response);
 
     if (response.statusCode == HttpStatus.unauthorized) {
       if (useRecoveryToken) {
@@ -127,6 +122,9 @@ class MyHttpClient {
       }
       throw UnauthenticatedError("Authentication error");
     }
+
+    _checkResponse(response);
+
     return response;
   }
 
@@ -162,7 +160,7 @@ class MyHttpClient {
 
   void _checkResponse(Response response) {
     debugPrint("Status code: ${response.statusCode}");
-    if (response.statusCode == HttpStatus.internalServerError) {
+    if ((response.statusCode ?? 500) >= 400) {
       throw RequestError(
         ErrorOut.fromBuffer(parseResponseData(response.data)).message,
       );
@@ -176,7 +174,7 @@ class MyHttpClient {
   }
 
   MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage)
-      : baseUrl = "https://mafbase.ru";
+      : baseUrl = "http://192.168.0.168";
 
   MyHttpClient.autoForWeb(this._storage, this._credentialStorage)
       : baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";

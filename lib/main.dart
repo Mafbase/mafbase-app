@@ -107,6 +107,24 @@ class MafbaseApp extends StatelessWidget {
               iconTheme: IconThemeData(
                 color: context.theme.darkGreyColor,
               ),
+              textButtonTheme: TextButtonThemeData(
+                style: ButtonStyle(
+                  textStyle: MaterialStateProperty.resolveWith(
+                    (states) {
+                      if (states.contains(MaterialState.disabled)) {
+                        print('test25:');
+                        return context.theme.btnTextStyle.copyWith(
+                          color: context.theme.btnTextColor.withOpacity(
+                            0.5,
+                          ),
+                        );
+                      }
+
+                      return context.theme.btnTextStyle;
+                    },
+                  ),
+                ),
+              ),
             ),
             routerDelegate: context.read<AppRouter>().router.routerDelegate,
             routeInformationProvider:
