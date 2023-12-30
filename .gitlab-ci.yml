@@ -55,7 +55,6 @@ test:
   image: "$REGISTRY_HOST/flutter-builder:3.16.5"
   before_script:
     - flutter pub global activate junitreport
-    - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
     - flutter test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
