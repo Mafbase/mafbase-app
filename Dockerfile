@@ -1,5 +1,6 @@
 #Stage 1 - Install dependencies and build the app in a build environment
-FROM ghcr.io/cirruslabs/flutter:3.10.5 as build-env
+ARG REGISTRY_HOST
+FROM ${REGISTRY_HOST}/flutter-builder:3.16.5 as build-env
 
 RUN mkdir /app/
 COPY . /app/
