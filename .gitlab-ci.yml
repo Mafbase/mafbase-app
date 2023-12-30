@@ -40,9 +40,8 @@ code_quality:
     - docker
   image: "$REGISTRY_HOST/flutter-builder:3.16.5"
   before_script:
-    - apt-get install -y lcov
-    - flutter pub global activate junitreport
-    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - flutter pub global activate dart_code_metrics
+    - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
     - metrics lib -r codeclimate  > gl-code-quality-report.json
   artifacts:
@@ -55,7 +54,9 @@ test:
     - docker
   image: "$REGISTRY_HOST/flutter-builder:3.16.5"
   before_script:
+    - apt-get install -y lcov
     - flutter pub global activate junitreport
+    - export PATH="$PATH:$HOME/.pub-cache/bin"
   script:
     - flutter test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
