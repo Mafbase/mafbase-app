@@ -85,7 +85,6 @@ deploy:
     - chmod 700 ~/.ssh
     - ssh-keyscan -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
-    - docker context create mafbase-host --docker "host=ssh://""$DEPLOY_USER"@"$DEPLOY_HOST"
   script:
     - scp flutter-image.tar "$DEPLOY_USER"@"$DEPLOY_HOST":~/
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./load_flutter.sh"
