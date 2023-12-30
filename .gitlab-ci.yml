@@ -93,3 +93,5 @@ deploy:
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
+    paths:
+      - flutter-image.tar
