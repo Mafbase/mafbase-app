@@ -20,47 +20,47 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: DefaultTextStyle(
-        style: const TextStyle(fontSize: 24),
+        style: TextStyle(fontSize: 24),
         child: SelectionArea(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.phone, size: 32),
                       SizedBox(width: 8),
                       Flexible(child: Text("+79528828343")),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.person, size: 32),
                       SizedBox(width: 8),
-                      Flexible(child: Text("Анисов Сергей Владимирович"))
+                      Flexible(child: Text("Анисов Сергей Владимирович")),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.perm_contact_cal_outlined, size: 32),
                       SizedBox(width: 8),
                       Flexible(child: Text("ИНН: 701724290760")),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.location_city_outlined, size: 32),
                       SizedBox(width: 8),
                       Flexible(

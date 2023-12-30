@@ -444,10 +444,10 @@ class _RatingPageState extends CustomState<RatingPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-            "Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})"),
+            "Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})",),
         const SizedBox(height: 4),
         Text(
-            "Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})"),
+            "Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})",),
       ],
     );
   }

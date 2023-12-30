@@ -163,7 +163,7 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                               .defaultTextStyle
                               .copyWith(fontSize: 20),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

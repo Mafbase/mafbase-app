@@ -26,7 +26,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 Navigator.pop(context);
               },
             ),
-          )
+          ),
         ],
       ),
     );

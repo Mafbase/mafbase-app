@@ -44,7 +44,7 @@ class MyHttpClient {
       options: Options(
         headers: {
           if (token != null && token.isNotEmpty)
-            HttpHeaders.authorizationHeader: "Bearer $token"
+            HttpHeaders.authorizationHeader: "Bearer $token",
         },
       ),
     );
@@ -95,7 +95,7 @@ class MyHttpClient {
         headers: {
           HttpHeaders.contentLengthHeader: contentLength,
           if (token != null && token.isNotEmpty)
-            HttpHeaders.authorizationHeader: "Bearer $token"
+            HttpHeaders.authorizationHeader: "Bearer $token",
         },
       ),
     );
@@ -141,7 +141,7 @@ class MyHttpClient {
       data: FormData.fromMap(
         {
           "file":
-              MultipartFile.fromBytes(bytes, filename: fileName ?? "temp.csv")
+              MultipartFile.fromBytes(bytes, filename: fileName ?? "temp.csv"),
         },
       ),
       options: Options(

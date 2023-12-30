@@ -145,7 +145,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                       ),
                     );
                   },
-                )
+                ),
               ],
             ),
           ),

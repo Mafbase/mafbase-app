@@ -87,7 +87,7 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                     role: widget.model.roles?[i],
                     score: widget.model.scores?[i],
                   ),
-                )
+                ),
             ],
           ),
         );

@@ -672,7 +672,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
             gameResult: ClubGameResult(
               date: date.toIso8601String(),
               addScore: addScoreControllers.map((e) =>
-                  (double.parse(e.text.replaceAll(",", ".")) * 100).floor()),
+                  (double.parse(e.text.replaceAll(",", ".")) * 100).floor(),),
               players: controllers.map(
                 (e) => state.players
                     .firstWhere((element) => e.text == element.nickname)
@@ -881,7 +881,7 @@ class PlayerRowWidget extends StatelessWidget {
             hint: "0.0",
             label: "Доп балл",
           ),
-        )
+        ),
       ],
     );
   }

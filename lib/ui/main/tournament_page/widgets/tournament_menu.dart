@@ -78,10 +78,10 @@ class _TournamentMenuState extends State<TournamentMenu> {
                   child: Container(
                     color: MyTheme.of(context).greyColor,
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

@@ -124,7 +124,7 @@ class TournamentEditRepositoryImpl extends BaseRepository
     return GetFinalPlayersRequest(tournamentId: tournamentId)
         .execute(client)
         .then((value) =>
-            value.player.map((e) => PlayerModel.fromProto(e)).toList());
+            value.player.map((e) => PlayerModel.fromProto(e)).toList(),);
   }
 
   @override

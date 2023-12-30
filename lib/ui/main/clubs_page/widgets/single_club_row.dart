@@ -60,7 +60,7 @@ class SingleClubRow extends StatelessWidget {
                             model.city != null ? "г. ${model.city}" : " ",
                             style: context.theme.defaultTextStyle,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

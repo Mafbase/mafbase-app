@@ -87,7 +87,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
               BottomNavigationBarItem(
                 icon: const Icon(Icons.people_alt_outlined),
                 label: context.locale.clubsHeader,
-              )
+              ),
             ],
           ),
         );

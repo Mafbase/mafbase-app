@@ -8,7 +8,6 @@ class StartGameInfoDialog extends StatelessWidget {
   final int maxGame;
 
   const StartGameInfoDialog._({
-    super.key,
     required this.maxGame,
   });
 

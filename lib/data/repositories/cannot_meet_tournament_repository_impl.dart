@@ -41,7 +41,7 @@ class CannotMeetTournamentRepositoryImpl extends BaseRepository
           .map(
             (e) => [
               PlayerModel.fromProto(e.player1),
-              PlayerModel.fromProto(e.player2)
+              PlayerModel.fromProto(e.player2),
             ],
           )
           .toList();

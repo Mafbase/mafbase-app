@@ -108,7 +108,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                 ],
               ),
             ),

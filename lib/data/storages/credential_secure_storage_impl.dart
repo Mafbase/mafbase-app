@@ -13,7 +13,7 @@ class CredentialSecureStorageImpl implements CredentialStorage {
     try {
       if (await Future.wait([
         _storage.containsKey(key: _loginKey),
-        _storage.containsKey(key: _passwordKey)
+        _storage.containsKey(key: _passwordKey),
       ]).then((value) => value.any((element) => !element))) {
         return null;
       }

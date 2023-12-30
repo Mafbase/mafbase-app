@@ -12,7 +12,6 @@ class TranslationDialog extends StatefulWidget {
   final int tournamentId;
 
   const TranslationDialog._({
-    super.key,
     required this.tournamentId,
     required this.tablesCount,
   });
@@ -73,7 +72,9 @@ class _TranslationDialogState extends State<TranslationDialog> {
                       ),
                       CustomDropdown(
                         items: List.generate(
-                            widget.tablesCount, (index) => index + 1),
+                          widget.tablesCount,
+                          (index) => index + 1,
+                        ),
                         initValue: table,
                         onChanged: (value) => setState(
                           () => table = value ?? table,

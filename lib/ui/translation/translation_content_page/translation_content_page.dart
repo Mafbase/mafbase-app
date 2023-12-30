@@ -444,7 +444,7 @@ class _StatusOverlayState extends State<_StatusOverlay>
                       blurRadius: 10,
                       spreadRadius: 10,
                       offset: Offset(2, 2),
-                    )
+                    ),
                   ],
                 ),
               ),

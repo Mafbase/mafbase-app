@@ -5,7 +5,7 @@ import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 
 class CustomTextInfoDialog extends StatefulWidget {
-  const CustomTextInfoDialog._({super.key});
+  const CustomTextInfoDialog._();
 
   @override
   State<CustomTextInfoDialog> createState() => _CustomTextInfoDialogState();

@@ -34,7 +34,7 @@ class ClubInfoWidget extends StatelessWidget {
                   top: 40,
                   right: 60,
                 ),
-                child: SizedBox.expand(
+                child: const SizedBox.expand(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -45,7 +45,7 @@ class ClubInfoWidget extends StatelessWidget {
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 _ClubInfoHeader(),
                                 SizedBox(height: 20),
                                 _ClubDescription(),
@@ -54,7 +54,7 @@ class ClubInfoWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const _ClubRatingButton(),
+                      _ClubRatingButton(),
                     ],
                   ),
                 ),
@@ -64,24 +64,24 @@ class ClubInfoWidget extends StatelessWidget {
   }
 
   Widget buildMobile(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
             child: Column(
-              children: const [
+              children: [
                 _ClubInfoHeader(),
                 SizedBox(height: 20),
                 _ClubDescription(),
-                Spacer()
+                Spacer(),
               ],
             ),
           ),
         ),
-        const Divider(),
-        const _ClubRatingButton(),
+        Divider(),
+        _ClubRatingButton(),
       ],
     );
   }
@@ -137,7 +137,7 @@ class _ClubDescription extends StatelessWidget {
             model.description ?? "Тут пусто",
             style: context.theme.defaultTextStyle,
           ),
-        )
+        ),
       ],
     );
   }
