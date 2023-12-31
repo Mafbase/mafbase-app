@@ -71,7 +71,7 @@ test:
 
 deploy:
   stage: deploy
-  image: ubuntu:latest
+  image: "$REGISTRY_HOST/deployer:1.0.0"
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   tags:
