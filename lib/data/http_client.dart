@@ -24,7 +24,7 @@ class MyHttpClient {
         return status != null && status <= 500;
       },
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/protobuf",
         "Accept": "application/protobuf",
       },
     ),

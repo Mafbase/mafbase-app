@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -28,9 +27,7 @@ abstract class BaseRequest<R> {
       final bytes = data!.writeToBuffer();
       response = await client.post(
         method,
-        jsonEncode(
-          data!.toProto3Json(),
-        ), //Stream.fromIterable(bytes.map((e) => [e])),
+        Stream.fromIterable(bytes.map((e) => [e])),
         bytes.length,
         useRecoveryToken: resendOnUnauth,
       );
