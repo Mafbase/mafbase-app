@@ -9,7 +9,7 @@ const BorderSide _side = BorderSide(
   width: 1,
 );
 
-const double width = 400;
+const double _width = 400;
 
 class GameResultWidget extends StatefulWidget {
   final GameResultModel model;
@@ -23,75 +23,69 @@ class GameResultWidget extends StatefulWidget {
 class _GameResultWidgetState extends State<GameResultWidget> {
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Container(
-          width: width,
-          decoration: const BoxDecoration(
-            border: Border(left: _side, right: _side, top: _side, bottom: _side),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 120,
-                child: SizedBox(
-                  width: width,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 60,
-                        height: double.infinity,
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            right: _side,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "№",
-                            style:
-                            MyTheme.of(context).defaultTextStyle.copyWith(
+    return Container(
+      width: _width,
+      decoration: const BoxDecoration(
+        border: Border(left: _side, right: _side, top: _side, bottom: _side),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 120,
+            child: SizedBox(
+              width: _width,
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        right: _side,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "№",
+                        style: MyTheme.of(context).defaultTextStyle.copyWith(
                               color: const Color(0xFF979A9D),
                             ),
-                          ),
-                        ),
                       ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                              MyTheme.of(context).defaultTextStyle.copyWith(
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: MyTheme.of(context).defaultTextStyle.copyWith(
                                 color: const Color(0xFF979A9D),
                               ),
-                            ),
-                            _GameResultWidget(win: widget.model.gameWin),
-                          ],
                         ),
-                      ),
-                    ],
+                        _GameResultWidget(win: widget.model.gameWin),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              for (int i = 0; i < 10; i++)
-                SizedBox(
-                  width: width,
-                  child: _PlayerRowWidget(
-                    nickname: widget.model.nicknames[i],
-                    place: i + 1,
-                    status: widget.model.statuses?[i],
-                    role: widget.model.roles?[i],
-                    score: widget.model.scores?[i],
-                  ),
-                ),
-            ],
+            ),
           ),
-        );
-      },
+          for (int i = 0; i < 10; i++)
+            SizedBox(
+              width: _width,
+              child: _PlayerRowWidget(
+                nickname: widget.model.nicknames[i],
+                place: i + 1,
+                status: widget.model.statuses?[i],
+                role: widget.model.roles?[i],
+                score: widget.model.scores?[i],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

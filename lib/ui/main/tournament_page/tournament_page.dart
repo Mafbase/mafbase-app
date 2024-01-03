@@ -194,14 +194,15 @@ class _TournamentPageState extends CustomState<TournamentPage>
                 .add(const TournamentPageEvent.playersListTapped());
           },
         ),
-        MenuItemModel(
-          text: AppLocalizations.of(context)!.addPlayer,
-          onTap: () {
-            context.read<TournamentPageBloc>().add(
-                  const TournamentPageEvent.addPlayerTapped(),
-                );
-          },
-        ),
+        if (state.isMyTournament)
+          MenuItemModel(
+            text: AppLocalizations.of(context)!.addPlayer,
+            onTap: () {
+              context.read<TournamentPageBloc>().add(
+                    const TournamentPageEvent.addPlayerTapped(),
+                  );
+            },
+          ),
         MenuItemModel(
           text: context.locale.seating,
           onTap: () {
@@ -249,24 +250,25 @@ class _TournamentPageState extends CustomState<TournamentPage>
               );
             },
           ),
-        MenuItemModel(
-          text: 'Оплата',
-          onTap: () async {
-            final result = await TournamentBillingDialog.open(
-              context: context,
-              billedPlayers: state.billedPlayers,
-              hasTranslation: state.billedTranslation,
-            );
-            if (result != null && mounted) {
-              context.read<TournamentPageBloc>().add(
-                    TournamentPageEvent.bill(
-                      playersCount: result.billedPlayers,
-                      billedTranlsation: result.billedTranslation,
-                    ),
-                  );
-            }
-          },
-        ),
+        if (state.isMyTournament)
+          MenuItemModel(
+            text: 'Оплата',
+            onTap: () async {
+              final result = await TournamentBillingDialog.open(
+                context: context,
+                billedPlayers: state.billedPlayers,
+                hasTranslation: state.billedTranslation,
+              );
+              if (result != null && mounted) {
+                context.read<TournamentPageBloc>().add(
+                      TournamentPageEvent.bill(
+                        playersCount: result.billedPlayers,
+                        billedTranlsation: result.billedTranslation,
+                      ),
+                    );
+              }
+            },
+          ),
         if (state.isMyTournament && state.notificationEnabled) ...[
           MenuItemModel(
             text: 'Оповещение об игре',
