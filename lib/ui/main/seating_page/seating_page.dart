@@ -61,7 +61,9 @@ class _SeatingPageState extends State<SeatingPage> {
                 child: Column(
                   children: [
                     Text(
-                      context.locale.separateTitle,
+                      tournamentState.isMyTournament
+                          ? context.locale.separateTitle
+                          : context.locale.seating,
                       style: MyTheme.of(context).headerTextStyle,
                     ),
                     const SizedBox(
