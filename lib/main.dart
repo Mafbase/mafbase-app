@@ -36,13 +36,16 @@ void main() async {
 }
 
 void _startApp() async {
+  WidgetsBinding? binding;
   if (!kIsWeb) {
-    WidgetsFlutterBinding.ensureInitialized();
+    binding = WidgetsFlutterBinding.ensureInitialized();
     final directory = await getApplicationDocumentsDirectory();
     await Hive.initFlutter(directory.path);
   }
   registerGetIt();
-  SplashManager.deferSplash(WidgetsFlutterBinding.ensureInitialized());
+  SplashManager.deferSplash(
+    binding ?? WidgetsFlutterBinding.ensureInitialized(),
+  );
   runApp(const MafbaseApp());
 }
 
@@ -112,7 +115,6 @@ class MafbaseApp extends StatelessWidget {
                   textStyle: MaterialStateProperty.resolveWith(
                     (states) {
                       if (states.contains(MaterialState.disabled)) {
-                        print('test25:');
                         return context.theme.btnTextStyle.copyWith(
                           color: context.theme.btnTextColor.withOpacity(
                             0.5,

@@ -210,25 +210,26 @@ class _TournamentPageState extends CustomState<TournamentPage>
                 .add(const TournamentPageEvent.openSeatingPage());
           },
         ),
-        MenuItemModel(
-          text: context.locale.tournamentSettingsTitle,
-          onTap: () async {
-            final oldSettings =
-                context.read<TournamentPageBloc>().state.settings;
-            final settings = await TournamentSettingsDialog.open(
-              context: context,
-              initValue: oldSettings,
-              onFinalPlayersTapped: () => openFinalPlayersDialog(state),
-            );
-            if (mounted && settings != null && settings != oldSettings) {
-              context.read<TournamentPageBloc>().add(
-                    TournamentPageEvent.updateSettings(
-                      settings: settings,
-                    ),
-                  );
-            }
-          },
-        ),
+        if (state.isMyTournament)
+          MenuItemModel(
+            text: context.locale.tournamentSettingsTitle,
+            onTap: () async {
+              final oldSettings =
+                  context.read<TournamentPageBloc>().state.settings;
+              final settings = await TournamentSettingsDialog.open(
+                context: context,
+                initValue: oldSettings,
+                onFinalPlayersTapped: () => openFinalPlayersDialog(state),
+              );
+              if (mounted && settings != null && settings != oldSettings) {
+                context.read<TournamentPageBloc>().add(
+                      TournamentPageEvent.updateSettings(
+                        settings: settings,
+                      ),
+                    );
+              }
+            },
+          ),
         MenuItemModel(
           text: 'Таблица',
           onTap: () {

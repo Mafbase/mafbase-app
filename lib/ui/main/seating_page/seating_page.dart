@@ -161,8 +161,8 @@ class _SeatingPageState extends State<SeatingPage> {
                       Wrap(
                         children: [
                           if (state.games.lastOrNull
-                                  ?.any((element) => element.gameWin == null) ==
-                              false)
+                                  ?.any((element) => element.gameWin != null) ==
+                              true)
                             TextButton(
                               onPressed: () {
                                 onSwissGameCreate(state, true);
@@ -176,21 +176,16 @@ class _SeatingPageState extends State<SeatingPage> {
                             )
                           else
                             TextButton(
-                              onPressed: state.games.lastOrNull?.any(
-                                        (element) => element.gameWin == null,
-                                      ) ==
-                                      true
-                                  ? null
-                                  : () {
-                                      ConfirmDialog.open(
-                                        context,
-                                        "Новая рассадка заменит старую",
-                                      ).then((value) {
-                                        if (value == true) {
-                                          onSwissGameCreate(state, false);
-                                        }
-                                      });
-                                    },
+                              onPressed: () {
+                                ConfirmDialog.open(
+                                  context,
+                                  "Новая рассадка заменит старую",
+                                ).then((value) {
+                                  if (value == true) {
+                                    onSwissGameCreate(state, false);
+                                  }
+                                });
+                              },
                               child: const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
