@@ -93,9 +93,7 @@ class SeatingList extends StatelessWidget {
           itemCount: models.length,
           itemBuilder: itemBuilder,
           separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(
-              height: 8,
-            );
+            return const SizedBox(height: 32);
           },
         );
       },
