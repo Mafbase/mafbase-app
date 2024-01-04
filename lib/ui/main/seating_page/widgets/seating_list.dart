@@ -31,17 +31,18 @@ class SeatingList extends StatelessWidget {
 
         Widget itemBuilder(BuildContext context, int columnIndex) {
           final children = models[columnIndex].map((model) {
-            return Transform.scale(
-              scale: coef,
-              child: InkWell(
-                onTap: () {
-                  context.read<SeatingPageBloc>().add(
-                        SeatingPageEvent.openGameEditing(
-                          gameId: model.gameId,
-                        ),
-                      );
-                },
-                child: GameResultWidget(model: model),
+            return InkWell(
+              onTap: () {
+                context.read<SeatingPageBloc>().add(
+                      SeatingPageEvent.openGameEditing(
+                        gameId: model.gameId,
+                      ),
+                    );
+              },
+              child: GameResultWidget(
+                model: model,
+                width: GameResultWidget.baseWidth * coef,
+                height: GameResultWidget.baseHeight * coef,
               ),
             );
           }).toList();

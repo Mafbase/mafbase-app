@@ -51,24 +51,27 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                 width: widget.width,
                 child: Row(
                   children: [
-                    Container(
-                      width: 60,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          right: _side,
+                    Expanded(
+                      child: Container(
+                        height: double.infinity,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            right: _side,
+                          ),
                         ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "№",
-                          style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                color: const Color(0xFF979A9D),
-                              ),
+                        child: Center(
+                          child: Text(
+                            "№",
+                            style:
+                                MyTheme.of(context).defaultTextStyle.copyWith(
+                                      color: const Color(0xFF979A9D),
+                                    ),
+                          ),
                         ),
                       ),
                     ),
                     Expanded(
+                      flex: 6,
                       child: Column(
                         children: [
                           Text(
@@ -138,19 +141,21 @@ class _PlayerRowWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              height: double.infinity,
-              width: 60,
-              decoration: const BoxDecoration(
-                border: Border(right: _side),
-              ),
-              padding: const EdgeInsets.all(4),
-              child: Text(
-                "$place",
-                style: context.theme.defaultTextStyle,
+            Expanded(
+              child: Container(
+                height: double.infinity,
+                decoration: const BoxDecoration(
+                  border: Border(right: _side),
+                ),
+                padding: const EdgeInsets.all(4),
+                child: Text(
+                  "$place",
+                  style: context.theme.defaultTextStyle,
+                ),
               ),
             ),
             Expanded(
+              flex: 3,
               child: Container(
                 height: double.infinity,
                 decoration: const BoxDecoration(
@@ -163,22 +168,27 @@ class _PlayerRowWidget extends StatelessWidget {
                 ),
               ),
             ),
-            _RoleWidget(
-              role: role,
-              status: status,
+            Expanded(
+              flex: 2,
+              child: _RoleWidget(
+                role: role,
+                status: status,
+              ),
             ),
             Visibility(
               visible: score != null,
-              child: Container(
-                width: 60,
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                  border: Border(right: _side),
-                ),
-                padding: const EdgeInsets.all(4),
-                child: Text(
-                  "$score",
-                  style: context.theme.defaultTextStyle,
+              child: Expanded(
+                child: Container(
+                  width: 60,
+                  height: double.infinity,
+                  decoration: const BoxDecoration(
+                    border: Border(right: _side),
+                  ),
+                  padding: const EdgeInsets.all(4),
+                  child: Text(
+                    "$score",
+                    style: context.theme.defaultTextStyle,
+                  ),
                 ),
               ),
             ),
