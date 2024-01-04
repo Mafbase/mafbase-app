@@ -41,12 +41,7 @@ class SeatingList extends StatelessWidget {
                         ),
                       );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: GameResultWidget(
-                    model: model,
-                  ),
-                ),
+                child: GameResultWidget(model: model),
               ),
             );
           }).toList();
@@ -76,7 +71,14 @@ class SeatingList extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: children,
+                  children: children
+                      .map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: e,
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ),

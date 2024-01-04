@@ -9,12 +9,19 @@ const BorderSide _side = BorderSide(
   width: 1,
 );
 
-const double _width = 400;
-
 class GameResultWidget extends StatefulWidget {
   final GameResultModel model;
+  static const baseWidth = 400.0;
+  static const baseHeight = 520.0;
+  final double width;
+  final double height;
 
-  const GameResultWidget({Key? key, required this.model}) : super(key: key);
+  const GameResultWidget({
+    Key? key,
+    required this.model,
+    this.width = baseWidth,
+    this.height = baseHeight,
+  }) : super(key: key);
 
   @override
   State<GameResultWidget> createState() => _GameResultWidgetState();
@@ -23,68 +30,84 @@ class GameResultWidget extends StatefulWidget {
 class _GameResultWidgetState extends State<GameResultWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: _width,
-      decoration: const BoxDecoration(
-        border: Border(left: _side, right: _side, top: _side, bottom: _side),
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(
+        textScaler: TextScaler.linear(
+          widget.height / GameResultWidget.baseHeight,
+        ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 120,
-            child: SizedBox(
-              width: _width,
-              child: Row(
-                children: [
-                  Container(
-                    width: 60,
-                    height: double.infinity,
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        right: _side,
+      child: Container(
+        width: widget.width,
+        height: widget.height,
+        decoration: const BoxDecoration(
+          border: Border(left: _side, right: _side, top: _side, bottom: _side),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              flex: 120,
+              child: SizedBox(
+                width: widget.width,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 60,
+                      height: double.infinity,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          right: _side,
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "№",
-                        style: MyTheme.of(context).defaultTextStyle.copyWith(
-                              color: const Color(0xFF979A9D),
-                            ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(
-                          "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                      child: Center(
+                        child: Text(
+                          "№",
                           style: MyTheme.of(context).defaultTextStyle.copyWith(
                                 color: const Color(0xFF979A9D),
                               ),
                         ),
-                        _GameResultWidget(win: widget.model.gameWin),
-                      ],
+                      ),
                     ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                MyTheme.of(context).defaultTextStyle.copyWith(
+                                      color: const Color(0xFF979A9D),
+                                    ),
+                          ),
+                          Expanded(
+                            child: _GameResultWidget(
+                              win: widget.model.gameWin,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            for (int i = 0; i < 10; i++)
+              Expanded(
+                flex: 40,
+                child: SizedBox(
+                  width: widget.width,
+                  child: _PlayerRowWidget(
+                    nickname: widget.model.nicknames[i],
+                    place: i + 1,
+                    status: widget.model.statuses?[i],
+                    role: widget.model.roles?[i],
+                    score: widget.model.scores?[i],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          for (int i = 0; i < 10; i++)
-            SizedBox(
-              width: _width,
-              child: _PlayerRowWidget(
-                nickname: widget.model.nicknames[i],
-                place: i + 1,
-                status: widget.model.statuses?[i],
-                role: widget.model.roles?[i],
-                score: widget.model.scores?[i],
-              ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -110,7 +133,6 @@ class _PlayerRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Container(
-        height: 40,
         decoration: const BoxDecoration(
           border: Border(top: _side),
         ),
@@ -248,7 +270,6 @@ class _GameResultWidget extends StatelessWidget {
     return Opacity(
       opacity: win == null ? 0 : 1,
       child: Container(
-        padding: const EdgeInsets.all(8),
         width: double.infinity,
         color: color(context),
         child: Center(
