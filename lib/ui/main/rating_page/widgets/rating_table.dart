@@ -221,10 +221,15 @@ class _RatingTableState extends State<RatingTable> {
     super.dispose();
   }
 
-  Widget wrap(Widget child, {bool boldRight = false, bool boldLeft = false}) {
+  Widget wrap(
+    Widget child, {
+    bool boldRight = false,
+    bool boldLeft = false,
+    bool center = false,
+  }) {
     return Container(
       height: 50,
-      padding: const EdgeInsets.all(16),
+      padding: center ? EdgeInsets.zero : const EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
@@ -245,7 +250,7 @@ class _RatingTableState extends State<RatingTable> {
           ),
         ),
       ),
-      child: child,
+      child: center ? Center(child: child) : child,
     );
   }
 
@@ -286,7 +291,6 @@ class _RatingTableState extends State<RatingTable> {
         Text(
           widget.sortedRows[index].score.toString(),
         ),
-        boldLeft: true,
       );
 
   Widget get addScorePrototype => wrap(
@@ -303,6 +307,7 @@ class _RatingTableState extends State<RatingTable> {
         Text(
           widget.sortedRows[index].addScore.toString(),
         ),
+        boldRight: true,
       );
 
   Widget get winPrototype => wrap(
@@ -348,7 +353,13 @@ class _RatingTableState extends State<RatingTable> {
       );
 
   Widget ciWidget(int index) => wrap(
-        Text((widget.sortedRows[index].ci / 100).toString()),
+        Text(
+          (widget.sortedRows[index].ci / 100).toString(),
+          maxLines: 1,
+          overflow: TextOverflow.visible,
+        ),
+        boldLeft: true,
+        center: true,
       );
 
   Widget totalGamesWidget(int index) => wrap(
@@ -873,10 +884,29 @@ class _RatingTableState extends State<RatingTable> {
         column(
           mainControllers[1],
           key: const Key("fullColumns1"),
-          builder: (index) => nicknames(index, boldRight: true),
+          builder: (index) => nicknames(index),
           header: const Text("Игрок"),
-          boldRight: true,
           prototype: nicknamePrototype,
+        ),
+        column(
+          mainControllers[3],
+          key: const Key("fullColumns3"),
+          builder: scores,
+          header: InkWell(
+            onTap: () {
+              widget.changeSort(RatingSort.score);
+            },
+            child: const Text("Очки"),
+          ),
+          prototype: scorePrototype,
+        ),
+        column(
+          mainControllers[4],
+          key: const Key("fullColumns4"),
+          builder: addScores,
+          header: const Text("+"),
+          prototype: addScorePrototype,
+          boldRight: true,
         ),
         Flexible(
           fit: FlexFit.loose,
@@ -926,31 +956,12 @@ class _RatingTableState extends State<RatingTable> {
           ),
         ),
         column(
-          mainControllers[3],
-          key: const Key("fullColumns3"),
-          builder: scores,
-          header: InkWell(
-            onTap: () {
-              widget.changeSort(RatingSort.score);
-            },
-            child: const Text("Очки"),
-          ),
-          boldLeft: true,
-          prototype: scorePrototype,
-        ),
-        column(
-          mainControllers[4],
-          key: const Key("fullColumns4"),
-          builder: addScores,
-          header: const Text("+"),
-          prototype: addScorePrototype,
-        ),
-        column(
           mainControllers[5],
           key: const Key("fullColumns5"),
           header: const Text("Ci"),
           prototype: ciPrototype,
           builder: ciWidget,
+          boldLeft: true,
         ),
         column(
           mainControllers[6],
