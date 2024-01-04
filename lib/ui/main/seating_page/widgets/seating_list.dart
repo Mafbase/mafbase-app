@@ -21,7 +21,7 @@ class SeatingList extends StatelessWidget {
       builder: (context, constraints) {
         final coef = min(
           min(
-            (constraints.maxHeight / 552),
+            (constraints.maxHeight / 584),
             constraints.maxWidth / 432,
           ),
           1.0,
@@ -54,16 +54,15 @@ class SeatingList extends StatelessWidget {
           if (pageView) {
             return SizedBox(
               height: constraints.maxHeight,
-              child: Center(
-                child: PageView(
-                  children: children
-                      .map(
-                        (e) => Center(
-                          child: e,
-                        ),
-                      )
-                      .toList(),
-                ),
+              child: PageView(
+                children: children
+                    .map(
+                      (e) => Align(
+                        alignment: Alignment.topCenter,
+                        child: e,
+                      ),
+                    )
+                    .toList(),
               ),
             );
           }
