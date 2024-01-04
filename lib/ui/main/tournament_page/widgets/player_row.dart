@@ -4,8 +4,8 @@ import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 
 class PlayerRow extends StatelessWidget {
-  final VoidCallback onTap;
-  final VoidCallback onDelete;
+  final VoidCallback? onTap;
+  final VoidCallback? onDelete;
   final String nickname;
   final String? imageUrl;
   final int index;
@@ -48,16 +48,17 @@ class PlayerRow extends StatelessWidget {
             const SizedBox(width: 8),
             Text("${index + 1}.\t$nickname"),
             const Spacer(),
-            Center(
-              child: IconButton(
-                onPressed: onDelete,
-                icon: Icon(
-                  Icons.delete,
-                  size: 24,
-                  color: MyTheme.of(context).redColor,
+            if (onDelete != null)
+              Center(
+                child: IconButton(
+                  onPressed: onDelete,
+                  icon: Icon(
+                    Icons.delete,
+                    size: 24,
+                    color: MyTheme.of(context).redColor,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ),

@@ -53,25 +53,29 @@ class _PlayersListBodyState extends State<PlayersListBody> {
                     itemCount: state.tournamentPlayers.length,
                     itemBuilder: (context, index) => PlayerRow(
                       index: index,
-                      onTap: () async {
-                        context.read<TournamentPageBloc>().add(
-                              TournamentPageEvent.openProfileDialog(
-                                player: state.tournamentPlayers[index],
-                              ),
-                            );
-                      },
-                      onDelete: () {
-                        final bloc = context.read<TournamentPageBloc>();
-                        ConfirmDialog.open(context).then((value) {
-                          if (value == true) {
-                            bloc.add(
-                              TournamentPageEvent.deletePlayer(
-                                player: state.tournamentPlayers[index],
-                              ),
-                            );
-                          }
-                        });
-                      },
+                      onTap: state.isMyTournament
+                          ? () async {
+                              context.read<TournamentPageBloc>().add(
+                                    TournamentPageEvent.openProfileDialog(
+                                      player: state.tournamentPlayers[index],
+                                    ),
+                                  );
+                            }
+                          : null,
+                      onDelete: state.isMyTournament
+                          ? () {
+                              final bloc = context.read<TournamentPageBloc>();
+                              ConfirmDialog.open(context).then((value) {
+                                if (value == true) {
+                                  bloc.add(
+                                    TournamentPageEvent.deletePlayer(
+                                      player: state.tournamentPlayers[index],
+                                    ),
+                                  );
+                                }
+                              });
+                            }
+                          : null,
                       nickname: state.tournamentPlayers[index].nickname,
                       imageUrl: state.tournamentPlayers[index].imageUrl,
                     ),
