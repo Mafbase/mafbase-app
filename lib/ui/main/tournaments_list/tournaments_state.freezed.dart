@@ -63,22 +63,22 @@ class _$TournamentsStateCopyWithImpl<$Res, $Val extends TournamentsState>
 }
 
 /// @nodoc
-abstract class _$$_TournamentsStateCopyWith<$Res>
+abstract class _$$TournamentsStateImplCopyWith<$Res>
     implements $TournamentsStateCopyWith<$Res> {
-  factory _$$_TournamentsStateCopyWith(
-          _$_TournamentsState value, $Res Function(_$_TournamentsState) then) =
-      __$$_TournamentsStateCopyWithImpl<$Res>;
+  factory _$$TournamentsStateImplCopyWith(_$TournamentsStateImpl value,
+          $Res Function(_$TournamentsStateImpl) then) =
+      __$$TournamentsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<TournamentModel> tournaments, bool isLoading});
 }
 
 /// @nodoc
-class __$$_TournamentsStateCopyWithImpl<$Res>
-    extends _$TournamentsStateCopyWithImpl<$Res, _$_TournamentsState>
-    implements _$$_TournamentsStateCopyWith<$Res> {
-  __$$_TournamentsStateCopyWithImpl(
-      _$_TournamentsState _value, $Res Function(_$_TournamentsState) _then)
+class __$$TournamentsStateImplCopyWithImpl<$Res>
+    extends _$TournamentsStateCopyWithImpl<$Res, _$TournamentsStateImpl>
+    implements _$$TournamentsStateImplCopyWith<$Res> {
+  __$$TournamentsStateImplCopyWithImpl(_$TournamentsStateImpl _value,
+      $Res Function(_$TournamentsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_TournamentsStateCopyWithImpl<$Res>
     Object? tournaments = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_TournamentsState(
+    return _then(_$TournamentsStateImpl(
       tournaments: null == tournaments
           ? _value._tournaments
           : tournaments // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_TournamentsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TournamentsState implements _TournamentsState {
-  const _$_TournamentsState(
+class _$TournamentsStateImpl implements _TournamentsState {
+  const _$TournamentsStateImpl(
       {required final List<TournamentModel> tournaments,
       required this.isLoading})
       : _tournaments = tournaments;
@@ -125,10 +125,10 @@ class _$_TournamentsState implements _TournamentsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TournamentsState &&
+            other is _$TournamentsStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._tournaments, _tournaments) &&
             (identical(other.isLoading, isLoading) ||
@@ -142,14 +142,15 @@ class _$_TournamentsState implements _TournamentsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TournamentsStateCopyWith<_$_TournamentsState> get copyWith =>
-      __$$_TournamentsStateCopyWithImpl<_$_TournamentsState>(this, _$identity);
+  _$$TournamentsStateImplCopyWith<_$TournamentsStateImpl> get copyWith =>
+      __$$TournamentsStateImplCopyWithImpl<_$TournamentsStateImpl>(
+          this, _$identity);
 }
 
 abstract class _TournamentsState implements TournamentsState {
   const factory _TournamentsState(
       {required final List<TournamentModel> tournaments,
-      required final bool isLoading}) = _$_TournamentsState;
+      required final bool isLoading}) = _$TournamentsStateImpl;
 
   @override
   List<TournamentModel> get tournaments;
@@ -157,6 +158,6 @@ abstract class _TournamentsState implements TournamentsState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_TournamentsStateCopyWith<_$_TournamentsState> get copyWith =>
+  _$$TournamentsStateImplCopyWith<_$TournamentsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

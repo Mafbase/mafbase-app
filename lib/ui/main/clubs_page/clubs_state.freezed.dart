@@ -63,22 +63,22 @@ class _$ClubsStateCopyWithImpl<$Res, $Val extends ClubsState>
 }
 
 /// @nodoc
-abstract class _$$_ClubsStateCopyWith<$Res>
+abstract class _$$ClubsStateImplCopyWith<$Res>
     implements $ClubsStateCopyWith<$Res> {
-  factory _$$_ClubsStateCopyWith(
-          _$_ClubsState value, $Res Function(_$_ClubsState) then) =
-      __$$_ClubsStateCopyWithImpl<$Res>;
+  factory _$$ClubsStateImplCopyWith(
+          _$ClubsStateImpl value, $Res Function(_$ClubsStateImpl) then) =
+      __$$ClubsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<ClubModel> clubs, bool isLoading});
 }
 
 /// @nodoc
-class __$$_ClubsStateCopyWithImpl<$Res>
-    extends _$ClubsStateCopyWithImpl<$Res, _$_ClubsState>
-    implements _$$_ClubsStateCopyWith<$Res> {
-  __$$_ClubsStateCopyWithImpl(
-      _$_ClubsState _value, $Res Function(_$_ClubsState) _then)
+class __$$ClubsStateImplCopyWithImpl<$Res>
+    extends _$ClubsStateCopyWithImpl<$Res, _$ClubsStateImpl>
+    implements _$$ClubsStateImplCopyWith<$Res> {
+  __$$ClubsStateImplCopyWithImpl(
+      _$ClubsStateImpl _value, $Res Function(_$ClubsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ClubsStateCopyWithImpl<$Res>
     Object? clubs = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_ClubsState(
+    return _then(_$ClubsStateImpl(
       clubs: null == clubs
           ? _value._clubs
           : clubs // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_ClubsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ClubsState implements _ClubsState {
-  const _$_ClubsState(
+class _$ClubsStateImpl implements _ClubsState {
+  const _$ClubsStateImpl(
       {final List<ClubModel> clubs = const [], this.isLoading = true})
       : _clubs = clubs;
 
@@ -126,10 +126,10 @@ class _$_ClubsState implements _ClubsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ClubsState &&
+            other is _$ClubsStateImpl &&
             const DeepCollectionEquality().equals(other._clubs, _clubs) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
@@ -142,13 +142,13 @@ class _$_ClubsState implements _ClubsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ClubsStateCopyWith<_$_ClubsState> get copyWith =>
-      __$$_ClubsStateCopyWithImpl<_$_ClubsState>(this, _$identity);
+  _$$ClubsStateImplCopyWith<_$ClubsStateImpl> get copyWith =>
+      __$$ClubsStateImplCopyWithImpl<_$ClubsStateImpl>(this, _$identity);
 }
 
 abstract class _ClubsState implements ClubsState {
   const factory _ClubsState(
-      {final List<ClubModel> clubs, final bool isLoading}) = _$_ClubsState;
+      {final List<ClubModel> clubs, final bool isLoading}) = _$ClubsStateImpl;
 
   @override
   List<ClubModel> get clubs;
@@ -156,6 +156,6 @@ abstract class _ClubsState implements ClubsState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_ClubsStateCopyWith<_$_ClubsState> get copyWith =>
+  _$$ClubsStateImplCopyWith<_$ClubsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

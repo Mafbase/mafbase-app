@@ -58,22 +58,24 @@ class _$SeatingInsertingStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SeatingInsertingStateCopyWith<$Res>
+abstract class _$$SeatingInsertingStateImplCopyWith<$Res>
     implements $SeatingInsertingStateCopyWith<$Res> {
-  factory _$$_SeatingInsertingStateCopyWith(_$_SeatingInsertingState value,
-          $Res Function(_$_SeatingInsertingState) then) =
-      __$$_SeatingInsertingStateCopyWithImpl<$Res>;
+  factory _$$SeatingInsertingStateImplCopyWith(
+          _$SeatingInsertingStateImpl value,
+          $Res Function(_$SeatingInsertingStateImpl) then) =
+      __$$SeatingInsertingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isLoading});
 }
 
 /// @nodoc
-class __$$_SeatingInsertingStateCopyWithImpl<$Res>
-    extends _$SeatingInsertingStateCopyWithImpl<$Res, _$_SeatingInsertingState>
-    implements _$$_SeatingInsertingStateCopyWith<$Res> {
-  __$$_SeatingInsertingStateCopyWithImpl(_$_SeatingInsertingState _value,
-      $Res Function(_$_SeatingInsertingState) _then)
+class __$$SeatingInsertingStateImplCopyWithImpl<$Res>
+    extends _$SeatingInsertingStateCopyWithImpl<$Res,
+        _$SeatingInsertingStateImpl>
+    implements _$$SeatingInsertingStateImplCopyWith<$Res> {
+  __$$SeatingInsertingStateImplCopyWithImpl(_$SeatingInsertingStateImpl _value,
+      $Res Function(_$SeatingInsertingStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +83,7 @@ class __$$_SeatingInsertingStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
   }) {
-    return _then(_$_SeatingInsertingState(
+    return _then(_$SeatingInsertingStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -92,8 +94,8 @@ class __$$_SeatingInsertingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SeatingInsertingState implements _SeatingInsertingState {
-  const _$_SeatingInsertingState({this.isLoading = false});
+class _$SeatingInsertingStateImpl implements _SeatingInsertingState {
+  const _$SeatingInsertingStateImpl({this.isLoading = false});
 
   @override
   @JsonKey()
@@ -105,10 +107,10 @@ class _$_SeatingInsertingState implements _SeatingInsertingState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SeatingInsertingState &&
+            other is _$SeatingInsertingStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
@@ -119,19 +121,19 @@ class _$_SeatingInsertingState implements _SeatingInsertingState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SeatingInsertingStateCopyWith<_$_SeatingInsertingState> get copyWith =>
-      __$$_SeatingInsertingStateCopyWithImpl<_$_SeatingInsertingState>(
-          this, _$identity);
+  _$$SeatingInsertingStateImplCopyWith<_$SeatingInsertingStateImpl>
+      get copyWith => __$$SeatingInsertingStateImplCopyWithImpl<
+          _$SeatingInsertingStateImpl>(this, _$identity);
 }
 
 abstract class _SeatingInsertingState implements SeatingInsertingState {
   const factory _SeatingInsertingState({final bool isLoading}) =
-      _$_SeatingInsertingState;
+      _$SeatingInsertingStateImpl;
 
   @override
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_SeatingInsertingStateCopyWith<_$_SeatingInsertingState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SeatingInsertingStateImplCopyWith<_$SeatingInsertingStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

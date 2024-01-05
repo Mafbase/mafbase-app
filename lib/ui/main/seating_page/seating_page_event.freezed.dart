@@ -118,25 +118,27 @@ class _$SeatingPageEventCopyWithImpl<$Res, $Val extends SeatingPageEvent>
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventAddPairCopyWith<$Res> {
-  factory _$$SeatingPageEventAddPairCopyWith(_$SeatingPageEventAddPair value,
-          $Res Function(_$SeatingPageEventAddPair) then) =
-      __$$SeatingPageEventAddPairCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventAddPairImplCopyWith<$Res> {
+  factory _$$SeatingPageEventAddPairImplCopyWith(
+          _$SeatingPageEventAddPairImpl value,
+          $Res Function(_$SeatingPageEventAddPairImpl) then) =
+      __$$SeatingPageEventAddPairImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SeatingPageEventAddPairCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventAddPair>
-    implements _$$SeatingPageEventAddPairCopyWith<$Res> {
-  __$$SeatingPageEventAddPairCopyWithImpl(_$SeatingPageEventAddPair _value,
-      $Res Function(_$SeatingPageEventAddPair) _then)
+class __$$SeatingPageEventAddPairImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventAddPairImpl>
+    implements _$$SeatingPageEventAddPairImplCopyWith<$Res> {
+  __$$SeatingPageEventAddPairImplCopyWithImpl(
+      _$SeatingPageEventAddPairImpl _value,
+      $Res Function(_$SeatingPageEventAddPairImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
-  const _$SeatingPageEventAddPair();
+class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
+  const _$SeatingPageEventAddPairImpl();
 
   @override
   String toString() {
@@ -144,10 +146,10 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventAddPair);
+            other is _$SeatingPageEventAddPairImpl);
   }
 
   @override
@@ -260,32 +262,33 @@ class _$SeatingPageEventAddPair implements SeatingPageEventAddPair {
 }
 
 abstract class SeatingPageEventAddPair implements SeatingPageEvent {
-  const factory SeatingPageEventAddPair() = _$SeatingPageEventAddPair;
+  const factory SeatingPageEventAddPair() = _$SeatingPageEventAddPairImpl;
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventCreateSeatingCopyWith<$Res> {
-  factory _$$SeatingPageEventCreateSeatingCopyWith(
-          _$SeatingPageEventCreateSeating value,
-          $Res Function(_$SeatingPageEventCreateSeating) then) =
-      __$$SeatingPageEventCreateSeatingCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventCreateSeatingImplCopyWith<$Res> {
+  factory _$$SeatingPageEventCreateSeatingImplCopyWith(
+          _$SeatingPageEventCreateSeatingImpl value,
+          $Res Function(_$SeatingPageEventCreateSeatingImpl) then) =
+      __$$SeatingPageEventCreateSeatingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SeatingPageEventCreateSeatingCopyWithImpl<$Res>
+class __$$SeatingPageEventCreateSeatingImplCopyWithImpl<$Res>
     extends _$SeatingPageEventCopyWithImpl<$Res,
-        _$SeatingPageEventCreateSeating>
-    implements _$$SeatingPageEventCreateSeatingCopyWith<$Res> {
-  __$$SeatingPageEventCreateSeatingCopyWithImpl(
-      _$SeatingPageEventCreateSeating _value,
-      $Res Function(_$SeatingPageEventCreateSeating) _then)
+        _$SeatingPageEventCreateSeatingImpl>
+    implements _$$SeatingPageEventCreateSeatingImplCopyWith<$Res> {
+  __$$SeatingPageEventCreateSeatingImplCopyWithImpl(
+      _$SeatingPageEventCreateSeatingImpl _value,
+      $Res Function(_$SeatingPageEventCreateSeatingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
-  const _$SeatingPageEventCreateSeating();
+class _$SeatingPageEventCreateSeatingImpl
+    implements SeatingPageEventCreateSeating {
+  const _$SeatingPageEventCreateSeatingImpl();
 
   @override
   String toString() {
@@ -293,10 +296,10 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventCreateSeating);
+            other is _$SeatingPageEventCreateSeatingImpl);
   }
 
   @override
@@ -410,33 +413,33 @@ class _$SeatingPageEventCreateSeating implements SeatingPageEventCreateSeating {
 
 abstract class SeatingPageEventCreateSeating implements SeatingPageEvent {
   const factory SeatingPageEventCreateSeating() =
-      _$SeatingPageEventCreateSeating;
+      _$SeatingPageEventCreateSeatingImpl;
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventFsmSeatingTappedCopyWith<$Res> {
-  factory _$$SeatingPageEventFsmSeatingTappedCopyWith(
-          _$SeatingPageEventFsmSeatingTapped value,
-          $Res Function(_$SeatingPageEventFsmSeatingTapped) then) =
-      __$$SeatingPageEventFsmSeatingTappedCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventFsmSeatingTappedImplCopyWith<$Res> {
+  factory _$$SeatingPageEventFsmSeatingTappedImplCopyWith(
+          _$SeatingPageEventFsmSeatingTappedImpl value,
+          $Res Function(_$SeatingPageEventFsmSeatingTappedImpl) then) =
+      __$$SeatingPageEventFsmSeatingTappedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SeatingPageEventFsmSeatingTappedCopyWithImpl<$Res>
+class __$$SeatingPageEventFsmSeatingTappedImplCopyWithImpl<$Res>
     extends _$SeatingPageEventCopyWithImpl<$Res,
-        _$SeatingPageEventFsmSeatingTapped>
-    implements _$$SeatingPageEventFsmSeatingTappedCopyWith<$Res> {
-  __$$SeatingPageEventFsmSeatingTappedCopyWithImpl(
-      _$SeatingPageEventFsmSeatingTapped _value,
-      $Res Function(_$SeatingPageEventFsmSeatingTapped) _then)
+        _$SeatingPageEventFsmSeatingTappedImpl>
+    implements _$$SeatingPageEventFsmSeatingTappedImplCopyWith<$Res> {
+  __$$SeatingPageEventFsmSeatingTappedImplCopyWithImpl(
+      _$SeatingPageEventFsmSeatingTappedImpl _value,
+      $Res Function(_$SeatingPageEventFsmSeatingTappedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SeatingPageEventFsmSeatingTapped
+class _$SeatingPageEventFsmSeatingTappedImpl
     implements SeatingPageEventFsmSeatingTapped {
-  const _$SeatingPageEventFsmSeatingTapped();
+  const _$SeatingPageEventFsmSeatingTappedImpl();
 
   @override
   String toString() {
@@ -444,10 +447,10 @@ class _$SeatingPageEventFsmSeatingTapped
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventFsmSeatingTapped);
+            other is _$SeatingPageEventFsmSeatingTappedImpl);
   }
 
   @override
@@ -561,15 +564,15 @@ class _$SeatingPageEventFsmSeatingTapped
 
 abstract class SeatingPageEventFsmSeatingTapped implements SeatingPageEvent {
   const factory SeatingPageEventFsmSeatingTapped() =
-      _$SeatingPageEventFsmSeatingTapped;
+      _$SeatingPageEventFsmSeatingTappedImpl;
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventDeletePairCopyWith<$Res> {
-  factory _$$SeatingPageEventDeletePairCopyWith(
-          _$SeatingPageEventDeletePair value,
-          $Res Function(_$SeatingPageEventDeletePair) then) =
-      __$$SeatingPageEventDeletePairCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventDeletePairImplCopyWith<$Res> {
+  factory _$$SeatingPageEventDeletePairImplCopyWith(
+          _$SeatingPageEventDeletePairImpl value,
+          $Res Function(_$SeatingPageEventDeletePairImpl) then) =
+      __$$SeatingPageEventDeletePairImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PlayerModel first, PlayerModel second});
 
@@ -578,12 +581,13 @@ abstract class _$$SeatingPageEventDeletePairCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SeatingPageEventDeletePairCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventDeletePair>
-    implements _$$SeatingPageEventDeletePairCopyWith<$Res> {
-  __$$SeatingPageEventDeletePairCopyWithImpl(
-      _$SeatingPageEventDeletePair _value,
-      $Res Function(_$SeatingPageEventDeletePair) _then)
+class __$$SeatingPageEventDeletePairImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventDeletePairImpl>
+    implements _$$SeatingPageEventDeletePairImplCopyWith<$Res> {
+  __$$SeatingPageEventDeletePairImplCopyWithImpl(
+      _$SeatingPageEventDeletePairImpl _value,
+      $Res Function(_$SeatingPageEventDeletePairImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -592,7 +596,7 @@ class __$$SeatingPageEventDeletePairCopyWithImpl<$Res>
     Object? first = null,
     Object? second = null,
   }) {
-    return _then(_$SeatingPageEventDeletePair(
+    return _then(_$SeatingPageEventDeletePairImpl(
       first: null == first
           ? _value.first
           : first // ignore: cast_nullable_to_non_nullable
@@ -623,8 +627,8 @@ class __$$SeatingPageEventDeletePairCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
-  const _$SeatingPageEventDeletePair(
+class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
+  const _$SeatingPageEventDeletePairImpl(
       {required this.first, required this.second});
 
   @override
@@ -638,10 +642,10 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventDeletePair &&
+            other is _$SeatingPageEventDeletePairImpl &&
             (identical(other.first, first) || other.first == first) &&
             (identical(other.second, second) || other.second == second));
   }
@@ -652,9 +656,9 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SeatingPageEventDeletePairCopyWith<_$SeatingPageEventDeletePair>
-      get copyWith => __$$SeatingPageEventDeletePairCopyWithImpl<
-          _$SeatingPageEventDeletePair>(this, _$identity);
+  _$$SeatingPageEventDeletePairImplCopyWith<_$SeatingPageEventDeletePairImpl>
+      get copyWith => __$$SeatingPageEventDeletePairImplCopyWithImpl<
+          _$SeatingPageEventDeletePairImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -765,32 +769,33 @@ class _$SeatingPageEventDeletePair implements SeatingPageEventDeletePair {
 abstract class SeatingPageEventDeletePair implements SeatingPageEvent {
   const factory SeatingPageEventDeletePair(
       {required final PlayerModel first,
-      required final PlayerModel second}) = _$SeatingPageEventDeletePair;
+      required final PlayerModel second}) = _$SeatingPageEventDeletePairImpl;
 
   PlayerModel get first;
   PlayerModel get second;
   @JsonKey(ignore: true)
-  _$$SeatingPageEventDeletePairCopyWith<_$SeatingPageEventDeletePair>
+  _$$SeatingPageEventDeletePairImplCopyWith<_$SeatingPageEventDeletePairImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventPageOpenedCopyWith<$Res> {
-  factory _$$SeatingPageEventPageOpenedCopyWith(
-          _$SeatingPageEventPageOpened value,
-          $Res Function(_$SeatingPageEventPageOpened) then) =
-      __$$SeatingPageEventPageOpenedCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventPageOpenedImplCopyWith<$Res> {
+  factory _$$SeatingPageEventPageOpenedImplCopyWith(
+          _$SeatingPageEventPageOpenedImpl value,
+          $Res Function(_$SeatingPageEventPageOpenedImpl) then) =
+      __$$SeatingPageEventPageOpenedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int tournamentId});
 }
 
 /// @nodoc
-class __$$SeatingPageEventPageOpenedCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventPageOpened>
-    implements _$$SeatingPageEventPageOpenedCopyWith<$Res> {
-  __$$SeatingPageEventPageOpenedCopyWithImpl(
-      _$SeatingPageEventPageOpened _value,
-      $Res Function(_$SeatingPageEventPageOpened) _then)
+class __$$SeatingPageEventPageOpenedImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventPageOpenedImpl>
+    implements _$$SeatingPageEventPageOpenedImplCopyWith<$Res> {
+  __$$SeatingPageEventPageOpenedImplCopyWithImpl(
+      _$SeatingPageEventPageOpenedImpl _value,
+      $Res Function(_$SeatingPageEventPageOpenedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -798,7 +803,7 @@ class __$$SeatingPageEventPageOpenedCopyWithImpl<$Res>
   $Res call({
     Object? tournamentId = null,
   }) {
-    return _then(_$SeatingPageEventPageOpened(
+    return _then(_$SeatingPageEventPageOpenedImpl(
       tournamentId: null == tournamentId
           ? _value.tournamentId
           : tournamentId // ignore: cast_nullable_to_non_nullable
@@ -809,8 +814,8 @@ class __$$SeatingPageEventPageOpenedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
-  const _$SeatingPageEventPageOpened({required this.tournamentId});
+class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
+  const _$SeatingPageEventPageOpenedImpl({required this.tournamentId});
 
   @override
   final int tournamentId;
@@ -821,10 +826,10 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventPageOpened &&
+            other is _$SeatingPageEventPageOpenedImpl &&
             (identical(other.tournamentId, tournamentId) ||
                 other.tournamentId == tournamentId));
   }
@@ -835,9 +840,9 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SeatingPageEventPageOpenedCopyWith<_$SeatingPageEventPageOpened>
-      get copyWith => __$$SeatingPageEventPageOpenedCopyWithImpl<
-          _$SeatingPageEventPageOpened>(this, _$identity);
+  _$$SeatingPageEventPageOpenedImplCopyWith<_$SeatingPageEventPageOpenedImpl>
+      get copyWith => __$$SeatingPageEventPageOpenedImplCopyWithImpl<
+          _$SeatingPageEventPageOpenedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -947,31 +952,32 @@ class _$SeatingPageEventPageOpened implements SeatingPageEventPageOpened {
 
 abstract class SeatingPageEventPageOpened implements SeatingPageEvent {
   const factory SeatingPageEventPageOpened({required final int tournamentId}) =
-      _$SeatingPageEventPageOpened;
+      _$SeatingPageEventPageOpenedImpl;
 
   int get tournamentId;
   @JsonKey(ignore: true)
-  _$$SeatingPageEventPageOpenedCopyWith<_$SeatingPageEventPageOpened>
+  _$$SeatingPageEventPageOpenedImplCopyWith<_$SeatingPageEventPageOpenedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventGameEditingCopyWith<$Res> {
-  factory _$$SeatingPageEventGameEditingCopyWith(
-          _$SeatingPageEventGameEditing value,
-          $Res Function(_$SeatingPageEventGameEditing) then) =
-      __$$SeatingPageEventGameEditingCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventGameEditingImplCopyWith<$Res> {
+  factory _$$SeatingPageEventGameEditingImplCopyWith(
+          _$SeatingPageEventGameEditingImpl value,
+          $Res Function(_$SeatingPageEventGameEditingImpl) then) =
+      __$$SeatingPageEventGameEditingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int gameId});
 }
 
 /// @nodoc
-class __$$SeatingPageEventGameEditingCopyWithImpl<$Res>
-    extends _$SeatingPageEventCopyWithImpl<$Res, _$SeatingPageEventGameEditing>
-    implements _$$SeatingPageEventGameEditingCopyWith<$Res> {
-  __$$SeatingPageEventGameEditingCopyWithImpl(
-      _$SeatingPageEventGameEditing _value,
-      $Res Function(_$SeatingPageEventGameEditing) _then)
+class __$$SeatingPageEventGameEditingImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventGameEditingImpl>
+    implements _$$SeatingPageEventGameEditingImplCopyWith<$Res> {
+  __$$SeatingPageEventGameEditingImplCopyWithImpl(
+      _$SeatingPageEventGameEditingImpl _value,
+      $Res Function(_$SeatingPageEventGameEditingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -979,7 +985,7 @@ class __$$SeatingPageEventGameEditingCopyWithImpl<$Res>
   $Res call({
     Object? gameId = null,
   }) {
-    return _then(_$SeatingPageEventGameEditing(
+    return _then(_$SeatingPageEventGameEditingImpl(
       gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
@@ -990,8 +996,8 @@ class __$$SeatingPageEventGameEditingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SeatingPageEventGameEditing implements SeatingPageEventGameEditing {
-  const _$SeatingPageEventGameEditing({required this.gameId});
+class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
+  const _$SeatingPageEventGameEditingImpl({required this.gameId});
 
   @override
   final int gameId;
@@ -1002,10 +1008,10 @@ class _$SeatingPageEventGameEditing implements SeatingPageEventGameEditing {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventGameEditing &&
+            other is _$SeatingPageEventGameEditingImpl &&
             (identical(other.gameId, gameId) || other.gameId == gameId));
   }
 
@@ -1015,9 +1021,9 @@ class _$SeatingPageEventGameEditing implements SeatingPageEventGameEditing {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SeatingPageEventGameEditingCopyWith<_$SeatingPageEventGameEditing>
-      get copyWith => __$$SeatingPageEventGameEditingCopyWithImpl<
-          _$SeatingPageEventGameEditing>(this, _$identity);
+  _$$SeatingPageEventGameEditingImplCopyWith<_$SeatingPageEventGameEditingImpl>
+      get copyWith => __$$SeatingPageEventGameEditingImplCopyWithImpl<
+          _$SeatingPageEventGameEditingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1127,38 +1133,38 @@ class _$SeatingPageEventGameEditing implements SeatingPageEventGameEditing {
 
 abstract class SeatingPageEventGameEditing implements SeatingPageEvent {
   const factory SeatingPageEventGameEditing({required final int gameId}) =
-      _$SeatingPageEventGameEditing;
+      _$SeatingPageEventGameEditingImpl;
 
   int get gameId;
   @JsonKey(ignore: true)
-  _$$SeatingPageEventGameEditingCopyWith<_$SeatingPageEventGameEditing>
+  _$$SeatingPageEventGameEditingImplCopyWith<_$SeatingPageEventGameEditingImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventCreateFinalSeatingCopyWith<$Res> {
-  factory _$$SeatingPageEventCreateFinalSeatingCopyWith(
-          _$SeatingPageEventCreateFinalSeating value,
-          $Res Function(_$SeatingPageEventCreateFinalSeating) then) =
-      __$$SeatingPageEventCreateFinalSeatingCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventCreateFinalSeatingImplCopyWith<$Res> {
+  factory _$$SeatingPageEventCreateFinalSeatingImplCopyWith(
+          _$SeatingPageEventCreateFinalSeatingImpl value,
+          $Res Function(_$SeatingPageEventCreateFinalSeatingImpl) then) =
+      __$$SeatingPageEventCreateFinalSeatingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SeatingPageEventCreateFinalSeatingCopyWithImpl<$Res>
+class __$$SeatingPageEventCreateFinalSeatingImplCopyWithImpl<$Res>
     extends _$SeatingPageEventCopyWithImpl<$Res,
-        _$SeatingPageEventCreateFinalSeating>
-    implements _$$SeatingPageEventCreateFinalSeatingCopyWith<$Res> {
-  __$$SeatingPageEventCreateFinalSeatingCopyWithImpl(
-      _$SeatingPageEventCreateFinalSeating _value,
-      $Res Function(_$SeatingPageEventCreateFinalSeating) _then)
+        _$SeatingPageEventCreateFinalSeatingImpl>
+    implements _$$SeatingPageEventCreateFinalSeatingImplCopyWith<$Res> {
+  __$$SeatingPageEventCreateFinalSeatingImplCopyWithImpl(
+      _$SeatingPageEventCreateFinalSeatingImpl _value,
+      $Res Function(_$SeatingPageEventCreateFinalSeatingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SeatingPageEventCreateFinalSeating
+class _$SeatingPageEventCreateFinalSeatingImpl
     implements SeatingPageEventCreateFinalSeating {
-  const _$SeatingPageEventCreateFinalSeating();
+  const _$SeatingPageEventCreateFinalSeatingImpl();
 
   @override
   String toString() {
@@ -1166,10 +1172,10 @@ class _$SeatingPageEventCreateFinalSeating
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventCreateFinalSeating);
+            other is _$SeatingPageEventCreateFinalSeatingImpl);
   }
 
   @override
@@ -1283,27 +1289,27 @@ class _$SeatingPageEventCreateFinalSeating
 
 abstract class SeatingPageEventCreateFinalSeating implements SeatingPageEvent {
   const factory SeatingPageEventCreateFinalSeating() =
-      _$SeatingPageEventCreateFinalSeating;
+      _$SeatingPageEventCreateFinalSeatingImpl;
 }
 
 /// @nodoc
-abstract class _$$SeatingPageEventCreateSwissGameCopyWith<$Res> {
-  factory _$$SeatingPageEventCreateSwissGameCopyWith(
-          _$SeatingPageEventCreateSwissGame value,
-          $Res Function(_$SeatingPageEventCreateSwissGame) then) =
-      __$$SeatingPageEventCreateSwissGameCopyWithImpl<$Res>;
+abstract class _$$SeatingPageEventCreateSwissGameImplCopyWith<$Res> {
+  factory _$$SeatingPageEventCreateSwissGameImplCopyWith(
+          _$SeatingPageEventCreateSwissGameImpl value,
+          $Res Function(_$SeatingPageEventCreateSwissGameImpl) then) =
+      __$$SeatingPageEventCreateSwissGameImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int game});
 }
 
 /// @nodoc
-class __$$SeatingPageEventCreateSwissGameCopyWithImpl<$Res>
+class __$$SeatingPageEventCreateSwissGameImplCopyWithImpl<$Res>
     extends _$SeatingPageEventCopyWithImpl<$Res,
-        _$SeatingPageEventCreateSwissGame>
-    implements _$$SeatingPageEventCreateSwissGameCopyWith<$Res> {
-  __$$SeatingPageEventCreateSwissGameCopyWithImpl(
-      _$SeatingPageEventCreateSwissGame _value,
-      $Res Function(_$SeatingPageEventCreateSwissGame) _then)
+        _$SeatingPageEventCreateSwissGameImpl>
+    implements _$$SeatingPageEventCreateSwissGameImplCopyWith<$Res> {
+  __$$SeatingPageEventCreateSwissGameImplCopyWithImpl(
+      _$SeatingPageEventCreateSwissGameImpl _value,
+      $Res Function(_$SeatingPageEventCreateSwissGameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1311,7 +1317,7 @@ class __$$SeatingPageEventCreateSwissGameCopyWithImpl<$Res>
   $Res call({
     Object? game = null,
   }) {
-    return _then(_$SeatingPageEventCreateSwissGame(
+    return _then(_$SeatingPageEventCreateSwissGameImpl(
       game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
@@ -1322,9 +1328,9 @@ class __$$SeatingPageEventCreateSwissGameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SeatingPageEventCreateSwissGame
+class _$SeatingPageEventCreateSwissGameImpl
     implements SeatingPageEventCreateSwissGame {
-  const _$SeatingPageEventCreateSwissGame({required this.game});
+  const _$SeatingPageEventCreateSwissGameImpl({required this.game});
 
   @override
   final int game;
@@ -1335,10 +1341,10 @@ class _$SeatingPageEventCreateSwissGame
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingPageEventCreateSwissGame &&
+            other is _$SeatingPageEventCreateSwissGameImpl &&
             (identical(other.game, game) || other.game == game));
   }
 
@@ -1348,9 +1354,10 @@ class _$SeatingPageEventCreateSwissGame
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SeatingPageEventCreateSwissGameCopyWith<_$SeatingPageEventCreateSwissGame>
-      get copyWith => __$$SeatingPageEventCreateSwissGameCopyWithImpl<
-          _$SeatingPageEventCreateSwissGame>(this, _$identity);
+  _$$SeatingPageEventCreateSwissGameImplCopyWith<
+          _$SeatingPageEventCreateSwissGameImpl>
+      get copyWith => __$$SeatingPageEventCreateSwissGameImplCopyWithImpl<
+          _$SeatingPageEventCreateSwissGameImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1460,10 +1467,11 @@ class _$SeatingPageEventCreateSwissGame
 
 abstract class SeatingPageEventCreateSwissGame implements SeatingPageEvent {
   const factory SeatingPageEventCreateSwissGame({required final int game}) =
-      _$SeatingPageEventCreateSwissGame;
+      _$SeatingPageEventCreateSwissGameImpl;
 
   int get game;
   @JsonKey(ignore: true)
-  _$$SeatingPageEventCreateSwissGameCopyWith<_$SeatingPageEventCreateSwissGame>
+  _$$SeatingPageEventCreateSwissGameImplCopyWith<
+          _$SeatingPageEventCreateSwissGameImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

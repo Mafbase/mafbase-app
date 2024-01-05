@@ -114,11 +114,11 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
 }
 
 /// @nodoc
-abstract class _$$_TournamentModelCopyWith<$Res>
+abstract class _$$TournamentModelImplCopyWith<$Res>
     implements $TournamentModelCopyWith<$Res> {
-  factory _$$_TournamentModelCopyWith(
-          _$_TournamentModel value, $Res Function(_$_TournamentModel) then) =
-      __$$_TournamentModelCopyWithImpl<$Res>;
+  factory _$$TournamentModelImplCopyWith(_$TournamentModelImpl value,
+          $Res Function(_$TournamentModelImpl) then) =
+      __$$TournamentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$_TournamentModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TournamentModelCopyWithImpl<$Res>
-    extends _$TournamentModelCopyWithImpl<$Res, _$_TournamentModel>
-    implements _$$_TournamentModelCopyWith<$Res> {
-  __$$_TournamentModelCopyWithImpl(
-      _$_TournamentModel _value, $Res Function(_$_TournamentModel) _then)
+class __$$TournamentModelImplCopyWithImpl<$Res>
+    extends _$TournamentModelCopyWithImpl<$Res, _$TournamentModelImpl>
+    implements _$$TournamentModelImplCopyWith<$Res> {
+  __$$TournamentModelImplCopyWithImpl(
+      _$TournamentModelImpl _value, $Res Function(_$TournamentModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_TournamentModelCopyWithImpl<$Res>
     Object? billedTranslation = null,
     Object? notificationEnabled = null,
   }) {
-    return _then(_$_TournamentModel(
+    return _then(_$TournamentModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_TournamentModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TournamentModel implements _TournamentModel {
-  const _$_TournamentModel(
+class _$TournamentModelImpl implements _TournamentModel {
+  const _$TournamentModelImpl(
       {required this.id,
       required this.name,
       required this.status,
@@ -234,10 +234,10 @@ class _$_TournamentModel implements _TournamentModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TournamentModel &&
+            other is _$TournamentModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.status, status) || other.status == status) &&
@@ -270,8 +270,9 @@ class _$_TournamentModel implements _TournamentModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TournamentModelCopyWith<_$_TournamentModel> get copyWith =>
-      __$$_TournamentModelCopyWithImpl<_$_TournamentModel>(this, _$identity);
+  _$$TournamentModelImplCopyWith<_$TournamentModelImpl> get copyWith =>
+      __$$TournamentModelImplCopyWithImpl<_$TournamentModelImpl>(
+          this, _$identity);
 }
 
 abstract class _TournamentModel implements TournamentModel {
@@ -284,7 +285,7 @@ abstract class _TournamentModel implements TournamentModel {
       required final int gamesCount,
       required final int billedPlayers,
       required final bool billedTranslation,
-      required final bool notificationEnabled}) = _$_TournamentModel;
+      required final bool notificationEnabled}) = _$TournamentModelImpl;
 
   @override
   int get id;
@@ -306,6 +307,6 @@ abstract class _TournamentModel implements TournamentModel {
   bool get notificationEnabled;
   @override
   @JsonKey(ignore: true)
-  _$$_TournamentModelCopyWith<_$_TournamentModel> get copyWith =>
+  _$$TournamentModelImplCopyWith<_$TournamentModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

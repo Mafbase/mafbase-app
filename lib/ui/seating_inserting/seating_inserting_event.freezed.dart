@@ -77,27 +77,28 @@ class _$SeatingInsertingEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$SeatingInsertingSaveEventCopyWith<$Res> {
-  factory _$$SeatingInsertingSaveEventCopyWith(
-          _$SeatingInsertingSaveEvent value,
-          $Res Function(_$SeatingInsertingSaveEvent) then) =
-      __$$SeatingInsertingSaveEventCopyWithImpl<$Res>;
+abstract class _$$SeatingInsertingSaveEventImplCopyWith<$Res> {
+  factory _$$SeatingInsertingSaveEventImplCopyWith(
+          _$SeatingInsertingSaveEventImpl value,
+          $Res Function(_$SeatingInsertingSaveEventImpl) then) =
+      __$$SeatingInsertingSaveEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SeatingInsertingSaveEventCopyWithImpl<$Res>
+class __$$SeatingInsertingSaveEventImplCopyWithImpl<$Res>
     extends _$SeatingInsertingEventCopyWithImpl<$Res,
-        _$SeatingInsertingSaveEvent>
-    implements _$$SeatingInsertingSaveEventCopyWith<$Res> {
-  __$$SeatingInsertingSaveEventCopyWithImpl(_$SeatingInsertingSaveEvent _value,
-      $Res Function(_$SeatingInsertingSaveEvent) _then)
+        _$SeatingInsertingSaveEventImpl>
+    implements _$$SeatingInsertingSaveEventImplCopyWith<$Res> {
+  __$$SeatingInsertingSaveEventImplCopyWithImpl(
+      _$SeatingInsertingSaveEventImpl _value,
+      $Res Function(_$SeatingInsertingSaveEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SeatingInsertingSaveEvent implements SeatingInsertingSaveEvent {
-  const _$SeatingInsertingSaveEvent();
+class _$SeatingInsertingSaveEventImpl implements SeatingInsertingSaveEvent {
+  const _$SeatingInsertingSaveEventImpl();
 
   @override
   String toString() {
@@ -105,10 +106,10 @@ class _$SeatingInsertingSaveEvent implements SeatingInsertingSaveEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingInsertingSaveEvent);
+            other is _$SeatingInsertingSaveEventImpl);
   }
 
   @override
@@ -179,27 +180,27 @@ class _$SeatingInsertingSaveEvent implements SeatingInsertingSaveEvent {
 }
 
 abstract class SeatingInsertingSaveEvent implements SeatingInsertingEvent {
-  const factory SeatingInsertingSaveEvent() = _$SeatingInsertingSaveEvent;
+  const factory SeatingInsertingSaveEvent() = _$SeatingInsertingSaveEventImpl;
 }
 
 /// @nodoc
-abstract class _$$SeatingInsertingFileSelectedEventCopyWith<$Res> {
-  factory _$$SeatingInsertingFileSelectedEventCopyWith(
-          _$SeatingInsertingFileSelectedEvent value,
-          $Res Function(_$SeatingInsertingFileSelectedEvent) then) =
-      __$$SeatingInsertingFileSelectedEventCopyWithImpl<$Res>;
+abstract class _$$SeatingInsertingFileSelectedEventImplCopyWith<$Res> {
+  factory _$$SeatingInsertingFileSelectedEventImplCopyWith(
+          _$SeatingInsertingFileSelectedEventImpl value,
+          $Res Function(_$SeatingInsertingFileSelectedEventImpl) then) =
+      __$$SeatingInsertingFileSelectedEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Stream<List<int>> bytesStream});
 }
 
 /// @nodoc
-class __$$SeatingInsertingFileSelectedEventCopyWithImpl<$Res>
+class __$$SeatingInsertingFileSelectedEventImplCopyWithImpl<$Res>
     extends _$SeatingInsertingEventCopyWithImpl<$Res,
-        _$SeatingInsertingFileSelectedEvent>
-    implements _$$SeatingInsertingFileSelectedEventCopyWith<$Res> {
-  __$$SeatingInsertingFileSelectedEventCopyWithImpl(
-      _$SeatingInsertingFileSelectedEvent _value,
-      $Res Function(_$SeatingInsertingFileSelectedEvent) _then)
+        _$SeatingInsertingFileSelectedEventImpl>
+    implements _$$SeatingInsertingFileSelectedEventImplCopyWith<$Res> {
+  __$$SeatingInsertingFileSelectedEventImplCopyWithImpl(
+      _$SeatingInsertingFileSelectedEventImpl _value,
+      $Res Function(_$SeatingInsertingFileSelectedEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -207,7 +208,7 @@ class __$$SeatingInsertingFileSelectedEventCopyWithImpl<$Res>
   $Res call({
     Object? bytesStream = null,
   }) {
-    return _then(_$SeatingInsertingFileSelectedEvent(
+    return _then(_$SeatingInsertingFileSelectedEventImpl(
       bytesStream: null == bytesStream
           ? _value.bytesStream
           : bytesStream // ignore: cast_nullable_to_non_nullable
@@ -218,9 +219,9 @@ class __$$SeatingInsertingFileSelectedEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SeatingInsertingFileSelectedEvent
+class _$SeatingInsertingFileSelectedEventImpl
     implements SeatingInsertingFileSelectedEvent {
-  const _$SeatingInsertingFileSelectedEvent({required this.bytesStream});
+  const _$SeatingInsertingFileSelectedEventImpl({required this.bytesStream});
 
   @override
   final Stream<List<int>> bytesStream;
@@ -231,10 +232,10 @@ class _$SeatingInsertingFileSelectedEvent
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SeatingInsertingFileSelectedEvent &&
+            other is _$SeatingInsertingFileSelectedEventImpl &&
             (identical(other.bytesStream, bytesStream) ||
                 other.bytesStream == bytesStream));
   }
@@ -245,10 +246,10 @@ class _$SeatingInsertingFileSelectedEvent
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SeatingInsertingFileSelectedEventCopyWith<
-          _$SeatingInsertingFileSelectedEvent>
-      get copyWith => __$$SeatingInsertingFileSelectedEventCopyWithImpl<
-          _$SeatingInsertingFileSelectedEvent>(this, _$identity);
+  _$$SeatingInsertingFileSelectedEventImplCopyWith<
+          _$SeatingInsertingFileSelectedEventImpl>
+      get copyWith => __$$SeatingInsertingFileSelectedEventImplCopyWithImpl<
+          _$SeatingInsertingFileSelectedEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -318,11 +319,11 @@ abstract class SeatingInsertingFileSelectedEvent
     implements SeatingInsertingEvent {
   const factory SeatingInsertingFileSelectedEvent(
           {required final Stream<List<int>> bytesStream}) =
-      _$SeatingInsertingFileSelectedEvent;
+      _$SeatingInsertingFileSelectedEventImpl;
 
   Stream<List<int>> get bytesStream;
   @JsonKey(ignore: true)
-  _$$SeatingInsertingFileSelectedEventCopyWith<
-          _$SeatingInsertingFileSelectedEvent>
+  _$$SeatingInsertingFileSelectedEventImplCopyWith<
+          _$SeatingInsertingFileSelectedEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

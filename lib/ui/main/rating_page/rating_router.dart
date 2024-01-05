@@ -15,6 +15,8 @@ abstract class RatingRouter {
   );
 
   void openGame(int clubId, int gameId);
+
+  void openTournamentGame(int tournamentId, int gameId);
 }
 
 class RatingRouterImpl implements RatingRouter {
@@ -57,5 +59,16 @@ class RatingRouterImpl implements RatingRouter {
   @override
   void openGame(int clubId, int gameId) {
     context.push(AddClubGamePage.createViewLocation(context, clubId, gameId));
+  }
+
+  @override
+  void openTournamentGame(int tournamentId, int gameId) {
+    context.push(
+      AddClubGamePage.createTournamentEditLocation(
+        context: context,
+        tournamentId: tournamentId,
+        gameId: gameId,
+      ),
+    );
   }
 }

@@ -16,7 +16,8 @@ class RatingEvent with _$RatingEvent {
 
   const factory RatingEvent.gameSelected({
     required int gameId,
-    required int clubId,
+    int? clubId,
+    int? tournamentId,
   }) = RatingEventGameSelected;
 
   const factory RatingEvent.pageOpened({

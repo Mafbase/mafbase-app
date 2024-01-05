@@ -81,20 +81,23 @@ class _$ProfileDialogEventCopyWithImpl<$Res, $Val extends ProfileDialogEvent>
 }
 
 /// @nodoc
-abstract class _$$ProfileDialogEventSubmitCopyWith<$Res> {
-  factory _$$ProfileDialogEventSubmitCopyWith(_$ProfileDialogEventSubmit value,
-          $Res Function(_$ProfileDialogEventSubmit) then) =
-      __$$ProfileDialogEventSubmitCopyWithImpl<$Res>;
+abstract class _$$ProfileDialogEventSubmitImplCopyWith<$Res> {
+  factory _$$ProfileDialogEventSubmitImplCopyWith(
+          _$ProfileDialogEventSubmitImpl value,
+          $Res Function(_$ProfileDialogEventSubmitImpl) then) =
+      __$$ProfileDialogEventSubmitImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String nickname, String mafbankNickname, String fsmNickname});
 }
 
 /// @nodoc
-class __$$ProfileDialogEventSubmitCopyWithImpl<$Res>
-    extends _$ProfileDialogEventCopyWithImpl<$Res, _$ProfileDialogEventSubmit>
-    implements _$$ProfileDialogEventSubmitCopyWith<$Res> {
-  __$$ProfileDialogEventSubmitCopyWithImpl(_$ProfileDialogEventSubmit _value,
-      $Res Function(_$ProfileDialogEventSubmit) _then)
+class __$$ProfileDialogEventSubmitImplCopyWithImpl<$Res>
+    extends _$ProfileDialogEventCopyWithImpl<$Res,
+        _$ProfileDialogEventSubmitImpl>
+    implements _$$ProfileDialogEventSubmitImplCopyWith<$Res> {
+  __$$ProfileDialogEventSubmitImplCopyWithImpl(
+      _$ProfileDialogEventSubmitImpl _value,
+      $Res Function(_$ProfileDialogEventSubmitImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +107,7 @@ class __$$ProfileDialogEventSubmitCopyWithImpl<$Res>
     Object? mafbankNickname = null,
     Object? fsmNickname = null,
   }) {
-    return _then(_$ProfileDialogEventSubmit(
+    return _then(_$ProfileDialogEventSubmitImpl(
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -123,8 +126,8 @@ class __$$ProfileDialogEventSubmitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileDialogEventSubmit implements ProfileDialogEventSubmit {
-  const _$ProfileDialogEventSubmit(
+class _$ProfileDialogEventSubmitImpl implements ProfileDialogEventSubmit {
+  const _$ProfileDialogEventSubmitImpl(
       {required this.nickname,
       required this.mafbankNickname,
       required this.fsmNickname});
@@ -142,10 +145,10 @@ class _$ProfileDialogEventSubmit implements ProfileDialogEventSubmit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileDialogEventSubmit &&
+            other is _$ProfileDialogEventSubmitImpl &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.mafbankNickname, mafbankNickname) ||
@@ -161,10 +164,9 @@ class _$ProfileDialogEventSubmit implements ProfileDialogEventSubmit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProfileDialogEventSubmitCopyWith<_$ProfileDialogEventSubmit>
-      get copyWith =>
-          __$$ProfileDialogEventSubmitCopyWithImpl<_$ProfileDialogEventSubmit>(
-              this, _$identity);
+  _$$ProfileDialogEventSubmitImplCopyWith<_$ProfileDialogEventSubmitImpl>
+      get copyWith => __$$ProfileDialogEventSubmitImplCopyWithImpl<
+          _$ProfileDialogEventSubmitImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -239,34 +241,34 @@ abstract class ProfileDialogEventSubmit implements ProfileDialogEvent {
   const factory ProfileDialogEventSubmit(
       {required final String nickname,
       required final String mafbankNickname,
-      required final String fsmNickname}) = _$ProfileDialogEventSubmit;
+      required final String fsmNickname}) = _$ProfileDialogEventSubmitImpl;
 
   String get nickname;
   String get mafbankNickname;
   String get fsmNickname;
   @JsonKey(ignore: true)
-  _$$ProfileDialogEventSubmitCopyWith<_$ProfileDialogEventSubmit>
+  _$$ProfileDialogEventSubmitImplCopyWith<_$ProfileDialogEventSubmitImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProfileDialogEventEditImageCopyWith<$Res> {
-  factory _$$ProfileDialogEventEditImageCopyWith(
-          _$ProfileDialogEventEditImage value,
-          $Res Function(_$ProfileDialogEventEditImage) then) =
-      __$$ProfileDialogEventEditImageCopyWithImpl<$Res>;
+abstract class _$$ProfileDialogEventEditImageImplCopyWith<$Res> {
+  factory _$$ProfileDialogEventEditImageImplCopyWith(
+          _$ProfileDialogEventEditImageImpl value,
+          $Res Function(_$ProfileDialogEventEditImageImpl) then) =
+      __$$ProfileDialogEventEditImageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Uint8List bytes, String fileName});
 }
 
 /// @nodoc
-class __$$ProfileDialogEventEditImageCopyWithImpl<$Res>
+class __$$ProfileDialogEventEditImageImplCopyWithImpl<$Res>
     extends _$ProfileDialogEventCopyWithImpl<$Res,
-        _$ProfileDialogEventEditImage>
-    implements _$$ProfileDialogEventEditImageCopyWith<$Res> {
-  __$$ProfileDialogEventEditImageCopyWithImpl(
-      _$ProfileDialogEventEditImage _value,
-      $Res Function(_$ProfileDialogEventEditImage) _then)
+        _$ProfileDialogEventEditImageImpl>
+    implements _$$ProfileDialogEventEditImageImplCopyWith<$Res> {
+  __$$ProfileDialogEventEditImageImplCopyWithImpl(
+      _$ProfileDialogEventEditImageImpl _value,
+      $Res Function(_$ProfileDialogEventEditImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -275,7 +277,7 @@ class __$$ProfileDialogEventEditImageCopyWithImpl<$Res>
     Object? bytes = null,
     Object? fileName = null,
   }) {
-    return _then(_$ProfileDialogEventEditImage(
+    return _then(_$ProfileDialogEventEditImageImpl(
       bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
@@ -290,8 +292,8 @@ class __$$ProfileDialogEventEditImageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileDialogEventEditImage implements ProfileDialogEventEditImage {
-  const _$ProfileDialogEventEditImage(
+class _$ProfileDialogEventEditImageImpl implements ProfileDialogEventEditImage {
+  const _$ProfileDialogEventEditImageImpl(
       {required this.bytes, required this.fileName});
 
   @override
@@ -305,10 +307,10 @@ class _$ProfileDialogEventEditImage implements ProfileDialogEventEditImage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileDialogEventEditImage &&
+            other is _$ProfileDialogEventEditImageImpl &&
             const DeepCollectionEquality().equals(other.bytes, bytes) &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName));
@@ -321,9 +323,9 @@ class _$ProfileDialogEventEditImage implements ProfileDialogEventEditImage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProfileDialogEventEditImageCopyWith<_$ProfileDialogEventEditImage>
-      get copyWith => __$$ProfileDialogEventEditImageCopyWithImpl<
-          _$ProfileDialogEventEditImage>(this, _$identity);
+  _$$ProfileDialogEventEditImageImplCopyWith<_$ProfileDialogEventEditImageImpl>
+      get copyWith => __$$ProfileDialogEventEditImageImplCopyWithImpl<
+          _$ProfileDialogEventEditImageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -397,11 +399,11 @@ class _$ProfileDialogEventEditImage implements ProfileDialogEventEditImage {
 abstract class ProfileDialogEventEditImage implements ProfileDialogEvent {
   const factory ProfileDialogEventEditImage(
       {required final Uint8List bytes,
-      required final String fileName}) = _$ProfileDialogEventEditImage;
+      required final String fileName}) = _$ProfileDialogEventEditImageImpl;
 
   Uint8List get bytes;
   String get fileName;
   @JsonKey(ignore: true)
-  _$$ProfileDialogEventEditImageCopyWith<_$ProfileDialogEventEditImage>
+  _$$ProfileDialogEventEditImageImplCopyWith<_$ProfileDialogEventEditImageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

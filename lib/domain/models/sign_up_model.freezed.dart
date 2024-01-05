@@ -63,22 +63,22 @@ class _$SignUpModelCopyWithImpl<$Res, $Val extends SignUpModel>
 }
 
 /// @nodoc
-abstract class _$$_SignUpModelCopyWith<$Res>
+abstract class _$$SignUpModelImplCopyWith<$Res>
     implements $SignUpModelCopyWith<$Res> {
-  factory _$$_SignUpModelCopyWith(
-          _$_SignUpModel value, $Res Function(_$_SignUpModel) then) =
-      __$$_SignUpModelCopyWithImpl<$Res>;
+  factory _$$SignUpModelImplCopyWith(
+          _$SignUpModelImpl value, $Res Function(_$SignUpModelImpl) then) =
+      __$$SignUpModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ErrorEnum? error, int? id});
 }
 
 /// @nodoc
-class __$$_SignUpModelCopyWithImpl<$Res>
-    extends _$SignUpModelCopyWithImpl<$Res, _$_SignUpModel>
-    implements _$$_SignUpModelCopyWith<$Res> {
-  __$$_SignUpModelCopyWithImpl(
-      _$_SignUpModel _value, $Res Function(_$_SignUpModel) _then)
+class __$$SignUpModelImplCopyWithImpl<$Res>
+    extends _$SignUpModelCopyWithImpl<$Res, _$SignUpModelImpl>
+    implements _$$SignUpModelImplCopyWith<$Res> {
+  __$$SignUpModelImplCopyWithImpl(
+      _$SignUpModelImpl _value, $Res Function(_$SignUpModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_SignUpModelCopyWithImpl<$Res>
     Object? error = freezed,
     Object? id = freezed,
   }) {
-    return _then(_$_SignUpModel(
+    return _then(_$SignUpModelImpl(
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_SignUpModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignUpModel implements _SignUpModel {
-  const _$_SignUpModel({this.error, this.id});
+class _$SignUpModelImpl implements _SignUpModel {
+  const _$SignUpModelImpl({this.error, this.id});
 
   @override
   final ErrorEnum? error;
@@ -116,10 +116,10 @@ class _$_SignUpModel implements _SignUpModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignUpModel &&
+            other is _$SignUpModelImpl &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.id, id) || other.id == id));
   }
@@ -130,13 +130,13 @@ class _$_SignUpModel implements _SignUpModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignUpModelCopyWith<_$_SignUpModel> get copyWith =>
-      __$$_SignUpModelCopyWithImpl<_$_SignUpModel>(this, _$identity);
+  _$$SignUpModelImplCopyWith<_$SignUpModelImpl> get copyWith =>
+      __$$SignUpModelImplCopyWithImpl<_$SignUpModelImpl>(this, _$identity);
 }
 
 abstract class _SignUpModel implements SignUpModel {
   const factory _SignUpModel({final ErrorEnum? error, final int? id}) =
-      _$_SignUpModel;
+      _$SignUpModelImpl;
 
   @override
   ErrorEnum? get error;
@@ -144,6 +144,6 @@ abstract class _SignUpModel implements SignUpModel {
   int? get id;
   @override
   @JsonKey(ignore: true)
-  _$$_SignUpModelCopyWith<_$_SignUpModel> get copyWith =>
+  _$$SignUpModelImplCopyWith<_$SignUpModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

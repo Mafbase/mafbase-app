@@ -81,20 +81,23 @@ class _$VerificationEventsCopyWithImpl<$Res, $Val extends VerificationEvents>
 }
 
 /// @nodoc
-abstract class _$$VerificationEventSubmitCopyWith<$Res> {
-  factory _$$VerificationEventSubmitCopyWith(_$VerificationEventSubmit value,
-          $Res Function(_$VerificationEventSubmit) then) =
-      __$$VerificationEventSubmitCopyWithImpl<$Res>;
+abstract class _$$VerificationEventSubmitImplCopyWith<$Res> {
+  factory _$$VerificationEventSubmitImplCopyWith(
+          _$VerificationEventSubmitImpl value,
+          $Res Function(_$VerificationEventSubmitImpl) then) =
+      __$$VerificationEventSubmitImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String token});
 }
 
 /// @nodoc
-class __$$VerificationEventSubmitCopyWithImpl<$Res>
-    extends _$VerificationEventsCopyWithImpl<$Res, _$VerificationEventSubmit>
-    implements _$$VerificationEventSubmitCopyWith<$Res> {
-  __$$VerificationEventSubmitCopyWithImpl(_$VerificationEventSubmit _value,
-      $Res Function(_$VerificationEventSubmit) _then)
+class __$$VerificationEventSubmitImplCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res,
+        _$VerificationEventSubmitImpl>
+    implements _$$VerificationEventSubmitImplCopyWith<$Res> {
+  __$$VerificationEventSubmitImplCopyWithImpl(
+      _$VerificationEventSubmitImpl _value,
+      $Res Function(_$VerificationEventSubmitImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +105,7 @@ class __$$VerificationEventSubmitCopyWithImpl<$Res>
   $Res call({
     Object? token = null,
   }) {
-    return _then(_$VerificationEventSubmit(
+    return _then(_$VerificationEventSubmitImpl(
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -113,8 +116,8 @@ class __$$VerificationEventSubmitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$VerificationEventSubmit implements VerificationEventSubmit {
-  const _$VerificationEventSubmit({required this.token});
+class _$VerificationEventSubmitImpl implements VerificationEventSubmit {
+  const _$VerificationEventSubmitImpl({required this.token});
 
   @override
   final String token;
@@ -125,10 +128,10 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VerificationEventSubmit &&
+            other is _$VerificationEventSubmitImpl &&
             (identical(other.token, token) || other.token == token));
   }
 
@@ -138,9 +141,9 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$VerificationEventSubmitCopyWith<_$VerificationEventSubmit> get copyWith =>
-      __$$VerificationEventSubmitCopyWithImpl<_$VerificationEventSubmit>(
-          this, _$identity);
+  _$$VerificationEventSubmitImplCopyWith<_$VerificationEventSubmitImpl>
+      get copyWith => __$$VerificationEventSubmitImplCopyWithImpl<
+          _$VerificationEventSubmitImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -213,34 +216,34 @@ class _$VerificationEventSubmit implements VerificationEventSubmit {
 
 abstract class VerificationEventSubmit implements VerificationEvents {
   const factory VerificationEventSubmit({required final String token}) =
-      _$VerificationEventSubmit;
+      _$VerificationEventSubmitImpl;
 
   String get token;
   @JsonKey(ignore: true)
-  _$$VerificationEventSubmitCopyWith<_$VerificationEventSubmit> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$VerificationEventSubmitImplCopyWith<_$VerificationEventSubmitImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$OnSignUpButtonTappedCopyWith<$Res> {
-  factory _$$OnSignUpButtonTappedCopyWith(_$OnSignUpButtonTapped value,
-          $Res Function(_$OnSignUpButtonTapped) then) =
-      __$$OnSignUpButtonTappedCopyWithImpl<$Res>;
+abstract class _$$OnSignUpButtonTappedImplCopyWith<$Res> {
+  factory _$$OnSignUpButtonTappedImplCopyWith(_$OnSignUpButtonTappedImpl value,
+          $Res Function(_$OnSignUpButtonTappedImpl) then) =
+      __$$OnSignUpButtonTappedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$OnSignUpButtonTappedCopyWithImpl<$Res>
-    extends _$VerificationEventsCopyWithImpl<$Res, _$OnSignUpButtonTapped>
-    implements _$$OnSignUpButtonTappedCopyWith<$Res> {
-  __$$OnSignUpButtonTappedCopyWithImpl(_$OnSignUpButtonTapped _value,
-      $Res Function(_$OnSignUpButtonTapped) _then)
+class __$$OnSignUpButtonTappedImplCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res, _$OnSignUpButtonTappedImpl>
+    implements _$$OnSignUpButtonTappedImplCopyWith<$Res> {
+  __$$OnSignUpButtonTappedImplCopyWithImpl(_$OnSignUpButtonTappedImpl _value,
+      $Res Function(_$OnSignUpButtonTappedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$OnSignUpButtonTapped implements OnSignUpButtonTapped {
-  const _$OnSignUpButtonTapped();
+class _$OnSignUpButtonTappedImpl implements OnSignUpButtonTapped {
+  const _$OnSignUpButtonTappedImpl();
 
   @override
   String toString() {
@@ -248,9 +251,10 @@ class _$OnSignUpButtonTapped implements OnSignUpButtonTapped {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OnSignUpButtonTapped);
+        (other.runtimeType == runtimeType &&
+            other is _$OnSignUpButtonTappedImpl);
   }
 
   @override
@@ -326,29 +330,29 @@ class _$OnSignUpButtonTapped implements OnSignUpButtonTapped {
 }
 
 abstract class OnSignUpButtonTapped implements VerificationEvents {
-  const factory OnSignUpButtonTapped() = _$OnSignUpButtonTapped;
+  const factory OnSignUpButtonTapped() = _$OnSignUpButtonTappedImpl;
 }
 
 /// @nodoc
-abstract class _$$OnLoginButtonTappedCopyWith<$Res> {
-  factory _$$OnLoginButtonTappedCopyWith(_$OnLoginButtonTapped value,
-          $Res Function(_$OnLoginButtonTapped) then) =
-      __$$OnLoginButtonTappedCopyWithImpl<$Res>;
+abstract class _$$OnLoginButtonTappedImplCopyWith<$Res> {
+  factory _$$OnLoginButtonTappedImplCopyWith(_$OnLoginButtonTappedImpl value,
+          $Res Function(_$OnLoginButtonTappedImpl) then) =
+      __$$OnLoginButtonTappedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$OnLoginButtonTappedCopyWithImpl<$Res>
-    extends _$VerificationEventsCopyWithImpl<$Res, _$OnLoginButtonTapped>
-    implements _$$OnLoginButtonTappedCopyWith<$Res> {
-  __$$OnLoginButtonTappedCopyWithImpl(
-      _$OnLoginButtonTapped _value, $Res Function(_$OnLoginButtonTapped) _then)
+class __$$OnLoginButtonTappedImplCopyWithImpl<$Res>
+    extends _$VerificationEventsCopyWithImpl<$Res, _$OnLoginButtonTappedImpl>
+    implements _$$OnLoginButtonTappedImplCopyWith<$Res> {
+  __$$OnLoginButtonTappedImplCopyWithImpl(_$OnLoginButtonTappedImpl _value,
+      $Res Function(_$OnLoginButtonTappedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$OnLoginButtonTapped implements OnLoginButtonTapped {
-  const _$OnLoginButtonTapped();
+class _$OnLoginButtonTappedImpl implements OnLoginButtonTapped {
+  const _$OnLoginButtonTappedImpl();
 
   @override
   String toString() {
@@ -356,9 +360,10 @@ class _$OnLoginButtonTapped implements OnLoginButtonTapped {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OnLoginButtonTapped);
+        (other.runtimeType == runtimeType &&
+            other is _$OnLoginButtonTappedImpl);
   }
 
   @override
@@ -434,5 +439,5 @@ class _$OnLoginButtonTapped implements OnLoginButtonTapped {
 }
 
 abstract class OnLoginButtonTapped implements VerificationEvents {
-  const factory OnLoginButtonTapped() = _$OnLoginButtonTapped;
+  const factory OnLoginButtonTapped() = _$OnLoginButtonTappedImpl;
 }

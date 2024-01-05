@@ -86,11 +86,11 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
 }
 
 /// @nodoc
-abstract class _$$_PlayerModelCopyWith<$Res>
+abstract class _$$PlayerModelImplCopyWith<$Res>
     implements $PlayerModelCopyWith<$Res> {
-  factory _$$_PlayerModelCopyWith(
-          _$_PlayerModel value, $Res Function(_$_PlayerModel) then) =
-      __$$_PlayerModelCopyWithImpl<$Res>;
+  factory _$$PlayerModelImplCopyWith(
+          _$PlayerModelImpl value, $Res Function(_$PlayerModelImpl) then) =
+      __$$PlayerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_PlayerModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PlayerModelCopyWithImpl<$Res>
-    extends _$PlayerModelCopyWithImpl<$Res, _$_PlayerModel>
-    implements _$$_PlayerModelCopyWith<$Res> {
-  __$$_PlayerModelCopyWithImpl(
-      _$_PlayerModel _value, $Res Function(_$_PlayerModel) _then)
+class __$$PlayerModelImplCopyWithImpl<$Res>
+    extends _$PlayerModelCopyWithImpl<$Res, _$PlayerModelImpl>
+    implements _$$PlayerModelImplCopyWith<$Res> {
+  __$$PlayerModelImplCopyWithImpl(
+      _$PlayerModelImpl _value, $Res Function(_$PlayerModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_PlayerModelCopyWithImpl<$Res>
     Object? mafbankNickname = freezed,
     Object? imageUrl = freezed,
   }) {
-    return _then(_$_PlayerModel(
+    return _then(_$PlayerModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_PlayerModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PlayerModel implements _PlayerModel {
-  const _$_PlayerModel(
+class _$PlayerModelImpl implements _PlayerModel {
+  const _$PlayerModelImpl(
       {required this.id,
       required this.nickname,
       this.fsmNickaname,
@@ -170,10 +170,10 @@ class _$_PlayerModel implements _PlayerModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PlayerModel &&
+            other is _$PlayerModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
@@ -192,8 +192,8 @@ class _$_PlayerModel implements _PlayerModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlayerModelCopyWith<_$_PlayerModel> get copyWith =>
-      __$$_PlayerModelCopyWithImpl<_$_PlayerModel>(this, _$identity);
+  _$$PlayerModelImplCopyWith<_$PlayerModelImpl> get copyWith =>
+      __$$PlayerModelImplCopyWithImpl<_$PlayerModelImpl>(this, _$identity);
 }
 
 abstract class _PlayerModel implements PlayerModel {
@@ -202,7 +202,7 @@ abstract class _PlayerModel implements PlayerModel {
       required final String nickname,
       final String? fsmNickaname,
       final String? mafbankNickname,
-      final String? imageUrl}) = _$_PlayerModel;
+      final String? imageUrl}) = _$PlayerModelImpl;
 
   @override
   int get id;
@@ -216,6 +216,6 @@ abstract class _PlayerModel implements PlayerModel {
   String? get imageUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_PlayerModelCopyWith<_$_PlayerModel> get copyWith =>
+  _$$PlayerModelImplCopyWith<_$PlayerModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

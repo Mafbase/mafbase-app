@@ -56,21 +56,22 @@ class _$TempStateCopyWithImpl<$Res, $Val extends TempState>
 }
 
 /// @nodoc
-abstract class _$$_TempStateCopyWith<$Res> implements $TempStateCopyWith<$Res> {
-  factory _$$_TempStateCopyWith(
-          _$_TempState value, $Res Function(_$_TempState) then) =
-      __$$_TempStateCopyWithImpl<$Res>;
+abstract class _$$TempStateImplCopyWith<$Res>
+    implements $TempStateCopyWith<$Res> {
+  factory _$$TempStateImplCopyWith(
+          _$TempStateImpl value, $Res Function(_$TempStateImpl) then) =
+      __$$TempStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TempStyle style});
 }
 
 /// @nodoc
-class __$$_TempStateCopyWithImpl<$Res>
-    extends _$TempStateCopyWithImpl<$Res, _$_TempState>
-    implements _$$_TempStateCopyWith<$Res> {
-  __$$_TempStateCopyWithImpl(
-      _$_TempState _value, $Res Function(_$_TempState) _then)
+class __$$TempStateImplCopyWithImpl<$Res>
+    extends _$TempStateCopyWithImpl<$Res, _$TempStateImpl>
+    implements _$$TempStateImplCopyWith<$Res> {
+  __$$TempStateImplCopyWithImpl(
+      _$TempStateImpl _value, $Res Function(_$TempStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -78,7 +79,7 @@ class __$$_TempStateCopyWithImpl<$Res>
   $Res call({
     Object? style = null,
   }) {
-    return _then(_$_TempState(
+    return _then(_$TempStateImpl(
       style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
@@ -89,8 +90,8 @@ class __$$_TempStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TempState implements _TempState {
-  const _$_TempState({required this.style});
+class _$TempStateImpl implements _TempState {
+  const _$TempStateImpl({required this.style});
 
   @override
   final TempStyle style;
@@ -101,10 +102,10 @@ class _$_TempState implements _TempState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TempState &&
+            other is _$TempStateImpl &&
             (identical(other.style, style) || other.style == style));
   }
 
@@ -114,17 +115,17 @@ class _$_TempState implements _TempState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TempStateCopyWith<_$_TempState> get copyWith =>
-      __$$_TempStateCopyWithImpl<_$_TempState>(this, _$identity);
+  _$$TempStateImplCopyWith<_$TempStateImpl> get copyWith =>
+      __$$TempStateImplCopyWithImpl<_$TempStateImpl>(this, _$identity);
 }
 
 abstract class _TempState implements TempState {
-  const factory _TempState({required final TempStyle style}) = _$_TempState;
+  const factory _TempState({required final TempStyle style}) = _$TempStateImpl;
 
   @override
   TempStyle get style;
   @override
   @JsonKey(ignore: true)
-  _$$_TempStateCopyWith<_$_TempState> get copyWith =>
+  _$$TempStateImplCopyWith<_$TempStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

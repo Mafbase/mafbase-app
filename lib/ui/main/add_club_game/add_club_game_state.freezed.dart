@@ -93,11 +93,11 @@ class _$AddClubGameStateCopyWithImpl<$Res, $Val extends AddClubGameState>
 }
 
 /// @nodoc
-abstract class _$$_AddClubGameStateCopyWith<$Res>
+abstract class _$$AddClubGameStateImplCopyWith<$Res>
     implements $AddClubGameStateCopyWith<$Res> {
-  factory _$$_AddClubGameStateCopyWith(
-          _$_AddClubGameState value, $Res Function(_$_AddClubGameState) then) =
-      __$$_AddClubGameStateCopyWithImpl<$Res>;
+  factory _$$AddClubGameStateImplCopyWith(_$AddClubGameStateImpl value,
+          $Res Function(_$AddClubGameStateImpl) then) =
+      __$$AddClubGameStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_AddClubGameStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddClubGameStateCopyWithImpl<$Res>
-    extends _$AddClubGameStateCopyWithImpl<$Res, _$_AddClubGameState>
-    implements _$$_AddClubGameStateCopyWith<$Res> {
-  __$$_AddClubGameStateCopyWithImpl(
-      _$_AddClubGameState _value, $Res Function(_$_AddClubGameState) _then)
+class __$$AddClubGameStateImplCopyWithImpl<$Res>
+    extends _$AddClubGameStateCopyWithImpl<$Res, _$AddClubGameStateImpl>
+    implements _$$AddClubGameStateImplCopyWith<$Res> {
+  __$$AddClubGameStateImplCopyWithImpl(_$AddClubGameStateImpl _value,
+      $Res Function(_$AddClubGameStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
     Object? ciSchemes = null,
     Object? isTournament = null,
   }) {
-    return _then(_$_AddClubGameState(
+    return _then(_$AddClubGameStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_AddClubGameStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddClubGameState implements _AddClubGameState {
-  const _$_AddClubGameState(
+class _$AddClubGameStateImpl implements _AddClubGameState {
+  const _$AddClubGameStateImpl(
       {this.isLoading = true,
       final List<PlayerModel> players = const [],
       this.canEdit = false,
@@ -206,10 +206,10 @@ class _$_AddClubGameState implements _AddClubGameState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddClubGameState &&
+            other is _$AddClubGameStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other._players, _players) &&
@@ -235,8 +235,9 @@ class _$_AddClubGameState implements _AddClubGameState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddClubGameStateCopyWith<_$_AddClubGameState> get copyWith =>
-      __$$_AddClubGameStateCopyWithImpl<_$_AddClubGameState>(this, _$identity);
+  _$$AddClubGameStateImplCopyWith<_$AddClubGameStateImpl> get copyWith =>
+      __$$AddClubGameStateImplCopyWithImpl<_$AddClubGameStateImpl>(
+          this, _$identity);
 }
 
 abstract class _AddClubGameState implements AddClubGameState {
@@ -246,7 +247,7 @@ abstract class _AddClubGameState implements AddClubGameState {
       final bool canEdit,
       final String clubName,
       final List<CiSchemeModel> ciSchemes,
-      final bool isTournament}) = _$_AddClubGameState;
+      final bool isTournament}) = _$AddClubGameStateImpl;
 
   @override
   bool get isLoading;
@@ -262,6 +263,6 @@ abstract class _AddClubGameState implements AddClubGameState {
   bool get isTournament;
   @override
   @JsonKey(ignore: true)
-  _$$_AddClubGameStateCopyWith<_$_AddClubGameState> get copyWith =>
+  _$$AddClubGameStateImplCopyWith<_$AddClubGameStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

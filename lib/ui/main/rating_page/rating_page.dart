@@ -268,7 +268,14 @@ class _RatingPageState extends CustomState<RatingPage> {
                           context.read<RatingBloc>().add(
                                 RatingEvent.gameSelected(
                                   gameId: gameId,
-                                  clubId: widget.clubId!,
+                                  clubId: widget.clubId,
+                                ),
+                              );
+                        } else {
+                          context.read<RatingBloc>().add(
+                                RatingEvent.gameSelected(
+                                  gameId: gameId,
+                                  tournamentId: widget.tournamentId,
                                 ),
                               );
                         }
@@ -444,10 +451,12 @@ class _RatingPageState extends CustomState<RatingPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-            "Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})",),
+          "Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})",
+        ),
         const SizedBox(height: 4),
         Text(
-            "Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})",),
+          "Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})",
+        ),
       ],
     );
   }

@@ -219,11 +219,11 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
 }
 
 /// @nodoc
-abstract class _$$_ClubRatingRowModelCopyWith<$Res>
+abstract class _$$ClubRatingRowModelImplCopyWith<$Res>
     implements $ClubRatingRowModelCopyWith<$Res> {
-  factory _$$_ClubRatingRowModelCopyWith(_$_ClubRatingRowModel value,
-          $Res Function(_$_ClubRatingRowModel) then) =
-      __$$_ClubRatingRowModelCopyWithImpl<$Res>;
+  factory _$$ClubRatingRowModelImplCopyWith(_$ClubRatingRowModelImpl value,
+          $Res Function(_$ClubRatingRowModelImpl) then) =
+      __$$ClubRatingRowModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -254,11 +254,11 @@ abstract class _$$_ClubRatingRowModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ClubRatingRowModelCopyWithImpl<$Res>
-    extends _$ClubRatingRowModelCopyWithImpl<$Res, _$_ClubRatingRowModel>
-    implements _$$_ClubRatingRowModelCopyWith<$Res> {
-  __$$_ClubRatingRowModelCopyWithImpl(
-      _$_ClubRatingRowModel _value, $Res Function(_$_ClubRatingRowModel) _then)
+class __$$ClubRatingRowModelImplCopyWithImpl<$Res>
+    extends _$ClubRatingRowModelCopyWithImpl<$Res, _$ClubRatingRowModelImpl>
+    implements _$$ClubRatingRowModelImplCopyWith<$Res> {
+  __$$ClubRatingRowModelImplCopyWithImpl(_$ClubRatingRowModelImpl _value,
+      $Res Function(_$ClubRatingRowModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -289,7 +289,7 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
     Object? donScore = null,
     Object? mafiaScore = null,
   }) {
-    return _then(_$_ClubRatingRowModel(
+    return _then(_$ClubRatingRowModelImpl(
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -392,8 +392,8 @@ class __$$_ClubRatingRowModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ClubRatingRowModel implements _ClubRatingRowModel {
-  const _$_ClubRatingRowModel(
+class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
+  const _$ClubRatingRowModelImpl(
       {required this.nickname,
       required this.score,
       required this.addScore,
@@ -481,10 +481,10 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ClubRatingRowModel &&
+            other is _$ClubRatingRowModelImpl &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.score, score) || other.score == score) &&
@@ -562,8 +562,8 @@ class _$_ClubRatingRowModel implements _ClubRatingRowModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ClubRatingRowModelCopyWith<_$_ClubRatingRowModel> get copyWith =>
-      __$$_ClubRatingRowModelCopyWithImpl<_$_ClubRatingRowModel>(
+  _$$ClubRatingRowModelImplCopyWith<_$ClubRatingRowModelImpl> get copyWith =>
+      __$$ClubRatingRowModelImplCopyWithImpl<_$ClubRatingRowModelImpl>(
           this, _$identity);
 }
 
@@ -592,7 +592,7 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
       required final double citizenScore,
       required final double sheriffScore,
       required final double donScore,
-      required final double mafiaScore}) = _$_ClubRatingRowModel;
+      required final double mafiaScore}) = _$ClubRatingRowModelImpl;
 
   @override
   String get nickname;
@@ -644,7 +644,7 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   double get mafiaScore;
   @override
   @JsonKey(ignore: true)
-  _$$_ClubRatingRowModelCopyWith<_$_ClubRatingRowModel> get copyWith =>
+  _$$ClubRatingRowModelImplCopyWith<_$ClubRatingRowModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -697,22 +697,22 @@ class _$GameRowItemModelCopyWithImpl<$Res, $Val extends GameRowItemModel>
 }
 
 /// @nodoc
-abstract class _$$_GameRowItemModelCopyWith<$Res>
+abstract class _$$GameRowItemModelImplCopyWith<$Res>
     implements $GameRowItemModelCopyWith<$Res> {
-  factory _$$_GameRowItemModelCopyWith(
-          _$_GameRowItemModel value, $Res Function(_$_GameRowItemModel) then) =
-      __$$_GameRowItemModelCopyWithImpl<$Res>;
+  factory _$$GameRowItemModelImplCopyWith(_$GameRowItemModelImpl value,
+          $Res Function(_$GameRowItemModelImpl) then) =
+      __$$GameRowItemModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double? score, int gameId});
 }
 
 /// @nodoc
-class __$$_GameRowItemModelCopyWithImpl<$Res>
-    extends _$GameRowItemModelCopyWithImpl<$Res, _$_GameRowItemModel>
-    implements _$$_GameRowItemModelCopyWith<$Res> {
-  __$$_GameRowItemModelCopyWithImpl(
-      _$_GameRowItemModel _value, $Res Function(_$_GameRowItemModel) _then)
+class __$$GameRowItemModelImplCopyWithImpl<$Res>
+    extends _$GameRowItemModelCopyWithImpl<$Res, _$GameRowItemModelImpl>
+    implements _$$GameRowItemModelImplCopyWith<$Res> {
+  __$$GameRowItemModelImplCopyWithImpl(_$GameRowItemModelImpl _value,
+      $Res Function(_$GameRowItemModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -721,7 +721,7 @@ class __$$_GameRowItemModelCopyWithImpl<$Res>
     Object? score = freezed,
     Object? gameId = null,
   }) {
-    return _then(_$_GameRowItemModel(
+    return _then(_$GameRowItemModelImpl(
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -736,8 +736,8 @@ class __$$_GameRowItemModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GameRowItemModel implements _GameRowItemModel {
-  const _$_GameRowItemModel({this.score, required this.gameId});
+class _$GameRowItemModelImpl implements _GameRowItemModel {
+  const _$GameRowItemModelImpl({this.score, required this.gameId});
 
   @override
   final double? score;
@@ -750,10 +750,10 @@ class _$_GameRowItemModel implements _GameRowItemModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GameRowItemModel &&
+            other is _$GameRowItemModelImpl &&
             (identical(other.score, score) || other.score == score) &&
             (identical(other.gameId, gameId) || other.gameId == gameId));
   }
@@ -764,13 +764,15 @@ class _$_GameRowItemModel implements _GameRowItemModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GameRowItemModelCopyWith<_$_GameRowItemModel> get copyWith =>
-      __$$_GameRowItemModelCopyWithImpl<_$_GameRowItemModel>(this, _$identity);
+  _$$GameRowItemModelImplCopyWith<_$GameRowItemModelImpl> get copyWith =>
+      __$$GameRowItemModelImplCopyWithImpl<_$GameRowItemModelImpl>(
+          this, _$identity);
 }
 
 abstract class _GameRowItemModel implements GameRowItemModel {
   const factory _GameRowItemModel(
-      {final double? score, required final int gameId}) = _$_GameRowItemModel;
+      {final double? score,
+      required final int gameId}) = _$GameRowItemModelImpl;
 
   @override
   double? get score;
@@ -778,6 +780,6 @@ abstract class _GameRowItemModel implements GameRowItemModel {
   int get gameId;
   @override
   @JsonKey(ignore: true)
-  _$$_GameRowItemModelCopyWith<_$_GameRowItemModel> get copyWith =>
+  _$$GameRowItemModelImplCopyWith<_$GameRowItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

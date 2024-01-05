@@ -75,25 +75,25 @@ class _$SignUpEventsCopyWithImpl<$Res, $Val extends SignUpEvents>
 }
 
 /// @nodoc
-abstract class _$$BackButtonTappedCopyWith<$Res> {
-  factory _$$BackButtonTappedCopyWith(
-          _$BackButtonTapped value, $Res Function(_$BackButtonTapped) then) =
-      __$$BackButtonTappedCopyWithImpl<$Res>;
+abstract class _$$BackButtonTappedImplCopyWith<$Res> {
+  factory _$$BackButtonTappedImplCopyWith(_$BackButtonTappedImpl value,
+          $Res Function(_$BackButtonTappedImpl) then) =
+      __$$BackButtonTappedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BackButtonTappedCopyWithImpl<$Res>
-    extends _$SignUpEventsCopyWithImpl<$Res, _$BackButtonTapped>
-    implements _$$BackButtonTappedCopyWith<$Res> {
-  __$$BackButtonTappedCopyWithImpl(
-      _$BackButtonTapped _value, $Res Function(_$BackButtonTapped) _then)
+class __$$BackButtonTappedImplCopyWithImpl<$Res>
+    extends _$SignUpEventsCopyWithImpl<$Res, _$BackButtonTappedImpl>
+    implements _$$BackButtonTappedImplCopyWith<$Res> {
+  __$$BackButtonTappedImplCopyWithImpl(_$BackButtonTappedImpl _value,
+      $Res Function(_$BackButtonTappedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$BackButtonTapped implements BackButtonTapped {
-  const _$BackButtonTapped();
+class _$BackButtonTappedImpl implements BackButtonTapped {
+  const _$BackButtonTappedImpl();
 
   @override
   String toString() {
@@ -101,9 +101,9 @@ class _$BackButtonTapped implements BackButtonTapped {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BackButtonTapped);
+        (other.runtimeType == runtimeType && other is _$BackButtonTappedImpl);
   }
 
   @override
@@ -173,24 +173,24 @@ class _$BackButtonTapped implements BackButtonTapped {
 }
 
 abstract class BackButtonTapped implements SignUpEvents {
-  const factory BackButtonTapped() = _$BackButtonTapped;
+  const factory BackButtonTapped() = _$BackButtonTappedImpl;
 }
 
 /// @nodoc
-abstract class _$$SignUpButtonTappedCopyWith<$Res> {
-  factory _$$SignUpButtonTappedCopyWith(_$SignUpButtonTapped value,
-          $Res Function(_$SignUpButtonTapped) then) =
-      __$$SignUpButtonTappedCopyWithImpl<$Res>;
+abstract class _$$SignUpButtonTappedImplCopyWith<$Res> {
+  factory _$$SignUpButtonTappedImplCopyWith(_$SignUpButtonTappedImpl value,
+          $Res Function(_$SignUpButtonTappedImpl) then) =
+      __$$SignUpButtonTappedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$SignUpButtonTappedCopyWithImpl<$Res>
-    extends _$SignUpEventsCopyWithImpl<$Res, _$SignUpButtonTapped>
-    implements _$$SignUpButtonTappedCopyWith<$Res> {
-  __$$SignUpButtonTappedCopyWithImpl(
-      _$SignUpButtonTapped _value, $Res Function(_$SignUpButtonTapped) _then)
+class __$$SignUpButtonTappedImplCopyWithImpl<$Res>
+    extends _$SignUpEventsCopyWithImpl<$Res, _$SignUpButtonTappedImpl>
+    implements _$$SignUpButtonTappedImplCopyWith<$Res> {
+  __$$SignUpButtonTappedImplCopyWithImpl(_$SignUpButtonTappedImpl _value,
+      $Res Function(_$SignUpButtonTappedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -199,7 +199,7 @@ class __$$SignUpButtonTappedCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$SignUpButtonTapped(
+    return _then(_$SignUpButtonTappedImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -214,8 +214,8 @@ class __$$SignUpButtonTappedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignUpButtonTapped implements SignUpButtonTapped {
-  const _$SignUpButtonTapped({required this.email, required this.password});
+class _$SignUpButtonTappedImpl implements SignUpButtonTapped {
+  const _$SignUpButtonTappedImpl({required this.email, required this.password});
 
   @override
   final String email;
@@ -228,10 +228,10 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignUpButtonTapped &&
+            other is _$SignUpButtonTappedImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -243,8 +243,8 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignUpButtonTappedCopyWith<_$SignUpButtonTapped> get copyWith =>
-      __$$SignUpButtonTappedCopyWithImpl<_$SignUpButtonTapped>(
+  _$$SignUpButtonTappedImplCopyWith<_$SignUpButtonTappedImpl> get copyWith =>
+      __$$SignUpButtonTappedImplCopyWithImpl<_$SignUpButtonTappedImpl>(
           this, _$identity);
 
   @override
@@ -313,11 +313,11 @@ class _$SignUpButtonTapped implements SignUpButtonTapped {
 abstract class SignUpButtonTapped implements SignUpEvents {
   const factory SignUpButtonTapped(
       {required final String email,
-      required final String password}) = _$SignUpButtonTapped;
+      required final String password}) = _$SignUpButtonTappedImpl;
 
   String get email;
   String get password;
   @JsonKey(ignore: true)
-  _$$SignUpButtonTappedCopyWith<_$SignUpButtonTapped> get copyWith =>
+  _$$SignUpButtonTappedImplCopyWith<_$SignUpButtonTappedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

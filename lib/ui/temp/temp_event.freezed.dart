@@ -68,25 +68,25 @@ class _$TempEventCopyWithImpl<$Res, $Val extends TempEvent>
 }
 
 /// @nodoc
-abstract class _$$TempEventGenerateCopyWith<$Res> {
-  factory _$$TempEventGenerateCopyWith(
-          _$TempEventGenerate value, $Res Function(_$TempEventGenerate) then) =
-      __$$TempEventGenerateCopyWithImpl<$Res>;
+abstract class _$$TempEventGenerateImplCopyWith<$Res> {
+  factory _$$TempEventGenerateImplCopyWith(_$TempEventGenerateImpl value,
+          $Res Function(_$TempEventGenerateImpl) then) =
+      __$$TempEventGenerateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TempEventGenerateCopyWithImpl<$Res>
-    extends _$TempEventCopyWithImpl<$Res, _$TempEventGenerate>
-    implements _$$TempEventGenerateCopyWith<$Res> {
-  __$$TempEventGenerateCopyWithImpl(
-      _$TempEventGenerate _value, $Res Function(_$TempEventGenerate) _then)
+class __$$TempEventGenerateImplCopyWithImpl<$Res>
+    extends _$TempEventCopyWithImpl<$Res, _$TempEventGenerateImpl>
+    implements _$$TempEventGenerateImplCopyWith<$Res> {
+  __$$TempEventGenerateImplCopyWithImpl(_$TempEventGenerateImpl _value,
+      $Res Function(_$TempEventGenerateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TempEventGenerate implements TempEventGenerate {
-  const _$TempEventGenerate();
+class _$TempEventGenerateImpl implements TempEventGenerate {
+  const _$TempEventGenerateImpl();
 
   @override
   String toString() {
@@ -94,9 +94,9 @@ class _$TempEventGenerate implements TempEventGenerate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TempEventGenerate);
+        (other.runtimeType == runtimeType && other is _$TempEventGenerateImpl);
   }
 
   @override
@@ -160,5 +160,5 @@ class _$TempEventGenerate implements TempEventGenerate {
 }
 
 abstract class TempEventGenerate implements TempEvent {
-  const factory TempEventGenerate() = _$TempEventGenerate;
+  const factory TempEventGenerate() = _$TempEventGenerateImpl;
 }

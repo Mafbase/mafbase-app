@@ -94,11 +94,12 @@ class _$TranslationContentStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TranslationContentStateCopyWith<$Res>
+abstract class _$$TranslationContentStateImplCopyWith<$Res>
     implements $TranslationContentStateCopyWith<$Res> {
-  factory _$$_TranslationContentStateCopyWith(_$_TranslationContentState value,
-          $Res Function(_$_TranslationContentState) then) =
-      __$$_TranslationContentStateCopyWithImpl<$Res>;
+  factory _$$TranslationContentStateImplCopyWith(
+          _$TranslationContentStateImpl value,
+          $Res Function(_$TranslationContentStateImpl) then) =
+      __$$TranslationContentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -111,12 +112,13 @@ abstract class _$$_TranslationContentStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TranslationContentStateCopyWithImpl<$Res>
+class __$$TranslationContentStateImplCopyWithImpl<$Res>
     extends _$TranslationContentStateCopyWithImpl<$Res,
-        _$_TranslationContentState>
-    implements _$$_TranslationContentStateCopyWith<$Res> {
-  __$$_TranslationContentStateCopyWithImpl(_$_TranslationContentState _value,
-      $Res Function(_$_TranslationContentState) _then)
+        _$TranslationContentStateImpl>
+    implements _$$TranslationContentStateImplCopyWith<$Res> {
+  __$$TranslationContentStateImplCopyWithImpl(
+      _$TranslationContentStateImpl _value,
+      $Res Function(_$TranslationContentStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,7 +131,7 @@ class __$$_TranslationContentStateCopyWithImpl<$Res>
     Object? game = null,
     Object? totalGames = null,
   }) {
-    return _then(_$_TranslationContentState(
+    return _then(_$TranslationContentStateImpl(
       roles: freezed == roles
           ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
@@ -160,8 +162,8 @@ class __$$_TranslationContentStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TranslationContentState implements _TranslationContentState {
-  const _$_TranslationContentState(
+class _$TranslationContentStateImpl implements _TranslationContentState {
+  const _$TranslationContentStateImpl(
       {final List<PlayerRole>? roles,
       final List<PlayerStatus>? statuses,
       final List<String>? images,
@@ -226,10 +228,10 @@ class _$_TranslationContentState implements _TranslationContentState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TranslationContentState &&
+            other is _$TranslationContentStateImpl &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
@@ -253,10 +255,9 @@ class _$_TranslationContentState implements _TranslationContentState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TranslationContentStateCopyWith<_$_TranslationContentState>
-      get copyWith =>
-          __$$_TranslationContentStateCopyWithImpl<_$_TranslationContentState>(
-              this, _$identity);
+  _$$TranslationContentStateImplCopyWith<_$TranslationContentStateImpl>
+      get copyWith => __$$TranslationContentStateImplCopyWithImpl<
+          _$TranslationContentStateImpl>(this, _$identity);
 }
 
 abstract class _TranslationContentState implements TranslationContentState {
@@ -266,7 +267,7 @@ abstract class _TranslationContentState implements TranslationContentState {
       final List<String>? images,
       final List<String>? nicknames,
       final int game,
-      final int totalGames}) = _$_TranslationContentState;
+      final int totalGames}) = _$TranslationContentStateImpl;
 
   @override
   List<PlayerRole>? get roles;
@@ -282,6 +283,6 @@ abstract class _TranslationContentState implements TranslationContentState {
   int get totalGames;
   @override
   @JsonKey(ignore: true)
-  _$$_TranslationContentStateCopyWith<_$_TranslationContentState>
+  _$$TranslationContentStateImplCopyWith<_$TranslationContentStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

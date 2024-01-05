@@ -93,23 +93,23 @@ class _$TranslationControlEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$TranslationControlEventChangeRoleCopyWith<$Res> {
-  factory _$$TranslationControlEventChangeRoleCopyWith(
-          _$TranslationControlEventChangeRole value,
-          $Res Function(_$TranslationControlEventChangeRole) then) =
-      __$$TranslationControlEventChangeRoleCopyWithImpl<$Res>;
+abstract class _$$TranslationControlEventChangeRoleImplCopyWith<$Res> {
+  factory _$$TranslationControlEventChangeRoleImplCopyWith(
+          _$TranslationControlEventChangeRoleImpl value,
+          $Res Function(_$TranslationControlEventChangeRoleImpl) then) =
+      __$$TranslationControlEventChangeRoleImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int index, PlayerRole role});
 }
 
 /// @nodoc
-class __$$TranslationControlEventChangeRoleCopyWithImpl<$Res>
+class __$$TranslationControlEventChangeRoleImplCopyWithImpl<$Res>
     extends _$TranslationControlEventCopyWithImpl<$Res,
-        _$TranslationControlEventChangeRole>
-    implements _$$TranslationControlEventChangeRoleCopyWith<$Res> {
-  __$$TranslationControlEventChangeRoleCopyWithImpl(
-      _$TranslationControlEventChangeRole _value,
-      $Res Function(_$TranslationControlEventChangeRole) _then)
+        _$TranslationControlEventChangeRoleImpl>
+    implements _$$TranslationControlEventChangeRoleImplCopyWith<$Res> {
+  __$$TranslationControlEventChangeRoleImplCopyWithImpl(
+      _$TranslationControlEventChangeRoleImpl _value,
+      $Res Function(_$TranslationControlEventChangeRoleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$TranslationControlEventChangeRoleCopyWithImpl<$Res>
     Object? index = null,
     Object? role = null,
   }) {
-    return _then(_$TranslationControlEventChangeRole(
+    return _then(_$TranslationControlEventChangeRoleImpl(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -133,9 +133,9 @@ class __$$TranslationControlEventChangeRoleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TranslationControlEventChangeRole
+class _$TranslationControlEventChangeRoleImpl
     implements TranslationControlEventChangeRole {
-  const _$TranslationControlEventChangeRole(
+  const _$TranslationControlEventChangeRoleImpl(
       {required this.index, required this.role});
 
   @override
@@ -149,10 +149,10 @@ class _$TranslationControlEventChangeRole
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TranslationControlEventChangeRole &&
+            other is _$TranslationControlEventChangeRoleImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.role, role) || other.role == role));
   }
@@ -163,10 +163,10 @@ class _$TranslationControlEventChangeRole
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TranslationControlEventChangeRoleCopyWith<
-          _$TranslationControlEventChangeRole>
-      get copyWith => __$$TranslationControlEventChangeRoleCopyWithImpl<
-          _$TranslationControlEventChangeRole>(this, _$identity);
+  _$$TranslationControlEventChangeRoleImplCopyWith<
+          _$TranslationControlEventChangeRoleImpl>
+      get copyWith => __$$TranslationControlEventChangeRoleImplCopyWithImpl<
+          _$TranslationControlEventChangeRoleImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -251,35 +251,35 @@ class _$TranslationControlEventChangeRole
 abstract class TranslationControlEventChangeRole
     implements TranslationControlEvent {
   const factory TranslationControlEventChangeRole(
-      {required final int index,
-      required final PlayerRole role}) = _$TranslationControlEventChangeRole;
+          {required final int index, required final PlayerRole role}) =
+      _$TranslationControlEventChangeRoleImpl;
 
   int get index;
   PlayerRole get role;
   @JsonKey(ignore: true)
-  _$$TranslationControlEventChangeRoleCopyWith<
-          _$TranslationControlEventChangeRole>
+  _$$TranslationControlEventChangeRoleImplCopyWith<
+          _$TranslationControlEventChangeRoleImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TranslationControlEventChangeStatusCopyWith<$Res> {
-  factory _$$TranslationControlEventChangeStatusCopyWith(
-          _$TranslationControlEventChangeStatus value,
-          $Res Function(_$TranslationControlEventChangeStatus) then) =
-      __$$TranslationControlEventChangeStatusCopyWithImpl<$Res>;
+abstract class _$$TranslationControlEventChangeStatusImplCopyWith<$Res> {
+  factory _$$TranslationControlEventChangeStatusImplCopyWith(
+          _$TranslationControlEventChangeStatusImpl value,
+          $Res Function(_$TranslationControlEventChangeStatusImpl) then) =
+      __$$TranslationControlEventChangeStatusImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int index, PlayerStatus status});
 }
 
 /// @nodoc
-class __$$TranslationControlEventChangeStatusCopyWithImpl<$Res>
+class __$$TranslationControlEventChangeStatusImplCopyWithImpl<$Res>
     extends _$TranslationControlEventCopyWithImpl<$Res,
-        _$TranslationControlEventChangeStatus>
-    implements _$$TranslationControlEventChangeStatusCopyWith<$Res> {
-  __$$TranslationControlEventChangeStatusCopyWithImpl(
-      _$TranslationControlEventChangeStatus _value,
-      $Res Function(_$TranslationControlEventChangeStatus) _then)
+        _$TranslationControlEventChangeStatusImpl>
+    implements _$$TranslationControlEventChangeStatusImplCopyWith<$Res> {
+  __$$TranslationControlEventChangeStatusImplCopyWithImpl(
+      _$TranslationControlEventChangeStatusImpl _value,
+      $Res Function(_$TranslationControlEventChangeStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -288,7 +288,7 @@ class __$$TranslationControlEventChangeStatusCopyWithImpl<$Res>
     Object? index = null,
     Object? status = null,
   }) {
-    return _then(_$TranslationControlEventChangeStatus(
+    return _then(_$TranslationControlEventChangeStatusImpl(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -303,9 +303,9 @@ class __$$TranslationControlEventChangeStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TranslationControlEventChangeStatus
+class _$TranslationControlEventChangeStatusImpl
     implements TranslationControlEventChangeStatus {
-  const _$TranslationControlEventChangeStatus(
+  const _$TranslationControlEventChangeStatusImpl(
       {required this.index, required this.status});
 
   @override
@@ -319,10 +319,10 @@ class _$TranslationControlEventChangeStatus
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TranslationControlEventChangeStatus &&
+            other is _$TranslationControlEventChangeStatusImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.status, status) || other.status == status));
   }
@@ -333,10 +333,10 @@ class _$TranslationControlEventChangeStatus
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TranslationControlEventChangeStatusCopyWith<
-          _$TranslationControlEventChangeStatus>
-      get copyWith => __$$TranslationControlEventChangeStatusCopyWithImpl<
-          _$TranslationControlEventChangeStatus>(this, _$identity);
+  _$$TranslationControlEventChangeStatusImplCopyWith<
+          _$TranslationControlEventChangeStatusImpl>
+      get copyWith => __$$TranslationControlEventChangeStatusImplCopyWithImpl<
+          _$TranslationControlEventChangeStatusImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -422,34 +422,34 @@ abstract class TranslationControlEventChangeStatus
     implements TranslationControlEvent {
   const factory TranslationControlEventChangeStatus(
           {required final int index, required final PlayerStatus status}) =
-      _$TranslationControlEventChangeStatus;
+      _$TranslationControlEventChangeStatusImpl;
 
   int get index;
   PlayerStatus get status;
   @JsonKey(ignore: true)
-  _$$TranslationControlEventChangeStatusCopyWith<
-          _$TranslationControlEventChangeStatus>
+  _$$TranslationControlEventChangeStatusImplCopyWith<
+          _$TranslationControlEventChangeStatusImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TranslationControlEventSelectGameCopyWith<$Res> {
-  factory _$$TranslationControlEventSelectGameCopyWith(
-          _$TranslationControlEventSelectGame value,
-          $Res Function(_$TranslationControlEventSelectGame) then) =
-      __$$TranslationControlEventSelectGameCopyWithImpl<$Res>;
+abstract class _$$TranslationControlEventSelectGameImplCopyWith<$Res> {
+  factory _$$TranslationControlEventSelectGameImplCopyWith(
+          _$TranslationControlEventSelectGameImpl value,
+          $Res Function(_$TranslationControlEventSelectGameImpl) then) =
+      __$$TranslationControlEventSelectGameImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int gameIndex});
 }
 
 /// @nodoc
-class __$$TranslationControlEventSelectGameCopyWithImpl<$Res>
+class __$$TranslationControlEventSelectGameImplCopyWithImpl<$Res>
     extends _$TranslationControlEventCopyWithImpl<$Res,
-        _$TranslationControlEventSelectGame>
-    implements _$$TranslationControlEventSelectGameCopyWith<$Res> {
-  __$$TranslationControlEventSelectGameCopyWithImpl(
-      _$TranslationControlEventSelectGame _value,
-      $Res Function(_$TranslationControlEventSelectGame) _then)
+        _$TranslationControlEventSelectGameImpl>
+    implements _$$TranslationControlEventSelectGameImplCopyWith<$Res> {
+  __$$TranslationControlEventSelectGameImplCopyWithImpl(
+      _$TranslationControlEventSelectGameImpl _value,
+      $Res Function(_$TranslationControlEventSelectGameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -457,7 +457,7 @@ class __$$TranslationControlEventSelectGameCopyWithImpl<$Res>
   $Res call({
     Object? gameIndex = null,
   }) {
-    return _then(_$TranslationControlEventSelectGame(
+    return _then(_$TranslationControlEventSelectGameImpl(
       gameIndex: null == gameIndex
           ? _value.gameIndex
           : gameIndex // ignore: cast_nullable_to_non_nullable
@@ -468,9 +468,9 @@ class __$$TranslationControlEventSelectGameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TranslationControlEventSelectGame
+class _$TranslationControlEventSelectGameImpl
     implements TranslationControlEventSelectGame {
-  const _$TranslationControlEventSelectGame({required this.gameIndex});
+  const _$TranslationControlEventSelectGameImpl({required this.gameIndex});
 
   @override
   final int gameIndex;
@@ -481,10 +481,10 @@ class _$TranslationControlEventSelectGame
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TranslationControlEventSelectGame &&
+            other is _$TranslationControlEventSelectGameImpl &&
             (identical(other.gameIndex, gameIndex) ||
                 other.gameIndex == gameIndex));
   }
@@ -495,10 +495,10 @@ class _$TranslationControlEventSelectGame
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TranslationControlEventSelectGameCopyWith<
-          _$TranslationControlEventSelectGame>
-      get copyWith => __$$TranslationControlEventSelectGameCopyWithImpl<
-          _$TranslationControlEventSelectGame>(this, _$identity);
+  _$$TranslationControlEventSelectGameImplCopyWith<
+          _$TranslationControlEventSelectGameImpl>
+      get copyWith => __$$TranslationControlEventSelectGameImplCopyWithImpl<
+          _$TranslationControlEventSelectGameImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -583,33 +583,33 @@ class _$TranslationControlEventSelectGame
 abstract class TranslationControlEventSelectGame
     implements TranslationControlEvent {
   const factory TranslationControlEventSelectGame(
-      {required final int gameIndex}) = _$TranslationControlEventSelectGame;
+      {required final int gameIndex}) = _$TranslationControlEventSelectGameImpl;
 
   int get gameIndex;
   @JsonKey(ignore: true)
-  _$$TranslationControlEventSelectGameCopyWith<
-          _$TranslationControlEventSelectGame>
+  _$$TranslationControlEventSelectGameImplCopyWith<
+          _$TranslationControlEventSelectGameImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TranslationControlEventStateReceivedCopyWith<$Res> {
-  factory _$$TranslationControlEventStateReceivedCopyWith(
-          _$TranslationControlEventStateReceived value,
-          $Res Function(_$TranslationControlEventStateReceived) then) =
-      __$$TranslationControlEventStateReceivedCopyWithImpl<$Res>;
+abstract class _$$TranslationControlEventStateReceivedImplCopyWith<$Res> {
+  factory _$$TranslationControlEventStateReceivedImplCopyWith(
+          _$TranslationControlEventStateReceivedImpl value,
+          $Res Function(_$TranslationControlEventStateReceivedImpl) then) =
+      __$$TranslationControlEventStateReceivedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SeatingContent event});
 }
 
 /// @nodoc
-class __$$TranslationControlEventStateReceivedCopyWithImpl<$Res>
+class __$$TranslationControlEventStateReceivedImplCopyWithImpl<$Res>
     extends _$TranslationControlEventCopyWithImpl<$Res,
-        _$TranslationControlEventStateReceived>
-    implements _$$TranslationControlEventStateReceivedCopyWith<$Res> {
-  __$$TranslationControlEventStateReceivedCopyWithImpl(
-      _$TranslationControlEventStateReceived _value,
-      $Res Function(_$TranslationControlEventStateReceived) _then)
+        _$TranslationControlEventStateReceivedImpl>
+    implements _$$TranslationControlEventStateReceivedImplCopyWith<$Res> {
+  __$$TranslationControlEventStateReceivedImplCopyWithImpl(
+      _$TranslationControlEventStateReceivedImpl _value,
+      $Res Function(_$TranslationControlEventStateReceivedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -617,7 +617,7 @@ class __$$TranslationControlEventStateReceivedCopyWithImpl<$Res>
   $Res call({
     Object? event = null,
   }) {
-    return _then(_$TranslationControlEventStateReceived(
+    return _then(_$TranslationControlEventStateReceivedImpl(
       event: null == event
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
@@ -628,9 +628,9 @@ class __$$TranslationControlEventStateReceivedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TranslationControlEventStateReceived
+class _$TranslationControlEventStateReceivedImpl
     implements TranslationControlEventStateReceived {
-  const _$TranslationControlEventStateReceived({required this.event});
+  const _$TranslationControlEventStateReceivedImpl({required this.event});
 
   @override
   final SeatingContent event;
@@ -641,10 +641,10 @@ class _$TranslationControlEventStateReceived
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TranslationControlEventStateReceived &&
+            other is _$TranslationControlEventStateReceivedImpl &&
             (identical(other.event, event) || other.event == event));
   }
 
@@ -654,10 +654,10 @@ class _$TranslationControlEventStateReceived
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TranslationControlEventStateReceivedCopyWith<
-          _$TranslationControlEventStateReceived>
-      get copyWith => __$$TranslationControlEventStateReceivedCopyWithImpl<
-          _$TranslationControlEventStateReceived>(this, _$identity);
+  _$$TranslationControlEventStateReceivedImplCopyWith<
+          _$TranslationControlEventStateReceivedImpl>
+      get copyWith => __$$TranslationControlEventStateReceivedImplCopyWithImpl<
+          _$TranslationControlEventStateReceivedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -743,11 +743,11 @@ abstract class TranslationControlEventStateReceived
     implements TranslationControlEvent {
   const factory TranslationControlEventStateReceived(
           {required final SeatingContent event}) =
-      _$TranslationControlEventStateReceived;
+      _$TranslationControlEventStateReceivedImpl;
 
   SeatingContent get event;
   @JsonKey(ignore: true)
-  _$$TranslationControlEventStateReceivedCopyWith<
-          _$TranslationControlEventStateReceived>
+  _$$TranslationControlEventStateReceivedImplCopyWith<
+          _$TranslationControlEventStateReceivedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

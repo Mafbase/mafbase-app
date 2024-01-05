@@ -75,25 +75,26 @@ class _$TournamentsEventCopyWithImpl<$Res, $Val extends TournamentsEvent>
 }
 
 /// @nodoc
-abstract class _$$TournamentOpenedEventCopyWith<$Res> {
-  factory _$$TournamentOpenedEventCopyWith(_$TournamentOpenedEvent value,
-          $Res Function(_$TournamentOpenedEvent) then) =
-      __$$TournamentOpenedEventCopyWithImpl<$Res>;
+abstract class _$$TournamentOpenedEventImplCopyWith<$Res> {
+  factory _$$TournamentOpenedEventImplCopyWith(
+          _$TournamentOpenedEventImpl value,
+          $Res Function(_$TournamentOpenedEventImpl) then) =
+      __$$TournamentOpenedEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentOpenedEventCopyWithImpl<$Res>
-    extends _$TournamentsEventCopyWithImpl<$Res, _$TournamentOpenedEvent>
-    implements _$$TournamentOpenedEventCopyWith<$Res> {
-  __$$TournamentOpenedEventCopyWithImpl(_$TournamentOpenedEvent _value,
-      $Res Function(_$TournamentOpenedEvent) _then)
+class __$$TournamentOpenedEventImplCopyWithImpl<$Res>
+    extends _$TournamentsEventCopyWithImpl<$Res, _$TournamentOpenedEventImpl>
+    implements _$$TournamentOpenedEventImplCopyWith<$Res> {
+  __$$TournamentOpenedEventImplCopyWithImpl(_$TournamentOpenedEventImpl _value,
+      $Res Function(_$TournamentOpenedEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentOpenedEvent implements TournamentOpenedEvent {
-  const _$TournamentOpenedEvent();
+class _$TournamentOpenedEventImpl implements TournamentOpenedEvent {
+  const _$TournamentOpenedEventImpl();
 
   @override
   String toString() {
@@ -101,9 +102,10 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TournamentOpenedEvent);
+        (other.runtimeType == runtimeType &&
+            other is _$TournamentOpenedEventImpl);
   }
 
   @override
@@ -173,29 +175,31 @@ class _$TournamentOpenedEvent implements TournamentOpenedEvent {
 }
 
 abstract class TournamentOpenedEvent implements TournamentsEvent {
-  const factory TournamentOpenedEvent() = _$TournamentOpenedEvent;
+  const factory TournamentOpenedEvent() = _$TournamentOpenedEventImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentsEventCreateCopyWith<$Res> {
-  factory _$$TournamentsEventCreateCopyWith(_$TournamentsEventCreate value,
-          $Res Function(_$TournamentsEventCreate) then) =
-      __$$TournamentsEventCreateCopyWithImpl<$Res>;
+abstract class _$$TournamentsEventCreateImplCopyWith<$Res> {
+  factory _$$TournamentsEventCreateImplCopyWith(
+          _$TournamentsEventCreateImpl value,
+          $Res Function(_$TournamentsEventCreateImpl) then) =
+      __$$TournamentsEventCreateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentsEventCreateCopyWithImpl<$Res>
-    extends _$TournamentsEventCopyWithImpl<$Res, _$TournamentsEventCreate>
-    implements _$$TournamentsEventCreateCopyWith<$Res> {
-  __$$TournamentsEventCreateCopyWithImpl(_$TournamentsEventCreate _value,
-      $Res Function(_$TournamentsEventCreate) _then)
+class __$$TournamentsEventCreateImplCopyWithImpl<$Res>
+    extends _$TournamentsEventCopyWithImpl<$Res, _$TournamentsEventCreateImpl>
+    implements _$$TournamentsEventCreateImplCopyWith<$Res> {
+  __$$TournamentsEventCreateImplCopyWithImpl(
+      _$TournamentsEventCreateImpl _value,
+      $Res Function(_$TournamentsEventCreateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentsEventCreate implements TournamentsEventCreate {
-  const _$TournamentsEventCreate();
+class _$TournamentsEventCreateImpl implements TournamentsEventCreate {
+  const _$TournamentsEventCreateImpl();
 
   @override
   String toString() {
@@ -203,9 +207,10 @@ class _$TournamentsEventCreate implements TournamentsEventCreate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TournamentsEventCreate);
+        (other.runtimeType == runtimeType &&
+            other is _$TournamentsEventCreateImpl);
   }
 
   @override
@@ -275,5 +280,5 @@ class _$TournamentsEventCreate implements TournamentsEventCreate {
 }
 
 abstract class TournamentsEventCreate implements TournamentsEvent {
-  const factory TournamentsEventCreate() = _$TournamentsEventCreate;
+  const factory TournamentsEventCreate() = _$TournamentsEventCreateImpl;
 }

@@ -105,11 +105,11 @@ class _$AddClubGameEffectCopyWithImpl<$Res, $Val extends AddClubGameEffect>
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res> {
-  factory _$$AddClubGameEffectSetValuesCopyWith(
-          _$AddClubGameEffectSetValues value,
-          $Res Function(_$AddClubGameEffectSetValues) then) =
-      __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>;
+abstract class _$$AddClubGameEffectSetValuesImplCopyWith<$Res> {
+  factory _$$AddClubGameEffectSetValuesImplCopyWith(
+          _$AddClubGameEffectSetValuesImpl value,
+          $Res Function(_$AddClubGameEffectSetValuesImpl) then) =
+      __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<String> players,
@@ -126,12 +126,13 @@ abstract class _$$AddClubGameEffectSetValuesCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>
-    extends _$AddClubGameEffectCopyWithImpl<$Res, _$AddClubGameEffectSetValues>
-    implements _$$AddClubGameEffectSetValuesCopyWith<$Res> {
-  __$$AddClubGameEffectSetValuesCopyWithImpl(
-      _$AddClubGameEffectSetValues _value,
-      $Res Function(_$AddClubGameEffectSetValues) _then)
+class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
+    extends _$AddClubGameEffectCopyWithImpl<$Res,
+        _$AddClubGameEffectSetValuesImpl>
+    implements _$$AddClubGameEffectSetValuesImplCopyWith<$Res> {
+  __$$AddClubGameEffectSetValuesImplCopyWithImpl(
+      _$AddClubGameEffectSetValuesImpl _value,
+      $Res Function(_$AddClubGameEffectSetValuesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -147,7 +148,7 @@ class __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>
     Object? date = null,
     Object? ciModel = freezed,
   }) {
-    return _then(_$AddClubGameEffectSetValues(
+    return _then(_$AddClubGameEffectSetValuesImpl(
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
@@ -202,8 +203,8 @@ class __$$AddClubGameEffectSetValuesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
-  const _$AddClubGameEffectSetValues(
+class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
+  const _$AddClubGameEffectSetValuesImpl(
       {required final List<String> players,
       required final List<double> addScore,
       required final List<PlayerRole> roles,
@@ -260,10 +261,10 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEffectSetValues &&
+            other is _$AddClubGameEffectSetValuesImpl &&
             const DeepCollectionEquality().equals(other._players, _players) &&
             const DeepCollectionEquality().equals(other._addScore, _addScore) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
@@ -292,9 +293,9 @@ class _$AddClubGameEffectSetValues implements AddClubGameEffectSetValues {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddClubGameEffectSetValuesCopyWith<_$AddClubGameEffectSetValues>
-      get copyWith => __$$AddClubGameEffectSetValuesCopyWithImpl<
-          _$AddClubGameEffectSetValues>(this, _$identity);
+  _$$AddClubGameEffectSetValuesImplCopyWith<_$AddClubGameEffectSetValuesImpl>
+      get copyWith => __$$AddClubGameEffectSetValuesImplCopyWithImpl<
+          _$AddClubGameEffectSetValuesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -402,7 +403,7 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
       required final String referee,
       required final int died,
       required final DateTime date,
-      final CiSchemeModel? ciModel}) = _$AddClubGameEffectSetValues;
+      final CiSchemeModel? ciModel}) = _$AddClubGameEffectSetValuesImpl;
 
   List<String> get players;
   List<double> get addScore;
@@ -414,16 +415,16 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
   DateTime get date;
   CiSchemeModel? get ciModel;
   @JsonKey(ignore: true)
-  _$$AddClubGameEffectSetValuesCopyWith<_$AddClubGameEffectSetValues>
+  _$$AddClubGameEffectSetValuesImplCopyWith<_$AddClubGameEffectSetValuesImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
-  factory _$$AddClubGameEffectSetPlayerCopyWith(
-          _$AddClubGameEffectSetPlayer value,
-          $Res Function(_$AddClubGameEffectSetPlayer) then) =
-      __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>;
+abstract class _$$AddClubGameEffectSetPlayerImplCopyWith<$Res> {
+  factory _$$AddClubGameEffectSetPlayerImplCopyWith(
+          _$AddClubGameEffectSetPlayerImpl value,
+          $Res Function(_$AddClubGameEffectSetPlayerImpl) then) =
+      __$$AddClubGameEffectSetPlayerImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int index, PlayerModel player});
 
@@ -431,12 +432,13 @@ abstract class _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>
-    extends _$AddClubGameEffectCopyWithImpl<$Res, _$AddClubGameEffectSetPlayer>
-    implements _$$AddClubGameEffectSetPlayerCopyWith<$Res> {
-  __$$AddClubGameEffectSetPlayerCopyWithImpl(
-      _$AddClubGameEffectSetPlayer _value,
-      $Res Function(_$AddClubGameEffectSetPlayer) _then)
+class __$$AddClubGameEffectSetPlayerImplCopyWithImpl<$Res>
+    extends _$AddClubGameEffectCopyWithImpl<$Res,
+        _$AddClubGameEffectSetPlayerImpl>
+    implements _$$AddClubGameEffectSetPlayerImplCopyWith<$Res> {
+  __$$AddClubGameEffectSetPlayerImplCopyWithImpl(
+      _$AddClubGameEffectSetPlayerImpl _value,
+      $Res Function(_$AddClubGameEffectSetPlayerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -445,7 +447,7 @@ class __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>
     Object? index = null,
     Object? player = null,
   }) {
-    return _then(_$AddClubGameEffectSetPlayer(
+    return _then(_$AddClubGameEffectSetPlayerImpl(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -468,8 +470,8 @@ class __$$AddClubGameEffectSetPlayerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
-  const _$AddClubGameEffectSetPlayer(
+class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
+  const _$AddClubGameEffectSetPlayerImpl(
       {required this.index, required this.player});
 
   @override
@@ -483,10 +485,10 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEffectSetPlayer &&
+            other is _$AddClubGameEffectSetPlayerImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.player, player) || other.player == player));
   }
@@ -497,9 +499,9 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddClubGameEffectSetPlayerCopyWith<_$AddClubGameEffectSetPlayer>
-      get copyWith => __$$AddClubGameEffectSetPlayerCopyWithImpl<
-          _$AddClubGameEffectSetPlayer>(this, _$identity);
+  _$$AddClubGameEffectSetPlayerImplCopyWith<_$AddClubGameEffectSetPlayerImpl>
+      get copyWith => __$$AddClubGameEffectSetPlayerImplCopyWithImpl<
+          _$AddClubGameEffectSetPlayerImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -597,11 +599,11 @@ class _$AddClubGameEffectSetPlayer implements AddClubGameEffectSetPlayer {
 abstract class AddClubGameEffectSetPlayer implements AddClubGameEffect {
   const factory AddClubGameEffectSetPlayer(
       {required final int index,
-      required final PlayerModel player}) = _$AddClubGameEffectSetPlayer;
+      required final PlayerModel player}) = _$AddClubGameEffectSetPlayerImpl;
 
   int get index;
   PlayerModel get player;
   @JsonKey(ignore: true)
-  _$$AddClubGameEffectSetPlayerCopyWith<_$AddClubGameEffectSetPlayer>
+  _$$AddClubGameEffectSetPlayerImplCopyWith<_$AddClubGameEffectSetPlayerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

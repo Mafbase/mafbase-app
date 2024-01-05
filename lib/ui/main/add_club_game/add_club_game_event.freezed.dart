@@ -93,22 +93,23 @@ class _$AddClubGameEventCopyWithImpl<$Res, $Val extends AddClubGameEvent>
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEventPageOpenedCopyWith<$Res> {
-  factory _$$AddClubGameEventPageOpenedCopyWith(
-          _$AddClubGameEventPageOpened value,
-          $Res Function(_$AddClubGameEventPageOpened) then) =
-      __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>;
+abstract class _$$AddClubGameEventPageOpenedImplCopyWith<$Res> {
+  factory _$$AddClubGameEventPageOpenedImplCopyWith(
+          _$AddClubGameEventPageOpenedImpl value,
+          $Res Function(_$AddClubGameEventPageOpenedImpl) then) =
+      __$$AddClubGameEventPageOpenedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int? gameId, bool viewOnly});
 }
 
 /// @nodoc
-class __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventPageOpened>
-    implements _$$AddClubGameEventPageOpenedCopyWith<$Res> {
-  __$$AddClubGameEventPageOpenedCopyWithImpl(
-      _$AddClubGameEventPageOpened _value,
-      $Res Function(_$AddClubGameEventPageOpened) _then)
+class __$$AddClubGameEventPageOpenedImplCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res,
+        _$AddClubGameEventPageOpenedImpl>
+    implements _$$AddClubGameEventPageOpenedImplCopyWith<$Res> {
+  __$$AddClubGameEventPageOpenedImplCopyWithImpl(
+      _$AddClubGameEventPageOpenedImpl _value,
+      $Res Function(_$AddClubGameEventPageOpenedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +118,7 @@ class __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>
     Object? gameId = freezed,
     Object? viewOnly = null,
   }) {
-    return _then(_$AddClubGameEventPageOpened(
+    return _then(_$AddClubGameEventPageOpenedImpl(
       gameId: freezed == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
@@ -132,8 +133,8 @@ class __$$AddClubGameEventPageOpenedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
-  const _$AddClubGameEventPageOpened({this.gameId, required this.viewOnly});
+class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
+  const _$AddClubGameEventPageOpenedImpl({this.gameId, required this.viewOnly});
 
   @override
   final int? gameId;
@@ -146,10 +147,10 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEventPageOpened &&
+            other is _$AddClubGameEventPageOpenedImpl &&
             (identical(other.gameId, gameId) || other.gameId == gameId) &&
             (identical(other.viewOnly, viewOnly) ||
                 other.viewOnly == viewOnly));
@@ -161,9 +162,9 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddClubGameEventPageOpenedCopyWith<_$AddClubGameEventPageOpened>
-      get copyWith => __$$AddClubGameEventPageOpenedCopyWithImpl<
-          _$AddClubGameEventPageOpened>(this, _$identity);
+  _$$AddClubGameEventPageOpenedImplCopyWith<_$AddClubGameEventPageOpenedImpl>
+      get copyWith => __$$AddClubGameEventPageOpenedImplCopyWithImpl<
+          _$AddClubGameEventPageOpenedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -249,30 +250,32 @@ class _$AddClubGameEventPageOpened implements AddClubGameEventPageOpened {
 abstract class AddClubGameEventPageOpened implements AddClubGameEvent {
   const factory AddClubGameEventPageOpened(
       {final int? gameId,
-      required final bool viewOnly}) = _$AddClubGameEventPageOpened;
+      required final bool viewOnly}) = _$AddClubGameEventPageOpenedImpl;
 
   int? get gameId;
   bool get viewOnly;
   @JsonKey(ignore: true)
-  _$$AddClubGameEventPageOpenedCopyWith<_$AddClubGameEventPageOpened>
+  _$$AddClubGameEventPageOpenedImplCopyWith<_$AddClubGameEventPageOpenedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEventSubmitCopyWith<$Res> {
-  factory _$$AddClubGameEventSubmitCopyWith(_$AddClubGameEventSubmit value,
-          $Res Function(_$AddClubGameEventSubmit) then) =
-      __$$AddClubGameEventSubmitCopyWithImpl<$Res>;
+abstract class _$$AddClubGameEventSubmitImplCopyWith<$Res> {
+  factory _$$AddClubGameEventSubmitImplCopyWith(
+          _$AddClubGameEventSubmitImpl value,
+          $Res Function(_$AddClubGameEventSubmitImpl) then) =
+      __$$AddClubGameEventSubmitImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ClubGameResult gameResult, int? gameId});
 }
 
 /// @nodoc
-class __$$AddClubGameEventSubmitCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventSubmit>
-    implements _$$AddClubGameEventSubmitCopyWith<$Res> {
-  __$$AddClubGameEventSubmitCopyWithImpl(_$AddClubGameEventSubmit _value,
-      $Res Function(_$AddClubGameEventSubmit) _then)
+class __$$AddClubGameEventSubmitImplCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventSubmitImpl>
+    implements _$$AddClubGameEventSubmitImplCopyWith<$Res> {
+  __$$AddClubGameEventSubmitImplCopyWithImpl(
+      _$AddClubGameEventSubmitImpl _value,
+      $Res Function(_$AddClubGameEventSubmitImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -281,7 +284,7 @@ class __$$AddClubGameEventSubmitCopyWithImpl<$Res>
     Object? gameResult = null,
     Object? gameId = freezed,
   }) {
-    return _then(_$AddClubGameEventSubmit(
+    return _then(_$AddClubGameEventSubmitImpl(
       gameResult: null == gameResult
           ? _value.gameResult
           : gameResult // ignore: cast_nullable_to_non_nullable
@@ -296,8 +299,8 @@ class __$$AddClubGameEventSubmitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
-  const _$AddClubGameEventSubmit({required this.gameResult, this.gameId});
+class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
+  const _$AddClubGameEventSubmitImpl({required this.gameResult, this.gameId});
 
   @override
   final ClubGameResult gameResult;
@@ -310,10 +313,10 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEventSubmit &&
+            other is _$AddClubGameEventSubmitImpl &&
             (identical(other.gameResult, gameResult) ||
                 other.gameResult == gameResult) &&
             (identical(other.gameId, gameId) || other.gameId == gameId));
@@ -325,9 +328,9 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddClubGameEventSubmitCopyWith<_$AddClubGameEventSubmit> get copyWith =>
-      __$$AddClubGameEventSubmitCopyWithImpl<_$AddClubGameEventSubmit>(
-          this, _$identity);
+  _$$AddClubGameEventSubmitImplCopyWith<_$AddClubGameEventSubmitImpl>
+      get copyWith => __$$AddClubGameEventSubmitImplCopyWithImpl<
+          _$AddClubGameEventSubmitImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -413,30 +416,32 @@ class _$AddClubGameEventSubmit implements AddClubGameEventSubmit {
 abstract class AddClubGameEventSubmit implements AddClubGameEvent {
   const factory AddClubGameEventSubmit(
       {required final ClubGameResult gameResult,
-      final int? gameId}) = _$AddClubGameEventSubmit;
+      final int? gameId}) = _$AddClubGameEventSubmitImpl;
 
   ClubGameResult get gameResult;
   int? get gameId;
   @JsonKey(ignore: true)
-  _$$AddClubGameEventSubmitCopyWith<_$AddClubGameEventSubmit> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AddClubGameEventSubmitImplCopyWith<_$AddClubGameEventSubmitImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEventPageEditCopyWith<$Res> {
-  factory _$$AddClubGameEventPageEditCopyWith(_$AddClubGameEventPageEdit value,
-          $Res Function(_$AddClubGameEventPageEdit) then) =
-      __$$AddClubGameEventPageEditCopyWithImpl<$Res>;
+abstract class _$$AddClubGameEventPageEditImplCopyWith<$Res> {
+  factory _$$AddClubGameEventPageEditImplCopyWith(
+          _$AddClubGameEventPageEditImpl value,
+          $Res Function(_$AddClubGameEventPageEditImpl) then) =
+      __$$AddClubGameEventPageEditImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int gameId});
 }
 
 /// @nodoc
-class __$$AddClubGameEventPageEditCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventPageEdit>
-    implements _$$AddClubGameEventPageEditCopyWith<$Res> {
-  __$$AddClubGameEventPageEditCopyWithImpl(_$AddClubGameEventPageEdit _value,
-      $Res Function(_$AddClubGameEventPageEdit) _then)
+class __$$AddClubGameEventPageEditImplCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventPageEditImpl>
+    implements _$$AddClubGameEventPageEditImplCopyWith<$Res> {
+  __$$AddClubGameEventPageEditImplCopyWithImpl(
+      _$AddClubGameEventPageEditImpl _value,
+      $Res Function(_$AddClubGameEventPageEditImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -444,7 +449,7 @@ class __$$AddClubGameEventPageEditCopyWithImpl<$Res>
   $Res call({
     Object? gameId = null,
   }) {
-    return _then(_$AddClubGameEventPageEdit(
+    return _then(_$AddClubGameEventPageEditImpl(
       gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
@@ -455,8 +460,8 @@ class __$$AddClubGameEventPageEditCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
-  const _$AddClubGameEventPageEdit({required this.gameId});
+class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
+  const _$AddClubGameEventPageEditImpl({required this.gameId});
 
   @override
   final int gameId;
@@ -467,10 +472,10 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEventPageEdit &&
+            other is _$AddClubGameEventPageEditImpl &&
             (identical(other.gameId, gameId) || other.gameId == gameId));
   }
 
@@ -480,10 +485,9 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddClubGameEventPageEditCopyWith<_$AddClubGameEventPageEdit>
-      get copyWith =>
-          __$$AddClubGameEventPageEditCopyWithImpl<_$AddClubGameEventPageEdit>(
-              this, _$identity);
+  _$$AddClubGameEventPageEditImplCopyWith<_$AddClubGameEventPageEditImpl>
+      get copyWith => __$$AddClubGameEventPageEditImplCopyWithImpl<
+          _$AddClubGameEventPageEditImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -568,30 +572,32 @@ class _$AddClubGameEventPageEdit implements AddClubGameEventPageEdit {
 
 abstract class AddClubGameEventPageEdit implements AddClubGameEvent {
   const factory AddClubGameEventPageEdit({required final int gameId}) =
-      _$AddClubGameEventPageEdit;
+      _$AddClubGameEventPageEditImpl;
 
   int get gameId;
   @JsonKey(ignore: true)
-  _$$AddClubGameEventPageEditCopyWith<_$AddClubGameEventPageEdit>
+  _$$AddClubGameEventPageEditImplCopyWith<_$AddClubGameEventPageEditImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEventNewPlayerCopyWith<$Res> {
-  factory _$$AddClubGameEventNewPlayerCopyWith(
-          _$AddClubGameEventNewPlayer value,
-          $Res Function(_$AddClubGameEventNewPlayer) then) =
-      __$$AddClubGameEventNewPlayerCopyWithImpl<$Res>;
+abstract class _$$AddClubGameEventNewPlayerImplCopyWith<$Res> {
+  factory _$$AddClubGameEventNewPlayerImplCopyWith(
+          _$AddClubGameEventNewPlayerImpl value,
+          $Res Function(_$AddClubGameEventNewPlayerImpl) then) =
+      __$$AddClubGameEventNewPlayerImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int index, String nickname});
 }
 
 /// @nodoc
-class __$$AddClubGameEventNewPlayerCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventNewPlayer>
-    implements _$$AddClubGameEventNewPlayerCopyWith<$Res> {
-  __$$AddClubGameEventNewPlayerCopyWithImpl(_$AddClubGameEventNewPlayer _value,
-      $Res Function(_$AddClubGameEventNewPlayer) _then)
+class __$$AddClubGameEventNewPlayerImplCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res,
+        _$AddClubGameEventNewPlayerImpl>
+    implements _$$AddClubGameEventNewPlayerImplCopyWith<$Res> {
+  __$$AddClubGameEventNewPlayerImplCopyWithImpl(
+      _$AddClubGameEventNewPlayerImpl _value,
+      $Res Function(_$AddClubGameEventNewPlayerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -600,7 +606,7 @@ class __$$AddClubGameEventNewPlayerCopyWithImpl<$Res>
     Object? index = null,
     Object? nickname = null,
   }) {
-    return _then(_$AddClubGameEventNewPlayer(
+    return _then(_$AddClubGameEventNewPlayerImpl(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -615,8 +621,8 @@ class __$$AddClubGameEventNewPlayerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
-  const _$AddClubGameEventNewPlayer(
+class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
+  const _$AddClubGameEventNewPlayerImpl(
       {required this.index, required this.nickname});
 
   @override
@@ -630,10 +636,10 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEventNewPlayer &&
+            other is _$AddClubGameEventNewPlayerImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname));
@@ -645,9 +651,9 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddClubGameEventNewPlayerCopyWith<_$AddClubGameEventNewPlayer>
-      get copyWith => __$$AddClubGameEventNewPlayerCopyWithImpl<
-          _$AddClubGameEventNewPlayer>(this, _$identity);
+  _$$AddClubGameEventNewPlayerImplCopyWith<_$AddClubGameEventNewPlayerImpl>
+      get copyWith => __$$AddClubGameEventNewPlayerImplCopyWithImpl<
+          _$AddClubGameEventNewPlayerImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -733,30 +739,32 @@ class _$AddClubGameEventNewPlayer implements AddClubGameEventNewPlayer {
 abstract class AddClubGameEventNewPlayer implements AddClubGameEvent {
   const factory AddClubGameEventNewPlayer(
       {required final int index,
-      required final String nickname}) = _$AddClubGameEventNewPlayer;
+      required final String nickname}) = _$AddClubGameEventNewPlayerImpl;
 
   int get index;
   String get nickname;
   @JsonKey(ignore: true)
-  _$$AddClubGameEventNewPlayerCopyWith<_$AddClubGameEventNewPlayer>
+  _$$AddClubGameEventNewPlayerImplCopyWith<_$AddClubGameEventNewPlayerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AddClubGameEventNewGameCopyWith<$Res> {
-  factory _$$AddClubGameEventNewGameCopyWith(_$AddClubGameEventNewGame value,
-          $Res Function(_$AddClubGameEventNewGame) then) =
-      __$$AddClubGameEventNewGameCopyWithImpl<$Res>;
+abstract class _$$AddClubGameEventNewGameImplCopyWith<$Res> {
+  factory _$$AddClubGameEventNewGameImplCopyWith(
+          _$AddClubGameEventNewGameImpl value,
+          $Res Function(_$AddClubGameEventNewGameImpl) then) =
+      __$$AddClubGameEventNewGameImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTime dateTime});
 }
 
 /// @nodoc
-class __$$AddClubGameEventNewGameCopyWithImpl<$Res>
-    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventNewGame>
-    implements _$$AddClubGameEventNewGameCopyWith<$Res> {
-  __$$AddClubGameEventNewGameCopyWithImpl(_$AddClubGameEventNewGame _value,
-      $Res Function(_$AddClubGameEventNewGame) _then)
+class __$$AddClubGameEventNewGameImplCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res, _$AddClubGameEventNewGameImpl>
+    implements _$$AddClubGameEventNewGameImplCopyWith<$Res> {
+  __$$AddClubGameEventNewGameImplCopyWithImpl(
+      _$AddClubGameEventNewGameImpl _value,
+      $Res Function(_$AddClubGameEventNewGameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -764,7 +772,7 @@ class __$$AddClubGameEventNewGameCopyWithImpl<$Res>
   $Res call({
     Object? dateTime = null,
   }) {
-    return _then(_$AddClubGameEventNewGame(
+    return _then(_$AddClubGameEventNewGameImpl(
       dateTime: null == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
@@ -775,8 +783,8 @@ class __$$AddClubGameEventNewGameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
-  const _$AddClubGameEventNewGame({required this.dateTime});
+class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
+  const _$AddClubGameEventNewGameImpl({required this.dateTime});
 
   @override
   final DateTime dateTime;
@@ -787,10 +795,10 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddClubGameEventNewGame &&
+            other is _$AddClubGameEventNewGameImpl &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime));
   }
@@ -801,9 +809,9 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddClubGameEventNewGameCopyWith<_$AddClubGameEventNewGame> get copyWith =>
-      __$$AddClubGameEventNewGameCopyWithImpl<_$AddClubGameEventNewGame>(
-          this, _$identity);
+  _$$AddClubGameEventNewGameImplCopyWith<_$AddClubGameEventNewGameImpl>
+      get copyWith => __$$AddClubGameEventNewGameImplCopyWithImpl<
+          _$AddClubGameEventNewGameImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -888,10 +896,10 @@ class _$AddClubGameEventNewGame implements AddClubGameEventNewGame {
 
 abstract class AddClubGameEventNewGame implements AddClubGameEvent {
   const factory AddClubGameEventNewGame({required final DateTime dateTime}) =
-      _$AddClubGameEventNewGame;
+      _$AddClubGameEventNewGameImpl;
 
   DateTime get dateTime;
   @JsonKey(ignore: true)
-  _$$AddClubGameEventNewGameCopyWith<_$AddClubGameEventNewGame> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AddClubGameEventNewGameImplCopyWith<_$AddClubGameEventNewGameImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

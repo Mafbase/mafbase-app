@@ -81,23 +81,25 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
 }
 
 /// @nodoc
-abstract class _$$SuccessCopyWith<$Res> {
-  factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) =
-      __$$SuccessCopyWithImpl<$Res>;
+abstract class _$$SuccessImplCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SuccessCopyWithImpl<$Res>
-    extends _$LoginModelCopyWithImpl<$Res, _$Success>
-    implements _$$SuccessCopyWith<$Res> {
-  __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$LoginModelCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Success implements Success {
-  const _$Success();
+class _$SuccessImpl implements Success {
+  const _$SuccessImpl();
 
   @override
   String toString() {
@@ -105,9 +107,9 @@ class _$Success implements Success {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Success);
+        (other.runtimeType == runtimeType && other is _$SuccessImpl);
   }
 
   @override
@@ -183,24 +185,24 @@ class _$Success implements Success {
 }
 
 abstract class Success implements LoginModel {
-  const factory Success() = _$Success;
+  const factory Success() = _$SuccessImpl;
 }
 
 /// @nodoc
-abstract class _$$NeedVerificationCopyWith<$Res> {
-  factory _$$NeedVerificationCopyWith(
-          _$NeedVerification value, $Res Function(_$NeedVerification) then) =
-      __$$NeedVerificationCopyWithImpl<$Res>;
+abstract class _$$NeedVerificationImplCopyWith<$Res> {
+  factory _$$NeedVerificationImplCopyWith(_$NeedVerificationImpl value,
+          $Res Function(_$NeedVerificationImpl) then) =
+      __$$NeedVerificationImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class __$$NeedVerificationCopyWithImpl<$Res>
-    extends _$LoginModelCopyWithImpl<$Res, _$NeedVerification>
-    implements _$$NeedVerificationCopyWith<$Res> {
-  __$$NeedVerificationCopyWithImpl(
-      _$NeedVerification _value, $Res Function(_$NeedVerification) _then)
+class __$$NeedVerificationImplCopyWithImpl<$Res>
+    extends _$LoginModelCopyWithImpl<$Res, _$NeedVerificationImpl>
+    implements _$$NeedVerificationImplCopyWith<$Res> {
+  __$$NeedVerificationImplCopyWithImpl(_$NeedVerificationImpl _value,
+      $Res Function(_$NeedVerificationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -208,7 +210,7 @@ class __$$NeedVerificationCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$NeedVerification(
+    return _then(_$NeedVerificationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -219,8 +221,8 @@ class __$$NeedVerificationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NeedVerification implements NeedVerification {
-  const _$NeedVerification({required this.id});
+class _$NeedVerificationImpl implements NeedVerification {
+  const _$NeedVerificationImpl({required this.id});
 
   @override
   final int id;
@@ -231,10 +233,10 @@ class _$NeedVerification implements NeedVerification {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NeedVerification &&
+            other is _$NeedVerificationImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -244,8 +246,9 @@ class _$NeedVerification implements NeedVerification {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NeedVerificationCopyWith<_$NeedVerification> get copyWith =>
-      __$$NeedVerificationCopyWithImpl<_$NeedVerification>(this, _$identity);
+  _$$NeedVerificationImplCopyWith<_$NeedVerificationImpl> get copyWith =>
+      __$$NeedVerificationImplCopyWithImpl<_$NeedVerificationImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -317,27 +320,30 @@ class _$NeedVerification implements NeedVerification {
 }
 
 abstract class NeedVerification implements LoginModel {
-  const factory NeedVerification({required final int id}) = _$NeedVerification;
+  const factory NeedVerification({required final int id}) =
+      _$NeedVerificationImpl;
 
   int get id;
   @JsonKey(ignore: true)
-  _$$NeedVerificationCopyWith<_$NeedVerification> get copyWith =>
+  _$$NeedVerificationImplCopyWith<_$NeedVerificationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$LoginModelCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$LoginModelCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -345,7 +351,7 @@ class __$$ErrorCopyWithImpl<$Res>
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_$Error(
+    return _then(_$ErrorImpl(
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -356,8 +362,8 @@ class __$$ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Error implements Error {
-  const _$Error({this.message});
+class _$ErrorImpl implements Error {
+  const _$ErrorImpl({this.message});
 
   @override
   final String? message;
@@ -368,10 +374,10 @@ class _$Error implements Error {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error &&
+            other is _$ErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -381,8 +387,8 @@ class _$Error implements Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<_$Error> get copyWith =>
-      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -454,9 +460,10 @@ class _$Error implements Error {
 }
 
 abstract class Error implements LoginModel {
-  const factory Error({final String? message}) = _$Error;
+  const factory Error({final String? message}) = _$ErrorImpl;
 
   String? get message;
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

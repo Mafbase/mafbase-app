@@ -79,23 +79,23 @@ class _$TranslationContentEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$TranslationContentEventStateReceivedCopyWith<$Res> {
-  factory _$$TranslationContentEventStateReceivedCopyWith(
-          _$TranslationContentEventStateReceived value,
-          $Res Function(_$TranslationContentEventStateReceived) then) =
-      __$$TranslationContentEventStateReceivedCopyWithImpl<$Res>;
+abstract class _$$TranslationContentEventStateReceivedImplCopyWith<$Res> {
+  factory _$$TranslationContentEventStateReceivedImplCopyWith(
+          _$TranslationContentEventStateReceivedImpl value,
+          $Res Function(_$TranslationContentEventStateReceivedImpl) then) =
+      __$$TranslationContentEventStateReceivedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SeatingContent content});
 }
 
 /// @nodoc
-class __$$TranslationContentEventStateReceivedCopyWithImpl<$Res>
+class __$$TranslationContentEventStateReceivedImplCopyWithImpl<$Res>
     extends _$TranslationContentEventCopyWithImpl<$Res,
-        _$TranslationContentEventStateReceived>
-    implements _$$TranslationContentEventStateReceivedCopyWith<$Res> {
-  __$$TranslationContentEventStateReceivedCopyWithImpl(
-      _$TranslationContentEventStateReceived _value,
-      $Res Function(_$TranslationContentEventStateReceived) _then)
+        _$TranslationContentEventStateReceivedImpl>
+    implements _$$TranslationContentEventStateReceivedImplCopyWith<$Res> {
+  __$$TranslationContentEventStateReceivedImplCopyWithImpl(
+      _$TranslationContentEventStateReceivedImpl _value,
+      $Res Function(_$TranslationContentEventStateReceivedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$TranslationContentEventStateReceivedCopyWithImpl<$Res>
   $Res call({
     Object? content = null,
   }) {
-    return _then(_$TranslationContentEventStateReceived(
+    return _then(_$TranslationContentEventStateReceivedImpl(
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -114,9 +114,9 @@ class __$$TranslationContentEventStateReceivedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TranslationContentEventStateReceived
+class _$TranslationContentEventStateReceivedImpl
     implements TranslationContentEventStateReceived {
-  const _$TranslationContentEventStateReceived({required this.content});
+  const _$TranslationContentEventStateReceivedImpl({required this.content});
 
   @override
   final SeatingContent content;
@@ -127,10 +127,10 @@ class _$TranslationContentEventStateReceived
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TranslationContentEventStateReceived &&
+            other is _$TranslationContentEventStateReceivedImpl &&
             (identical(other.content, content) || other.content == content));
   }
 
@@ -140,10 +140,10 @@ class _$TranslationContentEventStateReceived
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TranslationContentEventStateReceivedCopyWith<
-          _$TranslationContentEventStateReceived>
-      get copyWith => __$$TranslationContentEventStateReceivedCopyWithImpl<
-          _$TranslationContentEventStateReceived>(this, _$identity);
+  _$$TranslationContentEventStateReceivedImplCopyWith<
+          _$TranslationContentEventStateReceivedImpl>
+      get copyWith => __$$TranslationContentEventStateReceivedImplCopyWithImpl<
+          _$TranslationContentEventStateReceivedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -215,39 +215,39 @@ abstract class TranslationContentEventStateReceived
     implements TranslationContentEvent {
   const factory TranslationContentEventStateReceived(
           {required final SeatingContent content}) =
-      _$TranslationContentEventStateReceived;
+      _$TranslationContentEventStateReceivedImpl;
 
   SeatingContent get content;
   @JsonKey(ignore: true)
-  _$$TranslationContentEventStateReceivedCopyWith<
-          _$TranslationContentEventStateReceived>
+  _$$TranslationContentEventStateReceivedImplCopyWith<
+          _$TranslationContentEventStateReceivedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TranslationContentEventPageOpenedCopyWith<$Res> {
-  factory _$$TranslationContentEventPageOpenedCopyWith(
-          _$TranslationContentEventPageOpened value,
-          $Res Function(_$TranslationContentEventPageOpened) then) =
-      __$$TranslationContentEventPageOpenedCopyWithImpl<$Res>;
+abstract class _$$TranslationContentEventPageOpenedImplCopyWith<$Res> {
+  factory _$$TranslationContentEventPageOpenedImplCopyWith(
+          _$TranslationContentEventPageOpenedImpl value,
+          $Res Function(_$TranslationContentEventPageOpenedImpl) then) =
+      __$$TranslationContentEventPageOpenedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TranslationContentEventPageOpenedCopyWithImpl<$Res>
+class __$$TranslationContentEventPageOpenedImplCopyWithImpl<$Res>
     extends _$TranslationContentEventCopyWithImpl<$Res,
-        _$TranslationContentEventPageOpened>
-    implements _$$TranslationContentEventPageOpenedCopyWith<$Res> {
-  __$$TranslationContentEventPageOpenedCopyWithImpl(
-      _$TranslationContentEventPageOpened _value,
-      $Res Function(_$TranslationContentEventPageOpened) _then)
+        _$TranslationContentEventPageOpenedImpl>
+    implements _$$TranslationContentEventPageOpenedImplCopyWith<$Res> {
+  __$$TranslationContentEventPageOpenedImplCopyWithImpl(
+      _$TranslationContentEventPageOpenedImpl _value,
+      $Res Function(_$TranslationContentEventPageOpenedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TranslationContentEventPageOpened
+class _$TranslationContentEventPageOpenedImpl
     implements TranslationContentEventPageOpened {
-  const _$TranslationContentEventPageOpened();
+  const _$TranslationContentEventPageOpenedImpl();
 
   @override
   String toString() {
@@ -255,10 +255,10 @@ class _$TranslationContentEventPageOpened
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TranslationContentEventPageOpened);
+            other is _$TranslationContentEventPageOpenedImpl);
   }
 
   @override
@@ -333,5 +333,5 @@ class _$TranslationContentEventPageOpened
 abstract class TranslationContentEventPageOpened
     implements TranslationContentEvent {
   const factory TranslationContentEventPageOpened() =
-      _$TranslationContentEventPageOpened;
+      _$TranslationContentEventPageOpenedImpl;
 }

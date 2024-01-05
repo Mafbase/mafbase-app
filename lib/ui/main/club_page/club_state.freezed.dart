@@ -82,10 +82,11 @@ class _$ClubStateCopyWithImpl<$Res, $Val extends ClubState>
 }
 
 /// @nodoc
-abstract class _$$_ClubStateCopyWith<$Res> implements $ClubStateCopyWith<$Res> {
-  factory _$$_ClubStateCopyWith(
-          _$_ClubState value, $Res Function(_$_ClubState) then) =
-      __$$_ClubStateCopyWithImpl<$Res>;
+abstract class _$$ClubStateImplCopyWith<$Res>
+    implements $ClubStateCopyWith<$Res> {
+  factory _$$ClubStateImplCopyWith(
+          _$ClubStateImpl value, $Res Function(_$ClubStateImpl) then) =
+      __$$ClubStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic isLoading, ClubModel? model, dynamic isOwner});
@@ -95,11 +96,11 @@ abstract class _$$_ClubStateCopyWith<$Res> implements $ClubStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ClubStateCopyWithImpl<$Res>
-    extends _$ClubStateCopyWithImpl<$Res, _$_ClubState>
-    implements _$$_ClubStateCopyWith<$Res> {
-  __$$_ClubStateCopyWithImpl(
-      _$_ClubState _value, $Res Function(_$_ClubState) _then)
+class __$$ClubStateImplCopyWithImpl<$Res>
+    extends _$ClubStateCopyWithImpl<$Res, _$ClubStateImpl>
+    implements _$$ClubStateImplCopyWith<$Res> {
+  __$$ClubStateImplCopyWithImpl(
+      _$ClubStateImpl _value, $Res Function(_$ClubStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +110,7 @@ class __$$_ClubStateCopyWithImpl<$Res>
     Object? model = freezed,
     Object? isOwner = freezed,
   }) {
-    return _then(_$_ClubState(
+    return _then(_$ClubStateImpl(
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
       model: freezed == model
           ? _value.model
@@ -122,8 +123,9 @@ class __$$_ClubStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ClubState implements _ClubState {
-  const _$_ClubState({this.isLoading = true, this.model, this.isOwner = false});
+class _$ClubStateImpl implements _ClubState {
+  const _$ClubStateImpl(
+      {this.isLoading = true, this.model, this.isOwner = false});
 
   @override
   @JsonKey()
@@ -140,10 +142,10 @@ class _$_ClubState implements _ClubState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ClubState &&
+            other is _$ClubStateImpl &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             (identical(other.model, model) || other.model == model) &&
             const DeepCollectionEquality().equals(other.isOwner, isOwner));
@@ -159,15 +161,15 @@ class _$_ClubState implements _ClubState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ClubStateCopyWith<_$_ClubState> get copyWith =>
-      __$$_ClubStateCopyWithImpl<_$_ClubState>(this, _$identity);
+  _$$ClubStateImplCopyWith<_$ClubStateImpl> get copyWith =>
+      __$$ClubStateImplCopyWithImpl<_$ClubStateImpl>(this, _$identity);
 }
 
 abstract class _ClubState implements ClubState {
   const factory _ClubState(
       {final dynamic isLoading,
       final ClubModel? model,
-      final dynamic isOwner}) = _$_ClubState;
+      final dynamic isOwner}) = _$ClubStateImpl;
 
   @override
   dynamic get isLoading;
@@ -177,6 +179,6 @@ abstract class _ClubState implements ClubState {
   dynamic get isOwner;
   @override
   @JsonKey(ignore: true)
-  _$$_ClubStateCopyWith<_$_ClubState> get copyWith =>
+  _$$ClubStateImplCopyWith<_$ClubStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

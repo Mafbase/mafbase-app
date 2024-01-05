@@ -75,25 +75,25 @@ class _$ClubsEventCopyWithImpl<$Res, $Val extends ClubsEvent>
 }
 
 /// @nodoc
-abstract class _$$ClubsEventPageOpenedCopyWith<$Res> {
-  factory _$$ClubsEventPageOpenedCopyWith(_$ClubsEventPageOpened value,
-          $Res Function(_$ClubsEventPageOpened) then) =
-      __$$ClubsEventPageOpenedCopyWithImpl<$Res>;
+abstract class _$$ClubsEventPageOpenedImplCopyWith<$Res> {
+  factory _$$ClubsEventPageOpenedImplCopyWith(_$ClubsEventPageOpenedImpl value,
+          $Res Function(_$ClubsEventPageOpenedImpl) then) =
+      __$$ClubsEventPageOpenedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ClubsEventPageOpenedCopyWithImpl<$Res>
-    extends _$ClubsEventCopyWithImpl<$Res, _$ClubsEventPageOpened>
-    implements _$$ClubsEventPageOpenedCopyWith<$Res> {
-  __$$ClubsEventPageOpenedCopyWithImpl(_$ClubsEventPageOpened _value,
-      $Res Function(_$ClubsEventPageOpened) _then)
+class __$$ClubsEventPageOpenedImplCopyWithImpl<$Res>
+    extends _$ClubsEventCopyWithImpl<$Res, _$ClubsEventPageOpenedImpl>
+    implements _$$ClubsEventPageOpenedImplCopyWith<$Res> {
+  __$$ClubsEventPageOpenedImplCopyWithImpl(_$ClubsEventPageOpenedImpl _value,
+      $Res Function(_$ClubsEventPageOpenedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ClubsEventPageOpened implements ClubsEventPageOpened {
-  const _$ClubsEventPageOpened();
+class _$ClubsEventPageOpenedImpl implements ClubsEventPageOpened {
+  const _$ClubsEventPageOpenedImpl();
 
   @override
   String toString() {
@@ -101,9 +101,10 @@ class _$ClubsEventPageOpened implements ClubsEventPageOpened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ClubsEventPageOpened);
+        (other.runtimeType == runtimeType &&
+            other is _$ClubsEventPageOpenedImpl);
   }
 
   @override
@@ -173,14 +174,15 @@ class _$ClubsEventPageOpened implements ClubsEventPageOpened {
 }
 
 abstract class ClubsEventPageOpened implements ClubsEvent {
-  const factory ClubsEventPageOpened() = _$ClubsEventPageOpened;
+  const factory ClubsEventPageOpened() = _$ClubsEventPageOpenedImpl;
 }
 
 /// @nodoc
-abstract class _$$ClubsEventClubSelectedCopyWith<$Res> {
-  factory _$$ClubsEventClubSelectedCopyWith(_$ClubsEventClubSelected value,
-          $Res Function(_$ClubsEventClubSelected) then) =
-      __$$ClubsEventClubSelectedCopyWithImpl<$Res>;
+abstract class _$$ClubsEventClubSelectedImplCopyWith<$Res> {
+  factory _$$ClubsEventClubSelectedImplCopyWith(
+          _$ClubsEventClubSelectedImpl value,
+          $Res Function(_$ClubsEventClubSelectedImpl) then) =
+      __$$ClubsEventClubSelectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ClubModel clubModel});
 
@@ -188,11 +190,12 @@ abstract class _$$ClubsEventClubSelectedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ClubsEventClubSelectedCopyWithImpl<$Res>
-    extends _$ClubsEventCopyWithImpl<$Res, _$ClubsEventClubSelected>
-    implements _$$ClubsEventClubSelectedCopyWith<$Res> {
-  __$$ClubsEventClubSelectedCopyWithImpl(_$ClubsEventClubSelected _value,
-      $Res Function(_$ClubsEventClubSelected) _then)
+class __$$ClubsEventClubSelectedImplCopyWithImpl<$Res>
+    extends _$ClubsEventCopyWithImpl<$Res, _$ClubsEventClubSelectedImpl>
+    implements _$$ClubsEventClubSelectedImplCopyWith<$Res> {
+  __$$ClubsEventClubSelectedImplCopyWithImpl(
+      _$ClubsEventClubSelectedImpl _value,
+      $Res Function(_$ClubsEventClubSelectedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -200,7 +203,7 @@ class __$$ClubsEventClubSelectedCopyWithImpl<$Res>
   $Res call({
     Object? clubModel = null,
   }) {
-    return _then(_$ClubsEventClubSelected(
+    return _then(_$ClubsEventClubSelectedImpl(
       clubModel: null == clubModel
           ? _value.clubModel
           : clubModel // ignore: cast_nullable_to_non_nullable
@@ -219,8 +222,8 @@ class __$$ClubsEventClubSelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ClubsEventClubSelected implements ClubsEventClubSelected {
-  const _$ClubsEventClubSelected({required this.clubModel});
+class _$ClubsEventClubSelectedImpl implements ClubsEventClubSelected {
+  const _$ClubsEventClubSelectedImpl({required this.clubModel});
 
   @override
   final ClubModel clubModel;
@@ -231,10 +234,10 @@ class _$ClubsEventClubSelected implements ClubsEventClubSelected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ClubsEventClubSelected &&
+            other is _$ClubsEventClubSelectedImpl &&
             (identical(other.clubModel, clubModel) ||
                 other.clubModel == clubModel));
   }
@@ -245,9 +248,9 @@ class _$ClubsEventClubSelected implements ClubsEventClubSelected {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ClubsEventClubSelectedCopyWith<_$ClubsEventClubSelected> get copyWith =>
-      __$$ClubsEventClubSelectedCopyWithImpl<_$ClubsEventClubSelected>(
-          this, _$identity);
+  _$$ClubsEventClubSelectedImplCopyWith<_$ClubsEventClubSelectedImpl>
+      get copyWith => __$$ClubsEventClubSelectedImplCopyWithImpl<
+          _$ClubsEventClubSelectedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -314,10 +317,10 @@ class _$ClubsEventClubSelected implements ClubsEventClubSelected {
 
 abstract class ClubsEventClubSelected implements ClubsEvent {
   const factory ClubsEventClubSelected({required final ClubModel clubModel}) =
-      _$ClubsEventClubSelected;
+      _$ClubsEventClubSelectedImpl;
 
   ClubModel get clubModel;
   @JsonKey(ignore: true)
-  _$$ClubsEventClubSelectedCopyWith<_$ClubsEventClubSelected> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ClubsEventClubSelectedImplCopyWith<_$ClubsEventClubSelectedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

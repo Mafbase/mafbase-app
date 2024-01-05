@@ -114,11 +114,11 @@ class _$GameResultModelCopyWithImpl<$Res, $Val extends GameResultModel>
 }
 
 /// @nodoc
-abstract class _$$_GameResultModelCopyWith<$Res>
+abstract class _$$GameResultModelImplCopyWith<$Res>
     implements $GameResultModelCopyWith<$Res> {
-  factory _$$_GameResultModelCopyWith(
-          _$_GameResultModel value, $Res Function(_$_GameResultModel) then) =
-      __$$_GameResultModelCopyWithImpl<$Res>;
+  factory _$$GameResultModelImplCopyWith(_$GameResultModelImpl value,
+          $Res Function(_$GameResultModelImpl) then) =
+      __$$GameResultModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$_GameResultModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GameResultModelCopyWithImpl<$Res>
-    extends _$GameResultModelCopyWithImpl<$Res, _$_GameResultModel>
-    implements _$$_GameResultModelCopyWith<$Res> {
-  __$$_GameResultModelCopyWithImpl(
-      _$_GameResultModel _value, $Res Function(_$_GameResultModel) _then)
+class __$$GameResultModelImplCopyWithImpl<$Res>
+    extends _$GameResultModelCopyWithImpl<$Res, _$GameResultModelImpl>
+    implements _$$GameResultModelImplCopyWith<$Res> {
+  __$$GameResultModelImplCopyWithImpl(
+      _$GameResultModelImpl _value, $Res Function(_$GameResultModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_GameResultModelCopyWithImpl<$Res>
     Object? table = null,
     Object? game = null,
   }) {
-    return _then(_$_GameResultModel(
+    return _then(_$GameResultModelImpl(
       gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_GameResultModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GameResultModel implements _GameResultModel {
-  const _$_GameResultModel(
+class _$GameResultModelImpl implements _GameResultModel {
+  const _$GameResultModelImpl(
       {required this.gameId,
       final List<PlayerRole>? roles,
       required final List<String> nicknames,
@@ -268,10 +268,10 @@ class _$_GameResultModel implements _GameResultModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GameResultModel &&
+            other is _$GameResultModelImpl &&
             (identical(other.gameId, gameId) || other.gameId == gameId) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             const DeepCollectionEquality()
@@ -300,8 +300,9 @@ class _$_GameResultModel implements _GameResultModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GameResultModelCopyWith<_$_GameResultModel> get copyWith =>
-      __$$_GameResultModelCopyWithImpl<_$_GameResultModel>(this, _$identity);
+  _$$GameResultModelImplCopyWith<_$GameResultModelImpl> get copyWith =>
+      __$$GameResultModelImplCopyWithImpl<_$GameResultModelImpl>(
+          this, _$identity);
 }
 
 abstract class _GameResultModel implements GameResultModel {
@@ -314,7 +315,7 @@ abstract class _GameResultModel implements GameResultModel {
       final List<double>? scores,
       final List<PlayerResultStatus?>? statuses,
       required final int table,
-      required final int game}) = _$_GameResultModel;
+      required final int game}) = _$GameResultModelImpl;
 
   @override
   int get gameId;
@@ -336,6 +337,6 @@ abstract class _GameResultModel implements GameResultModel {
   int get game;
   @override
   @JsonKey(ignore: true)
-  _$$_GameResultModelCopyWith<_$_GameResultModel> get copyWith =>
+  _$$GameResultModelImplCopyWith<_$GameResultModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

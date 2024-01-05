@@ -63,22 +63,22 @@ class _$VerificationStateCopyWithImpl<$Res, $Val extends VerificationState>
 }
 
 /// @nodoc
-abstract class _$$_VerificationStateCopyWith<$Res>
+abstract class _$$VerificationStateImplCopyWith<$Res>
     implements $VerificationStateCopyWith<$Res> {
-  factory _$$_VerificationStateCopyWith(_$_VerificationState value,
-          $Res Function(_$_VerificationState) then) =
-      __$$_VerificationStateCopyWithImpl<$Res>;
+  factory _$$VerificationStateImplCopyWith(_$VerificationStateImpl value,
+          $Res Function(_$VerificationStateImpl) then) =
+      __$$VerificationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool hasError, bool isLoading});
 }
 
 /// @nodoc
-class __$$_VerificationStateCopyWithImpl<$Res>
-    extends _$VerificationStateCopyWithImpl<$Res, _$_VerificationState>
-    implements _$$_VerificationStateCopyWith<$Res> {
-  __$$_VerificationStateCopyWithImpl(
-      _$_VerificationState _value, $Res Function(_$_VerificationState) _then)
+class __$$VerificationStateImplCopyWithImpl<$Res>
+    extends _$VerificationStateCopyWithImpl<$Res, _$VerificationStateImpl>
+    implements _$$VerificationStateImplCopyWith<$Res> {
+  __$$VerificationStateImplCopyWithImpl(_$VerificationStateImpl _value,
+      $Res Function(_$VerificationStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_VerificationStateCopyWithImpl<$Res>
     Object? hasError = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_VerificationState(
+    return _then(_$VerificationStateImpl(
       hasError: null == hasError
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,9 @@ class __$$_VerificationStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_VerificationState implements _VerificationState {
-  const _$_VerificationState({this.hasError = false, required this.isLoading});
+class _$VerificationStateImpl implements _VerificationState {
+  const _$VerificationStateImpl(
+      {this.hasError = false, required this.isLoading});
 
   @override
   @JsonKey()
@@ -117,10 +118,10 @@ class _$_VerificationState implements _VerificationState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VerificationState &&
+            other is _$VerificationStateImpl &&
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             (identical(other.isLoading, isLoading) ||
@@ -133,15 +134,15 @@ class _$_VerificationState implements _VerificationState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VerificationStateCopyWith<_$_VerificationState> get copyWith =>
-      __$$_VerificationStateCopyWithImpl<_$_VerificationState>(
+  _$$VerificationStateImplCopyWith<_$VerificationStateImpl> get copyWith =>
+      __$$VerificationStateImplCopyWithImpl<_$VerificationStateImpl>(
           this, _$identity);
 }
 
 abstract class _VerificationState implements VerificationState {
   const factory _VerificationState(
       {final bool hasError,
-      required final bool isLoading}) = _$_VerificationState;
+      required final bool isLoading}) = _$VerificationStateImpl;
 
   @override
   bool get hasError;
@@ -149,6 +150,6 @@ abstract class _VerificationState implements VerificationState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_VerificationStateCopyWith<_$_VerificationState> get copyWith =>
+  _$$VerificationStateImplCopyWith<_$VerificationStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

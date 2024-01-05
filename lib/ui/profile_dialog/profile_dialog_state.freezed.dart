@@ -63,22 +63,22 @@ class _$ProfileDialogStateCopyWithImpl<$Res, $Val extends ProfileDialogState>
 }
 
 /// @nodoc
-abstract class _$$_ProfileDialogStateCopyWith<$Res>
+abstract class _$$ProfileDialogStateImplCopyWith<$Res>
     implements $ProfileDialogStateCopyWith<$Res> {
-  factory _$$_ProfileDialogStateCopyWith(_$_ProfileDialogState value,
-          $Res Function(_$_ProfileDialogState) then) =
-      __$$_ProfileDialogStateCopyWithImpl<$Res>;
+  factory _$$ProfileDialogStateImplCopyWith(_$ProfileDialogStateImpl value,
+          $Res Function(_$ProfileDialogStateImpl) then) =
+      __$$ProfileDialogStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? imageUrl, bool isLoading});
 }
 
 /// @nodoc
-class __$$_ProfileDialogStateCopyWithImpl<$Res>
-    extends _$ProfileDialogStateCopyWithImpl<$Res, _$_ProfileDialogState>
-    implements _$$_ProfileDialogStateCopyWith<$Res> {
-  __$$_ProfileDialogStateCopyWithImpl(
-      _$_ProfileDialogState _value, $Res Function(_$_ProfileDialogState) _then)
+class __$$ProfileDialogStateImplCopyWithImpl<$Res>
+    extends _$ProfileDialogStateCopyWithImpl<$Res, _$ProfileDialogStateImpl>
+    implements _$$ProfileDialogStateImplCopyWith<$Res> {
+  __$$ProfileDialogStateImplCopyWithImpl(_$ProfileDialogStateImpl _value,
+      $Res Function(_$ProfileDialogStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ProfileDialogStateCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? isLoading = null,
   }) {
-    return _then(_$_ProfileDialogState(
+    return _then(_$ProfileDialogStateImpl(
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_ProfileDialogStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProfileDialogState implements _ProfileDialogState {
-  const _$_ProfileDialogState({this.imageUrl, this.isLoading = false});
+class _$ProfileDialogStateImpl implements _ProfileDialogState {
+  const _$ProfileDialogStateImpl({this.imageUrl, this.isLoading = false});
 
   @override
   final String? imageUrl;
@@ -117,10 +117,10 @@ class _$_ProfileDialogState implements _ProfileDialogState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProfileDialogState &&
+            other is _$ProfileDialogStateImpl &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.isLoading, isLoading) ||
@@ -133,14 +133,15 @@ class _$_ProfileDialogState implements _ProfileDialogState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProfileDialogStateCopyWith<_$_ProfileDialogState> get copyWith =>
-      __$$_ProfileDialogStateCopyWithImpl<_$_ProfileDialogState>(
+  _$$ProfileDialogStateImplCopyWith<_$ProfileDialogStateImpl> get copyWith =>
+      __$$ProfileDialogStateImplCopyWithImpl<_$ProfileDialogStateImpl>(
           this, _$identity);
 }
 
 abstract class _ProfileDialogState implements ProfileDialogState {
   const factory _ProfileDialogState(
-      {final String? imageUrl, final bool isLoading}) = _$_ProfileDialogState;
+      {final String? imageUrl,
+      final bool isLoading}) = _$ProfileDialogStateImpl;
 
   @override
   String? get imageUrl;
@@ -148,6 +149,6 @@ abstract class _ProfileDialogState implements ProfileDialogState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_ProfileDialogStateCopyWith<_$_ProfileDialogState> get copyWith =>
+  _$$ProfileDialogStateImplCopyWith<_$ProfileDialogStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -73,29 +73,29 @@ class _$TournamentPageEffectCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEffectUpdateSettingsSuccessCopyWith<$Res> {
-  factory _$$TournamentPageEffectUpdateSettingsSuccessCopyWith(
-          _$TournamentPageEffectUpdateSettingsSuccess value,
-          $Res Function(_$TournamentPageEffectUpdateSettingsSuccess) then) =
-      __$$TournamentPageEffectUpdateSettingsSuccessCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEffectUpdateSettingsSuccessImplCopyWith<$Res> {
+  factory _$$TournamentPageEffectUpdateSettingsSuccessImplCopyWith(
+          _$TournamentPageEffectUpdateSettingsSuccessImpl value,
+          $Res Function(_$TournamentPageEffectUpdateSettingsSuccessImpl) then) =
+      __$$TournamentPageEffectUpdateSettingsSuccessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageEffectUpdateSettingsSuccessCopyWithImpl<$Res>
+class __$$TournamentPageEffectUpdateSettingsSuccessImplCopyWithImpl<$Res>
     extends _$TournamentPageEffectCopyWithImpl<$Res,
-        _$TournamentPageEffectUpdateSettingsSuccess>
-    implements _$$TournamentPageEffectUpdateSettingsSuccessCopyWith<$Res> {
-  __$$TournamentPageEffectUpdateSettingsSuccessCopyWithImpl(
-      _$TournamentPageEffectUpdateSettingsSuccess _value,
-      $Res Function(_$TournamentPageEffectUpdateSettingsSuccess) _then)
+        _$TournamentPageEffectUpdateSettingsSuccessImpl>
+    implements _$$TournamentPageEffectUpdateSettingsSuccessImplCopyWith<$Res> {
+  __$$TournamentPageEffectUpdateSettingsSuccessImplCopyWithImpl(
+      _$TournamentPageEffectUpdateSettingsSuccessImpl _value,
+      $Res Function(_$TournamentPageEffectUpdateSettingsSuccessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageEffectUpdateSettingsSuccess
+class _$TournamentPageEffectUpdateSettingsSuccessImpl
     implements TournamentPageEffectUpdateSettingsSuccess {
-  const _$TournamentPageEffectUpdateSettingsSuccess();
+  const _$TournamentPageEffectUpdateSettingsSuccessImpl();
 
   @override
   String toString() {
@@ -103,10 +103,10 @@ class _$TournamentPageEffectUpdateSettingsSuccess
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEffectUpdateSettingsSuccess);
+            other is _$TournamentPageEffectUpdateSettingsSuccessImpl);
   }
 
   @override
@@ -175,5 +175,5 @@ class _$TournamentPageEffectUpdateSettingsSuccess
 abstract class TournamentPageEffectUpdateSettingsSuccess
     implements TournamentPageEffect {
   const factory TournamentPageEffectUpdateSettingsSuccess() =
-      _$TournamentPageEffectUpdateSettingsSuccess;
+      _$TournamentPageEffectUpdateSettingsSuccessImpl;
 }

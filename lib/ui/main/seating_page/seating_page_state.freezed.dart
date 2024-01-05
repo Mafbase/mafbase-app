@@ -73,11 +73,11 @@ class _$SeatingPageStateCopyWithImpl<$Res, $Val extends SeatingPageState>
 }
 
 /// @nodoc
-abstract class _$$_SeatingPageStateCopyWith<$Res>
+abstract class _$$SeatingPageStateImplCopyWith<$Res>
     implements $SeatingPageStateCopyWith<$Res> {
-  factory _$$_SeatingPageStateCopyWith(
-          _$_SeatingPageState value, $Res Function(_$_SeatingPageState) then) =
-      __$$_SeatingPageStateCopyWithImpl<$Res>;
+  factory _$$SeatingPageStateImplCopyWith(_$SeatingPageStateImpl value,
+          $Res Function(_$SeatingPageStateImpl) then) =
+      __$$SeatingPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_SeatingPageStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SeatingPageStateCopyWithImpl<$Res>
-    extends _$SeatingPageStateCopyWithImpl<$Res, _$_SeatingPageState>
-    implements _$$_SeatingPageStateCopyWith<$Res> {
-  __$$_SeatingPageStateCopyWithImpl(
-      _$_SeatingPageState _value, $Res Function(_$_SeatingPageState) _then)
+class __$$SeatingPageStateImplCopyWithImpl<$Res>
+    extends _$SeatingPageStateCopyWithImpl<$Res, _$SeatingPageStateImpl>
+    implements _$$SeatingPageStateImplCopyWith<$Res> {
+  __$$SeatingPageStateImplCopyWithImpl(_$SeatingPageStateImpl _value,
+      $Res Function(_$SeatingPageStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_SeatingPageStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? games = null,
   }) {
-    return _then(_$_SeatingPageState(
+    return _then(_$SeatingPageStateImpl(
       cannotMeet: null == cannotMeet
           ? _value._cannotMeet
           : cannotMeet // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,8 @@ class __$$_SeatingPageStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SeatingPageState implements _SeatingPageState {
-  const _$_SeatingPageState(
+class _$SeatingPageStateImpl implements _SeatingPageState {
+  const _$SeatingPageStateImpl(
       {final List<Pair<PlayerModel, PlayerModel>> cannotMeet = const [],
       this.isLoading = true,
       final List<List<GameResultModel>> games = const []})
@@ -155,10 +155,10 @@ class _$_SeatingPageState implements _SeatingPageState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SeatingPageState &&
+            other is _$SeatingPageStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._cannotMeet, _cannotMeet) &&
             (identical(other.isLoading, isLoading) ||
@@ -176,15 +176,16 @@ class _$_SeatingPageState implements _SeatingPageState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SeatingPageStateCopyWith<_$_SeatingPageState> get copyWith =>
-      __$$_SeatingPageStateCopyWithImpl<_$_SeatingPageState>(this, _$identity);
+  _$$SeatingPageStateImplCopyWith<_$SeatingPageStateImpl> get copyWith =>
+      __$$SeatingPageStateImplCopyWithImpl<_$SeatingPageStateImpl>(
+          this, _$identity);
 }
 
 abstract class _SeatingPageState implements SeatingPageState {
   const factory _SeatingPageState(
       {final List<Pair<PlayerModel, PlayerModel>> cannotMeet,
       final bool isLoading,
-      final List<List<GameResultModel>> games}) = _$_SeatingPageState;
+      final List<List<GameResultModel>> games}) = _$SeatingPageStateImpl;
 
   @override
   List<Pair<PlayerModel, PlayerModel>> get cannotMeet;
@@ -194,6 +195,6 @@ abstract class _SeatingPageState implements SeatingPageState {
   List<List<GameResultModel>> get games;
   @override
   @JsonKey(ignore: true)
-  _$$_SeatingPageStateCopyWith<_$_SeatingPageState> get copyWith =>
+  _$$SeatingPageStateImplCopyWith<_$SeatingPageStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

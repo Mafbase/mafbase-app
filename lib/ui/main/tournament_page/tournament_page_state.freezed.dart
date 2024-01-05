@@ -131,11 +131,11 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
 }
 
 /// @nodoc
-abstract class _$$_TournamentPageStateCopyWith<$Res>
+abstract class _$$TournamentPageStateImplCopyWith<$Res>
     implements $TournamentPageStateCopyWith<$Res> {
-  factory _$$_TournamentPageStateCopyWith(_$_TournamentPageState value,
-          $Res Function(_$_TournamentPageState) then) =
-      __$$_TournamentPageStateCopyWithImpl<$Res>;
+  factory _$$TournamentPageStateImplCopyWith(_$TournamentPageStateImpl value,
+          $Res Function(_$TournamentPageStateImpl) then) =
+      __$$TournamentPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -155,11 +155,11 @@ abstract class _$$_TournamentPageStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TournamentPageStateCopyWithImpl<$Res>
-    extends _$TournamentPageStateCopyWithImpl<$Res, _$_TournamentPageState>
-    implements _$$_TournamentPageStateCopyWith<$Res> {
-  __$$_TournamentPageStateCopyWithImpl(_$_TournamentPageState _value,
-      $Res Function(_$_TournamentPageState) _then)
+class __$$TournamentPageStateImplCopyWithImpl<$Res>
+    extends _$TournamentPageStateCopyWithImpl<$Res, _$TournamentPageStateImpl>
+    implements _$$TournamentPageStateImplCopyWith<$Res> {
+  __$$TournamentPageStateImplCopyWithImpl(_$TournamentPageStateImpl _value,
+      $Res Function(_$TournamentPageStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -176,7 +176,7 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
     Object? isMyTournament = null,
     Object? notificationEnabled = null,
   }) {
-    return _then(_$_TournamentPageState(
+    return _then(_$TournamentPageStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -223,8 +223,8 @@ class __$$_TournamentPageStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TournamentPageState implements _TournamentPageState {
-  const _$_TournamentPageState(
+class _$TournamentPageStateImpl implements _TournamentPageState {
+  const _$TournamentPageStateImpl(
       {this.isLoading = true,
       final List<PlayerModel> players = const [],
       final List<PlayerModel> tournamentPlayers = const [],
@@ -303,10 +303,10 @@ class _$_TournamentPageState implements _TournamentPageState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TournamentPageState &&
+            other is _$TournamentPageStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other._players, _players) &&
@@ -345,8 +345,8 @@ class _$_TournamentPageState implements _TournamentPageState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TournamentPageStateCopyWith<_$_TournamentPageState> get copyWith =>
-      __$$_TournamentPageStateCopyWithImpl<_$_TournamentPageState>(
+  _$$TournamentPageStateImplCopyWith<_$TournamentPageStateImpl> get copyWith =>
+      __$$TournamentPageStateImplCopyWithImpl<_$TournamentPageStateImpl>(
           this, _$identity);
 }
 
@@ -361,7 +361,7 @@ abstract class _TournamentPageState implements TournamentPageState {
       final int billedPlayers,
       final bool billedTranslation,
       final bool isMyTournament,
-      final bool notificationEnabled}) = _$_TournamentPageState;
+      final bool notificationEnabled}) = _$TournamentPageStateImpl;
 
   @override
   bool get isLoading;
@@ -385,6 +385,6 @@ abstract class _TournamentPageState implements TournamentPageState {
   bool get notificationEnabled;
   @override
   @JsonKey(ignore: true)
-  _$$_TournamentPageStateCopyWith<_$_TournamentPageState> get copyWith =>
+  _$$TournamentPageStateImplCopyWith<_$TournamentPageStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

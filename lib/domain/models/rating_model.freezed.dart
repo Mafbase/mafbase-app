@@ -86,11 +86,11 @@ class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
 }
 
 /// @nodoc
-abstract class _$$_RatingModelCopyWith<$Res>
+abstract class _$$RatingModelImplCopyWith<$Res>
     implements $RatingModelCopyWith<$Res> {
-  factory _$$_RatingModelCopyWith(
-          _$_RatingModel value, $Res Function(_$_RatingModel) then) =
-      __$$_RatingModelCopyWithImpl<$Res>;
+  factory _$$RatingModelImplCopyWith(
+          _$RatingModelImpl value, $Res Function(_$RatingModelImpl) then) =
+      __$$RatingModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_RatingModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RatingModelCopyWithImpl<$Res>
-    extends _$RatingModelCopyWithImpl<$Res, _$_RatingModel>
-    implements _$$_RatingModelCopyWith<$Res> {
-  __$$_RatingModelCopyWithImpl(
-      _$_RatingModel _value, $Res Function(_$_RatingModel) _then)
+class __$$RatingModelImplCopyWithImpl<$Res>
+    extends _$RatingModelCopyWithImpl<$Res, _$RatingModelImpl>
+    implements _$$RatingModelImplCopyWith<$Res> {
+  __$$RatingModelImplCopyWithImpl(
+      _$RatingModelImpl _value, $Res Function(_$RatingModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_RatingModelCopyWithImpl<$Res>
     Object? citizenWins = null,
     Object? mafiaWins = null,
   }) {
-    return _then(_$_RatingModel(
+    return _then(_$RatingModelImpl(
       clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_RatingModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RatingModel implements _RatingModel {
-  const _$_RatingModel(
+class _$RatingModelImpl implements _RatingModel {
+  const _$RatingModelImpl(
       {required this.clubName,
       required final List<ClubRatingRowModel> rows,
       required this.games,
@@ -177,10 +177,10 @@ class _$_RatingModel implements _RatingModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RatingModel &&
+            other is _$RatingModelImpl &&
             (identical(other.clubName, clubName) ||
                 other.clubName == clubName) &&
             const DeepCollectionEquality().equals(other._rows, _rows) &&
@@ -203,8 +203,8 @@ class _$_RatingModel implements _RatingModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
-      __$$_RatingModelCopyWithImpl<_$_RatingModel>(this, _$identity);
+  _$$RatingModelImplCopyWith<_$RatingModelImpl> get copyWith =>
+      __$$RatingModelImplCopyWithImpl<_$RatingModelImpl>(this, _$identity);
 }
 
 abstract class _RatingModel implements RatingModel {
@@ -213,7 +213,7 @@ abstract class _RatingModel implements RatingModel {
       required final List<ClubRatingRowModel> rows,
       required final int games,
       required final int citizenWins,
-      required final int mafiaWins}) = _$_RatingModel;
+      required final int mafiaWins}) = _$RatingModelImpl;
 
   @override
   String get clubName;
@@ -227,6 +227,6 @@ abstract class _RatingModel implements RatingModel {
   int get mafiaWins;
   @override
   @JsonKey(ignore: true)
-  _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
+  _$$RatingModelImplCopyWith<_$RatingModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -93,11 +93,11 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
 }
 
 /// @nodoc
-abstract class _$$_RatingStateCopyWith<$Res>
+abstract class _$$RatingStateImplCopyWith<$Res>
     implements $RatingStateCopyWith<$Res> {
-  factory _$$_RatingStateCopyWith(
-          _$_RatingState value, $Res Function(_$_RatingState) then) =
-      __$$_RatingStateCopyWithImpl<$Res>;
+  factory _$$RatingStateImplCopyWith(
+          _$RatingStateImpl value, $Res Function(_$RatingStateImpl) then) =
+      __$$RatingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_RatingStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RatingStateCopyWithImpl<$Res>
-    extends _$RatingStateCopyWithImpl<$Res, _$_RatingState>
-    implements _$$_RatingStateCopyWith<$Res> {
-  __$$_RatingStateCopyWithImpl(
-      _$_RatingState _value, $Res Function(_$_RatingState) _then)
+class __$$RatingStateImplCopyWithImpl<$Res>
+    extends _$RatingStateCopyWithImpl<$Res, _$RatingStateImpl>
+    implements _$$RatingStateImplCopyWith<$Res> {
+  __$$RatingStateImplCopyWithImpl(
+      _$RatingStateImpl _value, $Res Function(_$RatingStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_RatingStateCopyWithImpl<$Res>
     Object? citizenWins = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_RatingState(
+    return _then(_$RatingStateImpl(
       clubName: null == clubName
           ? _value.clubName
           : clubName // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_RatingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RatingState implements _RatingState {
-  const _$_RatingState(
+class _$RatingStateImpl implements _RatingState {
+  const _$RatingStateImpl(
       {this.clubName = "",
       final List<ClubRatingRowModel> rows = const [],
       this.games = 0,
@@ -199,10 +199,10 @@ class _$_RatingState implements _RatingState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RatingState &&
+            other is _$RatingStateImpl &&
             (identical(other.clubName, clubName) ||
                 other.clubName == clubName) &&
             const DeepCollectionEquality().equals(other._rows, _rows) &&
@@ -228,8 +228,8 @@ class _$_RatingState implements _RatingState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>
-      __$$_RatingStateCopyWithImpl<_$_RatingState>(this, _$identity);
+  _$$RatingStateImplCopyWith<_$RatingStateImpl> get copyWith =>
+      __$$RatingStateImplCopyWithImpl<_$RatingStateImpl>(this, _$identity);
 }
 
 abstract class _RatingState implements RatingState {
@@ -239,7 +239,7 @@ abstract class _RatingState implements RatingState {
       final int games,
       final int mafiaWins,
       final int citizenWins,
-      final bool isLoading}) = _$_RatingState;
+      final bool isLoading}) = _$RatingStateImpl;
 
   @override
   String get clubName;
@@ -255,6 +255,6 @@ abstract class _RatingState implements RatingState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_RatingStateCopyWith<_$_RatingState> get copyWith =>
+  _$$RatingStateImplCopyWith<_$RatingStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

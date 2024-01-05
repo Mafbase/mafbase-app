@@ -63,22 +63,22 @@ class _$CiSchemeModelCopyWithImpl<$Res, $Val extends CiSchemeModel>
 }
 
 /// @nodoc
-abstract class _$$_CiSchemeModelCopyWith<$Res>
+abstract class _$$CiSchemeModelImplCopyWith<$Res>
     implements $CiSchemeModelCopyWith<$Res> {
-  factory _$$_CiSchemeModelCopyWith(
-          _$_CiSchemeModel value, $Res Function(_$_CiSchemeModel) then) =
-      __$$_CiSchemeModelCopyWithImpl<$Res>;
+  factory _$$CiSchemeModelImplCopyWith(
+          _$CiSchemeModelImpl value, $Res Function(_$CiSchemeModelImpl) then) =
+      __$$CiSchemeModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class __$$_CiSchemeModelCopyWithImpl<$Res>
-    extends _$CiSchemeModelCopyWithImpl<$Res, _$_CiSchemeModel>
-    implements _$$_CiSchemeModelCopyWith<$Res> {
-  __$$_CiSchemeModelCopyWithImpl(
-      _$_CiSchemeModel _value, $Res Function(_$_CiSchemeModel) _then)
+class __$$CiSchemeModelImplCopyWithImpl<$Res>
+    extends _$CiSchemeModelCopyWithImpl<$Res, _$CiSchemeModelImpl>
+    implements _$$CiSchemeModelImplCopyWith<$Res> {
+  __$$CiSchemeModelImplCopyWithImpl(
+      _$CiSchemeModelImpl _value, $Res Function(_$CiSchemeModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_CiSchemeModelCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_CiSchemeModel(
+    return _then(_$CiSchemeModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_CiSchemeModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CiSchemeModel implements _CiSchemeModel {
-  const _$_CiSchemeModel({required this.id, required this.name});
+class _$CiSchemeModelImpl implements _CiSchemeModel {
+  const _$CiSchemeModelImpl({required this.id, required this.name});
 
   @override
   final int id;
@@ -116,10 +116,10 @@ class _$_CiSchemeModel implements _CiSchemeModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CiSchemeModel &&
+            other is _$CiSchemeModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -130,13 +130,14 @@ class _$_CiSchemeModel implements _CiSchemeModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CiSchemeModelCopyWith<_$_CiSchemeModel> get copyWith =>
-      __$$_CiSchemeModelCopyWithImpl<_$_CiSchemeModel>(this, _$identity);
+  _$$CiSchemeModelImplCopyWith<_$CiSchemeModelImpl> get copyWith =>
+      __$$CiSchemeModelImplCopyWithImpl<_$CiSchemeModelImpl>(this, _$identity);
 }
 
 abstract class _CiSchemeModel implements CiSchemeModel {
   const factory _CiSchemeModel(
-      {required final int id, required final String name}) = _$_CiSchemeModel;
+      {required final int id,
+      required final String name}) = _$CiSchemeModelImpl;
 
   @override
   int get id;
@@ -144,6 +145,6 @@ abstract class _CiSchemeModel implements CiSchemeModel {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_CiSchemeModelCopyWith<_$_CiSchemeModel> get copyWith =>
+  _$$CiSchemeModelImplCopyWith<_$CiSchemeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

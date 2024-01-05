@@ -23,7 +23,16 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
   }
 
   _onGameSelected(RatingEventGameSelected event, Emitter emit) {
-    _router.openGame(event.clubId, event.gameId);
+    final clubId = event.clubId;
+    if (clubId != null) {
+      _router.openGame(clubId, event.gameId);
+      return;
+    }
+
+    final tournamentId = event.tournamentId;
+    if (tournamentId != null) {
+      _router.openTournamentGame(tournamentId, event.gameId);
+    }
   }
 
   _onDownloadRatingClicked(

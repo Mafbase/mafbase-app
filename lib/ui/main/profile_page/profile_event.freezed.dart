@@ -75,25 +75,27 @@ class _$ProfileEventCopyWithImpl<$Res, $Val extends ProfileEvent>
 }
 
 /// @nodoc
-abstract class _$$ProfileEventPageOpenedCopyWith<$Res> {
-  factory _$$ProfileEventPageOpenedCopyWith(_$ProfileEventPageOpened value,
-          $Res Function(_$ProfileEventPageOpened) then) =
-      __$$ProfileEventPageOpenedCopyWithImpl<$Res>;
+abstract class _$$ProfileEventPageOpenedImplCopyWith<$Res> {
+  factory _$$ProfileEventPageOpenedImplCopyWith(
+          _$ProfileEventPageOpenedImpl value,
+          $Res Function(_$ProfileEventPageOpenedImpl) then) =
+      __$$ProfileEventPageOpenedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProfileEventPageOpenedCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventPageOpened>
-    implements _$$ProfileEventPageOpenedCopyWith<$Res> {
-  __$$ProfileEventPageOpenedCopyWithImpl(_$ProfileEventPageOpened _value,
-      $Res Function(_$ProfileEventPageOpened) _then)
+class __$$ProfileEventPageOpenedImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventPageOpenedImpl>
+    implements _$$ProfileEventPageOpenedImplCopyWith<$Res> {
+  __$$ProfileEventPageOpenedImplCopyWithImpl(
+      _$ProfileEventPageOpenedImpl _value,
+      $Res Function(_$ProfileEventPageOpenedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ProfileEventPageOpened implements ProfileEventPageOpened {
-  const _$ProfileEventPageOpened();
+class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
+  const _$ProfileEventPageOpenedImpl();
 
   @override
   String toString() {
@@ -101,9 +103,10 @@ class _$ProfileEventPageOpened implements ProfileEventPageOpened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ProfileEventPageOpened);
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileEventPageOpenedImpl);
   }
 
   @override
@@ -173,30 +176,31 @@ class _$ProfileEventPageOpened implements ProfileEventPageOpened {
 }
 
 abstract class ProfileEventPageOpened implements ProfileEvent {
-  const factory ProfileEventPageOpened() = _$ProfileEventPageOpened;
+  const factory ProfileEventPageOpened() = _$ProfileEventPageOpenedImpl;
 }
 
 /// @nodoc
-abstract class _$$ProfileEventLogoutPressedCopyWith<$Res> {
-  factory _$$ProfileEventLogoutPressedCopyWith(
-          _$ProfileEventLogoutPressed value,
-          $Res Function(_$ProfileEventLogoutPressed) then) =
-      __$$ProfileEventLogoutPressedCopyWithImpl<$Res>;
+abstract class _$$ProfileEventLogoutPressedImplCopyWith<$Res> {
+  factory _$$ProfileEventLogoutPressedImplCopyWith(
+          _$ProfileEventLogoutPressedImpl value,
+          $Res Function(_$ProfileEventLogoutPressedImpl) then) =
+      __$$ProfileEventLogoutPressedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProfileEventLogoutPressedCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventLogoutPressed>
-    implements _$$ProfileEventLogoutPressedCopyWith<$Res> {
-  __$$ProfileEventLogoutPressedCopyWithImpl(_$ProfileEventLogoutPressed _value,
-      $Res Function(_$ProfileEventLogoutPressed) _then)
+class __$$ProfileEventLogoutPressedImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventLogoutPressedImpl>
+    implements _$$ProfileEventLogoutPressedImplCopyWith<$Res> {
+  __$$ProfileEventLogoutPressedImplCopyWithImpl(
+      _$ProfileEventLogoutPressedImpl _value,
+      $Res Function(_$ProfileEventLogoutPressedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ProfileEventLogoutPressed implements ProfileEventLogoutPressed {
-  const _$ProfileEventLogoutPressed();
+class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
+  const _$ProfileEventLogoutPressedImpl();
 
   @override
   String toString() {
@@ -204,10 +208,10 @@ class _$ProfileEventLogoutPressed implements ProfileEventLogoutPressed {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileEventLogoutPressed);
+            other is _$ProfileEventLogoutPressedImpl);
   }
 
   @override
@@ -277,5 +281,5 @@ class _$ProfileEventLogoutPressed implements ProfileEventLogoutPressed {
 }
 
 abstract class ProfileEventLogoutPressed implements ProfileEvent {
-  const factory ProfileEventLogoutPressed() = _$ProfileEventLogoutPressed;
+  const factory ProfileEventLogoutPressed() = _$ProfileEventLogoutPressedImpl;
 }

@@ -177,29 +177,29 @@ class _$TournamentPageEventCopyWithImpl<$Res, $Val extends TournamentPageEvent>
 }
 
 /// @nodoc
-abstract class _$$TournamentPageBackButtonPreesedEventCopyWith<$Res> {
-  factory _$$TournamentPageBackButtonPreesedEventCopyWith(
-          _$TournamentPageBackButtonPreesedEvent value,
-          $Res Function(_$TournamentPageBackButtonPreesedEvent) then) =
-      __$$TournamentPageBackButtonPreesedEventCopyWithImpl<$Res>;
+abstract class _$$TournamentPageBackButtonPreesedEventImplCopyWith<$Res> {
+  factory _$$TournamentPageBackButtonPreesedEventImplCopyWith(
+          _$TournamentPageBackButtonPreesedEventImpl value,
+          $Res Function(_$TournamentPageBackButtonPreesedEventImpl) then) =
+      __$$TournamentPageBackButtonPreesedEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageBackButtonPreesedEventCopyWithImpl<$Res>
+class __$$TournamentPageBackButtonPreesedEventImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageBackButtonPreesedEvent>
-    implements _$$TournamentPageBackButtonPreesedEventCopyWith<$Res> {
-  __$$TournamentPageBackButtonPreesedEventCopyWithImpl(
-      _$TournamentPageBackButtonPreesedEvent _value,
-      $Res Function(_$TournamentPageBackButtonPreesedEvent) _then)
+        _$TournamentPageBackButtonPreesedEventImpl>
+    implements _$$TournamentPageBackButtonPreesedEventImplCopyWith<$Res> {
+  __$$TournamentPageBackButtonPreesedEventImplCopyWithImpl(
+      _$TournamentPageBackButtonPreesedEventImpl _value,
+      $Res Function(_$TournamentPageBackButtonPreesedEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageBackButtonPreesedEvent
+class _$TournamentPageBackButtonPreesedEventImpl
     implements TournamentPageBackButtonPreesedEvent {
-  const _$TournamentPageBackButtonPreesedEvent();
+  const _$TournamentPageBackButtonPreesedEventImpl();
 
   @override
   String toString() {
@@ -207,10 +207,10 @@ class _$TournamentPageBackButtonPreesedEvent
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageBackButtonPreesedEvent);
+            other is _$TournamentPageBackButtonPreesedEventImpl);
   }
 
   @override
@@ -384,33 +384,33 @@ class _$TournamentPageBackButtonPreesedEvent
 abstract class TournamentPageBackButtonPreesedEvent
     implements TournamentPageEvent {
   const factory TournamentPageBackButtonPreesedEvent() =
-      _$TournamentPageBackButtonPreesedEvent;
+      _$TournamentPageBackButtonPreesedEventImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventPlayersListTappedCopyWith<$Res> {
-  factory _$$TournamentPageEventPlayersListTappedCopyWith(
-          _$TournamentPageEventPlayersListTapped value,
-          $Res Function(_$TournamentPageEventPlayersListTapped) then) =
-      __$$TournamentPageEventPlayersListTappedCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventPlayersListTappedImplCopyWith<$Res> {
+  factory _$$TournamentPageEventPlayersListTappedImplCopyWith(
+          _$TournamentPageEventPlayersListTappedImpl value,
+          $Res Function(_$TournamentPageEventPlayersListTappedImpl) then) =
+      __$$TournamentPageEventPlayersListTappedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageEventPlayersListTappedCopyWithImpl<$Res>
+class __$$TournamentPageEventPlayersListTappedImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventPlayersListTapped>
-    implements _$$TournamentPageEventPlayersListTappedCopyWith<$Res> {
-  __$$TournamentPageEventPlayersListTappedCopyWithImpl(
-      _$TournamentPageEventPlayersListTapped _value,
-      $Res Function(_$TournamentPageEventPlayersListTapped) _then)
+        _$TournamentPageEventPlayersListTappedImpl>
+    implements _$$TournamentPageEventPlayersListTappedImplCopyWith<$Res> {
+  __$$TournamentPageEventPlayersListTappedImplCopyWithImpl(
+      _$TournamentPageEventPlayersListTappedImpl _value,
+      $Res Function(_$TournamentPageEventPlayersListTappedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageEventPlayersListTapped
+class _$TournamentPageEventPlayersListTappedImpl
     implements TournamentPageEventPlayersListTapped {
-  const _$TournamentPageEventPlayersListTapped();
+  const _$TournamentPageEventPlayersListTappedImpl();
 
   @override
   String toString() {
@@ -418,10 +418,10 @@ class _$TournamentPageEventPlayersListTapped
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventPlayersListTapped);
+            other is _$TournamentPageEventPlayersListTappedImpl);
   }
 
   @override
@@ -595,15 +595,15 @@ class _$TournamentPageEventPlayersListTapped
 abstract class TournamentPageEventPlayersListTapped
     implements TournamentPageEvent {
   const factory TournamentPageEventPlayersListTapped() =
-      _$TournamentPageEventPlayersListTapped;
+      _$TournamentPageEventPlayersListTappedImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventUpdateSettingsCopyWith<$Res> {
-  factory _$$TournamentPageEventUpdateSettingsCopyWith(
-          _$TournamentPageEventUpdateSettings value,
-          $Res Function(_$TournamentPageEventUpdateSettings) then) =
-      __$$TournamentPageEventUpdateSettingsCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventUpdateSettingsImplCopyWith<$Res> {
+  factory _$$TournamentPageEventUpdateSettingsImplCopyWith(
+          _$TournamentPageEventUpdateSettingsImpl value,
+          $Res Function(_$TournamentPageEventUpdateSettingsImpl) then) =
+      __$$TournamentPageEventUpdateSettingsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({TournamentSettingsModel settings});
 
@@ -611,13 +611,13 @@ abstract class _$$TournamentPageEventUpdateSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TournamentPageEventUpdateSettingsCopyWithImpl<$Res>
+class __$$TournamentPageEventUpdateSettingsImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventUpdateSettings>
-    implements _$$TournamentPageEventUpdateSettingsCopyWith<$Res> {
-  __$$TournamentPageEventUpdateSettingsCopyWithImpl(
-      _$TournamentPageEventUpdateSettings _value,
-      $Res Function(_$TournamentPageEventUpdateSettings) _then)
+        _$TournamentPageEventUpdateSettingsImpl>
+    implements _$$TournamentPageEventUpdateSettingsImplCopyWith<$Res> {
+  __$$TournamentPageEventUpdateSettingsImplCopyWithImpl(
+      _$TournamentPageEventUpdateSettingsImpl _value,
+      $Res Function(_$TournamentPageEventUpdateSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -625,7 +625,7 @@ class __$$TournamentPageEventUpdateSettingsCopyWithImpl<$Res>
   $Res call({
     Object? settings = null,
   }) {
-    return _then(_$TournamentPageEventUpdateSettings(
+    return _then(_$TournamentPageEventUpdateSettingsImpl(
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -644,9 +644,9 @@ class __$$TournamentPageEventUpdateSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TournamentPageEventUpdateSettings
+class _$TournamentPageEventUpdateSettingsImpl
     implements TournamentPageEventUpdateSettings {
-  const _$TournamentPageEventUpdateSettings({required this.settings});
+  const _$TournamentPageEventUpdateSettingsImpl({required this.settings});
 
   @override
   final TournamentSettingsModel settings;
@@ -657,10 +657,10 @@ class _$TournamentPageEventUpdateSettings
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventUpdateSettings &&
+            other is _$TournamentPageEventUpdateSettingsImpl &&
             (identical(other.settings, settings) ||
                 other.settings == settings));
   }
@@ -671,10 +671,10 @@ class _$TournamentPageEventUpdateSettings
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TournamentPageEventUpdateSettingsCopyWith<
-          _$TournamentPageEventUpdateSettings>
-      get copyWith => __$$TournamentPageEventUpdateSettingsCopyWithImpl<
-          _$TournamentPageEventUpdateSettings>(this, _$identity);
+  _$$TournamentPageEventUpdateSettingsImplCopyWith<
+          _$TournamentPageEventUpdateSettingsImpl>
+      get copyWith => __$$TournamentPageEventUpdateSettingsImplCopyWithImpl<
+          _$TournamentPageEventUpdateSettingsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -845,38 +845,39 @@ abstract class TournamentPageEventUpdateSettings
     implements TournamentPageEvent {
   const factory TournamentPageEventUpdateSettings(
           {required final TournamentSettingsModel settings}) =
-      _$TournamentPageEventUpdateSettings;
+      _$TournamentPageEventUpdateSettingsImpl;
 
   TournamentSettingsModel get settings;
   @JsonKey(ignore: true)
-  _$$TournamentPageEventUpdateSettingsCopyWith<
-          _$TournamentPageEventUpdateSettings>
+  _$$TournamentPageEventUpdateSettingsImplCopyWith<
+          _$TournamentPageEventUpdateSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventOpenRatingCopyWith<$Res> {
-  factory _$$TournamentPageEventOpenRatingCopyWith(
-          _$TournamentPageEventOpenRating value,
-          $Res Function(_$TournamentPageEventOpenRating) then) =
-      __$$TournamentPageEventOpenRatingCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventOpenRatingImplCopyWith<$Res> {
+  factory _$$TournamentPageEventOpenRatingImplCopyWith(
+          _$TournamentPageEventOpenRatingImpl value,
+          $Res Function(_$TournamentPageEventOpenRatingImpl) then) =
+      __$$TournamentPageEventOpenRatingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageEventOpenRatingCopyWithImpl<$Res>
+class __$$TournamentPageEventOpenRatingImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventOpenRating>
-    implements _$$TournamentPageEventOpenRatingCopyWith<$Res> {
-  __$$TournamentPageEventOpenRatingCopyWithImpl(
-      _$TournamentPageEventOpenRating _value,
-      $Res Function(_$TournamentPageEventOpenRating) _then)
+        _$TournamentPageEventOpenRatingImpl>
+    implements _$$TournamentPageEventOpenRatingImplCopyWith<$Res> {
+  __$$TournamentPageEventOpenRatingImplCopyWithImpl(
+      _$TournamentPageEventOpenRatingImpl _value,
+      $Res Function(_$TournamentPageEventOpenRatingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
-  const _$TournamentPageEventOpenRating();
+class _$TournamentPageEventOpenRatingImpl
+    implements TournamentPageEventOpenRating {
+  const _$TournamentPageEventOpenRatingImpl();
 
   @override
   String toString() {
@@ -884,10 +885,10 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventOpenRating);
+            other is _$TournamentPageEventOpenRatingImpl);
   }
 
   @override
@@ -1060,33 +1061,33 @@ class _$TournamentPageEventOpenRating implements TournamentPageEventOpenRating {
 
 abstract class TournamentPageEventOpenRating implements TournamentPageEvent {
   const factory TournamentPageEventOpenRating() =
-      _$TournamentPageEventOpenRating;
+      _$TournamentPageEventOpenRatingImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPagePlayerListOpenedEventCopyWith<$Res> {
-  factory _$$TournamentPagePlayerListOpenedEventCopyWith(
-          _$TournamentPagePlayerListOpenedEvent value,
-          $Res Function(_$TournamentPagePlayerListOpenedEvent) then) =
-      __$$TournamentPagePlayerListOpenedEventCopyWithImpl<$Res>;
+abstract class _$$TournamentPagePlayerListOpenedEventImplCopyWith<$Res> {
+  factory _$$TournamentPagePlayerListOpenedEventImplCopyWith(
+          _$TournamentPagePlayerListOpenedEventImpl value,
+          $Res Function(_$TournamentPagePlayerListOpenedEventImpl) then) =
+      __$$TournamentPagePlayerListOpenedEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPagePlayerListOpenedEventCopyWithImpl<$Res>
+class __$$TournamentPagePlayerListOpenedEventImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPagePlayerListOpenedEvent>
-    implements _$$TournamentPagePlayerListOpenedEventCopyWith<$Res> {
-  __$$TournamentPagePlayerListOpenedEventCopyWithImpl(
-      _$TournamentPagePlayerListOpenedEvent _value,
-      $Res Function(_$TournamentPagePlayerListOpenedEvent) _then)
+        _$TournamentPagePlayerListOpenedEventImpl>
+    implements _$$TournamentPagePlayerListOpenedEventImplCopyWith<$Res> {
+  __$$TournamentPagePlayerListOpenedEventImplCopyWithImpl(
+      _$TournamentPagePlayerListOpenedEventImpl _value,
+      $Res Function(_$TournamentPagePlayerListOpenedEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPagePlayerListOpenedEvent
+class _$TournamentPagePlayerListOpenedEventImpl
     implements TournamentPagePlayerListOpenedEvent {
-  const _$TournamentPagePlayerListOpenedEvent();
+  const _$TournamentPagePlayerListOpenedEventImpl();
 
   @override
   String toString() {
@@ -1094,10 +1095,10 @@ class _$TournamentPagePlayerListOpenedEvent
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPagePlayerListOpenedEvent);
+            other is _$TournamentPagePlayerListOpenedEventImpl);
   }
 
   @override
@@ -1271,32 +1272,33 @@ class _$TournamentPagePlayerListOpenedEvent
 abstract class TournamentPagePlayerListOpenedEvent
     implements TournamentPageEvent {
   const factory TournamentPagePlayerListOpenedEvent() =
-      _$TournamentPagePlayerListOpenedEvent;
+      _$TournamentPagePlayerListOpenedEventImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventAddPlayerCopyWith<$Res> {
-  factory _$$TournamentPageEventAddPlayerCopyWith(
-          _$TournamentPageEventAddPlayer value,
-          $Res Function(_$TournamentPageEventAddPlayer) then) =
-      __$$TournamentPageEventAddPlayerCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventAddPlayerImplCopyWith<$Res> {
+  factory _$$TournamentPageEventAddPlayerImplCopyWith(
+          _$TournamentPageEventAddPlayerImpl value,
+          $Res Function(_$TournamentPageEventAddPlayerImpl) then) =
+      __$$TournamentPageEventAddPlayerImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageEventAddPlayerCopyWithImpl<$Res>
+class __$$TournamentPageEventAddPlayerImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventAddPlayer>
-    implements _$$TournamentPageEventAddPlayerCopyWith<$Res> {
-  __$$TournamentPageEventAddPlayerCopyWithImpl(
-      _$TournamentPageEventAddPlayer _value,
-      $Res Function(_$TournamentPageEventAddPlayer) _then)
+        _$TournamentPageEventAddPlayerImpl>
+    implements _$$TournamentPageEventAddPlayerImplCopyWith<$Res> {
+  __$$TournamentPageEventAddPlayerImplCopyWithImpl(
+      _$TournamentPageEventAddPlayerImpl _value,
+      $Res Function(_$TournamentPageEventAddPlayerImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
-  const _$TournamentPageEventAddPlayer();
+class _$TournamentPageEventAddPlayerImpl
+    implements TournamentPageEventAddPlayer {
+  const _$TournamentPageEventAddPlayerImpl();
 
   @override
   String toString() {
@@ -1304,10 +1306,10 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventAddPlayer);
+            other is _$TournamentPageEventAddPlayerImpl);
   }
 
   @override
@@ -1479,33 +1481,34 @@ class _$TournamentPageEventAddPlayer implements TournamentPageEventAddPlayer {
 }
 
 abstract class TournamentPageEventAddPlayer implements TournamentPageEvent {
-  const factory TournamentPageEventAddPlayer() = _$TournamentPageEventAddPlayer;
+  const factory TournamentPageEventAddPlayer() =
+      _$TournamentPageEventAddPlayerImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventEditSettingsCopyWith<$Res> {
-  factory _$$TournamentPageEventEditSettingsCopyWith(
-          _$TournamentPageEventEditSettings value,
-          $Res Function(_$TournamentPageEventEditSettings) then) =
-      __$$TournamentPageEventEditSettingsCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventEditSettingsImplCopyWith<$Res> {
+  factory _$$TournamentPageEventEditSettingsImplCopyWith(
+          _$TournamentPageEventEditSettingsImpl value,
+          $Res Function(_$TournamentPageEventEditSettingsImpl) then) =
+      __$$TournamentPageEventEditSettingsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageEventEditSettingsCopyWithImpl<$Res>
+class __$$TournamentPageEventEditSettingsImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventEditSettings>
-    implements _$$TournamentPageEventEditSettingsCopyWith<$Res> {
-  __$$TournamentPageEventEditSettingsCopyWithImpl(
-      _$TournamentPageEventEditSettings _value,
-      $Res Function(_$TournamentPageEventEditSettings) _then)
+        _$TournamentPageEventEditSettingsImpl>
+    implements _$$TournamentPageEventEditSettingsImplCopyWith<$Res> {
+  __$$TournamentPageEventEditSettingsImplCopyWithImpl(
+      _$TournamentPageEventEditSettingsImpl _value,
+      $Res Function(_$TournamentPageEventEditSettingsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageEventEditSettings
+class _$TournamentPageEventEditSettingsImpl
     implements TournamentPageEventEditSettings {
-  const _$TournamentPageEventEditSettings();
+  const _$TournamentPageEventEditSettingsImpl();
 
   @override
   String toString() {
@@ -1513,10 +1516,10 @@ class _$TournamentPageEventEditSettings
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventEditSettings);
+            other is _$TournamentPageEventEditSettingsImpl);
   }
 
   @override
@@ -1689,15 +1692,15 @@ class _$TournamentPageEventEditSettings
 
 abstract class TournamentPageEventEditSettings implements TournamentPageEvent {
   const factory TournamentPageEventEditSettings() =
-      _$TournamentPageEventEditSettings;
+      _$TournamentPageEventEditSettingsImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
-  factory _$$TournamentPageEventDeletePlayerCopyWith(
-          _$TournamentPageEventDeletePlayer value,
-          $Res Function(_$TournamentPageEventDeletePlayer) then) =
-      __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventDeletePlayerImplCopyWith<$Res> {
+  factory _$$TournamentPageEventDeletePlayerImplCopyWith(
+          _$TournamentPageEventDeletePlayerImpl value,
+          $Res Function(_$TournamentPageEventDeletePlayerImpl) then) =
+      __$$TournamentPageEventDeletePlayerImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PlayerModel player});
 
@@ -1705,13 +1708,13 @@ abstract class _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>
+class __$$TournamentPageEventDeletePlayerImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventDeletePlayer>
-    implements _$$TournamentPageEventDeletePlayerCopyWith<$Res> {
-  __$$TournamentPageEventDeletePlayerCopyWithImpl(
-      _$TournamentPageEventDeletePlayer _value,
-      $Res Function(_$TournamentPageEventDeletePlayer) _then)
+        _$TournamentPageEventDeletePlayerImpl>
+    implements _$$TournamentPageEventDeletePlayerImplCopyWith<$Res> {
+  __$$TournamentPageEventDeletePlayerImplCopyWithImpl(
+      _$TournamentPageEventDeletePlayerImpl _value,
+      $Res Function(_$TournamentPageEventDeletePlayerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1719,7 +1722,7 @@ class __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>
   $Res call({
     Object? player = null,
   }) {
-    return _then(_$TournamentPageEventDeletePlayer(
+    return _then(_$TournamentPageEventDeletePlayerImpl(
       player: null == player
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
@@ -1738,9 +1741,9 @@ class __$$TournamentPageEventDeletePlayerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TournamentPageEventDeletePlayer
+class _$TournamentPageEventDeletePlayerImpl
     implements TournamentPageEventDeletePlayer {
-  const _$TournamentPageEventDeletePlayer({required this.player});
+  const _$TournamentPageEventDeletePlayerImpl({required this.player});
 
   @override
   final PlayerModel player;
@@ -1751,10 +1754,10 @@ class _$TournamentPageEventDeletePlayer
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventDeletePlayer &&
+            other is _$TournamentPageEventDeletePlayerImpl &&
             (identical(other.player, player) || other.player == player));
   }
 
@@ -1764,9 +1767,10 @@ class _$TournamentPageEventDeletePlayer
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TournamentPageEventDeletePlayerCopyWith<_$TournamentPageEventDeletePlayer>
-      get copyWith => __$$TournamentPageEventDeletePlayerCopyWithImpl<
-          _$TournamentPageEventDeletePlayer>(this, _$identity);
+  _$$TournamentPageEventDeletePlayerImplCopyWith<
+          _$TournamentPageEventDeletePlayerImpl>
+      get copyWith => __$$TournamentPageEventDeletePlayerImplCopyWithImpl<
+          _$TournamentPageEventDeletePlayerImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1935,20 +1939,22 @@ class _$TournamentPageEventDeletePlayer
 
 abstract class TournamentPageEventDeletePlayer implements TournamentPageEvent {
   const factory TournamentPageEventDeletePlayer(
-      {required final PlayerModel player}) = _$TournamentPageEventDeletePlayer;
+          {required final PlayerModel player}) =
+      _$TournamentPageEventDeletePlayerImpl;
 
   PlayerModel get player;
   @JsonKey(ignore: true)
-  _$$TournamentPageEventDeletePlayerCopyWith<_$TournamentPageEventDeletePlayer>
+  _$$TournamentPageEventDeletePlayerImplCopyWith<
+          _$TournamentPageEventDeletePlayerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventOpenProfileDialogCopyWith<$Res> {
-  factory _$$TournamentPageEventOpenProfileDialogCopyWith(
-          _$TournamentPageEventOpenProfileDialog value,
-          $Res Function(_$TournamentPageEventOpenProfileDialog) then) =
-      __$$TournamentPageEventOpenProfileDialogCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventOpenProfileDialogImplCopyWith<$Res> {
+  factory _$$TournamentPageEventOpenProfileDialogImplCopyWith(
+          _$TournamentPageEventOpenProfileDialogImpl value,
+          $Res Function(_$TournamentPageEventOpenProfileDialogImpl) then) =
+      __$$TournamentPageEventOpenProfileDialogImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PlayerModel player});
 
@@ -1956,13 +1962,13 @@ abstract class _$$TournamentPageEventOpenProfileDialogCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TournamentPageEventOpenProfileDialogCopyWithImpl<$Res>
+class __$$TournamentPageEventOpenProfileDialogImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventOpenProfileDialog>
-    implements _$$TournamentPageEventOpenProfileDialogCopyWith<$Res> {
-  __$$TournamentPageEventOpenProfileDialogCopyWithImpl(
-      _$TournamentPageEventOpenProfileDialog _value,
-      $Res Function(_$TournamentPageEventOpenProfileDialog) _then)
+        _$TournamentPageEventOpenProfileDialogImpl>
+    implements _$$TournamentPageEventOpenProfileDialogImplCopyWith<$Res> {
+  __$$TournamentPageEventOpenProfileDialogImplCopyWithImpl(
+      _$TournamentPageEventOpenProfileDialogImpl _value,
+      $Res Function(_$TournamentPageEventOpenProfileDialogImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1970,7 +1976,7 @@ class __$$TournamentPageEventOpenProfileDialogCopyWithImpl<$Res>
   $Res call({
     Object? player = null,
   }) {
-    return _then(_$TournamentPageEventOpenProfileDialog(
+    return _then(_$TournamentPageEventOpenProfileDialogImpl(
       player: null == player
           ? _value.player
           : player // ignore: cast_nullable_to_non_nullable
@@ -1989,9 +1995,9 @@ class __$$TournamentPageEventOpenProfileDialogCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TournamentPageEventOpenProfileDialog
+class _$TournamentPageEventOpenProfileDialogImpl
     implements TournamentPageEventOpenProfileDialog {
-  const _$TournamentPageEventOpenProfileDialog({required this.player});
+  const _$TournamentPageEventOpenProfileDialogImpl({required this.player});
 
   @override
   final PlayerModel player;
@@ -2002,10 +2008,10 @@ class _$TournamentPageEventOpenProfileDialog
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventOpenProfileDialog &&
+            other is _$TournamentPageEventOpenProfileDialogImpl &&
             (identical(other.player, player) || other.player == player));
   }
 
@@ -2015,10 +2021,10 @@ class _$TournamentPageEventOpenProfileDialog
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TournamentPageEventOpenProfileDialogCopyWith<
-          _$TournamentPageEventOpenProfileDialog>
-      get copyWith => __$$TournamentPageEventOpenProfileDialogCopyWithImpl<
-          _$TournamentPageEventOpenProfileDialog>(this, _$identity);
+  _$$TournamentPageEventOpenProfileDialogImplCopyWith<
+          _$TournamentPageEventOpenProfileDialogImpl>
+      get copyWith => __$$TournamentPageEventOpenProfileDialogImplCopyWithImpl<
+          _$TournamentPageEventOpenProfileDialogImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2189,39 +2195,39 @@ abstract class TournamentPageEventOpenProfileDialog
     implements TournamentPageEvent {
   const factory TournamentPageEventOpenProfileDialog(
           {required final PlayerModel player}) =
-      _$TournamentPageEventOpenProfileDialog;
+      _$TournamentPageEventOpenProfileDialogImpl;
 
   PlayerModel get player;
   @JsonKey(ignore: true)
-  _$$TournamentPageEventOpenProfileDialogCopyWith<
-          _$TournamentPageEventOpenProfileDialog>
+  _$$TournamentPageEventOpenProfileDialogImplCopyWith<
+          _$TournamentPageEventOpenProfileDialogImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventOpenSeatingPageCopyWith<$Res> {
-  factory _$$TournamentPageEventOpenSeatingPageCopyWith(
-          _$TournamentPageEventOpenSeatingPage value,
-          $Res Function(_$TournamentPageEventOpenSeatingPage) then) =
-      __$$TournamentPageEventOpenSeatingPageCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventOpenSeatingPageImplCopyWith<$Res> {
+  factory _$$TournamentPageEventOpenSeatingPageImplCopyWith(
+          _$TournamentPageEventOpenSeatingPageImpl value,
+          $Res Function(_$TournamentPageEventOpenSeatingPageImpl) then) =
+      __$$TournamentPageEventOpenSeatingPageImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageEventOpenSeatingPageCopyWithImpl<$Res>
+class __$$TournamentPageEventOpenSeatingPageImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventOpenSeatingPage>
-    implements _$$TournamentPageEventOpenSeatingPageCopyWith<$Res> {
-  __$$TournamentPageEventOpenSeatingPageCopyWithImpl(
-      _$TournamentPageEventOpenSeatingPage _value,
-      $Res Function(_$TournamentPageEventOpenSeatingPage) _then)
+        _$TournamentPageEventOpenSeatingPageImpl>
+    implements _$$TournamentPageEventOpenSeatingPageImplCopyWith<$Res> {
+  __$$TournamentPageEventOpenSeatingPageImplCopyWithImpl(
+      _$TournamentPageEventOpenSeatingPageImpl _value,
+      $Res Function(_$TournamentPageEventOpenSeatingPageImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageEventOpenSeatingPage
+class _$TournamentPageEventOpenSeatingPageImpl
     implements TournamentPageEventOpenSeatingPage {
-  const _$TournamentPageEventOpenSeatingPage();
+  const _$TournamentPageEventOpenSeatingPageImpl();
 
   @override
   String toString() {
@@ -2229,10 +2235,10 @@ class _$TournamentPageEventOpenSeatingPage
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventOpenSeatingPage);
+            other is _$TournamentPageEventOpenSeatingPageImpl);
   }
 
   @override
@@ -2406,24 +2412,27 @@ class _$TournamentPageEventOpenSeatingPage
 abstract class TournamentPageEventOpenSeatingPage
     implements TournamentPageEvent {
   const factory TournamentPageEventOpenSeatingPage() =
-      _$TournamentPageEventOpenSeatingPage;
+      _$TournamentPageEventOpenSeatingPageImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventBillCopyWith<$Res> {
-  factory _$$TournamentPageEventBillCopyWith(_$TournamentPageEventBill value,
-          $Res Function(_$TournamentPageEventBill) then) =
-      __$$TournamentPageEventBillCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventBillImplCopyWith<$Res> {
+  factory _$$TournamentPageEventBillImplCopyWith(
+          _$TournamentPageEventBillImpl value,
+          $Res Function(_$TournamentPageEventBillImpl) then) =
+      __$$TournamentPageEventBillImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int playersCount, bool billedTranlsation});
 }
 
 /// @nodoc
-class __$$TournamentPageEventBillCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res, _$TournamentPageEventBill>
-    implements _$$TournamentPageEventBillCopyWith<$Res> {
-  __$$TournamentPageEventBillCopyWithImpl(_$TournamentPageEventBill _value,
-      $Res Function(_$TournamentPageEventBill) _then)
+class __$$TournamentPageEventBillImplCopyWithImpl<$Res>
+    extends _$TournamentPageEventCopyWithImpl<$Res,
+        _$TournamentPageEventBillImpl>
+    implements _$$TournamentPageEventBillImplCopyWith<$Res> {
+  __$$TournamentPageEventBillImplCopyWithImpl(
+      _$TournamentPageEventBillImpl _value,
+      $Res Function(_$TournamentPageEventBillImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2432,7 +2441,7 @@ class __$$TournamentPageEventBillCopyWithImpl<$Res>
     Object? playersCount = null,
     Object? billedTranlsation = null,
   }) {
-    return _then(_$TournamentPageEventBill(
+    return _then(_$TournamentPageEventBillImpl(
       playersCount: null == playersCount
           ? _value.playersCount
           : playersCount // ignore: cast_nullable_to_non_nullable
@@ -2447,8 +2456,8 @@ class __$$TournamentPageEventBillCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TournamentPageEventBill implements TournamentPageEventBill {
-  const _$TournamentPageEventBill(
+class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
+  const _$TournamentPageEventBillImpl(
       {required this.playersCount, required this.billedTranlsation});
 
   @override
@@ -2462,10 +2471,10 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventBill &&
+            other is _$TournamentPageEventBillImpl &&
             (identical(other.playersCount, playersCount) ||
                 other.playersCount == playersCount) &&
             (identical(other.billedTranlsation, billedTranlsation) ||
@@ -2478,9 +2487,9 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TournamentPageEventBillCopyWith<_$TournamentPageEventBill> get copyWith =>
-      __$$TournamentPageEventBillCopyWithImpl<_$TournamentPageEventBill>(
-          this, _$identity);
+  _$$TournamentPageEventBillImplCopyWith<_$TournamentPageEventBillImpl>
+      get copyWith => __$$TournamentPageEventBillImplCopyWithImpl<
+          _$TournamentPageEventBillImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2650,38 +2659,39 @@ class _$TournamentPageEventBill implements TournamentPageEventBill {
 abstract class TournamentPageEventBill implements TournamentPageEvent {
   const factory TournamentPageEventBill(
       {required final int playersCount,
-      required final bool billedTranlsation}) = _$TournamentPageEventBill;
+      required final bool billedTranlsation}) = _$TournamentPageEventBillImpl;
 
   int get playersCount;
   bool get billedTranlsation;
   @JsonKey(ignore: true)
-  _$$TournamentPageEventBillCopyWith<_$TournamentPageEventBill> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TournamentPageEventBillImplCopyWith<_$TournamentPageEventBillImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventPageOpenedCopyWith<$Res> {
-  factory _$$TournamentPageEventPageOpenedCopyWith(
-          _$TournamentPageEventPageOpened value,
-          $Res Function(_$TournamentPageEventPageOpened) then) =
-      __$$TournamentPageEventPageOpenedCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventPageOpenedImplCopyWith<$Res> {
+  factory _$$TournamentPageEventPageOpenedImplCopyWith(
+          _$TournamentPageEventPageOpenedImpl value,
+          $Res Function(_$TournamentPageEventPageOpenedImpl) then) =
+      __$$TournamentPageEventPageOpenedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TournamentPageEventPageOpenedCopyWithImpl<$Res>
+class __$$TournamentPageEventPageOpenedImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventPageOpened>
-    implements _$$TournamentPageEventPageOpenedCopyWith<$Res> {
-  __$$TournamentPageEventPageOpenedCopyWithImpl(
-      _$TournamentPageEventPageOpened _value,
-      $Res Function(_$TournamentPageEventPageOpened) _then)
+        _$TournamentPageEventPageOpenedImpl>
+    implements _$$TournamentPageEventPageOpenedImplCopyWith<$Res> {
+  __$$TournamentPageEventPageOpenedImplCopyWithImpl(
+      _$TournamentPageEventPageOpenedImpl _value,
+      $Res Function(_$TournamentPageEventPageOpenedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
-  const _$TournamentPageEventPageOpened();
+class _$TournamentPageEventPageOpenedImpl
+    implements TournamentPageEventPageOpened {
+  const _$TournamentPageEventPageOpenedImpl();
 
   @override
   String toString() {
@@ -2689,10 +2699,10 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventPageOpened);
+            other is _$TournamentPageEventPageOpenedImpl);
   }
 
   @override
@@ -2865,27 +2875,27 @@ class _$TournamentPageEventPageOpened implements TournamentPageEventPageOpened {
 
 abstract class TournamentPageEventPageOpened implements TournamentPageEvent {
   const factory TournamentPageEventPageOpened() =
-      _$TournamentPageEventPageOpened;
+      _$TournamentPageEventPageOpenedImpl;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventSetFinalPlayersCopyWith<$Res> {
-  factory _$$TournamentPageEventSetFinalPlayersCopyWith(
-          _$TournamentPageEventSetFinalPlayers value,
-          $Res Function(_$TournamentPageEventSetFinalPlayers) then) =
-      __$$TournamentPageEventSetFinalPlayersCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventSetFinalPlayersImplCopyWith<$Res> {
+  factory _$$TournamentPageEventSetFinalPlayersImplCopyWith(
+          _$TournamentPageEventSetFinalPlayersImpl value,
+          $Res Function(_$TournamentPageEventSetFinalPlayersImpl) then) =
+      __$$TournamentPageEventSetFinalPlayersImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PlayerModel> players});
 }
 
 /// @nodoc
-class __$$TournamentPageEventSetFinalPlayersCopyWithImpl<$Res>
+class __$$TournamentPageEventSetFinalPlayersImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventSetFinalPlayers>
-    implements _$$TournamentPageEventSetFinalPlayersCopyWith<$Res> {
-  __$$TournamentPageEventSetFinalPlayersCopyWithImpl(
-      _$TournamentPageEventSetFinalPlayers _value,
-      $Res Function(_$TournamentPageEventSetFinalPlayers) _then)
+        _$TournamentPageEventSetFinalPlayersImpl>
+    implements _$$TournamentPageEventSetFinalPlayersImplCopyWith<$Res> {
+  __$$TournamentPageEventSetFinalPlayersImplCopyWithImpl(
+      _$TournamentPageEventSetFinalPlayersImpl _value,
+      $Res Function(_$TournamentPageEventSetFinalPlayersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2893,7 +2903,7 @@ class __$$TournamentPageEventSetFinalPlayersCopyWithImpl<$Res>
   $Res call({
     Object? players = null,
   }) {
-    return _then(_$TournamentPageEventSetFinalPlayers(
+    return _then(_$TournamentPageEventSetFinalPlayersImpl(
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
@@ -2904,9 +2914,9 @@ class __$$TournamentPageEventSetFinalPlayersCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TournamentPageEventSetFinalPlayers
+class _$TournamentPageEventSetFinalPlayersImpl
     implements TournamentPageEventSetFinalPlayers {
-  const _$TournamentPageEventSetFinalPlayers(
+  const _$TournamentPageEventSetFinalPlayersImpl(
       {required final List<PlayerModel> players})
       : _players = players;
 
@@ -2924,10 +2934,10 @@ class _$TournamentPageEventSetFinalPlayers
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventSetFinalPlayers &&
+            other is _$TournamentPageEventSetFinalPlayersImpl &&
             const DeepCollectionEquality().equals(other._players, _players));
   }
 
@@ -2938,10 +2948,10 @@ class _$TournamentPageEventSetFinalPlayers
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TournamentPageEventSetFinalPlayersCopyWith<
-          _$TournamentPageEventSetFinalPlayers>
-      get copyWith => __$$TournamentPageEventSetFinalPlayersCopyWithImpl<
-          _$TournamentPageEventSetFinalPlayers>(this, _$identity);
+  _$$TournamentPageEventSetFinalPlayersImplCopyWith<
+          _$TournamentPageEventSetFinalPlayersImpl>
+      get copyWith => __$$TournamentPageEventSetFinalPlayersImplCopyWithImpl<
+          _$TournamentPageEventSetFinalPlayersImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3112,33 +3122,33 @@ abstract class TournamentPageEventSetFinalPlayers
     implements TournamentPageEvent {
   const factory TournamentPageEventSetFinalPlayers(
           {required final List<PlayerModel> players}) =
-      _$TournamentPageEventSetFinalPlayers;
+      _$TournamentPageEventSetFinalPlayersImpl;
 
   List<PlayerModel> get players;
   @JsonKey(ignore: true)
-  _$$TournamentPageEventSetFinalPlayersCopyWith<
-          _$TournamentPageEventSetFinalPlayers>
+  _$$TournamentPageEventSetFinalPlayersImplCopyWith<
+          _$TournamentPageEventSetFinalPlayersImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventStartGameInfoCopyWith<$Res> {
-  factory _$$TournamentPageEventStartGameInfoCopyWith(
-          _$TournamentPageEventStartGameInfo value,
-          $Res Function(_$TournamentPageEventStartGameInfo) then) =
-      __$$TournamentPageEventStartGameInfoCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventStartGameInfoImplCopyWith<$Res> {
+  factory _$$TournamentPageEventStartGameInfoImplCopyWith(
+          _$TournamentPageEventStartGameInfoImpl value,
+          $Res Function(_$TournamentPageEventStartGameInfoImpl) then) =
+      __$$TournamentPageEventStartGameInfoImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int game});
 }
 
 /// @nodoc
-class __$$TournamentPageEventStartGameInfoCopyWithImpl<$Res>
+class __$$TournamentPageEventStartGameInfoImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventStartGameInfo>
-    implements _$$TournamentPageEventStartGameInfoCopyWith<$Res> {
-  __$$TournamentPageEventStartGameInfoCopyWithImpl(
-      _$TournamentPageEventStartGameInfo _value,
-      $Res Function(_$TournamentPageEventStartGameInfo) _then)
+        _$TournamentPageEventStartGameInfoImpl>
+    implements _$$TournamentPageEventStartGameInfoImplCopyWith<$Res> {
+  __$$TournamentPageEventStartGameInfoImplCopyWithImpl(
+      _$TournamentPageEventStartGameInfoImpl _value,
+      $Res Function(_$TournamentPageEventStartGameInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3146,7 +3156,7 @@ class __$$TournamentPageEventStartGameInfoCopyWithImpl<$Res>
   $Res call({
     Object? game = null,
   }) {
-    return _then(_$TournamentPageEventStartGameInfo(
+    return _then(_$TournamentPageEventStartGameInfoImpl(
       game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
@@ -3157,9 +3167,9 @@ class __$$TournamentPageEventStartGameInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TournamentPageEventStartGameInfo
+class _$TournamentPageEventStartGameInfoImpl
     implements TournamentPageEventStartGameInfo {
-  const _$TournamentPageEventStartGameInfo({required this.game});
+  const _$TournamentPageEventStartGameInfoImpl({required this.game});
 
   @override
   final int game;
@@ -3170,10 +3180,10 @@ class _$TournamentPageEventStartGameInfo
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventStartGameInfo &&
+            other is _$TournamentPageEventStartGameInfoImpl &&
             (identical(other.game, game) || other.game == game));
   }
 
@@ -3183,10 +3193,10 @@ class _$TournamentPageEventStartGameInfo
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TournamentPageEventStartGameInfoCopyWith<
-          _$TournamentPageEventStartGameInfo>
-      get copyWith => __$$TournamentPageEventStartGameInfoCopyWithImpl<
-          _$TournamentPageEventStartGameInfo>(this, _$identity);
+  _$$TournamentPageEventStartGameInfoImplCopyWith<
+          _$TournamentPageEventStartGameInfoImpl>
+      get copyWith => __$$TournamentPageEventStartGameInfoImplCopyWithImpl<
+          _$TournamentPageEventStartGameInfoImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3355,33 +3365,33 @@ class _$TournamentPageEventStartGameInfo
 
 abstract class TournamentPageEventStartGameInfo implements TournamentPageEvent {
   const factory TournamentPageEventStartGameInfo({required final int game}) =
-      _$TournamentPageEventStartGameInfo;
+      _$TournamentPageEventStartGameInfoImpl;
 
   int get game;
   @JsonKey(ignore: true)
-  _$$TournamentPageEventStartGameInfoCopyWith<
-          _$TournamentPageEventStartGameInfo>
+  _$$TournamentPageEventStartGameInfoImplCopyWith<
+          _$TournamentPageEventStartGameInfoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TournamentPageEventCustomTextInfoCopyWith<$Res> {
-  factory _$$TournamentPageEventCustomTextInfoCopyWith(
-          _$TournamentPageEventCustomTextInfo value,
-          $Res Function(_$TournamentPageEventCustomTextInfo) then) =
-      __$$TournamentPageEventCustomTextInfoCopyWithImpl<$Res>;
+abstract class _$$TournamentPageEventCustomTextInfoImplCopyWith<$Res> {
+  factory _$$TournamentPageEventCustomTextInfoImplCopyWith(
+          _$TournamentPageEventCustomTextInfoImpl value,
+          $Res Function(_$TournamentPageEventCustomTextInfoImpl) then) =
+      __$$TournamentPageEventCustomTextInfoImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String text});
 }
 
 /// @nodoc
-class __$$TournamentPageEventCustomTextInfoCopyWithImpl<$Res>
+class __$$TournamentPageEventCustomTextInfoImplCopyWithImpl<$Res>
     extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventCustomTextInfo>
-    implements _$$TournamentPageEventCustomTextInfoCopyWith<$Res> {
-  __$$TournamentPageEventCustomTextInfoCopyWithImpl(
-      _$TournamentPageEventCustomTextInfo _value,
-      $Res Function(_$TournamentPageEventCustomTextInfo) _then)
+        _$TournamentPageEventCustomTextInfoImpl>
+    implements _$$TournamentPageEventCustomTextInfoImplCopyWith<$Res> {
+  __$$TournamentPageEventCustomTextInfoImplCopyWithImpl(
+      _$TournamentPageEventCustomTextInfoImpl _value,
+      $Res Function(_$TournamentPageEventCustomTextInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3389,7 +3399,7 @@ class __$$TournamentPageEventCustomTextInfoCopyWithImpl<$Res>
   $Res call({
     Object? text = null,
   }) {
-    return _then(_$TournamentPageEventCustomTextInfo(
+    return _then(_$TournamentPageEventCustomTextInfoImpl(
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -3400,9 +3410,9 @@ class __$$TournamentPageEventCustomTextInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TournamentPageEventCustomTextInfo
+class _$TournamentPageEventCustomTextInfoImpl
     implements TournamentPageEventCustomTextInfo {
-  const _$TournamentPageEventCustomTextInfo({required this.text});
+  const _$TournamentPageEventCustomTextInfoImpl({required this.text});
 
   @override
   final String text;
@@ -3413,10 +3423,10 @@ class _$TournamentPageEventCustomTextInfo
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventCustomTextInfo &&
+            other is _$TournamentPageEventCustomTextInfoImpl &&
             (identical(other.text, text) || other.text == text));
   }
 
@@ -3426,10 +3436,10 @@ class _$TournamentPageEventCustomTextInfo
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TournamentPageEventCustomTextInfoCopyWith<
-          _$TournamentPageEventCustomTextInfo>
-      get copyWith => __$$TournamentPageEventCustomTextInfoCopyWithImpl<
-          _$TournamentPageEventCustomTextInfo>(this, _$identity);
+  _$$TournamentPageEventCustomTextInfoImplCopyWith<
+          _$TournamentPageEventCustomTextInfoImpl>
+      get copyWith => __$$TournamentPageEventCustomTextInfoImplCopyWithImpl<
+          _$TournamentPageEventCustomTextInfoImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3599,11 +3609,11 @@ class _$TournamentPageEventCustomTextInfo
 abstract class TournamentPageEventCustomTextInfo
     implements TournamentPageEvent {
   const factory TournamentPageEventCustomTextInfo(
-      {required final String text}) = _$TournamentPageEventCustomTextInfo;
+      {required final String text}) = _$TournamentPageEventCustomTextInfoImpl;
 
   String get text;
   @JsonKey(ignore: true)
-  _$$TournamentPageEventCustomTextInfoCopyWith<
-          _$TournamentPageEventCustomTextInfo>
+  _$$TournamentPageEventCustomTextInfoImplCopyWith<
+          _$TournamentPageEventCustomTextInfoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

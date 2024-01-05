@@ -80,25 +80,25 @@ class _$ClubEventCopyWithImpl<$Res, $Val extends ClubEvent>
 }
 
 /// @nodoc
-abstract class _$$ClubEventPageOpenedCopyWith<$Res> {
-  factory _$$ClubEventPageOpenedCopyWith(_$ClubEventPageOpened value,
-          $Res Function(_$ClubEventPageOpened) then) =
-      __$$ClubEventPageOpenedCopyWithImpl<$Res>;
+abstract class _$$ClubEventPageOpenedImplCopyWith<$Res> {
+  factory _$$ClubEventPageOpenedImplCopyWith(_$ClubEventPageOpenedImpl value,
+          $Res Function(_$ClubEventPageOpenedImpl) then) =
+      __$$ClubEventPageOpenedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ClubEventPageOpenedCopyWithImpl<$Res>
-    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventPageOpened>
-    implements _$$ClubEventPageOpenedCopyWith<$Res> {
-  __$$ClubEventPageOpenedCopyWithImpl(
-      _$ClubEventPageOpened _value, $Res Function(_$ClubEventPageOpened) _then)
+class __$$ClubEventPageOpenedImplCopyWithImpl<$Res>
+    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventPageOpenedImpl>
+    implements _$$ClubEventPageOpenedImplCopyWith<$Res> {
+  __$$ClubEventPageOpenedImplCopyWithImpl(_$ClubEventPageOpenedImpl _value,
+      $Res Function(_$ClubEventPageOpenedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ClubEventPageOpened implements ClubEventPageOpened {
-  const _$ClubEventPageOpened();
+class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
+  const _$ClubEventPageOpenedImpl();
 
   @override
   String toString() {
@@ -106,9 +106,10 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ClubEventPageOpened);
+        (other.runtimeType == runtimeType &&
+            other is _$ClubEventPageOpenedImpl);
   }
 
   @override
@@ -184,29 +185,29 @@ class _$ClubEventPageOpened implements ClubEventPageOpened {
 }
 
 abstract class ClubEventPageOpened implements ClubEvent {
-  const factory ClubEventPageOpened() = _$ClubEventPageOpened;
+  const factory ClubEventPageOpened() = _$ClubEventPageOpenedImpl;
 }
 
 /// @nodoc
-abstract class _$$ClubEventOpenRatingCopyWith<$Res> {
-  factory _$$ClubEventOpenRatingCopyWith(_$ClubEventOpenRating value,
-          $Res Function(_$ClubEventOpenRating) then) =
-      __$$ClubEventOpenRatingCopyWithImpl<$Res>;
+abstract class _$$ClubEventOpenRatingImplCopyWith<$Res> {
+  factory _$$ClubEventOpenRatingImplCopyWith(_$ClubEventOpenRatingImpl value,
+          $Res Function(_$ClubEventOpenRatingImpl) then) =
+      __$$ClubEventOpenRatingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ClubEventOpenRatingCopyWithImpl<$Res>
-    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventOpenRating>
-    implements _$$ClubEventOpenRatingCopyWith<$Res> {
-  __$$ClubEventOpenRatingCopyWithImpl(
-      _$ClubEventOpenRating _value, $Res Function(_$ClubEventOpenRating) _then)
+class __$$ClubEventOpenRatingImplCopyWithImpl<$Res>
+    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventOpenRatingImpl>
+    implements _$$ClubEventOpenRatingImplCopyWith<$Res> {
+  __$$ClubEventOpenRatingImplCopyWithImpl(_$ClubEventOpenRatingImpl _value,
+      $Res Function(_$ClubEventOpenRatingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ClubEventOpenRating implements ClubEventOpenRating {
-  const _$ClubEventOpenRating();
+class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
+  const _$ClubEventOpenRatingImpl();
 
   @override
   String toString() {
@@ -214,9 +215,10 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ClubEventOpenRating);
+        (other.runtimeType == runtimeType &&
+            other is _$ClubEventOpenRatingImpl);
   }
 
   @override
@@ -292,24 +294,24 @@ class _$ClubEventOpenRating implements ClubEventOpenRating {
 }
 
 abstract class ClubEventOpenRating implements ClubEvent {
-  const factory ClubEventOpenRating() = _$ClubEventOpenRating;
+  const factory ClubEventOpenRating() = _$ClubEventOpenRatingImpl;
 }
 
 /// @nodoc
-abstract class _$$ClubEventBillClubCopyWith<$Res> {
-  factory _$$ClubEventBillClubCopyWith(
-          _$ClubEventBillClub value, $Res Function(_$ClubEventBillClub) then) =
-      __$$ClubEventBillClubCopyWithImpl<$Res>;
+abstract class _$$ClubEventBillClubImplCopyWith<$Res> {
+  factory _$$ClubEventBillClubImplCopyWith(_$ClubEventBillClubImpl value,
+          $Res Function(_$ClubEventBillClubImpl) then) =
+      __$$ClubEventBillClubImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int days});
 }
 
 /// @nodoc
-class __$$ClubEventBillClubCopyWithImpl<$Res>
-    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventBillClub>
-    implements _$$ClubEventBillClubCopyWith<$Res> {
-  __$$ClubEventBillClubCopyWithImpl(
-      _$ClubEventBillClub _value, $Res Function(_$ClubEventBillClub) _then)
+class __$$ClubEventBillClubImplCopyWithImpl<$Res>
+    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventBillClubImpl>
+    implements _$$ClubEventBillClubImplCopyWith<$Res> {
+  __$$ClubEventBillClubImplCopyWithImpl(_$ClubEventBillClubImpl _value,
+      $Res Function(_$ClubEventBillClubImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -317,7 +319,7 @@ class __$$ClubEventBillClubCopyWithImpl<$Res>
   $Res call({
     Object? days = null,
   }) {
-    return _then(_$ClubEventBillClub(
+    return _then(_$ClubEventBillClubImpl(
       days: null == days
           ? _value.days
           : days // ignore: cast_nullable_to_non_nullable
@@ -328,8 +330,8 @@ class __$$ClubEventBillClubCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ClubEventBillClub implements ClubEventBillClub {
-  const _$ClubEventBillClub({required this.days});
+class _$ClubEventBillClubImpl implements ClubEventBillClub {
+  const _$ClubEventBillClubImpl({required this.days});
 
   @override
   final int days;
@@ -340,10 +342,10 @@ class _$ClubEventBillClub implements ClubEventBillClub {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ClubEventBillClub &&
+            other is _$ClubEventBillClubImpl &&
             (identical(other.days, days) || other.days == days));
   }
 
@@ -353,8 +355,9 @@ class _$ClubEventBillClub implements ClubEventBillClub {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ClubEventBillClubCopyWith<_$ClubEventBillClub> get copyWith =>
-      __$$ClubEventBillClubCopyWithImpl<_$ClubEventBillClub>(this, _$identity);
+  _$$ClubEventBillClubImplCopyWith<_$ClubEventBillClubImpl> get copyWith =>
+      __$$ClubEventBillClubImplCopyWithImpl<_$ClubEventBillClubImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -427,10 +430,10 @@ class _$ClubEventBillClub implements ClubEventBillClub {
 
 abstract class ClubEventBillClub implements ClubEvent {
   const factory ClubEventBillClub({required final int days}) =
-      _$ClubEventBillClub;
+      _$ClubEventBillClubImpl;
 
   int get days;
   @JsonKey(ignore: true)
-  _$$ClubEventBillClubCopyWith<_$ClubEventBillClub> get copyWith =>
+  _$$ClubEventBillClubImplCopyWith<_$ClubEventBillClubImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

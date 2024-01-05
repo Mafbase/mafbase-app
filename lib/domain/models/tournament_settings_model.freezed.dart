@@ -77,11 +77,12 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TournamentSettingsModelCopyWith<$Res>
+abstract class _$$TournamentSettingsModelImplCopyWith<$Res>
     implements $TournamentSettingsModelCopyWith<$Res> {
-  factory _$$_TournamentSettingsModelCopyWith(_$_TournamentSettingsModel value,
-          $Res Function(_$_TournamentSettingsModel) then) =
-      __$$_TournamentSettingsModelCopyWithImpl<$Res>;
+  factory _$$TournamentSettingsModelImplCopyWith(
+          _$TournamentSettingsModelImpl value,
+          $Res Function(_$TournamentSettingsModelImpl) then) =
+      __$$TournamentSettingsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -89,12 +90,13 @@ abstract class _$$_TournamentSettingsModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TournamentSettingsModelCopyWithImpl<$Res>
+class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
     extends _$TournamentSettingsModelCopyWithImpl<$Res,
-        _$_TournamentSettingsModel>
-    implements _$$_TournamentSettingsModelCopyWith<$Res> {
-  __$$_TournamentSettingsModelCopyWithImpl(_$_TournamentSettingsModel _value,
-      $Res Function(_$_TournamentSettingsModel) _then)
+        _$TournamentSettingsModelImpl>
+    implements _$$TournamentSettingsModelImplCopyWith<$Res> {
+  __$$TournamentSettingsModelImplCopyWithImpl(
+      _$TournamentSettingsModelImpl _value,
+      $Res Function(_$TournamentSettingsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +107,7 @@ class __$$_TournamentSettingsModelCopyWithImpl<$Res>
     Object? finalGames = null,
     Object? buckets = freezed,
   }) {
-    return _then(_$_TournamentSettingsModel(
+    return _then(_$TournamentSettingsModelImpl(
       defaultGames: null == defaultGames
           ? _value.defaultGames
           : defaultGames // ignore: cast_nullable_to_non_nullable
@@ -128,8 +130,8 @@ class __$$_TournamentSettingsModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TournamentSettingsModel implements _TournamentSettingsModel {
-  const _$_TournamentSettingsModel(
+class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
+  const _$TournamentSettingsModelImpl(
       {required this.defaultGames,
       required this.swissGames,
       required this.finalGames,
@@ -158,10 +160,10 @@ class _$_TournamentSettingsModel implements _TournamentSettingsModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TournamentSettingsModel &&
+            other is _$TournamentSettingsModelImpl &&
             (identical(other.defaultGames, defaultGames) ||
                 other.defaultGames == defaultGames) &&
             (identical(other.swissGames, swissGames) ||
@@ -178,10 +180,9 @@ class _$_TournamentSettingsModel implements _TournamentSettingsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TournamentSettingsModelCopyWith<_$_TournamentSettingsModel>
-      get copyWith =>
-          __$$_TournamentSettingsModelCopyWithImpl<_$_TournamentSettingsModel>(
-              this, _$identity);
+  _$$TournamentSettingsModelImplCopyWith<_$TournamentSettingsModelImpl>
+      get copyWith => __$$TournamentSettingsModelImplCopyWithImpl<
+          _$TournamentSettingsModelImpl>(this, _$identity);
 }
 
 abstract class _TournamentSettingsModel implements TournamentSettingsModel {
@@ -189,7 +190,7 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
       {required final int defaultGames,
       required final int swissGames,
       required final int finalGames,
-      final List<int>? buckets}) = _$_TournamentSettingsModel;
+      final List<int>? buckets}) = _$TournamentSettingsModelImpl;
 
   @override
   int get defaultGames;
@@ -201,6 +202,6 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
   List<int>? get buckets;
   @override
   @JsonKey(ignore: true)
-  _$$_TournamentSettingsModelCopyWith<_$_TournamentSettingsModel>
+  _$$TournamentSettingsModelImplCopyWith<_$TournamentSettingsModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

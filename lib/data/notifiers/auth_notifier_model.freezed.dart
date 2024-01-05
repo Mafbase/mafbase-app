@@ -81,28 +81,29 @@ class _$AuthNotifierModelCopyWithImpl<$Res, $Val extends AuthNotifierModel>
 }
 
 /// @nodoc
-abstract class _$$AuthNotifierUnauthorizedModelCopyWith<$Res> {
-  factory _$$AuthNotifierUnauthorizedModelCopyWith(
-          _$AuthNotifierUnauthorizedModel value,
-          $Res Function(_$AuthNotifierUnauthorizedModel) then) =
-      __$$AuthNotifierUnauthorizedModelCopyWithImpl<$Res>;
+abstract class _$$AuthNotifierUnauthorizedModelImplCopyWith<$Res> {
+  factory _$$AuthNotifierUnauthorizedModelImplCopyWith(
+          _$AuthNotifierUnauthorizedModelImpl value,
+          $Res Function(_$AuthNotifierUnauthorizedModelImpl) then) =
+      __$$AuthNotifierUnauthorizedModelImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthNotifierUnauthorizedModelCopyWithImpl<$Res>
+class __$$AuthNotifierUnauthorizedModelImplCopyWithImpl<$Res>
     extends _$AuthNotifierModelCopyWithImpl<$Res,
-        _$AuthNotifierUnauthorizedModel>
-    implements _$$AuthNotifierUnauthorizedModelCopyWith<$Res> {
-  __$$AuthNotifierUnauthorizedModelCopyWithImpl(
-      _$AuthNotifierUnauthorizedModel _value,
-      $Res Function(_$AuthNotifierUnauthorizedModel) _then)
+        _$AuthNotifierUnauthorizedModelImpl>
+    implements _$$AuthNotifierUnauthorizedModelImplCopyWith<$Res> {
+  __$$AuthNotifierUnauthorizedModelImplCopyWithImpl(
+      _$AuthNotifierUnauthorizedModelImpl _value,
+      $Res Function(_$AuthNotifierUnauthorizedModelImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthNotifierUnauthorizedModel implements AuthNotifierUnauthorizedModel {
-  const _$AuthNotifierUnauthorizedModel();
+class _$AuthNotifierUnauthorizedModelImpl
+    implements AuthNotifierUnauthorizedModel {
+  const _$AuthNotifierUnauthorizedModelImpl();
 
   @override
   String toString() {
@@ -110,10 +111,10 @@ class _$AuthNotifierUnauthorizedModel implements AuthNotifierUnauthorizedModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthNotifierUnauthorizedModel);
+            other is _$AuthNotifierUnauthorizedModelImpl);
   }
 
   @override
@@ -190,29 +191,32 @@ class _$AuthNotifierUnauthorizedModel implements AuthNotifierUnauthorizedModel {
 
 abstract class AuthNotifierUnauthorizedModel implements AuthNotifierModel {
   const factory AuthNotifierUnauthorizedModel() =
-      _$AuthNotifierUnauthorizedModel;
+      _$AuthNotifierUnauthorizedModelImpl;
 }
 
 /// @nodoc
-abstract class _$$AuthNotifierLoadingModelCopyWith<$Res> {
-  factory _$$AuthNotifierLoadingModelCopyWith(_$AuthNotifierLoadingModel value,
-          $Res Function(_$AuthNotifierLoadingModel) then) =
-      __$$AuthNotifierLoadingModelCopyWithImpl<$Res>;
+abstract class _$$AuthNotifierLoadingModelImplCopyWith<$Res> {
+  factory _$$AuthNotifierLoadingModelImplCopyWith(
+          _$AuthNotifierLoadingModelImpl value,
+          $Res Function(_$AuthNotifierLoadingModelImpl) then) =
+      __$$AuthNotifierLoadingModelImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthNotifierLoadingModelCopyWithImpl<$Res>
-    extends _$AuthNotifierModelCopyWithImpl<$Res, _$AuthNotifierLoadingModel>
-    implements _$$AuthNotifierLoadingModelCopyWith<$Res> {
-  __$$AuthNotifierLoadingModelCopyWithImpl(_$AuthNotifierLoadingModel _value,
-      $Res Function(_$AuthNotifierLoadingModel) _then)
+class __$$AuthNotifierLoadingModelImplCopyWithImpl<$Res>
+    extends _$AuthNotifierModelCopyWithImpl<$Res,
+        _$AuthNotifierLoadingModelImpl>
+    implements _$$AuthNotifierLoadingModelImplCopyWith<$Res> {
+  __$$AuthNotifierLoadingModelImplCopyWithImpl(
+      _$AuthNotifierLoadingModelImpl _value,
+      $Res Function(_$AuthNotifierLoadingModelImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthNotifierLoadingModel implements AuthNotifierLoadingModel {
-  const _$AuthNotifierLoadingModel();
+class _$AuthNotifierLoadingModelImpl implements AuthNotifierLoadingModel {
+  const _$AuthNotifierLoadingModelImpl();
 
   @override
   String toString() {
@@ -220,10 +224,10 @@ class _$AuthNotifierLoadingModel implements AuthNotifierLoadingModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthNotifierLoadingModel);
+            other is _$AuthNotifierLoadingModelImpl);
   }
 
   @override
@@ -299,31 +303,32 @@ class _$AuthNotifierLoadingModel implements AuthNotifierLoadingModel {
 }
 
 abstract class AuthNotifierLoadingModel implements AuthNotifierModel {
-  const factory AuthNotifierLoadingModel() = _$AuthNotifierLoadingModel;
+  const factory AuthNotifierLoadingModel() = _$AuthNotifierLoadingModelImpl;
 }
 
 /// @nodoc
-abstract class _$$AuthNotifierAuthorizedModelCopyWith<$Res> {
-  factory _$$AuthNotifierAuthorizedModelCopyWith(
-          _$AuthNotifierAuthorizedModel value,
-          $Res Function(_$AuthNotifierAuthorizedModel) then) =
-      __$$AuthNotifierAuthorizedModelCopyWithImpl<$Res>;
+abstract class _$$AuthNotifierAuthorizedModelImplCopyWith<$Res> {
+  factory _$$AuthNotifierAuthorizedModelImplCopyWith(
+          _$AuthNotifierAuthorizedModelImpl value,
+          $Res Function(_$AuthNotifierAuthorizedModelImpl) then) =
+      __$$AuthNotifierAuthorizedModelImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthNotifierAuthorizedModelCopyWithImpl<$Res>
-    extends _$AuthNotifierModelCopyWithImpl<$Res, _$AuthNotifierAuthorizedModel>
-    implements _$$AuthNotifierAuthorizedModelCopyWith<$Res> {
-  __$$AuthNotifierAuthorizedModelCopyWithImpl(
-      _$AuthNotifierAuthorizedModel _value,
-      $Res Function(_$AuthNotifierAuthorizedModel) _then)
+class __$$AuthNotifierAuthorizedModelImplCopyWithImpl<$Res>
+    extends _$AuthNotifierModelCopyWithImpl<$Res,
+        _$AuthNotifierAuthorizedModelImpl>
+    implements _$$AuthNotifierAuthorizedModelImplCopyWith<$Res> {
+  __$$AuthNotifierAuthorizedModelImplCopyWithImpl(
+      _$AuthNotifierAuthorizedModelImpl _value,
+      $Res Function(_$AuthNotifierAuthorizedModelImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthNotifierAuthorizedModel implements AuthNotifierAuthorizedModel {
-  const _$AuthNotifierAuthorizedModel();
+class _$AuthNotifierAuthorizedModelImpl implements AuthNotifierAuthorizedModel {
+  const _$AuthNotifierAuthorizedModelImpl();
 
   @override
   String toString() {
@@ -331,10 +336,10 @@ class _$AuthNotifierAuthorizedModel implements AuthNotifierAuthorizedModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthNotifierAuthorizedModel);
+            other is _$AuthNotifierAuthorizedModelImpl);
   }
 
   @override
@@ -410,5 +415,6 @@ class _$AuthNotifierAuthorizedModel implements AuthNotifierAuthorizedModel {
 }
 
 abstract class AuthNotifierAuthorizedModel implements AuthNotifierModel {
-  const factory AuthNotifierAuthorizedModel() = _$AuthNotifierAuthorizedModel;
+  const factory AuthNotifierAuthorizedModel() =
+      _$AuthNotifierAuthorizedModelImpl;
 }
