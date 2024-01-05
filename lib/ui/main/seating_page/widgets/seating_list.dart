@@ -27,7 +27,7 @@ class SeatingList extends StatelessWidget {
           1.0,
         );
 
-        final pageView = coef < .99 || constraints.maxWidth < 500;
+        final pageView = constraints.maxWidth < 500;
 
         Widget itemBuilder(BuildContext context, int columnIndex) {
           final children = models[columnIndex].map((model) {
