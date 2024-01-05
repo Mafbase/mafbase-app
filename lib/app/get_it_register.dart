@@ -330,7 +330,11 @@ void registerSharedGetIt() {
       () => GetRatingInteractor(getIt()),
     )
     ..registerLazySingleton<LogoutInteractor>(
-      () => LogoutInteractor(getIt<TokenStorage>(), getIt<AuthNotifier>()),
+      () => LogoutInteractor(
+        getIt<TokenStorage>(),
+        getIt<AuthNotifier>(),
+        getIt<CredentialStorage>(),
+      ),
     )
     ..registerLazySingleton(() => AuthNotifier())
     ..registerLazySingleton<GetClubsInteractor>(
