@@ -208,7 +208,10 @@ class _SeatingPageState extends State<SeatingPage> {
                             .map(
                               (e) => TextButton(
                                 onPressed: e.onTap,
-                                child: Text(e.title),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text(e.title),
+                                ),
                               ),
                             )
                             .toList(),
