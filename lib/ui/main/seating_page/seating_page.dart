@@ -11,6 +11,7 @@ import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class SeatingPage extends StatefulWidget {
   final int tournamentId;
@@ -38,6 +39,8 @@ class SeatingPage extends StatefulWidget {
 }
 
 class _SeatingPageState extends State<SeatingPage> {
+  final seatingKey = GlobalKey();
+
   @override
   void initState() {
     context.read<SeatingPageBloc>().add(
@@ -158,101 +161,58 @@ class _SeatingPageState extends State<SeatingPage> {
                     ),
                   ),
                   if (tournamentState.isMyTournament)
-                    Wrap(
-                      children: [
-                        if (state.games.lastOrNull
-                                ?.any((element) => element.gameWin != null) ==
-                            true)
-                          TextButton(
-                            onPressed: () {
-                              onSwissGameCreate(state, true);
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Сгенерировать следующий полуфинальный тур',
-                              ),
-                            ),
-                          )
-                        else
-                          TextButton(
-                            onPressed: () {
-                              ConfirmDialog.open(
-                                context,
-                                "Новая рассадка заменит старую",
-                              ).then((value) {
-                                if (value == true) {
-                                  onSwissGameCreate(state, false);
-                                }
-                              });
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Перегенерировать текущий полуфинальный тур',
-                              ),
-                            ),
-                          ),
-                        if (tournamentState.finalPlayers.length == 10)
-                          TextButton(
-                            onPressed: () {
-                              ConfirmDialog.open(
-                                context,
-                                "Новая рассадка заменит старую",
-                              ).then(
-                                (value) {
-                                  if (value == true && context.mounted) {
-                                    context.read<SeatingPageBloc>().add(
-                                          const SeatingPageEvent
-                                              .createFinalSeating(),
-                                        );
-                                  }
-                                },
-                              );
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                "Сгенерировать рассадку на финал",
-                              ),
-                            ),
-                          ),
-                        TextButton(
+                    if (context.isMobile)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: TextButton(
+                          key: seatingKey,
                           onPressed: () {
-                            ConfirmDialog.open(
-                              context,
-                              "Новая рассадка заменит старую",
-                            ).then((value) {
-                              if (value == true) {
-                                if (!mounted) return;
-                                context.read<SeatingPageBloc>().add(
-                                      const SeatingPageEvent.createSeating(),
-                                    );
-                              }
-                            });
+                            final button = (seatingKey.currentContext
+                                ?.findRenderObject() as RenderBox);
+                            final overlay = Navigator.of(context)
+                                .overlay!
+                                .context
+                                .findRenderObject()! as RenderBox;
+                            const offset = Offset.zero;
+
+                            final RelativeRect position = RelativeRect.fromRect(
+                              Rect.fromPoints(
+                                button.localToGlobal(offset, ancestor: overlay),
+                                button.localToGlobal(
+                                    button.size.bottomRight(Offset.zero) +
+                                        offset,
+                                    ancestor: overlay),
+                              ),
+                              Offset.zero & overlay.size,
+                            );
+
+                            showMenu(
+                              context: context,
+                              position: position,
+                              items: actions(tournamentState, state)
+                                  .map(
+                                    (e) => PopupMenuItem(
+                                      onTap: e.onTap,
+                                      child: Text(e.title),
+                                    ),
+                                  )
+                                  .toList(),
+                            );
                           },
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Сгенерировать рассадку",
-                            ),
-                          ),
+                          child: Text(context.locale.seating),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            context.read<SeatingPageBloc>().add(
-                                  const SeatingPageEvent.fsmSeatingTapped(),
-                                );
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Загрузить готовую рассадку",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      )
+                    else
+                      Wrap(
+                        children: actions(tournamentState, state)
+                            .map(
+                              (e) => TextButton(
+                                onPressed: e.onTap,
+                                child: Text(e.title),
+                              ),
+                            )
+                            .toList(),
+                      ),
                 ],
               ),
               if (state.isLoading)
@@ -271,4 +231,75 @@ class _SeatingPageState extends State<SeatingPage> {
           ),
         );
   }
+
+  List<({VoidCallback onTap, String title})> actions(
+    TournamentPageState tournamentState,
+    SeatingPageState state,
+  ) =>
+      [
+        if (state.games.lastOrNull?.any((element) => element.gameWin != null) ==
+            true)
+          (
+            onTap: () {
+              onSwissGameCreate(state, true);
+            },
+            title: 'Сгенерировать следующий полуфинальный тур',
+          )
+        else
+          (
+            onTap: () {
+              ConfirmDialog.open(
+                context,
+                "Новая рассадка заменит старую",
+              ).then((value) {
+                if (value == true) {
+                  onSwissGameCreate(state, false);
+                }
+              });
+            },
+            title: 'Новая рассадка заменит старую',
+          ),
+        if (tournamentState.finalPlayers.length == 10)
+          (
+            onTap: () {
+              ConfirmDialog.open(
+                context,
+                "Новая рассадка заменит старую",
+              ).then(
+                (value) {
+                  if (value == true && context.mounted) {
+                    context.read<SeatingPageBloc>().add(
+                          const SeatingPageEvent.createFinalSeating(),
+                        );
+                  }
+                },
+              );
+            },
+            title: 'Сгенерировать рассадку на финал',
+          ),
+        (
+          onTap: () {
+            ConfirmDialog.open(
+              context,
+              "Новая рассадка заменит старую",
+            ).then((value) {
+              if (value == true) {
+                if (!mounted) return;
+                context.read<SeatingPageBloc>().add(
+                      const SeatingPageEvent.createSeating(),
+                    );
+              }
+            });
+          },
+          title: 'Сгенерировать рассадку',
+        ),
+        (
+          onTap: () {
+            context.read<SeatingPageBloc>().add(
+                  const SeatingPageEvent.fsmSeatingTapped(),
+                );
+          },
+          title: 'Загрузить готовую рассадку',
+        ),
+      ];
 }

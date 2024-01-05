@@ -6,12 +6,11 @@ import 'package:flutter/material.dart';
 abstract class CustomState<W extends StatefulWidget> extends State<W> {
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     Widget child;
     bool expanded = true;
     final mobile = buildMobile(context);
     final desktop = buildDesktop(context);
-    if (screenWidth < 500) {
+    if (context.isMobile) {
       child = mobile ?? desktop;
       if (mobile != null) {
         expanded = false;
@@ -52,4 +51,8 @@ abstract class CustomState<W extends StatefulWidget> extends State<W> {
   Widget buildDesktop(BuildContext context);
 
   Widget? buildMobile(BuildContext context) => null;
+}
+
+extension BuildContextIsMobileExt on BuildContext {
+  bool get isMobile => MediaQuery.of(this).size.width < 500;
 }
