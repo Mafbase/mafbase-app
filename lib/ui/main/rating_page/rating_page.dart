@@ -263,23 +263,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                       clubId: widget.clubId,
                       sort: widget.sort,
                       gameFilter: widget.gameFilter,
-                      openGame: (gameId) {
-                        if (widget.clubId != null) {
-                          context.read<RatingBloc>().add(
-                                RatingEvent.gameSelected(
-                                  gameId: gameId,
-                                  clubId: widget.clubId,
-                                ),
-                              );
-                        } else {
-                          context.read<RatingBloc>().add(
-                                RatingEvent.gameSelected(
-                                  gameId: gameId,
-                                  tournamentId: widget.tournamentId,
-                                ),
-                              );
-                        }
-                      },
+                      openGame: openGame,
                       changeSort: (RatingSort sort) {
                         context.read<RatingBloc>().add(
                               RatingEvent.rangeChanged(
@@ -366,16 +350,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                           clubId: widget.clubId,
                           sort: widget.sort,
                           gameFilter: widget.gameFilter,
-                          openGame: (gameId) {
-                            if (widget.clubId != null) {
-                              context.read<RatingBloc>().add(
-                                    RatingEvent.gameSelected(
-                                      gameId: gameId,
-                                      clubId: widget.clubId!,
-                                    ),
-                                  );
-                            }
-                          },
+                          openGame: openGame,
                           changeSort: (RatingSort sort) {
                             context.read<RatingBloc>().add(
                                   RatingEvent.rangeChanged(
@@ -440,6 +415,24 @@ class _RatingPageState extends CustomState<RatingPage> {
           gameFilter: widget.gameFilter,
         ),
       );
+    }
+  }
+
+  void openGame(int gameId) {
+    if (widget.clubId != null) {
+      context.read<RatingBloc>().add(
+            RatingEvent.gameSelected(
+              gameId: gameId,
+              clubId: widget.clubId,
+            ),
+          );
+    } else {
+      context.read<RatingBloc>().add(
+            RatingEvent.gameSelected(
+              gameId: gameId,
+              tournamentId: widget.tournamentId,
+            ),
+          );
     }
   }
 
