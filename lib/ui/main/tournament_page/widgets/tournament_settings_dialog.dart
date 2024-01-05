@@ -12,6 +12,7 @@ class TournamentSettingsDialog extends StatefulWidget {
   final int finalGames;
   final List<int>? buckets;
   final VoidCallback onFinalPlayersTapped;
+  final bool hideResult;
 
   const TournamentSettingsDialog({
     Key? key,
@@ -19,6 +20,7 @@ class TournamentSettingsDialog extends StatefulWidget {
     this.swissGames = 0,
     this.finalGames = 0,
     this.buckets,
+    this.hideResult = false,
     required this.onFinalPlayersTapped,
   }) : super(key: key);
 
@@ -38,6 +40,7 @@ class TournamentSettingsDialog extends StatefulWidget {
         swissGames: initValue.swissGames,
         finalGames: initValue.finalGames,
         buckets: initValue.buckets,
+        hideResult: initValue.hideResult,
         onFinalPlayersTapped: onFinalPlayersTapped,
       ),
     );
@@ -49,6 +52,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
   final finalGamesController = TextEditingController();
   final swissGamesController = TextEditingController();
   final bucketsController = TextEditingController();
+  late bool hideResult = widget.hideResult;
 
   final formState = GlobalKey<FormState>();
 
@@ -65,6 +69,10 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
       swissGamesController,
       bucketsController,
     ]).addListener(() {
+      setState(() {});
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {});
     });
 
@@ -94,6 +102,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
@@ -168,6 +177,22 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                   ],
                 ),
                 const SizedBox(height: 16),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Checkbox(
+                      value: hideResult,
+                      onChanged: (value) {
+                        setState(() {
+                          hideResult = value ?? hideResult;
+                        });
+                      },
+                    ),
+                    const SizedBox(width: 4),
+                    Text(context.locale.hideResult),
+                  ],
+                ),
+                const SizedBox(height: 16),
                 CustomButton(
                   text: context.locale.save,
                   disabled: formState.currentState?.validate() != true,
@@ -181,6 +206,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                             .split(';')
                             .map((e) => int.parse(e))
                             .toList(),
+                        hideResult: hideResult,
                       ),
                     );
                   },

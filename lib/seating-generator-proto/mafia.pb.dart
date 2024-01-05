@@ -2493,6 +2493,7 @@ class TournamentSettings extends $pb.GeneratedMessage {
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'swissGamesCount', $pb.PbFieldType.O3, protoName: 'swissGamesCount')
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'finalGamesCount', $pb.PbFieldType.O3, protoName: 'finalGamesCount')
     ..p<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'buckets', $pb.PbFieldType.K3)
+    ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hideResult', protoName: 'hideResult')
     ..hasRequiredFields = false
   ;
 
@@ -2502,6 +2503,7 @@ class TournamentSettings extends $pb.GeneratedMessage {
     $core.int? swissGamesCount,
     $core.int? finalGamesCount,
     $core.Iterable<$core.int>? buckets,
+    $core.bool? hideResult,
   }) {
     final _result = create();
     if (defaultGamesCount != null) {
@@ -2515,6 +2517,9 @@ class TournamentSettings extends $pb.GeneratedMessage {
     }
     if (buckets != null) {
       _result.buckets.addAll(buckets);
+    }
+    if (hideResult != null) {
+      _result.hideResult = hideResult;
     }
     return _result;
   }
@@ -2568,6 +2573,15 @@ class TournamentSettings extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(4)
   $core.List<$core.int> get buckets => $_getList(3);
+
+  @$pb.TagNumber(5)
+  $core.bool get hideResult => $_getBF(4);
+  @$pb.TagNumber(5)
+  set hideResult($core.bool v) { $_setBool(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasHideResult() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearHideResult() => clearField(5);
 }
 
 class Profile extends $pb.GeneratedMessage {

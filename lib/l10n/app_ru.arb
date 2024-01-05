@@ -214,5 +214,6 @@
   "translationControlLink": "Ссылка для управления",
   "@translationControlLink": {},
   "bucketFieldTitle": "Корзины для полуфинального этапа",
-  "bucketFieldHint": "30;20;30"
+  "bucketFieldHint": "30;20;30",
+  "hideResult": "Скрыть результат"
 }

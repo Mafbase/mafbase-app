@@ -20,6 +20,7 @@ mixin _$TournamentSettingsModel {
   int get swissGames => throw _privateConstructorUsedError;
   int get finalGames => throw _privateConstructorUsedError;
   List<int>? get buckets => throw _privateConstructorUsedError;
+  bool get hideResult => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentSettingsModelCopyWith<TournamentSettingsModel> get copyWith =>
@@ -33,7 +34,11 @@ abstract class $TournamentSettingsModelCopyWith<$Res> {
       _$TournamentSettingsModelCopyWithImpl<$Res, TournamentSettingsModel>;
   @useResult
   $Res call(
-      {int defaultGames, int swissGames, int finalGames, List<int>? buckets});
+      {int defaultGames,
+      int swissGames,
+      int finalGames,
+      List<int>? buckets,
+      bool hideResult});
 }
 
 /// @nodoc
@@ -54,6 +59,7 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
     Object? swissGames = null,
     Object? finalGames = null,
     Object? buckets = freezed,
+    Object? hideResult = null,
   }) {
     return _then(_value.copyWith(
       defaultGames: null == defaultGames
@@ -72,6 +78,10 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
           ? _value.buckets
           : buckets // ignore: cast_nullable_to_non_nullable
               as List<int>?,
+      hideResult: null == hideResult
+          ? _value.hideResult
+          : hideResult // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -86,7 +96,11 @@ abstract class _$$TournamentSettingsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int defaultGames, int swissGames, int finalGames, List<int>? buckets});
+      {int defaultGames,
+      int swissGames,
+      int finalGames,
+      List<int>? buckets,
+      bool hideResult});
 }
 
 /// @nodoc
@@ -106,6 +120,7 @@ class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
     Object? swissGames = null,
     Object? finalGames = null,
     Object? buckets = freezed,
+    Object? hideResult = null,
   }) {
     return _then(_$TournamentSettingsModelImpl(
       defaultGames: null == defaultGames
@@ -124,6 +139,10 @@ class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
           ? _value._buckets
           : buckets // ignore: cast_nullable_to_non_nullable
               as List<int>?,
+      hideResult: null == hideResult
+          ? _value.hideResult
+          : hideResult // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -135,7 +154,8 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
       {required this.defaultGames,
       required this.swissGames,
       required this.finalGames,
-      final List<int>? buckets})
+      final List<int>? buckets,
+      this.hideResult = false})
       : _buckets = buckets;
 
   @override
@@ -155,8 +175,12 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
   }
 
   @override
+  @JsonKey()
+  final bool hideResult;
+
+  @override
   String toString() {
-    return 'TournamentSettingsModel(defaultGames: $defaultGames, swissGames: $swissGames, finalGames: $finalGames, buckets: $buckets)';
+    return 'TournamentSettingsModel(defaultGames: $defaultGames, swissGames: $swissGames, finalGames: $finalGames, buckets: $buckets, hideResult: $hideResult)';
   }
 
   @override
@@ -170,12 +194,14 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
                 other.swissGames == swissGames) &&
             (identical(other.finalGames, finalGames) ||
                 other.finalGames == finalGames) &&
-            const DeepCollectionEquality().equals(other._buckets, _buckets));
+            const DeepCollectionEquality().equals(other._buckets, _buckets) &&
+            (identical(other.hideResult, hideResult) ||
+                other.hideResult == hideResult));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, defaultGames, swissGames,
-      finalGames, const DeepCollectionEquality().hash(_buckets));
+      finalGames, const DeepCollectionEquality().hash(_buckets), hideResult);
 
   @JsonKey(ignore: true)
   @override
@@ -190,7 +216,8 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
       {required final int defaultGames,
       required final int swissGames,
       required final int finalGames,
-      final List<int>? buckets}) = _$TournamentSettingsModelImpl;
+      final List<int>? buckets,
+      final bool hideResult}) = _$TournamentSettingsModelImpl;
 
   @override
   int get defaultGames;
@@ -200,6 +227,8 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
   int get finalGames;
   @override
   List<int>? get buckets;
+  @override
+  bool get hideResult;
   @override
   @JsonKey(ignore: true)
   _$$TournamentSettingsModelImplCopyWith<_$TournamentSettingsModelImpl>

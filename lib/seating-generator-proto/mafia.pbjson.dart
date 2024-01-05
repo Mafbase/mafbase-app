@@ -528,16 +528,18 @@ const TournamentSettings$json = const {
     const {'1': 'swissGamesCount', '3': 2, '4': 1, '5': 5, '9': 1, '10': 'swissGamesCount', '17': true},
     const {'1': 'finalGamesCount', '3': 3, '4': 1, '5': 5, '9': 2, '10': 'finalGamesCount', '17': true},
     const {'1': 'buckets', '3': 4, '4': 3, '5': 5, '10': 'buckets'},
+    const {'1': 'hideResult', '3': 5, '4': 1, '5': 8, '9': 3, '10': 'hideResult', '17': true},
   ],
   '8': const [
     const {'1': '_defaultGamesCount'},
     const {'1': '_swissGamesCount'},
     const {'1': '_finalGamesCount'},
+    const {'1': '_hideResult'},
   ],
 };
 
 /// Descriptor for `TournamentSettings`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode('ChJUb3VybmFtZW50U2V0dGluZ3MSMQoRZGVmYXVsdEdhbWVzQ291bnQYASABKAVIAFIRZGVmYXVsdEdhbWVzQ291bnSIAQESLQoPc3dpc3NHYW1lc0NvdW50GAIgASgFSAFSD3N3aXNzR2FtZXNDb3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBEhgKB2J1Y2tldHMYBCADKAVSB2J1Y2tldHNCFAoSX2RlZmF1bHRHYW1lc0NvdW50QhIKEF9zd2lzc0dhbWVzQ291bnRCEgoQX2ZpbmFsR2FtZXNDb3VudA==');
+final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode('ChJUb3VybmFtZW50U2V0dGluZ3MSMQoRZGVmYXVsdEdhbWVzQ291bnQYASABKAVIAFIRZGVmYXVsdEdhbWVzQ291bnSIAQESLQoPc3dpc3NHYW1lc0NvdW50GAIgASgFSAFSD3N3aXNzR2FtZXNDb3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBEhgKB2J1Y2tldHMYBCADKAVSB2J1Y2tldHMSIwoKaGlkZVJlc3VsdBgFIAEoCEgDUgpoaWRlUmVzdWx0iAEBQhQKEl9kZWZhdWx0R2FtZXNDb3VudEISChBfc3dpc3NHYW1lc0NvdW50QhIKEF9maW5hbEdhbWVzQ291bnRCDQoLX2hpZGVSZXN1bHQ=');
 @$core.Deprecated('Use profileDescriptor instead')
 const Profile$json = const {
   '1': 'Profile',
