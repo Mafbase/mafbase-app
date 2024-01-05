@@ -14,7 +14,7 @@ class AddClubGameEffect with _$AddClubGameEffect {
     required GameWin win,
     required BestMove bestMove,
     required String referee,
-    required int died,
+    int? died,
     required DateTime date,
     CiSchemeModel? ciModel,
   }) = AddClubGameEffectSetValues;

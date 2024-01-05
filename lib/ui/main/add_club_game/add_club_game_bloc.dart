@@ -184,7 +184,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
             referee: players
                 .firstWhere((element) => element.id == game.referee)
                 .nickname,
-            died: game.firstDie,
+            died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
             ciModel: state.ciSchemes.firstWhereOrNull(
               (element) => element.id == game.ciId,
@@ -237,7 +237,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
                   .firstWhereOrNull((element) => game.referee == element.id)
                   ?.nickname ??
               "Не указан",
-          died: game.firstDie,
+          died: game.hasFirstDie() ? game.firstDie : null,
           date: DateTime.now(),
         ),
       );

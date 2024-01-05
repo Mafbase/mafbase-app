@@ -25,7 +25,7 @@ mixin _$AddClubGameEffect {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)
         setValues,
@@ -41,7 +41,7 @@ mixin _$AddClubGameEffect {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)?
         setValues,
@@ -57,7 +57,7 @@ mixin _$AddClubGameEffect {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)?
         setValues,
@@ -118,7 +118,7 @@ abstract class _$$AddClubGameEffectSetValuesImplCopyWith<$Res> {
       GameWin win,
       BestMove bestMove,
       String referee,
-      int died,
+      int? died,
       DateTime date,
       CiSchemeModel? ciModel});
 
@@ -144,7 +144,7 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
     Object? win = null,
     Object? bestMove = null,
     Object? referee = null,
-    Object? died = null,
+    Object? died = freezed,
     Object? date = null,
     Object? ciModel = freezed,
   }) {
@@ -173,10 +173,10 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
           ? _value.referee
           : referee // ignore: cast_nullable_to_non_nullable
               as String,
-      died: null == died
+      died: freezed == died
           ? _value.died
           : died // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -211,7 +211,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
       required this.win,
       required this.bestMove,
       required this.referee,
-      required this.died,
+      this.died,
       required this.date,
       this.ciModel})
       : _players = players,
@@ -249,7 +249,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
   @override
   final String referee;
   @override
-  final int died;
+  final int? died;
   @override
   final DateTime date;
   @override
@@ -307,7 +307,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)
         setValues,
@@ -327,7 +327,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)?
         setValues,
@@ -347,7 +347,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)?
         setValues,
@@ -401,7 +401,7 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
       required final GameWin win,
       required final BestMove bestMove,
       required final String referee,
-      required final int died,
+      final int? died,
       required final DateTime date,
       final CiSchemeModel? ciModel}) = _$AddClubGameEffectSetValuesImpl;
 
@@ -411,7 +411,7 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
   GameWin get win;
   BestMove get bestMove;
   String get referee;
-  int get died;
+  int? get died;
   DateTime get date;
   CiSchemeModel? get ciModel;
   @JsonKey(ignore: true)
@@ -513,7 +513,7 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)
         setValues,
@@ -532,7 +532,7 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)?
         setValues,
@@ -551,7 +551,7 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
             GameWin win,
             BestMove bestMove,
             String referee,
-            int died,
+            int? died,
             DateTime date,
             CiSchemeModel? ciModel)?
         setValues,

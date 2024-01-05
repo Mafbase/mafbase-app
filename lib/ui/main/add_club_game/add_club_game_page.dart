@@ -164,7 +164,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   final focusNodes = List.generate(10, (index) => FocusNode());
   final addScoreFocusNodes = List.generate(10, (index) => FocusNode());
   GameWin? winSelected;
-  int firstDie = 0;
+  int? firstDie;
   BestMove? bestMove = BestMove.miss;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
   late DateTime date = widget.initDateTime ?? DateTime.now();
@@ -338,36 +338,36 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   const SizedBox(
                                     width: 8,
                                   ),
-                                  StatefulBuilder(
-                                    builder: (context, setState) =>
-                                        CustomDropdown<int>(
-                                      readOnly: widget.readOnly,
-                                      initValue: firstDie,
-                                      items: List.generate(
-                                        11,
-                                        (index) {
-                                          return index - 1;
-                                        },
-                                      ),
-                                      mapToString: (index) => index == -1
-                                          ? "Промах"
-                                          : ((index ?? 0) + 1).toString(),
-                                      onChanged: widget.readOnly
-                                          ? null
-                                          : (value) {
-                                              setState(() {
-                                                firstDie = value ?? -1;
-                                                if (firstDie == -1) {
-                                                  bestMove = BestMove.miss;
-                                                }
-                                              });
-                                            },
+                                  CustomDropdown<int>(
+                                    readOnly: widget.readOnly,
+                                    initValue: firstDie,
+                                    items: List.generate(
+                                      11,
+                                      (index) {
+                                        return index - 1;
+                                      },
                                     ),
+                                    mapToString: (index) => index == null
+                                        ? 'Не указан'
+                                        : index == -1
+                                            ? "Промах"
+                                            : (index + 1).toString(),
+                                    onChanged: widget.readOnly
+                                        ? null
+                                        : (value) {
+                                            setState(() {
+                                              firstDie = value ?? -1;
+                                              if (firstDie == -1) {
+                                                bestMove = BestMove.miss;
+                                              }
+                                            });
+                                          },
                                   ),
                                 ],
                               ),
-                              if (firstDie != -1)
+                              if (firstDie != null && firstDie != -1)
                                 Row(
+                                  key: const Key("best_move_row"),
                                   children: [
                                     Text(
                                       "Лучший ход:",
@@ -411,6 +411,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   ],
                                 ),
                               Row(
+                                key: const Key("result_row"),
                                 children: [
                                   Text(
                                     "Результат:",
@@ -671,6 +672,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 
     if (firstDie != -1 && bestMove == null) {
       AppRouter.showErrorDialog(context, "Установите лучший ход");
+      return;
+    }
+
+    if (firstDie == null) {
+      AppRouter.showErrorDialog(context, 'Не указан первый отстрел');
       return;
     }
 

@@ -27,12 +27,6 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
   T? value;
 
   @override
-  void didChangeDependencies() {
-    value = widget.initValue;
-    super.didChangeDependencies();
-  }
-
-  @override
   void didUpdateWidget(covariant CustomDropdown<T> oldWidget) {
     if (oldWidget.initValue != widget.initValue) {
       setState(() {
