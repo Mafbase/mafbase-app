@@ -31,7 +31,10 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
 
     final tournamentId = event.tournamentId;
     if (tournamentId != null) {
-      _router.openTournamentGame(tournamentId, event.gameId);
+      _router.openTournamentGame(
+        tournamentId,
+        event.gameId,
+      );
     }
   }
 

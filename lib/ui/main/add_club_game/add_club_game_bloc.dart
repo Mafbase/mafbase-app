@@ -15,6 +15,7 @@ import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
+import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
@@ -36,6 +37,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
   final EditTournamentGameInteractor _editTournamentGameInteractor = getIt();
   final GetTournamentGameInteractor _getTournamentGameInteractor = getIt();
   final GetTournamentInteractor _getTournamentInteractor = getIt();
+  final TournamentsRepository _tournamentsRepository = getIt();
 
   AddClubGameBloc({
     this.clubId,
@@ -87,10 +89,11 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
   }
 
   _onEdit(AddClubGameEventPageEdit event, Emitter emit) {
-    if (clubId == null) {
-      return;
-    }
-    router.editPage(clubId!, event.gameId);
+    router.editPage(
+      clubId,
+      tournamentId,
+      event.gameId,
+    );
   }
 
   _onSubmit(
@@ -198,10 +201,12 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
           tournamentId: tournamentId!,
         ),
         _getTournamentInteractor(tournamentId: tournamentId!),
+        _tournamentsRepository.isOwner(tournamentId!),
       ]);
       final players = list[0] as List<PlayerModel>;
       final game = list[1] as ClubGameResult;
       final tournament = list[2] as TournamentModel;
+      final isOwner = list[3] as bool;
 
       emitEffect(
         AddClubGameEffect.setValues(
@@ -241,7 +246,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
         state.copyWith(
           isLoading: false,
           players: players,
-          canEdit: true,
+          canEdit: isOwner,
           clubName: tournament.name,
           ciSchemes: [],
           isTournament: true,

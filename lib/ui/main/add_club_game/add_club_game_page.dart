@@ -18,12 +18,12 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_bloc.d
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class AddClubGamePage extends StatefulWidget {
   final bool readOnly;
-  final bool editing;
   final int? gameId;
   final DateTime? initDateTime;
 
@@ -31,7 +31,6 @@ class AddClubGamePage extends StatefulWidget {
     Key? key,
     this.readOnly = false,
     this.gameId,
-    this.editing = true,
     this.initDateTime,
   }) : super(key: key);
 
@@ -42,12 +41,16 @@ class AddClubGamePage extends StatefulWidget {
     required BuildContext context,
     required int tournamentId,
     required int gameId,
+    required bool edit,
   }) {
     return context.namedLocation(
       'editTournamentGame',
       params: {
         'id': tournamentId.toString(),
         'gameId': gameId.toString(),
+      },
+      queryParams: {
+        'edit': edit.toString(),
       },
     );
   }
@@ -58,15 +61,15 @@ class AddClubGamePage extends StatefulWidget {
     builder: (context, state) {
       final gameId = int.parse(state.params["gameId"]!);
       final tournamentId = int.parse(state.params["id"]!);
+      final edit = bool.tryParse(state.queryParams['edit'] ?? '') ?? true;
       return BlocProvider<AddClubGameBloc>(
         create: (context) => AddClubGameBloc(
           context: context,
           tournamentId: tournamentId,
         ),
         child: AddClubGamePage(
-          readOnly: false,
+          readOnly: !edit,
           gameId: gameId,
-          editing: true,
         ),
       );
     },
@@ -86,7 +89,6 @@ class AddClubGamePage extends StatefulWidget {
           ),
           // TODO: REGISTER IN GET IT
           child: AddClubGamePage(
-            editing: true,
             initDateTime: initDateTime,
           ),
         );
@@ -109,7 +111,6 @@ class AddClubGamePage extends StatefulWidget {
             child: AddClubGamePage(
               readOnly: !edit,
               gameId: gameId,
-              editing: edit,
             ),
           );
         } catch (i) {
@@ -612,6 +613,12 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     );
   }
 
+  bool get canEdit {
+    if (context.watch<AddClubGameBloc>().tournamentId == null) return true;
+
+    return context.watch<TournamentPageBloc>().state.isMyTournament;
+  }
+
   submit(AddClubGameState state) {
     if (widget.readOnly) {
       context
@@ -671,8 +678,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
           AddClubGameEvent.submit(
             gameResult: ClubGameResult(
               date: date.toIso8601String(),
-              addScore: addScoreControllers.map((e) =>
-                  (double.parse(e.text.replaceAll(",", ".")) * 100).floor(),),
+              addScore: addScoreControllers.map(
+                (e) =>
+                    (double.parse(e.text.replaceAll(",", ".")) * 100).floor(),
+              ),
               players: controllers.map(
                 (e) => state.players
                     .firstWhere((element) => e.text == element.nickname)
