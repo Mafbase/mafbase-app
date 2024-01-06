@@ -260,7 +260,7 @@ class _SeatingPageState extends State<SeatingPage> {
                 }
               });
             },
-            title: 'Новая рассадка заменит старую',
+            title: 'Перегенерировать текущий полуфинальный тур',
           ),
         if (tournamentState.finalPlayers.length == 10)
           (
