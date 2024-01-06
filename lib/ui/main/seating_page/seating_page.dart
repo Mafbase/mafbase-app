@@ -240,28 +240,30 @@ class _SeatingPageState extends State<SeatingPage> {
     SeatingPageState state,
   ) =>
       [
-        if (state.games.lastOrNull?.any((element) => element.gameWin != null) ==
-            true)
-          (
-            onTap: () {
-              onSwissGameCreate(state, true);
-            },
-            title: 'Сгенерировать следующий полуфинальный тур',
-          )
-        else
-          (
-            onTap: () {
-              ConfirmDialog.open(
-                context,
-                "Новая рассадка заменит старую",
-              ).then((value) {
-                if (value == true) {
-                  onSwissGameCreate(state, false);
-                }
-              });
-            },
-            title: 'Перегенерировать текущий полуфинальный тур',
-          ),
+        if (tournamentState.settings.swissGames > 0)
+          if (state.games.lastOrNull
+                  ?.any((element) => element.gameWin != null) ==
+              true)
+            (
+              onTap: () {
+                onSwissGameCreate(state, true);
+              },
+              title: 'Сгенерировать следующий полуфинальный тур',
+            )
+          else
+            (
+              onTap: () {
+                ConfirmDialog.open(
+                  context,
+                  "Новая рассадка заменит старую",
+                ).then((value) {
+                  if (value == true) {
+                    onSwissGameCreate(state, false);
+                  }
+                });
+              },
+              title: 'Перегенерировать текущий полуфинальный тур',
+            ),
         if (tournamentState.finalPlayers.length == 10)
           (
             onTap: () {
