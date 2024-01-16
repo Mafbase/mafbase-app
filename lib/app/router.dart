@@ -36,8 +36,6 @@ class AppRouter {
           }
         }
         return null;
-      }).then((value) {
-        return value;
       }).whenComplete(() => SplashManager.removeSplash());
     },
     routes: [
