@@ -14,6 +14,7 @@ class CustomAutoComplete extends StatelessWidget {
   final Iterable<PlayerModel> Function(TextEditingValue text) optionsBuilder;
   final String hint;
   final bool readOnly;
+  final OptionsViewOpenDirection openDirection;
 
   const CustomAutoComplete({
     Key? key,
@@ -24,6 +25,7 @@ class CustomAutoComplete extends StatelessWidget {
     required this.onSubmit,
     required this.optionsBuilder,
     required this.hint,
+    this.openDirection = OptionsViewOpenDirection.down,
     this.readOnly = false,
   }) : super(key: key);
 
@@ -32,6 +34,7 @@ class CustomAutoComplete extends StatelessWidget {
     return RawAutocomplete<PlayerModel>(
       optionsBuilder: readOnly ? (_) => [] : optionsBuilder,
       key: key,
+      optionsViewOpenDirection: openDirection,
       textEditingController: controller,
       displayStringForOption: displayStringForOption,
       focusNode: focusNode,
@@ -41,12 +44,15 @@ class CustomAutoComplete extends StatelessWidget {
         options,
       ) {
         return Align(
-          alignment: Alignment.topLeft,
+          alignment: openDirection == OptionsViewOpenDirection.up
+              ? Alignment.bottomLeft
+              : Alignment.topLeft,
           child: Material(
             elevation: 4.0,
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
               child: ListView.builder(
+                reverse: openDirection == OptionsViewOpenDirection.up,
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 itemCount: options.length,

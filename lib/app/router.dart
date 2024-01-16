@@ -28,11 +28,12 @@ class AppRouter {
             final response = await getIt<MyHttpClient>().get("/api/auth");
             if (response.statusCode == 200) {
               authNotifier.value = const AuthNotifierModel.authorized();
+            } else {
+              authNotifier.value = const AuthNotifierModel.unauthorized();
             }
           } catch (_) {
             authNotifier.value = const AuthNotifierModel.unauthorized();
           }
-          return null;
         }
         return null;
       }).then((value) {

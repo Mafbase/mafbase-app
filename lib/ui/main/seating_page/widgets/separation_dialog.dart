@@ -62,6 +62,7 @@ class _SeparationDialogState extends State<SeparationDialog> {
                 height: 8,
               ),
               NicknameField(
+                down: true,
                 controller: firstPlayerTextField,
                 focusNode: firstFocusNode,
                 availablePlayers: widget.availablePlayers,
@@ -75,6 +76,7 @@ class _SeparationDialogState extends State<SeparationDialog> {
                 height: 8,
               ),
               NicknameField(
+                down: true,
                 controller: secondPlayerTextField,
                 focusNode: secondFocusNode,
                 availablePlayers: widget.availablePlayers,

@@ -50,7 +50,6 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     final result = await _loginInteractor.run(
       event.email,
       event.password,
-      rememberMe: event.rememberMe,
       context: context,
     );
     if (result is Success) {

@@ -28,7 +28,33 @@ class MyHttpClient {
         "Accept": "application/protobuf",
       },
     ),
-  )..interceptors.add(LogInterceptor(requestBody: true));
+  )..interceptors.addAll([
+      LogInterceptor(requestBody: true),
+      InterceptorsWrapper(
+        onResponse: (response, handler) async {
+          if (response.statusCode != HttpStatus.unauthorized) {
+            handler.next(response);
+            return;
+          }
+
+          if (response.headers[HttpHeaders.authorizationHeader]?.isEmpty ??
+              true) {
+            handler.next(response);
+            return;
+          }
+
+          final options = response.requestOptions.copyWith(
+            headers: {
+              ...response.requestOptions.headers,
+            }..remove(HttpHeaders.authorizationHeader),
+          );
+
+          handler.resolve(await _fetch(options));
+        },
+      ),
+    ]);
+
+  Future<Response> _fetch(RequestOptions options) => _client.fetch(options);
 
   Future<Response> get(String method, {bool useRecoveryToken = true}) async {
     if (useRecoveryToken) {
@@ -58,6 +84,7 @@ class MyHttpClient {
           ).execute(this);
 
           if (authResponse.token.isEmpty) {
+            await _storage.clear();
             return response;
           } else {
             await _storage.onTokensUpdated(
@@ -68,7 +95,8 @@ class MyHttpClient {
         }
         return get(method, useRecoveryToken: false);
       }
-      throw UnauthenticatedError("Authentication error");
+      await _storage.clear();
+      return response;
     }
     _checkResponse(response);
 

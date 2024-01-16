@@ -18,24 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, bool rememberMe)
-        loginButtonTapped,
+    required TResult Function(String email, String password) loginButtonTapped,
     required TResult Function() forgotPasswordTapped,
     required TResult Function() signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
     TResult? Function()? forgotPasswordTapped,
     TResult? Function()? signUpButtonTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
     TResult Function()? signUpButtonTapped,
     required TResult orElse(),
@@ -89,7 +86,7 @@ abstract class _$$LoginButtonTappedImplCopyWith<$Res> {
           $Res Function(_$LoginButtonTappedImpl) then) =
       __$$LoginButtonTappedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String password, bool rememberMe});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -105,7 +102,6 @@ class __$$LoginButtonTappedImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? rememberMe = null,
   }) {
     return _then(_$LoginButtonTappedImpl(
       email: null == email
@@ -116,10 +112,6 @@ class __$$LoginButtonTappedImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      rememberMe: null == rememberMe
-          ? _value.rememberMe
-          : rememberMe // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -127,19 +119,16 @@ class __$$LoginButtonTappedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginButtonTappedImpl implements LoginButtonTapped {
-  const _$LoginButtonTappedImpl(
-      {required this.email, required this.password, required this.rememberMe});
+  const _$LoginButtonTappedImpl({required this.email, required this.password});
 
   @override
   final String email;
   @override
   final String password;
-  @override
-  final bool rememberMe;
 
   @override
   String toString() {
-    return 'LoginEvent.loginButtonTapped(email: $email, password: $password, rememberMe: $rememberMe)';
+    return 'LoginEvent.loginButtonTapped(email: $email, password: $password)';
   }
 
   @override
@@ -149,13 +138,11 @@ class _$LoginButtonTappedImpl implements LoginButtonTapped {
             other is _$LoginButtonTappedImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.rememberMe, rememberMe) ||
-                other.rememberMe == rememberMe));
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password, rememberMe);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
@@ -167,36 +154,33 @@ class _$LoginButtonTappedImpl implements LoginButtonTapped {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, bool rememberMe)
-        loginButtonTapped,
+    required TResult Function(String email, String password) loginButtonTapped,
     required TResult Function() forgotPasswordTapped,
     required TResult Function() signUpButtonTapped,
   }) {
-    return loginButtonTapped(email, password, rememberMe);
+    return loginButtonTapped(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
     TResult? Function()? forgotPasswordTapped,
     TResult? Function()? signUpButtonTapped,
   }) {
-    return loginButtonTapped?.call(email, password, rememberMe);
+    return loginButtonTapped?.call(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
     TResult Function()? signUpButtonTapped,
     required TResult orElse(),
   }) {
     if (loginButtonTapped != null) {
-      return loginButtonTapped(email, password, rememberMe);
+      return loginButtonTapped(email, password);
     }
     return orElse();
   }
@@ -239,12 +223,10 @@ class _$LoginButtonTappedImpl implements LoginButtonTapped {
 abstract class LoginButtonTapped implements LoginEvent {
   const factory LoginButtonTapped(
       {required final String email,
-      required final String password,
-      required final bool rememberMe}) = _$LoginButtonTappedImpl;
+      required final String password}) = _$LoginButtonTappedImpl;
 
   String get email;
   String get password;
-  bool get rememberMe;
   @JsonKey(ignore: true)
   _$$LoginButtonTappedImplCopyWith<_$LoginButtonTappedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -289,8 +271,7 @@ class _$ForgotPasswordTappedImpl implements ForgotPasswordTapped {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, bool rememberMe)
-        loginButtonTapped,
+    required TResult Function(String email, String password) loginButtonTapped,
     required TResult Function() forgotPasswordTapped,
     required TResult Function() signUpButtonTapped,
   }) {
@@ -300,8 +281,7 @@ class _$ForgotPasswordTappedImpl implements ForgotPasswordTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
     TResult? Function()? forgotPasswordTapped,
     TResult? Function()? signUpButtonTapped,
   }) {
@@ -311,8 +291,7 @@ class _$ForgotPasswordTappedImpl implements ForgotPasswordTapped {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
     TResult Function()? signUpButtonTapped,
     required TResult orElse(),
@@ -400,8 +379,7 @@ class _$SignUpButtonTappedImpl implements SignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, bool rememberMe)
-        loginButtonTapped,
+    required TResult Function(String email, String password) loginButtonTapped,
     required TResult Function() forgotPasswordTapped,
     required TResult Function() signUpButtonTapped,
   }) {
@@ -411,8 +389,7 @@ class _$SignUpButtonTappedImpl implements SignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult? Function(String email, String password)? loginButtonTapped,
     TResult? Function()? forgotPasswordTapped,
     TResult? Function()? signUpButtonTapped,
   }) {
@@ -422,8 +399,7 @@ class _$SignUpButtonTappedImpl implements SignUpButtonTapped {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, bool rememberMe)?
-        loginButtonTapped,
+    TResult Function(String email, String password)? loginButtonTapped,
     TResult Function()? forgotPasswordTapped,
     TResult Function()? signUpButtonTapped,
     required TResult orElse(),

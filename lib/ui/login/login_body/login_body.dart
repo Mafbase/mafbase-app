@@ -62,7 +62,6 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-  bool remember = false;
 
   @override
   void dispose() {
@@ -77,171 +76,147 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
   Widget buildMobile(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        return WrapperLoginPage(child: Form(
-          key: _formKey,
-          child: Container(
-            key: const Key("loginBox"),
-            child: AutofillGroup(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.loginAuth,
-                      style: MyTheme.of(context).headerTextStyle,
+        return WrapperLoginPage(
+          child: Form(
+            key: _formKey,
+            child: Container(
+              key: const Key("loginBox"),
+              child: AutofillGroup(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.loginAuth,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                    key: const Key("login_field"),
-                    autoFillHints: const [
-                      AutofillHints.username,
-                      AutofillHints.email,
-                    ],
-                    validate: (value) {
-                      if (value != null) {
-                        if (EmailValidator.validate(value)) {
-                          return null;
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CustomTextField(
+                      key: const Key("login_field"),
+                      autoFillHints: const [
+                        AutofillHints.username,
+                        AutofillHints.email,
+                      ],
+                      validate: (value) {
+                        if (value != null) {
+                          if (EmailValidator.validate(value)) {
+                            return null;
+                          }
                         }
-                      }
-                      return "Введите корректный адресс электронной почты";
-                    },
-                    controller: _emailController,
-                    hint: AppLocalizations.of(context)!.loginEmailHint,
-                    errorText: state.hasError
-                        ? context.locale.invalidEmailOrPassword
-                        : null,
-                    focusNode: _emailFocusNode,
-                    onSubmit: (_) {
-                      _emailFocusNode.unfocus();
-                      _passwordFocusNode.requestFocus();
-                    },
-                    icon: Icon(
-                      Icons.email_outlined,
-                      color: MyTheme.of(context).borderColor,
+                        return "Введите корректный адресс электронной почты";
+                      },
+                      controller: _emailController,
+                      hint: AppLocalizations.of(context)!.loginEmailHint,
+                      errorText: state.hasError
+                          ? context.locale.invalidEmailOrPassword
+                          : null,
+                      focusNode: _emailFocusNode,
+                      onSubmit: (_) {
+                        _emailFocusNode.unfocus();
+                        _passwordFocusNode.requestFocus();
+                      },
+                      icon: Icon(
+                        Icons.email_outlined,
+                        color: MyTheme.of(context).borderColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomTextField(
-                    key: const Key("password_field"),
-                    autoFillHints: const [AutofillHints.password],
-                    controller: _passwordController,
-                    focusNode: _passwordFocusNode,
-                    hint: AppLocalizations.of(context)!.loginPasswordHint,
-                    onSubmit: (_) {
-                      _onSubmit();
-                    },
-                    canObscure: true,
-                    icon: Icon(
-                      Icons.lock_outline,
-                      color: MyTheme.of(context).borderColor,
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Wrap(
-                    alignment: WrapAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Transform.translate(
-                            offset: const Offset(-3, 0),
-                            child: Checkbox(
-                              splashRadius: 0,
-                              value: remember,
-                              checkColor: MyTheme.of(context).borderColor,
-                              fillColor: MaterialStatePropertyAll(
-                                MyTheme.of(context).borderColor,
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  remember = value ?? remember;
-                                });
-                              },
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Text(
-                            AppLocalizations.of(context)!.loginRememberMe,
-                            style: MyTheme.of(context).defaultTextStyle.copyWith(fontSize: 14),
-                          ),
-                        ],
+                    CustomTextField(
+                      key: const Key("password_field"),
+                      autoFillHints: const [AutofillHints.password],
+                      controller: _passwordController,
+                      focusNode: _passwordFocusNode,
+                      hint: AppLocalizations.of(context)!.loginPasswordHint,
+                      onSubmit: (_) {
+                        _onSubmit();
+                      },
+                      canObscure: true,
+                      icon: Icon(
+                        Icons.lock_outline,
+                        color: MyTheme.of(context).borderColor,
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          AppLocalizations.of(context)!.loginForgotPassword,
-                          style: MyTheme.of(context).defaultTextStyle.copyWith(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 22,
-                  ),
-                  CustomButton(
-                    disabled: state.isLoading,
-                    key: const Key("auth_button"),
-                    text: AppLocalizations.of(context)!.loginIn,
-                    minimize: true,
-                    onTap: _onSubmit,
-                  ),
-                  const SizedBox(height: 8),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      style: context.theme.defaultTextStyle.copyWith(
-                        color: context.theme.defaultTextStyle.color
-                            ?.withOpacity(0.5),
-                        fontSize: 14,
-                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
                       children: [
-                        TextSpan(text: context.locale.politicaAlert),
-                        TextSpan(
-                          text: context.locale.politicaHref,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              launchUrl(
-                                Uri.parse(
-                                  // TODO: replace
-                                  "https://mafbase.ru/images/politika.pdf",
-                                ),
-                              );
-                            },
-                          style: const TextStyle(
-                            decoration: TextDecoration.underline,
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            AppLocalizations.of(context)!.loginForgotPassword,
+                            style: MyTheme.of(context)
+                                .defaultTextStyle
+                                .copyWith(fontSize: 14),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 14),
-                  TextButton(
-                    onPressed: _onSignUpTapped,
-                    child: Text(
-                      AppLocalizations.of(context)!.loginRegistration,
-                      style: MyTheme.of(context).defaultTextStyle,
+                    const SizedBox(
+                      height: 22,
                     ),
-                  ),
-                  if (state.isLoading)
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(),
+                    CustomButton(
+                      disabled: state.isLoading,
+                      key: const Key("auth_button"),
+                      text: AppLocalizations.of(context)!.loginIn,
+                      minimize: true,
+                      onTap: _onSubmit,
                     ),
-                ],
+                    const SizedBox(height: 8),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: context.theme.defaultTextStyle.copyWith(
+                          color: context.theme.defaultTextStyle.color
+                              ?.withOpacity(0.5),
+                          fontSize: 14,
+                        ),
+                        children: [
+                          TextSpan(text: context.locale.politicaAlert),
+                          TextSpan(
+                            text: context.locale.politicaHref,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrl(
+                                  Uri.parse(
+                                    // TODO: replace
+                                    "https://mafbase.ru/images/politika.pdf",
+                                  ),
+                                );
+                              },
+                            style: const TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    TextButton(
+                      onPressed: _onSignUpTapped,
+                      child: Text(
+                        AppLocalizations.of(context)!.loginRegistration,
+                        style: MyTheme.of(context).defaultTextStyle,
+                      ),
+                    ),
+                    if (state.isLoading)
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),);
+        );
       },
     );
   }
@@ -326,34 +301,6 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                     Wrap(
                       alignment: WrapAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Transform.translate(
-                              offset: const Offset(-3, 0),
-                              child: Checkbox(
-                                splashRadius: 0,
-                                value: remember,
-                                checkColor: MyTheme.of(context).borderColor,
-                                fillColor: MaterialStatePropertyAll(
-                                  MyTheme.of(context).borderColor,
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    remember = value ?? remember;
-                                  });
-                                },
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              AppLocalizations.of(context)!.loginRememberMe,
-                              style: MyTheme.of(context).defaultTextStyle,
-                            ),
-                          ],
-                        ),
                         TextButton(
                           onPressed: () {},
                           child: Text(
@@ -431,7 +378,6 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
             LoginEvent.loginButtonTapped(
               email: _emailController.text,
               password: _passwordController.text,
-              rememberMe: remember,
             ),
           );
     }

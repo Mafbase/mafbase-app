@@ -269,6 +269,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                         for (int i = 0; i < 10; i++)
                           StatefulBuilder(
                             builder: (context, setState) => PlayerRowWidget(
+                              down: i < 5,
                               onRoleChanged: (role) {
                                 setState(() {
                                   roles[i] = role;
@@ -315,6 +316,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               NicknameField(
+                                down: true,
                                 controller: refereeController,
                                 focusNode: refereeFocusNode,
                                 availablePlayers: state.players,
@@ -722,6 +724,7 @@ class NicknameField extends StatelessWidget {
   final Function({String? initValue})? onNewPlayer;
   final bool readOnly;
   final String hint;
+  final bool down;
 
   const NicknameField({
     Key? key,
@@ -732,6 +735,7 @@ class NicknameField extends StatelessWidget {
     this.onNewPlayer,
     this.onSelected,
     required this.hint,
+    required this.down,
   }) : super(key: key);
 
   @override
@@ -740,6 +744,8 @@ class NicknameField extends StatelessWidget {
       width: 250,
       child: CustomAutoComplete(
         readOnly: readOnly,
+        openDirection:
+            down ? OptionsViewOpenDirection.down : OptionsViewOpenDirection.up,
         controller: controller,
         displayStringForOption: (model) =>
             model.id == -1 ? "+" : model.nickname,
@@ -841,6 +847,7 @@ class PlayerRowWidget extends StatelessWidget {
   final String hint;
   final PlayerRole role;
   final Function({String? initValue}) onNewPlayer;
+  final bool down;
 
   const PlayerRowWidget({
     Key? key,
@@ -856,6 +863,7 @@ class PlayerRowWidget extends StatelessWidget {
     required this.onNewPlayer,
     required this.addScoreFocusNode,
     required this.isTournament,
+    required this.down,
   }) : super(key: key);
 
   @override
@@ -864,6 +872,7 @@ class PlayerRowWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         NicknameField(
+          down: down,
           readOnly: readOnly || isTournament,
           controller: nicknameController,
           focusNode: focusNode,

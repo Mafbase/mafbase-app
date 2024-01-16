@@ -7,7 +7,6 @@ class LoginEvent with _$LoginEvent {
   const factory LoginEvent.loginButtonTapped({
     required String email,
     required String password,
-    required bool rememberMe,
   }) = LoginButtonTapped;
 
   const factory LoginEvent.forgotPasswordTapped() = ForgotPasswordTapped;
