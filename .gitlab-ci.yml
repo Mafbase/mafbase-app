@@ -54,6 +54,7 @@ test:
     - docker
   image: "$REGISTRY_HOST/flutter-builder:3.16.5"
   before_script:
+    - apt-get update
     - apt-get install -y lcov
     - flutter pub global activate junitreport
     - export PATH="$PATH:$HOME/.pub-cache/bin"
