@@ -24,9 +24,8 @@ class LoginInteractor extends BaseInteractor {
     return wrap(() async {
       final model = await _authRepository.login(email, password);
       if (model is Success) {
-        await _credentialStorage.save(Credentials(email, password));
-      }
-      if (model is Success) {
+        _credentialStorage.save(Credentials(email, password));
+
         context?.read<AuthNotifier>().value =
             const AuthNotifierModel.authorized();
       }
