@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +25,19 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
 
 void main() async {
   if (!kDebugMode) {
-    await SentryFlutter.init(
-      (options) {
-        options.dsn = sentryUrl;
-        options.tracesSampleRate = 1.0;
+    runZonedGuarded(
+      () async {
+        await SentryFlutter.init(
+          (options) {
+            options.dsn = sentryUrl;
+            options.tracesSampleRate = 1.0;
+          },
+          appRunner: _startApp,
+        );
       },
-      appRunner: _startApp,
+      (error, stack) async {
+        Sentry.captureException(error, stackTrace: stack);
+      },
     );
   } else {
     _startApp();
