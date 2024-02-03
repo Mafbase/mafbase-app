@@ -20,6 +20,7 @@ mixin _$RatingEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
+    required TResult Function(DateTimeRange range, int clubId) downloadStats,
     required TResult Function(int gameId, int? clubId, int? tournamentId)
         gameSelected,
     required TResult Function(
@@ -39,6 +40,7 @@ mixin _$RatingEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int playerId)? playerSelected,
     TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(DateTimeRange range, int clubId)? downloadStats,
     TResult? Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -51,6 +53,7 @@ mixin _$RatingEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult Function(DateTimeRange range, int clubId)? downloadStats,
     TResult Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -64,6 +67,7 @@ mixin _$RatingEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(RatingEventPlayerSelected value) playerSelected,
     required TResult Function(RatingEventDownload value) downloadRating,
+    required TResult Function(RatingEventDownloadStats value) downloadStats,
     required TResult Function(RatingEventGameSelected value) gameSelected,
     required TResult Function(RatingEventPageOpened value) pageOpened,
     required TResult Function(RatingEventRangeChanged value) rangeChanged,
@@ -73,6 +77,7 @@ mixin _$RatingEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RatingEventPlayerSelected value)? playerSelected,
     TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventDownloadStats value)? downloadStats,
     TResult? Function(RatingEventGameSelected value)? gameSelected,
     TResult? Function(RatingEventPageOpened value)? pageOpened,
     TResult? Function(RatingEventRangeChanged value)? rangeChanged,
@@ -82,6 +87,7 @@ mixin _$RatingEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RatingEventPlayerSelected value)? playerSelected,
     TResult Function(RatingEventDownload value)? downloadRating,
+    TResult Function(RatingEventDownloadStats value)? downloadStats,
     TResult Function(RatingEventGameSelected value)? gameSelected,
     TResult Function(RatingEventPageOpened value)? pageOpened,
     TResult Function(RatingEventRangeChanged value)? rangeChanged,
@@ -178,6 +184,7 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
+    required TResult Function(DateTimeRange range, int clubId) downloadStats,
     required TResult Function(int gameId, int? clubId, int? tournamentId)
         gameSelected,
     required TResult Function(
@@ -200,6 +207,7 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int playerId)? playerSelected,
     TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(DateTimeRange range, int clubId)? downloadStats,
     TResult? Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -215,6 +223,7 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult Function(DateTimeRange range, int clubId)? downloadStats,
     TResult Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -234,6 +243,7 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
   TResult map<TResult extends Object?>({
     required TResult Function(RatingEventPlayerSelected value) playerSelected,
     required TResult Function(RatingEventDownload value) downloadRating,
+    required TResult Function(RatingEventDownloadStats value) downloadStats,
     required TResult Function(RatingEventGameSelected value) gameSelected,
     required TResult Function(RatingEventPageOpened value) pageOpened,
     required TResult Function(RatingEventRangeChanged value) rangeChanged,
@@ -246,6 +256,7 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RatingEventPlayerSelected value)? playerSelected,
     TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventDownloadStats value)? downloadStats,
     TResult? Function(RatingEventGameSelected value)? gameSelected,
     TResult? Function(RatingEventPageOpened value)? pageOpened,
     TResult? Function(RatingEventRangeChanged value)? rangeChanged,
@@ -258,6 +269,7 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RatingEventPlayerSelected value)? playerSelected,
     TResult Function(RatingEventDownload value)? downloadRating,
+    TResult Function(RatingEventDownloadStats value)? downloadStats,
     TResult Function(RatingEventGameSelected value)? gameSelected,
     TResult Function(RatingEventPageOpened value)? pageOpened,
     TResult Function(RatingEventRangeChanged value)? rangeChanged,
@@ -355,6 +367,7 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
+    required TResult Function(DateTimeRange range, int clubId) downloadStats,
     required TResult Function(int gameId, int? clubId, int? tournamentId)
         gameSelected,
     required TResult Function(
@@ -377,6 +390,7 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int playerId)? playerSelected,
     TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(DateTimeRange range, int clubId)? downloadStats,
     TResult? Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -392,6 +406,7 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult Function(DateTimeRange range, int clubId)? downloadStats,
     TResult Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -411,6 +426,7 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
   TResult map<TResult extends Object?>({
     required TResult Function(RatingEventPlayerSelected value) playerSelected,
     required TResult Function(RatingEventDownload value) downloadRating,
+    required TResult Function(RatingEventDownloadStats value) downloadStats,
     required TResult Function(RatingEventGameSelected value) gameSelected,
     required TResult Function(RatingEventPageOpened value) pageOpened,
     required TResult Function(RatingEventRangeChanged value) rangeChanged,
@@ -423,6 +439,7 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RatingEventPlayerSelected value)? playerSelected,
     TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventDownloadStats value)? downloadStats,
     TResult? Function(RatingEventGameSelected value)? gameSelected,
     TResult? Function(RatingEventPageOpened value)? pageOpened,
     TResult? Function(RatingEventRangeChanged value)? rangeChanged,
@@ -435,6 +452,7 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RatingEventPlayerSelected value)? playerSelected,
     TResult Function(RatingEventDownload value)? downloadRating,
+    TResult Function(RatingEventDownloadStats value)? downloadStats,
     TResult Function(RatingEventGameSelected value)? gameSelected,
     TResult Function(RatingEventPageOpened value)? pageOpened,
     TResult Function(RatingEventRangeChanged value)? rangeChanged,
@@ -457,6 +475,194 @@ abstract class RatingEventDownload implements RatingEvent {
   @JsonKey(ignore: true)
   _$$RatingEventDownloadImplCopyWith<_$RatingEventDownloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RatingEventDownloadStatsImplCopyWith<$Res> {
+  factory _$$RatingEventDownloadStatsImplCopyWith(
+          _$RatingEventDownloadStatsImpl value,
+          $Res Function(_$RatingEventDownloadStatsImpl) then) =
+      __$$RatingEventDownloadStatsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTimeRange range, int clubId});
+}
+
+/// @nodoc
+class __$$RatingEventDownloadStatsImplCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$RatingEventDownloadStatsImpl>
+    implements _$$RatingEventDownloadStatsImplCopyWith<$Res> {
+  __$$RatingEventDownloadStatsImplCopyWithImpl(
+      _$RatingEventDownloadStatsImpl _value,
+      $Res Function(_$RatingEventDownloadStatsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? range = null,
+    Object? clubId = null,
+  }) {
+    return _then(_$RatingEventDownloadStatsImpl(
+      range: null == range
+          ? _value.range
+          : range // ignore: cast_nullable_to_non_nullable
+              as DateTimeRange,
+      clubId: null == clubId
+          ? _value.clubId
+          : clubId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RatingEventDownloadStatsImpl implements RatingEventDownloadStats {
+  const _$RatingEventDownloadStatsImpl(
+      {required this.range, required this.clubId});
+
+  @override
+  final DateTimeRange range;
+  @override
+  final int clubId;
+
+  @override
+  String toString() {
+    return 'RatingEvent.downloadStats(range: $range, clubId: $clubId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RatingEventDownloadStatsImpl &&
+            (identical(other.range, range) || other.range == range) &&
+            (identical(other.clubId, clubId) || other.clubId == clubId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, range, clubId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RatingEventDownloadStatsImplCopyWith<_$RatingEventDownloadStatsImpl>
+      get copyWith => __$$RatingEventDownloadStatsImplCopyWithImpl<
+          _$RatingEventDownloadStatsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int playerId) playerSelected,
+    required TResult Function(DateTimeRange range, int clubId) downloadRating,
+    required TResult Function(DateTimeRange range, int clubId) downloadStats,
+    required TResult Function(int gameId, int? clubId, int? tournamentId)
+        gameSelected,
+    required TResult Function(
+            DateTimeRange? range, int? clubId, int? tournamentId)
+        pageOpened,
+    required TResult Function(
+            DateTimeRange? range,
+            int? clubId,
+            int? tournamentId,
+            RatingTableStyle style,
+            RatingSort sort,
+            int gameFilter)
+        rangeChanged,
+  }) {
+    return downloadStats(range, clubId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int playerId)? playerSelected,
+    TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(DateTimeRange range, int clubId)? downloadStats,
+    TResult? Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
+    TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId)?
+        pageOpened,
+    TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId,
+            RatingTableStyle style, RatingSort sort, int gameFilter)?
+        rangeChanged,
+  }) {
+    return downloadStats?.call(range, clubId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int playerId)? playerSelected,
+    TResult Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult Function(DateTimeRange range, int clubId)? downloadStats,
+    TResult Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
+    TResult Function(DateTimeRange? range, int? clubId, int? tournamentId)?
+        pageOpened,
+    TResult Function(DateTimeRange? range, int? clubId, int? tournamentId,
+            RatingTableStyle style, RatingSort sort, int gameFilter)?
+        rangeChanged,
+    required TResult orElse(),
+  }) {
+    if (downloadStats != null) {
+      return downloadStats(range, clubId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RatingEventPlayerSelected value) playerSelected,
+    required TResult Function(RatingEventDownload value) downloadRating,
+    required TResult Function(RatingEventDownloadStats value) downloadStats,
+    required TResult Function(RatingEventGameSelected value) gameSelected,
+    required TResult Function(RatingEventPageOpened value) pageOpened,
+    required TResult Function(RatingEventRangeChanged value) rangeChanged,
+  }) {
+    return downloadStats(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventDownloadStats value)? downloadStats,
+    TResult? Function(RatingEventGameSelected value)? gameSelected,
+    TResult? Function(RatingEventPageOpened value)? pageOpened,
+    TResult? Function(RatingEventRangeChanged value)? rangeChanged,
+  }) {
+    return downloadStats?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RatingEventPlayerSelected value)? playerSelected,
+    TResult Function(RatingEventDownload value)? downloadRating,
+    TResult Function(RatingEventDownloadStats value)? downloadStats,
+    TResult Function(RatingEventGameSelected value)? gameSelected,
+    TResult Function(RatingEventPageOpened value)? pageOpened,
+    TResult Function(RatingEventRangeChanged value)? rangeChanged,
+    required TResult orElse(),
+  }) {
+    if (downloadStats != null) {
+      return downloadStats(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RatingEventDownloadStats implements RatingEvent {
+  const factory RatingEventDownloadStats(
+      {required final DateTimeRange range,
+      required final int clubId}) = _$RatingEventDownloadStatsImpl;
+
+  DateTimeRange get range;
+  int get clubId;
+  @JsonKey(ignore: true)
+  _$$RatingEventDownloadStatsImplCopyWith<_$RatingEventDownloadStatsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -546,6 +752,7 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
+    required TResult Function(DateTimeRange range, int clubId) downloadStats,
     required TResult Function(int gameId, int? clubId, int? tournamentId)
         gameSelected,
     required TResult Function(
@@ -568,6 +775,7 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int playerId)? playerSelected,
     TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(DateTimeRange range, int clubId)? downloadStats,
     TResult? Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -583,6 +791,7 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult Function(DateTimeRange range, int clubId)? downloadStats,
     TResult Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -602,6 +811,7 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
   TResult map<TResult extends Object?>({
     required TResult Function(RatingEventPlayerSelected value) playerSelected,
     required TResult Function(RatingEventDownload value) downloadRating,
+    required TResult Function(RatingEventDownloadStats value) downloadStats,
     required TResult Function(RatingEventGameSelected value) gameSelected,
     required TResult Function(RatingEventPageOpened value) pageOpened,
     required TResult Function(RatingEventRangeChanged value) rangeChanged,
@@ -614,6 +824,7 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RatingEventPlayerSelected value)? playerSelected,
     TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventDownloadStats value)? downloadStats,
     TResult? Function(RatingEventGameSelected value)? gameSelected,
     TResult? Function(RatingEventPageOpened value)? pageOpened,
     TResult? Function(RatingEventRangeChanged value)? rangeChanged,
@@ -626,6 +837,7 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RatingEventPlayerSelected value)? playerSelected,
     TResult Function(RatingEventDownload value)? downloadRating,
+    TResult Function(RatingEventDownloadStats value)? downloadStats,
     TResult Function(RatingEventGameSelected value)? gameSelected,
     TResult Function(RatingEventPageOpened value)? pageOpened,
     TResult Function(RatingEventRangeChanged value)? rangeChanged,
@@ -738,6 +950,7 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
+    required TResult Function(DateTimeRange range, int clubId) downloadStats,
     required TResult Function(int gameId, int? clubId, int? tournamentId)
         gameSelected,
     required TResult Function(
@@ -760,6 +973,7 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int playerId)? playerSelected,
     TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(DateTimeRange range, int clubId)? downloadStats,
     TResult? Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -775,6 +989,7 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult Function(DateTimeRange range, int clubId)? downloadStats,
     TResult Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -794,6 +1009,7 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
   TResult map<TResult extends Object?>({
     required TResult Function(RatingEventPlayerSelected value) playerSelected,
     required TResult Function(RatingEventDownload value) downloadRating,
+    required TResult Function(RatingEventDownloadStats value) downloadStats,
     required TResult Function(RatingEventGameSelected value) gameSelected,
     required TResult Function(RatingEventPageOpened value) pageOpened,
     required TResult Function(RatingEventRangeChanged value) rangeChanged,
@@ -806,6 +1022,7 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RatingEventPlayerSelected value)? playerSelected,
     TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventDownloadStats value)? downloadStats,
     TResult? Function(RatingEventGameSelected value)? gameSelected,
     TResult? Function(RatingEventPageOpened value)? pageOpened,
     TResult? Function(RatingEventRangeChanged value)? rangeChanged,
@@ -818,6 +1035,7 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RatingEventPlayerSelected value)? playerSelected,
     TResult Function(RatingEventDownload value)? downloadRating,
+    TResult Function(RatingEventDownloadStats value)? downloadStats,
     TResult Function(RatingEventGameSelected value)? gameSelected,
     TResult Function(RatingEventPageOpened value)? pageOpened,
     TResult Function(RatingEventRangeChanged value)? rangeChanged,
@@ -968,6 +1186,7 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(int playerId) playerSelected,
     required TResult Function(DateTimeRange range, int clubId) downloadRating,
+    required TResult Function(DateTimeRange range, int clubId) downloadStats,
     required TResult Function(int gameId, int? clubId, int? tournamentId)
         gameSelected,
     required TResult Function(
@@ -990,6 +1209,7 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int playerId)? playerSelected,
     TResult? Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult? Function(DateTimeRange range, int clubId)? downloadStats,
     TResult? Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult? Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -1006,6 +1226,7 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int playerId)? playerSelected,
     TResult Function(DateTimeRange range, int clubId)? downloadRating,
+    TResult Function(DateTimeRange range, int clubId)? downloadStats,
     TResult Function(int gameId, int? clubId, int? tournamentId)? gameSelected,
     TResult Function(DateTimeRange? range, int? clubId, int? tournamentId)?
         pageOpened,
@@ -1025,6 +1246,7 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(RatingEventPlayerSelected value) playerSelected,
     required TResult Function(RatingEventDownload value) downloadRating,
+    required TResult Function(RatingEventDownloadStats value) downloadStats,
     required TResult Function(RatingEventGameSelected value) gameSelected,
     required TResult Function(RatingEventPageOpened value) pageOpened,
     required TResult Function(RatingEventRangeChanged value) rangeChanged,
@@ -1037,6 +1259,7 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RatingEventPlayerSelected value)? playerSelected,
     TResult? Function(RatingEventDownload value)? downloadRating,
+    TResult? Function(RatingEventDownloadStats value)? downloadStats,
     TResult? Function(RatingEventGameSelected value)? gameSelected,
     TResult? Function(RatingEventPageOpened value)? pageOpened,
     TResult? Function(RatingEventRangeChanged value)? rangeChanged,
@@ -1049,6 +1272,7 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RatingEventPlayerSelected value)? playerSelected,
     TResult Function(RatingEventDownload value)? downloadRating,
+    TResult Function(RatingEventDownloadStats value)? downloadStats,
     TResult Function(RatingEventGameSelected value)? gameSelected,
     TResult Function(RatingEventPageOpened value)? pageOpened,
     TResult Function(RatingEventRangeChanged value)? rangeChanged,

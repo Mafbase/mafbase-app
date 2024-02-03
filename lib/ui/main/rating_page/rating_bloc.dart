@@ -5,6 +5,7 @@ import 'package:seating_generator_web/domain/interactors/download_rating_interac
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_rating_interactor.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
+import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
@@ -13,6 +14,7 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
   final DownloadRatingInteractor _downloadRatingInteractor = getIt();
   final GetRatingInteractor _getRatingRepository = getIt();
   final GetTournamentRatingInteractor _getTournamentRatingInteractor = getIt();
+  final ClubRepository _clubRepository = getIt();
   late final RatingRouter _router = getIt(param1: context);
 
   RatingBloc([BuildContext? context]) : super(const RatingState(), context) {
@@ -20,6 +22,12 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     on<RatingEventRangeChanged>(_onRangeChanged);
     on<RatingEventGameSelected>(_onGameSelected);
     on<RatingEventDownload>(_onDownloadRatingClicked);
+    on<RatingEventDownloadStats>(_onStatsDownload);
+  }
+
+  _onStatsDownload(RatingEventDownloadStats event, Emitter emit) {
+    return _clubRepository.downloadStats(
+        clubId: event.clubId, range: event.range);
   }
 
   _onGameSelected(RatingEventGameSelected event, Emitter emit) {

@@ -381,18 +381,35 @@ class _RatingPageState extends CustomState<RatingPage> {
 
   Widget downloadRatingButton() => widget.clubId == null
       ? Container()
-      : IconButton(
-          onPressed: () {
-            context.read<RatingBloc>().add(
-                  RatingEvent.downloadRating(
-                    range: widget.range!,
-                    clubId: widget.clubId!,
-                  ),
-                );
-          },
-          icon: const Icon(
-            Icons.download,
-          ),
+      : Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () {
+                context.read<RatingBloc>().add(
+                      RatingEvent.downloadRating(
+                        range: widget.range!,
+                        clubId: widget.clubId!,
+                      ),
+                    );
+              },
+              icon: const Icon(
+                Icons.download,
+              ),
+            ),
+            const SizedBox(width: 4),
+            IconButton(
+              onPressed: () {
+                context.read<RatingBloc>().add(
+                      RatingEvent.downloadStats(
+                        range: widget.range!,
+                        clubId: widget.clubId!,
+                      ),
+                    );
+              },
+              icon: const Icon(Icons.stacked_bar_chart),
+            ),
+          ],
         );
 
   onChangeRangeTap() async {

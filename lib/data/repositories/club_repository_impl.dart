@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/club_check_request.dart';
 import 'package:seating_generator_web/data/requests/clubs_list_request.dart';
@@ -7,7 +8,6 @@ import 'package:seating_generator_web/data/requests/edit_club_game_request.dart'
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_request.dart';
-import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
@@ -63,6 +63,15 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
     return launchUrl(
       Uri.parse(
         "${client.baseUrl}/api/club/$clubId/rating/download?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}",
+      ),
+    );
+  }
+
+  @override
+  Future downloadStats({required int clubId, required DateTimeRange range}) {
+    return launchUrl(
+      Uri.parse(
+        "${client.baseUrl}/api/club/$clubId/rating/download-stats?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}",
       ),
     );
   }

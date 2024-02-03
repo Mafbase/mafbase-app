@@ -52,4 +52,10 @@ class ClubRepositoryMock implements ClubRepository {
   Future<List<ClubModel>> getClubs({bool onlyMy = false}) async {
     return [await getClub(id: 1)];
   }
+
+  @override
+  Future downloadStats({
+    required int clubId,
+    required DateTimeRange range,
+  }) async {}
 }

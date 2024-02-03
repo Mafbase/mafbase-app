@@ -24,5 +24,10 @@ abstract class ClubRepository {
     required DateTimeRange range,
   });
 
+  Future downloadStats({
+    required int clubId,
+    required DateTimeRange range,
+  });
+
   Future<ClubModel> getClub({required int id});
 }

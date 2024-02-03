@@ -14,6 +14,11 @@ class RatingEvent with _$RatingEvent {
     required int clubId,
   }) = RatingEventDownload;
 
+  const factory RatingEvent.downloadStats({
+    required DateTimeRange range,
+    required int clubId,
+  }) = RatingEventDownloadStats;
+
   const factory RatingEvent.gameSelected({
     required int gameId,
     int? clubId,
