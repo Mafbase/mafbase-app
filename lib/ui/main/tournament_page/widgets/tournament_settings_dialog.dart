@@ -142,18 +142,22 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                       readOnly:
                           (int.tryParse(swissGamesController.text) ?? 0) == 0,
                       controller: bucketsController,
-                      validate: (value) =>
-                          (int.tryParse(swissGamesController.text) ?? 0) != 0 &&
-                                  (value?.split(";").any(
-                                        (element) {
-                                          final count = int.tryParse(element);
-                                          return count == null ||
-                                              count % 10 > 0;
-                                        },
-                                      ) ??
-                                      true)
-                              ? 'Неверный формат корзин'
-                              : null,
+                      validate: (value) {
+                        if ((int.tryParse(swissGamesController.text) ?? 0) ==
+                            0) {
+                          return null;
+                        }
+
+                        return (value?.split(";").any(
+                                  (element) {
+                                    final count = int.tryParse(element);
+                                    return count == null || count % 10 > 0;
+                                  },
+                                ) ??
+                                true)
+                            ? 'Неверный формат корзин'
+                            : null;
+                      },
                     ),
                   ),
                 ),
