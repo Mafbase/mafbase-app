@@ -1,4 +1,3 @@
-import 'dart:html' show AnchorElement;
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -16,6 +15,7 @@ import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/downloader/downloader.dart';
 
 class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   ClubRepositoryImpl(super.client);
@@ -69,15 +69,10 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
       '/api/club/$clubId/rating/download?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}"',
     );
 
-    final uri = Uri.dataFromBytes(
-      response.data ?? Uint8List(0),
-      mimeType: 'text/xlsx',
+    await downloadFile(
+      bytes: response.data ?? Uint8List(0),
+      fileName: 'rating.xlsx',
     );
-
-    AnchorElement()
-      ..href = uri.toString()
-      ..download = 'rating.xlsx'
-      ..click();
   }
 
   @override
@@ -89,15 +84,10 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
       '/api/club/$clubId/rating/download-stats?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}',
     );
 
-    final uri = Uri.dataFromBytes(
-      response.data ?? Uint8List(0),
-      mimeType: 'text/xlsx',
+    await downloadFile(
+      bytes: response.data ?? Uint8List(0),
+      fileName: 'stats.xlsx',
     );
-
-    AnchorElement()
-      ..href = uri.toString()
-      ..download = 'stats.xlsx'
-      ..click();
   }
 
   @override
