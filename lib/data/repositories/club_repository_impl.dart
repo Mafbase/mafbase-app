@@ -1,3 +1,6 @@
+import 'dart:html' show AnchorElement;
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
@@ -13,7 +16,6 @@ import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   ClubRepositoryImpl(super.client);
@@ -59,21 +61,43 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   }
 
   @override
-  Future downloadRating({required int clubId, required DateTimeRange range}) {
-    return launchUrl(
-      Uri.parse(
-        "${client.baseUrl}/api/club/$clubId/rating/download?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}",
-      ),
+  Future downloadRating({
+    required int clubId,
+    required DateTimeRange range,
+  }) async {
+    final response = await client.get<Uint8List>(
+      '/api/club/$clubId/rating/download?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}"',
     );
+
+    final uri = Uri.dataFromBytes(
+      response.data ?? Uint8List(0),
+      mimeType: 'text/xlsx',
+    );
+
+    AnchorElement()
+      ..href = uri.toString()
+      ..download = 'rating.xlsx'
+      ..click();
   }
 
   @override
-  Future downloadStats({required int clubId, required DateTimeRange range}) {
-    return launchUrl(
-      Uri.parse(
-        "${client.baseUrl}/api/club/$clubId/rating/download-stats?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}",
-      ),
+  Future downloadStats({
+    required int clubId,
+    required DateTimeRange range,
+  }) async {
+    final response = await client.get<Uint8List>(
+      '/api/club/$clubId/rating/download-stats?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}',
     );
+
+    final uri = Uri.dataFromBytes(
+      response.data ?? Uint8List(0),
+      mimeType: 'text/xlsx',
+    );
+
+    AnchorElement()
+      ..href = uri.toString()
+      ..download = 'stats.xlsx'
+      ..click();
   }
 
   @override

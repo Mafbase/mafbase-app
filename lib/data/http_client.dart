@@ -56,13 +56,16 @@ class MyHttpClient {
 
   Future<Response> _fetch(RequestOptions options) => _client.fetch(options);
 
-  Future<Response> get(String method, {bool useRecoveryToken = true}) async {
+  Future<Response<T>> get<T>(
+    String method, {
+    bool useRecoveryToken = true,
+  }) async {
     if (useRecoveryToken) {
       debugPrint("sending request to $baseUrl$method");
     }
     final token = await _storage.authToken;
 
-    final response = await _client.get(
+    final response = await _client.get<T>(
       method,
       options: Options(
         headers: {

@@ -206,7 +206,9 @@ void registerGetIt({bool isIntegrationTest = false}) {
     ..registerFactoryParam<TournamentsRouter, BuildContext, dynamic>(
       (context, _) => TournamentsRouterImpl(context),
     )
-    ..registerLazySingleton<ClubRepository>(() => ClubRepositoryImpl(getIt()));
+    ..registerLazySingleton<ClubRepository>(
+      () => ClubRepositoryImpl(getIt()),
+    );
   registerSharedGetIt();
 }
 
