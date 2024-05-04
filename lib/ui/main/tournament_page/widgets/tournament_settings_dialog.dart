@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -208,7 +209,8 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                         finalGames: int.parse(finalGamesController.text),
                         buckets: bucketsController.text
                             .split(';')
-                            .map((e) => int.parse(e))
+                            .map((e) => int.tryParse(e))
+                            .whereNotNull()
                             .toList(),
                         hideResult: hideResult,
                       ),
