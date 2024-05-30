@@ -1,6 +1,6 @@
 #Stage 1 - Install dependencies and build the app in a build environment
 ARG REGISTRY_HOST
-FROM ${REGISTRY_HOST}/flutter-builder:3.16.5 as build-env
+FROM ${REGISTRY_HOST}/flutter-builder:3.19.3 as build-env
 
 RUN mkdir /app/
 COPY . /app/
