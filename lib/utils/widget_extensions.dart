@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 abstract class CustomState<W extends StatefulWidget> extends State<W> {
+
   @override
   Widget build(BuildContext context) {
     Widget child;
