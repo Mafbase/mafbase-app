@@ -939,9 +939,6 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
           focusNode: widget.addScoreFocusNode,
           readOnly: widget.readOnly,
           controller: widget.addScoreController,
-          textInputType: const TextInputType.numberWithOptions(
-            decimal: true,
-          ),
           hint: "0.0",
           label: "Доп балл",
         ),
