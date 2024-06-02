@@ -940,7 +940,6 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
           readOnly: widget.readOnly,
           controller: widget.addScoreController,
           textInputType: const TextInputType.numberWithOptions(
-            signed: true,
             decimal: true,
           ),
           hint: "0.0",
