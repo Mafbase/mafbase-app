@@ -19,15 +19,17 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textWidget = Column(
-      children: [
-        const Spacer(),
-        Text(
+    final textWidget = ConstrainedBox(
+      constraints: const BoxConstraints(
+        minHeight: 53,
+      ),
+      child: Center(
+        child: Text(
           text,
           style: MyTheme.of(context).btnTextStyle,
+          textAlign: TextAlign.center,
         ),
-        const Spacer(),
-      ],
+      ),
     );
     return ElevatedButton(
       style: ButtonStyle(
@@ -52,10 +54,7 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       onPressed: disabled ? null : onTap,
-      child: SizedBox(
-        height: 57,
-        child: minimize ? textWidget : Center(child: textWidget),
-      ),
+      child: minimize ? textWidget : Center(child: textWidget),
     );
   }
 }

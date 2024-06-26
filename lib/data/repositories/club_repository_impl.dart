@@ -22,9 +22,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
 
   @override
   Future<int> addGame(ClubGameResult result, int clubId) {
-    return AddClubGameRequest(clubId: clubId, result: result)
-        .execute(client)
-        .then((value) => value.gameId);
+    return AddClubGameRequest(clubId: clubId, result: result).execute(client).then((value) => value.gameId);
   }
 
   @override
@@ -32,9 +30,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
     required int clubId,
     required DateTimeRange range,
   }) {
-    return GetClubRatingRequest(range: range, clubId: clubId)
-        .execute(client)
-        .then((event) {
+    return GetClubRatingRequest(range: range, clubId: clubId).execute(client).then((event) {
       return RatingModel.fromProto(event);
     });
   }
@@ -46,18 +42,12 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
 
   @override
   Future<bool> isOwner(int clubId) async {
-    return ClubCheckRequest(clubId: clubId)
-        .execute(client)
-        .then(
-          (value) => true,
-        )
-        .onError((error, stackTrace) => false);
+    return ClubCheckRequest(clubId: clubId).execute(client).then((value) => true).onError((error, stackTrace) => false);
   }
 
   @override
   Future editGame(ClubGameResult result, int clubId, int gameId) {
-    return EditClubGameRequest(clubId: clubId, gameId: gameId, result: result)
-        .execute(client);
+    return EditClubGameRequest(clubId: clubId, gameId: gameId, result: result).execute(client);
   }
 
   @override

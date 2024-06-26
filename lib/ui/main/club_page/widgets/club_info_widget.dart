@@ -87,7 +87,7 @@ class ClubInfoWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
@@ -101,7 +101,6 @@ class ClubInfoWidget extends StatelessWidget {
                     onTap: billClub!,
                   ),
                 ],
-                const Spacer(),
               ],
             ),
           ),

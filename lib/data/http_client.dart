@@ -99,7 +99,7 @@ class MyHttpClient {
         return get(method, useRecoveryToken: false);
       }
       await _storage.clear();
-      return response;
+      throw UnauthenticatedError();
     }
     _checkResponse(response);
 
