@@ -26,7 +26,7 @@ build_job:
   tags:
     - docker
   script:
-    - docker build --no-cache -t "$REGISTRY_HOST/seating-generator-flutter:latest" .
+    - docker build --no-cache --build-arg "REGISTRY_HOST=$REGISTRY_HOST" -t "$REGISTRY_HOST/seating-generator-flutter:latest" .
     - docker push "$REGISTRY_HOST/seating-generator-flutter:latest"
 
 code_quality:
