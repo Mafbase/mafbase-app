@@ -43,7 +43,7 @@ class ClubInfoWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Expanded(
+                      const Expanded(
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -51,14 +51,9 @@ class ClubInfoWidget extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const _ClubInfoHeader(),
-                                const SizedBox(height: 20),
-                                const _ClubDescription(),
-                                if (billClub != null)
-                                  CustomButton(
-                                    text: 'Продлить подписку клуба',
-                                    onTap: billClub!,
-                                  ),
+                                _ClubInfoHeader(),
+                                SizedBox(height: 20),
+                                _ClubDescription(),
                               ],
                             ),
                           ],
