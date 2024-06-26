@@ -26,13 +26,8 @@ build_job:
   tags:
     - docker
   script:
-    - docker build --build-arg "REGISTRY_HOST=$REGISTRY_HOST" -t seating-generator-flutter:latest .
-    - docker save seating-generator-flutter:latest > flutter-image.tar
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: push
-    paths:
-      - flutter-image.tar
+    - docker build --no-cache -t "$REGISTRY_HOST/seating-generator-flutter:latest" .
+    - docker push "$REGISTRY_HOST/seating-generator-flutter:latest"
 
 code_quality:
   stage: test
@@ -87,12 +82,5 @@ deploy:
     - ssh-keyscan -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - scp flutter-image.tar "$DEPLOY_USER"@"$DEPLOY_HOST":~/
-    - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./load_flutter.sh"
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - flutter-image.tar
