@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/club_avatar.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
@@ -10,11 +11,15 @@ import 'package:seating_generator_web/utils.dart';
 class ClubInfoWidget extends StatelessWidget {
   final ClubModel clubModel;
   final bool isMobile;
+  final VoidCallback? onAddGame;
+  final VoidCallback? billClub;
 
   const ClubInfoWidget({
     Key? key,
     required this.clubModel,
     this.isMobile = false,
+    this.onAddGame,
+    this.billClub,
   }) : super(key: key);
 
   @override
@@ -34,7 +39,7 @@ class ClubInfoWidget extends StatelessWidget {
                   top: 40,
                   right: 60,
                 ),
-                child: const SizedBox.expand(
+                child: SizedBox.expand(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -46,15 +51,29 @@ class ClubInfoWidget extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _ClubInfoHeader(),
-                                SizedBox(height: 20),
-                                _ClubDescription(),
+                                const _ClubInfoHeader(),
+                                const SizedBox(height: 20),
+                                const _ClubDescription(),
+                                if (billClub != null)
+                                  CustomButton(
+                                    text: 'Продлить подписку клуба',
+                                    onTap: billClub!,
+                                  ),
                               ],
                             ),
                           ],
                         ),
                       ),
-                      _ClubRatingButton(),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Flexible(child: _ClubRatingButton()),
+                          if (onAddGame != null) ...[
+                            _AddGameButton(onTap: onAddGame!),
+                            const SizedBox(width: 12),
+                          ],
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -64,24 +83,39 @@ class ClubInfoWidget extends StatelessWidget {
   }
 
   Widget buildMobile(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _ClubInfoHeader(),
-                SizedBox(height: 20),
-                _ClubDescription(),
-                Spacer(),
+                const _ClubInfoHeader(),
+                const SizedBox(height: 20),
+                const _ClubDescription(),
+                if (billClub != null) ...[
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    text: 'Продлить подписку клуба',
+                    onTap: billClub!,
+                  ),
+                ],
+                const Spacer(),
               ],
             ),
           ),
         ),
-        Divider(),
-        _ClubRatingButton(),
+        const Divider(),
+        Row(
+          children: [
+            const Flexible(child: _ClubRatingButton()),
+            if (onAddGame != null) ...[
+              _AddGameButton(onTap: onAddGame!),
+              const SizedBox(width: 12),
+            ],
+          ],
+        ),
       ],
     );
   }
@@ -107,6 +141,30 @@ class _ClubRatingButton extends StatelessWidget {
       ),
     );
   }
+}
+
+class _AddGameButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _AddGameButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) => InkWell(
+        onTap: onTap,
+        customBorder: const CircleBorder(),
+        child: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: MyTheme.of(context).darkGreyColor,
+          ),
+          child: const Icon(
+            Icons.add,
+            size: 32,
+            color: Colors.white,
+          ),
+        ),
+      );
 }
 
 class _ClubDescription extends StatelessWidget {

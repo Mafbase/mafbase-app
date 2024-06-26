@@ -71,6 +71,8 @@ class _ClubPageState extends CustomState<ClubPage> {
               ClubInfoWidget(
                 clubModel: state.model!,
                 isMobile: true,
+                onAddGame: state.isOwner ? _addNewGame : null,
+                billClub: state.isOwner ? _bill : null,
               ),
           ],
         );
@@ -90,6 +92,8 @@ class _ClubPageState extends CustomState<ClubPage> {
                   Expanded(
                     child: ClubInfoWidget(
                       clubModel: state.model!,
+                      onAddGame: state.isOwner ? _addNewGame : null,
+                      billClub: state.isOwner ? _bill : null,
                     ),
                   ),
               ],
@@ -100,21 +104,7 @@ class _ClubPageState extends CustomState<ClubPage> {
                 right: 20,
                 child: FloatingActionButton.large(
                   backgroundColor: context.theme.redColor,
-                  onPressed: () {
-                    final bloc = context.read<ClubBloc>();
-                    ClubBillDialog.open(
-                      context: context,
-                      billedFor: state.model?.billedFor,
-                    ).then((option) {
-                      if (option != null) {
-                        bloc.add(
-                          ClubEvent.billClub(
-                            days: option.days,
-                          ),
-                        );
-                      }
-                    });
-                  },
+                  onPressed: _bill,
                   child: const Icon(Icons.monetization_on_outlined),
                 ),
               ),
@@ -122,5 +112,29 @@ class _ClubPageState extends CustomState<ClubPage> {
         );
       },
     );
+  }
+
+  void _addNewGame() => context.go(
+      AddClubGamePage.createLocation(
+        context,
+        context.read<ClubBloc>().state.model!.id,
+      ),
+    );
+
+  void _bill() async {
+    final bloc = context.read<ClubBloc>();
+    final option = await ClubBillDialog.open(
+      context: context,
+      billedFor: bloc.state.model?.billedFor,
+    );
+
+    if (!context.mounted) return;
+    if (option != null) {
+      bloc.add(
+        ClubEvent.billClub(
+          days: option.days,
+        ),
+      );
+    }
   }
 }
