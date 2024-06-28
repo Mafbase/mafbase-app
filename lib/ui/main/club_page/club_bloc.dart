@@ -79,6 +79,7 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
         redirectPath: router.getLocation(),
         days: event.days,
       ).then((str) => Uri.parse(str)),
+      webOnlyWindowName: '_self',
     );
   }
 
