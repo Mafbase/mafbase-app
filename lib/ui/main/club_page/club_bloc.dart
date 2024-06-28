@@ -57,12 +57,14 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
   }
 
   _onPageOpened(ClubEventPageOpened event, Emitter emit) async {
-    final list = await Future.wait([
+    final [
+      ClubModel club,
+      bool isOwner,
+    ] = await Future.wait<dynamic>([
       _getClubInteractor.run(clubId: _clubId),
       _checkClubInteractor(_clubId),
     ]);
-    final club = list[0] as ClubModel;
-    final isOwner = list[1] as bool;
+
     emit(
       state.copyWith(
         isLoading: false,
