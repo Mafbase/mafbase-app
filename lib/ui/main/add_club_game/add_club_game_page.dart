@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/router.dart';
@@ -292,15 +293,33 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                       style: MyTheme.of(context).headerTextStyle,
                     ),
                     Expanded(
-                      child: Wrap(
-                        alignment: WrapAlignment.spaceAround,
-                        runSpacing: 20,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        direction: Axis.vertical,
-                        children: [
-                          ...buildPlayersRow(state),
-                          buildGameInfoWidget(state),
-                        ],
+                      child: LayoutBuilder(
+                        builder: (context, constraints) =>
+                            SingleChildScrollView(
+                          child: Wrap(
+                            alignment: WrapAlignment.spaceAround,
+                            runSpacing: 20,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  minHeight: constraints.maxHeight,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: buildPlayersRow(state)
+                                      .map(
+                                        (e) => e,
+                                      )
+                                      .toList(),
+                                ),
+                              ),
+                              buildGameInfoWidget(state),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],
