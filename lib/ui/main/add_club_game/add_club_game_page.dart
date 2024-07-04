@@ -305,15 +305,18 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                 constraints: BoxConstraints(
                                   minHeight: constraints.maxHeight,
                                 ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: buildPlayersRow(state)
-                                      .map(
-                                        (e) => e,
-                                      )
-                                      .toList(),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: buildPlayersRow(state)
+                                        .map(
+                                          (e) => e,
+                                        )
+                                        .toList(),
+                                  ),
                                 ),
                               ),
                               buildGameInfoWidget(state),
