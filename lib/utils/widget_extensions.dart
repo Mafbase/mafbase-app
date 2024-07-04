@@ -55,5 +55,5 @@ abstract class CustomState<W extends StatefulWidget> extends State<W> {
 }
 
 extension BuildContextIsMobileExt on BuildContext {
-  bool get isMobile => MediaQuery.of(this).size.width < 500;
+  bool get isMobile => MediaQuery.of(this).size.width < 1050;
 }
