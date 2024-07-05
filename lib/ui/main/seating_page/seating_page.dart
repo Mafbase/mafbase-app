@@ -7,6 +7,7 @@ import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
@@ -305,6 +306,19 @@ class _SeatingPageState extends State<SeatingPage> {
                 );
           },
           title: 'Загрузить готовую рассадку',
+        ),
+        (
+          onTap: () async {
+            final id = await GomafiaInputDialog.show(context);
+
+            if (id == null) return;
+            if (!mounted) return;
+
+            context.read<SeatingPageBloc>().add(
+                  SeatingPageEvent.autoFsmSeating(id),
+                );
+          },
+          title: 'Загрузить с Gomafia',
         ),
       ];
 }

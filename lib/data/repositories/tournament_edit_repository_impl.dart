@@ -10,6 +10,7 @@ import 'package:seating_generator_web/data/requests/get_separations_request.dart
 import 'package:seating_generator_web/data/requests/get_settings_request.dart';
 import 'package:seating_generator_web/data/requests/separate_players_request.dart';
 import 'package:seating_generator_web/data/requests/set_final_players_request.dart';
+import 'package:seating_generator_web/data/requests/take_gomafia_seating_request.dart';
 import 'package:seating_generator_web/data/requests/update_settings_request.dart';
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
@@ -143,4 +144,14 @@ class TournamentEditRepositoryImpl extends BaseRepository
     await CreateSwissGameRequest(tournamentId: tournamentId, game: game)
         .execute(client);
   }
+
+  @override
+  Future<void> getGomafiaSeating({
+    required int tournamentId,
+    required int gomafiaId,
+  }) =>
+      TakeGomafiaSeatingRequest(
+        tournamentId: tournamentId,
+        gomafiaId: gomafiaId,
+      ).execute(client);
 }

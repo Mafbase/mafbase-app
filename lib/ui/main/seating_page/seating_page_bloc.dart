@@ -37,6 +37,20 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     on<SeatingPageEventGameEditing>(_onOpenGameEditing);
     on<SeatingPageEventCreateFinalSeating>(_onGenerateFinalSeating);
     on<SeatingPageEventCreateSwissGame>(_onSwissGameCreate);
+    on<SeatingPageEventAutoFsmSeating>(_autoFsmSeating);
+  }
+
+  Future<void> _autoFsmSeating(
+    SeatingPageEventAutoFsmSeating event,
+    Emitter emit,
+  ) async {
+    emit(state.copyWith(isLoading: true));
+    await _tournamentEditRepository.getGomafiaSeating(
+      tournamentId: tournamentId,
+      gomafiaId: event.gomafiaId,
+    );
+
+    add(SeatingPageEvent.pageOpened(tournamentId: tournamentId));
   }
 
   Future<void> _onSwissGameCreate(

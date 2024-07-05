@@ -13,6 +13,10 @@ class SeatingPageEvent with _$SeatingPageEvent {
   const factory SeatingPageEvent.fsmSeatingTapped() =
       SeatingPageEventFsmSeatingTapped;
 
+  const factory SeatingPageEvent.autoFsmSeating(
+    int gomafiaId,
+  ) = SeatingPageEventAutoFsmSeating;
+
   const factory SeatingPageEvent.deletePair({
     required PlayerModel first,
     required PlayerModel second,

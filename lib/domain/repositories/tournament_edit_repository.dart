@@ -47,4 +47,9 @@ abstract class TournamentEditRepository {
     required int tournamentId,
     required int game,
   });
+
+  Future<void> getGomafiaSeating({
+    required int tournamentId,
+    required int gomafiaId,
+  });
 }

@@ -21,6 +21,7 @@ mixin _$SeatingPageEvent {
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -33,6 +34,7 @@ mixin _$SeatingPageEvent {
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -45,6 +47,7 @@ mixin _$SeatingPageEvent {
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -60,6 +63,8 @@ mixin _$SeatingPageEvent {
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -75,6 +80,7 @@ mixin _$SeatingPageEvent {
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -88,6 +94,7 @@ mixin _$SeatingPageEvent {
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -161,6 +168,7 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -176,6 +184,7 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -191,6 +200,7 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -212,6 +222,8 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -230,6 +242,7 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -246,6 +259,7 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -311,6 +325,7 @@ class _$SeatingPageEventCreateSeatingImpl
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -326,6 +341,7 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -341,6 +357,7 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -362,6 +379,8 @@ class _$SeatingPageEventCreateSeatingImpl
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -380,6 +399,7 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -396,6 +416,7 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -462,6 +483,7 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -477,6 +499,7 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -492,6 +515,7 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -513,6 +537,8 @@ class _$SeatingPageEventFsmSeatingTappedImpl
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -531,6 +557,7 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -547,6 +574,7 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -565,6 +593,198 @@ class _$SeatingPageEventFsmSeatingTappedImpl
 abstract class SeatingPageEventFsmSeatingTapped implements SeatingPageEvent {
   const factory SeatingPageEventFsmSeatingTapped() =
       _$SeatingPageEventFsmSeatingTappedImpl;
+}
+
+/// @nodoc
+abstract class _$$SeatingPageEventAutoFsmSeatingImplCopyWith<$Res> {
+  factory _$$SeatingPageEventAutoFsmSeatingImplCopyWith(
+          _$SeatingPageEventAutoFsmSeatingImpl value,
+          $Res Function(_$SeatingPageEventAutoFsmSeatingImpl) then) =
+      __$$SeatingPageEventAutoFsmSeatingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int gomafiaId});
+}
+
+/// @nodoc
+class __$$SeatingPageEventAutoFsmSeatingImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventAutoFsmSeatingImpl>
+    implements _$$SeatingPageEventAutoFsmSeatingImplCopyWith<$Res> {
+  __$$SeatingPageEventAutoFsmSeatingImplCopyWithImpl(
+      _$SeatingPageEventAutoFsmSeatingImpl _value,
+      $Res Function(_$SeatingPageEventAutoFsmSeatingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gomafiaId = null,
+  }) {
+    return _then(_$SeatingPageEventAutoFsmSeatingImpl(
+      null == gomafiaId
+          ? _value.gomafiaId
+          : gomafiaId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SeatingPageEventAutoFsmSeatingImpl
+    implements SeatingPageEventAutoFsmSeating {
+  const _$SeatingPageEventAutoFsmSeatingImpl(this.gomafiaId);
+
+  @override
+  final int gomafiaId;
+
+  @override
+  String toString() {
+    return 'SeatingPageEvent.autoFsmSeating(gomafiaId: $gomafiaId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SeatingPageEventAutoFsmSeatingImpl &&
+            (identical(other.gomafiaId, gomafiaId) ||
+                other.gomafiaId == gomafiaId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, gomafiaId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SeatingPageEventAutoFsmSeatingImplCopyWith<
+          _$SeatingPageEventAutoFsmSeatingImpl>
+      get copyWith => __$$SeatingPageEventAutoFsmSeatingImplCopyWithImpl<
+          _$SeatingPageEventAutoFsmSeatingImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() addPair,
+    required TResult Function() createSeating,
+    required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
+    required TResult Function(PlayerModel first, PlayerModel second) deletePair,
+    required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
+    required TResult Function() createFinalSeating,
+    required TResult Function(int game) createSwissGame,
+  }) {
+    return autoFsmSeating(gomafiaId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
+    TResult? Function()? createFinalSeating,
+    TResult? Function(int game)? createSwissGame,
+  }) {
+    return autoFsmSeating?.call(gomafiaId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? addPair,
+    TResult Function()? createSeating,
+    TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
+    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
+    TResult Function()? createFinalSeating,
+    TResult Function(int game)? createSwissGame,
+    required TResult orElse(),
+  }) {
+    if (autoFsmSeating != null) {
+      return autoFsmSeating(gomafiaId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventCreateSeating value)
+        createSeating,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
+    required TResult Function(SeatingPageEventDeletePair value) deletePair,
+    required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
+    required TResult Function(SeatingPageEventCreateFinalSeating value)
+        createFinalSeating,
+    required TResult Function(SeatingPageEventCreateSwissGame value)
+        createSwissGame,
+  }) {
+    return autoFsmSeating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult? Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+  }) {
+    return autoFsmSeating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    required TResult orElse(),
+  }) {
+    if (autoFsmSeating != null) {
+      return autoFsmSeating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SeatingPageEventAutoFsmSeating implements SeatingPageEvent {
+  const factory SeatingPageEventAutoFsmSeating(final int gomafiaId) =
+      _$SeatingPageEventAutoFsmSeatingImpl;
+
+  int get gomafiaId;
+  @JsonKey(ignore: true)
+  _$$SeatingPageEventAutoFsmSeatingImplCopyWith<
+          _$SeatingPageEventAutoFsmSeatingImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -666,6 +886,7 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -681,6 +902,7 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -696,6 +918,7 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -717,6 +940,8 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -735,6 +960,7 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -751,6 +977,7 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -850,6 +1077,7 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -865,6 +1093,7 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -880,6 +1109,7 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -901,6 +1131,8 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -919,6 +1151,7 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -935,6 +1168,7 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -1031,6 +1265,7 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -1046,6 +1281,7 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -1061,6 +1297,7 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -1082,6 +1319,8 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -1100,6 +1339,7 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -1116,6 +1356,7 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -1187,6 +1428,7 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -1202,6 +1444,7 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -1217,6 +1460,7 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -1238,6 +1482,8 @@ class _$SeatingPageEventCreateFinalSeatingImpl
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -1256,6 +1502,7 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -1272,6 +1519,7 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -1365,6 +1613,7 @@ class _$SeatingPageEventCreateSwissGameImpl
     required TResult Function() addPair,
     required TResult Function() createSeating,
     required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
     required TResult Function(PlayerModel first, PlayerModel second) deletePair,
     required TResult Function(int tournamentId) pageOpened,
     required TResult Function(int gameId) openGameEditing,
@@ -1380,6 +1629,7 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult? Function()? addPair,
     TResult? Function()? createSeating,
     TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
     TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult? Function(int tournamentId)? pageOpened,
     TResult? Function(int gameId)? openGameEditing,
@@ -1395,6 +1645,7 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult Function()? addPair,
     TResult Function()? createSeating,
     TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
     TResult Function(PlayerModel first, PlayerModel second)? deletePair,
     TResult Function(int tournamentId)? pageOpened,
     TResult Function(int gameId)? openGameEditing,
@@ -1416,6 +1667,8 @@ class _$SeatingPageEventCreateSwissGameImpl
         createSeating,
     required TResult Function(SeatingPageEventFsmSeatingTapped value)
         fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
     required TResult Function(SeatingPageEventDeletePair value) deletePair,
     required TResult Function(SeatingPageEventPageOpened value) pageOpened,
     required TResult Function(SeatingPageEventGameEditing value)
@@ -1434,6 +1687,7 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult? Function(SeatingPageEventAddPair value)? addPair,
     TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult? Function(SeatingPageEventDeletePair value)? deletePair,
     TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
@@ -1450,6 +1704,7 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult Function(SeatingPageEventAddPair value)? addPair,
     TResult Function(SeatingPageEventCreateSeating value)? createSeating,
     TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
     TResult Function(SeatingPageEventDeletePair value)? deletePair,
     TResult Function(SeatingPageEventPageOpened value)? pageOpened,
     TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
