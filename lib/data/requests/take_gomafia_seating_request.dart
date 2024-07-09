@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:seating_generator_web/data/base_request.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
-class TakeGomafiaSeatingRequest extends BaseRequest<void> {
+class TakeGomafiaSeatingRequest
+    extends BaseRequest<TakeGomafiaSeatingEventOut> {
   TakeGomafiaSeatingRequest({
     required int tournamentId,
     required int gomafiaId,
@@ -13,5 +15,8 @@ class TakeGomafiaSeatingRequest extends BaseRequest<void> {
         );
 
   @override
-  FutureOr<void> parse(List<int> bytes) {}
+  FutureOr<TakeGomafiaSeatingEventOut> parse(List<int> bytes) => compute(
+        TakeGomafiaSeatingEventOut.fromBuffer,
+        bytes,
+      );
 }

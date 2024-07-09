@@ -81,13 +81,18 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
   }
 
   @override
-  Future<void> generateSwissGame(
-      {required int tournamentId, required int game}) {
+  Future<void> generateSwissGame({
+    required int tournamentId,
+    required int game,
+  }) {
     return Future.value();
   }
 
   @override
-  Future<void> getGomafiaSeating({required int tournamentId, required int gomafiaId}) {
+  Future<void> getGomafiaSeating({
+    required int tournamentId,
+    required int gomafiaId,
+  }) {
     // TODO: implement getGomafiaSeating
     throw UnimplementedError();
   }

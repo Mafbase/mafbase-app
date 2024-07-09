@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 
@@ -57,12 +55,12 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
                       Navigator.pop(
                         context,
                         int.tryParse(
-                            controller.text.split('/').lastOrNull ?? ''),
+                            controller.text.split('/').lastOrNull ?? '',),
                       );
                     },
                     disabled: !validate,
                   ),
-                )
+                ),
               ],
             ),
           ),

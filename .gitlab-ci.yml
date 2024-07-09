@@ -18,11 +18,10 @@
 
 stages:          # List of stages for jobs, and their order of execution
   - test
-  - build
   - deploy
 
 build_job:
-  stage: build
+  stage: deploy
   tags:
     - docker
   script:

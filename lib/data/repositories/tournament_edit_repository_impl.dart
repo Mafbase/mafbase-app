@@ -153,5 +153,13 @@ class TournamentEditRepositoryImpl extends BaseRepository
       TakeGomafiaSeatingRequest(
         tournamentId: tournamentId,
         gomafiaId: gomafiaId,
-      ).execute(client);
+      ).execute(client).then(
+        (value) {
+          if (value.notFound.isNotEmpty) {
+            throw Exception(
+              'Не найдены следующие игроки: ${value.notFound.join(', ')}',
+            );
+          }
+        },
+      );
 }

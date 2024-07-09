@@ -180,9 +180,9 @@ class _SeatingPageState extends State<SeatingPage> {
                               Rect.fromPoints(
                                 button.localToGlobal(offset, ancestor: overlay),
                                 button.localToGlobal(
-                                    button.size.bottomRight(Offset.zero) +
-                                        offset,
-                                    ancestor: overlay),
+                                  button.size.bottomRight(Offset.zero) + offset,
+                                  ancestor: overlay,
+                                ),
                               ),
                               Offset.zero & overlay.size,
                             );

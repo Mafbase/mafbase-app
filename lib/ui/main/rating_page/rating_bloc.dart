@@ -25,10 +25,10 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     on<RatingEventDownloadStats>(_onStatsDownload);
   }
 
-  _onStatsDownload(RatingEventDownloadStats event, Emitter emit) {
-    return _clubRepository.downloadStats(
-        clubId: event.clubId, range: event.range);
-  }
+  _onStatsDownload(RatingEventDownloadStats event, Emitter emit) => _clubRepository.downloadStats(
+      clubId: event.clubId,
+      range: event.range,
+    );
 
   _onGameSelected(RatingEventGameSelected event, Emitter emit) {
     final clubId = event.clubId;

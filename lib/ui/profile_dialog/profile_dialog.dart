@@ -81,7 +81,7 @@ class _ProfileDialogState extends State<ProfileDialog> {
                       onTap: () async {
                         final image = await ImagePicker()
                             .pickImage(source: ImageSource.gallery);
-                        if (image != null && mounted) {
+                        if (image != null && context.mounted) {
                           context.read<ProfileDialogBloc>().add(
                                 ProfileDialogEvent.editImage(
                                   bytes: Uint8List.fromList(
