@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage._({Key? key}) : super(key: key);
@@ -20,10 +21,13 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: DefaultTextStyle(
-        style: TextStyle(fontSize: 24),
-        child: SelectionArea(
+        style: TextStyle(
+          fontSize: 24,
+          color: MyTheme.of(context).textColor
+        ),
+        child: const SelectionArea(
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),

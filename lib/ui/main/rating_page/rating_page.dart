@@ -211,6 +211,7 @@ class _RatingPageState extends CustomState<RatingPage> {
               child: Text(
                 state.clubName,
                 style: context.theme.headerTextStyle,
+                textAlign: TextAlign.center,
               ),
             ),
             if (widget.range != null)

@@ -124,11 +124,13 @@ class TournamentPageBloc
 
   _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {
     await Future.wait([
-      _tournamentCheckInteractor(tournamentId: tournamentId).then(
-        (value) => emit(
-          state.copyWith(isMyTournament: value),
-        ),
-      ),
+      _tournamentCheckInteractor(tournamentId: tournamentId)
+          .onError((error, _) => false)
+          .then(
+            (value) => emit(
+              state.copyWith(isMyTournament: value),
+            ),
+          ),
       Future(() async {
         final tournament = await _getTournamentInteractor(
           tournamentId: tournamentId,
