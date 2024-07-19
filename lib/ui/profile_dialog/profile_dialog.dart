@@ -76,103 +76,101 @@ class _ProfileDialogState extends State<ProfileDialog> {
               width: 600,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        widget.player.nickname,
-                        style: MyTheme.of(context).headerTextStyle,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              final image = await ImagePicker()
-                                  .pickImage(source: ImageSource.gallery);
-                              if (image != null && context.mounted) {
-                                context.read<ProfileDialogBloc>().add(
-                                  ProfileDialogEvent.editImage(
-                                    bytes: Uint8List.fromList(
-                                      await image.openRead().fold<List<int>>(
-                                        [],
-                                            (previous, element) => previous + element,
-                                      ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      widget.player.nickname,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            final image = await ImagePicker()
+                                .pickImage(source: ImageSource.gallery);
+                            if (image != null && context.mounted) {
+                              context.read<ProfileDialogBloc>().add(
+                                ProfileDialogEvent.editImage(
+                                  bytes: Uint8List.fromList(
+                                    await image.openRead().fold<List<int>>(
+                                      [],
+                                          (previous, element) => previous + element,
                                     ),
-                                    fileName: image.name,
                                   ),
-                                );
-                              }
-                            },
-                            child: SizedBox(
-                              width: 150,
-                              height: 150,
-                              child: state.imageUrl == null
-                                  ? Image.asset(
-                                AppAssets.playerPhoto,
-                                fit: BoxFit.cover,
-                              )
-                                  : CachedNetworkImage(
-                                imageUrl: state.imageUrl ?? "",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          Flexible(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                CustomTextField(
-                                  controller: nicknameController,
-                                  onSubmit: (_) {
-                                    fsmFocusNode.requestFocus();
-                                  },
-                                  focusNode: nicknameFocusNode,
-                                  label: context.locale.nicknameHint,
-                                ),
-                                CustomTextField(
-                                  controller: fsmNicknameController,
-                                  onSubmit: (_) {
-                                    mafbankFocusNode.requestFocus();
-                                  },
-                                  focusNode: fsmFocusNode,
-                                  label: context.locale.fsmNicknameHint,
-                                ),
-                                CustomTextField(
-                                  controller: mafbankNicknameController,
-                                  onSubmit: (_) {
-                                    mafbankFocusNode.unfocus();
-                                  },
-                                  focusNode: mafbankFocusNode,
-                                  label: context.locale.mafbankNicknameHint,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      CustomButton(
-                        text: context.locale.save,
-                        onTap: () {
-                          context.read<ProfileDialogBloc>().add(
-                                ProfileDialogEvent.onSubmit(
-                                  nickname: nicknameController.text,
-                                  mafbankNickname:
-                                      mafbankNicknameController.text,
-                                  fsmNickname: fsmNicknameController.text,
+                                  fileName: image.name,
                                 ),
                               );
-                        },
-                      ),
-                    ],
-                  ),
+                            }
+                          },
+                          child: SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: state.imageUrl == null
+                                ? Image.asset(
+                              AppAssets.playerPhoto,
+                              fit: BoxFit.cover,
+                            )
+                                : CachedNetworkImage(
+                              imageUrl: state.imageUrl ?? "",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Flexible(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CustomTextField(
+                                controller: nicknameController,
+                                onSubmit: (_) {
+                                  fsmFocusNode.requestFocus();
+                                },
+                                focusNode: nicknameFocusNode,
+                                label: context.locale.nicknameHint,
+                              ),
+                              CustomTextField(
+                                controller: fsmNicknameController,
+                                onSubmit: (_) {
+                                  mafbankFocusNode.requestFocus();
+                                },
+                                focusNode: fsmFocusNode,
+                                label: context.locale.fsmNicknameHint,
+                              ),
+                              CustomTextField(
+                                controller: mafbankNicknameController,
+                                onSubmit: (_) {
+                                  mafbankFocusNode.unfocus();
+                                },
+                                focusNode: mafbankFocusNode,
+                                label: context.locale.mafbankNicknameHint,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    CustomButton(
+                      text: context.locale.save,
+                      onTap: () {
+                        context.read<ProfileDialogBloc>().add(
+                              ProfileDialogEvent.onSubmit(
+                                nickname: nicknameController.text,
+                                mafbankNickname:
+                                    mafbankNicknameController.text,
+                                fsmNickname: fsmNicknameController.text,
+                              ),
+                            );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
