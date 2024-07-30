@@ -765,7 +765,7 @@ class NicknameField extends StatelessWidget {
   final FocusNode focusNode;
   final List<PlayerModel> availablePlayers;
 
-  final VoidCallback? onSelected;
+  final Function(PlayerModel player)? onSelected;
   final Function({String? initValue})? onNewPlayer;
   final bool readOnly;
   final String hint;
@@ -793,14 +793,14 @@ class NicknameField extends StatelessWidget {
             down ? OptionsViewOpenDirection.down : OptionsViewOpenDirection.up,
         controller: controller,
         displayStringForOption: (model) =>
-            model.id == -1 ? "+" : model.nickname,
+            model.id == PlayerModel.undefinedId ? "+" : model.nickname,
         focusNode: focusNode,
         onSelected: (playerModel) async {
-          if (playerModel.id == -1) {
+          if (playerModel.id == PlayerModel.undefinedId) {
             onNewPlayer?.call(initValue: playerModel.nickname);
           } else {
             controller.text = playerModel.nickname;
-            onSelected?.call();
+            onSelected?.call(playerModel);
           }
         },
         onSubmit: () {},
@@ -828,8 +828,7 @@ class NicknameField extends StatelessWidget {
 
           return players +
               [
-                if (onNewPlayer != null)
-                  PlayerModel(id: -1, nickname: value.text),
+                if (onNewPlayer != null) PlayerModel(nickname: value.text),
               ];
         },
         hint: hint,
@@ -972,6 +971,6 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
         availablePlayers: widget.availablePlayers,
         hint: widget.hint,
         onNewPlayer: widget.onNewPlayer,
-        onSelected: widget.onSelected,
+        onSelected: (_) => widget.onSelected(),
       );
 }

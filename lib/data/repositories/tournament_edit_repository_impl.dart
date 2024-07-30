@@ -147,7 +147,7 @@ class TournamentEditRepositoryImpl extends BaseRepository
   }
 
   @override
-  Future<void> getGomafiaSeating({
+  Future<List<String>> getGomafiaSeating({
     required int tournamentId,
     required int gomafiaId,
   }) =>
@@ -155,12 +155,6 @@ class TournamentEditRepositoryImpl extends BaseRepository
         tournamentId: tournamentId,
         gomafiaId: gomafiaId,
       ).execute(client).then(
-        (value) {
-          if (value.notFound.isNotEmpty) {
-            throw RequestError(
-              'Не найдены следующие игроки: ${value.notFound.join(', ')}',
-            );
-          }
-        },
-      );
+            (value) => value.notFound,
+          );
 }

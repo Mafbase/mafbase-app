@@ -9,11 +9,13 @@ import 'package:seating_generator_web/domain/interactors/get_seating_interactor.
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 
-class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
+class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState>
+    with EffectEmitter<SeatingPageEffect, SeatingPageState> {
   late int tournamentId;
   final GetSeparationInteractor _getSeparationInteractor = getIt();
   final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
@@ -45,12 +47,17 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState> {
     Emitter emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    await _tournamentEditRepository.getGomafiaSeating(
+    final notFound = await _tournamentEditRepository.getGomafiaSeating(
       tournamentId: tournamentId,
       gomafiaId: event.gomafiaId,
     );
 
-    add(SeatingPageEvent.pageOpened(tournamentId: tournamentId));
+    if (notFound.isEmpty) {
+      add(SeatingPageEvent.pageOpened(tournamentId: tournamentId));
+      return;
+    }
+
+    emitEffect(SeatingPageEffect.fixPlayers(notFound, event.gomafiaId));
   }
 
   Future<void> _onSwissGameCreate(

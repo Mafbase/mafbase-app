@@ -147,13 +147,14 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
 
 class _$PlayerModelImpl implements _PlayerModel {
   const _$PlayerModelImpl(
-      {required this.id,
+      {this.id = PlayerModel.undefinedId,
       required this.nickname,
       this.fsmNickaname,
       this.mafbankNickname,
       this.imageUrl});
 
   @override
+  @JsonKey()
   final int id;
   @override
   final String nickname;
@@ -198,7 +199,7 @@ class _$PlayerModelImpl implements _PlayerModel {
 
 abstract class _PlayerModel implements PlayerModel {
   const factory _PlayerModel(
-      {required final int id,
+      {final int id,
       required final String nickname,
       final String? fsmNickaname,
       final String? mafbankNickname,

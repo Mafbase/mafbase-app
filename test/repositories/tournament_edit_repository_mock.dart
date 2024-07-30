@@ -89,7 +89,7 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
   }
 
   @override
-  Future<void> getGomafiaSeating({
+  Future<List<String>> getGomafiaSeating({
     required int tournamentId,
     required int gomafiaId,
   }) {

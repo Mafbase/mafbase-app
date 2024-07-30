@@ -5,8 +5,10 @@ part 'player_model.freezed.dart';
 
 @freezed
 class PlayerModel with _$PlayerModel {
+  static const int undefinedId = -1;
+
   const factory PlayerModel({
-    required int id,
+    @Default(PlayerModel.undefinedId) int id,
     required String nickname,
     String? fsmNickaname,
     String? mafbankNickname,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
@@ -39,7 +42,10 @@ class SeatingPage extends StatefulWidget {
   }
 }
 
-class _SeatingPageState extends State<SeatingPage> {
+class _SeatingPageState extends State<SeatingPage>
+    with
+        EffectListener<SeatingPageEffect, SeatingPageState, SeatingPageBloc,
+            SeatingPage> {
   final seatingKey = GlobalKey();
 
   @override
@@ -321,4 +327,24 @@ class _SeatingPageState extends State<SeatingPage> {
           title: 'Загрузить с Gomafia',
         ),
       ];
+
+  @override
+  void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
+    on<SeatingPageEffectFixPlayers>(fixPlayersEffect);
+  }
+
+  Future<void> fixPlayersEffect(SeatingPageEffectFixPlayers effect) async {
+    final success = await SeatingPageDialog.show(
+          context: context,
+          players: effect.players,
+        ) ??
+        false;
+
+    if (!mounted) return;
+    if (!success) return;
+
+    context
+        .read<SeatingPageBloc>()
+        .add(SeatingPageEvent.autoFsmSeating(effect.gomafiaId));
+  }
 }

@@ -84,6 +84,8 @@ import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_bloc.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_state.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
@@ -324,6 +326,13 @@ void registerSharedGetIt() {
     )
     ..registerFactoryParam<ProfileDialogBloc, BuildContext?, PlayerModel>(
       (context, player) => ProfileDialogBloc(player, context),
+    )
+    ..registerFactoryParam<SeatingPageDialogBloc, List<String>, BuildContext?>(
+      (param1, param2) => SeatingPageDialogBloc(
+        SeatingPageDialogState(notFound: param1),
+        getIt(),
+        param2,
+      ),
     )
     ..registerLazySingleton<DownloadRatingInteractor>(
       () => DownloadRatingInteractor(getIt()),

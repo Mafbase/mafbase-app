@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -200,11 +201,12 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                                   const SizedBox(
                                     width: 35,
                                   ),
-                                  Text(
-                                    state.tournaments[index].name,
-                                    style: MyTheme.of(context).defaultTextStyle,
+                                  Expanded(
+                                    child: Text(
+                                      state.tournaments[index].name,
+                                      style: MyTheme.of(context).defaultTextStyle,
+                                    ),
                                   ),
-                                  const Spacer(),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TournamentStatusWidget(
