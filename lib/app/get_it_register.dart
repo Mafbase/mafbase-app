@@ -113,7 +113,7 @@ void registerGetIt({bool isIntegrationTest = false}) {
       () => CredentialSecureStorageImpl(),
     )
     ..registerLazySingleton<MyHttpClient>(
-      () => kReleaseMode
+      () => kReleaseMode && kIsWeb
           ? MyHttpClient.autoForWeb(getIt(), getIt())
           : MyHttpClient.withDefaultUrl(getIt(), getIt()),
     )

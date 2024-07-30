@@ -114,7 +114,10 @@ abstract class CustomBloc<E, S> extends Bloc<E, S> {
         rethrow;
       } catch (error) {
         if (context != null) {
-          AppRouter.showErrorDialog(context!, "Произошла неизвестная ошибка");
+          AppRouter.showErrorDialog(
+            context!,
+            "Произошла неизвестная ошибка $error",
+          );
         }
         rethrow;
       }

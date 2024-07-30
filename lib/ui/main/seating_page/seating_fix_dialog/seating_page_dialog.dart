@@ -107,9 +107,11 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                               context.read<SeatingPageDialogBloc>().add(
                                   SeatingPageDialogEvent.newPlayer(initValue));
                             },
-                            onSelected: (player) => setState(
-                              () => selectedPlayer = player,
-                            ),
+                            onSelected: (player) {
+                              setState(
+                                () => selectedPlayer = player,
+                              );
+                            },
                           ),
                           if (selectedPlayer?.fsmNickaname
                               case String fsmNickname)

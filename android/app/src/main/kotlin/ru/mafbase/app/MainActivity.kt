@@ -1,4 +1,4 @@
-package com.example.seating_generator_web
+package ru.mafbase.app
 
 import io.flutter.embedding.android.FlutterActivity
 

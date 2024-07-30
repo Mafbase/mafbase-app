@@ -181,21 +181,6 @@ class _MainPageState extends CustomState<MainPage> {
                 ],
               ),
             ),
-            PopupMenuItem(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.contact_support_outlined,
-                    color: theme.btnTextColor,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    context.locale.aboutApp,
-                    style: theme.btnTextStyle.copyWith(fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
           ];
         },
       ),
