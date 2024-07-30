@@ -58,6 +58,7 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState>
     }
 
     emitEffect(SeatingPageEffect.fixPlayers(notFound, event.gomafiaId));
+    emit(state.copyWith(isLoading: false));
   }
 
   Future<void> _onSwissGameCreate(
