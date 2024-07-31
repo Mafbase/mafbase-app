@@ -15,10 +15,14 @@ import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class AppRouter {
   final String initLocation;
   late final router = GoRouter(
+    observers: [
+      SentryNavigatorObserver(),
+    ],
     initialLocation: initLocation,
     redirect: (context, state) {
       return Future<String?>.microtask(() async {
