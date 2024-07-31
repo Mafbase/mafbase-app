@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -98,7 +99,7 @@ class _ClubPageState extends CustomState<ClubPage> {
                   ),
               ],
             ),
-            if (state.isOwner)
+            if (state.isOwner && kIsWeb)
               Positioned(
                 bottom: 20,
                 right: 20,

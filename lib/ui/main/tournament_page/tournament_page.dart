@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -250,7 +251,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
               );
             },
           ),
-        if (state.isMyTournament)
+        if (state.isMyTournament && kIsWeb)
           MenuItemModel(
             text: 'Оплата',
             onTap: () async {

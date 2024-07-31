@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -89,7 +90,7 @@ class ClubInfoWidget extends StatelessWidget {
                 const _ClubInfoHeader(),
                 const SizedBox(height: 20),
                 const _ClubDescription(),
-                if (billClub != null) ...[
+                if (billClub != null && kIsWeb) ...[
                   const SizedBox(height: 20),
                   CustomButton(
                     text: 'Продлить подписку клуба',

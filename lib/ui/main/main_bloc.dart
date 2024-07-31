@@ -207,7 +207,7 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void openAuthPage() {
-    context.go(
+    context.push(
       LoginPageBody.createLocation(
         context: context,
         nextPath: GoRouter.of(context).location,

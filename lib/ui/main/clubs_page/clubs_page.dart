@@ -43,34 +43,37 @@ class _ClubsPageState extends CustomState<ClubsPage> {
 
   @override
   Widget? buildMobile(BuildContext context) {
-    return BlocBuilder<ClubsBloc, ClubsState>(
-      builder: (context, state) {
-        if (state.isLoading) {
-          return const LoadingOverlayWidget();
-        }
-        return ListView.builder(
-          itemCount: state.clubs.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 16.0,
-              ),
-              child: SingleClubRow(
-                style: ClubRowStyle.mobile,
-                model: state.clubs[index],
-                onTap: () {
-                  context.read<ClubsBloc>().add(
-                        ClubsEvent.clubSelected(
-                          clubModel: state.clubs[index],
-                        ),
-                      );
-                },
-              ),
-            );
-          },
-        );
-      },
+    return ColoredBox(
+      color: context.theme.background2,
+      child: BlocBuilder<ClubsBloc, ClubsState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const LoadingOverlayWidget();
+          }
+          return ListView.builder(
+            itemCount: state.clubs.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 16.0,
+                ),
+                child: SingleClubRow(
+                  style: ClubRowStyle.mobile,
+                  model: state.clubs[index],
+                  onTap: () {
+                    context.read<ClubsBloc>().add(
+                          ClubsEvent.clubSelected(
+                            clubModel: state.clubs[index],
+                          ),
+                        );
+                  },
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 

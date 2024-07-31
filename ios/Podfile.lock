@@ -38,6 +38,11 @@ PODS:
     - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
+  - FMDB (2.7.12):
+    - FMDB/standard (= 2.7.12)
+  - FMDB/Core (2.7.12)
+  - FMDB/standard (2.7.12):
+    - FMDB/Core
   - image_picker_ios (0.0.1):
     - Flutter
   - integration_test (0.0.1):
@@ -50,14 +55,21 @@ PODS:
   - SDWebImage (5.13.2):
     - SDWebImage/Core (= 5.13.2)
   - SDWebImage/Core (5.13.2)
-  - Sentry/HybridSDK (7.31.5)
+  - Sentry/HybridSDK (8.19.0):
+    - SentryPrivate (= 8.19.0)
   - sentry_flutter (0.0.1):
     - Flutter
     - FlutterMacOS
-    - Sentry/HybridSDK (= 7.31.5)
+    - Sentry/HybridSDK (= 8.19.0)
+  - SentryPrivate (8.19.0)
+  - share_plus (0.0.1):
+    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
   - SwiftyGif (5.4.3)
   - url_launcher_ios (0.0.1):
     - Flutter
@@ -70,17 +82,21 @@ DEPENDENCIES:
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - share_plus (from `.symlinks/plugins/share_plus/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
     - DKImagePickerController
     - DKPhotoGallery
+    - FMDB
     - SDWebImage
     - Sentry
+    - SentryPrivate
     - SwiftyGif
 
 EXTERNAL SOURCES:
@@ -99,32 +115,40 @@ EXTERNAL SOURCES:
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   sentry_flutter:
     :path: ".symlinks/plugins/sentry_flutter/ios"
+  share_plus:
+    :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
-  file_picker: ce3938a0df3cc1ef404671531facef740d03f920
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  file_picker: 15fd9539e4eb735dc54bae8c0534a7a9511a03de
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
-  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
-  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
-  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  integration_test: 13825b8a9334a850581300559b8839134b124670
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
-  Sentry: 4c9babff9034785067c896fd580b1f7de44da020
-  sentry_flutter: 1346a880b24c0240807b53b10cf50ddad40f504e
-  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
+  Sentry: 1ebcaef678a27c8ac515f974cb5425dd1bbdec2f
+  sentry_flutter: ecdfbedee55337205561cfa782ee02d31ec83e1f
+  SentryPrivate: 765c9b4ebe9ac1a5fcdc067c5a1cfbf3f10e1677
+  share_plus: 8875f4f2500512ea181eef553c3e27dba5135aad
+  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
-  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
+  url_launcher_ios: bf5ce03e0e2088bad9cc378ea97fa0ed5b49673b
 
-PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+PODFILE CHECKSUM: c4c93c5f6502fe2754f48404d3594bf779584011
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2
