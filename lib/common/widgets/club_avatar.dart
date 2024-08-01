@@ -16,13 +16,18 @@ class ClubAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (clubModel.imageUrl != null) {
-      return CachedNetworkImage(
-        imageUrl: clubModel.imageUrl!,
-        height: size,
-        width: size,
-        placeholder: (_, __) => _ImagePlaceholder(
-          clubName: clubModel.name,
-          size: size,
+      return Container(
+        decoration: const BoxDecoration(shape: BoxShape.circle),
+        clipBehavior: Clip.hardEdge,
+        child: CachedNetworkImage(
+          imageUrl: clubModel.imageUrl!,
+          height: size,
+          width: size,
+          fit: BoxFit.cover,
+          placeholder: (_, __) => _ImagePlaceholder(
+            clubName: clubModel.name,
+            size: size,
+          ),
         ),
       );
     } else {
