@@ -5,6 +5,7 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -31,6 +32,13 @@ class AppRouter {
           try {
             final response = await getIt<MyHttpClient>().get("/api/auth");
             if (response.statusCode == 200) {
+              getIt<CredentialStorage>().read().then((value) {
+                Sentry.configureScope(
+                  (p0) => p0.setUser(
+                    SentryUser(email: value?.login),
+                  ),
+                );
+              });
               authNotifier.value = const AuthNotifierModel.authorized();
             } else {
               authNotifier.value = const AuthNotifierModel.unauthorized();

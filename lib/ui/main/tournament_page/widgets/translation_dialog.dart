@@ -45,7 +45,7 @@ class _TranslationDialogState extends State<TranslationDialog> {
     final contentLink =
         '$root/translation?tournamentId=${widget.tournamentId}&table=$table';
     final controlLink =
-        '$root/#/translationControl?tournamentId=${widget.tournamentId}&table=$table';
+        '$root/translationControl?tournamentId=${widget.tournamentId}&table=$table';
 
     return CustomDialog(
       child: SelectionArea(

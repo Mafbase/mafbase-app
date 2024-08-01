@@ -15,6 +15,7 @@ import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
@@ -46,6 +47,7 @@ void main() async {
 
 void _startApp() async {
   WidgetsBinding? binding;
+  setPathUrlStrategy();
   if (!kIsWeb) {
     binding = WidgetsFlutterBinding.ensureInitialized();
     final directory = await getApplicationDocumentsDirectory();
