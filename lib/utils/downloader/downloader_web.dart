@@ -1,3 +1,4 @@
+//ignore: avoid_web_libraries_in_flutter
 import 'dart:html' show AnchorElement;
 import 'dart:typed_data';
 

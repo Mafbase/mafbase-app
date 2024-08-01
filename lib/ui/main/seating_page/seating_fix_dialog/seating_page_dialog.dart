@@ -105,7 +105,8 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                               if (initValue == null) return;
 
                               context.read<SeatingPageDialogBloc>().add(
-                                  SeatingPageDialogEvent.newPlayer(initValue));
+                                    SeatingPageDialogEvent.newPlayer(initValue),
+                                  );
                             },
                             onSelected: (player) {
                               setState(

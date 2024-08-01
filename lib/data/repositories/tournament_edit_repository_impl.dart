@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
-import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/requests/create_swiss_game_request.dart';
 import 'package:seating_generator_web/data/requests/delete_separation_request.dart';
 import 'package:seating_generator_web/data/requests/generate_final_seating_request.dart';

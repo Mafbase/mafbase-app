@@ -316,7 +316,4 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
     }
   }
 
-  _onBackButtonTapped() {
-    context.read<SignUpBloc>().add(const SignUpEvents.backButtonTapped());
-  }
 }

@@ -25,7 +25,7 @@ class _ContactsPageState extends State<ContactsPage> {
       body: DefaultTextStyle(
         style: TextStyle(
           fontSize: 24,
-          color: MyTheme.of(context).textColor
+          color: MyTheme.of(context).textColor,
         ),
         child: const SelectionArea(
           child: Center(

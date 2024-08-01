@@ -157,7 +157,7 @@ class MainPageRouterImpl implements MainPageRouter {
     Future.delayed(
       const Duration(milliseconds: 50),
       () => controller
-          .add(GoRouter.of(context).routeInformationProvider.value.location),
+          .add(GoRouter.of(context).routeInformationProvider.value.uri.toString()),
     );
   }
 

@@ -77,7 +77,6 @@ class _MainPageState extends CustomState<MainPage> {
 
   @override
   Widget buildDesktop(BuildContext context) {
-    const double railWidth = 100;
     return ChangeNotifierProvider.value(
       value: titleProvider,
       child: BlocBuilder<MainBloc, MainState>(
