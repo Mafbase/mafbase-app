@@ -103,6 +103,7 @@ class ClubInfoWidget extends StatelessWidget {
         ),
         const Divider(),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Flexible(child: _ClubRatingButton()),
             if (onAddGame != null) ...[
