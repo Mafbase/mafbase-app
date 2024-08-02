@@ -65,6 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ),
             Expanded(
               child: TextFormField(
+                scrollPadding: const EdgeInsets.all(50),
                 onChanged: widget.onChanged,
                 autofillHints: widget.autoFillHints,
                 validator: widget.validate,
