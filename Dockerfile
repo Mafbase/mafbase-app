@@ -16,4 +16,4 @@ EXPOSE 80
 COPY --from=build-env /app/build/web /usr/share/nginx/html
 
 # Copy the custom NGINX configuration file
-COPY nginx.conf /etc/nginx/sites-enabled/default
+COPY nginx.conf /etc/nginx/nginx.conf
