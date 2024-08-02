@@ -249,42 +249,53 @@ class _RatingPageState extends CustomState<RatingPage> {
               height: 16,
             ),
             Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 16,
+              child: state.rows.isEmpty
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          'За данный период не найдено ни одной игры. Попробуйте изменить период.',
+                          style: MyTheme.of(context).defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          RatingTable(
+                            isTournament: widget.tournamentId != null,
+                            isMobile: true,
+                            style: widget.style,
+                            rows: state.rows,
+                            clubId: widget.clubId,
+                            sort: widget.sort,
+                            gameFilter: widget.gameFilter,
+                            openGame: openGame,
+                            changeSort: (RatingSort sort) {
+                              context.read<RatingBloc>().add(
+                                    RatingEvent.rangeChanged(
+                                      range: widget.range,
+                                      clubId: widget.clubId,
+                                      tournamentId: widget.tournamentId,
+                                      style: widget.style,
+                                      sort: sort,
+                                      gameFilter: widget.gameFilter,
+                                    ),
+                                  );
+                            },
+                            tournamentId: widget.tournamentId,
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                        ],
+                      ),
                     ),
-                    RatingTable(
-                      isTournament: widget.tournamentId != null,
-                      isMobile: true,
-                      style: widget.style,
-                      rows: state.rows,
-                      clubId: widget.clubId,
-                      sort: widget.sort,
-                      gameFilter: widget.gameFilter,
-                      openGame: openGame,
-                      changeSort: (RatingSort sort) {
-                        context.read<RatingBloc>().add(
-                              RatingEvent.rangeChanged(
-                                range: widget.range,
-                                clubId: widget.clubId,
-                                tournamentId: widget.tournamentId,
-                                style: widget.style,
-                                sort: sort,
-                                gameFilter: widget.gameFilter,
-                              ),
-                            );
-                      },
-                      tournamentId: widget.tournamentId,
-                    ),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                  ],
-                ),
-              ),
             ),
           ],
         );

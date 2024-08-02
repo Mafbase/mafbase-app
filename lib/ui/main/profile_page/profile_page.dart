@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -41,10 +43,29 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
             child: Padding(
-              padding: EdgeInsets.all(40),
-              child: Placeholder(),
+              padding: const EdgeInsets.all(16),
+              child: BlocSelector<ProfileBloc, ProfileState, String?>(
+                selector: (state) => state.login,
+                builder: (context, login) => Center(
+                  child: Text.rich(
+                    textAlign: TextAlign.center,
+                    TextSpan(
+                      style: MyTheme.of(context).fieldTextStyle,
+                      children: [
+                        const TextSpan(
+                          text: 'Вы авторизованы как: ',
+                        ),
+                        TextSpan(
+                          text: login ?? '',
+                          style: const TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           Padding(

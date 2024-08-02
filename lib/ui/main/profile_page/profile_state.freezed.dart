@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isLogoutLoading => throw _privateConstructorUsedError;
+  String? get login => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileStateCopyWith<ProfileState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res, ProfileState>;
   @useResult
-  $Res call({bool isLoading, bool isLogoutLoading});
+  $Res call({bool isLoading, bool isLogoutLoading, String? login});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   $Res call({
     Object? isLoading = null,
     Object? isLogoutLoading = null,
+    Object? login = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +60,10 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.isLogoutLoading
           : isLogoutLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      login: freezed == login
+          ? _value.login
+          : login // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
       __$$ProfileStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool isLogoutLoading});
+  $Res call({bool isLoading, bool isLogoutLoading, String? login});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isLogoutLoading = null,
+    Object? login = freezed,
   }) {
     return _then(_$ProfileStateImpl(
       isLoading: null == isLoading
@@ -96,6 +103,10 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
           ? _value.isLogoutLoading
           : isLogoutLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      login: freezed == login
+          ? _value.login
+          : login // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -104,7 +115,7 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
 
 class _$ProfileStateImpl implements _ProfileState {
   const _$ProfileStateImpl(
-      {this.isLoading = false, this.isLogoutLoading = false});
+      {this.isLoading = false, this.isLogoutLoading = false, this.login});
 
   @override
   @JsonKey()
@@ -112,10 +123,12 @@ class _$ProfileStateImpl implements _ProfileState {
   @override
   @JsonKey()
   final bool isLogoutLoading;
+  @override
+  final String? login;
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, isLogoutLoading: $isLogoutLoading)';
+    return 'ProfileState(isLoading: $isLoading, isLogoutLoading: $isLogoutLoading, login: $login)';
   }
 
   @override
@@ -126,11 +139,13 @@ class _$ProfileStateImpl implements _ProfileState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isLogoutLoading, isLogoutLoading) ||
-                other.isLogoutLoading == isLogoutLoading));
+                other.isLogoutLoading == isLogoutLoading) &&
+            (identical(other.login, login) || other.login == login));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isLogoutLoading);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, isLogoutLoading, login);
 
   @JsonKey(ignore: true)
   @override
@@ -141,12 +156,16 @@ class _$ProfileStateImpl implements _ProfileState {
 
 abstract class _ProfileState implements ProfileState {
   const factory _ProfileState(
-      {final bool isLoading, final bool isLogoutLoading}) = _$ProfileStateImpl;
+      {final bool isLoading,
+      final bool isLogoutLoading,
+      final String? login}) = _$ProfileStateImpl;
 
   @override
   bool get isLoading;
   @override
   bool get isLogoutLoading;
+  @override
+  String? get login;
   @override
   @JsonKey(ignore: true)
   _$$ProfileStateImplCopyWith<_$ProfileStateImpl> get copyWith =>

@@ -375,7 +375,11 @@ void registerSharedGetIt() {
       ),
     )
     ..registerFactoryParam<ProfileBloc, BuildContext?, dynamic>(
-      (context, _) => ProfileBloc(getIt<LogoutInteractor>(), context),
+      (context, _) => ProfileBloc(
+        getIt<LogoutInteractor>(),
+        getIt<CredentialStorage>(),
+        context,
+      ),
     )
     ..registerFactoryParam<MainBloc, BuildContext?, MainPageTab?>(
       (context, tab) => MainBloc(
