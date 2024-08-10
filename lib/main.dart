@@ -8,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -57,102 +58,113 @@ void _startApp() async {
   SplashManager.deferSplash(
     binding ?? WidgetsFlutterBinding.ensureInitialized(),
   );
-  runApp(const MafbaseApp());
+
+  final scope = DependencyScope();
+
+  runApp(MafbaseApp(scope: scope));
 }
 
 class MafbaseApp extends StatelessWidget {
   final String initLocation;
+  final DependencyScope scope;
 
-  const MafbaseApp({Key? key, this.initLocation = '/'}) : super(key: key);
+  const MafbaseApp({
+    Key? key,
+    this.initLocation = '/',
+    required this.scope,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => getIt<AuthNotifier>(),
-        ),
-        Provider(
-          create: (context) => AppRouter(initLocation),
-        ),
-        Provider<MyTheme>(
-          create: (context) => MyTheme.light(),
-        ),
-      ],
-      child: Builder(
-        builder: (context) {
-          return MaterialApp.router(
-            scrollBehavior: MyCustomScrollBehavior(),
-            title: 'Mafbase',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData.light(useMaterial3: true).copyWith(
-              scaffoldBackgroundColor: context.theme.background2,
-              dividerTheme: const DividerThemeData(
-                color: Color(0xFFCAC4D0),
-                thickness: 1,
-                space: 0,
-                indent: 0,
-                endIndent: 0,
-              ),
-              colorScheme:
-                  ThemeData.light(useMaterial3: true).colorScheme.copyWith(
-                        primary: MyTheme.of(context).darkGreyColor,
-                        primaryContainer: MyTheme.of(context).darkBlueColor,
-                        secondary: MyTheme.of(context).redColor,
-                        secondaryContainer: MyTheme.of(context).redColor,
-                      ),
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                selectedItemColor: context.theme.darkGreyColor,
-                elevation: 5,
-                backgroundColor: context.theme.darkBlueColor,
-                selectedLabelStyle: const TextStyle().copyWith(
-                  color: Colors.white,
+    return DependencyScopeWidget(
+      scope: scope,
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => getIt<AuthNotifier>(),
+          ),
+          Provider(
+            create: (context) => AppRouter(initLocation),
+          ),
+          Provider<MyTheme>(
+            create: (context) => MyTheme.light(),
+          ),
+        ],
+        child: Builder(
+          builder: (context) {
+            return MaterialApp.router(
+              scrollBehavior: MyCustomScrollBehavior(),
+              title: 'Mafbase',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData.light(useMaterial3: true).copyWith(
+                scaffoldBackgroundColor: context.theme.background2,
+                dividerTheme: const DividerThemeData(
+                  color: Color(0xFFCAC4D0),
+                  thickness: 1,
+                  space: 0,
+                  indent: 0,
+                  endIndent: 0,
                 ),
-                unselectedLabelStyle: const TextStyle().copyWith(
-                  color: Colors.white,
+                colorScheme:
+                    ThemeData.light(useMaterial3: true).colorScheme.copyWith(
+                          primary: MyTheme.of(context).darkGreyColor,
+                          primaryContainer: MyTheme.of(context).darkBlueColor,
+                          secondary: MyTheme.of(context).redColor,
+                          secondaryContainer: MyTheme.of(context).redColor,
+                        ),
+                bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                  selectedItemColor: context.theme.darkGreyColor,
+                  elevation: 5,
+                  backgroundColor: context.theme.darkBlueColor,
+                  selectedLabelStyle: const TextStyle().copyWith(
+                    color: Colors.white,
+                  ),
+                  unselectedLabelStyle: const TextStyle().copyWith(
+                    color: Colors.white,
+                  ),
+                  selectedIconTheme: const IconThemeData(
+                    color: Colors.white,
+                  ),
+                  unselectedIconTheme: const IconThemeData(
+                    color: Colors.white60,
+                  ),
                 ),
-                selectedIconTheme: const IconThemeData(
-                  color: Colors.white,
+                iconTheme: IconThemeData(
+                  color: context.theme.darkGreyColor,
                 ),
-                unselectedIconTheme: const IconThemeData(
-                  color: Colors.white60,
-                ),
-              ),
-              iconTheme: IconThemeData(
-                color: context.theme.darkGreyColor,
-              ),
-              textButtonTheme: TextButtonThemeData(
-                style: ButtonStyle(
-                  textStyle: MaterialStateProperty.resolveWith(
-                    (states) {
-                      if (states.contains(MaterialState.disabled)) {
-                        return context.theme.btnTextStyle.copyWith(
-                          color: context.theme.btnTextColor.withOpacity(
-                            0.5,
-                          ),
-                        );
-                      }
+                textButtonTheme: TextButtonThemeData(
+                  style: ButtonStyle(
+                    textStyle: MaterialStateProperty.resolveWith(
+                      (states) {
+                        if (states.contains(MaterialState.disabled)) {
+                          return context.theme.btnTextStyle.copyWith(
+                            color: context.theme.btnTextColor.withOpacity(
+                              0.5,
+                            ),
+                          );
+                        }
 
-                      return context.theme.btnTextStyle;
-                    },
+                        return context.theme.btnTextStyle;
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            routerDelegate: context.read<AppRouter>().router.routerDelegate,
-            routeInformationProvider:
-                context.read<AppRouter>().router.routeInformationProvider,
-            routeInformationParser:
-                context.read<AppRouter>().router.routeInformationParser,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
-          );
-        },
+              routerDelegate: context.read<AppRouter>().router.routerDelegate,
+              routeInformationProvider:
+                  context.read<AppRouter>().router.routeInformationProvider,
+              routeInformationParser:
+                  context.read<AppRouter>().router.routeInformationParser,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+            );
+          },
+        ),
       ),
     );
   }

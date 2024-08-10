@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/storage_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
+import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
+import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
@@ -24,7 +28,23 @@ class ProfilePage extends StatefulWidget {
     name: 'profile',
     pageBuilder: (context, state) => FadeTransitionPage(
       child: BlocProvider<ProfileBloc>(
-        create: (context) => getIt<ProfileBloc>(param1: context),
+        create: (context) {
+          final logoutInteractor = LogoutInteractor(
+            StorageFactory.of(context).tokenStorage,
+            DependencyScope.of(context).authNotifier,
+            StorageFactory.of(context).credentialStorage,
+          );
+
+          return ProfileBloc(
+            logoutInteractor,
+            StorageFactory.of(context).credentialStorage,
+            DeleteProfileInteractor(
+              logoutInteractor,
+              RepositoryFactory.of(context).profileRepository,
+            ),
+            context,
+          );
+        },
         child: const ProfilePage._(),
       ),
     ),
@@ -72,20 +92,64 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.all(40),
             child: Container(
               constraints: const BoxConstraints(maxWidth: 400),
-              child: CustomButton(
-                text: context.locale.logout,
-                onTap: () {
-                  context
-                      .read<ProfileBloc>()
-                      .add(const ProfileEvent.onLogoutPressed());
-                },
-                isRed: true,
-                minimize: true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CustomButton(
+                    text: context.locale.logout,
+                    onTap: () {
+                      context
+                          .read<ProfileBloc>()
+                          .add(const ProfileEvent.onLogoutPressed());
+                    },
+                    isRed: true,
+                    minimize: true,
+                  ),
+                  const SizedBox(height: 16),
+                  TextButton(
+                    onPressed: _deleteAccount,
+                    child: Text(
+                      'Удалить аккаунт',
+                      style: TextStyle(
+                        color: MyTheme.of(context).greyColor,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _deleteAccount() async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Вы уверны?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Нет'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(
+              'Да',
+              style: TextStyle(
+                color: MyTheme.of(context).redColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (result != true) return;
+    if (!mounted) return;
+
+    context.read<ProfileBloc>().add(const ProfileEvent.deleteProfile());
   }
 }

@@ -20,18 +20,21 @@ mixin _$ProfileEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() onPageOpened,
     required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onPageOpened,
     TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onPageOpened,
     TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ProfileEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(ProfileEventPageOpened value) onPageOpened,
     required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProfileEventPageOpened value)? onPageOpened,
     TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProfileEventPageOpened value)? onPageOpened,
     TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +123,7 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
   TResult when<TResult extends Object?>({
     required TResult Function() onPageOpened,
     required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
   }) {
     return onPageOpened();
   }
@@ -126,6 +133,7 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onPageOpened,
     TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
   }) {
     return onPageOpened?.call();
   }
@@ -135,6 +143,7 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onPageOpened,
     TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -148,6 +157,7 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
   TResult map<TResult extends Object?>({
     required TResult Function(ProfileEventPageOpened value) onPageOpened,
     required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
   }) {
     return onPageOpened(this);
   }
@@ -157,6 +167,7 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProfileEventPageOpened value)? onPageOpened,
     TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
   }) {
     return onPageOpened?.call(this);
   }
@@ -166,6 +177,7 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProfileEventPageOpened value)? onPageOpened,
     TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -222,6 +234,7 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
   TResult when<TResult extends Object?>({
     required TResult Function() onPageOpened,
     required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
   }) {
     return onLogoutPressed();
   }
@@ -231,6 +244,7 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onPageOpened,
     TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
   }) {
     return onLogoutPressed?.call();
   }
@@ -240,6 +254,7 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onPageOpened,
     TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
     required TResult orElse(),
   }) {
     if (onLogoutPressed != null) {
@@ -253,6 +268,7 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
   TResult map<TResult extends Object?>({
     required TResult Function(ProfileEventPageOpened value) onPageOpened,
     required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
   }) {
     return onLogoutPressed(this);
   }
@@ -262,6 +278,7 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProfileEventPageOpened value)? onPageOpened,
     TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
   }) {
     return onLogoutPressed?.call(this);
   }
@@ -271,6 +288,7 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProfileEventPageOpened value)? onPageOpened,
     TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     required TResult orElse(),
   }) {
     if (onLogoutPressed != null) {
@@ -282,4 +300,115 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
 
 abstract class ProfileEventLogoutPressed implements ProfileEvent {
   const factory ProfileEventLogoutPressed() = _$ProfileEventLogoutPressedImpl;
+}
+
+/// @nodoc
+abstract class _$$ProfileEventDeleteProfileImplCopyWith<$Res> {
+  factory _$$ProfileEventDeleteProfileImplCopyWith(
+          _$ProfileEventDeleteProfileImpl value,
+          $Res Function(_$ProfileEventDeleteProfileImpl) then) =
+      __$$ProfileEventDeleteProfileImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProfileEventDeleteProfileImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventDeleteProfileImpl>
+    implements _$$ProfileEventDeleteProfileImplCopyWith<$Res> {
+  __$$ProfileEventDeleteProfileImplCopyWithImpl(
+      _$ProfileEventDeleteProfileImpl _value,
+      $Res Function(_$ProfileEventDeleteProfileImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
+  const _$ProfileEventDeleteProfileImpl();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.deleteProfile()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileEventDeleteProfileImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onPageOpened,
+    required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
+  }) {
+    return deleteProfile();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onPageOpened,
+    TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
+  }) {
+    return deleteProfile?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onPageOpened,
+    TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
+    required TResult orElse(),
+  }) {
+    if (deleteProfile != null) {
+      return deleteProfile();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileEventPageOpened value) onPageOpened,
+    required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+  }) {
+    return deleteProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileEventPageOpened value)? onPageOpened,
+    TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+  }) {
+    return deleteProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileEventPageOpened value)? onPageOpened,
+    TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    required TResult orElse(),
+  }) {
+    if (deleteProfile != null) {
+      return deleteProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProfileEventDeleteProfile implements ProfileEvent {
+  const factory ProfileEventDeleteProfile() = _$ProfileEventDeleteProfileImpl;
 }

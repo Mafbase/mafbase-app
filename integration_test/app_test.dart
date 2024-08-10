@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
@@ -18,7 +19,9 @@ void main() {
       ),
     );
     await tester.pumpWidget(
-      const MafbaseApp(),
+      MafbaseApp(
+        scope: DependencyScope(),
+      ),
     );
     await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
@@ -44,7 +47,9 @@ void main() {
       ),
     );
     await tester.pumpWidget(
-      const MafbaseApp(),
+      MafbaseApp(
+        scope: DependencyScope(),
+      ),
     );
     await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
@@ -98,8 +103,9 @@ void main() {
 
 Future loginFlow(WidgetTester tester) async {
   await tester.pumpWidget(
-    const MafbaseApp(
+    MafbaseApp(
       initLocation: '/login',
+      scope: DependencyScope(),
     ),
   );
   await tester.pump(const Duration(seconds: 2));

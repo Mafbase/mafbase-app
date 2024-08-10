@@ -11,23 +11,25 @@ abstract class BaseRequest<R> {
   final GeneratedMessage? data;
   final bool resendOnUnauth;
   final bool useJson;
+  final bool forcePost;
 
   const BaseRequest(
     this.method, {
     this.data,
     this.resendOnUnauth = true,
     this.useJson = false,
+    this.forcePost = false,
   });
 
   Future<R> execute(MyHttpClient client) async {
     final Response response;
-    if (data == null) {
+    if (data == null && !forcePost) {
       response = await client.get(method, useRecoveryToken: resendOnUnauth);
     } else {
-      final bytes = data!.writeToBuffer();
+      final bytes = data?.writeToBuffer() ?? [];
       response = await client.post(
         method,
-        Stream.fromIterable(bytes.map((e) => [e])),
+        Stream.fromIterable(bytes.map<List<int>>((e) => [e])),
         bytes.length,
         useRecoveryToken: resendOnUnauth,
       );
