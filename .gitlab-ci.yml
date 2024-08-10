@@ -46,6 +46,7 @@ build_android_app:
 
 publish_to_rustore:
   stage: android-release
+  image: curlimages/curl:8.9.1
   tags:
     - docker
   before_script:
