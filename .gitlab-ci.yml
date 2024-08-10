@@ -7,9 +7,14 @@ stages:
   - test
   - deploy
   - android-release
+
 variables:
   PACKAGE_NAME: "ru.mafbase.app"
+  SECURE_FILES_DOWNLOAD_PATH: './secure-files/'
 
+before_script:
+  # Устанавливаем утилиту для загрузки Secure Files
+  - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
 
 build_android_app:
   stage: android-release
@@ -17,7 +22,21 @@ build_android_app:
   when: manual
   tags:
     - docker
+  before_script:
+    - echo "Downloading Secure Files..."
+    - mkdir -p $SECURE_FILES_DOWNLOAD_PATH
+    - download-secure-files -o $SECURE_FILES_DOWNLOAD_PATH
+    - echo "Moving Keystore..."
+    - mkdir -p ~/.android
+    - cp $SECURE_FILES_DOWNLOAD_PATH/mafbase.jks ~/.android/mafbase.jks
+    - echo "Creating key.properties file..."
+    - mkdir -p android
+    - echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
+    - echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+    - echo "keyAlias=$KEY_ALIAS" >> android/key.properties
+    - echo "storeFile=~/.android/mafbase.jks" >> android/key.properties
   script:
+    - echo "Building the app..."
     - flutter build appbundle --release
   artifacts:
     paths:
