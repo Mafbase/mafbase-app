@@ -15,17 +15,21 @@ build_android_app:
   stage: android-release
   image: "$REGISTRY_HOST/flutter-builder:3.19.3"
   when: manual
+  tags:
+    - docker
   script:
     - flutter build appbundle --release
   artifacts:
     paths:
       - build/app/outputs/bundle/release/app-release.aab
     expire_in: 1 hour
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 publish_to_rustore:
   stage: android-release
+  tags:
+    - docker
   before_script:
     - echo "Extracting app version..."
     - export VERSION_ID=$(grep -E '^version:' pubspec.yaml | awk '{print $2}' | cut -d'+' -f1)
@@ -38,12 +42,14 @@ publish_to_rustore:
         -F "file=@build/app/outputs/bundle/release/app-release.aab"
   dependencies:
     - build_android_app
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   when: manual
   allow_failure: false
 
 build_job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   tags:
     - docker
