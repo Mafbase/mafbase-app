@@ -27,7 +27,7 @@ build_android_app:
     - mkdir -p $SECURE_FILES_DOWNLOAD_PATH
     - download-secure-files -o $SECURE_FILES_DOWNLOAD_PATH
     - echo "Moving Keystore..."
-    - cp $SECURE_FILES_DOWNLOAD_PATH/mafbase.jks android/mafbase.jks
+    - cp $SECURE_FILES_DOWNLOAD_PATH/mafbase.jks $CI_PROJECT_DIR/android/mafbase.jks
     - echo "Creating key.properties file..."
     - echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
     - echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
