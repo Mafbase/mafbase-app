@@ -21,7 +21,7 @@ build_android_app:
       - build/app/outputs/bundle/release/app-release.aab
     expire_in: 1 hour
   only:
-    - master
+    - main
 
 publish_to_rustore:
   stage: android-release
@@ -38,7 +38,7 @@ publish_to_rustore:
   dependencies:
     - build_android_app
   only:
-    - master
+    - main
   when: manual
   allow_failure: false
 
