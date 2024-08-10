@@ -40,7 +40,7 @@ publish_to_rustore:
       curl -X POST "https://public-api.rustore.ru/public/v1/application/${PACKAGE_NAME}/version/${VERSION_ID}/aab" \
         -H "Public-Token: $RU_STORE_API_KEY" \
         -F "file=@build/app/outputs/bundle/release/app-release.aab"
-  dependencies:
+  needs:
     - build_android_app
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
