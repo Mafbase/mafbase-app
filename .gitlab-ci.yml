@@ -20,7 +20,7 @@ build_android_app:
     - docker
   before_script:
     - apt-get update
-    - apt-get install curl
+    - apt-get install curl -y
     # Устанавливаем утилиту для загрузки Secure Files
     - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
     - echo "Downloading Secure Files..."
