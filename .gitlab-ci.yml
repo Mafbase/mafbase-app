@@ -12,10 +12,6 @@ variables:
   PACKAGE_NAME: "ru.mafbase.app"
   SECURE_FILES_DOWNLOAD_PATH: './secure-files/'
 
-before_script:
-  # Устанавливаем утилиту для загрузки Secure Files
-  - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
-
 build_android_app:
   stage: android-release
   image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
@@ -23,6 +19,10 @@ build_android_app:
   tags:
     - docker
   before_script:
+    - apt-get update
+    - apt-get install curl
+    # Устанавливаем утилиту для загрузки Secure Files
+    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
     - echo "Downloading Secure Files..."
     - mkdir -p $SECURE_FILES_DOWNLOAD_PATH
     - download-secure-files -o $SECURE_FILES_DOWNLOAD_PATH
