@@ -6,6 +6,41 @@ services:
 stages:
   - test
   - deploy
+  - android-release
+variables:
+  PACKAGE_NAME: "ru.mafbase.app"
+
+
+build_android_app:
+  stage: android-release
+  when: manual
+  script:
+    - flutter build appbundle --release
+  artifacts:
+    paths:
+      - build/app/outputs/bundle/release/app-release.aab
+    expire_in: 1 hour
+  only:
+    - master
+
+publish_to_rustore:
+  stage: android-release
+  before_script:
+    - echo "Extracting app version..."
+    - export VERSION_ID=$(grep -E '^version:' pubspec.yaml | awk '{print $2}' | cut -d'+' -f1)
+    - echo "App version: $VERSION_ID"
+  script:
+    - echo "Uploading app to RuStore..."
+    - |
+      curl -X POST "https://public-api.rustore.ru/public/v1/application/${PACKAGE_NAME}/version/${VERSION_ID}/aab" \
+        -H "Public-Token: $RU_STORE_API_KEY" \
+        -F "file=@build/app/outputs/bundle/release/app-release.aab"
+  dependencies:
+    - build_android_app
+  only:
+    - master
+  when: manual
+  allow_failure: false
 
 build_job:
   stage: deploy
