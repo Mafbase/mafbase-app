@@ -13,6 +13,7 @@ variables:
 
 build_android_app:
   stage: android-release
+  image: "$REGISTRY_HOST/flutter-builder:3.19.3"
   when: manual
   script:
     - flutter build appbundle --release
