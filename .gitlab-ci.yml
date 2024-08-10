@@ -28,7 +28,7 @@ publish_to_rustore:
   before_script:
     - echo "Extracting app version..."
     - export VERSION_ID=$(grep -E '^version:' pubspec.yaml | awk '{print $2}' | cut -d'+' -f1)
-    - echo "App version: $VERSION_ID"
+    - echo "App version - $VERSION_ID"
   script:
     - echo "Uploading app to RuStore..."
     - |
