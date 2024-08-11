@@ -33,7 +33,6 @@ build_android_app:
     - echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
     - echo "keyAlias=$KEY_ALIAS" >> android/key.properties
     - echo "storeFile=$CI_PROJECT_DIR/android/mafbase.jks" >> android/key.properties
-    - cat
   script:
     - echo "Building the app..."
     - flutter build appbundle --release
@@ -50,13 +49,13 @@ publish_to_rustore:
   tags:
     - docker
   before_script:
-    - echo "Extracting app version..."
-    - export VERSION_ID=$(grep -E '^version:' pubspec.yaml | awk '{print $2}' | cut -d'+' -f1)
-    - echo "App version - $VERSION_ID"
+    - echo "Extracting build number..."
+    - export BUILD_NUMBER=$(grep -E '^version:' pubspec.yaml | awk -F '+' '{print $2}')
+    - echo "Build number - $BUILD_NUMBER"
   script:
     - echo "Uploading app to RuStore..."
     - |
-      curl -X POST "https://public-api.rustore.ru/public/v1/application/${PACKAGE_NAME}/version/${VERSION_ID}/aab" \
+      curl -X POST "https://public-api.rustore.ru/public/v1/application/${PACKAGE_NAME}/version/${BUILD_NUMBER}/aab" \
         -H "Public-Token: $RU_STORE_API_KEY" \
         -F "file=@build/app/outputs/bundle/release/app-release.aab"
   needs:
