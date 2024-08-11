@@ -76,6 +76,7 @@ build_job:
 
 
 sentry-upload:
+  image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   needs:
