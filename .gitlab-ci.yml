@@ -74,6 +74,18 @@ build_job:
     - docker build --no-cache --build-arg "REGISTRY_HOST=$REGISTRY_HOST" -t "$REGISTRY_HOST/seating-generator-flutter:latest" .
     - docker push "$REGISTRY_HOST/seating-generator-flutter:latest"
 
+
+sentry-upload:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  needs:
+    - build_job
+  tags:
+    - docker
+  stage: deploy
+  script:
+    - flutter packages pub run sentry_dart_plugin
+
 code_quality:
   stage: test
   tags:

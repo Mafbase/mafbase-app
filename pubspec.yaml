@@ -92,7 +92,7 @@ dev_dependencies:
   build_runner: ^2.2.0
   freezed: ^2.1.0+1
   json_serializable: ^6.3.1
-  sentry_dart_plugin: ^1.6.3
+  sentry_dart_plugin: ^2.0.0
   flutter_launcher_icons: ^0.13.1
 
 # For information on the generic Dart part of this file, see the
@@ -142,3 +142,4 @@ sentry:
   upload_debug_symbols: true
   auth_token: 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
   upload_source_maps: true
+  upload_sources: true
