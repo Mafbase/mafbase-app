@@ -28,13 +28,15 @@ class TranslationControlBloc
     on<TranslationControlEventChangeRole>(_onRoleChanged);
     on<TranslationControlEventChangeStatus>(_onStatusChanged);
     on<TranslationControlEventSelectGame>(_onGameSelected);
-    _socket.stream.listen((event) {
-      add(
-        TranslationControlEvent.stateReceived(
-          event: SeatingContent.fromBuffer(event),
-        ),
-      );
-    });
+    toDispose.add(
+      _socket.stream.listen((event) {
+        add(
+          TranslationControlEvent.stateReceived(
+            event: SeatingContent.fromBuffer(event),
+          ),
+        );
+      }),
+    );
     _socket.connect();
   }
 
@@ -80,6 +82,9 @@ class TranslationControlBloc
 
   @override
   Future<void> close() {
+    for (final e in toDispose) {
+      e.cancel();
+    }
     _socket.dispose();
     return super.close();
   }
