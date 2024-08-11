@@ -55,7 +55,7 @@ publish_to_rustore:
   script:
     - echo "Uploading app to RuStore..."
     - |
-      curl -X POST "https://public-api.rustore.ru/public/v1/application/${PACKAGE_NAME}/version/${BUILD_NUMBER}/aab" \
+      curl --fail -X POST "https://public-api.rustore.ru/public/v1/application/${PACKAGE_NAME}/version/${BUILD_NUMBER}/aab" \
         -H "Public-Token: $RU_STORE_API_KEY" \
         -F "file=@build/app/outputs/bundle/release/app-release.aab"
   needs:
