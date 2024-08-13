@@ -54,6 +54,7 @@ publish_to_rustore:
   before_script:
     - apt-get update
     - apt-get install -y curl jq
+    - jq --version
     - echo "Extracting build number..."
     - export BUILD_NUMBER=$(grep -E '^version:' pubspec.yaml | awk -F '+' '{print $2}')
     - echo "Build number - $BUILD_NUMBER"
@@ -62,7 +63,7 @@ publish_to_rustore:
     - echo "Generating API key..."
     - python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" > rustore_api_key.json
     - cat rustore_api_key.json
-    - export RU_STORE_API_KEY=$(jq -r '.signature' rustore_api_key.json)
+    - export RU_STORE_API_KEY=$(cat rustore_api_key.json | jq -r '.signature')
   script:
     - echo "Uploading app to RuStore..."
     - |
