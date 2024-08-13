@@ -61,7 +61,7 @@ publish_to_rustore:
     - python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" > rustore_api_key.json
     - export RU_STORE_API_KEY=$(jq -r '.signature' rustore_api_key.json)
     - apt-get update
-    - apt-get install -y curl
+    - apt-get install -y curl jq
   script:
     - echo "Uploading app to RuStore..."
     - |
