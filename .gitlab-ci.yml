@@ -89,8 +89,6 @@ build_job:
 
 sentry-upload:
   image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   needs:
     - build_job
   tags:
@@ -98,6 +96,11 @@ sentry-upload:
   stage: deploy
   script:
     - flutter packages pub run sentry_dart_plugin
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - pubspec.yaml  # Триггер, если изменился pubspec.yaml
+    - when: manual
 
 
 code_quality:
@@ -155,4 +158,9 @@ deploy:
   script:
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - pubspec.yaml  # Триггер, если изменился pubspec.yaml
+    - when: manual
 
