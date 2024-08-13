@@ -6,17 +6,16 @@ services:
 stages:
   - test
   - deploy
+  - android-release
 
 variables:
   PACKAGE_NAME: "ru.mafbase.app"
   SECURE_FILES_DOWNLOAD_PATH: './secure-files/'
 
 build_android_app:
+  stage: android-release
   image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
   when: manual
-  needs:
-    - test
-    - code_quality
   tags:
     - docker
   before_script:
@@ -45,6 +44,7 @@ build_android_app:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 publish_to_rustore:
+  stage: android-release
   image: python:3.9-slim
   tags:
     - docker
@@ -152,3 +152,4 @@ deploy:
   script:
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
+
