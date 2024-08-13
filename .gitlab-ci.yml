@@ -84,7 +84,7 @@ build_job:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - pubspec.yaml  # Триггер, если изменился pubspec.yaml
+        - lib
     - when: manual
 
 sentry-upload:
@@ -99,7 +99,7 @@ sentry-upload:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - pubspec.yaml  # Триггер, если изменился pubspec.yaml
+        - lib
     - when: manual
 
 
@@ -161,6 +161,6 @@ deploy:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - pubspec.yaml  # Триггер, если изменился pubspec.yaml
+        - lib/
     - when: manual
 
