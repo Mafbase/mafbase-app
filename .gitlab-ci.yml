@@ -14,6 +14,7 @@ variables:
 
 build_android_app:
   stage: android-release
+  needs: []
   image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
   when: manual
   tags:
