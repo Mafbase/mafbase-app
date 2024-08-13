@@ -18,11 +18,7 @@ def generate_signature(key_id, private_key_content):
     signature_bytes = signer.sign(hash_obj)
     signature_value = base64.b64encode(signature_bytes).decode()
 
-    return json.dumps({
-        "keyId": key_id,
-        "timestamp": timestamp,
-        "signature": signature_value
-    }, indent=2)
+    return signature_value
 
 def main():
     if len(sys.argv) < 3:
