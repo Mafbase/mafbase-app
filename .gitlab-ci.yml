@@ -60,7 +60,7 @@ publish_to_rustore:
     - echo "Installing Python dependencies..."
     - pip3 install pycryptodome
     - echo "Generating API key..."
-    - export RU_STORE_API_KEY=$(python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" > rustore_api_key.json)
+    - export RU_STORE_API_KEY=$(python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY")
   script:
     - echo "Uploading app to RuStore..."
     - |
