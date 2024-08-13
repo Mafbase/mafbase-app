@@ -45,13 +45,18 @@ build_android_app:
 
 publish_to_rustore:
   stage: android-release
-  image: curlimages/curl:8.9.1
+  image: python:3.9-slim
   tags:
     - docker
   before_script:
     - echo "Extracting build number..."
     - export BUILD_NUMBER=$(grep -E '^version:' pubspec.yaml | awk -F '+' '{print $2}')
     - echo "Build number - $BUILD_NUMBER"
+    - echo "Generating API key..."
+    - python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" > rustore_api_key.json
+    - export RU_STORE_API_KEY=$(jq -r '.signature' rustore_api_key.json)
+    - apt-get update
+    - apt-get install -y curl
   script:
     - echo "Uploading app to RuStore..."
     - |
@@ -73,7 +78,6 @@ build_job:
   script:
     - docker build --no-cache --build-arg "REGISTRY_HOST=$REGISTRY_HOST" -t "$REGISTRY_HOST/seating-generator-flutter:latest" .
     - docker push "$REGISTRY_HOST/seating-generator-flutter:latest"
-
 
 sentry-upload:
   image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
