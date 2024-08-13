@@ -72,14 +72,17 @@ publish_to_rustore:
   allow_failure: false
 
 build_job:
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   tags:
     - docker
   script:
     - docker build --no-cache --build-arg "REGISTRY_HOST=$REGISTRY_HOST" -t "$REGISTRY_HOST/seating-generator-flutter:latest" .
     - docker push "$REGISTRY_HOST/seating-generator-flutter:latest"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - pubspec.yaml  # Триггер, если изменился pubspec.yaml
+    - when: manual
 
 sentry-upload:
   image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
@@ -132,8 +135,6 @@ test:
 deploy:
   stage: deploy
   image: "$REGISTRY_HOST/deployer:1.0.0"
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   tags:
     - docker
   needs:
@@ -150,3 +151,10 @@ deploy:
   script:
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
+  rules:
+    # Запускается автоматически, если изменился build_number
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - pubspec.yaml
+    # Доступен для ручного запуска, если не изменился build_number
+    - when: manual
