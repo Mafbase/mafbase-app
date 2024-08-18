@@ -57,178 +57,220 @@ class _SeatingPageState extends State<SeatingPage>
     super.initState();
   }
 
+  Widget buildActions() => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Tooltip(
+            message: 'По игрокам',
+            child: IconButton(
+              splashRadius: 16,
+              onPressed: () => context
+                  .read<SeatingPageBloc>()
+                  .add(const SeatingPageEvent.getPlayersSeating()),
+              icon: const Icon(Icons.person),
+            ),
+          ),
+          Tooltip(
+            message: 'По столам',
+            child: IconButton(
+              splashRadius: 16,
+              onPressed: () => context
+                  .read<SeatingPageBloc>()
+                  .add(const SeatingPageEvent.getTablesSeating()),
+              icon: const Icon(Icons.table_bar_outlined),
+            ),
+          ),
+          Tooltip(
+            message: 'Статистика пересечений',
+            child: IconButton(
+              splashRadius: 16,
+              onPressed: () => context
+                  .read<SeatingPageBloc>()
+                  .add(const SeatingPageEvent.getCrossStats()),
+              icon: const Icon(Icons.people),
+            ),
+          ),
+        ],
+      );
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TournamentPageBloc, TournamentPageState>(
       builder: (context, tournamentState) =>
           BlocBuilder<SeatingPageBloc, SeatingPageState>(
-        builder: (context, state) {
-          return Stack(
-            children: [
-              Column(
-                children: [
-                  Text(
-                    tournamentState.isMyTournament
-                        ? context.locale.separateTitle
-                        : context.locale.seating,
-                    style: MyTheme.of(context).headerTextStyle,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  if (tournamentState.isMyTournament) ...[
-                    Container(
-                      constraints: const BoxConstraints(maxHeight: 100),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: state.cannotMeet.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                                  state.cannotMeet[index].first,
-                                  state.cannotMeet[index].second,
-                                ]
-                                    .map<Widget>(
-                                      (playerModel) => Expanded(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: MyTheme.of(context)
-                                                  .borderColor,
-                                            ),
+        builder: (context, state) => Stack(
+          children: [
+            Column(
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        tournamentState.isMyTournament
+                            ? context.locale.separateTitle
+                            : context.locale.seating,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    buildActions(),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                if (tournamentState.isMyTournament) ...[
+                  Container(
+                    constraints: const BoxConstraints(maxHeight: 100),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.cannotMeet.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                                state.cannotMeet[index].first,
+                                state.cannotMeet[index].second,
+                              ]
+                                  .map<Widget>(
+                                    (playerModel) => Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color:
+                                                MyTheme.of(context).borderColor,
                                           ),
-                                          child: Center(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                playerModel.nickname,
-                                                style: MyTheme.of(context)
-                                                    .defaultTextStyle,
-                                              ),
+                                        ),
+                                        child: Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              playerModel.nickname,
+                                              style: MyTheme.of(context)
+                                                  .defaultTextStyle,
                                             ),
                                           ),
                                         ),
                                       ),
-                                    )
-                                    .toList() +
-                                <Widget>[
-                                  IconButton(
-                                    onPressed: () {
-                                      final bloc =
-                                          context.read<SeatingPageBloc>();
-                                      showDialog<bool>(
-                                        context: context,
-                                        builder: (context) =>
-                                            const ConfirmDialog(),
-                                      ).then(
-                                        (value) {
-                                          if (value == true) {
-                                            bloc.add(
-                                              SeatingPageEvent.deletePair(
-                                                first: state
-                                                    .cannotMeet[index].first,
-                                                second: state
-                                                    .cannotMeet[index].second,
-                                              ),
-                                            );
-                                          }
-                                        },
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: MyTheme.of(context).redColor,
-                                    ),
-                                  ),
-                                ],
-                          );
-                        },
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        context.read<SeatingPageBloc>().add(
-                              const SeatingPageEvent.addPair(),
-                            );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          context.locale.addSeparationBtnText,
-                        ),
-                      ),
-                    ),
-                  ],
-                  Expanded(
-                    flex: 100,
-                    child: SeatingList(
-                      models: state.games,
-                    ),
-                  ),
-                  if (tournamentState.isMyTournament)
-                    if (context.isMobile)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: TextButton(
-                          key: seatingKey,
-                          onPressed: () {
-                            final button = (seatingKey.currentContext
-                                ?.findRenderObject() as RenderBox);
-                            final overlay = Navigator.of(context)
-                                .overlay!
-                                .context
-                                .findRenderObject()! as RenderBox;
-                            const offset = Offset.zero;
-
-                            final RelativeRect position = RelativeRect.fromRect(
-                              Rect.fromPoints(
-                                button.localToGlobal(offset, ancestor: overlay),
-                                button.localToGlobal(
-                                  button.size.bottomRight(Offset.zero) + offset,
-                                  ancestor: overlay,
-                                ),
-                              ),
-                              Offset.zero & overlay.size,
-                            );
-
-                            showMenu(
-                              context: context,
-                              position: position,
-                              items: actions(tournamentState, state)
-                                  .map(
-                                    (e) => PopupMenuItem(
-                                      onTap: e.onTap,
-                                      child: Text(e.title),
                                     ),
                                   )
-                                  .toList(),
-                            );
-                          },
-                          child: Text(context.locale.seating),
-                        ),
-                      )
-                    else
-                      Wrap(
-                        children: actions(tournamentState, state)
-                            .map(
-                              (e) => TextButton(
-                                onPressed: e.onTap,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text(e.title),
+                                  .toList() +
+                              <Widget>[
+                                IconButton(
+                                  onPressed: () {
+                                    final bloc =
+                                        context.read<SeatingPageBloc>();
+                                    showDialog<bool>(
+                                      context: context,
+                                      builder: (context) =>
+                                          const ConfirmDialog(),
+                                    ).then(
+                                      (value) {
+                                        if (value == true) {
+                                          bloc.add(
+                                            SeatingPageEvent.deletePair(
+                                              first:
+                                                  state.cannotMeet[index].first,
+                                              second: state
+                                                  .cannotMeet[index].second,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: MyTheme.of(context).redColor,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
+                              ],
+                        );
+                      },
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      context.read<SeatingPageBloc>().add(
+                            const SeatingPageEvent.addPair(),
+                          );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        context.locale.addSeparationBtnText,
                       ),
+                    ),
+                  ),
                 ],
-              ),
-              if (state.isLoading)
-                const Positioned.fill(child: LoadingOverlayWidget()),
-            ],
-          );
-        },
+                Expanded(
+                  flex: 100,
+                  child: SeatingList(
+                    models: state.games,
+                  ),
+                ),
+                if (tournamentState.isMyTournament)
+                  if (context.isMobile)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: TextButton(
+                        key: seatingKey,
+                        onPressed: () {
+                          final button = (seatingKey.currentContext
+                              ?.findRenderObject() as RenderBox);
+                          final overlay = Navigator.of(context)
+                              .overlay!
+                              .context
+                              .findRenderObject()! as RenderBox;
+                          const offset = Offset.zero;
+
+                          final RelativeRect position = RelativeRect.fromRect(
+                            Rect.fromPoints(
+                              button.localToGlobal(offset, ancestor: overlay),
+                              button.localToGlobal(
+                                button.size.bottomRight(Offset.zero) + offset,
+                                ancestor: overlay,
+                              ),
+                            ),
+                            Offset.zero & overlay.size,
+                          );
+
+                          showMenu(
+                            context: context,
+                            position: position,
+                            items: actions(tournamentState, state)
+                                .map(
+                                  (e) => PopupMenuItem(
+                                    onTap: e.onTap,
+                                    child: Text(e.title),
+                                  ),
+                                )
+                                .toList(),
+                          );
+                        },
+                        child: Text(context.locale.seating),
+                      ),
+                    )
+                  else
+                    Wrap(
+                      children: actions(tournamentState, state)
+                          .map(
+                            (e) => TextButton(
+                              onPressed: e.onTap,
+                              child: Padding(
+                                padding: const EdgeInsets.all(4),
+                                child: Text(e.title),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+              ],
+            ),
+            if (state.isLoading)
+              const Positioned.fill(child: LoadingOverlayWidget()),
+          ],
+        ),
       ),
     );
   }

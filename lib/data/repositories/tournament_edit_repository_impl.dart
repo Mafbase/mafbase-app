@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:collection/collection.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/requests/create_swiss_game_request.dart';
@@ -18,6 +20,7 @@ import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/downloader/downloader.dart';
 
 class TournamentEditRepositoryImpl extends BaseRepository
     implements TournamentEditRepository {
@@ -156,4 +159,46 @@ class TournamentEditRepositoryImpl extends BaseRepository
       ).execute(client).then(
             (value) => value.notFound,
           );
+
+  @override
+  Future<void> downloadPlayersSeating({required int tournamentId}) async {
+    final response = await client.get<Uint8List>(
+      '/api/tournament/$tournamentId/playersSeating',
+    );
+
+    final bytes = response.data ?? Uint8List(0);
+
+    return downloadFile(
+      bytes: bytes,
+      fileName: 'players-seating.txt',
+    );
+  }
+
+  @override
+  Future<void> downloadCrossStats({required int tournamentId}) async {
+    final response = await client.get<Uint8List>(
+      '/api/tournament/$tournamentId/crossStats',
+    );
+
+    final bytes = response.data ?? Uint8List(0);
+
+    return downloadFile(
+      bytes: bytes,
+      fileName: 'cross-stats.txt',
+    );
+  }
+
+  @override
+  Future<void> downloadTablesSeating({required int tournamentId}) async {
+    final response = await client.get<Uint8List>(
+      '/api/tournament/$tournamentId/tablesSeating',
+    );
+
+    final bytes = response.data ?? Uint8List(0);
+
+    return downloadFile(
+      bytes: bytes,
+      fileName: 'tables-seating.txt',
+    );
+  }
 }

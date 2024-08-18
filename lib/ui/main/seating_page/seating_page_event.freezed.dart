@@ -27,6 +27,9 @@ mixin _$SeatingPageEvent {
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +43,9 @@ mixin _$SeatingPageEvent {
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +59,9 @@ mixin _$SeatingPageEvent {
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,6 +82,12 @@ mixin _$SeatingPageEvent {
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +102,10 @@ mixin _$SeatingPageEvent {
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -101,6 +120,10 @@ mixin _$SeatingPageEvent {
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -174,6 +197,9 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return addPair();
   }
@@ -190,6 +216,9 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return addPair?.call();
   }
@@ -206,6 +235,9 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (addPair != null) {
@@ -232,6 +264,12 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return addPair(this);
   }
@@ -249,6 +287,10 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return addPair?.call(this);
   }
@@ -266,6 +308,10 @@ class _$SeatingPageEventAddPairImpl implements SeatingPageEventAddPair {
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (addPair != null) {
@@ -331,6 +377,9 @@ class _$SeatingPageEventCreateSeatingImpl
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return createSeating();
   }
@@ -347,6 +396,9 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return createSeating?.call();
   }
@@ -363,6 +415,9 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (createSeating != null) {
@@ -389,6 +444,12 @@ class _$SeatingPageEventCreateSeatingImpl
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return createSeating(this);
   }
@@ -406,6 +467,10 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return createSeating?.call(this);
   }
@@ -423,6 +488,10 @@ class _$SeatingPageEventCreateSeatingImpl
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (createSeating != null) {
@@ -489,6 +558,9 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return fsmSeatingTapped();
   }
@@ -505,6 +577,9 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return fsmSeatingTapped?.call();
   }
@@ -521,6 +596,9 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (fsmSeatingTapped != null) {
@@ -547,6 +625,12 @@ class _$SeatingPageEventFsmSeatingTappedImpl
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return fsmSeatingTapped(this);
   }
@@ -564,6 +648,10 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return fsmSeatingTapped?.call(this);
   }
@@ -581,6 +669,10 @@ class _$SeatingPageEventFsmSeatingTappedImpl
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (fsmSeatingTapped != null) {
@@ -675,6 +767,9 @@ class _$SeatingPageEventAutoFsmSeatingImpl
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return autoFsmSeating(gomafiaId);
   }
@@ -691,6 +786,9 @@ class _$SeatingPageEventAutoFsmSeatingImpl
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return autoFsmSeating?.call(gomafiaId);
   }
@@ -707,6 +805,9 @@ class _$SeatingPageEventAutoFsmSeatingImpl
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (autoFsmSeating != null) {
@@ -733,6 +834,12 @@ class _$SeatingPageEventAutoFsmSeatingImpl
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return autoFsmSeating(this);
   }
@@ -750,6 +857,10 @@ class _$SeatingPageEventAutoFsmSeatingImpl
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return autoFsmSeating?.call(this);
   }
@@ -767,6 +878,10 @@ class _$SeatingPageEventAutoFsmSeatingImpl
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (autoFsmSeating != null) {
@@ -892,6 +1007,9 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return deletePair(first, second);
   }
@@ -908,6 +1026,9 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return deletePair?.call(first, second);
   }
@@ -924,6 +1045,9 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (deletePair != null) {
@@ -950,6 +1074,12 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return deletePair(this);
   }
@@ -967,6 +1097,10 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return deletePair?.call(this);
   }
@@ -984,6 +1118,10 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (deletePair != null) {
@@ -1083,6 +1221,9 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return pageOpened(tournamentId);
   }
@@ -1099,6 +1240,9 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return pageOpened?.call(tournamentId);
   }
@@ -1115,6 +1259,9 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -1141,6 +1288,12 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return pageOpened(this);
   }
@@ -1158,6 +1311,10 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return pageOpened?.call(this);
   }
@@ -1175,6 +1332,10 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -1271,6 +1432,9 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return openGameEditing(gameId);
   }
@@ -1287,6 +1451,9 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return openGameEditing?.call(gameId);
   }
@@ -1303,6 +1470,9 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (openGameEditing != null) {
@@ -1329,6 +1499,12 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return openGameEditing(this);
   }
@@ -1346,6 +1522,10 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return openGameEditing?.call(this);
   }
@@ -1363,6 +1543,10 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (openGameEditing != null) {
@@ -1434,6 +1618,9 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return createFinalSeating();
   }
@@ -1450,6 +1637,9 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return createFinalSeating?.call();
   }
@@ -1466,6 +1656,9 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (createFinalSeating != null) {
@@ -1492,6 +1685,12 @@ class _$SeatingPageEventCreateFinalSeatingImpl
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return createFinalSeating(this);
   }
@@ -1509,6 +1708,10 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return createFinalSeating?.call(this);
   }
@@ -1526,6 +1729,10 @@ class _$SeatingPageEventCreateFinalSeatingImpl
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (createFinalSeating != null) {
@@ -1619,6 +1826,9 @@ class _$SeatingPageEventCreateSwissGameImpl
     required TResult Function(int gameId) openGameEditing,
     required TResult Function() createFinalSeating,
     required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
   }) {
     return createSwissGame(game);
   }
@@ -1635,6 +1845,9 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult? Function(int gameId)? openGameEditing,
     TResult? Function()? createFinalSeating,
     TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
   }) {
     return createSwissGame?.call(game);
   }
@@ -1651,6 +1864,9 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult Function(int gameId)? openGameEditing,
     TResult Function()? createFinalSeating,
     TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
     required TResult orElse(),
   }) {
     if (createSwissGame != null) {
@@ -1677,6 +1893,12 @@ class _$SeatingPageEventCreateSwissGameImpl
         createFinalSeating,
     required TResult Function(SeatingPageEventCreateSwissGame value)
         createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
   }) {
     return createSwissGame(this);
   }
@@ -1694,6 +1916,10 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult? Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
   }) {
     return createSwissGame?.call(this);
   }
@@ -1711,6 +1937,10 @@ class _$SeatingPageEventCreateSwissGameImpl
     TResult Function(SeatingPageEventCreateFinalSeating value)?
         createFinalSeating,
     TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
     required TResult orElse(),
   }) {
     if (createSwissGame != null) {
@@ -1729,4 +1959,547 @@ abstract class SeatingPageEventCreateSwissGame implements SeatingPageEvent {
   _$$SeatingPageEventCreateSwissGameImplCopyWith<
           _$SeatingPageEventCreateSwissGameImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SeatingPageEventGetPlayersSeatingImplCopyWith<$Res> {
+  factory _$$SeatingPageEventGetPlayersSeatingImplCopyWith(
+          _$SeatingPageEventGetPlayersSeatingImpl value,
+          $Res Function(_$SeatingPageEventGetPlayersSeatingImpl) then) =
+      __$$SeatingPageEventGetPlayersSeatingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SeatingPageEventGetPlayersSeatingImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventGetPlayersSeatingImpl>
+    implements _$$SeatingPageEventGetPlayersSeatingImplCopyWith<$Res> {
+  __$$SeatingPageEventGetPlayersSeatingImplCopyWithImpl(
+      _$SeatingPageEventGetPlayersSeatingImpl _value,
+      $Res Function(_$SeatingPageEventGetPlayersSeatingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SeatingPageEventGetPlayersSeatingImpl
+    implements SeatingPageEventGetPlayersSeating {
+  const _$SeatingPageEventGetPlayersSeatingImpl();
+
+  @override
+  String toString() {
+    return 'SeatingPageEvent.getPlayersSeating()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SeatingPageEventGetPlayersSeatingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() addPair,
+    required TResult Function() createSeating,
+    required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
+    required TResult Function(PlayerModel first, PlayerModel second) deletePair,
+    required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
+    required TResult Function() createFinalSeating,
+    required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
+  }) {
+    return getPlayersSeating();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
+    TResult? Function()? createFinalSeating,
+    TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
+  }) {
+    return getPlayersSeating?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? addPair,
+    TResult Function()? createSeating,
+    TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
+    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
+    TResult Function()? createFinalSeating,
+    TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
+    required TResult orElse(),
+  }) {
+    if (getPlayersSeating != null) {
+      return getPlayersSeating();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventCreateSeating value)
+        createSeating,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
+    required TResult Function(SeatingPageEventDeletePair value) deletePair,
+    required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
+    required TResult Function(SeatingPageEventCreateFinalSeating value)
+        createFinalSeating,
+    required TResult Function(SeatingPageEventCreateSwissGame value)
+        createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
+  }) {
+    return getPlayersSeating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult? Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
+  }) {
+    return getPlayersSeating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
+    required TResult orElse(),
+  }) {
+    if (getPlayersSeating != null) {
+      return getPlayersSeating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SeatingPageEventGetPlayersSeating implements SeatingPageEvent {
+  const factory SeatingPageEventGetPlayersSeating() =
+      _$SeatingPageEventGetPlayersSeatingImpl;
+}
+
+/// @nodoc
+abstract class _$$SeatingPageEventGetTablesSeatingImplCopyWith<$Res> {
+  factory _$$SeatingPageEventGetTablesSeatingImplCopyWith(
+          _$SeatingPageEventGetTablesSeatingImpl value,
+          $Res Function(_$SeatingPageEventGetTablesSeatingImpl) then) =
+      __$$SeatingPageEventGetTablesSeatingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SeatingPageEventGetTablesSeatingImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventGetTablesSeatingImpl>
+    implements _$$SeatingPageEventGetTablesSeatingImplCopyWith<$Res> {
+  __$$SeatingPageEventGetTablesSeatingImplCopyWithImpl(
+      _$SeatingPageEventGetTablesSeatingImpl _value,
+      $Res Function(_$SeatingPageEventGetTablesSeatingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SeatingPageEventGetTablesSeatingImpl
+    implements SeatingPageEventGetTablesSeating {
+  const _$SeatingPageEventGetTablesSeatingImpl();
+
+  @override
+  String toString() {
+    return 'SeatingPageEvent.getTablesSeating()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SeatingPageEventGetTablesSeatingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() addPair,
+    required TResult Function() createSeating,
+    required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
+    required TResult Function(PlayerModel first, PlayerModel second) deletePair,
+    required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
+    required TResult Function() createFinalSeating,
+    required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
+  }) {
+    return getTablesSeating();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
+    TResult? Function()? createFinalSeating,
+    TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
+  }) {
+    return getTablesSeating?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? addPair,
+    TResult Function()? createSeating,
+    TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
+    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
+    TResult Function()? createFinalSeating,
+    TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
+    required TResult orElse(),
+  }) {
+    if (getTablesSeating != null) {
+      return getTablesSeating();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventCreateSeating value)
+        createSeating,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
+    required TResult Function(SeatingPageEventDeletePair value) deletePair,
+    required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
+    required TResult Function(SeatingPageEventCreateFinalSeating value)
+        createFinalSeating,
+    required TResult Function(SeatingPageEventCreateSwissGame value)
+        createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
+  }) {
+    return getTablesSeating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult? Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
+  }) {
+    return getTablesSeating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
+    required TResult orElse(),
+  }) {
+    if (getTablesSeating != null) {
+      return getTablesSeating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SeatingPageEventGetTablesSeating implements SeatingPageEvent {
+  const factory SeatingPageEventGetTablesSeating() =
+      _$SeatingPageEventGetTablesSeatingImpl;
+}
+
+/// @nodoc
+abstract class _$$SeatingPageEventGetCrossStatsImplCopyWith<$Res> {
+  factory _$$SeatingPageEventGetCrossStatsImplCopyWith(
+          _$SeatingPageEventGetCrossStatsImpl value,
+          $Res Function(_$SeatingPageEventGetCrossStatsImpl) then) =
+      __$$SeatingPageEventGetCrossStatsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SeatingPageEventGetCrossStatsImplCopyWithImpl<$Res>
+    extends _$SeatingPageEventCopyWithImpl<$Res,
+        _$SeatingPageEventGetCrossStatsImpl>
+    implements _$$SeatingPageEventGetCrossStatsImplCopyWith<$Res> {
+  __$$SeatingPageEventGetCrossStatsImplCopyWithImpl(
+      _$SeatingPageEventGetCrossStatsImpl _value,
+      $Res Function(_$SeatingPageEventGetCrossStatsImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SeatingPageEventGetCrossStatsImpl
+    implements SeatingPageEventGetCrossStats {
+  const _$SeatingPageEventGetCrossStatsImpl();
+
+  @override
+  String toString() {
+    return 'SeatingPageEvent.getCrossStats()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SeatingPageEventGetCrossStatsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() addPair,
+    required TResult Function() createSeating,
+    required TResult Function() fsmSeatingTapped,
+    required TResult Function(int gomafiaId) autoFsmSeating,
+    required TResult Function(PlayerModel first, PlayerModel second) deletePair,
+    required TResult Function(int tournamentId) pageOpened,
+    required TResult Function(int gameId) openGameEditing,
+    required TResult Function() createFinalSeating,
+    required TResult Function(int game) createSwissGame,
+    required TResult Function() getPlayersSeating,
+    required TResult Function() getTablesSeating,
+    required TResult Function() getCrossStats,
+  }) {
+    return getCrossStats();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? addPair,
+    TResult? Function()? createSeating,
+    TResult? Function()? fsmSeatingTapped,
+    TResult? Function(int gomafiaId)? autoFsmSeating,
+    TResult? Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult? Function(int tournamentId)? pageOpened,
+    TResult? Function(int gameId)? openGameEditing,
+    TResult? Function()? createFinalSeating,
+    TResult? Function(int game)? createSwissGame,
+    TResult? Function()? getPlayersSeating,
+    TResult? Function()? getTablesSeating,
+    TResult? Function()? getCrossStats,
+  }) {
+    return getCrossStats?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? addPair,
+    TResult Function()? createSeating,
+    TResult Function()? fsmSeatingTapped,
+    TResult Function(int gomafiaId)? autoFsmSeating,
+    TResult Function(PlayerModel first, PlayerModel second)? deletePair,
+    TResult Function(int tournamentId)? pageOpened,
+    TResult Function(int gameId)? openGameEditing,
+    TResult Function()? createFinalSeating,
+    TResult Function(int game)? createSwissGame,
+    TResult Function()? getPlayersSeating,
+    TResult Function()? getTablesSeating,
+    TResult Function()? getCrossStats,
+    required TResult orElse(),
+  }) {
+    if (getCrossStats != null) {
+      return getCrossStats();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SeatingPageEventAddPair value) addPair,
+    required TResult Function(SeatingPageEventCreateSeating value)
+        createSeating,
+    required TResult Function(SeatingPageEventFsmSeatingTapped value)
+        fsmSeatingTapped,
+    required TResult Function(SeatingPageEventAutoFsmSeating value)
+        autoFsmSeating,
+    required TResult Function(SeatingPageEventDeletePair value) deletePair,
+    required TResult Function(SeatingPageEventPageOpened value) pageOpened,
+    required TResult Function(SeatingPageEventGameEditing value)
+        openGameEditing,
+    required TResult Function(SeatingPageEventCreateFinalSeating value)
+        createFinalSeating,
+    required TResult Function(SeatingPageEventCreateSwissGame value)
+        createSwissGame,
+    required TResult Function(SeatingPageEventGetPlayersSeating value)
+        getPlayersSeating,
+    required TResult Function(SeatingPageEventGetTablesSeating value)
+        getTablesSeating,
+    required TResult Function(SeatingPageEventGetCrossStats value)
+        getCrossStats,
+  }) {
+    return getCrossStats(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SeatingPageEventAddPair value)? addPair,
+    TResult? Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult? Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult? Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult? Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult? Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult? Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult? Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult? Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult? Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult? Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult? Function(SeatingPageEventGetCrossStats value)? getCrossStats,
+  }) {
+    return getCrossStats?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SeatingPageEventAddPair value)? addPair,
+    TResult Function(SeatingPageEventCreateSeating value)? createSeating,
+    TResult Function(SeatingPageEventFsmSeatingTapped value)? fsmSeatingTapped,
+    TResult Function(SeatingPageEventAutoFsmSeating value)? autoFsmSeating,
+    TResult Function(SeatingPageEventDeletePair value)? deletePair,
+    TResult Function(SeatingPageEventPageOpened value)? pageOpened,
+    TResult Function(SeatingPageEventGameEditing value)? openGameEditing,
+    TResult Function(SeatingPageEventCreateFinalSeating value)?
+        createFinalSeating,
+    TResult Function(SeatingPageEventCreateSwissGame value)? createSwissGame,
+    TResult Function(SeatingPageEventGetPlayersSeating value)?
+        getPlayersSeating,
+    TResult Function(SeatingPageEventGetTablesSeating value)? getTablesSeating,
+    TResult Function(SeatingPageEventGetCrossStats value)? getCrossStats,
+    required TResult orElse(),
+  }) {
+    if (getCrossStats != null) {
+      return getCrossStats(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SeatingPageEventGetCrossStats implements SeatingPageEvent {
+  const factory SeatingPageEventGetCrossStats() =
+      _$SeatingPageEventGetCrossStatsImpl;
 }

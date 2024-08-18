@@ -96,4 +96,22 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
     // TODO: implement getGomafiaSeating
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> downloadPlayersSeating({required int tournamentId}) {
+    // TODO: implement downloadPlayersSeating
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> downloadCrossStats({required int tournamentId}) {
+    // TODO: implement downloadSwissStats
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> downloadTablesSeating({required int tournamentId}) {
+    // TODO: implement downloadTablesSeating
+    throw UnimplementedError();
+  }
 }

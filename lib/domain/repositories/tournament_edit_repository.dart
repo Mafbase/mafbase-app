@@ -52,4 +52,10 @@ abstract class TournamentEditRepository {
     required int tournamentId,
     required int gomafiaId,
   });
+
+  Future<void> downloadPlayersSeating({required int tournamentId});
+
+  Future<void> downloadTablesSeating({required int tournamentId});
+
+  Future<void> downloadCrossStats({required int tournamentId});
 }

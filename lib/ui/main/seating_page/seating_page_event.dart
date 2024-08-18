@@ -33,4 +33,13 @@ class SeatingPageEvent with _$SeatingPageEvent {
 
   const factory SeatingPageEvent.createSwissGame({required int game}) =
       SeatingPageEventCreateSwissGame;
+
+  const factory SeatingPageEvent.getPlayersSeating() =
+      SeatingPageEventGetPlayersSeating;
+
+  const factory SeatingPageEvent.getTablesSeating() =
+      SeatingPageEventGetTablesSeating;
+
+  const factory SeatingPageEvent.getCrossStats() =
+      SeatingPageEventGetCrossStats;
 }

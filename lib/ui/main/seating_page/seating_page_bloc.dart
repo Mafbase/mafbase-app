@@ -40,7 +40,32 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState>
     on<SeatingPageEventCreateFinalSeating>(_onGenerateFinalSeating);
     on<SeatingPageEventCreateSwissGame>(_onSwissGameCreate);
     on<SeatingPageEventAutoFsmSeating>(_autoFsmSeating);
+    on<SeatingPageEventGetPlayersSeating>(_downloadPlayersSeating);
+    on<SeatingPageEventGetTablesSeating>(_downloadTablesSeating);
+    on<SeatingPageEventGetCrossStats>(_downloadCrossStats);
   }
+
+  Future<void> _downloadPlayersSeating(
+    SeatingPageEventGetPlayersSeating event,
+    Emitter emit,
+  ) async =>
+      _tournamentEditRepository.downloadPlayersSeating(
+        tournamentId: tournamentId,
+      );
+
+  Future<void> _downloadTablesSeating(
+    SeatingPageEventGetTablesSeating event,
+    Emitter emit,
+  ) async =>
+      _tournamentEditRepository.downloadTablesSeating(
+        tournamentId: tournamentId,
+      );
+
+  Future<void> _downloadCrossStats(
+    SeatingPageEventGetCrossStats event,
+    Emitter emit,
+  ) async =>
+      _tournamentEditRepository.downloadCrossStats(tournamentId: tournamentId);
 
   Future<void> _autoFsmSeating(
     SeatingPageEventAutoFsmSeating event,

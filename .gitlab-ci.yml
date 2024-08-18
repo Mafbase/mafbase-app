@@ -59,14 +59,9 @@ publish_to_rustore:
     - echo "Build number - $BUILD_NUMBER"
     - echo "Installing Python dependencies..."
     - pip3 install pycryptodome
-    - echo "Generating API key..."
-    - export RU_STORE_API_KEY=$(python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY")
   script:
     - echo "Uploading app to RuStore..."
-    - |
-      curl --fail -X POST "https://public-api.rustore.ru/public/v1/application/${PACKAGE_NAME}/version/${BUILD_NUMBER}/aab" \
-        -H "Public-Token: $RU_STORE_API_KEY" \
-        -F "file=@build/app/outputs/bundle/release/app-release.aab"
+    - python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" "$PACKAGE_NAME" "$BUILD_NUMBER" /build/app/outputs/bundle/release/app-release.aab
   needs:
     - build_android_app
   rules:
