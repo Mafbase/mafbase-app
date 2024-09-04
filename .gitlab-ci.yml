@@ -61,7 +61,7 @@ publish_to_rustore:
     - pip3 install pycryptodome tqdm requests
   script:
     - echo "Uploading app to RuStore..."
-    - python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" "$PACKAGE_NAME" /build/app/outputs/bundle/release/app-release.aab
+    - python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" "$PACKAGE_NAME" build/app/outputs/bundle/release/app-release.aab
   needs:
     - build_android_app
   rules:
