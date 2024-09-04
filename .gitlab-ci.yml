@@ -75,11 +75,6 @@ build_job:
   script:
     - docker build --no-cache --build-arg "REGISTRY_HOST=$REGISTRY_HOST" -t "$REGISTRY_HOST/seating-generator-flutter:latest" .
     - docker push "$REGISTRY_HOST/seating-generator-flutter:latest"
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      changes:
-        - lib
-    - when: manual
 
 sentry-upload:
   image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
@@ -90,11 +85,6 @@ sentry-upload:
   stage: deploy
   script:
     - flutter packages pub run sentry_dart_plugin
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      changes:
-        - lib
-    - when: manual
 
 
 code_quality:
@@ -152,9 +142,4 @@ deploy:
   script:
     - ssh "$DEPLOY_USER"@"$DEPLOY_HOST" "./restart.sh"
   environment: production
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      changes:
-        - lib/
-    - when: manual
 

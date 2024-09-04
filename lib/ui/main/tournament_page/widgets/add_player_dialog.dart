@@ -71,88 +71,92 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
           vertical: 40,
           horizontal: 40,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              context.locale.addPlayerDialogTitle,
-              style: MyTheme.of(context).headerTextStyle,
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-            CustomAutoComplete(
-              hint: context.locale.nicknameHint,
-              controller: _controller,
-              displayStringForOption: (model) => model.nickname,
-              focusNode: _focusNode,
-              onSelected: (player) {
-                _controllerFsm.text = player.fsmNickaname ?? "";
-                _controllerMafbank.text = player.mafbankNickname ?? "";
-                _controller.text = player.nickname;
-              },
-              optionsBuilder: (text) {
-                return widget.showAvailablePlayers ? widget.availablePlayers
-                    .where(
-                      (element) => element.nickname
-                          .toLowerCase()
-                          .contains(text.text.toLowerCase()),
-                    )
-                    .sortedBy<num>((element) => element.nickname.length) : [];
-              },
-              onSubmit: () {
-                _focusNodeFsm.requestFocus();
-              },
-            ),
-            CustomAutoComplete(
-              hint: context.locale.fsmNicknameHint,
-              controller: _controllerFsm,
-              displayStringForOption: (model) => model.fsmNickaname ?? "",
-              focusNode: _focusNodeFsm,
-              onSelected: (player) {
-                _controllerFsm.text = player.fsmNickaname ?? "";
-                _controllerMafbank.text = player.mafbankNickname ?? "";
-                _controller.text = player.nickname;
-              },
-              optionsBuilder: (text) {
-                return widget.showAvailablePlayers ? widget.availablePlayers
-                    .where(
-                      (element) => element.nickname
-                      .toLowerCase()
-                      .contains(text.text.toLowerCase()),
-                )
-                    .sortedBy<num>((element) => element.nickname.length) : [];
-              },
-              onSubmit: () {
-                _focusNodeMafbank.requestFocus();
-              },
-            ),
-            CustomAutoComplete(
-              hint: context.locale.mafbankNicknameHint,
-              controller: _controllerMafbank,
-              displayStringForOption: (model) => model.mafbankNickname ?? "",
-              focusNode: _focusNodeMafbank,
-              onSelected: (player) {
-                _controllerFsm.text = player.fsmNickaname ?? "";
-                _controllerMafbank.text = player.mafbankNickname ?? "";
-                _controller.text = player.nickname;
-              },
-              optionsBuilder: (text) {
-                return widget.showAvailablePlayers ? widget.availablePlayers
-                    .where(
-                      (element) => element.nickname
-                      .toLowerCase()
-                      .contains(text.text.toLowerCase()),
-                )
-                    .sortedBy<num>((element) => element.nickname.length) : [];
-              },
-              onSubmit: onSubmit,
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-            CustomButton(text: context.locale.add, onTap: onSubmit),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                context.locale.addPlayerDialogTitle,
+                style: MyTheme.of(context).headerTextStyle,
+              ),
+              const SizedBox(height: 24),
+              CustomAutoComplete(
+                hint: context.locale.nicknameHint,
+                controller: _controller,
+                displayStringForOption: (model) => model.nickname,
+                focusNode: _focusNode,
+                onSelected: (player) {
+                  _controllerFsm.text = player.fsmNickaname ?? "";
+                  _controllerMafbank.text = player.mafbankNickname ?? "";
+                  _controller.text = player.nickname;
+                },
+                optionsBuilder: (text) {
+                  return widget.showAvailablePlayers
+                      ? widget.availablePlayers
+                          .where(
+                            (element) => element.nickname
+                                .toLowerCase()
+                                .contains(text.text.toLowerCase()),
+                          )
+                          .sortedBy<num>((element) => element.nickname.length)
+                      : [];
+                },
+                onSubmit: () {
+                  _focusNodeFsm.requestFocus();
+                },
+              ),
+              CustomAutoComplete(
+                hint: context.locale.fsmNicknameHint,
+                controller: _controllerFsm,
+                displayStringForOption: (model) => model.fsmNickaname ?? "",
+                focusNode: _focusNodeFsm,
+                onSelected: (player) {
+                  _controllerFsm.text = player.fsmNickaname ?? "";
+                  _controllerMafbank.text = player.mafbankNickname ?? "";
+                  _controller.text = player.nickname;
+                },
+                optionsBuilder: (text) {
+                  return widget.showAvailablePlayers
+                      ? widget.availablePlayers
+                          .where(
+                            (element) => element.nickname
+                                .toLowerCase()
+                                .contains(text.text.toLowerCase()),
+                          )
+                          .sortedBy<num>((element) => element.nickname.length)
+                      : [];
+                },
+                onSubmit: () {
+                  _focusNodeMafbank.requestFocus();
+                },
+              ),
+              CustomAutoComplete(
+                hint: context.locale.mafbankNicknameHint,
+                controller: _controllerMafbank,
+                displayStringForOption: (model) => model.mafbankNickname ?? "",
+                focusNode: _focusNodeMafbank,
+                onSelected: (player) {
+                  _controllerFsm.text = player.fsmNickaname ?? "";
+                  _controllerMafbank.text = player.mafbankNickname ?? "";
+                  _controller.text = player.nickname;
+                },
+                optionsBuilder: (text) {
+                  return widget.showAvailablePlayers
+                      ? widget.availablePlayers
+                          .where(
+                            (element) => element.nickname
+                                .toLowerCase()
+                                .contains(text.text.toLowerCase()),
+                          )
+                          .sortedBy<num>((element) => element.nickname.length)
+                      : [];
+                },
+                onSubmit: onSubmit,
+              ),
+              const SizedBox(height: 24),
+              CustomButton(text: context.locale.add, onTap: onSubmit),
+            ],
+          ),
         ),
       ),
     );

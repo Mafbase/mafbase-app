@@ -830,7 +830,7 @@ class NicknameField extends StatelessWidget {
                 (element) => element.nickname.length,
               );
 
-          return players +
+          return players.take(3).toList() +
               [
                 if (onNewPlayer != null) PlayerModel(nickname: value.text),
               ];
