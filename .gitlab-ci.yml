@@ -58,7 +58,7 @@ publish_to_rustore:
     - export BUILD_NUMBER=$(grep -E '^version:' pubspec.yaml | awk -F '+' '{print $2}')
     - echo "Build number - $BUILD_NUMBER"
     - echo "Installing Python dependencies..."
-    - pip3 install pycryptodome tqdm
+    - pip3 install pycryptodome tqdm requests
   script:
     - echo "Uploading app to RuStore..."
     - python3 rustore-api-key-gen.py "$RUSTORE_KEY_ID" "$RUSTORE_PRIVATE_KEY" "$PACKAGE_NAME" "$BUILD_NUMBER" /build/app/outputs/bundle/release/app-release.aab
