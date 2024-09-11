@@ -26,6 +26,7 @@ mixin _$TournamentPageState {
   bool get billedTranslation => throw _privateConstructorUsedError;
   bool get isMyTournament => throw _privateConstructorUsedError;
   bool get notificationEnabled => throw _privateConstructorUsedError;
+  String? get gomafiaUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentPageStateCopyWith<TournamentPageState> get copyWith =>
@@ -48,7 +49,8 @@ abstract class $TournamentPageStateCopyWith<$Res> {
       int billedPlayers,
       bool billedTranslation,
       bool isMyTournament,
-      bool notificationEnabled});
+      bool notificationEnabled,
+      String? gomafiaUrl});
 
   $TournamentSettingsModelCopyWith<$Res> get settings;
 }
@@ -76,6 +78,7 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     Object? billedTranslation = null,
     Object? isMyTournament = null,
     Object? notificationEnabled = null,
+    Object? gomafiaUrl = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -118,6 +121,10 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.notificationEnabled
           : notificationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      gomafiaUrl: freezed == gomafiaUrl
+          ? _value.gomafiaUrl
+          : gomafiaUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -148,7 +155,8 @@ abstract class _$$TournamentPageStateImplCopyWith<$Res>
       int billedPlayers,
       bool billedTranslation,
       bool isMyTournament,
-      bool notificationEnabled});
+      bool notificationEnabled,
+      String? gomafiaUrl});
 
   @override
   $TournamentSettingsModelCopyWith<$Res> get settings;
@@ -175,6 +183,7 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
     Object? billedTranslation = null,
     Object? isMyTournament = null,
     Object? notificationEnabled = null,
+    Object? gomafiaUrl = freezed,
   }) {
     return _then(_$TournamentPageStateImpl(
       isLoading: null == isLoading
@@ -217,6 +226,10 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
           ? _value.notificationEnabled
           : notificationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      gomafiaUrl: freezed == gomafiaUrl
+          ? _value.gomafiaUrl
+          : gomafiaUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -235,7 +248,8 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
       this.billedPlayers = 10,
       this.billedTranslation = false,
       this.isMyTournament = false,
-      this.notificationEnabled = false})
+      this.notificationEnabled = false,
+      this.gomafiaUrl})
       : _players = players,
         _tournamentPlayers = tournamentPlayers,
         _cannotMeet = cannotMeet,
@@ -296,10 +310,12 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
   @override
   @JsonKey()
   final bool notificationEnabled;
+  @override
+  final String? gomafiaUrl;
 
   @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament, notificationEnabled: $notificationEnabled)';
+    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl)';
   }
 
   @override
@@ -325,7 +341,9 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
             (identical(other.isMyTournament, isMyTournament) ||
                 other.isMyTournament == isMyTournament) &&
             (identical(other.notificationEnabled, notificationEnabled) ||
-                other.notificationEnabled == notificationEnabled));
+                other.notificationEnabled == notificationEnabled) &&
+            (identical(other.gomafiaUrl, gomafiaUrl) ||
+                other.gomafiaUrl == gomafiaUrl));
   }
 
   @override
@@ -340,7 +358,8 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
       billedPlayers,
       billedTranslation,
       isMyTournament,
-      notificationEnabled);
+      notificationEnabled,
+      gomafiaUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -361,7 +380,8 @@ abstract class _TournamentPageState implements TournamentPageState {
       final int billedPlayers,
       final bool billedTranslation,
       final bool isMyTournament,
-      final bool notificationEnabled}) = _$TournamentPageStateImpl;
+      final bool notificationEnabled,
+      final String? gomafiaUrl}) = _$TournamentPageStateImpl;
 
   @override
   bool get isLoading;
@@ -383,6 +403,8 @@ abstract class _TournamentPageState implements TournamentPageState {
   bool get isMyTournament;
   @override
   bool get notificationEnabled;
+  @override
+  String? get gomafiaUrl;
   @override
   @JsonKey(ignore: true)
   _$$TournamentPageStateImplCopyWith<_$TournamentPageStateImpl> get copyWith =>

@@ -24,5 +24,6 @@ class TournamentPageState with _$TournamentPageState {
     @Default(false) bool billedTranslation,
     @Default(false) bool isMyTournament,
     @Default(false) bool notificationEnabled,
+    String? gomafiaUrl,
   }) = _TournamentPageState;
 }

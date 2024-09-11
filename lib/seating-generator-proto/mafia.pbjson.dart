@@ -889,6 +889,7 @@ const Tournament$json = {
     {'1': 'billedPlayers', '3': 7, '4': 1, '5': 5, '10': 'billedPlayers'},
     {'1': 'billedTranslation', '3': 8, '4': 1, '5': 8, '10': 'billedTranslation'},
     {'1': 'notificationEnabled', '3': 9, '4': 1, '5': 8, '10': 'notificationEnabled'},
+    {'1': 'description', '3': 10, '4': 1, '5': 11, '6': '.generated.TournamentDescription', '10': 'description'},
   ],
   '4': [Tournament_Status$json],
 };
@@ -910,8 +911,10 @@ final $typed_data.Uint8List tournamentDescriptor = $convert.base64Decode(
     'dGFydBgEIAEoCVIJZGF0ZVN0YXJ0EhgKB2RhdGVFbmQYBSABKAlSB2RhdGVFbmQSHgoKZ2FtZX'
     'NDb3VudBgGIAEoBVIKZ2FtZXNDb3VudBIkCg1iaWxsZWRQbGF5ZXJzGAcgASgFUg1iaWxsZWRQ'
     'bGF5ZXJzEiwKEWJpbGxlZFRyYW5zbGF0aW9uGAggASgIUhFiaWxsZWRUcmFuc2xhdGlvbhIwCh'
-    'Nub3RpZmljYXRpb25FbmFibGVkGAkgASgIUhNub3RpZmljYXRpb25FbmFibGVkIjMKBlN0YXR1'
-    'cxISCg53YWl0Rm9yQmlsbGluZxAAEgoKBmFjdGl2ZRABEgkKBWVuZGVkEAI=');
+    'Nub3RpZmljYXRpb25FbmFibGVkGAkgASgIUhNub3RpZmljYXRpb25FbmFibGVkEkIKC2Rlc2Ny'
+    'aXB0aW9uGAogASgLMiAuZ2VuZXJhdGVkLlRvdXJuYW1lbnREZXNjcmlwdGlvblILZGVzY3JpcH'
+    'Rpb24iMwoGU3RhdHVzEhIKDndhaXRGb3JCaWxsaW5nEAASCgoGYWN0aXZlEAESCQoFZW5kZWQQ'
+    'Ag==');
 
 @$core.Deprecated('Use errorOutDescriptor instead')
 const ErrorOut$json = {

@@ -25,6 +25,7 @@ mixin _$TournamentModel {
   int get billedPlayers => throw _privateConstructorUsedError;
   bool get billedTranslation => throw _privateConstructorUsedError;
   bool get notificationEnabled => throw _privateConstructorUsedError;
+  String get gomafiaUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TournamentModelCopyWith<TournamentModel> get copyWith =>
@@ -46,7 +47,8 @@ abstract class $TournamentModelCopyWith<$Res> {
       int gamesCount,
       int billedPlayers,
       bool billedTranslation,
-      bool notificationEnabled});
+      bool notificationEnabled,
+      String gomafiaUrl});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
     Object? billedPlayers = null,
     Object? billedTranslation = null,
     Object? notificationEnabled = null,
+    Object? gomafiaUrl = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -109,6 +112,10 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
           ? _value.notificationEnabled
           : notificationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      gomafiaUrl: null == gomafiaUrl
+          ? _value.gomafiaUrl
+          : gomafiaUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -130,7 +137,8 @@ abstract class _$$TournamentModelImplCopyWith<$Res>
       int gamesCount,
       int billedPlayers,
       bool billedTranslation,
-      bool notificationEnabled});
+      bool notificationEnabled,
+      String gomafiaUrl});
 }
 
 /// @nodoc
@@ -153,6 +161,7 @@ class __$$TournamentModelImplCopyWithImpl<$Res>
     Object? billedPlayers = null,
     Object? billedTranslation = null,
     Object? notificationEnabled = null,
+    Object? gomafiaUrl = null,
   }) {
     return _then(_$TournamentModelImpl(
       id: null == id
@@ -191,6 +200,10 @@ class __$$TournamentModelImplCopyWithImpl<$Res>
           ? _value.notificationEnabled
           : notificationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      gomafiaUrl: null == gomafiaUrl
+          ? _value.gomafiaUrl
+          : gomafiaUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -207,7 +220,8 @@ class _$TournamentModelImpl implements _TournamentModel {
       required this.gamesCount,
       required this.billedPlayers,
       required this.billedTranslation,
-      required this.notificationEnabled});
+      required this.notificationEnabled,
+      this.gomafiaUrl = ""});
 
   @override
   final int id;
@@ -227,10 +241,13 @@ class _$TournamentModelImpl implements _TournamentModel {
   final bool billedTranslation;
   @override
   final bool notificationEnabled;
+  @override
+  @JsonKey()
+  final String gomafiaUrl;
 
   @override
   String toString() {
-    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, notificationEnabled: $notificationEnabled)';
+    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl)';
   }
 
   @override
@@ -251,7 +268,9 @@ class _$TournamentModelImpl implements _TournamentModel {
             (identical(other.billedTranslation, billedTranslation) ||
                 other.billedTranslation == billedTranslation) &&
             (identical(other.notificationEnabled, notificationEnabled) ||
-                other.notificationEnabled == notificationEnabled));
+                other.notificationEnabled == notificationEnabled) &&
+            (identical(other.gomafiaUrl, gomafiaUrl) ||
+                other.gomafiaUrl == gomafiaUrl));
   }
 
   @override
@@ -265,7 +284,8 @@ class _$TournamentModelImpl implements _TournamentModel {
       gamesCount,
       billedPlayers,
       billedTranslation,
-      notificationEnabled);
+      notificationEnabled,
+      gomafiaUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -285,7 +305,8 @@ abstract class _TournamentModel implements TournamentModel {
       required final int gamesCount,
       required final int billedPlayers,
       required final bool billedTranslation,
-      required final bool notificationEnabled}) = _$TournamentModelImpl;
+      required final bool notificationEnabled,
+      final String gomafiaUrl}) = _$TournamentModelImpl;
 
   @override
   int get id;
@@ -305,6 +326,8 @@ abstract class _TournamentModel implements TournamentModel {
   bool get billedTranslation;
   @override
   bool get notificationEnabled;
+  @override
+  String get gomafiaUrl;
   @override
   @JsonKey(ignore: true)
   _$$TournamentModelImplCopyWith<_$TournamentModelImpl> get copyWith =>

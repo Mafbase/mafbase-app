@@ -356,7 +356,10 @@ class _SeatingPageState extends State<SeatingPage>
         ),
         (
           onTap: () async {
-            final id = await GomafiaInputDialog.show(context);
+            final id = await GomafiaInputDialog.show(
+              context,
+              tournamentState.gomafiaUrl,
+            );
 
             if (id == null) return;
             if (!mounted) return;

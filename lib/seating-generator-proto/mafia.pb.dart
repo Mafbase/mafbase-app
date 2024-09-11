@@ -3450,6 +3450,7 @@ class Tournament extends $pb.GeneratedMessage {
     $core.int? billedPlayers,
     $core.bool? billedTranslation,
     $core.bool? notificationEnabled,
+    TournamentDescription? description,
   }) {
     final $result = create();
     if (id != null) {
@@ -3479,6 +3480,9 @@ class Tournament extends $pb.GeneratedMessage {
     if (notificationEnabled != null) {
       $result.notificationEnabled = notificationEnabled;
     }
+    if (description != null) {
+      $result.description = description;
+    }
     return $result;
   }
   Tournament._() : super();
@@ -3495,6 +3499,7 @@ class Tournament extends $pb.GeneratedMessage {
     ..a<$core.int>(7, _omitFieldNames ? '' : 'billedPlayers', $pb.PbFieldType.O3, protoName: 'billedPlayers')
     ..aOB(8, _omitFieldNames ? '' : 'billedTranslation', protoName: 'billedTranslation')
     ..aOB(9, _omitFieldNames ? '' : 'notificationEnabled', protoName: 'notificationEnabled')
+    ..aOM<TournamentDescription>(10, _omitFieldNames ? '' : 'description', subBuilder: TournamentDescription.create)
     ..hasRequiredFields = false
   ;
 
@@ -3599,6 +3604,17 @@ class Tournament extends $pb.GeneratedMessage {
   $core.bool hasNotificationEnabled() => $_has(8);
   @$pb.TagNumber(9)
   void clearNotificationEnabled() => clearField(9);
+
+  @$pb.TagNumber(10)
+  TournamentDescription get description => $_getN(9);
+  @$pb.TagNumber(10)
+  set description(TournamentDescription v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasDescription() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearDescription() => clearField(10);
+  @$pb.TagNumber(10)
+  TournamentDescription ensureDescription() => $_ensure(9);
 }
 
 class ErrorOut extends $pb.GeneratedMessage {

@@ -78,5 +78,6 @@ extension TournamentExt on Tournament {
         billedTranslation: billedTranslation,
         billedPlayers: billedPlayers,
         notificationEnabled: notificationEnabled,
+        gomafiaUrl: description.gomafiaUrl,
       );
 }

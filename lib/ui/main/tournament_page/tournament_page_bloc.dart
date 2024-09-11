@@ -141,6 +141,7 @@ class TournamentPageBloc
             billedPlayers: tournament.billedPlayers,
             billedTranslation: tournament.billedTranslation,
             notificationEnabled: tournament.notificationEnabled,
+            gomafiaUrl: tournament.gomafiaUrl,
           ),
         );
       }),

@@ -1,21 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
+import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 
 class GomafiaInputDialog extends StatefulWidget {
-  const GomafiaInputDialog({super.key});
+  final String? gomafiaUrl;
+
+  const GomafiaInputDialog({
+    super.key,
+    this.gomafiaUrl,
+  });
 
   @override
   State<GomafiaInputDialog> createState() => _GomafiaInputDialogState();
 
-  static Future<int?> show(BuildContext context) => showDialog(
+  static Future<int?> show(BuildContext context, [String? gomafiaUrl]) =>
+      showDialog(
         context: context,
-        builder: (context) => const GomafiaInputDialog(),
+        builder: (context) => GomafiaInputDialog(
+          gomafiaUrl: gomafiaUrl,
+        ),
       );
 }
 
 class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
-  final controller = TextEditingController();
+  late final controller = TextEditingController();
+
+  @override
+  void initState() {
+    controller.text = widget.gomafiaUrl ?? "";
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -27,7 +42,7 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
       .hasMatch(controller.value.text);
 
   @override
-  Widget build(BuildContext context) => Dialog(
+  Widget build(BuildContext context) => CustomDialog(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ConstrainedBox(
@@ -55,7 +70,8 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
                       Navigator.pop(
                         context,
                         int.tryParse(
-                            controller.text.split('/').lastOrNull ?? '',),
+                          controller.text.split('/').lastOrNull ?? '',
+                        ),
                       );
                     },
                     disabled: !validate,
