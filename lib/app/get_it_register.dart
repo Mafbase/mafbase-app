@@ -81,7 +81,6 @@ import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_bloc.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_bloc.dart';

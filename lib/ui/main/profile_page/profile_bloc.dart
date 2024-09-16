@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
-import 'package:seating_generator_web/feature/profile/data/request/delete_account_request.dart';
 import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';

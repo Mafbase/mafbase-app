@@ -260,7 +260,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
           body: state.rows.isEmpty
               ? Center(
