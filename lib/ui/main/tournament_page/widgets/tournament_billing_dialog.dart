@@ -195,7 +195,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
 
 int calculatePrice(int count, bool translation) {
   if (count == 10 && translation) {
-    return 500;
+    return 300;
   } else if (count == 10) {
     return 0;
   }
