@@ -28,17 +28,6 @@ class MainPageRouterMock implements MainPageRouter {
   }
 
   @override
-  void dispose() {
-    _openedTabController.close();
-  }
-
-  @override
-  Stream<String?> get routesStream => const Stream.empty();
-
-  @override
-  void initState() {}
-
-  @override
   bool get canPop => false;
 
   @override

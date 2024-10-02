@@ -234,8 +234,10 @@ class _SeatingPageState extends State<SeatingPage>
                               final RelativeRect position =
                                   RelativeRect.fromRect(
                                 Rect.fromPoints(
-                                  button.localToGlobal(offset,
-                                      ancestor: overlay),
+                                  button.localToGlobal(
+                                    offset,
+                                    ancestor: overlay,
+                                  ),
                                   button.localToGlobal(
                                     button.size.bottomRight(Offset.zero) +
                                         offset,

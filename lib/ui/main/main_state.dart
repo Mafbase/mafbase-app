@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/app/router.dart';
 
 part 'main_state.freezed.dart';
 
