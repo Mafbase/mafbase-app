@@ -98,7 +98,7 @@ class TranslationControlBloc
     for (final e in toDispose) {
       e.cancel();
     }
-    _socket.dispose();
+    _socket?.dispose();
     return super.close();
   }
 }
