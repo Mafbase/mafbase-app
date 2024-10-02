@@ -27,7 +27,7 @@ class TranslationControlPage extends StatefulWidget {
             tournamentId: tournamentId,
             table: table,
           ),
-        ),
+        )..add(const TranslationControlEvent.pageOpened()),
         child: const TranslationControlPage(),
       );
     },
