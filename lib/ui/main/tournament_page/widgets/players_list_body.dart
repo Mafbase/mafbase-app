@@ -31,76 +31,75 @@ class _PlayersListBodyState extends State<PlayersListBody> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TournamentPageBloc, TournamentPageState>(
-      builder: (context, state) {
-        return Stack(
-          children: [
-            Column(
-              children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  context.locale.participants,
-                  style: MyTheme.of(context).headerTextStyle,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Expanded(
-                  child: state.tournamentPlayers.isEmpty
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Text(
-                              'Пока не добавлен ни один участник',
-                              textAlign: TextAlign.center,
-                              style: MyTheme.of(context).defaultTextStyle,
+  Widget build(BuildContext context) => Container(
+      color: MyTheme.of(context).background2,
+      child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
+        builder: (context, state) => Stack(
+            children: [
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    context.locale.participants,
+                    style: MyTheme.of(context).headerTextStyle,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Expanded(
+                    child: state.tournamentPlayers.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(
+                                'Пока не добавлен ни один участник',
+                                textAlign: TextAlign.center,
+                                style: MyTheme.of(context).defaultTextStyle,
+                              ),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: state.tournamentPlayers.length,
+                            itemBuilder: (context, index) => PlayerRow(
+                              index: index,
+                              onTap: state.isMyTournament
+                                  ? () async {
+                                      context.read<TournamentPageBloc>().add(
+                                            TournamentPageEvent.openProfileDialog(
+                                              player:
+                                                  state.tournamentPlayers[index],
+                                            ),
+                                          );
+                                    }
+                                  : null,
+                              onDelete: state.isMyTournament
+                                  ? () {
+                                      final bloc =
+                                          context.read<TournamentPageBloc>();
+                                      ConfirmDialog.open(context).then((value) {
+                                        if (value == true) {
+                                          bloc.add(
+                                            TournamentPageEvent.deletePlayer(
+                                              player:
+                                                  state.tournamentPlayers[index],
+                                            ),
+                                          );
+                                        }
+                                      });
+                                    }
+                                  : null,
+                              nickname: state.tournamentPlayers[index].nickname,
+                              imageUrl: state.tournamentPlayers[index].imageUrl,
                             ),
                           ),
-                        )
-                      : ListView.builder(
-                          itemCount: state.tournamentPlayers.length,
-                          itemBuilder: (context, index) => PlayerRow(
-                            index: index,
-                            onTap: state.isMyTournament
-                                ? () async {
-                                    context.read<TournamentPageBloc>().add(
-                                          TournamentPageEvent.openProfileDialog(
-                                            player:
-                                                state.tournamentPlayers[index],
-                                          ),
-                                        );
-                                  }
-                                : null,
-                            onDelete: state.isMyTournament
-                                ? () {
-                                    final bloc =
-                                        context.read<TournamentPageBloc>();
-                                    ConfirmDialog.open(context).then((value) {
-                                      if (value == true) {
-                                        bloc.add(
-                                          TournamentPageEvent.deletePlayer(
-                                            player:
-                                                state.tournamentPlayers[index],
-                                          ),
-                                        );
-                                      }
-                                    });
-                                  }
-                                : null,
-                            nickname: state.tournamentPlayers[index].nickname,
-                            imageUrl: state.tournamentPlayers[index].imageUrl,
-                          ),
-                        ),
-                ),
-              ],
-            ),
-            if (state.isLoading) const LoadingOverlayWidget(),
-          ],
-        );
-      },
+                  ),
+                ],
+              ),
+              if (state.isLoading) const LoadingOverlayWidget(),
+            ],
+          ),
+      ),
     );
-  }
 }

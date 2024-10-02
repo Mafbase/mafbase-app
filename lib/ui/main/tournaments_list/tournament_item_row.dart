@@ -47,6 +47,7 @@ class TournamentItemRow extends StatelessWidget {
                     style: context.theme.headerTextStyle.copyWith(fontSize: 24),
                   ),
                 ),
+                const SizedBox(width: 4),
                 Text(
                   'ID: ${tournamentModel.id}',
                   style: MyTheme.of(context).hintTextStyle,
