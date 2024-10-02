@@ -22,7 +22,11 @@ class BillTournamentInteractor extends BaseInteractor {
           tournamentId: tournamentId,
           playersCount: playersCount,
           billedTranslation: billedTranslation,
-          redirectPath: GoRouter.of(_context).location,
+          redirectPath: GoRouter.of(_context)
+              .routeInformationProvider
+              .value
+              .uri
+              .toString(),
         ),
       );
 }

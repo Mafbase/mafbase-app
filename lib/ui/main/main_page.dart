@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:seating_generator_web/app/router.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -39,41 +39,24 @@ class _MainPageState extends CustomState<MainPage> {
     setState(() {});
   }
 
+  void routeListener() => Future.delayed(
+        const Duration(milliseconds: 16),
+        listener,
+      );
+
   @override
   void initState() {
-    context.read<MainBloc>().add(const MainEvent.onPageOpened());
     titleProvider.addListener(listener);
+    GoRouter.of(context).routeInformationProvider.addListener(routeListener);
     super.initState();
   }
 
   @override
   void dispose() {
     titleProvider.removeListener(listener);
+    GoRouter.of(context).routeInformationProvider.removeListener(routeListener);
     super.dispose();
   }
-
-  void onDestinationSelected(int index) {
-    MainPageTab? tab;
-    switch (index) {
-      case 0:
-        tab = MainPageTab.tournaments;
-        break;
-      case 1:
-        tab = MainPageTab.clubs;
-        break;
-    }
-    if (tab != null) {
-      context.read<MainBloc>().add(
-            MainEvent.switchTab(
-              tab: tab,
-              hasBackButton: false,
-            ),
-          );
-    }
-  }
-
-  int selectedIndex(MainState state) =>
-      state.selectedTab == MainPageTab.tournaments ? 0 : 1;
 
   @override
   Widget buildDesktop(BuildContext context) {
@@ -97,32 +80,34 @@ class _MainPageState extends CustomState<MainPage> {
   AppBar buildAppBar({
     required BuildContext context,
     required MainState state,
-  }) {
-    return AppBar(
-      leading: IgnorePointer(
-        ignoring: !state.hasBackButton,
-        child: Opacity(
-          opacity: state.hasBackButton ? 1 : 0,
-          child: BackButton(
-            color: Colors.white,
-            onPressed: () {
-              GoRouter.of(context).pop();
+  }) =>
+      AppBar(
+        leading: IconTheme(
+          data: IconTheme.of(context).copyWith(
+            color: MyTheme.of(context).btnTextColor,
+          ),
+          child: ListenableBuilder(
+            listenable: GoRouter.of(context).routeInformationProvider,
+            builder: (context, child) {
+              return context.canPop()
+                  ? BackButton(onPressed: context.pop)
+                  : Navigator.canPop(context)
+                      ? BackButton(onPressed: () => Navigator.pop(context))
+                      : const SizedBox.shrink();
             },
           ),
         ),
-      ),
-      backgroundColor: context.theme.darkBlueColor,
-      actions: getProfileAction(context.watch<AuthNotifier>().value),
-      title: Text(
-        titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
-        style: GoogleFonts.balooBhai2(
-          color: Colors.white,
-          fontSize: 48,
-          fontWeight: FontWeight.w500,
+        backgroundColor: context.theme.darkBlueColor,
+        actions: getProfileAction(context.watch<AuthNotifier>().value),
+        title: Text(
+          titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
+          style: GoogleFonts.balooBhai2(
+            color: Colors.white,
+            fontSize: 48,
+            fontWeight: FontWeight.w500,
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   List<Widget> getProfileAction(AuthNotifierModel model) {
     final theme = context.theme;

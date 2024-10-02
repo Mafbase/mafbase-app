@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/repositories/auth_repository_impl.dart';
@@ -373,10 +372,9 @@ void registerSharedGetIt() {
         context,
       ),
     )
-    ..registerFactoryParam<MainBloc, BuildContext?, MainPageTab?>(
+    ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
       (context, tab) => MainBloc(
         getIt.get<MainPageRouter>(param1: context),
-        tab ?? MainPageTab.clubs,
         context,
       ),
     )

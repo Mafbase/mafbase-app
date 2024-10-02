@@ -56,7 +56,7 @@ class AppRouter {
       TranslationControlPage.route,
       GoRoute(
         path: '/',
-        redirect: (_, state) => state.location == '/' ? '/club' : null,
+        redirect: (_, state) => state.uri.toString() == '/' ? '/club' : null,
         builder: (context, state) => const Placeholder(),
       ),
       ShellRoute(
@@ -65,7 +65,7 @@ class AppRouter {
             key: const Key("MainBlocProvider"),
             create: (context) => getIt.get<MainBloc>(
               param1: context,
-              param2: state.location.startsWith('/club')
+              param2: state.uri.toString().startsWith('/club')
                   ? MainPageTab.clubs
                   : MainPageTab.tournaments,
             ),

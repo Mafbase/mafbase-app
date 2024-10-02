@@ -20,7 +20,7 @@ class VerificationPageBody extends StatefulWidget {
     path: 'verification/:id',
     name: name,
     pageBuilder: (context, state) {
-      final id = int.parse(state.params["id"]!);
+      final id = int.parse(state.pathParameters["id"]!);
       return FadeTransitionPage(
         child: BlocProvider<VerificationBloc>(
           create: (BuildContext context) {
@@ -33,7 +33,7 @@ class VerificationPageBody extends StatefulWidget {
   );
 
   static String namedLocation(BuildContext context, int id) {
-    return context.namedLocation(name, params: {'id': id.toString()});
+    return context.namedLocation(name, pathParameters: {'id': id.toString()});
   }
 
   const VerificationPageBody({Key? key}) : super(key: key);

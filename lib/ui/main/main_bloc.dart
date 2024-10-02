@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
@@ -19,11 +18,12 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
   @visibleForTesting
   final MainPageRouter router;
 
-  MainBloc(this.router, MainPageTab tab, [BuildContext? context])
-      : super(
-          MainState(
+  MainBloc(
+    this.router, [
+    BuildContext? context,
+  ]) : super(
+          const MainState(
             isLoading: false,
-            selectedTab: tab,
             hasBackButton: false,
           ),
           context,
@@ -31,24 +31,10 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     on<MainEventSwitchTab>(_onSwitchTab);
     on<MainEventBackButtonPressed>(_onBackButtonPressed);
     on<MainEventTournamentSelected>(_onTournamentSelected);
-    on<MainEventPageOpened>(_onPageOpened);
     on<MainEventTitleTapped>(_onTitleTapped);
     on<MainEventEnterPressed>(_onEnterPressed);
     on<MainEventProfilePressed>(_onProfilePressed);
     on<MainEventOpenContacts>(_onOpenContacts);
-    router.routesStream.listen((route) {
-      final hasBackButton = router.canPop;
-      final tab = MainPageTab.values.firstWhereOrNull(
-        (element) => route?.startsWith('/${element.name}') == true,
-      );
-      add(
-        MainEvent.switchTab(
-          tab: tab ?? state.selectedTab,
-          disableNavigate: true,
-          hasBackButton: hasBackButton,
-        ),
-      );
-    });
   }
 
   _onOpenContacts(MainEventOpenContacts event, Emitter emit) {
@@ -65,16 +51,6 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
 
   _onTitleTapped(MainEventTitleTapped event, Emitter emit) {
     router.openDefaultPage();
-  }
-
-  _onPageOpened(MainEventPageOpened event, Emitter emit) {
-    router.initState();
-  }
-
-  @override
-  Future<void> close() {
-    router.dispose();
-    return super.close();
   }
 
   Future _onTournamentSelected(
@@ -97,7 +73,6 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
   ) async {
     emit(
       state.copyWith(
-        selectedTab: event.tab,
         hasBackButton: event.hasBackButton,
       ),
     );
@@ -119,12 +94,6 @@ abstract class MainPageRouter {
 
   void openTournament(int id);
 
-  Stream<String?> get routesStream;
-
-  void dispose();
-
-  void initState();
-
   void openDefaultPage();
 
   void openAuthPage();
@@ -138,28 +107,9 @@ abstract class MainPageRouter {
 
 class MainPageRouterImpl implements MainPageRouter {
   final BuildContext context;
-  GoRouter? _goRouter;
   final controller = BehaviorSubject<String?>.seeded(null);
 
   MainPageRouterImpl(this.context);
-
-  @override
-  void initState() {
-    _goRouter = GoRouter.of(context)..addListener(routeListener);
-  }
-
-  @override
-  void dispose() {
-    _goRouter?.removeListener(routeListener);
-  }
-
-  void routeListener() {
-    Future.delayed(
-      const Duration(milliseconds: 50),
-      () => controller
-          .add(GoRouter.of(context).routeInformationProvider.value.uri.toString()),
-    );
-  }
 
   @override
   void switchTabTo(MainPageTab tab) {
@@ -189,9 +139,6 @@ class MainPageRouterImpl implements MainPageRouter {
   }
 
   @override
-  Stream<String?> get routesStream => controller.stream;
-
-  @override
   void openDefaultPage() {
     GoRouter.of(context).go('/');
   }
@@ -210,7 +157,8 @@ class MainPageRouterImpl implements MainPageRouter {
     context.push(
       LoginPageBody.createLocation(
         context: context,
-        nextPath: GoRouter.of(context).location,
+        nextPath:
+            GoRouter.of(context).routeInformationProvider.value.uri.toString(),
       ),
     );
   }

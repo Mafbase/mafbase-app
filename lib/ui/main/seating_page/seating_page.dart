@@ -29,7 +29,7 @@ class SeatingPage extends StatefulWidget {
     path: 'editSeating',
     name: name,
     builder: (context, state) => SeatingPage(
-      tournamentId: int.parse(state.params["id"] ?? ""),
+      tournamentId: int.parse(state.pathParameters["id"] ?? ""),
     ),
   );
 
@@ -37,7 +37,12 @@ class SeatingPage extends StatefulWidget {
     required int tournamentId,
     required BuildContext context,
   }) {
-    return context.namedLocation(name, params: {"id": tournamentId.toString()});
+    return context.namedLocation(
+      name,
+      pathParameters: {
+        "id": tournamentId.toString(),
+      },
+    );
   }
 }
 

@@ -45,10 +45,10 @@ class RatingPage extends StatefulWidget {
   }) {
     return context.namedLocation(
       _tournamentName,
-      params: {
+      pathParameters: {
         "id": tournamentId.toString(),
       },
-      queryParams: {
+      queryParameters: {
         "style": tableStyle.name,
         "sort": sort.name,
       },
@@ -65,8 +65,8 @@ class RatingPage extends StatefulWidget {
   }) {
     return context.namedLocation(
       _clubName,
-      params: {"clubId": clubId.toString()},
-      queryParams: {
+      pathParameters: {"clubId": clubId.toString()},
+      queryParameters: {
         "date-start":
             range == null ? null : dateFormatForRequests.format(range.start),
         "date-end":
@@ -85,17 +85,17 @@ class RatingPage extends StatefulWidget {
     path: 'rating',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.params["id"]!);
+      final tournamentId = int.parse(state.pathParameters["id"]!);
       final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.queryParams["style"] == element.name,
+            (element) => state.uri.queryParameters["style"] == element.name,
           ) ??
           RatingTableStyle.full;
       final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.queryParams["sort"] == element.name,
+            (element) => state.uri.queryParameters["sort"] == element.name,
           ) ??
           RatingSort.score;
       final gameFilter =
-          int.tryParse(state.queryParams["game-filter"] ?? "") ?? 0;
+          int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
       return BlocProvider<RatingBloc>(
         create: (context) {
           return getIt(param1: context);
@@ -114,23 +114,23 @@ class RatingPage extends StatefulWidget {
     path: "rating",
     name: _clubName,
     builder: (context, state) {
-      final clubId = int.parse(state.params["clubId"]!);
+      final clubId = int.parse(state.pathParameters["clubId"]!);
       final dateStart =
-          DateTime.tryParse(state.queryParams["date-start"] ?? "") ??
+          DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
               DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd = DateTime.tryParse(state.queryParams["date-end"] ?? "") ??
+      final dateEnd = DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ??
           DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
       final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.queryParams["style"] == element.name,
+            (element) => state.uri.queryParameters["style"] == element.name,
           ) ??
           RatingTableStyle.full;
       final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.queryParams["sort"] == element.name,
+            (element) => state.uri.queryParameters["sort"] == element.name,
           ) ??
           RatingSort.score;
       final gameFilter =
-          int.tryParse(state.queryParams["game-filter"] ?? "") ?? 0;
+          int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
       return BlocProvider<RatingBloc>(
         create: (context) {
           return getIt(param1: context);

@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +50,7 @@ void main() async {
 void _startApp() async {
   WidgetsBinding? binding;
   setPathUrlStrategy();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   if (!kIsWeb) {
     binding = WidgetsFlutterBinding.ensureInitialized();
     final directory = await getApplicationDocumentsDirectory();

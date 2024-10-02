@@ -17,8 +17,8 @@ class TranslationControlPage extends StatefulWidget {
     path: "/translationControl",
     name: "translation_control",
     builder: (context, state) {
-      final tournamentId = int.parse(state.queryParams["tournamentId"] ?? "");
-      final table = int.parse(state.queryParams["table"] ?? "");
+      final tournamentId = int.parse(state.uri.queryParameters["tournamentId"] ?? "");
+      final table = int.parse(state.uri.queryParameters["table"] ?? "");
       return BlocProvider<TranslationControlBloc>(
         create: (context) => getIt(
           param1: context,

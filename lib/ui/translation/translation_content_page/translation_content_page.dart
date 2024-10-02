@@ -27,7 +27,7 @@ class TranslationContentPage extends StatefulWidget {
   }) {
     return context.namedLocation(
       routeName,
-      queryParams: {"tournamentId": tournamentId, "table": table},
+      queryParameters: {"tournamentId": tournamentId, "table": table},
     );
   }
 
@@ -35,8 +35,8 @@ class TranslationContentPage extends StatefulWidget {
     path: '/translationContent',
     name: routeName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.queryParams["tournamentId"] ?? "");
-      final table = int.parse(state.queryParams["table"] ?? "");
+      final tournamentId = int.parse(state.uri.queryParameters["tournamentId"] ?? "");
+      final table = int.parse(state.uri.queryParameters["table"] ?? "");
       debugPrint("$tournamentId $table");
       return BlocProvider<TranslationContentBloc>(
         create: (context) => getIt(

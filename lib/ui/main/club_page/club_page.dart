@@ -27,7 +27,7 @@ class ClubPage extends StatefulWidget {
   }) {
     context.goNamed(
       'club',
-      params: {"clubId": id.toString()},
+      pathParameters: {"clubId": id.toString()},
       extra: cachedModel,
     );
   }
@@ -38,7 +38,7 @@ class ClubPage extends StatefulWidget {
     builder: (context, state) => BlocProvider<ClubBloc>(
       create: (context) {
         final args = ClubBlocArgs(
-          clubId: int.parse(state.params["clubId"]!),
+          clubId: int.parse(state.pathParameters["clubId"]!),
           cachedModel: state.extra as ClubModel?,
         );
         return getIt(param1: context, param2: args);

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
-import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
-import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
@@ -13,12 +11,22 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class RailWrapper extends StatefulWidget {
-  static final ShellRoute route = ShellRoute(
-    routes: [
-      TournamentsPage.route,
-      ClubsPage.route,
+  static final route = StatefulShellRoute.indexedStack(
+    branches: [
+      StatefulShellBranch(
+        initialLocation: '/tournament',
+        routes: [
+          TournamentsPage.route,
+        ],
+      ),
+      StatefulShellBranch(
+        initialLocation: '/club',
+        routes: [
+          ClubsPage.route,
+        ],
+      ),
     ],
-    builder: (context, state, child) {
+    builder: (context, state, shell) {
       return MultiBlocProvider(
         providers: [
           BlocProvider<TournamentsBloc>(
@@ -27,16 +35,16 @@ class RailWrapper extends StatefulWidget {
           ),
         ],
         child: RailWrapper._(
-          child: child,
+          shell: shell,
         ),
       );
     },
   );
-  final Widget? child;
+  final StatefulNavigationShell shell;
 
   const RailWrapper._({
     Key? key,
-    this.child,
+    required this.shell,
   }) : super(key: key);
 
   @override
@@ -46,38 +54,20 @@ class RailWrapper extends StatefulWidget {
 class _RailWrapperState extends CustomState<RailWrapper> {
   double railWidth = 100;
 
-  int selectedIndex(MainState state) =>
-      state.selectedTab == MainPageTab.tournaments ? 0 : 1;
-
-  void onDestinationSelected(int index) {
-    MainPageTab? tab;
-    switch (index) {
-      case 0:
-        tab = MainPageTab.tournaments;
-        break;
-      case 1:
-        tab = MainPageTab.clubs;
-        break;
-    }
-    if (tab != null) {
-      context.read<MainBloc>().add(
-            MainEvent.switchTab(
-              tab: tab,
-              hasBackButton: false,
-            ),
-          );
-    }
-  }
+  void onDestinationSelected(int index) => widget.shell.goBranch(
+        index,
+        initialLocation: widget.shell.currentIndex == index,
+      );
 
   @override
   Widget buildMobile(BuildContext context) {
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) {
         return Scaffold(
-          body: widget.child,
+          body: widget.shell,
           bottomNavigationBar: BottomNavigationBar(
             useLegacyColorScheme: false,
-            currentIndex: selectedIndex(state),
+            currentIndex: widget.shell.currentIndex,
             onTap: onDestinationSelected,
             items: [
               BottomNavigationBarItem(
@@ -106,7 +96,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
               left: railWidth,
               right: 0,
               bottom: 0,
-              child: widget.child ?? Container(),
+              child: widget.shell,
             ),
             Positioned(
               top: 0,
@@ -144,7 +134,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
                     ),
                   ),
                 ],
-                selectedIndex: selectedIndex(state),
+                selectedIndex: widget.shell.currentIndex,
               ),
             ),
           ],

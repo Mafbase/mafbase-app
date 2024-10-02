@@ -32,7 +32,7 @@ class LoginPageBody extends StatefulWidget {
   }) =>
       context.namedLocation(
         'login',
-        queryParams: {
+        queryParameters: {
           if (nextPath != null) 'next': nextPath,
         },
       );
@@ -48,7 +48,7 @@ class LoginPageBody extends StatefulWidget {
       child: BlocProvider(
         create: (context) => getIt.get<LoginBloc>(
           param1: context,
-          param2: state.queryParams['next'],
+          param2: state.uri.queryParameters['next'],
         ),
         child: const LoginPageBody(),
       ),

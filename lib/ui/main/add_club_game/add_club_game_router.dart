@@ -68,7 +68,8 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
     context.go(
       LoginPageBody.createLocation(
         context: context,
-        nextPath: GoRouter.of(context).location,
+        nextPath:
+            GoRouter.of(context).routeInformationProvider.value.uri.toString(),
       ),
     );
   }

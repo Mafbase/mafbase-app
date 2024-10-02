@@ -45,11 +45,11 @@ class AddClubGamePage extends StatefulWidget {
   }) {
     return context.namedLocation(
       'editTournamentGame',
-      params: {
+      pathParameters: {
         'id': tournamentId.toString(),
         'gameId': gameId.toString(),
       },
-      queryParams: {
+      queryParameters: {
         'edit': edit.toString(),
       },
     );
@@ -59,9 +59,9 @@ class AddClubGamePage extends StatefulWidget {
     path: 'editGame/:gameId',
     name: 'editTournamentGame',
     builder: (context, state) {
-      final gameId = int.parse(state.params["gameId"]!);
-      final tournamentId = int.parse(state.params["id"]!);
-      final edit = bool.tryParse(state.queryParams['edit'] ?? '') ?? true;
+      final gameId = int.parse(state.pathParameters["gameId"]!);
+      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final edit = bool.tryParse(state.uri.queryParameters['edit'] ?? '') ?? true;
       return BlocProvider<AddClubGameBloc>(
         create: (context) => AddClubGameBloc(
           context: context,
@@ -80,7 +80,7 @@ class AddClubGamePage extends StatefulWidget {
       path: 'addGame',
       name: "addGame",
       builder: (context, state) {
-        final clubId = int.parse(state.params["clubId"]!);
+        final clubId = int.parse(state.pathParameters["clubId"]!);
         final initDateTime = state.extra as DateTime?;
         return BlocProvider<AddClubGameBloc>(
           create: (context) => AddClubGameBloc(
@@ -99,9 +99,9 @@ class AddClubGamePage extends StatefulWidget {
       path: "game/:gameId",
       builder: (context, state) {
         try {
-          final clubId = int.parse(state.params["clubId"]!);
-          final gameId = int.parse(state.params["gameId"]!);
-          final edit = state.queryParams["edit"] == true.toString();
+          final clubId = int.parse(state.pathParameters["clubId"]!);
+          final gameId = int.parse(state.pathParameters["gameId"]!);
+          final edit = state.uri.queryParameters["edit"] == true.toString();
           return BlocProvider<AddClubGameBloc>(
             create: (context) => AddClubGameBloc(
               clubId: clubId,
@@ -129,11 +129,11 @@ class AddClubGamePage extends StatefulWidget {
   }) {
     return context.namedLocation(
       "viewGame",
-      params: {
+      pathParameters: {
         "clubId": clubId.toString(),
         "gameId": gameId.toString(),
       },
-      queryParams: {"edit": canEdit.toString()},
+      queryParameters: {"edit": canEdit.toString()},
     );
   }
 
@@ -143,7 +143,7 @@ class AddClubGamePage extends StatefulWidget {
   ) {
     return context.namedLocation(
       "addGame",
-      params: {
+      pathParameters: {
         "clubId": clubId.toString(),
       },
     );

@@ -43,7 +43,7 @@ class TournamentPage extends StatefulWidget {
   }) {
     return context.namedLocation(
       "tournament_page",
-      params: {
+      pathParameters: {
         "id": "$tournamentId",
       },
     );
@@ -62,7 +62,7 @@ class TournamentPage extends StatefulWidget {
             ],
             builder: (context, state) {
               return PlayersListBody(
-                tournamentId: int.parse(state.params["id"] ?? ""),
+                tournamentId: int.parse(state.pathParameters["id"] ?? ""),
               );
             },
           ),
@@ -74,7 +74,7 @@ class TournamentPage extends StatefulWidget {
                 key: const Key("TournamentPageBloc"),
                 create: (context) => getIt<TournamentPageBloc>(
                   param1: context,
-                  param2: int.parse(state.params["id"] ?? ""),
+                  param2: int.parse(state.pathParameters["id"] ?? ""),
                 ),
               ),
               BlocProvider<SeatingPageBloc>(
@@ -85,7 +85,7 @@ class TournamentPage extends StatefulWidget {
               ),
             ],
             child: TournamentPage(
-              tournamentId: int.parse(state.params["id"] ?? ""),
+              tournamentId: int.parse(state.pathParameters["id"] ?? ""),
               child: child,
             ),
           );

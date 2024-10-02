@@ -22,7 +22,6 @@ mixin _$MainEvent {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -36,7 +35,6 @@ mixin _$MainEvent {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -50,7 +48,6 @@ mixin _$MainEvent {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -64,7 +61,6 @@ mixin _$MainEvent {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -77,7 +73,6 @@ mixin _$MainEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -89,7 +84,6 @@ mixin _$MainEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
@@ -209,7 +203,6 @@ class _$MainEventSwitchTabImpl implements MainEventSwitchTab {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -226,7 +219,6 @@ class _$MainEventSwitchTabImpl implements MainEventSwitchTab {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -243,7 +235,6 @@ class _$MainEventSwitchTabImpl implements MainEventSwitchTab {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -263,7 +254,6 @@ class _$MainEventSwitchTabImpl implements MainEventSwitchTab {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -279,7 +269,6 @@ class _$MainEventSwitchTabImpl implements MainEventSwitchTab {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -294,7 +283,6 @@ class _$MainEventSwitchTabImpl implements MainEventSwitchTab {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
@@ -368,7 +356,6 @@ class _$MainEventBackButtonPressedImpl implements MainEventBackButtonPressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -385,7 +372,6 @@ class _$MainEventBackButtonPressedImpl implements MainEventBackButtonPressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -402,7 +388,6 @@ class _$MainEventBackButtonPressedImpl implements MainEventBackButtonPressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -422,7 +407,6 @@ class _$MainEventBackButtonPressedImpl implements MainEventBackButtonPressed {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -438,7 +422,6 @@ class _$MainEventBackButtonPressedImpl implements MainEventBackButtonPressed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -453,7 +436,6 @@ class _$MainEventBackButtonPressedImpl implements MainEventBackButtonPressed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
@@ -470,153 +452,6 @@ class _$MainEventBackButtonPressedImpl implements MainEventBackButtonPressed {
 
 abstract class MainEventBackButtonPressed implements MainEvent {
   const factory MainEventBackButtonPressed() = _$MainEventBackButtonPressedImpl;
-}
-
-/// @nodoc
-abstract class _$$MainEventPageOpenedImplCopyWith<$Res> {
-  factory _$$MainEventPageOpenedImplCopyWith(_$MainEventPageOpenedImpl value,
-          $Res Function(_$MainEventPageOpenedImpl) then) =
-      __$$MainEventPageOpenedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$MainEventPageOpenedImplCopyWithImpl<$Res>
-    extends _$MainEventCopyWithImpl<$Res, _$MainEventPageOpenedImpl>
-    implements _$$MainEventPageOpenedImplCopyWith<$Res> {
-  __$$MainEventPageOpenedImplCopyWithImpl(_$MainEventPageOpenedImpl _value,
-      $Res Function(_$MainEventPageOpenedImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$MainEventPageOpenedImpl implements MainEventPageOpened {
-  const _$MainEventPageOpenedImpl();
-
-  @override
-  String toString() {
-    return 'MainEvent.onPageOpened()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MainEventPageOpenedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
-        switchTab,
-    required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
-    required TResult Function(int tournamentId) tournamentSelected,
-    required TResult Function() onTitleTapped,
-    required TResult Function() onEnterPressed,
-    required TResult Function() onProfilePressed,
-    required TResult Function() openContacts,
-  }) {
-    return onPageOpened();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
-        switchTab,
-    TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
-    TResult? Function(int tournamentId)? tournamentSelected,
-    TResult? Function()? onTitleTapped,
-    TResult? Function()? onEnterPressed,
-    TResult? Function()? onProfilePressed,
-    TResult? Function()? openContacts,
-  }) {
-    return onPageOpened?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
-        switchTab,
-    TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
-    TResult Function(int tournamentId)? tournamentSelected,
-    TResult Function()? onTitleTapped,
-    TResult Function()? onEnterPressed,
-    TResult Function()? onProfilePressed,
-    TResult Function()? openContacts,
-    required TResult orElse(),
-  }) {
-    if (onPageOpened != null) {
-      return onPageOpened();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MainEventSwitchTab value) switchTab,
-    required TResult Function(MainEventBackButtonPressed value)
-        backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
-    required TResult Function(MainEventTournamentSelected value)
-        tournamentSelected,
-    required TResult Function(MainEventTitleTapped value) onTitleTapped,
-    required TResult Function(MainEventEnterPressed value) onEnterPressed,
-    required TResult Function(MainEventProfilePressed value) onProfilePressed,
-    required TResult Function(MainEventOpenContacts value) openContacts,
-  }) {
-    return onPageOpened(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MainEventSwitchTab value)? switchTab,
-    TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
-    TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
-    TResult? Function(MainEventTitleTapped value)? onTitleTapped,
-    TResult? Function(MainEventEnterPressed value)? onEnterPressed,
-    TResult? Function(MainEventProfilePressed value)? onProfilePressed,
-    TResult? Function(MainEventOpenContacts value)? openContacts,
-  }) {
-    return onPageOpened?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MainEventSwitchTab value)? switchTab,
-    TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
-    TResult Function(MainEventTournamentSelected value)? tournamentSelected,
-    TResult Function(MainEventTitleTapped value)? onTitleTapped,
-    TResult Function(MainEventEnterPressed value)? onEnterPressed,
-    TResult Function(MainEventProfilePressed value)? onProfilePressed,
-    TResult Function(MainEventOpenContacts value)? openContacts,
-    required TResult orElse(),
-  }) {
-    if (onPageOpened != null) {
-      return onPageOpened(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class MainEventPageOpened implements MainEvent {
-  const factory MainEventPageOpened() = _$MainEventPageOpenedImpl;
 }
 
 /// @nodoc
@@ -691,7 +526,6 @@ class _$MainEventTournamentSelectedImpl implements MainEventTournamentSelected {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -708,7 +542,6 @@ class _$MainEventTournamentSelectedImpl implements MainEventTournamentSelected {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -725,7 +558,6 @@ class _$MainEventTournamentSelectedImpl implements MainEventTournamentSelected {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -745,7 +577,6 @@ class _$MainEventTournamentSelectedImpl implements MainEventTournamentSelected {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -761,7 +592,6 @@ class _$MainEventTournamentSelectedImpl implements MainEventTournamentSelected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -776,7 +606,6 @@ class _$MainEventTournamentSelectedImpl implements MainEventTournamentSelected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
@@ -844,7 +673,6 @@ class _$MainEventTitleTappedImpl implements MainEventTitleTapped {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -861,7 +689,6 @@ class _$MainEventTitleTappedImpl implements MainEventTitleTapped {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -878,7 +705,6 @@ class _$MainEventTitleTappedImpl implements MainEventTitleTapped {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -898,7 +724,6 @@ class _$MainEventTitleTappedImpl implements MainEventTitleTapped {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -914,7 +739,6 @@ class _$MainEventTitleTappedImpl implements MainEventTitleTapped {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -929,7 +753,6 @@ class _$MainEventTitleTappedImpl implements MainEventTitleTapped {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
@@ -992,7 +815,6 @@ class _$MainEventEnterPressedImpl implements MainEventEnterPressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -1009,7 +831,6 @@ class _$MainEventEnterPressedImpl implements MainEventEnterPressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -1026,7 +847,6 @@ class _$MainEventEnterPressedImpl implements MainEventEnterPressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -1046,7 +866,6 @@ class _$MainEventEnterPressedImpl implements MainEventEnterPressed {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -1062,7 +881,6 @@ class _$MainEventEnterPressedImpl implements MainEventEnterPressed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -1077,7 +895,6 @@ class _$MainEventEnterPressedImpl implements MainEventEnterPressed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
@@ -1141,7 +958,6 @@ class _$MainEventProfilePressedImpl implements MainEventProfilePressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -1158,7 +974,6 @@ class _$MainEventProfilePressedImpl implements MainEventProfilePressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -1175,7 +990,6 @@ class _$MainEventProfilePressedImpl implements MainEventProfilePressed {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -1195,7 +1009,6 @@ class _$MainEventProfilePressedImpl implements MainEventProfilePressed {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -1211,7 +1024,6 @@ class _$MainEventProfilePressedImpl implements MainEventProfilePressed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -1226,7 +1038,6 @@ class _$MainEventProfilePressedImpl implements MainEventProfilePressed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,
@@ -1289,7 +1100,6 @@ class _$MainEventOpenContactsImpl implements MainEventOpenContacts {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)
         switchTab,
     required TResult Function() backButtonPressed,
-    required TResult Function() onPageOpened,
     required TResult Function(int tournamentId) tournamentSelected,
     required TResult Function() onTitleTapped,
     required TResult Function() onEnterPressed,
@@ -1306,7 +1116,6 @@ class _$MainEventOpenContactsImpl implements MainEventOpenContacts {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult? Function()? backButtonPressed,
-    TResult? Function()? onPageOpened,
     TResult? Function(int tournamentId)? tournamentSelected,
     TResult? Function()? onTitleTapped,
     TResult? Function()? onEnterPressed,
@@ -1323,7 +1132,6 @@ class _$MainEventOpenContactsImpl implements MainEventOpenContacts {
             MainPageTab tab, dynamic disableNavigate, bool hasBackButton)?
         switchTab,
     TResult Function()? backButtonPressed,
-    TResult Function()? onPageOpened,
     TResult Function(int tournamentId)? tournamentSelected,
     TResult Function()? onTitleTapped,
     TResult Function()? onEnterPressed,
@@ -1343,7 +1151,6 @@ class _$MainEventOpenContactsImpl implements MainEventOpenContacts {
     required TResult Function(MainEventSwitchTab value) switchTab,
     required TResult Function(MainEventBackButtonPressed value)
         backButtonPressed,
-    required TResult Function(MainEventPageOpened value) onPageOpened,
     required TResult Function(MainEventTournamentSelected value)
         tournamentSelected,
     required TResult Function(MainEventTitleTapped value) onTitleTapped,
@@ -1359,7 +1166,6 @@ class _$MainEventOpenContactsImpl implements MainEventOpenContacts {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MainEventSwitchTab value)? switchTab,
     TResult? Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult? Function(MainEventPageOpened value)? onPageOpened,
     TResult? Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult? Function(MainEventTitleTapped value)? onTitleTapped,
     TResult? Function(MainEventEnterPressed value)? onEnterPressed,
@@ -1374,7 +1180,6 @@ class _$MainEventOpenContactsImpl implements MainEventOpenContacts {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MainEventSwitchTab value)? switchTab,
     TResult Function(MainEventBackButtonPressed value)? backButtonPressed,
-    TResult Function(MainEventPageOpened value)? onPageOpened,
     TResult Function(MainEventTournamentSelected value)? tournamentSelected,
     TResult Function(MainEventTitleTapped value)? onTitleTapped,
     TResult Function(MainEventEnterPressed value)? onEnterPressed,

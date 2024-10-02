@@ -19,7 +19,7 @@ class SeatingInsertingPage extends StatefulWidget {
     name: name,
     path: 'fsmSeating',
     builder: (context, state) {
-      final id = int.parse(state.params["id"]!);
+      final id = int.parse(state.pathParameters["id"]!);
       return BlocProvider<SeatingInsertingBloc>(
         create: (context) => getIt(param1: context, param2: id),
         child: const SeatingInsertingPage(),
@@ -30,7 +30,7 @@ class SeatingInsertingPage extends StatefulWidget {
   static String createLocation(BuildContext context, int id) {
     return context.namedLocation(
       name,
-      params: {"id": id.toString()},
+      pathParameters: {"id": id.toString()},
     );
   }
 

@@ -25,6 +25,6 @@ class ClubRouterImpl implements ClubRouter {
 
   @override
   String getLocation() {
-    return GoRouterState.of(context).location;
+    return GoRouterState.of(context).uri.toString();
   }
 }
