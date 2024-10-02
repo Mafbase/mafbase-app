@@ -10,6 +10,7 @@ abstract class MyTheme {
   abstract final Color textColor;
   abstract final Color borderColor;
   abstract final TextStyle defaultTextStyle;
+  abstract final TextStyle hintTextStyle;
   abstract final TextStyle fieldTextStyle;
   abstract final TextStyle btnTextStyle;
   abstract final TextStyle textBtnTextStyle;
@@ -33,7 +34,7 @@ abstract class MyTheme {
 
   static MyTheme of(BuildContext context) => context.watch();
 
-  factory MyTheme.light() => const _LightTheme._();
+  factory MyTheme.light() => _LightTheme._();
 }
 
 class _LightTheme implements MyTheme {
@@ -42,7 +43,7 @@ class _LightTheme implements MyTheme {
     color: Colors.black,
   );
 
-  const _LightTheme._();
+  _LightTheme._();
 
   @override
   Color get background1 => const Color(0xFFF5F5F5);
@@ -57,20 +58,26 @@ class _LightTheme implements MyTheme {
   Color get btnColor2 => const Color(0xFF4E6B9B);
 
   @override
-  Color get btnTextColor => Colors.white;
+  late final btnTextColor = Colors.white;
 
   @override
-  Color get textColor => Colors.black;
+  late final textColor = Colors.black;
 
   @override
-  Color get borderColor => const Color(0x3B1C2B40);
+  late final Color borderColor = const Color(0x3B1C2B40);
 
   @override
-  TextStyle get btnTextStyle => _defaultTextStyle.copyWith(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: btnTextColor,
-      );
+  late final TextStyle btnTextStyle = _defaultTextStyle.copyWith(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    color: btnTextColor,
+  );
+
+  @override
+  late final TextStyle hintTextStyle = _defaultTextStyle.copyWith(
+    fontSize: 14,
+    color: greyColor,
+  );
 
   @override
   TextStyle get defaultTextStyle => _defaultTextStyle.copyWith(

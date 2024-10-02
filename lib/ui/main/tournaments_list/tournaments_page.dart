@@ -160,65 +160,81 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                   ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
-                        childCount: state.tournaments.length, (context, index) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 10,
-                          ),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(50),
-                            onTap: () {
-                              context.read<MainBloc>().add(
-                                    MainEvent.tournamentSelected(
-                                      tournamentId: state.tournaments[index].id,
+                      childCount: state.tournaments.length,
+                      (context, index) {
+                        final tournament = state.tournaments[index];
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 10,
+                            ),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(50),
+                              onTap: () {
+                                context.read<MainBloc>().add(
+                                      MainEvent.tournamentSelected(
+                                        tournamentId: tournament.id,
+                                      ),
+                                    );
+                              },
+                              child: Container(
+                                constraints: const BoxConstraints(
+                                  maxWidth: 900,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 15,
+                                  horizontal: 25,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: MyTheme.of(context)
+                                      .greyColor
+                                      .withOpacity(0.16),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      DateFormat('dd-MM-yyyy').format(
+                                        tournament.dateStart,
+                                      ),
+                                      style:
+                                          MyTheme.of(context).defaultTextStyle,
                                     ),
-                                  );
-                            },
-                            child: Container(
-                              constraints: const BoxConstraints(
-                                maxWidth: 900,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 15,
-                                horizontal: 25,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: MyTheme.of(context)
-                                    .greyColor
-                                    .withOpacity(0.16),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    DateFormat('dd-MM-yyyy').format(
-                                      state.tournaments[index].dateStart,
+                                    const SizedBox(
+                                      width: 35,
                                     ),
-                                    style: MyTheme.of(context).defaultTextStyle,
-                                  ),
-                                  const SizedBox(
-                                    width: 35,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      state.tournaments[index].name,
-                                      style: MyTheme.of(context).defaultTextStyle,
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            tournament.name,
+                                            style: MyTheme.of(context)
+                                                .defaultTextStyle,
+                                          ),
+                                          Text(
+                                            'ID: ${tournament.id}',
+                                            style: MyTheme.of(context)
+                                                .hintTextStyle,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TournamentStatusWidget(
-                                      status: state.tournaments[index].status,
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TournamentStatusWidget(
+                                        status: tournament.status,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

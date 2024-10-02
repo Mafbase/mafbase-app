@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/club_avatar.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -54,12 +55,19 @@ class SingleClubRow extends StatelessWidget {
                         const SizedBox(height: 16),
                         const Divider(height: 2),
                         const SizedBox(height: 16),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            model.city != null ? "г. ${model.city}" : " ",
-                            style: context.theme.defaultTextStyle,
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              'ID: ${model.id}',
+                              style: MyTheme.of(context).hintTextStyle,
+                            ),
+                            const Spacer(),
+                            Text(
+                              model.city != null ? "г. ${model.city}" : " ",
+                              style: context.theme.defaultTextStyle,
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -74,44 +82,47 @@ class SingleClubRow extends StatelessWidget {
   }
 
   Widget buildDesktop(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(500),
-      onTap: onTap,
-      child: Container(
-        constraints: const BoxConstraints(
-          maxHeight: 100,
-          maxWidth: 1000,
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          children: [
-            ClubAvatar(
-              clubModel: model,
-              size: 70,
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                model.name,
-                style: context.theme.defaultTextStyle,
+    return Tooltip(
+      message: 'ID: ${model.id}',
+      child: InkWell(
+        borderRadius: BorderRadius.circular(500),
+        onTap: onTap,
+        child: Container(
+          constraints: const BoxConstraints(
+            maxHeight: 100,
+            maxWidth: 1000,
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Row(
+            children: [
+              ClubAvatar(
+                clubModel: model,
+                size: 70,
               ),
-            ),
-            Container(
-              width: 3,
-              height: 30,
-              color: Colors.black,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-            ),
-            if (model.city != null)
+              const SizedBox(width: 16),
               Expanded(
                 child: Text(
-                  "г. ${model.city}",
+                  model.name,
                   style: context.theme.defaultTextStyle,
                 ),
-              )
-            else
-              const Spacer(),
-          ],
+              ),
+              Container(
+                width: 3,
+                height: 30,
+                color: Colors.black,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+              ),
+              if (model.city != null)
+                Expanded(
+                  child: Text(
+                    "г. ${model.city}",
+                    style: context.theme.defaultTextStyle,
+                  ),
+                )
+              else
+                const Spacer(),
+            ],
+          ),
         ),
       ),
     );

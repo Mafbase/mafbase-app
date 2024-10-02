@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
@@ -35,20 +38,36 @@ class TournamentItemRow extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              tournamentModel.name,
-              style: context.theme.headerTextStyle.copyWith(fontSize: 24),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    tournamentModel.name,
+                    style: context.theme.headerTextStyle.copyWith(fontSize: 24),
+                  ),
+                ),
+                Text(
+                  'ID: ${tournamentModel.id}',
+                  style: MyTheme.of(context).hintTextStyle,
+                ),
+              ],
             ),
             const SizedBox(height: 24),
-            Row(
-              children: [
-                Text(
-                  DateFormat('dd.MM.yyyy').format(tournamentModel.dateStart),
-                  style: context.theme.defaultTextStyle,
-                ),
-                const Spacer(),
-                TournamentStatusWidget(status: tournamentModel.status),
-              ],
+            IntrinsicHeight(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      DateFormat('dd.MM.yyyy').format(tournamentModel.dateStart),
+                      style: context.theme.defaultTextStyle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  TournamentStatusWidget(status: tournamentModel.status),
+                ],
+              ),
             ),
           ],
         ),
