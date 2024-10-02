@@ -12,10 +12,7 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 
 class TranslationControlBloc
     extends Bloc<TranslationControlEvent, TranslationContentState> {
-  late final TournamentContentSocket _socket = TournamentContentSocket(
-    tournamentId: params.tournamentId,
-    table: params.table,
-  );
+  TournamentContentSocket? _socket;
   final TranslationRepository _repository = getIt();
   final TranslationContentBlocParams params;
   final List<StreamSubscription> toDispose = [];
@@ -28,8 +25,25 @@ class TranslationControlBloc
     on<TranslationControlEventChangeRole>(_onRoleChanged);
     on<TranslationControlEventChangeStatus>(_onStatusChanged);
     on<TranslationControlEventSelectGame>(_onGameSelected);
+    on<TranslationControlEventPageOpened>(_onPageOpened);
+  }
+
+  void _onPageOpened(
+    TranslationControlEventPageOpened event,
+    Emitter emit,
+  ) {
+    for (var element in toDispose) {
+      element.cancel();
+    }
+
+    _socket?.dispose();
+    _socket = TournamentContentSocket(
+      tournamentId: params.tournamentId,
+      table: params.table,
+    )..connect();
+
     toDispose.add(
-      _socket.stream.listen((event) {
+      _socket!.stream.listen((event) {
         add(
           TranslationControlEvent.stateReceived(
             event: SeatingContent.fromBuffer(event),
@@ -37,7 +51,6 @@ class TranslationControlBloc
         );
       }),
     );
-    _socket.connect();
   }
 
   _onGameSelected(TranslationControlEventSelectGame event, Emitter emit) {

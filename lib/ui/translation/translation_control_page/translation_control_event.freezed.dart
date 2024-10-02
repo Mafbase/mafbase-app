@@ -22,6 +22,8 @@ mixin _$TranslationControlEvent {
     required TResult Function(int index, PlayerStatus status) changeStatus,
     required TResult Function(int gameIndex) selectGame,
     required TResult Function(SeatingContent event) stateReceived,
+    required TResult Function() pageOpened,
+    required TResult Function() paused,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +32,8 @@ mixin _$TranslationControlEvent {
     TResult? Function(int index, PlayerStatus status)? changeStatus,
     TResult? Function(int gameIndex)? selectGame,
     TResult? Function(SeatingContent event)? stateReceived,
+    TResult? Function()? pageOpened,
+    TResult? Function()? paused,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +42,8 @@ mixin _$TranslationControlEvent {
     TResult Function(int index, PlayerStatus status)? changeStatus,
     TResult Function(int gameIndex)? selectGame,
     TResult Function(SeatingContent event)? stateReceived,
+    TResult Function()? pageOpened,
+    TResult Function()? paused,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +57,9 @@ mixin _$TranslationControlEvent {
         selectGame,
     required TResult Function(TranslationControlEventStateReceived value)
         stateReceived,
+    required TResult Function(TranslationControlEventPageOpened value)
+        pageOpened,
+    required TResult Function(TranslationControlEventPaused value) paused,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +69,8 @@ mixin _$TranslationControlEvent {
     TResult? Function(TranslationControlEventSelectGame value)? selectGame,
     TResult? Function(TranslationControlEventStateReceived value)?
         stateReceived,
+    TResult? Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationControlEventPaused value)? paused,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +79,8 @@ mixin _$TranslationControlEvent {
     TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
     TResult Function(TranslationControlEventSelectGame value)? selectGame,
     TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult Function(TranslationControlEventPaused value)? paused,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -175,6 +188,8 @@ class _$TranslationControlEventChangeRoleImpl
     required TResult Function(int index, PlayerStatus status) changeStatus,
     required TResult Function(int gameIndex) selectGame,
     required TResult Function(SeatingContent event) stateReceived,
+    required TResult Function() pageOpened,
+    required TResult Function() paused,
   }) {
     return changeRole(index, role);
   }
@@ -186,6 +201,8 @@ class _$TranslationControlEventChangeRoleImpl
     TResult? Function(int index, PlayerStatus status)? changeStatus,
     TResult? Function(int gameIndex)? selectGame,
     TResult? Function(SeatingContent event)? stateReceived,
+    TResult? Function()? pageOpened,
+    TResult? Function()? paused,
   }) {
     return changeRole?.call(index, role);
   }
@@ -197,6 +214,8 @@ class _$TranslationControlEventChangeRoleImpl
     TResult Function(int index, PlayerStatus status)? changeStatus,
     TResult Function(int gameIndex)? selectGame,
     TResult Function(SeatingContent event)? stateReceived,
+    TResult Function()? pageOpened,
+    TResult Function()? paused,
     required TResult orElse(),
   }) {
     if (changeRole != null) {
@@ -216,6 +235,9 @@ class _$TranslationControlEventChangeRoleImpl
         selectGame,
     required TResult Function(TranslationControlEventStateReceived value)
         stateReceived,
+    required TResult Function(TranslationControlEventPageOpened value)
+        pageOpened,
+    required TResult Function(TranslationControlEventPaused value) paused,
   }) {
     return changeRole(this);
   }
@@ -228,6 +250,8 @@ class _$TranslationControlEventChangeRoleImpl
     TResult? Function(TranslationControlEventSelectGame value)? selectGame,
     TResult? Function(TranslationControlEventStateReceived value)?
         stateReceived,
+    TResult? Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationControlEventPaused value)? paused,
   }) {
     return changeRole?.call(this);
   }
@@ -239,6 +263,8 @@ class _$TranslationControlEventChangeRoleImpl
     TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
     TResult Function(TranslationControlEventSelectGame value)? selectGame,
     TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult Function(TranslationControlEventPaused value)? paused,
     required TResult orElse(),
   }) {
     if (changeRole != null) {
@@ -345,6 +371,8 @@ class _$TranslationControlEventChangeStatusImpl
     required TResult Function(int index, PlayerStatus status) changeStatus,
     required TResult Function(int gameIndex) selectGame,
     required TResult Function(SeatingContent event) stateReceived,
+    required TResult Function() pageOpened,
+    required TResult Function() paused,
   }) {
     return changeStatus(index, status);
   }
@@ -356,6 +384,8 @@ class _$TranslationControlEventChangeStatusImpl
     TResult? Function(int index, PlayerStatus status)? changeStatus,
     TResult? Function(int gameIndex)? selectGame,
     TResult? Function(SeatingContent event)? stateReceived,
+    TResult? Function()? pageOpened,
+    TResult? Function()? paused,
   }) {
     return changeStatus?.call(index, status);
   }
@@ -367,6 +397,8 @@ class _$TranslationControlEventChangeStatusImpl
     TResult Function(int index, PlayerStatus status)? changeStatus,
     TResult Function(int gameIndex)? selectGame,
     TResult Function(SeatingContent event)? stateReceived,
+    TResult Function()? pageOpened,
+    TResult Function()? paused,
     required TResult orElse(),
   }) {
     if (changeStatus != null) {
@@ -386,6 +418,9 @@ class _$TranslationControlEventChangeStatusImpl
         selectGame,
     required TResult Function(TranslationControlEventStateReceived value)
         stateReceived,
+    required TResult Function(TranslationControlEventPageOpened value)
+        pageOpened,
+    required TResult Function(TranslationControlEventPaused value) paused,
   }) {
     return changeStatus(this);
   }
@@ -398,6 +433,8 @@ class _$TranslationControlEventChangeStatusImpl
     TResult? Function(TranslationControlEventSelectGame value)? selectGame,
     TResult? Function(TranslationControlEventStateReceived value)?
         stateReceived,
+    TResult? Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationControlEventPaused value)? paused,
   }) {
     return changeStatus?.call(this);
   }
@@ -409,6 +446,8 @@ class _$TranslationControlEventChangeStatusImpl
     TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
     TResult Function(TranslationControlEventSelectGame value)? selectGame,
     TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult Function(TranslationControlEventPaused value)? paused,
     required TResult orElse(),
   }) {
     if (changeStatus != null) {
@@ -507,6 +546,8 @@ class _$TranslationControlEventSelectGameImpl
     required TResult Function(int index, PlayerStatus status) changeStatus,
     required TResult Function(int gameIndex) selectGame,
     required TResult Function(SeatingContent event) stateReceived,
+    required TResult Function() pageOpened,
+    required TResult Function() paused,
   }) {
     return selectGame(gameIndex);
   }
@@ -518,6 +559,8 @@ class _$TranslationControlEventSelectGameImpl
     TResult? Function(int index, PlayerStatus status)? changeStatus,
     TResult? Function(int gameIndex)? selectGame,
     TResult? Function(SeatingContent event)? stateReceived,
+    TResult? Function()? pageOpened,
+    TResult? Function()? paused,
   }) {
     return selectGame?.call(gameIndex);
   }
@@ -529,6 +572,8 @@ class _$TranslationControlEventSelectGameImpl
     TResult Function(int index, PlayerStatus status)? changeStatus,
     TResult Function(int gameIndex)? selectGame,
     TResult Function(SeatingContent event)? stateReceived,
+    TResult Function()? pageOpened,
+    TResult Function()? paused,
     required TResult orElse(),
   }) {
     if (selectGame != null) {
@@ -548,6 +593,9 @@ class _$TranslationControlEventSelectGameImpl
         selectGame,
     required TResult Function(TranslationControlEventStateReceived value)
         stateReceived,
+    required TResult Function(TranslationControlEventPageOpened value)
+        pageOpened,
+    required TResult Function(TranslationControlEventPaused value) paused,
   }) {
     return selectGame(this);
   }
@@ -560,6 +608,8 @@ class _$TranslationControlEventSelectGameImpl
     TResult? Function(TranslationControlEventSelectGame value)? selectGame,
     TResult? Function(TranslationControlEventStateReceived value)?
         stateReceived,
+    TResult? Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationControlEventPaused value)? paused,
   }) {
     return selectGame?.call(this);
   }
@@ -571,6 +621,8 @@ class _$TranslationControlEventSelectGameImpl
     TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
     TResult Function(TranslationControlEventSelectGame value)? selectGame,
     TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult Function(TranslationControlEventPaused value)? paused,
     required TResult orElse(),
   }) {
     if (selectGame != null) {
@@ -666,6 +718,8 @@ class _$TranslationControlEventStateReceivedImpl
     required TResult Function(int index, PlayerStatus status) changeStatus,
     required TResult Function(int gameIndex) selectGame,
     required TResult Function(SeatingContent event) stateReceived,
+    required TResult Function() pageOpened,
+    required TResult Function() paused,
   }) {
     return stateReceived(event);
   }
@@ -677,6 +731,8 @@ class _$TranslationControlEventStateReceivedImpl
     TResult? Function(int index, PlayerStatus status)? changeStatus,
     TResult? Function(int gameIndex)? selectGame,
     TResult? Function(SeatingContent event)? stateReceived,
+    TResult? Function()? pageOpened,
+    TResult? Function()? paused,
   }) {
     return stateReceived?.call(event);
   }
@@ -688,6 +744,8 @@ class _$TranslationControlEventStateReceivedImpl
     TResult Function(int index, PlayerStatus status)? changeStatus,
     TResult Function(int gameIndex)? selectGame,
     TResult Function(SeatingContent event)? stateReceived,
+    TResult Function()? pageOpened,
+    TResult Function()? paused,
     required TResult orElse(),
   }) {
     if (stateReceived != null) {
@@ -707,6 +765,9 @@ class _$TranslationControlEventStateReceivedImpl
         selectGame,
     required TResult Function(TranslationControlEventStateReceived value)
         stateReceived,
+    required TResult Function(TranslationControlEventPageOpened value)
+        pageOpened,
+    required TResult Function(TranslationControlEventPaused value) paused,
   }) {
     return stateReceived(this);
   }
@@ -719,6 +780,8 @@ class _$TranslationControlEventStateReceivedImpl
     TResult? Function(TranslationControlEventSelectGame value)? selectGame,
     TResult? Function(TranslationControlEventStateReceived value)?
         stateReceived,
+    TResult? Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationControlEventPaused value)? paused,
   }) {
     return stateReceived?.call(this);
   }
@@ -730,6 +793,8 @@ class _$TranslationControlEventStateReceivedImpl
     TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
     TResult Function(TranslationControlEventSelectGame value)? selectGame,
     TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult Function(TranslationControlEventPaused value)? paused,
     required TResult orElse(),
   }) {
     if (stateReceived != null) {
@@ -750,4 +815,282 @@ abstract class TranslationControlEventStateReceived
   _$$TranslationControlEventStateReceivedImplCopyWith<
           _$TranslationControlEventStateReceivedImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TranslationControlEventPageOpenedImplCopyWith<$Res> {
+  factory _$$TranslationControlEventPageOpenedImplCopyWith(
+          _$TranslationControlEventPageOpenedImpl value,
+          $Res Function(_$TranslationControlEventPageOpenedImpl) then) =
+      __$$TranslationControlEventPageOpenedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TranslationControlEventPageOpenedImplCopyWithImpl<$Res>
+    extends _$TranslationControlEventCopyWithImpl<$Res,
+        _$TranslationControlEventPageOpenedImpl>
+    implements _$$TranslationControlEventPageOpenedImplCopyWith<$Res> {
+  __$$TranslationControlEventPageOpenedImplCopyWithImpl(
+      _$TranslationControlEventPageOpenedImpl _value,
+      $Res Function(_$TranslationControlEventPageOpenedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TranslationControlEventPageOpenedImpl
+    implements TranslationControlEventPageOpened {
+  const _$TranslationControlEventPageOpenedImpl();
+
+  @override
+  String toString() {
+    return 'TranslationControlEvent.pageOpened()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TranslationControlEventPageOpenedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int index, PlayerRole role) changeRole,
+    required TResult Function(int index, PlayerStatus status) changeStatus,
+    required TResult Function(int gameIndex) selectGame,
+    required TResult Function(SeatingContent event) stateReceived,
+    required TResult Function() pageOpened,
+    required TResult Function() paused,
+  }) {
+    return pageOpened();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int index, PlayerRole role)? changeRole,
+    TResult? Function(int index, PlayerStatus status)? changeStatus,
+    TResult? Function(int gameIndex)? selectGame,
+    TResult? Function(SeatingContent event)? stateReceived,
+    TResult? Function()? pageOpened,
+    TResult? Function()? paused,
+  }) {
+    return pageOpened?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int index, PlayerRole role)? changeRole,
+    TResult Function(int index, PlayerStatus status)? changeStatus,
+    TResult Function(int gameIndex)? selectGame,
+    TResult Function(SeatingContent event)? stateReceived,
+    TResult Function()? pageOpened,
+    TResult Function()? paused,
+    required TResult orElse(),
+  }) {
+    if (pageOpened != null) {
+      return pageOpened();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TranslationControlEventChangeRole value)
+        changeRole,
+    required TResult Function(TranslationControlEventChangeStatus value)
+        changeStatus,
+    required TResult Function(TranslationControlEventSelectGame value)
+        selectGame,
+    required TResult Function(TranslationControlEventStateReceived value)
+        stateReceived,
+    required TResult Function(TranslationControlEventPageOpened value)
+        pageOpened,
+    required TResult Function(TranslationControlEventPaused value) paused,
+  }) {
+    return pageOpened(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult? Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult? Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult? Function(TranslationControlEventStateReceived value)?
+        stateReceived,
+    TResult? Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationControlEventPaused value)? paused,
+  }) {
+    return pageOpened?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult Function(TranslationControlEventPaused value)? paused,
+    required TResult orElse(),
+  }) {
+    if (pageOpened != null) {
+      return pageOpened(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TranslationControlEventPageOpened
+    implements TranslationControlEvent {
+  const factory TranslationControlEventPageOpened() =
+      _$TranslationControlEventPageOpenedImpl;
+}
+
+/// @nodoc
+abstract class _$$TranslationControlEventPausedImplCopyWith<$Res> {
+  factory _$$TranslationControlEventPausedImplCopyWith(
+          _$TranslationControlEventPausedImpl value,
+          $Res Function(_$TranslationControlEventPausedImpl) then) =
+      __$$TranslationControlEventPausedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TranslationControlEventPausedImplCopyWithImpl<$Res>
+    extends _$TranslationControlEventCopyWithImpl<$Res,
+        _$TranslationControlEventPausedImpl>
+    implements _$$TranslationControlEventPausedImplCopyWith<$Res> {
+  __$$TranslationControlEventPausedImplCopyWithImpl(
+      _$TranslationControlEventPausedImpl _value,
+      $Res Function(_$TranslationControlEventPausedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TranslationControlEventPausedImpl
+    implements TranslationControlEventPaused {
+  const _$TranslationControlEventPausedImpl();
+
+  @override
+  String toString() {
+    return 'TranslationControlEvent.paused()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TranslationControlEventPausedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int index, PlayerRole role) changeRole,
+    required TResult Function(int index, PlayerStatus status) changeStatus,
+    required TResult Function(int gameIndex) selectGame,
+    required TResult Function(SeatingContent event) stateReceived,
+    required TResult Function() pageOpened,
+    required TResult Function() paused,
+  }) {
+    return paused();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int index, PlayerRole role)? changeRole,
+    TResult? Function(int index, PlayerStatus status)? changeStatus,
+    TResult? Function(int gameIndex)? selectGame,
+    TResult? Function(SeatingContent event)? stateReceived,
+    TResult? Function()? pageOpened,
+    TResult? Function()? paused,
+  }) {
+    return paused?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int index, PlayerRole role)? changeRole,
+    TResult Function(int index, PlayerStatus status)? changeStatus,
+    TResult Function(int gameIndex)? selectGame,
+    TResult Function(SeatingContent event)? stateReceived,
+    TResult Function()? pageOpened,
+    TResult Function()? paused,
+    required TResult orElse(),
+  }) {
+    if (paused != null) {
+      return paused();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TranslationControlEventChangeRole value)
+        changeRole,
+    required TResult Function(TranslationControlEventChangeStatus value)
+        changeStatus,
+    required TResult Function(TranslationControlEventSelectGame value)
+        selectGame,
+    required TResult Function(TranslationControlEventStateReceived value)
+        stateReceived,
+    required TResult Function(TranslationControlEventPageOpened value)
+        pageOpened,
+    required TResult Function(TranslationControlEventPaused value) paused,
+  }) {
+    return paused(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult? Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult? Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult? Function(TranslationControlEventStateReceived value)?
+        stateReceived,
+    TResult? Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult? Function(TranslationControlEventPaused value)? paused,
+  }) {
+    return paused?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TranslationControlEventChangeRole value)? changeRole,
+    TResult Function(TranslationControlEventChangeStatus value)? changeStatus,
+    TResult Function(TranslationControlEventSelectGame value)? selectGame,
+    TResult Function(TranslationControlEventStateReceived value)? stateReceived,
+    TResult Function(TranslationControlEventPageOpened value)? pageOpened,
+    TResult Function(TranslationControlEventPaused value)? paused,
+    required TResult orElse(),
+  }) {
+    if (paused != null) {
+      return paused(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TranslationControlEventPaused
+    implements TranslationControlEvent {
+  const factory TranslationControlEventPaused() =
+      _$TranslationControlEventPausedImpl;
 }

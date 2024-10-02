@@ -22,4 +22,7 @@ class TranslationControlEvent with _$TranslationControlEvent {
   const factory TranslationControlEvent.stateReceived({
     required SeatingContent event,
   }) = TranslationControlEventStateReceived;
+
+  const factory TranslationControlEvent.pageOpened() =
+      TranslationControlEventPageOpened;
 }

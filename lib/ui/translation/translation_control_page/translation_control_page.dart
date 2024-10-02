@@ -17,7 +17,8 @@ class TranslationControlPage extends StatefulWidget {
     path: "/translationControl",
     name: "translation_control",
     builder: (context, state) {
-      final tournamentId = int.parse(state.uri.queryParameters["tournamentId"] ?? "");
+      final tournamentId =
+          int.parse(state.uri.queryParameters["tournamentId"] ?? "");
       final table = int.parse(state.uri.queryParameters["table"] ?? "");
       return BlocProvider<TranslationControlBloc>(
         create: (context) => getIt(
@@ -36,7 +37,20 @@ class TranslationControlPage extends StatefulWidget {
   State<TranslationControlPage> createState() => _TranslationControlPageState();
 }
 
-class _TranslationControlPageState extends State<TranslationControlPage> {
+class _TranslationControlPageState extends State<TranslationControlPage>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TranslationControlBloc, TranslationContentState>(
@@ -116,5 +130,14 @@ class _TranslationControlPageState extends State<TranslationControlPage> {
         );
       },
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      context
+          .read<TranslationControlBloc>()
+          .add(const TranslationControlEvent.pageOpened());
+    }
   }
 }
