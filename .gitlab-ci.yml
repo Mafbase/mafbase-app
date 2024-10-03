@@ -84,6 +84,7 @@ sentry-upload:
     - docker
   stage: deploy
   script:
+    - flutter build web --source-maps
     - flutter packages pub run sentry_dart_plugin
 
 

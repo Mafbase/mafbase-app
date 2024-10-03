@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/sockets/tournament_content_socket.dart';
@@ -37,13 +36,13 @@ class TranslationControlBloc
     }
 
     _socket?.dispose();
-    _socket = TournamentContentSocket(
+    final socket = _socket = TournamentContentSocket(
       tournamentId: params.tournamentId,
       table: params.table,
     )..connect();
 
     toDispose.add(
-      _socket!.stream.listen((event) {
+      socket.stream.listen((event) {
         add(
           TranslationControlEvent.stateReceived(
             event: SeatingContent.fromBuffer(event),
@@ -80,7 +79,6 @@ class TranslationControlBloc
   }
 
   _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
-    debugPrint(event.event.toString());
     emit(
       TranslationContentState(
         roles: event.event.roles,
