@@ -37,7 +37,6 @@ def generate_signature(key_id, private_key_content):
     # Создаем временную метку в формате ISO 8601 с точностью до миллисекунд
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='milliseconds')
     message_to_sign = key_id + timestamp
-    print("Message to sign:", message_to_sign)
 
     # Создаем хэш объекта и подписываем его с помощью закрытого ключа
     hash_obj = SHA512.new(message_to_sign.encode())

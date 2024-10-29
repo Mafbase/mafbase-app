@@ -8,6 +8,7 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
@@ -118,8 +119,9 @@ class RatingPage extends StatefulWidget {
       final dateStart =
           DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
               DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd = DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ??
-          DateTime.now();
+      final dateEnd =
+          DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ??
+              DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
       final style = RatingTableStyle.values.firstWhereOrNull(
             (element) => state.uri.queryParameters["style"] == element.name,
@@ -212,15 +214,34 @@ class _RatingPageState extends CustomState<RatingPage> {
             SliverAppBar(
               expandedHeight: 307,
               clipBehavior: Clip.hardEdge,
+              automaticallyImplyLeading: false,
               flexibleSpace: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Center(
-                      child: Text(
-                        state.clubName,
-                        style: context.theme.headerTextStyle,
-                        textAlign: TextAlign.center,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              state.clubName,
+                              style: context.theme.headerTextStyle,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          if (widget.clubId != null)
+                            IconButton(
+                              onPressed: () => context.push(
+                                ClubGamesPage.createLocation(
+                                  context: context,
+                                  clubId: widget.clubId!,
+                                  range: widget.range,
+                                ),
+                              ),
+                              icon: const Icon(Icons.table_chart_outlined),
+                            ),
+                        ],
                       ),
                     ),
                     if (widget.range != null)
@@ -311,92 +332,109 @@ class _RatingPageState extends CustomState<RatingPage> {
   }
 
   @override
-  Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<RatingBloc, RatingState>(
-      builder: (context, state) {
-        return Stack(
-          children: [
-            Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  top: 20,
-                  bottom: 20,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      state.clubName,
-                      style: MyTheme.of(context).headerTextStyle,
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (widget.range != null)
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 16.0, right: 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Text("Период: "),
-                                CustomButton(
-                                  onTap: onChangeRangeTap,
-                                  disabled: widget.tournamentId != null,
-                                  text:
-                                      "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
-                                ),
-                              ],
+  Widget buildDesktop(BuildContext context) =>
+      BlocBuilder<RatingBloc, RatingState>(
+        builder: (context, state) {
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              state.clubName,
+                              style: MyTheme.of(context).headerTextStyle,
                             ),
                           ),
-                        styleSwitcher(),
-                        downloadRatingButton(),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    winRate(state),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: RatingTable(
-                          style: widget.style,
-                          rows: state.rows,
-                          clubId: widget.clubId,
-                          sort: widget.sort,
-                          gameFilter: widget.gameFilter,
-                          openGame: openGame,
-                          changeSort: (RatingSort sort) {
-                            context.read<RatingBloc>().add(
-                                  RatingEvent.rangeChanged(
-                                    range: widget.range,
-                                    clubId: widget.clubId,
-                                    style: widget.style,
-                                    tournamentId: widget.tournamentId,
-                                    sort: sort,
-                                    gameFilter: widget.gameFilter,
+                          if (widget.clubId != null)
+                            IconButton(
+                              onPressed: () => context.push(
+                                ClubGamesPage.createLocation(
+                                  context: context,
+                                  clubId: widget.clubId!,
+                                  range: widget.range,
+                                ),
+                              ),
+                              icon: const Icon(Icons.table_chart_outlined),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (widget.range != null)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 16.0, right: 8),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text("Период: "),
+                                  CustomButton(
+                                    onTap: onChangeRangeTap,
+                                    disabled: widget.tournamentId != null,
+                                    text:
+                                        "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
                                   ),
-                                );
-                          },
-                          tournamentId: widget.tournamentId,
-                          isTournament: widget.tournamentId != null,
+                                ],
+                              ),
+                            ),
+                          styleSwitcher(),
+                          downloadRatingButton(),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      winRate(state),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: RatingTable(
+                            style: widget.style,
+                            rows: state.rows,
+                            clubId: widget.clubId,
+                            sort: widget.sort,
+                            gameFilter: widget.gameFilter,
+                            openGame: openGame,
+                            changeSort: (RatingSort sort) {
+                              context.read<RatingBloc>().add(
+                                    RatingEvent.rangeChanged(
+                                      range: widget.range,
+                                      clubId: widget.clubId,
+                                      style: widget.style,
+                                      tournamentId: widget.tournamentId,
+                                      sort: sort,
+                                      gameFilter: widget.gameFilter,
+                                    ),
+                                  );
+                            },
+                            tournamentId: widget.tournamentId,
+                            isTournament: widget.tournamentId != null,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            if (state.isLoading) const LoadingOverlayWidget(),
-          ],
-        );
-      },
-    );
-  }
+              if (state.isLoading) const LoadingOverlayWidget(),
+            ],
+          );
+        },
+      );
 
   Widget downloadRatingButton() => widget.clubId == null
       ? Container()

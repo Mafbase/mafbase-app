@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
@@ -9,6 +10,11 @@ abstract class ClubRepository {
   Future editGame(ClubGameResult result, int clubId, int gameId);
 
   Future<RatingModel> getRating({
+    required int clubId,
+    required DateTimeRange range,
+  });
+
+  Future<List<GameResultModel>> getGames({
     required int clubId,
     required DateTimeRange range,
   });

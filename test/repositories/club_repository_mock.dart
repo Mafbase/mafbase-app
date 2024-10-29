@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -58,4 +59,10 @@ class ClubRepositoryMock implements ClubRepository {
     required int clubId,
     required DateTimeRange range,
   }) async {}
+
+  @override
+  Future<List<GameResultModel>> getGames({required int clubId, required DateTimeRange range}) {
+    // TODO: implement getGames
+    throw UnimplementedError();
+  }
 }

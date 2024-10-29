@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
@@ -51,6 +52,7 @@ class ClubPage extends StatefulWidget {
     routes: [
       ...AddClubGamePage.routes,
       RatingPage.clubRoute,
+      ClubGamesPage.route,
     ],
   );
 }

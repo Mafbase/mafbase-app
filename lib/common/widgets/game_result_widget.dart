@@ -74,15 +74,16 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                       flex: 6,
                       child: Column(
                         children: [
-                          Text(
-                            "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                MyTheme.of(context).defaultTextStyle.copyWith(
-                                      color: const Color(0xFF979A9D),
-                                    ),
-                          ),
+                          if (widget.model.table != 0 && widget.model.game != 0)
+                            Text(
+                              "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  MyTheme.of(context).defaultTextStyle.copyWith(
+                                        color: const Color(0xFF979A9D),
+                                      ),
+                            ),
                           Expanded(
                             child: _GameResultWidget(
                               win: widget.model.gameWin,
