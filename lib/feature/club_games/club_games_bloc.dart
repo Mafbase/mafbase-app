@@ -22,10 +22,12 @@ class ClubGamesBloc extends CustomBloc<ClubGamesEvent, ClubGamesState> {
       range: event.range,
     );
 
-    emit(state.copyWith(
-      loading: false,
-      games: games,
-    ));
+    emit(
+      state.copyWith(
+        loading: false,
+        games: games,
+      ),
+    );
   }
 
   @override

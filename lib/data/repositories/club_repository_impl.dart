@@ -78,7 +78,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
     required DateTimeRange range,
   }) async {
     final response = await client.get<Uint8List>(
-      '/api/club/$clubId/rating/download?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}"',
+      '/api/club/$clubId/rating/download?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}',
     );
 
     await downloadFile(
