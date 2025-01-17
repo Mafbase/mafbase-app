@@ -65,4 +65,16 @@ class ClubRepositoryMock implements ClubRepository {
     // TODO: implement getGames
     throw UnimplementedError();
   }
+
+  @override
+  Future<DateTime?> getHideDate({required int id}) {
+    // TODO: implement getHideDate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateHideDate({required int id, required DateTime? dateTime}) {
+    // TODO: implement updateHideDate
+    throw UnimplementedError();
+  }
 }
