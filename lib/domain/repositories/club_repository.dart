@@ -36,4 +36,11 @@ abstract class ClubRepository {
   });
 
   Future<ClubModel> getClub({required int id});
+
+  Future<DateTime?> getHideDate({required int id});
+
+  Future<void> updateHideDate({
+    required int id,
+    required DateTime? dateTime,
+  });
 }

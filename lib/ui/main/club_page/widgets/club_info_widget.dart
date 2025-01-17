@@ -14,6 +14,7 @@ class ClubInfoWidget extends StatelessWidget {
   final bool isMobile;
   final VoidCallback? onAddGame;
   final VoidCallback? billClub;
+  final VoidCallback? changeHideDate;
 
   const ClubInfoWidget({
     Key? key,
@@ -21,62 +22,69 @@ class ClubInfoWidget extends StatelessWidget {
     this.isMobile = false,
     this.onAddGame,
     this.billClub,
+    this.changeHideDate,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Provider<bool>.value(
-      value: isMobile,
-      child: Provider<ClubModel>.value(
-        value: clubModel,
-        child: isMobile
-            ? buildMobile(context)
-            : Container(
-                constraints: const BoxConstraints(
-                  minWidth: 300,
-                ),
-                padding: const EdgeInsets.only(
-                  left: 60,
-                  top: 40,
-                  right: 60,
-                ),
-                child: SizedBox.expand(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) => Provider<bool>.value(
+        value: isMobile,
+        child: Provider<ClubModel>.value(
+          value: clubModel,
+          child: isMobile
+              ? buildMobile(context)
+              : Container(
+                  constraints: const BoxConstraints(
+                    minWidth: 300,
+                  ),
+                  padding: const EdgeInsets.only(
+                    left: 60,
+                    top: 40,
+                    right: 60,
+                  ),
+                  child: SizedBox.expand(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _ClubInfoHeader(),
+                                  SizedBox(height: 20),
+                                  _ClubDescription(),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _ClubInfoHeader(),
-                                SizedBox(height: 20),
-                                _ClubDescription(),
-                              ],
-                            ),
+                            if (changeHideDate != null)
+                              Tooltip(
+                                message: 'Скрыть рейтинг',
+                                child: IconButton(
+                                  onPressed: changeHideDate,
+                                  icon: const Icon(
+                                    Icons.pivot_table_chart_outlined,
+                                  ),
+                                ),
+                              ),
+                            const Flexible(child: _ClubRatingButton()),
+                            if (onAddGame != null)
+                              _AddGameButton(onTap: onAddGame!),
                           ],
                         ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Flexible(child: _ClubRatingButton()),
-                          if (onAddGame != null) ...[
-                            _AddGameButton(onTap: onAddGame!),
-                            const SizedBox(width: 12),
-                          ],
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-      ),
-    );
-  }
+        ),
+      );
 
   Widget buildMobile(BuildContext context) {
     return Column(
@@ -95,6 +103,14 @@ class ClubInfoWidget extends StatelessWidget {
                   CustomButton(
                     text: 'Продлить подписку клуба',
                     onTap: billClub!,
+                  ),
+                ],
+
+                if (changeHideDate != null && kIsWeb) ...[
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    text: 'Скрыть рейтинг',
+                    onTap: changeHideDate!,
                   ),
                 ],
               ],

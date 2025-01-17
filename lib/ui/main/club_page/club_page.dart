@@ -65,64 +65,86 @@ class _ClubPageState extends CustomState<ClubPage> {
   }
 
   @override
-  Widget? buildMobile(BuildContext context) {
-    return BlocBuilder<ClubBloc, ClubState>(
-      builder: (context, state) {
-        return Stack(
-          children: [
-            if (state.model != null)
-              ClubInfoWidget(
-                clubModel: state.model!,
-                isMobile: true,
-                onAddGame: state.isOwner ? _addNewGame : null,
-                billClub: state.isOwner ? _bill : null,
-              ),
-          ],
-        );
-      },
-    );
-  }
+  Widget? buildMobile(BuildContext context) => BlocBuilder<ClubBloc, ClubState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return Stack(
+            children: [
+              if (state.model != null)
+                ClubInfoWidget(
+                  clubModel: state.model!,
+                  isMobile: true,
+                  onAddGame: state.isOwner ? _addNewGame : null,
+                  billClub: state.isOwner ? _bill : null,
+                  changeHideDate: state.isOwner ? _changeHideDate : null,
+                ),
+            ],
+          );
+        },
+      );
 
   @override
-  Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<ClubBloc, ClubState>(
-      builder: (context, state) {
-        return Stack(
-          children: [
-            Row(
-              children: [
-                if (state.model != null)
-                  Expanded(
-                    child: ClubInfoWidget(
-                      clubModel: state.model!,
-                      onAddGame: state.isOwner ? _addNewGame : null,
-                      billClub: state.isOwner ? _bill : null,
-                    ),
+  Widget buildDesktop(BuildContext context) => BlocBuilder<ClubBloc, ClubState>(
+        builder: (context, state) => state.isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Stack(
+                children: [
+                  Row(
+                    children: [
+                      if (state.model != null)
+                        Expanded(
+                          child: ClubInfoWidget(
+                            clubModel: state.model!,
+                            onAddGame: state.isOwner ? _addNewGame : null,
+                            billClub: state.isOwner ? _bill : null,
+                            changeHideDate:
+                                state.isOwner ? _changeHideDate : null,
+                          ),
+                        ),
+                    ],
                   ),
-              ],
-            ),
-            if (state.isOwner && kIsWeb)
-              Positioned(
-                bottom: 20,
-                right: 20,
-                child: FloatingActionButton.large(
-                  backgroundColor: context.theme.redColor,
-                  onPressed: _bill,
-                  child: const Icon(Icons.monetization_on_outlined),
-                ),
+                  if (state.isOwner && kIsWeb)
+                    Positioned(
+                      bottom: 20,
+                      right: 20,
+                      child: FloatingActionButton.large(
+                        backgroundColor: context.theme.redColor,
+                        onPressed: _bill,
+                        child: const Icon(Icons.monetization_on_outlined),
+                      ),
+                    ),
+                ],
               ),
-          ],
-        );
-      },
-    );
-  }
+      );
 
   void _addNewGame() => context.go(
-      AddClubGamePage.createLocation(
-        context,
-        context.read<ClubBloc>().state.model!.id,
-      ),
+        AddClubGamePage.createLocation(
+          context,
+          context.read<ClubBloc>().state.model!.id,
+        ),
+      );
+
+  void _changeHideDate() async {
+    final bloc = context.read<ClubBloc>();
+
+    final date = await showDatePicker(
+      context: context,
+      firstDate: DateTime(1990),
+      lastDate: DateTime.now(),
+      initialDate: bloc.state.hideDate,
     );
+
+    if (date == null) return;
+
+    bloc.add(ClubEvent.changeHideDate(dateTime: date));
+  }
 
   void _bill() async {
     final bloc = context.read<ClubBloc>();

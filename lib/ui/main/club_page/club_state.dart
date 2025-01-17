@@ -9,5 +9,6 @@ class ClubState with _$ClubState {
     @Default(true) isLoading,
     ClubModel? model,
     @Default(false) isOwner,
+    DateTime? hideDate,
   }) = _ClubState;
 }

@@ -10,12 +10,15 @@ import 'package:seating_generator_web/data/requests/edit_club_game_request.dart'
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_request.dart';
+import 'package:seating_generator_web/data/requests/get_hide_date_request.dart';
+import 'package:seating_generator_web/data/requests/update_hide_date_request.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/feature/club_games/data/request/club_tables_rating_request.dart';
-import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart'
+    as pb;
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/downloader/downloader.dart';
 
@@ -23,7 +26,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   ClubRepositoryImpl(super.client);
 
   @override
-  Future<int> addGame(ClubGameResult result, int clubId) {
+  Future<int> addGame(pb.ClubGameResult result, int clubId) {
     return AddClubGameRequest(clubId: clubId, result: result)
         .execute(client)
         .then((value) => value.gameId);
@@ -54,7 +57,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   }
 
   @override
-  Future<ClubGameResult> getGame(int gameId, int clubId) {
+  Future<pb.ClubGameResult> getGame(int gameId, int clubId) {
     return GetClubGameRequest(clubId: clubId, gameId: gameId).execute(client);
   }
 
@@ -67,7 +70,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   }
 
   @override
-  Future editGame(ClubGameResult result, int clubId, int gameId) {
+  Future editGame(pb.ClubGameResult result, int clubId, int gameId) {
     return EditClubGameRequest(clubId: clubId, gameId: gameId, result: result)
         .execute(client);
   }
@@ -111,7 +114,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
 
   @override
   Future<List<ClubModel>> getClubs({bool onlyMy = false}) {
-    final Future<ClubsEventOut> result;
+    final Future<pb.ClubsEventOut> result;
     if (onlyMy) {
       result = ClubsMyRequest().execute(client);
     } else {
@@ -121,4 +124,15 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
       (value) => value.club.map((e) => ClubModel.fromProto(e)).toList(),
     );
   }
+
+  @override
+  Future<DateTime?> getHideDate({required int id}) =>
+      GetHideDateRequest(id.toString())
+          .execute(client)
+          .then((value) => DateTime.tryParse(value.date));
+
+  @override
+  Future<void> updateHideDate({required int id, required DateTime? dateTime}) =>
+      UpdateHideDateRequest(clubId: id.toString(), dateTime: dateTime)
+          .execute(client);
 }

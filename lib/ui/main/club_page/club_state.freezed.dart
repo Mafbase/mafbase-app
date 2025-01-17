@@ -19,6 +19,7 @@ mixin _$ClubState {
   dynamic get isLoading => throw _privateConstructorUsedError;
   ClubModel? get model => throw _privateConstructorUsedError;
   dynamic get isOwner => throw _privateConstructorUsedError;
+  DateTime? get hideDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClubStateCopyWith<ClubState> get copyWith =>
@@ -30,7 +31,11 @@ abstract class $ClubStateCopyWith<$Res> {
   factory $ClubStateCopyWith(ClubState value, $Res Function(ClubState) then) =
       _$ClubStateCopyWithImpl<$Res, ClubState>;
   @useResult
-  $Res call({dynamic isLoading, ClubModel? model, dynamic isOwner});
+  $Res call(
+      {dynamic isLoading,
+      ClubModel? model,
+      dynamic isOwner,
+      DateTime? hideDate});
 
   $ClubModelCopyWith<$Res>? get model;
 }
@@ -51,6 +56,7 @@ class _$ClubStateCopyWithImpl<$Res, $Val extends ClubState>
     Object? isLoading = freezed,
     Object? model = freezed,
     Object? isOwner = freezed,
+    Object? hideDate = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: freezed == isLoading
@@ -65,6 +71,10 @@ class _$ClubStateCopyWithImpl<$Res, $Val extends ClubState>
           ? _value.isOwner
           : isOwner // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      hideDate: freezed == hideDate
+          ? _value.hideDate
+          : hideDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -89,7 +99,11 @@ abstract class _$$ClubStateImplCopyWith<$Res>
       __$$ClubStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic isLoading, ClubModel? model, dynamic isOwner});
+  $Res call(
+      {dynamic isLoading,
+      ClubModel? model,
+      dynamic isOwner,
+      DateTime? hideDate});
 
   @override
   $ClubModelCopyWith<$Res>? get model;
@@ -109,6 +123,7 @@ class __$$ClubStateImplCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? model = freezed,
     Object? isOwner = freezed,
+    Object? hideDate = freezed,
   }) {
     return _then(_$ClubStateImpl(
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
@@ -117,6 +132,10 @@ class __$$ClubStateImplCopyWithImpl<$Res>
           : model // ignore: cast_nullable_to_non_nullable
               as ClubModel?,
       isOwner: freezed == isOwner ? _value.isOwner! : isOwner,
+      hideDate: freezed == hideDate
+          ? _value.hideDate
+          : hideDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -125,7 +144,7 @@ class __$$ClubStateImplCopyWithImpl<$Res>
 
 class _$ClubStateImpl implements _ClubState {
   const _$ClubStateImpl(
-      {this.isLoading = true, this.model, this.isOwner = false});
+      {this.isLoading = true, this.model, this.isOwner = false, this.hideDate});
 
   @override
   @JsonKey()
@@ -135,10 +154,12 @@ class _$ClubStateImpl implements _ClubState {
   @override
   @JsonKey()
   final dynamic isOwner;
+  @override
+  final DateTime? hideDate;
 
   @override
   String toString() {
-    return 'ClubState(isLoading: $isLoading, model: $model, isOwner: $isOwner)';
+    return 'ClubState(isLoading: $isLoading, model: $model, isOwner: $isOwner, hideDate: $hideDate)';
   }
 
   @override
@@ -148,7 +169,9 @@ class _$ClubStateImpl implements _ClubState {
             other is _$ClubStateImpl &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             (identical(other.model, model) || other.model == model) &&
-            const DeepCollectionEquality().equals(other.isOwner, isOwner));
+            const DeepCollectionEquality().equals(other.isOwner, isOwner) &&
+            (identical(other.hideDate, hideDate) ||
+                other.hideDate == hideDate));
   }
 
   @override
@@ -156,7 +179,8 @@ class _$ClubStateImpl implements _ClubState {
       runtimeType,
       const DeepCollectionEquality().hash(isLoading),
       model,
-      const DeepCollectionEquality().hash(isOwner));
+      const DeepCollectionEquality().hash(isOwner),
+      hideDate);
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +193,8 @@ abstract class _ClubState implements ClubState {
   const factory _ClubState(
       {final dynamic isLoading,
       final ClubModel? model,
-      final dynamic isOwner}) = _$ClubStateImpl;
+      final dynamic isOwner,
+      final DateTime? hideDate}) = _$ClubStateImpl;
 
   @override
   dynamic get isLoading;
@@ -177,6 +202,8 @@ abstract class _ClubState implements ClubState {
   ClubModel? get model;
   @override
   dynamic get isOwner;
+  @override
+  DateTime? get hideDate;
   @override
   @JsonKey(ignore: true)
   _$$ClubStateImplCopyWith<_$ClubStateImpl> get copyWith =>

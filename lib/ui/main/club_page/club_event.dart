@@ -11,4 +11,7 @@ class ClubEvent with _$ClubEvent {
   const factory ClubEvent.billClub({
     required int days,
   }) = ClubEventBillClub;
+
+  const factory ClubEvent.changeHideDate({required DateTime? dateTime}) =
+      ClubEventChangeHideDate;
 }

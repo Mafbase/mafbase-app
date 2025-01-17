@@ -4,6 +4,7 @@ import 'package:seating_generator_web/domain/interactors/bill_club_interactor.da
 import 'package:seating_generator_web/domain/interactors/check_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
@@ -26,6 +27,7 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
   final ClubRouter router;
   final CheckClubInteractor _checkClubInteractor;
   final BillClubInteractor _billClubInteractor;
+  final ClubRepository _clubRepository;
 
   ClubBloc({
     BuildContext? context,
@@ -34,10 +36,12 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
     required GetClubInteractor getClubInteractor,
     required BillClubInteractor billClubInteractor,
     required CheckClubInteractor checkClubInteractor,
+    required ClubRepository clubRepository,
   })  : _clubId = args.clubId,
         _checkClubInteractor = checkClubInteractor,
         _billClubInteractor = billClubInteractor,
         _getClubInteractor = getClubInteractor,
+        _clubRepository = clubRepository,
         super(
           args.cachedModel == null
               ? const ClubState()
@@ -50,6 +54,16 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
     on<ClubEventPageOpened>(_onPageOpened);
     on<ClubEventOpenRating>(_onOpenRating);
     on<ClubEventBillClub>(_onBillClub);
+    on<ClubEventChangeHideDate>(_onChangeHideDate);
+  }
+
+  _onChangeHideDate(ClubEventChangeHideDate event, Emitter emit) async {
+    emit(state.copyWith(isLoading: true));
+    await _clubRepository.updateHideDate(
+      id: _clubId,
+      dateTime: event.dateTime,
+    );
+    add(const ClubEvent.pageOpened());
   }
 
   _onOpenRating(ClubEventOpenRating event, Emitter emit) async {
@@ -65,11 +79,15 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
       _checkClubInteractor(_clubId),
     ]);
 
+    final hideDate =
+        isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
+
     emit(
       state.copyWith(
         isLoading: false,
         model: club,
         isOwner: isOwner,
+        hideDate: hideDate,
       ),
     );
   }

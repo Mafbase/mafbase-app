@@ -130,6 +130,18 @@ final $typed_data.Uint8List tableSeatingResultDescriptor = $convert.base64Decode
     'ITLmdlbmVyYXRlZC5CZXN0TW92ZVIIYmVzdE1vdmUSGgoIYWRkU2NvcmUYBiADKAFSCGFkZFNj'
     'b3JlQgcKBV9kaWVk');
 
+@$core.Deprecated('Use updateHideDateRequestDescriptor instead')
+const UpdateHideDateRequest$json = {
+  '1': 'UpdateHideDateRequest',
+  '2': [
+    {'1': 'date', '3': 1, '4': 1, '5': 9, '10': 'date'},
+  ],
+};
+
+/// Descriptor for `UpdateHideDateRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateHideDateRequestDescriptor = $convert.base64Decode(
+    'ChVVcGRhdGVIaWRlRGF0ZVJlcXVlc3QSEgoEZGF0ZRgBIAEoCVIEZGF0ZQ==');
+
 @$core.Deprecated('Use tableSeatingItemDescriptor instead')
 const TableSeatingItem$json = {
   '1': 'TableSeatingItem',

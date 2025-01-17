@@ -255,6 +255,56 @@ class TableSeatingResult extends $pb.GeneratedMessage {
   $core.List<$core.double> get addScore => $_getList(5);
 }
 
+class UpdateHideDateRequest extends $pb.GeneratedMessage {
+  factory UpdateHideDateRequest({
+    $core.String? date,
+  }) {
+    final $result = create();
+    if (date != null) {
+      $result.date = date;
+    }
+    return $result;
+  }
+  UpdateHideDateRequest._() : super();
+  factory UpdateHideDateRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateHideDateRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHideDateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'date')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateHideDateRequest clone() => UpdateHideDateRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateHideDateRequest copyWith(void Function(UpdateHideDateRequest) updates) => super.copyWith((message) => updates(message as UpdateHideDateRequest)) as UpdateHideDateRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateHideDateRequest create() => UpdateHideDateRequest._();
+  UpdateHideDateRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateHideDateRequest> createRepeated() => $pb.PbList<UpdateHideDateRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateHideDateRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHideDateRequest>(create);
+  static UpdateHideDateRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get date => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set date($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDate() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDate() => clearField(1);
+}
+
 class TableSeatingItem extends $pb.GeneratedMessage {
   factory TableSeatingItem({
     $core.int? gameId,

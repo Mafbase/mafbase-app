@@ -21,6 +21,7 @@ mixin _$ClubEvent {
     required TResult Function() pageOpened,
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
+    required TResult Function(DateTime? dateTime) changeHideDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$ClubEvent {
     TResult? Function()? pageOpened,
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
+    TResult? Function(DateTime? dateTime)? changeHideDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$ClubEvent {
     TResult Function()? pageOpened,
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
+    TResult Function(DateTime? dateTime)? changeHideDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$ClubEvent {
     required TResult Function(ClubEventPageOpened value) pageOpened,
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
+    required TResult Function(ClubEventChangeHideDate value) changeHideDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$ClubEvent {
     TResult? Function(ClubEventPageOpened value)? pageOpened,
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
+    TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$ClubEvent {
     TResult Function(ClubEventPageOpened value)? pageOpened,
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
+    TResult Function(ClubEventChangeHideDate value)? changeHideDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +127,7 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     required TResult Function() pageOpened,
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
+    required TResult Function(DateTime? dateTime) changeHideDate,
   }) {
     return pageOpened();
   }
@@ -131,6 +138,7 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult? Function()? pageOpened,
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
+    TResult? Function(DateTime? dateTime)? changeHideDate,
   }) {
     return pageOpened?.call();
   }
@@ -141,6 +149,7 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult Function()? pageOpened,
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
+    TResult Function(DateTime? dateTime)? changeHideDate,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -155,6 +164,7 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     required TResult Function(ClubEventPageOpened value) pageOpened,
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
+    required TResult Function(ClubEventChangeHideDate value) changeHideDate,
   }) {
     return pageOpened(this);
   }
@@ -165,6 +175,7 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult? Function(ClubEventPageOpened value)? pageOpened,
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
+    TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
   }) {
     return pageOpened?.call(this);
   }
@@ -175,6 +186,7 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult Function(ClubEventPageOpened value)? pageOpened,
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
+    TResult Function(ClubEventChangeHideDate value)? changeHideDate,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -230,6 +242,7 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     required TResult Function() pageOpened,
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
+    required TResult Function(DateTime? dateTime) changeHideDate,
   }) {
     return openRating();
   }
@@ -240,6 +253,7 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult? Function()? pageOpened,
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
+    TResult? Function(DateTime? dateTime)? changeHideDate,
   }) {
     return openRating?.call();
   }
@@ -250,6 +264,7 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult Function()? pageOpened,
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
+    TResult Function(DateTime? dateTime)? changeHideDate,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -264,6 +279,7 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     required TResult Function(ClubEventPageOpened value) pageOpened,
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
+    required TResult Function(ClubEventChangeHideDate value) changeHideDate,
   }) {
     return openRating(this);
   }
@@ -274,6 +290,7 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult? Function(ClubEventPageOpened value)? pageOpened,
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
+    TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
   }) {
     return openRating?.call(this);
   }
@@ -284,6 +301,7 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult Function(ClubEventPageOpened value)? pageOpened,
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
+    TResult Function(ClubEventChangeHideDate value)? changeHideDate,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -365,6 +383,7 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     required TResult Function() pageOpened,
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
+    required TResult Function(DateTime? dateTime) changeHideDate,
   }) {
     return billClub(days);
   }
@@ -375,6 +394,7 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult? Function()? pageOpened,
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
+    TResult? Function(DateTime? dateTime)? changeHideDate,
   }) {
     return billClub?.call(days);
   }
@@ -385,6 +405,7 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult Function()? pageOpened,
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
+    TResult Function(DateTime? dateTime)? changeHideDate,
     required TResult orElse(),
   }) {
     if (billClub != null) {
@@ -399,6 +420,7 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     required TResult Function(ClubEventPageOpened value) pageOpened,
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
+    required TResult Function(ClubEventChangeHideDate value) changeHideDate,
   }) {
     return billClub(this);
   }
@@ -409,6 +431,7 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult? Function(ClubEventPageOpened value)? pageOpened,
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
+    TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
   }) {
     return billClub?.call(this);
   }
@@ -419,6 +442,7 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult Function(ClubEventPageOpened value)? pageOpened,
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
+    TResult Function(ClubEventChangeHideDate value)? changeHideDate,
     required TResult orElse(),
   }) {
     if (billClub != null) {
@@ -436,4 +460,154 @@ abstract class ClubEventBillClub implements ClubEvent {
   @JsonKey(ignore: true)
   _$$ClubEventBillClubImplCopyWith<_$ClubEventBillClubImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClubEventChangeHideDateImplCopyWith<$Res> {
+  factory _$$ClubEventChangeHideDateImplCopyWith(
+          _$ClubEventChangeHideDateImpl value,
+          $Res Function(_$ClubEventChangeHideDateImpl) then) =
+      __$$ClubEventChangeHideDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime? dateTime});
+}
+
+/// @nodoc
+class __$$ClubEventChangeHideDateImplCopyWithImpl<$Res>
+    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventChangeHideDateImpl>
+    implements _$$ClubEventChangeHideDateImplCopyWith<$Res> {
+  __$$ClubEventChangeHideDateImplCopyWithImpl(
+      _$ClubEventChangeHideDateImpl _value,
+      $Res Function(_$ClubEventChangeHideDateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dateTime = freezed,
+  }) {
+    return _then(_$ClubEventChangeHideDateImpl(
+      dateTime: freezed == dateTime
+          ? _value.dateTime
+          : dateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
+  const _$ClubEventChangeHideDateImpl({required this.dateTime});
+
+  @override
+  final DateTime? dateTime;
+
+  @override
+  String toString() {
+    return 'ClubEvent.changeHideDate(dateTime: $dateTime)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClubEventChangeHideDateImpl &&
+            (identical(other.dateTime, dateTime) ||
+                other.dateTime == dateTime));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, dateTime);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClubEventChangeHideDateImplCopyWith<_$ClubEventChangeHideDateImpl>
+      get copyWith => __$$ClubEventChangeHideDateImplCopyWithImpl<
+          _$ClubEventChangeHideDateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pageOpened,
+    required TResult Function() openRating,
+    required TResult Function(int days) billClub,
+    required TResult Function(DateTime? dateTime) changeHideDate,
+  }) {
+    return changeHideDate(dateTime);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pageOpened,
+    TResult? Function()? openRating,
+    TResult? Function(int days)? billClub,
+    TResult? Function(DateTime? dateTime)? changeHideDate,
+  }) {
+    return changeHideDate?.call(dateTime);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pageOpened,
+    TResult Function()? openRating,
+    TResult Function(int days)? billClub,
+    TResult Function(DateTime? dateTime)? changeHideDate,
+    required TResult orElse(),
+  }) {
+    if (changeHideDate != null) {
+      return changeHideDate(dateTime);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ClubEventPageOpened value) pageOpened,
+    required TResult Function(ClubEventOpenRating value) openRating,
+    required TResult Function(ClubEventBillClub value) billClub,
+    required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+  }) {
+    return changeHideDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ClubEventPageOpened value)? pageOpened,
+    TResult? Function(ClubEventOpenRating value)? openRating,
+    TResult? Function(ClubEventBillClub value)? billClub,
+    TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+  }) {
+    return changeHideDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ClubEventPageOpened value)? pageOpened,
+    TResult Function(ClubEventOpenRating value)? openRating,
+    TResult Function(ClubEventBillClub value)? billClub,
+    TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    required TResult orElse(),
+  }) {
+    if (changeHideDate != null) {
+      return changeHideDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClubEventChangeHideDate implements ClubEvent {
+  const factory ClubEventChangeHideDate({required final DateTime? dateTime}) =
+      _$ClubEventChangeHideDateImpl;
+
+  DateTime? get dateTime;
+  @JsonKey(ignore: true)
+  _$$ClubEventChangeHideDateImplCopyWith<_$ClubEventChangeHideDateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

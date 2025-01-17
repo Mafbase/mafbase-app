@@ -241,6 +241,7 @@ void registerSharedGetIt() {
         getClubInteractor: getIt(),
         billClubInteractor: getIt(),
         checkClubInteractor: getIt(),
+        clubRepository: getIt(),
         router: getIt(param1: context),
         args: args,
         context: context,
