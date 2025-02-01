@@ -19,8 +19,10 @@ class CustomTextField extends StatefulWidget {
   final Function(String s)? onChanged;
   final FocusNode? focusNode;
   final TextInputType? textInputType;
+  final TextInputAction? textInputAction;
   final bool readOnly;
   final String? Function(String? value) validate;
+  final int? maxLines;
 
   const CustomTextField({
     Key? key,
@@ -35,10 +37,12 @@ class CustomTextField extends StatefulWidget {
     this.errorText,
     this.focusNode,
     this.autoFillHints,
+    this.textInputAction,
     this.canObscure = false,
     this.isRequiredField = false,
     this.validate = _validate,
     this.onChanged,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -71,10 +75,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 validator: widget.validate,
                 readOnly: widget.readOnly,
                 keyboardType: widget.textInputType,
+                textInputAction: widget.textInputAction,
                 onFieldSubmitted: widget.onSubmit,
                 focusNode: widget.focusNode,
                 controller: widget.controller,
                 obscureText: obscureText,
+                maxLines: widget.maxLines,
+                minLines: 1,
                 decoration: InputDecoration(
                   suffixIcon: widget.suffixIcon,
                   errorText: widget.errorText,

@@ -37,6 +37,7 @@ abstract class MyTheme {
   factory MyTheme.light() => _LightTheme._();
 }
 
+
 class _LightTheme implements MyTheme {
   final _defaultTextStyle = const TextStyle(
     fontFamily: "Open Sans",
@@ -75,13 +76,13 @@ class _LightTheme implements MyTheme {
 
   @override
   late final TextStyle hintTextStyle = _defaultTextStyle.copyWith(
-    fontSize: 14,
+    fontSize: 12,
     color: greyColor,
   );
 
   @override
   TextStyle get defaultTextStyle => _defaultTextStyle.copyWith(
-        fontSize: 22,
+        fontSize: 16,
         fontWeight: FontWeight.w400,
       );
 
@@ -90,7 +91,7 @@ class _LightTheme implements MyTheme {
 
   @override
   TextStyle get headerTextStyle => _defaultTextStyle.copyWith(
-        fontSize: 40,
+        fontSize: 28,
         fontWeight: FontWeight.w600,
       );
 

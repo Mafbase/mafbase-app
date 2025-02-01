@@ -45,6 +45,9 @@ class _CustomTextInfoDialogState extends State<CustomTextInfoDialog> {
               child: CustomTextField(
                 controller: controller,
                 label: "Сообщение",
+                textInputType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                maxLines: 5,
               ),
             ),
             const SizedBox(height: 12),

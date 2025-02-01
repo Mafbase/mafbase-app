@@ -164,6 +164,13 @@ class MafbaseApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               supportedLocales: AppLocalizations.supportedLocales,
+              builder: (context, child) => MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: TextScaler.noScaling,
+                  boldText: false,
+                ),
+                child: child ?? const SizedBox.shrink(),
+              ),
             );
           },
         ),
