@@ -61,7 +61,8 @@ class AddClubGamePage extends StatefulWidget {
     builder: (context, state) {
       final gameId = int.parse(state.pathParameters["gameId"]!);
       final tournamentId = int.parse(state.pathParameters["id"]!);
-      final edit = bool.tryParse(state.uri.queryParameters['edit'] ?? '') ?? true;
+      final edit =
+          bool.tryParse(state.uri.queryParameters['edit'] ?? '') ?? true;
       return BlocProvider<AddClubGameBloc>(
         create: (context) => AddClubGameBloc(
           context: context,
@@ -165,7 +166,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   final addScoreFocusNodes = List.generate(10, (index) => FocusNode());
   GameWin? winSelected;
   int? firstDie;
-  BestMove? bestMove = BestMove.miss;
+  BestMove? bestMove;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
   late DateTime date = widget.initDateTime ?? DateTime.now();
   CiSchemeModel? ciSchemeModel;
@@ -512,15 +513,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                       mapToString: (model) {
                         return model?.name ?? context.locale.withoutCi;
                       },
-                      items: List.generate(
-                        state.ciSchemes.length + 1,
-                        (index) {
-                          if (index == 0) {
-                            return null;
-                          }
-                          return state.ciSchemes[index - 1];
-                        },
-                      ),
+                      items: [
+                        CiSchemeModel.empty,
+                        ...state.ciSchemes,
+                      ],
                       onChanged: (value) {
                         setState(() {
                           ciSchemeModel = value;
@@ -730,6 +726,10 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
       AppRouter.showErrorDialog(context, 'Не указан первый отстрел');
       return;
     }
+    if (ciSchemeModel == null) {
+      AppRouter.showErrorDialog(context, 'Не указана схема компенсации');
+      return;
+    }
 
     context.read<AddClubGameBloc>().add(
           AddClubGameEvent.submit(
@@ -756,7 +756,9 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               firstDie: firstDie,
               win: winSelected,
               bestMove: bestMove,
-              ciId: ciSchemeModel?.id,
+              ciId: ciSchemeModel == CiSchemeModel.empty
+                  ? null
+                  : ciSchemeModel?.id,
             ),
             gameId: widget.gameId,
           ),

@@ -80,7 +80,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 focusNode: widget.focusNode,
                 controller: widget.controller,
                 obscureText: obscureText,
-                maxLines: widget.maxLines,
+                maxLines: widget.maxLines ?? 1,
                 minLines: 1,
                 decoration: InputDecoration(
                   suffixIcon: widget.suffixIcon,

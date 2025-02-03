@@ -14,4 +14,6 @@ class CiSchemeModel with _$CiSchemeModel {
         id: proto.id,
         name: proto.name,
       );
+
+  static const CiSchemeModel empty = CiSchemeModel(id: -1, name: 'Без коменсации');
 }

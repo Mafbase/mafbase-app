@@ -186,9 +186,11 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
                 .nickname,
             died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
-            ciModel: state.ciSchemes.firstWhereOrNull(
-              (element) => element.id == game.ciId,
-            ),
+            ciModel: game.hasCiId()
+                ? state.ciSchemes.firstWhereOrNull(
+                    (element) => element.id == game.ciId,
+                  )
+                : CiSchemeModel.empty,
           ),
         );
         emit(state.copyWith(isLoading: false));
