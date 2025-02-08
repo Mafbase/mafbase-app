@@ -44,7 +44,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     this.tournamentId,
     BuildContext? context,
   })  : assert((clubId == null) != (tournamentId == null)),
-        super(const AddClubGameState(), context) {
+        super(AddClubGameState(isTournament: tournamentId != null), context) {
     on<AddClubGameEventPageOpened>(_onPageOpened);
     on<AddClubGameEventSubmit>(_onSubmit);
     on<AddClubGameEventPageEdit>(_onEdit);
@@ -186,11 +186,11 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
                 .nickname,
             died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
-            ciModel: game.hasCiId()
+            ciModel: (game.hasCiId()
                 ? state.ciSchemes.firstWhereOrNull(
                     (element) => element.id == game.ciId,
                   )
-                : CiSchemeModel.empty,
+                : CiSchemeModel.empty) ?? CiSchemeModel.empty,
           ),
         );
         emit(state.copyWith(isLoading: false));
@@ -241,6 +241,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
               "Не указан",
           died: game.hasFirstDie() ? game.firstDie : null,
           date: DateTime.now(),
+          ciModel: CiSchemeModel.empty,
         ),
       );
 

@@ -197,6 +197,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
             viewOnly: widget.readOnly,
           ),
         );
+
+    if (context.read<AddClubGameBloc>().state.isTournament) {
+      ciSchemeModel = CiSchemeModel.empty;
+    }
+
     super.initState();
   }
 
@@ -496,37 +501,38 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                 ),
               ],
             ),
-            Wrap(
-              children: [
-                Text(
-                  context.locale.ci,
-                  style: MyTheme.of(context).defaultTextStyle,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                StatefulBuilder(
-                  builder: (context, setState) {
-                    return CustomDropdown<CiSchemeModel>(
-                      readOnly: widget.readOnly || state.isTournament,
-                      initValue: ciSchemeModel,
-                      mapToString: (model) {
-                        return model?.name ?? context.locale.withoutCi;
-                      },
-                      items: [
-                        CiSchemeModel.empty,
-                        ...state.ciSchemes,
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          ciSchemeModel = value;
-                        });
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
+            if (!state.isTournament)
+              Wrap(
+                children: [
+                  Text(
+                    context.locale.ci,
+                    style: MyTheme.of(context).defaultTextStyle,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  StatefulBuilder(
+                    builder: (context, setState) {
+                      return CustomDropdown<CiSchemeModel>(
+                        readOnly: widget.readOnly || state.isTournament,
+                        initValue: ciSchemeModel,
+                        mapToString: (model) {
+                          return model?.name ?? context.locale.withoutCi;
+                        },
+                        items: [
+                          CiSchemeModel.empty,
+                          ...state.ciSchemes,
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            ciSchemeModel = value;
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
             StatefulBuilder(
               builder: (context, setState) => InkWell(
                 onTap: widget.readOnly || state.isTournament

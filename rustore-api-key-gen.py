@@ -106,7 +106,7 @@ def submit_for_review(package_name, api_key, version_number):
         print(f"Черновик отправлен на ревью: {response.text}")
         return version_number
     else:
-        print(f"Не удалось отправить черновьк на ревью: {response.status_code} {response.text}")
+        print(f"Не удалось отправить черновик на ревью: {response.status_code} {response.text}")
         sys.exit(1)
 
 def upload_aab(package_name, version_number, api_key, aab_file_path):
