@@ -209,7 +209,9 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                     if (state.isLoading)
                       const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: CircularProgressIndicator(),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                   ],
                 ),
@@ -359,7 +361,9 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                     if (state.isLoading)
                       const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: CircularProgressIndicator(),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                   ],
                 ),
