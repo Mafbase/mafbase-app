@@ -72,10 +72,13 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState>
     Emitter emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    final notFound = await _tournamentEditRepository.getGomafiaSeating(
-      tournamentId: tournamentId,
-      gomafiaId: event.gomafiaId,
-    );
+    final notFound = await _tournamentEditRepository
+        .getGomafiaSeating(
+          tournamentId: tournamentId,
+          gomafiaId: event.gomafiaId,
+        );
+
+    event.completer?.complete();
 
     if (notFound.isEmpty) {
       add(SeatingPageEvent.pageOpened(tournamentId: tournamentId));

@@ -8,6 +8,7 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.d
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
@@ -68,20 +69,25 @@ class TournamentPage extends StatefulWidget {
           ),
         ],
         builder: (context, state, child) {
+          final tournamentId = int.parse(state.pathParameters["id"] ?? "");
           return MultiBlocProvider(
             providers: [
               BlocProvider<TournamentPageBloc>(
                 key: const Key("TournamentPageBloc"),
                 create: (context) => getIt<TournamentPageBloc>(
                   param1: context,
-                  param2: int.parse(state.pathParameters["id"] ?? ""),
-                ),
+                  param2: tournamentId,
+                )..add(const TournamentPageEvent.pageOpened()),
               ),
               BlocProvider<SeatingPageBloc>(
                 key: const Key("SeatingPageBloc"),
                 create: (context) => getIt<SeatingPageBloc>(
                   param1: context,
-                ),
+                )..add(
+                    SeatingPageEvent.pageOpened(
+                      tournamentId: tournamentId,
+                    ),
+                  ),
               ),
             ],
             child: TournamentPage(
@@ -97,14 +103,6 @@ class _TournamentPageState extends CustomState<TournamentPage>
     with
         EffectListener<TournamentPageEffect, TournamentPageState,
             TournamentPageBloc, TournamentPage> {
-  @override
-  void initState() {
-    context
-        .read<TournamentPageBloc>()
-        .add(const TournamentPageEvent.pageOpened());
-    super.initState();
-  }
-
   void openFinalPlayersDialog(TournamentPageState state) {
     FinalPlayersDialog.open(
       context: context,
@@ -270,39 +268,39 @@ class _TournamentPageState extends CustomState<TournamentPage>
               }
             },
           ),
-        if (state.isMyTournament && state.notificationEnabled) ...[
-          MenuItemModel(
-            text: 'Оповещение об игре',
-            onTap: () {
-              StartGameInfoDialog.show(
-                context: context,
-                maxGame: state.settings.defaultGames +
-                    state.settings.swissGames +
-                    state.settings.finalGames,
-              ).then((game) {
-                if (game == null || !context.mounted) {
-                  return;
-                }
-                context
-                    .read<TournamentPageBloc>()
-                    .add(TournamentPageEvent.startGameInfo(game: game));
-              });
-            },
-          ),
-          MenuItemModel(
-            text: 'Текстовое оповещение',
-            onTap: () {
-              CustomTextInfoDialog.show(context: context).then((text) {
-                if (text == null || !context.mounted) {
-                  return;
-                }
+        if (context.watch<SeatingPageBloc>().state.games.length
+            case int games)
+          if (state.isMyTournament && state.notificationEnabled) ...[
+            MenuItemModel(
+              text: 'Оповещение об игре',
+              onTap: () {
+                StartGameInfoDialog.show(
+                  context: context,
+                  maxGame: games,
+                ).then((game) {
+                  if (game == null || !context.mounted) {
+                    return;
+                  }
+                  context
+                      .read<TournamentPageBloc>()
+                      .add(TournamentPageEvent.startGameInfo(game: game));
+                });
+              },
+            ),
+            MenuItemModel(
+              text: 'Текстовое оповещение',
+              onTap: () {
+                CustomTextInfoDialog.show(context: context).then((text) {
+                  if (text == null || !context.mounted) {
+                    return;
+                  }
 
-                context
-                    .read<TournamentPageBloc>()
-                    .add(TournamentPageEvent.customTextInfo(text: text));
-              });
-            },
-          ),
-        ],
+                  context
+                      .read<TournamentPageBloc>()
+                      .add(TournamentPageEvent.customTextInfo(text: text));
+                });
+              },
+            ),
+          ],
       ];
 }

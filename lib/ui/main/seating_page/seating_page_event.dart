@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
@@ -14,8 +16,9 @@ class SeatingPageEvent with _$SeatingPageEvent {
       SeatingPageEventFsmSeatingTapped;
 
   const factory SeatingPageEvent.autoFsmSeating(
-    int gomafiaId,
-  ) = SeatingPageEventAutoFsmSeating;
+    int gomafiaId, {
+    Completer? completer,
+  }) = SeatingPageEventAutoFsmSeating;
 
   const factory SeatingPageEvent.deletePair({
     required PlayerModel first,

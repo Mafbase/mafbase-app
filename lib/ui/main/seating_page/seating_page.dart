@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
@@ -12,6 +14,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.da
 import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -51,16 +54,6 @@ class _SeatingPageState extends State<SeatingPage>
         EffectListener<SeatingPageEffect, SeatingPageState, SeatingPageBloc,
             SeatingPage> {
   final seatingKey = GlobalKey();
-
-  @override
-  void initState() {
-    context.read<SeatingPageBloc>().add(
-          SeatingPageEvent.pageOpened(
-            tournamentId: widget.tournamentId,
-          ),
-        );
-    super.initState();
-  }
 
   Widget buildActions() => Row(
         mainAxisSize: MainAxisSize.min,
@@ -376,9 +369,17 @@ class _SeatingPageState extends State<SeatingPage>
             if (id == null) return;
             if (!mounted) return;
 
+            final completer = Completer();
+
             context.read<SeatingPageBloc>().add(
-                  SeatingPageEvent.autoFsmSeating(id),
+                  SeatingPageEvent.autoFsmSeating(id, completer: completer),
                 );
+            await completer.future;
+            if (!mounted) return;
+
+            context.read<TournamentPageBloc>()
+              ..add(const TournamentPageEvent.pageOpened())
+              ..add(const TournamentPageEvent.playersListOpened());
           },
           title: 'Загрузить с Gomafia',
         ),
@@ -399,8 +400,20 @@ class _SeatingPageState extends State<SeatingPage>
     if (!mounted) return;
     if (!success) return;
 
-    context
-        .read<SeatingPageBloc>()
-        .add(SeatingPageEvent.autoFsmSeating(effect.gomafiaId));
+    final completer = Completer();
+    context.read<SeatingPageBloc>().add(
+          SeatingPageEvent.autoFsmSeating(
+            effect.gomafiaId,
+            completer: completer,
+          ),
+        );
+
+    await completer.future;
+    if (!mounted) return;
+
+    context.read<TournamentPageBloc>()
+      ..add(const TournamentPageEvent.pageOpened())
+      ..add(const TournamentPageEvent.playersListOpened());
+    ;
   }
 }
