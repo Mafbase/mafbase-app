@@ -16,7 +16,7 @@ def extract_latest_changelog(filepath):
         content = file.read()
 
     # Регулярное выражение для поиска последней версии и ее изменений
-    pattern = r'## \[(\d+\.\d+\.\d+)\] - \d{2}\.\d{2}\.\d{4}\n+((?: - .*\n?)*)'
+    pattern = r'## \[(\d+\.\d+\.\d+)\] - \d{2}\.\d{2}\.\d{4}\n+((?:- .*\n?)*)'
     match = re.search(pattern, content)
 
     if match:
