@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
@@ -184,123 +186,129 @@ class _TournamentPageState extends CustomState<TournamentPage>
     );
   }
 
-  List<MenuItemModel> menuItems(TournamentPageState state) => [
-        MenuItemModel(
-          text: context.locale.tournamentPageListOfPlayers,
-          onTap: () {
-            context
-                .read<TournamentPageBloc>()
-                .add(const TournamentPageEvent.playersListTapped());
-          },
-        ),
-        if (state.isMyTournament)
-          MenuItemModel(
-            text: AppLocalizations.of(context)!.addPlayer,
-            onTap: () {
-              context.read<TournamentPageBloc>().add(
-                    const TournamentPageEvent.addPlayerTapped(),
-                  );
-            },
-          ),
-        MenuItemModel(
-          text: context.locale.seating,
-          onTap: () {
-            context
-                .read<TournamentPageBloc>()
-                .add(const TournamentPageEvent.openSeatingPage());
-          },
-        ),
-        if (state.isMyTournament)
-          MenuItemModel(
-            text: context.locale.tournamentSettingsTitle,
-            onTap: () async {
-              final oldSettings =
-                  context.read<TournamentPageBloc>().state.settings;
-              final settings = await TournamentSettingsDialog.open(
-                context: context,
-                initValue: oldSettings,
-                onFinalPlayersTapped: () => openFinalPlayersDialog(state),
-              );
-              if (mounted && settings != null && settings != oldSettings) {
-                context.read<TournamentPageBloc>().add(
-                      TournamentPageEvent.updateSettings(
-                        settings: settings,
-                      ),
-                    );
-              }
-            },
-          ),
-        MenuItemModel(
-          text: 'Таблица',
-          onTap: () {
-            context
-                .read<TournamentPageBloc>()
-                .add(const TournamentPageEvent.openRating());
-          },
-        ),
-        if (state.billedTranslation && state.isMyTournament)
-          MenuItemModel(
-            text: context.locale.translationDialogTitle,
-            onTap: () {
-              TranslationDialog.open(
-                context: context,
-                tournamentId: widget.tournamentId,
-                tablesCount: (state.tournamentPlayers.length / 10).floor(),
-              );
-            },
-          ),
-        if (state.isMyTournament && kIsWeb)
-          MenuItemModel(
-            text: 'Оплата',
-            onTap: () async {
-              final result = await TournamentBillingDialog.open(
-                context: context,
-                billedPlayers: state.billedPlayers,
-                hasTranslation: state.billedTranslation,
-              );
-              if (result != null && mounted) {
-                context.read<TournamentPageBloc>().add(
-                      TournamentPageEvent.bill(
-                        playersCount: result.billedPlayers,
-                        billedTranlsation: result.billedTranslation,
-                      ),
-                    );
-              }
-            },
-          ),
-        if (context.watch<SeatingPageBloc>().state.games.length
-            case int games)
-          if (state.isMyTournament && state.notificationEnabled) ...[
-            MenuItemModel(
-              text: 'Оповещение об игре',
-              onTap: () {
-                StartGameInfoDialog.show(
-                  context: context,
-                  maxGame: games,
-                ).then((game) {
-                  if (game == null || !context.mounted) {
-                    return;
-                  }
-                  context
-                      .read<TournamentPageBloc>()
-                      .add(TournamentPageEvent.startGameInfo(game: game));
-                });
-              },
-            ),
-            MenuItemModel(
-              text: 'Текстовое оповещение',
-              onTap: () {
-                CustomTextInfoDialog.show(context: context).then((text) {
-                  if (text == null || !context.mounted) {
-                    return;
-                  }
+  List<MenuItemModel> menuItems(TournamentPageState state) {
+    final showBill = context.read<AuthNotifier>().value.mapOrNull(
+              authorized: (model) => !model.hideBilling,
+            ) ??
+        true;
 
-                  context
-                      .read<TournamentPageBloc>()
-                      .add(TournamentPageEvent.customTextInfo(text: text));
-                });
-              },
-            ),
-          ],
-      ];
+    return [
+      MenuItemModel(
+        text: context.locale.tournamentPageListOfPlayers,
+        onTap: () {
+          context
+              .read<TournamentPageBloc>()
+              .add(const TournamentPageEvent.playersListTapped());
+        },
+      ),
+      if (state.isMyTournament)
+        MenuItemModel(
+          text: AppLocalizations.of(context)!.addPlayer,
+          onTap: () {
+            context.read<TournamentPageBloc>().add(
+                  const TournamentPageEvent.addPlayerTapped(),
+                );
+          },
+        ),
+      MenuItemModel(
+        text: context.locale.seating,
+        onTap: () {
+          context
+              .read<TournamentPageBloc>()
+              .add(const TournamentPageEvent.openSeatingPage());
+        },
+      ),
+      if (state.isMyTournament)
+        MenuItemModel(
+          text: context.locale.tournamentSettingsTitle,
+          onTap: () async {
+            final oldSettings =
+                context.read<TournamentPageBloc>().state.settings;
+            final settings = await TournamentSettingsDialog.open(
+              context: context,
+              initValue: oldSettings,
+              onFinalPlayersTapped: () => openFinalPlayersDialog(state),
+            );
+            if (mounted && settings != null && settings != oldSettings) {
+              context.read<TournamentPageBloc>().add(
+                    TournamentPageEvent.updateSettings(
+                      settings: settings,
+                    ),
+                  );
+            }
+          },
+        ),
+      MenuItemModel(
+        text: 'Таблица',
+        onTap: () {
+          context
+              .read<TournamentPageBloc>()
+              .add(const TournamentPageEvent.openRating());
+        },
+      ),
+      if (state.billedTranslation && state.isMyTournament)
+        MenuItemModel(
+          text: context.locale.translationDialogTitle,
+          onTap: () {
+            TranslationDialog.open(
+              context: context,
+              tournamentId: widget.tournamentId,
+              tablesCount: (state.tournamentPlayers.length / 10).floor(),
+            );
+          },
+        ),
+      if (state.isMyTournament && showBill)
+        MenuItemModel(
+          text: 'Оплата',
+          onTap: () async {
+            final result = await TournamentBillingDialog.open(
+              context: context,
+              billedPlayers: state.billedPlayers,
+              hasTranslation: state.billedTranslation,
+            );
+            if (result != null && mounted) {
+              context.read<TournamentPageBloc>().add(
+                    TournamentPageEvent.bill(
+                      playersCount: result.billedPlayers,
+                      billedTranlsation: result.billedTranslation,
+                    ),
+                  );
+            }
+          },
+        ),
+      if (context.read<SeatingPageBloc>().state.games.length case int games)
+        if (state.isMyTournament && state.notificationEnabled) ...[
+          MenuItemModel(
+            text: 'Оповещение об игре',
+            onTap: () {
+              StartGameInfoDialog.show(
+                context: context,
+                maxGame: games,
+              ).then((game) {
+                if (game == null || !context.mounted) {
+                  return;
+                }
+                context
+                    .read<TournamentPageBloc>()
+                    .add(TournamentPageEvent.startGameInfo(game: game));
+              });
+            },
+          ),
+          MenuItemModel(
+            text: 'Текстовое оповещение',
+            onTap: () {
+              CustomTextInfoDialog.show(context: context).then((text) {
+                if (text == null || !context.mounted) {
+                  return;
+                }
+
+                context
+                    .read<TournamentPageBloc>()
+                    .add(TournamentPageEvent.customTextInfo(text: text));
+              });
+            },
+          ),
+        ],
+    ];
+  }
 }

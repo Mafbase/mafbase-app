@@ -7,7 +7,6 @@ class AuthNotifier extends ValueNotifier<AuthNotifierModel> {
 
   @override
   set value(AuthNotifierModel newValue) {
-    Sentry.configureScope((p0) => p0.setUser(null));
     super.value = newValue;
   }
 }

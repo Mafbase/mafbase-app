@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';

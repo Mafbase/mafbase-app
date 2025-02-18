@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/bill_club_interactor.dart';
@@ -93,14 +94,19 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
   }
 
   _onBillClub(ClubEventBillClub event, Emitter emit) async {
-    launchUrl(
-      await _billClubInteractor(
-        clubId: _clubId,
-        redirectPath: router.getLocation(),
-        days: event.days,
-      ).then((str) => Uri.parse(str)),
-      webOnlyWindowName: '_self',
-    );
+    final url = await _billClubInteractor(
+      clubId: _clubId,
+      redirectPath: router.getLocation(),
+      days: event.days,
+    ).then((str) => Uri.parse(str));
+    if (kIsWeb) {
+      launchUrl(
+        url,
+        webOnlyWindowName: '_self',
+      );
+    } else {
+      router.openWebView(url.toString());
+    }
   }
 
   @override

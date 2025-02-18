@@ -75,45 +75,47 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                         style: context.theme.defaultTextStyle,
                       ),
                       const SizedBox(width: 16),
-                      TextButton(
-                        onPressed: () {
-                          final value = field.value;
-                          if (value != null && value > widget.playersCount) {
-                            field.didChange(value - 10);
-                          }
-                        },
-                        child: const Text(
-                          "-",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              final value = field.value;
+                              if (value != null &&
+                                  value > widget.playersCount) {
+                                field.didChange(value - 10);
+                              }
+                            },
+                            child: const Text(
+                              "-",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "${field.value}",
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          final value = field.value;
-                          if (value != null) {
-                            field.didChange(value + 10);
-                          }
-                        },
-                        child: const Text(
-                          "+",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
+                          const SizedBox(width: 8),
+                          Text(
+                            "${field.value}",
+                            style: const TextStyle(fontSize: 24),
                           ),
-                        ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            onPressed: () {
+                              final value = field.value;
+                              if (value != null) {
+                                field.didChange(value + 10);
+                              }
+                            },
+                            child: const Text(
+                              "+",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   );
@@ -128,6 +130,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                     enableTranslation = value ?? enableTranslation,
                 builder: (field) {
                   return Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Text(
                         context.locale.translationHelp,

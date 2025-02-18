@@ -9,6 +9,7 @@ import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class LoginInteractor extends BaseInteractor {
+  static const hideBillEmails = ['test@mail.ru'];
   final AuthRepository _authRepository;
   final CredentialStorage _credentialStorage;
 
@@ -33,8 +34,9 @@ class LoginInteractor extends BaseInteractor {
 
         _credentialStorage.save(Credentials(email, password));
 
-        context?.read<AuthNotifier>().value =
-            const AuthNotifierModel.authorized();
+        context?.read<AuthNotifier>().value = AuthNotifierModel.authorized(
+          hideBilling: hideBillEmails.contains(email),
+        );
       }
       return model;
     });

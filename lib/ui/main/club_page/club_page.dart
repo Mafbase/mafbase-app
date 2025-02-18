@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
@@ -89,40 +90,47 @@ class _ClubPageState extends CustomState<ClubPage> {
       );
 
   @override
-  Widget buildDesktop(BuildContext context) => BlocBuilder<ClubBloc, ClubState>(
-        builder: (context, state) => state.isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Stack(
-                children: [
-                  Row(
-                    children: [
-                      if (state.model != null)
-                        Expanded(
-                          child: ClubInfoWidget(
-                            clubModel: state.model!,
-                            onAddGame: state.isOwner ? _addNewGame : null,
-                            billClub: state.isOwner ? _bill : null,
-                            changeHideDate:
-                                state.isOwner ? _changeHideDate : null,
-                          ),
+  Widget buildDesktop(BuildContext context) {
+    final showBill = !(context.watch<AuthNotifier>().value.mapOrNull(
+              authorized: (model) => model.hideBilling,
+            ) ??
+        false);
+
+    return BlocBuilder<ClubBloc, ClubState>(
+      builder: (context, state) => state.isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Stack(
+              children: [
+                Row(
+                  children: [
+                    if (state.model != null)
+                      Expanded(
+                        child: ClubInfoWidget(
+                          clubModel: state.model!,
+                          onAddGame: state.isOwner ? _addNewGame : null,
+                          billClub: state.isOwner ? _bill : null,
+                          changeHideDate:
+                              state.isOwner ? _changeHideDate : null,
                         ),
-                    ],
-                  ),
-                  if (state.isOwner && kIsWeb)
-                    Positioned(
-                      bottom: 20,
-                      right: 20,
-                      child: FloatingActionButton.large(
-                        backgroundColor: context.theme.redColor,
-                        onPressed: _bill,
-                        child: const Icon(Icons.monetization_on_outlined),
                       ),
+                  ],
+                ),
+                if (state.isOwner && showBill)
+                  Positioned(
+                    bottom: 20,
+                    right: 20,
+                    child: FloatingActionButton.large(
+                      backgroundColor: context.theme.redColor,
+                      onPressed: _bill,
+                      child: const Icon(Icons.monetization_on_outlined),
                     ),
-                ],
-              ),
-      );
+                  ),
+              ],
+            ),
+    );
+  }
 
   void _addNewGame() => context.go(
         AddClubGamePage.createLocation(

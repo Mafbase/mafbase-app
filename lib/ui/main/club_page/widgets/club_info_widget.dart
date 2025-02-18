@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/club_avatar.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
@@ -26,67 +27,72 @@ class ClubInfoWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Provider<bool>.value(
+  Widget build(BuildContext context) =>
+      Provider<bool>.value(
         value: isMobile,
         child: Provider<ClubModel>.value(
           value: clubModel,
           child: isMobile
               ? buildMobile(context)
               : Container(
-                  constraints: const BoxConstraints(
-                    minWidth: 300,
-                  ),
-                  padding: const EdgeInsets.only(
-                    left: 60,
-                    top: 40,
-                    right: 60,
-                  ),
-                  child: SizedBox.expand(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+            constraints: const BoxConstraints(
+              minWidth: 300,
+            ),
+            padding: const EdgeInsets.only(
+              left: 60,
+              top: 40,
+              right: 60,
+            ),
+            child: SizedBox.expand(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  _ClubInfoHeader(),
-                                  SizedBox(height: 20),
-                                  _ClubDescription(),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
+                        Column(
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (changeHideDate != null)
-                              Tooltip(
-                                message: 'Скрыть рейтинг',
-                                child: IconButton(
-                                  onPressed: changeHideDate,
-                                  icon: const Icon(
-                                    Icons.pivot_table_chart_outlined,
-                                  ),
-                                ),
-                              ),
-                            const Flexible(child: _ClubRatingButton()),
-                            if (onAddGame != null)
-                              _AddGameButton(onTap: onAddGame!),
+                            _ClubInfoHeader(),
+                            SizedBox(height: 20),
+                            _ClubDescription(),
                           ],
                         ),
                       ],
                     ),
                   ),
-                ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (changeHideDate != null)
+                        Tooltip(
+                          message: 'Скрыть рейтинг',
+                          child: IconButton(
+                            onPressed: changeHideDate,
+                            icon: const Icon(
+                              Icons.pivot_table_chart_outlined,
+                            ),
+                          ),
+                        ),
+                      const Flexible(child: _ClubRatingButton()),
+                      if (onAddGame != null)
+                        _AddGameButton(onTap: onAddGame!),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       );
 
   Widget buildMobile(BuildContext context) {
+    final showBill = context
+        .watch<AuthNotifier>()
+        .value
+        .mapOrNull(authorized: (model) => !model.hideBilling) ?? true;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -98,7 +104,7 @@ class ClubInfoWidget extends StatelessWidget {
                 const _ClubInfoHeader(),
                 const SizedBox(height: 20),
                 const _ClubDescription(),
-                if (billClub != null && kIsWeb) ...[
+                if (billClub != null && showBill) ...[
                   const SizedBox(height: 20),
                   CustomButton(
                     text: 'Продлить подписку клуба',
@@ -161,14 +167,17 @@ class _AddGameButton extends StatelessWidget {
   const _AddGameButton({required this.onTap});
 
   @override
-  Widget build(BuildContext context) => InkWell(
+  Widget build(BuildContext context) =>
+      InkWell(
         onTap: onTap,
         customBorder: const CircleBorder(),
         child: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: MyTheme.of(context).darkGreyColor,
+            color: MyTheme
+                .of(context)
+                .darkGreyColor,
           ),
           child: const Icon(
             Icons.add,
@@ -218,7 +227,10 @@ class _ClubDescription extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Theme.of(context).dividerTheme.color ?? Colors.transparent,
+          color: Theme
+              .of(context)
+              .dividerTheme
+              .color ?? Colors.transparent,
         ),
       ),
       child: Column(

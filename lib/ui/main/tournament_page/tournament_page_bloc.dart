@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
@@ -111,15 +112,19 @@ class TournamentPageBloc
   }
 
   _onBill(TournamentPageEventBill event, Emitter emit) async {
-    await launchUrl(
-      Uri.parse(
-        await _billTournamentInteractor(
-          tournamentId: tournamentId,
-          playersCount: event.playersCount,
-          billedTranslation: event.billedTranlsation,
-        ),
-      ),
+    final url = await _billTournamentInteractor(
+      tournamentId: tournamentId,
+      playersCount: event.playersCount,
+      billedTranslation: event.billedTranlsation,
     );
+
+    if (kIsWeb) {
+      await launchUrl(
+        Uri.parse(url),
+      );
+    } else {
+      router.openWebView(url);
+    }
   }
 
   _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {

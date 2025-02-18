@@ -6,6 +6,8 @@ import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
+import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
+import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -32,14 +34,19 @@ class AppRouter {
           try {
             final response = await getIt<MyHttpClient>().get("/api/auth");
             if (response.statusCode == 200) {
-              getIt<CredentialStorage>().read().then((value) {
-                Sentry.configureScope(
-                  (p0) => p0.setUser(
-                    SentryUser(email: value?.login),
-                  ),
-                );
-              });
-              authNotifier.value = const AuthNotifierModel.authorized();
+              final value = await getIt<CredentialStorage>().read();
+
+              Sentry.configureScope(
+                (p0) => p0.setUser(
+                  SentryUser(email: value?.login),
+                ),
+              );
+
+              authNotifier.value = AuthNotifierModel.authorized(
+                hideBilling: LoginInteractor.hideBillEmails.contains(
+                  value?.login,
+                ),
+              );
             } else {
               authNotifier.value = const AuthNotifierModel.unauthorized();
             }
@@ -54,10 +61,16 @@ class AppRouter {
       TempPage.route,
       TranslationContentPage.route,
       TranslationControlPage.route,
+      WebViewScreen.route,
       GoRoute(
         path: '/',
-        redirect: (_, state) => state.uri.toString() == '/' ? '/club' : null,
-        builder: (context, state) => const Placeholder(),
+        redirect: (_, state) {
+          if (state.uri.hasFragment) {
+            return state.uri.fragment;
+          }
+
+          return '/club';
+        },
       ),
       ShellRoute(
         builder: (context, state, child) {
