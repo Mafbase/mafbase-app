@@ -1,6 +1,6 @@
 # Stage 1 - Install dependencies and build the app in a build environment
 ARG REGISTRY_HOST
-FROM ${REGISTRY_HOST}/flutter-builder:3.19.3 as build-env
+FROM instrumentisto/flutter:3.27.2-androidsdk34-r0 as build-env
 
 RUN mkdir /app/
 COPY . /app/
