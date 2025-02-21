@@ -92,7 +92,7 @@ code_quality:
   stage: test
   tags:
     - docker
-  image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
+  image: "instrumentisto/flutter:3.27.2-androidsdk34-r0"
   before_script:
     - flutter pub global activate dart_code_metrics
     - export PATH="$PATH:$HOME/.pub-cache/bin"
@@ -106,7 +106,7 @@ test:
   stage: test
   tags:
     - docker
-  image: "instrumentisto/flutter:3.19.3-androidsdk34-r0"
+  image: "instrumentisto/flutter:3.27.2-androidsdk34-r0"
   before_script:
     - apt-get update
     - apt-get install -y lcov
