@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomDialog extends StatefulWidget {
   final Widget child;
 
-  const CustomDialog({Key? key, required this.child}) : super(key: key);
+  const CustomDialog({super.key, required this.child});
 
   @override
   State<CustomDialog> createState() => _CustomDialogState();

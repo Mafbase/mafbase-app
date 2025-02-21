@@ -8,7 +8,7 @@ import 'package:seating_generator_web/ui/temp/temp_event.dart';
 import 'package:seating_generator_web/ui/temp/temp_state.dart';
 
 class TempPage extends StatefulWidget {
-  const TempPage({Key? key}) : super(key: key);
+  const TempPage({super.key});
 
   static const String name = 'temp';
   static final GoRoute route = GoRoute(
@@ -70,7 +70,7 @@ class _TempPageState extends State<TempPage> {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.black.withValues(alpha: 0.2),
                       offset: const Offset(2, 2),
                       spreadRadius: 3,
                       blurRadius: 5,

@@ -10,9 +10,9 @@ class SeparationDialog extends StatefulWidget {
   final List<PlayerModel> availablePlayers;
 
   const SeparationDialog({
-    Key? key,
+    super.key,
     required this.availablePlayers,
-  }) : super(key: key);
+  });
 
   static Future<Pair<PlayerModel, PlayerModel>?> open(
     BuildContext context,

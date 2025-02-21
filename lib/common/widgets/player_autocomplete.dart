@@ -17,7 +17,7 @@ class CustomAutoComplete extends StatelessWidget {
   final OptionsViewOpenDirection openDirection;
 
   const CustomAutoComplete({
-    Key? key,
+    super.key,
     required this.controller,
     required this.displayStringForOption,
     required this.focusNode,
@@ -27,7 +27,7 @@ class CustomAutoComplete extends StatelessWidget {
     required this.hint,
     this.openDirection = OptionsViewOpenDirection.down,
     this.readOnly = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

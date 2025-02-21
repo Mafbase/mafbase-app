@@ -8,10 +8,10 @@ class ClubAvatar extends StatelessWidget {
   final double size;
 
   const ClubAvatar({
-    Key? key,
+    super.key,
     required this.clubModel,
     this.size = 70,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,9 @@ class _ImagePlaceholder extends StatelessWidget {
   final double size;
 
   const _ImagePlaceholder({
-    Key? key,
     required this.clubName,
     required this.size,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

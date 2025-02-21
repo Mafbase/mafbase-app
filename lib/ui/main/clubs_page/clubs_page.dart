@@ -14,7 +14,7 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubsPage extends StatefulWidget {
-  const ClubsPage({Key? key}) : super(key: key);
+  const ClubsPage({super.key});
 
   @override
   State<ClubsPage> createState() => _ClubsPageState();

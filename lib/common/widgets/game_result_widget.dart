@@ -17,11 +17,11 @@ class GameResultWidget extends StatefulWidget {
   final double height;
 
   const GameResultWidget({
-    Key? key,
+    super.key,
     required this.model,
     this.width = baseWidth,
     this.height = baseHeight,
-  }) : super(key: key);
+  });
 
   @override
   State<GameResultWidget> createState() => _GameResultWidgetState();
@@ -125,13 +125,12 @@ class _PlayerRowWidget extends StatelessWidget {
   final double? score;
 
   const _PlayerRowWidget({
-    Key? key,
     this.role,
     this.status,
     this.score,
     required this.nickname,
     required this.place,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -205,10 +204,9 @@ class _RoleWidget extends StatelessWidget {
   final PlayerResultStatus? status;
 
   const _RoleWidget({
-    Key? key,
     this.role,
     this.status,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -272,9 +270,8 @@ class _GameResultWidget extends StatelessWidget {
   final GameWin? win;
 
   const _GameResultWidget({
-    Key? key,
     required this.win,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

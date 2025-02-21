@@ -12,7 +12,7 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_sta
 import 'package:seating_generator_web/utils.dart';
 
 class SeatingInsertingPage extends StatefulWidget {
-  const SeatingInsertingPage({Key? key}) : super(key: key);
+  const SeatingInsertingPage({super.key});
 
   static const name = "fsm_seating";
   static final route = GoRoute(

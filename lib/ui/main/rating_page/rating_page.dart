@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousel;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,15 +25,14 @@ class RatingPage extends StatefulWidget {
   final int gameFilter;
 
   const RatingPage({
-    Key? key,
+    super.key,
     this.clubId,
     this.tournamentId,
     this.range,
     this.style = RatingTableStyle.full,
     this.sort = RatingSort.score,
     this.gameFilter = 0,
-  })  : assert((clubId == null) != (tournamentId == null)),
-        super(key: key);
+  })  : assert((clubId == null) != (tournamentId == null));
 
   @override
   State<RatingPage> createState() => _RatingPageState();
@@ -157,7 +156,7 @@ class _RatingPageState extends CustomState<RatingPage> {
     RatingTableStyle.stats,
   ];
   int carouselIndex = 1;
-  final CarouselController _carouselController = CarouselController();
+  final _carouselController = carousel.CarouselSliderController();
 
   @override
   void initState() {
@@ -557,7 +556,7 @@ class _RatingPageState extends CustomState<RatingPage> {
             ),
           ),
           Expanded(
-            child: CarouselSlider(
+            child: carousel.CarouselSlider(
               carouselController: _carouselController,
               items: items
                   .map(
@@ -566,7 +565,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                     ),
                   )
                   .toList(),
-              options: CarouselOptions(
+              options: carousel.CarouselOptions(
                 enableInfiniteScroll: false,
                 initialPage: items.indexOf(widget.style),
                 viewportFraction: 1,

@@ -9,11 +9,11 @@ class MenuButton extends StatefulWidget {
   final String? label;
 
   const MenuButton({
-    Key? key,
+    super.key,
     this.label,
     required this.icon,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<MenuButton> createState() => _MenuButtonState();
@@ -96,7 +96,7 @@ class _MenuButtonState extends State<MenuButton> {
 class _BubbleHint extends StatelessWidget {
   final String text;
 
-  const _BubbleHint({Key? key, required this.text}) : super(key: key);
+  const _BubbleHint({required this.text});
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage._({Key? key}) : super(key: key);
+  const ProfilePage._();
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();

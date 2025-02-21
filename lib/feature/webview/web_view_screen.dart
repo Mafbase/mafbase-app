@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:go_router/go_router.dart';
-import 'package:path/path.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 
 class WebViewScreen extends StatefulWidget {
@@ -59,10 +58,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   bool loading = true;
 
   @override
-  Widget build(BuildContext context) {
-    print('test25: ${widget.url}');
-
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -107,5 +103,4 @@ class _WebViewScreenState extends State<WebViewScreen> {
         ],
       ),
     );
-  }
 }

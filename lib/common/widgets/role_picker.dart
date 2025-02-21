@@ -8,11 +8,11 @@ class RolePicker extends StatefulWidget {
   final bool readOnly;
 
   const RolePicker({
-    Key? key,
+    super.key,
     required this.playerRole,
     required this.onChange,
     required this.readOnly,
-  }) : super(key: key);
+  });
 
   @override
   State<RolePicker> createState() => _RolePickerState();

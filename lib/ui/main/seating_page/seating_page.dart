@@ -22,7 +22,7 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 class SeatingPage extends StatefulWidget {
   final int tournamentId;
 
-  const SeatingPage({Key? key, required this.tournamentId}) : super(key: key);
+  const SeatingPage({super.key, required this.tournamentId});
 
   @override
   State<SeatingPage> createState() => _SeatingPageState();
@@ -325,7 +325,7 @@ class _SeatingPageState extends State<SeatingPage>
                 "Новая рассадка заменит старую",
               ).then(
                 (value) {
-                  if (value == true && context.mounted) {
+                  if (value == true && mounted) {
                     context.read<SeatingPageBloc>().add(
                           const SeatingPageEvent.createFinalSeating(),
                         );
@@ -414,6 +414,5 @@ class _SeatingPageState extends State<SeatingPage>
     context.read<TournamentPageBloc>()
       ..add(const TournamentPageEvent.pageOpened())
       ..add(const TournamentPageEvent.playersListOpened());
-    ;
   }
 }

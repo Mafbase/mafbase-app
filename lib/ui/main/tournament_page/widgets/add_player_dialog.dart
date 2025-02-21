@@ -14,11 +14,11 @@ class AddPlayerDialog extends StatefulWidget {
   final String? initValue;
 
   const AddPlayerDialog({
-    Key? key,
+    super.key,
     required this.availablePlayers,
     this.initValue,
     this.showAvailablePlayers = true,
-  }) : super(key: key);
+  });
 
   @override
   State<AddPlayerDialog> createState() => _AddPlayerDialogState();

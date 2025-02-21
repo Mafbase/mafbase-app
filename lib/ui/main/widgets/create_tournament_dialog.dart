@@ -7,7 +7,7 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class CreateTournamentDialog extends StatefulWidget {
-  const CreateTournamentDialog({Key? key}) : super(key: key);
+  const CreateTournamentDialog({super.key});
 
   @override
   State<CreateTournamentDialog> createState() => _CreateTournamentDialogState();

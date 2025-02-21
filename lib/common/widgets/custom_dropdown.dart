@@ -11,13 +11,13 @@ class CustomDropdown<T> extends StatefulWidget {
   final bool readOnly;
 
   const CustomDropdown({
-    Key? key,
+    super.key,
     this.onChanged,
     this.readOnly = false,
     this.mapToString = _mapToString,
     required this.items,
     required this.initValue,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomDropdown> createState() => _CustomDropdownState<T>();

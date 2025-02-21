@@ -9,13 +9,13 @@ class CustomButton extends StatelessWidget {
   final bool minimize;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onTap,
     this.isRed = false,
     this.disabled = false,
     this.minimize = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,12 @@ class CustomButton extends StatelessWidget {
     );
     return ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.resolveWith(
+        backgroundColor: WidgetStateProperty.resolveWith(
           (states) {
-            if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.disabled)) {
               return MyTheme.of(context).buttonDisabledColor;
             }
-            if (states.contains(MaterialState.pressed)) {
+            if (states.contains(WidgetState.pressed)) {
               if (isRed) {
                 return MyTheme.of(context).btnRedColor1;
               } else {

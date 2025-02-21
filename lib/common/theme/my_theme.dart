@@ -53,7 +53,7 @@ class _LightTheme implements MyTheme {
   Color get background2 => Colors.white;
 
   @override
-  Color get btnColor1 => darkGreyColor.withOpacity(0.64);
+  Color get btnColor1 => darkGreyColor.withValues(alpha: 0.64);
 
   @override
   Color get btnColor2 => const Color(0xFF4E6B9B);
@@ -129,7 +129,7 @@ class _LightTheme implements MyTheme {
   Color get btnRedColor => const Color(0xFFDF5650);
 
   @override
-  Color get btnRedColor1 => btnRedColor.withOpacity(0.7);
+  Color get btnRedColor1 => btnRedColor.withValues(alpha: 0.7);
 
   @override
   Color get diedColor => darkGreyColor;

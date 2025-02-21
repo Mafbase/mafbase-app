@@ -20,7 +20,7 @@ import 'package:seating_generator_web/utils.dart';
 class ProfileDialog extends StatefulWidget {
   final PlayerModel player;
 
-  const ProfileDialog({Key? key, required this.player}) : super(key: key);
+  const ProfileDialog({super.key, required this.player});
 
   static Future<bool?> open(BuildContext context, PlayerModel player) {
     return showDialog<bool>(

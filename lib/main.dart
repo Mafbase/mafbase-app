@@ -71,10 +71,10 @@ class MafbaseApp extends StatelessWidget {
   final DependencyScope scope;
 
   const MafbaseApp({
-    Key? key,
+    super.key,
     this.initLocation = '/',
     required this.scope,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -136,12 +136,12 @@ class MafbaseApp extends StatelessWidget {
                 ),
                 textButtonTheme: TextButtonThemeData(
                   style: ButtonStyle(
-                    textStyle: MaterialStateProperty.resolveWith(
+                    textStyle: WidgetStateProperty.resolveWith(
                       (states) {
-                        if (states.contains(MaterialState.disabled)) {
+                        if (states.contains(WidgetState.disabled)) {
                           return context.theme.btnTextStyle.copyWith(
-                            color: context.theme.btnTextColor.withOpacity(
-                              0.5,
+                            color: context.theme.btnTextColor.withValues(
+                              alpha: 0.5,
                             ),
                           );
                         }

@@ -11,13 +11,13 @@ class PlayerRow extends StatelessWidget {
   final int index;
 
   const PlayerRow({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.index,
     required this.onDelete,
     required this.nickname,
     this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

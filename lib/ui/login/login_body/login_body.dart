@@ -21,7 +21,7 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginPageBody extends StatefulWidget {
-  const LoginPageBody({Key? key}) : super(key: key);
+  const LoginPageBody({super.key});
 
   @override
   State<LoginPageBody> createState() => _LoginPageBodyState();
@@ -175,7 +175,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       text: TextSpan(
                         style: context.theme.defaultTextStyle.copyWith(
                           color: context.theme.defaultTextStyle.color
-                              ?.withOpacity(0.5),
+                              ?.withValues(alpha: 0.5),
                           fontSize: 14,
                         ),
                         children: [
@@ -327,7 +327,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       text: TextSpan(
                         style: context.theme.defaultTextStyle.copyWith(
                           color: context.theme.defaultTextStyle.color
-                              ?.withOpacity(0.5),
+                              ?.withValues(alpha: 0.5),
                           fontSize: 14,
                         ),
                         children: [

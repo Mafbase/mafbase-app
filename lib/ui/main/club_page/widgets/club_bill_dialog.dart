@@ -19,7 +19,7 @@ enum ClubBillOptions {
 class ClubBillDialog extends StatefulWidget {
   final DateTime? billedFor;
 
-  const ClubBillDialog._({Key? key, this.billedFor}) : super(key: key);
+  const ClubBillDialog._({this.billedFor});
 
   @override
   State<ClubBillDialog> createState() => _ClubBillDialogState();

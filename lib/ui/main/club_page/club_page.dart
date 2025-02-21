@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +16,7 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubPage extends StatefulWidget {
-  const ClubPage._({Key? key}) : super(key: key);
+  const ClubPage._();
 
   @override
   State<ClubPage> createState() => _ClubPageState();

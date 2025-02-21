@@ -11,7 +11,7 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
 
 class TranslationControlPage extends StatefulWidget {
-  const TranslationControlPage({Key? key}) : super(key: key);
+  const TranslationControlPage({super.key});
 
   static final route = GoRoute(
     path: "/translationControl",

@@ -13,7 +13,7 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 
 class TranslationContentPage extends StatefulWidget {
-  const TranslationContentPage({Key? key}) : super(key: key);
+  const TranslationContentPage({super.key});
 
   @override
   State<TranslationContentPage> createState() => _TranslationContentPageState();
@@ -104,13 +104,12 @@ class _TranslationPlayerCard extends StatelessWidget {
   final int place;
 
   const _TranslationPlayerCard({
-    Key? key,
     required this.nickname,
     required this.image,
     required this.role,
     required this.status,
     required this.place,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -237,7 +236,7 @@ class _TranslationPlayerCard extends StatelessWidget {
 class _RoleWidget extends StatefulWidget {
   final PlayerRole role;
 
-  const _RoleWidget({Key? key, required this.role}) : super(key: key);
+  const _RoleWidget({required this.role});
 
   @override
   State<_RoleWidget> createState() => _RoleWidgetState();
@@ -304,7 +303,7 @@ class _RoleWidgetState extends State<_RoleWidget>
 class _StatusWidget extends StatefulWidget {
   final PlayerStatus status;
 
-  const _StatusWidget({Key? key, required this.status}) : super(key: key);
+  const _StatusWidget({required this.status});
 
   @override
   State<_StatusWidget> createState() => _StatusWidgetState();
@@ -379,7 +378,7 @@ class _StatusWidgetState extends State<_StatusWidget>
 class _StatusOverlay extends StatefulWidget {
   final PlayerStatus status;
 
-  const _StatusOverlay({Key? key, required this.status}) : super(key: key);
+  const _StatusOverlay({required this.status});
 
   @override
   State<_StatusOverlay> createState() => _StatusOverlayState();

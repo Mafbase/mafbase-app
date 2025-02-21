@@ -36,7 +36,7 @@ class VerificationPageBody extends StatefulWidget {
     return context.namedLocation(name, pathParameters: {'id': id.toString()});
   }
 
-  const VerificationPageBody({Key? key}) : super(key: key);
+  const VerificationPageBody({super.key});
 
   @override
   State<VerificationPageBody> createState() => _VerificationPageBodyState();

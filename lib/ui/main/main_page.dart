@@ -26,7 +26,7 @@ class TitleProvider extends ValueNotifier<String> {
 class MainPage extends StatefulWidget {
   final Widget? child;
 
-  const MainPage({Key? key, this.child}) : super(key: key);
+  const MainPage({super.key, this.child});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -130,7 +130,7 @@ class _MainPageState extends CustomState<MainPage> {
           onPressed: () {
             context.read<MainBloc>().add(const MainEvent.onProfilePressed());
           },
-          hoverColor: context.theme.background1.withOpacity(0.2),
+          hoverColor: context.theme.background1.withValues(alpha: 0.2),
           icon: Icon(
             Icons.person,
             color: context.theme.background1,

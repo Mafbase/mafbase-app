@@ -43,9 +43,8 @@ class RailWrapper extends StatefulWidget {
   final StatefulNavigationShell shell;
 
   const RailWrapper._({
-    Key? key,
     required this.shell,
-  }) : super(key: key);
+  });
 
   @override
   State<RailWrapper> createState() => _RailWrapperState();

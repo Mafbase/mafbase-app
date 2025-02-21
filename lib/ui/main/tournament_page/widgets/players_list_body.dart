@@ -13,9 +13,9 @@ class PlayersListBody extends StatefulWidget {
   final int tournamentId;
 
   const PlayersListBody({
-    Key? key,
+    super.key,
     required this.tournamentId,
-  }) : super(key: key);
+  });
 
   @override
   State<PlayersListBody> createState() => _PlayersListBodyState();

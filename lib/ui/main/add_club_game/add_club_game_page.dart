@@ -28,11 +28,11 @@ class AddClubGamePage extends StatefulWidget {
   final DateTime? initDateTime;
 
   const AddClubGamePage({
-    Key? key,
+    super.key,
     this.readOnly = false,
     this.gameId,
     this.initDateTime,
-  }) : super(key: key);
+  });
 
   @override
   State<AddClubGamePage> createState() => _AddClubGamePageState();
@@ -544,7 +544,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                           firstDate: DateTime(2000),
                           lastDate: DateTime.now(),
                         ).then((value) async {
-                          if (!mounted) return null;
+                          if (!context.mounted) return null;
                           if (value != null) {
                             final timeOfDay = await showTimePicker(
                               context: context,
@@ -784,7 +784,7 @@ class NicknameField extends StatelessWidget {
   final bool down;
 
   const NicknameField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.focusNode,
     required this.availablePlayers,
@@ -793,7 +793,7 @@ class NicknameField extends StatelessWidget {
     this.onSelected,
     required this.hint,
     required this.down,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -906,7 +906,7 @@ class PlayerRowWidget extends StatefulWidget {
   final bool down;
 
   const PlayerRowWidget({
-    Key? key,
+    super.key,
     required this.onRoleChanged,
     required this.addScoreController,
     required this.nicknameController,
@@ -920,7 +920,7 @@ class PlayerRowWidget extends StatefulWidget {
     required this.addScoreFocusNode,
     required this.isTournament,
     required this.down,
-  }) : super(key: key);
+  });
 
   @override
   State<PlayerRowWidget> createState() => _PlayerRowWidgetState();

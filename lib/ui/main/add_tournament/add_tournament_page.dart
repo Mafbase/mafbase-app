@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddTournamentPage extends StatefulWidget {
-  const AddTournamentPage({Key? key}) : super(key: key);
+  const AddTournamentPage({super.key});
 
   @override
   State<AddTournamentPage> createState() => _AddTournamentPageState();

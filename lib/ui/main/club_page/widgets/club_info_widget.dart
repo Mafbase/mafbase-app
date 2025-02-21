@@ -18,13 +18,13 @@ class ClubInfoWidget extends StatelessWidget {
   final VoidCallback? changeHideDate;
 
   const ClubInfoWidget({
-    Key? key,
+    super.key,
     required this.clubModel,
     this.isMobile = false,
     this.onAddGame,
     this.billClub,
     this.changeHideDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) =>
@@ -140,7 +140,7 @@ class ClubInfoWidget extends StatelessWidget {
 }
 
 class _ClubRatingButton extends StatelessWidget {
-  const _ClubRatingButton({Key? key}) : super(key: key);
+  const _ClubRatingButton();
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +189,7 @@ class _AddGameButton extends StatelessWidget {
 }
 
 class _ClubDescription extends StatelessWidget {
-  const _ClubDescription({Key? key}) : super(key: key);
+  const _ClubDescription();
 
   @override
   Widget build(BuildContext context) {
@@ -277,7 +277,7 @@ class _ClubDescription extends StatelessWidget {
 }
 
 class _ClubInfoHeader extends StatelessWidget {
-  const _ClubInfoHeader({Key? key}) : super(key: key);
+  const _ClubInfoHeader();
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:seating_generator_web/common/widgets/menu_button.dart';
 class CustomMenu extends StatefulWidget {
   final List<CustomMenuItemModel> models;
 
-  const CustomMenu({Key? key, required this.models}) : super(key: key);
+  const CustomMenu({super.key, required this.models});
 
   @override
   State<CustomMenu> createState() => _CustomMenuState();

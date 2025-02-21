@@ -14,7 +14,7 @@ class ConfirmDialog extends StatelessWidget {
         ),
       );
 
-  const ConfirmDialog({Key? key, this.text}) : super(key: key);
+  const ConfirmDialog({super.key, this.text});
 
   @override
   Widget build(BuildContext context) {

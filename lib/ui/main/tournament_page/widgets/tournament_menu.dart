@@ -5,9 +5,9 @@ class TournamentMenu extends StatefulWidget {
   final List<MenuItemModel> items;
 
   const TournamentMenu({
-    Key? key,
+    super.key,
     required this.items,
-  }) : super(key: key);
+  });
 
   @override
   State<TournamentMenu> createState() => _TournamentMenuState();

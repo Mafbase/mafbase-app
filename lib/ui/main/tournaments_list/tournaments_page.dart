@@ -21,9 +21,7 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class TournamentsPage extends StatefulWidget {
-  const TournamentsPage._({
-    Key? key,
-  }) : super(key: key);
+  const TournamentsPage._();
 
   @override
   State<TournamentsPage> createState() => _TournamentsPageState();
@@ -198,7 +196,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                                   borderRadius: BorderRadius.circular(50),
                                   color: MyTheme.of(context)
                                       .greyColor
-                                      .withOpacity(0.16),
+                                      .withValues(alpha: 0.16),
                                 ),
                                 child: Row(
                                   children: [

@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
@@ -32,10 +30,10 @@ class TournamentPage extends StatefulWidget {
   final int tournamentId;
 
   const TournamentPage({
-    Key? key,
+    super.key,
     required this.child,
     required this.tournamentId,
-  }) : super(key: key);
+  });
 
   @override
   State<TournamentPage> createState() => _TournamentPageState();
@@ -111,7 +109,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
       initValue: state.finalPlayers,
       players: state.tournamentPlayers,
     ).then((value) {
-      if (value != null) {
+      if (value != null && mounted) {
         context.read<TournamentPageBloc>().add(
               TournamentPageEvent.setFinalPlayers(
                 players: value,
@@ -285,7 +283,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
                 context: context,
                 maxGame: games,
               ).then((game) {
-                if (game == null || !context.mounted) {
+                if (game == null || !mounted) {
                   return;
                 }
                 context
@@ -298,7 +296,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
             text: 'Текстовое оповещение',
             onTap: () {
               CustomTextInfoDialog.show(context: context).then((text) {
-                if (text == null || !context.mounted) {
+                if (text == null || !mounted) {
                   return;
                 }
 

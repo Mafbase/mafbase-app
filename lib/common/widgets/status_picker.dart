@@ -9,11 +9,11 @@ class StatusPicker extends StatefulWidget {
   final bool readOnly;
 
   const StatusPicker({
-    Key? key,
+    super.key,
     required this.playerStatus,
     required this.onChange,
     required this.readOnly,
-  }) : super(key: key);
+  });
 
   @override
   State<StatusPicker> createState() => _StatusPickerState();

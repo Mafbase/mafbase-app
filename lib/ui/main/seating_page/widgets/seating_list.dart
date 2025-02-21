@@ -11,9 +11,9 @@ class SeatingList extends StatelessWidget {
   final List<List<GameResultModel>> models;
 
   const SeatingList({
-    Key? key,
+    super.key,
     required this.models,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

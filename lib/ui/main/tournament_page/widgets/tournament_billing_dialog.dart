@@ -8,10 +8,9 @@ class TournamentBillingDialog extends StatefulWidget {
   final bool billedTranslation;
 
   const TournamentBillingDialog._({
-    Key? key,
     required this.playersCount,
     required this.billedTranslation,
-  }) : super(key: key);
+  });
 
   @override
   State<TournamentBillingDialog> createState() =>

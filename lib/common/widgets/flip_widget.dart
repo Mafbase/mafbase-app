@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class FlipWidget extends StatefulWidget {
   final Widget child;
 
-  const FlipWidget({Key? key, required this.child}) : super(key: key);
+  const FlipWidget({super.key, required this.child});
 
   @override
   State<FlipWidget> createState() => _FlipWidgetState();

@@ -40,7 +40,7 @@ class RatingTable extends StatefulWidget {
   final bool isTournament;
 
   RatingTable({
-    Key? key,
+    super.key,
     required this.rows,
     required this.clubId,
     required this.tournamentId,
@@ -59,8 +59,7 @@ class RatingTable extends StatefulWidget {
                 .where(
                   (element) => element.gamesCount >= (gameFilter ?? 0),
                 )
-                .toList(),
-        super(key: key);
+                .toList();
 
   static List<ClubRatingRowModel> createSortedRows(
     List<ClubRatingRowModel> rows,
@@ -233,19 +232,19 @@ class _RatingTableState extends State<RatingTable> {
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             width: boldLeft ? 2.5 : 0.5,
           ),
           right: BorderSide(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             width: boldRight ? 2.5 : 0.5,
           ),
           top: BorderSide(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             width: 0.5,
           ),
           bottom: BorderSide(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             width: 0.5,
           ),
         ),
@@ -396,7 +395,7 @@ class _RatingTableState extends State<RatingTable> {
                       width: width,
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withValues(alpha: 0.2),
                           width: 0.5,
                         ),
                       ),
@@ -452,7 +451,7 @@ class _RatingTableState extends State<RatingTable> {
                 width: width,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 0.2),
                     width: 0.5,
                   ),
                 ),

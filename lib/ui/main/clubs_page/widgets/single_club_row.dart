@@ -15,11 +15,11 @@ class SingleClubRow extends StatelessWidget {
   final ClubRowStyle style;
 
   const SingleClubRow({
-    Key? key,
+    super.key,
     required this.model,
     required this.onTap,
     this.style = ClubRowStyle.desktop,
-  }) : super(key: key);
+  });
 
   Widget buildMobile(BuildContext context) {
     return Container(

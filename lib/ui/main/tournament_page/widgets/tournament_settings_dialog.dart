@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -16,14 +15,14 @@ class TournamentSettingsDialog extends StatefulWidget {
   final bool hideResult;
 
   const TournamentSettingsDialog({
-    Key? key,
+    super.key,
     this.defaultGames = 0,
     this.swissGames = 0,
     this.finalGames = 0,
     this.buckets,
     this.hideResult = false,
     required this.onFinalPlayersTapped,
-  }) : super(key: key);
+  });
 
   @override
   State<TournamentSettingsDialog> createState() =>
@@ -210,7 +209,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                         buckets: bucketsController.text
                             .split(';')
                             .map((e) => int.tryParse(e))
-                            .whereNotNull()
+                            .nonNulls
                             .toList(),
                         hideResult: hideResult,
                       ),

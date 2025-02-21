@@ -10,10 +10,10 @@ class FinalPlayersDialog extends StatefulWidget {
   final List<PlayerModel> players;
 
   const FinalPlayersDialog({
-    Key? key,
+    super.key,
     required this.initValue,
     required this.players,
-  }) : super(key: key);
+  });
 
   @override
   State<FinalPlayersDialog> createState() => _FinalPlayersDialogState();

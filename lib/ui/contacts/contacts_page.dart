@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 
 class ContactsPage extends StatefulWidget {
-  const ContactsPage._({Key? key}) : super(key: key);
+  const ContactsPage._();
 
   @override
   State<ContactsPage> createState() => _ContactsPageState();

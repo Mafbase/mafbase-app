@@ -19,7 +19,7 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class SignUpPageBody extends StatefulWidget {
-  const SignUpPageBody({Key? key}) : super(key: key);
+  const SignUpPageBody({super.key});
 
   @override
   State<SignUpPageBody> createState() => _SignUpPageBodyState();

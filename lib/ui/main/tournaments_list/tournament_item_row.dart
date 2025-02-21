@@ -28,7 +28,7 @@ class TournamentItemRow extends StatelessWidget {
       },
       child: Ink(
         decoration: BoxDecoration(
-          color: context.theme.greyColor.withOpacity(0.5),
+          color: context.theme.greyColor.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 24),

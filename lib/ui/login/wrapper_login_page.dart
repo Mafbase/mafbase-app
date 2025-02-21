@@ -8,9 +8,9 @@ class WrapperLoginPage extends StatefulWidget {
   final Widget child;
 
   const WrapperLoginPage({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   State<WrapperLoginPage> createState() => _WrapperLoginPageState();
