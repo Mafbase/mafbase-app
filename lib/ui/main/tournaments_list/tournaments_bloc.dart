@@ -45,8 +45,12 @@ class TournamentsBloc extends CustomBloc<TournamentsEvent, TournamentsState> {
     TournamentOpenedEvent event,
     Emitter<TournamentsState> emit,
   ) async {
-    final tournaments = await _getTournamentsInteractor();
-    emit(state.copyWith(tournaments: tournaments, isLoading: false));
+    try {
+      final tournaments = await _getTournamentsInteractor();
+      emit(state.copyWith(tournaments: tournaments, isLoading: false));
+    } finally {
+      event.completer?.complete();
+    }
   }
 
   @override

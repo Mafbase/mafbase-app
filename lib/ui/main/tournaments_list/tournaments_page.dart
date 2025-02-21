@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -52,59 +54,66 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
   }
 
   @override
-  Widget? buildMobile(BuildContext context) {
-    return Container(
-      color: context.theme.background2,
-      child: Material(
-        child: BlocBuilder<TournamentsBloc, TournamentsState>(
-          builder: (context, state) {
-            return ValueListenableBuilder(
-              valueListenable: context.read<AuthNotifier>(),
-              builder: (context, authModel, child) {
-                return Stack(
-                  children: [
-                    child ?? Container(),
-                    if (authModel is AuthNotifierAuthorizedModel)
-                      Positioned(
-                        bottom: 8,
-                        right: 8,
-                        child: FloatingActionButton(
-                          elevation: 10,
-                          onPressed: () {
-                            context
-                                .read<TournamentsBloc>()
-                                .add(const TournamentsEvent.create());
-                          },
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
+  Widget? buildMobile(BuildContext context) => RefreshIndicator(
+        onRefresh: () {
+          final completer = Completer();
+
+          context
+              .read<TournamentsBloc>()
+              .add(TournamentsEvent.opened(completer: completer));
+
+          return completer.future;
+        },
+        child: Container(
+          color: context.theme.background2,
+          child: Material(
+            child: BlocBuilder<TournamentsBloc, TournamentsState>(
+              builder: (context, state) => ValueListenableBuilder(
+                valueListenable: context.read<AuthNotifier>(),
+                builder: (context, authModel, child) {
+                  return Stack(
+                    children: [
+                      child ?? Container(),
+                      if (authModel is AuthNotifierAuthorizedModel)
+                        Positioned(
+                          bottom: 8,
+                          right: 8,
+                          child: FloatingActionButton(
+                            elevation: 10,
+                            onPressed: () {
+                              context
+                                  .read<TournamentsBloc>()
+                                  .add(const TournamentsEvent.create());
+                            },
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                    if (state.isLoading) const LoadingOverlayWidget(),
-                  ],
-                );
-              },
-              child: ListView.builder(
-                itemCount: state.tournaments.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    child: TournamentItemRow(
-                      tournamentModel: state.tournaments[index],
-                    ),
+                      if (state.isLoading) const LoadingOverlayWidget(),
+                    ],
                   );
                 },
+                child: ListView.builder(
+                  itemCount: state.tournaments.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: TournamentItemRow(
+                        tournamentModel: state.tournaments[index],
+                      ),
+                    );
+                  },
+                ),
               ),
-            );
-          },
+            ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   Widget buildDesktop(BuildContext context) {

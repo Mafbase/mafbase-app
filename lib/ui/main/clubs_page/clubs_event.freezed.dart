@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ClubsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pageOpened,
+    required TResult Function(Completer<dynamic>? completer) pageOpened,
     required TResult Function(ClubModel clubModel) clubSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pageOpened,
+    TResult? Function(Completer<dynamic>? completer)? pageOpened,
     TResult? Function(ClubModel clubModel)? clubSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(Completer<dynamic>? completer)? pageOpened,
     TResult Function(ClubModel clubModel)? clubSelected,
     required TResult orElse(),
   }) =>
@@ -79,6 +79,8 @@ abstract class _$$ClubsEventPageOpenedImplCopyWith<$Res> {
   factory _$$ClubsEventPageOpenedImplCopyWith(_$ClubsEventPageOpenedImpl value,
           $Res Function(_$ClubsEventPageOpenedImpl) then) =
       __$$ClubsEventPageOpenedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Completer<dynamic>? completer});
 }
 
 /// @nodoc
@@ -88,55 +90,81 @@ class __$$ClubsEventPageOpenedImplCopyWithImpl<$Res>
   __$$ClubsEventPageOpenedImplCopyWithImpl(_$ClubsEventPageOpenedImpl _value,
       $Res Function(_$ClubsEventPageOpenedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? completer = freezed,
+  }) {
+    return _then(_$ClubsEventPageOpenedImpl(
+      completer: freezed == completer
+          ? _value.completer
+          : completer // ignore: cast_nullable_to_non_nullable
+              as Completer<dynamic>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ClubsEventPageOpenedImpl implements ClubsEventPageOpened {
-  const _$ClubsEventPageOpenedImpl();
+  const _$ClubsEventPageOpenedImpl({this.completer});
+
+  @override
+  final Completer<dynamic>? completer;
 
   @override
   String toString() {
-    return 'ClubsEvent.pageOpened()';
+    return 'ClubsEvent.pageOpened(completer: $completer)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ClubsEventPageOpenedImpl);
+            other is _$ClubsEventPageOpenedImpl &&
+            (identical(other.completer, completer) ||
+                other.completer == completer));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, completer);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClubsEventPageOpenedImplCopyWith<_$ClubsEventPageOpenedImpl>
+      get copyWith =>
+          __$$ClubsEventPageOpenedImplCopyWithImpl<_$ClubsEventPageOpenedImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pageOpened,
+    required TResult Function(Completer<dynamic>? completer) pageOpened,
     required TResult Function(ClubModel clubModel) clubSelected,
   }) {
-    return pageOpened();
+    return pageOpened(completer);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pageOpened,
+    TResult? Function(Completer<dynamic>? completer)? pageOpened,
     TResult? Function(ClubModel clubModel)? clubSelected,
   }) {
-    return pageOpened?.call();
+    return pageOpened?.call(completer);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(Completer<dynamic>? completer)? pageOpened,
     TResult Function(ClubModel clubModel)? clubSelected,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
-      return pageOpened();
+      return pageOpened(completer);
     }
     return orElse();
   }
@@ -174,7 +202,13 @@ class _$ClubsEventPageOpenedImpl implements ClubsEventPageOpened {
 }
 
 abstract class ClubsEventPageOpened implements ClubsEvent {
-  const factory ClubsEventPageOpened() = _$ClubsEventPageOpenedImpl;
+  const factory ClubsEventPageOpened({final Completer<dynamic>? completer}) =
+      _$ClubsEventPageOpenedImpl;
+
+  Completer<dynamic>? get completer;
+  @JsonKey(ignore: true)
+  _$$ClubsEventPageOpenedImplCopyWith<_$ClubsEventPageOpenedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -255,7 +289,7 @@ class _$ClubsEventClubSelectedImpl implements ClubsEventClubSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pageOpened,
+    required TResult Function(Completer<dynamic>? completer) pageOpened,
     required TResult Function(ClubModel clubModel) clubSelected,
   }) {
     return clubSelected(clubModel);
@@ -264,7 +298,7 @@ class _$ClubsEventClubSelectedImpl implements ClubsEventClubSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pageOpened,
+    TResult? Function(Completer<dynamic>? completer)? pageOpened,
     TResult? Function(ClubModel clubModel)? clubSelected,
   }) {
     return clubSelected?.call(clubModel);
@@ -273,7 +307,7 @@ class _$ClubsEventClubSelectedImpl implements ClubsEventClubSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pageOpened,
+    TResult Function(Completer<dynamic>? completer)? pageOpened,
     TResult Function(ClubModel clubModel)? clubSelected,
     required TResult orElse(),
   }) {

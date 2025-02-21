@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -50,27 +52,38 @@ class _ClubsPageState extends CustomState<ClubsPage> {
           if (state.isLoading) {
             return const LoadingOverlayWidget();
           }
-          return ListView.builder(
-            itemCount: state.clubs.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 16.0,
-                ),
-                child: SingleClubRow(
-                  style: ClubRowStyle.mobile,
-                  model: state.clubs[index],
-                  onTap: () {
-                    context.read<ClubsBloc>().add(
-                          ClubsEvent.clubSelected(
-                            clubModel: state.clubs[index],
-                          ),
-                        );
-                  },
-                ),
-              );
+
+          return RefreshIndicator(
+            onRefresh: () {
+              final completer = Completer();
+              context.read<ClubsBloc>().add(
+                    ClubsEvent.pageOpened(completer: completer),
+                  );
+
+              return completer.future;
             },
+            child: ListView.builder(
+              itemCount: state.clubs.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 16.0,
+                  ),
+                  child: SingleClubRow(
+                    style: ClubRowStyle.mobile,
+                    model: state.clubs[index],
+                    onTap: () {
+                      context.read<ClubsBloc>().add(
+                            ClubsEvent.clubSelected(
+                              clubModel: state.clubs[index],
+                            ),
+                          );
+                    },
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

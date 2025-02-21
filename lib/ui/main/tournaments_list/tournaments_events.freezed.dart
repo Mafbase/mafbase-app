@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TournamentsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() opened,
+    required TResult Function(Completer<dynamic>? completer) opened,
     required TResult Function() create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? opened,
+    TResult? Function(Completer<dynamic>? completer)? opened,
     TResult? Function()? create,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? opened,
+    TResult Function(Completer<dynamic>? completer)? opened,
     TResult Function()? create,
     required TResult orElse(),
   }) =>
@@ -80,6 +80,8 @@ abstract class _$$TournamentOpenedEventImplCopyWith<$Res> {
           _$TournamentOpenedEventImpl value,
           $Res Function(_$TournamentOpenedEventImpl) then) =
       __$$TournamentOpenedEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Completer<dynamic>? completer});
 }
 
 /// @nodoc
@@ -89,55 +91,80 @@ class __$$TournamentOpenedEventImplCopyWithImpl<$Res>
   __$$TournamentOpenedEventImplCopyWithImpl(_$TournamentOpenedEventImpl _value,
       $Res Function(_$TournamentOpenedEventImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? completer = freezed,
+  }) {
+    return _then(_$TournamentOpenedEventImpl(
+      completer: freezed == completer
+          ? _value.completer
+          : completer // ignore: cast_nullable_to_non_nullable
+              as Completer<dynamic>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$TournamentOpenedEventImpl implements TournamentOpenedEvent {
-  const _$TournamentOpenedEventImpl();
+  const _$TournamentOpenedEventImpl({this.completer});
+
+  @override
+  final Completer<dynamic>? completer;
 
   @override
   String toString() {
-    return 'TournamentsEvent.opened()';
+    return 'TournamentsEvent.opened(completer: $completer)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TournamentOpenedEventImpl);
+            other is _$TournamentOpenedEventImpl &&
+            (identical(other.completer, completer) ||
+                other.completer == completer));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, completer);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TournamentOpenedEventImplCopyWith<_$TournamentOpenedEventImpl>
+      get copyWith => __$$TournamentOpenedEventImplCopyWithImpl<
+          _$TournamentOpenedEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() opened,
+    required TResult Function(Completer<dynamic>? completer) opened,
     required TResult Function() create,
   }) {
-    return opened();
+    return opened(completer);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? opened,
+    TResult? Function(Completer<dynamic>? completer)? opened,
     TResult? Function()? create,
   }) {
-    return opened?.call();
+    return opened?.call(completer);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? opened,
+    TResult Function(Completer<dynamic>? completer)? opened,
     TResult Function()? create,
     required TResult orElse(),
   }) {
     if (opened != null) {
-      return opened();
+      return opened(completer);
     }
     return orElse();
   }
@@ -175,7 +202,13 @@ class _$TournamentOpenedEventImpl implements TournamentOpenedEvent {
 }
 
 abstract class TournamentOpenedEvent implements TournamentsEvent {
-  const factory TournamentOpenedEvent() = _$TournamentOpenedEventImpl;
+  const factory TournamentOpenedEvent({final Completer<dynamic>? completer}) =
+      _$TournamentOpenedEventImpl;
+
+  Completer<dynamic>? get completer;
+  @JsonKey(ignore: true)
+  _$$TournamentOpenedEventImplCopyWith<_$TournamentOpenedEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -219,7 +252,7 @@ class _$TournamentsEventCreateImpl implements TournamentsEventCreate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() opened,
+    required TResult Function(Completer<dynamic>? completer) opened,
     required TResult Function() create,
   }) {
     return create();
@@ -228,7 +261,7 @@ class _$TournamentsEventCreateImpl implements TournamentsEventCreate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? opened,
+    TResult? Function(Completer<dynamic>? completer)? opened,
     TResult? Function()? create,
   }) {
     return create?.call();
@@ -237,7 +270,7 @@ class _$TournamentsEventCreateImpl implements TournamentsEventCreate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? opened,
+    TResult Function(Completer<dynamic>? completer)? opened,
     TResult Function()? create,
     required TResult orElse(),
   }) {

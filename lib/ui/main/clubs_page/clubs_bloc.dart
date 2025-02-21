@@ -28,8 +28,12 @@ class ClubsBloc extends CustomBloc<ClubsEvent, ClubsState> {
   }
 
   _onPageOpened(ClubsEventPageOpened event, Emitter emit) async {
-    final clubs = await _getClubsInteractor.run();
-    emit(state.copyWith(clubs: clubs, isLoading: false));
+    try {
+      final clubs = await _getClubsInteractor.run();
+      emit(state.copyWith(clubs: clubs, isLoading: false));
+    } finally {
+      event.completer?.complete();
+    }
   }
 
   @override
