@@ -32,7 +32,7 @@ class RatingPage extends StatefulWidget {
     this.style = RatingTableStyle.full,
     this.sort = RatingSort.score,
     this.gameFilter = 0,
-  })  : assert((clubId == null) != (tournamentId == null));
+  }) : assert((clubId == null) != (tournamentId == null));
 
   @override
   State<RatingPage> createState() => _RatingPageState();
@@ -203,102 +203,89 @@ class _RatingPageState extends CustomState<RatingPage> {
   Widget buildMobile(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
+        print('test25: ${state.rows}');
         if (state.isLoading) {
           return const LoadingOverlayWidget();
         }
 
-        return NestedScrollView(
-          floatHeaderSlivers: true,
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            SliverAppBar(
-              expandedHeight: 307,
-              clipBehavior: Clip.hardEdge,
-              automaticallyImplyLeading: false,
-              flexibleSpace: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              state.clubName,
-                              style: context.theme.headerTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          if (widget.clubId != null)
-                            IconButton(
-                              onPressed: () => context.push(
-                                ClubGamesPage.createLocation(
-                                  context: context,
-                                  clubId: widget.clubId!,
-                                  range: widget.range,
-                                ),
-                              ),
-                              icon: const Icon(Icons.table_chart_outlined),
-                            ),
-                        ],
-                      ),
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      state.clubName,
+                      style: context.theme.headerTextStyle,
+                      textAlign: TextAlign.center,
                     ),
-                    if (widget.range != null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("Период: "),
-                            CustomButton(
-                              onTap: onChangeRangeTap,
-                              disabled: widget.tournamentId != null,
-                              text:
-                                  "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
-                            ),
-                          ],
+                  ),
+                  if (widget.clubId != null)
+                    IconButton(
+                      onPressed: () => context.push(
+                        ClubGamesPage.createLocation(
+                          context: context,
+                          clubId: widget.clubId!,
+                          range: widget.range,
                         ),
                       ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          styleSwitcher(),
-                          const SizedBox(width: 8),
-                          downloadRatingButton(),
-                        ],
-                      ),
+                      icon: const Icon(Icons.table_chart_outlined),
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    winRate(state),
-                    const SizedBox(
-                      height: 16,
+                ],
+              ),
+            ),
+            if (widget.range != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Период: "),
+                    CustomButton(
+                      onTap: onChangeRangeTap,
+                      disabled: widget.tournamentId != null,
+                      text:
+                          "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
                     ),
                   ],
                 ),
               ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  styleSwitcher(),
+                  const SizedBox(width: 8),
+                  downloadRatingButton(),
+                ],
+              ),
             ),
-          ],
-          body: state.rows.isEmpty
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      'За данный период не найдено ни одной игры. Попробуйте изменить период.',
-                      style: MyTheme.of(context).defaultTextStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                )
-              : SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 16),
-                      RatingTable(
+            const SizedBox(
+              height: 8,
+            ),
+            winRate(state),
+            const SizedBox(
+              height: 16,
+            ),
+            Expanded(
+              child: state.rows.isEmpty
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          'За данный период не найдено ни одной игры. Попробуйте изменить период.',
+                          style: MyTheme.of(context).defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      scrollDirection: Axis.horizontal,
+                      child: RatingTable(
                         isTournament: widget.tournamentId != null,
                         isMobile: true,
                         style: widget.style,
@@ -321,10 +308,9 @@ class _RatingPageState extends CustomState<RatingPage> {
                         },
                         tournamentId: widget.tournamentId,
                       ),
-                      const SizedBox(width: 16),
-                    ],
-                  ),
-                ),
+                    ),
+            ),
+          ],
         );
       },
     );
