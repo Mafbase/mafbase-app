@@ -38,6 +38,7 @@ class RatingTable extends StatefulWidget {
   final List<ClubRatingRowModel> sortedRows;
   final int gameFilter;
   final bool isTournament;
+  final bool pinNicknames;
 
   RatingTable({
     super.key,
@@ -51,6 +52,7 @@ class RatingTable extends StatefulWidget {
     int? gameFilter,
     required this.changeSort,
     required this.isTournament,
+    this.pinNicknames = false,
   })  : style = style ?? RatingTableStyle.full,
         sort = sort ?? RatingSort.score,
         gameFilter = gameFilter ?? 0,
@@ -678,18 +680,48 @@ class _RatingTableState extends State<RatingTable> {
 
   @override
   Widget build(BuildContext context) {
-    return SelectionArea(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: columns,
-      ),
+    final columns = this.columns(widget.isMobile && widget.pinNicknames);
+
+    return Material(
+      color: Colors.transparent,
+      child: widget.isMobile
+          ? widget.pinNicknames
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ...columns.take(2),
+                      Expanded(
+                        child: ListView(
+                          padding: EdgeInsets.only(right: 16),
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          children: columns.skip(2).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: columns,
+                  ),
+                )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: columns,
+            ),
     );
   }
 
-  List<Widget> get columns {
+  List<Widget> columns([withoutFlex = false]) {
     switch (widget.style) {
       case RatingTableStyle.full:
-        return fullColumns;
+        return fullColumns(withoutFlex);
       case RatingTableStyle.stats:
         return statsColumn;
       case RatingTableStyle.score:
@@ -872,125 +904,129 @@ class _RatingTableState extends State<RatingTable> {
         ),
       ];
 
-  List<Widget> get fullColumns => [
-        column(
-          mainControllers[0],
-          key: const Key("fullColumns0"),
-          builder: indexWidgets,
-          header: const Text("№"),
-          prototype: indexProtoype,
-        ),
-        column(
-          mainControllers[1],
-          key: const Key("fullColumns1"),
-          builder: (index) => nicknames(index),
-          header: const Text("Игрок"),
-          prototype: nicknamePrototype,
-        ),
-        column(
-          mainControllers[3],
-          key: const Key("fullColumns3"),
-          builder: scores,
-          header: InkWell(
-            onTap: () {
-              widget.changeSort(RatingSort.score);
-            },
-            child: const Text("Очки"),
-          ),
-          prototype: scorePrototype,
-        ),
-        column(
-          mainControllers[4],
-          key: const Key("fullColumns4"),
-          builder: addScores,
-          header: const Text("+"),
-          prototype: addScorePrototype,
-          boldRight: true,
-        ),
-        Flexible(
-          fit: FlexFit.loose,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final width = constraints.maxWidth.isFinite
-                  ? constraints.maxWidth / (constraints.maxWidth / 60).floor()
-                  : 60.0;
-              final gamesCount =
-                  widget.sortedRows.firstOrNull?.games.length ?? 0;
-              final expand =
-                  width * gamesCount > constraints.maxWidth && !widget.isMobile;
-              final header = gameHeader(width, expand);
-              final listView = ListView.builder(
-                key: const Key("fullColumns2"),
-                physics: const ClampingScrollPhysics(),
-                controller: mainControllers[2],
-                itemCount: widget.sortedRows.length,
-                shrinkWrap: widget.isMobile,
-                itemBuilder: (context, index) => games(width, index, expand),
-              );
-              return Column(
-                children: [
-                  if (header != null) header,
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context)
-                          .copyWith(scrollbars: false),
-                      child: expand
-                          ? listView
-                          : Stack(
-                              children: [
-                                IgnorePointer(
-                                  child: Opacity(
-                                    opacity: 0,
-                                    child: games(width, 0, expand),
-                                  ),
-                                ),
-                                Positioned.fill(child: listView),
-                              ],
+  List<Widget> fullColumns([bool withoutFlex = false]) {
+    final gamesColumn = LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth.isFinite
+            ? constraints.maxWidth / (constraints.maxWidth / 60).floor()
+            : 60.0;
+        final gamesCount = widget.sortedRows.firstOrNull?.games.length ?? 0;
+        final expand =
+            width * gamesCount > constraints.maxWidth && !widget.isMobile;
+        final header = gameHeader(width, expand);
+        final listView = ListView.builder(
+          key: const Key("fullColumns2"),
+          physics: const ClampingScrollPhysics(),
+          controller: mainControllers[2],
+          itemCount: widget.sortedRows.length,
+          shrinkWrap: widget.isMobile,
+          itemBuilder: (context, index) => games(width, index, expand),
+        );
+        return Column(
+          children: [
+            if (header != null) header,
+            Expanded(
+              child: ScrollConfiguration(
+                behavior:
+                    ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                child: expand
+                    ? listView
+                    : Stack(
+                        children: [
+                          IgnorePointer(
+                            child: Opacity(
+                              opacity: 0,
+                              child: games(width, 0, expand),
                             ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+                          ),
+                          Positioned.fill(child: listView),
+                        ],
+                      ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    return [
+      column(
+        mainControllers[0],
+        key: const Key("fullColumns0"),
+        builder: indexWidgets,
+        header: const Text("№"),
+        prototype: indexProtoype,
+      ),
+      column(
+        mainControllers[1],
+        key: const Key("fullColumns1"),
+        builder: (index) => nicknames(index),
+        header: const Text("Игрок"),
+        prototype: nicknamePrototype,
+      ),
+      column(
+        mainControllers[3],
+        key: const Key("fullColumns3"),
+        builder: scores,
+        header: InkWell(
+          onTap: () {
+            widget.changeSort(RatingSort.score);
+          },
+          child: const Text("Очки"),
         ),
-        column(
-          mainControllers[5],
-          key: const Key("fullColumns5"),
-          header: const Text("Ci"),
-          prototype: ciPrototype,
-          builder: ciWidget,
-          boldLeft: true,
-        ),
-        column(
-          mainControllers[6],
-          key: const Key("fullColumns6"),
-          header: const Text("п"),
-          prototype: winPrototype,
-          builder: wins,
-        ),
-        column(
-          key: const Key("fullColumns7"),
-          mainControllers[7],
-          header: const Text("дк"),
-          prototype: roleWinPrototype,
-          builder: roleWins,
-        ),
-        column(
-          mainControllers[8],
-          key: const Key("fullColumns8"),
-          builder: dies,
-          header: const Text("по"),
-          prototype: diesPrototype,
-        ),
-        column(
-          mainControllers[9],
-          key: const Key("fullColumns9"),
-          builder: totalGamesWidget,
-          isLastColumn: true,
-          header: const Text("и"),
-        ),
-      ];
+        prototype: scorePrototype,
+      ),
+      column(
+        mainControllers[4],
+        key: const Key("fullColumns4"),
+        builder: addScores,
+        header: const Text("+"),
+        prototype: addScorePrototype,
+        boldRight: true,
+      ),
+      withoutFlex
+          ? gamesColumn
+          : Flexible(
+              fit: FlexFit.loose,
+              child: gamesColumn,
+            ),
+      column(
+        mainControllers[5],
+        key: const Key("fullColumns5"),
+        header: const Text("Ci"),
+        prototype: ciPrototype,
+        builder: ciWidget,
+        boldLeft: true,
+      ),
+      column(
+        mainControllers[6],
+        key: const Key("fullColumns6"),
+        header: const Text("п"),
+        prototype: winPrototype,
+        builder: wins,
+      ),
+      column(
+        key: const Key("fullColumns7"),
+        mainControllers[7],
+        header: const Text("дк"),
+        prototype: roleWinPrototype,
+        builder: roleWins,
+      ),
+      column(
+        mainControllers[8],
+        key: const Key("fullColumns8"),
+        builder: dies,
+        header: const Text("по"),
+        prototype: diesPrototype,
+      ),
+      column(
+        mainControllers[9],
+        key: const Key("fullColumns9"),
+        builder: totalGamesWidget,
+        isLastColumn: true,
+        header: const Text("и"),
+      ),
+    ];
+  }
 
   Widget column(
     ScrollController controller, {

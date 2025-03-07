@@ -203,9 +203,56 @@ class _RatingPageState extends CustomState<RatingPage> {
   Widget buildMobile(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
-        print('test25: ${state.rows}');
         if (state.isLoading) {
           return const LoadingOverlayWidget();
+        }
+
+        Widget ratingTable({bool singlePage = false}) => RatingTable(
+              isTournament: widget.tournamentId != null,
+              isMobile: true,
+              style: widget.style,
+              rows: state.rows,
+              clubId: widget.clubId,
+              sort: widget.sort,
+              gameFilter: widget.gameFilter,
+              openGame: openGame,
+              pinNicknames: singlePage,
+              changeSort: (RatingSort sort) {
+                context.read<RatingBloc>().add(
+                      RatingEvent.rangeChanged(
+                        range: widget.range,
+                        clubId: widget.clubId,
+                        tournamentId: widget.tournamentId,
+                        style: widget.style,
+                        sort: sort,
+                        gameFilter: widget.gameFilter,
+                      ),
+                    );
+              },
+              tournamentId: widget.tournamentId,
+            );
+
+        void openFullscreen() {
+          Navigator.of(context, rootNavigator: true).push(
+            PageRouteBuilder(
+              pageBuilder: (context, _, __) => Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: true,
+                  title: Text('Рейтинг'),
+                  backgroundColor: MyTheme.of(context).darkBlueColor,
+                  foregroundColor: Colors.white,
+                ),
+                backgroundColor: Colors.white,
+                body: SafeArea(
+                  top: false,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: ratingTable(singlePage: true),
+                  ),
+                ),
+              ),
+            ),
+          );
         }
 
         return Column(
@@ -215,6 +262,11 @@ class _RatingPageState extends CustomState<RatingPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (state.rows.isNotEmpty)
+                    IconButton(
+                      onPressed: openFullscreen,
+                      icon: Icon(Icons.fullscreen_outlined),
+                    ),
                   Flexible(
                     child: Text(
                       state.clubName,
@@ -282,33 +334,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                         ),
                       ),
                     )
-                  : SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      scrollDirection: Axis.horizontal,
-                      child: RatingTable(
-                        isTournament: widget.tournamentId != null,
-                        isMobile: true,
-                        style: widget.style,
-                        rows: state.rows,
-                        clubId: widget.clubId,
-                        sort: widget.sort,
-                        gameFilter: widget.gameFilter,
-                        openGame: openGame,
-                        changeSort: (RatingSort sort) {
-                          context.read<RatingBloc>().add(
-                                RatingEvent.rangeChanged(
-                                  range: widget.range,
-                                  clubId: widget.clubId,
-                                  tournamentId: widget.tournamentId,
-                                  style: widget.style,
-                                  sort: sort,
-                                  gameFilter: widget.gameFilter,
-                                ),
-                              );
-                        },
-                        tournamentId: widget.tournamentId,
-                      ),
-                    ),
+                  : ratingTable(singlePage: false),
             ),
           ],
         );
