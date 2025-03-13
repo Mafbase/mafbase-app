@@ -56,9 +56,9 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - SDWebImage (5.20.1):
-    - SDWebImage/Core (= 5.20.1)
-  - SDWebImage/Core (5.20.1)
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
   - Sentry/HybridSDK (8.44.0)
   - sentry_flutter (8.13.2):
     - Flutter
@@ -144,7 +144,7 @@ SPEC CHECKSUMS:
   OrderedSet: e539b66b644ff081c73a262d24ad552a69be3a94
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  SDWebImage: 33d0f23bddeb5d209ae959153883247be6703713
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   Sentry: 0f9bc9adfc0b960e7f3bb5ec67e9a3d8193f3bdb
   sentry_flutter: 64a43fb39ab4c7f67d8a4cad52b49e22439e58b7
   share_plus: 8b6f8b3447e494cca5317c8c3073de39b3600d1f

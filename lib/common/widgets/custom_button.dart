@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final textWidget = ConstrainedBox(
       constraints: const BoxConstraints(
-        minHeight: 53,
+        minHeight: 48,
       ),
       child: Center(
         child: Text(

@@ -234,8 +234,8 @@ class _RatingPageState extends CustomState<RatingPage> {
 
         void openFullscreen() {
           Navigator.of(context, rootNavigator: true).push(
-            PageRouteBuilder(
-              pageBuilder: (context, _, __) => Scaffold(
+            MaterialPageRoute(
+              builder: (context) => Scaffold(
                 appBar: AppBar(
                   automaticallyImplyLeading: true,
                   title: Text('Рейтинг'),
@@ -291,17 +291,12 @@ class _RatingPageState extends CustomState<RatingPage> {
             if (widget.range != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Период: "),
-                    CustomButton(
-                      onTap: onChangeRangeTap,
-                      disabled: widget.tournamentId != null,
-                      text:
-                          "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
-                    ),
-                  ],
+                child: TextButton(
+                  onPressed: onChangeRangeTap,
+                  child: Text(
+                    "Период:\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             Padding(
