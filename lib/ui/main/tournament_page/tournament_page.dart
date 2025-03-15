@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
@@ -216,7 +217,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
               .add(const TournamentPageEvent.openSeatingPage());
         },
       ),
-      if (state.isMyTournament)
+      if (state.isMyTournament && state.isLoading)
         MenuItemModel(
           text: context.locale.tournamentSettingsTitle,
           onTap: () async {
@@ -244,7 +245,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
               .add(const TournamentPageEvent.openRating());
         },
       ),
-      if (state.billedTranslation && state.isMyTournament)
+      if (state.billedTranslation && state.isMyTournament && !state.isLoading)
         MenuItemModel(
           text: context.locale.translationDialogTitle,
           onTap: () {
@@ -255,7 +256,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
             );
           },
         ),
-      if (state.isMyTournament && showBill)
+      if (state.isMyTournament && showBill && !state.isLoading)
         MenuItemModel(
           text: 'Оплата',
           onTap: () async {
@@ -275,7 +276,9 @@ class _TournamentPageState extends CustomState<TournamentPage>
           },
         ),
       if (context.read<SeatingPageBloc>().state.games.length case int games)
-        if (state.isMyTournament && state.notificationEnabled) ...[
+        if (state.isMyTournament &&
+            state.notificationEnabled &&
+            !context.read<SeatingPageBloc>().state.isLoading) ...[
           MenuItemModel(
             text: 'Оповещение об игре',
             onTap: () {
