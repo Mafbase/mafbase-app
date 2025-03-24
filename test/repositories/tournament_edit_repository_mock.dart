@@ -2,6 +2,7 @@ import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/domain/models/user_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -112,6 +113,24 @@ class TournamentEditRepositoryMock implements TournamentEditRepository {
   @override
   Future<void> downloadTablesSeating({required int tournamentId}) {
     // TODO: implement downloadTablesSeating
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<UserModel>> getOwners({required int tournamentId}) {
+    // TODO: implement getOwners
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addOwner({required int tournamentId, required String email}) {
+    // TODO: implement addOwner
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteOwner({required int tournamentId, required int ownerId}) {
+    // TODO: implement deleteOwner
     throw UnimplementedError();
   }
 }

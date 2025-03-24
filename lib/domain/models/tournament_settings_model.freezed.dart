@@ -12,7 +12,7 @@ part of 'tournament_settings_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TournamentSettingsModel {
@@ -22,7 +22,9 @@ mixin _$TournamentSettingsModel {
   List<int>? get buckets => throw _privateConstructorUsedError;
   bool get hideResult => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentSettingsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TournamentSettingsModelCopyWith<TournamentSettingsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TournamentSettingsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +117,8 @@ class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
       $Res Function(_$TournamentSettingsModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentSettingsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -203,7 +209,9 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
   int get hashCode => Object.hash(runtimeType, defaultGames, swissGames,
       finalGames, const DeepCollectionEquality().hash(_buckets), hideResult);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentSettingsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentSettingsModelImplCopyWith<_$TournamentSettingsModelImpl>
@@ -229,8 +237,11 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
   List<int>? get buckets;
   @override
   bool get hideResult;
+
+  /// Create a copy of TournamentSettingsModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentSettingsModelImplCopyWith<_$TournamentSettingsModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

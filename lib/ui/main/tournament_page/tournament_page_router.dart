@@ -19,6 +19,7 @@ abstract class TournamentPageRouter {
 
   void openPlayersList({required int tournamentId});
 
+
   void openRating({required int tournamentId});
 
   void openWebView(String url);
@@ -84,4 +85,5 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
       ),
     );
   }
+
 }

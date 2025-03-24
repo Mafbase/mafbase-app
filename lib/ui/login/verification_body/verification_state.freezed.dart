@@ -12,14 +12,16 @@ part of 'verification_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VerificationState {
   bool get hasError => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VerificationStateCopyWith<VerificationState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$VerificationStateCopyWithImpl<$Res, $Val extends VerificationState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$VerificationStateImplCopyWithImpl<$Res>
       $Res Function(_$VerificationStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,7 +137,9 @@ class _$VerificationStateImpl implements _VerificationState {
   @override
   int get hashCode => Object.hash(runtimeType, hasError, isLoading);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VerificationStateImplCopyWith<_$VerificationStateImpl> get copyWith =>
@@ -148,8 +156,11 @@ abstract class _VerificationState implements VerificationState {
   bool get hasError;
   @override
   bool get isLoading;
+
+  /// Create a copy of VerificationState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VerificationStateImplCopyWith<_$VerificationStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

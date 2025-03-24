@@ -12,7 +12,7 @@ part of 'profile_dialog_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProfileDialogEvent {
@@ -78,6 +78,9 @@ class _$ProfileDialogEventCopyWithImpl<$Res, $Val extends ProfileDialogEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ProfileDialogEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,8 @@ class __$$ProfileDialogEventSubmitImplCopyWithImpl<$Res>
       $Res Function(_$ProfileDialogEventSubmitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileDialogEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -161,7 +166,9 @@ class _$ProfileDialogEventSubmitImpl implements ProfileDialogEventSubmit {
   int get hashCode =>
       Object.hash(runtimeType, nickname, mafbankNickname, fsmNickname);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileDialogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileDialogEventSubmitImplCopyWith<_$ProfileDialogEventSubmitImpl>
@@ -246,7 +253,10 @@ abstract class ProfileDialogEventSubmit implements ProfileDialogEvent {
   String get nickname;
   String get mafbankNickname;
   String get fsmNickname;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileDialogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileDialogEventSubmitImplCopyWith<_$ProfileDialogEventSubmitImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -271,6 +281,8 @@ class __$$ProfileDialogEventEditImageImplCopyWithImpl<$Res>
       $Res Function(_$ProfileDialogEventEditImageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileDialogEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -320,7 +332,9 @@ class _$ProfileDialogEventEditImageImpl implements ProfileDialogEventEditImage {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(bytes), fileName);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileDialogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileDialogEventEditImageImplCopyWith<_$ProfileDialogEventEditImageImpl>
@@ -403,7 +417,10 @@ abstract class ProfileDialogEventEditImage implements ProfileDialogEvent {
 
   Uint8List get bytes;
   String get fileName;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileDialogEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileDialogEventEditImageImplCopyWith<_$ProfileDialogEventEditImageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

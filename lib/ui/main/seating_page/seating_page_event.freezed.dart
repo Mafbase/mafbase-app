@@ -12,7 +12,7 @@ part of 'seating_page_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SeatingPageEvent {
@@ -148,6 +148,9 @@ class _$SeatingPageEventCopyWithImpl<$Res, $Val extends SeatingPageEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -166,6 +169,9 @@ class __$$SeatingPageEventAddPairImplCopyWithImpl<$Res>
       _$SeatingPageEventAddPairImpl _value,
       $Res Function(_$SeatingPageEventAddPairImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -348,6 +354,9 @@ class __$$SeatingPageEventCreateSeatingImplCopyWithImpl<$Res>
       _$SeatingPageEventCreateSeatingImpl _value,
       $Res Function(_$SeatingPageEventCreateSeatingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -532,6 +541,9 @@ class __$$SeatingPageEventFsmSeatingTappedImplCopyWithImpl<$Res>
       _$SeatingPageEventFsmSeatingTappedImpl _value,
       $Res Function(_$SeatingPageEventFsmSeatingTappedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -719,6 +731,8 @@ class __$$SeatingPageEventAutoFsmSeatingImplCopyWithImpl<$Res>
       $Res Function(_$SeatingPageEventAutoFsmSeatingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -768,7 +782,9 @@ class _$SeatingPageEventAutoFsmSeatingImpl
   @override
   int get hashCode => Object.hash(runtimeType, gomafiaId, completer);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SeatingPageEventAutoFsmSeatingImplCopyWith<
@@ -922,7 +938,10 @@ abstract class SeatingPageEventAutoFsmSeating implements SeatingPageEvent {
 
   int get gomafiaId;
   Completer<dynamic>? get completer;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SeatingPageEventAutoFsmSeatingImplCopyWith<
           _$SeatingPageEventAutoFsmSeatingImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -951,6 +970,8 @@ class __$$SeatingPageEventDeletePairImplCopyWithImpl<$Res>
       $Res Function(_$SeatingPageEventDeletePairImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -969,6 +990,8 @@ class __$$SeatingPageEventDeletePairImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get first {
@@ -977,6 +1000,8 @@ class __$$SeatingPageEventDeletePairImplCopyWithImpl<$Res>
     });
   }
 
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get second {
@@ -1014,7 +1039,9 @@ class _$SeatingPageEventDeletePairImpl implements SeatingPageEventDeletePair {
   @override
   int get hashCode => Object.hash(runtimeType, first, second);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SeatingPageEventDeletePairImplCopyWith<_$SeatingPageEventDeletePairImpl>
@@ -1167,7 +1194,10 @@ abstract class SeatingPageEventDeletePair implements SeatingPageEvent {
 
   PlayerModel get first;
   PlayerModel get second;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SeatingPageEventDeletePairImplCopyWith<_$SeatingPageEventDeletePairImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1192,6 +1222,8 @@ class __$$SeatingPageEventPageOpenedImplCopyWithImpl<$Res>
       $Res Function(_$SeatingPageEventPageOpenedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1231,7 +1263,9 @@ class _$SeatingPageEventPageOpenedImpl implements SeatingPageEventPageOpened {
   @override
   int get hashCode => Object.hash(runtimeType, tournamentId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SeatingPageEventPageOpenedImplCopyWith<_$SeatingPageEventPageOpenedImpl>
@@ -1382,7 +1416,10 @@ abstract class SeatingPageEventPageOpened implements SeatingPageEvent {
       _$SeatingPageEventPageOpenedImpl;
 
   int get tournamentId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SeatingPageEventPageOpenedImplCopyWith<_$SeatingPageEventPageOpenedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1407,6 +1444,8 @@ class __$$SeatingPageEventGameEditingImplCopyWithImpl<$Res>
       $Res Function(_$SeatingPageEventGameEditingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1445,7 +1484,9 @@ class _$SeatingPageEventGameEditingImpl implements SeatingPageEventGameEditing {
   @override
   int get hashCode => Object.hash(runtimeType, gameId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SeatingPageEventGameEditingImplCopyWith<_$SeatingPageEventGameEditingImpl>
@@ -1596,7 +1637,10 @@ abstract class SeatingPageEventGameEditing implements SeatingPageEvent {
       _$SeatingPageEventGameEditingImpl;
 
   int get gameId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SeatingPageEventGameEditingImplCopyWith<_$SeatingPageEventGameEditingImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1618,6 +1662,9 @@ class __$$SeatingPageEventCreateFinalSeatingImplCopyWithImpl<$Res>
       _$SeatingPageEventCreateFinalSeatingImpl _value,
       $Res Function(_$SeatingPageEventCreateFinalSeatingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1805,6 +1852,8 @@ class __$$SeatingPageEventCreateSwissGameImplCopyWithImpl<$Res>
       $Res Function(_$SeatingPageEventCreateSwissGameImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1844,7 +1893,9 @@ class _$SeatingPageEventCreateSwissGameImpl
   @override
   int get hashCode => Object.hash(runtimeType, game);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SeatingPageEventCreateSwissGameImplCopyWith<
@@ -1996,7 +2047,10 @@ abstract class SeatingPageEventCreateSwissGame implements SeatingPageEvent {
       _$SeatingPageEventCreateSwissGameImpl;
 
   int get game;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SeatingPageEventCreateSwissGameImplCopyWith<
           _$SeatingPageEventCreateSwissGameImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2019,6 +2073,9 @@ class __$$SeatingPageEventGetPlayersSeatingImplCopyWithImpl<$Res>
       _$SeatingPageEventGetPlayersSeatingImpl _value,
       $Res Function(_$SeatingPageEventGetPlayersSeatingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2203,6 +2260,9 @@ class __$$SeatingPageEventGetTablesSeatingImplCopyWithImpl<$Res>
       _$SeatingPageEventGetTablesSeatingImpl _value,
       $Res Function(_$SeatingPageEventGetTablesSeatingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2387,6 +2447,9 @@ class __$$SeatingPageEventGetCrossStatsImplCopyWithImpl<$Res>
       _$SeatingPageEventGetCrossStatsImpl _value,
       $Res Function(_$SeatingPageEventGetCrossStatsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SeatingPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

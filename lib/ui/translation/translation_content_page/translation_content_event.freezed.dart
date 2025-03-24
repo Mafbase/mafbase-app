@@ -12,7 +12,7 @@ part of 'translation_content_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TranslationContentEvent {
@@ -76,6 +76,9 @@ class _$TranslationContentEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TranslationContentEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -98,6 +101,8 @@ class __$$TranslationContentEventStateReceivedImplCopyWithImpl<$Res>
       $Res Function(_$TranslationContentEventStateReceivedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TranslationContentEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,7 +142,9 @@ class _$TranslationContentEventStateReceivedImpl
   @override
   int get hashCode => Object.hash(runtimeType, content);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TranslationContentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TranslationContentEventStateReceivedImplCopyWith<
@@ -218,7 +225,10 @@ abstract class TranslationContentEventStateReceived
       _$TranslationContentEventStateReceivedImpl;
 
   SeatingContent get content;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TranslationContentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TranslationContentEventStateReceivedImplCopyWith<
           _$TranslationContentEventStateReceivedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -241,6 +251,9 @@ class __$$TranslationContentEventPageOpenedImplCopyWithImpl<$Res>
       _$TranslationContentEventPageOpenedImpl _value,
       $Res Function(_$TranslationContentEventPageOpenedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TranslationContentEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

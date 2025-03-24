@@ -12,7 +12,7 @@ part of 'verification_events.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VerificationEvents {
@@ -78,6 +78,9 @@ class _$VerificationEventsCopyWithImpl<$Res, $Val extends VerificationEvents>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of VerificationEvents
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,8 @@ class __$$VerificationEventSubmitImplCopyWithImpl<$Res>
       $Res Function(_$VerificationEventSubmitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VerificationEvents
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,7 +143,9 @@ class _$VerificationEventSubmitImpl implements VerificationEventSubmit {
   @override
   int get hashCode => Object.hash(runtimeType, token);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VerificationEvents
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VerificationEventSubmitImplCopyWith<_$VerificationEventSubmitImpl>
@@ -219,7 +226,10 @@ abstract class VerificationEventSubmit implements VerificationEvents {
       _$VerificationEventSubmitImpl;
 
   String get token;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of VerificationEvents
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VerificationEventSubmitImplCopyWith<_$VerificationEventSubmitImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -238,6 +248,9 @@ class __$$OnSignUpButtonTappedImplCopyWithImpl<$Res>
   __$$OnSignUpButtonTappedImplCopyWithImpl(_$OnSignUpButtonTappedImpl _value,
       $Res Function(_$OnSignUpButtonTappedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of VerificationEvents
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -347,6 +360,9 @@ class __$$OnLoginButtonTappedImplCopyWithImpl<$Res>
   __$$OnLoginButtonTappedImplCopyWithImpl(_$OnLoginButtonTappedImpl _value,
       $Res Function(_$OnLoginButtonTappedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of VerificationEvents
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

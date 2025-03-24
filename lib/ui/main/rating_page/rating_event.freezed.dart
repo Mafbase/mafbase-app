@@ -12,7 +12,7 @@ part of 'rating_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$RatingEvent {
@@ -112,6 +112,9 @@ class _$RatingEventCopyWithImpl<$Res, $Val extends RatingEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -133,6 +136,8 @@ class __$$RatingEventPlayerSelectedImplCopyWithImpl<$Res>
       $Res Function(_$RatingEventPlayerSelectedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -172,7 +177,9 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
   @override
   int get hashCode => Object.hash(runtimeType, playerId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RatingEventPlayerSelectedImplCopyWith<_$RatingEventPlayerSelectedImpl>
@@ -287,7 +294,10 @@ abstract class RatingEventPlayerSelected implements RatingEvent {
       _$RatingEventPlayerSelectedImpl;
 
   int get playerId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RatingEventPlayerSelectedImplCopyWith<_$RatingEventPlayerSelectedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -309,6 +319,8 @@ class __$$RatingEventDownloadImplCopyWithImpl<$Res>
       $Res Function(_$RatingEventDownloadImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -355,7 +367,9 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
   @override
   int get hashCode => Object.hash(runtimeType, range, clubId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RatingEventDownloadImplCopyWith<_$RatingEventDownloadImpl> get copyWith =>
@@ -472,7 +486,10 @@ abstract class RatingEventDownload implements RatingEvent {
 
   DateTimeRange get range;
   int get clubId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RatingEventDownloadImplCopyWith<_$RatingEventDownloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -496,6 +513,8 @@ class __$$RatingEventDownloadStatsImplCopyWithImpl<$Res>
       $Res Function(_$RatingEventDownloadStatsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -543,7 +562,9 @@ class _$RatingEventDownloadStatsImpl implements RatingEventDownloadStats {
   @override
   int get hashCode => Object.hash(runtimeType, range, clubId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RatingEventDownloadStatsImplCopyWith<_$RatingEventDownloadStatsImpl>
@@ -660,7 +681,10 @@ abstract class RatingEventDownloadStats implements RatingEvent {
 
   DateTimeRange get range;
   int get clubId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RatingEventDownloadStatsImplCopyWith<_$RatingEventDownloadStatsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -684,6 +708,8 @@ class __$$RatingEventGameSelectedImplCopyWithImpl<$Res>
       $Res Function(_$RatingEventGameSelectedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -740,7 +766,9 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
   @override
   int get hashCode => Object.hash(runtimeType, gameId, clubId, tournamentId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RatingEventGameSelectedImplCopyWith<_$RatingEventGameSelectedImpl>
@@ -859,7 +887,10 @@ abstract class RatingEventGameSelected implements RatingEvent {
   int get gameId;
   int? get clubId;
   int? get tournamentId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RatingEventGameSelectedImplCopyWith<_$RatingEventGameSelectedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -882,6 +913,8 @@ class __$$RatingEventPageOpenedImplCopyWithImpl<$Res>
       $Res Function(_$RatingEventPageOpenedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -938,7 +971,9 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
   @override
   int get hashCode => Object.hash(runtimeType, range, clubId, tournamentId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RatingEventPageOpenedImplCopyWith<_$RatingEventPageOpenedImpl>
@@ -1057,7 +1092,10 @@ abstract class RatingEventPageOpened implements RatingEvent {
   DateTimeRange? get range;
   int? get clubId;
   int? get tournamentId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RatingEventPageOpenedImplCopyWith<_$RatingEventPageOpenedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1087,6 +1125,8 @@ class __$$RatingEventRangeChangedImplCopyWithImpl<$Res>
       $Res Function(_$RatingEventRangeChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1174,7 +1214,9 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   int get hashCode => Object.hash(
       runtimeType, range, clubId, tournamentId, style, sort, gameFilter);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RatingEventRangeChangedImplCopyWith<_$RatingEventRangeChangedImpl>
@@ -1300,7 +1342,10 @@ abstract class RatingEventRangeChanged implements RatingEvent {
   RatingTableStyle get style;
   RatingSort get sort;
   int get gameFilter;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RatingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RatingEventRangeChangedImplCopyWith<_$RatingEventRangeChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

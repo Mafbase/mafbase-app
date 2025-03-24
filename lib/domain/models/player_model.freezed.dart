@@ -12,7 +12,7 @@ part of 'player_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PlayerModel {
@@ -22,7 +22,9 @@ mixin _$PlayerModel {
   String? get mafbankNickname => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlayerModelCopyWith<PlayerModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -109,6 +113,8 @@ class __$$PlayerModelImplCopyWithImpl<$Res>
       _$PlayerModelImpl _value, $Res Function(_$PlayerModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -190,7 +196,9 @@ class _$PlayerModelImpl implements _PlayerModel {
   int get hashCode => Object.hash(
       runtimeType, id, nickname, fsmNickaname, mafbankNickname, imageUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlayerModelImplCopyWith<_$PlayerModelImpl> get copyWith =>
@@ -215,8 +223,11 @@ abstract class _PlayerModel implements PlayerModel {
   String? get mafbankNickname;
   @override
   String? get imageUrl;
+
+  /// Create a copy of PlayerModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlayerModelImplCopyWith<_$PlayerModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

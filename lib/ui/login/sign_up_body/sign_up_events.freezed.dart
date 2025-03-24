@@ -12,7 +12,7 @@ part of 'sign_up_events.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SignUpEvents {
@@ -72,6 +72,9 @@ class _$SignUpEventsCopyWithImpl<$Res, $Val extends SignUpEvents>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SignUpEvents
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -88,6 +91,9 @@ class __$$BackButtonTappedImplCopyWithImpl<$Res>
   __$$BackButtonTappedImplCopyWithImpl(_$BackButtonTappedImpl _value,
       $Res Function(_$BackButtonTappedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignUpEvents
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -193,6 +199,8 @@ class __$$SignUpButtonTappedImplCopyWithImpl<$Res>
       $Res Function(_$SignUpButtonTappedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SignUpEvents
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -240,7 +248,9 @@ class _$SignUpButtonTappedImpl implements SignUpButtonTapped {
   @override
   int get hashCode => Object.hash(runtimeType, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SignUpEvents
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SignUpButtonTappedImplCopyWith<_$SignUpButtonTappedImpl> get copyWith =>
@@ -317,7 +327,10 @@ abstract class SignUpButtonTapped implements SignUpEvents {
 
   String get email;
   String get password;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SignUpEvents
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignUpButtonTappedImplCopyWith<_$SignUpButtonTappedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

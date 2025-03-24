@@ -12,7 +12,7 @@ part of 'translation_control_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TranslationControlEvent {
@@ -97,6 +97,9 @@ class _$TranslationControlEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -119,6 +122,8 @@ class __$$TranslationControlEventChangeRoleImplCopyWithImpl<$Res>
       $Res Function(_$TranslationControlEventChangeRoleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,7 +172,9 @@ class _$TranslationControlEventChangeRoleImpl
   @override
   int get hashCode => Object.hash(runtimeType, index, role);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TranslationControlEventChangeRoleImplCopyWith<
@@ -270,7 +277,10 @@ abstract class TranslationControlEventChangeRole
 
   int get index;
   PlayerRole get role;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TranslationControlEventChangeRoleImplCopyWith<
           _$TranslationControlEventChangeRoleImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -296,6 +306,8 @@ class __$$TranslationControlEventChangeStatusImplCopyWithImpl<$Res>
       $Res Function(_$TranslationControlEventChangeStatusImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -344,7 +356,9 @@ class _$TranslationControlEventChangeStatusImpl
   @override
   int get hashCode => Object.hash(runtimeType, index, status);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TranslationControlEventChangeStatusImplCopyWith<
@@ -447,7 +461,10 @@ abstract class TranslationControlEventChangeStatus
 
   int get index;
   PlayerStatus get status;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TranslationControlEventChangeStatusImplCopyWith<
           _$TranslationControlEventChangeStatusImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -473,6 +490,8 @@ class __$$TranslationControlEventSelectGameImplCopyWithImpl<$Res>
       $Res Function(_$TranslationControlEventSelectGameImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -513,7 +532,9 @@ class _$TranslationControlEventSelectGameImpl
   @override
   int get hashCode => Object.hash(runtimeType, gameIndex);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TranslationControlEventSelectGameImplCopyWith<
@@ -614,7 +635,10 @@ abstract class TranslationControlEventSelectGame
       {required final int gameIndex}) = _$TranslationControlEventSelectGameImpl;
 
   int get gameIndex;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TranslationControlEventSelectGameImplCopyWith<
           _$TranslationControlEventSelectGameImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -640,6 +664,8 @@ class __$$TranslationControlEventStateReceivedImplCopyWithImpl<$Res>
       $Res Function(_$TranslationControlEventStateReceivedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -679,7 +705,9 @@ class _$TranslationControlEventStateReceivedImpl
   @override
   int get hashCode => Object.hash(runtimeType, event);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TranslationControlEventStateReceivedImplCopyWith<
@@ -781,7 +809,10 @@ abstract class TranslationControlEventStateReceived
       _$TranslationControlEventStateReceivedImpl;
 
   SeatingContent get event;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TranslationControlEventStateReceivedImplCopyWith<
           _$TranslationControlEventStateReceivedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -804,6 +835,9 @@ class __$$TranslationControlEventPageOpenedImplCopyWithImpl<$Res>
       _$TranslationControlEventPageOpenedImpl _value,
       $Res Function(_$TranslationControlEventPageOpenedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TranslationControlEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

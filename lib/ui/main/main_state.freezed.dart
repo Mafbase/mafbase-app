@@ -12,14 +12,16 @@ part of 'main_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MainState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasBackButton => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MainState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MainStateCopyWith<MainState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MainState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +84,8 @@ class __$$MainStateImplCopyWithImpl<$Res>
       _$MainStateImpl _value, $Res Function(_$MainStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MainState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,7 +134,9 @@ class _$MainStateImpl implements _MainState {
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, hasBackButton);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MainState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MainStateImplCopyWith<_$MainStateImpl> get copyWith =>
@@ -144,8 +152,11 @@ abstract class _MainState implements MainState {
   bool get isLoading;
   @override
   bool get hasBackButton;
+
+  /// Create a copy of MainState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MainStateImplCopyWith<_$MainStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

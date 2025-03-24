@@ -56,6 +56,55 @@ class MyHttpClient {
 
   Future<Response> _fetch(RequestOptions options) => _client.fetch(options);
 
+  Future<Response<T>> delete<T>(String method, dynamic data, int contentLength, {bool useRecoveryToken = true}) async {
+    if (useRecoveryToken) {
+      debugPrint("sending request to $baseUrl$method");
+    }
+    final token = await _storage.authToken;
+
+    final response = await _client.delete<T>(
+      method,
+      data: data,
+      options: Options(
+        headers: {
+          HttpHeaders.contentLengthHeader: contentLength,
+          if (token != null && token.isNotEmpty)
+            HttpHeaders.authorizationHeader: "Bearer $token",
+        },
+      ),
+    );
+
+    if (response.statusCode == HttpStatus.unauthorized) {
+      if (useRecoveryToken) {
+        final credentials = await _credentialStorage.read();
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(
+              email: credentials.login,
+              password: credentials.password,
+            ),
+          ).execute(this);
+
+          if (authResponse.token.isEmpty) {
+            await _storage.clear();
+            return response;
+          } else {
+            await _storage.onTokensUpdated(
+              authResponse.token,
+              authResponse.recoveryToken,
+            );
+          }
+        }
+        return delete(method, data, contentLength, useRecoveryToken: false);
+      }
+      await _storage.clear();
+      throw UnauthenticatedError();
+    }
+    _checkResponse(response);
+
+    return response;
+  }
+
   Future<Response<T>> get<T>(
     String method, {
     bool useRecoveryToken = true,

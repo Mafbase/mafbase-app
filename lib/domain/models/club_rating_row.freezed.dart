@@ -12,7 +12,7 @@ part of 'club_rating_row.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ClubRatingRowModel {
@@ -41,7 +41,9 @@ mixin _$ClubRatingRowModel {
   double get donScore => throw _privateConstructorUsedError;
   double get mafiaScore => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubRatingRowModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClubRatingRowModelCopyWith<ClubRatingRowModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -89,6 +91,8 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ClubRatingRowModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -261,6 +265,8 @@ class __$$ClubRatingRowModelImplCopyWithImpl<$Res>
       $Res Function(_$ClubRatingRowModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClubRatingRowModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -559,7 +565,9 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
         mafiaScore
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubRatingRowModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClubRatingRowModelImplCopyWith<_$ClubRatingRowModelImpl> get copyWith =>
@@ -642,8 +650,11 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   double get donScore;
   @override
   double get mafiaScore;
+
+  /// Create a copy of ClubRatingRowModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClubRatingRowModelImplCopyWith<_$ClubRatingRowModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -653,7 +664,9 @@ mixin _$GameRowItemModel {
   double? get score => throw _privateConstructorUsedError;
   int get gameId => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GameRowItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GameRowItemModelCopyWith<GameRowItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -677,6 +690,8 @@ class _$GameRowItemModelCopyWithImpl<$Res, $Val extends GameRowItemModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GameRowItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -715,6 +730,8 @@ class __$$GameRowItemModelImplCopyWithImpl<$Res>
       $Res Function(_$GameRowItemModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GameRowItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -761,7 +778,9 @@ class _$GameRowItemModelImpl implements _GameRowItemModel {
   @override
   int get hashCode => Object.hash(runtimeType, score, gameId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GameRowItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GameRowItemModelImplCopyWith<_$GameRowItemModelImpl> get copyWith =>
@@ -778,8 +797,11 @@ abstract class _GameRowItemModel implements GameRowItemModel {
   double? get score;
   @override
   int get gameId;
+
+  /// Create a copy of GameRowItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GameRowItemModelImplCopyWith<_$GameRowItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1032,3 +1032,41 @@ final $typed_data.Uint8List takeGomafiaSeatingEventOutDescriptor = $convert.base
     'ChpUYWtlR29tYWZpYVNlYXRpbmdFdmVudE91dBIaCghub3RGb3VuZBgBIAMoCVIIbm90Rm91bm'
     'Q=');
 
+@$core.Deprecated('Use userDescriptor instead')
+const User$json = {
+  '1': 'User',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'email', '3': 2, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
+    'CgRVc2VyEg4KAmlkGAEgASgFUgJpZBIUCgVlbWFpbBgCIAEoCVIFZW1haWw=');
+
+@$core.Deprecated('Use tournamentOwnersEventOutDescriptor instead')
+const TournamentOwnersEventOut$json = {
+  '1': 'TournamentOwnersEventOut',
+  '2': [
+    {'1': 'owners', '3': 1, '4': 3, '5': 11, '6': '.generated.User', '10': 'owners'},
+  ],
+};
+
+/// Descriptor for `TournamentOwnersEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tournamentOwnersEventOutDescriptor = $convert.base64Decode(
+    'ChhUb3VybmFtZW50T3duZXJzRXZlbnRPdXQSJwoGb3duZXJzGAEgAygLMg8uZ2VuZXJhdGVkLl'
+    'VzZXJSBm93bmVycw==');
+
+@$core.Deprecated('Use updateOwnerEventDescriptor instead')
+const UpdateOwnerEvent$json = {
+  '1': 'UpdateOwnerEvent',
+  '2': [
+    {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `UpdateOwnerEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateOwnerEventDescriptor = $convert.base64Decode(
+    'ChBVcGRhdGVPd25lckV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
+

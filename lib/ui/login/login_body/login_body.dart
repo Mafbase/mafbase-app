@@ -107,7 +107,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                             return null;
                           }
                         }
-                        return "Введите корректный адресс электронной почты";
+                        return "Введите корректный адрес электронной почты";
                       },
                       controller: _emailController,
                       hint: AppLocalizations.of(context)!.loginEmailHint,
@@ -262,7 +262,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                             return null;
                           }
                         }
-                        return "Введите корректный адресс электронной почты";
+                        return "Введите корректный адрес электронной почты";
                       },
                       controller: _emailController,
                       hint: AppLocalizations.of(context)!.loginEmailHint,
