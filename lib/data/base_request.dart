@@ -9,6 +9,7 @@ import 'package:seating_generator_web/data/http_client.dart';
 abstract class BaseRequest<R> {
   final String method;
   final GeneratedMessage? data;
+  final Method? methodType;
   final bool resendOnUnauth;
   final bool useJson;
   final bool forcePost;
@@ -19,20 +20,31 @@ abstract class BaseRequest<R> {
     this.resendOnUnauth = true,
     this.useJson = false,
     this.forcePost = false,
+    this.methodType,
   });
 
   Future<R> execute(MyHttpClient client) async {
     final Response response;
-    if (data == null && !forcePost) {
-      response = await client.get(method, useRecoveryToken: resendOnUnauth);
-    } else {
+    if (methodType == Method.delete) {
       final bytes = data?.writeToBuffer() ?? [];
-      response = await client.post(
+      response = await client.delete(
         method,
         Stream.fromIterable(bytes.map<List<int>>((e) => [e])),
         bytes.length,
         useRecoveryToken: resendOnUnauth,
       );
+    } else {
+      if (data == null && !forcePost) {
+        response = await client.get(method, useRecoveryToken: resendOnUnauth);
+      } else {
+        final bytes = data?.writeToBuffer() ?? [];
+        response = await client.post(
+          method,
+          Stream.fromIterable(bytes.map<List<int>>((e) => [e])),
+          bytes.length,
+          useRecoveryToken: resendOnUnauth,
+        );
+      }
     }
 
     final bytes = parseResponseData(response.data);
@@ -57,4 +69,4 @@ List<int> parseResponseData(dynamic data) {
   return list;
 }
 
-enum Method { post, get }
+enum Method { post, get, delete }

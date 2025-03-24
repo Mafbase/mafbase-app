@@ -12,7 +12,7 @@ part of 'add_club_game_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddClubGameState {
@@ -23,7 +23,9 @@ mixin _$AddClubGameState {
   List<CiSchemeModel> get ciSchemes => throw _privateConstructorUsedError;
   bool get isTournament => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AddClubGameStateCopyWith<AddClubGameState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +55,8 @@ class _$AddClubGameStateCopyWithImpl<$Res, $Val extends AddClubGameState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AddClubGameState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,6 +121,8 @@ class __$$AddClubGameStateImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -232,7 +238,9 @@ class _$AddClubGameStateImpl implements _AddClubGameState {
       const DeepCollectionEquality().hash(_ciSchemes),
       isTournament);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameStateImplCopyWith<_$AddClubGameStateImpl> get copyWith =>
@@ -261,8 +269,11 @@ abstract class _AddClubGameState implements AddClubGameState {
   List<CiSchemeModel> get ciSchemes;
   @override
   bool get isTournament;
+
+  /// Create a copy of AddClubGameState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameStateImplCopyWith<_$AddClubGameStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

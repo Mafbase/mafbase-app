@@ -12,7 +12,7 @@ part of 'game_result_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GameResultModel {
@@ -26,7 +26,9 @@ mixin _$GameResultModel {
   int get table => throw _privateConstructorUsedError;
   int get game => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GameResultModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GameResultModelCopyWith<GameResultModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +61,8 @@ class _$GameResultModelCopyWithImpl<$Res, $Val extends GameResultModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GameResultModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,6 +145,8 @@ class __$$GameResultModelImplCopyWithImpl<$Res>
       _$GameResultModelImpl _value, $Res Function(_$GameResultModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GameResultModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -297,7 +303,9 @@ class _$GameResultModelImpl implements _GameResultModel {
       table,
       game);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GameResultModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GameResultModelImplCopyWith<_$GameResultModelImpl> get copyWith =>
@@ -335,8 +343,11 @@ abstract class _GameResultModel implements GameResultModel {
   int get table;
   @override
   int get game;
+
+  /// Create a copy of GameResultModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GameResultModelImplCopyWith<_$GameResultModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

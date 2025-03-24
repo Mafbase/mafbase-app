@@ -12,7 +12,7 @@ part of 'tournament_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TournamentModel {
@@ -27,7 +27,9 @@ mixin _$TournamentModel {
   bool get notificationEnabled => throw _privateConstructorUsedError;
   String get gomafiaUrl => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TournamentModelCopyWith<TournamentModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +63,8 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TournamentModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,6 +153,8 @@ class __$$TournamentModelImplCopyWithImpl<$Res>
       _$TournamentModelImpl _value, $Res Function(_$TournamentModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -287,7 +293,9 @@ class _$TournamentModelImpl implements _TournamentModel {
       notificationEnabled,
       gomafiaUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentModelImplCopyWith<_$TournamentModelImpl> get copyWith =>
@@ -328,8 +336,11 @@ abstract class _TournamentModel implements TournamentModel {
   bool get notificationEnabled;
   @override
   String get gomafiaUrl;
+
+  /// Create a copy of TournamentModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentModelImplCopyWith<_$TournamentModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

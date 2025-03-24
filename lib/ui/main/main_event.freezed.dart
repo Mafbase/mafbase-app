@@ -12,7 +12,7 @@ part of 'main_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MainEvent {
@@ -109,6 +109,9 @@ class _$MainEventCopyWithImpl<$Res, $Val extends MainEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -128,6 +131,8 @@ class __$$MainEventSwitchTabImplCopyWithImpl<$Res>
       $Res Function(_$MainEventSwitchTabImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -189,7 +194,9 @@ class _$MainEventSwitchTabImpl implements MainEventSwitchTab {
   int get hashCode => Object.hash(runtimeType, tab,
       const DeepCollectionEquality().hash(disableNavigate), hasBackButton);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MainEventSwitchTabImplCopyWith<_$MainEventSwitchTabImpl> get copyWith =>
@@ -306,7 +313,10 @@ abstract class MainEventSwitchTab implements MainEvent {
   MainPageTab get tab;
   dynamic get disableNavigate;
   bool get hasBackButton;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MainEventSwitchTabImplCopyWith<_$MainEventSwitchTabImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -327,6 +337,9 @@ class __$$MainEventBackButtonPressedImplCopyWithImpl<$Res>
       _$MainEventBackButtonPressedImpl _value,
       $Res Function(_$MainEventBackButtonPressedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -473,6 +486,8 @@ class __$$MainEventTournamentSelectedImplCopyWithImpl<$Res>
       $Res Function(_$MainEventTournamentSelectedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -512,7 +527,9 @@ class _$MainEventTournamentSelectedImpl implements MainEventTournamentSelected {
   @override
   int get hashCode => Object.hash(runtimeType, tournamentId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MainEventTournamentSelectedImplCopyWith<_$MainEventTournamentSelectedImpl>
@@ -625,7 +642,10 @@ abstract class MainEventTournamentSelected implements MainEvent {
       _$MainEventTournamentSelectedImpl;
 
   int get tournamentId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MainEventTournamentSelectedImplCopyWith<_$MainEventTournamentSelectedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -644,6 +664,9 @@ class __$$MainEventTitleTappedImplCopyWithImpl<$Res>
   __$$MainEventTitleTappedImplCopyWithImpl(_$MainEventTitleTappedImpl _value,
       $Res Function(_$MainEventTitleTappedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -786,6 +809,9 @@ class __$$MainEventEnterPressedImplCopyWithImpl<$Res>
   __$$MainEventEnterPressedImplCopyWithImpl(_$MainEventEnterPressedImpl _value,
       $Res Function(_$MainEventEnterPressedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -929,6 +955,9 @@ class __$$MainEventProfilePressedImplCopyWithImpl<$Res>
       _$MainEventProfilePressedImpl _value,
       $Res Function(_$MainEventProfilePressedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1071,6 +1100,9 @@ class __$$MainEventOpenContactsImplCopyWithImpl<$Res>
   __$$MainEventOpenContactsImplCopyWithImpl(_$MainEventOpenContactsImpl _value,
       $Res Function(_$MainEventOpenContactsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MainEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

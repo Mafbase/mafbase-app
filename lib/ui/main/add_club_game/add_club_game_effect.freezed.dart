@@ -12,7 +12,7 @@ part of 'add_club_game_effect.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddClubGameEffect {
@@ -102,6 +102,9 @@ class _$AddClubGameEffectCopyWithImpl<$Res, $Val extends AddClubGameEffect>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -135,6 +138,8 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameEffectSetValuesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,6 +193,8 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CiSchemeModelCopyWith<$Res>? get ciModel {
@@ -290,7 +297,9 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
       date,
       ciModel);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameEffectSetValuesImplCopyWith<_$AddClubGameEffectSetValuesImpl>
@@ -414,7 +423,10 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
   int? get died;
   DateTime get date;
   CiSchemeModel? get ciModel;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEffectSetValuesImplCopyWith<_$AddClubGameEffectSetValuesImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -441,6 +453,8 @@ class __$$AddClubGameEffectSetPlayerImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameEffectSetPlayerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -459,6 +473,8 @@ class __$$AddClubGameEffectSetPlayerImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get player {
@@ -496,7 +512,9 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
   @override
   int get hashCode => Object.hash(runtimeType, index, player);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameEffectSetPlayerImplCopyWith<_$AddClubGameEffectSetPlayerImpl>
@@ -603,7 +621,10 @@ abstract class AddClubGameEffectSetPlayer implements AddClubGameEffect {
 
   int get index;
   PlayerModel get player;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddClubGameEffect
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEffectSetPlayerImplCopyWith<_$AddClubGameEffectSetPlayerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

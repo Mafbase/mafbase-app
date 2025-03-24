@@ -12,7 +12,7 @@ part of 'add_club_game_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddClubGameEvent {
@@ -90,6 +90,9 @@ class _$AddClubGameEventCopyWithImpl<$Res, $Val extends AddClubGameEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -112,6 +115,8 @@ class __$$AddClubGameEventPageOpenedImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameEventPageOpenedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,7 +164,9 @@ class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
   @override
   int get hashCode => Object.hash(runtimeType, gameId, viewOnly);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameEventPageOpenedImplCopyWith<_$AddClubGameEventPageOpenedImpl>
@@ -254,7 +261,10 @@ abstract class AddClubGameEventPageOpened implements AddClubGameEvent {
 
   int? get gameId;
   bool get viewOnly;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEventPageOpenedImplCopyWith<_$AddClubGameEventPageOpenedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -278,6 +288,8 @@ class __$$AddClubGameEventSubmitImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameEventSubmitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -325,7 +337,9 @@ class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
   @override
   int get hashCode => Object.hash(runtimeType, gameResult, gameId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameEventSubmitImplCopyWith<_$AddClubGameEventSubmitImpl>
@@ -420,7 +434,10 @@ abstract class AddClubGameEventSubmit implements AddClubGameEvent {
 
   ClubGameResult get gameResult;
   int? get gameId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEventSubmitImplCopyWith<_$AddClubGameEventSubmitImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -444,6 +461,8 @@ class __$$AddClubGameEventPageEditImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameEventPageEditImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -482,7 +501,9 @@ class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
   @override
   int get hashCode => Object.hash(runtimeType, gameId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameEventPageEditImplCopyWith<_$AddClubGameEventPageEditImpl>
@@ -575,7 +596,10 @@ abstract class AddClubGameEventPageEdit implements AddClubGameEvent {
       _$AddClubGameEventPageEditImpl;
 
   int get gameId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEventPageEditImplCopyWith<_$AddClubGameEventPageEditImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -600,6 +624,8 @@ class __$$AddClubGameEventNewPlayerImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameEventNewPlayerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -648,7 +674,9 @@ class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
   @override
   int get hashCode => Object.hash(runtimeType, index, nickname);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameEventNewPlayerImplCopyWith<_$AddClubGameEventNewPlayerImpl>
@@ -743,7 +771,10 @@ abstract class AddClubGameEventNewPlayer implements AddClubGameEvent {
 
   int get index;
   String get nickname;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEventNewPlayerImplCopyWith<_$AddClubGameEventNewPlayerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -767,6 +798,8 @@ class __$$AddClubGameEventNewGameImplCopyWithImpl<$Res>
       $Res Function(_$AddClubGameEventNewGameImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -806,7 +839,9 @@ class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
   @override
   int get hashCode => Object.hash(runtimeType, dateTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddClubGameEventNewGameImplCopyWith<_$AddClubGameEventNewGameImpl>
@@ -899,7 +934,10 @@ abstract class AddClubGameEventNewGame implements AddClubGameEvent {
       _$AddClubGameEventNewGameImpl;
 
   DateTime get dateTime;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEventNewGameImplCopyWith<_$AddClubGameEventNewGameImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

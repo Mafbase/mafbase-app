@@ -12,7 +12,7 @@ part of 'clubs_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ClubsEvent {
@@ -72,6 +72,9 @@ class _$ClubsEventCopyWithImpl<$Res, $Val extends ClubsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -91,6 +94,8 @@ class __$$ClubsEventPageOpenedImplCopyWithImpl<$Res>
       $Res Function(_$ClubsEventPageOpenedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,7 +135,9 @@ class _$ClubsEventPageOpenedImpl implements ClubsEventPageOpened {
   @override
   int get hashCode => Object.hash(runtimeType, completer);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClubsEventPageOpenedImplCopyWith<_$ClubsEventPageOpenedImpl>
@@ -206,7 +213,10 @@ abstract class ClubsEventPageOpened implements ClubsEvent {
       _$ClubsEventPageOpenedImpl;
 
   Completer<dynamic>? get completer;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClubsEventPageOpenedImplCopyWith<_$ClubsEventPageOpenedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -232,6 +242,8 @@ class __$$ClubsEventClubSelectedImplCopyWithImpl<$Res>
       $Res Function(_$ClubsEventClubSelectedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -245,6 +257,8 @@ class __$$ClubsEventClubSelectedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ClubModelCopyWith<$Res> get clubModel {
@@ -279,7 +293,9 @@ class _$ClubsEventClubSelectedImpl implements ClubsEventClubSelected {
   @override
   int get hashCode => Object.hash(runtimeType, clubModel);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClubsEventClubSelectedImplCopyWith<_$ClubsEventClubSelectedImpl>
@@ -354,7 +370,10 @@ abstract class ClubsEventClubSelected implements ClubsEvent {
       _$ClubsEventClubSelectedImpl;
 
   ClubModel get clubModel;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClubsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClubsEventClubSelectedImplCopyWith<_$ClubsEventClubSelectedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

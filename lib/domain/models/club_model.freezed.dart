@@ -12,7 +12,7 @@ part of 'club_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ClubModel {
@@ -24,7 +24,9 @@ mixin _$ClubModel {
   String? get groupLink => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClubModelCopyWith<ClubModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +56,8 @@ class _$ClubModelCopyWithImpl<$Res, $Val extends ClubModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ClubModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -124,6 +128,8 @@ class __$$ClubModelImplCopyWithImpl<$Res>
       _$ClubModelImpl _value, $Res Function(_$ClubModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClubModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -222,7 +228,9 @@ class _$ClubModelImpl implements _ClubModel {
   int get hashCode => Object.hash(
       runtimeType, id, name, billedFor, description, imageUrl, groupLink, city);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClubModelImplCopyWith<_$ClubModelImpl> get copyWith =>
@@ -253,8 +261,11 @@ abstract class _ClubModel implements ClubModel {
   String? get groupLink;
   @override
   String? get city;
+
+  /// Create a copy of ClubModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClubModelImplCopyWith<_$ClubModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

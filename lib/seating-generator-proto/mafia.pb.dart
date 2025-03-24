@@ -4103,6 +4103,164 @@ class TakeGomafiaSeatingEventOut extends $pb.GeneratedMessage {
   $core.List<$core.String> get notFound => $_getList(0);
 }
 
+class User extends $pb.GeneratedMessage {
+  factory User({
+    $core.int? id,
+    $core.String? email,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (email != null) {
+      $result.email = email;
+    }
+    return $result;
+  }
+  User._() : super();
+  factory User.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  User clone() => User()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  User copyWith(void Function(User) updates) => super.copyWith((message) => updates(message as User)) as User;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static User create() => User._();
+  User createEmptyInstance() => create();
+  static $pb.PbList<User> createRepeated() => $pb.PbList<User>();
+  @$core.pragma('dart2js:noInline')
+  static User getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<User>(create);
+  static User? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get email => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set email($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEmail() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEmail() => clearField(2);
+}
+
+class TournamentOwnersEventOut extends $pb.GeneratedMessage {
+  factory TournamentOwnersEventOut({
+    $core.Iterable<User>? owners,
+  }) {
+    final $result = create();
+    if (owners != null) {
+      $result.owners.addAll(owners);
+    }
+    return $result;
+  }
+  TournamentOwnersEventOut._() : super();
+  factory TournamentOwnersEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TournamentOwnersEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TournamentOwnersEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<User>(1, _omitFieldNames ? '' : 'owners', $pb.PbFieldType.PM, subBuilder: User.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TournamentOwnersEventOut clone() => TournamentOwnersEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TournamentOwnersEventOut copyWith(void Function(TournamentOwnersEventOut) updates) => super.copyWith((message) => updates(message as TournamentOwnersEventOut)) as TournamentOwnersEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TournamentOwnersEventOut create() => TournamentOwnersEventOut._();
+  TournamentOwnersEventOut createEmptyInstance() => create();
+  static $pb.PbList<TournamentOwnersEventOut> createRepeated() => $pb.PbList<TournamentOwnersEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static TournamentOwnersEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TournamentOwnersEventOut>(create);
+  static TournamentOwnersEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<User> get owners => $_getList(0);
+}
+
+class UpdateOwnerEvent extends $pb.GeneratedMessage {
+  factory UpdateOwnerEvent({
+    $core.String? email,
+  }) {
+    final $result = create();
+    if (email != null) {
+      $result.email = email;
+    }
+    return $result;
+  }
+  UpdateOwnerEvent._() : super();
+  factory UpdateOwnerEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateOwnerEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateOwnerEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateOwnerEvent clone() => UpdateOwnerEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateOwnerEvent copyWith(void Function(UpdateOwnerEvent) updates) => super.copyWith((message) => updates(message as UpdateOwnerEvent)) as UpdateOwnerEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateOwnerEvent create() => UpdateOwnerEvent._();
+  UpdateOwnerEvent createEmptyInstance() => create();
+  static $pb.PbList<UpdateOwnerEvent> createRepeated() => $pb.PbList<UpdateOwnerEvent>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateOwnerEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateOwnerEvent>(create);
+  static UpdateOwnerEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => clearField(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -5,7 +5,7 @@ import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.d
 part 'rating_event.freezed.dart';
 
 @freezed
-class RatingEvent with _$RatingEvent {
+sealed class RatingEvent with _$RatingEvent {
   const factory RatingEvent.playerSelected({required int playerId}) =
       RatingEventPlayerSelected;
 

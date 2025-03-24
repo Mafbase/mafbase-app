@@ -12,7 +12,7 @@ part of 'club_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ClubEvent {
@@ -83,6 +83,9 @@ class _$ClubEventCopyWithImpl<$Res, $Val extends ClubEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -99,6 +102,9 @@ class __$$ClubEventPageOpenedImplCopyWithImpl<$Res>
   __$$ClubEventPageOpenedImplCopyWithImpl(_$ClubEventPageOpenedImpl _value,
       $Res Function(_$ClubEventPageOpenedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -214,6 +220,9 @@ class __$$ClubEventOpenRatingImplCopyWithImpl<$Res>
   __$$ClubEventOpenRatingImplCopyWithImpl(_$ClubEventOpenRatingImpl _value,
       $Res Function(_$ClubEventOpenRatingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -332,6 +341,8 @@ class __$$ClubEventBillClubImplCopyWithImpl<$Res>
       $Res Function(_$ClubEventBillClubImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -370,7 +381,9 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
   @override
   int get hashCode => Object.hash(runtimeType, days);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClubEventBillClubImplCopyWith<_$ClubEventBillClubImpl> get copyWith =>
@@ -457,7 +470,10 @@ abstract class ClubEventBillClub implements ClubEvent {
       _$ClubEventBillClubImpl;
 
   int get days;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClubEventBillClubImplCopyWith<_$ClubEventBillClubImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -481,6 +497,8 @@ class __$$ClubEventChangeHideDateImplCopyWithImpl<$Res>
       $Res Function(_$ClubEventChangeHideDateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -520,7 +538,9 @@ class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
   @override
   int get hashCode => Object.hash(runtimeType, dateTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClubEventChangeHideDateImplCopyWith<_$ClubEventChangeHideDateImpl>
@@ -607,7 +627,10 @@ abstract class ClubEventChangeHideDate implements ClubEvent {
       _$ClubEventChangeHideDateImpl;
 
   DateTime? get dateTime;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClubEventChangeHideDateImplCopyWith<_$ClubEventChangeHideDateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'tournaments_events.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TournamentsEvent {
@@ -72,6 +72,9 @@ class _$TournamentsEventCopyWithImpl<$Res, $Val extends TournamentsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TournamentsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -92,6 +95,8 @@ class __$$TournamentOpenedEventImplCopyWithImpl<$Res>
       $Res Function(_$TournamentOpenedEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,7 +136,9 @@ class _$TournamentOpenedEventImpl implements TournamentOpenedEvent {
   @override
   int get hashCode => Object.hash(runtimeType, completer);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentOpenedEventImplCopyWith<_$TournamentOpenedEventImpl>
@@ -206,7 +213,10 @@ abstract class TournamentOpenedEvent implements TournamentsEvent {
       _$TournamentOpenedEventImpl;
 
   Completer<dynamic>? get completer;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentOpenedEventImplCopyWith<_$TournamentOpenedEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -227,6 +237,9 @@ class __$$TournamentsEventCreateImplCopyWithImpl<$Res>
       _$TournamentsEventCreateImpl _value,
       $Res Function(_$TournamentsEventCreateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

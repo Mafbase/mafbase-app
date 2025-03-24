@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
@@ -61,6 +62,7 @@ class TournamentPage extends StatefulWidget {
               SeatingInsertingPage.route,
               AddClubGamePage.tournamentEditRoute,
               RatingPage.tournamentRoute,
+              AdministrationPage.tournamentRoute,
             ],
             builder: (context, state) {
               return PlayersListBody(
@@ -273,6 +275,18 @@ class _TournamentPageState extends CustomState<TournamentPage>
                     ),
                   );
             }
+          },
+        ),
+      if (state.isMyTournament)
+        MenuItemModel(
+          text: 'Администраторы',
+          onTap: () {
+            context.go(
+              AdministrationPage.createTournamentLocation(
+                tournamentId: context.read<TournamentPageBloc>().tournamentId,
+                context: context,
+              ),
+            );
           },
         ),
       if (context.read<SeatingPageBloc>().state.games.length case int games)

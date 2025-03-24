@@ -12,7 +12,7 @@ part of 'tournament_page_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TournamentPageEvent {
@@ -174,6 +174,9 @@ class _$TournamentPageEventCopyWithImpl<$Res, $Val extends TournamentPageEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -193,6 +196,9 @@ class __$$TournamentPageBackButtonPreesedEventImplCopyWithImpl<$Res>
       _$TournamentPageBackButtonPreesedEventImpl _value,
       $Res Function(_$TournamentPageBackButtonPreesedEventImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -404,6 +410,9 @@ class __$$TournamentPageEventPlayersListTappedImplCopyWithImpl<$Res>
       _$TournamentPageEventPlayersListTappedImpl _value,
       $Res Function(_$TournamentPageEventPlayersListTappedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -620,6 +629,8 @@ class __$$TournamentPageEventUpdateSettingsImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageEventUpdateSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -633,6 +644,8 @@ class __$$TournamentPageEventUpdateSettingsImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TournamentSettingsModelCopyWith<$Res> get settings {
@@ -668,7 +681,9 @@ class _$TournamentPageEventUpdateSettingsImpl
   @override
   int get hashCode => Object.hash(runtimeType, settings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageEventUpdateSettingsImplCopyWith<
@@ -848,7 +863,10 @@ abstract class TournamentPageEventUpdateSettings
       _$TournamentPageEventUpdateSettingsImpl;
 
   TournamentSettingsModel get settings;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventUpdateSettingsImplCopyWith<
           _$TournamentPageEventUpdateSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -871,6 +889,9 @@ class __$$TournamentPageEventOpenRatingImplCopyWithImpl<$Res>
       _$TournamentPageEventOpenRatingImpl _value,
       $Res Function(_$TournamentPageEventOpenRatingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1081,6 +1102,9 @@ class __$$TournamentPagePlayerListOpenedEventImplCopyWithImpl<$Res>
       _$TournamentPagePlayerListOpenedEventImpl _value,
       $Res Function(_$TournamentPagePlayerListOpenedEventImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1292,6 +1316,9 @@ class __$$TournamentPageEventAddPlayerImplCopyWithImpl<$Res>
       _$TournamentPageEventAddPlayerImpl _value,
       $Res Function(_$TournamentPageEventAddPlayerImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1502,6 +1529,9 @@ class __$$TournamentPageEventEditSettingsImplCopyWithImpl<$Res>
       _$TournamentPageEventEditSettingsImpl _value,
       $Res Function(_$TournamentPageEventEditSettingsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1717,6 +1747,8 @@ class __$$TournamentPageEventDeletePlayerImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageEventDeletePlayerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1730,6 +1762,8 @@ class __$$TournamentPageEventDeletePlayerImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get player {
@@ -1764,7 +1798,9 @@ class _$TournamentPageEventDeletePlayerImpl
   @override
   int get hashCode => Object.hash(runtimeType, player);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageEventDeletePlayerImplCopyWith<
@@ -1943,7 +1979,10 @@ abstract class TournamentPageEventDeletePlayer implements TournamentPageEvent {
       _$TournamentPageEventDeletePlayerImpl;
 
   PlayerModel get player;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventDeletePlayerImplCopyWith<
           _$TournamentPageEventDeletePlayerImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1971,6 +2010,8 @@ class __$$TournamentPageEventOpenProfileDialogImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageEventOpenProfileDialogImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1984,6 +2025,8 @@ class __$$TournamentPageEventOpenProfileDialogImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlayerModelCopyWith<$Res> get player {
@@ -2018,7 +2061,9 @@ class _$TournamentPageEventOpenProfileDialogImpl
   @override
   int get hashCode => Object.hash(runtimeType, player);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageEventOpenProfileDialogImplCopyWith<
@@ -2198,7 +2243,10 @@ abstract class TournamentPageEventOpenProfileDialog
       _$TournamentPageEventOpenProfileDialogImpl;
 
   PlayerModel get player;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventOpenProfileDialogImplCopyWith<
           _$TournamentPageEventOpenProfileDialogImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2221,6 +2269,9 @@ class __$$TournamentPageEventOpenSeatingPageImplCopyWithImpl<$Res>
       _$TournamentPageEventOpenSeatingPageImpl _value,
       $Res Function(_$TournamentPageEventOpenSeatingPageImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2435,6 +2486,8 @@ class __$$TournamentPageEventBillImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageEventBillImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2484,7 +2537,9 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
   @override
   int get hashCode => Object.hash(runtimeType, playersCount, billedTranlsation);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageEventBillImplCopyWith<_$TournamentPageEventBillImpl>
@@ -2663,7 +2718,10 @@ abstract class TournamentPageEventBill implements TournamentPageEvent {
 
   int get playersCount;
   bool get billedTranlsation;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventBillImplCopyWith<_$TournamentPageEventBillImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -2685,6 +2743,9 @@ class __$$TournamentPageEventPageOpenedImplCopyWithImpl<$Res>
       _$TournamentPageEventPageOpenedImpl _value,
       $Res Function(_$TournamentPageEventPageOpenedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2898,6 +2959,8 @@ class __$$TournamentPageEventSetFinalPlayersImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageEventSetFinalPlayersImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2945,7 +3008,9 @@ class _$TournamentPageEventSetFinalPlayersImpl
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_players));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageEventSetFinalPlayersImplCopyWith<
@@ -3125,7 +3190,10 @@ abstract class TournamentPageEventSetFinalPlayers
       _$TournamentPageEventSetFinalPlayersImpl;
 
   List<PlayerModel> get players;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventSetFinalPlayersImplCopyWith<
           _$TournamentPageEventSetFinalPlayersImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -3151,6 +3219,8 @@ class __$$TournamentPageEventStartGameInfoImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageEventStartGameInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3190,7 +3260,9 @@ class _$TournamentPageEventStartGameInfoImpl
   @override
   int get hashCode => Object.hash(runtimeType, game);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageEventStartGameInfoImplCopyWith<
@@ -3368,7 +3440,10 @@ abstract class TournamentPageEventStartGameInfo implements TournamentPageEvent {
       _$TournamentPageEventStartGameInfoImpl;
 
   int get game;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventStartGameInfoImplCopyWith<
           _$TournamentPageEventStartGameInfoImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -3394,6 +3469,8 @@ class __$$TournamentPageEventCustomTextInfoImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageEventCustomTextInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3433,7 +3510,9 @@ class _$TournamentPageEventCustomTextInfoImpl
   @override
   int get hashCode => Object.hash(runtimeType, text);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageEventCustomTextInfoImplCopyWith<
@@ -3612,7 +3691,10 @@ abstract class TournamentPageEventCustomTextInfo
       {required final String text}) = _$TournamentPageEventCustomTextInfoImpl;
 
   String get text;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TournamentPageEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventCustomTextInfoImplCopyWith<
           _$TournamentPageEventCustomTextInfoImpl>
       get copyWith => throw _privateConstructorUsedError;

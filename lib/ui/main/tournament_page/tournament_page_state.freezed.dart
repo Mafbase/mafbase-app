@@ -12,7 +12,7 @@ part of 'tournament_page_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TournamentPageState {
@@ -28,7 +28,9 @@ mixin _$TournamentPageState {
   bool get notificationEnabled => throw _privateConstructorUsedError;
   String? get gomafiaUrl => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TournamentPageStateCopyWith<TournamentPageState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +67,8 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TournamentPageState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,6 +132,8 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     ) as $Val);
   }
 
+  /// Create a copy of TournamentPageState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TournamentSettingsModelCopyWith<$Res> get settings {
@@ -170,6 +176,8 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
       $Res Function(_$TournamentPageStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TournamentPageState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -361,7 +369,9 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
       notificationEnabled,
       gomafiaUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TournamentPageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TournamentPageStateImplCopyWith<_$TournamentPageStateImpl> get copyWith =>
@@ -405,8 +415,11 @@ abstract class _TournamentPageState implements TournamentPageState {
   bool get notificationEnabled;
   @override
   String? get gomafiaUrl;
+
+  /// Create a copy of TournamentPageState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageStateImplCopyWith<_$TournamentPageStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

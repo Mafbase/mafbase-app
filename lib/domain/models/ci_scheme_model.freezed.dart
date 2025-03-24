@@ -12,14 +12,16 @@ part of 'ci_scheme_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CiSchemeModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CiSchemeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CiSchemeModelCopyWith<CiSchemeModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$CiSchemeModelCopyWithImpl<$Res, $Val extends CiSchemeModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CiSchemeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$CiSchemeModelImplCopyWithImpl<$Res>
       _$CiSchemeModelImpl _value, $Res Function(_$CiSchemeModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CiSchemeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,7 +133,9 @@ class _$CiSchemeModelImpl implements _CiSchemeModel {
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CiSchemeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CiSchemeModelImplCopyWith<_$CiSchemeModelImpl> get copyWith =>
@@ -143,8 +151,11 @@ abstract class _CiSchemeModel implements CiSchemeModel {
   int get id;
   @override
   String get name;
+
+  /// Create a copy of CiSchemeModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CiSchemeModelImplCopyWith<_$CiSchemeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
