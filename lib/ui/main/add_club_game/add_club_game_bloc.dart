@@ -50,6 +50,19 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     on<AddClubGameEventPageEdit>(_onEdit);
     on<AddClubGameEventNewPlayer>(_onNewPlayer);
     on<AddClubGameEventNewGame>(_onNewGame);
+    on<AddClubGameEventDeleteGame>(_onDeleteGame);
+  }
+
+  _onDeleteGame(
+    AddClubGameEventDeleteGame event,
+    Emitter emit,
+  ) async {
+    if (clubId == null) {
+      return;
+    }
+
+    await _repository.deleteGame(gameId: event.gameId, clubId: clubId!);
+    router.pop();
   }
 
   _onNewGame(AddClubGameEventNewGame event, Emitter emit) async {
@@ -187,10 +200,11 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
             died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
             ciModel: (game.hasCiId()
-                ? state.ciSchemes.firstWhereOrNull(
-                    (element) => element.id == game.ciId,
-                  )
-                : CiSchemeModel.empty) ?? CiSchemeModel.empty,
+                    ? state.ciSchemes.firstWhereOrNull(
+                        (element) => element.id == game.ciId,
+                      )
+                    : CiSchemeModel.empty) ??
+                CiSchemeModel.empty,
           ),
         );
         emit(state.copyWith(isLoading: false));

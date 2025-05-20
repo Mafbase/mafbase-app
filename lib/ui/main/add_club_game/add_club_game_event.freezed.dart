@@ -23,6 +23,7 @@ mixin _$AddClubGameEvent {
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
     required TResult Function(DateTime dateTime) newGame,
+    required TResult Function(int gameId) deleteGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$AddClubGameEvent {
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
     TResult? Function(DateTime dateTime)? newGame,
+    TResult? Function(int gameId)? deleteGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$AddClubGameEvent {
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
     TResult Function(DateTime dateTime)? newGame,
+    TResult Function(int gameId)? deleteGame,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$AddClubGameEvent {
     required TResult Function(AddClubGameEventPageEdit value) edit,
     required TResult Function(AddClubGameEventNewPlayer value) onNewPlayer,
     required TResult Function(AddClubGameEventNewGame value) newGame,
+    required TResult Function(AddClubGameEventDeleteGame value) deleteGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$AddClubGameEvent {
     TResult? Function(AddClubGameEventPageEdit value)? edit,
     TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult? Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventDeleteGame value)? deleteGame,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$AddClubGameEvent {
     TResult Function(AddClubGameEventPageEdit value)? edit,
     TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult Function(AddClubGameEventDeleteGame value)? deleteGame,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,6 +187,7 @@ class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
     required TResult Function(DateTime dateTime) newGame,
+    required TResult Function(int gameId) deleteGame,
   }) {
     return pageOpened(gameId, viewOnly);
   }
@@ -193,6 +200,7 @@ class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
     TResult? Function(DateTime dateTime)? newGame,
+    TResult? Function(int gameId)? deleteGame,
   }) {
     return pageOpened?.call(gameId, viewOnly);
   }
@@ -205,6 +213,7 @@ class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
     TResult Function(DateTime dateTime)? newGame,
+    TResult Function(int gameId)? deleteGame,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -221,6 +230,7 @@ class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
     required TResult Function(AddClubGameEventPageEdit value) edit,
     required TResult Function(AddClubGameEventNewPlayer value) onNewPlayer,
     required TResult Function(AddClubGameEventNewGame value) newGame,
+    required TResult Function(AddClubGameEventDeleteGame value) deleteGame,
   }) {
     return pageOpened(this);
   }
@@ -233,6 +243,7 @@ class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
     TResult? Function(AddClubGameEventPageEdit value)? edit,
     TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult? Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventDeleteGame value)? deleteGame,
   }) {
     return pageOpened?.call(this);
   }
@@ -245,6 +256,7 @@ class _$AddClubGameEventPageOpenedImpl implements AddClubGameEventPageOpened {
     TResult Function(AddClubGameEventPageEdit value)? edit,
     TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult Function(AddClubGameEventDeleteGame value)? deleteGame,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -354,6 +366,7 @@ class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
     required TResult Function(DateTime dateTime) newGame,
+    required TResult Function(int gameId) deleteGame,
   }) {
     return submit(gameResult, gameId);
   }
@@ -366,6 +379,7 @@ class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
     TResult? Function(DateTime dateTime)? newGame,
+    TResult? Function(int gameId)? deleteGame,
   }) {
     return submit?.call(gameResult, gameId);
   }
@@ -378,6 +392,7 @@ class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
     TResult Function(DateTime dateTime)? newGame,
+    TResult Function(int gameId)? deleteGame,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -394,6 +409,7 @@ class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
     required TResult Function(AddClubGameEventPageEdit value) edit,
     required TResult Function(AddClubGameEventNewPlayer value) onNewPlayer,
     required TResult Function(AddClubGameEventNewGame value) newGame,
+    required TResult Function(AddClubGameEventDeleteGame value) deleteGame,
   }) {
     return submit(this);
   }
@@ -406,6 +422,7 @@ class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
     TResult? Function(AddClubGameEventPageEdit value)? edit,
     TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult? Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventDeleteGame value)? deleteGame,
   }) {
     return submit?.call(this);
   }
@@ -418,6 +435,7 @@ class _$AddClubGameEventSubmitImpl implements AddClubGameEventSubmit {
     TResult Function(AddClubGameEventPageEdit value)? edit,
     TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult Function(AddClubGameEventDeleteGame value)? deleteGame,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -518,6 +536,7 @@ class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
     required TResult Function(DateTime dateTime) newGame,
+    required TResult Function(int gameId) deleteGame,
   }) {
     return edit(gameId);
   }
@@ -530,6 +549,7 @@ class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
     TResult? Function(DateTime dateTime)? newGame,
+    TResult? Function(int gameId)? deleteGame,
   }) {
     return edit?.call(gameId);
   }
@@ -542,6 +562,7 @@ class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
     TResult Function(DateTime dateTime)? newGame,
+    TResult Function(int gameId)? deleteGame,
     required TResult orElse(),
   }) {
     if (edit != null) {
@@ -558,6 +579,7 @@ class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
     required TResult Function(AddClubGameEventPageEdit value) edit,
     required TResult Function(AddClubGameEventNewPlayer value) onNewPlayer,
     required TResult Function(AddClubGameEventNewGame value) newGame,
+    required TResult Function(AddClubGameEventDeleteGame value) deleteGame,
   }) {
     return edit(this);
   }
@@ -570,6 +592,7 @@ class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
     TResult? Function(AddClubGameEventPageEdit value)? edit,
     TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult? Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventDeleteGame value)? deleteGame,
   }) {
     return edit?.call(this);
   }
@@ -582,6 +605,7 @@ class _$AddClubGameEventPageEditImpl implements AddClubGameEventPageEdit {
     TResult Function(AddClubGameEventPageEdit value)? edit,
     TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult Function(AddClubGameEventDeleteGame value)? deleteGame,
     required TResult orElse(),
   }) {
     if (edit != null) {
@@ -691,6 +715,7 @@ class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
     required TResult Function(DateTime dateTime) newGame,
+    required TResult Function(int gameId) deleteGame,
   }) {
     return onNewPlayer(index, nickname);
   }
@@ -703,6 +728,7 @@ class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
     TResult? Function(DateTime dateTime)? newGame,
+    TResult? Function(int gameId)? deleteGame,
   }) {
     return onNewPlayer?.call(index, nickname);
   }
@@ -715,6 +741,7 @@ class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
     TResult Function(DateTime dateTime)? newGame,
+    TResult Function(int gameId)? deleteGame,
     required TResult orElse(),
   }) {
     if (onNewPlayer != null) {
@@ -731,6 +758,7 @@ class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
     required TResult Function(AddClubGameEventPageEdit value) edit,
     required TResult Function(AddClubGameEventNewPlayer value) onNewPlayer,
     required TResult Function(AddClubGameEventNewGame value) newGame,
+    required TResult Function(AddClubGameEventDeleteGame value) deleteGame,
   }) {
     return onNewPlayer(this);
   }
@@ -743,6 +771,7 @@ class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
     TResult? Function(AddClubGameEventPageEdit value)? edit,
     TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult? Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventDeleteGame value)? deleteGame,
   }) {
     return onNewPlayer?.call(this);
   }
@@ -755,6 +784,7 @@ class _$AddClubGameEventNewPlayerImpl implements AddClubGameEventNewPlayer {
     TResult Function(AddClubGameEventPageEdit value)? edit,
     TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult Function(AddClubGameEventDeleteGame value)? deleteGame,
     required TResult orElse(),
   }) {
     if (onNewPlayer != null) {
@@ -856,6 +886,7 @@ class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
     required TResult Function(int gameId) edit,
     required TResult Function(int index, String nickname) onNewPlayer,
     required TResult Function(DateTime dateTime) newGame,
+    required TResult Function(int gameId) deleteGame,
   }) {
     return newGame(dateTime);
   }
@@ -868,6 +899,7 @@ class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
     TResult? Function(int gameId)? edit,
     TResult? Function(int index, String nickname)? onNewPlayer,
     TResult? Function(DateTime dateTime)? newGame,
+    TResult? Function(int gameId)? deleteGame,
   }) {
     return newGame?.call(dateTime);
   }
@@ -880,6 +912,7 @@ class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
     TResult Function(int gameId)? edit,
     TResult Function(int index, String nickname)? onNewPlayer,
     TResult Function(DateTime dateTime)? newGame,
+    TResult Function(int gameId)? deleteGame,
     required TResult orElse(),
   }) {
     if (newGame != null) {
@@ -896,6 +929,7 @@ class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
     required TResult Function(AddClubGameEventPageEdit value) edit,
     required TResult Function(AddClubGameEventNewPlayer value) onNewPlayer,
     required TResult Function(AddClubGameEventNewGame value) newGame,
+    required TResult Function(AddClubGameEventDeleteGame value) deleteGame,
   }) {
     return newGame(this);
   }
@@ -908,6 +942,7 @@ class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
     TResult? Function(AddClubGameEventPageEdit value)? edit,
     TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult? Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventDeleteGame value)? deleteGame,
   }) {
     return newGame?.call(this);
   }
@@ -920,6 +955,7 @@ class _$AddClubGameEventNewGameImpl implements AddClubGameEventNewGame {
     TResult Function(AddClubGameEventPageEdit value)? edit,
     TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
     TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult Function(AddClubGameEventDeleteGame value)? deleteGame,
     required TResult orElse(),
   }) {
     if (newGame != null) {
@@ -939,5 +975,174 @@ abstract class AddClubGameEventNewGame implements AddClubGameEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddClubGameEventNewGameImplCopyWith<_$AddClubGameEventNewGameImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddClubGameEventDeleteGameImplCopyWith<$Res> {
+  factory _$$AddClubGameEventDeleteGameImplCopyWith(
+          _$AddClubGameEventDeleteGameImpl value,
+          $Res Function(_$AddClubGameEventDeleteGameImpl) then) =
+      __$$AddClubGameEventDeleteGameImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int gameId});
+}
+
+/// @nodoc
+class __$$AddClubGameEventDeleteGameImplCopyWithImpl<$Res>
+    extends _$AddClubGameEventCopyWithImpl<$Res,
+        _$AddClubGameEventDeleteGameImpl>
+    implements _$$AddClubGameEventDeleteGameImplCopyWith<$Res> {
+  __$$AddClubGameEventDeleteGameImplCopyWithImpl(
+      _$AddClubGameEventDeleteGameImpl _value,
+      $Res Function(_$AddClubGameEventDeleteGameImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gameId = null,
+  }) {
+    return _then(_$AddClubGameEventDeleteGameImpl(
+      gameId: null == gameId
+          ? _value.gameId
+          : gameId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddClubGameEventDeleteGameImpl implements AddClubGameEventDeleteGame {
+  const _$AddClubGameEventDeleteGameImpl({required this.gameId});
+
+  @override
+  final int gameId;
+
+  @override
+  String toString() {
+    return 'AddClubGameEvent.deleteGame(gameId: $gameId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddClubGameEventDeleteGameImpl &&
+            (identical(other.gameId, gameId) || other.gameId == gameId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, gameId);
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddClubGameEventDeleteGameImplCopyWith<_$AddClubGameEventDeleteGameImpl>
+      get copyWith => __$$AddClubGameEventDeleteGameImplCopyWithImpl<
+          _$AddClubGameEventDeleteGameImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int? gameId, bool viewOnly) pageOpened,
+    required TResult Function(ClubGameResult gameResult, int? gameId) submit,
+    required TResult Function(int gameId) edit,
+    required TResult Function(int index, String nickname) onNewPlayer,
+    required TResult Function(DateTime dateTime) newGame,
+    required TResult Function(int gameId) deleteGame,
+  }) {
+    return deleteGame(gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int? gameId, bool viewOnly)? pageOpened,
+    TResult? Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult? Function(int gameId)? edit,
+    TResult? Function(int index, String nickname)? onNewPlayer,
+    TResult? Function(DateTime dateTime)? newGame,
+    TResult? Function(int gameId)? deleteGame,
+  }) {
+    return deleteGame?.call(gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int? gameId, bool viewOnly)? pageOpened,
+    TResult Function(ClubGameResult gameResult, int? gameId)? submit,
+    TResult Function(int gameId)? edit,
+    TResult Function(int index, String nickname)? onNewPlayer,
+    TResult Function(DateTime dateTime)? newGame,
+    TResult Function(int gameId)? deleteGame,
+    required TResult orElse(),
+  }) {
+    if (deleteGame != null) {
+      return deleteGame(gameId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AddClubGameEventPageOpened value) pageOpened,
+    required TResult Function(AddClubGameEventSubmit value) submit,
+    required TResult Function(AddClubGameEventPageEdit value) edit,
+    required TResult Function(AddClubGameEventNewPlayer value) onNewPlayer,
+    required TResult Function(AddClubGameEventNewGame value) newGame,
+    required TResult Function(AddClubGameEventDeleteGame value) deleteGame,
+  }) {
+    return deleteGame(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult? Function(AddClubGameEventSubmit value)? submit,
+    TResult? Function(AddClubGameEventPageEdit value)? edit,
+    TResult? Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult? Function(AddClubGameEventNewGame value)? newGame,
+    TResult? Function(AddClubGameEventDeleteGame value)? deleteGame,
+  }) {
+    return deleteGame?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AddClubGameEventPageOpened value)? pageOpened,
+    TResult Function(AddClubGameEventSubmit value)? submit,
+    TResult Function(AddClubGameEventPageEdit value)? edit,
+    TResult Function(AddClubGameEventNewPlayer value)? onNewPlayer,
+    TResult Function(AddClubGameEventNewGame value)? newGame,
+    TResult Function(AddClubGameEventDeleteGame value)? deleteGame,
+    required TResult orElse(),
+  }) {
+    if (deleteGame != null) {
+      return deleteGame(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddClubGameEventDeleteGame implements AddClubGameEvent {
+  const factory AddClubGameEventDeleteGame({required final int gameId}) =
+      _$AddClubGameEventDeleteGameImpl;
+
+  int get gameId;
+
+  /// Create a copy of AddClubGameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddClubGameEventDeleteGameImplCopyWith<_$AddClubGameEventDeleteGameImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -32,16 +32,16 @@ class MockCannotMeetTournamentRepository extends _i1.Mock
   @override
   _i3.Future<List<List<_i4.PlayerModel>>> pairs(int? tournamentId) =>
       (super.noSuchMethod(
-            Invocation.method(#pairs, [tournamentId]),
-            returnValue: _i3.Future<List<List<_i4.PlayerModel>>>.value(
-              <List<_i4.PlayerModel>>[],
-            ),
-            returnValueForMissingStub:
-                _i3.Future<List<List<_i4.PlayerModel>>>.value(
-                  <List<_i4.PlayerModel>>[],
-                ),
-          )
-          as _i3.Future<List<List<_i4.PlayerModel>>>);
+        Invocation.method(
+          #pairs,
+          [tournamentId],
+        ),
+        returnValue: _i3.Future<List<List<_i4.PlayerModel>>>.value(
+            <List<_i4.PlayerModel>>[]),
+        returnValueForMissingStub:
+            _i3.Future<List<List<_i4.PlayerModel>>>.value(
+                <List<_i4.PlayerModel>>[]),
+      ) as _i3.Future<List<List<_i4.PlayerModel>>>);
 
   @override
   _i3.Future<dynamic> insertPair(
@@ -50,11 +50,17 @@ class MockCannotMeetTournamentRepository extends _i1.Mock
     _i4.PlayerModel? second,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#insertPair, [tournamentId, first, second]),
-            returnValue: _i3.Future<dynamic>.value(),
-            returnValueForMissingStub: _i3.Future<dynamic>.value(),
-          )
-          as _i3.Future<dynamic>);
+        Invocation.method(
+          #insertPair,
+          [
+            tournamentId,
+            first,
+            second,
+          ],
+        ),
+        returnValue: _i3.Future<dynamic>.value(),
+        returnValueForMissingStub: _i3.Future<dynamic>.value(),
+      ) as _i3.Future<dynamic>);
 
   @override
   _i3.Future<dynamic> deletePair(
@@ -63,9 +69,15 @@ class MockCannotMeetTournamentRepository extends _i1.Mock
     _i4.PlayerModel? second,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#deletePair, [tournamentId, first, second]),
-            returnValue: _i3.Future<dynamic>.value(),
-            returnValueForMissingStub: _i3.Future<dynamic>.value(),
-          )
-          as _i3.Future<dynamic>);
+        Invocation.method(
+          #deletePair,
+          [
+            tournamentId,
+            first,
+            second,
+          ],
+        ),
+        returnValue: _i3.Future<dynamic>.value(),
+        returnValueForMissingStub: _i3.Future<dynamic>.value(),
+      ) as _i3.Future<dynamic>);
 }

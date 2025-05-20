@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -620,6 +621,31 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                         child: Text(
                           context.locale.addGame,
                           style: MyTheme.of(context).textBtnTextStyle,
+                        ),
+                      ),
+                    ),
+                  if (widget.readOnly &&
+                      widget.gameId != null &&
+                      !state.isTournament &&
+                      state.canEdit)
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextButton(
+                        onPressed: () async {
+                          final confirm = await ConfirmDialog.open(context);
+                          if (!mounted || confirm != true) return;
+
+                          context.read<AddClubGameBloc>().add(
+                                AddClubGameEvent.deleteGame(
+                                  gameId: widget.gameId!,
+                                ),
+                              );
+                        },
+                        child: Text(
+                          context.locale.deleteGame,
+                          style: MyTheme.of(context).textBtnTextStyle.copyWith(
+                                color: MyTheme.of(context).btnRedColor,
+                              ),
                         ),
                       ),
                     ),

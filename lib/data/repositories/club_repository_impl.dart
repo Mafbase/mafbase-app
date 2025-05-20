@@ -6,6 +6,7 @@ import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/club_check_request.dart';
 import 'package:seating_generator_web/data/requests/clubs_list_request.dart';
 import 'package:seating_generator_web/data/requests/clubs_my_request.dart';
+import 'package:seating_generator_web/data/requests/delete_game_request.dart';
 import 'package:seating_generator_web/data/requests/edit_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
@@ -135,4 +136,8 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   Future<void> updateHideDate({required int id, required DateTime? dateTime}) =>
       UpdateHideDateRequest(clubId: id.toString(), dateTime: dateTime)
           .execute(client);
+
+  @override
+  Future<void> deleteGame({required int gameId, required int clubId}) =>
+      DeleteGameRequest(clubId: clubId, gameId: gameId).execute(client);
 }

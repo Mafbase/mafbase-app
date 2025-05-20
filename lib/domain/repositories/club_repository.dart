@@ -43,4 +43,9 @@ abstract class ClubRepository {
     required int id,
     required DateTime? dateTime,
   });
+
+  Future<void> deleteGame({
+    required int gameId,
+    required int clubId,
+  });
 }

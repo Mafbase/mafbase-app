@@ -131,6 +131,8 @@
   "@invalidCode": {},
   "addGame": "Добавить новую игру",
   "@addGame": {},
+  "deleteGame": "Удалить",
+  "@deleteGame": {},
   "invalidEmailOrPassword": "Неверная почта или пароль",
   "@invalidEmailOrPassword": {},
   "tableAndGame": "Игра {game}, Стол {table}",

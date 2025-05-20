@@ -26,4 +26,7 @@ class AddClubGameEvent with _$AddClubGameEvent {
   const factory AddClubGameEvent.newGame({
     required DateTime dateTime,
   }) = AddClubGameEventNewGame;
+
+  const factory AddClubGameEvent.deleteGame({required int gameId}) =
+      AddClubGameEventDeleteGame;
 }
