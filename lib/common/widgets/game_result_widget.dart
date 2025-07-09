@@ -46,7 +46,7 @@ class _GameResultWidgetState extends State<GameResultWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Expanded(
-              flex: 120,
+              flex: 3,
               child: SizedBox(
                 width: widget.width,
                 child: Row(
@@ -98,7 +98,7 @@ class _GameResultWidgetState extends State<GameResultWidget> {
             ),
             for (int i = 0; i < 10; i++)
               Expanded(
-                flex: 40,
+                flex: 1,
                 child: SizedBox(
                   width: widget.width,
                   child: _PlayerRowWidget(
@@ -175,15 +175,12 @@ class _PlayerRowWidget extends StatelessWidget {
                 status: status,
               ),
             ),
-            Visibility(
-              visible: score != null,
-              child: Expanded(
+            Expanded(
+              child: Opacity(
+                opacity: score != null ? 1 : 0,
                 child: Container(
                   width: 60,
                   height: double.infinity,
-                  decoration: const BoxDecoration(
-                    border: Border(right: _side),
-                  ),
                   padding: const EdgeInsets.all(4),
                   child: Text(
                     "$score",
