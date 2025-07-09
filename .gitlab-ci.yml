@@ -28,7 +28,7 @@ build_android_app:
     - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
     - echo "Downloading Secure Files..."
     - mkdir -p $SECURE_FILES_DOWNLOAD_PATH
-    - download-secure-files -o $SECURE_FILES_DOWNLOAD_PATH
+    - download-secure-files $SECURE_FILES_DOWNLOAD_PATH
     - echo "Moving Keystore..."
     - cp $SECURE_FILES_DOWNLOAD_PATH/mafbase.jks $CI_PROJECT_DIR/android/mafbase.jks
     - echo "Creating key.properties file..."
