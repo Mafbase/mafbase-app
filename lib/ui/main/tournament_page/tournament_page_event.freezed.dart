@@ -31,7 +31,7 @@ mixin _$TournamentPageEvent {
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ mixin _$TournamentPageEvent {
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) =>
       throw _privateConstructorUsedError;
@@ -69,7 +69,7 @@ mixin _$TournamentPageEvent {
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) =>
@@ -238,7 +238,7 @@ class _$TournamentPageBackButtonPreesedEventImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return backButtonPressed();
@@ -260,7 +260,7 @@ class _$TournamentPageBackButtonPreesedEventImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return backButtonPressed?.call();
@@ -282,7 +282,7 @@ class _$TournamentPageBackButtonPreesedEventImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -452,7 +452,7 @@ class _$TournamentPageEventPlayersListTappedImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return playersListTapped();
@@ -474,7 +474,7 @@ class _$TournamentPageEventPlayersListTappedImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return playersListTapped?.call();
@@ -496,7 +496,7 @@ class _$TournamentPageEventPlayersListTappedImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -707,7 +707,7 @@ class _$TournamentPageEventUpdateSettingsImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return updateSettings(settings);
@@ -729,7 +729,7 @@ class _$TournamentPageEventUpdateSettingsImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return updateSettings?.call(settings);
@@ -751,7 +751,7 @@ class _$TournamentPageEventUpdateSettingsImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -931,7 +931,7 @@ class _$TournamentPageEventOpenRatingImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return openRating();
@@ -953,7 +953,7 @@ class _$TournamentPageEventOpenRatingImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return openRating?.call();
@@ -975,7 +975,7 @@ class _$TournamentPageEventOpenRatingImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -1144,7 +1144,7 @@ class _$TournamentPagePlayerListOpenedEventImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return playersListOpened();
@@ -1166,7 +1166,7 @@ class _$TournamentPagePlayerListOpenedEventImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return playersListOpened?.call();
@@ -1188,7 +1188,7 @@ class _$TournamentPagePlayerListOpenedEventImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -1358,7 +1358,7 @@ class _$TournamentPageEventAddPlayerImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return addPlayerTapped();
@@ -1380,7 +1380,7 @@ class _$TournamentPageEventAddPlayerImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return addPlayerTapped?.call();
@@ -1402,7 +1402,7 @@ class _$TournamentPageEventAddPlayerImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -1571,7 +1571,7 @@ class _$TournamentPageEventEditSettingsImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return editTournamentSettings();
@@ -1593,7 +1593,7 @@ class _$TournamentPageEventEditSettingsImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return editTournamentSettings?.call();
@@ -1615,7 +1615,7 @@ class _$TournamentPageEventEditSettingsImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -1824,7 +1824,7 @@ class _$TournamentPageEventDeletePlayerImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return deletePlayer(player);
@@ -1846,7 +1846,7 @@ class _$TournamentPageEventDeletePlayerImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return deletePlayer?.call(player);
@@ -1868,7 +1868,7 @@ class _$TournamentPageEventDeletePlayerImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -2087,7 +2087,7 @@ class _$TournamentPageEventOpenProfileDialogImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return openProfileDialog(player);
@@ -2109,7 +2109,7 @@ class _$TournamentPageEventOpenProfileDialogImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return openProfileDialog?.call(player);
@@ -2131,7 +2131,7 @@ class _$TournamentPageEventOpenProfileDialogImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -2311,7 +2311,7 @@ class _$TournamentPageEventOpenSeatingPageImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return openSeatingPage();
@@ -2333,7 +2333,7 @@ class _$TournamentPageEventOpenSeatingPageImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return openSeatingPage?.call();
@@ -2355,7 +2355,7 @@ class _$TournamentPageEventOpenSeatingPageImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -2562,7 +2562,7 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return bill(playersCount, billedTranlsation);
@@ -2584,7 +2584,7 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return bill?.call(playersCount, billedTranlsation);
@@ -2606,7 +2606,7 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -2785,7 +2785,7 @@ class _$TournamentPageEventPageOpenedImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return pageOpened();
@@ -2807,7 +2807,7 @@ class _$TournamentPageEventPageOpenedImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return pageOpened?.call();
@@ -2829,7 +2829,7 @@ class _$TournamentPageEventPageOpenedImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -3034,7 +3034,7 @@ class _$TournamentPageEventSetFinalPlayersImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return setFinalPlayers(players);
@@ -3056,7 +3056,7 @@ class _$TournamentPageEventSetFinalPlayersImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return setFinalPlayers?.call(players);
@@ -3078,7 +3078,7 @@ class _$TournamentPageEventSetFinalPlayersImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
@@ -3206,7 +3206,7 @@ abstract class _$$TournamentPageEventStartGameInfoImplCopyWith<$Res> {
           $Res Function(_$TournamentPageEventStartGameInfoImpl) then) =
       __$$TournamentPageEventStartGameInfoImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int game});
+  $Res call({int game, TimeOfDay? time});
 }
 
 /// @nodoc
@@ -3225,12 +3225,17 @@ class __$$TournamentPageEventStartGameInfoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? game = null,
+    Object? time = freezed,
   }) {
     return _then(_$TournamentPageEventStartGameInfoImpl(
       game: null == game
           ? _value.game
           : game // ignore: cast_nullable_to_non_nullable
               as int,
+      time: freezed == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay?,
     ));
   }
 }
@@ -3239,14 +3244,16 @@ class __$$TournamentPageEventStartGameInfoImplCopyWithImpl<$Res>
 
 class _$TournamentPageEventStartGameInfoImpl
     implements TournamentPageEventStartGameInfo {
-  const _$TournamentPageEventStartGameInfoImpl({required this.game});
+  const _$TournamentPageEventStartGameInfoImpl({required this.game, this.time});
 
   @override
   final int game;
+  @override
+  final TimeOfDay? time;
 
   @override
   String toString() {
-    return 'TournamentPageEvent.startGameInfo(game: $game)';
+    return 'TournamentPageEvent.startGameInfo(game: $game, time: $time)';
   }
 
   @override
@@ -3254,11 +3261,12 @@ class _$TournamentPageEventStartGameInfoImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TournamentPageEventStartGameInfoImpl &&
-            (identical(other.game, game) || other.game == game));
+            (identical(other.game, game) || other.game == game) &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, game);
+  int get hashCode => Object.hash(runtimeType, game, time);
 
   /// Create a copy of TournamentPageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -3286,10 +3294,10 @@ class _$TournamentPageEventStartGameInfoImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
-    return startGameInfo(game);
+    return startGameInfo(game, time);
   }
 
   @override
@@ -3308,10 +3316,10 @@ class _$TournamentPageEventStartGameInfoImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
-    return startGameInfo?.call(game);
+    return startGameInfo?.call(game, time);
   }
 
   @override
@@ -3330,12 +3338,12 @@ class _$TournamentPageEventStartGameInfoImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {
     if (startGameInfo != null) {
-      return startGameInfo(game);
+      return startGameInfo(game, time);
     }
     return orElse();
   }
@@ -3436,10 +3444,12 @@ class _$TournamentPageEventStartGameInfoImpl
 }
 
 abstract class TournamentPageEventStartGameInfo implements TournamentPageEvent {
-  const factory TournamentPageEventStartGameInfo({required final int game}) =
-      _$TournamentPageEventStartGameInfoImpl;
+  const factory TournamentPageEventStartGameInfo(
+      {required final int game,
+      final TimeOfDay? time}) = _$TournamentPageEventStartGameInfoImpl;
 
   int get game;
+  TimeOfDay? get time;
 
   /// Create a copy of TournamentPageEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -3536,7 +3546,7 @@ class _$TournamentPageEventCustomTextInfoImpl
     required TResult Function(int playersCount, bool billedTranlsation) bill,
     required TResult Function() pageOpened,
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game) startGameInfo,
+    required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
   }) {
     return customTextInfo(text);
@@ -3558,7 +3568,7 @@ class _$TournamentPageEventCustomTextInfoImpl
     TResult? Function(int playersCount, bool billedTranlsation)? bill,
     TResult? Function()? pageOpened,
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game)? startGameInfo,
+    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
   }) {
     return customTextInfo?.call(text);
@@ -3580,7 +3590,7 @@ class _$TournamentPageEventCustomTextInfoImpl
     TResult Function(int playersCount, bool billedTranlsation)? bill,
     TResult Function()? pageOpened,
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game)? startGameInfo,
+    TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
     required TResult orElse(),
   }) {

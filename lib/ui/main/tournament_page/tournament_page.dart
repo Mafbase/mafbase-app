@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
@@ -298,13 +298,17 @@ class _TournamentPageState extends CustomState<TournamentPage>
               StartGameInfoDialog.show(
                 context: context,
                 maxGame: games,
-              ).then((game) {
-                if (game == null || !mounted) {
+              ).then((result) {
+                if (result == null || !mounted) {
                   return;
                 }
-                context
-                    .read<TournamentPageBloc>()
-                    .add(TournamentPageEvent.startGameInfo(game: game));
+
+                context.read<TournamentPageBloc>().add(
+                      TournamentPageEvent.startGameInfo(
+                        game: result.$1,
+                        time: result.$2,
+                      ),
+                    );
               });
             },
           ),

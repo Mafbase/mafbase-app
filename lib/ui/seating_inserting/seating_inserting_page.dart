@@ -1,6 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
@@ -40,6 +40,7 @@ class SeatingInsertingPage extends StatefulWidget {
 
 class _SeatingInsertingPageState extends State<SeatingInsertingPage> {
   String? name;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SeatingInsertingBloc, SeatingInsertingState>(
@@ -58,19 +59,19 @@ class _SeatingInsertingPageState extends State<SeatingInsertingPage> {
                   onPressed: state.isLoading
                       ? null
                       : () async {
-                    final bloc = context.read<SeatingInsertingBloc>();
-                    final files = await FilePicker.platform.pickFiles();
-                    bloc.add(
-                      SeatingInsertingFileSelectedEvent(
-                        bytesStream: Stream.value(
-                          files!.files.first.bytes!,
-                        ),
-                      ),
-                    );
-                    setState(() {
-                      name = files.files.first.name;
-                    });
-                  },
+                          final bloc = context.read<SeatingInsertingBloc>();
+                          final files = await FilePicker.platform.pickFiles();
+                          bloc.add(
+                            SeatingInsertingFileSelectedEvent(
+                              bytesStream: Stream.value(
+                                files!.files.first.bytes!,
+                              ),
+                            ),
+                          );
+                          setState(() {
+                            name = files.files.first.name;
+                          });
+                        },
                   child: Text(
                     name ?? "Загрузить файл",
                     style: MyTheme.of(context).textBtnTextStyle,

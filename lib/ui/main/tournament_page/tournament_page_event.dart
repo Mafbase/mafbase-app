@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
@@ -51,8 +52,10 @@ class TournamentPageEvent with _$TournamentPageEvent {
     required List<PlayerModel> players,
   }) = TournamentPageEventSetFinalPlayers;
 
-  const factory TournamentPageEvent.startGameInfo({required int game}) =
-      TournamentPageEventStartGameInfo;
+  const factory TournamentPageEvent.startGameInfo({
+    required int game,
+    TimeOfDay? time,
+  }) = TournamentPageEventStartGameInfo;
 
   const factory TournamentPageEvent.customTextInfo({required String text}) =
       TournamentPageEventCustomTextInfo;

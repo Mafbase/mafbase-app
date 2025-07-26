@@ -72,22 +72,21 @@ class TournamentPageBloc
   Future _onStartGameInfo(
     TournamentPageEventStartGameInfo event,
     Emitter emit,
-  ) {
-    return _startGameInfoInteractor(
-      tournamentId: tournamentId,
-      game: event.game,
-    );
-  }
+  ) =>
+      _startGameInfoInteractor(
+        tournamentId: tournamentId,
+        game: event.game,
+        time: event.time,
+      );
 
   Future _onCustomTextInfo(
     TournamentPageEventCustomTextInfo event,
     Emitter emit,
-  ) {
-    return _customTextInfoInteractor(
-      tournamentId: tournamentId,
-      text: event.text,
-    );
-  }
+  ) =>
+      _customTextInfoInteractor(
+        tournamentId: tournamentId,
+        text: event.text,
+      );
 
   Future _updateFinalPlayers(Emitter emit) async {
     final finalPlayer = await _getFinalPlayersInteractor(

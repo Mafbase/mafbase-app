@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/requests/custom_text_info_request.dart';
 import 'package:seating_generator_web/data/requests/start_game_info_request.dart';
@@ -13,8 +14,15 @@ class InfoRepositoryImpl extends BaseRepository implements InfoRepository {
   }
 
   @override
-  Future startGameInfo({required int tournamentId, required int game}) {
-    return StartGameInfoRequest(tournamentId: tournamentId, game: game)
-        .execute(client);
+  Future startGameInfo({
+    required int tournamentId,
+    required int game,
+    TimeOfDay? time,
+  }) {
+    return StartGameInfoRequest(
+      tournamentId: tournamentId,
+      game: game,
+      time: time,
+    ).execute(client);
   }
 }

@@ -217,5 +217,6 @@
   "@translationControlLink": {},
   "bucketFieldTitle": "Корзины для полуфинального этапа",
   "bucketFieldHint": "30;20;30",
-  "hideResult": "Скрыть результат"
+  "hideResult": "Скрыть результат",
+  "local_time_placeholder": "Выбрать время"
 }
