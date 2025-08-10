@@ -303,4 +303,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get local_time_placeholder => 'Выбрать время';
+
+  @override
+  String get rating_schema => 'Схема рассчета';
+
+  @override
+  String get old_fsm_schema => 'Старая схема ФСМ';
+
+  @override
+  String get minus_fsm_schema => 'Схема ФСМ с минусами';
 }

@@ -1715,6 +1715,7 @@ class ClubGameResult extends $pb.GeneratedMessage {
     $core.int? don,
     $core.int? sheriff,
     $core.int? ciId,
+    RatingScheme? ratingScheme,
   }) {
     final result = create();
     if (addScore != null) result.addScore.addAll(addScore);
@@ -1729,6 +1730,7 @@ class ClubGameResult extends $pb.GeneratedMessage {
     if (don != null) result.don = don;
     if (sheriff != null) result.sheriff = sheriff;
     if (ciId != null) result.ciId = ciId;
+    if (ratingScheme != null) result.ratingScheme = ratingScheme;
     return result;
   }
 
@@ -1767,6 +1769,12 @@ class ClubGameResult extends $pb.GeneratedMessage {
     ..a<$core.int>(11, _omitFieldNames ? '' : 'sheriff', $pb.PbFieldType.O3)
     ..a<$core.int>(12, _omitFieldNames ? '' : 'ciId', $pb.PbFieldType.O3,
         protoName: 'ciId')
+    ..e<RatingScheme>(
+        13, _omitFieldNames ? '' : 'ratingScheme', $pb.PbFieldType.OE,
+        protoName: 'ratingScheme',
+        defaultOrMaker: RatingScheme.oldFSM,
+        valueOf: RatingScheme.valueOf,
+        enumValues: RatingScheme.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1885,6 +1893,15 @@ class ClubGameResult extends $pb.GeneratedMessage {
   $core.bool hasCiId() => $_has(11);
   @$pb.TagNumber(12)
   void clearCiId() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  RatingScheme get ratingScheme => $_getN(12);
+  @$pb.TagNumber(13)
+  set ratingScheme(RatingScheme value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasRatingScheme() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearRatingScheme() => $_clearField(13);
 }
 
 class ClubsEventOut extends $pb.GeneratedMessage {

@@ -8,15 +8,16 @@ part 'add_club_game_effect.freezed.dart';
 @freezed
 class AddClubGameEffect with _$AddClubGameEffect {
   const factory AddClubGameEffect.setValues({
-    required List<String> players,
-    required List<double> addScore,
-    required List<PlayerRole> roles,
-    required GameWin win,
-    required BestMove bestMove,
-    required String referee,
+    List<String>? players,
+    List<double>? addScore,
+    List<PlayerRole>? roles,
+    GameWin? win,
+    BestMove? bestMove,
+    String? referee,
     int? died,
-    required DateTime date,
+    DateTime? date,
     CiSchemeModel? ciModel,
+    RatingScheme? ratingsSchema,
   }) = AddClubGameEffectSetValues;
 
   const factory AddClubGameEffect.setPlayer({

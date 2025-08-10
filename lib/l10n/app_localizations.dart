@@ -668,6 +668,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Выбрать время'**
   String get local_time_placeholder;
+
+  /// No description provided for @rating_schema.
+  ///
+  /// In ru, this message translates to:
+  /// **'Схема рассчета'**
+  String get rating_schema;
+
+  /// No description provided for @old_fsm_schema.
+  ///
+  /// In ru, this message translates to:
+  /// **'Старая схема ФСМ'**
+  String get old_fsm_schema;
+
+  /// No description provided for @minus_fsm_schema.
+  ///
+  /// In ru, this message translates to:
+  /// **'Схема ФСМ с минусами'**
+  String get minus_fsm_schema;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

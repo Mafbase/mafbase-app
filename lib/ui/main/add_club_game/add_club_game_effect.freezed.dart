@@ -19,15 +19,16 @@ mixin _$AddClubGameEffect {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)
         setValues,
     required TResult Function(int index, PlayerModel player) setPlayer,
   }) =>
@@ -35,15 +36,16 @@ mixin _$AddClubGameEffect {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)?
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)?
         setValues,
     TResult? Function(int index, PlayerModel player)? setPlayer,
   }) =>
@@ -51,15 +53,16 @@ mixin _$AddClubGameEffect {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)?
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)?
         setValues,
     TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),
@@ -115,15 +118,16 @@ abstract class _$$AddClubGameEffectSetValuesImplCopyWith<$Res> {
       __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<String> players,
-      List<double> addScore,
-      List<PlayerRole> roles,
-      GameWin win,
-      BestMove bestMove,
-      String referee,
+      {List<String>? players,
+      List<double>? addScore,
+      List<PlayerRole>? roles,
+      GameWin? win,
+      BestMove? bestMove,
+      String? referee,
       int? died,
-      DateTime date,
-      CiSchemeModel? ciModel});
+      DateTime? date,
+      CiSchemeModel? ciModel,
+      RatingScheme? ratingsSchema});
 
   $CiSchemeModelCopyWith<$Res>? get ciModel;
 }
@@ -143,53 +147,58 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? players = null,
-    Object? addScore = null,
-    Object? roles = null,
-    Object? win = null,
-    Object? bestMove = null,
-    Object? referee = null,
+    Object? players = freezed,
+    Object? addScore = freezed,
+    Object? roles = freezed,
+    Object? win = freezed,
+    Object? bestMove = freezed,
+    Object? referee = freezed,
     Object? died = freezed,
-    Object? date = null,
+    Object? date = freezed,
     Object? ciModel = freezed,
+    Object? ratingsSchema = freezed,
   }) {
     return _then(_$AddClubGameEffectSetValuesImpl(
-      players: null == players
+      players: freezed == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      addScore: null == addScore
+              as List<String>?,
+      addScore: freezed == addScore
           ? _value._addScore
           : addScore // ignore: cast_nullable_to_non_nullable
-              as List<double>,
-      roles: null == roles
+              as List<double>?,
+      roles: freezed == roles
           ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
-              as List<PlayerRole>,
-      win: null == win
+              as List<PlayerRole>?,
+      win: freezed == win
           ? _value.win
           : win // ignore: cast_nullable_to_non_nullable
-              as GameWin,
-      bestMove: null == bestMove
+              as GameWin?,
+      bestMove: freezed == bestMove
           ? _value.bestMove
           : bestMove // ignore: cast_nullable_to_non_nullable
-              as BestMove,
-      referee: null == referee
+              as BestMove?,
+      referee: freezed == referee
           ? _value.referee
           : referee // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       died: freezed == died
           ? _value.died
           : died // ignore: cast_nullable_to_non_nullable
               as int?,
-      date: null == date
+      date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       ciModel: freezed == ciModel
           ? _value.ciModel
           : ciModel // ignore: cast_nullable_to_non_nullable
               as CiSchemeModel?,
+      ratingsSchema: freezed == ratingsSchema
+          ? _value.ratingsSchema
+          : ratingsSchema // ignore: cast_nullable_to_non_nullable
+              as RatingScheme?,
     ));
   }
 
@@ -212,59 +221,68 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
 
 class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
   const _$AddClubGameEffectSetValuesImpl(
-      {required final List<String> players,
-      required final List<double> addScore,
-      required final List<PlayerRole> roles,
-      required this.win,
-      required this.bestMove,
-      required this.referee,
+      {final List<String>? players,
+      final List<double>? addScore,
+      final List<PlayerRole>? roles,
+      this.win,
+      this.bestMove,
+      this.referee,
       this.died,
-      required this.date,
-      this.ciModel})
+      this.date,
+      this.ciModel,
+      this.ratingsSchema})
       : _players = players,
         _addScore = addScore,
         _roles = roles;
 
-  final List<String> _players;
+  final List<String>? _players;
   @override
-  List<String> get players {
+  List<String>? get players {
+    final value = _players;
+    if (value == null) return null;
     if (_players is EqualUnmodifiableListView) return _players;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_players);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<double> _addScore;
+  final List<double>? _addScore;
   @override
-  List<double> get addScore {
+  List<double>? get addScore {
+    final value = _addScore;
+    if (value == null) return null;
     if (_addScore is EqualUnmodifiableListView) return _addScore;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_addScore);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<PlayerRole> _roles;
+  final List<PlayerRole>? _roles;
   @override
-  List<PlayerRole> get roles {
+  List<PlayerRole>? get roles {
+    final value = _roles;
+    if (value == null) return null;
     if (_roles is EqualUnmodifiableListView) return _roles;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_roles);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final GameWin win;
+  final GameWin? win;
   @override
-  final BestMove bestMove;
+  final BestMove? bestMove;
   @override
-  final String referee;
+  final String? referee;
   @override
   final int? died;
   @override
-  final DateTime date;
+  final DateTime? date;
   @override
   final CiSchemeModel? ciModel;
+  @override
+  final RatingScheme? ratingsSchema;
 
   @override
   String toString() {
-    return 'AddClubGameEffect.setValues(players: $players, addScore: $addScore, roles: $roles, win: $win, bestMove: $bestMove, referee: $referee, died: $died, date: $date, ciModel: $ciModel)';
+    return 'AddClubGameEffect.setValues(players: $players, addScore: $addScore, roles: $roles, win: $win, bestMove: $bestMove, referee: $referee, died: $died, date: $date, ciModel: $ciModel, ratingsSchema: $ratingsSchema)';
   }
 
   @override
@@ -281,7 +299,9 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
             (identical(other.referee, referee) || other.referee == referee) &&
             (identical(other.died, died) || other.died == died) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.ciModel, ciModel) || other.ciModel == ciModel));
+            (identical(other.ciModel, ciModel) || other.ciModel == ciModel) &&
+            (identical(other.ratingsSchema, ratingsSchema) ||
+                other.ratingsSchema == ratingsSchema));
   }
 
   @override
@@ -295,7 +315,8 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
       referee,
       died,
       date,
-      ciModel);
+      ciModel,
+      ratingsSchema);
 
   /// Create a copy of AddClubGameEffect
   /// with the given fields replaced by the non-null parameter values.
@@ -310,62 +331,65 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)
         setValues,
     required TResult Function(int index, PlayerModel player) setPlayer,
   }) {
-    return setValues(
-        players, addScore, roles, win, bestMove, referee, died, date, ciModel);
+    return setValues(players, addScore, roles, win, bestMove, referee, died,
+        date, ciModel, ratingsSchema);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)?
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)?
         setValues,
     TResult? Function(int index, PlayerModel player)? setPlayer,
   }) {
-    return setValues?.call(
-        players, addScore, roles, win, bestMove, referee, died, date, ciModel);
+    return setValues?.call(players, addScore, roles, win, bestMove, referee,
+        died, date, ciModel, ratingsSchema);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)?
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)?
         setValues,
     TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),
   }) {
     if (setValues != null) {
       return setValues(players, addScore, roles, win, bestMove, referee, died,
-          date, ciModel);
+          date, ciModel, ratingsSchema);
     }
     return orElse();
   }
@@ -404,25 +428,27 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
 
 abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
   const factory AddClubGameEffectSetValues(
-      {required final List<String> players,
-      required final List<double> addScore,
-      required final List<PlayerRole> roles,
-      required final GameWin win,
-      required final BestMove bestMove,
-      required final String referee,
+      {final List<String>? players,
+      final List<double>? addScore,
+      final List<PlayerRole>? roles,
+      final GameWin? win,
+      final BestMove? bestMove,
+      final String? referee,
       final int? died,
-      required final DateTime date,
-      final CiSchemeModel? ciModel}) = _$AddClubGameEffectSetValuesImpl;
+      final DateTime? date,
+      final CiSchemeModel? ciModel,
+      final RatingScheme? ratingsSchema}) = _$AddClubGameEffectSetValuesImpl;
 
-  List<String> get players;
-  List<double> get addScore;
-  List<PlayerRole> get roles;
-  GameWin get win;
-  BestMove get bestMove;
-  String get referee;
+  List<String>? get players;
+  List<double>? get addScore;
+  List<PlayerRole>? get roles;
+  GameWin? get win;
+  BestMove? get bestMove;
+  String? get referee;
   int? get died;
-  DateTime get date;
+  DateTime? get date;
   CiSchemeModel? get ciModel;
+  RatingScheme? get ratingsSchema;
 
   /// Create a copy of AddClubGameEffect
   /// with the given fields replaced by the non-null parameter values.
@@ -525,15 +551,16 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)
         setValues,
     required TResult Function(int index, PlayerModel player) setPlayer,
   }) {
@@ -544,15 +571,16 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)?
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)?
         setValues,
     TResult? Function(int index, PlayerModel player)? setPlayer,
   }) {
@@ -563,15 +591,16 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            List<String> players,
-            List<double> addScore,
-            List<PlayerRole> roles,
-            GameWin win,
-            BestMove bestMove,
-            String referee,
+            List<String>? players,
+            List<double>? addScore,
+            List<PlayerRole>? roles,
+            GameWin? win,
+            BestMove? bestMove,
+            String? referee,
             int? died,
-            DateTime date,
-            CiSchemeModel? ciModel)?
+            DateTime? date,
+            CiSchemeModel? ciModel,
+            RatingScheme? ratingsSchema)?
         setValues,
     TResult Function(int index, PlayerModel player)? setPlayer,
     required TResult orElse(),

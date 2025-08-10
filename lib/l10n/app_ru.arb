@@ -218,5 +218,8 @@
   "bucketFieldTitle": "Корзины для полуфинального этапа",
   "bucketFieldHint": "30;20;30",
   "hideResult": "Скрыть результат",
-  "local_time_placeholder": "Выбрать время"
+  "local_time_placeholder": "Выбрать время",
+  "rating_schema": "Схема рассчета",
+  "old_fsm_schema": "Старая схема ФСМ",
+  "minus_fsm_schema": "Схема ФСМ с минусами"
 }

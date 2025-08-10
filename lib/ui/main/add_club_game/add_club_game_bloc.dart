@@ -1,7 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:seating_generator_web/app/di/storage_factory.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/storages/prefer_add_game_settings_storage.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_tournament_game_interactor.dart';
@@ -38,6 +40,8 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
   final GetTournamentGameInteractor _getTournamentGameInteractor = getIt();
   final GetTournamentInteractor _getTournamentInteractor = getIt();
   final TournamentsRepository _tournamentsRepository = getIt();
+  final PreferAddGameSettingsStorage _settingsStorage =
+      PreferAddGameSettingsStorageImpl();
 
   AddClubGameBloc({
     this.clubId,
@@ -113,6 +117,10 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     AddClubGameEventSubmit event,
     Emitter emit,
   ) async {
+    if (event.gameResult.hasRatingScheme()) {
+      _settingsStorage.saveScheme(event.gameResult.ratingScheme);
+    }
+
     emit(state.copyWith(isLoading: true));
     if (clubId != null) {
       int? gameId;
@@ -170,6 +178,7 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
         final game = await _repository.getGame(event.gameId!, clubId!);
         emitEffect(
           AddClubGameEffect.setValues(
+            ratingsSchema: game.ratingScheme,
             players: game.players
                 .map(
                   (e) =>
@@ -208,6 +217,14 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
           ),
         );
         emit(state.copyWith(isLoading: false));
+      } else {
+        final defaultScheme = await _settingsStorage.getDefaultRatingScheme();
+
+        emitEffect(
+          AddClubGameEffect.setValues(
+            ratingsSchema: defaultScheme ?? RatingScheme.oldFSM,
+          ),
+        );
       }
     } else {
       final list = await Future.wait([

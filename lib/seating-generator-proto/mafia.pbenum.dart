@@ -102,6 +102,25 @@ class PlayerStatus extends $pb.ProtobufEnum {
   const PlayerStatus._(super.value, super.name);
 }
 
+class RatingScheme extends $pb.ProtobufEnum {
+  static const RatingScheme oldFSM =
+      RatingScheme._(0, _omitEnumNames ? '' : 'oldFSM');
+  static const RatingScheme minusFSM =
+      RatingScheme._(1, _omitEnumNames ? '' : 'minusFSM');
+
+  static const $core.List<RatingScheme> values = <RatingScheme>[
+    oldFSM,
+    minusFSM,
+  ];
+
+  static final $core.List<RatingScheme?> _byValue =
+      $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static RatingScheme? valueOf($core.int value) =>
+      value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const RatingScheme._(super.value, super.name);
+}
+
 class LoginEventOut_Error extends $pb.ProtobufEnum {
   static const LoginEventOut_Error noError =
       LoginEventOut_Error._(0, _omitEnumNames ? '' : 'noError');

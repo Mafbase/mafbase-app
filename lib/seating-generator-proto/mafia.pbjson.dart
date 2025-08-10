@@ -75,6 +75,19 @@ final $typed_data.Uint8List playerStatusDescriptor = $convert.base64Decode(
     'CgxQbGF5ZXJTdGF0dXMSCQoFYWxpdmUQABIJCgV2b3RlZBABEgsKB2RlbGV0ZWQQAhIKCgZraW'
     'xsZWQQAw==');
 
+@$core.Deprecated('Use ratingSchemeDescriptor instead')
+const RatingScheme$json = {
+  '1': 'RatingScheme',
+  '2': [
+    {'1': 'oldFSM', '2': 0},
+    {'1': 'minusFSM', '2': 1},
+  ],
+};
+
+/// Descriptor for `RatingScheme`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List ratingSchemeDescriptor = $convert
+    .base64Decode('CgxSYXRpbmdTY2hlbWUSCgoGb2xkRlNNEAASDAoIbWludXNGU00QAQ==');
+
 @$core.Deprecated('Use loginEventDescriptor instead')
 const LoginEvent$json = {
   '1': 'LoginEvent',
@@ -624,6 +637,16 @@ const ClubGameResult$json = {
       '17': true
     },
     {'1': 'ciId', '3': 12, '4': 1, '5': 5, '9': 8, '10': 'ciId', '17': true},
+    {
+      '1': 'ratingScheme',
+      '3': 13,
+      '4': 1,
+      '5': 14,
+      '6': '.generated.RatingScheme',
+      '9': 9,
+      '10': 'ratingScheme',
+      '17': true
+    },
   ],
   '8': [
     {'1': '_win'},
@@ -635,6 +658,7 @@ const ClubGameResult$json = {
     {'1': '_don'},
     {'1': '_sheriff'},
     {'1': '_ciId'},
+    {'1': '_ratingScheme'},
   ],
 };
 
@@ -646,9 +670,11 @@ final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode(
     '5nZW5lcmF0ZWQuQmVzdE1vdmVIAlIIYmVzdE1vdmWIAQESFwoEZGF0ZRgGIAEoCUgDUgRkYXRl'
     'iAEBEhgKB3JlZmVyZWUYByABKAVSB3JlZmVyZWUSGwoGbWFmaWExGAggASgFSARSBm1hZmlhMY'
     'gBARIbCgZtYWZpYTIYCSABKAVIBVIGbWFmaWEyiAEBEhUKA2RvbhgKIAEoBUgGUgNkb26IAQES'
-    'HQoHc2hlcmlmZhgLIAEoBUgHUgdzaGVyaWZmiAEBEhcKBGNpSWQYDCABKAVICFIEY2lJZIgBAU'
-    'IGCgRfd2luQgsKCV9maXJzdERpZUILCglfYmVzdE1vdmVCBwoFX2RhdGVCCQoHX21hZmlhMUIJ'
-    'CgdfbWFmaWEyQgYKBF9kb25CCgoIX3NoZXJpZmZCBwoFX2NpSWQ=');
+    'HQoHc2hlcmlmZhgLIAEoBUgHUgdzaGVyaWZmiAEBEhcKBGNpSWQYDCABKAVICFIEY2lJZIgBAR'
+    'JACgxyYXRpbmdTY2hlbWUYDSABKA4yFy5nZW5lcmF0ZWQuUmF0aW5nU2NoZW1lSAlSDHJhdGlu'
+    'Z1NjaGVtZYgBAUIGCgRfd2luQgsKCV9maXJzdERpZUILCglfYmVzdE1vdmVCBwoFX2RhdGVCCQ'
+    'oHX21hZmlhMUIJCgdfbWFmaWEyQgYKBF9kb25CCgoIX3NoZXJpZmZCBwoFX2NpSWRCDwoNX3Jh'
+    'dGluZ1NjaGVtZQ==');
 
 @$core.Deprecated('Use clubsEventOutDescriptor instead')
 const ClubsEventOut$json = {

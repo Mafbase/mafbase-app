@@ -171,6 +171,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
   late DateTime date = widget.initDateTime ?? DateTime.now();
   CiSchemeModel? ciSchemeModel;
+  RatingScheme? ratingScheme;
 
   @override
   void dispose() {
@@ -222,19 +223,29 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 
   void onSetValues(AddClubGameEffectSetValues effect) {
     for (int i = 0; i < 10; i++) {
-      if (effect.addScore.length > i) {
-        addScoreControllers[i].text = effect.addScore[i].toString();
+      if (effect.addScore case final addScore?) {
+        if (addScore.length > i) {
+          addScoreControllers[i].text = addScore[i].toString();
+        }
       }
-      controllers[i].text = effect.players[i].toString();
+
+      if (effect.players case final players?) {
+        controllers[i].text = players[i].toString();
+      }
     }
-    refereeController.text = effect.referee;
+
+    if (effect.referee case final referee?) refereeController.text = referee;
+
     setState(() {
       winSelected = effect.win;
       bestMove = effect.bestMove;
       firstDie = effect.died;
-      date = effect.date;
-      roles = effect.roles.toList();
+      if (effect.date case final selectedDate?) date = selectedDate;
+      if (effect.roles case final selectedRoles?) {
+        roles = selectedRoles.toList();
+      }
       ciSchemeModel = effect.ciModel;
+      ratingScheme = effect.ratingsSchema ?? RatingScheme.oldFSM;
     });
   }
 
@@ -509,9 +520,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                     context.locale.ci,
                     style: MyTheme.of(context).defaultTextStyle,
                   ),
-                  const SizedBox(
-                    width: 8,
-                  ),
+                  const SizedBox(width: 8),
                   StatefulBuilder(
                     builder: (context, setState) {
                       return CustomDropdown<CiSchemeModel>(
@@ -527,6 +536,41 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                         onChanged: (value) {
                           setState(() {
                             ciSchemeModel = value;
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+            if (!state.isTournament)
+              Wrap(
+                children: [
+                  Text(
+                    context.locale.rating_schema,
+                    style: MyTheme.of(context).defaultTextStyle,
+                  ),
+                  const SizedBox(width: 8),
+                  StatefulBuilder(
+                    builder: (context, setState) {
+                      return CustomDropdown<RatingScheme>(
+                        readOnly: widget.readOnly,
+                        initValue: ratingScheme,
+                        mapToString: (model) {
+                          switch (model) {
+                            case RatingScheme.minusFSM:
+                              return context.locale.minus_fsm_schema;
+                            default:
+                              return context.locale.old_fsm_schema;
+                          }
+                        },
+                        items: [
+                          RatingScheme.oldFSM,
+                          RatingScheme.minusFSM,
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            ratingScheme = value;
                           });
                         },
                       );
@@ -791,6 +835,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               ciId: ciSchemeModel == CiSchemeModel.empty
                   ? null
                   : ciSchemeModel?.id,
+              ratingScheme: ratingScheme,
             ),
             gameId: widget.gameId,
           ),
