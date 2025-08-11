@@ -11,13 +11,13 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+/ios/build
 
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
-
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
@@ -45,6 +45,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/.cxx
+/android/build
 
 # FVM Version Cache
 .fvm/
