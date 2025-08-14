@@ -37,6 +37,7 @@ class ClubRouterImpl implements ClubRouter {
       WebViewScreen.createLocation(
         url: url,
         title: 'Оплата',
+        context: context,
       ),
     );
   }
