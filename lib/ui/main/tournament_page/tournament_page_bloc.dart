@@ -120,6 +120,7 @@ class TournamentPageBloc
     if (kIsWeb) {
       await launchUrl(
         Uri.parse(url),
+        webOnlyWindowName: '_self',
       );
     } else {
       router.openWebView(url);
