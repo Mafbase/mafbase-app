@@ -49,7 +49,7 @@ class LoginEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LoginEvent clone() => LoginEvent()..mergeFromMessage(this);
+  LoginEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginEvent copyWith(void Function(LoginEvent) updates) =>
       super.copyWith((message) => updates(message as LoginEvent)) as LoginEvent;
@@ -114,11 +114,11 @@ class TableSeating extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'nickname')
     ..aOS(2, _omitFieldNames ? '' : 'referee')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'table', $pb.PbFieldType.O3)
+    ..aI(3, _omitFieldNames ? '' : 'table')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TableSeating clone() => TableSeating()..mergeFromMessage(this);
+  TableSeating clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeating copyWith(void Function(TableSeating) updates) =>
       super.copyWith((message) => updates(message as TableSeating))
@@ -197,22 +197,16 @@ class TableSeatingResult extends $pb.GeneratedMessage {
         enumValues: PlayerRole.values,
         defaultEnumValue: PlayerRole.citizen)
     ..p<$core.double>(2, _omitFieldNames ? '' : 'score', $pb.PbFieldType.KD)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'died', $pb.PbFieldType.O3)
-    ..e<GameWin>(4, _omitFieldNames ? '' : 'win', $pb.PbFieldType.OE,
-        defaultOrMaker: GameWin.city,
-        valueOf: GameWin.valueOf,
-        enumValues: GameWin.values)
-    ..e<BestMove>(5, _omitFieldNames ? '' : 'bestMove', $pb.PbFieldType.OE,
-        protoName: 'bestMove',
-        defaultOrMaker: BestMove.miss,
-        valueOf: BestMove.valueOf,
-        enumValues: BestMove.values)
+    ..aI(3, _omitFieldNames ? '' : 'died')
+    ..aE<GameWin>(4, _omitFieldNames ? '' : 'win', enumValues: GameWin.values)
+    ..aE<BestMove>(5, _omitFieldNames ? '' : 'bestMove',
+        protoName: 'bestMove', enumValues: BestMove.values)
     ..p<$core.double>(6, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.KD,
         protoName: 'addScore')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TableSeatingResult clone() => TableSeatingResult()..mergeFromMessage(this);
+  TableSeatingResult clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeatingResult copyWith(void Function(TableSeatingResult) updates) =>
       super.copyWith((message) => updates(message as TableSeatingResult))
@@ -295,8 +289,7 @@ class UpdateHideDateRequest extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateHideDateRequest clone() =>
-      UpdateHideDateRequest()..mergeFromMessage(this);
+  UpdateHideDateRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UpdateHideDateRequest copyWith(
           void Function(UpdateHideDateRequest) updates) =>
@@ -357,18 +350,17 @@ class TableSeatingItem extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'TableSeatingItem',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'gameId', $pb.PbFieldType.O3,
-        protoName: 'gameId')
+    ..aI(1, _omitFieldNames ? '' : 'gameId', protoName: 'gameId')
     ..aOM<TableSeating>(2, _omitFieldNames ? '' : 'seating',
         subBuilder: TableSeating.create)
     ..aOM<TableSeatingResult>(3, _omitFieldNames ? '' : 'result',
         subBuilder: TableSeatingResult.create)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'game', $pb.PbFieldType.O3)
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'table', $pb.PbFieldType.O3)
+    ..aI(4, _omitFieldNames ? '' : 'game')
+    ..aI(5, _omitFieldNames ? '' : 'table')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TableSeatingItem clone() => TableSeatingItem()..mergeFromMessage(this);
+  TableSeatingItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeatingItem copyWith(void Function(TableSeatingItem) updates) =>
       super.copyWith((message) => updates(message as TableSeatingItem))
@@ -460,12 +452,12 @@ class SeatingEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SeatingEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<TableSeatingItem>(1, _omitFieldNames ? '' : 'item', $pb.PbFieldType.PM,
+    ..pPM<TableSeatingItem>(1, _omitFieldNames ? '' : 'item',
         subBuilder: TableSeatingItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SeatingEventOut clone() => SeatingEventOut()..mergeFromMessage(this);
+  SeatingEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingEventOut copyWith(void Function(SeatingEventOut) updates) =>
       super.copyWith((message) => updates(message as SeatingEventOut))
@@ -519,16 +511,13 @@ class LoginEventOut extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'recoveryToken', protoName: 'recoveryToken')
-    ..e<LoginEventOut_Error>(
-        3, _omitFieldNames ? '' : 'error', $pb.PbFieldType.OE,
-        defaultOrMaker: LoginEventOut_Error.noError,
-        valueOf: LoginEventOut_Error.valueOf,
+    ..aE<LoginEventOut_Error>(3, _omitFieldNames ? '' : 'error',
         enumValues: LoginEventOut_Error.values)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(4, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LoginEventOut clone() => LoginEventOut()..mergeFromMessage(this);
+  LoginEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginEventOut copyWith(void Function(LoginEventOut) updates) =>
       super.copyWith((message) => updates(message as LoginEventOut))
@@ -615,23 +604,17 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'ChangeSeatingContent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'player', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'player')
     ..aOS(2, _omitFieldNames ? '' : 'imageUrl', protoName: 'imageUrl')
-    ..e<PlayerRole>(3, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE,
-        defaultOrMaker: PlayerRole.citizen,
-        valueOf: PlayerRole.valueOf,
+    ..aE<PlayerRole>(3, _omitFieldNames ? '' : 'role',
         enumValues: PlayerRole.values)
-    ..e<PlayerStatus>(4, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE,
-        defaultOrMaker: PlayerStatus.alive,
-        valueOf: PlayerStatus.valueOf,
+    ..aE<PlayerStatus>(4, _omitFieldNames ? '' : 'status',
         enumValues: PlayerStatus.values)
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'selectedGame', $pb.PbFieldType.O3,
-        protoName: 'selectedGame')
+    ..aI(5, _omitFieldNames ? '' : 'selectedGame', protoName: 'selectedGame')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ChangeSeatingContent clone() =>
-      ChangeSeatingContent()..mergeFromMessage(this);
+  ChangeSeatingContent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ChangeSeatingContent copyWith(void Function(ChangeSeatingContent) updates) =>
       super.copyWith((message) => updates(message as ChangeSeatingContent))
@@ -731,7 +714,7 @@ class Club extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Club',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
     ..aOS(4, _omitFieldNames ? '' : 'imageUrl', protoName: 'imageUrl')
@@ -741,7 +724,7 @@ class Club extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Club clone() => Club()..mergeFromMessage(this);
+  Club clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Club copyWith(void Function(Club) updates) =>
       super.copyWith((message) => updates(message as Club)) as Club;
@@ -853,18 +836,16 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'ClubRatingEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<ClubRatingRow>(1, _omitFieldNames ? '' : 'row', $pb.PbFieldType.PM,
+    ..pPM<ClubRatingRow>(1, _omitFieldNames ? '' : 'row',
         subBuilder: ClubRatingRow.create)
     ..aOS(2, _omitFieldNames ? '' : 'clubName', protoName: 'clubName')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'games', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'mafiaWins', $pb.PbFieldType.O3,
-        protoName: 'mafiaWins')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'citizenWins', $pb.PbFieldType.O3,
-        protoName: 'citizenWins')
+    ..aI(3, _omitFieldNames ? '' : 'games')
+    ..aI(4, _omitFieldNames ? '' : 'mafiaWins', protoName: 'mafiaWins')
+    ..aI(5, _omitFieldNames ? '' : 'citizenWins', protoName: 'citizenWins')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClubRatingEventOut clone() => ClubRatingEventOut()..mergeFromMessage(this);
+  ClubRatingEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubRatingEventOut copyWith(void Function(ClubRatingEventOut) updates) =>
       super.copyWith((message) => updates(message as ClubRatingEventOut))
@@ -948,14 +929,12 @@ class ClubRatingRow_GameItem extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'ClubRatingRow.GameItem',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'gameId', $pb.PbFieldType.O3,
-        protoName: 'gameId')
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'score', $pb.PbFieldType.OD)
+    ..aI(1, _omitFieldNames ? '' : 'gameId', protoName: 'gameId')
+    ..aD(2, _omitFieldNames ? '' : 'score')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClubRatingRow_GameItem clone() =>
-      ClubRatingRow_GameItem()..mergeFromMessage(this);
+  ClubRatingRow_GameItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubRatingRow_GameItem copyWith(
           void Function(ClubRatingRow_GameItem) updates) =>
@@ -1082,89 +1061,50 @@ class ClubRatingRow extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'nickname')
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'score', $pb.PbFieldType.OD)
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.OD,
-        protoName: 'addScore')
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'firstDie', $pb.PbFieldType.O3,
-        protoName: 'firstDie')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'donWins', $pb.PbFieldType.O3,
-        protoName: 'donWins')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'sheriffWins', $pb.PbFieldType.O3,
-        protoName: 'sheriffWins')
-    ..pc<ClubRatingRow_GameItem>(
-        7, _omitFieldNames ? '' : 'item', $pb.PbFieldType.PM,
+    ..aD(2, _omitFieldNames ? '' : 'score')
+    ..aD(3, _omitFieldNames ? '' : 'addScore', protoName: 'addScore')
+    ..aI(4, _omitFieldNames ? '' : 'firstDie', protoName: 'firstDie')
+    ..aI(5, _omitFieldNames ? '' : 'donWins', protoName: 'donWins')
+    ..aI(6, _omitFieldNames ? '' : 'sheriffWins', protoName: 'sheriffWins')
+    ..pPM<ClubRatingRow_GameItem>(7, _omitFieldNames ? '' : 'item',
         subBuilder: ClubRatingRow_GameItem.create)
-    ..a<$core.int>(8, _omitFieldNames ? '' : 'wins', $pb.PbFieldType.O3)
-    ..a<$core.int>(9, _omitFieldNames ? '' : 'ci', $pb.PbFieldType.O3)
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'totalGames', $pb.PbFieldType.O3,
-        protoName: 'totalGames')
-    ..a<$core.int>(
-        11, _omitFieldNames ? '' : 'citizenGames', $pb.PbFieldType.O3,
-        protoName: 'citizenGames')
-    ..a<$core.int>(12, _omitFieldNames ? '' : 'donGames', $pb.PbFieldType.O3,
-        protoName: 'donGames')
-    ..a<$core.int>(
-        13, _omitFieldNames ? '' : 'sheriffGames', $pb.PbFieldType.O3,
-        protoName: 'sheriffGames')
-    ..a<$core.int>(14, _omitFieldNames ? '' : 'mafiaGames', $pb.PbFieldType.O3,
-        protoName: 'mafiaGames')
-    ..a<$core.int>(15, _omitFieldNames ? '' : 'mafiaWins', $pb.PbFieldType.O3,
-        protoName: 'mafiaWins')
-    ..a<$core.int>(16, _omitFieldNames ? '' : 'citizenWins', $pb.PbFieldType.O3,
-        protoName: 'citizenWins')
-    ..a<$core.double>(
-        17, _omitFieldNames ? '' : 'citizenAddScore', $pb.PbFieldType.OD,
+    ..aI(8, _omitFieldNames ? '' : 'wins')
+    ..aI(9, _omitFieldNames ? '' : 'ci')
+    ..aI(10, _omitFieldNames ? '' : 'totalGames', protoName: 'totalGames')
+    ..aI(11, _omitFieldNames ? '' : 'citizenGames', protoName: 'citizenGames')
+    ..aI(12, _omitFieldNames ? '' : 'donGames', protoName: 'donGames')
+    ..aI(13, _omitFieldNames ? '' : 'sheriffGames', protoName: 'sheriffGames')
+    ..aI(14, _omitFieldNames ? '' : 'mafiaGames', protoName: 'mafiaGames')
+    ..aI(15, _omitFieldNames ? '' : 'mafiaWins', protoName: 'mafiaWins')
+    ..aI(16, _omitFieldNames ? '' : 'citizenWins', protoName: 'citizenWins')
+    ..aD(17, _omitFieldNames ? '' : 'citizenAddScore',
         protoName: 'citizenAddScore')
-    ..a<$core.double>(
-        18, _omitFieldNames ? '' : 'mafiaAddScore', $pb.PbFieldType.OD,
-        protoName: 'mafiaAddScore')
-    ..a<$core.double>(
-        19, _omitFieldNames ? '' : 'donAddScore', $pb.PbFieldType.OD,
-        protoName: 'donAddScore')
-    ..a<$core.double>(
-        20, _omitFieldNames ? '' : 'sheriffAddScore', $pb.PbFieldType.OD,
+    ..aD(18, _omitFieldNames ? '' : 'mafiaAddScore', protoName: 'mafiaAddScore')
+    ..aD(19, _omitFieldNames ? '' : 'donAddScore', protoName: 'donAddScore')
+    ..aD(20, _omitFieldNames ? '' : 'sheriffAddScore',
         protoName: 'sheriffAddScore')
-    ..a<$core.double>(
-        21, _omitFieldNames ? '' : 'citizenScore', $pb.PbFieldType.OD,
-        protoName: 'citizenScore')
-    ..a<$core.double>(
-        22, _omitFieldNames ? '' : 'mafiaScore', $pb.PbFieldType.OD,
-        protoName: 'mafiaScore')
-    ..a<$core.double>(23, _omitFieldNames ? '' : 'donScore', $pb.PbFieldType.OD,
-        protoName: 'donScore')
-    ..a<$core.double>(
-        24, _omitFieldNames ? '' : 'sheriffScore', $pb.PbFieldType.OD,
-        protoName: 'sheriffScore')
-    ..a<$core.int>(25, _omitFieldNames ? '' : 'playerId', $pb.PbFieldType.O3,
-        protoName: 'playerId')
-    ..a<$core.int>(
-        26, _omitFieldNames ? '' : 'refereeCount', $pb.PbFieldType.O3,
-        protoName: 'refereeCount')
-    ..a<$core.double>(
-        27, _omitFieldNames ? '' : 'minusScore', $pb.PbFieldType.OD,
-        protoName: 'minusScore')
-    ..a<$core.double>(
-        28, _omitFieldNames ? '' : 'citizenMinusScore', $pb.PbFieldType.OD,
+    ..aD(21, _omitFieldNames ? '' : 'citizenScore', protoName: 'citizenScore')
+    ..aD(22, _omitFieldNames ? '' : 'mafiaScore', protoName: 'mafiaScore')
+    ..aD(23, _omitFieldNames ? '' : 'donScore', protoName: 'donScore')
+    ..aD(24, _omitFieldNames ? '' : 'sheriffScore', protoName: 'sheriffScore')
+    ..aI(25, _omitFieldNames ? '' : 'playerId', protoName: 'playerId')
+    ..aI(26, _omitFieldNames ? '' : 'refereeCount', protoName: 'refereeCount')
+    ..aD(27, _omitFieldNames ? '' : 'minusScore', protoName: 'minusScore')
+    ..aD(28, _omitFieldNames ? '' : 'citizenMinusScore',
         protoName: 'citizenMinusScore')
-    ..a<$core.double>(
-        29, _omitFieldNames ? '' : 'mafiaMinusScore', $pb.PbFieldType.OD,
+    ..aD(29, _omitFieldNames ? '' : 'mafiaMinusScore',
         protoName: 'mafiaMinusScore')
-    ..a<$core.double>(
-        30, _omitFieldNames ? '' : 'donMinusScore', $pb.PbFieldType.OD,
-        protoName: 'donMinusScore')
-    ..a<$core.double>(
-        31, _omitFieldNames ? '' : 'sheriffMinusScore', $pb.PbFieldType.OD,
+    ..aD(30, _omitFieldNames ? '' : 'donMinusScore', protoName: 'donMinusScore')
+    ..aD(31, _omitFieldNames ? '' : 'sheriffMinusScore',
         protoName: 'sheriffMinusScore')
-    ..a<$core.double>(
-        32, _omitFieldNames ? '' : 'bestMoveCitizen', $pb.PbFieldType.OD,
+    ..aD(32, _omitFieldNames ? '' : 'bestMoveCitizen',
         protoName: 'bestMoveCitizen')
-    ..a<$core.double>(
-        33, _omitFieldNames ? '' : 'bestMoveSheriff', $pb.PbFieldType.OD,
+    ..aD(33, _omitFieldNames ? '' : 'bestMoveSheriff',
         protoName: 'bestMoveSheriff')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClubRatingRow clone() => ClubRatingRow()..mergeFromMessage(this);
+  ClubRatingRow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubRatingRow copyWith(void Function(ClubRatingRow) updates) =>
       super.copyWith((message) => updates(message as ClubRatingRow))
@@ -1498,12 +1438,11 @@ class AddGameEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'AddGameEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'gameId', $pb.PbFieldType.O3,
-        protoName: 'gameId')
+    ..aI(1, _omitFieldNames ? '' : 'gameId', protoName: 'gameId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AddGameEventOut clone() => AddGameEventOut()..mergeFromMessage(this);
+  AddGameEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AddGameEventOut copyWith(void Function(AddGameEventOut) updates) =>
       super.copyWith((message) => updates(message as AddGameEventOut))
@@ -1557,12 +1496,12 @@ class CiScheme extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'CiScheme',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CiScheme clone() => CiScheme()..mergeFromMessage(this);
+  CiScheme clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CiScheme copyWith(void Function(CiScheme) updates) =>
       super.copyWith((message) => updates(message as CiScheme)) as CiScheme;
@@ -1621,12 +1560,12 @@ class AvailableCiEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'AvailableCiEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<CiScheme>(1, _omitFieldNames ? '' : 'schemes', $pb.PbFieldType.PM,
+    ..pPM<CiScheme>(1, _omitFieldNames ? '' : 'schemes',
         subBuilder: CiScheme.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AvailableCiEventOut clone() => AvailableCiEventOut()..mergeFromMessage(this);
+  AvailableCiEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AvailableCiEventOut copyWith(void Function(AvailableCiEventOut) updates) =>
       super.copyWith((message) => updates(message as AvailableCiEventOut))
@@ -1676,8 +1615,7 @@ class SetFinalPlayersEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetFinalPlayersEvent clone() =>
-      SetFinalPlayersEvent()..mergeFromMessage(this);
+  SetFinalPlayersEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetFinalPlayersEvent copyWith(void Function(SetFinalPlayersEvent) updates) =>
       super.copyWith((message) => updates(message as SetFinalPlayersEvent))
@@ -1750,35 +1688,23 @@ class ClubGameResult extends $pb.GeneratedMessage {
     ..p<$core.int>(1, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.K3,
         protoName: 'addScore')
     ..p<$core.int>(2, _omitFieldNames ? '' : 'players', $pb.PbFieldType.K3)
-    ..e<GameWin>(3, _omitFieldNames ? '' : 'win', $pb.PbFieldType.OE,
-        defaultOrMaker: GameWin.city,
-        valueOf: GameWin.valueOf,
-        enumValues: GameWin.values)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'firstDie', $pb.PbFieldType.O3,
-        protoName: 'firstDie')
-    ..e<BestMove>(5, _omitFieldNames ? '' : 'bestMove', $pb.PbFieldType.OE,
-        protoName: 'bestMove',
-        defaultOrMaker: BestMove.miss,
-        valueOf: BestMove.valueOf,
-        enumValues: BestMove.values)
+    ..aE<GameWin>(3, _omitFieldNames ? '' : 'win', enumValues: GameWin.values)
+    ..aI(4, _omitFieldNames ? '' : 'firstDie', protoName: 'firstDie')
+    ..aE<BestMove>(5, _omitFieldNames ? '' : 'bestMove',
+        protoName: 'bestMove', enumValues: BestMove.values)
     ..aOS(6, _omitFieldNames ? '' : 'date')
-    ..a<$core.int>(7, _omitFieldNames ? '' : 'referee', $pb.PbFieldType.O3)
-    ..a<$core.int>(8, _omitFieldNames ? '' : 'mafia1', $pb.PbFieldType.O3)
-    ..a<$core.int>(9, _omitFieldNames ? '' : 'mafia2', $pb.PbFieldType.O3)
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'don', $pb.PbFieldType.O3)
-    ..a<$core.int>(11, _omitFieldNames ? '' : 'sheriff', $pb.PbFieldType.O3)
-    ..a<$core.int>(12, _omitFieldNames ? '' : 'ciId', $pb.PbFieldType.O3,
-        protoName: 'ciId')
-    ..e<RatingScheme>(
-        13, _omitFieldNames ? '' : 'ratingScheme', $pb.PbFieldType.OE,
-        protoName: 'ratingScheme',
-        defaultOrMaker: RatingScheme.oldFSM,
-        valueOf: RatingScheme.valueOf,
-        enumValues: RatingScheme.values)
+    ..aI(7, _omitFieldNames ? '' : 'referee')
+    ..aI(8, _omitFieldNames ? '' : 'mafia1')
+    ..aI(9, _omitFieldNames ? '' : 'mafia2')
+    ..aI(10, _omitFieldNames ? '' : 'don')
+    ..aI(11, _omitFieldNames ? '' : 'sheriff')
+    ..aI(12, _omitFieldNames ? '' : 'ciId', protoName: 'ciId')
+    ..aE<RatingScheme>(13, _omitFieldNames ? '' : 'ratingScheme',
+        protoName: 'ratingScheme', enumValues: RatingScheme.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClubGameResult clone() => ClubGameResult()..mergeFromMessage(this);
+  ClubGameResult clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubGameResult copyWith(void Function(ClubGameResult) updates) =>
       super.copyWith((message) => updates(message as ClubGameResult))
@@ -1926,12 +1852,11 @@ class ClubsEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'ClubsEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<Club>(1, _omitFieldNames ? '' : 'club', $pb.PbFieldType.PM,
-        subBuilder: Club.create)
+    ..pPM<Club>(1, _omitFieldNames ? '' : 'club', subBuilder: Club.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClubsEventOut clone() => ClubsEventOut()..mergeFromMessage(this);
+  ClubsEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubsEventOut copyWith(void Function(ClubsEventOut) updates) =>
       super.copyWith((message) => updates(message as ClubsEventOut))
@@ -1997,13 +1922,12 @@ class SeatingContent extends $pb.GeneratedMessage {
         defaultEnumValue: PlayerStatus.alive)
     ..pPS(3, _omitFieldNames ? '' : 'images')
     ..pPS(4, _omitFieldNames ? '' : 'names')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'game', $pb.PbFieldType.O3)
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'totalGames', $pb.PbFieldType.O3,
-        protoName: 'totalGames')
+    ..aI(5, _omitFieldNames ? '' : 'game')
+    ..aI(6, _omitFieldNames ? '' : 'totalGames', protoName: 'totalGames')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SeatingContent clone() => SeatingContent()..mergeFromMessage(this);
+  SeatingContent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingContent copyWith(void Function(SeatingContent) updates) =>
       super.copyWith((message) => updates(message as SeatingContent))
@@ -2080,7 +2004,7 @@ class LoginByTokenEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LoginByTokenEvent clone() => LoginByTokenEvent()..mergeFromMessage(this);
+  LoginByTokenEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginByTokenEvent copyWith(void Function(LoginByTokenEvent) updates) =>
       super.copyWith((message) => updates(message as LoginByTokenEvent))
@@ -2138,16 +2062,12 @@ class LoginByTokenEventOut extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'recoveryToken', protoName: 'recoveryToken')
-    ..e<LoginByTokenEventOut_Error>(
-        3, _omitFieldNames ? '' : 'error', $pb.PbFieldType.OE,
-        defaultOrMaker: LoginByTokenEventOut_Error.noError,
-        valueOf: LoginByTokenEventOut_Error.valueOf,
+    ..aE<LoginByTokenEventOut_Error>(3, _omitFieldNames ? '' : 'error',
         enumValues: LoginByTokenEventOut_Error.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LoginByTokenEventOut clone() =>
-      LoginByTokenEventOut()..mergeFromMessage(this);
+  LoginByTokenEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginByTokenEventOut copyWith(void Function(LoginByTokenEventOut) updates) =>
       super.copyWith((message) => updates(message as LoginByTokenEventOut))
@@ -2227,8 +2147,7 @@ class TournamentDescription extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TournamentDescription clone() =>
-      TournamentDescription()..mergeFromMessage(this);
+  TournamentDescription clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TournamentDescription copyWith(
           void Function(TournamentDescription) updates) =>
@@ -2306,7 +2225,7 @@ class SignUpEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SignUpEvent clone() => SignUpEvent()..mergeFromMessage(this);
+  SignUpEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SignUpEvent copyWith(void Function(SignUpEvent) updates) =>
       super.copyWith((message) => updates(message as SignUpEvent))
@@ -2374,16 +2293,13 @@ class SignUpEventOut extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'recoveryToken', protoName: 'recoveryToken')
-    ..e<SignUpEventOut_Error>(
-        3, _omitFieldNames ? '' : 'error', $pb.PbFieldType.OE,
-        defaultOrMaker: SignUpEventOut_Error.noError,
-        valueOf: SignUpEventOut_Error.valueOf,
+    ..aE<SignUpEventOut_Error>(3, _omitFieldNames ? '' : 'error',
         enumValues: SignUpEventOut_Error.values)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(4, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SignUpEventOut clone() => SignUpEventOut()..mergeFromMessage(this);
+  SignUpEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SignUpEventOut copyWith(void Function(SignUpEventOut) updates) =>
       super.copyWith((message) => updates(message as SignUpEventOut))
@@ -2464,13 +2380,12 @@ class EmailVerificationEvent extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'EmailVerificationEvent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'token')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EmailVerificationEvent clone() =>
-      EmailVerificationEvent()..mergeFromMessage(this);
+  EmailVerificationEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EmailVerificationEvent copyWith(
           void Function(EmailVerificationEvent) updates) =>
@@ -2542,8 +2457,7 @@ class CreateTournamentEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateTournamentEvent clone() =>
-      CreateTournamentEvent()..mergeFromMessage(this);
+  CreateTournamentEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreateTournamentEvent copyWith(
           void Function(CreateTournamentEvent) updates) =>
@@ -2614,12 +2528,11 @@ class CreateTournamentEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'CreateTournamentEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateTournamentEventOut clone() =>
-      CreateTournamentEventOut()..mergeFromMessage(this);
+  CreateTournamentEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreateTournamentEventOut copyWith(
           void Function(CreateTournamentEventOut) updates) =>
@@ -2676,7 +2589,7 @@ class AddPlayerEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AddPlayerEvent clone() => AddPlayerEvent()..mergeFromMessage(this);
+  AddPlayerEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AddPlayerEvent copyWith(void Function(AddPlayerEvent) updates) =>
       super.copyWith((message) => updates(message as AddPlayerEvent))
@@ -2739,8 +2652,7 @@ class CannotMeetEditionEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CannotMeetEditionEvent clone() =>
-      CannotMeetEditionEvent()..mergeFromMessage(this);
+  CannotMeetEditionEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CannotMeetEditionEvent copyWith(
           void Function(CannotMeetEditionEvent) updates) =>
@@ -2806,13 +2718,12 @@ class CannotMeetEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'CannotMeetEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<CannotMeetEditionEvent>(
-        1, _omitFieldNames ? '' : 'pairs', $pb.PbFieldType.PM,
+    ..pPM<CannotMeetEditionEvent>(1, _omitFieldNames ? '' : 'pairs',
         subBuilder: CannotMeetEditionEvent.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CannotMeetEventOut clone() => CannotMeetEventOut()..mergeFromMessage(this);
+  CannotMeetEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CannotMeetEventOut copyWith(void Function(CannotMeetEventOut) updates) =>
       super.copyWith((message) => updates(message as CannotMeetEventOut))
@@ -2858,13 +2769,12 @@ class GetAvailablePlayerEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'GetAvailablePlayerEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<Player>(1, _omitFieldNames ? '' : 'players', $pb.PbFieldType.PM,
+    ..pPM<Player>(1, _omitFieldNames ? '' : 'players',
         subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetAvailablePlayerEventOut clone() =>
-      GetAvailablePlayerEventOut()..mergeFromMessage(this);
+  GetAvailablePlayerEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetAvailablePlayerEventOut copyWith(
           void Function(GetAvailablePlayerEventOut) updates) =>
@@ -2920,21 +2830,18 @@ class TournamentSettings extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'TournamentSettings',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(
-        1, _omitFieldNames ? '' : 'defaultGamesCount', $pb.PbFieldType.O3,
+    ..aI(1, _omitFieldNames ? '' : 'defaultGamesCount',
         protoName: 'defaultGamesCount')
-    ..a<$core.int>(
-        2, _omitFieldNames ? '' : 'swissGamesCount', $pb.PbFieldType.O3,
+    ..aI(2, _omitFieldNames ? '' : 'swissGamesCount',
         protoName: 'swissGamesCount')
-    ..a<$core.int>(
-        3, _omitFieldNames ? '' : 'finalGamesCount', $pb.PbFieldType.O3,
+    ..aI(3, _omitFieldNames ? '' : 'finalGamesCount',
         protoName: 'finalGamesCount')
     ..p<$core.int>(4, _omitFieldNames ? '' : 'buckets', $pb.PbFieldType.K3)
     ..aOB(5, _omitFieldNames ? '' : 'hideResult', protoName: 'hideResult')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TournamentSettings clone() => TournamentSettings()..mergeFromMessage(this);
+  TournamentSettings clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TournamentSettings copyWith(void Function(TournamentSettings) updates) =>
       super.copyWith((message) => updates(message as TournamentSettings))
@@ -3023,7 +2930,7 @@ class Profile extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Profile clone() => Profile()..mergeFromMessage(this);
+  Profile clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Profile copyWith(void Function(Profile) updates) =>
       super.copyWith((message) => updates(message as Profile)) as Profile;
@@ -3082,12 +2989,11 @@ class CreatePlayerEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'CreatePlayerEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreatePlayerEventOut clone() =>
-      CreatePlayerEventOut()..mergeFromMessage(this);
+  CreatePlayerEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreatePlayerEventOut copyWith(void Function(CreatePlayerEventOut) updates) =>
       super.copyWith((message) => updates(message as CreatePlayerEventOut))
@@ -3143,7 +3049,7 @@ class CreatePlayerEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreatePlayerEvent clone() => CreatePlayerEvent()..mergeFromMessage(this);
+  CreatePlayerEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreatePlayerEvent copyWith(void Function(CreatePlayerEvent) updates) =>
       super.copyWith((message) => updates(message as CreatePlayerEvent))
@@ -3205,7 +3111,7 @@ class Player extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Player',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'nickname')
     ..aOS(3, _omitFieldNames ? '' : 'fsmNickname', protoName: 'fsmNickname')
     ..aOS(4, _omitFieldNames ? '' : 'mafbankNickname',
@@ -3214,7 +3120,7 @@ class Player extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Player clone() => Player()..mergeFromMessage(this);
+  Player clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Player copyWith(void Function(Player) updates) =>
       super.copyWith((message) => updates(message as Player)) as Player;
@@ -3300,11 +3206,11 @@ class CreateSwissRound extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'CreateSwissRound',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'game', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'game')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateSwissRound clone() => CreateSwissRound()..mergeFromMessage(this);
+  CreateSwissRound clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreateSwissRound copyWith(void Function(CreateSwissRound) updates) =>
       super.copyWith((message) => updates(message as CreateSwissRound))
@@ -3356,16 +3262,12 @@ class EmailVerificationEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'EmailVerificationEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..e<EmailVerificationEventOut_Status>(
-        1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE,
-        defaultOrMaker: EmailVerificationEventOut_Status.success,
-        valueOf: EmailVerificationEventOut_Status.valueOf,
+    ..aE<EmailVerificationEventOut_Status>(1, _omitFieldNames ? '' : 'status',
         enumValues: EmailVerificationEventOut_Status.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EmailVerificationEventOut clone() =>
-      EmailVerificationEventOut()..mergeFromMessage(this);
+  EmailVerificationEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EmailVerificationEventOut copyWith(
           void Function(EmailVerificationEventOut) updates) =>
@@ -3418,12 +3320,11 @@ class GetFinalPlayersOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'GetFinalPlayersOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<Player>(1, _omitFieldNames ? '' : 'player', $pb.PbFieldType.PM,
-        subBuilder: Player.create)
+    ..pPM<Player>(1, _omitFieldNames ? '' : 'player', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetFinalPlayersOut clone() => GetFinalPlayersOut()..mergeFromMessage(this);
+  GetFinalPlayersOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetFinalPlayersOut copyWith(void Function(GetFinalPlayersOut) updates) =>
       super.copyWith((message) => updates(message as GetFinalPlayersOut))
@@ -3473,15 +3374,13 @@ class SeatingForTranslationEvent extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SeatingForTranslationEvent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'tournamentId', $pb.PbFieldType.O3,
-        protoName: 'tournamentId')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'table', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'game', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'tournamentId', protoName: 'tournamentId')
+    ..aI(2, _omitFieldNames ? '' : 'table')
+    ..aI(3, _omitFieldNames ? '' : 'game')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SeatingForTranslationEvent clone() =>
-      SeatingForTranslationEvent()..mergeFromMessage(this);
+  SeatingForTranslationEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingForTranslationEvent copyWith(
           void Function(SeatingForTranslationEvent) updates) =>
@@ -3557,8 +3456,7 @@ class SeatingForTranslationEventOut extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SeatingForTranslationEventOut clone() =>
-      SeatingForTranslationEventOut()..mergeFromMessage(this);
+  SeatingForTranslationEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingForTranslationEventOut copyWith(
           void Function(SeatingForTranslationEventOut) updates) =>
@@ -3611,12 +3509,11 @@ class InsertSeatingEvent extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
         1, _omitFieldNames ? '' : 'bytes', $pb.PbFieldType.OY)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'tournamentId', $pb.PbFieldType.O3,
-        protoName: 'tournamentId')
+    ..aI(2, _omitFieldNames ? '' : 'tournamentId', protoName: 'tournamentId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  InsertSeatingEvent clone() => InsertSeatingEvent()..mergeFromMessage(this);
+  InsertSeatingEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   InsertSeatingEvent copyWith(void Function(InsertSeatingEvent) updates) =>
       super.copyWith((message) => updates(message as InsertSeatingEvent))
@@ -3677,14 +3574,12 @@ class GetTournamentsEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'GetTournamentsEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<Tournament>(
-        1, _omitFieldNames ? '' : 'tournaments', $pb.PbFieldType.PM,
+    ..pPM<Tournament>(1, _omitFieldNames ? '' : 'tournaments',
         subBuilder: Tournament.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetTournamentsEventOut clone() =>
-      GetTournamentsEventOut()..mergeFromMessage(this);
+  GetTournamentsEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetTournamentsEventOut copyWith(
           void Function(GetTournamentsEventOut) updates) =>
@@ -3750,20 +3645,14 @@ class Tournament extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Tournament',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..e<Tournament_Status>(
-        3, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE,
-        defaultOrMaker: Tournament_Status.waitForBilling,
-        valueOf: Tournament_Status.valueOf,
+    ..aE<Tournament_Status>(3, _omitFieldNames ? '' : 'status',
         enumValues: Tournament_Status.values)
     ..aOS(4, _omitFieldNames ? '' : 'dateStart', protoName: 'dateStart')
     ..aOS(5, _omitFieldNames ? '' : 'dateEnd', protoName: 'dateEnd')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'gamesCount', $pb.PbFieldType.O3,
-        protoName: 'gamesCount')
-    ..a<$core.int>(
-        7, _omitFieldNames ? '' : 'billedPlayers', $pb.PbFieldType.O3,
-        protoName: 'billedPlayers')
+    ..aI(6, _omitFieldNames ? '' : 'gamesCount', protoName: 'gamesCount')
+    ..aI(7, _omitFieldNames ? '' : 'billedPlayers', protoName: 'billedPlayers')
     ..aOB(8, _omitFieldNames ? '' : 'billedTranslation',
         protoName: 'billedTranslation')
     ..aOB(9, _omitFieldNames ? '' : 'notificationEnabled',
@@ -3773,7 +3662,7 @@ class Tournament extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Tournament clone() => Tournament()..mergeFromMessage(this);
+  Tournament clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Tournament copyWith(void Function(Tournament) updates) =>
       super.copyWith((message) => updates(message as Tournament)) as Tournament;
@@ -3910,7 +3799,7 @@ class ErrorOut extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ErrorOut clone() => ErrorOut()..mergeFromMessage(this);
+  ErrorOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ErrorOut copyWith(void Function(ErrorOut) updates) =>
       super.copyWith((message) => updates(message as ErrorOut)) as ErrorOut;
@@ -3964,14 +3853,14 @@ class BillTournamentEvent extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'BillTournamentEvent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'players', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'players')
     ..aOB(2, _omitFieldNames ? '' : 'hasTranslation',
         protoName: 'hasTranslation')
     ..aOS(3, _omitFieldNames ? '' : 'redirectPath', protoName: 'redirectPath')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BillTournamentEvent clone() => BillTournamentEvent()..mergeFromMessage(this);
+  BillTournamentEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BillTournamentEvent copyWith(void Function(BillTournamentEvent) updates) =>
       super.copyWith((message) => updates(message as BillTournamentEvent))
@@ -4043,12 +3932,12 @@ class BillClubEvent extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'BillClubEvent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'days', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'days')
     ..aOS(2, _omitFieldNames ? '' : 'redirectPath', protoName: 'redirectPath')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BillClubEvent clone() => BillClubEvent()..mergeFromMessage(this);
+  BillClubEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BillClubEvent copyWith(void Function(BillClubEvent) updates) =>
       super.copyWith((message) => updates(message as BillClubEvent))
@@ -4113,8 +4002,7 @@ class BillTournamentEventOut extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BillTournamentEventOut clone() =>
-      BillTournamentEventOut()..mergeFromMessage(this);
+  BillTournamentEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BillTournamentEventOut copyWith(
           void Function(BillTournamentEventOut) updates) =>
@@ -4169,12 +4057,12 @@ class StartGameInfoEvent extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'StartGameInfoEvent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'game', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'game')
     ..aOS(2, _omitFieldNames ? '' : 'localDate', protoName: 'localDate')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StartGameInfoEvent clone() => StartGameInfoEvent()..mergeFromMessage(this);
+  StartGameInfoEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StartGameInfoEvent copyWith(void Function(StartGameInfoEvent) updates) =>
       super.copyWith((message) => updates(message as StartGameInfoEvent))
@@ -4239,7 +4127,7 @@ class CustomTextInfoEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CustomTextInfoEvent clone() => CustomTextInfoEvent()..mergeFromMessage(this);
+  CustomTextInfoEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CustomTextInfoEvent copyWith(void Function(CustomTextInfoEvent) updates) =>
       super.copyWith((message) => updates(message as CustomTextInfoEvent))
@@ -4291,12 +4179,11 @@ class TakeGomafiaSeatingEvent extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'TakeGomafiaSeatingEvent',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TakeGomafiaSeatingEvent clone() =>
-      TakeGomafiaSeatingEvent()..mergeFromMessage(this);
+  TakeGomafiaSeatingEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TakeGomafiaSeatingEvent copyWith(
           void Function(TakeGomafiaSeatingEvent) updates) =>
@@ -4353,8 +4240,7 @@ class TakeGomafiaSeatingEventOut extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TakeGomafiaSeatingEventOut clone() =>
-      TakeGomafiaSeatingEventOut()..mergeFromMessage(this);
+  TakeGomafiaSeatingEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TakeGomafiaSeatingEventOut copyWith(
           void Function(TakeGomafiaSeatingEventOut) updates) =>
@@ -4404,12 +4290,12 @@ class User extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'User',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'email')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  User clone() => User()..mergeFromMessage(this);
+  User clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   User copyWith(void Function(User) updates) =>
       super.copyWith((message) => updates(message as User)) as User;
@@ -4468,13 +4354,11 @@ class TournamentOwnersEventOut extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'TournamentOwnersEventOut',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
       createEmptyInstance: create)
-    ..pc<User>(1, _omitFieldNames ? '' : 'owners', $pb.PbFieldType.PM,
-        subBuilder: User.create)
+    ..pPM<User>(1, _omitFieldNames ? '' : 'owners', subBuilder: User.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TournamentOwnersEventOut clone() =>
-      TournamentOwnersEventOut()..mergeFromMessage(this);
+  TournamentOwnersEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TournamentOwnersEventOut copyWith(
           void Function(TournamentOwnersEventOut) updates) =>
@@ -4525,7 +4409,7 @@ class UpdateOwnerEvent extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateOwnerEvent clone() => UpdateOwnerEvent()..mergeFromMessage(this);
+  UpdateOwnerEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UpdateOwnerEvent copyWith(void Function(UpdateOwnerEvent) updates) =>
       super.copyWith((message) => updates(message as UpdateOwnerEvent))
@@ -4553,6 +4437,63 @@ class UpdateOwnerEvent extends $pb.GeneratedMessage {
   $core.bool hasEmail() => $_has(0);
   @$pb.TagNumber(1)
   void clearEmail() => $_clearField(1);
+}
+
+class TranslationKeyEventOut extends $pb.GeneratedMessage {
+  factory TranslationKeyEventOut({
+    $core.String? key,
+  }) {
+    final result = create();
+    if (key != null) result.key = key;
+    return result;
+  }
+
+  TranslationKeyEventOut._();
+
+  factory TranslationKeyEventOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory TranslationKeyEventOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'TranslationKeyEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'key')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TranslationKeyEventOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TranslationKeyEventOut copyWith(
+          void Function(TranslationKeyEventOut) updates) =>
+      super.copyWith((message) => updates(message as TranslationKeyEventOut))
+          as TranslationKeyEventOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TranslationKeyEventOut create() => TranslationKeyEventOut._();
+  @$core.override
+  TranslationKeyEventOut createEmptyInstance() => create();
+  static $pb.PbList<TranslationKeyEventOut> createRepeated() =>
+      $pb.PbList<TranslationKeyEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static TranslationKeyEventOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TranslationKeyEventOut>(create);
+  static TranslationKeyEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get key => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set key($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearKey() => $_clearField(1);
 }
 
 const $core.bool _omitFieldNames =

@@ -30,26 +30,6 @@ class TranslationContentPage extends StatefulWidget {
       queryParameters: {"tournamentId": tournamentId, "table": table},
     );
   }
-
-  static final GoRoute route = GoRoute(
-    path: '/translationContent',
-    name: routeName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.uri.queryParameters["tournamentId"] ?? "");
-      final table = int.parse(state.uri.queryParameters["table"] ?? "");
-      debugPrint("$tournamentId $table");
-      return BlocProvider<TranslationContentBloc>(
-        create: (context) => getIt(
-          param1: context,
-          param2: TranslationContentBlocParams(
-            tournamentId: tournamentId,
-            table: table,
-          ),
-        ),
-        child: const TranslationContentPage(),
-      );
-    },
-  );
 }
 
 class _TranslationContentPageState extends State<TranslationContentPage> {

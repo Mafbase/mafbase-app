@@ -8,6 +8,7 @@ abstract class TranslationRepository {
     required PlayerRole role,
     required int table,
     required int tournamentId,
+    required String key,
   });
 
   Future changeStatus({
@@ -15,11 +16,15 @@ abstract class TranslationRepository {
     required PlayerStatus status,
     required int table,
     required int tournamentId,
+    required String key,
   });
 
   Future selectGame({
     required int gameIndex,
     required int table,
     required int tournamentId,
+    required String key,
   });
+
+  Future<String> getKey({required int tournamentId});
 }

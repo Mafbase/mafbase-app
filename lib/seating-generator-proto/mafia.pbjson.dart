@@ -1529,3 +1529,15 @@ const UpdateOwnerEvent$json = {
 /// Descriptor for `UpdateOwnerEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateOwnerEventDescriptor = $convert
     .base64Decode('ChBVcGRhdGVPd25lckV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
+
+@$core.Deprecated('Use translationKeyEventOutDescriptor instead')
+const TranslationKeyEventOut$json = {
+  '1': 'TranslationKeyEventOut',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+  ],
+};
+
+/// Descriptor for `TranslationKeyEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List translationKeyEventOutDescriptor = $convert
+    .base64Decode('ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5');

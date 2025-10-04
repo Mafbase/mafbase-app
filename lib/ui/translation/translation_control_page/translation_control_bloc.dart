@@ -57,6 +57,7 @@ class TranslationControlBloc
       gameIndex: event.gameIndex,
       table: params.table,
       tournamentId: params.tournamentId,
+      key: params.key,
     );
   }
 
@@ -66,6 +67,7 @@ class TranslationControlBloc
       status: event.status,
       table: params.table,
       tournamentId: params.tournamentId,
+      key: params.key,
     );
   }
 
@@ -75,6 +77,7 @@ class TranslationControlBloc
       role: event.role,
       table: params.table,
       tournamentId: params.tournamentId,
+      key: params.key,
     );
   }
 

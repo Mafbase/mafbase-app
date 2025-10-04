@@ -61,7 +61,6 @@ class AppRouter {
     },
     routes: [
       TempPage.route,
-      TranslationContentPage.route,
       TranslationControlPage.route,
       WebViewScreen.route,
       GoRoute(

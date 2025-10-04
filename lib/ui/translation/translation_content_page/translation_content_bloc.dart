@@ -62,9 +62,11 @@ class TranslationContentBloc
 class TranslationContentBlocParams {
   final int tournamentId;
   final int table;
+  final String key;
 
   TranslationContentBlocParams({
     required this.tournamentId,
     required this.table,
+    required this.key,
   });
 }

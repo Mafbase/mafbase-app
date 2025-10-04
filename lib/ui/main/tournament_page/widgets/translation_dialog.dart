@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
+import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -35,101 +37,116 @@ class TranslationDialog extends StatefulWidget {
 }
 
 class _TranslationDialogState extends State<TranslationDialog> {
+  final TranslationRepository repository = getIt();
+  late final Future<String> keyFuture;
   int table = 1;
 
   @override
-  Widget build(BuildContext context) {
-    final root = kIsWeb && !kDebugMode
-        ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 433 ? ':${Uri.base.port}' : ''}'
-        : 'https://mafbase.ru';
-    final contentLink =
-        '$root/translation?tournamentId=${widget.tournamentId}&table=$table';
-    final controlLink =
-        '$root/translationControl?tournamentId=${widget.tournamentId}&table=$table';
+  void initState() {
+    keyFuture = repository.getKey(tournamentId: widget.tournamentId);
+    super.initState();
+  }
 
-    return CustomDialog(
-      child: SelectionArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: IntrinsicWidth(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Text(
-                    context.locale.translationDialogTitle,
-                    style: MyTheme.of(context).headerTextStyle,
-                  ),
-                ),
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Стол: ',
+  @override
+  Widget build(BuildContext context) {
+
+
+    return FutureBuilder(
+      future: keyFuture,
+      builder: (context, snapshot) {
+        final key = snapshot.data;
+        final root = kIsWeb && !kDebugMode
+            ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 433 ? ':${Uri.base.port}' : ''}'
+            : 'https://mafbase.ru';
+
+        final contentLink = '$root/translation?tournamentId=${widget.tournamentId}&table=$table&key=$key';
+        final controlLink = '$root/translationControl?tournamentId=${widget.tournamentId}&table=$table&key=$key';
+
+        return CustomDialog(
+          child: SelectionArea(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: key == null ? Center(child: CircularProgressIndicator()) : IntrinsicWidth(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        context.locale.translationDialogTitle,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Стол: ',
+                            style: MyTheme.of(context).defaultTextStyle,
+                          ),
+                          CustomDropdown(
+                            items: List.generate(
+                              widget.tablesCount,
+                              (index) => index + 1,
+                            ),
+                            initValue: table,
+                            onChanged: (value) => setState(
+                              () => table = value ?? table,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text.rich(
+                      TextSpan(
                         style: MyTheme.of(context).defaultTextStyle,
+                        children: [
+                          TextSpan(
+                            text: '${context.locale.translationContentLink}\n',
+                          ),
+                          TextSpan(
+                            text: contentLink,
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: MyTheme.of(context).blueForCard,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrlString(contentLink);
+                              },
+                          ),
+                        ],
                       ),
-                      CustomDropdown(
-                        items: List.generate(
-                          widget.tablesCount,
-                          (index) => index + 1,
-                        ),
-                        initValue: table,
-                        onChanged: (value) => setState(
-                          () => table = value ?? table,
-                        ),
+                    ),
+                    Text.rich(
+                      TextSpan(
+                        style: MyTheme.of(context).defaultTextStyle,
+                        children: [
+                          TextSpan(
+                            text: '${context.locale.translationControlLink}\n',
+                          ),
+                          TextSpan(
+                            text: controlLink,
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: MyTheme.of(context).blueForCard,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrlString(controlLink);
+                              },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Text.rich(
-                  TextSpan(
-                    style: MyTheme.of(context).defaultTextStyle,
-                    children: [
-                      TextSpan(
-                        text: '${context.locale.translationContentLink}\n',
-                      ),
-                      TextSpan(
-                        text: contentLink,
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: MyTheme.of(context).blueForCard,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrlString(contentLink);
-                          },
-                      ),
-                    ],
-                  ),
-                ),
-                Text.rich(
-                  TextSpan(
-                    style: MyTheme.of(context).defaultTextStyle,
-                    children: [
-                      TextSpan(
-                        text: '${context.locale.translationControlLink}\n',
-                      ),
-                      TextSpan(
-                        text: controlLink,
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: MyTheme.of(context).blueForCard,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrlString(controlLink);
-                          },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

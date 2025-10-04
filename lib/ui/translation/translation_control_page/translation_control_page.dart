@@ -20,12 +20,15 @@ class TranslationControlPage extends StatefulWidget {
       final tournamentId =
           int.parse(state.uri.queryParameters["tournamentId"] ?? "");
       final table = int.parse(state.uri.queryParameters["table"] ?? "");
+      final key = state.uri.queryParameters["key"] ?? "";
+
       return BlocProvider<TranslationControlBloc>(
         create: (context) => getIt(
           param1: context,
           param2: TranslationContentBlocParams(
             tournamentId: tournamentId,
             table: table,
+            key: key,
           ),
         )..add(const TranslationControlEvent.pageOpened()),
         child: const TranslationControlPage(),

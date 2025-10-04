@@ -13,6 +13,7 @@ class TranslationRepositoryMock implements TranslationRepository {
     required PlayerRole role,
     required int table,
     required int tournamentId,
+    required String key,
   }) async {}
 
   @override
@@ -21,6 +22,7 @@ class TranslationRepositoryMock implements TranslationRepository {
     required PlayerStatus status,
     required int table,
     required int tournamentId,
+    required String key,
   }) async {}
 
   @override
@@ -28,5 +30,9 @@ class TranslationRepositoryMock implements TranslationRepository {
     required int gameIndex,
     required int table,
     required int tournamentId,
+    required String key,
   }) async {}
+
+  @override
+  Future<String> getKey({required int tournamentId}) async => "";
 }

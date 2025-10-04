@@ -1,11 +1,11 @@
 import 'package:seating_generator_web/data/requests/change_seating_content_request.dart';
 import 'package:seating_generator_web/data/requests/insert_seating_request.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/data/requests/translation_key_request.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
-class TranslationRepositoryImpl extends BaseRepository
-    implements TranslationRepository {
+class TranslationRepositoryImpl extends BaseRepository implements TranslationRepository {
   TranslationRepositoryImpl(super.client);
 
   @override
@@ -19,11 +19,13 @@ class TranslationRepositoryImpl extends BaseRepository
     required PlayerRole role,
     required int table,
     required int tournamentId,
+    required String key,
   }) {
     return ChangeSeatingContentRequest(
       tournamentId: tournamentId,
       table: table,
       content: ChangeSeatingContent(player: playerIndex, role: role),
+      key: key,
     ).execute(client);
   }
 
@@ -33,10 +35,12 @@ class TranslationRepositoryImpl extends BaseRepository
     required PlayerStatus status,
     required int table,
     required int tournamentId,
+    required String key,
   }) {
     return ChangeSeatingContentRequest(
       tournamentId: tournamentId,
       table: table,
+      key: key,
       content: ChangeSeatingContent(player: playerIndex, status: status),
     ).execute(client);
   }
@@ -46,11 +50,17 @@ class TranslationRepositoryImpl extends BaseRepository
     required int gameIndex,
     required int table,
     required int tournamentId,
+    required String key,
   }) {
     return ChangeSeatingContentRequest(
       tournamentId: tournamentId,
       table: table,
+      key: key,
       content: ChangeSeatingContent(selectedGame: gameIndex),
     ).execute(client);
   }
+
+  @override
+  Future<String> getKey({required int tournamentId}) =>
+      TranslationKeyRequest(tournamentId: tournamentId).execute(client).then((e) => e.key);
 }
