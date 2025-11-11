@@ -11,15 +11,16 @@ class TournamentSettingsModel with _$TournamentSettingsModel {
     required int finalGames,
     List<int>? buckets,
     @Default(false) bool hideResult,
+    RatingScheme? ratingScheme,
   }) = _TournamentSettingsModel;
 
-  factory TournamentSettingsModel.fromProto(TournamentSettings proto) =>
-      TournamentSettingsModel(
+  factory TournamentSettingsModel.fromProto(TournamentSettings proto) => TournamentSettingsModel(
         defaultGames: proto.defaultGamesCount,
         swissGames: proto.swissGamesCount,
         finalGames: proto.finalGamesCount,
         buckets: proto.buckets,
         hideResult: proto.hideResult,
+        ratingScheme: proto.scheme,
       );
 }
 
@@ -30,5 +31,6 @@ extension TournamentSettingsModelExt on TournamentSettingsModel {
         finalGamesCount: finalGames,
         buckets: buckets,
         hideResult: hideResult,
+        scheme: ratingScheme,
       );
 }

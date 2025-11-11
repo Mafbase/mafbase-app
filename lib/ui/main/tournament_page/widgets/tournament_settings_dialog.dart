@@ -4,6 +4,7 @@ import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentSettingsDialog extends StatefulWidget {
@@ -13,6 +14,7 @@ class TournamentSettingsDialog extends StatefulWidget {
   final List<int>? buckets;
   final VoidCallback onFinalPlayersTapped;
   final bool hideResult;
+  final RatingScheme? scheme;
 
   const TournamentSettingsDialog({
     super.key,
@@ -21,12 +23,12 @@ class TournamentSettingsDialog extends StatefulWidget {
     this.finalGames = 0,
     this.buckets,
     this.hideResult = false,
+    this.scheme,
     required this.onFinalPlayersTapped,
   });
 
   @override
-  State<TournamentSettingsDialog> createState() =>
-      _TournamentSettingsDialogState();
+  State<TournamentSettingsDialog> createState() => _TournamentSettingsDialogState();
 
   static Future<TournamentSettingsModel?> open({
     required BuildContext context,
@@ -41,6 +43,7 @@ class TournamentSettingsDialog extends StatefulWidget {
         finalGames: initValue.finalGames,
         buckets: initValue.buckets,
         hideResult: initValue.hideResult,
+        scheme: initValue.ratingScheme,
         onFinalPlayersTapped: onFinalPlayersTapped,
       ),
     );
@@ -53,6 +56,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
   final swissGamesController = TextEditingController();
   final bucketsController = TextEditingController();
   late bool hideResult = widget.hideResult;
+  late RatingScheme? ratingScheme = widget.scheme;
 
   final formState = GlobalKey<FormState>();
 
@@ -114,37 +118,52 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                 ),
                 CustomTextField(
                   hint: "6",
-                  validate: (value) => int.tryParse(value ?? "") == null
-                      ? "Неверный формат числа"
-                      : null,
+                  validate: (value) => int.tryParse(value ?? "") == null ? "Неверный формат числа" : null,
                   label: context.locale.defaultGamesLabel,
                   controller: defaultGamesController,
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  validate: (value) => int.tryParse(value ?? "") == null
-                      ? "Неверный формат числа"
-                      : null,
+                  validate: (value) => int.tryParse(value ?? "") == null ? "Неверный формат числа" : null,
                   hint: "6",
                   label: context.locale.swissGamesLabel,
                   controller: swissGamesController,
                 ),
                 const SizedBox(height: 16),
+                DropdownButton<RatingScheme>(
+                  items: RatingScheme.values
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(
+                            switch (e) {
+                              RatingScheme.oldFSM => context.locale.old_fsm_schema,
+                              RatingScheme.minusFSM => context.locale.minus_fsm_schema,
+                              _ => '',
+                            },
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  value: ratingScheme,
+                  onChanged: (value) {
+                    setState(() {
+                      ratingScheme = value;
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
                 IgnorePointer(
                   ignoring: (int.tryParse(swissGamesController.text) ?? 0) == 0,
                   child: Opacity(
-                    opacity: (int.tryParse(swissGamesController.text) ?? 0) == 0
-                        ? 0.5
-                        : 1,
+                    opacity: (int.tryParse(swissGamesController.text) ?? 0) == 0 ? 0.5 : 1,
                     child: CustomTextField(
                       label: context.locale.bucketFieldTitle,
                       hint: context.locale.bucketFieldHint,
-                      readOnly:
-                          (int.tryParse(swissGamesController.text) ?? 0) == 0,
+                      readOnly: (int.tryParse(swissGamesController.text) ?? 0) == 0,
                       controller: bucketsController,
                       validate: (value) {
-                        if ((int.tryParse(swissGamesController.text) ?? 0) ==
-                            0) {
+                        if ((int.tryParse(swissGamesController.text) ?? 0) == 0) {
                           return null;
                         }
 
@@ -167,9 +186,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                     Expanded(
                       child: CustomTextField(
                         hint: "6",
-                        validate: (value) => int.tryParse(value ?? "") == null
-                            ? "Неверный формат числа"
-                            : null,
+                        validate: (value) => int.tryParse(value ?? "") == null ? "Неверный формат числа" : null,
                         label: context.locale.finalGamesLabel,
                         controller: finalGamesController,
                       ),
@@ -206,12 +223,9 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                         defaultGames: int.parse(defaultGamesController.text),
                         swissGames: int.parse(swissGamesController.text),
                         finalGames: int.parse(finalGamesController.text),
-                        buckets: bucketsController.text
-                            .split(';')
-                            .map((e) => int.tryParse(e))
-                            .nonNulls
-                            .toList(),
+                        buckets: bucketsController.text.split(';').map((e) => int.tryParse(e)).nonNulls.toList(),
                         hideResult: hideResult,
+                        ratingScheme: ratingScheme,
                       ),
                     );
                   },

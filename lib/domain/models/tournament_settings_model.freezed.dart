@@ -21,6 +21,7 @@ mixin _$TournamentSettingsModel {
   int get finalGames => throw _privateConstructorUsedError;
   List<int>? get buckets => throw _privateConstructorUsedError;
   bool get hideResult => throw _privateConstructorUsedError;
+  RatingScheme? get ratingScheme => throw _privateConstructorUsedError;
 
   /// Create a copy of TournamentSettingsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -40,7 +41,8 @@ abstract class $TournamentSettingsModelCopyWith<$Res> {
       int swissGames,
       int finalGames,
       List<int>? buckets,
-      bool hideResult});
+      bool hideResult,
+      RatingScheme? ratingScheme});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
     Object? finalGames = null,
     Object? buckets = freezed,
     Object? hideResult = null,
+    Object? ratingScheme = freezed,
   }) {
     return _then(_value.copyWith(
       defaultGames: null == defaultGames
@@ -86,6 +89,10 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
           ? _value.hideResult
           : hideResult // ignore: cast_nullable_to_non_nullable
               as bool,
+      ratingScheme: freezed == ratingScheme
+          ? _value.ratingScheme
+          : ratingScheme // ignore: cast_nullable_to_non_nullable
+              as RatingScheme?,
     ) as $Val);
   }
 }
@@ -104,7 +111,8 @@ abstract class _$$TournamentSettingsModelImplCopyWith<$Res>
       int swissGames,
       int finalGames,
       List<int>? buckets,
-      bool hideResult});
+      bool hideResult,
+      RatingScheme? ratingScheme});
 }
 
 /// @nodoc
@@ -127,6 +135,7 @@ class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
     Object? finalGames = null,
     Object? buckets = freezed,
     Object? hideResult = null,
+    Object? ratingScheme = freezed,
   }) {
     return _then(_$TournamentSettingsModelImpl(
       defaultGames: null == defaultGames
@@ -149,6 +158,10 @@ class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
           ? _value.hideResult
           : hideResult // ignore: cast_nullable_to_non_nullable
               as bool,
+      ratingScheme: freezed == ratingScheme
+          ? _value.ratingScheme
+          : ratingScheme // ignore: cast_nullable_to_non_nullable
+              as RatingScheme?,
     ));
   }
 }
@@ -161,7 +174,8 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
       required this.swissGames,
       required this.finalGames,
       final List<int>? buckets,
-      this.hideResult = false})
+      this.hideResult = false,
+      this.ratingScheme})
       : _buckets = buckets;
 
   @override
@@ -183,10 +197,12 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
   @override
   @JsonKey()
   final bool hideResult;
+  @override
+  final RatingScheme? ratingScheme;
 
   @override
   String toString() {
-    return 'TournamentSettingsModel(defaultGames: $defaultGames, swissGames: $swissGames, finalGames: $finalGames, buckets: $buckets, hideResult: $hideResult)';
+    return 'TournamentSettingsModel(defaultGames: $defaultGames, swissGames: $swissGames, finalGames: $finalGames, buckets: $buckets, hideResult: $hideResult, ratingScheme: $ratingScheme)';
   }
 
   @override
@@ -202,12 +218,20 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
                 other.finalGames == finalGames) &&
             const DeepCollectionEquality().equals(other._buckets, _buckets) &&
             (identical(other.hideResult, hideResult) ||
-                other.hideResult == hideResult));
+                other.hideResult == hideResult) &&
+            (identical(other.ratingScheme, ratingScheme) ||
+                other.ratingScheme == ratingScheme));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, defaultGames, swissGames,
-      finalGames, const DeepCollectionEquality().hash(_buckets), hideResult);
+  int get hashCode => Object.hash(
+      runtimeType,
+      defaultGames,
+      swissGames,
+      finalGames,
+      const DeepCollectionEquality().hash(_buckets),
+      hideResult,
+      ratingScheme);
 
   /// Create a copy of TournamentSettingsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -225,7 +249,8 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
       required final int swissGames,
       required final int finalGames,
       final List<int>? buckets,
-      final bool hideResult}) = _$TournamentSettingsModelImpl;
+      final bool hideResult,
+      final RatingScheme? ratingScheme}) = _$TournamentSettingsModelImpl;
 
   @override
   int get defaultGames;
@@ -237,6 +262,8 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
   List<int>? get buckets;
   @override
   bool get hideResult;
+  @override
+  RatingScheme? get ratingScheme;
 
   /// Create a copy of TournamentSettingsModel
   /// with the given fields replaced by the non-null parameter values.
