@@ -4355,6 +4355,114 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
   void clearKey() => $_clearField(1);
 }
 
+class TableInfoItem extends $pb.GeneratedMessage {
+  factory TableInfoItem({
+    $core.int? table,
+    $core.String? info,
+  }) {
+    final $result = create();
+    if (table != null) {
+      $result.table = table;
+    }
+    if (info != null) {
+      $result.info = info;
+    }
+    return $result;
+  }
+  TableInfoItem._() : super();
+  factory TableInfoItem.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TableInfoItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TableInfoItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'table', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'info')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TableInfoItem clone() => TableInfoItem()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TableInfoItem copyWith(void Function(TableInfoItem) updates) => super.copyWith((message) => updates(message as TableInfoItem)) as TableInfoItem;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TableInfoItem create() => TableInfoItem._();
+  TableInfoItem createEmptyInstance() => create();
+  static $pb.PbList<TableInfoItem> createRepeated() => $pb.PbList<TableInfoItem>();
+  @$core.pragma('dart2js:noInline')
+  static TableInfoItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TableInfoItem>(create);
+  static TableInfoItem? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get table => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set table($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTable() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTable() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get info => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set info($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasInfo() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearInfo() => $_clearField(2);
+}
+
+class TableInfoEvent extends $pb.GeneratedMessage {
+  factory TableInfoEvent({
+    $core.Iterable<TableInfoItem>? items,
+  }) {
+    final $result = create();
+    if (items != null) {
+      $result.items.addAll(items);
+    }
+    return $result;
+  }
+  TableInfoEvent._() : super();
+  factory TableInfoEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TableInfoEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TableInfoEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<TableInfoItem>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: TableInfoItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TableInfoEvent clone() => TableInfoEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TableInfoEvent copyWith(void Function(TableInfoEvent) updates) => super.copyWith((message) => updates(message as TableInfoEvent)) as TableInfoEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TableInfoEvent create() => TableInfoEvent._();
+  TableInfoEvent createEmptyInstance() => create();
+  static $pb.PbList<TableInfoEvent> createRepeated() => $pb.PbList<TableInfoEvent>();
+  @$core.pragma('dart2js:noInline')
+  static TableInfoEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TableInfoEvent>(create);
+  static TableInfoEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<TableInfoItem> get items => $_getList(0);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -15,7 +15,6 @@ import 'package:seating_generator_web/ui/main/main_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
-import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';

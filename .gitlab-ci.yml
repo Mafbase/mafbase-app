@@ -17,7 +17,7 @@ build_android_app:
   needs:
     - test
     - code_quality
-  image: "instrumentisto/flutter:3.29.2-androidsdk35-r0"
+  image: "instrumentisto/flutter:3.38.3-androidsdk35-r0"
   when: manual
   tags:
     - docker
@@ -79,7 +79,7 @@ build_job:
     - docker push "$REGISTRY_HOST/seating-generator-flutter:latest"
 
 sentry-upload:
-  image: "instrumentisto/flutter:3.29.2-androidsdk35-r0"
+  image: "instrumentisto/flutter:3.38.3-androidsdk35-r0"
   needs:
     - build_job
   rules:
@@ -96,7 +96,7 @@ code_quality:
   stage: test
   tags:
     - docker
-  image: "instrumentisto/flutter:3.29.2-androidsdk35-r0"
+  image: "instrumentisto/flutter:3.38.3-androidsdk35-r0"
   before_script:
     - flutter pub global activate dart_code_metrics
     - export PATH="$PATH:$HOME/.pub-cache/bin"
@@ -110,7 +110,7 @@ test:
   stage: test
   tags:
     - docker
-  image: "instrumentisto/flutter:3.29.2-androidsdk35-r0"
+  image: "instrumentisto/flutter:3.38.3-androidsdk35-r0"
   before_script:
     - apt-get update
     - apt-get install -y lcov

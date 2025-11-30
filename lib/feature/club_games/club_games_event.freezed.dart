@@ -17,20 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ClubGamesEvent {
   int get clubId => throw _privateConstructorUsedError;
-  DateTimeRange get range => throw _privateConstructorUsedError;
+  DateTimeRange<DateTime> get range => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int clubId, DateTimeRange range) init,
+    required TResult Function(int clubId, DateTimeRange<DateTime> range) init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int clubId, DateTimeRange range)? init,
+    TResult? Function(int clubId, DateTimeRange<DateTime> range)? init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int clubId, DateTimeRange range)? init,
+    TResult Function(int clubId, DateTimeRange<DateTime> range)? init,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,7 +64,7 @@ abstract class $ClubGamesEventCopyWith<$Res> {
           ClubGamesEvent value, $Res Function(ClubGamesEvent) then) =
       _$ClubGamesEventCopyWithImpl<$Res, ClubGamesEvent>;
   @useResult
-  $Res call({int clubId, DateTimeRange range});
+  $Res call({int clubId, DateTimeRange<DateTime> range});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class _$ClubGamesEventCopyWithImpl<$Res, $Val extends ClubGamesEvent>
       range: null == range
           ? _value.range
           : range // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange,
+              as DateTimeRange<DateTime>,
     ) as $Val);
   }
 }
@@ -106,7 +106,7 @@ abstract class _$$ClubGamesEventInitImplCopyWith<$Res>
       __$$ClubGamesEventInitImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int clubId, DateTimeRange range});
+  $Res call({int clubId, DateTimeRange<DateTime> range});
 }
 
 /// @nodoc
@@ -133,7 +133,7 @@ class __$$ClubGamesEventInitImplCopyWithImpl<$Res>
       range: null == range
           ? _value.range
           : range // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange,
+              as DateTimeRange<DateTime>,
     ));
   }
 }
@@ -146,7 +146,7 @@ class _$ClubGamesEventInitImpl implements ClubGamesEventInit {
   @override
   final int clubId;
   @override
-  final DateTimeRange range;
+  final DateTimeRange<DateTime> range;
 
   @override
   String toString() {
@@ -177,7 +177,7 @@ class _$ClubGamesEventInitImpl implements ClubGamesEventInit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int clubId, DateTimeRange range) init,
+    required TResult Function(int clubId, DateTimeRange<DateTime> range) init,
   }) {
     return init(clubId, range);
   }
@@ -185,7 +185,7 @@ class _$ClubGamesEventInitImpl implements ClubGamesEventInit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int clubId, DateTimeRange range)? init,
+    TResult? Function(int clubId, DateTimeRange<DateTime> range)? init,
   }) {
     return init?.call(clubId, range);
   }
@@ -193,7 +193,7 @@ class _$ClubGamesEventInitImpl implements ClubGamesEventInit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int clubId, DateTimeRange range)? init,
+    TResult Function(int clubId, DateTimeRange<DateTime> range)? init,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -234,12 +234,12 @@ class _$ClubGamesEventInitImpl implements ClubGamesEventInit {
 abstract class ClubGamesEventInit implements ClubGamesEvent {
   const factory ClubGamesEventInit(
       {required final int clubId,
-      required final DateTimeRange range}) = _$ClubGamesEventInitImpl;
+      required final DateTimeRange<DateTime> range}) = _$ClubGamesEventInitImpl;
 
   @override
   int get clubId;
   @override
-  DateTimeRange get range;
+  DateTimeRange<DateTime> get range;
 
   /// Create a copy of ClubGamesEvent
   /// with the given fields replaced by the non-null parameter values.

@@ -102,9 +102,7 @@ class TournamentPage extends StatefulWidget {
 }
 
 class _TournamentPageState extends CustomState<TournamentPage>
-    with
-        EffectListener<TournamentPageEffect, TournamentPageState,
-            TournamentPageBloc, TournamentPage> {
+    with EffectListener<TournamentPageEffect, TournamentPageState, TournamentPageBloc, TournamentPage> {
   void openFinalPlayersDialog(TournamentPageState state) {
     FinalPlayersDialog.open(
       context: context,
@@ -126,34 +124,35 @@ class _TournamentPageState extends CustomState<TournamentPage>
     return Stack(
       children: [
         Positioned.fill(child: widget.child),
-        Positioned(
-          bottom: 8,
-          right: 8,
-          child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
-            builder: (context, state) => PopupMenuButton<MenuItemModel>(
-              itemBuilder: (_) => menuItems(state)
-                  .map<PopupMenuEntry<MenuItemModel>>(
-                    (e) => PopupMenuItem<MenuItemModel>(
-                      value: e,
-                      onTap: e.onTap,
-                      child: Text(e.text),
-                    ),
-                  )
-                  .toList(),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: context.theme.darkBlueColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: const EdgeInsets.all(16),
-                child: const Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
+        if (!context.watch<TournamentPageBloc>().state.isLoading && !context.watch<SeatingPageBloc>().state.isLoading)
+          Positioned(
+            bottom: 8,
+            right: 8,
+            child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
+              builder: (context, state) => PopupMenuButton<MenuItemModel>(
+                itemBuilder: (_) => menuItems(state, listen: false)
+                    .map<PopupMenuEntry<MenuItemModel>>(
+                      (e) => PopupMenuItem<MenuItemModel>(
+                        value: e,
+                        onTap: e.onTap,
+                        child: Text(e.text),
+                      ),
+                    )
+                    .toList(),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: context.theme.darkBlueColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: const Icon(
+                    Icons.more_vert,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }
@@ -165,7 +164,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
         Expanded(child: widget.child),
         BlocBuilder<TournamentPageBloc, TournamentPageState>(
           builder: (context, state) => TournamentMenu(
-            items: menuItems(state),
+            items: menuItems(state, listen: true),
           ),
         ),
       ],
@@ -186,19 +185,25 @@ class _TournamentPageState extends CustomState<TournamentPage>
     );
   }
 
-  List<MenuItemModel> menuItems(TournamentPageState state) {
+  List<MenuItemModel> menuItems(
+    TournamentPageState state, {
+    required bool listen,
+  }) {
     final showBill = context.read<AuthNotifier>().value.mapOrNull(
               authorized: (model) => !model.hideBilling,
             ) ??
         true;
 
+    if (listen) {
+      context.watch<SeatingPageBloc>();
+      context.watch<TournamentPageBloc>();
+    }
+
     return [
       MenuItemModel(
         text: context.locale.tournamentPageListOfPlayers,
         onTap: () {
-          context
-              .read<TournamentPageBloc>()
-              .add(const TournamentPageEvent.playersListTapped());
+          context.read<TournamentPageBloc>().add(const TournamentPageEvent.playersListTapped());
         },
       ),
       if (state.isMyTournament)
@@ -213,17 +218,14 @@ class _TournamentPageState extends CustomState<TournamentPage>
       MenuItemModel(
         text: context.locale.seating,
         onTap: () {
-          context
-              .read<TournamentPageBloc>()
-              .add(const TournamentPageEvent.openSeatingPage());
+          context.read<TournamentPageBloc>().add(const TournamentPageEvent.openSeatingPage());
         },
       ),
       if (state.isMyTournament && !state.isLoading)
         MenuItemModel(
           text: context.locale.tournamentSettingsTitle,
           onTap: () async {
-            final oldSettings =
-                context.read<TournamentPageBloc>().state.settings;
+            final oldSettings = context.read<TournamentPageBloc>().state.settings;
             final settings = await TournamentSettingsDialog.open(
               context: context,
               initValue: oldSettings,
@@ -241,9 +243,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
       MenuItemModel(
         text: 'Таблица',
         onTap: () {
-          context
-              .read<TournamentPageBloc>()
-              .add(const TournamentPageEvent.openRating());
+          context.read<TournamentPageBloc>().add(const TournamentPageEvent.openRating());
         },
       ),
       if (state.billedTranslation && state.isMyTournament && !state.isLoading)
@@ -289,16 +289,12 @@ class _TournamentPageState extends CustomState<TournamentPage>
           },
         ),
       if (context.read<SeatingPageBloc>().state.games.length case int games)
-        if (state.isMyTournament &&
-            state.notificationEnabled &&
-            !context.read<SeatingPageBloc>().state.isLoading) ...[
+        if (state.isMyTournament && state.notificationEnabled && !context.read<SeatingPageBloc>().state.isLoading) ...[
           MenuItemModel(
             text: 'Оповещение об игре',
             onTap: () {
-              StartGameInfoDialog.show(
-                context: context,
-                maxGame: games,
-              ).then((result) {
+              StartGameInfoDialog.show(context: context, maxGame: games, tournamentId: widget.tournamentId.toString())
+                  .then((result) {
                 if (result == null || !mounted) {
                   return;
                 }
@@ -320,9 +316,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
                   return;
                 }
 
-                context
-                    .read<TournamentPageBloc>()
-                    .add(TournamentPageEvent.customTextInfo(text: text));
+                context.read<TournamentPageBloc>().add(TournamentPageEvent.customTextInfo(text: text));
               });
             },
           ),

@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:seating_generator_web/app/di/storage_factory.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/storages/prefer_add_game_settings_storage.dart';

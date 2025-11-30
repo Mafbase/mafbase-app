@@ -1107,3 +1107,30 @@ const TranslationKeyEventOut$json = {
 final $typed_data.Uint8List translationKeyEventOutDescriptor = $convert.base64Decode(
     'ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5');
 
+@$core.Deprecated('Use tableInfoItemDescriptor instead')
+const TableInfoItem$json = {
+  '1': 'TableInfoItem',
+  '2': [
+    {'1': 'table', '3': 1, '4': 1, '5': 5, '10': 'table'},
+    {'1': 'info', '3': 2, '4': 1, '5': 9, '10': 'info'},
+  ],
+};
+
+/// Descriptor for `TableInfoItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tableInfoItemDescriptor = $convert.base64Decode(
+    'Cg1UYWJsZUluZm9JdGVtEhQKBXRhYmxlGAEgASgFUgV0YWJsZRISCgRpbmZvGAIgASgJUgRpbm'
+    'Zv');
+
+@$core.Deprecated('Use tableInfoEventDescriptor instead')
+const TableInfoEvent$json = {
+  '1': 'TableInfoEvent',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.generated.TableInfoItem', '10': 'items'},
+  ],
+};
+
+/// Descriptor for `TableInfoEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tableInfoEventDescriptor = $convert.base64Decode(
+    'Cg5UYWJsZUluZm9FdmVudBIuCgVpdGVtcxgBIAMoCzIYLmdlbmVyYXRlZC5UYWJsZUluZm9JdG'
+    'VtUgVpdGVtcw==');
+

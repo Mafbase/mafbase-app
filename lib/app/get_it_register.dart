@@ -71,6 +71,8 @@ import 'package:seating_generator_web/domain/repositories/tournament_edit_reposi
 import 'package:seating_generator_web/domain/repositories/tournament_result_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
+import 'package:seating_generator_web/feature/info_table_description/data/info_table_description_repository_impl.dart';
+import 'package:seating_generator_web/feature/info_table_description/domain/info_table_description_repository.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
@@ -103,9 +105,8 @@ const _useHiveStorage = true;
 void registerGetIt({bool isIntegrationTest = false}) {
   getIt
     ..registerLazySingleton<TokenStorage>(
-      () => isIntegrationTest
-          ? TokenInMemoryStorage()
-          : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl()),
+      () =>
+          isIntegrationTest ? TokenInMemoryStorage() : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl()),
     )
     ..registerLazySingleton<CredentialStorage>(
       () => CredentialSecureStorageImpl(),
@@ -319,8 +320,7 @@ void registerSharedGetIt() {
         context,
       ),
     )
-    ..registerFactoryParam<TranslationContentBloc, BuildContext?,
-        TranslationContentBlocParams>(
+    ..registerFactoryParam<TranslationContentBloc, BuildContext?, TranslationContentBlocParams>(
       (context, params) => TranslationContentBloc(params, context),
     )
     ..registerFactoryParam<ProfileDialogBloc, BuildContext?, PlayerModel>(
@@ -379,8 +379,7 @@ void registerSharedGetIt() {
         context,
       ),
     )
-    ..registerFactoryParam<TranslationControlBloc, BuildContext?,
-        TranslationContentBlocParams>(
+    ..registerFactoryParam<TranslationControlBloc, BuildContext?, TranslationContentBlocParams>(
       (context, params) => TranslationControlBloc(params),
     )
     ..registerFactoryParam<TournamentsBloc, BuildContext?, dynamic>(
@@ -403,13 +402,8 @@ void registerSharedGetIt() {
         tournamentId: tournamentId,
       ),
     )
-    ..registerFactoryParam<RatingBloc, BuildContext?, dynamic>(
-      (context, _) => RatingBloc(context),
-    )
-    ..registerLazySingleton<GetSettingsInteractor>(
-      () => GetSettingsInteractor(getIt()),
-    )
-    ..registerLazySingleton<UpdateSettingsInteractor>(
-      () => UpdateSettingsInteractor(getIt()),
-    );
+    ..registerFactoryParam<RatingBloc, BuildContext?, dynamic>((context, _) => RatingBloc(context))
+    ..registerLazySingleton<GetSettingsInteractor>(() => GetSettingsInteractor(getIt()))
+    ..registerLazySingleton<UpdateSettingsInteractor>(() => UpdateSettingsInteractor(getIt()))
+    ..registerLazySingleton<InfoTableDescriptionRepository>(() => InfoTableDescriptionRepositoryImpl(getIt()));
 }

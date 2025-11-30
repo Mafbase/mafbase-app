@@ -44,50 +44,52 @@ class _ClubBillDialogState extends State<ClubBillDialog> {
       child: Container(
         padding: const EdgeInsets.all(20),
         constraints: const BoxConstraints(maxWidth: 600),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.billedFor != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text(
-                  context.locale.billedFor(
-                    DateFormat(
-                      "dd MMMM yyyy",
-                      Localizations.localeOf(context).languageCode,
-                    ).format(widget.billedFor!),
+        child: RadioGroup(
+          groupValue: groupValue,
+          onChanged: (value) {
+            setState(() {
+              groupValue = value;
+            });
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.billedFor != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    context.locale.billedFor(
+                      DateFormat(
+                        "dd MMMM yyyy",
+                        Localizations.localeOf(context).languageCode,
+                      ).format(widget.billedFor!),
+                    ),
                   ),
                 ),
+              ...ClubBillOptions.values.map(
+                (value) => RadioListTile(
+                  title: Text(
+                    context.locale.billClubDialogOption(value.days),
+                  ),
+                  subtitle: Text(
+                    "${value.amount.floor()}₽",
+                  ),
+                  value: value,
+                ),
               ),
-            ...ClubBillOptions.values.map(
-              (value) => RadioListTile(
-                title: Text(
-                  context.locale.billClubDialogOption(value.days),
-                ),
-                subtitle: Text(
-                  "${value.amount.floor()}₽",
-                ),
-                value: value,
-                groupValue: groupValue,
-                onChanged: (value) {
-                  setState(() {
-                    groupValue = value;
-                  });
+              const SizedBox(height: 20),
+              CustomButton(
+                text: groupValue == null
+                    ? context.locale.billClubButtonDisabledText
+                    : context.locale
+                        .billClubButtonText(groupValue!.amount.floor()),
+                disabled: groupValue == null,
+                onTap: () {
+                  Navigator.of(context).pop(groupValue);
                 },
               ),
-            ),
-            const SizedBox(height: 20),
-            CustomButton(
-              text: groupValue == null
-                  ? context.locale.billClubButtonDisabledText
-                  : context.locale
-                      .billClubButtonText(groupValue!.amount.floor()),
-              disabled: groupValue == null,
-              onTap: () {
-                Navigator.of(context).pop(groupValue);
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

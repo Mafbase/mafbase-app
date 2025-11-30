@@ -39,7 +39,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get insertSeatingSuccess => 'Рассадка успешно сохранена';
 
   @override
-  String get insertSeatingError => 'Произошла какая-то ошибка при сохранении рассадки';
+  String get insertSeatingError =>
+      'Произошла какая-то ошибка при сохранении рассадки';
 
   @override
   String get send => 'Отправить';
@@ -114,7 +115,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get yourEmail => 'Ваша электронная почта';
 
   @override
-  String get wrongEmail => 'Профиль с такой почтой уже существует / Неверная почта';
+  String get wrongEmail =>
+      'Профиль с такой почтой уже существует / Неверная почта';
 
   @override
   String get enterPassword => 'Введите пароль';
@@ -138,7 +140,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sendOneMoreCode => 'Отправить код повторно';
 
   @override
-  String get verificationText => 'На вашу почту отправлено письмо с кодом для подтверждения регистрации, введите его ниже.\n';
+  String get verificationText =>
+      'На вашу почту отправлено письмо с кодом для подтверждения регистрации, введите его ниже.\n';
 
   @override
   String get confirmRegistration => 'Подтверждение регистрации';
@@ -227,7 +230,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get draw => 'Ничья';
 
   @override
-  String get tournamentSettingsUpdateSuccess => 'Настройки турнира успешно обновлены';
+  String get tournamentSettingsUpdateSuccess =>
+      'Настройки турнира успешно обновлены';
 
   @override
   String get clubsHeader => 'Клубы';

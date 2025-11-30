@@ -1,12 +1,11 @@
-//ignore: avoid_web_libraries_in_flutter
-import 'dart:html' show AnchorElement;
 import 'dart:typed_data';
+import 'package:web/web.dart' as web;
 
 Future<void> downloadFile({
   required Uint8List bytes,
   required String fileName,
 }) async =>
-    AnchorElement()
+    web.HTMLAnchorElement()
       ..href = Uri.dataFromBytes(bytes).toString()
       ..download = fileName
       ..click();
