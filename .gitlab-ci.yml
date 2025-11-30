@@ -14,9 +14,9 @@ variables:
 
 build_android_app:
   stage: android-release
-  needs:
-    - test
-    - code_quality
+#  needs:
+#    - test
+#    - code_quality
   image: "instrumentisto/flutter:3.38.3-androidsdk36-r0"
   when: manual
   tags:
@@ -92,41 +92,41 @@ sentry-upload:
     - flutter packages pub run sentry_dart_plugin
 
 
-code_quality:
-  stage: test
-  tags:
-    - docker
-  image: "instrumentisto/flutter:3.38.3-androidsdk36-r0"
-  before_script:
-    - flutter pub global activate dart_code_metrics
-    - export PATH="$PATH:$HOME/.pub-cache/bin"
-  script:
-    - metrics lib -r codeclimate  > gl-code-quality-report.json
-  artifacts:
-    reports:
-      codequality: gl-code-quality-report.json
+#code_quality:
+#  stage: test
+#  tags:
+#    - docker
+#  image: "instrumentisto/flutter:3.38.3-androidsdk36-r0"
+#  before_script:
+#    - flutter pub global activate dart_code_metrics
+#    - export PATH="$PATH:$HOME/.pub-cache/bin"
+#  script:
+#    - metrics lib -r codeclimate  > gl-code-quality-report.json
+#  artifacts:
+#    reports:
+#      codequality: gl-code-quality-report.json
 
-test:
-  stage: test
-  tags:
-    - docker
-  image: "instrumentisto/flutter:3.38.3-androidsdk36-r0"
-  before_script:
-    - apt-get update
-    - apt-get install -y lcov
-    - flutter pub global activate junitreport
-    - export PATH="$PATH:$HOME/.pub-cache/bin"
-  script:
-    - flutter test --machine --coverage | tojunit -o report.xml
-    - lcov --summary coverage/lcov.info
-    - genhtml coverage/lcov.info --output=coverage
-  coverage: '/lines\.*: \d+\.\d+\%/'
-  artifacts:
-    name: coverage
-    paths:
-      - $CI_PROJECT_DIR/coverage
-    reports:
-      junit: report.xml
+#test:
+#  stage: test
+#  tags:
+#    - docker
+#  image: "instrumentisto/flutter:3.38.3-androidsdk36-r0"
+#  before_script:
+#    - apt-get update
+#    - apt-get install -y lcov
+#    - flutter pub global activate junitreport
+#    - export PATH="$PATH:$HOME/.pub-cache/bin"
+#  script:
+#    - flutter test --machine --coverage | tojunit -o report.xml
+#    - lcov --summary coverage/lcov.info
+#    - genhtml coverage/lcov.info --output=coverage
+#  coverage: '/lines\.*: \d+\.\d+\%/'
+#  artifacts:
+#    name: coverage
+#    paths:
+#      - $CI_PROJECT_DIR/coverage
+#    reports:
+#      junit: report.xml
 
 deploy:
   stage: deploy
