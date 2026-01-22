@@ -9,6 +9,7 @@ import 'package:seating_generator_web/data/requests/clubs_my_request.dart';
 import 'package:seating_generator_web/data/requests/delete_game_request.dart';
 import 'package:seating_generator_web/data/requests/edit_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
+import 'package:seating_generator_web/data/requests/get_club_owners_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_request.dart';
 import 'package:seating_generator_web/data/requests/get_hide_date_request.dart';
@@ -38,6 +39,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
     required int clubId,
     required DateTimeRange range,
   }) {
+    GetClubOwnersRequest(clubId: clubId).execute(client);
     return GetClubRatingRequest(range: range, clubId: clubId)
         .execute(client)
         .then((event) {
