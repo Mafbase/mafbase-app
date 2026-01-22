@@ -4255,6 +4255,50 @@ class TournamentOwnersEventOut extends $pb.GeneratedMessage {
   $pb.PbList<User> get owners => $_getList(0);
 }
 
+class ClubOwnersEventOut extends $pb.GeneratedMessage {
+  factory ClubOwnersEventOut({
+    $core.Iterable<User>? owners,
+  }) {
+    final $result = create();
+    if (owners != null) {
+      $result.owners.addAll(owners);
+    }
+    return $result;
+  }
+  ClubOwnersEventOut._() : super();
+  factory ClubOwnersEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ClubOwnersEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClubOwnersEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<User>(1, _omitFieldNames ? '' : 'owners', $pb.PbFieldType.PM, subBuilder: User.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ClubOwnersEventOut clone() => ClubOwnersEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ClubOwnersEventOut copyWith(void Function(ClubOwnersEventOut) updates) => super.copyWith((message) => updates(message as ClubOwnersEventOut)) as ClubOwnersEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ClubOwnersEventOut create() => ClubOwnersEventOut._();
+  ClubOwnersEventOut createEmptyInstance() => create();
+  static $pb.PbList<ClubOwnersEventOut> createRepeated() => $pb.PbList<ClubOwnersEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static ClubOwnersEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubOwnersEventOut>(create);
+  static ClubOwnersEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<User> get owners => $_getList(0);
+}
+
 class UpdateOwnerEvent extends $pb.GeneratedMessage {
   factory UpdateOwnerEvent({
     $core.String? email,
@@ -4461,6 +4505,422 @@ class TableInfoEvent extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $pb.PbList<TableInfoItem> get items => $_getList(0);
+}
+
+class FantasyParticipantsEventOut extends $pb.GeneratedMessage {
+  factory FantasyParticipantsEventOut({
+    $core.Iterable<User>? participants,
+  }) {
+    final $result = create();
+    if (participants != null) {
+      $result.participants.addAll(participants);
+    }
+    return $result;
+  }
+  FantasyParticipantsEventOut._() : super();
+  factory FantasyParticipantsEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FantasyParticipantsEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyParticipantsEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<User>(1, _omitFieldNames ? '' : 'participants', $pb.PbFieldType.PM, subBuilder: User.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FantasyParticipantsEventOut clone() => FantasyParticipantsEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FantasyParticipantsEventOut copyWith(void Function(FantasyParticipantsEventOut) updates) => super.copyWith((message) => updates(message as FantasyParticipantsEventOut)) as FantasyParticipantsEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FantasyParticipantsEventOut create() => FantasyParticipantsEventOut._();
+  FantasyParticipantsEventOut createEmptyInstance() => create();
+  static $pb.PbList<FantasyParticipantsEventOut> createRepeated() => $pb.PbList<FantasyParticipantsEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static FantasyParticipantsEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyParticipantsEventOut>(create);
+  static FantasyParticipantsEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<User> get participants => $_getList(0);
+}
+
+class SetFantasyParticipantEvent extends $pb.GeneratedMessage {
+  factory SetFantasyParticipantEvent({
+    $core.String? email,
+  }) {
+    final $result = create();
+    if (email != null) {
+      $result.email = email;
+    }
+    return $result;
+  }
+  SetFantasyParticipantEvent._() : super();
+  factory SetFantasyParticipantEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetFantasyParticipantEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetFantasyParticipantEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SetFantasyParticipantEvent clone() => SetFantasyParticipantEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetFantasyParticipantEvent copyWith(void Function(SetFantasyParticipantEvent) updates) => super.copyWith((message) => updates(message as SetFantasyParticipantEvent)) as SetFantasyParticipantEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetFantasyParticipantEvent create() => SetFantasyParticipantEvent._();
+  SetFantasyParticipantEvent createEmptyInstance() => create();
+  static $pb.PbList<SetFantasyParticipantEvent> createRepeated() => $pb.PbList<SetFantasyParticipantEvent>();
+  @$core.pragma('dart2js:noInline')
+  static SetFantasyParticipantEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetFantasyParticipantEvent>(create);
+  static SetFantasyParticipantEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => $_clearField(1);
+}
+
+class FantasyRatingRow extends $pb.GeneratedMessage {
+  factory FantasyRatingRow({
+    $core.String? nickname,
+    $core.Iterable<FantasyPredictionItem>? predictions,
+    $core.int? totalPoints,
+  }) {
+    final $result = create();
+    if (nickname != null) {
+      $result.nickname = nickname;
+    }
+    if (predictions != null) {
+      $result.predictions.addAll(predictions);
+    }
+    if (totalPoints != null) {
+      $result.totalPoints = totalPoints;
+    }
+    return $result;
+  }
+  FantasyRatingRow._() : super();
+  factory FantasyRatingRow.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FantasyRatingRow.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyRatingRow', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'nickname')
+    ..pc<FantasyPredictionItem>(2, _omitFieldNames ? '' : 'predictions', $pb.PbFieldType.PM, subBuilder: FantasyPredictionItem.create)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'totalPoints', $pb.PbFieldType.O3, protoName: 'totalPoints')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FantasyRatingRow clone() => FantasyRatingRow()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FantasyRatingRow copyWith(void Function(FantasyRatingRow) updates) => super.copyWith((message) => updates(message as FantasyRatingRow)) as FantasyRatingRow;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FantasyRatingRow create() => FantasyRatingRow._();
+  FantasyRatingRow createEmptyInstance() => create();
+  static $pb.PbList<FantasyRatingRow> createRepeated() => $pb.PbList<FantasyRatingRow>();
+  @$core.pragma('dart2js:noInline')
+  static FantasyRatingRow getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyRatingRow>(create);
+  static FantasyRatingRow? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get nickname => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set nickname($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasNickname() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNickname() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<FantasyPredictionItem> get predictions => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $core.int get totalPoints => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set totalPoints($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasTotalPoints() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalPoints() => $_clearField(3);
+}
+
+class FantasyPredictionItem extends $pb.GeneratedMessage {
+  factory FantasyPredictionItem({
+    $core.int? gameNumber,
+    GameWin? prediction,
+    GameWin? actualResult,
+    $core.int? points,
+  }) {
+    final $result = create();
+    if (gameNumber != null) {
+      $result.gameNumber = gameNumber;
+    }
+    if (prediction != null) {
+      $result.prediction = prediction;
+    }
+    if (actualResult != null) {
+      $result.actualResult = actualResult;
+    }
+    if (points != null) {
+      $result.points = points;
+    }
+    return $result;
+  }
+  FantasyPredictionItem._() : super();
+  factory FantasyPredictionItem.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FantasyPredictionItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyPredictionItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'gameNumber', $pb.PbFieldType.O3, protoName: 'gameNumber')
+    ..e<GameWin>(2, _omitFieldNames ? '' : 'prediction', $pb.PbFieldType.OE, defaultOrMaker: GameWin.city, valueOf: GameWin.valueOf, enumValues: GameWin.values)
+    ..e<GameWin>(3, _omitFieldNames ? '' : 'actualResult', $pb.PbFieldType.OE, protoName: 'actualResult', defaultOrMaker: GameWin.city, valueOf: GameWin.valueOf, enumValues: GameWin.values)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'points', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FantasyPredictionItem clone() => FantasyPredictionItem()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FantasyPredictionItem copyWith(void Function(FantasyPredictionItem) updates) => super.copyWith((message) => updates(message as FantasyPredictionItem)) as FantasyPredictionItem;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FantasyPredictionItem create() => FantasyPredictionItem._();
+  FantasyPredictionItem createEmptyInstance() => create();
+  static $pb.PbList<FantasyPredictionItem> createRepeated() => $pb.PbList<FantasyPredictionItem>();
+  @$core.pragma('dart2js:noInline')
+  static FantasyPredictionItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyPredictionItem>(create);
+  static FantasyPredictionItem? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get gameNumber => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set gameNumber($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGameNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGameNumber() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  GameWin get prediction => $_getN(1);
+  @$pb.TagNumber(2)
+  set prediction(GameWin v) { $_setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPrediction() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrediction() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  GameWin get actualResult => $_getN(2);
+  @$pb.TagNumber(3)
+  set actualResult(GameWin v) { $_setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasActualResult() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearActualResult() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get points => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set points($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPoints() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPoints() => $_clearField(4);
+}
+
+class FantasyRatingEventOut extends $pb.GeneratedMessage {
+  factory FantasyRatingEventOut({
+    $core.Iterable<FantasyRatingRow>? rows,
+  }) {
+    final $result = create();
+    if (rows != null) {
+      $result.rows.addAll(rows);
+    }
+    return $result;
+  }
+  FantasyRatingEventOut._() : super();
+  factory FantasyRatingEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FantasyRatingEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyRatingEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<FantasyRatingRow>(1, _omitFieldNames ? '' : 'rows', $pb.PbFieldType.PM, subBuilder: FantasyRatingRow.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FantasyRatingEventOut clone() => FantasyRatingEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FantasyRatingEventOut copyWith(void Function(FantasyRatingEventOut) updates) => super.copyWith((message) => updates(message as FantasyRatingEventOut)) as FantasyRatingEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FantasyRatingEventOut create() => FantasyRatingEventOut._();
+  FantasyRatingEventOut createEmptyInstance() => create();
+  static $pb.PbList<FantasyRatingEventOut> createRepeated() => $pb.PbList<FantasyRatingEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static FantasyRatingEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyRatingEventOut>(create);
+  static FantasyRatingEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<FantasyRatingRow> get rows => $_getList(0);
+}
+
+class SetFantasyPredictionEvent extends $pb.GeneratedMessage {
+  factory SetFantasyPredictionEvent({
+    GameWin? prediction,
+  }) {
+    final $result = create();
+    if (prediction != null) {
+      $result.prediction = prediction;
+    }
+    return $result;
+  }
+  SetFantasyPredictionEvent._() : super();
+  factory SetFantasyPredictionEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetFantasyPredictionEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetFantasyPredictionEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..e<GameWin>(1, _omitFieldNames ? '' : 'prediction', $pb.PbFieldType.OE, defaultOrMaker: GameWin.city, valueOf: GameWin.valueOf, enumValues: GameWin.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SetFantasyPredictionEvent clone() => SetFantasyPredictionEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetFantasyPredictionEvent copyWith(void Function(SetFantasyPredictionEvent) updates) => super.copyWith((message) => updates(message as SetFantasyPredictionEvent)) as SetFantasyPredictionEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetFantasyPredictionEvent create() => SetFantasyPredictionEvent._();
+  SetFantasyPredictionEvent createEmptyInstance() => create();
+  static $pb.PbList<SetFantasyPredictionEvent> createRepeated() => $pb.PbList<SetFantasyPredictionEvent>();
+  @$core.pragma('dart2js:noInline')
+  static SetFantasyPredictionEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetFantasyPredictionEvent>(create);
+  static SetFantasyPredictionEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  GameWin get prediction => $_getN(0);
+  @$pb.TagNumber(1)
+  set prediction(GameWin v) { $_setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPrediction() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPrediction() => $_clearField(1);
+}
+
+class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
+  factory FantasyCurrentGameEventOut({
+    $core.int? gameNumber,
+    $core.bool? canPredict,
+  }) {
+    final $result = create();
+    if (gameNumber != null) {
+      $result.gameNumber = gameNumber;
+    }
+    if (canPredict != null) {
+      $result.canPredict = canPredict;
+    }
+    return $result;
+  }
+  FantasyCurrentGameEventOut._() : super();
+  factory FantasyCurrentGameEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FantasyCurrentGameEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyCurrentGameEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'gameNumber', $pb.PbFieldType.O3, protoName: 'gameNumber')
+    ..aOB(2, _omitFieldNames ? '' : 'canPredict', protoName: 'canPredict')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FantasyCurrentGameEventOut clone() => FantasyCurrentGameEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FantasyCurrentGameEventOut copyWith(void Function(FantasyCurrentGameEventOut) updates) => super.copyWith((message) => updates(message as FantasyCurrentGameEventOut)) as FantasyCurrentGameEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FantasyCurrentGameEventOut create() => FantasyCurrentGameEventOut._();
+  FantasyCurrentGameEventOut createEmptyInstance() => create();
+  static $pb.PbList<FantasyCurrentGameEventOut> createRepeated() => $pb.PbList<FantasyCurrentGameEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static FantasyCurrentGameEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyCurrentGameEventOut>(create);
+  static FantasyCurrentGameEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get gameNumber => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set gameNumber($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGameNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGameNumber() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get canPredict => $_getBF(1);
+  @$pb.TagNumber(2)
+  set canPredict($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCanPredict() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCanPredict() => $_clearField(2);
 }
 
 

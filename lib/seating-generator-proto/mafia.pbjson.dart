@@ -1083,6 +1083,19 @@ final $typed_data.Uint8List tournamentOwnersEventOutDescriptor = $convert.base64
     'ChhUb3VybmFtZW50T3duZXJzRXZlbnRPdXQSJwoGb3duZXJzGAEgAygLMg8uZ2VuZXJhdGVkLl'
     'VzZXJSBm93bmVycw==');
 
+@$core.Deprecated('Use clubOwnersEventOutDescriptor instead')
+const ClubOwnersEventOut$json = {
+  '1': 'ClubOwnersEventOut',
+  '2': [
+    {'1': 'owners', '3': 1, '4': 3, '5': 11, '6': '.generated.User', '10': 'owners'},
+  ],
+};
+
+/// Descriptor for `ClubOwnersEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List clubOwnersEventOutDescriptor = $convert.base64Decode(
+    'ChJDbHViT3duZXJzRXZlbnRPdXQSJwoGb3duZXJzGAEgAygLMg8uZ2VuZXJhdGVkLlVzZXJSBm'
+    '93bmVycw==');
+
 @$core.Deprecated('Use updateOwnerEventDescriptor instead')
 const UpdateOwnerEvent$json = {
   '1': 'UpdateOwnerEvent',
@@ -1133,4 +1146,108 @@ const TableInfoEvent$json = {
 final $typed_data.Uint8List tableInfoEventDescriptor = $convert.base64Decode(
     'Cg5UYWJsZUluZm9FdmVudBIuCgVpdGVtcxgBIAMoCzIYLmdlbmVyYXRlZC5UYWJsZUluZm9JdG'
     'VtUgVpdGVtcw==');
+
+@$core.Deprecated('Use fantasyParticipantsEventOutDescriptor instead')
+const FantasyParticipantsEventOut$json = {
+  '1': 'FantasyParticipantsEventOut',
+  '2': [
+    {'1': 'participants', '3': 1, '4': 3, '5': 11, '6': '.generated.User', '10': 'participants'},
+  ],
+};
+
+/// Descriptor for `FantasyParticipantsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fantasyParticipantsEventOutDescriptor = $convert.base64Decode(
+    'ChtGYW50YXN5UGFydGljaXBhbnRzRXZlbnRPdXQSMwoMcGFydGljaXBhbnRzGAEgAygLMg8uZ2'
+    'VuZXJhdGVkLlVzZXJSDHBhcnRpY2lwYW50cw==');
+
+@$core.Deprecated('Use setFantasyParticipantEventDescriptor instead')
+const SetFantasyParticipantEvent$json = {
+  '1': 'SetFantasyParticipantEvent',
+  '2': [
+    {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `SetFantasyParticipantEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setFantasyParticipantEventDescriptor = $convert.base64Decode(
+    'ChpTZXRGYW50YXN5UGFydGljaXBhbnRFdmVudBIUCgVlbWFpbBgBIAEoCVIFZW1haWw=');
+
+@$core.Deprecated('Use fantasyRatingRowDescriptor instead')
+const FantasyRatingRow$json = {
+  '1': 'FantasyRatingRow',
+  '2': [
+    {'1': 'nickname', '3': 1, '4': 1, '5': 9, '10': 'nickname'},
+    {'1': 'predictions', '3': 2, '4': 3, '5': 11, '6': '.generated.FantasyPredictionItem', '10': 'predictions'},
+    {'1': 'totalPoints', '3': 3, '4': 1, '5': 5, '10': 'totalPoints'},
+  ],
+};
+
+/// Descriptor for `FantasyRatingRow`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fantasyRatingRowDescriptor = $convert.base64Decode(
+    'ChBGYW50YXN5UmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRJCCgtwcmVkaW'
+    'N0aW9ucxgCIAMoCzIgLmdlbmVyYXRlZC5GYW50YXN5UHJlZGljdGlvbkl0ZW1SC3ByZWRpY3Rp'
+    'b25zEiAKC3RvdGFsUG9pbnRzGAMgASgFUgt0b3RhbFBvaW50cw==');
+
+@$core.Deprecated('Use fantasyPredictionItemDescriptor instead')
+const FantasyPredictionItem$json = {
+  '1': 'FantasyPredictionItem',
+  '2': [
+    {'1': 'gameNumber', '3': 1, '4': 1, '5': 5, '10': 'gameNumber'},
+    {'1': 'prediction', '3': 2, '4': 1, '5': 14, '6': '.generated.GameWin', '9': 0, '10': 'prediction', '17': true},
+    {'1': 'actualResult', '3': 3, '4': 1, '5': 14, '6': '.generated.GameWin', '9': 1, '10': 'actualResult', '17': true},
+    {'1': 'points', '3': 4, '4': 1, '5': 5, '10': 'points'},
+  ],
+  '8': [
+    {'1': '_prediction'},
+    {'1': '_actualResult'},
+  ],
+};
+
+/// Descriptor for `FantasyPredictionItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fantasyPredictionItemDescriptor = $convert.base64Decode(
+    'ChVGYW50YXN5UHJlZGljdGlvbkl0ZW0SHgoKZ2FtZU51bWJlchgBIAEoBVIKZ2FtZU51bWJlch'
+    'I3CgpwcmVkaWN0aW9uGAIgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5IAFIKcHJlZGljdGlvbogB'
+    'ARI7CgxhY3R1YWxSZXN1bHQYAyABKA4yEi5nZW5lcmF0ZWQuR2FtZVdpbkgBUgxhY3R1YWxSZX'
+    'N1bHSIAQESFgoGcG9pbnRzGAQgASgFUgZwb2ludHNCDQoLX3ByZWRpY3Rpb25CDwoNX2FjdHVh'
+    'bFJlc3VsdA==');
+
+@$core.Deprecated('Use fantasyRatingEventOutDescriptor instead')
+const FantasyRatingEventOut$json = {
+  '1': 'FantasyRatingEventOut',
+  '2': [
+    {'1': 'rows', '3': 1, '4': 3, '5': 11, '6': '.generated.FantasyRatingRow', '10': 'rows'},
+  ],
+};
+
+/// Descriptor for `FantasyRatingEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fantasyRatingEventOutDescriptor = $convert.base64Decode(
+    'ChVGYW50YXN5UmF0aW5nRXZlbnRPdXQSLwoEcm93cxgBIAMoCzIbLmdlbmVyYXRlZC5GYW50YX'
+    'N5UmF0aW5nUm93UgRyb3dz');
+
+@$core.Deprecated('Use setFantasyPredictionEventDescriptor instead')
+const SetFantasyPredictionEvent$json = {
+  '1': 'SetFantasyPredictionEvent',
+  '2': [
+    {'1': 'prediction', '3': 1, '4': 1, '5': 14, '6': '.generated.GameWin', '10': 'prediction'},
+  ],
+};
+
+/// Descriptor for `SetFantasyPredictionEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setFantasyPredictionEventDescriptor = $convert.base64Decode(
+    'ChlTZXRGYW50YXN5UHJlZGljdGlvbkV2ZW50EjIKCnByZWRpY3Rpb24YASABKA4yEi5nZW5lcm'
+    'F0ZWQuR2FtZVdpblIKcHJlZGljdGlvbg==');
+
+@$core.Deprecated('Use fantasyCurrentGameEventOutDescriptor instead')
+const FantasyCurrentGameEventOut$json = {
+  '1': 'FantasyCurrentGameEventOut',
+  '2': [
+    {'1': 'gameNumber', '3': 1, '4': 1, '5': 5, '10': 'gameNumber'},
+    {'1': 'canPredict', '3': 2, '4': 1, '5': 8, '10': 'canPredict'},
+  ],
+};
+
+/// Descriptor for `FantasyCurrentGameEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fantasyCurrentGameEventOutDescriptor = $convert.base64Decode(
+    'ChpGYW50YXN5Q3VycmVudEdhbWVFdmVudE91dBIeCgpnYW1lTnVtYmVyGAEgASgFUgpnYW1lTn'
+    'VtYmVyEh4KCmNhblByZWRpY3QYAiABKAhSCmNhblByZWRpY3Q=');
 
