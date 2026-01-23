@@ -687,6 +687,144 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Схема ФСМ с минусами'**
   String get minus_fsm_schema;
+
+  /// No description provided for @fantasy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фентези'**
+  String get fantasy;
+
+  /// No description provided for @fantasyRatingEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Рейтинг пока пуст'**
+  String get fantasyRatingEmpty;
+
+  /// No description provided for @fantasyRating.
+  ///
+  /// In ru, this message translates to:
+  /// **'Рейтинг'**
+  String get fantasyRating;
+
+  /// No description provided for @fantasyPoints.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} очков'**
+  String fantasyPoints(int count);
+
+  /// No description provided for @fantasyGame.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игра {number}'**
+  String fantasyGame(int number);
+
+  /// No description provided for @fantasyCurrentGameInfoUnavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Информация о текущей игре недоступна'**
+  String get fantasyCurrentGameInfoUnavailable;
+
+  /// No description provided for @fantasyCurrentGame.
+  ///
+  /// In ru, this message translates to:
+  /// **'Текущая игра'**
+  String get fantasyCurrentGame;
+
+  /// No description provided for @fantasyNotParticipating.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы не допущены к участию в фентези. Обратитесь к администратору турнира для получения доступа.'**
+  String get fantasyNotParticipating;
+
+  /// No description provided for @fantasyYourPrediction.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваше предсказание:'**
+  String get fantasyYourPrediction;
+
+  /// No description provided for @fantasyPredictionTimeExpired.
+  ///
+  /// In ru, this message translates to:
+  /// **'Время для предсказаний истекло'**
+  String get fantasyPredictionTimeExpired;
+
+  /// No description provided for @fantasyParticipants.
+  ///
+  /// In ru, this message translates to:
+  /// **'Участники'**
+  String get fantasyParticipants;
+
+  /// No description provided for @fantasyNoParticipants.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пока не добавлен ни один участник'**
+  String get fantasyNoParticipants;
+
+  /// No description provided for @fantasyAddParticipant.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавление участника'**
+  String get fantasyAddParticipant;
+
+  /// No description provided for @fantasyEmail.
+  ///
+  /// In ru, this message translates to:
+  /// **'Почта'**
+  String get fantasyEmail;
+
+  /// No description provided for @fantasyEmailInvalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите корректный адрес электронной почты'**
+  String get fantasyEmailInvalid;
+
+  /// No description provided for @fantasyRemoveParticipant.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить участника {email}?'**
+  String fantasyRemoveParticipant(String email);
+
+  /// No description provided for @fantasyNoPrediction.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет'**
+  String get fantasyNoPrediction;
+
+  /// No description provided for @fantasyPredictionSeparator.
+  ///
+  /// In ru, this message translates to:
+  /// **' → '**
+  String get fantasyPredictionSeparator;
+
+  /// No description provided for @fantasyPointsShort.
+  ///
+  /// In ru, this message translates to:
+  /// **' очков'**
+  String get fantasyPointsShort;
+
+  /// No description provided for @fantasyStatusDisabled.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отключено'**
+  String get fantasyStatusDisabled;
+
+  /// No description provided for @fantasyStatusEnabledForSelected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включено для выбранных'**
+  String get fantasyStatusEnabledForSelected;
+
+  /// No description provided for @fantasyStatusEnabledForAll.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включено для всех'**
+  String get fantasyStatusEnabledForAll;
+
+  /// No description provided for @fantasyStatusLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Статус фентези'**
+  String get fantasyStatusLabel;
 }
 
 class _AppLocalizationsDelegate

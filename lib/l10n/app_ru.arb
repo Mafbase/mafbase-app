@@ -221,5 +221,72 @@
   "local_time_placeholder": "Выбрать время",
   "rating_schema": "Схема рассчета",
   "old_fsm_schema": "Старая схема ФСМ",
-  "minus_fsm_schema": "Схема ФСМ с минусами"
+  "minus_fsm_schema": "Схема ФСМ с минусами",
+  "fantasy": "Фентези",
+  "@fantasy": {},
+  "fantasyRatingEmpty": "Рейтинг пока пуст",
+  "@fantasyRatingEmpty": {},
+  "fantasyRating": "Рейтинг",
+  "@fantasyRating": {},
+  "fantasyPoints": "{count} очков",
+  "@fantasyPoints": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "fantasyGame": "Игра {number}",
+  "@fantasyGame": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "fantasyCurrentGameInfoUnavailable": "Информация о текущей игре недоступна",
+  "@fantasyCurrentGameInfoUnavailable": {},
+  "fantasyCurrentGame": "Текущая игра",
+  "@fantasyCurrentGame": {},
+  "fantasyNotParticipating": "Вы не допущены к участию в фентези. Обратитесь к администратору турнира для получения доступа.",
+  "@fantasyNotParticipating": {},
+  "fantasyYourPrediction": "Ваше предсказание:",
+  "@fantasyYourPrediction": {},
+  "fantasyPredictionTimeExpired": "Время для предсказаний истекло",
+  "@fantasyPredictionTimeExpired": {},
+  "fantasyParticipants": "Участники",
+  "@fantasyParticipants": {},
+  "fantasyNoParticipants": "Пока не добавлен ни один участник",
+  "@fantasyNoParticipants": {},
+  "fantasyAddParticipant": "Добавление участника",
+  "@fantasyAddParticipant": {},
+  "fantasyEmail": "Почта",
+  "@fantasyEmail": {},
+  "fantasyEmailInvalid": "Введите корректный адрес электронной почты",
+  "@fantasyEmailInvalid": {},
+  "fantasyRemoveParticipant": "Удалить участника {email}?",
+  "@fantasyRemoveParticipant": {
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "user@example.com"
+      }
+    }
+  },
+  "fantasyNoPrediction": "Нет",
+  "@fantasyNoPrediction": {},
+  "fantasyPredictionSeparator": " → ",
+  "@fantasyPredictionSeparator": {},
+  "fantasyPointsShort": " очков",
+  "@fantasyPointsShort": {},
+  "fantasyStatusDisabled": "Отключено",
+  "@fantasyStatusDisabled": {},
+  "fantasyStatusEnabledForSelected": "Включено для выбранных",
+  "@fantasyStatusEnabledForSelected": {},
+  "fantasyStatusEnabledForAll": "Включено для всех",
+  "@fantasyStatusEnabledForAll": {},
+  "fantasyStatusLabel": "Статус фентези",
+  "@fantasyStatusLabel": {}
 }

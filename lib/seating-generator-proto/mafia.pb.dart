@@ -2767,6 +2767,7 @@ class TournamentSettings extends $pb.GeneratedMessage {
     $core.Iterable<$core.int>? buckets,
     $core.bool? hideResult,
     RatingScheme? scheme,
+    FantasyStatus? fantasyStatus,
   }) {
     final $result = create();
     if (defaultGamesCount != null) {
@@ -2787,6 +2788,9 @@ class TournamentSettings extends $pb.GeneratedMessage {
     if (scheme != null) {
       $result.scheme = scheme;
     }
+    if (fantasyStatus != null) {
+      $result.fantasyStatus = fantasyStatus;
+    }
     return $result;
   }
   TournamentSettings._() : super();
@@ -2800,6 +2804,7 @@ class TournamentSettings extends $pb.GeneratedMessage {
     ..p<$core.int>(4, _omitFieldNames ? '' : 'buckets', $pb.PbFieldType.K3)
     ..aOB(5, _omitFieldNames ? '' : 'hideResult', protoName: 'hideResult')
     ..e<RatingScheme>(6, _omitFieldNames ? '' : 'scheme', $pb.PbFieldType.OE, defaultOrMaker: RatingScheme.oldFSM, valueOf: RatingScheme.valueOf, enumValues: RatingScheme.values)
+    ..e<FantasyStatus>(7, _omitFieldNames ? '' : 'fantasyStatus', $pb.PbFieldType.OE, protoName: 'fantasyStatus', defaultOrMaker: FantasyStatus.disabled, valueOf: FantasyStatus.valueOf, enumValues: FantasyStatus.values)
     ..hasRequiredFields = false
   ;
 
@@ -2871,6 +2876,15 @@ class TournamentSettings extends $pb.GeneratedMessage {
   $core.bool hasScheme() => $_has(5);
   @$pb.TagNumber(6)
   void clearScheme() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  FantasyStatus get fantasyStatus => $_getN(6);
+  @$pb.TagNumber(7)
+  set fantasyStatus(FantasyStatus v) { $_setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasFantasyStatus() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearFantasyStatus() => $_clearField(7);
 }
 
 class Profile extends $pb.GeneratedMessage {
@@ -4606,6 +4620,7 @@ class FantasyRatingRow extends $pb.GeneratedMessage {
     $core.String? nickname,
     $core.Iterable<FantasyPredictionItem>? predictions,
     $core.int? totalPoints,
+    $core.int? playerId,
   }) {
     final $result = create();
     if (nickname != null) {
@@ -4617,6 +4632,9 @@ class FantasyRatingRow extends $pb.GeneratedMessage {
     if (totalPoints != null) {
       $result.totalPoints = totalPoints;
     }
+    if (playerId != null) {
+      $result.playerId = playerId;
+    }
     return $result;
   }
   FantasyRatingRow._() : super();
@@ -4627,6 +4645,7 @@ class FantasyRatingRow extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'nickname')
     ..pc<FantasyPredictionItem>(2, _omitFieldNames ? '' : 'predictions', $pb.PbFieldType.PM, subBuilder: FantasyPredictionItem.create)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'totalPoints', $pb.PbFieldType.O3, protoName: 'totalPoints')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'playerId', $pb.PbFieldType.O3, protoName: 'playerId')
     ..hasRequiredFields = false
   ;
 
@@ -4671,6 +4690,15 @@ class FantasyRatingRow extends $pb.GeneratedMessage {
   $core.bool hasTotalPoints() => $_has(2);
   @$pb.TagNumber(3)
   void clearTotalPoints() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get playerId => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set playerId($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPlayerId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPlayerId() => $_clearField(4);
 }
 
 class FantasyPredictionItem extends $pb.GeneratedMessage {
@@ -4809,6 +4837,56 @@ class FantasyRatingEventOut extends $pb.GeneratedMessage {
   $pb.PbList<FantasyRatingRow> get rows => $_getList(0);
 }
 
+class AuthEventOut extends $pb.GeneratedMessage {
+  factory AuthEventOut({
+    $core.int? userId,
+  }) {
+    final $result = create();
+    if (userId != null) {
+      $result.userId = userId;
+    }
+    return $result;
+  }
+  AuthEventOut._() : super();
+  factory AuthEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AuthEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AuthEventOut clone() => AuthEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AuthEventOut copyWith(void Function(AuthEventOut) updates) => super.copyWith((message) => updates(message as AuthEventOut)) as AuthEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AuthEventOut create() => AuthEventOut._();
+  AuthEventOut createEmptyInstance() => create();
+  static $pb.PbList<AuthEventOut> createRepeated() => $pb.PbList<AuthEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static AuthEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthEventOut>(create);
+  static AuthEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => $_clearField(1);
+}
+
 class SetFantasyPredictionEvent extends $pb.GeneratedMessage {
   factory SetFantasyPredictionEvent({
     GameWin? prediction,
@@ -4863,6 +4941,7 @@ class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
   factory FantasyCurrentGameEventOut({
     $core.int? gameNumber,
     $core.bool? canPredict,
+    $core.bool? canParticipate,
   }) {
     final $result = create();
     if (gameNumber != null) {
@@ -4870,6 +4949,9 @@ class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
     }
     if (canPredict != null) {
       $result.canPredict = canPredict;
+    }
+    if (canParticipate != null) {
+      $result.canParticipate = canParticipate;
     }
     return $result;
   }
@@ -4880,6 +4962,7 @@ class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyCurrentGameEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'gameNumber', $pb.PbFieldType.O3, protoName: 'gameNumber')
     ..aOB(2, _omitFieldNames ? '' : 'canPredict', protoName: 'canPredict')
+    ..aOB(3, _omitFieldNames ? '' : 'canParticipate', protoName: 'canParticipate')
     ..hasRequiredFields = false
   ;
 
@@ -4921,6 +5004,15 @@ class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
   $core.bool hasCanPredict() => $_has(1);
   @$pb.TagNumber(2)
   void clearCanPredict() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get canParticipate => $_getBF(2);
+  @$pb.TagNumber(3)
+  set canParticipate($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCanParticipate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCanParticipate() => $_clearField(3);
 }
 
 

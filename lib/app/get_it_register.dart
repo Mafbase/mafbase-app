@@ -73,6 +73,10 @@ import 'package:seating_generator_web/domain/repositories/tournaments_repository
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/feature/info_table_description/data/info_table_description_repository_impl.dart';
 import 'package:seating_generator_web/feature/info_table_description/domain/info_table_description_repository.dart';
+import 'package:seating_generator_web/feature/fantasy/data/fantasy_repository_impl.dart';
+import 'package:seating_generator_web/feature/fantasy/domain/fantasy_repository.dart';
+import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
+import 'package:seating_generator_web/feature/fantasy/ui/fantasy_state.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
@@ -405,5 +409,9 @@ void registerSharedGetIt() {
     ..registerFactoryParam<RatingBloc, BuildContext?, dynamic>((context, _) => RatingBloc(context))
     ..registerLazySingleton<GetSettingsInteractor>(() => GetSettingsInteractor(getIt()))
     ..registerLazySingleton<UpdateSettingsInteractor>(() => UpdateSettingsInteractor(getIt()))
-    ..registerLazySingleton<InfoTableDescriptionRepository>(() => InfoTableDescriptionRepositoryImpl(getIt()));
+    ..registerLazySingleton<InfoTableDescriptionRepository>(() => InfoTableDescriptionRepositoryImpl(getIt()))
+    ..registerLazySingleton<FantasyRepository>(() => FantasyRepositoryImpl(getIt()))
+    ..registerFactoryParam<FantasyBloc, FantasyState, FantasyRepository>(
+      (state, repository) => FantasyBloc(state, repository),
+    );
 }

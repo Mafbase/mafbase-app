@@ -25,7 +25,7 @@ void main() {
       final authRepository = getIt<AuthRepository>() as MockAuthRepository;
       when(authRepository.login(any, any)).thenAnswer(
         (_) => Future.value(
-          const LoginModel.success(),
+          const LoginModel.success(userId: 1),
         ),
       );
       bloc.add(
@@ -89,7 +89,7 @@ void main() {
       final authRepository = getIt<AuthRepository>() as MockAuthRepository;
       when(authRepository.login(any, any)).thenAnswer(
         (_) => Future.value(
-          const LoginModel.success(),
+          const LoginModel.success(userId: 1),
         ),
       );
       await storage.cleanup();

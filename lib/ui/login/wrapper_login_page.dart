@@ -59,12 +59,7 @@ class _WrapperLoginPageState extends CustomState<WrapperLoginPage> {
                             width: 2,
                           ),
                         ),
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            debugPrint(constraints.toString());
-                            return widget.child;
-                          },
-                        ),
+                        child: widget.child,
                       ),
                     );
                   },
@@ -119,12 +114,7 @@ class _WrapperLoginPageState extends CustomState<WrapperLoginPage> {
                             width: 2,
                           ),
                         ),
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            debugPrint(constraints.toString());
-                            return widget.child;
-                          },
-                        ),
+                        child: widget.child,
                       ),
                     );
                   },

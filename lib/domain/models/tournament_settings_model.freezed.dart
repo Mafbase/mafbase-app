@@ -22,6 +22,7 @@ mixin _$TournamentSettingsModel {
   List<int>? get buckets => throw _privateConstructorUsedError;
   bool get hideResult => throw _privateConstructorUsedError;
   RatingScheme? get ratingScheme => throw _privateConstructorUsedError;
+  FantasyStatus? get fantasyStatus => throw _privateConstructorUsedError;
 
   /// Create a copy of TournamentSettingsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -42,7 +43,8 @@ abstract class $TournamentSettingsModelCopyWith<$Res> {
       int finalGames,
       List<int>? buckets,
       bool hideResult,
-      RatingScheme? ratingScheme});
+      RatingScheme? ratingScheme,
+      FantasyStatus? fantasyStatus});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
     Object? buckets = freezed,
     Object? hideResult = null,
     Object? ratingScheme = freezed,
+    Object? fantasyStatus = freezed,
   }) {
     return _then(_value.copyWith(
       defaultGames: null == defaultGames
@@ -93,6 +96,10 @@ class _$TournamentSettingsModelCopyWithImpl<$Res,
           ? _value.ratingScheme
           : ratingScheme // ignore: cast_nullable_to_non_nullable
               as RatingScheme?,
+      fantasyStatus: freezed == fantasyStatus
+          ? _value.fantasyStatus
+          : fantasyStatus // ignore: cast_nullable_to_non_nullable
+              as FantasyStatus?,
     ) as $Val);
   }
 }
@@ -112,7 +119,8 @@ abstract class _$$TournamentSettingsModelImplCopyWith<$Res>
       int finalGames,
       List<int>? buckets,
       bool hideResult,
-      RatingScheme? ratingScheme});
+      RatingScheme? ratingScheme,
+      FantasyStatus? fantasyStatus});
 }
 
 /// @nodoc
@@ -136,6 +144,7 @@ class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
     Object? buckets = freezed,
     Object? hideResult = null,
     Object? ratingScheme = freezed,
+    Object? fantasyStatus = freezed,
   }) {
     return _then(_$TournamentSettingsModelImpl(
       defaultGames: null == defaultGames
@@ -162,6 +171,10 @@ class __$$TournamentSettingsModelImplCopyWithImpl<$Res>
           ? _value.ratingScheme
           : ratingScheme // ignore: cast_nullable_to_non_nullable
               as RatingScheme?,
+      fantasyStatus: freezed == fantasyStatus
+          ? _value.fantasyStatus
+          : fantasyStatus // ignore: cast_nullable_to_non_nullable
+              as FantasyStatus?,
     ));
   }
 }
@@ -175,7 +188,8 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
       required this.finalGames,
       final List<int>? buckets,
       this.hideResult = false,
-      this.ratingScheme})
+      this.ratingScheme,
+      this.fantasyStatus})
       : _buckets = buckets;
 
   @override
@@ -199,10 +213,12 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
   final bool hideResult;
   @override
   final RatingScheme? ratingScheme;
+  @override
+  final FantasyStatus? fantasyStatus;
 
   @override
   String toString() {
-    return 'TournamentSettingsModel(defaultGames: $defaultGames, swissGames: $swissGames, finalGames: $finalGames, buckets: $buckets, hideResult: $hideResult, ratingScheme: $ratingScheme)';
+    return 'TournamentSettingsModel(defaultGames: $defaultGames, swissGames: $swissGames, finalGames: $finalGames, buckets: $buckets, hideResult: $hideResult, ratingScheme: $ratingScheme, fantasyStatus: $fantasyStatus)';
   }
 
   @override
@@ -220,7 +236,9 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
             (identical(other.hideResult, hideResult) ||
                 other.hideResult == hideResult) &&
             (identical(other.ratingScheme, ratingScheme) ||
-                other.ratingScheme == ratingScheme));
+                other.ratingScheme == ratingScheme) &&
+            (identical(other.fantasyStatus, fantasyStatus) ||
+                other.fantasyStatus == fantasyStatus));
   }
 
   @override
@@ -231,7 +249,8 @@ class _$TournamentSettingsModelImpl implements _TournamentSettingsModel {
       finalGames,
       const DeepCollectionEquality().hash(_buckets),
       hideResult,
-      ratingScheme);
+      ratingScheme,
+      fantasyStatus);
 
   /// Create a copy of TournamentSettingsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -250,7 +269,8 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
       required final int finalGames,
       final List<int>? buckets,
       final bool hideResult,
-      final RatingScheme? ratingScheme}) = _$TournamentSettingsModelImpl;
+      final RatingScheme? ratingScheme,
+      final FantasyStatus? fantasyStatus}) = _$TournamentSettingsModelImpl;
 
   @override
   int get defaultGames;
@@ -264,6 +284,8 @@ abstract class _TournamentSettingsModel implements TournamentSettingsModel {
   bool get hideResult;
   @override
   RatingScheme? get ratingScheme;
+  @override
+  FantasyStatus? get fantasyStatus;
 
   /// Create a copy of TournamentSettingsModel
   /// with the given fields replaced by the non-null parameter values.

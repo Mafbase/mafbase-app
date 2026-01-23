@@ -316,4 +316,82 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get minus_fsm_schema => 'Схема ФСМ с минусами';
+
+  @override
+  String get fantasy => 'Фентези';
+
+  @override
+  String get fantasyRatingEmpty => 'Рейтинг пока пуст';
+
+  @override
+  String get fantasyRating => 'Рейтинг';
+
+  @override
+  String fantasyPoints(int count) {
+    return '$count очков';
+  }
+
+  @override
+  String fantasyGame(int number) {
+    return 'Игра $number';
+  }
+
+  @override
+  String get fantasyCurrentGameInfoUnavailable =>
+      'Информация о текущей игре недоступна';
+
+  @override
+  String get fantasyCurrentGame => 'Текущая игра';
+
+  @override
+  String get fantasyNotParticipating =>
+      'Вы не допущены к участию в фентези. Обратитесь к администратору турнира для получения доступа.';
+
+  @override
+  String get fantasyYourPrediction => 'Ваше предсказание:';
+
+  @override
+  String get fantasyPredictionTimeExpired => 'Время для предсказаний истекло';
+
+  @override
+  String get fantasyParticipants => 'Участники';
+
+  @override
+  String get fantasyNoParticipants => 'Пока не добавлен ни один участник';
+
+  @override
+  String get fantasyAddParticipant => 'Добавление участника';
+
+  @override
+  String get fantasyEmail => 'Почта';
+
+  @override
+  String get fantasyEmailInvalid =>
+      'Введите корректный адрес электронной почты';
+
+  @override
+  String fantasyRemoveParticipant(String email) {
+    return 'Удалить участника $email?';
+  }
+
+  @override
+  String get fantasyNoPrediction => 'Нет';
+
+  @override
+  String get fantasyPredictionSeparator => ' → ';
+
+  @override
+  String get fantasyPointsShort => ' очков';
+
+  @override
+  String get fantasyStatusDisabled => 'Отключено';
+
+  @override
+  String get fantasyStatusEnabledForSelected => 'Включено для выбранных';
+
+  @override
+  String get fantasyStatusEnabledForAll => 'Включено для всех';
+
+  @override
+  String get fantasyStatusLabel => 'Статус фентези';
 }

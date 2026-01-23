@@ -26,9 +26,15 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
           case LoginEventOut_Error.needVerification:
             return LoginModel.needVerification(id: value.id);
           case LoginEventOut_Error.noError:
-            return const LoginModel.success();
+            if (!value.hasId()) {
+              throw Exception('User ID is missing in login response');
+            }
+            return LoginModel.success(userId: value.id);
         }
-        return const LoginModel.success();
+        if (!value.hasId()) {
+          throw Exception('User ID is missing in login response');
+        }
+        return LoginModel.success(userId: value.id);
       },
     ).onError(
       (error, stackTrace) => LoginModel.error(

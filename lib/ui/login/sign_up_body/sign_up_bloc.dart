@@ -28,8 +28,6 @@ class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
 
     final result = await _signUpInteractor.run(event.email, event.password);
 
-    debugPrint(result.toString());
-
     switch (result.error) {
       case ErrorEnum.needVerification:
         emit(state.copyWith(isLoading: false));

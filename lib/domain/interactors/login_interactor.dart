@@ -35,6 +35,7 @@ class LoginInteractor extends BaseInteractor {
         _credentialStorage.save(Credentials(email, password));
 
         context?.read<AuthNotifier>().value = AuthNotifierModel.authorized(
+          userId: model.userId,
           hideBilling: hideBillEmails.contains(email),
         );
       }

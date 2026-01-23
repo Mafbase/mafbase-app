@@ -6,5 +6,8 @@ class AuthNotifierModel with _$AuthNotifierModel {
 
   const factory AuthNotifierModel.loading() = AuthNotifierLoadingModel;
 
-  const factory AuthNotifierModel.authorized({@Default(false) bool hideBilling}) = AuthNotifierAuthorizedModel;
+  const factory AuthNotifierModel.authorized({
+    required int userId,
+    @Default(false) bool hideBilling,
+  }) = AuthNotifierAuthorizedModel;
 }

@@ -42,6 +42,21 @@ const GameWin$json = {
 final $typed_data.Uint8List gameWinDescriptor = $convert.base64Decode(
     'CgdHYW1lV2luEggKBGNpdHkQABIJCgVtYWZpYRABEggKBGRyYXcQAg==');
 
+@$core.Deprecated('Use fantasyStatusDescriptor instead')
+const FantasyStatus$json = {
+  '1': 'FantasyStatus',
+  '2': [
+    {'1': 'disabled', '2': 0},
+    {'1': 'enabledForSelected', '2': 1},
+    {'1': 'enabledForAll', '2': 2},
+  ],
+};
+
+/// Descriptor for `FantasyStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List fantasyStatusDescriptor = $convert.base64Decode(
+    'Cg1GYW50YXN5U3RhdHVzEgwKCGRpc2FibGVkEAASFgoSZW5hYmxlZEZvclNlbGVjdGVkEAESEQ'
+    'oNZW5hYmxlZEZvckFsbBAC');
+
 @$core.Deprecated('Use playerRoleDescriptor instead')
 const PlayerRole$json = {
   '1': 'PlayerRole',
@@ -717,6 +732,7 @@ const TournamentSettings$json = {
     {'1': 'buckets', '3': 4, '4': 3, '5': 5, '10': 'buckets'},
     {'1': 'hideResult', '3': 5, '4': 1, '5': 8, '9': 3, '10': 'hideResult', '17': true},
     {'1': 'scheme', '3': 6, '4': 1, '5': 14, '6': '.generated.RatingScheme', '9': 4, '10': 'scheme', '17': true},
+    {'1': 'fantasyStatus', '3': 7, '4': 1, '5': 14, '6': '.generated.FantasyStatus', '9': 5, '10': 'fantasyStatus', '17': true},
   ],
   '8': [
     {'1': '_defaultGamesCount'},
@@ -724,6 +740,7 @@ const TournamentSettings$json = {
     {'1': '_finalGamesCount'},
     {'1': '_hideResult'},
     {'1': '_scheme'},
+    {'1': '_fantasyStatus'},
   ],
 };
 
@@ -734,8 +751,10 @@ final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode
     'b3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBEh'
     'gKB2J1Y2tldHMYBCADKAVSB2J1Y2tldHMSIwoKaGlkZVJlc3VsdBgFIAEoCEgDUgpoaWRlUmVz'
     'dWx0iAEBEjQKBnNjaGVtZRgGIAEoDjIXLmdlbmVyYXRlZC5SYXRpbmdTY2hlbWVIBFIGc2NoZW'
-    '1liAEBQhQKEl9kZWZhdWx0R2FtZXNDb3VudEISChBfc3dpc3NHYW1lc0NvdW50QhIKEF9maW5h'
-    'bEdhbWVzQ291bnRCDQoLX2hpZGVSZXN1bHRCCQoHX3NjaGVtZQ==');
+    '1liAEBEkMKDWZhbnRhc3lTdGF0dXMYByABKA4yGC5nZW5lcmF0ZWQuRmFudGFzeVN0YXR1c0gF'
+    'Ug1mYW50YXN5U3RhdHVziAEBQhQKEl9kZWZhdWx0R2FtZXNDb3VudEISChBfc3dpc3NHYW1lc0'
+    'NvdW50QhIKEF9maW5hbEdhbWVzQ291bnRCDQoLX2hpZGVSZXN1bHRCCQoHX3NjaGVtZUIQCg5f'
+    'ZmFudGFzeVN0YXR1cw==');
 
 @$core.Deprecated('Use profileDescriptor instead')
 const Profile$json = {
@@ -1179,6 +1198,7 @@ const FantasyRatingRow$json = {
     {'1': 'nickname', '3': 1, '4': 1, '5': 9, '10': 'nickname'},
     {'1': 'predictions', '3': 2, '4': 3, '5': 11, '6': '.generated.FantasyPredictionItem', '10': 'predictions'},
     {'1': 'totalPoints', '3': 3, '4': 1, '5': 5, '10': 'totalPoints'},
+    {'1': 'playerId', '3': 4, '4': 1, '5': 5, '10': 'playerId'},
   ],
 };
 
@@ -1186,7 +1206,8 @@ const FantasyRatingRow$json = {
 final $typed_data.Uint8List fantasyRatingRowDescriptor = $convert.base64Decode(
     'ChBGYW50YXN5UmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRJCCgtwcmVkaW'
     'N0aW9ucxgCIAMoCzIgLmdlbmVyYXRlZC5GYW50YXN5UHJlZGljdGlvbkl0ZW1SC3ByZWRpY3Rp'
-    'b25zEiAKC3RvdGFsUG9pbnRzGAMgASgFUgt0b3RhbFBvaW50cw==');
+    'b25zEiAKC3RvdGFsUG9pbnRzGAMgASgFUgt0b3RhbFBvaW50cxIaCghwbGF5ZXJJZBgEIAEoBV'
+    'IIcGxheWVySWQ=');
 
 @$core.Deprecated('Use fantasyPredictionItemDescriptor instead')
 const FantasyPredictionItem$json = {
@@ -1224,6 +1245,18 @@ final $typed_data.Uint8List fantasyRatingEventOutDescriptor = $convert.base64Dec
     'ChVGYW50YXN5UmF0aW5nRXZlbnRPdXQSLwoEcm93cxgBIAMoCzIbLmdlbmVyYXRlZC5GYW50YX'
     'N5UmF0aW5nUm93UgRyb3dz');
 
+@$core.Deprecated('Use authEventOutDescriptor instead')
+const AuthEventOut$json = {
+  '1': 'AuthEventOut',
+  '2': [
+    {'1': 'userId', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `AuthEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List authEventOutDescriptor = $convert.base64Decode(
+    'CgxBdXRoRXZlbnRPdXQSFgoGdXNlcklkGAEgASgFUgZ1c2VySWQ=');
+
 @$core.Deprecated('Use setFantasyPredictionEventDescriptor instead')
 const SetFantasyPredictionEvent$json = {
   '1': 'SetFantasyPredictionEvent',
@@ -1243,11 +1276,13 @@ const FantasyCurrentGameEventOut$json = {
   '2': [
     {'1': 'gameNumber', '3': 1, '4': 1, '5': 5, '10': 'gameNumber'},
     {'1': 'canPredict', '3': 2, '4': 1, '5': 8, '10': 'canPredict'},
+    {'1': 'canParticipate', '3': 3, '4': 1, '5': 8, '10': 'canParticipate'},
   ],
 };
 
 /// Descriptor for `FantasyCurrentGameEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fantasyCurrentGameEventOutDescriptor = $convert.base64Decode(
     'ChpGYW50YXN5Q3VycmVudEdhbWVFdmVudE91dBIeCgpnYW1lTnVtYmVyGAEgASgFUgpnYW1lTn'
-    'VtYmVyEh4KCmNhblByZWRpY3QYAiABKAhSCmNhblByZWRpY3Q=');
+    'VtYmVyEh4KCmNhblByZWRpY3QYAiABKAhSCmNhblByZWRpY3QSJgoOY2FuUGFydGljaXBhdGUY'
+    'AyABKAhSDmNhblBhcnRpY2lwYXRl');
 

@@ -4,7 +4,7 @@ part 'login_model.freezed.dart';
 
 @freezed
 class LoginModel with _$LoginModel {
-  const factory LoginModel.success() = Success;
+  const factory LoginModel.success({required int userId}) = Success;
 
   const factory LoginModel.needVerification({required int id}) =
       NeedVerification;

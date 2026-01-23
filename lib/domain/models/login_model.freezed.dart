@@ -18,21 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() success,
+    required TResult Function(int userId) success,
     required TResult Function(int id) needVerification,
     required TResult Function(String? message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? success,
+    TResult? Function(int userId)? success,
     TResult? Function(int id)? needVerification,
     TResult? Function(String? message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? success,
+    TResult Function(int userId)? success,
     TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -88,6 +88,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int userId});
 }
 
 /// @nodoc
@@ -100,57 +102,82 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
   /// Create a copy of LoginModel
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+  }) {
+    return _then(_$SuccessImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl();
+  const _$SuccessImpl({required this.userId});
+
+  @override
+  final int userId;
 
   @override
   String toString() {
-    return 'LoginModel.success()';
+    return 'LoginModel.success(userId: $userId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userId);
+
+  /// Create a copy of LoginModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() success,
+    required TResult Function(int userId) success,
     required TResult Function(int id) needVerification,
     required TResult Function(String? message) error,
   }) {
-    return success();
+    return success(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? success,
+    TResult? Function(int userId)? success,
     TResult? Function(int id)? needVerification,
     TResult? Function(String? message)? error,
   }) {
-    return success?.call();
+    return success?.call(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? success,
+    TResult Function(int userId)? success,
     TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(userId);
     }
     return orElse();
   }
@@ -191,7 +218,15 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements LoginModel {
-  const factory Success() = _$SuccessImpl;
+  const factory Success({required final int userId}) = _$SuccessImpl;
+
+  int get userId;
+
+  /// Create a copy of LoginModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -263,7 +298,7 @@ class _$NeedVerificationImpl implements NeedVerification {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() success,
+    required TResult Function(int userId) success,
     required TResult Function(int id) needVerification,
     required TResult Function(String? message) error,
   }) {
@@ -273,7 +308,7 @@ class _$NeedVerificationImpl implements NeedVerification {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? success,
+    TResult? Function(int userId)? success,
     TResult? Function(int id)? needVerification,
     TResult? Function(String? message)? error,
   }) {
@@ -283,7 +318,7 @@ class _$NeedVerificationImpl implements NeedVerification {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? success,
+    TResult Function(int userId)? success,
     TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -410,7 +445,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() success,
+    required TResult Function(int userId) success,
     required TResult Function(int id) needVerification,
     required TResult Function(String? message) error,
   }) {
@@ -420,7 +455,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? success,
+    TResult? Function(int userId)? success,
     TResult? Function(int id)? needVerification,
     TResult? Function(String? message)? error,
   }) {
@@ -430,7 +465,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? success,
+    TResult Function(int userId)? success,
     TResult Function(int id)? needVerification,
     TResult Function(String? message)? error,
     required TResult orElse(),

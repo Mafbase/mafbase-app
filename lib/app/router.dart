@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -36,6 +38,10 @@ class AppRouter {
             final response = await getIt<MyHttpClient>().get("/api/auth");
             if (response.statusCode == 200) {
               final value = await getIt<CredentialStorage>().read();
+              
+              // Парсим userId из ответа (просто число)
+              final responseData = response.data as List<int>;
+              final userId = AuthEventOut.fromBuffer(responseData).userId;
 
               Sentry.configureScope(
                 (p0) => p0.setUser(
@@ -44,6 +50,7 @@ class AppRouter {
               );
 
               authNotifier.value = AuthNotifierModel.authorized(
+                userId: userId,
                 hideBilling: LoginInteractor.hideBillEmails.contains(
                   value?.login,
                 ),

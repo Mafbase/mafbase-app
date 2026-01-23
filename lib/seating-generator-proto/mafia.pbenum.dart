@@ -49,6 +49,23 @@ class GameWin extends $pb.ProtobufEnum {
   const GameWin._(super.v, super.n);
 }
 
+class FantasyStatus extends $pb.ProtobufEnum {
+  static const FantasyStatus disabled = FantasyStatus._(0, _omitEnumNames ? '' : 'disabled');
+  static const FantasyStatus enabledForSelected = FantasyStatus._(1, _omitEnumNames ? '' : 'enabledForSelected');
+  static const FantasyStatus enabledForAll = FantasyStatus._(2, _omitEnumNames ? '' : 'enabledForAll');
+
+  static const $core.List<FantasyStatus> values = <FantasyStatus> [
+    disabled,
+    enabledForSelected,
+    enabledForAll,
+  ];
+
+  static final $core.Map<$core.int, FantasyStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static FantasyStatus? valueOf($core.int value) => _byValue[value];
+
+  const FantasyStatus._(super.v, super.n);
+}
+
 class PlayerRole extends $pb.ProtobufEnum {
   static const PlayerRole citizen = PlayerRole._(0, _omitEnumNames ? '' : 'citizen');
   static const PlayerRole maf = PlayerRole._(1, _omitEnumNames ? '' : 'maf');

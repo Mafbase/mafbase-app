@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
@@ -23,6 +24,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/tournament_settings_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/translation_dialog.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -62,6 +64,7 @@ class TournamentPage extends StatefulWidget {
               AddClubGamePage.tournamentEditRoute,
               RatingPage.tournamentRoute,
               AdministrationPage.tournamentRoute,
+              FantasyPage.tournamentRoute,
             ],
             builder: (context, state) {
               return PlayersListBody(
@@ -246,6 +249,20 @@ class _TournamentPageState extends CustomState<TournamentPage>
           context.read<TournamentPageBloc>().add(const TournamentPageEvent.openRating());
         },
       ),
+      if (!state.isLoading && 
+          state.settings.fantasyStatus != null && 
+          state.settings.fantasyStatus != FantasyStatus.disabled)
+        MenuItemModel(
+          text: context.locale.fantasy,
+          onTap: () {
+            context.go(
+              FantasyPage.createTournamentLocation(
+                tournamentId: widget.tournamentId,
+                context: context,
+              ),
+            );
+          },
+        ),
       if (state.billedTranslation && state.isMyTournament && !state.isLoading)
         MenuItemModel(
           text: context.locale.translationDialogTitle,

@@ -20,21 +20,21 @@ mixin _$AuthNotifierModel {
   TResult when<TResult extends Object?>({
     required TResult Function() unauthorized,
     required TResult Function() loading,
-    required TResult Function(bool hideBilling) authorized,
+    required TResult Function(int userId, bool hideBilling) authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unauthorized,
     TResult? Function()? loading,
-    TResult? Function(bool hideBilling)? authorized,
+    TResult? Function(int userId, bool hideBilling)? authorized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthorized,
     TResult Function()? loading,
-    TResult Function(bool hideBilling)? authorized,
+    TResult Function(int userId, bool hideBilling)? authorized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,7 +131,7 @@ class _$AuthNotifierUnauthorizedModelImpl
   TResult when<TResult extends Object?>({
     required TResult Function() unauthorized,
     required TResult Function() loading,
-    required TResult Function(bool hideBilling) authorized,
+    required TResult Function(int userId, bool hideBilling) authorized,
   }) {
     return unauthorized();
   }
@@ -141,7 +141,7 @@ class _$AuthNotifierUnauthorizedModelImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unauthorized,
     TResult? Function()? loading,
-    TResult? Function(bool hideBilling)? authorized,
+    TResult? Function(int userId, bool hideBilling)? authorized,
   }) {
     return unauthorized?.call();
   }
@@ -151,7 +151,7 @@ class _$AuthNotifierUnauthorizedModelImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthorized,
     TResult Function()? loading,
-    TResult Function(bool hideBilling)? authorized,
+    TResult Function(int userId, bool hideBilling)? authorized,
     required TResult orElse(),
   }) {
     if (unauthorized != null) {
@@ -247,7 +247,7 @@ class _$AuthNotifierLoadingModelImpl implements AuthNotifierLoadingModel {
   TResult when<TResult extends Object?>({
     required TResult Function() unauthorized,
     required TResult Function() loading,
-    required TResult Function(bool hideBilling) authorized,
+    required TResult Function(int userId, bool hideBilling) authorized,
   }) {
     return loading();
   }
@@ -257,7 +257,7 @@ class _$AuthNotifierLoadingModelImpl implements AuthNotifierLoadingModel {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unauthorized,
     TResult? Function()? loading,
-    TResult? Function(bool hideBilling)? authorized,
+    TResult? Function(int userId, bool hideBilling)? authorized,
   }) {
     return loading?.call();
   }
@@ -267,7 +267,7 @@ class _$AuthNotifierLoadingModelImpl implements AuthNotifierLoadingModel {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthorized,
     TResult Function()? loading,
-    TResult Function(bool hideBilling)? authorized,
+    TResult Function(int userId, bool hideBilling)? authorized,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -322,7 +322,7 @@ abstract class _$$AuthNotifierAuthorizedModelImplCopyWith<$Res> {
           $Res Function(_$AuthNotifierAuthorizedModelImpl) then) =
       __$$AuthNotifierAuthorizedModelImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool hideBilling});
+  $Res call({int userId, bool hideBilling});
 }
 
 /// @nodoc
@@ -340,9 +340,14 @@ class __$$AuthNotifierAuthorizedModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userId = null,
     Object? hideBilling = null,
   }) {
     return _then(_$AuthNotifierAuthorizedModelImpl(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
       hideBilling: null == hideBilling
           ? _value.hideBilling
           : hideBilling // ignore: cast_nullable_to_non_nullable
@@ -354,15 +359,18 @@ class __$$AuthNotifierAuthorizedModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthNotifierAuthorizedModelImpl implements AuthNotifierAuthorizedModel {
-  const _$AuthNotifierAuthorizedModelImpl({this.hideBilling = false});
+  const _$AuthNotifierAuthorizedModelImpl(
+      {required this.userId, this.hideBilling = false});
 
+  @override
+  final int userId;
   @override
   @JsonKey()
   final bool hideBilling;
 
   @override
   String toString() {
-    return 'AuthNotifierModel.authorized(hideBilling: $hideBilling)';
+    return 'AuthNotifierModel.authorized(userId: $userId, hideBilling: $hideBilling)';
   }
 
   @override
@@ -370,12 +378,13 @@ class _$AuthNotifierAuthorizedModelImpl implements AuthNotifierAuthorizedModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthNotifierAuthorizedModelImpl &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.hideBilling, hideBilling) ||
                 other.hideBilling == hideBilling));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, hideBilling);
+  int get hashCode => Object.hash(runtimeType, userId, hideBilling);
 
   /// Create a copy of AuthNotifierModel
   /// with the given fields replaced by the non-null parameter values.
@@ -391,9 +400,9 @@ class _$AuthNotifierAuthorizedModelImpl implements AuthNotifierAuthorizedModel {
   TResult when<TResult extends Object?>({
     required TResult Function() unauthorized,
     required TResult Function() loading,
-    required TResult Function(bool hideBilling) authorized,
+    required TResult Function(int userId, bool hideBilling) authorized,
   }) {
-    return authorized(hideBilling);
+    return authorized(userId, hideBilling);
   }
 
   @override
@@ -401,9 +410,9 @@ class _$AuthNotifierAuthorizedModelImpl implements AuthNotifierAuthorizedModel {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unauthorized,
     TResult? Function()? loading,
-    TResult? Function(bool hideBilling)? authorized,
+    TResult? Function(int userId, bool hideBilling)? authorized,
   }) {
-    return authorized?.call(hideBilling);
+    return authorized?.call(userId, hideBilling);
   }
 
   @override
@@ -411,11 +420,11 @@ class _$AuthNotifierAuthorizedModelImpl implements AuthNotifierAuthorizedModel {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthorized,
     TResult Function()? loading,
-    TResult Function(bool hideBilling)? authorized,
+    TResult Function(int userId, bool hideBilling)? authorized,
     required TResult orElse(),
   }) {
     if (authorized != null) {
-      return authorized(hideBilling);
+      return authorized(userId, hideBilling);
     }
     return orElse();
   }
@@ -456,9 +465,11 @@ class _$AuthNotifierAuthorizedModelImpl implements AuthNotifierAuthorizedModel {
 }
 
 abstract class AuthNotifierAuthorizedModel implements AuthNotifierModel {
-  const factory AuthNotifierAuthorizedModel({final bool hideBilling}) =
-      _$AuthNotifierAuthorizedModelImpl;
+  const factory AuthNotifierAuthorizedModel(
+      {required final int userId,
+      final bool hideBilling}) = _$AuthNotifierAuthorizedModelImpl;
 
+  int get userId;
   bool get hideBilling;
 
   /// Create a copy of AuthNotifierModel

@@ -12,6 +12,7 @@ class TournamentSettingsModel with _$TournamentSettingsModel {
     List<int>? buckets,
     @Default(false) bool hideResult,
     RatingScheme? ratingScheme,
+    FantasyStatus? fantasyStatus,
   }) = _TournamentSettingsModel;
 
   factory TournamentSettingsModel.fromProto(TournamentSettings proto) => TournamentSettingsModel(
@@ -21,6 +22,7 @@ class TournamentSettingsModel with _$TournamentSettingsModel {
         buckets: proto.buckets,
         hideResult: proto.hideResult,
         ratingScheme: proto.scheme,
+        fantasyStatus: proto.hasFantasyStatus() ? proto.fantasyStatus : null,
       );
 }
 
@@ -32,5 +34,6 @@ extension TournamentSettingsModelExt on TournamentSettingsModel {
         buckets: buckets,
         hideResult: hideResult,
         scheme: ratingScheme,
+        fantasyStatus: fantasyStatus,
       );
 }
