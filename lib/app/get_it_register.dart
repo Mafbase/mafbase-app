@@ -411,7 +411,7 @@ void registerSharedGetIt() {
     ..registerLazySingleton<UpdateSettingsInteractor>(() => UpdateSettingsInteractor(getIt()))
     ..registerLazySingleton<InfoTableDescriptionRepository>(() => InfoTableDescriptionRepositoryImpl(getIt()))
     ..registerLazySingleton<FantasyRepository>(() => FantasyRepositoryImpl(getIt()))
-    ..registerFactoryParam<FantasyBloc, FantasyState, FantasyRepository>(
-      (state, repository) => FantasyBloc(state, repository),
+    ..registerFactoryParam<FantasyBloc, BuildContext?, dynamic>(
+      (context, tournamentId) => FantasyBloc(FantasyState(), getIt(), context),
     );
 }

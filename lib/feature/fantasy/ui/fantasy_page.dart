@@ -60,10 +60,8 @@ class FantasyPage extends StatefulWidget {
 
       return BlocProvider<FantasyBloc>(
         key: ValueKey("$tournamentId$isOwner"),
-        create: (context) => getIt<FantasyBloc>(
-          param1: const FantasyState(),
-          param2: getIt<FantasyRepository>(),
-        )..add(
+        create: (context) => getIt<FantasyBloc>(param1: context)
+          ..add(
             FantasyEventInit(
               tournamentId: tournamentId,
               isOwner: isOwner,

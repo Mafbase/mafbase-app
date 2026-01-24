@@ -5,8 +5,7 @@ import 'package:seating_generator_web/domain/interactors/get_administration_inte
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
 
-class AdministrationBloc
-    extends CustomBloc<AdministrationEvent, AdministrationState> {
+class AdministrationBloc extends CustomBloc<AdministrationEvent, AdministrationState> {
   final GetAdministrationInteractor getAdministrationInteractor;
   final AddOwnerInteractor addOwnerInteractor;
   final DeleteOwnerInteractor deleteOwnerInteractor;
@@ -16,6 +15,7 @@ class AdministrationBloc
     this.addOwnerInteractor,
     this.deleteOwnerInteractor,
     this.getAdministrationInteractor,
+    super.context,
   ) {
     on<AdministrationEventPageOpened>(_onPageOpened);
     on<AdministrationEventAddOwner>(_onAddOwnerTapped);

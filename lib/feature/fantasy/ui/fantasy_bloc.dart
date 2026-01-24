@@ -8,7 +8,11 @@ class FantasyBloc extends CustomBloc<FantasyEvent, FantasyState> {
   final FantasyRepository _repository;
   int? _currentUserId;
 
-  FantasyBloc(super.initialState, this._repository) {
+  FantasyBloc(
+    super.initialState,
+    this._repository,
+    super.context,
+  ) {
     on<FantasyEventInit>(_onInit);
     on<FantasyEventRefresh>(_onRefresh);
     on<FantasyEventSetPrediction>(_onSetPrediction);
@@ -94,7 +98,7 @@ class FantasyBloc extends CustomBloc<FantasyEvent, FantasyState> {
     try {
       final rating = await _repository.getRating(tournamentId);
       final currentGameInfo = await _repository.getCurrentGameInfo(tournamentId);
-      
+
       // Находим предсказание текущего пользователя по userId
       GameWin? userPrediction;
       if (_currentUserId != null && rating.rows.isNotEmpty && currentGameInfo != null) {
@@ -102,17 +106,17 @@ class FantasyBloc extends CustomBloc<FantasyEvent, FantasyState> {
           final userRow = rating.rows.firstWhere(
             (row) => row.playerId == _currentUserId,
           );
-          
+
           final prediction = userRow.predictions.firstWhere(
             (p) => p.gameNumber == currentGameInfo.gameNumber && p.prediction != null,
           );
-          
+
           userPrediction = prediction.prediction;
         } catch (_) {
           // Пользователь не найден в рейтинге или нет предсказания для текущей игры
         }
       }
-      
+
       emit(
         state.copyWith(
           isLoading: false,

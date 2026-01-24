@@ -46,23 +46,20 @@ class AdministrationPage extends StatefulWidget {
     name: _tournamentName,
     builder: (context, state) {
       final tournamentId = int.parse(state.pathParameters["id"]!);
-      final OwnersRepository ownersRepository =
-          RepositoryFactory.of(context).ownersRepository;
-      final getAdministrationInteractor =
-          GetAdministrationInteractor(ownersRepository);
+      final OwnersRepository ownersRepository = RepositoryFactory.of(context).ownersRepository;
+      final getAdministrationInteractor = GetAdministrationInteractor(ownersRepository);
       final addOwnerInteractor = AddOwnerInteractor(ownersRepository);
       final deleteOwnerInteractor = DeleteOwnerInteractor(ownersRepository);
       return BlocProvider<AdministrationBloc>(
-        create: (context) {
-          return AdministrationBloc(
-            const AdministrationState(),
-            addOwnerInteractor,
-            deleteOwnerInteractor,
-            getAdministrationInteractor,
-          )..add(
-              AdministrationEventPageOpened(tournamentId: tournamentId),
-            );
-        },
+        create: (context) => AdministrationBloc(
+          const AdministrationState(),
+          addOwnerInteractor,
+          deleteOwnerInteractor,
+          getAdministrationInteractor,
+          context,
+        )..add(
+            AdministrationEventPageOpened(tournamentId: tournamentId),
+          ),
         child: AdministrationPage(
           tournamentId: tournamentId,
         ),
@@ -105,7 +102,9 @@ class _AdministrationPageState extends State<AdministrationPage> {
                       if (value != null) {
                         bloc.add(
                           AdministrationEventAddOwner(
-                              tournamentId: widget.tournamentId, email: value,),
+                            tournamentId: widget.tournamentId,
+                            email: value,
+                          ),
                         );
                       }
                     });
