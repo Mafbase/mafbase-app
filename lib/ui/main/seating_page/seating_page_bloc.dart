@@ -14,9 +14,10 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.da
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 
-class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState>
+class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     with EffectEmitter<SeatingPageEffect, SeatingPageState> {
   late int tournamentId;
+  final BuildContext? _context;
   final GetSeparationInteractor _getSeparationInteractor = getIt();
   final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
       getIt();
@@ -27,10 +28,11 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState>
   final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
       getIt();
   final TournamentEditRepository _tournamentEditRepository = getIt();
-  late final SeatingPageRouter router = getIt(param1: context);
+  late final SeatingPageRouter router = getIt(param1: _context);
 
   SeatingPageBloc([BuildContext? context])
-      : super(const SeatingPageState(), context) {
+      : _context = context,
+        super(const SeatingPageState()) {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
@@ -187,8 +189,4 @@ class SeatingPageBloc extends CustomBloc<SeatingPageEvent, SeatingPageState>
     emit(state.copyWith(isLoading: false, cannotMeet: pairs, games: seating));
   }
 
-  @override
-  void emitOnError(Emitter<SeatingPageState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

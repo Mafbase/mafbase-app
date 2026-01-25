@@ -1,0 +1,519 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get loginAuth => 'Authorization';
+
+  @override
+  String get loginEmailHint => 'Your email';
+
+  @override
+  String get loginPasswordHint => 'Password';
+
+  @override
+  String get loginIn => 'Sign in';
+
+  @override
+  String get loginRememberMe => 'Remember me';
+
+  @override
+  String get loginForgotPassword => 'Forgot password?';
+
+  @override
+  String get mainProfileHint => 'Profile settings';
+
+  @override
+  String get mainCreateTournamentHint => 'Create tournament';
+
+  @override
+  String get mainRegulationsHint => 'Tournament regulations';
+
+  @override
+  String get insertSeatingSuccess => 'Seating successfully saved';
+
+  @override
+  String get insertSeatingError => 'An error occurred while saving the seating';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get seating => 'Seating';
+
+  @override
+  String get idHint => '23';
+
+  @override
+  String get tournamentsListTitle => 'Tournaments';
+
+  @override
+  String get tournamentsListDateHeader => 'Tournament date';
+
+  @override
+  String get tournamentsListGamesCountHeader => 'Number of games';
+
+  @override
+  String get tournamentsListStatusHeader => 'Status';
+
+  @override
+  String get tournamentsListNameHeader => 'Tournament name';
+
+  @override
+  String get tournamentStatusActive => 'Active';
+
+  @override
+  String get tournamentStatusWaitForBilling => 'Waiting for payment';
+
+  @override
+  String get tournamentStatusEnded => 'Ended';
+
+  @override
+  String get loginRegistration => 'Sign up';
+
+  @override
+  String get loginRegister => 'Registration';
+
+  @override
+  String get addPlayer => 'Add participant';
+
+  @override
+  String get nicknameHint => 'Nickname';
+
+  @override
+  String get fsmNicknameHint => 'FSM nickname (optional)';
+
+  @override
+  String get mafbankNicknameHint => 'Mafbank nickname (optional)';
+
+  @override
+  String get addPlayerDialogTitle => 'Add participant';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get finalGamesHint => 'Number of final games';
+
+  @override
+  String get swissGamesHint => 'Number of Swiss games';
+
+  @override
+  String get defaultGamesHint => 'Number of qualifying games';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get yourEmail => 'Your email';
+
+  @override
+  String get wrongEmail =>
+      'Profile with this email already exists / Invalid email';
+
+  @override
+  String get enterPassword => 'Enter password';
+
+  @override
+  String get repeatPassword => 'Repeat password';
+
+  @override
+  String get invalidPassword => 'Password is too weak';
+
+  @override
+  String get notMatchPasswords => 'Passwords do not match';
+
+  @override
+  String get requiredForEnter => '- required field';
+
+  @override
+  String get authorization => 'Authorize';
+
+  @override
+  String get sendOneMoreCode => 'Send code again';
+
+  @override
+  String get verificationText =>
+      'An email with a registration confirmation code has been sent to your email, enter it below.\n';
+
+  @override
+  String get confirmRegistration => 'Registration confirmation';
+
+  @override
+  String get enterCode => 'Enter code';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get confirmText => 'Are you sure?';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get participants => 'Participants';
+
+  @override
+  String get separateTitle => 'Seat';
+
+  @override
+  String get addSeparationBtnText => 'Add pair';
+
+  @override
+  String get tournamentPageListOfPlayers => 'List of participants';
+
+  @override
+  String get withoutCi => 'Without compensation';
+
+  @override
+  String get ci => 'Compensation';
+
+  @override
+  String get createTournamentLabel => 'Tournament name';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get dateTimeRangePlaceholder => 'Tournament dates';
+
+  @override
+  String get fsmSeatingHeader => 'Load seating from FSM tournament';
+
+  @override
+  String get tournamentSettingsTitle => 'Tournament settings';
+
+  @override
+  String get defaultGamesLabel => 'Number of regular games';
+
+  @override
+  String get swissGamesLabel => 'Number of Swiss games';
+
+  @override
+  String get finalGamesLabel => 'Number of final games';
+
+  @override
+  String get invalidCode => 'Invalid code';
+
+  @override
+  String get addGame => 'Add new game';
+
+  @override
+  String get deleteGame => 'Delete';
+
+  @override
+  String get invalidEmailOrPassword => 'Invalid email or password';
+
+  @override
+  String tableAndGame(int table, int game) {
+    return 'Game $game, Table $table';
+  }
+
+  @override
+  String get mafiaWon => 'Mafia won';
+
+  @override
+  String get cityWon => 'City won';
+
+  @override
+  String get draw => 'Draw';
+
+  @override
+  String get tournamentSettingsUpdateSuccess =>
+      'Tournament settings successfully updated';
+
+  @override
+  String get clubsHeader => 'Clubs';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get openRating => 'Open club rating';
+
+  @override
+  String billClubButtonText(int amount) {
+    return 'Pay $amount₽';
+  }
+
+  @override
+  String get billClubButtonDisabledText => 'Pay';
+
+  @override
+  String billClubDialogOption(int days) {
+    return '$days days';
+  }
+
+  @override
+  String get clubDescription => 'Club description';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get contacts => 'Contacts';
+
+  @override
+  String get aboutApp => 'About app';
+
+  @override
+  String get politicaAlert =>
+      'By clicking the Sign in button, you fully accept ';
+
+  @override
+  String get politicaHref => 'Privacy Policy';
+
+  @override
+  String get playersCount => 'Number of players';
+
+  @override
+  String get translationHelp => 'Overlays';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String billedFor(String date) {
+    return 'Paid until $date';
+  }
+
+  @override
+  String get translationDialogTitle => 'Broadcast';
+
+  @override
+  String get translationContentLink => 'Embed link for OBS';
+
+  @override
+  String get translationControlLink => 'Control link';
+
+  @override
+  String get bucketFieldTitle => 'Buckets for semi-final stage';
+
+  @override
+  String get bucketFieldHint => '30;20;30';
+
+  @override
+  String get hideResult => 'Hide result';
+
+  @override
+  String get local_time_placeholder => 'Select time';
+
+  @override
+  String get rating_schema => 'Rating scheme';
+
+  @override
+  String get old_fsm_schema => 'Old FSM scheme';
+
+  @override
+  String get minus_fsm_schema => 'FSM scheme with minuses';
+
+  @override
+  String get fantasy => 'Fantasy';
+
+  @override
+  String get fantasyRatingEmpty => 'Rating is empty';
+
+  @override
+  String get fantasyRating => 'Rating';
+
+  @override
+  String fantasyPoints(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count points',
+      one: '1 point',
+      zero: '0 points',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String fantasyGame(int number) {
+    return 'Game $number';
+  }
+
+  @override
+  String get fantasyCurrentGameInfoUnavailable =>
+      'Current game information unavailable';
+
+  @override
+  String get fantasyCurrentGame => 'Current game';
+
+  @override
+  String get fantasyNotParticipating =>
+      'You are not allowed to participate in fantasy. Contact the tournament administrator to get access.';
+
+  @override
+  String get fantasyYourPrediction => 'Your prediction:';
+
+  @override
+  String get fantasyPredictionTimeExpired => 'Prediction time has expired';
+
+  @override
+  String get fantasyParticipants => 'Participants';
+
+  @override
+  String get fantasyNoParticipants => 'No participants added yet';
+
+  @override
+  String get fantasyAddParticipant => 'Add participant';
+
+  @override
+  String get fantasyEmail => 'Email';
+
+  @override
+  String get fantasyEmailInvalid => 'Enter a valid email address';
+
+  @override
+  String fantasyRemoveParticipant(String email) {
+    return 'Remove participant $email?';
+  }
+
+  @override
+  String get fantasyNoPrediction => 'No';
+
+  @override
+  String get fantasyPredictionSeparator => ' → ';
+
+  @override
+  String get fantasyPointsShort => ' points';
+
+  @override
+  String get fantasyStatusDisabled => 'Disabled';
+
+  @override
+  String get fantasyStatusEnabledForSelected => 'Enabled for selected';
+
+  @override
+  String get fantasyStatusEnabledForAll => 'Enabled for all';
+
+  @override
+  String get fantasyStatusLabel => 'Fantasy status';
+
+  @override
+  String get seatingPlayerNotFound => 'Player with nickname not found: ';
+
+  @override
+  String get seatingSelectOrCreatePlayer =>
+      'Select a player from the list or create a new one';
+
+  @override
+  String get seatingCurrentFsmNickname =>
+      'Current FSM nickname of selected player: ';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get period => 'Period: ';
+
+  @override
+  String get ratingNoGamesFound =>
+      'No games found for this period. Try changing the period.';
+
+  @override
+  String get ratingNumber => '#';
+
+  @override
+  String get ratingPlayer => 'Player';
+
+  @override
+  String get ratingScorePerGame => 'Score per game';
+
+  @override
+  String get ratingMvp => 'MVP';
+
+  @override
+  String get ratingMvpCitizen => 'MVP (citizen)';
+
+  @override
+  String get ratingMvpSheriff => 'MVP (sheriff)';
+
+  @override
+  String get ratingMvpDon => 'MVP (don)';
+
+  @override
+  String get ratingMvpMafia => 'MVP (mafia)';
+
+  @override
+  String get ratingWinRate => 'Win rate';
+
+  @override
+  String get ratingWinRateCitizen => 'Win rate as citizen';
+
+  @override
+  String get ratingWinRateSheriff => 'Win rate as sheriff';
+
+  @override
+  String get ratingWinRateMafia => 'Win rate as mafia';
+
+  @override
+  String get ratingWinRateDon => 'Win rate as don';
+
+  @override
+  String get ratingKillPercentage => 'Kill percentage';
+
+  @override
+  String get ratingPoints => 'Points';
+
+  @override
+  String get ratingPlus => '+';
+
+  @override
+  String get ratingCi => 'Ci';
+
+  @override
+  String get ratingWin => 'w';
+
+  @override
+  String get ratingRoleWin => 'rw';
+
+  @override
+  String get ratingDies => 'd';
+
+  @override
+  String get ratingGames => 'g';
+
+  @override
+  String get date => 'Date:';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get tempTryLuck => 'Try your luck!';
+
+  @override
+  String get tempTryNextTime => 'Try again next time';
+
+  @override
+  String get tempGotCard => 'You got a card!';
+
+  @override
+  String get tempGotGoldCard => 'You got a GOLDEN card!';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String unknownError(String error) {
+    return 'An unknown error occurred: $error';
+  }
+}

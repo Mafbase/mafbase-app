@@ -10,16 +10,15 @@ import 'package:seating_generator_web/ui/login/login_state.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
-class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginInteractor _loginInteractor;
   @visibleForTesting
   final LoginPageRouter router;
 
   LoginBloc(
     this._loginInteractor,
-    this.router, [
-    BuildContext? context,
-  ]) : super(LoginState(hasError: false), context) {
+    this.router,
+  ) : super(LoginState(hasError: false)) {
     on<LoginButtonTapped>(_onLoginButtonTapped);
     on<ForgotPasswordTapped>(_onForgotPasswordTapped);
     on<SignUpButtonTapped>(_onSignUpButtonTapped);
@@ -50,7 +49,6 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     final result = await _loginInteractor.run(
       event.email,
       event.password,
-      context: context,
     );
     if (result is Success) {
       router.openMainPage();
@@ -63,10 +61,6 @@ class LoginBloc extends CustomBloc<LoginEvent, LoginState> {
     }
   }
 
-  @override
-  void emitOnError(Emitter<LoginState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }
 
 abstract class LoginPageRouter {

@@ -4,14 +4,13 @@ import 'package:seating_generator_web/feature/fantasy/ui/fantasy_event.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_state.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 
-class FantasyBloc extends CustomBloc<FantasyEvent, FantasyState> {
+class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
   final FantasyRepository _repository;
   int? _currentUserId;
 
   FantasyBloc(
     super.initialState,
     this._repository,
-    super.context,
   ) {
     on<FantasyEventInit>(_onInit);
     on<FantasyEventRefresh>(_onRefresh);
@@ -141,8 +140,4 @@ class FantasyBloc extends CustomBloc<FantasyEvent, FantasyState> {
     }
   }
 
-  @override
-  void emitOnError(Emitter<FantasyState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

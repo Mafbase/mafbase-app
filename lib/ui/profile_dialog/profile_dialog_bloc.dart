@@ -9,20 +9,21 @@ import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_router.da
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_state.dart';
 
 class ProfileDialogBloc
-    extends CustomBloc<ProfileDialogEvent, ProfileDialogState> {
-  late final ProfileDialogRouter router = getIt(param1: context);
+    extends Bloc<ProfileDialogEvent, ProfileDialogState> {
+  final BuildContext? _context;
+  late final ProfileDialogRouter router = getIt(param1: _context);
   final EditPlayerInteractor _editPlayerInteractor = getIt();
   final AddPhotoInteractor _addPhotoInteractor = getIt();
   final int playerId;
 
   ProfileDialogBloc(PlayerModel player, [BuildContext? context])
       : playerId = player.id,
+        _context = context,
         super(
           ProfileDialogState(
             imageUrl: player.imageUrl,
             isLoading: false,
           ),
-          context,
         ) {
     on<ProfileDialogEventSubmit>(_onSubmit);
     on<ProfileDialogEventEditImage>(_onEditImage);
@@ -52,8 +53,4 @@ class ProfileDialogBloc
     router.close();
   }
 
-  @override
-  void emitOnError(Emitter<ProfileDialogState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

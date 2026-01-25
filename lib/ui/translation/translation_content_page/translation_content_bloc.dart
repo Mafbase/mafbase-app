@@ -6,7 +6,7 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 
 class TranslationContentBloc
-    extends CustomBloc<TranslationContentEvent, TranslationContentState> {
+    extends Bloc<TranslationContentEvent, TranslationContentState> {
   final TranslationContentBlocParams params;
   late final _socket = TournamentContentSocket(
     table: params.table,
@@ -16,7 +16,6 @@ class TranslationContentBloc
   TranslationContentBloc(this.params, [BuildContext? context])
       : super(
           const TranslationContentState(),
-          context,
         ) {
     on<TranslationContentEventStateReceived>(_onStateReceived);
     on<TranslationContentEventPageOpened>(_onPageOpened);
@@ -49,8 +48,6 @@ class TranslationContentBloc
     );
   }
 
-  @override
-  void emitOnError(Emitter<TranslationContentState> emit) {}
 
   @override
   Future<void> close() {

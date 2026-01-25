@@ -10,7 +10,7 @@ import 'package:seating_generator_web/ui/login/verification_body/verification_ev
 import 'package:seating_generator_web/ui/login/verification_body/verification_state.dart';
 
 class VerificationBloc
-    extends CustomBloc<VerificationEvents, VerificationState> {
+    extends Bloc<VerificationEvents, VerificationState> {
   @visibleForTesting
   final VerificationPageRouter router;
   final VerificationInteractor _interactor;
@@ -19,9 +19,8 @@ class VerificationBloc
   VerificationBloc(
     this.router,
     this._interactor,
-    this._id, [
-    BuildContext? context,
-  ]) : super(const VerificationState(isLoading: false), context) {
+    this._id,
+  ) : super(const VerificationState(isLoading: false)) {
     on<VerificationEventSubmit>(_onSubmit);
     on<OnSignUpButtonTapped>(onRegistrationButtonTapped);
     on<OnLoginButtonTapped>(onAuthButtonTapped);
@@ -58,10 +57,6 @@ class VerificationBloc
     router.openSignUpPage();
   }
 
-  @override
-  void emitOnError(Emitter<VerificationState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }
 
 abstract class VerificationPageRouter {

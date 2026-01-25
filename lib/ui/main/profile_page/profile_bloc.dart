@@ -7,17 +7,19 @@ import 'package:seating_generator_web/feature/profile/domain/interactor/delete_p
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 
-class ProfileBloc extends CustomBloc<ProfileEvent, ProfileState> {
+class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final CredentialStorage _credentialStorage;
   final LogoutInteractor _logoutInteractor;
   final DeleteProfileInteractor _deleteProfileInteractor;
+  final BuildContext? _context;
 
   ProfileBloc(
     this._logoutInteractor,
     this._credentialStorage,
     this._deleteProfileInteractor,
     BuildContext? context,
-  ) : super(const ProfileState(), context) {
+  ) : _context = context,
+        super(const ProfileState()) {
     on<ProfileEventLogoutPressed>(_onLogoutPressed);
     on<ProfileEventPageOpened>(_init);
     on<ProfileEventDeleteProfile>(_deleteProfile);
@@ -27,7 +29,7 @@ class ProfileBloc extends CustomBloc<ProfileEvent, ProfileState> {
     ProfileEventDeleteProfile event,
     Emitter emit,
   ) =>
-      _deleteProfileInteractor.run().whenComplete(() => context?.pop());
+      _deleteProfileInteractor.run().whenComplete(() => _context?.pop());
 
   Future<void> _init(ProfileEventPageOpened event, Emitter emit) async {
     final login = await _credentialStorage.read().then((value) => value?.login);
@@ -41,11 +43,7 @@ class ProfileBloc extends CustomBloc<ProfileEvent, ProfileState> {
   }
 
   _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {
-    return _logoutInteractor().whenComplete(() => context?.pop());
+    return _logoutInteractor().whenComplete(() => _context?.pop());
   }
 
-  @override
-  void emitOnError(Emitter<ProfileState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

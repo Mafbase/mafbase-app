@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
@@ -8,14 +9,14 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/se
 typedef _Emit = Emitter<SeatingPageDialogState>;
 
 class SeatingPageDialogBloc
-    extends CustomBloc<SeatingPageDialogEvent, SeatingPageDialogState>
+    extends Bloc<SeatingPageDialogEvent, SeatingPageDialogState>
     with EffectEmitter<SeatingPageDialogEffect, SeatingPageDialogState> {
   final PlayersRepository _playersRepository;
 
   SeatingPageDialogBloc(
     super.initialState,
     this._playersRepository, [
-    super.context,
+    BuildContext? context,
   ]) {
     on<SeatingPageDialogEventInit>(_init);
     on<SeatingPageDialogEventNewPlayer>(_newPlayer);
@@ -85,8 +86,4 @@ class SeatingPageDialogBloc
     );
   }
 
-  @override
-  void emitOnError(Emitter<SeatingPageDialogState> emit) {
-    emit(state.copyWith(loading: false));
-  }
 }

@@ -9,6 +9,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/se
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_state.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class SeatingPageDialog extends StatefulWidget {
   const SeatingPageDialog._();
@@ -79,8 +80,8 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                             TextSpan(
                               style: const TextStyle(fontSize: 24),
                               children: [
-                                const TextSpan(
-                                  text: 'Не найден игрок с никнеймом: ',
+                                TextSpan(
+                                  text: context.locale.seatingPlayerNotFound,
                                 ),
                                 TextSpan(
                                   text: state.incorrectPlayer,
@@ -91,15 +92,15 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                               ],
                             ),
                           ),
-                          const Text(
-                            'Выберите игрока из списка, либо создайте нового',
+                          Text(
+                            context.locale.seatingSelectOrCreatePlayer,
                           ),
                           NicknameField(
                             controller: controller,
                             focusNode: focusNode,
                             availablePlayers: state.players,
                             readOnly: false,
-                            hint: 'Никнейм',
+                            hint: context.locale.nicknameHint,
                             down: true,
                             onNewPlayer: ({initValue}) {
                               if (initValue == null) return;
@@ -119,9 +120,9 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                             Text.rich(
                               TextSpan(
                                 children: [
-                                  const TextSpan(
+                                  TextSpan(
                                     text:
-                                        'Текущий ФСМ никнейм выбранного игрока: ',
+                                        context.locale.seatingCurrentFsmNickname,
                                   ),
                                   TextSpan(
                                     text: fsmNickname,
@@ -134,7 +135,7 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                             ),
                           const SizedBox(height: 32),
                           CustomButton(
-                            text: 'Подтвердить',
+                            text: context.locale.confirm,
                             disabled: selectedPlayer == null,
                             onTap: () {
                               final player = selectedPlayer;

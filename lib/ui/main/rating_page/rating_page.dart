@@ -238,7 +238,7 @@ class _RatingPageState extends CustomState<RatingPage> {
               builder: (context) => Scaffold(
                 appBar: AppBar(
                   automaticallyImplyLeading: true,
-                  title: Text('Рейтинг'),
+                  title: Text(context.locale.rating),
                   backgroundColor: MyTheme.of(context).darkBlueColor,
                   foregroundColor: Colors.white,
                 ),
@@ -294,7 +294,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                 child: TextButton(
                   onPressed: onChangeRangeTap,
                   child: Text(
-                    "Период:\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
+                    "${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -323,7 +323,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          'За данный период не найдено ни одной игры. Попробуйте изменить период.',
+                          context.locale.ratingNoGamesFound,
                           style: MyTheme.of(context).defaultTextStyle,
                           textAlign: TextAlign.center,
                         ),
@@ -387,7 +387,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Text("Период: "),
+                                  Text(context.locale.period),
                                   CustomButton(
                                     onTap: onChangeRangeTap,
                                     disabled: widget.tournamentId != null,

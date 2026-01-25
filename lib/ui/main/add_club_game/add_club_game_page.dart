@@ -627,7 +627,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                       ),
                   child: Wrap(
                     children: [
-                      const Text("Дата:"),
+                      Text(context.locale.date),
                       const SizedBox(width: 80),
                       Text(
                         DateFormat("dd:MM:yyy HH:mm").format(date),

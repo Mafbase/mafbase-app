@@ -4,7 +4,7 @@ import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/ui/temp/temp_event.dart';
 import 'package:seating_generator_web/ui/temp/temp_state.dart';
 
-class TempBloc extends CustomBloc<TempEvent, TempState> {
+class TempBloc extends Bloc<TempEvent, TempState> {
   TempBloc() : super(const TempState(style: TempStyle.hide)) {
     on<TempEventGenerate>(_onGenerate);
   }
@@ -22,6 +22,4 @@ class TempBloc extends CustomBloc<TempEvent, TempState> {
     }
   }
 
-  @override
-  void emitOnError(Emitter<TempState> emit) {}
 }

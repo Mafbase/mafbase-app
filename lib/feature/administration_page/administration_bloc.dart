@@ -5,7 +5,7 @@ import 'package:seating_generator_web/domain/interactors/get_administration_inte
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
 
-class AdministrationBloc extends CustomBloc<AdministrationEvent, AdministrationState> {
+class AdministrationBloc extends Bloc<AdministrationEvent, AdministrationState> {
   final GetAdministrationInteractor getAdministrationInteractor;
   final AddOwnerInteractor addOwnerInteractor;
   final DeleteOwnerInteractor deleteOwnerInteractor;
@@ -15,7 +15,6 @@ class AdministrationBloc extends CustomBloc<AdministrationEvent, AdministrationS
     this.addOwnerInteractor,
     this.deleteOwnerInteractor,
     this.getAdministrationInteractor,
-    super.context,
   ) {
     on<AdministrationEventPageOpened>(_onPageOpened);
     on<AdministrationEventAddOwner>(_onAddOwnerTapped);
@@ -69,12 +68,4 @@ class AdministrationBloc extends CustomBloc<AdministrationEvent, AdministrationS
     emit(state.copyWith(isLoading: false, owners: owners));
   }
 
-  @override
-  void emitOnError(Emitter<AdministrationState> emit) {
-    emit(
-      state.copyWith(
-        isLoading: false,
-      ),
-    );
-  }
 }

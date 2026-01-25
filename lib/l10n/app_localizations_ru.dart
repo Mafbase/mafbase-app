@@ -328,7 +328,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String fantasyPoints(int count) {
-    return '$count очков';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count очков',
+      many: '$count очков',
+      few: '$count очка',
+      one: '1 очко',
+      zero: '0 очков',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -394,4 +403,120 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get fantasyStatusLabel => 'Статус фентези';
+
+  @override
+  String get seatingPlayerNotFound => 'Не найден игрок с никнеймом: ';
+
+  @override
+  String get seatingSelectOrCreatePlayer =>
+      'Выберите игрока из списка, либо создайте нового';
+
+  @override
+  String get seatingCurrentFsmNickname =>
+      'Текущий ФСМ никнейм выбранного игрока: ';
+
+  @override
+  String get confirm => 'Подтвердить';
+
+  @override
+  String get rating => 'Рейтинг';
+
+  @override
+  String get period => 'Период: ';
+
+  @override
+  String get ratingNoGamesFound =>
+      'За данный период не найдено ни одной игры. Попробуйте изменить период.';
+
+  @override
+  String get ratingNumber => '№';
+
+  @override
+  String get ratingPlayer => 'Игрок';
+
+  @override
+  String get ratingScorePerGame => 'Балл за игру';
+
+  @override
+  String get ratingMvp => 'MVP';
+
+  @override
+  String get ratingMvpCitizen => 'MVP (мирный)';
+
+  @override
+  String get ratingMvpSheriff => 'MVP (шериф)';
+
+  @override
+  String get ratingMvpDon => 'MVP (дон)';
+
+  @override
+  String get ratingMvpMafia => 'MVP (мафия)';
+
+  @override
+  String get ratingWinRate => 'Винрейт';
+
+  @override
+  String get ratingWinRateCitizen => 'Винрейт за мирного';
+
+  @override
+  String get ratingWinRateSheriff => 'Винрейт за шерифа';
+
+  @override
+  String get ratingWinRateMafia => 'Винрейт за мафию';
+
+  @override
+  String get ratingWinRateDon => 'Винрейт за дона';
+
+  @override
+  String get ratingKillPercentage => 'Процент убийств';
+
+  @override
+  String get ratingPoints => 'Очки';
+
+  @override
+  String get ratingPlus => '+';
+
+  @override
+  String get ratingCi => 'Ci';
+
+  @override
+  String get ratingWin => 'п';
+
+  @override
+  String get ratingRoleWin => 'дк';
+
+  @override
+  String get ratingDies => 'по';
+
+  @override
+  String get ratingGames => 'и';
+
+  @override
+  String get date => 'Дата:';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get tempTryLuck => 'Испытай удачу!';
+
+  @override
+  String get tempTryNextTime => 'Попробуй в следующий раз';
+
+  @override
+  String get tempGotCard => 'Ты получил карточку!';
+
+  @override
+  String get tempGotGoldCard => 'Ты получил ЗОЛОТУЮ карточку!';
+
+  @override
+  String get next => 'Дальше';
+
+  @override
+  String unknownError(String error) {
+    return 'Произошла неизвестная ошибка $error';
+  }
 }

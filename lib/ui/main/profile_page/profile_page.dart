@@ -128,11 +128,11 @@ class _ProfilePageState extends State<ProfilePage> {
     final result = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Вы уверны?"),
+        title: Text(context.locale.confirmText),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Нет'),
+            child: Text(context.locale.no),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),

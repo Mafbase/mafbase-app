@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_en.dart';
 import 'app_localizations_ru.dart';
 
 // ignore_for_file: type=lint
@@ -92,7 +93,10 @@ abstract class AppLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('ru')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('ru')
+  ];
 
   /// No description provided for @loginAuth.
   ///
@@ -709,7 +713,7 @@ abstract class AppLocalizations {
   /// No description provided for @fantasyPoints.
   ///
   /// In ru, this message translates to:
-  /// **'{count} очков'**
+  /// **'{count, plural, =0{0 очков} =1{1 очко} few{{count} очка} many{{count} очков} other{{count} очков}}'**
   String fantasyPoints(int count);
 
   /// No description provided for @fantasyGame.
@@ -825,6 +829,228 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Статус фентези'**
   String get fantasyStatusLabel;
+
+  /// No description provided for @seatingPlayerNotFound.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не найден игрок с никнеймом: '**
+  String get seatingPlayerNotFound;
+
+  /// No description provided for @seatingSelectOrCreatePlayer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите игрока из списка, либо создайте нового'**
+  String get seatingSelectOrCreatePlayer;
+
+  /// No description provided for @seatingCurrentFsmNickname.
+  ///
+  /// In ru, this message translates to:
+  /// **'Текущий ФСМ никнейм выбранного игрока: '**
+  String get seatingCurrentFsmNickname;
+
+  /// No description provided for @confirm.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подтвердить'**
+  String get confirm;
+
+  /// No description provided for @rating.
+  ///
+  /// In ru, this message translates to:
+  /// **'Рейтинг'**
+  String get rating;
+
+  /// No description provided for @period.
+  ///
+  /// In ru, this message translates to:
+  /// **'Период: '**
+  String get period;
+
+  /// No description provided for @ratingNoGamesFound.
+  ///
+  /// In ru, this message translates to:
+  /// **'За данный период не найдено ни одной игры. Попробуйте изменить период.'**
+  String get ratingNoGamesFound;
+
+  /// No description provided for @ratingNumber.
+  ///
+  /// In ru, this message translates to:
+  /// **'№'**
+  String get ratingNumber;
+
+  /// No description provided for @ratingPlayer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игрок'**
+  String get ratingPlayer;
+
+  /// No description provided for @ratingScorePerGame.
+  ///
+  /// In ru, this message translates to:
+  /// **'Балл за игру'**
+  String get ratingScorePerGame;
+
+  /// No description provided for @ratingMvp.
+  ///
+  /// In ru, this message translates to:
+  /// **'MVP'**
+  String get ratingMvp;
+
+  /// No description provided for @ratingMvpCitizen.
+  ///
+  /// In ru, this message translates to:
+  /// **'MVP (мирный)'**
+  String get ratingMvpCitizen;
+
+  /// No description provided for @ratingMvpSheriff.
+  ///
+  /// In ru, this message translates to:
+  /// **'MVP (шериф)'**
+  String get ratingMvpSheriff;
+
+  /// No description provided for @ratingMvpDon.
+  ///
+  /// In ru, this message translates to:
+  /// **'MVP (дон)'**
+  String get ratingMvpDon;
+
+  /// No description provided for @ratingMvpMafia.
+  ///
+  /// In ru, this message translates to:
+  /// **'MVP (мафия)'**
+  String get ratingMvpMafia;
+
+  /// No description provided for @ratingWinRate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Винрейт'**
+  String get ratingWinRate;
+
+  /// No description provided for @ratingWinRateCitizen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Винрейт за мирного'**
+  String get ratingWinRateCitizen;
+
+  /// No description provided for @ratingWinRateSheriff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Винрейт за шерифа'**
+  String get ratingWinRateSheriff;
+
+  /// No description provided for @ratingWinRateMafia.
+  ///
+  /// In ru, this message translates to:
+  /// **'Винрейт за мафию'**
+  String get ratingWinRateMafia;
+
+  /// No description provided for @ratingWinRateDon.
+  ///
+  /// In ru, this message translates to:
+  /// **'Винрейт за дона'**
+  String get ratingWinRateDon;
+
+  /// No description provided for @ratingKillPercentage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Процент убийств'**
+  String get ratingKillPercentage;
+
+  /// No description provided for @ratingPoints.
+  ///
+  /// In ru, this message translates to:
+  /// **'Очки'**
+  String get ratingPoints;
+
+  /// No description provided for @ratingPlus.
+  ///
+  /// In ru, this message translates to:
+  /// **'+'**
+  String get ratingPlus;
+
+  /// No description provided for @ratingCi.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ci'**
+  String get ratingCi;
+
+  /// No description provided for @ratingWin.
+  ///
+  /// In ru, this message translates to:
+  /// **'п'**
+  String get ratingWin;
+
+  /// No description provided for @ratingRoleWin.
+  ///
+  /// In ru, this message translates to:
+  /// **'дк'**
+  String get ratingRoleWin;
+
+  /// No description provided for @ratingDies.
+  ///
+  /// In ru, this message translates to:
+  /// **'по'**
+  String get ratingDies;
+
+  /// No description provided for @ratingGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'и'**
+  String get ratingGames;
+
+  /// No description provided for @date.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дата:'**
+  String get date;
+
+  /// No description provided for @error.
+  ///
+  /// In ru, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @cancel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @tempTryLuck.
+  ///
+  /// In ru, this message translates to:
+  /// **'Испытай удачу!'**
+  String get tempTryLuck;
+
+  /// No description provided for @tempTryNextTime.
+  ///
+  /// In ru, this message translates to:
+  /// **'Попробуй в следующий раз'**
+  String get tempTryNextTime;
+
+  /// No description provided for @tempGotCard.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ты получил карточку!'**
+  String get tempGotCard;
+
+  /// No description provided for @tempGotGoldCard.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ты получил ЗОЛОТУЮ карточку!'**
+  String get tempGotGoldCard;
+
+  /// No description provided for @next.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дальше'**
+  String get next;
+
+  /// No description provided for @unknownError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Произошла неизвестная ошибка {error}'**
+  String unknownError(String error);
 }
 
 class _AppLocalizationsDelegate
@@ -838,7 +1064,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['ru'].contains(locale.languageCode);
+      <String>['en', 'ru'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -847,6 +1073,8 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'en':
+      return AppLocalizationsEn();
     case 'ru':
       return AppLocalizationsRu();
   }

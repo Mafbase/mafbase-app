@@ -2,11 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/router.dart';
-import 'package:seating_generator_web/data/http_client.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 export 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,76 +55,4 @@ mixin EffectListener<E, S, B extends EffectEmitter<E, S>,
   }
 
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {}
-}
-
-abstract class CustomBloc<E, S> extends Bloc<E, S> {
-  final BuildContext? context;
-
-  CustomBloc(super.initialState, [this.context]);
-
-  @override
-  void on<EV extends E>(
-    EventHandler<EV, S> handler, {
-    EventTransformer<EV>? transformer,
-  }) {
-    super.on(
-      (event, emit) async {
-        await _functionWrapper(
-          () async {
-            await handler(event, emit);
-          },
-          emit,
-        );
-      },
-      transformer: transformer,
-    );
-  }
-
-  void emitOnError(Emitter<S> emit);
-
-  FutureOr _functionWrapper(
-    FutureOr Function() function,
-    Emitter<S> emit,
-  ) async {
-    try {
-      try {
-        return await function();
-      } on RequestError catch (error) {
-        if (context != null) {
-          AppRouter.showErrorDialog(context!, error.message ?? "");
-        }
-        rethrow;
-      } on UnauthenticatedError catch (error) {
-        if (context != null) {
-          final location = GoRouter.of(context!)
-              .routeInformationProvider
-              .value
-              .uri
-              .toString();
-          context!.go(
-            LoginPageBody.createLocation(
-              context: context!,
-              nextPath: location,
-            ),
-          );
-
-          AppRouter.showErrorDialog(context!, error.message ?? "");
-        }
-        rethrow;
-      } catch (error) {
-        if (context != null) {
-          AppRouter.showErrorDialog(
-            context!,
-            "Произошла неизвестная ошибка $error",
-          );
-        }
-        rethrow;
-      }
-    } catch (ignored, stacktrace) {
-      emitOnError(emit);
-      debugPrint(ignored.toString());
-      debugPrint(stacktrace.toString());
-      Sentry.captureException(ignored, stackTrace: stacktrace);
-    }
-  }
 }

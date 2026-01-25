@@ -315,8 +315,7 @@ void registerSharedGetIt() {
     ..registerFactoryParam<LoginBloc, BuildContext?, String?>(
       (context, nextPath) => LoginBloc(
         getIt(),
-        getIt.call(param1: context, param2: nextPath),
-        context,
+        getIt(param1: context, param2: nextPath),
       ),
     )
     ..registerFactoryParam<SeatingPageBloc, BuildContext?, dynamic>(
@@ -361,20 +360,21 @@ void registerSharedGetIt() {
       () => AddPhotoInteractor(getIt()),
     )
     ..registerLazySingleton<BillClubInteractor>(
-      () => BillClubInteractor(
-        getIt(),
-      ),
+      () => BillClubInteractor(getIt()),
     )
     ..registerFactoryParam<VerificationBloc, BuildContext?, int>(
       (context, id) {
-        return VerificationBloc(getIt(param1: context), getIt(), id, context);
+        return VerificationBloc(
+          getIt(param1: context),
+          getIt(),
+          id,
+        );
       },
     )
     ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(
       (context, _) => SignUpBloc(
         getIt(),
         getIt.call(param1: context),
-        context,
       ),
     )
     ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
@@ -412,6 +412,6 @@ void registerSharedGetIt() {
     ..registerLazySingleton<InfoTableDescriptionRepository>(() => InfoTableDescriptionRepositoryImpl(getIt()))
     ..registerLazySingleton<FantasyRepository>(() => FantasyRepositoryImpl(getIt()))
     ..registerFactoryParam<FantasyBloc, BuildContext?, dynamic>(
-      (context, tournamentId) => FantasyBloc(FantasyState(), getIt(), context),
+      (context, tournamentId) => FantasyBloc(FantasyState(), getIt()),
     );
 }

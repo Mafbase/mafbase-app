@@ -8,7 +8,7 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_event
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
 
-class TournamentsBloc extends CustomBloc<TournamentsEvent, TournamentsState> {
+class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
   final GetMyTournamentsInteractor _getTournamentsInteractor;
   final CreateTournamentInteractor _createTournamentInteractor;
   @visibleForTesting
@@ -21,7 +21,6 @@ class TournamentsBloc extends CustomBloc<TournamentsEvent, TournamentsState> {
   ])  : router = getIt(param1: context),
         super(
           const TournamentsState(tournaments: [], isLoading: true),
-          context,
         ) {
     on<TournamentOpenedEvent>(_onOpened);
     on<TournamentsEventCreate>(_onCreateNew);
@@ -53,8 +52,4 @@ class TournamentsBloc extends CustomBloc<TournamentsEvent, TournamentsState> {
     }
   }
 
-  @override
-  void emitOnError(Emitter<TournamentsState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

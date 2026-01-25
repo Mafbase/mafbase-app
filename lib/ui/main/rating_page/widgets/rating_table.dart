@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:seating_generator_web/domain/models/club_rating_row.dart';
+import 'package:seating_generator_web/utils.dart';
 
 enum RatingTableStyle {
   full,
@@ -736,14 +737,14 @@ class _RatingTableState extends State<RatingTable> {
           mainControllers[0],
           key: const Key("scoreColumn0"),
           builder: indexWidgets,
-          header: const Text("№"),
+          header: Text(context.locale.ratingNumber),
           prototype: indexProtoype,
         ),
         column(
           mainControllers[1],
           key: const Key("scoreColumn1"),
           builder: nicknames,
-          header: const Text("Игрок"),
+          header: Text(context.locale.ratingPlayer),
           prototype: nicknamePrototype,
         ),
         column(
@@ -754,7 +755,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.scorePerGame);
             },
-            child: const Text("Балл за игру"),
+            child: Text(context.locale.ratingScorePerGame),
           ),
         ),
         column(
@@ -765,7 +766,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.addScorePerGame);
             },
-            child: const Text("MVP"),
+            child: Text(context.locale.ratingMvp),
           ),
         ),
         column(
@@ -776,7 +777,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.citizenAddScorePerGame);
             },
-            child: const Text("MVP (мирный)"),
+            child: Text(context.locale.ratingMvpCitizen),
           ),
         ),
         column(
@@ -787,7 +788,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.sheriffAddScorePerGame);
             },
-            child: const Text("MVP (шериф)"),
+            child: Text(context.locale.ratingMvpSheriff),
           ),
         ),
         column(
@@ -798,7 +799,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.donAddScorePerGame);
             },
-            child: const Text("MVP (дон)"),
+            child: Text(context.locale.ratingMvpDon),
           ),
         ),
         column(
@@ -809,7 +810,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.mafiaAddScorePerGame);
             },
-            child: const Text("MVP (мафия)"),
+            child: Text(context.locale.ratingMvpMafia),
           ),
         ),
       ];
@@ -819,14 +820,14 @@ class _RatingTableState extends State<RatingTable> {
           mainControllers[0],
           key: const Key("statsColumn0"),
           builder: indexWidgets,
-          header: const Text("№"),
+          header: Text(context.locale.ratingNumber),
           prototype: indexProtoype,
         ),
         column(
           mainControllers[1],
           key: const Key("statsColumn0"),
           builder: nicknames,
-          header: const Text("Игрок"),
+          header: Text(context.locale.ratingPlayer),
           prototype: nicknamePrototype,
         ),
         column(
@@ -837,7 +838,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.winRate);
             },
-            child: const Text("Винрейт"),
+            child: Text(context.locale.ratingWinRate),
           ),
           prototype: winRatePrototype(),
         ),
@@ -849,7 +850,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.citizenWinRate);
             },
-            child: const Text("Винрейт за мирного"),
+            child: Text(context.locale.ratingWinRateCitizen),
           ),
           prototype: citizenWinRatePrototype(),
         ),
@@ -861,7 +862,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.sheriffWinRate);
             },
-            child: const Text("Винрейт за шерифа"),
+            child: Text(context.locale.ratingWinRateSheriff),
           ),
           prototype: sheriffWinRatePrototype(),
         ),
@@ -873,7 +874,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.mafiaWinRate);
             },
-            child: const Text("Винрейт за мафию"),
+            child: Text(context.locale.ratingWinRateMafia),
           ),
           prototype: mafiaWinRatePrototype(),
         ),
@@ -885,7 +886,7 @@ class _RatingTableState extends State<RatingTable> {
             onTap: () {
               widget.changeSort(RatingSort.donWinRate);
             },
-            child: const Text("Винрейт за дона"),
+            child: Text(context.locale.ratingWinRateDon),
           ),
           prototype: donWinRatePrototype(),
         ),
@@ -894,7 +895,7 @@ class _RatingTableState extends State<RatingTable> {
           key: const Key("statsColumn7"),
           builder: diesStat,
           header: InkWell(
-            child: const Text("Процент убийств"),
+            child: Text(context.locale.ratingKillPercentage),
             onTap: () {
               widget.changeSort(RatingSort.dies);
             },
@@ -960,7 +961,7 @@ class _RatingTableState extends State<RatingTable> {
         mainControllers[1],
         key: const Key("fullColumns1"),
         builder: (index) => nicknames(index),
-        header: const Text("Игрок"),
+        header: Text(context.locale.ratingPlayer),
         prototype: nicknamePrototype,
       ),
       column(
@@ -971,7 +972,7 @@ class _RatingTableState extends State<RatingTable> {
           onTap: () {
             widget.changeSort(RatingSort.score);
           },
-          child: const Text("Очки"),
+          child: Text(context.locale.ratingPoints),
         ),
         prototype: scorePrototype,
       ),
@@ -979,7 +980,7 @@ class _RatingTableState extends State<RatingTable> {
         mainControllers[4],
         key: const Key("fullColumns4"),
         builder: addScores,
-        header: const Text("+"),
+        header: Text(context.locale.ratingPlus),
         prototype: addScorePrototype,
         boldRight: true,
       ),
@@ -992,7 +993,7 @@ class _RatingTableState extends State<RatingTable> {
       column(
         mainControllers[5],
         key: const Key("fullColumns5"),
-        header: const Text("Ci"),
+        header: Text(context.locale.ratingCi),
         prototype: ciPrototype,
         builder: ciWidget,
         boldLeft: true,
@@ -1000,14 +1001,14 @@ class _RatingTableState extends State<RatingTable> {
       column(
         mainControllers[6],
         key: const Key("fullColumns6"),
-        header: const Text("п"),
+        header: Text(context.locale.ratingWin),
         prototype: winPrototype,
         builder: wins,
       ),
       column(
         key: const Key("fullColumns7"),
         mainControllers[7],
-        header: const Text("дк"),
+        header: Text(context.locale.ratingRoleWin),
         prototype: roleWinPrototype,
         builder: roleWins,
       ),
@@ -1015,7 +1016,7 @@ class _RatingTableState extends State<RatingTable> {
         mainControllers[8],
         key: const Key("fullColumns8"),
         builder: dies,
-        header: const Text("по"),
+        header: Text(context.locale.ratingDies),
         prototype: diesPrototype,
       ),
       column(
@@ -1023,7 +1024,7 @@ class _RatingTableState extends State<RatingTable> {
         key: const Key("fullColumns9"),
         builder: totalGamesWidget,
         isLastColumn: true,
-        header: const Text("и"),
+        header: Text(context.locale.ratingGames),
       ),
     ];
   }

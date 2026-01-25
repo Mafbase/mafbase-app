@@ -23,9 +23,10 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_st
 import 'package:url_launcher/url_launcher.dart';
 
 class TournamentPageBloc
-    extends CustomBloc<TournamentPageEvent, TournamentPageState>
+    extends Bloc<TournamentPageEvent, TournamentPageState>
     with EffectEmitter<TournamentPageEffect, TournamentPageState> {
   final int tournamentId;
+  final BuildContext? _context;
   final GetAllPlayersInteractor _getAllPlayersInteractor = getIt();
   final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
       getIt();
@@ -45,15 +46,16 @@ class TournamentPageBloc
   final StartGameInfoInteractor _startGameInfoInteractor = getIt();
 
   late final BillTournamentInteractor _billTournamentInteractor = getIt(
-    param1: context,
+    param1: _context,
   );
 
   @visibleForTesting
   late final TournamentPageRouter router =
-      getIt<TournamentPageRouter>(param1: context);
+      getIt<TournamentPageRouter>(param1: _context);
 
   TournamentPageBloc({BuildContext? context, required this.tournamentId})
-      : super(const TournamentPageState(), context) {
+      : _context = context,
+        super(const TournamentPageState()) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);
     on<TournamentPageEventDeletePlayer>(_onDeletePlayer);
@@ -272,8 +274,4 @@ class TournamentPageBloc
     return Future.wait([first, second]);
   }
 
-  @override
-  void emitOnError(Emitter<TournamentPageState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

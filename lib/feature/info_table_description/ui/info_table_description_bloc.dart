@@ -3,7 +3,7 @@ import 'package:seating_generator_web/feature/info_table_description/domain/info
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_event.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_state.dart';
 
-class InfoTableDescriptionBloc extends CustomBloc<InfoTableDescriptionEvent, InfoTableState> {
+class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTableState> {
   final InfoTableDescriptionRepository _repository;
   late String _tournamentId;
 
@@ -75,8 +75,4 @@ class InfoTableDescriptionBloc extends CustomBloc<InfoTableDescriptionEvent, Inf
     }
   }
 
-  @override
-  void emitOnError(Emitter<InfoTableState> emit) {
-    emit(state.copyWith(loading: false));
-  }
 }

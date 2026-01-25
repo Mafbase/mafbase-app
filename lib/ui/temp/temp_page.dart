@@ -6,6 +6,7 @@ import 'package:seating_generator_web/common/widgets/flip_widget.dart';
 import 'package:seating_generator_web/ui/temp/temp_bloc.dart';
 import 'package:seating_generator_web/ui/temp/temp_event.dart';
 import 'package:seating_generator_web/ui/temp/temp_state.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class TempPage extends StatefulWidget {
   const TempPage({super.key});
@@ -36,27 +37,27 @@ class _TempPageState extends State<TempPage> {
           case TempStyle.hide:
             child = Container(
               padding: const EdgeInsets.all(8),
-              child: const Text("Испытай удачу!"),
+              child: Text(context.locale.tempTryLuck),
             );
             break;
           case TempStyle.empty:
             child = Container(
               padding: const EdgeInsets.all(8),
-              child: const Text("Попробуй в следующий раз"),
+              child: Text(context.locale.tempTryNextTime),
             );
             break;
           case TempStyle.classic:
             child = Container(
               color: Colors.blueAccent,
               padding: const EdgeInsets.all(8),
-              child: const Text("Ты получил карточку!"),
+              child: Text(context.locale.tempGotCard),
             );
             break;
           case TempStyle.gold:
             child = Container(
               color: Colors.amber,
               padding: const EdgeInsets.all(8),
-              child: const Text("Ты получил ЗОЛОТУЮ карточку!"),
+              child: Text(context.locale.tempGotGoldCard),
             );
             break;
         }
@@ -84,7 +85,7 @@ class _TempPageState extends State<TempPage> {
                   children: [
                     child,
                     CustomButton(
-                      text: "Дальше",
+                      text: context.locale.next,
                       onTap: () {
                         context
                             .read<TempBloc>()

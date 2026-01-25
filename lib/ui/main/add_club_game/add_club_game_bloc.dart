@@ -24,14 +24,15 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
 
-class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
+class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     with EffectEmitter<AddClubGameEffect, AddClubGameState> {
   final GetAllPlayersInteractor _getAllPlayersInteractor = getIt();
   final AddClubGameInteractor _addClubGameInteractor = getIt();
   final ClubRepository _repository = getIt();
   final int? clubId;
   final int? tournamentId;
-  late final AddClubGameRouter router = getIt(param1: context);
+  final BuildContext? _context;
+  late final AddClubGameRouter router = getIt(param1: _context);
   final CreatePlayerInteractor _createPlayerInteractor = getIt();
   final GetCiSchemesInteractor _getCiSchemesInteractor = getIt();
   final GetClubInteractor _getClubInteractor = getIt();
@@ -47,7 +48,8 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     this.tournamentId,
     BuildContext? context,
   })  : assert((clubId == null) != (tournamentId == null)),
-        super(AddClubGameState(isTournament: tournamentId != null), context) {
+        _context = context,
+        super(AddClubGameState(isTournament: tournamentId != null)) {
     on<AddClubGameEventPageOpened>(_onPageOpened);
     on<AddClubGameEventSubmit>(_onSubmit);
     on<AddClubGameEventPageEdit>(_onEdit);
@@ -76,12 +78,12 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
   }
 
   _onNewPlayer(AddClubGameEventNewPlayer event, Emitter emit) async {
-    if (context == null) {
+    if (_context == null) {
       return;
     }
 
     final newPlayer = await AddPlayerDialog.open(
-      context: context!,
+      context: _context!,
       availablePlayers: state.players,
       initValue: event.nickname,
     );
@@ -288,8 +290,4 @@ class AddClubGameBloc extends CustomBloc<AddClubGameEvent, AddClubGameState>
     }
   }
 
-  @override
-  void emitOnError(Emitter emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

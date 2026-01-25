@@ -3,7 +3,7 @@ import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_event.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_state.dart';
 
-class ClubGamesBloc extends CustomBloc<ClubGamesEvent, ClubGamesState> {
+class ClubGamesBloc extends Bloc<ClubGamesEvent, ClubGamesState> {
   final ClubRepository repository;
 
   ClubGamesBloc(
@@ -30,8 +30,4 @@ class ClubGamesBloc extends CustomBloc<ClubGamesEvent, ClubGamesState> {
     );
   }
 
-  @override
-  void emitOnError(Emitter<ClubGamesState> emit) {
-    emit(state.copyWith(loading: false));
-  }
 }

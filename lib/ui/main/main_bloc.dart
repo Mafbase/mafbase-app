@@ -14,7 +14,7 @@ import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 
-class MainBloc extends CustomBloc<MainEvent, MainState> {
+class MainBloc extends Bloc<MainEvent, MainState> {
   @visibleForTesting
   final MainPageRouter router;
 
@@ -26,7 +26,6 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
             isLoading: false,
             hasBackButton: false,
           ),
-          context,
         ) {
     on<MainEventSwitchTab>(_onSwitchTab);
     on<MainEventBackButtonPressed>(_onBackButtonPressed);
@@ -81,10 +80,6 @@ class MainBloc extends CustomBloc<MainEvent, MainState> {
     }
   }
 
-  @override
-  void emitOnError(Emitter<MainState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }
 
 abstract class MainPageRouter {

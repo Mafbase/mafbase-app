@@ -21,7 +21,7 @@ class ClubBlocArgs {
   });
 }
 
-class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
+class ClubBloc extends Bloc<ClubEvent, ClubState> {
   final int _clubId;
   final GetClubInteractor _getClubInteractor;
   @visibleForTesting
@@ -50,7 +50,6 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
                   isLoading: false,
                   model: args.cachedModel,
                 ),
-          context,
         ) {
     on<ClubEventPageOpened>(_onPageOpened);
     on<ClubEventOpenRating>(_onOpenRating);
@@ -109,8 +108,4 @@ class ClubBloc extends CustomBloc<ClubEvent, ClubState> {
     }
   }
 
-  @override
-  void emitOnError(Emitter<ClubState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

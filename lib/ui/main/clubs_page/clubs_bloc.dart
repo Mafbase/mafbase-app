@@ -5,7 +5,7 @@ import 'package:seating_generator_web/ui/main/clubs_page/clubs_event.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_state.dart';
 
-class ClubsBloc extends CustomBloc<ClubsEvent, ClubsState> {
+class ClubsBloc extends Bloc<ClubsEvent, ClubsState> {
   final GetClubsInteractor _getClubsInteractor;
   final ClubsRouter _router;
 
@@ -15,7 +15,7 @@ class ClubsBloc extends CustomBloc<ClubsEvent, ClubsState> {
     required ClubsRouter router,
   })  : _getClubsInteractor = getClubsInteractor,
         _router = router,
-        super(const ClubsState(), context) {
+        super(const ClubsState()) {
     on<ClubsEventPageOpened>(_onPageOpened);
     on<ClubsEventClubSelected>(_onClubSelected);
   }
@@ -36,8 +36,4 @@ class ClubsBloc extends CustomBloc<ClubsEvent, ClubsState> {
     }
   }
 
-  @override
-  void emitOnError(Emitter<ClubsState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

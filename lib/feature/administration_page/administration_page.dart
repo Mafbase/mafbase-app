@@ -56,7 +56,6 @@ class AdministrationPage extends StatefulWidget {
           addOwnerInteractor,
           deleteOwnerInteractor,
           getAdministrationInteractor,
-          context,
         )..add(
             AdministrationEventPageOpened(tournamentId: tournamentId),
           ),

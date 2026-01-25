@@ -9,6 +9,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/app/router.dart';
@@ -60,6 +62,8 @@ void _startApp() async {
   SplashManager.deferSplash(
     binding ?? WidgetsFlutterBinding.ensureInitialized(),
   );
+
+  Bloc.observer = AppBlocObserver();
 
   final scope = DependencyScope();
 

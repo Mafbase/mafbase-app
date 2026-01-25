@@ -10,14 +10,17 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 
-class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
+class RatingBloc extends Bloc<RatingEvent, RatingState> {
+  final BuildContext? _context;
   final DownloadRatingInteractor _downloadRatingInteractor = getIt();
   final GetRatingInteractor _getRatingRepository = getIt();
   final GetTournamentRatingInteractor _getTournamentRatingInteractor = getIt();
   final ClubRepository _clubRepository = getIt();
-  late final RatingRouter _router = getIt(param1: context);
+  late final RatingRouter _router = getIt(param1: _context);
 
-  RatingBloc([BuildContext? context]) : super(const RatingState(), context) {
+  RatingBloc([BuildContext? context])
+      : _context = context,
+        super(const RatingState()) {
     on<RatingEventPageOpened>(_onPageOpened);
     on<RatingEventRangeChanged>(_onRangeChanged);
     on<RatingEventGameSelected>(_onGameSelected);
@@ -95,8 +98,4 @@ class RatingBloc extends CustomBloc<RatingEvent, RatingState> {
     );
   }
 
-  @override
-  void emitOnError(Emitter<RatingState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }

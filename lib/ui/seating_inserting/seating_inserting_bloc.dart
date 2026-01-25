@@ -7,14 +7,14 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_rou
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_state.dart';
 
 class SeatingInsertingBloc
-    extends CustomBloc<SeatingInsertingEvent, SeatingInsertingState> {
+    extends Bloc<SeatingInsertingEvent, SeatingInsertingState> {
   final SeatingInsertingRouter _router;
   final InsertSeatingInteractor _insertSeatingInteractor = getIt();
   final int tournamentId;
   List<int> bytes = [];
 
   SeatingInsertingBloc(this._router, this.tournamentId, [BuildContext? context])
-      : super(const SeatingInsertingState(), context) {
+      : super(const SeatingInsertingState()) {
     on<SeatingInsertingSaveEvent>(_onSaveEvent);
     on<SeatingInsertingFileSelectedEvent>(_onFileSelected);
   }
@@ -42,9 +42,4 @@ class SeatingInsertingBloc
     _router.showSuccessDialog();
   }
 
-  @override
-  void emitOnError(Emitter<SeatingInsertingState> emit) {
-    _router.showErrorDialog();
-    emit(state.copyWith(isLoading: false));
-  }
 }

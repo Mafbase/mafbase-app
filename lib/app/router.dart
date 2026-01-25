@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -17,13 +16,16 @@ import 'package:seating_generator_web/ui/main/main_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
+import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class AppRouter {
   final String initLocation;
   late final router = GoRouter(
+    navigatorKey: rootNavigationKey,
     observers: [
       SentryNavigatorObserver(),
     ],
@@ -39,7 +41,6 @@ class AppRouter {
             if (response.statusCode == 200) {
               final value = await getIt<CredentialStorage>().read();
               
-              // Парсим userId из ответа (просто число)
               final responseData = response.data as List<int>;
               final userId = AuthEventOut.fromBuffer(responseData).userId;
 
@@ -117,14 +118,14 @@ class AppRouter {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Error"),
+        title: Text(context.locale.error),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text("Cancel"),
+            child: Text(context.locale.cancel),
           ),
         ],
       ),

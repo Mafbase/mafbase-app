@@ -10,12 +10,12 @@ import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart'
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
-class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
+class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
   final SignUpInteractor _signUpInteractor;
   final SignUpPageRouter router;
 
-  SignUpBloc(this._signUpInteractor, this.router, [BuildContext? context])
-      : super(SignUpState(), context) {
+  SignUpBloc(this._signUpInteractor, this.router)
+      : super(SignUpState()) {
     on<SignUpButtonTapped>(_onSignUpButtonTapped);
     on<BackButtonTapped>(_onBackButtonTapped);
   }
@@ -54,10 +54,6 @@ class SignUpBloc extends CustomBloc<SignUpEvents, SignUpState> {
     router.openLoginPage();
   }
 
-  @override
-  void emitOnError(Emitter<SignUpState> emit) {
-    emit(state.copyWith(isLoading: false));
-  }
 }
 
 abstract class SignUpPageRouter {
