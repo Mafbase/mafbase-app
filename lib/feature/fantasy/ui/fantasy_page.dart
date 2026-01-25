@@ -10,7 +10,6 @@ import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/feature/fantasy/domain/fantasy_repository.dart';
 import 'package:seating_generator_web/feature/fantasy/domain/models/fantasy_prediction_item_model.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_event.dart';

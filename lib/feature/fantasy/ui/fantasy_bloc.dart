@@ -100,7 +100,7 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
 
       // Находим предсказание текущего пользователя по userId
       GameWin? userPrediction;
-      if (_currentUserId != null && rating.rows.isNotEmpty && currentGameInfo != null) {
+      if (_currentUserId != null && rating.rows.isNotEmpty) {
         try {
           final userRow = rating.rows.firstWhere(
             (row) => row.playerId == _currentUserId,
