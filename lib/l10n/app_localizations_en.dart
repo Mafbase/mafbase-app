@@ -516,4 +516,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String unknownError(String error) {
     return 'An unknown error occurred: $error';
   }
+
+  @override
+  String get forgotPasswordTitle => 'Восстановление пароля';
+
+  @override
+  String get forgotPasswordDescription =>
+      'Введите ваш email, и мы отправим вам инструкции по восстановлению пароля';
+
+  @override
+  String get forgotPasswordEmailNotFound =>
+      'Пользователь с таким email не найден';
+
+  @override
+  String get resetPasswordTitle => 'Сброс пароля';
+
+  @override
+  String get resetPasswordDescription =>
+      'Введите токен из письма и новый пароль';
+
+  @override
+  String get resetPasswordTokenHint => 'Токен из письма';
+
+  @override
+  String get resetPasswordInvalidToken => 'Неверный токен';
 }

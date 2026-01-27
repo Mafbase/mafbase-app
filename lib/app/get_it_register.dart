@@ -78,7 +78,6 @@ import 'package:seating_generator_web/feature/fantasy/domain/fantasy_repository.
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_state.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
-import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
@@ -177,9 +176,6 @@ void registerGetIt({bool isIntegrationTest = false}) {
     )
     ..registerFactoryParam<MainPageRouter, BuildContext, dynamic>(
       (context, _) => MainPageRouterImpl(context),
-    )
-    ..registerFactoryParam<SignUpPageRouter, BuildContext, dynamic>(
-      (context, _) => SignUpPageRouterImpl(context),
     )
     ..registerFactoryParam<SeatingPageRouter, BuildContext, dynamic>(
       (context, _) => SeatingPageRouterImpl(context),
@@ -371,12 +367,6 @@ void registerSharedGetIt() {
           id,
         );
       },
-    )
-    ..registerFactoryParam<SignUpBloc, BuildContext?, dynamic>(
-      (context, _) => SignUpBloc(
-        getIt(),
-        getIt.call(param1: context),
-      ),
     )
     ..registerFactoryParam<MainBloc, BuildContext?, dynamic>(
       (context, tab) => MainBloc(

@@ -1,9 +1,12 @@
+import 'package:seating_generator_web/data/requests/forgot_password_request.dart';
 import 'package:seating_generator_web/data/requests/login_request.dart';
+import 'package:seating_generator_web/data/requests/reset_password_request.dart';
 import 'package:seating_generator_web/data/requests/sign_up_request.dart';
 import 'package:seating_generator_web/data/requests/verification_request.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
+import 'package:seating_generator_web/domain/models/password_reset_model.dart';
 import 'package:seating_generator_web/domain/models/sign_up_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -74,5 +77,59 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
         return true;
     }
     return false;
+  }
+
+  @override
+  Future<ForgotPasswordModel> forgotPassword(String email) async {
+    try {
+      final value = await ForgotPasswordRequest(
+        ForgotPasswordEvent(email: email),
+      ).execute(client);
+      switch (value.error) {
+        case ForgotPasswordEventOut_Error.noError:
+          return const ForgotPasswordModel.success();
+        case ForgotPasswordEventOut_Error.emailNotFound:
+          return const ForgotPasswordModel.error();
+      }
+      return const ForgotPasswordModel.error();
+    } catch (e) {
+      return const ForgotPasswordModel.error();
+    }
+  }
+
+  @override
+  Future<ResetPasswordModel> resetPassword(
+    String token,
+    String email,
+    String newPassword,
+  ) async {
+    try {
+      final value = await ResetPasswordRequest(
+        ResetPasswordEvent(
+          token: token,
+          email: email,
+          newPassword: newPassword,
+        ),
+      ).execute(client);
+      switch (value.error) {
+        case ResetPasswordEventOut_Error.noError:
+          return const ResetPasswordModel.success();
+        case ResetPasswordEventOut_Error.invalidToken:
+          return const ResetPasswordModel.error(
+            ResetPasswordError.invalidToken,
+          );
+        case ResetPasswordEventOut_Error.weakPassword:
+          return const ResetPasswordModel.error(
+            ResetPasswordError.weakPassword,
+          );
+      }
+      return const ResetPasswordModel.error(
+        ResetPasswordError.invalidToken,
+      );
+    } catch (e) {
+      return const ResetPasswordModel.error(
+        ResetPasswordError.invalidToken,
+      );
+    }
   }
 }

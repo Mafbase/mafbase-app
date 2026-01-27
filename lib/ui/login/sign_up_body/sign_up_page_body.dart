@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -34,7 +36,11 @@ class SignUpPageBody extends StatefulWidget {
     pageBuilder: (context, state) => FadeTransitionPage(
       child: BlocProvider<SignUpBloc>(
         key: const Key('SignUpBlocProvider'),
-        create: (context) => getIt.get<SignUpBloc>(param1: context),
+        create: (context) => SignUpBloc(
+          getIt.get<SignUpInteractor>(),
+          getIt.get<LoginInteractor>(),
+          SignUpPageRouterImpl(context),
+        ),
         child: const SignUpPageBody(),
       ),
     ),

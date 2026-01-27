@@ -369,5 +369,19 @@
         "example": "error message"
       }
     }
-  }
+  },
+  "forgotPasswordTitle": "Восстановление пароля",
+  "@forgotPasswordTitle": {},
+  "forgotPasswordDescription": "Введите ваш email, и мы отправим вам инструкции по восстановлению пароля",
+  "@forgotPasswordDescription": {},
+  "forgotPasswordEmailNotFound": "Пользователь с таким email не найден",
+  "@forgotPasswordEmailNotFound": {},
+  "resetPasswordTitle": "Сброс пароля",
+  "@resetPasswordTitle": {},
+  "resetPasswordDescription": "Введите токен из письма и новый пароль",
+  "@resetPasswordDescription": {},
+  "resetPasswordTokenHint": "Токен из письма",
+  "@resetPasswordTokenHint": {},
+  "resetPasswordInvalidToken": "Неверный токен",
+  "@resetPasswordInvalidToken": {}
 }

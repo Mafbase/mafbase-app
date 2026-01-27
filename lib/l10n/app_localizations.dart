@@ -1051,6 +1051,48 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Произошла неизвестная ошибка {error}'**
   String unknownError(String error);
+
+  /// No description provided for @forgotPasswordTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Восстановление пароля'**
+  String get forgotPasswordTitle;
+
+  /// No description provided for @forgotPasswordDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите ваш email, и мы отправим вам инструкции по восстановлению пароля'**
+  String get forgotPasswordDescription;
+
+  /// No description provided for @forgotPasswordEmailNotFound.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пользователь с таким email не найден'**
+  String get forgotPasswordEmailNotFound;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сброс пароля'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @resetPasswordDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите токен из письма и новый пароль'**
+  String get resetPasswordDescription;
+
+  /// No description provided for @resetPasswordTokenHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Токен из письма'**
+  String get resetPasswordTokenHint;
+
+  /// No description provided for @resetPasswordInvalidToken.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный токен'**
+  String get resetPasswordInvalidToken;
 }
 
 class _AppLocalizationsDelegate

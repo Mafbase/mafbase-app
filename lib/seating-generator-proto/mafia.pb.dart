@@ -5015,6 +5015,234 @@ class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
   void clearCanParticipate() => $_clearField(3);
 }
 
+class ForgotPasswordEvent extends $pb.GeneratedMessage {
+  factory ForgotPasswordEvent({
+    $core.String? email,
+  }) {
+    final $result = create();
+    if (email != null) {
+      $result.email = email;
+    }
+    return $result;
+  }
+  ForgotPasswordEvent._() : super();
+  factory ForgotPasswordEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ForgotPasswordEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ForgotPasswordEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ForgotPasswordEvent clone() => ForgotPasswordEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ForgotPasswordEvent copyWith(void Function(ForgotPasswordEvent) updates) => super.copyWith((message) => updates(message as ForgotPasswordEvent)) as ForgotPasswordEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ForgotPasswordEvent create() => ForgotPasswordEvent._();
+  ForgotPasswordEvent createEmptyInstance() => create();
+  static $pb.PbList<ForgotPasswordEvent> createRepeated() => $pb.PbList<ForgotPasswordEvent>();
+  @$core.pragma('dart2js:noInline')
+  static ForgotPasswordEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ForgotPasswordEvent>(create);
+  static ForgotPasswordEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get email => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set email($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEmail() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEmail() => $_clearField(1);
+}
+
+class ForgotPasswordEventOut extends $pb.GeneratedMessage {
+  factory ForgotPasswordEventOut({
+    ForgotPasswordEventOut_Error? error,
+  }) {
+    final $result = create();
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  ForgotPasswordEventOut._() : super();
+  factory ForgotPasswordEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ForgotPasswordEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ForgotPasswordEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..e<ForgotPasswordEventOut_Error>(1, _omitFieldNames ? '' : 'error', $pb.PbFieldType.OE, defaultOrMaker: ForgotPasswordEventOut_Error.noError, valueOf: ForgotPasswordEventOut_Error.valueOf, enumValues: ForgotPasswordEventOut_Error.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ForgotPasswordEventOut clone() => ForgotPasswordEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ForgotPasswordEventOut copyWith(void Function(ForgotPasswordEventOut) updates) => super.copyWith((message) => updates(message as ForgotPasswordEventOut)) as ForgotPasswordEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ForgotPasswordEventOut create() => ForgotPasswordEventOut._();
+  ForgotPasswordEventOut createEmptyInstance() => create();
+  static $pb.PbList<ForgotPasswordEventOut> createRepeated() => $pb.PbList<ForgotPasswordEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static ForgotPasswordEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ForgotPasswordEventOut>(create);
+  static ForgotPasswordEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ForgotPasswordEventOut_Error get error => $_getN(0);
+  @$pb.TagNumber(1)
+  set error(ForgotPasswordEventOut_Error v) { $_setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasError() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearError() => $_clearField(1);
+}
+
+class ResetPasswordEvent extends $pb.GeneratedMessage {
+  factory ResetPasswordEvent({
+    $core.String? token,
+    $core.String? newPassword,
+    $core.String? email,
+  }) {
+    final $result = create();
+    if (token != null) {
+      $result.token = token;
+    }
+    if (newPassword != null) {
+      $result.newPassword = newPassword;
+    }
+    if (email != null) {
+      $result.email = email;
+    }
+    return $result;
+  }
+  ResetPasswordEvent._() : super();
+  factory ResetPasswordEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ResetPasswordEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResetPasswordEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'token')
+    ..aOS(2, _omitFieldNames ? '' : 'newPassword', protoName: 'newPassword')
+    ..aOS(3, _omitFieldNames ? '' : 'email')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ResetPasswordEvent clone() => ResetPasswordEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ResetPasswordEvent copyWith(void Function(ResetPasswordEvent) updates) => super.copyWith((message) => updates(message as ResetPasswordEvent)) as ResetPasswordEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ResetPasswordEvent create() => ResetPasswordEvent._();
+  ResetPasswordEvent createEmptyInstance() => create();
+  static $pb.PbList<ResetPasswordEvent> createRepeated() => $pb.PbList<ResetPasswordEvent>();
+  @$core.pragma('dart2js:noInline')
+  static ResetPasswordEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPasswordEvent>(create);
+  static ResetPasswordEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get token => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set token($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearToken() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get newPassword => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set newPassword($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNewPassword() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNewPassword() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get email => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set email($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasEmail() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEmail() => $_clearField(3);
+}
+
+class ResetPasswordEventOut extends $pb.GeneratedMessage {
+  factory ResetPasswordEventOut({
+    ResetPasswordEventOut_Error? error,
+  }) {
+    final $result = create();
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  ResetPasswordEventOut._() : super();
+  factory ResetPasswordEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ResetPasswordEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResetPasswordEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..e<ResetPasswordEventOut_Error>(1, _omitFieldNames ? '' : 'error', $pb.PbFieldType.OE, defaultOrMaker: ResetPasswordEventOut_Error.noError, valueOf: ResetPasswordEventOut_Error.valueOf, enumValues: ResetPasswordEventOut_Error.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ResetPasswordEventOut clone() => ResetPasswordEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ResetPasswordEventOut copyWith(void Function(ResetPasswordEventOut) updates) => super.copyWith((message) => updates(message as ResetPasswordEventOut)) as ResetPasswordEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ResetPasswordEventOut create() => ResetPasswordEventOut._();
+  ResetPasswordEventOut createEmptyInstance() => create();
+  static $pb.PbList<ResetPasswordEventOut> createRepeated() => $pb.PbList<ResetPasswordEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static ResetPasswordEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPasswordEventOut>(create);
+  static ResetPasswordEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ResetPasswordEventOut_Error get error => $_getN(0);
+  @$pb.TagNumber(1)
+  set error(ResetPasswordEventOut_Error v) { $_setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasError() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearError() => $_clearField(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

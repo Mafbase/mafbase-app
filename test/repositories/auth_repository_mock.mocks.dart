@@ -3,13 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:seating_generator_web/domain/models/login_model.dart' as _i2;
+import 'package:seating_generator_web/domain/models/password_reset_model.dart'
+    as _i4;
 import 'package:seating_generator_web/domain/models/sign_up_model.dart' as _i3;
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart'
-    as _i4;
+    as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -45,12 +47,34 @@ class _FakeSignUpModel_1 extends _i1.SmartFake implements _i3.SignUpModel {
         );
 }
 
+class _FakeForgotPasswordModel_2 extends _i1.SmartFake
+    implements _i4.ForgotPasswordModel {
+  _FakeForgotPasswordModel_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeResetPasswordModel_3 extends _i1.SmartFake
+    implements _i4.ResetPasswordModel {
+  _FakeResetPasswordModel_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
   @override
-  _i5.Future<_i2.LoginModel> login(
+  _i6.Future<_i2.LoginModel> login(
     String? email,
     String? password,
   ) =>
@@ -62,7 +86,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             password,
           ],
         ),
-        returnValue: _i5.Future<_i2.LoginModel>.value(_FakeLoginModel_0(
+        returnValue: _i6.Future<_i2.LoginModel>.value(_FakeLoginModel_0(
           this,
           Invocation.method(
             #login,
@@ -73,7 +97,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.LoginModel>.value(_FakeLoginModel_0(
+            _i6.Future<_i2.LoginModel>.value(_FakeLoginModel_0(
           this,
           Invocation.method(
             #login,
@@ -83,10 +107,10 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             ],
           ),
         )),
-      ) as _i5.Future<_i2.LoginModel>);
+      ) as _i6.Future<_i2.LoginModel>);
 
   @override
-  _i5.Future<_i3.SignUpModel> signUp(
+  _i6.Future<_i3.SignUpModel> signUp(
     String? email,
     String? password,
   ) =>
@@ -98,7 +122,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             password,
           ],
         ),
-        returnValue: _i5.Future<_i3.SignUpModel>.value(_FakeSignUpModel_1(
+        returnValue: _i6.Future<_i3.SignUpModel>.value(_FakeSignUpModel_1(
           this,
           Invocation.method(
             #signUp,
@@ -109,7 +133,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i3.SignUpModel>.value(_FakeSignUpModel_1(
+            _i6.Future<_i3.SignUpModel>.value(_FakeSignUpModel_1(
           this,
           Invocation.method(
             #signUp,
@@ -119,10 +143,10 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             ],
           ),
         )),
-      ) as _i5.Future<_i3.SignUpModel>);
+      ) as _i6.Future<_i3.SignUpModel>);
 
   @override
-  _i5.Future<bool> verificate(
+  _i6.Future<bool> verificate(
     int? id,
     String? token,
   ) =>
@@ -134,7 +158,73 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
             token,
           ],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+
+  @override
+  _i6.Future<_i4.ForgotPasswordModel> forgotPassword(String? email) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #forgotPassword,
+          [email],
+        ),
+        returnValue: _i6.Future<_i4.ForgotPasswordModel>.value(
+            _FakeForgotPasswordModel_2(
+          this,
+          Invocation.method(
+            #forgotPassword,
+            [email],
+          ),
+        )),
+        returnValueForMissingStub: _i6.Future<_i4.ForgotPasswordModel>.value(
+            _FakeForgotPasswordModel_2(
+          this,
+          Invocation.method(
+            #forgotPassword,
+            [email],
+          ),
+        )),
+      ) as _i6.Future<_i4.ForgotPasswordModel>);
+
+  @override
+  _i6.Future<_i4.ResetPasswordModel> resetPassword(
+    String? token,
+    String? email,
+    String? newPassword,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #resetPassword,
+          [
+            token,
+            email,
+            newPassword,
+          ],
+        ),
+        returnValue:
+            _i6.Future<_i4.ResetPasswordModel>.value(_FakeResetPasswordModel_3(
+          this,
+          Invocation.method(
+            #resetPassword,
+            [
+              token,
+              email,
+              newPassword,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i4.ResetPasswordModel>.value(_FakeResetPasswordModel_3(
+          this,
+          Invocation.method(
+            #resetPassword,
+            [
+              token,
+              email,
+              newPassword,
+            ],
+          ),
+        )),
+      ) as _i6.Future<_i4.ResetPasswordModel>);
 }

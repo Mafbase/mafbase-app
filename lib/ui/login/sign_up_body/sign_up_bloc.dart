@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
+import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/domain/models/sign_up_model.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
@@ -12,10 +14,14 @@ import 'package:seating_generator_web/ui/login/verification_body/verification_pa
 
 class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
   final SignUpInteractor _signUpInteractor;
+  final LoginInteractor _loginInteractor;
   final SignUpPageRouter router;
 
-  SignUpBloc(this._signUpInteractor, this.router)
-      : super(SignUpState()) {
+  SignUpBloc(
+    this._signUpInteractor,
+    this._loginInteractor,
+    this.router,
+  ) : super(SignUpState()) {
     on<SignUpButtonTapped>(_onSignUpButtonTapped);
     on<BackButtonTapped>(_onBackButtonTapped);
   }
@@ -42,7 +48,20 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
         emit(state.copyWith(isLoading: false, weakPassword: true));
         break;
       default:
-        router.openMainPage();
+        // После успешной регистрации автоматически входим в аккаунт
+        final loginResult = await _loginInteractor.run(
+          event.email,
+          event.password,
+        );
+
+        if (loginResult is Success) {
+          emit(state.copyWith(isLoading: false));
+          router.openMainPage();
+        } else {
+          // Если вход не удался, все равно переходим на главную
+          emit(state.copyWith(isLoading: false));
+          router.openMainPage();
+        }
         break;
     }
   }

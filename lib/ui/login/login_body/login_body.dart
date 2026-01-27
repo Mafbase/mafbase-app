@@ -13,6 +13,8 @@ import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
+import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_page_body.dart';
+import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_page_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
@@ -43,6 +45,8 @@ class LoginPageBody extends StatefulWidget {
     routes: [
       SignUpPageBody.route,
       VerificationPageBody.route,
+      ForgotPasswordPageBody.route,
+      ResetPasswordPageBody.route,
     ],
     pageBuilder: (context, state) => FadeTransitionPage(
       child: BlocProvider(
@@ -149,12 +153,14 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       alignment: WrapAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.read<LoginBloc>().add(
+                                  const LoginEvent.forgotPasswordTapped(),
+                                );
+                          },
                           child: Text(
                             AppLocalizations.of(context)!.loginForgotPassword,
-                            style: MyTheme.of(context)
-                                .defaultTextStyle
-                                .copyWith(fontSize: 14),
+                            style: MyTheme.of(context).defaultTextStyle,
                           ),
                         ),
                       ],
@@ -304,7 +310,11 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       alignment: WrapAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.read<LoginBloc>().add(
+                                  const LoginEvent.forgotPasswordTapped(),
+                                );
+                          },
                           child: Text(
                             AppLocalizations.of(context)!.loginForgotPassword,
                             style: MyTheme.of(context).defaultTextStyle,

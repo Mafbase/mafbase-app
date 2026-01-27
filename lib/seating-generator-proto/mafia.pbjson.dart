@@ -1286,3 +1286,79 @@ final $typed_data.Uint8List fantasyCurrentGameEventOutDescriptor = $convert.base
     'VtYmVyEh4KCmNhblByZWRpY3QYAiABKAhSCmNhblByZWRpY3QSJgoOY2FuUGFydGljaXBhdGUY'
     'AyABKAhSDmNhblBhcnRpY2lwYXRl');
 
+@$core.Deprecated('Use forgotPasswordEventDescriptor instead')
+const ForgotPasswordEvent$json = {
+  '1': 'ForgotPasswordEvent',
+  '2': [
+    {'1': 'email', '3': 1, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `ForgotPasswordEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List forgotPasswordEventDescriptor = $convert.base64Decode(
+    'ChNGb3Jnb3RQYXNzd29yZEV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
+
+@$core.Deprecated('Use forgotPasswordEventOutDescriptor instead')
+const ForgotPasswordEventOut$json = {
+  '1': 'ForgotPasswordEventOut',
+  '2': [
+    {'1': 'error', '3': 1, '4': 1, '5': 14, '6': '.generated.ForgotPasswordEventOut.Error', '10': 'error'},
+  ],
+  '4': [ForgotPasswordEventOut_Error$json],
+};
+
+@$core.Deprecated('Use forgotPasswordEventOutDescriptor instead')
+const ForgotPasswordEventOut_Error$json = {
+  '1': 'Error',
+  '2': [
+    {'1': 'noError', '2': 0},
+    {'1': 'emailNotFound', '2': 1},
+  ],
+};
+
+/// Descriptor for `ForgotPasswordEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List forgotPasswordEventOutDescriptor = $convert.base64Decode(
+    'ChZGb3Jnb3RQYXNzd29yZEV2ZW50T3V0Ej0KBWVycm9yGAEgASgOMicuZ2VuZXJhdGVkLkZvcm'
+    'dvdFBhc3N3b3JkRXZlbnRPdXQuRXJyb3JSBWVycm9yIicKBUVycm9yEgsKB25vRXJyb3IQABIR'
+    'Cg1lbWFpbE5vdEZvdW5kEAE=');
+
+@$core.Deprecated('Use resetPasswordEventDescriptor instead')
+const ResetPasswordEvent$json = {
+  '1': 'ResetPasswordEvent',
+  '2': [
+    {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
+    {'1': 'newPassword', '3': 2, '4': 1, '5': 9, '10': 'newPassword'},
+    {'1': 'email', '3': 3, '4': 1, '5': 9, '10': 'email'},
+  ],
+};
+
+/// Descriptor for `ResetPasswordEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resetPasswordEventDescriptor = $convert.base64Decode(
+    'ChJSZXNldFBhc3N3b3JkRXZlbnQSFAoFdG9rZW4YASABKAlSBXRva2VuEiAKC25ld1Bhc3N3b3'
+    'JkGAIgASgJUgtuZXdQYXNzd29yZBIUCgVlbWFpbBgDIAEoCVIFZW1haWw=');
+
+@$core.Deprecated('Use resetPasswordEventOutDescriptor instead')
+const ResetPasswordEventOut$json = {
+  '1': 'ResetPasswordEventOut',
+  '2': [
+    {'1': 'error', '3': 1, '4': 1, '5': 14, '6': '.generated.ResetPasswordEventOut.Error', '10': 'error'},
+  ],
+  '4': [ResetPasswordEventOut_Error$json],
+};
+
+@$core.Deprecated('Use resetPasswordEventOutDescriptor instead')
+const ResetPasswordEventOut_Error$json = {
+  '1': 'Error',
+  '2': [
+    {'1': 'noError', '2': 0},
+    {'1': 'invalidToken', '2': 1},
+    {'1': 'weakPassword', '2': 2},
+  ],
+};
+
+/// Descriptor for `ResetPasswordEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resetPasswordEventOutDescriptor = $convert.base64Decode(
+    'ChVSZXNldFBhc3N3b3JkRXZlbnRPdXQSPAoFZXJyb3IYASABKA4yJi5nZW5lcmF0ZWQuUmVzZX'
+    'RQYXNzd29yZEV2ZW50T3V0LkVycm9yUgVlcnJvciI4CgVFcnJvchILCgdub0Vycm9yEAASEAoM'
+    'aW52YWxpZFRva2VuEAESEAoMd2Vha1Bhc3N3b3JkEAI=');
+

@@ -7,6 +7,7 @@ import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
+import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_page_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
@@ -86,8 +87,7 @@ class LoginPageRouterImpl implements LoginPageRouter {
 
   @override
   void openForgotPasswordPage() {
-    // TODO: implement openForgotPasswordPage
-    throw UnimplementedError();
+    _context.go(ForgotPasswordPageBody.createLocation(context: _context));
   }
 
   @override

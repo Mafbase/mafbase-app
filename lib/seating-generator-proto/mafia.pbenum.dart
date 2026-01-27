@@ -204,5 +204,37 @@ class Tournament_Status extends $pb.ProtobufEnum {
   const Tournament_Status._(super.v, super.n);
 }
 
+class ForgotPasswordEventOut_Error extends $pb.ProtobufEnum {
+  static const ForgotPasswordEventOut_Error noError = ForgotPasswordEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
+  static const ForgotPasswordEventOut_Error emailNotFound = ForgotPasswordEventOut_Error._(1, _omitEnumNames ? '' : 'emailNotFound');
+
+  static const $core.List<ForgotPasswordEventOut_Error> values = <ForgotPasswordEventOut_Error> [
+    noError,
+    emailNotFound,
+  ];
+
+  static final $core.Map<$core.int, ForgotPasswordEventOut_Error> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static ForgotPasswordEventOut_Error? valueOf($core.int value) => _byValue[value];
+
+  const ForgotPasswordEventOut_Error._(super.v, super.n);
+}
+
+class ResetPasswordEventOut_Error extends $pb.ProtobufEnum {
+  static const ResetPasswordEventOut_Error noError = ResetPasswordEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
+  static const ResetPasswordEventOut_Error invalidToken = ResetPasswordEventOut_Error._(1, _omitEnumNames ? '' : 'invalidToken');
+  static const ResetPasswordEventOut_Error weakPassword = ResetPasswordEventOut_Error._(2, _omitEnumNames ? '' : 'weakPassword');
+
+  static const $core.List<ResetPasswordEventOut_Error> values = <ResetPasswordEventOut_Error> [
+    noError,
+    invalidToken,
+    weakPassword,
+  ];
+
+  static final $core.Map<$core.int, ResetPasswordEventOut_Error> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static ResetPasswordEventOut_Error? valueOf($core.int value) => _byValue[value];
+
+  const ResetPasswordEventOut_Error._(super.v, super.n);
+}
+
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');
