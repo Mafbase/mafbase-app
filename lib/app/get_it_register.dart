@@ -227,6 +227,7 @@ void registerSharedGetIt() {
       () => LoginInteractor(
         getIt(),
         getIt(),
+        getIt<AuthNotifier>(),
       ),
     )
     ..registerLazySingleton<SetFinalPlayersInteractor>(

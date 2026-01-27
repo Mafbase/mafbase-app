@@ -12,36 +12,38 @@ class LoginInteractor extends BaseInteractor {
   static const hideBillEmails = ['test@mail.ru'];
   final AuthRepository _authRepository;
   final CredentialStorage _credentialStorage;
+  final AuthNotifier _authNotifier;
 
   LoginInteractor(
     this._authRepository,
     this._credentialStorage,
+    this._authNotifier,
   );
 
   Future<LoginModel> run(
     String email,
     String password, {
     BuildContext? context,
-  }) {
-    return wrap(() async {
-      final model = await _authRepository.login(email, password);
-      if (model is Success) {
-        Sentry.configureScope(
-          (p0) => p0.setUser(
-            SentryUser(username: email),
-          ),
-        );
+  }) =>
+      wrap(() async {
+        final model = await _authRepository.login(email, password);
+        if (model is Success) {
+          Sentry.configureScope(
+            (p0) => p0.setUser(
+              SentryUser(username: email),
+            ),
+          );
 
-        _credentialStorage.save(Credentials(email, password));
+          _credentialStorage.save(Credentials(email, password));
 
-        context?.read<AuthNotifier>().value = AuthNotifierModel.authorized(
-          userId: model.userId,
-          hideBilling: hideBillEmails.contains(email),
-        );
-      }
-      return model;
-    });
-  }
+          _authNotifier.value = AuthNotifierModel.authorized(
+            userId: model.userId,
+            hideBilling: hideBillEmails.contains(email),
+          );
+        }
+
+        return model;
+      });
 
   @override
   String get interactorName => "LoginInteractor";
