@@ -30,8 +30,38 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="mafbase.ru" />
-                <data android:scheme="https" />
+
+                <!-- Главная: только https://mafbase.ru/ -->
+                <data
+                    android:scheme="https"
+                    android:host="mafbase.ru"
+                    android:path="/" />
+
+                <!-- /club и подпути -->
+                <data
+                    android:scheme="https"
+                    android:host="mafbase.ru"
+                    android:pathPrefix="/club" />
+
+                <!-- /tournament и подпути -->
+                <data
+                    android:scheme="https"
+                    android:host="mafbase.ru"
+                    android:pathPrefix="/tournament" />
+
+                <!-- Ровно эти страницы (без подпутей) -->
+                <data
+                    android:scheme="https"
+                    android:host="mafbase.ru"
+                    android:path="/profile" />
+                <data
+                    android:scheme="https"
+                    android:host="mafbase.ru"
+                    android:path="/contacts" />
+                <data
+                    android:scheme="https"
+                    android:host="mafbase.ru"
+                    android:path="/translationControl" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
