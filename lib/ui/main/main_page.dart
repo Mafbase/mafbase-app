@@ -59,23 +59,21 @@ class _MainPageState extends CustomState<MainPage> {
   }
 
   @override
-  Widget buildDesktop(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: titleProvider,
-      child: BlocBuilder<MainBloc, MainState>(
-        builder: (context, state) {
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: buildAppBar(
-              context: context,
-              state: state,
-            ),
-            body: widget.child,
-          );
-        },
-      ),
-    );
-  }
+  Widget buildDesktop(BuildContext context) => ChangeNotifierProvider.value(
+        value: titleProvider,
+        child: BlocBuilder<MainBloc, MainState>(
+          builder: (context, state) {
+            return Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: buildAppBar(
+                context: context,
+                state: state,
+              ),
+              body: widget.child,
+            );
+          },
+        ),
+      );
 
   AppBar buildAppBar({
     required BuildContext context,
@@ -98,7 +96,9 @@ class _MainPageState extends CustomState<MainPage> {
           ),
         ),
         backgroundColor: context.theme.darkBlueColor,
-        actions: getProfileAction(context.watch<AuthNotifier>().value),
+        actions: GoRouterState.of(context).uri.pathSegments.firstOrNull == 'auth'
+            ? null
+            : getProfileAction(context.watch<AuthNotifier>().value),
         title: Text(
           titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
           style: GoogleFonts.balooBhai2(
