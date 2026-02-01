@@ -32,6 +32,8 @@ class PushTokenService {
     return await _deviceIdService.getDeviceId();
   }
 
+  Stream<String> get tokenUpdatedStream => FirebaseMessaging.instance.onTokenRefresh;
+
   /// Отправить push token и deviceId на сервер через auth запрос
   Future<void> sendPushTokenToServer() async {
     try {

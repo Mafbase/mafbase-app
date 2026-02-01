@@ -2,12 +2,13 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:permission_handler/permission_handler.dart' as permission_handler;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/data/services/push_token_service.dart';
 import 'package:seating_generator_web/domain/services/notification_permission_service.dart';
 
 class NotificationPermissionServiceImpl with WidgetsBindingObserver implements NotificationPermissionService {
   final _statusController = StreamController<PermissionStatus>.broadcast();
-  StreamSubscription<PermissionStatus>? _statusSubscription;
+  StreamSubscription<void>? _statusSubscription;
   final PushTokenService _pushTokenService;
 
   NotificationPermissionServiceImpl(this._pushTokenService) {
@@ -20,7 +21,16 @@ class NotificationPermissionServiceImpl with WidgetsBindingObserver implements N
   }
 
   void _subscribeToStatusChanges() {
-    _statusSubscription = _statusController.stream.where((status) => status.isGranted).listen((status) async {
+    _statusSubscription = _statusController.stream
+        .switchMap(
+      (status) => status.isGranted
+          ? MergeStream([
+              Stream.value(null),
+              _pushTokenService.tokenUpdatedStream,
+            ])
+          : Stream.empty(),
+    )
+        .listen((status) async {
       await _pushTokenService.sendPushTokenToServer();
     });
   }
