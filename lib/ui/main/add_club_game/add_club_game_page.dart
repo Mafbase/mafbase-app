@@ -100,25 +100,19 @@ class AddClubGamePage extends StatefulWidget {
       name: 'viewGame',
       path: "game/:gameId",
       builder: (context, state) {
-        try {
-          final clubId = int.parse(state.pathParameters["clubId"]!);
-          final gameId = int.parse(state.pathParameters["gameId"]!);
-          final edit = state.uri.queryParameters["edit"] == true.toString();
-          return BlocProvider<AddClubGameBloc>(
-            create: (context) => AddClubGameBloc(
-              clubId: clubId,
-              context: context,
-            ),
-            // TODO: REGISTER IN GET IT
-            child: AddClubGamePage(
-              readOnly: !edit,
-              gameId: gameId,
-            ),
-          );
-        } catch (i) {
-          debugPrint(i.toString());
-          rethrow;
-        }
+        final clubId = int.parse(state.pathParameters["clubId"]!);
+        final gameId = int.parse(state.pathParameters["gameId"]!);
+        final edit = state.uri.queryParameters["edit"] == true.toString();
+        return BlocProvider<AddClubGameBloc>(
+          create: (context) => AddClubGameBloc(
+            clubId: clubId,
+            context: context,
+          ),
+          child: AddClubGamePage(
+            readOnly: !edit,
+            gameId: gameId,
+          ),
+        );
       },
     ),
   ];

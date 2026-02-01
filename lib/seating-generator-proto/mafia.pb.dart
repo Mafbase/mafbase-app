@@ -4837,6 +4837,70 @@ class FantasyRatingEventOut extends $pb.GeneratedMessage {
   $pb.PbList<FantasyRatingRow> get rows => $_getList(0);
 }
 
+class AuthEvent extends $pb.GeneratedMessage {
+  factory AuthEvent({
+    $core.String? deviceId,
+    $core.String? pushToken,
+  }) {
+    final $result = create();
+    if (deviceId != null) {
+      $result.deviceId = deviceId;
+    }
+    if (pushToken != null) {
+      $result.pushToken = pushToken;
+    }
+    return $result;
+  }
+  AuthEvent._() : super();
+  factory AuthEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AuthEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'deviceId', protoName: 'deviceId')
+    ..aOS(2, _omitFieldNames ? '' : 'pushToken', protoName: 'pushToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AuthEvent clone() => AuthEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AuthEvent copyWith(void Function(AuthEvent) updates) => super.copyWith((message) => updates(message as AuthEvent)) as AuthEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AuthEvent create() => AuthEvent._();
+  AuthEvent createEmptyInstance() => create();
+  static $pb.PbList<AuthEvent> createRepeated() => $pb.PbList<AuthEvent>();
+  @$core.pragma('dart2js:noInline')
+  static AuthEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthEvent>(create);
+  static AuthEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get deviceId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set deviceId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDeviceId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDeviceId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get pushToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set pushToken($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPushToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPushToken() => $_clearField(2);
+}
+
 class AuthEventOut extends $pb.GeneratedMessage {
   factory AuthEventOut({
     $core.int? userId,

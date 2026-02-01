@@ -1093,6 +1093,30 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Неверный токен'**
   String get resetPasswordInvalidToken;
+
+  /// No description provided for @fantasyNotificationsDisabled.
+  ///
+  /// In ru, this message translates to:
+  /// **'У вас выключены пуш-уведомления'**
+  String get fantasyNotificationsDisabled;
+
+  /// No description provided for @fantasyNotificationsDisabledDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включите уведомления, чтобы получать сообщения о доступности нового предсказания'**
+  String get fantasyNotificationsDisabledDescription;
+
+  /// No description provided for @fantasyEnableNotifications.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включить уведомления'**
+  String get fantasyEnableNotifications;
+
+  /// No description provided for @fantasyNotificationsEnabled.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления успешно включены'**
+  String get fantasyNotificationsEnabled;
 }
 
 class _AppLocalizationsDelegate

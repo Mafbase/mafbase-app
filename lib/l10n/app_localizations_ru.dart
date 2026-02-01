@@ -543,4 +543,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get resetPasswordInvalidToken => 'Неверный токен';
+
+  @override
+  String get fantasyNotificationsDisabled => 'У вас выключены пуш-уведомления';
+
+  @override
+  String get fantasyNotificationsDisabledDescription =>
+      'Включите уведомления, чтобы получать сообщения о доступности нового предсказания';
+
+  @override
+  String get fantasyEnableNotifications => 'Включить уведомления';
+
+  @override
+  String get fantasyNotificationsEnabled => 'Уведомления успешно включены';
 }

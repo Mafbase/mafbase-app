@@ -37,7 +37,6 @@ class TranslationContentBloc
     Emitter emit,
   ) {
     final content = event.content;
-    debugPrint(content.toString());
     emit(
       TranslationContentState(
         roles: content.roles,

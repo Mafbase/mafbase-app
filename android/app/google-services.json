@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "778845684766",
+    "project_id": "mafbase-f35dd",
+    "storage_bucket": "mafbase-f35dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778845684766:android:781a637199ea8715c15a0f",
+        "android_client_info": {
+          "package_name": "ru.mafbase.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_J5zwuMIZUf6q4pXy7-6jhew5Sc5h3UI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,4 +12,8 @@ abstract class AuthRepository {
   Future<ForgotPasswordModel> forgotPassword(String email);
 
   Future<ResetPasswordModel> resetPassword(String token, String email, String newPassword);
+
+  /// Отправить запрос авторизации с push token и deviceId
+  /// Возвращает userId если авторизация успешна, null если нет
+  Future<int?> auth({String? pushToken, String? deviceId});
 }

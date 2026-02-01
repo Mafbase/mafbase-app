@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -21,11 +24,12 @@ import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
 
+import 'firebase_options.dart';
+
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
-  Set<PointerDeviceKind> get dragDevices =>
-      super.dragDevices.toSet()..add(PointerDeviceKind.mouse);
+  Set<PointerDeviceKind> get dragDevices => super.dragDevices.toSet()..add(PointerDeviceKind.mouse);
 }
 
 void main() async {
@@ -49,6 +53,15 @@ void main() async {
   }
 }
 
+extension LocationPathExt on RemoteMessage {
+  String? get location {
+    final pushLocation = data['location'] as String?;
+    final initUri = pushLocation == null ? null : Uri.parse(pushLocation);
+    final initPath = initUri == null ? null : initUri.path + initUri.query;
+    return initPath;
+  }
+}
+
 void _startApp() async {
   WidgetsBinding? binding;
   setPathUrlStrategy();
@@ -58,19 +71,24 @@ void _startApp() async {
     final directory = await getApplicationDocumentsDirectory();
     await Hive.initFlutter(directory.path);
   }
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  final initPush = await FirebaseMessaging.instance.getInitialMessage().onError((_, __) => null);
   registerGetIt();
   SplashManager.deferSplash(
-    binding ?? WidgetsFlutterBinding.ensureInitialized(),
+    binding ??= WidgetsFlutterBinding.ensureInitialized(),
   );
 
   Bloc.observer = AppBlocObserver();
 
   final scope = DependencyScope();
 
-  runApp(MafbaseApp(scope: scope));
+  runApp(MafbaseApp(
+    scope: scope,
+    initLocation: initPush?.location ?? '/',
+  ));
 }
 
-class MafbaseApp extends StatelessWidget {
+class MafbaseApp extends StatefulWidget {
   final String initLocation;
   final DependencyScope scope;
 
@@ -81,104 +99,113 @@ class MafbaseApp extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return DependencyScopeWidget(
-      scope: scope,
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => getIt<AuthNotifier>(),
-          ),
-          Provider(
-            create: (context) => AppRouter(initLocation),
-          ),
-          Provider<MyTheme>(
-            create: (context) => MyTheme.light(),
-          ),
-        ],
-        child: Builder(
-          builder: (context) {
-            return MaterialApp.router(
-              scrollBehavior: MyCustomScrollBehavior(),
-              title: 'Mafbase',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData.light(useMaterial3: true).copyWith(
-                scaffoldBackgroundColor: context.theme.background2,
-                dividerTheme: const DividerThemeData(
-                  color: Color(0xFFCAC4D0),
-                  thickness: 1,
-                  space: 0,
-                  indent: 0,
-                  endIndent: 0,
-                ),
-                colorScheme:
-                    ThemeData.light(useMaterial3: true).colorScheme.copyWith(
-                          primary: MyTheme.of(context).darkGreyColor,
-                          primaryContainer: MyTheme.of(context).darkBlueColor,
-                          secondary: MyTheme.of(context).redColor,
-                          secondaryContainer: MyTheme.of(context).redColor,
-                        ),
-                bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                  selectedItemColor: context.theme.darkGreyColor,
-                  elevation: 5,
-                  backgroundColor: context.theme.darkBlueColor,
-                  selectedLabelStyle: const TextStyle().copyWith(
-                    color: Colors.white,
-                  ),
-                  unselectedLabelStyle: const TextStyle().copyWith(
-                    color: Colors.white,
-                  ),
-                  selectedIconTheme: const IconThemeData(
-                    color: Colors.white,
-                  ),
-                  unselectedIconTheme: const IconThemeData(
-                    color: Colors.white60,
-                  ),
-                ),
-                iconTheme: IconThemeData(
-                  color: context.theme.darkGreyColor,
-                ),
-                textButtonTheme: TextButtonThemeData(
-                  style: ButtonStyle(
-                    textStyle: WidgetStateProperty.resolveWith(
-                      (states) {
-                        if (states.contains(WidgetState.disabled)) {
-                          return context.theme.btnTextStyle.copyWith(
-                            color: context.theme.btnTextColor.withValues(
-                              alpha: 0.5,
-                            ),
-                          );
-                        }
+  State<MafbaseApp> createState() => _MafbaseAppState();
+}
 
-                        return context.theme.btnTextStyle;
-                      },
+class _MafbaseAppState extends State<MafbaseApp> {
+  late final router = AppRouter(widget.initLocation);
+  StreamSubscription? subscription;
+
+  @override
+  void initState() {
+    subscription = FirebaseMessaging.onMessageOpenedApp.map((e) => e.location).whereNotNull().listen(router.router.go);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    subscription?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => DependencyScopeWidget(
+        scope: widget.scope,
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => getIt<AuthNotifier>()),
+            Provider.value(value: router),
+            Provider<MyTheme>(create: (context) => MyTheme.light()),
+          ],
+          child: Builder(
+            builder: (context) {
+              return MaterialApp.router(
+                scrollBehavior: MyCustomScrollBehavior(),
+                title: 'Mafbase',
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData.light(useMaterial3: true).copyWith(
+                  scaffoldBackgroundColor: context.theme.background2,
+                  dividerTheme: const DividerThemeData(
+                    color: Color(0xFFCAC4D0),
+                    thickness: 1,
+                    space: 0,
+                    indent: 0,
+                    endIndent: 0,
+                  ),
+                  colorScheme: ThemeData.light(useMaterial3: true).colorScheme.copyWith(
+                        primary: MyTheme.of(context).darkGreyColor,
+                        primaryContainer: MyTheme.of(context).darkBlueColor,
+                        secondary: MyTheme.of(context).redColor,
+                        secondaryContainer: MyTheme.of(context).redColor,
+                      ),
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    selectedItemColor: context.theme.darkGreyColor,
+                    elevation: 5,
+                    backgroundColor: context.theme.darkBlueColor,
+                    selectedLabelStyle: const TextStyle().copyWith(
+                      color: Colors.white,
+                    ),
+                    unselectedLabelStyle: const TextStyle().copyWith(
+                      color: Colors.white,
+                    ),
+                    selectedIconTheme: const IconThemeData(
+                      color: Colors.white,
+                    ),
+                    unselectedIconTheme: const IconThemeData(
+                      color: Colors.white60,
+                    ),
+                  ),
+                  iconTheme: IconThemeData(
+                    color: context.theme.darkGreyColor,
+                  ),
+                  textButtonTheme: TextButtonThemeData(
+                    style: ButtonStyle(
+                      textStyle: WidgetStateProperty.resolveWith(
+                        (states) {
+                          if (states.contains(WidgetState.disabled)) {
+                            return context.theme.btnTextStyle.copyWith(
+                              color: context.theme.btnTextColor.withValues(
+                                alpha: 0.5,
+                              ),
+                            );
+                          }
+
+                          return context.theme.btnTextStyle;
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              routerDelegate: context.read<AppRouter>().router.routerDelegate,
-              routeInformationProvider:
-                  context.read<AppRouter>().router.routeInformationProvider,
-              routeInformationParser:
-                  context.read<AppRouter>().router.routeInformationParser,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: AppLocalizations.supportedLocales,
-              builder: (context, child) => MediaQuery(
-                data: MediaQuery.of(context).copyWith(
-                  textScaler: TextScaler.noScaling,
-                  boldText: false,
+                routerDelegate: context.read<AppRouter>().router.routerDelegate,
+                routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
+                routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+                builder: (context, child) => MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: TextScaler.noScaling,
+                    boldText: false,
+                  ),
+                  child: child ?? const SizedBox.shrink(),
                 ),
-                child: child ?? const SizedBox.shrink(),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

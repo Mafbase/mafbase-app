@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
-import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
+import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
+import 'package:seating_generator_web/data/services/push_token_service.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
-import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -37,12 +37,20 @@ class AppRouter {
         final authNotifier = context.read<AuthNotifier>();
         if (authNotifier.value is AuthNotifierLoadingModel) {
           try {
-            final response = await getIt<MyHttpClient>().get("/api/auth");
-            if (response.statusCode == 200) {
+            final authRepository = getIt<AuthRepository>();
+            final pushTokenService = getIt<PushTokenService>();
+            
+            // Получаем FCM токен и deviceId если разрешение уже выдано
+            final fcmToken = await pushTokenService.getFcmToken();
+            final deviceId = await pushTokenService.getDeviceId();
+            
+            final userId = await authRepository.auth(
+              pushToken: fcmToken,
+              deviceId: deviceId,
+            );
+
+            if (userId != null) {
               final value = await getIt<CredentialStorage>().read();
-              
-              final responseData = response.data as List<int>;
-              final userId = AuthEventOut.fromBuffer(responseData).userId;
 
               Sentry.configureScope(
                 (p0) => p0.setUser(

@@ -1,3 +1,4 @@
+import 'package:seating_generator_web/data/requests/auth_request.dart';
 import 'package:seating_generator_web/data/requests/forgot_password_request.dart';
 import 'package:seating_generator_web/data/requests/login_request.dart';
 import 'package:seating_generator_web/data/requests/reset_password_request.dart';
@@ -130,6 +131,26 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
       return const ResetPasswordModel.error(
         ResetPasswordError.invalidToken,
       );
+    }
+  }
+
+  @override
+  Future<int?> auth({String? pushToken, String? deviceId}) async {
+    try {
+      final authEvent = AuthEvent();
+      if (pushToken != null && pushToken.isNotEmpty) {
+        authEvent.pushToken = pushToken;
+      }
+      if (deviceId != null && deviceId.isNotEmpty) {
+        authEvent.deviceId = deviceId;
+      }
+      final value = await AuthRequest(authEvent).execute(client);
+      if (value.hasUserId()) {
+        return value.userId;
+      }
+      return null;
+    } catch (_) {
+      return null;
     }
   }
 }

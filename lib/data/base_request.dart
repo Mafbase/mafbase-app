@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 
@@ -25,6 +27,11 @@ abstract class BaseRequest<R> {
 
   Future<R> execute(MyHttpClient client) async {
     final Response response;
+    log(
+      '[base_request] Executing $method${data == null ? '' : '\nData: $data'}',
+      level: Level.INFO.value,
+    );
+
     if (methodType == Method.delete) {
       final bytes = data?.writeToBuffer() ?? [];
       response = await client.delete(
@@ -48,7 +55,6 @@ abstract class BaseRequest<R> {
     }
 
     final bytes = parseResponseData(response.data);
-    debugPrint("response length: ${bytes.length}");
     final result = await parse(bytes);
 
     return result;

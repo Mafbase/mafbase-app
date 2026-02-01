@@ -57,9 +57,6 @@ class MyHttpClient {
   Future<Response> _fetch(RequestOptions options) => _client.fetch(options);
 
   Future<Response<T>> delete<T>(String method, dynamic data, int contentLength, {bool useRecoveryToken = true}) async {
-    if (useRecoveryToken) {
-      debugPrint("sending request to $baseUrl$method");
-    }
     final token = await _storage.authToken;
 
     final response = await _client.delete<T>(
@@ -109,9 +106,6 @@ class MyHttpClient {
     String method, {
     bool useRecoveryToken = true,
   }) async {
-    if (useRecoveryToken) {
-      debugPrint("sending request to $baseUrl$method");
-    }
     final token = await _storage.authToken;
 
     final response = await _client.get<T>(
@@ -161,9 +155,6 @@ class MyHttpClient {
     int contentLength, {
     bool useRecoveryToken = true,
   }) async {
-    if (useRecoveryToken) {
-      debugPrint("sending request to $baseUrl$method");
-    }
     final token = await _storage.authToken;
     final response = await _client.post(
       method,
@@ -231,7 +222,6 @@ class MyHttpClient {
     )
         .then(
       (value) {
-        debugPrint(value.statusCode.toString());
         _checkResponse(value);
         return value;
       },
@@ -239,7 +229,6 @@ class MyHttpClient {
   }
 
   void _checkResponse(Response response) {
-    debugPrint("Status code: ${response.statusCode}");
     if ((response.statusCode ?? 500) >= 400) {
       throw RequestError(
         ErrorOut.fromBuffer(parseResponseData(response.data)).message,

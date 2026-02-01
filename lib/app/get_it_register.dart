@@ -71,6 +71,10 @@ import 'package:seating_generator_web/domain/repositories/tournament_edit_reposi
 import 'package:seating_generator_web/domain/repositories/tournament_result_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
+import 'package:seating_generator_web/domain/services/notification_permission_service.dart';
+import 'package:seating_generator_web/data/services/notification_permission_service_impl.dart';
+import 'package:seating_generator_web/data/services/push_token_service.dart';
+import 'package:seating_generator_web/data/services/device_id_service.dart';
 import 'package:seating_generator_web/feature/info_table_description/data/info_table_description_repository_impl.dart';
 import 'package:seating_generator_web/feature/info_table_description/domain/info_table_description_repository.dart';
 import 'package:seating_generator_web/feature/fantasy/data/fantasy_repository_impl.dart';
@@ -402,6 +406,21 @@ void registerSharedGetIt() {
     ..registerLazySingleton<UpdateSettingsInteractor>(() => UpdateSettingsInteractor(getIt()))
     ..registerLazySingleton<InfoTableDescriptionRepository>(() => InfoTableDescriptionRepositoryImpl(getIt()))
     ..registerLazySingleton<FantasyRepository>(() => FantasyRepositoryImpl(getIt()))
+    ..registerLazySingleton<DeviceIdService>(
+      () => DeviceIdService(),
+    )
+    ..registerLazySingleton<PushTokenService>(
+      () => PushTokenService(
+        getIt<AuthRepository>(),
+        getIt<DeviceIdService>(),
+      ),
+    )
+    ..registerLazySingleton<NotificationPermissionService>(
+      () => NotificationPermissionServiceImpl(
+        getIt<PushTokenService>(),
+      ),
+      dispose: (service) => (service as NotificationPermissionServiceImpl).dispose(),
+    )
     ..registerFactoryParam<FantasyBloc, BuildContext?, dynamic>(
       (context, tournamentId) => FantasyBloc(FantasyState(), getIt()),
     );

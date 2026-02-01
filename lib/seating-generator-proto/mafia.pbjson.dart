@@ -1245,6 +1245,24 @@ final $typed_data.Uint8List fantasyRatingEventOutDescriptor = $convert.base64Dec
     'ChVGYW50YXN5UmF0aW5nRXZlbnRPdXQSLwoEcm93cxgBIAMoCzIbLmdlbmVyYXRlZC5GYW50YX'
     'N5UmF0aW5nUm93UgRyb3dz');
 
+@$core.Deprecated('Use authEventDescriptor instead')
+const AuthEvent$json = {
+  '1': 'AuthEvent',
+  '2': [
+    {'1': 'deviceId', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'deviceId', '17': true},
+    {'1': 'pushToken', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pushToken', '17': true},
+  ],
+  '8': [
+    {'1': '_deviceId'},
+    {'1': '_pushToken'},
+  ],
+};
+
+/// Descriptor for `AuthEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List authEventDescriptor = $convert.base64Decode(
+    'CglBdXRoRXZlbnQSHwoIZGV2aWNlSWQYASABKAlIAFIIZGV2aWNlSWSIAQESIQoJcHVzaFRva2'
+    'VuGAIgASgJSAFSCXB1c2hUb2tlbogBAUILCglfZGV2aWNlSWRCDAoKX3B1c2hUb2tlbg==');
+
 @$core.Deprecated('Use authEventOutDescriptor instead')
 const AuthEventOut$json = {
   '1': 'AuthEventOut',

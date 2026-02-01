@@ -383,5 +383,13 @@
   "resetPasswordTokenHint": "Токен из письма",
   "@resetPasswordTokenHint": {},
   "resetPasswordInvalidToken": "Неверный токен",
-  "@resetPasswordInvalidToken": {}
+  "@resetPasswordInvalidToken": {},
+  "fantasyNotificationsDisabled": "У вас выключены пуш-уведомления",
+  "@fantasyNotificationsDisabled": {},
+  "fantasyNotificationsDisabledDescription": "Включите уведомления, чтобы получать сообщения о доступности нового предсказания",
+  "@fantasyNotificationsDisabledDescription": {},
+  "fantasyEnableNotifications": "Включить уведомления",
+  "@fantasyEnableNotifications": {},
+  "fantasyNotificationsEnabled": "Уведомления успешно включены",
+  "@fantasyNotificationsEnabled": {}
 }
