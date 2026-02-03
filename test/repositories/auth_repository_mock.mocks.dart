@@ -227,4 +227,22 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
           ),
         )),
       ) as _i6.Future<_i4.ResetPasswordModel>);
+
+  @override
+  _i6.Future<int?> auth({
+    String? pushToken,
+    String? deviceId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #auth,
+          [],
+          {
+            #pushToken: pushToken,
+            #deviceId: deviceId,
+          },
+        ),
+        returnValue: _i6.Future<int?>.value(),
+        returnValueForMissingStub: _i6.Future<int?>.value(),
+      ) as _i6.Future<int?>);
 }

@@ -155,10 +155,15 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     10,
     (index) => TextEditingController()..text = "0.0",
   );
+  final minusScoreControllers = List.generate(
+    10,
+    (index) => TextEditingController()..text = "0.0",
+  );
   final refereeController = TextEditingController();
   final refereeFocusNode = FocusNode();
   final focusNodes = List.generate(10, (index) => FocusNode());
   final addScoreFocusNodes = List.generate(10, (index) => FocusNode());
+  final minusScoreFocusNodes = List.generate(10, (index) => FocusNode());
   GameWin? winSelected;
   int? firstDie;
   BestMove? bestMove;
@@ -179,7 +184,13 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     for (final focusNode in addScoreFocusNodes) {
       focusNode.dispose();
     }
+    for (final focusNode in minusScoreFocusNodes) {
+      focusNode.dispose();
+    }
     for (final controller in addScoreControllers) {
+      controller.dispose();
+    }
+    for (final controller in minusScoreControllers) {
       controller.dispose();
     }
     super.dispose();
@@ -217,10 +228,19 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 
   void onSetValues(AddClubGameEffectSetValues effect) {
     for (int i = 0; i < 10; i++) {
+      // Обрабатываем minusScore если он есть
+      if (effect.minusScore case final minusScore?) {
+        minusScoreControllers[i].text = minusScore[i].toString();
+      } else {
+        minusScoreControllers[i].text = "0.0";
+      }
+      
+      // Обрабатываем addScore
       if (effect.addScore case final addScore?) {
-        if (addScore.length > i) {
-          addScoreControllers[i].text = addScore[i].toString();
-        }
+        final value = addScore[i];
+        addScoreControllers[i].text = value.toString();
+      } else {
+        addScoreControllers[i].text = "0.0";
       }
 
       if (effect.players case final players?) {
@@ -706,6 +726,8 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               isTournament: state.isTournament,
               addScoreFocusNode: addScoreFocusNodes[i],
               addScoreController: addScoreControllers[i],
+              minusScoreFocusNode: minusScoreFocusNodes[i],
+              minusScoreController: minusScoreControllers[i],
               nicknameController: controllers[i],
               focusNode: focusNodes[i],
               readOnly: widget.readOnly,
@@ -801,14 +823,36 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
       return;
     }
 
+    // Проверка что все значения addScore неотрицательные
+    final addScores = addScoreControllers.map(
+      (e) => double.parse(e.text.replaceAll(",", ".")),
+    ).toList();
+    if (addScores.any((score) => score < 0)) {
+      AppRouter.showErrorDialog(
+        context,
+        "Положительные баллы не могут быть отрицательными",
+      );
+      return;
+    }
+
+    // Проверка что все значения minusScore неотрицательные
+    final minusScores = minusScoreControllers.map(
+      (e) => double.parse(e.text.replaceAll(",", ".")),
+    ).toList();
+    if (minusScores.any((score) => score < 0)) {
+      AppRouter.showErrorDialog(
+        context,
+        "Отрицательные баллы не могут быть отрицательными (используйте положительное значение)",
+      );
+      return;
+    }
+
     context.read<AddClubGameBloc>().add(
           AddClubGameEvent.submit(
             gameResult: ClubGameResult(
               date: date.toIso8601String(),
-              addScore: addScoreControllers.map(
-                (e) =>
-                    (double.parse(e.text.replaceAll(",", ".")) * 100).floor(),
-              ),
+              addScore: addScores.map((e) => (e * 100).floor()).toList(),
+              minusScore: minusScores.map((e) => (e * 100).floor()).toList(),
               players: controllers.map(
                 (e) => state.players
                     .firstWhere((element) => e.text == element.nickname)
@@ -958,10 +1002,12 @@ class NicknameField extends StatelessWidget {
 class PlayerRowWidget extends StatefulWidget {
   final void Function(PlayerRole role) onRoleChanged;
   final TextEditingController addScoreController;
+  final TextEditingController minusScoreController;
   final TextEditingController nicknameController;
   final VoidCallback onSelected;
   final FocusNode focusNode;
   final FocusNode addScoreFocusNode;
+  final FocusNode minusScoreFocusNode;
   final bool readOnly;
   final bool isTournament;
   final List<PlayerModel> availablePlayers;
@@ -974,6 +1020,7 @@ class PlayerRowWidget extends StatefulWidget {
     super.key,
     required this.onRoleChanged,
     required this.addScoreController,
+    required this.minusScoreController,
     required this.nicknameController,
     required this.focusNode,
     required this.readOnly,
@@ -983,6 +1030,7 @@ class PlayerRowWidget extends StatefulWidget {
     required this.role,
     required this.onNewPlayer,
     required this.addScoreFocusNode,
+    required this.minusScoreFocusNode,
     required this.isTournament,
     required this.down,
   });
@@ -997,15 +1045,22 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           buildNicknameField(),
-          Row(
+          Wrap(
             children: [
               RolePicker(
                 readOnly: widget.readOnly,
                 playerRole: widget.role,
                 onChange: widget.onRoleChanged,
               ),
-              const Spacer(),
-              buildAddScoreField(),
+              const SizedBox(width: 8),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  buildAddScoreField(),
+                  const SizedBox(width: 8),
+                  buildMinusScoreField(),
+                ],
+              ),
             ],
           ),
         ],
@@ -1025,18 +1080,31 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
         ),
         const SizedBox(width: 40),
         buildAddScoreField(),
+        const SizedBox(width: 8),
+        buildMinusScoreField(),
       ],
     );
   }
 
   Widget buildAddScoreField() => SizedBox(
-        width: 100,
+        width: 50,
         child: CustomTextField(
           focusNode: widget.addScoreFocusNode,
           readOnly: widget.readOnly,
           controller: widget.addScoreController,
           hint: "0.0",
-          label: "Доп балл",
+          label: "+ балл",
+        ),
+      );
+
+  Widget buildMinusScoreField() => SizedBox(
+        width: 50,
+        child: CustomTextField(
+          focusNode: widget.minusScoreFocusNode,
+          readOnly: widget.readOnly,
+          controller: widget.minusScoreController,
+          hint: "0.0",
+          label: "- балл",
         ),
       );
 

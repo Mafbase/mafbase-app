@@ -10,6 +10,7 @@ class AddClubGameEffect with _$AddClubGameEffect {
   const factory AddClubGameEffect.setValues({
     List<String>? players,
     List<double>? addScore,
+    List<double>? minusScore,
     List<PlayerRole>? roles,
     GameWin? win,
     BestMove? bestMove,

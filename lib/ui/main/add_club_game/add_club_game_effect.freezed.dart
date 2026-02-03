@@ -21,6 +21,7 @@ mixin _$AddClubGameEffect {
     required TResult Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -38,6 +39,7 @@ mixin _$AddClubGameEffect {
     TResult? Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -55,6 +57,7 @@ mixin _$AddClubGameEffect {
     TResult Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -120,6 +123,7 @@ abstract class _$$AddClubGameEffectSetValuesImplCopyWith<$Res> {
   $Res call(
       {List<String>? players,
       List<double>? addScore,
+      List<double>? minusScore,
       List<PlayerRole>? roles,
       GameWin? win,
       BestMove? bestMove,
@@ -149,6 +153,7 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
   $Res call({
     Object? players = freezed,
     Object? addScore = freezed,
+    Object? minusScore = freezed,
     Object? roles = freezed,
     Object? win = freezed,
     Object? bestMove = freezed,
@@ -166,6 +171,10 @@ class __$$AddClubGameEffectSetValuesImplCopyWithImpl<$Res>
       addScore: freezed == addScore
           ? _value._addScore
           : addScore // ignore: cast_nullable_to_non_nullable
+              as List<double>?,
+      minusScore: freezed == minusScore
+          ? _value._minusScore
+          : minusScore // ignore: cast_nullable_to_non_nullable
               as List<double>?,
       roles: freezed == roles
           ? _value._roles
@@ -223,6 +232,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
   const _$AddClubGameEffectSetValuesImpl(
       {final List<String>? players,
       final List<double>? addScore,
+      final List<double>? minusScore,
       final List<PlayerRole>? roles,
       this.win,
       this.bestMove,
@@ -233,6 +243,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
       this.ratingsSchema})
       : _players = players,
         _addScore = addScore,
+        _minusScore = minusScore,
         _roles = roles;
 
   final List<String>? _players;
@@ -251,6 +262,16 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
     final value = _addScore;
     if (value == null) return null;
     if (_addScore is EqualUnmodifiableListView) return _addScore;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<double>? _minusScore;
+  @override
+  List<double>? get minusScore {
+    final value = _minusScore;
+    if (value == null) return null;
+    if (_minusScore is EqualUnmodifiableListView) return _minusScore;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -282,7 +303,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
 
   @override
   String toString() {
-    return 'AddClubGameEffect.setValues(players: $players, addScore: $addScore, roles: $roles, win: $win, bestMove: $bestMove, referee: $referee, died: $died, date: $date, ciModel: $ciModel, ratingsSchema: $ratingsSchema)';
+    return 'AddClubGameEffect.setValues(players: $players, addScore: $addScore, minusScore: $minusScore, roles: $roles, win: $win, bestMove: $bestMove, referee: $referee, died: $died, date: $date, ciModel: $ciModel, ratingsSchema: $ratingsSchema)';
   }
 
   @override
@@ -292,6 +313,8 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
             other is _$AddClubGameEffectSetValuesImpl &&
             const DeepCollectionEquality().equals(other._players, _players) &&
             const DeepCollectionEquality().equals(other._addScore, _addScore) &&
+            const DeepCollectionEquality()
+                .equals(other._minusScore, _minusScore) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             (identical(other.win, win) || other.win == win) &&
             (identical(other.bestMove, bestMove) ||
@@ -309,6 +332,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
       runtimeType,
       const DeepCollectionEquality().hash(_players),
       const DeepCollectionEquality().hash(_addScore),
+      const DeepCollectionEquality().hash(_minusScore),
       const DeepCollectionEquality().hash(_roles),
       win,
       bestMove,
@@ -333,6 +357,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
     required TResult Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -344,8 +369,8 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
         setValues,
     required TResult Function(int index, PlayerModel player) setPlayer,
   }) {
-    return setValues(players, addScore, roles, win, bestMove, referee, died,
-        date, ciModel, ratingsSchema);
+    return setValues(players, addScore, minusScore, roles, win, bestMove,
+        referee, died, date, ciModel, ratingsSchema);
   }
 
   @override
@@ -354,6 +379,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
     TResult? Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -365,8 +391,8 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
         setValues,
     TResult? Function(int index, PlayerModel player)? setPlayer,
   }) {
-    return setValues?.call(players, addScore, roles, win, bestMove, referee,
-        died, date, ciModel, ratingsSchema);
+    return setValues?.call(players, addScore, minusScore, roles, win, bestMove,
+        referee, died, date, ciModel, ratingsSchema);
   }
 
   @override
@@ -375,6 +401,7 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
     TResult Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -388,8 +415,8 @@ class _$AddClubGameEffectSetValuesImpl implements AddClubGameEffectSetValues {
     required TResult orElse(),
   }) {
     if (setValues != null) {
-      return setValues(players, addScore, roles, win, bestMove, referee, died,
-          date, ciModel, ratingsSchema);
+      return setValues(players, addScore, minusScore, roles, win, bestMove,
+          referee, died, date, ciModel, ratingsSchema);
     }
     return orElse();
   }
@@ -430,6 +457,7 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
   const factory AddClubGameEffectSetValues(
       {final List<String>? players,
       final List<double>? addScore,
+      final List<double>? minusScore,
       final List<PlayerRole>? roles,
       final GameWin? win,
       final BestMove? bestMove,
@@ -441,6 +469,7 @@ abstract class AddClubGameEffectSetValues implements AddClubGameEffect {
 
   List<String>? get players;
   List<double>? get addScore;
+  List<double>? get minusScore;
   List<PlayerRole>? get roles;
   GameWin? get win;
   BestMove? get bestMove;
@@ -553,6 +582,7 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
     required TResult Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -573,6 +603,7 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
     TResult? Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,
@@ -593,6 +624,7 @@ class _$AddClubGameEffectSetPlayerImpl implements AddClubGameEffectSetPlayer {
     TResult Function(
             List<String>? players,
             List<double>? addScore,
+            List<double>? minusScore,
             List<PlayerRole>? roles,
             GameWin? win,
             BestMove? bestMove,

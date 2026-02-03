@@ -36,10 +36,12 @@ class GameResultModel with _$GameResultModel {
                   return PlayerResultStatus.died;
                 }
               }
+              // Проверяем положительные баллы из addScore
               if (proto.result.addScore[index] > 0) {
                 return PlayerResultStatus.positive;
               }
-              if (proto.result.addScore[index] < 0) {
+              // Проверяем отрицательные баллы из minusScore
+              if (proto.result.minusScore[index] > 0) {
                 return PlayerResultStatus.negative;
               }
               return null;

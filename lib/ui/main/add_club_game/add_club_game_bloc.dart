@@ -187,6 +187,9 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
                 )
                 .toList(),
             addScore: game.addScore.map((e) => e / 100).toList(),
+            minusScore: game.minusScore.isNotEmpty 
+                ? game.minusScore.map((e) => e / 100).toList()
+                : null,
             roles: List.generate(
               10,
               (index) {
@@ -252,6 +255,9 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
               .map((e) => e.nickname)
               .toList(),
           addScore: game.addScore.map((e) => e / 100).toList(),
+          minusScore: game.minusScore.isNotEmpty 
+              ? game.minusScore.map((e) => e / 100).toList()
+              : null,
           roles: List.generate(10, (index) {
             if (game.hasMafia1() && index == game.mafia1 ||
                 game.hasMafia2() && index == game.mafia2) {

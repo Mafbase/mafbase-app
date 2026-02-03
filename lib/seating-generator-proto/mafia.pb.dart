@@ -163,6 +163,7 @@ class TableSeatingResult extends $pb.GeneratedMessage {
     GameWin? win,
     BestMove? bestMove,
     $core.Iterable<$core.double>? addScore,
+    $core.Iterable<$core.double>? minusScore,
   }) {
     final $result = create();
     if (role != null) {
@@ -183,6 +184,9 @@ class TableSeatingResult extends $pb.GeneratedMessage {
     if (addScore != null) {
       $result.addScore.addAll(addScore);
     }
+    if (minusScore != null) {
+      $result.minusScore.addAll(minusScore);
+    }
     return $result;
   }
   TableSeatingResult._() : super();
@@ -196,6 +200,7 @@ class TableSeatingResult extends $pb.GeneratedMessage {
     ..e<GameWin>(4, _omitFieldNames ? '' : 'win', $pb.PbFieldType.OE, defaultOrMaker: GameWin.city, valueOf: GameWin.valueOf, enumValues: GameWin.values)
     ..e<BestMove>(5, _omitFieldNames ? '' : 'bestMove', $pb.PbFieldType.OE, protoName: 'bestMove', defaultOrMaker: BestMove.miss, valueOf: BestMove.valueOf, enumValues: BestMove.values)
     ..p<$core.double>(6, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.KD, protoName: 'addScore')
+    ..p<$core.double>(7, _omitFieldNames ? '' : 'minusScore', $pb.PbFieldType.KD, protoName: 'minusScore')
     ..hasRequiredFields = false
   ;
 
@@ -255,6 +260,9 @@ class TableSeatingResult extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(6)
   $pb.PbList<$core.double> get addScore => $_getList(5);
+
+  @$pb.TagNumber(7)
+  $pb.PbList<$core.double> get minusScore => $_getList(6);
 }
 
 class UpdateHideDateRequest extends $pb.GeneratedMessage {
@@ -1666,6 +1674,7 @@ class ClubGameResult extends $pb.GeneratedMessage {
     $core.int? sheriff,
     $core.int? ciId,
     RatingScheme? ratingScheme,
+    $core.Iterable<$core.int>? minusScore,
   }) {
     final $result = create();
     if (addScore != null) {
@@ -1707,6 +1716,9 @@ class ClubGameResult extends $pb.GeneratedMessage {
     if (ratingScheme != null) {
       $result.ratingScheme = ratingScheme;
     }
+    if (minusScore != null) {
+      $result.minusScore.addAll(minusScore);
+    }
     return $result;
   }
   ClubGameResult._() : super();
@@ -1727,6 +1739,7 @@ class ClubGameResult extends $pb.GeneratedMessage {
     ..a<$core.int>(11, _omitFieldNames ? '' : 'sheriff', $pb.PbFieldType.O3)
     ..a<$core.int>(12, _omitFieldNames ? '' : 'ciId', $pb.PbFieldType.O3, protoName: 'ciId')
     ..e<RatingScheme>(13, _omitFieldNames ? '' : 'ratingScheme', $pb.PbFieldType.OE, protoName: 'ratingScheme', defaultOrMaker: RatingScheme.oldFSM, valueOf: RatingScheme.valueOf, enumValues: RatingScheme.values)
+    ..p<$core.int>(14, _omitFieldNames ? '' : 'minusScore', $pb.PbFieldType.K3, protoName: 'minusScore')
     ..hasRequiredFields = false
   ;
 
@@ -1855,6 +1868,9 @@ class ClubGameResult extends $pb.GeneratedMessage {
   $core.bool hasRatingScheme() => $_has(12);
   @$pb.TagNumber(13)
   void clearRatingScheme() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $pb.PbList<$core.int> get minusScore => $_getList(13);
 }
 
 class ClubsEventOut extends $pb.GeneratedMessage {

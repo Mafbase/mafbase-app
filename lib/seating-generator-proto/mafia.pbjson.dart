@@ -144,6 +144,7 @@ const TableSeatingResult$json = {
     {'1': 'win', '3': 4, '4': 1, '5': 14, '6': '.generated.GameWin', '10': 'win'},
     {'1': 'bestMove', '3': 5, '4': 1, '5': 14, '6': '.generated.BestMove', '10': 'bestMove'},
     {'1': 'addScore', '3': 6, '4': 3, '5': 1, '10': 'addScore'},
+    {'1': 'minusScore', '3': 7, '4': 3, '5': 1, '10': 'minusScore'},
   ],
   '8': [
     {'1': '_died'},
@@ -156,7 +157,7 @@ final $typed_data.Uint8List tableSeatingResultDescriptor = $convert.base64Decode
     'xlUgRyb2xlEhQKBXNjb3JlGAIgAygBUgVzY29yZRIXCgRkaWVkGAMgASgFSABSBGRpZWSIAQES'
     'JAoDd2luGAQgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5SA3dpbhIvCghiZXN0TW92ZRgFIAEoDj'
     'ITLmdlbmVyYXRlZC5CZXN0TW92ZVIIYmVzdE1vdmUSGgoIYWRkU2NvcmUYBiADKAFSCGFkZFNj'
-    'b3JlQgcKBV9kaWVk');
+    'b3JlEh4KCm1pbnVzU2NvcmUYByADKAFSCm1pbnVzU2NvcmVCBwoFX2RpZWQ=');
 
 @$core.Deprecated('Use updateHideDateRequestDescriptor instead')
 const UpdateHideDateRequest$json = {
@@ -459,6 +460,7 @@ const ClubGameResult$json = {
     {'1': 'sheriff', '3': 11, '4': 1, '5': 5, '9': 7, '10': 'sheriff', '17': true},
     {'1': 'ciId', '3': 12, '4': 1, '5': 5, '9': 8, '10': 'ciId', '17': true},
     {'1': 'ratingScheme', '3': 13, '4': 1, '5': 14, '6': '.generated.RatingScheme', '9': 9, '10': 'ratingScheme', '17': true},
+    {'1': 'minusScore', '3': 14, '4': 3, '5': 5, '10': 'minusScore'},
   ],
   '8': [
     {'1': '_win'},
@@ -484,9 +486,9 @@ final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode(
     'gBARIbCgZtYWZpYTIYCSABKAVIBVIGbWFmaWEyiAEBEhUKA2RvbhgKIAEoBUgGUgNkb26IAQES'
     'HQoHc2hlcmlmZhgLIAEoBUgHUgdzaGVyaWZmiAEBEhcKBGNpSWQYDCABKAVICFIEY2lJZIgBAR'
     'JACgxyYXRpbmdTY2hlbWUYDSABKA4yFy5nZW5lcmF0ZWQuUmF0aW5nU2NoZW1lSAlSDHJhdGlu'
-    'Z1NjaGVtZYgBAUIGCgRfd2luQgsKCV9maXJzdERpZUILCglfYmVzdE1vdmVCBwoFX2RhdGVCCQ'
-    'oHX21hZmlhMUIJCgdfbWFmaWEyQgYKBF9kb25CCgoIX3NoZXJpZmZCBwoFX2NpSWRCDwoNX3Jh'
-    'dGluZ1NjaGVtZQ==');
+    'Z1NjaGVtZYgBARIeCgptaW51c1Njb3JlGA4gAygFUgptaW51c1Njb3JlQgYKBF93aW5CCwoJX2'
+    'ZpcnN0RGllQgsKCV9iZXN0TW92ZUIHCgVfZGF0ZUIJCgdfbWFmaWExQgkKB19tYWZpYTJCBgoE'
+    'X2RvbkIKCghfc2hlcmlmZkIHCgVfY2lJZEIPCg1fcmF0aW5nU2NoZW1l');
 
 @$core.Deprecated('Use clubsEventOutDescriptor instead')
 const ClubsEventOut$json = {
