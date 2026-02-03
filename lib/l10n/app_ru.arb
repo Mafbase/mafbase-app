@@ -345,11 +345,28 @@
   "@ratingDies": {},
   "ratingGames": "и",
   "@ratingGames": {},
+  "ratingGameFilter": "Минимум игр:",
+  "@ratingGameFilter": {},
+  "ratingGameFilterHint": "Минимум игр",
+  "@ratingGameFilterHint": {},
+  "ratingGameFilterTitle": "Фильтр по количеству игр",
+  "@ratingGameFilterTitle": {},
+  "ratingGameFilterDescription": "Показывать только игроков, которые сыграли минимум указанное количество игр за выбранный период.",
+  "@ratingGameFilterDescription": {},
+  "ratingGameFilterCurrent": "Текущий фильтр: {count} игр",
+  "@ratingGameFilterCurrent": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
   "date": "Дата:",
   "@date": {},
-  "error": "Error",
+  "error": "Ошибка",
   "@error": {},
-  "cancel": "Cancel",
+  "cancel": "Закрыть",
   "@cancel": {},
   "tempTryLuck": "Испытай удачу!",
   "@tempTryLuck": {},

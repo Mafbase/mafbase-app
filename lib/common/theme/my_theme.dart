@@ -33,18 +33,20 @@ abstract class MyTheme {
   MyTheme();
 
   static MyTheme of(BuildContext context) => context.watch();
+  static MyTheme read(BuildContext context) => context.watch();
 
-  factory MyTheme.light() => _LightTheme._();
+  factory MyTheme.light(bool isMobile) => _LightTheme._(isMobile);
 }
 
 
 class _LightTheme implements MyTheme {
+  final bool _isMobile;
   final _defaultTextStyle = const TextStyle(
     fontFamily: "Open Sans",
     color: Colors.black,
   );
 
-  _LightTheme._();
+  _LightTheme._(this._isMobile);
 
   @override
   Color get background1 => const Color(0xFFF5F5F5);
@@ -69,20 +71,20 @@ class _LightTheme implements MyTheme {
 
   @override
   late final TextStyle btnTextStyle = _defaultTextStyle.copyWith(
-    fontSize: 24,
+    fontSize: _isMobile ? 18 : 24,
     fontWeight: FontWeight.w600,
     color: btnTextColor,
   );
 
   @override
   late final TextStyle hintTextStyle = _defaultTextStyle.copyWith(
-    fontSize: 12,
+    fontSize: _isMobile ? 10 : 12,
     color: greyColor,
   );
 
   @override
   TextStyle get defaultTextStyle => _defaultTextStyle.copyWith(
-        fontSize: 16,
+        fontSize: _isMobile ? 12 : 16,
         fontWeight: FontWeight.w400,
       );
 
@@ -91,14 +93,14 @@ class _LightTheme implements MyTheme {
 
   @override
   TextStyle get headerTextStyle => _defaultTextStyle.copyWith(
-        fontSize: 28,
+        fontSize: _isMobile ? 20 : 28,
         fontWeight: FontWeight.w600,
       );
 
   @override
   TextStyle get textBtnTextStyle => _defaultTextStyle.copyWith(
         color: blueForCard,
-        fontSize: 24,
+        fontSize: _isMobile ? 18 : 24,
       );
 
   @override

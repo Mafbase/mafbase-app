@@ -492,13 +492,31 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ratingGames => 'и';
 
   @override
+  String get ratingGameFilter => 'Минимум игр:';
+
+  @override
+  String get ratingGameFilterHint => 'Минимум игр';
+
+  @override
+  String get ratingGameFilterTitle => 'Фильтр по количеству игр';
+
+  @override
+  String get ratingGameFilterDescription =>
+      'Показывать только игроков, которые сыграли минимум указанное количество игр за выбранный период.';
+
+  @override
+  String ratingGameFilterCurrent(int count) {
+    return 'Текущий фильтр: $count игр';
+  }
+
+  @override
   String get date => 'Дата:';
 
   @override
-  String get error => 'Error';
+  String get error => 'Ошибка';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Закрыть';
 
   @override
   String get tempTryLuck => 'Испытай удачу!';

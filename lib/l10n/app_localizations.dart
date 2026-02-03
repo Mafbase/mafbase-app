@@ -998,6 +998,36 @@ abstract class AppLocalizations {
   /// **'и'**
   String get ratingGames;
 
+  /// No description provided for @ratingGameFilter.
+  ///
+  /// In ru, this message translates to:
+  /// **'Минимум игр:'**
+  String get ratingGameFilter;
+
+  /// No description provided for @ratingGameFilterHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Минимум игр'**
+  String get ratingGameFilterHint;
+
+  /// No description provided for @ratingGameFilterTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фильтр по количеству игр'**
+  String get ratingGameFilterTitle;
+
+  /// No description provided for @ratingGameFilterDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Показывать только игроков, которые сыграли минимум указанное количество игр за выбранный период.'**
+  String get ratingGameFilterDescription;
+
+  /// No description provided for @ratingGameFilterCurrent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Текущий фильтр: {count} игр'**
+  String ratingGameFilterCurrent(int count);
+
   /// No description provided for @date.
   ///
   /// In ru, this message translates to:
@@ -1007,13 +1037,13 @@ abstract class AppLocalizations {
   /// No description provided for @error.
   ///
   /// In ru, this message translates to:
-  /// **'Error'**
+  /// **'Ошибка'**
   String get error;
 
   /// No description provided for @cancel.
   ///
   /// In ru, this message translates to:
-  /// **'Cancel'**
+  /// **'Закрыть'**
   String get cancel;
 
   /// No description provided for @tempTryLuck.

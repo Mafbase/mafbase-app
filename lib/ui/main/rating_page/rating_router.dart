@@ -51,6 +51,7 @@ class RatingRouterImpl implements RatingRouter {
         tableStyle: style,
         sort: sort,
         tournamentId: tournamentId,
+        gameFilter: gameFilter,
       );
     } else {
       throw ArgumentError();

@@ -21,6 +21,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -82,10 +83,12 @@ void _startApp() async {
 
   final scope = DependencyScope();
 
-  runApp(MafbaseApp(
-    scope: scope,
-    initLocation: initPush?.location ?? '/',
-  ));
+  runApp(
+    MafbaseApp(
+      scope: scope,
+      initLocation: initPush?.location ?? '/',
+    ),
+  );
 }
 
 class MafbaseApp extends StatefulWidget {
@@ -125,7 +128,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
           providers: [
             ChangeNotifierProvider(create: (_) => getIt<AuthNotifier>()),
             Provider.value(value: router),
-            Provider<MyTheme>(create: (context) => MyTheme.light()),
+            Provider<MyTheme>(create: (context) => MyTheme.light(false)),
           ],
           child: Builder(
             builder: (context) {
@@ -201,11 +204,41 @@ class _MafbaseAppState extends State<MafbaseApp> {
                     textScaler: TextScaler.noScaling,
                     boldText: false,
                   ),
-                  child: child ?? const SizedBox.shrink(),
+                  child: ThemeProvider(child: child ?? const SizedBox.shrink()),
                 ),
               );
             },
           ),
         ),
       );
+}
+
+class ThemeProvider extends StatefulWidget {
+  final Widget child;
+
+  const ThemeProvider({
+    super.key,
+    required this.child,
+  });
+
+  @override
+  State<ThemeProvider> createState() => _ThemeProviderState();
+}
+
+class _ThemeProviderState extends State<ThemeProvider> {
+  late MyTheme value;
+
+  @override
+  void didChangeDependencies() {
+    value = MyTheme.light(context.isMobile);
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Provider.value(
+      value: value,
+      child: widget.child,
+    );
+  }
 }

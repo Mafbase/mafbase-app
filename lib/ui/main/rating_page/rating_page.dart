@@ -12,6 +12,7 @@ import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
+import 'package:seating_generator_web/ui/main/rating_page/widgets/game_filter_dialog.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -42,6 +43,7 @@ class RatingPage extends StatefulWidget {
     required BuildContext context,
     RatingTableStyle tableStyle = RatingTableStyle.full,
     RatingSort sort = RatingSort.score,
+    int gameFilter = 0,
   }) {
     return context.namedLocation(
       _tournamentName,
@@ -51,6 +53,7 @@ class RatingPage extends StatefulWidget {
       queryParameters: {
         "style": tableStyle.name,
         "sort": sort.name,
+        "game-filter": gameFilter.toString(),
       },
     );
   }
@@ -304,6 +307,8 @@ class _RatingPageState extends CustomState<RatingPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  gameFilterWidget(),
+                  const SizedBox(width: 8),
                   styleSwitcher(),
                   const SizedBox(width: 8),
                   downloadRatingButton(),
@@ -397,6 +402,10 @@ class _RatingPageState extends CustomState<RatingPage> {
                                 ],
                               ),
                             ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0, right: 8),
+                            child: gameFilterWidget(),
+                          ),
                           styleSwitcher(),
                           downloadRatingButton(),
                         ],
@@ -532,6 +541,67 @@ class _RatingPageState extends CustomState<RatingPage> {
         ),
       ],
     );
+  }
+
+  Widget gameFilterWidget() {
+    return IconButton(
+      icon: Stack(
+        children: [
+          const Icon(Icons.filter_list),
+          if (widget.gameFilter > 0)
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Container(
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                constraints: const BoxConstraints(
+                  minWidth: 12,
+                  minHeight: 12,
+                ),
+                child: Text(
+                  widget.gameFilter.toString(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 8,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+        ],
+      ),
+      tooltip: widget.gameFilter > 0
+          ? context.locale.ratingGameFilterCurrent(widget.gameFilter)
+          : context.locale.ratingGameFilter,
+      onPressed: () => _showGameFilterDialog(),
+    );
+  }
+
+  Future<void> _showGameFilterDialog() async {
+    final gameFilter = await GameFilterDialog.show(
+      context,
+      currentFilter: widget.gameFilter,
+    );
+
+    if (!mounted) return;
+
+    if (gameFilter != null && gameFilter != widget.gameFilter) {
+      context.read<RatingBloc>().add(
+            RatingEvent.rangeChanged(
+              range: widget.range,
+              clubId: widget.clubId,
+              tournamentId: widget.tournamentId,
+              style: widget.style,
+              sort: widget.sort,
+              gameFilter: gameFilter,
+            ),
+          );
+    }
   }
 
   Widget styleSwitcher() {
