@@ -62,8 +62,7 @@ class AddClubGamePage extends StatefulWidget {
     builder: (context, state) {
       final gameId = int.parse(state.pathParameters["gameId"]!);
       final tournamentId = int.parse(state.pathParameters["id"]!);
-      final edit =
-          bool.tryParse(state.uri.queryParameters['edit'] ?? '') ?? true;
+      final edit = bool.tryParse(state.uri.queryParameters['edit'] ?? '') ?? true;
       return BlocProvider<AddClubGameBloc>(
         create: (context) => AddClubGameBloc(
           context: context,
@@ -147,9 +146,7 @@ class AddClubGamePage extends StatefulWidget {
 }
 
 class _AddClubGamePageState extends CustomState<AddClubGamePage>
-    with
-        EffectListener<AddClubGameEffect, AddClubGameState, AddClubGameBloc,
-            AddClubGamePage> {
+    with EffectListener<AddClubGameEffect, AddClubGameState, AddClubGameBloc, AddClubGamePage> {
   final controllers = List.generate(10, (index) => TextEditingController());
   final addScoreControllers = List.generate(
     10,
@@ -229,18 +226,19 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   void onSetValues(AddClubGameEffectSetValues effect) {
     for (int i = 0; i < 10; i++) {
       // Обрабатываем minusScore если он есть
-      if (effect.minusScore case final minusScore?) {
-        minusScoreControllers[i].text = minusScore[i].toString();
-      } else {
-        minusScoreControllers[i].text = "0.0";
+      switch (effect.minusScore) {
+        case List<double> minusScore when minusScore.length == 10:
+          minusScoreControllers[i].text = minusScore[i].toString();
+        default:
+          minusScoreControllers[i].text = "0.0";
       }
-      
+
       // Обрабатываем addScore
-      if (effect.addScore case final addScore?) {
-        final value = addScore[i];
-        addScoreControllers[i].text = value.toString();
-      } else {
-        addScoreControllers[i].text = "0.0";
+      switch (effect.addScore) {
+        case List<double> addScore when addScore.length == 10:
+          addScoreControllers[i].text = addScore[i].toString();
+        default:
+          addScoreControllers[i].text = "0.0";
       }
 
       if (effect.players case final players?) {
@@ -312,8 +310,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
       );
 
   @override
-  Widget buildDesktop(BuildContext context) =>
-      BlocBuilder<AddClubGameBloc, AddClubGameState>(
+  Widget buildDesktop(BuildContext context) => BlocBuilder<AddClubGameBloc, AddClubGameState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -328,8 +325,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                     ),
                     Expanded(
                       child: LayoutBuilder(
-                        builder: (context, constraints) =>
-                            SingleChildScrollView(
+                        builder: (context, constraints) => SingleChildScrollView(
                           child: Wrap(
                             alignment: WrapAlignment.spaceAround,
                             runSpacing: 20,
@@ -343,8 +339,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   scrollDirection: Axis.horizontal,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: buildPlayersRow(state)
                                         .map(
                                           (e) => e,
@@ -369,9 +364,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
       );
 
   Widget buildGameInfoWidget(AddClubGameState state) => Container(
-        padding: context.isMobile
-            ? EdgeInsets.zero
-            : const EdgeInsets.symmetric(horizontal: 30),
+        padding: context.isMobile ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 30),
         decoration: context.isMobile
             ? null
             : const BoxDecoration(
@@ -476,8 +469,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                       }
                       return text;
                     },
-                    onChanged:
-                        widget.readOnly ? null : (value) => bestMove = value,
+                    onChanged: widget.readOnly ? null : (value) => bestMove = value,
                   ),
                 ],
               ),
@@ -682,10 +674,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                         ),
                       ),
                     ),
-                  if (widget.readOnly &&
-                      widget.gameId != null &&
-                      !state.isTournament &&
-                      state.canEdit)
+                  if (widget.readOnly && widget.gameId != null && !state.isTournament && state.canEdit)
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: TextButton(
@@ -761,9 +750,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 
   submit(AddClubGameState state) {
     if (widget.readOnly) {
-      context
-          .read<AddClubGameBloc>()
-          .add(AddClubGameEvent.edit(gameId: widget.gameId!));
+      context.read<AddClubGameBloc>().add(AddClubGameEvent.edit(gameId: widget.gameId!));
       return;
     }
     if (roles.where((element) => element == PlayerRole.maf).length != 2 ||
@@ -824,9 +811,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     }
 
     // Проверка что все значения addScore неотрицательные
-    final addScores = addScoreControllers.map(
-      (e) => double.parse(e.text.replaceAll(",", ".")),
-    ).toList();
+    final addScores = addScoreControllers
+        .map(
+          (e) => double.parse(e.text.replaceAll(",", ".")),
+        )
+        .toList();
     if (addScores.any((score) => score < 0)) {
       AppRouter.showErrorDialog(
         context,
@@ -836,9 +825,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     }
 
     // Проверка что все значения minusScore неотрицательные
-    final minusScores = minusScoreControllers.map(
-      (e) => double.parse(e.text.replaceAll(",", ".")),
-    ).toList();
+    final minusScores = minusScoreControllers
+        .map(
+          (e) => double.parse(e.text.replaceAll(",", ".")),
+        )
+        .toList();
     if (minusScores.any((score) => score < 0)) {
       AppRouter.showErrorDialog(
         context,
@@ -854,9 +845,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               addScore: addScores.map((e) => (e * 100).floor()).toList(),
               minusScore: minusScores.map((e) => (e * 100).floor()).toList(),
               players: controllers.map(
-                (e) => state.players
-                    .firstWhere((element) => e.text == element.nickname)
-                    .id,
+                (e) => state.players.firstWhere((element) => e.text == element.nickname).id,
               ),
               mafia1: roles.indexOf(PlayerRole.maf),
               mafia2: roles.lastIndexOf(PlayerRole.maf),
@@ -870,9 +859,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               firstDie: firstDie,
               win: winSelected,
               bestMove: bestMove,
-              ciId: ciSchemeModel == CiSchemeModel.empty
-                  ? null
-                  : ciSchemeModel?.id,
+              ciId: ciSchemeModel == CiSchemeModel.empty ? null : ciSchemeModel?.id,
               ratingScheme: ratingScheme,
             ),
             gameId: widget.gameId,
@@ -910,11 +897,9 @@ class NicknameField extends StatelessWidget {
       width: 250,
       child: CustomAutoComplete(
         readOnly: readOnly,
-        openDirection:
-            down ? OptionsViewOpenDirection.down : OptionsViewOpenDirection.up,
+        openDirection: down ? OptionsViewOpenDirection.down : OptionsViewOpenDirection.up,
         controller: controller,
-        displayStringForOption: (model) =>
-            model.id == PlayerModel.undefinedId ? "+" : model.nickname,
+        displayStringForOption: (model) => model.id == PlayerModel.undefinedId ? "+" : model.nickname,
         focusNode: focusNode,
         onSelected: (playerModel) async {
           if (playerModel.id == PlayerModel.undefinedId) {
@@ -928,9 +913,7 @@ class NicknameField extends StatelessWidget {
         optionsBuilder: (value) {
           var players = availablePlayers
               .where(
-                (element) => element.nickname
-                    .toLowerCase()
-                    .contains(value.text.toLowerCase()),
+                (element) => element.nickname.toLowerCase().contains(value.text.toLowerCase()),
               )
               .sortedBy<num>(
                 (element) => element.nickname.length,
@@ -938,9 +921,7 @@ class NicknameField extends StatelessWidget {
 
           players += availablePlayers
               .where(
-                (element) => map(element.nickname)
-                    .toLowerCase()
-                    .contains(map(value.text.toLowerCase())),
+                (element) => map(element.nickname).toLowerCase().contains(map(value.text.toLowerCase())),
               )
               .where((element) => !players.contains(element))
               .sortedBy<num>(
