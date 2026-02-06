@@ -57,14 +57,21 @@ def request_api_token(signature_data):
         print(f"Failed to get API Token: {response.status_code} {response.text}")
         sys.exit(1)
 
-def get_version_number(package_name, api_key, whatsNew):
+def get_version_number(package_name, api_key, whatsNew, developer_email):
     url = f'https://public-api.rustore.ru/public/v1/application/{package_name}/version'
     headers = {
         'Content-Type': 'application/json',
         'Public-Token': api_key
     }
 
-    response = requests.post(url, headers=headers, data=json.dumps({'whatsNew': whatsNew}))
+    data = {
+        'whatsNew': whatsNew,
+        'developerContacts': {
+            'email': developer_email
+        }
+    }
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
 
     if response.status_code == 200:
         version_number = response.json().get('body')
@@ -129,7 +136,12 @@ def main():
     latest_version, latest_changes = extract_latest_changelog(change_log_file_name)
     print(f'Список изменений для версии {latest_version}:\n{latest_changes}')
 
-    version_number = get_version_number(package_name, api_token, latest_changes)
+    developer_email = os.environ.get('DEVELOPER_EMAIL')
+    if not developer_email:
+        print("Ошибка: переменная окружения DEVELOPER_EMAIL не установлена")
+        sys.exit(1)
+
+    version_number = get_version_number(package_name, api_token, latest_changes, developer_email)
     upload_aab(package_name, version_number, api_token, aab_file_path)
 
     # Отправляем на Review

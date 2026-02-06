@@ -11,6 +11,7 @@ stages:
 variables:
   PACKAGE_NAME: "ru.mafbase.app"
   SECURE_FILES_DOWNLOAD_PATH: './secure-files/'
+  DEVELOPER_EMAIL: "strelas70@gmail.com"
 
 build_android_app:
   stage: android-release
