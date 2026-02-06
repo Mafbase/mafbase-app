@@ -36,9 +36,13 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
     FantasyEventRefresh event,
     Emitter<FantasyState> emit,
   ) async {
-    await _loadData(event.tournamentId, emit);
-    if (state.isOwner) {
-      await _loadParticipants(event.tournamentId, emit);
+    try {
+      await _loadData(event.tournamentId, emit);
+      if (state.isOwner) {
+        await _loadParticipants(event.tournamentId, emit);
+      }
+    } finally {
+      event.completer?.complete();
     }
   }
 

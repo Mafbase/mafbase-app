@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 
 sealed class FantasyEvent {}
@@ -16,8 +17,12 @@ class FantasyEventInit implements FantasyEvent {
 
 class FantasyEventRefresh implements FantasyEvent {
   final int tournamentId;
+  final Completer<void>? completer;
 
-  const FantasyEventRefresh({required this.tournamentId});
+  const FantasyEventRefresh({
+    required this.tournamentId,
+    this.completer,
+  });
 }
 
 class FantasyEventSetPrediction implements FantasyEvent {

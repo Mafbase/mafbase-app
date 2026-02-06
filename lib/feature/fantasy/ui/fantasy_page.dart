@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -89,28 +90,41 @@ class _FantasyPageState extends CustomState<FantasyPage> {
                 ),
               ),
               Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-                        child: FantasyNotificationsBanner(),
-                      ),
-                      const SizedBox(height: 16),
-                      FantasyPredictionSection(
-                        state: state,
-                        tournamentId: widget.tournamentId,
-                        isMobile: true,
-                      ),
-                      const SizedBox(height: 16),
-                      FantasyRatingSection(
-                        state: state,
-                        isMobile: true,
-                      ),
-                      const SizedBox(height: 16),
-                    ],
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    final completer = Completer<void>();
+                    context.read<FantasyBloc>().add(
+                          FantasyEventRefresh(
+                            tournamentId: widget.tournamentId,
+                            completer: completer,
+                          ),
+                        );
+
+                    await completer.future;
+                  },
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+                          child: FantasyNotificationsBanner(),
+                        ),
+                        const SizedBox(height: 16),
+                        FantasyPredictionSection(
+                          state: state,
+                          tournamentId: widget.tournamentId,
+                          isMobile: true,
+                        ),
+                        const SizedBox(height: 16),
+                        FantasyRatingSection(
+                          state: state,
+                          isMobile: true,
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -142,23 +156,49 @@ class _FantasyPageState extends CustomState<FantasyPage> {
               ),
               const SizedBox(height: 8),
               Expanded(
-                child: Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    Expanded(
-                      flex: 3,
-                      child: FantasyRatingSection(state: state),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      flex: 1,
-                      child: FantasyPredictionSection(
-                        state: state,
-                        tournamentId: widget.tournamentId,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                  ],
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    final completer = Completer<void>();
+                    context.read<FantasyBloc>().add(
+                          FantasyEventRefresh(
+                            tournamentId: widget.tournamentId,
+                            completer: completer,
+                          ),
+                        );
+                    await completer.future;
+                  },
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: IntrinsicHeight(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  flex: 3,
+                                  child: FantasyRatingSection(state: state),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  flex: 1,
+                                  child: FantasyPredictionSection(
+                                    state: state,
+                                    tournamentId: widget.tournamentId,
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
