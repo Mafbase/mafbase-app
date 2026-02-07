@@ -19,6 +19,7 @@ mixin _$ProfileState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isLogoutLoading => throw _privateConstructorUsedError;
   String? get login => throw _privateConstructorUsedError;
+  PlayerModel? get playerProfile => throw _privateConstructorUsedError;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,13 @@ abstract class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res, ProfileState>;
   @useResult
-  $Res call({bool isLoading, bool isLogoutLoading, String? login});
+  $Res call(
+      {bool isLoading,
+      bool isLogoutLoading,
+      String? login,
+      PlayerModel? playerProfile});
+
+  $PlayerModelCopyWith<$Res>? get playerProfile;
 }
 
 /// @nodoc
@@ -54,6 +61,7 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
     Object? isLoading = null,
     Object? isLogoutLoading = null,
     Object? login = freezed,
+    Object? playerProfile = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -68,7 +76,25 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String?,
+      playerProfile: freezed == playerProfile
+          ? _value.playerProfile
+          : playerProfile // ignore: cast_nullable_to_non_nullable
+              as PlayerModel?,
     ) as $Val);
+  }
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlayerModelCopyWith<$Res>? get playerProfile {
+    if (_value.playerProfile == null) {
+      return null;
+    }
+
+    return $PlayerModelCopyWith<$Res>(_value.playerProfile!, (value) {
+      return _then(_value.copyWith(playerProfile: value) as $Val);
+    });
   }
 }
 
@@ -80,7 +106,14 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
       __$$ProfileStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool isLogoutLoading, String? login});
+  $Res call(
+      {bool isLoading,
+      bool isLogoutLoading,
+      String? login,
+      PlayerModel? playerProfile});
+
+  @override
+  $PlayerModelCopyWith<$Res>? get playerProfile;
 }
 
 /// @nodoc
@@ -99,6 +132,7 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isLogoutLoading = null,
     Object? login = freezed,
+    Object? playerProfile = freezed,
   }) {
     return _then(_$ProfileStateImpl(
       isLoading: null == isLoading
@@ -113,6 +147,10 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String?,
+      playerProfile: freezed == playerProfile
+          ? _value.playerProfile
+          : playerProfile // ignore: cast_nullable_to_non_nullable
+              as PlayerModel?,
     ));
   }
 }
@@ -121,7 +159,10 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
 
 class _$ProfileStateImpl implements _ProfileState {
   const _$ProfileStateImpl(
-      {this.isLoading = false, this.isLogoutLoading = false, this.login});
+      {this.isLoading = false,
+      this.isLogoutLoading = false,
+      this.login,
+      this.playerProfile});
 
   @override
   @JsonKey()
@@ -131,10 +172,12 @@ class _$ProfileStateImpl implements _ProfileState {
   final bool isLogoutLoading;
   @override
   final String? login;
+  @override
+  final PlayerModel? playerProfile;
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, isLogoutLoading: $isLogoutLoading, login: $login)';
+    return 'ProfileState(isLoading: $isLoading, isLogoutLoading: $isLogoutLoading, login: $login, playerProfile: $playerProfile)';
   }
 
   @override
@@ -146,12 +189,14 @@ class _$ProfileStateImpl implements _ProfileState {
                 other.isLoading == isLoading) &&
             (identical(other.isLogoutLoading, isLogoutLoading) ||
                 other.isLogoutLoading == isLogoutLoading) &&
-            (identical(other.login, login) || other.login == login));
+            (identical(other.login, login) || other.login == login) &&
+            (identical(other.playerProfile, playerProfile) ||
+                other.playerProfile == playerProfile));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isLogoutLoading, login);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, isLogoutLoading, login, playerProfile);
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -166,7 +211,8 @@ abstract class _ProfileState implements ProfileState {
   const factory _ProfileState(
       {final bool isLoading,
       final bool isLogoutLoading,
-      final String? login}) = _$ProfileStateImpl;
+      final String? login,
+      final PlayerModel? playerProfile}) = _$ProfileStateImpl;
 
   @override
   bool get isLoading;
@@ -174,6 +220,8 @@ abstract class _ProfileState implements ProfileState {
   bool get isLogoutLoading;
   @override
   String? get login;
+  @override
+  PlayerModel? get playerProfile;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.

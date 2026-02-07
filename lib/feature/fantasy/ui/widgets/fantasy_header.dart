@@ -34,7 +34,9 @@ class FantasyHeader extends StatelessWidget {
                   tooltip: context.locale.fantasyParticipants,
                 ),
               ),
-            ),
+            )
+          else
+            Spacer(),
         ],
       ),
     );

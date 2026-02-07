@@ -128,19 +128,24 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
                     await completer.future;
                   },
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-                          child: FantasyNotificationsBanner(),
-                        ),
-                        const SizedBox(height: 16),
-                        FantasyPredictionSection(
-                          state: state,
-                          tournamentId: widget.tournamentId,
-                          isMobile: true,
+                        FantasyNotificationsBanner(),
+                        ValueListenableBuilder(
+                          valueListenable: context.read<AuthNotifier>(),
+                          builder: (context, state, child) =>
+                              state.mapOrNull(
+                                authorized: (_) => child,
+                              ) ??
+                              const SizedBox.shrink(),
+                          child: FantasyPredictionSection(
+                            state: state,
+                            tournamentId: widget.tournamentId,
+                            isMobile: true,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         FantasyRatingSection(
@@ -197,6 +202,7 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       return SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
                             minHeight: constraints.maxHeight,

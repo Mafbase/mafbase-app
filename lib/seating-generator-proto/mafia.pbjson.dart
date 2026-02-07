@@ -758,6 +758,22 @@ final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode
     'NvdW50QhIKEF9maW5hbEdhbWVzQ291bnRCDQoLX2hpZGVSZXN1bHRCCQoHX3NjaGVtZUIQCg5f'
     'ZmFudGFzeVN0YXR1cw==');
 
+@$core.Deprecated('Use userProfileDescriptor instead')
+const UserProfile$json = {
+  '1': 'UserProfile',
+  '2': [
+    {'1': 'player', '3': 1, '4': 1, '5': 11, '6': '.generated.Player', '9': 0, '10': 'player', '17': true},
+  ],
+  '8': [
+    {'1': '_player'},
+  ],
+};
+
+/// Descriptor for `UserProfile`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List userProfileDescriptor = $convert.base64Decode(
+    'CgtVc2VyUHJvZmlsZRIuCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVySABSBnBsYX'
+    'llcogBAUIJCgdfcGxheWVy');
+
 @$core.Deprecated('Use profileDescriptor instead')
 const Profile$json = {
   '1': 'Profile',

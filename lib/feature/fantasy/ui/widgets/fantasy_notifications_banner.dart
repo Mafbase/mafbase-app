@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
@@ -26,6 +27,10 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
   Widget build(BuildContext context) => StreamBuilder<PermissionStatus>(
         stream: _notificationPermissionService.notificationStatusStream,
         builder: (context, snapshot) {
+          if (kIsWeb) {
+            return const SizedBox.shrink();
+          }
+
           if (!snapshot.hasData) {
             return const SizedBox.shrink();
           }
@@ -37,6 +42,7 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
 
           return Container(
             padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
               color: Colors.orange.withValues(alpha: 0.1),
               border: Border.all(color: Colors.orange),
@@ -74,8 +80,8 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
                 const SizedBox(height: 8),
                 CustomButton(
                   text: context.locale.fantasyEnableNotifications,
-                onTap: () async {
-                  final result = await _notificationPermissionService.requestNotificationPermission();
+                  onTap: () async {
+                    final result = await _notificationPermissionService.requestNotificationPermission();
                     if (context.mounted && result.isGranted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

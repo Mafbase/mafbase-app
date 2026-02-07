@@ -21,6 +21,8 @@ mixin _$ProfileEvent {
     required TResult Function() onPageOpened,
     required TResult Function() onLogoutPressed,
     required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +30,8 @@ mixin _$ProfileEvent {
     TResult? Function()? onPageOpened,
     TResult? Function()? onLogoutPressed,
     TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +39,8 @@ mixin _$ProfileEvent {
     TResult Function()? onPageOpened,
     TResult Function()? onLogoutPressed,
     TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,9 @@ mixin _$ProfileEvent {
     required TResult Function(ProfileEventPageOpened value) onPageOpened,
     required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
     required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +59,8 @@ mixin _$ProfileEvent {
     TResult? Function(ProfileEventPageOpened value)? onPageOpened,
     TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +68,8 @@ mixin _$ProfileEvent {
     TResult Function(ProfileEventPageOpened value)? onPageOpened,
     TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,6 +143,8 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
     required TResult Function() onPageOpened,
     required TResult Function() onLogoutPressed,
     required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
   }) {
     return onPageOpened();
   }
@@ -140,6 +155,8 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
     TResult? Function()? onPageOpened,
     TResult? Function()? onLogoutPressed,
     TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
   }) {
     return onPageOpened?.call();
   }
@@ -150,6 +167,8 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
     TResult Function()? onPageOpened,
     TResult Function()? onLogoutPressed,
     TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -164,6 +183,9 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
     required TResult Function(ProfileEventPageOpened value) onPageOpened,
     required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
     required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
   }) {
     return onPageOpened(this);
   }
@@ -174,6 +196,8 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
     TResult? Function(ProfileEventPageOpened value)? onPageOpened,
     TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
   }) {
     return onPageOpened?.call(this);
   }
@@ -184,6 +208,8 @@ class _$ProfileEventPageOpenedImpl implements ProfileEventPageOpened {
     TResult Function(ProfileEventPageOpened value)? onPageOpened,
     TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
     required TResult orElse(),
   }) {
     if (onPageOpened != null) {
@@ -244,6 +270,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     required TResult Function() onPageOpened,
     required TResult Function() onLogoutPressed,
     required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
   }) {
     return onLogoutPressed();
   }
@@ -254,6 +282,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult? Function()? onPageOpened,
     TResult? Function()? onLogoutPressed,
     TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
   }) {
     return onLogoutPressed?.call();
   }
@@ -264,6 +294,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult Function()? onPageOpened,
     TResult Function()? onLogoutPressed,
     TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
     required TResult orElse(),
   }) {
     if (onLogoutPressed != null) {
@@ -278,6 +310,9 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     required TResult Function(ProfileEventPageOpened value) onPageOpened,
     required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
     required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
   }) {
     return onLogoutPressed(this);
   }
@@ -288,6 +323,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult? Function(ProfileEventPageOpened value)? onPageOpened,
     TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
   }) {
     return onLogoutPressed?.call(this);
   }
@@ -298,6 +335,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult Function(ProfileEventPageOpened value)? onPageOpened,
     TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
     required TResult orElse(),
   }) {
     if (onLogoutPressed != null) {
@@ -358,6 +397,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     required TResult Function() onPageOpened,
     required TResult Function() onLogoutPressed,
     required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
   }) {
     return deleteProfile();
   }
@@ -368,6 +409,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult? Function()? onPageOpened,
     TResult? Function()? onLogoutPressed,
     TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
   }) {
     return deleteProfile?.call();
   }
@@ -378,6 +421,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult Function()? onPageOpened,
     TResult Function()? onLogoutPressed,
     TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
     required TResult orElse(),
   }) {
     if (deleteProfile != null) {
@@ -392,6 +437,9 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     required TResult Function(ProfileEventPageOpened value) onPageOpened,
     required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
     required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
   }) {
     return deleteProfile(this);
   }
@@ -402,6 +450,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult? Function(ProfileEventPageOpened value)? onPageOpened,
     TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
   }) {
     return deleteProfile?.call(this);
   }
@@ -412,6 +462,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult Function(ProfileEventPageOpened value)? onPageOpened,
     TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
     required TResult orElse(),
   }) {
     if (deleteProfile != null) {
@@ -423,4 +475,307 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
 
 abstract class ProfileEventDeleteProfile implements ProfileEvent {
   const factory ProfileEventDeleteProfile() = _$ProfileEventDeleteProfileImpl;
+}
+
+/// @nodoc
+abstract class _$$ProfileEventLoadUserProfileImplCopyWith<$Res> {
+  factory _$$ProfileEventLoadUserProfileImplCopyWith(
+          _$ProfileEventLoadUserProfileImpl value,
+          $Res Function(_$ProfileEventLoadUserProfileImpl) then) =
+      __$$ProfileEventLoadUserProfileImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProfileEventLoadUserProfileImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventLoadUserProfileImpl>
+    implements _$$ProfileEventLoadUserProfileImplCopyWith<$Res> {
+  __$$ProfileEventLoadUserProfileImplCopyWithImpl(
+      _$ProfileEventLoadUserProfileImpl _value,
+      $Res Function(_$ProfileEventLoadUserProfileImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ProfileEventLoadUserProfileImpl implements ProfileEventLoadUserProfile {
+  const _$ProfileEventLoadUserProfileImpl();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.loadUserProfile()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileEventLoadUserProfileImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onPageOpened,
+    required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
+  }) {
+    return loadUserProfile();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onPageOpened,
+    TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
+  }) {
+    return loadUserProfile?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onPageOpened,
+    TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
+    required TResult orElse(),
+  }) {
+    if (loadUserProfile != null) {
+      return loadUserProfile();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileEventPageOpened value) onPageOpened,
+    required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+  }) {
+    return loadUserProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileEventPageOpened value)? onPageOpened,
+    TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+  }) {
+    return loadUserProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileEventPageOpened value)? onPageOpened,
+    TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    required TResult orElse(),
+  }) {
+    if (loadUserProfile != null) {
+      return loadUserProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProfileEventLoadUserProfile implements ProfileEvent {
+  const factory ProfileEventLoadUserProfile() =
+      _$ProfileEventLoadUserProfileImpl;
+}
+
+/// @nodoc
+abstract class _$$ProfileEventSetUserProfileImplCopyWith<$Res> {
+  factory _$$ProfileEventSetUserProfileImplCopyWith(
+          _$ProfileEventSetUserProfileImpl value,
+          $Res Function(_$ProfileEventSetUserProfileImpl) then) =
+      __$$ProfileEventSetUserProfileImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PlayerModel player});
+
+  $PlayerModelCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class __$$ProfileEventSetUserProfileImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventSetUserProfileImpl>
+    implements _$$ProfileEventSetUserProfileImplCopyWith<$Res> {
+  __$$ProfileEventSetUserProfileImplCopyWithImpl(
+      _$ProfileEventSetUserProfileImpl _value,
+      $Res Function(_$ProfileEventSetUserProfileImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? player = null,
+  }) {
+    return _then(_$ProfileEventSetUserProfileImpl(
+      null == player
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as PlayerModel,
+    ));
+  }
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlayerModelCopyWith<$Res> get player {
+    return $PlayerModelCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$ProfileEventSetUserProfileImpl implements ProfileEventSetUserProfile {
+  const _$ProfileEventSetUserProfileImpl(this.player);
+
+  @override
+  final PlayerModel player;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.setUserProfile(player: $player)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileEventSetUserProfileImpl &&
+            (identical(other.player, player) || other.player == player));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, player);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProfileEventSetUserProfileImplCopyWith<_$ProfileEventSetUserProfileImpl>
+      get copyWith => __$$ProfileEventSetUserProfileImplCopyWithImpl<
+          _$ProfileEventSetUserProfileImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onPageOpened,
+    required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
+  }) {
+    return setUserProfile(player);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onPageOpened,
+    TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
+  }) {
+    return setUserProfile?.call(player);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onPageOpened,
+    TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
+    required TResult orElse(),
+  }) {
+    if (setUserProfile != null) {
+      return setUserProfile(player);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileEventPageOpened value) onPageOpened,
+    required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+  }) {
+    return setUserProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileEventPageOpened value)? onPageOpened,
+    TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+  }) {
+    return setUserProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileEventPageOpened value)? onPageOpened,
+    TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    required TResult orElse(),
+  }) {
+    if (setUserProfile != null) {
+      return setUserProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProfileEventSetUserProfile implements ProfileEvent {
+  const factory ProfileEventSetUserProfile(final PlayerModel player) =
+      _$ProfileEventSetUserProfileImpl;
+
+  PlayerModel get player;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProfileEventSetUserProfileImplCopyWith<_$ProfileEventSetUserProfileImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

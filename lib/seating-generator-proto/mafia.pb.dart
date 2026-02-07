@@ -2903,6 +2903,58 @@ class TournamentSettings extends $pb.GeneratedMessage {
   void clearFantasyStatus() => $_clearField(7);
 }
 
+class UserProfile extends $pb.GeneratedMessage {
+  factory UserProfile({
+    Player? player,
+  }) {
+    final $result = create();
+    if (player != null) {
+      $result.player = player;
+    }
+    return $result;
+  }
+  UserProfile._() : super();
+  factory UserProfile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserProfile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserProfile', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOM<Player>(1, _omitFieldNames ? '' : 'player', subBuilder: Player.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UserProfile clone() => UserProfile()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UserProfile copyWith(void Function(UserProfile) updates) => super.copyWith((message) => updates(message as UserProfile)) as UserProfile;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UserProfile create() => UserProfile._();
+  UserProfile createEmptyInstance() => create();
+  static $pb.PbList<UserProfile> createRepeated() => $pb.PbList<UserProfile>();
+  @$core.pragma('dart2js:noInline')
+  static UserProfile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserProfile>(create);
+  static UserProfile? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Player get player => $_getN(0);
+  @$pb.TagNumber(1)
+  set player(Player v) { $_setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlayer() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlayer() => $_clearField(1);
+  @$pb.TagNumber(1)
+  Player ensurePlayer() => $_ensure(0);
+}
+
 class Profile extends $pb.GeneratedMessage {
   factory Profile({
     $core.String? firstName,
