@@ -69,163 +69,166 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BlocSelector<ProfileBloc, ProfileState, String?>(
-                    selector: (state) => state.login,
-                    builder: (context, login) => Text.rich(
-                      textAlign: TextAlign.center,
-                      TextSpan(
-                        style: MyTheme.of(context).fieldTextStyle,
-                        children: [
-                          const TextSpan(
-                            text: 'Вы авторизованы как: ',
-                          ),
-                          TextSpan(
-                            text: login ?? '',
-                            style: const TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                        ],
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BlocSelector<ProfileBloc, ProfileState, String?>(
+                      selector: (state) => state.login,
+                      builder: (context, login) => Text.rich(
+                        textAlign: TextAlign.center,
+                        TextSpan(
+                          style: MyTheme.of(context).fieldTextStyle,
+                          children: [
+                            const TextSpan(
+                              text: 'Вы авторизованы как: ',
+                            ),
+                            TextSpan(
+                              text: login ?? '',
+                              style: const TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  BlocBuilder<ProfileBloc, ProfileState>(
-                    builder: (context, state) {
-                      return Column(
-                        children: [
-                          if (state.playerProfile != null) ...[
-                            Text(
-                              'Связанный профиль игрока:',
-                              style: MyTheme.of(context).fieldTextStyle,
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey.shade300,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
+                    const SizedBox(height: 24),
+                    BlocBuilder<ProfileBloc, ProfileState>(
+                      builder: (context, state) {
+                        return Column(
+                          children: [
+                            if (state.playerProfile != null) ...[
+                              Text(
+                                'Связанный профиль игрока:',
+                                style: MyTheme.of(context).fieldTextStyle,
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(4),
-                                    child: state.playerProfile!.imageUrl == null
-                                        ? Image.asset(
-                                            AppAssets.playerPhoto,
-                                            width: 60,
-                                            height: 60,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : CachedNetworkImage(
-                                            imageUrl: state.playerProfile!.imageUrl!,
-                                            width: 60,
-                                            height: 60,
-                                            fit: BoxFit.cover,
-                                            placeholder: (context, url) => Image.asset(
-                                              AppAssets.playerPhoto,
-                                              width: 60,
-                                              height: 60,
-                                              fit: BoxFit.cover,
-                                            ),
-                                            errorWidget: (context, url, error) => Image.asset(
-                                              AppAssets.playerPhoto,
-                                              width: 60,
-                                              height: 60,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
                                   ),
-                                  const SizedBox(width: 12),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        state.playerProfile!.nickname,
-                                        style: MyTheme.of(context)
-                                            .fieldTextStyle
-                                            .copyWith(
-                                              fontWeight: FontWeight.w500,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(4),
+                                      child: state.playerProfile!.imageUrl == null
+                                          ? Image.asset(
+                                              AppAssets.playerPhoto,
+                                              width: 60,
+                                              height: 60,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : CachedNetworkImage(
+                                              imageUrl: state.playerProfile!.imageUrl!,
+                                              width: 60,
+                                              height: 60,
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) => Image.asset(
+                                                AppAssets.playerPhoto,
+                                                width: 60,
+                                                height: 60,
+                                                fit: BoxFit.cover,
+                                              ),
+                                              errorWidget: (context, url, error) => Image.asset(
+                                                AppAssets.playerPhoto,
+                                                width: 60,
+                                                height: 60,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                      ),
-                                      if (state.playerProfile!.fsmNickaname != null)
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
                                         Text(
-                                          'ФСМ: ${state.playerProfile!.fsmNickaname}',
-                                          style: MyTheme.of(context).fieldTextStyle.copyWith(
-                                                fontSize: 12,
-                                                color: Colors.grey.shade600,
+                                          state.playerProfile!.nickname,
+                                          style: MyTheme.of(context)
+                                              .fieldTextStyle
+                                              .copyWith(
+                                                fontWeight: FontWeight.w500,
                                               ),
                                         ),
-                                    ],
-                                  ),
-                                ],
+                                        if (state.playerProfile!.fsmNickaname != null)
+                                          Text(
+                                            'ФСМ: ${state.playerProfile!.fsmNickaname}',
+                                            style: MyTheme.of(context).fieldTextStyle.copyWith(
+                                                  fontSize: 12,
+                                                  color: Colors.grey.shade600,
+                                                ),
+                                          ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                            ] else ...[
+                              Text(
+                                'Профиль игрока не выбран',
+                                style: MyTheme.of(context).fieldTextStyle,
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+                            TextButton(
+                              onPressed: () => _selectPlayerProfile(context),
+                              child: Text(
+                                state.playerProfile != null
+                                    ? 'Изменить профиль игрока'
+                                    : 'Выбрать профиль игрока',
                               ),
                             ),
-                            const SizedBox(height: 16),
-                          ] else ...[
-                            Text(
-                              'Профиль игрока не выбран',
-                              style: MyTheme.of(context).fieldTextStyle,
-                            ),
-                            const SizedBox(height: 16),
                           ],
-                          TextButton(
-                            onPressed: () => _selectPlayerProfile(context),
-                            child: Text(
-                              state.playerProfile != null
-                                  ? 'Изменить профиль игрока'
-                                  : 'Выбрать профиль игрока',
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(40),
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 400),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomButton(
-                    text: context.locale.logout,
-                    onTap: () {
-                      context
-                          .read<ProfileBloc>()
-                          .add(const ProfileEvent.onLogoutPressed());
-                    },
-                    isRed: true,
-                    minimize: true,
-                  ),
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: _deleteAccount,
-                    child: Text(
-                      'Удалить аккаунт',
-                      style: TextStyle(
-                        color: MyTheme.of(context).greyColor,
+            Padding(
+              padding: const EdgeInsets.all(40),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 400),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomButton(
+                      text: context.locale.logout,
+                      onTap: () {
+                        context
+                            .read<ProfileBloc>()
+                            .add(const ProfileEvent.onLogoutPressed());
+                      },
+                      isRed: true,
+                      minimize: true,
+                    ),
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: _deleteAccount,
+                      child: Text(
+                        'Удалить аккаунт',
+                        style: TextStyle(
+                          color: MyTheme.of(context).greyColor,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
