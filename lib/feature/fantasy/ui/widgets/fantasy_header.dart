@@ -5,12 +5,12 @@ import 'package:seating_generator_web/utils.dart';
 
 class FantasyHeader extends StatelessWidget {
   final FantasyState state;
-  final VoidCallback onParticipantsPressed;
+  final VoidCallback? onParticipantsPressed;
 
   const FantasyHeader({
     super.key,
     required this.state,
-    required this.onParticipantsPressed,
+    this.onParticipantsPressed,
   });
 
   @override
@@ -24,7 +24,7 @@ class FantasyHeader extends StatelessWidget {
             context.locale.fantasy,
             style: MyTheme.of(context).headerTextStyle,
           ),
-          if (state.isOwner)
+          if (onParticipantsPressed != null)
             Expanded(
               child: Align(
                 alignment: Alignment.centerRight,

@@ -72,7 +72,30 @@ class FantasyPage extends StatefulWidget {
   );
 }
 
-class _FantasyPageState extends CustomState<FantasyPage> {
+class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      context.read<FantasyBloc>().add(
+            FantasyEventRefresh(
+              tournamentId: widget.tournamentId,
+            ),
+          );
+    }
+  }
+
   @override
   Widget? buildMobile(BuildContext context) => BlocBuilder<FantasyBloc, FantasyState>(
         builder: (context, state) {
@@ -84,10 +107,12 @@ class _FantasyPageState extends CustomState<FantasyPage> {
             children: [
               FantasyHeader(
                 state: state,
-                onParticipantsPressed: () => FantasyParticipantsBottomSheet.show(
-                  context,
-                  widget.tournamentId,
-                ),
+                onParticipantsPressed: state.isOwner
+                    ? () => FantasyParticipantsBottomSheet.show(
+                          context,
+                          widget.tournamentId,
+                        )
+                    : null,
               ),
               Expanded(
                 child: RefreshIndicator(
@@ -144,10 +169,12 @@ class _FantasyPageState extends CustomState<FantasyPage> {
               const SizedBox(height: 8),
               FantasyHeader(
                 state: state,
-                onParticipantsPressed: () => FantasyParticipantsBottomSheet.show(
-                  context,
-                  widget.tournamentId,
-                ),
+                onParticipantsPressed: state.isOwner
+                    ? () => FantasyParticipantsBottomSheet.show(
+                          context,
+                          widget.tournamentId,
+                        )
+                    : null,
               ),
               const SizedBox(height: 8),
               const Padding(
