@@ -201,33 +201,28 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
                   },
                   child: LayoutBuilder(
                     builder: (context, constraints) {
-                      return SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: constraints.maxHeight,
-                          ),
-                          child: IntrinsicHeight(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  flex: 3,
-                                  child: FantasyRatingSection(state: state),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  flex: 1,
-                                  child: FantasyPredictionSection(
-                                    state: state,
-                                    tournamentId: widget.tournamentId,
-                                  ),
-                                ),
-                                const SizedBox(width: 16),
-                              ],
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const SizedBox(width: 16),
+                            Expanded(
+                              flex: 3,
+                              child: FantasyRatingSection(state: state),
                             ),
-                          ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              flex: 1,
+                              child: FantasyPredictionSection(
+                                state: state,
+                                tournamentId: widget.tournamentId,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                          ],
                         ),
                       );
                     },
