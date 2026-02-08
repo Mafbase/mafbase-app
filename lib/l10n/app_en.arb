@@ -228,7 +228,7 @@
   "@fantasyRatingEmpty": {},
   "fantasyRating": "Rating",
   "@fantasyRating": {},
-  "fantasyPoints": "{count, plural, =0{0 points} =1{1 point} other{{count} points}}",
+  "fantasyPoints": "{count, plural, =0{0 points} =1{{count} point} other{{count} points}}",
   "@fantasyPoints": {
     "placeholders": {
       "count": {

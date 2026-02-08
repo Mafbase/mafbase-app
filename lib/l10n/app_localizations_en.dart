@@ -332,7 +332,7 @@ class AppLocalizationsEn extends AppLocalizations {
       count,
       locale: localeName,
       other: '$count points',
-      one: '1 point',
+      one: '$count point',
       zero: '0 points',
     );
     return '$_temp0';

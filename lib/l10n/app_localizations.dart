@@ -713,7 +713,7 @@ abstract class AppLocalizations {
   /// No description provided for @fantasyPoints.
   ///
   /// In ru, this message translates to:
-  /// **'{count, plural, =0{0 очков} =1{1 очко} few{{count} очка} many{{count} очков} other{{count} очков}}'**
+  /// **'{count, plural, =0{0 очков} =1{{count} очко} few{{count} очка} many{{count} очков} other{{count} очков}}'**
   String fantasyPoints(int count);
 
   /// No description provided for @fantasyGame.

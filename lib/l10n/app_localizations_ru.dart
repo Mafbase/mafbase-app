@@ -334,7 +334,7 @@ class AppLocalizationsRu extends AppLocalizations {
       other: '$count очков',
       many: '$count очков',
       few: '$count очка',
-      one: '1 очко',
+      one: '$count очко',
       zero: '0 очков',
     );
     return '$_temp0';

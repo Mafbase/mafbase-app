@@ -228,7 +228,7 @@
   "@fantasyRatingEmpty": {},
   "fantasyRating": "Рейтинг",
   "@fantasyRating": {},
-  "fantasyPoints": "{count, plural, =0{0 очков} =1{1 очко} few{{count} очка} many{{count} очков} other{{count} очков}}",
+  "fantasyPoints": "{count, plural, =0{0 очков} =1{{count} очко} few{{count} очка} many{{count} очков} other{{count} очков}}",
   "@fantasyPoints": {
     "placeholders": {
       "count": {
