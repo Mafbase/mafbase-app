@@ -96,9 +96,7 @@ class _MainPageState extends CustomState<MainPage> {
           ),
         ),
         backgroundColor: context.theme.darkBlueColor,
-        actions: GoRouterState.of(context).uri.pathSegments.firstOrNull == 'auth'
-            ? null
-            : getProfileAction(context.watch<AuthNotifier>().value),
+        actions: GoRouterState.of(context).uri.pathSegments.firstOrNull == 'auth' ? null : getProfileAction(),
         title: Text(
           titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
           style: GoogleFonts.balooBhai2(
@@ -109,31 +107,34 @@ class _MainPageState extends CustomState<MainPage> {
         ),
       );
 
-  List<Widget> getProfileAction(AuthNotifierModel model) {
+  List<Widget> getProfileAction() {
     final theme = context.theme;
     return [
-      model.map(
-        unauthorized: (_) => TextButton(
-          onPressed: () {
-            context.read<MainBloc>().add(const MainEvent.onEnterPressed());
-          },
-          child: Text(
-            context.locale.loginIn,
-            style: context.theme.defaultTextStyle.copyWith(
-              color: context.theme.background1,
+      ValueListenableBuilder(
+        valueListenable: context.read<AuthNotifier>(),
+        builder: (context, model, child) => model.map(
+          unauthorized: (_) => TextButton(
+            onPressed: () {
+              context.read<MainBloc>().add(const MainEvent.onEnterPressed());
+            },
+            child: Text(
+              context.locale.loginIn,
+              style: context.theme.defaultTextStyle.copyWith(
+                color: context.theme.background1,
+              ),
             ),
           ),
-        ),
-        loading: (_) => Container(),
-        authorized: (_) => IconButton(
-          tooltip: context.locale.profile,
-          onPressed: () {
-            context.read<MainBloc>().add(const MainEvent.onProfilePressed());
-          },
-          hoverColor: context.theme.background1.withValues(alpha: 0.2),
-          icon: Icon(
-            Icons.person,
-            color: context.theme.background1,
+          loading: (_) => Container(),
+          authorized: (_) => IconButton(
+            tooltip: context.locale.profile,
+            onPressed: () {
+              context.read<MainBloc>().add(const MainEvent.onProfilePressed());
+            },
+            hoverColor: context.theme.background1.withValues(alpha: 0.2),
+            icon: Icon(
+              Icons.person,
+              color: context.theme.background1,
+            ),
           ),
         ),
       ),
