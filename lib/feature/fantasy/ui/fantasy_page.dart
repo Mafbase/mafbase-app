@@ -144,7 +144,6 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
                           child: FantasyPredictionSection(
                             state: state,
                             tournamentId: widget.tournamentId,
-                            isMobile: true,
                           ),
                         ),
                         const SizedBox(height: 16),

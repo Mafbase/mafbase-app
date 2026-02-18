@@ -12,13 +12,11 @@ import 'package:seating_generator_web/utils.dart';
 class FantasyPredictionSection extends StatelessWidget {
   final FantasyState state;
   final int tournamentId;
-  final bool isMobile;
 
   const FantasyPredictionSection({
     super.key,
     required this.state,
     required this.tournamentId,
-    this.isMobile = false,
   });
 
   @override
