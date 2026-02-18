@@ -259,6 +259,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get clubDescription => 'Описание клуба';
 
   @override
+  String get clubEditOwners => 'Редактировать администраторов';
+
+  @override
+  String get ownersTitle => 'Администраторы';
+
+  @override
+  String get ownersEmpty => 'Пока не добавлен ни один администратор';
+
+  @override
+  String get ownersAddTitle => 'Добавление администратора';
+
+  @override
+  String get ownersEmail => 'Почта';
+
+  @override
+  String get ownersEmailInvalid => 'Введите корректный адрес электронной почты';
+
+  @override
+  String ownersRemoveOwner(String email) {
+    return 'Удалить администратора $email?';
+  }
+
+  @override
   String get logout => 'Выйти из аккаунта';
 
   @override

@@ -7,8 +7,11 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class AddOwnerDialog extends StatefulWidget {
+  final String? title;
+
   const AddOwnerDialog({
     super.key,
+    this.title,
   });
 
   @override
@@ -16,10 +19,11 @@ class AddOwnerDialog extends StatefulWidget {
 
   static Future<String?> open({
     required BuildContext context,
+    String? title,
   }) =>
       showDialog(
         context: context,
-        builder: (context) => AddOwnerDialog(),
+        builder: (context) => AddOwnerDialog(title: title),
       );
 }
 
@@ -54,7 +58,7 @@ class _AddOwnerDialogState extends State<AddOwnerDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Добавление администратора',
+                widget.title ?? context.locale.ownersAddTitle,
                 style: MyTheme.of(context).headerTextStyle,
               ),
               const SizedBox(height: 24),
@@ -64,14 +68,14 @@ class _AddOwnerDialogState extends State<AddOwnerDialog> {
                   readOnly: false,
                   focusNode: _focusNode,
                   controller: _controller,
-                  label: 'Почта',
+                  label: context.locale.ownersEmail,
                   validate: (value) {
                     if (value != null) {
                       if (EmailValidator.validate(value)) {
                         return null;
                       }
                     }
-                    return "Введите корректный адрес электронной почты";
+                    return context.locale.ownersEmailInvalid;
                   },
                 ),
               ),

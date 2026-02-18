@@ -578,6 +578,48 @@ abstract class AppLocalizations {
   /// **'Описание клуба'**
   String get clubDescription;
 
+  /// No description provided for @clubEditOwners.
+  ///
+  /// In ru, this message translates to:
+  /// **'Редактировать администраторов'**
+  String get clubEditOwners;
+
+  /// No description provided for @ownersTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Администраторы'**
+  String get ownersTitle;
+
+  /// No description provided for @ownersEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пока не добавлен ни один администратор'**
+  String get ownersEmpty;
+
+  /// No description provided for @ownersAddTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавление администратора'**
+  String get ownersAddTitle;
+
+  /// No description provided for @ownersEmail.
+  ///
+  /// In ru, this message translates to:
+  /// **'Почта'**
+  String get ownersEmail;
+
+  /// No description provided for @ownersEmailInvalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите корректный адрес электронной почты'**
+  String get ownersEmailInvalid;
+
+  /// No description provided for @ownersRemoveOwner.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить администратора {email}?'**
+  String ownersRemoveOwner(String email);
+
   /// No description provided for @logout.
   ///
   /// In ru, this message translates to:

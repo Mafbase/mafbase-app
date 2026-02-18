@@ -184,6 +184,27 @@
   },
   "clubDescription": "Описание клуба",
   "@clubDescription": {},
+  "clubEditOwners": "Редактировать администраторов",
+  "@clubEditOwners": {},
+  "ownersTitle": "Администраторы",
+  "@ownersTitle": {},
+  "ownersEmpty": "Пока не добавлен ни один администратор",
+  "@ownersEmpty": {},
+  "ownersAddTitle": "Добавление администратора",
+  "@ownersAddTitle": {},
+  "ownersEmail": "Почта",
+  "@ownersEmail": {},
+  "ownersEmailInvalid": "Введите корректный адрес электронной почты",
+  "@ownersEmailInvalid": {},
+  "ownersRemoveOwner": "Удалить администратора {email}?",
+  "@ownersRemoveOwner": {
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "test@example.com"
+      }
+    }
+  },
   "logout": "Выйти из аккаунта",
   "@logout": {},
   "contacts": "Контакты",

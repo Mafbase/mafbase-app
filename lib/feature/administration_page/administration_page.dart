@@ -12,6 +12,7 @@ import 'package:seating_generator_web/domain/repositories/owners_repository.dart
 import 'package:seating_generator_web/feature/administration_page/administration_bloc.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
+import 'package:seating_generator_web/utils.dart';
 
 import 'widgets/add_owner_dialog.dart';
 import 'widgets/onwer_row.dart';
@@ -46,8 +47,10 @@ class AdministrationPage extends StatefulWidget {
     name: _tournamentName,
     builder: (context, state) {
       final tournamentId = int.parse(state.pathParameters["id"]!);
-      final OwnersRepository ownersRepository = RepositoryFactory.of(context).ownersRepository;
-      final getAdministrationInteractor = GetAdministrationInteractor(ownersRepository);
+      final OwnersRepository ownersRepository =
+          RepositoryFactory.of(context).ownersRepository;
+      final getAdministrationInteractor =
+          GetAdministrationInteractor(ownersRepository);
       final addOwnerInteractor = AddOwnerInteractor(ownersRepository);
       final deleteOwnerInteractor = DeleteOwnerInteractor(ownersRepository);
       return BlocProvider<AdministrationBloc>(
@@ -86,7 +89,7 @@ class _AdministrationPageState extends State<AdministrationPage> {
                   flex: 6,
                 ),
                 Text(
-                  'Администраторы',
+                  context.locale.ownersTitle,
                   style: MyTheme.of(context).headerTextStyle,
                 ),
                 const Spacer(
@@ -121,7 +124,7 @@ class _AdministrationPageState extends State<AdministrationPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          'Пока не добавлен ни один администратор',
+                          context.locale.ownersEmpty,
                           textAlign: TextAlign.center,
                           style: MyTheme.of(context).defaultTextStyle,
                         ),

@@ -18,6 +18,7 @@ class ClubInfoWidget extends StatelessWidget {
   final VoidCallback? changeHideDate;
   final VoidCallback? onEditDescription;
   final VoidCallback? onEditPhoto;
+  final VoidCallback? onEditOwners;
 
   const ClubInfoWidget({
     super.key,
@@ -28,6 +29,7 @@ class ClubInfoWidget extends StatelessWidget {
     this.changeHideDate,
     this.onEditDescription,
     this.onEditPhoto,
+    this.onEditOwners,
   });
 
   @override
@@ -58,7 +60,10 @@ class ClubInfoWidget extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  _ClubInfoHeader(onEditPhoto: onEditPhoto),
+                                  _ClubInfoHeader(
+                                    onEditPhoto: onEditPhoto,
+                                    onEditOwners: onEditOwners,
+                                  ),
                                   SizedBox(height: 20),
                                   _ClubDescription(
                                     onEditDescription: onEditDescription,
@@ -107,7 +112,10 @@ class ClubInfoWidget extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _ClubInfoHeader(onEditPhoto: onEditPhoto),
+                _ClubInfoHeader(
+                  onEditPhoto: onEditPhoto,
+                  onEditOwners: onEditOwners,
+                ),
                 const SizedBox(height: 20),
                 _ClubDescription(onEditDescription: onEditDescription),
                 if (onEditDescription != null) ...[
@@ -307,8 +315,9 @@ class _ClubDescription extends StatelessWidget {
 
 class _ClubInfoHeader extends StatelessWidget {
   final VoidCallback? onEditPhoto;
+  final VoidCallback? onEditOwners;
 
-  const _ClubInfoHeader({this.onEditPhoto});
+  const _ClubInfoHeader({this.onEditPhoto, this.onEditOwners});
 
   @override
   Widget build(BuildContext context) {
@@ -349,9 +358,20 @@ class _ClubInfoHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              model.name,
-              style: context.theme.headerTextStyle,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  model.name,
+                  style: context.theme.headerTextStyle,
+                ),
+                if (onEditOwners != null)
+                  IconButton(
+                    onPressed: onEditOwners,
+                    tooltip: context.locale.clubEditOwners,
+                    icon: const Icon(Icons.manage_accounts_outlined),
+                  ),
+              ],
             ),
             const SizedBox(height: 20),
             Row(
@@ -402,9 +422,21 @@ class _ClubInfoHeader extends StatelessWidget {
             ),
             const SizedBox(width: 16),
             Flexible(
-              child: Text(
-                clubModel.name,
-                style: context.theme.headerTextStyle,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      clubModel.name,
+                      style: context.theme.headerTextStyle,
+                    ),
+                  ),
+                  if (onEditOwners != null)
+                    IconButton(
+                      onPressed: onEditOwners,
+                      tooltip: context.locale.clubEditOwners,
+                      icon: const Icon(Icons.manage_accounts_outlined),
+                    ),
+                ],
               ),
             ),
           ],

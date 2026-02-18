@@ -15,6 +15,7 @@ import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_bill_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_owners_bottom_sheet.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -88,6 +89,7 @@ class _ClubPageState extends CustomState<ClubPage> {
                   changeHideDate: state.isOwner ? _changeHideDate : null,
                   onEditDescription: state.isOwner ? _editDescription : null,
                   onEditPhoto: state.isOwner ? _editPhoto : null,
+                  onEditOwners: state.isOwner ? _editOwners : null,
                 ),
             ],
           );
@@ -121,6 +123,7 @@ class _ClubPageState extends CustomState<ClubPage> {
                           onEditDescription:
                               state.isOwner ? _editDescription : null,
                           onEditPhoto: state.isOwner ? _editPhoto : null,
+                          onEditOwners: state.isOwner ? _editOwners : null,
                         ),
                       ),
                   ],
@@ -207,5 +210,13 @@ class _ClubPageState extends CustomState<ClubPage> {
 
     final bytes = Uint8List.fromList(await image.readAsBytes());
     bloc.add(ClubEvent.editPhoto(bytes: bytes, fileName: image.name));
+  }
+
+  Future<void> _editOwners() async {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) {
+      return;
+    }
+    await ClubOwnersBottomSheet.show(context, clubId: clubId);
   }
 }

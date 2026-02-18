@@ -258,6 +258,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clubDescription => 'Club description';
 
   @override
+  String get clubEditOwners => 'Edit administrators';
+
+  @override
+  String get ownersTitle => 'Administrators';
+
+  @override
+  String get ownersEmpty => 'No administrators added yet';
+
+  @override
+  String get ownersAddTitle => 'Add administrator';
+
+  @override
+  String get ownersEmail => 'Email';
+
+  @override
+  String get ownersEmailInvalid => 'Enter a valid email address';
+
+  @override
+  String ownersRemoveOwner(String email) {
+    return 'Remove administrator $email?';
+  }
+
+  @override
   String get logout => 'Log out';
 
   @override

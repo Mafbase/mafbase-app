@@ -184,6 +184,27 @@
   },
   "clubDescription": "Club description",
   "@clubDescription": {},
+  "clubEditOwners": "Edit administrators",
+  "@clubEditOwners": {},
+  "ownersTitle": "Administrators",
+  "@ownersTitle": {},
+  "ownersEmpty": "No administrators added yet",
+  "@ownersEmpty": {},
+  "ownersAddTitle": "Add administrator",
+  "@ownersAddTitle": {},
+  "ownersEmail": "Email",
+  "@ownersEmail": {},
+  "ownersEmailInvalid": "Enter a valid email address",
+  "@ownersEmailInvalid": {},
+  "ownersRemoveOwner": "Remove administrator {email}?",
+  "@ownersRemoveOwner": {
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "test@example.com"
+      }
+    }
+  },
   "logout": "Log out",
   "@logout": {},
   "contacts": "Contacts",
