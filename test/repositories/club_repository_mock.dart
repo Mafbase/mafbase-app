@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
@@ -61,7 +63,10 @@ class ClubRepositoryMock implements ClubRepository {
   }) async {}
 
   @override
-  Future<List<GameResultModel>> getGames({required int clubId, required DateTimeRange range}) {
+  Future<List<GameResultModel>> getGames({
+    required int clubId,
+    required DateTimeRange range,
+  }) {
     // TODO: implement getGames
     throw UnimplementedError();
   }
@@ -83,4 +88,17 @@ class ClubRepositoryMock implements ClubRepository {
     // TODO: implement deleteGame
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> updateDescription({
+    required int clubId,
+    required ClubModel club,
+  }) async {}
+
+  @override
+  Future<void> updatePhoto({
+    required int clubId,
+    required Uint8List bytes,
+    required String fileName,
+  }) async {}
 }

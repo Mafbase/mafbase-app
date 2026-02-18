@@ -22,6 +22,8 @@ mixin _$ClubEvent {
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
     required TResult Function(DateTime? dateTime) changeHideDate,
+    required TResult Function(String description) editDescription,
+    required TResult Function(Uint8List bytes, String fileName) editPhoto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +32,8 @@ mixin _$ClubEvent {
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
     TResult? Function(DateTime? dateTime)? changeHideDate,
+    TResult? Function(String description)? editDescription,
+    TResult? Function(Uint8List bytes, String fileName)? editPhoto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +42,8 @@ mixin _$ClubEvent {
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
     TResult Function(DateTime? dateTime)? changeHideDate,
+    TResult Function(String description)? editDescription,
+    TResult Function(Uint8List bytes, String fileName)? editPhoto,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +53,8 @@ mixin _$ClubEvent {
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
     required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+    required TResult Function(ClubEventEditDescription value) editDescription,
+    required TResult Function(ClubEventEditPhoto value) editPhoto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +63,8 @@ mixin _$ClubEvent {
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
     TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult? Function(ClubEventEditDescription value)? editDescription,
+    TResult? Function(ClubEventEditPhoto value)? editPhoto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +73,8 @@ mixin _$ClubEvent {
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
     TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult Function(ClubEventEditDescription value)? editDescription,
+    TResult Function(ClubEventEditPhoto value)? editPhoto,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +146,8 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
     required TResult Function(DateTime? dateTime) changeHideDate,
+    required TResult Function(String description) editDescription,
+    required TResult Function(Uint8List bytes, String fileName) editPhoto,
   }) {
     return pageOpened();
   }
@@ -145,6 +159,8 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
     TResult? Function(DateTime? dateTime)? changeHideDate,
+    TResult? Function(String description)? editDescription,
+    TResult? Function(Uint8List bytes, String fileName)? editPhoto,
   }) {
     return pageOpened?.call();
   }
@@ -156,6 +172,8 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
     TResult Function(DateTime? dateTime)? changeHideDate,
+    TResult Function(String description)? editDescription,
+    TResult Function(Uint8List bytes, String fileName)? editPhoto,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -171,6 +189,8 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
     required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+    required TResult Function(ClubEventEditDescription value) editDescription,
+    required TResult Function(ClubEventEditPhoto value) editPhoto,
   }) {
     return pageOpened(this);
   }
@@ -182,6 +202,8 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
     TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult? Function(ClubEventEditDescription value)? editDescription,
+    TResult? Function(ClubEventEditPhoto value)? editPhoto,
   }) {
     return pageOpened?.call(this);
   }
@@ -193,6 +215,8 @@ class _$ClubEventPageOpenedImpl implements ClubEventPageOpened {
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
     TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult Function(ClubEventEditDescription value)? editDescription,
+    TResult Function(ClubEventEditPhoto value)? editPhoto,
     required TResult orElse(),
   }) {
     if (pageOpened != null) {
@@ -252,6 +276,8 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
     required TResult Function(DateTime? dateTime) changeHideDate,
+    required TResult Function(String description) editDescription,
+    required TResult Function(Uint8List bytes, String fileName) editPhoto,
   }) {
     return openRating();
   }
@@ -263,6 +289,8 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
     TResult? Function(DateTime? dateTime)? changeHideDate,
+    TResult? Function(String description)? editDescription,
+    TResult? Function(Uint8List bytes, String fileName)? editPhoto,
   }) {
     return openRating?.call();
   }
@@ -274,6 +302,8 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
     TResult Function(DateTime? dateTime)? changeHideDate,
+    TResult Function(String description)? editDescription,
+    TResult Function(Uint8List bytes, String fileName)? editPhoto,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -289,6 +319,8 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
     required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+    required TResult Function(ClubEventEditDescription value) editDescription,
+    required TResult Function(ClubEventEditPhoto value) editPhoto,
   }) {
     return openRating(this);
   }
@@ -300,6 +332,8 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
     TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult? Function(ClubEventEditDescription value)? editDescription,
+    TResult? Function(ClubEventEditPhoto value)? editPhoto,
   }) {
     return openRating?.call(this);
   }
@@ -311,6 +345,8 @@ class _$ClubEventOpenRatingImpl implements ClubEventOpenRating {
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
     TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult Function(ClubEventEditDescription value)? editDescription,
+    TResult Function(ClubEventEditPhoto value)? editPhoto,
     required TResult orElse(),
   }) {
     if (openRating != null) {
@@ -397,6 +433,8 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
     required TResult Function(DateTime? dateTime) changeHideDate,
+    required TResult Function(String description) editDescription,
+    required TResult Function(Uint8List bytes, String fileName) editPhoto,
   }) {
     return billClub(days);
   }
@@ -408,6 +446,8 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
     TResult? Function(DateTime? dateTime)? changeHideDate,
+    TResult? Function(String description)? editDescription,
+    TResult? Function(Uint8List bytes, String fileName)? editPhoto,
   }) {
     return billClub?.call(days);
   }
@@ -419,6 +459,8 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
     TResult Function(DateTime? dateTime)? changeHideDate,
+    TResult Function(String description)? editDescription,
+    TResult Function(Uint8List bytes, String fileName)? editPhoto,
     required TResult orElse(),
   }) {
     if (billClub != null) {
@@ -434,6 +476,8 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
     required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+    required TResult Function(ClubEventEditDescription value) editDescription,
+    required TResult Function(ClubEventEditPhoto value) editPhoto,
   }) {
     return billClub(this);
   }
@@ -445,6 +489,8 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
     TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult? Function(ClubEventEditDescription value)? editDescription,
+    TResult? Function(ClubEventEditPhoto value)? editPhoto,
   }) {
     return billClub?.call(this);
   }
@@ -456,6 +502,8 @@ class _$ClubEventBillClubImpl implements ClubEventBillClub {
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
     TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult Function(ClubEventEditDescription value)? editDescription,
+    TResult Function(ClubEventEditPhoto value)? editPhoto,
     required TResult orElse(),
   }) {
     if (billClub != null) {
@@ -554,6 +602,8 @@ class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
     required TResult Function() openRating,
     required TResult Function(int days) billClub,
     required TResult Function(DateTime? dateTime) changeHideDate,
+    required TResult Function(String description) editDescription,
+    required TResult Function(Uint8List bytes, String fileName) editPhoto,
   }) {
     return changeHideDate(dateTime);
   }
@@ -565,6 +615,8 @@ class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
     TResult? Function()? openRating,
     TResult? Function(int days)? billClub,
     TResult? Function(DateTime? dateTime)? changeHideDate,
+    TResult? Function(String description)? editDescription,
+    TResult? Function(Uint8List bytes, String fileName)? editPhoto,
   }) {
     return changeHideDate?.call(dateTime);
   }
@@ -576,6 +628,8 @@ class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
     TResult Function()? openRating,
     TResult Function(int days)? billClub,
     TResult Function(DateTime? dateTime)? changeHideDate,
+    TResult Function(String description)? editDescription,
+    TResult Function(Uint8List bytes, String fileName)? editPhoto,
     required TResult orElse(),
   }) {
     if (changeHideDate != null) {
@@ -591,6 +645,8 @@ class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
     required TResult Function(ClubEventOpenRating value) openRating,
     required TResult Function(ClubEventBillClub value) billClub,
     required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+    required TResult Function(ClubEventEditDescription value) editDescription,
+    required TResult Function(ClubEventEditPhoto value) editPhoto,
   }) {
     return changeHideDate(this);
   }
@@ -602,6 +658,8 @@ class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
     TResult? Function(ClubEventOpenRating value)? openRating,
     TResult? Function(ClubEventBillClub value)? billClub,
     TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult? Function(ClubEventEditDescription value)? editDescription,
+    TResult? Function(ClubEventEditPhoto value)? editPhoto,
   }) {
     return changeHideDate?.call(this);
   }
@@ -613,6 +671,8 @@ class _$ClubEventChangeHideDateImpl implements ClubEventChangeHideDate {
     TResult Function(ClubEventOpenRating value)? openRating,
     TResult Function(ClubEventBillClub value)? billClub,
     TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult Function(ClubEventEditDescription value)? editDescription,
+    TResult Function(ClubEventEditPhoto value)? editPhoto,
     required TResult orElse(),
   }) {
     if (changeHideDate != null) {
@@ -633,4 +693,351 @@ abstract class ClubEventChangeHideDate implements ClubEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClubEventChangeHideDateImplCopyWith<_$ClubEventChangeHideDateImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClubEventEditDescriptionImplCopyWith<$Res> {
+  factory _$$ClubEventEditDescriptionImplCopyWith(
+          _$ClubEventEditDescriptionImpl value,
+          $Res Function(_$ClubEventEditDescriptionImpl) then) =
+      __$$ClubEventEditDescriptionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String description});
+}
+
+/// @nodoc
+class __$$ClubEventEditDescriptionImplCopyWithImpl<$Res>
+    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventEditDescriptionImpl>
+    implements _$$ClubEventEditDescriptionImplCopyWith<$Res> {
+  __$$ClubEventEditDescriptionImplCopyWithImpl(
+      _$ClubEventEditDescriptionImpl _value,
+      $Res Function(_$ClubEventEditDescriptionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? description = null,
+  }) {
+    return _then(_$ClubEventEditDescriptionImpl(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ClubEventEditDescriptionImpl implements ClubEventEditDescription {
+  const _$ClubEventEditDescriptionImpl({required this.description});
+
+  @override
+  final String description;
+
+  @override
+  String toString() {
+    return 'ClubEvent.editDescription(description: $description)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClubEventEditDescriptionImpl &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, description);
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClubEventEditDescriptionImplCopyWith<_$ClubEventEditDescriptionImpl>
+      get copyWith => __$$ClubEventEditDescriptionImplCopyWithImpl<
+          _$ClubEventEditDescriptionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pageOpened,
+    required TResult Function() openRating,
+    required TResult Function(int days) billClub,
+    required TResult Function(DateTime? dateTime) changeHideDate,
+    required TResult Function(String description) editDescription,
+    required TResult Function(Uint8List bytes, String fileName) editPhoto,
+  }) {
+    return editDescription(description);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pageOpened,
+    TResult? Function()? openRating,
+    TResult? Function(int days)? billClub,
+    TResult? Function(DateTime? dateTime)? changeHideDate,
+    TResult? Function(String description)? editDescription,
+    TResult? Function(Uint8List bytes, String fileName)? editPhoto,
+  }) {
+    return editDescription?.call(description);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pageOpened,
+    TResult Function()? openRating,
+    TResult Function(int days)? billClub,
+    TResult Function(DateTime? dateTime)? changeHideDate,
+    TResult Function(String description)? editDescription,
+    TResult Function(Uint8List bytes, String fileName)? editPhoto,
+    required TResult orElse(),
+  }) {
+    if (editDescription != null) {
+      return editDescription(description);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ClubEventPageOpened value) pageOpened,
+    required TResult Function(ClubEventOpenRating value) openRating,
+    required TResult Function(ClubEventBillClub value) billClub,
+    required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+    required TResult Function(ClubEventEditDescription value) editDescription,
+    required TResult Function(ClubEventEditPhoto value) editPhoto,
+  }) {
+    return editDescription(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ClubEventPageOpened value)? pageOpened,
+    TResult? Function(ClubEventOpenRating value)? openRating,
+    TResult? Function(ClubEventBillClub value)? billClub,
+    TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult? Function(ClubEventEditDescription value)? editDescription,
+    TResult? Function(ClubEventEditPhoto value)? editPhoto,
+  }) {
+    return editDescription?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ClubEventPageOpened value)? pageOpened,
+    TResult Function(ClubEventOpenRating value)? openRating,
+    TResult Function(ClubEventBillClub value)? billClub,
+    TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult Function(ClubEventEditDescription value)? editDescription,
+    TResult Function(ClubEventEditPhoto value)? editPhoto,
+    required TResult orElse(),
+  }) {
+    if (editDescription != null) {
+      return editDescription(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClubEventEditDescription implements ClubEvent {
+  const factory ClubEventEditDescription({required final String description}) =
+      _$ClubEventEditDescriptionImpl;
+
+  String get description;
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ClubEventEditDescriptionImplCopyWith<_$ClubEventEditDescriptionImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClubEventEditPhotoImplCopyWith<$Res> {
+  factory _$$ClubEventEditPhotoImplCopyWith(_$ClubEventEditPhotoImpl value,
+          $Res Function(_$ClubEventEditPhotoImpl) then) =
+      __$$ClubEventEditPhotoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Uint8List bytes, String fileName});
+}
+
+/// @nodoc
+class __$$ClubEventEditPhotoImplCopyWithImpl<$Res>
+    extends _$ClubEventCopyWithImpl<$Res, _$ClubEventEditPhotoImpl>
+    implements _$$ClubEventEditPhotoImplCopyWith<$Res> {
+  __$$ClubEventEditPhotoImplCopyWithImpl(_$ClubEventEditPhotoImpl _value,
+      $Res Function(_$ClubEventEditPhotoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytes = null,
+    Object? fileName = null,
+  }) {
+    return _then(_$ClubEventEditPhotoImpl(
+      bytes: null == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      fileName: null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ClubEventEditPhotoImpl implements ClubEventEditPhoto {
+  const _$ClubEventEditPhotoImpl({required this.bytes, required this.fileName});
+
+  @override
+  final Uint8List bytes;
+  @override
+  final String fileName;
+
+  @override
+  String toString() {
+    return 'ClubEvent.editPhoto(bytes: $bytes, fileName: $fileName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClubEventEditPhotoImpl &&
+            const DeepCollectionEquality().equals(other.bytes, bytes) &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(bytes), fileName);
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClubEventEditPhotoImplCopyWith<_$ClubEventEditPhotoImpl> get copyWith =>
+      __$$ClubEventEditPhotoImplCopyWithImpl<_$ClubEventEditPhotoImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pageOpened,
+    required TResult Function() openRating,
+    required TResult Function(int days) billClub,
+    required TResult Function(DateTime? dateTime) changeHideDate,
+    required TResult Function(String description) editDescription,
+    required TResult Function(Uint8List bytes, String fileName) editPhoto,
+  }) {
+    return editPhoto(bytes, fileName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pageOpened,
+    TResult? Function()? openRating,
+    TResult? Function(int days)? billClub,
+    TResult? Function(DateTime? dateTime)? changeHideDate,
+    TResult? Function(String description)? editDescription,
+    TResult? Function(Uint8List bytes, String fileName)? editPhoto,
+  }) {
+    return editPhoto?.call(bytes, fileName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pageOpened,
+    TResult Function()? openRating,
+    TResult Function(int days)? billClub,
+    TResult Function(DateTime? dateTime)? changeHideDate,
+    TResult Function(String description)? editDescription,
+    TResult Function(Uint8List bytes, String fileName)? editPhoto,
+    required TResult orElse(),
+  }) {
+    if (editPhoto != null) {
+      return editPhoto(bytes, fileName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ClubEventPageOpened value) pageOpened,
+    required TResult Function(ClubEventOpenRating value) openRating,
+    required TResult Function(ClubEventBillClub value) billClub,
+    required TResult Function(ClubEventChangeHideDate value) changeHideDate,
+    required TResult Function(ClubEventEditDescription value) editDescription,
+    required TResult Function(ClubEventEditPhoto value) editPhoto,
+  }) {
+    return editPhoto(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ClubEventPageOpened value)? pageOpened,
+    TResult? Function(ClubEventOpenRating value)? openRating,
+    TResult? Function(ClubEventBillClub value)? billClub,
+    TResult? Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult? Function(ClubEventEditDescription value)? editDescription,
+    TResult? Function(ClubEventEditPhoto value)? editPhoto,
+  }) {
+    return editPhoto?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ClubEventPageOpened value)? pageOpened,
+    TResult Function(ClubEventOpenRating value)? openRating,
+    TResult Function(ClubEventBillClub value)? billClub,
+    TResult Function(ClubEventChangeHideDate value)? changeHideDate,
+    TResult Function(ClubEventEditDescription value)? editDescription,
+    TResult Function(ClubEventEditPhoto value)? editPhoto,
+    required TResult orElse(),
+  }) {
+    if (editPhoto != null) {
+      return editPhoto(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClubEventEditPhoto implements ClubEvent {
+  const factory ClubEventEditPhoto(
+      {required final Uint8List bytes,
+      required final String fileName}) = _$ClubEventEditPhotoImpl;
+
+  Uint8List get bytes;
+  String get fileName;
+
+  /// Create a copy of ClubEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ClubEventEditPhotoImplCopyWith<_$ClubEventEditPhotoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

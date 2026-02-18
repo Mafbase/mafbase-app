@@ -16,6 +16,8 @@ class ClubInfoWidget extends StatelessWidget {
   final VoidCallback? onAddGame;
   final VoidCallback? billClub;
   final VoidCallback? changeHideDate;
+  final VoidCallback? onEditDescription;
+  final VoidCallback? onEditPhoto;
 
   const ClubInfoWidget({
     super.key,
@@ -24,75 +26,79 @@ class ClubInfoWidget extends StatelessWidget {
     this.onAddGame,
     this.billClub,
     this.changeHideDate,
+    this.onEditDescription,
+    this.onEditPhoto,
   });
 
   @override
-  Widget build(BuildContext context) =>
-      Provider<bool>.value(
+  Widget build(BuildContext context) => Provider<bool>.value(
         value: isMobile,
         child: Provider<ClubModel>.value(
           value: clubModel,
           child: isMobile
               ? buildMobile(context)
               : Container(
-            constraints: const BoxConstraints(
-              minWidth: 300,
-            ),
-            padding: const EdgeInsets.only(
-              left: 60,
-              top: 40,
-              right: 60,
-            ),
-            child: SizedBox.expand(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  constraints: const BoxConstraints(
+                    minWidth: 300,
+                  ),
+                  padding: const EdgeInsets.only(
+                    left: 60,
+                    top: 40,
+                    right: 60,
+                  ),
+                  child: SizedBox.expand(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Column(
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _ClubInfoHeader(onEditPhoto: onEditPhoto),
+                                  SizedBox(height: 20),
+                                  _ClubDescription(
+                                    onEditDescription: onEditDescription,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
                           mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _ClubInfoHeader(),
-                            SizedBox(height: 20),
-                            _ClubDescription(),
+                            if (changeHideDate != null)
+                              Tooltip(
+                                message: 'Скрыть рейтинг',
+                                child: IconButton(
+                                  onPressed: changeHideDate,
+                                  icon: const Icon(
+                                    Icons.pivot_table_chart_outlined,
+                                  ),
+                                ),
+                              ),
+                            const Flexible(child: _ClubRatingButton()),
+                            if (onAddGame != null)
+                              _AddGameButton(onTap: onAddGame!),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (changeHideDate != null)
-                        Tooltip(
-                          message: 'Скрыть рейтинг',
-                          child: IconButton(
-                            onPressed: changeHideDate,
-                            icon: const Icon(
-                              Icons.pivot_table_chart_outlined,
-                            ),
-                          ),
-                        ),
-                      const Flexible(child: _ClubRatingButton()),
-                      if (onAddGame != null)
-                        _AddGameButton(onTap: onAddGame!),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
         ),
       );
 
   Widget buildMobile(BuildContext context) {
     final showBill = context
-        .watch<AuthNotifier>()
-        .value
-        .mapOrNull(authorized: (model) => !model.hideBilling) ?? true;
+            .watch<AuthNotifier>()
+            .value
+            .mapOrNull(authorized: (model) => !model.hideBilling) ??
+        true;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -101,9 +107,19 @@ class ClubInfoWidget extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const _ClubInfoHeader(),
+                _ClubInfoHeader(onEditPhoto: onEditPhoto),
                 const SizedBox(height: 20),
-                const _ClubDescription(),
+                _ClubDescription(onEditDescription: onEditDescription),
+                if (onEditDescription != null) ...[
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      text: 'Редактировать описание',
+                      onTap: onEditDescription!,
+                    ),
+                  ),
+                ],
                 if (billClub != null && showBill) ...[
                   const SizedBox(height: 20),
                   CustomButton(
@@ -111,7 +127,6 @@ class ClubInfoWidget extends StatelessWidget {
                     onTap: billClub!,
                   ),
                 ],
-
                 if (changeHideDate != null && kIsWeb) ...[
                   const SizedBox(height: 20),
                   CustomButton(
@@ -167,17 +182,14 @@ class _AddGameButton extends StatelessWidget {
   const _AddGameButton({required this.onTap});
 
   @override
-  Widget build(BuildContext context) =>
-      InkWell(
+  Widget build(BuildContext context) => InkWell(
         onTap: onTap,
         customBorder: const CircleBorder(),
         child: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: MyTheme
-                .of(context)
-                .darkGreyColor,
+            color: MyTheme.of(context).darkGreyColor,
           ),
           child: const Icon(
             Icons.add,
@@ -189,7 +201,9 @@ class _AddGameButton extends StatelessWidget {
 }
 
 class _ClubDescription extends StatelessWidget {
-  const _ClubDescription();
+  final VoidCallback? onEditDescription;
+
+  const _ClubDescription({this.onEditDescription});
 
   @override
   Widget build(BuildContext context) {
@@ -202,9 +216,21 @@ class _ClubDescription extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          context.locale.description,
-          style: context.theme.headerTextStyle,
+        Row(
+          children: [
+            Text(
+              context.locale.description,
+              style: context.theme.headerTextStyle,
+            ),
+            if (onEditDescription != null) ...[
+              const SizedBox(width: 8),
+              IconButton(
+                onPressed: onEditDescription,
+                tooltip: 'Редактировать описание',
+                icon: const Icon(Icons.edit_outlined),
+              ),
+            ],
+          ],
         ),
         Container(
           padding: const EdgeInsets.all(20),
@@ -227,10 +253,7 @@ class _ClubDescription extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Theme
-              .of(context)
-              .dividerTheme
-              .color ?? Colors.transparent,
+          color: Theme.of(context).dividerTheme.color ?? Colors.transparent,
         ),
       ),
       child: Column(
@@ -259,6 +282,12 @@ class _ClubDescription extends StatelessWidget {
                     style: context.theme.headerTextStyle.copyWith(fontSize: 24),
                   ),
                 ),
+                if (onEditDescription != null)
+                  IconButton(
+                    onPressed: onEditDescription,
+                    tooltip: 'Редактировать описание',
+                    icon: const Icon(Icons.edit_outlined),
+                  ),
               ],
             ),
           ),
@@ -277,7 +306,9 @@ class _ClubDescription extends StatelessWidget {
 }
 
 class _ClubInfoHeader extends StatelessWidget {
-  const _ClubInfoHeader();
+  final VoidCallback? onEditPhoto;
+
+  const _ClubInfoHeader({this.onEditPhoto});
 
   @override
   Widget build(BuildContext context) {
@@ -289,7 +320,30 @@ class _ClubInfoHeader extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ClubAvatar(clubModel: model, size: 140),
+        Stack(
+          children: [
+            ClubAvatar(clubModel: model, size: 140),
+            if (onEditPhoto != null)
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: CircleAvatar(
+                  radius: 18,
+                  backgroundColor: context.theme.darkGreyColor,
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: onEditPhoto,
+                    tooltip: 'Сменить фото',
+                    icon: const Icon(
+                      Icons.photo_camera_outlined,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
         const SizedBox(width: 16),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,7 +376,30 @@ class _ClubInfoHeader extends StatelessWidget {
       children: [
         Row(
           children: [
-            ClubAvatar(clubModel: clubModel),
+            Stack(
+              children: [
+                ClubAvatar(clubModel: clubModel),
+                if (onEditPhoto != null)
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: CircleAvatar(
+                      radius: 14,
+                      backgroundColor: context.theme.darkGreyColor,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: onEditPhoto,
+                        tooltip: 'Сменить фото',
+                        icon: const Icon(
+                          Icons.photo_camera_outlined,
+                          color: Colors.white,
+                          size: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
             const SizedBox(width: 16),
             Flexible(
               child: Text(

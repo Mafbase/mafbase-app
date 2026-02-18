@@ -55,6 +55,8 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     on<ClubEventOpenRating>(_onOpenRating);
     on<ClubEventBillClub>(_onBillClub);
     on<ClubEventChangeHideDate>(_onChangeHideDate);
+    on<ClubEventEditDescription>(_onEditDescription);
+    on<ClubEventEditPhoto>(_onEditPhoto);
   }
 
   _onChangeHideDate(ClubEventChangeHideDate event, Emitter emit) async {
@@ -108,4 +110,36 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     }
   }
 
+  Future<void> _onEditDescription(
+    ClubEventEditDescription event,
+    Emitter emit,
+  ) async {
+    final model = state.model;
+    if (model == null) {
+      return;
+    }
+
+    emit(state.copyWith(isLoading: true));
+    await _clubRepository.updateDescription(
+      clubId: _clubId,
+      club: model.copyWith(
+        description:
+            event.description.trim().isEmpty ? null : event.description.trim(),
+      ),
+    );
+    add(const ClubEvent.pageOpened());
+  }
+
+  Future<void> _onEditPhoto(
+    ClubEventEditPhoto event,
+    Emitter emit,
+  ) async {
+    emit(state.copyWith(isLoading: true));
+    await _clubRepository.updatePhoto(
+      clubId: _clubId,
+      bytes: event.bytes,
+      fileName: event.fileName,
+    );
+    add(const ClubEvent.pageOpened());
+  }
 }

@@ -1,0 +1,15 @@
+name: Build & Deploy
+
+on:
+  workflow_run:
+    workflows: ["CI Tests"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    uses: Mafbase/mafbase-backend/.github/workflows/reusable-build-deploy.yml@main
+    with:
+      image_name: seating-generator-web

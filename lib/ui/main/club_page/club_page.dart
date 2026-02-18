@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
@@ -10,6 +13,7 @@ import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_bill_dialog.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -82,6 +86,8 @@ class _ClubPageState extends CustomState<ClubPage> {
                   onAddGame: state.isOwner ? _addNewGame : null,
                   billClub: state.isOwner ? _bill : null,
                   changeHideDate: state.isOwner ? _changeHideDate : null,
+                  onEditDescription: state.isOwner ? _editDescription : null,
+                  onEditPhoto: state.isOwner ? _editPhoto : null,
                 ),
             ],
           );
@@ -112,6 +118,9 @@ class _ClubPageState extends CustomState<ClubPage> {
                           billClub: state.isOwner ? _bill : null,
                           changeHideDate:
                               state.isOwner ? _changeHideDate : null,
+                          onEditDescription:
+                              state.isOwner ? _editDescription : null,
+                          onEditPhoto: state.isOwner ? _editPhoto : null,
                         ),
                       ),
                   ],
@@ -168,5 +177,35 @@ class _ClubPageState extends CustomState<ClubPage> {
         ),
       );
     }
+  }
+
+  Future<void> _editDescription() async {
+    final bloc = context.read<ClubBloc>();
+    final currentClub = bloc.state.model;
+    if (currentClub == null) {
+      return;
+    }
+
+    final value = await ClubDescriptionEditDialog.show(
+      context: context,
+      initialValue: currentClub.description ?? '',
+    );
+
+    if (!mounted || value == null) {
+      return;
+    }
+
+    bloc.add(ClubEvent.editDescription(description: value));
+  }
+
+  Future<void> _editPhoto() async {
+    final bloc = context.read<ClubBloc>();
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (!mounted || image == null) {
+      return;
+    }
+
+    final bytes = Uint8List.fromList(await image.readAsBytes());
+    bloc.add(ClubEvent.editPhoto(bytes: bytes, fileName: image.name));
   }
 }

@@ -3,6 +3,7 @@ import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+import 'dart:typed_data';
 
 abstract class ClubRepository {
   Future<int> addGame(ClubGameResult result, int clubId);
@@ -47,5 +48,16 @@ abstract class ClubRepository {
   Future<void> deleteGame({
     required int gameId,
     required int clubId,
+  });
+
+  Future<void> updateDescription({
+    required int clubId,
+    required ClubModel club,
+  });
+
+  Future<void> updatePhoto({
+    required int clubId,
+    required Uint8List bytes,
+    required String fileName,
   });
 }

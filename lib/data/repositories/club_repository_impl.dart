@@ -7,6 +7,8 @@ import 'package:seating_generator_web/data/requests/club_check_request.dart';
 import 'package:seating_generator_web/data/requests/clubs_list_request.dart';
 import 'package:seating_generator_web/data/requests/clubs_my_request.dart';
 import 'package:seating_generator_web/data/requests/delete_game_request.dart';
+import 'package:seating_generator_web/data/requests/edit_club_description_photo_request.dart';
+import 'package:seating_generator_web/data/requests/edit_club_description_request.dart';
 import 'package:seating_generator_web/data/requests/edit_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
@@ -140,4 +142,43 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   @override
   Future<void> deleteGame({required int gameId, required int clubId}) =>
       DeleteGameRequest(clubId: clubId, gameId: gameId).execute(client);
+
+  @override
+  Future<void> updateDescription({
+    required int clubId,
+    required ClubModel club,
+  }) async {
+    final requestClub = pb.Club()
+      ..id = club.id
+      ..name = club.name
+      ..description = club.description ?? '';
+
+    if (club.imageUrl != null) {
+      requestClub.imageUrl = club.imageUrl!;
+    }
+    if (club.groupLink != null) {
+      requestClub.groupLink = club.groupLink!;
+    }
+    if (club.city != null) {
+      requestClub.city = club.city!;
+    }
+    if (club.billedFor != null) {
+      requestClub.billedFor = club.billedFor!.toIso8601String();
+    }
+
+    await EditClubDescriptionRequest(clubId: clubId, club: requestClub)
+        .execute(client);
+  }
+
+  @override
+  Future<void> updatePhoto({
+    required int clubId,
+    required Uint8List bytes,
+    required String fileName,
+  }) =>
+      EditClubDescriptionPhotoRequest(
+        clubId: clubId,
+        bytes: bytes,
+        filename: fileName,
+      ).execute(client);
 }
