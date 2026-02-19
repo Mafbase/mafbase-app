@@ -1,0 +1,81 @@
+name: Android Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: Android package name
+        required: false
+        default: ru.mafbase.app
+        type: string
+  workflow_call:
+    inputs:
+      package_name:
+        required: false
+        default: ru.mafbase.app
+        type: string
+
+jobs:
+  deploy-android:
+    runs-on: ubuntu-latest
+    env:
+      PACKAGE_NAME: ${{ inputs.package_name }}
+      DEVELOPER_EMAIL: ${{ secrets.DEVELOPER_EMAIL }}
+      RUSTORE_KEY_ID: ${{ secrets.RUSTORE_KEY_ID }}
+      RUSTORE_PRIVATE_KEY: ${{ secrets.RUSTORE_PRIVATE_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.3'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate key paths
+        run: |
+          test -n "$KEY_PROPERTIES_PATH" || (echo "KEY_PROPERTIES_PATH is not set" && exit 1)
+          test -f "$KEY_PROPERTIES_PATH" || (echo "key.properties file not found: $KEY_PROPERTIES_PATH" && exit 1)
+          test -n "$PACKAGE_NAME" || (echo "PACKAGE_NAME is not set" && exit 1)
+          test -n "$DEVELOPER_EMAIL" || (echo "DEVELOPER_EMAIL is not set" && exit 1)
+          test -n "$RUSTORE_KEY_ID" || (echo "RUSTORE_KEY_ID is not set" && exit 1)
+          test -n "$RUSTORE_PRIVATE_KEY" || (echo "RUSTORE_PRIVATE_KEY is not set" && exit 1)
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Use Android signing config
+        run: |
+          cp "$KEY_PROPERTIES_PATH" android/key.properties
+
+      - name: Build Android appbundle
+        run: flutter build appbundle --release
+
+      - name: Upload appbundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+
+      - name: Install Python dependencies
+        run: pip install pycryptodome tqdm requests requests-toolbelt
+
+      - name: Publish to RuStore
+        run: |
+          RUSTORE_PRIVATE_KEY="$(echo "$RUSTORE_PRIVATE_KEY" | tr -d '\n')"
+          python3 rustore-api-key-gen.py \
+            "$RUSTORE_KEY_ID" \
+            "$RUSTORE_PRIVATE_KEY" \
+            "$PACKAGE_NAME" \
+            build/app/outputs/bundle/release/app-release.aab
