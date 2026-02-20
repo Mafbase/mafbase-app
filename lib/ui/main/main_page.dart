@@ -91,7 +91,7 @@ class _MainPageState extends CustomState<MainPage> {
                   ? BackButton(onPressed: context.pop)
                   : Navigator.canPop(context)
                       ? BackButton(onPressed: () => Navigator.pop(context))
-                      : const SizedBox.shrink();
+                      : BackButton(onPressed: () => context.go('/'));
             },
           ),
         ),
