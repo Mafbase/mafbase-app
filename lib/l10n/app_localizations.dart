@@ -668,6 +668,150 @@ abstract class AppLocalizations {
   /// **'Профиль'**
   String get profile;
 
+  /// No description provided for @profileAuthorizedAs.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы авторизованы как: {email}'**
+  String profileAuthorizedAs(String email);
+
+  /// No description provided for @profileLinkedPlayer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Связанный профиль игрока:'**
+  String get profileLinkedPlayer;
+
+  /// No description provided for @profilePlayerNotSelected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Профиль игрока не выбран'**
+  String get profilePlayerNotSelected;
+
+  /// No description provided for @profileChangePlayer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить профиль игрока'**
+  String get profileChangePlayer;
+
+  /// No description provided for @profileSelectPlayer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выбрать профиль игрока'**
+  String get profileSelectPlayer;
+
+  /// No description provided for @profileFsmNickname.
+  ///
+  /// In ru, this message translates to:
+  /// **'ФСМ: {nickname}'**
+  String profileFsmNickname(String nickname);
+
+  /// No description provided for @profileDeleteAccount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить аккаунт'**
+  String get profileDeleteAccount;
+
+  /// No description provided for @profilePaymentTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата'**
+  String get profilePaymentTitle;
+
+  /// No description provided for @profileTournamentSubscriptionTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подписка на турниры'**
+  String get profileTournamentSubscriptionTitle;
+
+  /// No description provided for @profileTournamentSubscriptionStatus.
+  ///
+  /// In ru, this message translates to:
+  /// **'Статус: {status}'**
+  String profileTournamentSubscriptionStatus(String status);
+
+  /// No description provided for @profileTournamentSubscriptionStatusActive.
+  ///
+  /// In ru, this message translates to:
+  /// **'Активна'**
+  String get profileTournamentSubscriptionStatusActive;
+
+  /// No description provided for @profileTournamentSubscriptionStatusInactive.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неактивна'**
+  String get profileTournamentSubscriptionStatusInactive;
+
+  /// No description provided for @profileTournamentSubscriptionPlan.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тариф: {plan}'**
+  String profileTournamentSubscriptionPlan(String plan);
+
+  /// No description provided for @profileTournamentSubscriptionPlanUnavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подписка не оформлена'**
+  String get profileTournamentSubscriptionPlanUnavailable;
+
+  /// No description provided for @profileTournamentSubscriptionTypeUnknown.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неизвестный тариф'**
+  String get profileTournamentSubscriptionTypeUnknown;
+
+  /// No description provided for @profileTournamentSubscriptionTypeTournamentWithAllAddons10Players.
+  ///
+  /// In ru, this message translates to:
+  /// **'Турниры + все дополнения (10 игроков)'**
+  String get profileTournamentSubscriptionTypeTournamentWithAllAddons10Players;
+
+  /// No description provided for @profileTournamentSubscriptionCreate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оформить подписку'**
+  String get profileTournamentSubscriptionCreate;
+
+  /// No description provided for @profileTournamentSubscriptionRenew.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продлить подписку'**
+  String get profileTournamentSubscriptionRenew;
+
+  /// No description provided for @profileTournamentSubscriptionLoading.
+  ///
+  /// In ru, this message translates to:
+  /// **'Загрузка...'**
+  String get profileTournamentSubscriptionLoading;
+
+  /// No description provided for @profileTournamentSubscriptionOption.
+  ///
+  /// In ru, this message translates to:
+  /// **'{days} дней'**
+  String profileTournamentSubscriptionOption(int days);
+
+  /// No description provided for @profileTournamentSubscriptionReload.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обновить'**
+  String get profileTournamentSubscriptionReload;
+
+  /// No description provided for @profileTournamentSubscriptionErrorGeneric.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось загрузить данные о подписке'**
+  String get profileTournamentSubscriptionErrorGeneric;
+
+  /// No description provided for @profileTournamentSubscriptionInfoTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'О подписке'**
+  String get profileTournamentSubscriptionInfoTitle;
+
+  /// No description provided for @profileTournamentSubscriptionInfoDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'При создании турниров в период подписки, будет выставляться статус оплаченного турнира на 10 человек'**
+  String get profileTournamentSubscriptionInfoDescription;
+
   /// No description provided for @billedFor.
   ///
   /// In ru, this message translates to:
@@ -895,6 +1039,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Подтвердить'**
   String get confirm;
+
+  /// No description provided for @ok.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ок'**
+  String get ok;
 
   /// No description provided for @rating.
   ///

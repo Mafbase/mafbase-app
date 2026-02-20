@@ -3971,6 +3971,84 @@ class BillClubEvent extends $pb.GeneratedMessage {
   void clearRedirectPath() => $_clearField(2);
 }
 
+class BillTournamentSubscriptionEvent extends $pb.GeneratedMessage {
+  factory BillTournamentSubscriptionEvent({
+    TournamentSubscriptionType? subscriptionType,
+    $core.int? days,
+    $core.String? redirectPath,
+  }) {
+    final $result = create();
+    if (subscriptionType != null) {
+      $result.subscriptionType = subscriptionType;
+    }
+    if (days != null) {
+      $result.days = days;
+    }
+    if (redirectPath != null) {
+      $result.redirectPath = redirectPath;
+    }
+    return $result;
+  }
+  BillTournamentSubscriptionEvent._() : super();
+  factory BillTournamentSubscriptionEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory BillTournamentSubscriptionEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BillTournamentSubscriptionEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..e<TournamentSubscriptionType>(1, _omitFieldNames ? '' : 'subscriptionType', $pb.PbFieldType.OE, protoName: 'subscriptionType', defaultOrMaker: TournamentSubscriptionType.unknownTournamentSubscriptionType, valueOf: TournamentSubscriptionType.valueOf, enumValues: TournamentSubscriptionType.values)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'days', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'redirectPath', protoName: 'redirectPath')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  BillTournamentSubscriptionEvent clone() => BillTournamentSubscriptionEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  BillTournamentSubscriptionEvent copyWith(void Function(BillTournamentSubscriptionEvent) updates) => super.copyWith((message) => updates(message as BillTournamentSubscriptionEvent)) as BillTournamentSubscriptionEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BillTournamentSubscriptionEvent create() => BillTournamentSubscriptionEvent._();
+  BillTournamentSubscriptionEvent createEmptyInstance() => create();
+  static $pb.PbList<BillTournamentSubscriptionEvent> createRepeated() => $pb.PbList<BillTournamentSubscriptionEvent>();
+  @$core.pragma('dart2js:noInline')
+  static BillTournamentSubscriptionEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BillTournamentSubscriptionEvent>(create);
+  static BillTournamentSubscriptionEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  TournamentSubscriptionType get subscriptionType => $_getN(0);
+  @$pb.TagNumber(1)
+  set subscriptionType(TournamentSubscriptionType v) { $_setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSubscriptionType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSubscriptionType() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get days => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set days($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDays() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDays() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get redirectPath => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set redirectPath($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRedirectPath() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRedirectPath() => $_clearField(3);
+}
+
 class BillTournamentEventOut extends $pb.GeneratedMessage {
   factory BillTournamentEventOut({
     $core.String? redirectLink,
@@ -4019,6 +4097,84 @@ class BillTournamentEventOut extends $pb.GeneratedMessage {
   $core.bool hasRedirectLink() => $_has(0);
   @$pb.TagNumber(1)
   void clearRedirectLink() => $_clearField(1);
+}
+
+class TournamentSubscriptionPlanEventOut extends $pb.GeneratedMessage {
+  factory TournamentSubscriptionPlanEventOut({
+    $core.bool? isActive,
+    TournamentSubscriptionType? subscriptionType,
+    $core.String? billedFor,
+  }) {
+    final $result = create();
+    if (isActive != null) {
+      $result.isActive = isActive;
+    }
+    if (subscriptionType != null) {
+      $result.subscriptionType = subscriptionType;
+    }
+    if (billedFor != null) {
+      $result.billedFor = billedFor;
+    }
+    return $result;
+  }
+  TournamentSubscriptionPlanEventOut._() : super();
+  factory TournamentSubscriptionPlanEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TournamentSubscriptionPlanEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TournamentSubscriptionPlanEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'isActive', protoName: 'isActive')
+    ..e<TournamentSubscriptionType>(2, _omitFieldNames ? '' : 'subscriptionType', $pb.PbFieldType.OE, protoName: 'subscriptionType', defaultOrMaker: TournamentSubscriptionType.unknownTournamentSubscriptionType, valueOf: TournamentSubscriptionType.valueOf, enumValues: TournamentSubscriptionType.values)
+    ..aOS(3, _omitFieldNames ? '' : 'billedFor', protoName: 'billedFor')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TournamentSubscriptionPlanEventOut clone() => TournamentSubscriptionPlanEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TournamentSubscriptionPlanEventOut copyWith(void Function(TournamentSubscriptionPlanEventOut) updates) => super.copyWith((message) => updates(message as TournamentSubscriptionPlanEventOut)) as TournamentSubscriptionPlanEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TournamentSubscriptionPlanEventOut create() => TournamentSubscriptionPlanEventOut._();
+  TournamentSubscriptionPlanEventOut createEmptyInstance() => create();
+  static $pb.PbList<TournamentSubscriptionPlanEventOut> createRepeated() => $pb.PbList<TournamentSubscriptionPlanEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static TournamentSubscriptionPlanEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TournamentSubscriptionPlanEventOut>(create);
+  static TournamentSubscriptionPlanEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get isActive => $_getBF(0);
+  @$pb.TagNumber(1)
+  set isActive($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasIsActive() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIsActive() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  TournamentSubscriptionType get subscriptionType => $_getN(1);
+  @$pb.TagNumber(2)
+  set subscriptionType(TournamentSubscriptionType v) { $_setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSubscriptionType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSubscriptionType() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get billedFor => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set billedFor($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasBilledFor() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBilledFor() => $_clearField(3);
 }
 
 class StartGameInfoEvent extends $pb.GeneratedMessage {

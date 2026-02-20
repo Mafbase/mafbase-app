@@ -221,6 +221,89 @@
   "@translationHelp": {},
   "profile": "Профиль",
   "@profile": {},
+  "profileAuthorizedAs": "Вы авторизованы как: {email}",
+  "@profileAuthorizedAs": {
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "user@mail.ru"
+      }
+    }
+  },
+  "profileLinkedPlayer": "Связанный профиль игрока:",
+  "@profileLinkedPlayer": {},
+  "profilePlayerNotSelected": "Профиль игрока не выбран",
+  "@profilePlayerNotSelected": {},
+  "profileChangePlayer": "Изменить профиль игрока",
+  "@profileChangePlayer": {},
+  "profileSelectPlayer": "Выбрать профиль игрока",
+  "@profileSelectPlayer": {},
+  "profileFsmNickname": "ФСМ: {nickname}",
+  "@profileFsmNickname": {
+    "placeholders": {
+      "nickname": {
+        "type": "String",
+        "example": "nickname"
+      }
+    }
+  },
+  "profileDeleteAccount": "Удалить аккаунт",
+  "@profileDeleteAccount": {},
+  "profilePaymentTitle": "Оплата",
+  "@profilePaymentTitle": {},
+  "profileTournamentSubscriptionTitle": "Подписка на турниры",
+  "@profileTournamentSubscriptionTitle": {},
+  "profileTournamentSubscriptionStatus": "Статус: {status}",
+  "@profileTournamentSubscriptionStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "Активна"
+      }
+    }
+  },
+  "profileTournamentSubscriptionStatusActive": "Активна",
+  "@profileTournamentSubscriptionStatusActive": {},
+  "profileTournamentSubscriptionStatusInactive": "Неактивна",
+  "@profileTournamentSubscriptionStatusInactive": {},
+  "profileTournamentSubscriptionPlan": "Тариф: {plan}",
+  "@profileTournamentSubscriptionPlan": {
+    "placeholders": {
+      "plan": {
+        "type": "String",
+        "example": "Турниры + все дополнения (10 игроков)"
+      }
+    }
+  },
+  "profileTournamentSubscriptionPlanUnavailable": "Подписка не оформлена",
+  "@profileTournamentSubscriptionPlanUnavailable": {},
+  "profileTournamentSubscriptionTypeUnknown": "Неизвестный тариф",
+  "@profileTournamentSubscriptionTypeUnknown": {},
+  "profileTournamentSubscriptionTypeTournamentWithAllAddons10Players": "Турниры + все дополнения (10 игроков)",
+  "@profileTournamentSubscriptionTypeTournamentWithAllAddons10Players": {},
+  "profileTournamentSubscriptionCreate": "Оформить подписку",
+  "@profileTournamentSubscriptionCreate": {},
+  "profileTournamentSubscriptionRenew": "Продлить подписку",
+  "@profileTournamentSubscriptionRenew": {},
+  "profileTournamentSubscriptionLoading": "Загрузка...",
+  "@profileTournamentSubscriptionLoading": {},
+  "profileTournamentSubscriptionOption": "{days} дней",
+  "@profileTournamentSubscriptionOption": {
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "profileTournamentSubscriptionReload": "Обновить",
+  "@profileTournamentSubscriptionReload": {},
+  "profileTournamentSubscriptionErrorGeneric": "Не удалось загрузить данные о подписке",
+  "@profileTournamentSubscriptionErrorGeneric": {},
+  "profileTournamentSubscriptionInfoTitle": "О подписке",
+  "@profileTournamentSubscriptionInfoTitle": {},
+  "profileTournamentSubscriptionInfoDescription": "При создании турниров в период подписки, будет выставляться статус оплаченного турнира на 10 человек",
+  "@profileTournamentSubscriptionInfoDescription": {},
   "billedFor": "Оплачено до {date}",
   "@billedFor": {
     "placeholders": {
@@ -318,6 +401,8 @@
   "@seatingCurrentFsmNickname": {},
   "confirm": "Подтвердить",
   "@confirm": {},
+  "ok": "Ок",
+  "@ok": {},
   "rating": "Рейтинг",
   "@rating": {},
   "period": "Период: ",

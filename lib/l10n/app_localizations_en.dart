@@ -306,6 +306,93 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile => 'Profile';
 
   @override
+  String profileAuthorizedAs(String email) {
+    return 'You are authorized as: $email';
+  }
+
+  @override
+  String get profileLinkedPlayer => 'Linked player profile:';
+
+  @override
+  String get profilePlayerNotSelected => 'Player profile is not selected';
+
+  @override
+  String get profileChangePlayer => 'Change player profile';
+
+  @override
+  String get profileSelectPlayer => 'Select player profile';
+
+  @override
+  String profileFsmNickname(String nickname) {
+    return 'FSM: $nickname';
+  }
+
+  @override
+  String get profileDeleteAccount => 'Delete account';
+
+  @override
+  String get profilePaymentTitle => 'Payment';
+
+  @override
+  String get profileTournamentSubscriptionTitle => 'Tournament subscription';
+
+  @override
+  String profileTournamentSubscriptionStatus(String status) {
+    return 'Status: $status';
+  }
+
+  @override
+  String get profileTournamentSubscriptionStatusActive => 'Active';
+
+  @override
+  String get profileTournamentSubscriptionStatusInactive => 'Inactive';
+
+  @override
+  String profileTournamentSubscriptionPlan(String plan) {
+    return 'Plan: $plan';
+  }
+
+  @override
+  String get profileTournamentSubscriptionPlanUnavailable =>
+      'No active subscription';
+
+  @override
+  String get profileTournamentSubscriptionTypeUnknown => 'Unknown plan';
+
+  @override
+  String
+      get profileTournamentSubscriptionTypeTournamentWithAllAddons10Players =>
+          'Tournaments + all addons (10 players)';
+
+  @override
+  String get profileTournamentSubscriptionCreate => 'Start subscription';
+
+  @override
+  String get profileTournamentSubscriptionRenew => 'Renew subscription';
+
+  @override
+  String get profileTournamentSubscriptionLoading => 'Loading...';
+
+  @override
+  String profileTournamentSubscriptionOption(int days) {
+    return '$days days';
+  }
+
+  @override
+  String get profileTournamentSubscriptionReload => 'Refresh';
+
+  @override
+  String get profileTournamentSubscriptionErrorGeneric =>
+      'Failed to load subscription data';
+
+  @override
+  String get profileTournamentSubscriptionInfoTitle => 'About subscription';
+
+  @override
+  String get profileTournamentSubscriptionInfoDescription =>
+      'When creating tournaments during the subscription period, the tournament will be marked as paid for 10 players';
+
+  @override
   String billedFor(String date) {
     return 'Paid until $date';
   }
@@ -437,6 +524,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirm => 'Confirm';
+
+  @override
+  String get ok => 'Ok';
 
   @override
   String get rating => 'Rating';

@@ -97,12 +97,15 @@ class _MainPageState extends CustomState<MainPage> {
         ),
         backgroundColor: context.theme.darkBlueColor,
         actions: GoRouterState.of(context).uri.pathSegments.firstOrNull == 'auth' ? null : getProfileAction(),
-        title: Text(
-          titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
-          style: GoogleFonts.balooBhai2(
-            color: Colors.white,
-            fontSize: 48,
-            fontWeight: FontWeight.w500,
+        title: InkWell(
+          onTap: titleProvider.value.isEmpty ? () => context.go('/') : null,
+          child: Text(
+            titleProvider.value.isEmpty ? "mafbase" : titleProvider.value,
+            style: GoogleFonts.balooBhai2(
+              color: Colors.white,
+              fontSize: 48,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       );

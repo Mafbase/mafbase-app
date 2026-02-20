@@ -10,6 +10,7 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
@@ -17,6 +18,7 @@ import 'package:seating_generator_web/feature/profile/domain/interactor/delete_p
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
+import 'package:seating_generator_web/ui/main/profile_page/widgets/tournament_subscription_section.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -26,8 +28,7 @@ class ProfilePage extends StatefulWidget {
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 
-  static String createLocation(BuildContext context) =>
-      context.namedLocation('profile');
+  static String createLocation(BuildContext context) => context.namedLocation('profile');
 
   static final GoRoute route = GoRoute(
     path: '/profile',
@@ -51,7 +52,7 @@ class ProfilePage extends StatefulWidget {
             RepositoryFactory.of(context).profileRepository,
             getIt<CreatePlayerInteractor>(),
             context,
-          );
+          )..add(const ProfileEvent.loadUserProfile());
         },
         child: const ProfilePage._(),
       ),
@@ -61,13 +62,12 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
-  void initState() {
-    context.read<ProfileBloc>().add(const ProfileEvent.onPageOpened());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final showBillingSection = !(context.watch<AuthNotifier>().value.mapOrNull(
+              authorized: (model) => model.hideBilling,
+            ) ??
+        false);
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -79,32 +79,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BlocSelector<ProfileBloc, ProfileState, String?>(
-                      selector: (state) => state.login,
-                      builder: (context, login) => Text.rich(
-                        textAlign: TextAlign.center,
-                        TextSpan(
-                          style: MyTheme.of(context).fieldTextStyle,
-                          children: [
-                            const TextSpan(
-                              text: 'Вы авторизованы как: ',
-                            ),
-                            TextSpan(
-                              text: login ?? '',
-                              style: const TextStyle(fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
+                    if (showBillingSection) ...[
+                      TournamentSubscriptionSection(
+                        repository: RepositoryFactory.of(context).profileRepository,
                       ),
-                    ),
-                    const SizedBox(height: 24),
+                      const SizedBox(height: 24),
+                    ],
                     BlocBuilder<ProfileBloc, ProfileState>(
                       builder: (context, state) {
                         return Column(
                           children: [
                             if (state.playerProfile != null) ...[
                               Text(
-                                'Связанный профиль игрока:',
+                                context.locale.profileLinkedPlayer,
                                 style: MyTheme.of(context).fieldTextStyle,
                               ),
                               const SizedBox(height: 8),
@@ -153,15 +140,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                       children: [
                                         Text(
                                           state.playerProfile!.nickname,
-                                          style: MyTheme.of(context)
-                                              .fieldTextStyle
-                                              .copyWith(
+                                          style: MyTheme.of(context).fieldTextStyle.copyWith(
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
                                         if (state.playerProfile!.fsmNickaname != null)
                                           Text(
-                                            'ФСМ: ${state.playerProfile!.fsmNickaname}',
+                                            context.locale.profileFsmNickname(
+                                              state.playerProfile!.fsmNickaname!,
+                                            ),
                                             style: MyTheme.of(context).fieldTextStyle.copyWith(
                                                   fontSize: 12,
                                                   color: Colors.grey.shade600,
@@ -175,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               const SizedBox(height: 16),
                             ] else ...[
                               Text(
-                                'Профиль игрока не выбран',
+                                context.locale.profilePlayerNotSelected,
                                 style: MyTheme.of(context).fieldTextStyle,
                               ),
                               const SizedBox(height: 16),
@@ -184,8 +171,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               onPressed: () => _selectPlayerProfile(context),
                               child: Text(
                                 state.playerProfile != null
-                                    ? 'Изменить профиль игрока'
-                                    : 'Выбрать профиль игрока',
+                                    ? context.locale.profileChangePlayer
+                                    : context.locale.profileSelectPlayer,
                               ),
                             ),
                           ],
@@ -206,9 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     CustomButton(
                       text: context.locale.logout,
                       onTap: () {
-                        context
-                            .read<ProfileBloc>()
-                            .add(const ProfileEvent.onLogoutPressed());
+                        context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed());
                       },
                       isRed: true,
                       minimize: true,
@@ -217,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     TextButton(
                       onPressed: _deleteAccount,
                       child: Text(
-                        'Удалить аккаунт',
+                        context.locale.profileDeleteAccount,
                         style: TextStyle(
                           color: MyTheme.of(context).greyColor,
                         ),
@@ -265,7 +250,7 @@ class _ProfilePageState extends State<ProfilePage> {
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             child: Text(
-              'Да',
+              context.locale.yes,
               style: TextStyle(
                 color: MyTheme.of(context).redColor,
               ),

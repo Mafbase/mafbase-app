@@ -221,6 +221,89 @@
   "@translationHelp": {},
   "profile": "Profile",
   "@profile": {},
+  "profileAuthorizedAs": "You are authorized as: {email}",
+  "@profileAuthorizedAs": {
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "user@mail.com"
+      }
+    }
+  },
+  "profileLinkedPlayer": "Linked player profile:",
+  "@profileLinkedPlayer": {},
+  "profilePlayerNotSelected": "Player profile is not selected",
+  "@profilePlayerNotSelected": {},
+  "profileChangePlayer": "Change player profile",
+  "@profileChangePlayer": {},
+  "profileSelectPlayer": "Select player profile",
+  "@profileSelectPlayer": {},
+  "profileFsmNickname": "FSM: {nickname}",
+  "@profileFsmNickname": {
+    "placeholders": {
+      "nickname": {
+        "type": "String",
+        "example": "nickname"
+      }
+    }
+  },
+  "profileDeleteAccount": "Delete account",
+  "@profileDeleteAccount": {},
+  "profilePaymentTitle": "Payment",
+  "@profilePaymentTitle": {},
+  "profileTournamentSubscriptionTitle": "Tournament subscription",
+  "@profileTournamentSubscriptionTitle": {},
+  "profileTournamentSubscriptionStatus": "Status: {status}",
+  "@profileTournamentSubscriptionStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "Active"
+      }
+    }
+  },
+  "profileTournamentSubscriptionStatusActive": "Active",
+  "@profileTournamentSubscriptionStatusActive": {},
+  "profileTournamentSubscriptionStatusInactive": "Inactive",
+  "@profileTournamentSubscriptionStatusInactive": {},
+  "profileTournamentSubscriptionPlan": "Plan: {plan}",
+  "@profileTournamentSubscriptionPlan": {
+    "placeholders": {
+      "plan": {
+        "type": "String",
+        "example": "Tournaments + all addons (10 players)"
+      }
+    }
+  },
+  "profileTournamentSubscriptionPlanUnavailable": "No active subscription",
+  "@profileTournamentSubscriptionPlanUnavailable": {},
+  "profileTournamentSubscriptionTypeUnknown": "Unknown plan",
+  "@profileTournamentSubscriptionTypeUnknown": {},
+  "profileTournamentSubscriptionTypeTournamentWithAllAddons10Players": "Tournaments + all addons (10 players)",
+  "@profileTournamentSubscriptionTypeTournamentWithAllAddons10Players": {},
+  "profileTournamentSubscriptionCreate": "Start subscription",
+  "@profileTournamentSubscriptionCreate": {},
+  "profileTournamentSubscriptionRenew": "Renew subscription",
+  "@profileTournamentSubscriptionRenew": {},
+  "profileTournamentSubscriptionLoading": "Loading...",
+  "@profileTournamentSubscriptionLoading": {},
+  "profileTournamentSubscriptionOption": "{days} days",
+  "@profileTournamentSubscriptionOption": {
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "profileTournamentSubscriptionReload": "Refresh",
+  "@profileTournamentSubscriptionReload": {},
+  "profileTournamentSubscriptionErrorGeneric": "Failed to load subscription data",
+  "@profileTournamentSubscriptionErrorGeneric": {},
+  "profileTournamentSubscriptionInfoTitle": "About subscription",
+  "@profileTournamentSubscriptionInfoTitle": {},
+  "profileTournamentSubscriptionInfoDescription": "When creating tournaments during the subscription period, the tournament will be marked as paid for 10 players",
+  "@profileTournamentSubscriptionInfoDescription": {},
   "billedFor": "Paid until {date}",
   "@billedFor": {
     "placeholders": {
@@ -318,6 +401,8 @@
   "@seatingCurrentFsmNickname": {},
   "confirm": "Confirm",
   "@confirm": {},
+  "ok": "Ok",
+  "@ok": {},
   "rating": "Rating",
   "@rating": {},
   "period": "Period: ",

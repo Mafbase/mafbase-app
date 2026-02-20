@@ -104,6 +104,21 @@ class PlayerStatus extends $pb.ProtobufEnum {
   const PlayerStatus._(super.v, super.n);
 }
 
+class TournamentSubscriptionType extends $pb.ProtobufEnum {
+  static const TournamentSubscriptionType unknownTournamentSubscriptionType = TournamentSubscriptionType._(0, _omitEnumNames ? '' : 'unknownTournamentSubscriptionType');
+  static const TournamentSubscriptionType tournamentWithAllAddons10Players = TournamentSubscriptionType._(1, _omitEnumNames ? '' : 'tournamentWithAllAddons10Players');
+
+  static const $core.List<TournamentSubscriptionType> values = <TournamentSubscriptionType> [
+    unknownTournamentSubscriptionType,
+    tournamentWithAllAddons10Players,
+  ];
+
+  static final $core.Map<$core.int, TournamentSubscriptionType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static TournamentSubscriptionType? valueOf($core.int value) => _byValue[value];
+
+  const TournamentSubscriptionType._(super.v, super.n);
+}
+
 class RatingScheme extends $pb.ProtobufEnum {
   static const RatingScheme oldFSM = RatingScheme._(0, _omitEnumNames ? '' : 'oldFSM');
   static const RatingScheme minusFSM = RatingScheme._(1, _omitEnumNames ? '' : 'minusFSM');

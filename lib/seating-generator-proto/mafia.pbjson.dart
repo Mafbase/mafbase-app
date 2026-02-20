@@ -89,6 +89,20 @@ final $typed_data.Uint8List playerStatusDescriptor = $convert.base64Decode(
     'CgxQbGF5ZXJTdGF0dXMSCQoFYWxpdmUQABIJCgV2b3RlZBABEgsKB2RlbGV0ZWQQAhIKCgZraW'
     'xsZWQQAw==');
 
+@$core.Deprecated('Use tournamentSubscriptionTypeDescriptor instead')
+const TournamentSubscriptionType$json = {
+  '1': 'TournamentSubscriptionType',
+  '2': [
+    {'1': 'unknownTournamentSubscriptionType', '2': 0},
+    {'1': 'tournamentWithAllAddons10Players', '2': 1},
+  ],
+};
+
+/// Descriptor for `TournamentSubscriptionType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List tournamentSubscriptionTypeDescriptor = $convert.base64Decode(
+    'ChpUb3VybmFtZW50U3Vic2NyaXB0aW9uVHlwZRIlCiF1bmtub3duVG91cm5hbWVudFN1YnNjcm'
+    'lwdGlvblR5cGUQABIkCiB0b3VybmFtZW50V2l0aEFsbEFkZG9uczEwUGxheWVycxAB');
+
 @$core.Deprecated('Use ratingSchemeDescriptor instead')
 const RatingScheme$json = {
   '1': 'RatingScheme',
@@ -1027,6 +1041,23 @@ final $typed_data.Uint8List billClubEventDescriptor = $convert.base64Decode(
     'Cg1CaWxsQ2x1YkV2ZW50EhIKBGRheXMYASABKAVSBGRheXMSIgoMcmVkaXJlY3RQYXRoGAIgAS'
     'gJUgxyZWRpcmVjdFBhdGg=');
 
+@$core.Deprecated('Use billTournamentSubscriptionEventDescriptor instead')
+const BillTournamentSubscriptionEvent$json = {
+  '1': 'BillTournamentSubscriptionEvent',
+  '2': [
+    {'1': 'subscriptionType', '3': 1, '4': 1, '5': 14, '6': '.generated.TournamentSubscriptionType', '10': 'subscriptionType'},
+    {'1': 'days', '3': 2, '4': 1, '5': 5, '10': 'days'},
+    {'1': 'redirectPath', '3': 3, '4': 1, '5': 9, '10': 'redirectPath'},
+  ],
+};
+
+/// Descriptor for `BillTournamentSubscriptionEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List billTournamentSubscriptionEventDescriptor = $convert.base64Decode(
+    'Ch9CaWxsVG91cm5hbWVudFN1YnNjcmlwdGlvbkV2ZW50ElEKEHN1YnNjcmlwdGlvblR5cGUYAS'
+    'ABKA4yJS5nZW5lcmF0ZWQuVG91cm5hbWVudFN1YnNjcmlwdGlvblR5cGVSEHN1YnNjcmlwdGlv'
+    'blR5cGUSEgoEZGF5cxgCIAEoBVIEZGF5cxIiCgxyZWRpcmVjdFBhdGgYAyABKAlSDHJlZGlyZW'
+    'N0UGF0aA==');
+
 @$core.Deprecated('Use billTournamentEventOutDescriptor instead')
 const BillTournamentEventOut$json = {
   '1': 'BillTournamentEventOut',
@@ -1039,6 +1070,27 @@ const BillTournamentEventOut$json = {
 final $typed_data.Uint8List billTournamentEventOutDescriptor = $convert.base64Decode(
     'ChZCaWxsVG91cm5hbWVudEV2ZW50T3V0EiIKDHJlZGlyZWN0TGluaxgBIAEoCVIMcmVkaXJlY3'
     'RMaW5r');
+
+@$core.Deprecated('Use tournamentSubscriptionPlanEventOutDescriptor instead')
+const TournamentSubscriptionPlanEventOut$json = {
+  '1': 'TournamentSubscriptionPlanEventOut',
+  '2': [
+    {'1': 'isActive', '3': 1, '4': 1, '5': 8, '10': 'isActive'},
+    {'1': 'subscriptionType', '3': 2, '4': 1, '5': 14, '6': '.generated.TournamentSubscriptionType', '9': 0, '10': 'subscriptionType', '17': true},
+    {'1': 'billedFor', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'billedFor', '17': true},
+  ],
+  '8': [
+    {'1': '_subscriptionType'},
+    {'1': '_billedFor'},
+  ],
+};
+
+/// Descriptor for `TournamentSubscriptionPlanEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tournamentSubscriptionPlanEventOutDescriptor = $convert.base64Decode(
+    'CiJUb3VybmFtZW50U3Vic2NyaXB0aW9uUGxhbkV2ZW50T3V0EhoKCGlzQWN0aXZlGAEgASgIUg'
+    'hpc0FjdGl2ZRJWChBzdWJzY3JpcHRpb25UeXBlGAIgASgOMiUuZ2VuZXJhdGVkLlRvdXJuYW1l'
+    'bnRTdWJzY3JpcHRpb25UeXBlSABSEHN1YnNjcmlwdGlvblR5cGWIAQESIQoJYmlsbGVkRm9yGA'
+    'MgASgJSAFSCWJpbGxlZEZvcogBAUITChFfc3Vic2NyaXB0aW9uVHlwZUIMCgpfYmlsbGVkRm9y');
 
 @$core.Deprecated('Use startGameInfoEventDescriptor instead')
 const StartGameInfoEvent$json = {

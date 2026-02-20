@@ -41,14 +41,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       _deleteProfileInteractor.run().whenComplete(() => _context?.pop());
 
   Future<void> _init(ProfileEventPageOpened event, Emitter emit) async {
-    final login = await _credentialStorage.read().then((value) => value?.login);
-
-    emit(
-      state.copyWith(
-        isLoading: false,
-        login: login,
-      ),
-    );
     add(const ProfileEvent.loadUserProfile());
   }
 

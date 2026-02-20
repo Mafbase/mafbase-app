@@ -306,6 +306,93 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile => 'Профиль';
 
   @override
+  String profileAuthorizedAs(String email) {
+    return 'Вы авторизованы как: $email';
+  }
+
+  @override
+  String get profileLinkedPlayer => 'Связанный профиль игрока:';
+
+  @override
+  String get profilePlayerNotSelected => 'Профиль игрока не выбран';
+
+  @override
+  String get profileChangePlayer => 'Изменить профиль игрока';
+
+  @override
+  String get profileSelectPlayer => 'Выбрать профиль игрока';
+
+  @override
+  String profileFsmNickname(String nickname) {
+    return 'ФСМ: $nickname';
+  }
+
+  @override
+  String get profileDeleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get profilePaymentTitle => 'Оплата';
+
+  @override
+  String get profileTournamentSubscriptionTitle => 'Подписка на турниры';
+
+  @override
+  String profileTournamentSubscriptionStatus(String status) {
+    return 'Статус: $status';
+  }
+
+  @override
+  String get profileTournamentSubscriptionStatusActive => 'Активна';
+
+  @override
+  String get profileTournamentSubscriptionStatusInactive => 'Неактивна';
+
+  @override
+  String profileTournamentSubscriptionPlan(String plan) {
+    return 'Тариф: $plan';
+  }
+
+  @override
+  String get profileTournamentSubscriptionPlanUnavailable =>
+      'Подписка не оформлена';
+
+  @override
+  String get profileTournamentSubscriptionTypeUnknown => 'Неизвестный тариф';
+
+  @override
+  String
+      get profileTournamentSubscriptionTypeTournamentWithAllAddons10Players =>
+          'Турниры + все дополнения (10 игроков)';
+
+  @override
+  String get profileTournamentSubscriptionCreate => 'Оформить подписку';
+
+  @override
+  String get profileTournamentSubscriptionRenew => 'Продлить подписку';
+
+  @override
+  String get profileTournamentSubscriptionLoading => 'Загрузка...';
+
+  @override
+  String profileTournamentSubscriptionOption(int days) {
+    return '$days дней';
+  }
+
+  @override
+  String get profileTournamentSubscriptionReload => 'Обновить';
+
+  @override
+  String get profileTournamentSubscriptionErrorGeneric =>
+      'Не удалось загрузить данные о подписке';
+
+  @override
+  String get profileTournamentSubscriptionInfoTitle => 'О подписке';
+
+  @override
+  String get profileTournamentSubscriptionInfoDescription =>
+      'При создании турниров в период подписки, будет выставляться статус оплаченного турнира на 10 человек';
+
+  @override
   String billedFor(String date) {
     return 'Оплачено до $date';
   }
@@ -440,6 +527,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get confirm => 'Подтвердить';
+
+  @override
+  String get ok => 'Ок';
 
   @override
   String get rating => 'Рейтинг';
