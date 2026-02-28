@@ -199,6 +199,56 @@ class MyHttpClient {
     return response;
   }
 
+  Future<Response> put(
+    String method,
+    dynamic data,
+    int contentLength, {
+    bool useRecoveryToken = true,
+  }) async {
+    final token = await _storage.authToken;
+    final response = await _client.put(
+      method,
+      data: data,
+      options: Options(
+        headers: {
+          HttpHeaders.contentLengthHeader: contentLength,
+          if (token != null && token.isNotEmpty)
+            HttpHeaders.authorizationHeader: "Bearer $token",
+        },
+      ),
+    );
+
+    if (response.statusCode == HttpStatus.unauthorized) {
+      if (useRecoveryToken) {
+        final credentials = await _credentialStorage.read();
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(
+              email: credentials.login,
+              password: credentials.password,
+            ),
+          ).execute(this);
+
+          if (authResponse.token.isEmpty) {
+            return response;
+          } else {
+            await _storage.onTokensUpdated(
+              authResponse.token,
+              authResponse.recoveryToken,
+            );
+          }
+        }
+
+        return put(method, data, contentLength, useRecoveryToken: false);
+      }
+      throw UnauthenticatedError("Authentication error");
+    }
+
+    _checkResponse(response);
+
+    return response;
+  }
+
   Future<Response> putFile(
     String method,
     List<int> bytes, [

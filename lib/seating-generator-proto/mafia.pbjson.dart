@@ -366,6 +366,7 @@ const ClubRatingRow$json = {
     {'1': 'sheriffMinusScore', '3': 31, '4': 1, '5': 1, '10': 'sheriffMinusScore'},
     {'1': 'bestMoveCitizen', '3': 32, '4': 1, '5': 1, '10': 'bestMoveCitizen'},
     {'1': 'bestMoveSheriff', '3': 33, '4': 1, '5': 1, '10': 'bestMoveSheriff'},
+    {'1': 'customColumns', '3': 34, '4': 3, '5': 11, '6': '.generated.CustomColumnValue', '10': 'customColumns'},
   ],
   '3': [ClubRatingRow_GameItem$json],
 };
@@ -404,8 +405,112 @@ final $typed_data.Uint8List clubRatingRowDescriptor = $convert.base64Decode(
     'NTY29yZRgdIAEoAVIPbWFmaWFNaW51c1Njb3JlEiQKDWRvbk1pbnVzU2NvcmUYHiABKAFSDWRv'
     'bk1pbnVzU2NvcmUSLAoRc2hlcmlmZk1pbnVzU2NvcmUYHyABKAFSEXNoZXJpZmZNaW51c1Njb3'
     'JlEigKD2Jlc3RNb3ZlQ2l0aXplbhggIAEoAVIPYmVzdE1vdmVDaXRpemVuEigKD2Jlc3RNb3Zl'
-    'U2hlcmlmZhghIAEoAVIPYmVzdE1vdmVTaGVyaWZmGkcKCEdhbWVJdGVtEhYKBmdhbWVJZBgBIA'
-    'EoBVIGZ2FtZUlkEhkKBXNjb3JlGAIgASgBSABSBXNjb3JliAEBQggKBl9zY29yZQ==');
+    'U2hlcmlmZhghIAEoAVIPYmVzdE1vdmVTaGVyaWZmEkIKDWN1c3RvbUNvbHVtbnMYIiADKAsyHC'
+    '5nZW5lcmF0ZWQuQ3VzdG9tQ29sdW1uVmFsdWVSDWN1c3RvbUNvbHVtbnMaRwoIR2FtZUl0ZW0S'
+    'FgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQSGQoFc2NvcmUYAiABKAFIAFIFc2NvcmWIAQFCCAoGX3'
+    'Njb3Jl');
+
+@$core.Deprecated('Use customColumnValueDescriptor instead')
+const CustomColumnValue$json = {
+  '1': 'CustomColumnValue',
+  '2': [
+    {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'value', '3': 2, '4': 1, '5': 1, '9': 0, '10': 'value', '17': true},
+  ],
+  '8': [
+    {'1': '_value'},
+  ],
+};
+
+/// Descriptor for `CustomColumnValue`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List customColumnValueDescriptor = $convert.base64Decode(
+    'ChFDdXN0b21Db2x1bW5WYWx1ZRIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGQoFdmFsdWUYAiABKA'
+    'FIAFIFdmFsdWWIAQFCCAoGX3ZhbHVl');
+
+@$core.Deprecated('Use customColumnDefinitionDescriptor instead')
+const CustomColumnDefinition$json = {
+  '1': 'CustomColumnDefinition',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'formula', '3': 3, '4': 1, '5': 9, '10': 'formula'},
+  ],
+};
+
+/// Descriptor for `CustomColumnDefinition`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List customColumnDefinitionDescriptor = $convert.base64Decode(
+    'ChZDdXN0b21Db2x1bW5EZWZpbml0aW9uEg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCV'
+    'IFdGl0bGUSGAoHZm9ybXVsYRgDIAEoCVIHZm9ybXVsYQ==');
+
+@$core.Deprecated('Use customColumnsEventOutDescriptor instead')
+const CustomColumnsEventOut$json = {
+  '1': 'CustomColumnsEventOut',
+  '2': [
+    {'1': 'columns', '3': 1, '4': 3, '5': 11, '6': '.generated.CustomColumnDefinition', '10': 'columns'},
+  ],
+};
+
+/// Descriptor for `CustomColumnsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List customColumnsEventOutDescriptor = $convert.base64Decode(
+    'ChVDdXN0b21Db2x1bW5zRXZlbnRPdXQSOwoHY29sdW1ucxgBIAMoCzIhLmdlbmVyYXRlZC5DdX'
+    'N0b21Db2x1bW5EZWZpbml0aW9uUgdjb2x1bW5z');
+
+@$core.Deprecated('Use createCustomColumnEventDescriptor instead')
+const CreateCustomColumnEvent$json = {
+  '1': 'CreateCustomColumnEvent',
+  '2': [
+    {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'formula', '3': 2, '4': 1, '5': 9, '10': 'formula'},
+  ],
+};
+
+/// Descriptor for `CreateCustomColumnEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createCustomColumnEventDescriptor = $convert.base64Decode(
+    'ChdDcmVhdGVDdXN0b21Db2x1bW5FdmVudBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGAoHZm9ybX'
+    'VsYRgCIAEoCVIHZm9ybXVsYQ==');
+
+@$core.Deprecated('Use updateCustomColumnEventDescriptor instead')
+const UpdateCustomColumnEvent$json = {
+  '1': 'UpdateCustomColumnEvent',
+  '2': [
+    {'1': 'title', '3': 1, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'formula', '3': 2, '4': 1, '5': 9, '10': 'formula'},
+  ],
+};
+
+/// Descriptor for `UpdateCustomColumnEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateCustomColumnEventDescriptor = $convert.base64Decode(
+    'ChdVcGRhdGVDdXN0b21Db2x1bW5FdmVudBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGAoHZm9ybX'
+    'VsYRgCIAEoCVIHZm9ybXVsYQ==');
+
+@$core.Deprecated('Use validateFormulaEventDescriptor instead')
+const ValidateFormulaEvent$json = {
+  '1': 'ValidateFormulaEvent',
+  '2': [
+    {'1': 'formula', '3': 1, '4': 1, '5': 9, '10': 'formula'},
+  ],
+};
+
+/// Descriptor for `ValidateFormulaEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List validateFormulaEventDescriptor = $convert.base64Decode(
+    'ChRWYWxpZGF0ZUZvcm11bGFFdmVudBIYCgdmb3JtdWxhGAEgASgJUgdmb3JtdWxh');
+
+@$core.Deprecated('Use validateFormulaEventOutDescriptor instead')
+const ValidateFormulaEventOut$json = {
+  '1': 'ValidateFormulaEventOut',
+  '2': [
+    {'1': 'valid', '3': 1, '4': 1, '5': 8, '10': 'valid'},
+    {'1': 'error', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'error', '17': true},
+  ],
+  '8': [
+    {'1': '_error'},
+  ],
+};
+
+/// Descriptor for `ValidateFormulaEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List validateFormulaEventOutDescriptor = $convert.base64Decode(
+    'ChdWYWxpZGF0ZUZvcm11bGFFdmVudE91dBIUCgV2YWxpZBgBIAEoCFIFdmFsaWQSGQoFZXJyb3'
+    'IYAiABKAlIAFIFZXJyb3KIAQFCCAoGX2Vycm9y');
 
 @$core.Deprecated('Use addGameEventOutDescriptor instead')
 const AddGameEventOut$json = {

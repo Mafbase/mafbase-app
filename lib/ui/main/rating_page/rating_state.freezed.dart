@@ -22,6 +22,7 @@ mixin _$RatingState {
   int get mafiaWins => throw _privateConstructorUsedError;
   int get citizenWins => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get hasCustomColumns => throw _privateConstructorUsedError;
 
   /// Create a copy of RatingState
   /// with the given fields replaced by the non-null parameter values.
@@ -42,7 +43,8 @@ abstract class $RatingStateCopyWith<$Res> {
       int games,
       int mafiaWins,
       int citizenWins,
-      bool isLoading});
+      bool isLoading,
+      bool hasCustomColumns});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
     Object? mafiaWins = null,
     Object? citizenWins = null,
     Object? isLoading = null,
+    Object? hasCustomColumns = null,
   }) {
     return _then(_value.copyWith(
       clubName: null == clubName
@@ -92,6 +95,10 @@ class _$RatingStateCopyWithImpl<$Res, $Val extends RatingState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasCustomColumns: null == hasCustomColumns
+          ? _value.hasCustomColumns
+          : hasCustomColumns // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -110,7 +117,8 @@ abstract class _$$RatingStateImplCopyWith<$Res>
       int games,
       int mafiaWins,
       int citizenWins,
-      bool isLoading});
+      bool isLoading,
+      bool hasCustomColumns});
 }
 
 /// @nodoc
@@ -132,6 +140,7 @@ class __$$RatingStateImplCopyWithImpl<$Res>
     Object? mafiaWins = null,
     Object? citizenWins = null,
     Object? isLoading = null,
+    Object? hasCustomColumns = null,
   }) {
     return _then(_$RatingStateImpl(
       clubName: null == clubName
@@ -158,6 +167,10 @@ class __$$RatingStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasCustomColumns: null == hasCustomColumns
+          ? _value.hasCustomColumns
+          : hasCustomColumns // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -171,7 +184,8 @@ class _$RatingStateImpl implements _RatingState {
       this.games = 0,
       this.mafiaWins = 0,
       this.citizenWins = 0,
-      this.isLoading = true})
+      this.isLoading = true,
+      this.hasCustomColumns = false})
       : _rows = rows;
 
   @override
@@ -198,10 +212,13 @@ class _$RatingStateImpl implements _RatingState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool hasCustomColumns;
 
   @override
   String toString() {
-    return 'RatingState(clubName: $clubName, rows: $rows, games: $games, mafiaWins: $mafiaWins, citizenWins: $citizenWins, isLoading: $isLoading)';
+    return 'RatingState(clubName: $clubName, rows: $rows, games: $games, mafiaWins: $mafiaWins, citizenWins: $citizenWins, isLoading: $isLoading, hasCustomColumns: $hasCustomColumns)';
   }
 
   @override
@@ -218,7 +235,9 @@ class _$RatingStateImpl implements _RatingState {
             (identical(other.citizenWins, citizenWins) ||
                 other.citizenWins == citizenWins) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.hasCustomColumns, hasCustomColumns) ||
+                other.hasCustomColumns == hasCustomColumns));
   }
 
   @override
@@ -229,7 +248,8 @@ class _$RatingStateImpl implements _RatingState {
       games,
       mafiaWins,
       citizenWins,
-      isLoading);
+      isLoading,
+      hasCustomColumns);
 
   /// Create a copy of RatingState
   /// with the given fields replaced by the non-null parameter values.
@@ -247,7 +267,8 @@ abstract class _RatingState implements RatingState {
       final int games,
       final int mafiaWins,
       final int citizenWins,
-      final bool isLoading}) = _$RatingStateImpl;
+      final bool isLoading,
+      final bool hasCustomColumns}) = _$RatingStateImpl;
 
   @override
   String get clubName;
@@ -261,6 +282,8 @@ abstract class _RatingState implements RatingState {
   int get citizenWins;
   @override
   bool get isLoading;
+  @override
+  bool get hasCustomColumns;
 
   /// Create a copy of RatingState
   /// with the given fields replaced by the non-null parameter values.

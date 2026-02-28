@@ -12,5 +12,6 @@ class RatingState with _$RatingState {
     @Default(0) int mafiaWins,
     @Default(0) int citizenWins,
     @Default(true) bool isLoading,
+    @Default(false) bool hasCustomColumns,
   }) = _RatingState;
 }

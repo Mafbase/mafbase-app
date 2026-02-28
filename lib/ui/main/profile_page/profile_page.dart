@@ -44,7 +44,6 @@ class ProfilePage extends StatefulWidget {
 
           return ProfileBloc(
             logoutInteractor,
-            StorageFactory.of(context).credentialStorage,
             DeleteProfileInteractor(
               logoutInteractor,
               RepositoryFactory.of(context).profileRepository,

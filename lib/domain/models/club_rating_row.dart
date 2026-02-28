@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:seating_generator_web/domain/models/custom_column_value_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 part 'club_rating_row.freezed.dart';
@@ -30,6 +31,7 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
     required double sheriffScore,
     required double donScore,
     required double mafiaScore,
+    @Default([]) List<CustomColumnValueModel> customColumns,
   }) = _ClubRatingRowModel;
 
   factory ClubRatingRowModel.fromProto(ClubRatingRow proto) =>
@@ -58,6 +60,9 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
         sheriffScore: proto.sheriffScore,
         donScore: proto.donScore,
         mafiaScore: proto.mafiaScore,
+        customColumns: proto.customColumns
+            .map((e) => CustomColumnValueModel.fromProto(e))
+            .toList(),
       );
 }
 

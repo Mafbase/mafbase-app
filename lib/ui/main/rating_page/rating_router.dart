@@ -13,8 +13,9 @@ abstract class RatingRouter {
     int? tournamentId,
     RatingTableStyle style,
     RatingSort sort,
-    int gameFilter,
-  );
+    int gameFilter, {
+    int customSortColumnIndex,
+  });
 
   void openGame(int clubId, int gameId);
 
@@ -33,8 +34,9 @@ class RatingRouterImpl implements RatingRouter {
     int? tournamentId,
     RatingTableStyle style,
     RatingSort sort,
-    int gameFilter,
-  ) {
+    int gameFilter, {
+    int customSortColumnIndex = 0,
+  }) {
     final String location;
     if (clubId != null) {
       location = RatingPage.createClubLocation(
@@ -44,6 +46,7 @@ class RatingRouterImpl implements RatingRouter {
         tableStyle: style,
         sort: sort,
         gameFilter: gameFilter,
+        customSortColumnIndex: customSortColumnIndex,
       );
     } else if (tournamentId != null) {
       location = RatingPage.createTournamentLocation(
@@ -52,6 +55,7 @@ class RatingRouterImpl implements RatingRouter {
         sort: sort,
         tournamentId: tournamentId,
         gameFilter: gameFilter,
+        customSortColumnIndex: customSortColumnIndex,
       );
     } else {
       throw ArgumentError();

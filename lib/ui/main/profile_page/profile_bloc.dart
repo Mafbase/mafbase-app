@@ -11,7 +11,6 @@ import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final CredentialStorage _credentialStorage;
   final LogoutInteractor _logoutInteractor;
   final DeleteProfileInteractor _deleteProfileInteractor;
   final ProfileRepository _profileRepository;
@@ -20,7 +19,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   ProfileBloc(
     this._logoutInteractor,
-    this._credentialStorage,
     this._deleteProfileInteractor,
     this._profileRepository,
     this._createPlayerInteractor,
@@ -28,7 +26,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) : _context = context,
         super(const ProfileState()) {
     on<ProfileEventLogoutPressed>(_onLogoutPressed);
-    on<ProfileEventPageOpened>(_init);
     on<ProfileEventDeleteProfile>(_deleteProfile);
     on<ProfileEventLoadUserProfile>(_loadUserProfile);
     on<ProfileEventSetUserProfile>(_setUserProfile);
@@ -39,10 +36,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter emit,
   ) =>
       _deleteProfileInteractor.run().whenComplete(() => _context?.pop());
-
-  Future<void> _init(ProfileEventPageOpened event, Emitter emit) async {
-    add(const ProfileEvent.loadUserProfile());
-  }
 
   Future<void> _loadUserProfile(
     ProfileEventLoadUserProfile event,

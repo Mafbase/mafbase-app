@@ -8,7 +8,7 @@ enum RatingTableStyle {
   full,
   stats,
   score,
-  addScore;
+  custom;
 }
 
 enum RatingSort {
@@ -24,7 +24,8 @@ enum RatingSort {
   mafiaAddScorePerGame,
   donAddScorePerGame,
   sheriffAddScorePerGame,
-  dies;
+  dies,
+  customColumn;
 }
 
 class RatingTable extends StatefulWidget {
@@ -33,13 +34,14 @@ class RatingTable extends StatefulWidget {
   final int? tournamentId;
   final bool isMobile;
   final Function(int gameId) openGame;
-  final Function(RatingSort sort) changeSort;
+  final Function(RatingSort sort, {int? customSortColumnIndex}) changeSort;
   final RatingTableStyle style;
   final RatingSort sort;
   final List<ClubRatingRowModel> sortedRows;
   final int gameFilter;
   final bool isTournament;
   final bool pinNicknames;
+  final int customSortColumnIndex;
 
   RatingTable({
     super.key,
@@ -54,21 +56,27 @@ class RatingTable extends StatefulWidget {
     required this.changeSort,
     required this.isTournament,
     this.pinNicknames = false,
+    this.customSortColumnIndex = 0,
   })  : style = style ?? RatingTableStyle.full,
         sort = sort ?? RatingSort.score,
         gameFilter = gameFilter ?? 0,
-        sortedRows =
-            createSortedRows(rows, sort ?? RatingSort.score, isTournament)
-                .where(
-                  (element) => element.gamesCount >= (gameFilter ?? 0),
-                )
-                .toList();
+        sortedRows = createSortedRows(
+          rows,
+          sort ?? RatingSort.score,
+          isTournament,
+          customSortColumnIndex: customSortColumnIndex,
+        )
+            .where(
+              (element) => element.gamesCount >= (gameFilter ?? 0),
+            )
+            .toList();
 
   static List<ClubRatingRowModel> createSortedRows(
     List<ClubRatingRowModel> rows,
     RatingSort sort,
-    bool isTournament,
-  ) {
+    bool isTournament, {
+    int customSortColumnIndex = 0,
+  }) {
     switch (sort) {
       case RatingSort.score:
         return rows;
@@ -160,6 +168,15 @@ class RatingTable extends StatefulWidget {
             element.gamesCount,
           ),
         );
+      case RatingSort.customColumn:
+        return rows.sortedBy<num>(
+          (element) {
+            if (customSortColumnIndex < element.customColumns.length) {
+              return -(element.customColumns[customSortColumnIndex].value ?? 0);
+            }
+            return 0;
+          },
+        );
     }
   }
 
@@ -173,7 +190,15 @@ class _RatingTableState extends State<RatingTable> {
   late List<ScrollController> controllers;
   late List<ScrollController> mainControllers;
 
-  int get mainControllersSize => widget.style == RatingTableStyle.full ? 10 : 8;
+  int get mainControllersSize {
+    if (widget.style == RatingTableStyle.full) return 10;
+    if (widget.style == RatingTableStyle.custom) {
+      final customCount =
+          widget.rows.firstOrNull?.customColumns.length ?? 0;
+      return 2 + customCount;
+    }
+    return 8;
+  }
 
   @override
   void initState() {
@@ -727,8 +752,8 @@ class _RatingTableState extends State<RatingTable> {
         return statsColumn;
       case RatingTableStyle.score:
         return scoreColumns;
-      case RatingTableStyle.addScore:
-        throw Exception();
+      case RatingTableStyle.custom:
+        return customColumns;
     }
   }
 
@@ -814,6 +839,51 @@ class _RatingTableState extends State<RatingTable> {
           ),
         ),
       ];
+
+  List<Widget> get customColumns {
+    final customColumnDefs =
+        widget.rows.firstOrNull?.customColumns ?? [];
+    return [
+      column(
+        mainControllers[0],
+        key: const Key("customColumn0"),
+        builder: indexWidgets,
+        header: Text(context.locale.ratingNumber),
+        prototype: indexProtoype,
+      ),
+      column(
+        mainControllers[1],
+        key: const Key("customColumn1"),
+        builder: nicknames,
+        header: Text(context.locale.ratingPlayer),
+        prototype: nicknamePrototype,
+      ),
+      for (int i = 0; i < customColumnDefs.length; i++)
+        column(
+          mainControllers[2 + i],
+          key: Key("customColumn${2 + i}"),
+          builder: (index) => wrap(
+            Text(
+              widget.sortedRows[index].customColumns.length > i
+                  ? widget.sortedRows[index].customColumns[i].value
+                          ?.toString() ??
+                      "—"
+                  : "—",
+            ),
+          ),
+          header: InkWell(
+            onTap: () {
+              widget.changeSort(
+                RatingSort.customColumn,
+                customSortColumnIndex: i,
+              );
+            },
+            child: Text(customColumnDefs[i].title),
+          ),
+          isLastColumn: i == customColumnDefs.length - 1,
+        ),
+    ];
+  }
 
   List<Widget> get statsColumn => [
         column(

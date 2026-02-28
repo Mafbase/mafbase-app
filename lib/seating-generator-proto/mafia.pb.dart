@@ -1000,6 +1000,7 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     $core.double? sheriffMinusScore,
     $core.double? bestMoveCitizen,
     $core.double? bestMoveSheriff,
+    $core.Iterable<CustomColumnValue>? customColumns,
   }) {
     final $result = create();
     if (nickname != null) {
@@ -1101,6 +1102,9 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     if (bestMoveSheriff != null) {
       $result.bestMoveSheriff = bestMoveSheriff;
     }
+    if (customColumns != null) {
+      $result.customColumns.addAll(customColumns);
+    }
     return $result;
   }
   ClubRatingRow._() : super();
@@ -1141,6 +1145,7 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     ..a<$core.double>(31, _omitFieldNames ? '' : 'sheriffMinusScore', $pb.PbFieldType.OD, protoName: 'sheriffMinusScore')
     ..a<$core.double>(32, _omitFieldNames ? '' : 'bestMoveCitizen', $pb.PbFieldType.OD, protoName: 'bestMoveCitizen')
     ..a<$core.double>(33, _omitFieldNames ? '' : 'bestMoveSheriff', $pb.PbFieldType.OD, protoName: 'bestMoveSheriff')
+    ..pc<CustomColumnValue>(34, _omitFieldNames ? '' : 'customColumns', $pb.PbFieldType.PM, protoName: 'customColumns', subBuilder: CustomColumnValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -1455,6 +1460,437 @@ class ClubRatingRow extends $pb.GeneratedMessage {
   $core.bool hasBestMoveSheriff() => $_has(32);
   @$pb.TagNumber(33)
   void clearBestMoveSheriff() => $_clearField(33);
+
+  @$pb.TagNumber(34)
+  $pb.PbList<CustomColumnValue> get customColumns => $_getList(33);
+}
+
+class CustomColumnValue extends $pb.GeneratedMessage {
+  factory CustomColumnValue({
+    $core.String? title,
+    $core.double? value,
+  }) {
+    final $result = create();
+    if (title != null) {
+      $result.title = title;
+    }
+    if (value != null) {
+      $result.value = value;
+    }
+    return $result;
+  }
+  CustomColumnValue._() : super();
+  factory CustomColumnValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CustomColumnValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CustomColumnValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'title')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CustomColumnValue clone() => CustomColumnValue()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CustomColumnValue copyWith(void Function(CustomColumnValue) updates) => super.copyWith((message) => updates(message as CustomColumnValue)) as CustomColumnValue;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CustomColumnValue create() => CustomColumnValue._();
+  CustomColumnValue createEmptyInstance() => create();
+  static $pb.PbList<CustomColumnValue> createRepeated() => $pb.PbList<CustomColumnValue>();
+  @$core.pragma('dart2js:noInline')
+  static CustomColumnValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomColumnValue>(create);
+  static CustomColumnValue? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get title => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set title($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTitle() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTitle() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get value => $_getN(1);
+  @$pb.TagNumber(2)
+  set value($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasValue() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearValue() => $_clearField(2);
+}
+
+class CustomColumnDefinition extends $pb.GeneratedMessage {
+  factory CustomColumnDefinition({
+    $core.int? id,
+    $core.String? title,
+    $core.String? formula,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (title != null) {
+      $result.title = title;
+    }
+    if (formula != null) {
+      $result.formula = formula;
+    }
+    return $result;
+  }
+  CustomColumnDefinition._() : super();
+  factory CustomColumnDefinition.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CustomColumnDefinition.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CustomColumnDefinition', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'title')
+    ..aOS(3, _omitFieldNames ? '' : 'formula')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CustomColumnDefinition clone() => CustomColumnDefinition()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CustomColumnDefinition copyWith(void Function(CustomColumnDefinition) updates) => super.copyWith((message) => updates(message as CustomColumnDefinition)) as CustomColumnDefinition;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CustomColumnDefinition create() => CustomColumnDefinition._();
+  CustomColumnDefinition createEmptyInstance() => create();
+  static $pb.PbList<CustomColumnDefinition> createRepeated() => $pb.PbList<CustomColumnDefinition>();
+  @$core.pragma('dart2js:noInline')
+  static CustomColumnDefinition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomColumnDefinition>(create);
+  static CustomColumnDefinition? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get title => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set title($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTitle() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTitle() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get formula => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set formula($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasFormula() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFormula() => $_clearField(3);
+}
+
+class CustomColumnsEventOut extends $pb.GeneratedMessage {
+  factory CustomColumnsEventOut({
+    $core.Iterable<CustomColumnDefinition>? columns,
+  }) {
+    final $result = create();
+    if (columns != null) {
+      $result.columns.addAll(columns);
+    }
+    return $result;
+  }
+  CustomColumnsEventOut._() : super();
+  factory CustomColumnsEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CustomColumnsEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CustomColumnsEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<CustomColumnDefinition>(1, _omitFieldNames ? '' : 'columns', $pb.PbFieldType.PM, subBuilder: CustomColumnDefinition.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CustomColumnsEventOut clone() => CustomColumnsEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CustomColumnsEventOut copyWith(void Function(CustomColumnsEventOut) updates) => super.copyWith((message) => updates(message as CustomColumnsEventOut)) as CustomColumnsEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CustomColumnsEventOut create() => CustomColumnsEventOut._();
+  CustomColumnsEventOut createEmptyInstance() => create();
+  static $pb.PbList<CustomColumnsEventOut> createRepeated() => $pb.PbList<CustomColumnsEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static CustomColumnsEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomColumnsEventOut>(create);
+  static CustomColumnsEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<CustomColumnDefinition> get columns => $_getList(0);
+}
+
+class CreateCustomColumnEvent extends $pb.GeneratedMessage {
+  factory CreateCustomColumnEvent({
+    $core.String? title,
+    $core.String? formula,
+  }) {
+    final $result = create();
+    if (title != null) {
+      $result.title = title;
+    }
+    if (formula != null) {
+      $result.formula = formula;
+    }
+    return $result;
+  }
+  CreateCustomColumnEvent._() : super();
+  factory CreateCustomColumnEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateCustomColumnEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateCustomColumnEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'title')
+    ..aOS(2, _omitFieldNames ? '' : 'formula')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CreateCustomColumnEvent clone() => CreateCustomColumnEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreateCustomColumnEvent copyWith(void Function(CreateCustomColumnEvent) updates) => super.copyWith((message) => updates(message as CreateCustomColumnEvent)) as CreateCustomColumnEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateCustomColumnEvent create() => CreateCustomColumnEvent._();
+  CreateCustomColumnEvent createEmptyInstance() => create();
+  static $pb.PbList<CreateCustomColumnEvent> createRepeated() => $pb.PbList<CreateCustomColumnEvent>();
+  @$core.pragma('dart2js:noInline')
+  static CreateCustomColumnEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateCustomColumnEvent>(create);
+  static CreateCustomColumnEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get title => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set title($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTitle() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTitle() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get formula => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set formula($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFormula() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFormula() => $_clearField(2);
+}
+
+class UpdateCustomColumnEvent extends $pb.GeneratedMessage {
+  factory UpdateCustomColumnEvent({
+    $core.String? title,
+    $core.String? formula,
+  }) {
+    final $result = create();
+    if (title != null) {
+      $result.title = title;
+    }
+    if (formula != null) {
+      $result.formula = formula;
+    }
+    return $result;
+  }
+  UpdateCustomColumnEvent._() : super();
+  factory UpdateCustomColumnEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateCustomColumnEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateCustomColumnEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'title')
+    ..aOS(2, _omitFieldNames ? '' : 'formula')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateCustomColumnEvent clone() => UpdateCustomColumnEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateCustomColumnEvent copyWith(void Function(UpdateCustomColumnEvent) updates) => super.copyWith((message) => updates(message as UpdateCustomColumnEvent)) as UpdateCustomColumnEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateCustomColumnEvent create() => UpdateCustomColumnEvent._();
+  UpdateCustomColumnEvent createEmptyInstance() => create();
+  static $pb.PbList<UpdateCustomColumnEvent> createRepeated() => $pb.PbList<UpdateCustomColumnEvent>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateCustomColumnEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateCustomColumnEvent>(create);
+  static UpdateCustomColumnEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get title => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set title($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTitle() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTitle() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get formula => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set formula($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFormula() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFormula() => $_clearField(2);
+}
+
+class ValidateFormulaEvent extends $pb.GeneratedMessage {
+  factory ValidateFormulaEvent({
+    $core.String? formula,
+  }) {
+    final $result = create();
+    if (formula != null) {
+      $result.formula = formula;
+    }
+    return $result;
+  }
+  ValidateFormulaEvent._() : super();
+  factory ValidateFormulaEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ValidateFormulaEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidateFormulaEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'formula')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ValidateFormulaEvent clone() => ValidateFormulaEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ValidateFormulaEvent copyWith(void Function(ValidateFormulaEvent) updates) => super.copyWith((message) => updates(message as ValidateFormulaEvent)) as ValidateFormulaEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ValidateFormulaEvent create() => ValidateFormulaEvent._();
+  ValidateFormulaEvent createEmptyInstance() => create();
+  static $pb.PbList<ValidateFormulaEvent> createRepeated() => $pb.PbList<ValidateFormulaEvent>();
+  @$core.pragma('dart2js:noInline')
+  static ValidateFormulaEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ValidateFormulaEvent>(create);
+  static ValidateFormulaEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get formula => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set formula($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFormula() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFormula() => $_clearField(1);
+}
+
+class ValidateFormulaEventOut extends $pb.GeneratedMessage {
+  factory ValidateFormulaEventOut({
+    $core.bool? valid,
+    $core.String? error,
+  }) {
+    final $result = create();
+    if (valid != null) {
+      $result.valid = valid;
+    }
+    if (error != null) {
+      $result.error = error;
+    }
+    return $result;
+  }
+  ValidateFormulaEventOut._() : super();
+  factory ValidateFormulaEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ValidateFormulaEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidateFormulaEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'valid')
+    ..aOS(2, _omitFieldNames ? '' : 'error')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ValidateFormulaEventOut clone() => ValidateFormulaEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ValidateFormulaEventOut copyWith(void Function(ValidateFormulaEventOut) updates) => super.copyWith((message) => updates(message as ValidateFormulaEventOut)) as ValidateFormulaEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ValidateFormulaEventOut create() => ValidateFormulaEventOut._();
+  ValidateFormulaEventOut createEmptyInstance() => create();
+  static $pb.PbList<ValidateFormulaEventOut> createRepeated() => $pb.PbList<ValidateFormulaEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static ValidateFormulaEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ValidateFormulaEventOut>(create);
+  static ValidateFormulaEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get valid => $_getBF(0);
+  @$pb.TagNumber(1)
+  set valid($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasValid() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearValid() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get error => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set error($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasError() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearError() => $_clearField(2);
 }
 
 class AddGameEventOut extends $pb.GeneratedMessage {

@@ -24,6 +24,7 @@ class RatingPage extends StatefulWidget {
   final RatingTableStyle style;
   final RatingSort sort;
   final int gameFilter;
+  final int customSortColumnIndex;
 
   const RatingPage({
     super.key,
@@ -33,6 +34,7 @@ class RatingPage extends StatefulWidget {
     this.style = RatingTableStyle.full,
     this.sort = RatingSort.score,
     this.gameFilter = 0,
+    this.customSortColumnIndex = 0,
   }) : assert((clubId == null) != (tournamentId == null));
 
   @override
@@ -44,6 +46,7 @@ class RatingPage extends StatefulWidget {
     RatingTableStyle tableStyle = RatingTableStyle.full,
     RatingSort sort = RatingSort.score,
     int gameFilter = 0,
+    int customSortColumnIndex = 0,
   }) {
     return context.namedLocation(
       _tournamentName,
@@ -54,6 +57,8 @@ class RatingPage extends StatefulWidget {
         "style": tableStyle.name,
         "sort": sort.name,
         "game-filter": gameFilter.toString(),
+        if (customSortColumnIndex > 0)
+          "custom-sort-column": customSortColumnIndex.toString(),
       },
     );
   }
@@ -65,6 +70,7 @@ class RatingPage extends StatefulWidget {
     RatingTableStyle tableStyle = RatingTableStyle.full,
     RatingSort sort = RatingSort.score,
     int gameFilter = 0,
+    int customSortColumnIndex = 0,
   }) {
     return context.namedLocation(
       _clubName,
@@ -77,6 +83,8 @@ class RatingPage extends StatefulWidget {
         "style": tableStyle.name,
         "sort": sort.name,
         "game-filter": gameFilter.toString(),
+        if (customSortColumnIndex > 0)
+          "custom-sort-column": customSortColumnIndex.toString(),
       },
     );
   }
@@ -99,6 +107,10 @@ class RatingPage extends StatefulWidget {
           RatingSort.score;
       final gameFilter =
           int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final customSortColumnIndex = int.tryParse(
+            state.uri.queryParameters["custom-sort-column"] ?? "",
+          ) ??
+          0;
       return BlocProvider<RatingBloc>(
         create: (context) {
           return getIt(param1: context);
@@ -108,6 +120,7 @@ class RatingPage extends StatefulWidget {
           style: style,
           sort: sort,
           gameFilter: gameFilter,
+          customSortColumnIndex: customSortColumnIndex,
         ),
       );
     },
@@ -135,6 +148,10 @@ class RatingPage extends StatefulWidget {
           RatingSort.score;
       final gameFilter =
           int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final customSortColumnIndex = int.tryParse(
+            state.uri.queryParameters["custom-sort-column"] ?? "",
+          ) ??
+          0;
       return BlocProvider<RatingBloc>(
         create: (context) {
           return getIt(param1: context);
@@ -145,6 +162,7 @@ class RatingPage extends StatefulWidget {
           style: style,
           sort: sort,
           gameFilter: gameFilter,
+          customSortColumnIndex: customSortColumnIndex,
         ),
       );
     },
@@ -153,13 +171,15 @@ class RatingPage extends StatefulWidget {
 
 class _RatingPageState extends CustomState<RatingPage> {
   final format = DateFormat("dd:MM:yyyy");
-  List<RatingTableStyle> items = [
-    RatingTableStyle.score,
-    RatingTableStyle.full,
-    RatingTableStyle.stats,
-  ];
   int carouselIndex = 1;
   final _carouselController = carousel.CarouselSliderController();
+
+  List<RatingTableStyle> _buildItems(bool hasCustomColumns) => [
+        RatingTableStyle.score,
+        RatingTableStyle.full,
+        RatingTableStyle.stats,
+        if (hasCustomColumns) RatingTableStyle.custom,
+      ];
 
   @override
   void initState() {
@@ -181,8 +201,8 @@ class _RatingPageState extends CustomState<RatingPage> {
         return "Винрейт";
       case RatingTableStyle.score:
         return "Баллы";
-      case RatingTableStyle.addScore:
-        return "MVP";
+      case RatingTableStyle.custom:
+        return context.locale.customColumns;
     }
   }
 
@@ -220,7 +240,11 @@ class _RatingPageState extends CustomState<RatingPage> {
               gameFilter: widget.gameFilter,
               openGame: openGame,
               pinNicknames: singlePage,
-              changeSort: (RatingSort sort) {
+              customSortColumnIndex: widget.customSortColumnIndex,
+              changeSort: (
+                RatingSort sort, {
+                int? customSortColumnIndex,
+              }) {
                 context.read<RatingBloc>().add(
                       RatingEvent.rangeChanged(
                         range: widget.range,
@@ -229,6 +253,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                         style: widget.style,
                         sort: sort,
                         gameFilter: widget.gameFilter,
+                        customSortColumnIndex: customSortColumnIndex ?? 0,
                       ),
                     );
               },
@@ -309,7 +334,9 @@ class _RatingPageState extends CustomState<RatingPage> {
                 children: [
                   gameFilterWidget(),
                   const SizedBox(width: 8),
-                  styleSwitcher(),
+                  styleSwitcher(
+                    hasCustomColumns: state.hasCustomColumns,
+                  ),
                   const SizedBox(width: 8),
                   downloadRatingButton(),
                 ],
@@ -406,7 +433,9 @@ class _RatingPageState extends CustomState<RatingPage> {
                             padding: const EdgeInsets.only(left: 8.0, right: 8),
                             child: gameFilterWidget(),
                           ),
-                          styleSwitcher(),
+                          styleSwitcher(
+                            hasCustomColumns: state.hasCustomColumns,
+                          ),
                           downloadRatingButton(),
                         ],
                       ),
@@ -424,7 +453,11 @@ class _RatingPageState extends CustomState<RatingPage> {
                             sort: widget.sort,
                             gameFilter: widget.gameFilter,
                             openGame: openGame,
-                            changeSort: (RatingSort sort) {
+                            customSortColumnIndex: widget.customSortColumnIndex,
+                            changeSort: (
+                              RatingSort sort, {
+                              int? customSortColumnIndex,
+                            }) {
                               context.read<RatingBloc>().add(
                                     RatingEvent.rangeChanged(
                                       range: widget.range,
@@ -433,6 +466,8 @@ class _RatingPageState extends CustomState<RatingPage> {
                                       tournamentId: widget.tournamentId,
                                       sort: sort,
                                       gameFilter: widget.gameFilter,
+                                      customSortColumnIndex:
+                                          customSortColumnIndex ?? 0,
                                     ),
                                   );
                             },
@@ -604,7 +639,8 @@ class _RatingPageState extends CustomState<RatingPage> {
     }
   }
 
-  Widget styleSwitcher() {
+  Widget styleSwitcher({bool hasCustomColumns = false}) {
+    final items = _buildItems(hasCustomColumns);
     return Container(
       width: 162,
       height: 56,
@@ -644,7 +680,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                   .toList(),
               options: carousel.CarouselOptions(
                 enableInfiniteScroll: false,
-                initialPage: items.indexOf(widget.style),
+                initialPage: items.indexOf(widget.style).clamp(0, items.length - 1),
                 viewportFraction: 1,
                 height: 56,
                 onPageChanged: (index, controller) {

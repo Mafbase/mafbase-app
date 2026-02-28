@@ -67,6 +67,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
       event.style,
       event.sort,
       event.gameFilter,
+      customSortColumnIndex: event.customSortColumnIndex,
     );
   }
 
@@ -86,6 +87,9 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
       throw ArgumentError();
     }
     rating;
+    final hasCustomColumns = rating.rows.any(
+      (row) => row.customColumns.isNotEmpty,
+    );
     emit(
       state.copyWith(
         isLoading: false,
@@ -94,6 +98,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
         games: rating.games,
         mafiaWins: rating.mafiaWins,
         citizenWins: rating.citizenWins,
+        hasCustomColumns: hasCustomColumns,
       ),
     );
   }

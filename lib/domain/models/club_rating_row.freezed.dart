@@ -40,6 +40,8 @@ mixin _$ClubRatingRowModel {
   double get sheriffScore => throw _privateConstructorUsedError;
   double get donScore => throw _privateConstructorUsedError;
   double get mafiaScore => throw _privateConstructorUsedError;
+  List<CustomColumnValueModel> get customColumns =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of ClubRatingRowModel
   /// with the given fields replaced by the non-null parameter values.
@@ -78,7 +80,8 @@ abstract class $ClubRatingRowModelCopyWith<$Res> {
       double citizenScore,
       double sheriffScore,
       double donScore,
-      double mafiaScore});
+      double mafiaScore,
+      List<CustomColumnValueModel> customColumns});
 }
 
 /// @nodoc
@@ -120,6 +123,7 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
     Object? sheriffScore = null,
     Object? donScore = null,
     Object? mafiaScore = null,
+    Object? customColumns = null,
   }) {
     return _then(_value.copyWith(
       nickname: null == nickname
@@ -218,6 +222,10 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
           ? _value.mafiaScore
           : mafiaScore // ignore: cast_nullable_to_non_nullable
               as double,
+      customColumns: null == customColumns
+          ? _value.customColumns
+          : customColumns // ignore: cast_nullable_to_non_nullable
+              as List<CustomColumnValueModel>,
     ) as $Val);
   }
 }
@@ -254,7 +262,8 @@ abstract class _$$ClubRatingRowModelImplCopyWith<$Res>
       double citizenScore,
       double sheriffScore,
       double donScore,
-      double mafiaScore});
+      double mafiaScore,
+      List<CustomColumnValueModel> customColumns});
 }
 
 /// @nodoc
@@ -294,6 +303,7 @@ class __$$ClubRatingRowModelImplCopyWithImpl<$Res>
     Object? sheriffScore = null,
     Object? donScore = null,
     Object? mafiaScore = null,
+    Object? customColumns = null,
   }) {
     return _then(_$ClubRatingRowModelImpl(
       nickname: null == nickname
@@ -392,6 +402,10 @@ class __$$ClubRatingRowModelImplCopyWithImpl<$Res>
           ? _value.mafiaScore
           : mafiaScore // ignore: cast_nullable_to_non_nullable
               as double,
+      customColumns: null == customColumns
+          ? _value._customColumns
+          : customColumns // ignore: cast_nullable_to_non_nullable
+              as List<CustomColumnValueModel>,
     ));
   }
 }
@@ -423,8 +437,10 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
       required this.citizenScore,
       required this.sheriffScore,
       required this.donScore,
-      required this.mafiaScore})
-      : _games = games;
+      required this.mafiaScore,
+      final List<CustomColumnValueModel> customColumns = const []})
+      : _games = games,
+        _customColumns = customColumns;
 
   @override
   final String nickname;
@@ -480,10 +496,18 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
   final double donScore;
   @override
   final double mafiaScore;
+  final List<CustomColumnValueModel> _customColumns;
+  @override
+  @JsonKey()
+  List<CustomColumnValueModel> get customColumns {
+    if (_customColumns is EqualUnmodifiableListView) return _customColumns;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_customColumns);
+  }
 
   @override
   String toString() {
-    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, gamesCount: $gamesCount, citizenGamesCount: $citizenGamesCount, donsGamesCount: $donsGamesCount, sheriffGamesCount: $sheriffGamesCount, mafiaGamesCount: $mafiaGamesCount, citizenWinsCount: $citizenWinsCount, donsWinsCount: $donsWinsCount, sheriffWinsCount: $sheriffWinsCount, mafiaWinsCount: $mafiaWinsCount, died: $died, games: $games, ci: $ci, citizenAddScore: $citizenAddScore, sheriffAddScore: $sheriffAddScore, donAddScore: $donAddScore, mafiaAddScore: $mafiaAddScore, citizenScore: $citizenScore, sheriffScore: $sheriffScore, donScore: $donScore, mafiaScore: $mafiaScore)';
+    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, gamesCount: $gamesCount, citizenGamesCount: $citizenGamesCount, donsGamesCount: $donsGamesCount, sheriffGamesCount: $sheriffGamesCount, mafiaGamesCount: $mafiaGamesCount, citizenWinsCount: $citizenWinsCount, donsWinsCount: $donsWinsCount, sheriffWinsCount: $sheriffWinsCount, mafiaWinsCount: $mafiaWinsCount, died: $died, games: $games, ci: $ci, citizenAddScore: $citizenAddScore, sheriffAddScore: $sheriffAddScore, donAddScore: $donAddScore, mafiaAddScore: $mafiaAddScore, citizenScore: $citizenScore, sheriffScore: $sheriffScore, donScore: $donScore, mafiaScore: $mafiaScore, customColumns: $customColumns)';
   }
 
   @override
@@ -533,7 +557,9 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
             (identical(other.donScore, donScore) ||
                 other.donScore == donScore) &&
             (identical(other.mafiaScore, mafiaScore) ||
-                other.mafiaScore == mafiaScore));
+                other.mafiaScore == mafiaScore) &&
+            const DeepCollectionEquality()
+                .equals(other._customColumns, _customColumns));
   }
 
   @override
@@ -562,7 +588,8 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
         citizenScore,
         sheriffScore,
         donScore,
-        mafiaScore
+        mafiaScore,
+        const DeepCollectionEquality().hash(_customColumns)
       ]);
 
   /// Create a copy of ClubRatingRowModel
@@ -577,30 +604,32 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
 
 abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   const factory _ClubRatingRowModel(
-      {required final String nickname,
-      required final double score,
-      required final double addScore,
-      required final int wins,
-      required final int gamesCount,
-      required final int citizenGamesCount,
-      required final int donsGamesCount,
-      required final int sheriffGamesCount,
-      required final int mafiaGamesCount,
-      required final int citizenWinsCount,
-      required final int donsWinsCount,
-      required final int sheriffWinsCount,
-      required final int mafiaWinsCount,
-      required final int died,
-      required final List<GameRowItemModel> games,
-      required final int ci,
-      required final double citizenAddScore,
-      required final double sheriffAddScore,
-      required final double donAddScore,
-      required final double mafiaAddScore,
-      required final double citizenScore,
-      required final double sheriffScore,
-      required final double donScore,
-      required final double mafiaScore}) = _$ClubRatingRowModelImpl;
+          {required final String nickname,
+          required final double score,
+          required final double addScore,
+          required final int wins,
+          required final int gamesCount,
+          required final int citizenGamesCount,
+          required final int donsGamesCount,
+          required final int sheriffGamesCount,
+          required final int mafiaGamesCount,
+          required final int citizenWinsCount,
+          required final int donsWinsCount,
+          required final int sheriffWinsCount,
+          required final int mafiaWinsCount,
+          required final int died,
+          required final List<GameRowItemModel> games,
+          required final int ci,
+          required final double citizenAddScore,
+          required final double sheriffAddScore,
+          required final double donAddScore,
+          required final double mafiaAddScore,
+          required final double citizenScore,
+          required final double sheriffScore,
+          required final double donScore,
+          required final double mafiaScore,
+          final List<CustomColumnValueModel> customColumns}) =
+      _$ClubRatingRowModelImpl;
 
   @override
   String get nickname;
@@ -650,6 +679,8 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   double get donScore;
   @override
   double get mafiaScore;
+  @override
+  List<CustomColumnValueModel> get customColumns;
 
   /// Create a copy of ClubRatingRowModel
   /// with the given fields replaced by the non-null parameter values.

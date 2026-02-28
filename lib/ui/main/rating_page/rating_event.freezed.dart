@@ -34,7 +34,8 @@ mixin _$RatingEvent {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)
+            int gameFilter,
+            int customSortColumnIndex)
         rangeChanged,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +55,8 @@ mixin _$RatingEvent {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +75,8 @@ mixin _$RatingEvent {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
     required TResult orElse(),
   }) =>
@@ -220,7 +223,8 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)
+            int gameFilter,
+            int customSortColumnIndex)
         rangeChanged,
   }) {
     return playerSelected(playerId);
@@ -243,7 +247,8 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
   }) {
     return playerSelected?.call(playerId);
@@ -265,7 +270,8 @@ class _$RatingEventPlayerSelectedImpl implements RatingEventPlayerSelected {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
     required TResult orElse(),
   }) {
@@ -425,7 +431,8 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)
+            int gameFilter,
+            int customSortColumnIndex)
         rangeChanged,
   }) {
     return downloadRating(range, clubId);
@@ -448,7 +455,8 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
   }) {
     return downloadRating?.call(range, clubId);
@@ -470,7 +478,8 @@ class _$RatingEventDownloadImpl implements RatingEventDownload {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
     required TResult orElse(),
   }) {
@@ -635,7 +644,8 @@ class _$RatingEventDownloadStatsImpl implements RatingEventDownloadStats {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)
+            int gameFilter,
+            int customSortColumnIndex)
         rangeChanged,
   }) {
     return downloadStats(range, clubId);
@@ -658,7 +668,8 @@ class _$RatingEventDownloadStatsImpl implements RatingEventDownloadStats {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
   }) {
     return downloadStats?.call(range, clubId);
@@ -680,7 +691,8 @@ class _$RatingEventDownloadStatsImpl implements RatingEventDownloadStats {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
     required TResult orElse(),
   }) {
@@ -854,7 +866,8 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)
+            int gameFilter,
+            int customSortColumnIndex)
         rangeChanged,
   }) {
     return gameSelected(gameId, clubId, tournamentId);
@@ -877,7 +890,8 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
   }) {
     return gameSelected?.call(gameId, clubId, tournamentId);
@@ -899,7 +913,8 @@ class _$RatingEventGameSelectedImpl implements RatingEventGameSelected {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
     required TResult orElse(),
   }) {
@@ -1074,7 +1089,8 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)
+            int gameFilter,
+            int customSortColumnIndex)
         rangeChanged,
   }) {
     return pageOpened(range, clubId, tournamentId);
@@ -1097,7 +1113,8 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
   }) {
     return pageOpened?.call(range, clubId, tournamentId);
@@ -1119,7 +1136,8 @@ class _$RatingEventPageOpenedImpl implements RatingEventPageOpened {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
     required TResult orElse(),
   }) {
@@ -1203,7 +1221,8 @@ abstract class _$$RatingEventRangeChangedImplCopyWith<$Res> {
       int? tournamentId,
       RatingTableStyle style,
       RatingSort sort,
-      int gameFilter});
+      int gameFilter,
+      int customSortColumnIndex});
 }
 
 /// @nodoc
@@ -1226,6 +1245,7 @@ class __$$RatingEventRangeChangedImplCopyWithImpl<$Res>
     Object? style = null,
     Object? sort = null,
     Object? gameFilter = null,
+    Object? customSortColumnIndex = null,
   }) {
     return _then(_$RatingEventRangeChangedImpl(
       range: freezed == range
@@ -1252,6 +1272,10 @@ class __$$RatingEventRangeChangedImplCopyWithImpl<$Res>
           ? _value.gameFilter
           : gameFilter // ignore: cast_nullable_to_non_nullable
               as int,
+      customSortColumnIndex: null == customSortColumnIndex
+          ? _value.customSortColumnIndex
+          : customSortColumnIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1265,7 +1289,8 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
       required this.tournamentId,
       required this.style,
       required this.sort,
-      required this.gameFilter});
+      required this.gameFilter,
+      this.customSortColumnIndex = 0});
 
   @override
   final DateTimeRange<DateTime>? range;
@@ -1279,10 +1304,13 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
   final RatingSort sort;
   @override
   final int gameFilter;
+  @override
+  @JsonKey()
+  final int customSortColumnIndex;
 
   @override
   String toString() {
-    return 'RatingEvent.rangeChanged(range: $range, clubId: $clubId, tournamentId: $tournamentId, style: $style, sort: $sort, gameFilter: $gameFilter)';
+    return 'RatingEvent.rangeChanged(range: $range, clubId: $clubId, tournamentId: $tournamentId, style: $style, sort: $sort, gameFilter: $gameFilter, customSortColumnIndex: $customSortColumnIndex)';
   }
 
   @override
@@ -1297,12 +1325,14 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
             (identical(other.style, style) || other.style == style) &&
             (identical(other.sort, sort) || other.sort == sort) &&
             (identical(other.gameFilter, gameFilter) ||
-                other.gameFilter == gameFilter));
+                other.gameFilter == gameFilter) &&
+            (identical(other.customSortColumnIndex, customSortColumnIndex) ||
+                other.customSortColumnIndex == customSortColumnIndex));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, range, clubId, tournamentId, style, sort, gameFilter);
+  int get hashCode => Object.hash(runtimeType, range, clubId, tournamentId,
+      style, sort, gameFilter, customSortColumnIndex);
 
   /// Create a copy of RatingEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1332,10 +1362,12 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)
+            int gameFilter,
+            int customSortColumnIndex)
         rangeChanged,
   }) {
-    return rangeChanged(range, clubId, tournamentId, style, sort, gameFilter);
+    return rangeChanged(range, clubId, tournamentId, style, sort, gameFilter,
+        customSortColumnIndex);
   }
 
   @override
@@ -1355,11 +1387,12 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
   }) {
-    return rangeChanged?.call(
-        range, clubId, tournamentId, style, sort, gameFilter);
+    return rangeChanged?.call(range, clubId, tournamentId, style, sort,
+        gameFilter, customSortColumnIndex);
   }
 
   @override
@@ -1378,12 +1411,14 @@ class _$RatingEventRangeChangedImpl implements RatingEventRangeChanged {
             int? tournamentId,
             RatingTableStyle style,
             RatingSort sort,
-            int gameFilter)?
+            int gameFilter,
+            int customSortColumnIndex)?
         rangeChanged,
     required TResult orElse(),
   }) {
     if (rangeChanged != null) {
-      return rangeChanged(range, clubId, tournamentId, style, sort, gameFilter);
+      return rangeChanged(range, clubId, tournamentId, style, sort, gameFilter,
+          customSortColumnIndex);
     }
     return orElse();
   }
@@ -1439,7 +1474,8 @@ abstract class RatingEventRangeChanged implements RatingEvent {
       required final int? tournamentId,
       required final RatingTableStyle style,
       required final RatingSort sort,
-      required final int gameFilter}) = _$RatingEventRangeChangedImpl;
+      required final int gameFilter,
+      final int customSortColumnIndex}) = _$RatingEventRangeChangedImpl;
 
   DateTimeRange<DateTime>? get range;
   int? get clubId;
@@ -1447,6 +1483,7 @@ abstract class RatingEventRangeChanged implements RatingEvent {
   RatingTableStyle get style;
   RatingSort get sort;
   int get gameFilter;
+  int get customSortColumnIndex;
 
   /// Create a copy of RatingEvent
   /// with the given fields replaced by the non-null parameter values.

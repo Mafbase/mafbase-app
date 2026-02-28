@@ -1339,6 +1339,336 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Уведомления успешно включены'**
   String get fantasyNotificationsEnabled;
+
+  /// No description provided for @customColumns.
+  ///
+  /// In ru, this message translates to:
+  /// **'Формулы'**
+  String get customColumns;
+
+  /// No description provided for @customColumnsEditor.
+  ///
+  /// In ru, this message translates to:
+  /// **'Редактор столбцов'**
+  String get customColumnsEditor;
+
+  /// No description provided for @customColumnsAdd.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавить столбец'**
+  String get customColumnsAdd;
+
+  /// No description provided for @customColumnsTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Название'**
+  String get customColumnsTitle;
+
+  /// No description provided for @customColumnsFormula.
+  ///
+  /// In ru, this message translates to:
+  /// **'Формула'**
+  String get customColumnsFormula;
+
+  /// No description provided for @customColumnsFormulaHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите формулу (напр. score / totalGames)'**
+  String get customColumnsFormulaHint;
+
+  /// No description provided for @customColumnsValidate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Проверить'**
+  String get customColumnsValidate;
+
+  /// No description provided for @customColumnsFormulaValid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Формула корректна'**
+  String get customColumnsFormulaValid;
+
+  /// No description provided for @customColumnsFormulaInvalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ошибка: {error}'**
+  String customColumnsFormulaInvalid(String error);
+
+  /// No description provided for @customColumnsAvailableVariables.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доступные переменные'**
+  String get customColumnsAvailableVariables;
+
+  /// No description provided for @customColumnsDelete.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить столбец'**
+  String get customColumnsDelete;
+
+  /// No description provided for @customColumnsDeleteConfirm.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить столбец \"{title}\"?'**
+  String customColumnsDeleteConfirm(String title);
+
+  /// No description provided for @customColumnsEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет пользовательских столбцов'**
+  String get customColumnsEmpty;
+
+  /// No description provided for @customColumnsEditButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Настроить столбцы'**
+  String get customColumnsEditButton;
+
+  /// No description provided for @customColumnsNoValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'—'**
+  String get customColumnsNoValue;
+
+  /// No description provided for @customColumnsSave.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить'**
+  String get customColumnsSave;
+
+  /// No description provided for @customColumnsEdit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Редактировать'**
+  String get customColumnsEdit;
+
+  /// No description provided for @customColumnsOperations.
+  ///
+  /// In ru, this message translates to:
+  /// **'Операции: +, -, *, /, ^ (степень), % (остаток), скобки'**
+  String get customColumnsOperations;
+
+  /// No description provided for @customColumnsFunctions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Функции: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan'**
+  String get customColumnsFunctions;
+
+  /// No description provided for @tooltipScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Общий балл'**
+  String get tooltipScore;
+
+  /// No description provided for @tooltipAddScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Общий доп. балл'**
+  String get tooltipAddScore;
+
+  /// No description provided for @tooltipMinusScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Общий штраф'**
+  String get tooltipMinusScore;
+
+  /// No description provided for @tooltipWins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Общее кол-во побед'**
+  String get tooltipWins;
+
+  /// No description provided for @tooltipFirstDie.
+  ///
+  /// In ru, this message translates to:
+  /// **'Кол-во первых убитых'**
+  String get tooltipFirstDie;
+
+  /// No description provided for @tooltipCi.
+  ///
+  /// In ru, this message translates to:
+  /// **'Компенсация'**
+  String get tooltipCi;
+
+  /// No description provided for @tooltipTotalGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'Всего игр'**
+  String get tooltipTotalGames;
+
+  /// No description provided for @tooltipCitizenGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игр за мирного'**
+  String get tooltipCitizenGames;
+
+  /// No description provided for @tooltipMafiaGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игр за мафию'**
+  String get tooltipMafiaGames;
+
+  /// No description provided for @tooltipDonGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игр за дона'**
+  String get tooltipDonGames;
+
+  /// No description provided for @tooltipSheriffGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игр за шерифа'**
+  String get tooltipSheriffGames;
+
+  /// No description provided for @tooltipCitizenWins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Побед за мирного'**
+  String get tooltipCitizenWins;
+
+  /// No description provided for @tooltipMafiaWins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Побед за мафию'**
+  String get tooltipMafiaWins;
+
+  /// No description provided for @tooltipDonWins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Побед за дона'**
+  String get tooltipDonWins;
+
+  /// No description provided for @tooltipSheriffWins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Побед за шерифа'**
+  String get tooltipSheriffWins;
+
+  /// No description provided for @tooltipCitizenAddScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доп. балл за мирного'**
+  String get tooltipCitizenAddScore;
+
+  /// No description provided for @tooltipMafiaAddScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доп. балл за мафию'**
+  String get tooltipMafiaAddScore;
+
+  /// No description provided for @tooltipDonAddScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доп. балл за дона'**
+  String get tooltipDonAddScore;
+
+  /// No description provided for @tooltipSheriffAddScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доп. балл за шерифа'**
+  String get tooltipSheriffAddScore;
+
+  /// No description provided for @tooltipCitizenScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Балл за мирного'**
+  String get tooltipCitizenScore;
+
+  /// No description provided for @tooltipMafiaScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Балл за мафию'**
+  String get tooltipMafiaScore;
+
+  /// No description provided for @tooltipDonScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Балл за дона'**
+  String get tooltipDonScore;
+
+  /// No description provided for @tooltipSheriffScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Балл за шерифа'**
+  String get tooltipSheriffScore;
+
+  /// No description provided for @tooltipCitizenMinusScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Штраф за мирного'**
+  String get tooltipCitizenMinusScore;
+
+  /// No description provided for @tooltipMafiaMinusScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Штраф за мафию'**
+  String get tooltipMafiaMinusScore;
+
+  /// No description provided for @tooltipDonMinusScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Штраф за дона'**
+  String get tooltipDonMinusScore;
+
+  /// No description provided for @tooltipSheriffMinusScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Штраф за шерифа'**
+  String get tooltipSheriffMinusScore;
+
+  /// No description provided for @tooltipBestMoveCitizen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доп. балл за лучший ход мирного'**
+  String get tooltipBestMoveCitizen;
+
+  /// No description provided for @tooltipBestMoveSheriff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доп. балл за лучший ход шерифа'**
+  String get tooltipBestMoveSheriff;
+
+  /// No description provided for @tooltipRefereeCount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Кол-во судейств'**
+  String get tooltipRefereeCount;
+
+  /// No description provided for @tooltipFnMin.
+  ///
+  /// In ru, this message translates to:
+  /// **'Минимум из двух значений'**
+  String get tooltipFnMin;
+
+  /// No description provided for @tooltipFnMax.
+  ///
+  /// In ru, this message translates to:
+  /// **'Максимум из двух значений'**
+  String get tooltipFnMax;
+
+  /// No description provided for @tooltipFnAbs.
+  ///
+  /// In ru, this message translates to:
+  /// **'Модуль числа'**
+  String get tooltipFnAbs;
+
+  /// No description provided for @tooltipFnRound.
+  ///
+  /// In ru, this message translates to:
+  /// **'Округление'**
+  String get tooltipFnRound;
+
+  /// No description provided for @tooltipFnFloor.
+  ///
+  /// In ru, this message translates to:
+  /// **'Округление вниз'**
+  String get tooltipFnFloor;
+
+  /// No description provided for @tooltipFnCeil.
+  ///
+  /// In ru, this message translates to:
+  /// **'Округление вверх'**
+  String get tooltipFnCeil;
 }
 
 class _AppLocalizationsDelegate

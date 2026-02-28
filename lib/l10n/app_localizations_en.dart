@@ -602,7 +602,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ratingGames => 'g';
 
   @override
-  String get ratingGameFilter => 'Минимум игр:';
+  String get ratingGameFilter => 'Game filter';
 
   @override
   String get ratingGameFilterHint => 'Минимум игр';
@@ -616,7 +616,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String ratingGameFilterCurrent(int count) {
-    return 'Текущий фильтр: $count игр';
+    return 'Minimum $count games';
   }
 
   @override
@@ -684,4 +684,176 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fantasyNotificationsEnabled => 'Уведомления успешно включены';
+
+  @override
+  String get customColumns => 'Custom columns';
+
+  @override
+  String get customColumnsEditor => 'Column editor';
+
+  @override
+  String get customColumnsAdd => 'Add column';
+
+  @override
+  String get customColumnsTitle => 'Title';
+
+  @override
+  String get customColumnsFormula => 'Formula';
+
+  @override
+  String get customColumnsFormulaHint =>
+      'Enter formula (e.g. score / totalGames)';
+
+  @override
+  String get customColumnsValidate => 'Validate';
+
+  @override
+  String get customColumnsFormulaValid => 'Formula is valid';
+
+  @override
+  String customColumnsFormulaInvalid(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get customColumnsAvailableVariables => 'Available variables';
+
+  @override
+  String get customColumnsDelete => 'Delete column';
+
+  @override
+  String customColumnsDeleteConfirm(String title) {
+    return 'Delete column \"$title\"?';
+  }
+
+  @override
+  String get customColumnsEmpty => 'No custom columns';
+
+  @override
+  String get customColumnsEditButton => 'Configure columns';
+
+  @override
+  String get customColumnsNoValue => '—';
+
+  @override
+  String get customColumnsSave => 'Save';
+
+  @override
+  String get customColumnsEdit => 'Edit';
+
+  @override
+  String get customColumnsOperations =>
+      'Operations: +, -, *, /, ^ (power), % (remainder), parentheses';
+
+  @override
+  String get customColumnsFunctions =>
+      'Functions: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan';
+
+  @override
+  String get tooltipScore => 'Total score';
+
+  @override
+  String get tooltipAddScore => 'Total bonus score';
+
+  @override
+  String get tooltipMinusScore => 'Total penalty';
+
+  @override
+  String get tooltipWins => 'Total wins';
+
+  @override
+  String get tooltipFirstDie => 'First killed count';
+
+  @override
+  String get tooltipCi => 'Compensation';
+
+  @override
+  String get tooltipTotalGames => 'Total games';
+
+  @override
+  String get tooltipCitizenGames => 'Games as citizen';
+
+  @override
+  String get tooltipMafiaGames => 'Games as mafia';
+
+  @override
+  String get tooltipDonGames => 'Games as don';
+
+  @override
+  String get tooltipSheriffGames => 'Games as sheriff';
+
+  @override
+  String get tooltipCitizenWins => 'Wins as citizen';
+
+  @override
+  String get tooltipMafiaWins => 'Wins as mafia';
+
+  @override
+  String get tooltipDonWins => 'Wins as don';
+
+  @override
+  String get tooltipSheriffWins => 'Wins as sheriff';
+
+  @override
+  String get tooltipCitizenAddScore => 'Bonus as citizen';
+
+  @override
+  String get tooltipMafiaAddScore => 'Bonus as mafia';
+
+  @override
+  String get tooltipDonAddScore => 'Bonus as don';
+
+  @override
+  String get tooltipSheriffAddScore => 'Bonus as sheriff';
+
+  @override
+  String get tooltipCitizenScore => 'Score as citizen';
+
+  @override
+  String get tooltipMafiaScore => 'Score as mafia';
+
+  @override
+  String get tooltipDonScore => 'Score as don';
+
+  @override
+  String get tooltipSheriffScore => 'Score as sheriff';
+
+  @override
+  String get tooltipCitizenMinusScore => 'Penalty as citizen';
+
+  @override
+  String get tooltipMafiaMinusScore => 'Penalty as mafia';
+
+  @override
+  String get tooltipDonMinusScore => 'Penalty as don';
+
+  @override
+  String get tooltipSheriffMinusScore => 'Penalty as sheriff';
+
+  @override
+  String get tooltipBestMoveCitizen => 'Best move bonus as citizen';
+
+  @override
+  String get tooltipBestMoveSheriff => 'Best move bonus as sheriff';
+
+  @override
+  String get tooltipRefereeCount => 'Referee count';
+
+  @override
+  String get tooltipFnMin => 'Minimum of two values';
+
+  @override
+  String get tooltipFnMax => 'Maximum of two values';
+
+  @override
+  String get tooltipFnAbs => 'Absolute value';
+
+  @override
+  String get tooltipFnRound => 'Round';
+
+  @override
+  String get tooltipFnFloor => 'Round down';
+
+  @override
+  String get tooltipFnCeil => 'Round up';
 }

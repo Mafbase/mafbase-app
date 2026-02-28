@@ -38,5 +38,6 @@ sealed class RatingEvent with _$RatingEvent {
     required RatingTableStyle style,
     required RatingSort sort,
     required int gameFilter,
+    @Default(0) int customSortColumnIndex,
   }) = RatingEventRangeChanged;
 }

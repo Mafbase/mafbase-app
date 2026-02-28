@@ -40,6 +40,14 @@ abstract class BaseRequest<R> {
         bytes.length,
         useRecoveryToken: resendOnUnauth,
       );
+    } else if (methodType == Method.put) {
+      final bytes = data?.writeToBuffer() ?? [];
+      response = await client.put(
+        method,
+        Stream.fromIterable(bytes.map<List<int>>((e) => [e])),
+        bytes.length,
+        useRecoveryToken: resendOnUnauth,
+      );
     } else {
       if (data == null && !forcePost) {
         response = await client.get(method, useRecoveryToken: resendOnUnauth);
@@ -75,4 +83,4 @@ List<int> parseResponseData(dynamic data) {
   return list;
 }
 
-enum Method { post, get, delete }
+enum Method { post, get, delete, put }

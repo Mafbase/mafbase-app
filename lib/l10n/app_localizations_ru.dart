@@ -687,4 +687,176 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get fantasyNotificationsEnabled => 'Уведомления успешно включены';
+
+  @override
+  String get customColumns => 'Формулы';
+
+  @override
+  String get customColumnsEditor => 'Редактор столбцов';
+
+  @override
+  String get customColumnsAdd => 'Добавить столбец';
+
+  @override
+  String get customColumnsTitle => 'Название';
+
+  @override
+  String get customColumnsFormula => 'Формула';
+
+  @override
+  String get customColumnsFormulaHint =>
+      'Введите формулу (напр. score / totalGames)';
+
+  @override
+  String get customColumnsValidate => 'Проверить';
+
+  @override
+  String get customColumnsFormulaValid => 'Формула корректна';
+
+  @override
+  String customColumnsFormulaInvalid(String error) {
+    return 'Ошибка: $error';
+  }
+
+  @override
+  String get customColumnsAvailableVariables => 'Доступные переменные';
+
+  @override
+  String get customColumnsDelete => 'Удалить столбец';
+
+  @override
+  String customColumnsDeleteConfirm(String title) {
+    return 'Удалить столбец \"$title\"?';
+  }
+
+  @override
+  String get customColumnsEmpty => 'Нет пользовательских столбцов';
+
+  @override
+  String get customColumnsEditButton => 'Настроить столбцы';
+
+  @override
+  String get customColumnsNoValue => '—';
+
+  @override
+  String get customColumnsSave => 'Сохранить';
+
+  @override
+  String get customColumnsEdit => 'Редактировать';
+
+  @override
+  String get customColumnsOperations =>
+      'Операции: +, -, *, /, ^ (степень), % (остаток), скобки';
+
+  @override
+  String get customColumnsFunctions =>
+      'Функции: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan';
+
+  @override
+  String get tooltipScore => 'Общий балл';
+
+  @override
+  String get tooltipAddScore => 'Общий доп. балл';
+
+  @override
+  String get tooltipMinusScore => 'Общий штраф';
+
+  @override
+  String get tooltipWins => 'Общее кол-во побед';
+
+  @override
+  String get tooltipFirstDie => 'Кол-во первых убитых';
+
+  @override
+  String get tooltipCi => 'Компенсация';
+
+  @override
+  String get tooltipTotalGames => 'Всего игр';
+
+  @override
+  String get tooltipCitizenGames => 'Игр за мирного';
+
+  @override
+  String get tooltipMafiaGames => 'Игр за мафию';
+
+  @override
+  String get tooltipDonGames => 'Игр за дона';
+
+  @override
+  String get tooltipSheriffGames => 'Игр за шерифа';
+
+  @override
+  String get tooltipCitizenWins => 'Побед за мирного';
+
+  @override
+  String get tooltipMafiaWins => 'Побед за мафию';
+
+  @override
+  String get tooltipDonWins => 'Побед за дона';
+
+  @override
+  String get tooltipSheriffWins => 'Побед за шерифа';
+
+  @override
+  String get tooltipCitizenAddScore => 'Доп. балл за мирного';
+
+  @override
+  String get tooltipMafiaAddScore => 'Доп. балл за мафию';
+
+  @override
+  String get tooltipDonAddScore => 'Доп. балл за дона';
+
+  @override
+  String get tooltipSheriffAddScore => 'Доп. балл за шерифа';
+
+  @override
+  String get tooltipCitizenScore => 'Балл за мирного';
+
+  @override
+  String get tooltipMafiaScore => 'Балл за мафию';
+
+  @override
+  String get tooltipDonScore => 'Балл за дона';
+
+  @override
+  String get tooltipSheriffScore => 'Балл за шерифа';
+
+  @override
+  String get tooltipCitizenMinusScore => 'Штраф за мирного';
+
+  @override
+  String get tooltipMafiaMinusScore => 'Штраф за мафию';
+
+  @override
+  String get tooltipDonMinusScore => 'Штраф за дона';
+
+  @override
+  String get tooltipSheriffMinusScore => 'Штраф за шерифа';
+
+  @override
+  String get tooltipBestMoveCitizen => 'Доп. балл за лучший ход мирного';
+
+  @override
+  String get tooltipBestMoveSheriff => 'Доп. балл за лучший ход шерифа';
+
+  @override
+  String get tooltipRefereeCount => 'Кол-во судейств';
+
+  @override
+  String get tooltipFnMin => 'Минимум из двух значений';
+
+  @override
+  String get tooltipFnMax => 'Максимум из двух значений';
+
+  @override
+  String get tooltipFnAbs => 'Модуль числа';
+
+  @override
+  String get tooltipFnRound => 'Округление';
+
+  @override
+  String get tooltipFnFloor => 'Округление вниз';
+
+  @override
+  String get tooltipFnCeil => 'Округление вверх';
 }

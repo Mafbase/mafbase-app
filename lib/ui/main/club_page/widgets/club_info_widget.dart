@@ -19,6 +19,7 @@ class ClubInfoWidget extends StatelessWidget {
   final VoidCallback? onEditDescription;
   final VoidCallback? onEditPhoto;
   final VoidCallback? onEditOwners;
+  final VoidCallback? onEditCustomColumns;
 
   const ClubInfoWidget({
     super.key,
@@ -30,6 +31,7 @@ class ClubInfoWidget extends StatelessWidget {
     this.onEditDescription,
     this.onEditPhoto,
     this.onEditOwners,
+    this.onEditCustomColumns,
   });
 
   @override
@@ -86,6 +88,16 @@ class ClubInfoWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                            if (onEditCustomColumns != null)
+                              Tooltip(
+                                message: context.locale.customColumnsEditButton,
+                                child: IconButton(
+                                  onPressed: onEditCustomColumns,
+                                  icon: const Icon(
+                                    Icons.view_column_outlined,
+                                  ),
+                                ),
+                              ),
                             const Flexible(child: _ClubRatingButton()),
                             if (onAddGame != null)
                               _AddGameButton(onTap: onAddGame!),
@@ -133,6 +145,16 @@ class ClubInfoWidget extends StatelessWidget {
                   CustomButton(
                     text: 'Продлить подписку клуба',
                     onTap: billClub!,
+                  ),
+                ],
+                if (onEditCustomColumns != null) ...[
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      text: context.locale.customColumnsEditButton,
+                      onTap: onEditCustomColumns!,
+                    ),
                   ),
                 ],
                 if (changeHideDate != null && kIsWeb) ...[
