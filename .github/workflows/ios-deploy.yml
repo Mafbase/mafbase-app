@@ -125,11 +125,13 @@ jobs:
         run: |
           security find-identity -v -p codesigning
       - name: Build iOS IPA
+        env:
+          CODE_SIGN_IDENTITY: "Apple Distribution: Sergey Anisov (L7YY6FT2M6)"
+          CODE_SIGNING_REQUIRED: "YES"
         run: |
           flutter build ipa \
             --release \
-            --export-options-plist=ios/exportOptions.plist \
-            --codesign-identity "Apple Distribution: Sergey Anisov (L7YY6FT2M6)"
+            --export-options-plist=ios/exportOptions.plist
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
