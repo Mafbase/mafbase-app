@@ -81,6 +81,42 @@ def get_version_number(package_name, api_key, whatsNew, developer_email):
         print(f"Failed to get version number: {response.status_code} {response.text}")
         sys.exit(1)
 
+def get_draft_version(package_name, api_key):
+    """Get existing draft version ID if it exists."""
+    url = f'https://public-api.rustore.ru/public/v1/application/{package_name}/version'
+    headers = {
+        'Content-Type': 'application/json',
+        'Public-Token': api_key
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        versions = response.json().get('body', [])
+        for version in versions:
+            if version.get('versionStatus') == 'DRAFT':
+                return version.get('versionId')
+    return None
+
+
+def delete_draft(package_name, api_key, version_id):
+    """Delete an existing draft version."""
+    url = f'https://public-api.rustore.ru/public/v1/application/{package_name}/version/{version_id}'
+    headers = {
+        'Content-Type': 'application/json',
+        'Public-Token': api_key
+    }
+
+    response = requests.delete(url, headers=headers)
+
+    if response.status_code == 200:
+        print(f"Черновик версии {version_id} успешно удалён")
+        return True
+    else:
+        print(f"Не удалось удалить черновик: {response.status_code} {response.text}")
+        return False
+
+
 def submit_for_review(package_name, api_key, version_number):
     url = f'https://public-api.rustore.ru/public/v1/application/{package_name}/version/{version_number}/commit'
     headers = {
@@ -140,6 +176,12 @@ def main():
     if not developer_email:
         print("Ошибка: переменная окружения DEVELOPER_EMAIL не установлена")
         sys.exit(1)
+
+    # Удаляем существующий черновик, если он есть
+    existing_draft = get_draft_version(package_name, api_token)
+    if existing_draft:
+        print(f"Найден существующий черновик: {existing_draft}")
+        delete_draft(package_name, api_token, existing_draft)
 
     version_number = get_version_number(package_name, api_token, latest_changes, developer_email)
     upload_aab(package_name, version_number, api_token, aab_file_path)
