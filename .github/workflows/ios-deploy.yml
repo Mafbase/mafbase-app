@@ -50,9 +50,6 @@ jobs:
           test -n "$APP_STORE_CONNECT_API_KEY_ID" || (echo "APP_STORE_CONNECT_API_KEY_ID is not set" && exit 1)
           test -n "$APP_STORE_CONNECT_ISSUER_ID" || (echo "APP_STORE_CONNECT_ISSUER_ID is not set" && exit 1)
           test -n "$APP_STORE_CONNECT_API_KEY_BASE64" || (echo "APP_STORE_CONNECT_API_KEY_BASE64 is not set" && exit 1)
-      - name: Check signing identities
-        run: |
-          security find-identity -v -p codesigning
       - name: Install Flutter dependencies
         run: flutter pub get
 
@@ -124,7 +121,9 @@ jobs:
           </dict>
           </plist>
           EOF
-
+      - name: Check signing identities
+        run: |
+          security find-identity -v -p codesigning
       - name: Build iOS IPA
         run: |
           flutter build ipa \
