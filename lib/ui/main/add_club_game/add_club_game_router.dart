@@ -45,7 +45,7 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
 
   @override
   void openGame(int clubId, int gameId) {
-    context.go(
+    context.replace(
       AddClubGamePage.createViewLocation(
         context,
         clubId,
@@ -57,7 +57,7 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
 
   @override
   void openNewGame(int clubId, [DateTime? initDateTime]) {
-    context.go(
+    context.replace(
       AddClubGamePage.createLocation(context, clubId),
       extra: initDateTime,
     );
