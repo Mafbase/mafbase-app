@@ -22,7 +22,7 @@ jobs:
   deploy-android:
     runs-on: self-hosted
     env:
-      PACKAGE_NAME: ${{ inputs.package_name }}
+      PACKAGE_NAME: ${{ inputs.package_name || 'ru.mafbase.app' }}
       DEVELOPER_EMAIL: ${{ secrets.DEVELOPER_EMAIL }}
       RUSTORE_KEY_ID: ${{ secrets.RUSTORE_KEY_ID }}
       RUSTORE_PRIVATE_KEY: ${{ secrets.RUSTORE_PRIVATE_KEY }}
