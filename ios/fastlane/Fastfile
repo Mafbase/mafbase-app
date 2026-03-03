@@ -28,7 +28,7 @@ platform :ios do
     # 4) Flutter + pods
     sh("cd .. && flutter pub get")
     sh("cd .. && flutter build ios --release --no-codesign")
-    sh("pod install", chdir: "ios")
+    sh("bundle exec pod install --repo-update", chdir: "ios")
 
     # 5) Сборка IPA (archive + export) через gym
     gym(
