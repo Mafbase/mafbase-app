@@ -34,13 +34,20 @@ platform :ios do
     ipa_path = Dir[File.expand_path("../../build/ios/ipa/*.ipa", __dir__)].first
     UI.user_error!("No IPA found in build/ios/ipa/") unless ipa_path
 
+    changelog_path = File.expand_path("../../CHANGELOG.md", __dir__)
+    changelog = File.read(changelog_path)
+    latest_notes = changelog.match(/^## \[.*?\].*?\n(.*?)(?=\n## \[|\z)/m)&.captures&.first&.strip || ""
+    UI.message("Release notes:\n#{latest_notes}")
+
     submit = (ENV["SUBMIT_FOR_REVIEW"].to_s.downcase == "true")
 
     upload_to_app_store(
       skip_metadata: true,
       skip_screenshots: true,
       submit_for_review: submit,
-      ipa: ipa_path
+      precheck_include_in_app_purchases: false,
+      ipa: ipa_path,
+      release_notes: { "ru" => latest_notes }
     )
   end
 end
