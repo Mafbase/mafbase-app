@@ -1,6 +1,9 @@
 name: iOS Deploy (Fastlane)
 
 on:
+  push:
+    tags:
+      - '*'
   workflow_dispatch:
     inputs:
       submit_for_review:

@@ -1,6 +1,9 @@
 name: Android Deploy
 
 on:
+  push:
+    tags:
+      - '*'
   workflow_dispatch:
     inputs:
       package_name:
