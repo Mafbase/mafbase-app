@@ -21,8 +21,10 @@ platform :ios do
 
     sh("flutter pub get", chdir: "../..")
 
+    export_options_plist = File.expand_path("../ExportOptions.plist", __dir__)
+
     sh(
-      "flutter build ipa --release --export-options-plist=ios/ExportOptions.plist",
+      "flutter build ipa --release --export-options-plist=#{export_options_plist}",
       chdir: "../.."
     )
 
