@@ -11,17 +11,20 @@ platform :ios do
       is_key_content_base64: true
     )
 
+    match(type: "appstore", readonly: true)
+
     update_code_signing_settings(
       use_automatic_signing: false,
       team_id: "L7YY6FT2M6",
-      targets: ["Runner"]
+      targets: ["Runner"],
+      code_sign_identity: "Apple Distribution",
+      profile_name: "match AppStore ru.mafbase.app",
+      bundle_identifier: "ru.mafbase.app"
     )
-
-    match(type: "appstore", readonly: true)
 
     sh("flutter pub get", chdir: "../..")
 
-    export_options_plist = File.expand_path("../ExportOptions.plist", __dir__)
+    export_options_plist = File.expand_path("ExportOptions.plist", __dir__)
 
     sh(
       "flutter build ipa --release --export-options-plist=#{export_options_plist}",
