@@ -1,0 +1,53 @@
+default_platform(:ios)
+
+platform :ios do
+  lane :release do
+    setup_ci
+
+    app_store_connect_api_key(
+      key_id: ENV.fetch("APP_STORE_CONNECT_API_KEY_ID"),
+      issuer_id: ENV.fetch("APP_STORE_CONNECT_ISSUER_ID"),
+      key_content: ENV.fetch("APP_STORE_CONNECT_API_KEY_BASE64"),
+      is_key_content_base64: true
+    )
+
+    match(type: "appstore", readonly: true)
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      team_id: "L7YY6FT2M6",
+      targets: ["Runner"],
+      code_sign_identity: "Apple Distribution",
+      profile_name: "match AppStore ru.mafbase.app",
+      bundle_identifier: "ru.mafbase.app"
+    )
+
+    sh("flutter pub get", chdir: "../..")
+
+    export_options_plist = File.expand_path("ExportOptions.plist", __dir__)
+
+    sh(
+      "flutter build ipa --release --export-options-plist=#{export_options_plist}",
+      chdir: "../.."
+    )
+
+    ipa_path = Dir[File.expand_path("../../build/ios/ipa/*.ipa", __dir__)].first
+    UI.user_error!("No IPA found in build/ios/ipa/") unless ipa_path
+
+    changelog_path = File.expand_path("../../CHANGELOG.md", __dir__)
+    changelog = File.read(changelog_path)
+    latest_notes = changelog.match(/^## \[.*?\].*?\n(.*?)(?=\n## \[|\z)/m)&.captures&.first&.strip || ""
+    UI.message("Release notes:\n#{latest_notes}")
+
+    submit = (ENV["SUBMIT_FOR_REVIEW"].to_s.downcase == "true")
+
+    upload_to_app_store(
+      skip_metadata: true,
+      skip_screenshots: true,
+      submit_for_review: submit,
+      precheck_include_in_app_purchases: false,
+      ipa: ipa_path,
+      release_notes: { "ru" => latest_notes }
+    )
+  end
+end
