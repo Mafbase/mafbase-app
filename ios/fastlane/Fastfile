@@ -4,7 +4,6 @@ platform :ios do
   lane :release do
     setup_ci
 
-    # 1) ASC API key (твои переменные)
     app_store_connect_api_key(
       key_id: ENV.fetch("APP_STORE_CONNECT_API_KEY_ID"),
       issuer_id: ENV.fetch("APP_STORE_CONNECT_ISSUER_ID"),
@@ -12,39 +11,31 @@ platform :ios do
       is_key_content_base64: true
     )
 
-    # 2) В CI принудительно делаем Manual signing + правильный Team
     update_code_signing_settings(
       use_automatic_signing: false,
       team_id: "L7YY6FT2M6",
       targets: ["Runner"]
     )
 
-    # 3) Подтягиваем сертификаты/профили (readonly в CI)
-    match(
-      type: "appstore",
-      readonly: true
+    match(type: "appstore", readonly: true)
+
+    sh("flutter pub get", chdir: "../..")
+
+    sh(
+      "flutter build ipa --release --export-options-plist=ios/ExportOptions.plist",
+      chdir: "../.."
     )
 
-    # 4) Flutter + pods
-    sh("cd .. && flutter pub get")
-    sh("cd .. && flutter build ios --release --no-codesign")
-    sh("bundle exec pod install --repo-update", chdir: "ios")
+    ipa_path = Dir["../../build/ios/ipa/*.ipa"].first
+    UI.user_error!("No IPA found in build/ios/ipa/") unless ipa_path
 
-    # 5) Сборка IPA (archive + export) через gym
-    gym(
-      workspace: "Runner.xcworkspace",
-      scheme: "Runner",
-      export_method: "app-store",
-      clean: true
-    )
-
-    # 6) Загрузка и (опционально) submit_for_review
     submit = (ENV["SUBMIT_FOR_REVIEW"].to_s.downcase == "true")
 
     upload_to_app_store(
       skip_metadata: true,
       skip_screenshots: true,
-      submit_for_review: submit
+      submit_for_review: submit,
+      ipa: ipa_path
     )
   end
 end
