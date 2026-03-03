@@ -1,2 +1,2 @@
-git_url("git@github-alt:Mafbase/iOS-certs.git")
+git_url("git@github.com:Mafbase/iOS-certs.git")
 storage_mode("git")
