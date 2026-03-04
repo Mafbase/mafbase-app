@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
@@ -121,6 +122,10 @@ Widget _buildPage(PlayerStatsBloc bloc) {
 }
 
 void main() {
+  setUpAll(() async {
+    await loadAppFonts();
+  });
+
   group('PlayerStatsPage golden tests', () {
     testWidgets('loading state', (tester) async {
       final bloc = _createMockBloc(const PlayerStatsState(isLoading: true));

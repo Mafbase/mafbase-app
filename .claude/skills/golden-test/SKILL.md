@@ -98,10 +98,31 @@ Place golden images in `test/golden/goldens/`:
 matchesGoldenFile('goldens/<page_name>_<state_name>.png')
 ```
 
+### Font loading — REQUIRED
+
+**ALWAYS** load fonts before golden tests using `loadAppFonts()` from `golden_toolkit`. Without this, text renders as empty rectangles in golden images.
+
+```dart
+import 'package:golden_toolkit/golden_toolkit.dart';
+
+void main() {
+  setUpAll(() async {
+    await loadAppFonts();
+  });
+  // ...
+}
+```
+
+Ensure `golden_toolkit` is in `dev_dependencies` (add with `fvm flutter pub add --dev golden_toolkit` if missing).
+
 ### Test structure
 
 ```dart
 void main() {
+  setUpAll(() async {
+    await loadAppFonts();
+  });
+
   group('XxxPage golden tests', () {
     testWidgets('<state name>', (tester) async {
       final bloc = _createMockBloc(const XxxState(/* ... */));
@@ -137,7 +158,7 @@ Create `const` model instances at the top of the file with realistic-looking dat
 
 1. Verify the test file compiles and passes: `fvm flutter test <test_path> --update-goldens`
 2. Verify the generated golden images look correct by reading the PNG files
-3. Ensure `bloc_test` is in `dev_dependencies` in `pubspec.yaml` (add with `fvm flutter pub add --dev bloc_test` if missing)
+3. Ensure `bloc_test` and `golden_toolkit` are in `dev_dependencies` in `pubspec.yaml`
 
 ## Reference example
 

@@ -888,13 +888,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playerStatsAvgBonus => 'Avg bonus';
 
   @override
-  String get playerStatsSameCityTop => 'TOP-5 teammates (city)';
+  String get playerStatsSameCityTop => 'TOP-5 same team (city)';
 
   @override
-  String get playerStatsSameMafiaTop => 'TOP-5 teammates (mafia)';
+  String get playerStatsSameMafiaTop => 'TOP-5 same team (mafia)';
 
   @override
-  String get playerStatsDiffTeamTop => 'TOP-5 opponents';
+  String get playerStatsDiffTeamTop => 'TOP-5 different team';
 
   @override
   String get playerStatsError => 'Failed to load statistics';

@@ -9,8 +9,10 @@ import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_state.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/widgets/player_pair_stats_section.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/widgets/player_role_stats_card.dart';
+import 'package:seating_generator_web/feature/player_statistics/ui/widgets/role_distribution_chart.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class PlayerStatsPage extends StatelessWidget {
   final int playerId;
@@ -42,114 +44,171 @@ class PlayerStatsPage extends StatelessWidget {
     },
   );
 
-  void _onBackPressed(BuildContext context) {
-    if (context.canPop()) {
-      context.pop();
-    } else {
-      context.go('/');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => _onBackPressed(context),
-        ),
-        title: Text(context.locale.playerStatsTitle),
-        backgroundColor: MyTheme.of(context).darkBlueColor,
-        foregroundColor: Colors.white,
-      ),
       backgroundColor: MyTheme.of(context).background1,
-      body: BlocBuilder<PlayerStatsBloc, PlayerStatsState>(
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const LoadingOverlayWidget();
-          }
+      body: SafeArea(
+        child: BlocBuilder<PlayerStatsBloc, PlayerStatsState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const LoadingOverlayWidget();
+            }
 
-          if (state.hasError) {
-            return Center(
-              child: Text(
-                context.locale.playerStatsError,
-                style: MyTheme.of(context).defaultTextStyle,
-              ),
+            if (state.hasError) {
+              return Center(
+                child: Text(
+                  context.locale.playerStatsError,
+                  style: MyTheme.of(context).defaultTextStyle,
+                ),
+              );
+            }
+
+            final statistics = state.statistics;
+            if (statistics == null) {
+              return const SizedBox.shrink();
+            }
+
+            return _PlayerStatsContent(
+              statistics: statistics,
             );
-          }
-
-          final statistics = state.statistics;
-          if (statistics == null) {
-            return const SizedBox.shrink();
-          }
-
-          return _PlayerStatsContent(statistics: statistics);
-        },
+          },
+        ),
       ),
     );
   }
 }
 
-class _PlayerStatsContent extends StatelessWidget {
+class _PlayerStatsContent extends StatefulWidget {
   final PlayerStatisticsModel statistics;
 
-  const _PlayerStatsContent({required this.statistics});
+  const _PlayerStatsContent({
+    required this.statistics,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  State<_PlayerStatsContent> createState() => _PlayerStatsContentState();
+}
+
+class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
+  PlayerStatisticsModel get statistics => widget.statistics;
+
+  Widget _buildHeader(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            context.locale.playerStatsTitle,
+            style: MyTheme.of(context).defaultTextStyle,
+          ),
+          Text(
+            statistics.nickname,
+            style: MyTheme.of(context).headerTextStyle,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildChart() {
+    return RoleDistributionChart(statistics: statistics);
+  }
+
+  List<Widget> _buildRoleCards(BuildContext context) {
+    return [
+      PlayerRoleStatsCard(
+        title: context.locale.playerStatsOverall,
+        stats: statistics.overall,
+      ),
+      PlayerRoleStatsCard(
+        title: context.locale.playerStatsCitizen,
+        stats: statistics.citizen,
+      ),
+      PlayerRoleStatsCard(
+        title: context.locale.playerStatsMafia,
+        stats: statistics.mafia,
+      ),
+      PlayerRoleStatsCard(
+        title: context.locale.playerStatsDon,
+        stats: statistics.don,
+      ),
+      PlayerRoleStatsCard(
+        title: context.locale.playerStatsSheriff,
+        stats: statistics.sheriff,
+      ),
+    ];
+  }
+
+  List<Widget> _buildPairSections(BuildContext context) {
+    return [
+      PlayerPairStatsSection(
+        title: context.locale.playerStatsSameCityTop,
+        pairs: statistics.sameCityTop,
+      ),
+      PlayerPairStatsSection(
+        title: context.locale.playerStatsSameMafiaTop,
+        pairs: statistics.sameMafiaTop,
+      ),
+      PlayerPairStatsSection(
+        title: context.locale.playerStatsDiffTeamTop,
+        pairs: statistics.diffTeamTop,
+      ),
+    ];
+  }
+
+  @override
+  Widget? buildMobile(BuildContext context) {
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 600),
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 16),
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Center(
-                child: Text(
-                  statistics.nickname,
-                  style: MyTheme.of(context).headerTextStyle,
-                ),
+            _buildHeader(context),
+            const SizedBox(height: 8),
+            _buildChart(),
+            const SizedBox(height: 8),
+            ..._buildRoleCards(context).map(
+              (e) => SizedBox(
+                width: double.infinity,
+                child: e,
               ),
             ),
             const SizedBox(height: 8),
-            PlayerRoleStatsCard(
-              title: context.locale.playerStatsOverall,
-              stats: statistics.overall,
-            ),
-            PlayerRoleStatsCard(
-              title: context.locale.playerStatsCitizen,
-              stats: statistics.citizen,
-            ),
-            PlayerRoleStatsCard(
-              title: context.locale.playerStatsMafia,
-              stats: statistics.mafia,
-            ),
-            PlayerRoleStatsCard(
-              title: context.locale.playerStatsDon,
-              stats: statistics.don,
-            ),
-            PlayerRoleStatsCard(
-              title: context.locale.playerStatsSheriff,
-              stats: statistics.sheriff,
-            ),
-            const SizedBox(height: 8),
-            PlayerPairStatsSection(
-              title: context.locale.playerStatsSameCityTop,
-              pairs: statistics.sameCityTop,
-            ),
-            PlayerPairStatsSection(
-              title: context.locale.playerStatsSameMafiaTop,
-              pairs: statistics.sameMafiaTop,
-            ),
-            PlayerPairStatsSection(
-              title: context.locale.playerStatsDiffTeamTop,
-              pairs: statistics.diffTeamTop,
-            ),
+            ..._buildPairSections(context),
             const SizedBox(height: 16),
           ],
         ),
       ),
+    );
+  }
+
+  @override
+  Widget buildDesktop(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+      children: [
+        _buildHeader(context),
+        const SizedBox(height: 8),
+        _buildChart(),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          alignment: WrapAlignment.center,
+          children: _buildRoleCards(context),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          alignment: WrapAlignment.center,
+          children: _buildPairSections(context).map((section) => SizedBox(width: 380, child: section)).toList(),
+        ),
+        const SizedBox(height: 16),
+      ],
     );
   }
 }

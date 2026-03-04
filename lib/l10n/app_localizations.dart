@@ -1733,19 +1733,19 @@ abstract class AppLocalizations {
   /// No description provided for @playerStatsSameCityTop.
   ///
   /// In ru, this message translates to:
-  /// **'ТОП-5 партнёров (город)'**
+  /// **'ТОП-5 Одноцветов (город)'**
   String get playerStatsSameCityTop;
 
   /// No description provided for @playerStatsSameMafiaTop.
   ///
   /// In ru, this message translates to:
-  /// **'ТОП-5 партнёров (мафия)'**
+  /// **'ТОП-5 Одноцветов (мафия)'**
   String get playerStatsSameMafiaTop;
 
   /// No description provided for @playerStatsDiffTeamTop.
   ///
   /// In ru, this message translates to:
-  /// **'ТОП-5 противников'**
+  /// **'ТОП-5 Разноцветов'**
   String get playerStatsDiffTeamTop;
 
   /// No description provided for @playerStatsError.

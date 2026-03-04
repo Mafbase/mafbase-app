@@ -891,13 +891,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get playerStatsAvgBonus => 'Ср. доп. балл';
 
   @override
-  String get playerStatsSameCityTop => 'ТОП-5 партнёров (город)';
+  String get playerStatsSameCityTop => 'ТОП-5 Одноцветов (город)';
 
   @override
-  String get playerStatsSameMafiaTop => 'ТОП-5 партнёров (мафия)';
+  String get playerStatsSameMafiaTop => 'ТОП-5 Одноцветов (мафия)';
 
   @override
-  String get playerStatsDiffTeamTop => 'ТОП-5 противников';
+  String get playerStatsDiffTeamTop => 'ТОП-5 Разноцветов';
 
   @override
   String get playerStatsError => 'Не удалось загрузить статистику';

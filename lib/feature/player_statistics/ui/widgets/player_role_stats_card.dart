@@ -30,15 +30,10 @@ class PlayerRoleStatsCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              spacing: 8,
               children: [
-                _StatItem(
-                  label: context.locale.playerStatsGames,
-                  value: stats.games.toString(),
-                ),
-                _StatItem(
-                  label: context.locale.playerStatsWins,
-                  value: stats.wins.toString(),
-                ),
                 _StatItem(
                   label: context.locale.playerStatsWinRate,
                   value: '${stats.winRate.toStringAsFixed(1)}%',
@@ -64,27 +59,25 @@ class _StatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
           ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[600],
-            ),
-            textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey[600],
           ),
-        ],
-      ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }
