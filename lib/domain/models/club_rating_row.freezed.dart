@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ClubRatingRowModel {
+  int get playerId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
   double get addScore => throw _privateConstructorUsedError;
@@ -57,7 +58,8 @@ abstract class $ClubRatingRowModelCopyWith<$Res> {
       _$ClubRatingRowModelCopyWithImpl<$Res, ClubRatingRowModel>;
   @useResult
   $Res call(
-      {String nickname,
+      {int playerId,
+      String nickname,
       double score,
       double addScore,
       int wins,
@@ -99,6 +101,7 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? playerId = null,
     Object? nickname = null,
     Object? score = null,
     Object? addScore = null,
@@ -126,6 +129,10 @@ class _$ClubRatingRowModelCopyWithImpl<$Res, $Val extends ClubRatingRowModel>
     Object? customColumns = null,
   }) {
     return _then(_value.copyWith(
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -239,7 +246,8 @@ abstract class _$$ClubRatingRowModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String nickname,
+      {int playerId,
+      String nickname,
       double score,
       double addScore,
       int wins,
@@ -279,6 +287,7 @@ class __$$ClubRatingRowModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? playerId = null,
     Object? nickname = null,
     Object? score = null,
     Object? addScore = null,
@@ -306,6 +315,10 @@ class __$$ClubRatingRowModelImplCopyWithImpl<$Res>
     Object? customColumns = null,
   }) {
     return _then(_$ClubRatingRowModelImpl(
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -414,7 +427,8 @@ class __$$ClubRatingRowModelImplCopyWithImpl<$Res>
 
 class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
   const _$ClubRatingRowModelImpl(
-      {required this.nickname,
+      {required this.playerId,
+      required this.nickname,
       required this.score,
       required this.addScore,
       required this.wins,
@@ -442,6 +456,8 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
       : _games = games,
         _customColumns = customColumns;
 
+  @override
+  final int playerId;
   @override
   final String nickname;
   @override
@@ -507,7 +523,7 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
 
   @override
   String toString() {
-    return 'ClubRatingRowModel(nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, gamesCount: $gamesCount, citizenGamesCount: $citizenGamesCount, donsGamesCount: $donsGamesCount, sheriffGamesCount: $sheriffGamesCount, mafiaGamesCount: $mafiaGamesCount, citizenWinsCount: $citizenWinsCount, donsWinsCount: $donsWinsCount, sheriffWinsCount: $sheriffWinsCount, mafiaWinsCount: $mafiaWinsCount, died: $died, games: $games, ci: $ci, citizenAddScore: $citizenAddScore, sheriffAddScore: $sheriffAddScore, donAddScore: $donAddScore, mafiaAddScore: $mafiaAddScore, citizenScore: $citizenScore, sheriffScore: $sheriffScore, donScore: $donScore, mafiaScore: $mafiaScore, customColumns: $customColumns)';
+    return 'ClubRatingRowModel(playerId: $playerId, nickname: $nickname, score: $score, addScore: $addScore, wins: $wins, gamesCount: $gamesCount, citizenGamesCount: $citizenGamesCount, donsGamesCount: $donsGamesCount, sheriffGamesCount: $sheriffGamesCount, mafiaGamesCount: $mafiaGamesCount, citizenWinsCount: $citizenWinsCount, donsWinsCount: $donsWinsCount, sheriffWinsCount: $sheriffWinsCount, mafiaWinsCount: $mafiaWinsCount, died: $died, games: $games, ci: $ci, citizenAddScore: $citizenAddScore, sheriffAddScore: $sheriffAddScore, donAddScore: $donAddScore, mafiaAddScore: $mafiaAddScore, citizenScore: $citizenScore, sheriffScore: $sheriffScore, donScore: $donScore, mafiaScore: $mafiaScore, customColumns: $customColumns)';
   }
 
   @override
@@ -515,6 +531,8 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ClubRatingRowModelImpl &&
+            (identical(other.playerId, playerId) ||
+                other.playerId == playerId) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.score, score) || other.score == score) &&
@@ -565,6 +583,7 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        playerId,
         nickname,
         score,
         addScore,
@@ -604,7 +623,8 @@ class _$ClubRatingRowModelImpl implements _ClubRatingRowModel {
 
 abstract class _ClubRatingRowModel implements ClubRatingRowModel {
   const factory _ClubRatingRowModel(
-          {required final String nickname,
+          {required final int playerId,
+          required final String nickname,
           required final double score,
           required final double addScore,
           required final int wins,
@@ -631,6 +651,8 @@ abstract class _ClubRatingRowModel implements ClubRatingRowModel {
           final List<CustomColumnValueModel> customColumns}) =
       _$ClubRatingRowModelImpl;
 
+  @override
+  int get playerId;
   @override
   String get nickname;
   @override

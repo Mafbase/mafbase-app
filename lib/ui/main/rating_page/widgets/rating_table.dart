@@ -42,6 +42,7 @@ class RatingTable extends StatefulWidget {
   final bool isTournament;
   final bool pinNicknames;
   final int customSortColumnIndex;
+  final void Function(int playerId)? onPlayerTap;
 
   RatingTable({
     super.key,
@@ -57,6 +58,7 @@ class RatingTable extends StatefulWidget {
     required this.isTournament,
     this.pinNicknames = false,
     this.customSortColumnIndex = 0,
+    this.onPlayerTap,
   })  : style = style ?? RatingTableStyle.full,
         sort = sort ?? RatingSort.score,
         gameFilter = gameFilter ?? 0,
@@ -300,7 +302,18 @@ class _RatingTableState extends State<RatingTable> {
       );
 
   Widget nicknames(int index, {bool? boldRight}) => wrap(
-        Text(widget.sortedRows[index].nickname),
+        widget.onPlayerTap != null
+            ? InkWell(
+                onTap: () =>
+                    widget.onPlayerTap!(widget.sortedRows[index].playerId),
+                child: Text(
+                  widget.sortedRows[index].nickname,
+                  style: const TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              )
+            : Text(widget.sortedRows[index].nickname),
         boldRight: boldRight ?? false,
       );
 

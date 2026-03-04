@@ -14,6 +14,7 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/game_filter_dialog.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
+import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -241,6 +242,12 @@ class _RatingPageState extends CustomState<RatingPage> {
               openGame: openGame,
               pinNicknames: singlePage,
               customSortColumnIndex: widget.customSortColumnIndex,
+              onPlayerTap: (playerId) => context.push(
+                PlayerStatsPage.createLocation(
+                  context: context,
+                  playerId: playerId,
+                ),
+              ),
               changeSort: (
                 RatingSort sort, {
                 int? customSortColumnIndex,
@@ -454,6 +461,12 @@ class _RatingPageState extends CustomState<RatingPage> {
                             gameFilter: widget.gameFilter,
                             openGame: openGame,
                             customSortColumnIndex: widget.customSortColumnIndex,
+                            onPlayerTap: (playerId) => context.push(
+                              PlayerStatsPage.createLocation(
+                                context: context,
+                                playerId: playerId,
+                              ),
+                            ),
                             changeSort: (
                               RatingSort sort, {
                               int? customSortColumnIndex,

@@ -15,6 +15,7 @@ import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
+import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
@@ -106,6 +107,7 @@ class AppRouter {
           LoginPageBody.route,
           ProfilePage.route,
           ContactsPage.route,
+          PlayerStatsPage.route,
         ],
       ),
     ],

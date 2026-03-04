@@ -7,6 +7,7 @@ part 'club_rating_row.freezed.dart';
 @freezed
 class ClubRatingRowModel with _$ClubRatingRowModel {
   const factory ClubRatingRowModel({
+    required int playerId,
     required String nickname,
     required double score,
     required double addScore,
@@ -36,6 +37,7 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
 
   factory ClubRatingRowModel.fromProto(ClubRatingRow proto) =>
       ClubRatingRowModel(
+        playerId: proto.playerId,
         nickname: proto.nickname,
         score: proto.score,
         addScore: proto.addScore,
