@@ -5967,6 +5967,372 @@ class ResetPasswordEventOut extends $pb.GeneratedMessage {
   void clearError() => $_clearField(1);
 }
 
+class PlayerRoleStats extends $pb.GeneratedMessage {
+  factory PlayerRoleStats({
+    $core.int? games,
+    $core.int? wins,
+    $core.double? winRate,
+    $core.double? avgBonusScore,
+  }) {
+    final $result = create();
+    if (games != null) {
+      $result.games = games;
+    }
+    if (wins != null) {
+      $result.wins = wins;
+    }
+    if (winRate != null) {
+      $result.winRate = winRate;
+    }
+    if (avgBonusScore != null) {
+      $result.avgBonusScore = avgBonusScore;
+    }
+    return $result;
+  }
+  PlayerRoleStats._() : super();
+  factory PlayerRoleStats.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PlayerRoleStats.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlayerRoleStats', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'games', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'wins', $pb.PbFieldType.O3)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'winRate', $pb.PbFieldType.OD, protoName: 'winRate')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'avgBonusScore', $pb.PbFieldType.OD, protoName: 'avgBonusScore')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PlayerRoleStats clone() => PlayerRoleStats()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PlayerRoleStats copyWith(void Function(PlayerRoleStats) updates) => super.copyWith((message) => updates(message as PlayerRoleStats)) as PlayerRoleStats;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PlayerRoleStats create() => PlayerRoleStats._();
+  PlayerRoleStats createEmptyInstance() => create();
+  static $pb.PbList<PlayerRoleStats> createRepeated() => $pb.PbList<PlayerRoleStats>();
+  @$core.pragma('dart2js:noInline')
+  static PlayerRoleStats getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayerRoleStats>(create);
+  static PlayerRoleStats? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get games => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set games($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasGames() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGames() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get wins => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set wins($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasWins() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearWins() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get winRate => $_getN(2);
+  @$pb.TagNumber(3)
+  set winRate($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasWinRate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearWinRate() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get avgBonusScore => $_getN(3);
+  @$pb.TagNumber(4)
+  set avgBonusScore($core.double v) { $_setDouble(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAvgBonusScore() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAvgBonusScore() => $_clearField(4);
+}
+
+class PlayerPairStat extends $pb.GeneratedMessage {
+  factory PlayerPairStat({
+    $core.int? playerId,
+    $core.String? nickname,
+    $core.int? games,
+    $core.int? wins,
+    $core.double? winRate,
+  }) {
+    final $result = create();
+    if (playerId != null) {
+      $result.playerId = playerId;
+    }
+    if (nickname != null) {
+      $result.nickname = nickname;
+    }
+    if (games != null) {
+      $result.games = games;
+    }
+    if (wins != null) {
+      $result.wins = wins;
+    }
+    if (winRate != null) {
+      $result.winRate = winRate;
+    }
+    return $result;
+  }
+  PlayerPairStat._() : super();
+  factory PlayerPairStat.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PlayerPairStat.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlayerPairStat', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'playerId', $pb.PbFieldType.O3, protoName: 'playerId')
+    ..aOS(2, _omitFieldNames ? '' : 'nickname')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'games', $pb.PbFieldType.O3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'wins', $pb.PbFieldType.O3)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'winRate', $pb.PbFieldType.OD, protoName: 'winRate')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PlayerPairStat clone() => PlayerPairStat()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PlayerPairStat copyWith(void Function(PlayerPairStat) updates) => super.copyWith((message) => updates(message as PlayerPairStat)) as PlayerPairStat;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PlayerPairStat create() => PlayerPairStat._();
+  PlayerPairStat createEmptyInstance() => create();
+  static $pb.PbList<PlayerPairStat> createRepeated() => $pb.PbList<PlayerPairStat>();
+  @$core.pragma('dart2js:noInline')
+  static PlayerPairStat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayerPairStat>(create);
+  static PlayerPairStat? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get playerId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set playerId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlayerId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlayerId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get nickname => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nickname($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNickname() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNickname() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get games => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set games($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasGames() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearGames() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get wins => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set wins($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasWins() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearWins() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get winRate => $_getN(4);
+  @$pb.TagNumber(5)
+  set winRate($core.double v) { $_setDouble(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasWinRate() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearWinRate() => $_clearField(5);
+}
+
+class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
+  factory PlayerStatisticsEventOut({
+    $core.int? playerId,
+    $core.String? nickname,
+    PlayerRoleStats? overall,
+    PlayerRoleStats? citizen,
+    PlayerRoleStats? mafia,
+    PlayerRoleStats? don,
+    PlayerRoleStats? sheriff,
+    $core.Iterable<PlayerPairStat>? sameCityTop,
+    $core.Iterable<PlayerPairStat>? sameMafiaTop,
+    $core.Iterable<PlayerPairStat>? diffTeamTop,
+  }) {
+    final $result = create();
+    if (playerId != null) {
+      $result.playerId = playerId;
+    }
+    if (nickname != null) {
+      $result.nickname = nickname;
+    }
+    if (overall != null) {
+      $result.overall = overall;
+    }
+    if (citizen != null) {
+      $result.citizen = citizen;
+    }
+    if (mafia != null) {
+      $result.mafia = mafia;
+    }
+    if (don != null) {
+      $result.don = don;
+    }
+    if (sheriff != null) {
+      $result.sheriff = sheriff;
+    }
+    if (sameCityTop != null) {
+      $result.sameCityTop.addAll(sameCityTop);
+    }
+    if (sameMafiaTop != null) {
+      $result.sameMafiaTop.addAll(sameMafiaTop);
+    }
+    if (diffTeamTop != null) {
+      $result.diffTeamTop.addAll(diffTeamTop);
+    }
+    return $result;
+  }
+  PlayerStatisticsEventOut._() : super();
+  factory PlayerStatisticsEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PlayerStatisticsEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlayerStatisticsEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'playerId', $pb.PbFieldType.O3, protoName: 'playerId')
+    ..aOS(2, _omitFieldNames ? '' : 'nickname')
+    ..aOM<PlayerRoleStats>(3, _omitFieldNames ? '' : 'overall', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(4, _omitFieldNames ? '' : 'citizen', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(5, _omitFieldNames ? '' : 'mafia', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(6, _omitFieldNames ? '' : 'don', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(7, _omitFieldNames ? '' : 'sheriff', subBuilder: PlayerRoleStats.create)
+    ..pc<PlayerPairStat>(8, _omitFieldNames ? '' : 'sameCityTop', $pb.PbFieldType.PM, protoName: 'sameCityTop', subBuilder: PlayerPairStat.create)
+    ..pc<PlayerPairStat>(9, _omitFieldNames ? '' : 'sameMafiaTop', $pb.PbFieldType.PM, protoName: 'sameMafiaTop', subBuilder: PlayerPairStat.create)
+    ..pc<PlayerPairStat>(10, _omitFieldNames ? '' : 'diffTeamTop', $pb.PbFieldType.PM, protoName: 'diffTeamTop', subBuilder: PlayerPairStat.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PlayerStatisticsEventOut clone() => PlayerStatisticsEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PlayerStatisticsEventOut copyWith(void Function(PlayerStatisticsEventOut) updates) => super.copyWith((message) => updates(message as PlayerStatisticsEventOut)) as PlayerStatisticsEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PlayerStatisticsEventOut create() => PlayerStatisticsEventOut._();
+  PlayerStatisticsEventOut createEmptyInstance() => create();
+  static $pb.PbList<PlayerStatisticsEventOut> createRepeated() => $pb.PbList<PlayerStatisticsEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static PlayerStatisticsEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayerStatisticsEventOut>(create);
+  static PlayerStatisticsEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get playerId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set playerId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlayerId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlayerId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get nickname => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nickname($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNickname() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNickname() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  PlayerRoleStats get overall => $_getN(2);
+  @$pb.TagNumber(3)
+  set overall(PlayerRoleStats v) { $_setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasOverall() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearOverall() => $_clearField(3);
+  @$pb.TagNumber(3)
+  PlayerRoleStats ensureOverall() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  PlayerRoleStats get citizen => $_getN(3);
+  @$pb.TagNumber(4)
+  set citizen(PlayerRoleStats v) { $_setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCitizen() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCitizen() => $_clearField(4);
+  @$pb.TagNumber(4)
+  PlayerRoleStats ensureCitizen() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  PlayerRoleStats get mafia => $_getN(4);
+  @$pb.TagNumber(5)
+  set mafia(PlayerRoleStats v) { $_setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasMafia() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMafia() => $_clearField(5);
+  @$pb.TagNumber(5)
+  PlayerRoleStats ensureMafia() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  PlayerRoleStats get don => $_getN(5);
+  @$pb.TagNumber(6)
+  set don(PlayerRoleStats v) { $_setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasDon() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDon() => $_clearField(6);
+  @$pb.TagNumber(6)
+  PlayerRoleStats ensureDon() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  PlayerRoleStats get sheriff => $_getN(6);
+  @$pb.TagNumber(7)
+  set sheriff(PlayerRoleStats v) { $_setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasSheriff() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSheriff() => $_clearField(7);
+  @$pb.TagNumber(7)
+  PlayerRoleStats ensureSheriff() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $pb.PbList<PlayerPairStat> get sameCityTop => $_getList(7);
+
+  @$pb.TagNumber(9)
+  $pb.PbList<PlayerPairStat> get sameMafiaTop => $_getList(8);
+
+  @$pb.TagNumber(10)
+  $pb.PbList<PlayerPairStat> get diffTeamTop => $_getList(9);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

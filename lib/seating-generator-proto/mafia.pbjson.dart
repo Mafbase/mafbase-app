@@ -1555,3 +1555,68 @@ final $typed_data.Uint8List resetPasswordEventOutDescriptor = $convert.base64Dec
     'RQYXNzd29yZEV2ZW50T3V0LkVycm9yUgVlcnJvciI4CgVFcnJvchILCgdub0Vycm9yEAASEAoM'
     'aW52YWxpZFRva2VuEAESEAoMd2Vha1Bhc3N3b3JkEAI=');
 
+@$core.Deprecated('Use playerRoleStatsDescriptor instead')
+const PlayerRoleStats$json = {
+  '1': 'PlayerRoleStats',
+  '2': [
+    {'1': 'games', '3': 1, '4': 1, '5': 5, '10': 'games'},
+    {'1': 'wins', '3': 2, '4': 1, '5': 5, '10': 'wins'},
+    {'1': 'winRate', '3': 3, '4': 1, '5': 1, '10': 'winRate'},
+    {'1': 'avgBonusScore', '3': 4, '4': 1, '5': 1, '10': 'avgBonusScore'},
+  ],
+};
+
+/// Descriptor for `PlayerRoleStats`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List playerRoleStatsDescriptor = $convert.base64Decode(
+    'Cg9QbGF5ZXJSb2xlU3RhdHMSFAoFZ2FtZXMYASABKAVSBWdhbWVzEhIKBHdpbnMYAiABKAVSBH'
+    'dpbnMSGAoHd2luUmF0ZRgDIAEoAVIHd2luUmF0ZRIkCg1hdmdCb251c1Njb3JlGAQgASgBUg1h'
+    'dmdCb251c1Njb3Jl');
+
+@$core.Deprecated('Use playerPairStatDescriptor instead')
+const PlayerPairStat$json = {
+  '1': 'PlayerPairStat',
+  '2': [
+    {'1': 'playerId', '3': 1, '4': 1, '5': 5, '10': 'playerId'},
+    {'1': 'nickname', '3': 2, '4': 1, '5': 9, '10': 'nickname'},
+    {'1': 'games', '3': 3, '4': 1, '5': 5, '10': 'games'},
+    {'1': 'wins', '3': 4, '4': 1, '5': 5, '10': 'wins'},
+    {'1': 'winRate', '3': 5, '4': 1, '5': 1, '10': 'winRate'},
+  ],
+};
+
+/// Descriptor for `PlayerPairStat`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List playerPairStatDescriptor = $convert.base64Decode(
+    'Cg5QbGF5ZXJQYWlyU3RhdBIaCghwbGF5ZXJJZBgBIAEoBVIIcGxheWVySWQSGgoIbmlja25hbW'
+    'UYAiABKAlSCG5pY2tuYW1lEhQKBWdhbWVzGAMgASgFUgVnYW1lcxISCgR3aW5zGAQgASgFUgR3'
+    'aW5zEhgKB3dpblJhdGUYBSABKAFSB3dpblJhdGU=');
+
+@$core.Deprecated('Use playerStatisticsEventOutDescriptor instead')
+const PlayerStatisticsEventOut$json = {
+  '1': 'PlayerStatisticsEventOut',
+  '2': [
+    {'1': 'playerId', '3': 1, '4': 1, '5': 5, '10': 'playerId'},
+    {'1': 'nickname', '3': 2, '4': 1, '5': 9, '10': 'nickname'},
+    {'1': 'overall', '3': 3, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'overall'},
+    {'1': 'citizen', '3': 4, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'citizen'},
+    {'1': 'mafia', '3': 5, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'mafia'},
+    {'1': 'don', '3': 6, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'don'},
+    {'1': 'sheriff', '3': 7, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'sheriff'},
+    {'1': 'sameCityTop', '3': 8, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameCityTop'},
+    {'1': 'sameMafiaTop', '3': 9, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameMafiaTop'},
+    {'1': 'diffTeamTop', '3': 10, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'diffTeamTop'},
+  ],
+};
+
+/// Descriptor for `PlayerStatisticsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List playerStatisticsEventOutDescriptor = $convert.base64Decode(
+    'ChhQbGF5ZXJTdGF0aXN0aWNzRXZlbnRPdXQSGgoIcGxheWVySWQYASABKAVSCHBsYXllcklkEh'
+    'oKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRI0CgdvdmVyYWxsGAMgASgLMhouZ2VuZXJhdGVk'
+    'LlBsYXllclJvbGVTdGF0c1IHb3ZlcmFsbBI0CgdjaXRpemVuGAQgASgLMhouZ2VuZXJhdGVkLl'
+    'BsYXllclJvbGVTdGF0c1IHY2l0aXplbhIwCgVtYWZpYRgFIAEoCzIaLmdlbmVyYXRlZC5QbGF5'
+    'ZXJSb2xlU3RhdHNSBW1hZmlhEiwKA2RvbhgGIAEoCzIaLmdlbmVyYXRlZC5QbGF5ZXJSb2xlU3'
+    'RhdHNSA2RvbhI0CgdzaGVyaWZmGAcgASgLMhouZ2VuZXJhdGVkLlBsYXllclJvbGVTdGF0c1IH'
+    'c2hlcmlmZhI7CgtzYW1lQ2l0eVRvcBgIIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdF'
+    'ILc2FtZUNpdHlUb3ASPQoMc2FtZU1hZmlhVG9wGAkgAygLMhkuZ2VuZXJhdGVkLlBsYXllclBh'
+    'aXJTdGF0UgxzYW1lTWFmaWFUb3ASOwoLZGlmZlRlYW1Ub3AYCiADKAsyGS5nZW5lcmF0ZWQuUG'
+    'xheWVyUGFpclN0YXRSC2RpZmZUZWFtVG9w');
+
