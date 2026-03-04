@@ -858,47 +858,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tooltipFnCeil => 'Round up';
 
   @override
-  String get playerStatsTitle => 'Статистика игрока';
+  String get playerStatsTitle => 'Player Statistics';
 
   @override
-  String get playerStatsOverall => 'Общая статистика';
+  String get playerStatsOverall => 'Overall';
 
   @override
-  String get playerStatsCitizen => 'Мирный житель';
+  String get playerStatsCitizen => 'Citizen';
 
   @override
-  String get playerStatsMafia => 'Мафия';
+  String get playerStatsMafia => 'Mafia';
 
   @override
-  String get playerStatsDon => 'Дон';
+  String get playerStatsDon => 'Don';
 
   @override
-  String get playerStatsSheriff => 'Шериф';
+  String get playerStatsSheriff => 'Sheriff';
 
   @override
-  String get playerStatsGames => 'Игры';
+  String get playerStatsGames => 'Games';
 
   @override
-  String get playerStatsWins => 'Победы';
+  String get playerStatsWins => 'Wins';
 
   @override
-  String get playerStatsWinRate => 'Винрейт';
+  String get playerStatsWinRate => 'Win rate';
 
   @override
-  String get playerStatsAvgBonus => 'Ср. доп. балл';
+  String get playerStatsAvgBonus => 'Avg bonus';
 
   @override
-  String get playerStatsSameCityTop => 'ТОП-5 партнёров (город)';
+  String get playerStatsSameCityTop => 'TOP-5 teammates (city)';
 
   @override
-  String get playerStatsSameMafiaTop => 'ТОП-5 партнёров (мафия)';
+  String get playerStatsSameMafiaTop => 'TOP-5 teammates (mafia)';
 
   @override
-  String get playerStatsDiffTeamTop => 'ТОП-5 противников';
+  String get playerStatsDiffTeamTop => 'TOP-5 opponents';
 
   @override
-  String get playerStatsError => 'Не удалось загрузить статистику';
+  String get playerStatsError => 'Failed to load statistics';
 
   @override
-  String get playerStatsNoData => 'Нет данных о парах';
+  String get playerStatsNoData => 'No pair data available';
 }
