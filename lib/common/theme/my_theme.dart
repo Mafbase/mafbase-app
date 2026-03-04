@@ -42,7 +42,6 @@ abstract class MyTheme {
 class _LightTheme implements MyTheme {
   final bool _isMobile;
   final _defaultTextStyle = const TextStyle(
-    fontFamily: "Open Sans",
     color: Colors.black,
   );
 

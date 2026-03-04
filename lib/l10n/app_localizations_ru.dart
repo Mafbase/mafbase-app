@@ -859,4 +859,58 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tooltipFnCeil => 'Округление вверх';
+
+  @override
+  String get playerStatsTitle => 'Статистика игрока';
+
+  @override
+  String get playerStatsOverall => 'Общая статистика';
+
+  @override
+  String get playerStatsCitizen => 'Мирный житель';
+
+  @override
+  String get playerStatsMafia => 'Мафия';
+
+  @override
+  String get playerStatsDon => 'Дон';
+
+  @override
+  String get playerStatsSheriff => 'Шериф';
+
+  @override
+  String get playerStatsGames => 'Игры';
+
+  @override
+  String get playerStatsWins => 'Победы';
+
+  @override
+  String get playerStatsWinRate => 'Винрейт';
+
+  @override
+  String get playerStatsAvgBonus => 'Ср. доп. балл';
+
+  @override
+  String get playerStatsSameCityTop => 'ТОП-5 Одноцветов (город)';
+
+  @override
+  String get playerStatsSameMafiaTop => 'ТОП-5 Одноцветов (мафия)';
+
+  @override
+  String get playerStatsDiffTeamTop => 'ТОП-5 Разноцветов';
+
+  @override
+  String get playerStatsSameCityBottom => 'АНТИТОП-5 Одноцветов (город)';
+
+  @override
+  String get playerStatsSameMafiaBottom => 'АНТИТОП-5 Одноцветов (мафия)';
+
+  @override
+  String get playerStatsDiffTeamBottom => 'АНТИТОП-5 Разноцветов';
+
+  @override
+  String get playerStatsError => 'Не удалось загрузить статистику';
+
+  @override
+  String get playerStatsNoData => 'Нет данных о парах';
 }

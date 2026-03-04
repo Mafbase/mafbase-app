@@ -42,6 +42,7 @@ class RatingTable extends StatefulWidget {
   final bool isTournament;
   final bool pinNicknames;
   final int customSortColumnIndex;
+  final void Function(int playerId)? onPlayerTap;
 
   RatingTable({
     super.key,
@@ -57,6 +58,7 @@ class RatingTable extends StatefulWidget {
     required this.isTournament,
     this.pinNicknames = false,
     this.customSortColumnIndex = 0,
+    this.onPlayerTap,
   })  : style = style ?? RatingTableStyle.full,
         sort = sort ?? RatingSort.score,
         gameFilter = gameFilter ?? 0,
@@ -82,41 +84,29 @@ class RatingTable extends StatefulWidget {
         return rows;
       case RatingSort.winRate:
         return rows.sortedBy<num>(
-          (element) => -(element.gamesCount == 0
-              ? 0
-              : element.wins / element.gamesCount),
+          (element) => -(element.gamesCount == 0 ? 0 : element.wins / element.gamesCount),
         );
       case RatingSort.citizenWinRate:
         return rows.sortedBy<num>(
-          (element) => -(element.citizenGamesCount == 0
-              ? 0
-              : element.citizenWinsCount / element.citizenGamesCount),
+          (element) => -(element.citizenGamesCount == 0 ? 0 : element.citizenWinsCount / element.citizenGamesCount),
         );
       case RatingSort.mafiaWinRate:
         return rows.sortedBy<num>(
-          (element) => -(element.mafiaGamesCount == 0
-              ? 0
-              : element.mafiaWinsCount / element.mafiaGamesCount),
+          (element) => -(element.mafiaGamesCount == 0 ? 0 : element.mafiaWinsCount / element.mafiaGamesCount),
         );
       case RatingSort.donWinRate:
         return rows.sortedBy<num>(
-          (element) => -(element.donsGamesCount == 0
-              ? 0
-              : element.donsWinsCount / element.donsGamesCount),
+          (element) => -(element.donsGamesCount == 0 ? 0 : element.donsWinsCount / element.donsGamesCount),
         );
       case RatingSort.sheriffWinRate:
         return rows.sortedBy<num>(
-          (element) => -(element.sheriffGamesCount == 0
-              ? 0
-              : element.sheriffWinsCount / element.sheriffGamesCount),
+          (element) => -(element.sheriffGamesCount == 0 ? 0 : element.sheriffWinsCount / element.sheriffGamesCount),
         );
       case RatingSort.dies:
         return rows.sortedBy<num>(
-          (element) =>
-              -((element.sheriffGamesCount + element.citizenGamesCount) == 0
-                  ? 0
-                  : element.died /
-                      (element.sheriffGamesCount + element.citizenGamesCount)),
+          (element) => -((element.sheriffGamesCount + element.citizenGamesCount) == 0
+              ? 0
+              : element.died / (element.sheriffGamesCount + element.citizenGamesCount)),
         );
       case RatingSort.citizenAddScorePerGame:
         return rows.sortedBy<num>(
@@ -193,8 +183,7 @@ class _RatingTableState extends State<RatingTable> {
   int get mainControllersSize {
     if (widget.style == RatingTableStyle.full) return 10;
     if (widget.style == RatingTableStyle.custom) {
-      final customCount =
-          widget.rows.firstOrNull?.customColumns.length ?? 0;
+      final customCount = widget.rows.firstOrNull?.customColumns.length ?? 0;
       return 2 + customCount;
     }
     return 8;
@@ -291,26 +280,25 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get nicknamePrototype => wrap(
         Text(
-          widget.sortedRows
-                  .map((e) => e.nickname)
-                  .sortedBy<num>((element) => element.length)
-                  .lastOrNull ??
-              "",
+          widget.sortedRows.map((e) => e.nickname).sortedBy<num>((element) => element.length).lastOrNull ?? "",
         ),
       );
 
   Widget nicknames(int index, {bool? boldRight}) => wrap(
-        Text(widget.sortedRows[index].nickname),
+        widget.onPlayerTap != null
+            ? InkWell(
+                onTap: () => widget.onPlayerTap!(widget.sortedRows[index].playerId),
+                child: Text(
+                  widget.sortedRows[index].nickname,
+                ),
+              )
+            : Text(widget.sortedRows[index].nickname),
         boldRight: boldRight ?? false,
       );
 
   Widget get scorePrototype => wrap(
         Text(
-          widget.sortedRows
-                  .map((e) => e.score.toString())
-                  .sortedBy<num>((element) => element.length)
-                  .lastOrNull ??
-              "",
+          widget.sortedRows.map((e) => e.score.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
         ),
       );
 
@@ -322,10 +310,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get addScorePrototype => wrap(
         Text(
-          widget.sortedRows
-                  .map((e) => e.addScore.toString())
-                  .sortedBy<num>((element) => element.length)
-                  .lastOrNull ??
+          widget.sortedRows.map((e) => e.addScore.toString()).sortedBy<num>((element) => element.length).lastOrNull ??
               "",
         ),
       );
@@ -339,11 +324,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get winPrototype => wrap(
         Text(
-          widget.sortedRows
-                  .map((e) => e.wins.toString())
-                  .sortedBy<num>((element) => element.length)
-                  .lastOrNull ??
-              "",
+          widget.sortedRows.map((e) => e.wins.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
         ),
       );
 
@@ -355,10 +336,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get roleWinPrototype => wrap(
         Text(
-          widget.sortedRows
-                  .map((e) => e.roleWins.toString())
-                  .sortedBy<num>((element) => element.length)
-                  .lastOrNull ??
+          widget.sortedRows.map((e) => e.roleWins.toString()).sortedBy<num>((element) => element.length).lastOrNull ??
               "",
         ),
       );
@@ -371,11 +349,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get ciPrototype => wrap(
         Text(
-          widget.sortedRows
-                  .map((e) => e.ci.toString())
-                  .sortedBy<num>((element) => element.length)
-                  .lastOrNull ??
-              "",
+          widget.sortedRows.map((e) => e.ci.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
         ),
       );
 
@@ -397,11 +371,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get diesPrototype => wrap(
         Text(
-          widget.sortedRows
-                  .map((e) => e.died.toString())
-                  .sortedBy<num>((element) => element.length)
-                  .lastOrNull ??
-              "",
+          widget.sortedRows.map((e) => e.died.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
         ),
       );
 
@@ -411,53 +381,51 @@ class _RatingTableState extends State<RatingTable> {
         ),
       );
 
-  Widget? gameHeader(double width, [bool expand = true]) =>
-      widget.sortedRows.isEmpty
-          ? null
-          : SizedBox(
-              height: 50,
-              child: Builder(
-                builder: (context) {
-                  builder(BuildContext context, int index) {
-                    return Container(
-                      width: width,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black.withValues(alpha: 0.2),
-                          width: 0.5,
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          (index + 1).toString(),
-                        ),
-                      ),
-                    );
-                  }
-
-                  if (!expand) {
-                    return Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: List.generate(
-                        widget.sortedRows.firstOrNull?.games.length ?? 0,
-                        (index) => builder(context, index),
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    key: Key(
-                      "GameHeader${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}",
+  Widget? gameHeader(double width, [bool expand = true]) => widget.sortedRows.isEmpty
+      ? null
+      : SizedBox(
+          height: 50,
+          child: Builder(
+            builder: (context) {
+              builder(BuildContext context, int index) {
+                return Container(
+                  width: width,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black.withValues(alpha: 0.2),
+                      width: 0.5,
                     ),
-                    physics: const ClampingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    controller: controllers.first,
-                    itemCount:
-                        (widget.sortedRows.firstOrNull?.games.length ?? 0),
-                    itemBuilder: builder,
-                  );
-                },
-              ),
-            );
+                  ),
+                  child: Center(
+                    child: Text(
+                      (index + 1).toString(),
+                    ),
+                  ),
+                );
+              }
+
+              if (!expand) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(
+                    widget.sortedRows.firstOrNull?.games.length ?? 0,
+                    (index) => builder(context, index),
+                  ),
+                );
+              }
+              return ListView.builder(
+                key: Key(
+                  "GameHeader${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}",
+                ),
+                physics: const ClampingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                controller: controllers.first,
+                itemCount: (widget.sortedRows.firstOrNull?.games.length ?? 0),
+                itemBuilder: builder,
+              );
+            },
+          ),
+        );
 
   Widget games(double width, int rowIndex, [bool expand = true]) {
     return SizedBox(
@@ -485,9 +453,7 @@ class _RatingTableState extends State<RatingTable> {
                 ),
                 child: Center(
                   child: Text(
-                    widget.sortedRows[rowIndex].games[index].score
-                            ?.toString() ??
-                        "",
+                    widget.sortedRows[rowIndex].games[index].score?.toString() ?? "",
                   ),
                 ),
               ),
@@ -521,9 +487,7 @@ class _RatingTableState extends State<RatingTable> {
   Widget winRatePrototype() {
     final element = widget.sortedRows
         .sortedBy<num>(
-          (element) =>
-              element.gamesCount.toString().length +
-              element.wins.toString().length,
+          (element) => element.gamesCount.toString().length + element.wins.toString().length,
         )
         .lastOrNull;
     if (element == null) return Container();
@@ -541,9 +505,7 @@ class _RatingTableState extends State<RatingTable> {
   Widget citizenWinRatePrototype() {
     final element = widget.sortedRows
         .sortedBy<num>(
-          (element) =>
-              element.citizenGamesCount.toString().length +
-              element.citizenWinsCount.toString().length,
+          (element) => element.citizenGamesCount.toString().length + element.citizenWinsCount.toString().length,
         )
         .lastOrNull;
     if (element == null) return Container();
@@ -559,15 +521,12 @@ class _RatingTableState extends State<RatingTable> {
         ),
       );
 
-  Widget citizenWinRate(int index) =>
-      citizenWinRateFromModel(widget.sortedRows[index]);
+  Widget citizenWinRate(int index) => citizenWinRateFromModel(widget.sortedRows[index]);
 
   Widget donWinRatePrototype() {
     final element = widget.sortedRows
         .sortedBy<num>(
-          (element) =>
-              element.donsGamesCount.toString().length +
-              element.donsWinsCount.toString().length,
+          (element) => element.donsGamesCount.toString().length + element.donsWinsCount.toString().length,
         )
         .lastOrNull;
     if (element == null) return Container();
@@ -588,9 +547,7 @@ class _RatingTableState extends State<RatingTable> {
   Widget sheriffWinRatePrototype() {
     final element = widget.sortedRows
         .sortedBy<num>(
-          (element) =>
-              element.sheriffGamesCount.toString().length +
-              element.sheriffWinsCount.toString().length,
+          (element) => element.sheriffGamesCount.toString().length + element.sheriffWinsCount.toString().length,
         )
         .lastOrNull;
     if (element == null) return Container();
@@ -606,15 +563,12 @@ class _RatingTableState extends State<RatingTable> {
         ),
       );
 
-  Widget sheriffWinRate(int index) =>
-      sheriffWinRateFromModel(widget.sortedRows[index]);
+  Widget sheriffWinRate(int index) => sheriffWinRateFromModel(widget.sortedRows[index]);
 
   Widget mafiaWinRatePrototype() {
     final element = widget.sortedRows
         .sortedBy<num>(
-          (element) =>
-              element.mafiaGamesCount.toString().length +
-              element.mafiaWinsCount.toString().length,
+          (element) => element.mafiaGamesCount.toString().length + element.mafiaWinsCount.toString().length,
         )
         .lastOrNull;
     if (element == null) return Container();
@@ -630,16 +584,13 @@ class _RatingTableState extends State<RatingTable> {
         ),
       );
 
-  Widget mafiaWinRate(int index) =>
-      mafiaWinRateFromModel(widget.sortedRows[index]);
+  Widget mafiaWinRate(int index) => mafiaWinRateFromModel(widget.sortedRows[index]);
 
   Widget diesStatPrototype() {
     final element = widget.sortedRows
         .sortedBy<num>(
           (element) =>
-              (element.citizenGamesCount + element.sheriffGamesCount)
-                  .toString()
-                  .length +
+              (element.citizenGamesCount + element.sheriffGamesCount).toString().length +
               element.died.toString().length,
         )
         .lastOrNull;
@@ -673,35 +624,31 @@ class _RatingTableState extends State<RatingTable> {
       );
 
   Widget citizenAddScorePerGame(int index) => wrap(
-        Text(
-            "${widget.isTournament ? widget.sortedRows[index].citizenAddScore : customDivide(
-                widget.sortedRows[index].citizenAddScore,
-                widget.sortedRows[index].citizenGamesCount,
-              )}"),
+        Text("${widget.isTournament ? widget.sortedRows[index].citizenAddScore : customDivide(
+            widget.sortedRows[index].citizenAddScore,
+            widget.sortedRows[index].citizenGamesCount,
+          )}"),
       );
 
   Widget sheriffAddScorePerGame(int index) => wrap(
-        Text(
-            "${widget.isTournament ? widget.sortedRows[index].sheriffAddScore : customDivide(
-                widget.sortedRows[index].sheriffAddScore,
-                widget.sortedRows[index].sheriffGamesCount,
-              )}"),
+        Text("${widget.isTournament ? widget.sortedRows[index].sheriffAddScore : customDivide(
+            widget.sortedRows[index].sheriffAddScore,
+            widget.sortedRows[index].sheriffGamesCount,
+          )}"),
       );
 
   Widget donAddScorePerGame(int index) => wrap(
-        Text(
-            "${widget.isTournament ? widget.sortedRows[index].donAddScore : customDivide(
-                widget.sortedRows[index].donAddScore,
-                widget.sortedRows[index].donsGamesCount,
-              )}"),
+        Text("${widget.isTournament ? widget.sortedRows[index].donAddScore : customDivide(
+            widget.sortedRows[index].donAddScore,
+            widget.sortedRows[index].donsGamesCount,
+          )}"),
       );
 
   Widget mafiaAddScorePerGame(int index) => wrap(
-        Text(
-            "${widget.isTournament ? widget.sortedRows[index].mafiaAddScore : customDivide(
-                widget.sortedRows[index].mafiaAddScore,
-                widget.sortedRows[index].mafiaGamesCount,
-              )}"),
+        Text("${widget.isTournament ? widget.sortedRows[index].mafiaAddScore : customDivide(
+            widget.sortedRows[index].mafiaAddScore,
+            widget.sortedRows[index].mafiaGamesCount,
+          )}"),
       );
 
   @override
@@ -841,8 +788,7 @@ class _RatingTableState extends State<RatingTable> {
       ];
 
   List<Widget> get customColumns {
-    final customColumnDefs =
-        widget.rows.firstOrNull?.customColumns ?? [];
+    final customColumnDefs = widget.rows.firstOrNull?.customColumns ?? [];
     return [
       column(
         mainControllers[0],
@@ -865,9 +811,7 @@ class _RatingTableState extends State<RatingTable> {
           builder: (index) => wrap(
             Text(
               widget.sortedRows[index].customColumns.length > i
-                  ? widget.sortedRows[index].customColumns[i].value
-                          ?.toString() ??
-                      "—"
+                  ? widget.sortedRows[index].customColumns[i].value?.toString() ?? "—"
                   : "—",
             ),
           ),
@@ -978,12 +922,9 @@ class _RatingTableState extends State<RatingTable> {
   List<Widget> fullColumns([bool withoutFlex = false]) {
     final gamesColumn = LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth.isFinite
-            ? constraints.maxWidth / (constraints.maxWidth / 60).floor()
-            : 60.0;
+        final width = constraints.maxWidth.isFinite ? constraints.maxWidth / (constraints.maxWidth / 60).floor() : 60.0;
         final gamesCount = widget.sortedRows.firstOrNull?.games.length ?? 0;
-        final expand =
-            width * gamesCount > constraints.maxWidth && !widget.isMobile;
+        final expand = width * gamesCount > constraints.maxWidth && !widget.isMobile;
         final header = gameHeader(width, expand);
         final listView = ListView.builder(
           key: const Key("fullColumns2"),
@@ -998,8 +939,7 @@ class _RatingTableState extends State<RatingTable> {
             if (header != null) header,
             Expanded(
               child: ScrollConfiguration(
-                behavior:
-                    ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
                 child: expand
                     ? listView
                     : Stack(
@@ -1155,15 +1095,13 @@ class _RatingTableState extends State<RatingTable> {
                     ),
                   Expanded(
                     child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context)
-                          .copyWith(scrollbars: isLastColumn),
+                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: isLastColumn),
                       child: ListView.builder(
                         key: key,
                         physics: const ClampingScrollPhysics(),
                         controller: controller,
                         itemCount: widget.sortedRows.length,
-                        itemBuilder: (context, index) =>
-                            builder != null ? builder(index) : widgets![index],
+                        itemBuilder: (context, index) => builder != null ? builder(index) : widgets![index],
                       ),
                     ),
                   ),
@@ -1177,8 +1115,6 @@ class _RatingTableState extends State<RatingTable> {
   }
 }
 
-num customDivideForPercents(num a, num b) =>
-    b == 0 ? 0 : (a * 100) / b.toDouble();
+num customDivideForPercents(num a, num b) => b == 0 ? 0 : (a * 100) / b.toDouble();
 
-num customDivide(num a, num b) =>
-    ((b == 0 ? 0 : a / b.toDouble()) * 10000).round() / 10000;
+num customDivide(num a, num b) => ((b == 0 ? 0 : a / b.toDouble()) * 10000).round() / 10000;

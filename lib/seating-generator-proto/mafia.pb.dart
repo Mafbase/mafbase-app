@@ -6177,6 +6177,9 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
     $core.Iterable<PlayerPairStat>? sameCityTop,
     $core.Iterable<PlayerPairStat>? sameMafiaTop,
     $core.Iterable<PlayerPairStat>? diffTeamTop,
+    $core.Iterable<PlayerPairStat>? sameCityBottom,
+    $core.Iterable<PlayerPairStat>? sameMafiaBottom,
+    $core.Iterable<PlayerPairStat>? diffTeamBottom,
   }) {
     final $result = create();
     if (playerId != null) {
@@ -6209,6 +6212,15 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
     if (diffTeamTop != null) {
       $result.diffTeamTop.addAll(diffTeamTop);
     }
+    if (sameCityBottom != null) {
+      $result.sameCityBottom.addAll(sameCityBottom);
+    }
+    if (sameMafiaBottom != null) {
+      $result.sameMafiaBottom.addAll(sameMafiaBottom);
+    }
+    if (diffTeamBottom != null) {
+      $result.diffTeamBottom.addAll(diffTeamBottom);
+    }
     return $result;
   }
   PlayerStatisticsEventOut._() : super();
@@ -6226,6 +6238,9 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
     ..pc<PlayerPairStat>(8, _omitFieldNames ? '' : 'sameCityTop', $pb.PbFieldType.PM, protoName: 'sameCityTop', subBuilder: PlayerPairStat.create)
     ..pc<PlayerPairStat>(9, _omitFieldNames ? '' : 'sameMafiaTop', $pb.PbFieldType.PM, protoName: 'sameMafiaTop', subBuilder: PlayerPairStat.create)
     ..pc<PlayerPairStat>(10, _omitFieldNames ? '' : 'diffTeamTop', $pb.PbFieldType.PM, protoName: 'diffTeamTop', subBuilder: PlayerPairStat.create)
+    ..pc<PlayerPairStat>(11, _omitFieldNames ? '' : 'sameCityBottom', $pb.PbFieldType.PM, protoName: 'sameCityBottom', subBuilder: PlayerPairStat.create)
+    ..pc<PlayerPairStat>(12, _omitFieldNames ? '' : 'sameMafiaBottom', $pb.PbFieldType.PM, protoName: 'sameMafiaBottom', subBuilder: PlayerPairStat.create)
+    ..pc<PlayerPairStat>(13, _omitFieldNames ? '' : 'diffTeamBottom', $pb.PbFieldType.PM, protoName: 'diffTeamBottom', subBuilder: PlayerPairStat.create)
     ..hasRequiredFields = false
   ;
 
@@ -6331,6 +6346,15 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(10)
   $pb.PbList<PlayerPairStat> get diffTeamTop => $_getList(9);
+
+  @$pb.TagNumber(11)
+  $pb.PbList<PlayerPairStat> get sameCityBottom => $_getList(10);
+
+  @$pb.TagNumber(12)
+  $pb.PbList<PlayerPairStat> get sameMafiaBottom => $_getList(11);
+
+  @$pb.TagNumber(13)
+  $pb.PbList<PlayerPairStat> get diffTeamBottom => $_getList(12);
 }
 
 

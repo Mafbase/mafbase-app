@@ -856,4 +856,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tooltipFnCeil => 'Round up';
+
+  @override
+  String get playerStatsTitle => 'Player Statistics';
+
+  @override
+  String get playerStatsOverall => 'Overall';
+
+  @override
+  String get playerStatsCitizen => 'Citizen';
+
+  @override
+  String get playerStatsMafia => 'Mafia';
+
+  @override
+  String get playerStatsDon => 'Don';
+
+  @override
+  String get playerStatsSheriff => 'Sheriff';
+
+  @override
+  String get playerStatsGames => 'Games';
+
+  @override
+  String get playerStatsWins => 'Wins';
+
+  @override
+  String get playerStatsWinRate => 'Win rate';
+
+  @override
+  String get playerStatsAvgBonus => 'Avg bonus';
+
+  @override
+  String get playerStatsSameCityTop => 'TOP-5 same team (city)';
+
+  @override
+  String get playerStatsSameMafiaTop => 'TOP-5 same team (mafia)';
+
+  @override
+  String get playerStatsDiffTeamTop => 'TOP-5 different team';
+
+  @override
+  String get playerStatsSameCityBottom => 'BOTTOM-5 same team (city)';
+
+  @override
+  String get playerStatsSameMafiaBottom => 'BOTTOM-5 same team (mafia)';
+
+  @override
+  String get playerStatsDiffTeamBottom => 'BOTTOM-5 different team';
+
+  @override
+  String get playerStatsError => 'Failed to load statistics';
+
+  @override
+  String get playerStatsNoData => 'No pair data available';
 }

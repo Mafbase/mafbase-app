@@ -1669,6 +1669,114 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Округление вверх'**
   String get tooltipFnCeil;
+
+  /// No description provided for @playerStatsTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Статистика игрока'**
+  String get playerStatsTitle;
+
+  /// No description provided for @playerStatsOverall.
+  ///
+  /// In ru, this message translates to:
+  /// **'Общая статистика'**
+  String get playerStatsOverall;
+
+  /// No description provided for @playerStatsCitizen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мирный житель'**
+  String get playerStatsCitizen;
+
+  /// No description provided for @playerStatsMafia.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мафия'**
+  String get playerStatsMafia;
+
+  /// No description provided for @playerStatsDon.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дон'**
+  String get playerStatsDon;
+
+  /// No description provided for @playerStatsSheriff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Шериф'**
+  String get playerStatsSheriff;
+
+  /// No description provided for @playerStatsGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игры'**
+  String get playerStatsGames;
+
+  /// No description provided for @playerStatsWins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Победы'**
+  String get playerStatsWins;
+
+  /// No description provided for @playerStatsWinRate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Винрейт'**
+  String get playerStatsWinRate;
+
+  /// No description provided for @playerStatsAvgBonus.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ср. доп. балл'**
+  String get playerStatsAvgBonus;
+
+  /// No description provided for @playerStatsSameCityTop.
+  ///
+  /// In ru, this message translates to:
+  /// **'ТОП-5 Одноцветов (город)'**
+  String get playerStatsSameCityTop;
+
+  /// No description provided for @playerStatsSameMafiaTop.
+  ///
+  /// In ru, this message translates to:
+  /// **'ТОП-5 Одноцветов (мафия)'**
+  String get playerStatsSameMafiaTop;
+
+  /// No description provided for @playerStatsDiffTeamTop.
+  ///
+  /// In ru, this message translates to:
+  /// **'ТОП-5 Разноцветов'**
+  String get playerStatsDiffTeamTop;
+
+  /// No description provided for @playerStatsSameCityBottom.
+  ///
+  /// In ru, this message translates to:
+  /// **'АНТИТОП-5 Одноцветов (город)'**
+  String get playerStatsSameCityBottom;
+
+  /// No description provided for @playerStatsSameMafiaBottom.
+  ///
+  /// In ru, this message translates to:
+  /// **'АНТИТОП-5 Одноцветов (мафия)'**
+  String get playerStatsSameMafiaBottom;
+
+  /// No description provided for @playerStatsDiffTeamBottom.
+  ///
+  /// In ru, this message translates to:
+  /// **'АНТИТОП-5 Разноцветов'**
+  String get playerStatsDiffTeamBottom;
+
+  /// No description provided for @playerStatsError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось загрузить статистику'**
+  String get playerStatsError;
+
+  /// No description provided for @playerStatsNoData.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет данных о парах'**
+  String get playerStatsNoData;
 }
 
 class _AppLocalizationsDelegate
