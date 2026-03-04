@@ -1,3 +1,4 @@
+import 'golden_path.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -155,7 +156,7 @@ void main() {
 
       await expectLater(
         find.byType(MaterialApp),
-        matchesGoldenFile('goldens/player_stats_loading.png'),
+        matchesGoldenFile(goldenPath('player_stats_loading')),
       );
 
       await bloc.close();
@@ -172,7 +173,7 @@ void main() {
 
       await expectLater(
         find.byType(MaterialApp),
-        matchesGoldenFile('goldens/player_stats_error.png'),
+        matchesGoldenFile(goldenPath('player_stats_error')),
       );
 
       await bloc.close();
@@ -192,7 +193,7 @@ void main() {
 
       await expectLater(
         find.byType(MaterialApp),
-        matchesGoldenFile('goldens/player_stats_data.png'),
+        matchesGoldenFile(goldenPath('player_stats_data')),
       );
 
       await bloc.close();
@@ -212,7 +213,7 @@ void main() {
 
       await expectLater(
         find.byType(MaterialApp),
-        matchesGoldenFile('goldens/player_stats_empty_pairs.png'),
+        matchesGoldenFile(goldenPath('player_stats_empty_pairs')),
       );
 
       await bloc.close();
