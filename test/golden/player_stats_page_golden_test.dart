@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -5,12 +6,16 @@ import 'package:provider/provider.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_bloc.dart';
+import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_event.dart';
+import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_state.dart';
-import 'package:seating_generator_web/feature/player_statistics/ui/widgets/player_pair_stats_section.dart';
-import 'package:seating_generator_web/feature/player_statistics/ui/widgets/player_role_stats_card.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 
-const _mockStatistics = PlayerStatisticsModel(
+class MockPlayerStatsBloc
+    extends MockBloc<PlayerStatsEvent, PlayerStatsState>
+    implements PlayerStatsBloc {}
+
+const _fullStatistics = PlayerStatisticsModel(
   playerId: 1,
   nickname: 'Белый Волк',
   overall: PlayerRoleStatsModel(
@@ -44,24 +49,62 @@ const _mockStatistics = PlayerStatisticsModel(
     avgBonusScore: 0.38,
   ),
   sameCityTop: [
-    PlayerPairStatModel(playerId: 2, nickname: 'Тень', games: 30, wins: 22, winRate: 73.3),
-    PlayerPairStatModel(playerId: 3, nickname: 'Рыцарь', games: 25, wins: 17, winRate: 68.0),
-    PlayerPairStatModel(playerId: 4, nickname: 'Ангел', games: 20, wins: 14, winRate: 70.0),
-    PlayerPairStatModel(playerId: 5, nickname: 'Феникс', games: 18, wins: 11, winRate: 61.1),
-    PlayerPairStatModel(playerId: 6, nickname: 'Гром', games: 15, wins: 10, winRate: 66.7),
+    PlayerPairStatModel(
+        playerId: 2, nickname: 'Тень', games: 30, wins: 22, winRate: 73.3),
+    PlayerPairStatModel(
+        playerId: 3, nickname: 'Рыцарь', games: 25, wins: 17, winRate: 68.0),
+    PlayerPairStatModel(
+        playerId: 4, nickname: 'Ангел', games: 20, wins: 14, winRate: 70.0),
+    PlayerPairStatModel(
+        playerId: 5, nickname: 'Феникс', games: 18, wins: 11, winRate: 61.1),
+    PlayerPairStatModel(
+        playerId: 6, nickname: 'Гром', games: 15, wins: 10, winRate: 66.7),
   ],
   sameMafiaTop: [
-    PlayerPairStatModel(playerId: 7, nickname: 'Вороной', games: 22, wins: 15, winRate: 68.2),
-    PlayerPairStatModel(playerId: 8, nickname: 'Клинок', games: 18, wins: 12, winRate: 66.7),
-    PlayerPairStatModel(playerId: 9, nickname: 'Шторм', games: 14, wins: 9, winRate: 64.3),
+    PlayerPairStatModel(
+        playerId: 7, nickname: 'Вороной', games: 22, wins: 15, winRate: 68.2),
+    PlayerPairStatModel(
+        playerId: 8, nickname: 'Клинок', games: 18, wins: 12, winRate: 66.7),
+    PlayerPairStatModel(
+        playerId: 9, nickname: 'Шторм', games: 14, wins: 9, winRate: 64.3),
   ],
   diffTeamTop: [
-    PlayerPairStatModel(playerId: 10, nickname: 'Алмаз', games: 28, wins: 20, winRate: 71.4),
-    PlayerPairStatModel(playerId: 11, nickname: 'Сокол', games: 24, wins: 16, winRate: 66.7),
+    PlayerPairStatModel(
+        playerId: 10, nickname: 'Алмаз', games: 28, wins: 20, winRate: 71.4),
+    PlayerPairStatModel(
+        playerId: 11, nickname: 'Сокол', games: 24, wins: 16, winRate: 66.7),
   ],
 );
 
-Widget _buildTestableWidget(Widget child) {
+const _emptyPairsStatistics = PlayerStatisticsModel(
+  playerId: 2,
+  nickname: 'Новичок',
+  overall: PlayerRoleStatsModel(
+      games: 3, wins: 1, winRate: 33.3, avgBonusScore: 0.10),
+  citizen: PlayerRoleStatsModel(
+      games: 2, wins: 1, winRate: 50.0, avgBonusScore: 0.05),
+  mafia: PlayerRoleStatsModel(
+      games: 1, wins: 0, winRate: 0.0, avgBonusScore: 0.0),
+  don: PlayerRoleStatsModel(
+      games: 0, wins: 0, winRate: 0.0, avgBonusScore: 0.0),
+  sheriff: PlayerRoleStatsModel(
+      games: 0, wins: 0, winRate: 0.0, avgBonusScore: 0.0),
+  sameCityTop: [],
+  sameMafiaTop: [],
+  diffTeamTop: [],
+);
+
+MockPlayerStatsBloc _createMockBloc(PlayerStatsState state) {
+  final bloc = MockPlayerStatsBloc();
+  whenListen(
+    bloc,
+    const Stream<PlayerStatsState>.empty(),
+    initialState: state,
+  );
+  return bloc;
+}
+
+Widget _buildPage(PlayerStatsBloc bloc) {
   return Provider<MyTheme>.value(
     value: MyTheme.light(false),
     child: MaterialApp(
@@ -69,7 +112,10 @@ Widget _buildTestableWidget(Widget child) {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: const Locale('ru'),
-      home: child,
+      home: BlocProvider<PlayerStatsBloc>.value(
+        value: bloc,
+        child: const PlayerStatsPage(playerId: 1),
+      ),
     ),
   );
 }
@@ -77,202 +123,75 @@ Widget _buildTestableWidget(Widget child) {
 void main() {
   group('PlayerStatsPage golden tests', () {
     testWidgets('loading state', (tester) async {
-      await tester.pumpWidget(
-        _buildTestableWidget(
-          Scaffold(
-            appBar: AppBar(
-              leading: const Icon(Icons.arrow_back, color: Colors.white),
-              title: const Text('Статистика игрока'),
-              backgroundColor: const Color(0xFF1A2D42),
-              foregroundColor: Colors.white,
-            ),
-            backgroundColor: const Color(0xFFF5F5F5),
-            body: const Center(child: CircularProgressIndicator()),
-          ),
-        ),
-      );
+      final bloc = _createMockBloc(const PlayerStatsState(isLoading: true));
+
+      await tester.pumpWidget(_buildPage(bloc));
+      await tester.pump();
       await tester.pump();
 
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/player_stats_loading.png'),
       );
+
+      await bloc.close();
     });
 
     testWidgets('error state', (tester) async {
-      await tester.pumpWidget(
-        _buildTestableWidget(
-          Scaffold(
-            appBar: AppBar(
-              leading: const Icon(Icons.arrow_back, color: Colors.white),
-              title: const Text('Статистика игрока'),
-              backgroundColor: const Color(0xFF1A2D42),
-              foregroundColor: Colors.white,
-            ),
-            backgroundColor: const Color(0xFFF5F5F5),
-            body: const Center(
-              child: Text('Не удалось загрузить статистику'),
-            ),
-          ),
-        ),
+      final bloc = _createMockBloc(
+        const PlayerStatsState(isLoading: false, hasError: true),
       );
-      await tester.pumpAndSettle();
+
+      await tester.pumpWidget(_buildPage(bloc));
+      await tester.pump();
+      await tester.pump();
 
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/player_stats_error.png'),
       );
+
+      await bloc.close();
     });
 
     testWidgets('data state — full page', (tester) async {
-      await tester.pumpWidget(
-        _buildTestableWidget(
-          Scaffold(
-            appBar: AppBar(
-              leading: const Icon(Icons.arrow_back, color: Colors.white),
-              title: const Text('Статистика игрока'),
-              backgroundColor: const Color(0xFF1A2D42),
-              foregroundColor: Colors.white,
-            ),
-            backgroundColor: const Color(0xFFF5F5F5),
-            body: Builder(builder: (context) {
-              return Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 600),
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: Center(
-                          child: Text(
-                            _mockStatistics.nickname,
-                            style: MyTheme.of(context).headerTextStyle,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      PlayerRoleStatsCard(
-                        title: context.locale.playerStatsOverall,
-                        stats: _mockStatistics.overall,
-                      ),
-                      PlayerRoleStatsCard(
-                        title: context.locale.playerStatsCitizen,
-                        stats: _mockStatistics.citizen,
-                      ),
-                      PlayerRoleStatsCard(
-                        title: context.locale.playerStatsMafia,
-                        stats: _mockStatistics.mafia,
-                      ),
-                      PlayerRoleStatsCard(
-                        title: context.locale.playerStatsDon,
-                        stats: _mockStatistics.don,
-                      ),
-                      PlayerRoleStatsCard(
-                        title: context.locale.playerStatsSheriff,
-                        stats: _mockStatistics.sheriff,
-                      ),
-                      const SizedBox(height: 8),
-                      PlayerPairStatsSection(
-                        title: context.locale.playerStatsSameCityTop,
-                        pairs: _mockStatistics.sameCityTop,
-                      ),
-                      PlayerPairStatsSection(
-                        title: context.locale.playerStatsSameMafiaTop,
-                        pairs: _mockStatistics.sameMafiaTop,
-                      ),
-                      PlayerPairStatsSection(
-                        title: context.locale.playerStatsDiffTeamTop,
-                        pairs: _mockStatistics.diffTeamTop,
-                      ),
-                      const SizedBox(height: 16),
-                    ],
-                  ),
-                ),
-              );
-            }),
-          ),
+      final bloc = _createMockBloc(
+        const PlayerStatsState(
+          isLoading: false,
+          statistics: _fullStatistics,
         ),
       );
-      await tester.pumpAndSettle();
+
+      await tester.pumpWidget(_buildPage(bloc));
+      await tester.pump();
+      await tester.pump();
 
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/player_stats_data.png'),
       );
+
+      await bloc.close();
     });
 
     testWidgets('data state — empty pair lists', (tester) async {
-      await tester.pumpWidget(
-        _buildTestableWidget(
-          Scaffold(
-            appBar: AppBar(
-              leading: const Icon(Icons.arrow_back, color: Colors.white),
-              title: const Text('Статистика игрока'),
-              backgroundColor: const Color(0xFF1A2D42),
-              foregroundColor: Colors.white,
-            ),
-            backgroundColor: const Color(0xFFF5F5F5),
-            body: Builder(builder: (context) {
-              return Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 600),
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: Center(
-                          child: Text(
-                            'Новичок',
-                            style: MyTheme.of(context).headerTextStyle,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      PlayerRoleStatsCard(
-                        title: context.locale.playerStatsOverall,
-                        stats: const PlayerRoleStatsModel(
-                          games: 3,
-                          wins: 1,
-                          winRate: 33.3,
-                          avgBonusScore: 0.10,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      PlayerPairStatsSection(
-                        title: context.locale.playerStatsSameCityTop,
-                        pairs: const [],
-                      ),
-                      PlayerPairStatsSection(
-                        title: context.locale.playerStatsSameMafiaTop,
-                        pairs: const [],
-                      ),
-                      PlayerPairStatsSection(
-                        title: context.locale.playerStatsDiffTeamTop,
-                        pairs: const [],
-                      ),
-                      const SizedBox(height: 16),
-                    ],
-                  ),
-                ),
-              );
-            }),
-          ),
+      final bloc = _createMockBloc(
+        const PlayerStatsState(
+          isLoading: false,
+          statistics: _emptyPairsStatistics,
         ),
       );
-      await tester.pumpAndSettle();
+
+      await tester.pumpWidget(_buildPage(bloc));
+      await tester.pump();
+      await tester.pump();
 
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/player_stats_empty_pairs.png'),
       );
+
+      await bloc.close();
     });
   });
-}
-
-extension _LocaleExt on BuildContext {
-  AppLocalizations get locale => AppLocalizations.of(this)!;
 }

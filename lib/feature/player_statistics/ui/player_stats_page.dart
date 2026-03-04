@@ -15,7 +15,8 @@ import 'package:seating_generator_web/utils.dart';
 class PlayerStatsPage extends StatelessWidget {
   final int playerId;
 
-  const PlayerStatsPage._({required this.playerId});
+  @visibleForTesting
+  const PlayerStatsPage({super.key, required this.playerId});
 
   static String createLocation({
     required BuildContext context,
@@ -36,7 +37,7 @@ class PlayerStatsPage extends StatelessWidget {
         create: (context) => PlayerStatsBloc(
           RepositoryFactory.of(context).playerStatisticsRepository,
         )..add(PlayerStatsEvent.pageOpened(playerId: playerId)),
-        child: PlayerStatsPage._(playerId: playerId),
+        child: PlayerStatsPage(playerId: playerId),
       );
     },
   );

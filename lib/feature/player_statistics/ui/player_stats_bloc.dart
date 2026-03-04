@@ -6,7 +6,7 @@ import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_
 class PlayerStatsBloc extends Bloc<PlayerStatsEvent, PlayerStatsState> {
   final PlayerStatisticsRepository _repository;
 
-  PlayerStatsBloc(this._repository) : super(const PlayerStatsState()) {
+  PlayerStatsBloc(this._repository, {PlayerStatsState initialState = const PlayerStatsState()}) : super(initialState) {
     on<PlayerStatsEventPageOpened>(_onPageOpened);
   }
 
