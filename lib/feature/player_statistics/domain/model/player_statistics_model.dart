@@ -16,6 +16,9 @@ class PlayerStatisticsModel with _$PlayerStatisticsModel {
     required List<PlayerPairStatModel> sameCityTop,
     required List<PlayerPairStatModel> sameMafiaTop,
     required List<PlayerPairStatModel> diffTeamTop,
+    required List<PlayerPairStatModel> sameCityBottom,
+    required List<PlayerPairStatModel> sameMafiaBottom,
+    required List<PlayerPairStatModel> diffTeamBottom,
   }) = _PlayerStatisticsModel;
 
   factory PlayerStatisticsModel.fromProto(PlayerStatisticsEventOut proto) =>
@@ -34,6 +37,15 @@ class PlayerStatisticsModel with _$PlayerStatisticsModel {
             .map((e) => PlayerPairStatModel.fromProto(e))
             .toList(),
         diffTeamTop: proto.diffTeamTop
+            .map((e) => PlayerPairStatModel.fromProto(e))
+            .toList(),
+        sameCityBottom: proto.sameCityBottom
+            .map((e) => PlayerPairStatModel.fromProto(e))
+            .toList(),
+        sameMafiaBottom: proto.sameMafiaBottom
+            .map((e) => PlayerPairStatModel.fromProto(e))
+            .toList(),
+        diffTeamBottom: proto.diffTeamBottom
             .map((e) => PlayerPairStatModel.fromProto(e))
             .toList(),
       );

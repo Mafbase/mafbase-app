@@ -897,6 +897,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playerStatsDiffTeamTop => 'TOP-5 different team';
 
   @override
+  String get playerStatsSameCityBottom => 'BOTTOM-5 same team (city)';
+
+  @override
+  String get playerStatsSameMafiaBottom => 'BOTTOM-5 same team (mafia)';
+
+  @override
+  String get playerStatsDiffTeamBottom => 'BOTTOM-5 different team';
+
+  @override
   String get playerStatsError => 'Failed to load statistics';
 
   @override

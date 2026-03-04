@@ -155,6 +155,18 @@ class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
         title: context.locale.playerStatsDiffTeamTop,
         pairs: statistics.diffTeamTop,
       ),
+      PlayerPairStatsSection(
+        title: context.locale.playerStatsSameCityBottom,
+        pairs: statistics.sameCityBottom,
+      ),
+      PlayerPairStatsSection(
+        title: context.locale.playerStatsSameMafiaBottom,
+        pairs: statistics.sameMafiaBottom,
+      ),
+      PlayerPairStatsSection(
+        title: context.locale.playerStatsDiffTeamBottom,
+        pairs: statistics.diffTeamBottom,
+      ),
     ];
   }
 

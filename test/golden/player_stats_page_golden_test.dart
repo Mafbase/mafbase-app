@@ -75,6 +75,22 @@ const _fullStatistics = PlayerStatisticsModel(
     PlayerPairStatModel(
         playerId: 11, nickname: 'Сокол', games: 24, wins: 16, winRate: 66.7),
   ],
+  sameCityBottom: [
+    PlayerPairStatModel(
+        playerId: 12, nickname: 'Молния', games: 20, wins: 8, winRate: 40.0),
+    PlayerPairStatModel(
+        playerId: 13, nickname: 'Туман', games: 18, wins: 6, winRate: 33.3),
+  ],
+  sameMafiaBottom: [
+    PlayerPairStatModel(
+        playerId: 14, nickname: 'Пепел', games: 15, wins: 4, winRate: 26.7),
+  ],
+  diffTeamBottom: [
+    PlayerPairStatModel(
+        playerId: 15, nickname: 'Кремень', games: 22, wins: 7, winRate: 31.8),
+    PlayerPairStatModel(
+        playerId: 16, nickname: 'Искра', games: 19, wins: 5, winRate: 26.3),
+  ],
 );
 
 const _emptyPairsStatistics = PlayerStatisticsModel(
@@ -93,6 +109,9 @@ const _emptyPairsStatistics = PlayerStatisticsModel(
   sameCityTop: [],
   sameMafiaTop: [],
   diffTeamTop: [],
+  sameCityBottom: [],
+  sameMafiaBottom: [],
+  diffTeamBottom: [],
 );
 
 MockPlayerStatsBloc _createMockBloc(PlayerStatsState state) {

@@ -900,6 +900,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get playerStatsDiffTeamTop => 'ТОП-5 Разноцветов';
 
   @override
+  String get playerStatsSameCityBottom => 'АНТИТОП-5 Одноцветов (город)';
+
+  @override
+  String get playerStatsSameMafiaBottom => 'АНТИТОП-5 Одноцветов (мафия)';
+
+  @override
+  String get playerStatsDiffTeamBottom => 'АНТИТОП-5 Разноцветов';
+
+  @override
   String get playerStatsError => 'Не удалось загрузить статистику';
 
   @override

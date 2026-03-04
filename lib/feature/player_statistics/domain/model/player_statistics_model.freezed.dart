@@ -29,6 +29,12 @@ mixin _$PlayerStatisticsModel {
       throw _privateConstructorUsedError;
   List<PlayerPairStatModel> get diffTeamTop =>
       throw _privateConstructorUsedError;
+  List<PlayerPairStatModel> get sameCityBottom =>
+      throw _privateConstructorUsedError;
+  List<PlayerPairStatModel> get sameMafiaBottom =>
+      throw _privateConstructorUsedError;
+  List<PlayerPairStatModel> get diffTeamBottom =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of PlayerStatisticsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -53,7 +59,10 @@ abstract class $PlayerStatisticsModelCopyWith<$Res> {
       PlayerRoleStatsModel sheriff,
       List<PlayerPairStatModel> sameCityTop,
       List<PlayerPairStatModel> sameMafiaTop,
-      List<PlayerPairStatModel> diffTeamTop});
+      List<PlayerPairStatModel> diffTeamTop,
+      List<PlayerPairStatModel> sameCityBottom,
+      List<PlayerPairStatModel> sameMafiaBottom,
+      List<PlayerPairStatModel> diffTeamBottom});
 
   $PlayerRoleStatsModelCopyWith<$Res> get overall;
   $PlayerRoleStatsModelCopyWith<$Res> get citizen;
@@ -88,6 +97,9 @@ class _$PlayerStatisticsModelCopyWithImpl<$Res,
     Object? sameCityTop = null,
     Object? sameMafiaTop = null,
     Object? diffTeamTop = null,
+    Object? sameCityBottom = null,
+    Object? sameMafiaBottom = null,
+    Object? diffTeamBottom = null,
   }) {
     return _then(_value.copyWith(
       playerId: null == playerId
@@ -129,6 +141,18 @@ class _$PlayerStatisticsModelCopyWithImpl<$Res,
       diffTeamTop: null == diffTeamTop
           ? _value.diffTeamTop
           : diffTeamTop // ignore: cast_nullable_to_non_nullable
+              as List<PlayerPairStatModel>,
+      sameCityBottom: null == sameCityBottom
+          ? _value.sameCityBottom
+          : sameCityBottom // ignore: cast_nullable_to_non_nullable
+              as List<PlayerPairStatModel>,
+      sameMafiaBottom: null == sameMafiaBottom
+          ? _value.sameMafiaBottom
+          : sameMafiaBottom // ignore: cast_nullable_to_non_nullable
+              as List<PlayerPairStatModel>,
+      diffTeamBottom: null == diffTeamBottom
+          ? _value.diffTeamBottom
+          : diffTeamBottom // ignore: cast_nullable_to_non_nullable
               as List<PlayerPairStatModel>,
     ) as $Val);
   }
@@ -203,7 +227,10 @@ abstract class _$$PlayerStatisticsModelImplCopyWith<$Res>
       PlayerRoleStatsModel sheriff,
       List<PlayerPairStatModel> sameCityTop,
       List<PlayerPairStatModel> sameMafiaTop,
-      List<PlayerPairStatModel> diffTeamTop});
+      List<PlayerPairStatModel> diffTeamTop,
+      List<PlayerPairStatModel> sameCityBottom,
+      List<PlayerPairStatModel> sameMafiaBottom,
+      List<PlayerPairStatModel> diffTeamBottom});
 
   @override
   $PlayerRoleStatsModelCopyWith<$Res> get overall;
@@ -241,6 +268,9 @@ class __$$PlayerStatisticsModelImplCopyWithImpl<$Res>
     Object? sameCityTop = null,
     Object? sameMafiaTop = null,
     Object? diffTeamTop = null,
+    Object? sameCityBottom = null,
+    Object? sameMafiaBottom = null,
+    Object? diffTeamBottom = null,
   }) {
     return _then(_$PlayerStatisticsModelImpl(
       playerId: null == playerId
@@ -283,6 +313,18 @@ class __$$PlayerStatisticsModelImplCopyWithImpl<$Res>
           ? _value._diffTeamTop
           : diffTeamTop // ignore: cast_nullable_to_non_nullable
               as List<PlayerPairStatModel>,
+      sameCityBottom: null == sameCityBottom
+          ? _value._sameCityBottom
+          : sameCityBottom // ignore: cast_nullable_to_non_nullable
+              as List<PlayerPairStatModel>,
+      sameMafiaBottom: null == sameMafiaBottom
+          ? _value._sameMafiaBottom
+          : sameMafiaBottom // ignore: cast_nullable_to_non_nullable
+              as List<PlayerPairStatModel>,
+      diffTeamBottom: null == diffTeamBottom
+          ? _value._diffTeamBottom
+          : diffTeamBottom // ignore: cast_nullable_to_non_nullable
+              as List<PlayerPairStatModel>,
     ));
   }
 }
@@ -300,10 +342,16 @@ class _$PlayerStatisticsModelImpl implements _PlayerStatisticsModel {
       required this.sheriff,
       required final List<PlayerPairStatModel> sameCityTop,
       required final List<PlayerPairStatModel> sameMafiaTop,
-      required final List<PlayerPairStatModel> diffTeamTop})
+      required final List<PlayerPairStatModel> diffTeamTop,
+      required final List<PlayerPairStatModel> sameCityBottom,
+      required final List<PlayerPairStatModel> sameMafiaBottom,
+      required final List<PlayerPairStatModel> diffTeamBottom})
       : _sameCityTop = sameCityTop,
         _sameMafiaTop = sameMafiaTop,
-        _diffTeamTop = diffTeamTop;
+        _diffTeamTop = diffTeamTop,
+        _sameCityBottom = sameCityBottom,
+        _sameMafiaBottom = sameMafiaBottom,
+        _diffTeamBottom = diffTeamBottom;
 
   @override
   final int playerId;
@@ -343,9 +391,33 @@ class _$PlayerStatisticsModelImpl implements _PlayerStatisticsModel {
     return EqualUnmodifiableListView(_diffTeamTop);
   }
 
+  final List<PlayerPairStatModel> _sameCityBottom;
+  @override
+  List<PlayerPairStatModel> get sameCityBottom {
+    if (_sameCityBottom is EqualUnmodifiableListView) return _sameCityBottom;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sameCityBottom);
+  }
+
+  final List<PlayerPairStatModel> _sameMafiaBottom;
+  @override
+  List<PlayerPairStatModel> get sameMafiaBottom {
+    if (_sameMafiaBottom is EqualUnmodifiableListView) return _sameMafiaBottom;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sameMafiaBottom);
+  }
+
+  final List<PlayerPairStatModel> _diffTeamBottom;
+  @override
+  List<PlayerPairStatModel> get diffTeamBottom {
+    if (_diffTeamBottom is EqualUnmodifiableListView) return _diffTeamBottom;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_diffTeamBottom);
+  }
+
   @override
   String toString() {
-    return 'PlayerStatisticsModel(playerId: $playerId, nickname: $nickname, overall: $overall, citizen: $citizen, mafia: $mafia, don: $don, sheriff: $sheriff, sameCityTop: $sameCityTop, sameMafiaTop: $sameMafiaTop, diffTeamTop: $diffTeamTop)';
+    return 'PlayerStatisticsModel(playerId: $playerId, nickname: $nickname, overall: $overall, citizen: $citizen, mafia: $mafia, don: $don, sheriff: $sheriff, sameCityTop: $sameCityTop, sameMafiaTop: $sameMafiaTop, diffTeamTop: $diffTeamTop, sameCityBottom: $sameCityBottom, sameMafiaBottom: $sameMafiaBottom, diffTeamBottom: $diffTeamBottom)';
   }
 
   @override
@@ -367,7 +439,13 @@ class _$PlayerStatisticsModelImpl implements _PlayerStatisticsModel {
             const DeepCollectionEquality()
                 .equals(other._sameMafiaTop, _sameMafiaTop) &&
             const DeepCollectionEquality()
-                .equals(other._diffTeamTop, _diffTeamTop));
+                .equals(other._diffTeamTop, _diffTeamTop) &&
+            const DeepCollectionEquality()
+                .equals(other._sameCityBottom, _sameCityBottom) &&
+            const DeepCollectionEquality()
+                .equals(other._sameMafiaBottom, _sameMafiaBottom) &&
+            const DeepCollectionEquality()
+                .equals(other._diffTeamBottom, _diffTeamBottom));
   }
 
   @override
@@ -382,7 +460,10 @@ class _$PlayerStatisticsModelImpl implements _PlayerStatisticsModel {
       sheriff,
       const DeepCollectionEquality().hash(_sameCityTop),
       const DeepCollectionEquality().hash(_sameMafiaTop),
-      const DeepCollectionEquality().hash(_diffTeamTop));
+      const DeepCollectionEquality().hash(_diffTeamTop),
+      const DeepCollectionEquality().hash(_sameCityBottom),
+      const DeepCollectionEquality().hash(_sameMafiaBottom),
+      const DeepCollectionEquality().hash(_diffTeamBottom));
 
   /// Create a copy of PlayerStatisticsModel
   /// with the given fields replaced by the non-null parameter values.
@@ -405,7 +486,10 @@ abstract class _PlayerStatisticsModel implements PlayerStatisticsModel {
           required final PlayerRoleStatsModel sheriff,
           required final List<PlayerPairStatModel> sameCityTop,
           required final List<PlayerPairStatModel> sameMafiaTop,
-          required final List<PlayerPairStatModel> diffTeamTop}) =
+          required final List<PlayerPairStatModel> diffTeamTop,
+          required final List<PlayerPairStatModel> sameCityBottom,
+          required final List<PlayerPairStatModel> sameMafiaBottom,
+          required final List<PlayerPairStatModel> diffTeamBottom}) =
       _$PlayerStatisticsModelImpl;
 
   @override
@@ -428,6 +512,12 @@ abstract class _PlayerStatisticsModel implements PlayerStatisticsModel {
   List<PlayerPairStatModel> get sameMafiaTop;
   @override
   List<PlayerPairStatModel> get diffTeamTop;
+  @override
+  List<PlayerPairStatModel> get sameCityBottom;
+  @override
+  List<PlayerPairStatModel> get sameMafiaBottom;
+  @override
+  List<PlayerPairStatModel> get diffTeamBottom;
 
   /// Create a copy of PlayerStatisticsModel
   /// with the given fields replaced by the non-null parameter values.

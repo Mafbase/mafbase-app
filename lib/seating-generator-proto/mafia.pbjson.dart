@@ -1604,6 +1604,9 @@ const PlayerStatisticsEventOut$json = {
     {'1': 'sameCityTop', '3': 8, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameCityTop'},
     {'1': 'sameMafiaTop', '3': 9, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameMafiaTop'},
     {'1': 'diffTeamTop', '3': 10, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'diffTeamTop'},
+    {'1': 'sameCityBottom', '3': 11, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameCityBottom'},
+    {'1': 'sameMafiaBottom', '3': 12, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameMafiaBottom'},
+    {'1': 'diffTeamBottom', '3': 13, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'diffTeamBottom'},
   ],
 };
 
@@ -1618,5 +1621,9 @@ final $typed_data.Uint8List playerStatisticsEventOutDescriptor = $convert.base64
     'c2hlcmlmZhI7CgtzYW1lQ2l0eVRvcBgIIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdF'
     'ILc2FtZUNpdHlUb3ASPQoMc2FtZU1hZmlhVG9wGAkgAygLMhkuZ2VuZXJhdGVkLlBsYXllclBh'
     'aXJTdGF0UgxzYW1lTWFmaWFUb3ASOwoLZGlmZlRlYW1Ub3AYCiADKAsyGS5nZW5lcmF0ZWQuUG'
-    'xheWVyUGFpclN0YXRSC2RpZmZUZWFtVG9w');
+    'xheWVyUGFpclN0YXRSC2RpZmZUZWFtVG9wEkEKDnNhbWVDaXR5Qm90dG9tGAsgAygLMhkuZ2Vu'
+    'ZXJhdGVkLlBsYXllclBhaXJTdGF0Ug5zYW1lQ2l0eUJvdHRvbRJDCg9zYW1lTWFmaWFCb3R0b2'
+    '0YDCADKAsyGS5nZW5lcmF0ZWQuUGxheWVyUGFpclN0YXRSD3NhbWVNYWZpYUJvdHRvbRJBCg5k'
+    'aWZmVGVhbUJvdHRvbRgNIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdFIOZGlmZlRlYW'
+    '1Cb3R0b20=');
 

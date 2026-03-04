@@ -1748,6 +1748,24 @@ abstract class AppLocalizations {
   /// **'ТОП-5 Разноцветов'**
   String get playerStatsDiffTeamTop;
 
+  /// No description provided for @playerStatsSameCityBottom.
+  ///
+  /// In ru, this message translates to:
+  /// **'АНТИТОП-5 Одноцветов (город)'**
+  String get playerStatsSameCityBottom;
+
+  /// No description provided for @playerStatsSameMafiaBottom.
+  ///
+  /// In ru, this message translates to:
+  /// **'АНТИТОП-5 Одноцветов (мафия)'**
+  String get playerStatsSameMafiaBottom;
+
+  /// No description provided for @playerStatsDiffTeamBottom.
+  ///
+  /// In ru, this message translates to:
+  /// **'АНТИТОП-5 Разноцветов'**
+  String get playerStatsDiffTeamBottom;
+
   /// No description provided for @playerStatsError.
   ///
   /// In ru, this message translates to:
