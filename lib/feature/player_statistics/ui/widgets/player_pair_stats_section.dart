@@ -5,13 +5,11 @@ import 'package:seating_generator_web/utils.dart';
 class PlayerPairStatsSection extends StatelessWidget {
   final String title;
   final List<PlayerPairStatModel> pairs;
-  final void Function(int playerId) onPlayerTap;
 
   const PlayerPairStatsSection({
     super.key,
     required this.title,
     required this.pairs,
-    required this.onPlayerTap,
   });
 
   @override
@@ -43,7 +41,7 @@ class PlayerPairStatsSection extends StatelessWidget {
               )
             else
               ...pairs.map(
-                (pair) => _PairRow(pair: pair, onTap: onPlayerTap),
+                (pair) => _PairRow(pair: pair),
               ),
           ],
         ),
@@ -54,46 +52,40 @@ class PlayerPairStatsSection extends StatelessWidget {
 
 class _PairRow extends StatelessWidget {
   final PlayerPairStatModel pair;
-  final void Function(int playerId) onTap;
 
-  const _PairRow({required this.pair, required this.onTap});
+  const _PairRow({required this.pair});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onTap(pair.playerId),
-      borderRadius: BorderRadius.circular(8),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Text(
-                pair.nickname,
-                style: const TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.w500,
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Text(
+              pair.nickname,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Text(
-                '${pair.wins}/${pair.games}',
-                textAlign: TextAlign.center,
-              ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              '${pair.wins}/${pair.games}',
+              textAlign: TextAlign.center,
             ),
-            Expanded(
-              flex: 2,
-              child: Text(
-                '${pair.winRate.toStringAsFixed(1)}%',
-                textAlign: TextAlign.end,
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              '${pair.winRate.toStringAsFixed(1)}%',
+              textAlign: TextAlign.end,
+              style: const TextStyle(fontWeight: FontWeight.w600),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

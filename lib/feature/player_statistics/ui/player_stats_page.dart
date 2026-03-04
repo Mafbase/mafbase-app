@@ -41,15 +41,6 @@ class PlayerStatsPage extends StatelessWidget {
     },
   );
 
-  void _navigateToPlayer(BuildContext context, int targetPlayerId) {
-    context.push(
-      PlayerStatsPage.createLocation(
-        context: context,
-        playerId: targetPlayerId,
-      ),
-    );
-  }
-
   void _onBackPressed(BuildContext context) {
     if (context.canPop()) {
       context.pop();
@@ -91,10 +82,7 @@ class PlayerStatsPage extends StatelessWidget {
             return const SizedBox.shrink();
           }
 
-          return _PlayerStatsContent(
-            statistics: statistics,
-            onPlayerTap: (id) => _navigateToPlayer(context, id),
-          );
+          return _PlayerStatsContent(statistics: statistics);
         },
       ),
     );
@@ -103,12 +91,8 @@ class PlayerStatsPage extends StatelessWidget {
 
 class _PlayerStatsContent extends StatelessWidget {
   final PlayerStatisticsModel statistics;
-  final void Function(int playerId) onPlayerTap;
 
-  const _PlayerStatsContent({
-    required this.statistics,
-    required this.onPlayerTap,
-  });
+  const _PlayerStatsContent({required this.statistics});
 
   @override
   Widget build(BuildContext context) {
@@ -152,17 +136,14 @@ class _PlayerStatsContent extends StatelessWidget {
             PlayerPairStatsSection(
               title: context.locale.playerStatsSameCityTop,
               pairs: statistics.sameCityTop,
-              onPlayerTap: onPlayerTap,
             ),
             PlayerPairStatsSection(
               title: context.locale.playerStatsSameMafiaTop,
               pairs: statistics.sameMafiaTop,
-              onPlayerTap: onPlayerTap,
             ),
             PlayerPairStatsSection(
               title: context.locale.playerStatsDiffTeamTop,
               pairs: statistics.diffTeamTop,
-              onPlayerTap: onPlayerTap,
             ),
             const SizedBox(height: 16),
           ],
