@@ -3,6 +3,9 @@ name: Update Golden Tests
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-goldens:
     runs-on: [self-hosted, linux]
