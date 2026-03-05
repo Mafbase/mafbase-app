@@ -1,0 +1,33 @@
+name: Update Golden Tests
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-goldens:
+    runs-on: [self-hosted, linux]
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.3'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Update golden files
+        run: flutter test --update-goldens test/golden/
+
+      - name: Commit and push updated goldens
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add test/golden/goldens/*_ci.png
+          git diff --cached --quiet || git commit -m "chore: update CI golden images"
+          git push
