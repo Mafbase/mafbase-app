@@ -40,7 +40,7 @@ class RoleDistributionChart extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: segments
-                .map((s) => _LegendItem(segment: s))
+                .map((s) => _LegendItem(segment: s, totalGames: totalGames))
                 .toList(),
           ),
         ],
@@ -88,11 +88,16 @@ class _ChartSegment {
 
 class _LegendItem extends StatelessWidget {
   final _ChartSegment segment;
+  final int totalGames;
 
-  const _LegendItem({required this.segment});
+  const _LegendItem({required this.segment, required this.totalGames});
 
   @override
   Widget build(BuildContext context) {
+    final percentage = totalGames > 0
+        ? (segment.games / totalGames * 100).round()
+        : 0;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
@@ -108,7 +113,7 @@ class _LegendItem extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            '${segment.label}: ${segment.games}',
+            '${segment.label}: ${segment.games} ($percentage%)',
             style: MyTheme.of(context).defaultTextStyle,
           ),
         ],
