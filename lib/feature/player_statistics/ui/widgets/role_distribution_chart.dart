@@ -39,9 +39,7 @@ class RoleDistributionChart extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
-            children: segments
-                .map((s) => _LegendItem(segment: s, totalGames: totalGames))
-                .toList(),
+            children: segments.map((s) => _LegendItem(segment: s, totalGames: totalGames)).toList(),
           ),
         ],
       ),
@@ -88,38 +86,33 @@ class _ChartSegment {
 
 class _LegendItem extends StatelessWidget {
   final _ChartSegment segment;
-  final int totalGames;
+  final int percentage;
 
-  const _LegendItem({required this.segment, required this.totalGames});
+  _LegendItem({required this.segment, required int totalGames})
+      : percentage = totalGames > 0 ? (segment.games / totalGames * 100).round() : 0;
 
   @override
-  Widget build(BuildContext context) {
-    final percentage = totalGames > 0
-        ? (segment.games / totalGames * 100).round()
-        : 0;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 12,
-            height: 12,
-            decoration: BoxDecoration(
-              color: segment.color,
-              shape: BoxShape.circle,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 3),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(
+                color: segment.color,
+                shape: BoxShape.circle,
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            '${segment.label}: ${segment.games} ($percentage%)',
-            style: MyTheme.of(context).defaultTextStyle,
-          ),
-        ],
-      ),
-    );
-  }
+            const SizedBox(width: 8),
+            Text(
+              '${segment.label}: ${segment.games} ($percentage%)',
+              style: MyTheme.of(context).defaultTextStyle,
+            ),
+          ],
+        ),
+      );
 }
 
 class _DonutChartPainter extends CustomPainter {
