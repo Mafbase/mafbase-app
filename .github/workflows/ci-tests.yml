@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: [self-hosted, linux]
@@ -13,6 +16,8 @@ jobs:
       CI: 'true'
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
 
       - uses: subosito/flutter-action@v2
         with:
@@ -20,6 +25,38 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Update CI golden images
+        run: flutter test --update-goldens test/golden/
+
+      - name: Verify only CI golden images changed
+        run: |
+          CHANGED=$(git diff --name-only)
+          UNTRACKED=$(git ls-files --others --exclude-standard)
+          ALL_CHANGES=$(printf '%s\n%s' "$CHANGED" "$UNTRACKED" | sed '/^$/d')
+
+          if [ -z "$ALL_CHANGES" ]; then
+            echo "No golden changes detected"
+            exit 0
+          fi
+
+          UNEXPECTED=$(echo "$ALL_CHANGES" | grep -v '_ci\.png$' || true)
+          if [ -n "$UNEXPECTED" ]; then
+            echo "::error::Unexpected files were modified by --update-goldens:"
+            echo "$UNEXPECTED"
+            exit 1
+          fi
+
+          echo "Only CI golden images changed (as expected):"
+          echo "$ALL_CHANGES"
+
+      - name: Commit and push updated goldens
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add test/golden/goldens/*_ci.png
+          git diff --cached --quiet || git commit -m "chore: update CI golden images"
+          git push
 
       - name: Run tests
         run: flutter test
