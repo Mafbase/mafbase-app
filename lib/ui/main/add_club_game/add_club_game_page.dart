@@ -69,6 +69,7 @@ class AddClubGamePage extends StatefulWidget {
           tournamentId: tournamentId,
         ),
         child: AddClubGamePage(
+          key: ValueKey(gameId),
           readOnly: !edit,
           gameId: gameId,
         ),
@@ -90,6 +91,7 @@ class AddClubGamePage extends StatefulWidget {
           ),
           // TODO: REGISTER IN GET IT
           child: AddClubGamePage(
+            key: const ValueKey(null),
             initDateTime: initDateTime,
           ),
         );
@@ -108,6 +110,7 @@ class AddClubGamePage extends StatefulWidget {
             context: context,
           ),
           child: AddClubGamePage(
+            key: ValueKey(gameId),
             readOnly: !edit,
             gameId: gameId,
           ),
