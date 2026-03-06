@@ -6,7 +6,9 @@ import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
+import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/widgets/design_picker_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -39,8 +41,9 @@ class TranslationDialog extends StatefulWidget {
 
 class _TranslationDialogState extends State<TranslationDialog> {
   final TranslationRepository repository = getIt();
-  late final Future<String> keyFuture;
+  late final Future<TranslationKeyModel> keyFuture;
   int table = 1;
+  DesignModel? selectedDesign;
 
   @override
   void initState() {
@@ -48,18 +51,28 @@ class _TranslationDialogState extends State<TranslationDialog> {
     super.initState();
   }
 
+  String _buildLink(String root, String path, String key, int table, DesignModel? design) {
+    final base = '$root/$path?tournamentId=${widget.tournamentId}&table=$table&key=$key';
+    if (design != null) return '$base&design=${design.designKey}';
+    return base;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: keyFuture,
       builder: (context, snapshot) {
-        final key = snapshot.data;
+        final data = snapshot.data;
         final root = kIsWeb && !kDebugMode
             ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 433 ? ':${Uri.base.port}' : ''}'
             : 'https://mafbase.ru';
 
-        final contentLink = '$root/translation?tournamentId=${widget.tournamentId}&table=$table&key=$key';
-        final controlLink = '$root/translationControl?tournamentId=${widget.tournamentId}&table=$table&key=$key';
+        final defaultDesign = data?.designs.where((d) => d.designKey == 'mafbase').firstOrNull
+            ?? data?.designs.firstOrNull;
+        final effectiveDesign = selectedDesign ?? defaultDesign;
+        final key = data?.key;
+        final contentLink = _buildLink(root, 'translation', key ?? '', table, effectiveDesign);
+        final controlLink = _buildLink(root, 'translationControl', key ?? '', table, effectiveDesign);
 
         return CustomDialog(
           child: SelectionArea(
@@ -104,6 +117,44 @@ class _TranslationDialogState extends State<TranslationDialog> {
                                   ],
                                 ),
                               ),
+                              if (data!.designs.isNotEmpty)
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 4),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          '${context.locale.translationDesignLabel}: ',
+                                          style: MyTheme.of(context).defaultTextStyle,
+                                        ),
+                                        InkWell(
+                                          onTap: () async {
+                                            final designs = data.designs;
+                                            final currentIndex = effectiveDesign != null
+                                                ? designs.indexWhere((d) => d.designKey == effectiveDesign.designKey)
+                                                : 0;
+                                            final result = await DesignPickerDialog.open(
+                                              context: context,
+                                              designs: designs,
+                                              initialIndex: currentIndex >= 0 ? currentIndex : 0,
+                                            );
+                                            if (result != null) {
+                                              setState(() => selectedDesign = result);
+                                            }
+                                          },
+                                          child: Text(
+                                            effectiveDesign?.title ?? '',
+                                            style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                                  decoration: TextDecoration.underline,
+                                                  color: MyTheme.of(context).blueForCard,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               Text.rich(
                                 TextSpan(
                                   style: MyTheme.of(context).defaultTextStyle,
@@ -158,9 +209,8 @@ class _TranslationDialogState extends State<TranslationDialog> {
                           onPressed: () {
                             final buffer = StringBuffer();
                             for (var t = 1; t <= widget.tablesCount; t++) {
-                              final content = '$root/translation?tournamentId=${widget.tournamentId}&table=$t&key=$key';
-                              final control =
-                                  '$root/translationControl?tournamentId=${widget.tournamentId}&table=$t&key=$key';
+                              final content = _buildLink(root, 'translation', key, t, effectiveDesign);
+                              final control = _buildLink(root, 'translationControl', key, t, effectiveDesign);
                               buffer.writeln(context.locale.translationCopyAllTable(t));
                               buffer.writeln('${context.locale.translationContentLink}: $content');
                               buffer.writeln('${context.locale.translationControlLink}: $control');

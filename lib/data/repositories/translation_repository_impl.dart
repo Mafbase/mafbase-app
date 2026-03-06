@@ -2,6 +2,7 @@ import 'package:seating_generator_web/data/requests/change_seating_content_reque
 import 'package:seating_generator_web/data/requests/insert_seating_request.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/requests/translation_key_request.dart';
+import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
@@ -61,6 +62,6 @@ class TranslationRepositoryImpl extends BaseRepository implements TranslationRep
   }
 
   @override
-  Future<String> getKey({required int tournamentId}) =>
-      TranslationKeyRequest(tournamentId: tournamentId).execute(client).then((e) => e.key);
+  Future<TranslationKeyModel> getKey({required int tournamentId}) =>
+      TranslationKeyRequest(tournamentId: tournamentId).execute(client).then(TranslationKeyModel.fromProto);
 }

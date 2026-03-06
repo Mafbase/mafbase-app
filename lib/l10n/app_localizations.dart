@@ -854,6 +854,24 @@ abstract class AppLocalizations {
   /// **'Ссылки скопированы'**
   String get translationCopiedSnackbar;
 
+  /// No description provided for @translationDesignLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дизайн'**
+  String get translationDesignLabel;
+
+  /// No description provided for @translationDesignPickerTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выбор дизайна'**
+  String get translationDesignPickerTitle;
+
+  /// No description provided for @translationDesignSelect.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выбрать'**
+  String get translationDesignSelect;
+
   /// No description provided for @bucketFieldTitle.
   ///
   /// In ru, this message translates to:

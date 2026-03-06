@@ -1,3 +1,4 @@
+import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 abstract class TranslationRepository {
@@ -26,5 +27,5 @@ abstract class TranslationRepository {
     required String key,
   });
 
-  Future<String> getKey({required int tournamentId});
+  Future<TranslationKeyModel> getKey({required int tournamentId});
 }

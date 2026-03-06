@@ -418,6 +418,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get translationCopiedSnackbar => 'Links copied';
 
   @override
+  String get translationDesignLabel => 'Design';
+
+  @override
+  String get translationDesignPickerTitle => 'Choose design';
+
+  @override
+  String get translationDesignSelect => 'Select';
+
+  @override
   String get bucketFieldTitle => 'Buckets for semi-final stage';
 
   @override

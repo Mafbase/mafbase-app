@@ -418,6 +418,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get translationCopiedSnackbar => 'Ссылки скопированы';
 
   @override
+  String get translationDesignLabel => 'Дизайн';
+
+  @override
+  String get translationDesignPickerTitle => 'Выбор дизайна';
+
+  @override
+  String get translationDesignSelect => 'Выбрать';
+
+  @override
   String get bucketFieldTitle => 'Корзины для полуфинального этапа';
 
   @override
