@@ -5023,13 +5023,95 @@ class UpdateOwnerEvent extends $pb.GeneratedMessage {
   void clearEmail() => $_clearField(1);
 }
 
+class DesignItem extends $pb.GeneratedMessage {
+  factory DesignItem({
+    $core.String? designKey,
+    $core.String? title,
+    $core.String? preview,
+  }) {
+    final $result = create();
+    if (designKey != null) {
+      $result.designKey = designKey;
+    }
+    if (title != null) {
+      $result.title = title;
+    }
+    if (preview != null) {
+      $result.preview = preview;
+    }
+    return $result;
+  }
+  DesignItem._() : super();
+  factory DesignItem.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DesignItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DesignItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'designKey', protoName: 'designKey')
+    ..aOS(2, _omitFieldNames ? '' : 'title')
+    ..aOS(3, _omitFieldNames ? '' : 'preview')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DesignItem clone() => DesignItem()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DesignItem copyWith(void Function(DesignItem) updates) => super.copyWith((message) => updates(message as DesignItem)) as DesignItem;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DesignItem create() => DesignItem._();
+  DesignItem createEmptyInstance() => create();
+  static $pb.PbList<DesignItem> createRepeated() => $pb.PbList<DesignItem>();
+  @$core.pragma('dart2js:noInline')
+  static DesignItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DesignItem>(create);
+  static DesignItem? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get designKey => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set designKey($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDesignKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDesignKey() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get title => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set title($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTitle() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTitle() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get preview => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set preview($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPreview() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPreview() => $_clearField(3);
+}
+
 class TranslationKeyEventOut extends $pb.GeneratedMessage {
   factory TranslationKeyEventOut({
     $core.String? key,
+    $core.Iterable<DesignItem>? designs,
   }) {
     final $result = create();
     if (key != null) {
       $result.key = key;
+    }
+    if (designs != null) {
+      $result.designs.addAll(designs);
     }
     return $result;
   }
@@ -5039,6 +5121,7 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TranslationKeyEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'key')
+    ..pc<DesignItem>(2, _omitFieldNames ? '' : 'designs', $pb.PbFieldType.PM, subBuilder: DesignItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -5071,6 +5154,9 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
   $core.bool hasKey() => $_has(0);
   @$pb.TagNumber(1)
   void clearKey() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<DesignItem> get designs => $_getList(1);
 }
 
 class TableInfoItem extends $pb.GeneratedMessage {

@@ -1302,17 +1302,34 @@ const UpdateOwnerEvent$json = {
 final $typed_data.Uint8List updateOwnerEventDescriptor = $convert.base64Decode(
     'ChBVcGRhdGVPd25lckV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
 
+@$core.Deprecated('Use designItemDescriptor instead')
+const DesignItem$json = {
+  '1': 'DesignItem',
+  '2': [
+    {'1': 'designKey', '3': 1, '4': 1, '5': 9, '10': 'designKey'},
+    {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
+    {'1': 'preview', '3': 3, '4': 1, '5': 9, '10': 'preview'},
+  ],
+};
+
+/// Descriptor for `DesignItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List designItemDescriptor = $convert.base64Decode(
+    'CgpEZXNpZ25JdGVtEhwKCWRlc2lnbktleRgBIAEoCVIJZGVzaWduS2V5EhQKBXRpdGxlGAIgAS'
+    'gJUgV0aXRsZRIYCgdwcmV2aWV3GAMgASgJUgdwcmV2aWV3');
+
 @$core.Deprecated('Use translationKeyEventOutDescriptor instead')
 const TranslationKeyEventOut$json = {
   '1': 'TranslationKeyEventOut',
   '2': [
     {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'designs', '3': 2, '4': 3, '5': 11, '6': '.generated.DesignItem', '10': 'designs'},
   ],
 };
 
 /// Descriptor for `TranslationKeyEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List translationKeyEventOutDescriptor = $convert.base64Decode(
-    'ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5');
+    'ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5Ei8KB2Rlc2lnbnMYAi'
+    'ADKAsyFS5nZW5lcmF0ZWQuRGVzaWduSXRlbVIHZGVzaWducw==');
 
 @$core.Deprecated('Use tableInfoItemDescriptor instead')
 const TableInfoItem$json = {

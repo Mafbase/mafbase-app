@@ -152,7 +152,7 @@ class _TranslationDialogState extends State<TranslationDialog> {
                       ),
                       Positioned(
                         top: 4,
-                        right: 4,
+                        left: 4,
                         child: IconButton(
                           tooltip: context.locale.translationCopyAllButton,
                           onPressed: () {
