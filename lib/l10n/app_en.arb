@@ -319,6 +319,18 @@
   "@translationContentLink": {},
   "translationControlLink": "Control link",
   "@translationControlLink": {},
+  "translationCopyAllButton": "Copy links for all tables",
+  "@translationCopyAllButton": {},
+  "translationCopyAllTable": "Table {table}:",
+  "@translationCopyAllTable": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
+  "translationCopiedSnackbar": "Links copied",
+  "@translationCopiedSnackbar": {},
   "bucketFieldTitle": "Buckets for semi-final stage",
   "bucketFieldHint": "30;20;30",
   "hideResult": "Hide result",

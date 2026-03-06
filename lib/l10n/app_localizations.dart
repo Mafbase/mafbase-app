@@ -836,6 +836,24 @@ abstract class AppLocalizations {
   /// **'Ссылка для управления'**
   String get translationControlLink;
 
+  /// No description provided for @translationCopyAllButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Скопировать ссылки для всех столов'**
+  String get translationCopyAllButton;
+
+  /// No description provided for @translationCopyAllTable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Стол {table}:'**
+  String translationCopyAllTable(int table);
+
+  /// No description provided for @translationCopiedSnackbar.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ссылки скопированы'**
+  String get translationCopiedSnackbar;
+
   /// No description provided for @bucketFieldTitle.
   ///
   /// In ru, this message translates to:

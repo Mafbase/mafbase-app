@@ -407,6 +407,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get translationControlLink => 'Ссылка для управления';
 
   @override
+  String get translationCopyAllButton => 'Скопировать ссылки для всех столов';
+
+  @override
+  String translationCopyAllTable(int table) {
+    return 'Стол $table:';
+  }
+
+  @override
+  String get translationCopiedSnackbar => 'Ссылки скопированы';
+
+  @override
   String get bucketFieldTitle => 'Корзины для полуфинального этапа';
 
   @override

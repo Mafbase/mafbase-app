@@ -319,6 +319,18 @@
   "@translationContentLink": {},
   "translationControlLink": "Ссылка для управления",
   "@translationControlLink": {},
+  "translationCopyAllButton": "Скопировать ссылки для всех столов",
+  "@translationCopyAllButton": {},
+  "translationCopyAllTable": "Стол {table}:",
+  "@translationCopyAllTable": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
+  "translationCopiedSnackbar": "Ссылки скопированы",
+  "@translationCopiedSnackbar": {},
   "bucketFieldTitle": "Корзины для полуфинального этапа",
   "bucketFieldHint": "30;20;30",
   "hideResult": "Скрыть результат",

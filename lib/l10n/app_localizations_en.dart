@@ -407,6 +407,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get translationControlLink => 'Control link';
 
   @override
+  String get translationCopyAllButton => 'Copy links for all tables';
+
+  @override
+  String translationCopyAllTable(int table) {
+    return 'Table $table:';
+  }
+
+  @override
+  String get translationCopiedSnackbar => 'Links copied';
+
+  @override
   String get bucketFieldTitle => 'Buckets for semi-final stage';
 
   @override

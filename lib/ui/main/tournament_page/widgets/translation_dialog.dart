@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
@@ -49,8 +50,6 @@ class _TranslationDialogState extends State<TranslationDialog> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return FutureBuilder(
       future: keyFuture,
       builder: (context, snapshot) {
@@ -64,86 +63,119 @@ class _TranslationDialogState extends State<TranslationDialog> {
 
         return CustomDialog(
           child: SelectionArea(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: key == null ? Center(child: CircularProgressIndicator()) : IntrinsicWidth(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        context.locale.translationDialogTitle,
-                        style: MyTheme.of(context).headerTextStyle,
+            child: key == null
+                ? Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                : Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: IntrinsicWidth(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Text(
+                                  context.locale.translationDialogTitle,
+                                  style: MyTheme.of(context).headerTextStyle,
+                                ),
+                              ),
+                              Center(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Стол: ',
+                                      style: MyTheme.of(context).defaultTextStyle,
+                                    ),
+                                    CustomDropdown(
+                                      items: List.generate(
+                                        widget.tablesCount,
+                                        (index) => index + 1,
+                                      ),
+                                      initValue: table,
+                                      onChanged: (value) => setState(
+                                        () => table = value ?? table,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  style: MyTheme.of(context).defaultTextStyle,
+                                  children: [
+                                    TextSpan(
+                                      text: '${context.locale.translationContentLink}\n',
+                                    ),
+                                    TextSpan(
+                                      text: contentLink,
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: MyTheme.of(context).blueForCard,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          launchUrlString(contentLink);
+                                        },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  style: MyTheme.of(context).defaultTextStyle,
+                                  children: [
+                                    TextSpan(
+                                      text: '${context.locale.translationControlLink}\n',
+                                    ),
+                                    TextSpan(
+                                      text: controlLink,
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: MyTheme.of(context).blueForCard,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          launchUrlString(controlLink);
+                                        },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Стол: ',
-                            style: MyTheme.of(context).defaultTextStyle,
-                          ),
-                          CustomDropdown(
-                            items: List.generate(
-                              widget.tablesCount,
-                              (index) => index + 1,
-                            ),
-                            initValue: table,
-                            onChanged: (value) => setState(
-                              () => table = value ?? table,
-                            ),
-                          ),
-                        ],
+                      Positioned(
+                        top: 4,
+                        right: 4,
+                        child: IconButton(
+                          tooltip: context.locale.translationCopyAllButton,
+                          onPressed: () {
+                            final buffer = StringBuffer();
+                            for (var t = 1; t <= widget.tablesCount; t++) {
+                              final content = '$root/translation?tournamentId=${widget.tournamentId}&table=$t&key=$key';
+                              final control =
+                                  '$root/translationControl?tournamentId=${widget.tournamentId}&table=$t&key=$key';
+                              buffer.writeln(context.locale.translationCopyAllTable(t));
+                              buffer.writeln('${context.locale.translationContentLink}: $content');
+                              buffer.writeln('${context.locale.translationControlLink}: $control');
+                              if (t < widget.tablesCount) buffer.writeln();
+                            }
+                            Clipboard.setData(ClipboardData(text: buffer.toString()));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(context.locale.translationCopiedSnackbar)),
+                            );
+                          },
+                          icon: const Icon(Icons.copy),
+                        ),
                       ),
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        style: MyTheme.of(context).defaultTextStyle,
-                        children: [
-                          TextSpan(
-                            text: '${context.locale.translationContentLink}\n',
-                          ),
-                          TextSpan(
-                            text: contentLink,
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: MyTheme.of(context).blueForCard,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                launchUrlString(contentLink);
-                              },
-                          ),
-                        ],
-                      ),
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        style: MyTheme.of(context).defaultTextStyle,
-                        children: [
-                          TextSpan(
-                            text: '${context.locale.translationControlLink}\n',
-                          ),
-                          TextSpan(
-                            text: controlLink,
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: MyTheme.of(context).blueForCard,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                launchUrlString(controlLink);
-                              },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                    ],
+                  ),
           ),
         );
       },
