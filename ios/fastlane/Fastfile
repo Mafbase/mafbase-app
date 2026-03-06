@@ -42,6 +42,7 @@ platform :ios do
     submit = (ENV["SUBMIT_FOR_REVIEW"].to_s.downcase == "true")
 
     upload_to_app_store(
+      force: true,
       skip_metadata: false,
       skip_screenshots: true,
       submit_for_review: submit,
