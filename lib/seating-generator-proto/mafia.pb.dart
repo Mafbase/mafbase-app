@@ -6929,6 +6929,156 @@ class SetTournamentPhotoThemeEvent extends $pb.GeneratedMessage {
   void clearThemeId() => $_clearField(1);
 }
 
+class AddPlayerToThemeEvent extends $pb.GeneratedMessage {
+  factory AddPlayerToThemeEvent({
+    $core.int? playerId,
+  }) {
+    final $result = create();
+    if (playerId != null) {
+      $result.playerId = playerId;
+    }
+    return $result;
+  }
+  AddPlayerToThemeEvent._() : super();
+  factory AddPlayerToThemeEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AddPlayerToThemeEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPlayerToThemeEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'playerId', $pb.PbFieldType.O3, protoName: 'playerId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AddPlayerToThemeEvent clone() => AddPlayerToThemeEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AddPlayerToThemeEvent copyWith(void Function(AddPlayerToThemeEvent) updates) => super.copyWith((message) => updates(message as AddPlayerToThemeEvent)) as AddPlayerToThemeEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddPlayerToThemeEvent create() => AddPlayerToThemeEvent._();
+  AddPlayerToThemeEvent createEmptyInstance() => create();
+  static $pb.PbList<AddPlayerToThemeEvent> createRepeated() => $pb.PbList<AddPlayerToThemeEvent>();
+  @$core.pragma('dart2js:noInline')
+  static AddPlayerToThemeEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddPlayerToThemeEvent>(create);
+  static AddPlayerToThemeEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get playerId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set playerId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlayerId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlayerId() => $_clearField(1);
+}
+
+class AddPlayersFromTournamentEvent extends $pb.GeneratedMessage {
+  factory AddPlayersFromTournamentEvent({
+    $core.int? tournamentId,
+  }) {
+    final $result = create();
+    if (tournamentId != null) {
+      $result.tournamentId = tournamentId;
+    }
+    return $result;
+  }
+  AddPlayersFromTournamentEvent._() : super();
+  factory AddPlayersFromTournamentEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AddPlayersFromTournamentEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPlayersFromTournamentEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'tournamentId', $pb.PbFieldType.O3, protoName: 'tournamentId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AddPlayersFromTournamentEvent clone() => AddPlayersFromTournamentEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AddPlayersFromTournamentEvent copyWith(void Function(AddPlayersFromTournamentEvent) updates) => super.copyWith((message) => updates(message as AddPlayersFromTournamentEvent)) as AddPlayersFromTournamentEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersFromTournamentEvent create() => AddPlayersFromTournamentEvent._();
+  AddPlayersFromTournamentEvent createEmptyInstance() => create();
+  static $pb.PbList<AddPlayersFromTournamentEvent> createRepeated() => $pb.PbList<AddPlayersFromTournamentEvent>();
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersFromTournamentEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddPlayersFromTournamentEvent>(create);
+  static AddPlayersFromTournamentEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get tournamentId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set tournamentId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTournamentId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTournamentId() => $_clearField(1);
+}
+
+class AddPlayersFromTournamentEventOut extends $pb.GeneratedMessage {
+  factory AddPlayersFromTournamentEventOut({
+    $core.int? addedCount,
+  }) {
+    final $result = create();
+    if (addedCount != null) {
+      $result.addedCount = addedCount;
+    }
+    return $result;
+  }
+  AddPlayersFromTournamentEventOut._() : super();
+  factory AddPlayersFromTournamentEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AddPlayersFromTournamentEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPlayersFromTournamentEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'addedCount', $pb.PbFieldType.O3, protoName: 'addedCount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AddPlayersFromTournamentEventOut clone() => AddPlayersFromTournamentEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AddPlayersFromTournamentEventOut copyWith(void Function(AddPlayersFromTournamentEventOut) updates) => super.copyWith((message) => updates(message as AddPlayersFromTournamentEventOut)) as AddPlayersFromTournamentEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersFromTournamentEventOut create() => AddPlayersFromTournamentEventOut._();
+  AddPlayersFromTournamentEventOut createEmptyInstance() => create();
+  static $pb.PbList<AddPlayersFromTournamentEventOut> createRepeated() => $pb.PbList<AddPlayersFromTournamentEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersFromTournamentEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddPlayersFromTournamentEventOut>(create);
+  static AddPlayersFromTournamentEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get addedCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set addedCount($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAddedCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAddedCount() => $_clearField(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -1765,3 +1765,41 @@ final $typed_data.Uint8List setTournamentPhotoThemeEventDescriptor = $convert.ba
     'ChxTZXRUb3VybmFtZW50UGhvdG9UaGVtZUV2ZW50Eh0KB3RoZW1lSWQYASABKAVIAFIHdGhlbW'
     'VJZIgBAUIKCghfdGhlbWVJZA==');
 
+@$core.Deprecated('Use addPlayerToThemeEventDescriptor instead')
+const AddPlayerToThemeEvent$json = {
+  '1': 'AddPlayerToThemeEvent',
+  '2': [
+    {'1': 'playerId', '3': 1, '4': 1, '5': 5, '10': 'playerId'},
+  ],
+};
+
+/// Descriptor for `AddPlayerToThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addPlayerToThemeEventDescriptor = $convert.base64Decode(
+    'ChVBZGRQbGF5ZXJUb1RoZW1lRXZlbnQSGgoIcGxheWVySWQYASABKAVSCHBsYXllcklk');
+
+@$core.Deprecated('Use addPlayersFromTournamentEventDescriptor instead')
+const AddPlayersFromTournamentEvent$json = {
+  '1': 'AddPlayersFromTournamentEvent',
+  '2': [
+    {'1': 'tournamentId', '3': 1, '4': 1, '5': 5, '10': 'tournamentId'},
+  ],
+};
+
+/// Descriptor for `AddPlayersFromTournamentEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addPlayersFromTournamentEventDescriptor = $convert.base64Decode(
+    'Ch1BZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudBIiCgx0b3VybmFtZW50SWQYASABKAVSDH'
+    'RvdXJuYW1lbnRJZA==');
+
+@$core.Deprecated('Use addPlayersFromTournamentEventOutDescriptor instead')
+const AddPlayersFromTournamentEventOut$json = {
+  '1': 'AddPlayersFromTournamentEventOut',
+  '2': [
+    {'1': 'addedCount', '3': 1, '4': 1, '5': 5, '10': 'addedCount'},
+  ],
+};
+
+/// Descriptor for `AddPlayersFromTournamentEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addPlayersFromTournamentEventOutDescriptor = $convert.base64Decode(
+    'CiBBZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudE91dBIeCgphZGRlZENvdW50GAEgASgFUg'
+    'phZGRlZENvdW50');
+
