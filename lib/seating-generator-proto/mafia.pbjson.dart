@@ -1078,8 +1078,12 @@ const Tournament$json = {
     {'1': 'billedTranslation', '3': 8, '4': 1, '5': 8, '10': 'billedTranslation'},
     {'1': 'notificationEnabled', '3': 9, '4': 1, '5': 8, '10': 'notificationEnabled'},
     {'1': 'description', '3': 10, '4': 1, '5': 11, '6': '.generated.TournamentDescription', '10': 'description'},
+    {'1': 'photoThemeId', '3': 11, '4': 1, '5': 5, '9': 0, '10': 'photoThemeId', '17': true},
   ],
   '4': [Tournament_Status$json],
+  '8': [
+    {'1': '_photoThemeId'},
+  ],
 };
 
 @$core.Deprecated('Use tournamentDescriptor instead')
@@ -1101,8 +1105,9 @@ final $typed_data.Uint8List tournamentDescriptor = $convert.base64Decode(
     'bGF5ZXJzEiwKEWJpbGxlZFRyYW5zbGF0aW9uGAggASgIUhFiaWxsZWRUcmFuc2xhdGlvbhIwCh'
     'Nub3RpZmljYXRpb25FbmFibGVkGAkgASgIUhNub3RpZmljYXRpb25FbmFibGVkEkIKC2Rlc2Ny'
     'aXB0aW9uGAogASgLMiAuZ2VuZXJhdGVkLlRvdXJuYW1lbnREZXNjcmlwdGlvblILZGVzY3JpcH'
-    'Rpb24iMwoGU3RhdHVzEhIKDndhaXRGb3JCaWxsaW5nEAASCgoGYWN0aXZlEAESCQoFZW5kZWQQ'
-    'Ag==');
+    'Rpb24SJwoMcGhvdG9UaGVtZUlkGAsgASgFSABSDHBob3RvVGhlbWVJZIgBASIzCgZTdGF0dXMS'
+    'EgoOd2FpdEZvckJpbGxpbmcQABIKCgZhY3RpdmUQARIJCgVlbmRlZBACQg8KDV9waG90b1RoZW'
+    '1lSWQ=');
 
 @$core.Deprecated('Use errorOutDescriptor instead')
 const ErrorOut$json = {
@@ -1643,4 +1648,120 @@ final $typed_data.Uint8List playerStatisticsEventOutDescriptor = $convert.base64
     '0YDCADKAsyGS5nZW5lcmF0ZWQuUGxheWVyUGFpclN0YXRSD3NhbWVNYWZpYUJvdHRvbRJBCg5k'
     'aWZmVGVhbUJvdHRvbRgNIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdFIOZGlmZlRlYW'
     '1Cb3R0b20=');
+
+@$core.Deprecated('Use photoThemeDescriptor instead')
+const PhotoTheme$json = {
+  '1': 'PhotoTheme',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'ownerId', '3': 3, '4': 1, '5': 5, '10': 'ownerId'},
+    {'1': 'photosCount', '3': 4, '4': 1, '5': 5, '10': 'photosCount'},
+  ],
+};
+
+/// Descriptor for `PhotoTheme`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List photoThemeDescriptor = $convert.base64Decode(
+    'CgpQaG90b1RoZW1lEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhgKB293bm'
+    'VySWQYAyABKAVSB293bmVySWQSIAoLcGhvdG9zQ291bnQYBCABKAVSC3Bob3Rvc0NvdW50');
+
+@$core.Deprecated('Use photoThemePlayerDescriptor instead')
+const PhotoThemePlayer$json = {
+  '1': 'PhotoThemePlayer',
+  '2': [
+    {'1': 'playerId', '3': 1, '4': 1, '5': 5, '10': 'playerId'},
+    {'1': 'nickname', '3': 2, '4': 1, '5': 9, '10': 'nickname'},
+    {'1': 'themeImageUrl', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'themeImageUrl', '17': true},
+    {'1': 'profileImageUrl', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'profileImageUrl', '17': true},
+  ],
+  '8': [
+    {'1': '_themeImageUrl'},
+    {'1': '_profileImageUrl'},
+  ],
+};
+
+/// Descriptor for `PhotoThemePlayer`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List photoThemePlayerDescriptor = $convert.base64Decode(
+    'ChBQaG90b1RoZW1lUGxheWVyEhoKCHBsYXllcklkGAEgASgFUghwbGF5ZXJJZBIaCghuaWNrbm'
+    'FtZRgCIAEoCVIIbmlja25hbWUSKQoNdGhlbWVJbWFnZVVybBgDIAEoCUgAUg10aGVtZUltYWdl'
+    'VXJsiAEBEi0KD3Byb2ZpbGVJbWFnZVVybBgEIAEoCUgBUg9wcm9maWxlSW1hZ2VVcmyIAQFCEA'
+    'oOX3RoZW1lSW1hZ2VVcmxCEgoQX3Byb2ZpbGVJbWFnZVVybA==');
+
+@$core.Deprecated('Use createPhotoThemeEventDescriptor instead')
+const CreatePhotoThemeEvent$json = {
+  '1': 'CreatePhotoThemeEvent',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `CreatePhotoThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createPhotoThemeEventDescriptor = $convert.base64Decode(
+    'ChVDcmVhdGVQaG90b1RoZW1lRXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
+
+@$core.Deprecated('Use createPhotoThemeEventOutDescriptor instead')
+const CreatePhotoThemeEventOut$json = {
+  '1': 'CreatePhotoThemeEventOut',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `CreatePhotoThemeEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createPhotoThemeEventOutDescriptor = $convert.base64Decode(
+    'ChhDcmVhdGVQaG90b1RoZW1lRXZlbnRPdXQSDgoCaWQYASABKAVSAmlk');
+
+@$core.Deprecated('Use updatePhotoThemeEventDescriptor instead')
+const UpdatePhotoThemeEvent$json = {
+  '1': 'UpdatePhotoThemeEvent',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `UpdatePhotoThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updatePhotoThemeEventDescriptor = $convert.base64Decode(
+    'ChVVcGRhdGVQaG90b1RoZW1lRXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
+
+@$core.Deprecated('Use getPhotoThemesEventOutDescriptor instead')
+const GetPhotoThemesEventOut$json = {
+  '1': 'GetPhotoThemesEventOut',
+  '2': [
+    {'1': 'themes', '3': 1, '4': 3, '5': 11, '6': '.generated.PhotoTheme', '10': 'themes'},
+  ],
+};
+
+/// Descriptor for `GetPhotoThemesEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPhotoThemesEventOutDescriptor = $convert.base64Decode(
+    'ChZHZXRQaG90b1RoZW1lc0V2ZW50T3V0Ei0KBnRoZW1lcxgBIAMoCzIVLmdlbmVyYXRlZC5QaG'
+    '90b1RoZW1lUgZ0aGVtZXM=');
+
+@$core.Deprecated('Use getPhotoThemePlayersEventOutDescriptor instead')
+const GetPhotoThemePlayersEventOut$json = {
+  '1': 'GetPhotoThemePlayersEventOut',
+  '2': [
+    {'1': 'players', '3': 1, '4': 3, '5': 11, '6': '.generated.PhotoThemePlayer', '10': 'players'},
+  ],
+};
+
+/// Descriptor for `GetPhotoThemePlayersEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPhotoThemePlayersEventOutDescriptor = $convert.base64Decode(
+    'ChxHZXRQaG90b1RoZW1lUGxheWVyc0V2ZW50T3V0EjUKB3BsYXllcnMYASADKAsyGy5nZW5lcm'
+    'F0ZWQuUGhvdG9UaGVtZVBsYXllclIHcGxheWVycw==');
+
+@$core.Deprecated('Use setTournamentPhotoThemeEventDescriptor instead')
+const SetTournamentPhotoThemeEvent$json = {
+  '1': 'SetTournamentPhotoThemeEvent',
+  '2': [
+    {'1': 'themeId', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'themeId', '17': true},
+  ],
+  '8': [
+    {'1': '_themeId'},
+  ],
+};
+
+/// Descriptor for `SetTournamentPhotoThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setTournamentPhotoThemeEventDescriptor = $convert.base64Decode(
+    'ChxTZXRUb3VybmFtZW50UGhvdG9UaGVtZUV2ZW50Eh0KB3RoZW1lSWQYASABKAVIAFIHdGhlbW'
+    'VJZIgBAUIKCghfdGhlbWVJZA==');
 

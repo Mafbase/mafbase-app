@@ -4049,6 +4049,7 @@ class Tournament extends $pb.GeneratedMessage {
     $core.bool? billedTranslation,
     $core.bool? notificationEnabled,
     TournamentDescription? description,
+    $core.int? photoThemeId,
   }) {
     final $result = create();
     if (id != null) {
@@ -4081,6 +4082,9 @@ class Tournament extends $pb.GeneratedMessage {
     if (description != null) {
       $result.description = description;
     }
+    if (photoThemeId != null) {
+      $result.photoThemeId = photoThemeId;
+    }
     return $result;
   }
   Tournament._() : super();
@@ -4098,6 +4102,7 @@ class Tournament extends $pb.GeneratedMessage {
     ..aOB(8, _omitFieldNames ? '' : 'billedTranslation', protoName: 'billedTranslation')
     ..aOB(9, _omitFieldNames ? '' : 'notificationEnabled', protoName: 'notificationEnabled')
     ..aOM<TournamentDescription>(10, _omitFieldNames ? '' : 'description', subBuilder: TournamentDescription.create)
+    ..a<$core.int>(11, _omitFieldNames ? '' : 'photoThemeId', $pb.PbFieldType.O3, protoName: 'photoThemeId')
     ..hasRequiredFields = false
   ;
 
@@ -4213,6 +4218,15 @@ class Tournament extends $pb.GeneratedMessage {
   void clearDescription() => $_clearField(10);
   @$pb.TagNumber(10)
   TournamentDescription ensureDescription() => $_ensure(9);
+
+  @$pb.TagNumber(11)
+  $core.int get photoThemeId => $_getIZ(10);
+  @$pb.TagNumber(11)
+  set photoThemeId($core.int v) { $_setSignedInt32(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasPhotoThemeId() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearPhotoThemeId() => $_clearField(11);
 }
 
 class ErrorOut extends $pb.GeneratedMessage {
@@ -6441,6 +6455,478 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(13)
   $pb.PbList<PlayerPairStat> get diffTeamBottom => $_getList(12);
+}
+
+class PhotoTheme extends $pb.GeneratedMessage {
+  factory PhotoTheme({
+    $core.int? id,
+    $core.String? name,
+    $core.int? ownerId,
+    $core.int? photosCount,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    if (name != null) {
+      $result.name = name;
+    }
+    if (ownerId != null) {
+      $result.ownerId = ownerId;
+    }
+    if (photosCount != null) {
+      $result.photosCount = photosCount;
+    }
+    return $result;
+  }
+  PhotoTheme._() : super();
+  factory PhotoTheme.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PhotoTheme.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PhotoTheme', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'ownerId', $pb.PbFieldType.O3, protoName: 'ownerId')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'photosCount', $pb.PbFieldType.O3, protoName: 'photosCount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PhotoTheme clone() => PhotoTheme()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PhotoTheme copyWith(void Function(PhotoTheme) updates) => super.copyWith((message) => updates(message as PhotoTheme)) as PhotoTheme;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PhotoTheme create() => PhotoTheme._();
+  PhotoTheme createEmptyInstance() => create();
+  static $pb.PbList<PhotoTheme> createRepeated() => $pb.PbList<PhotoTheme>();
+  @$core.pragma('dart2js:noInline')
+  static PhotoTheme getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PhotoTheme>(create);
+  static PhotoTheme? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get ownerId => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set ownerId($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasOwnerId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearOwnerId() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get photosCount => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set photosCount($core.int v) { $_setSignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPhotosCount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPhotosCount() => $_clearField(4);
+}
+
+class PhotoThemePlayer extends $pb.GeneratedMessage {
+  factory PhotoThemePlayer({
+    $core.int? playerId,
+    $core.String? nickname,
+    $core.String? themeImageUrl,
+    $core.String? profileImageUrl,
+  }) {
+    final $result = create();
+    if (playerId != null) {
+      $result.playerId = playerId;
+    }
+    if (nickname != null) {
+      $result.nickname = nickname;
+    }
+    if (themeImageUrl != null) {
+      $result.themeImageUrl = themeImageUrl;
+    }
+    if (profileImageUrl != null) {
+      $result.profileImageUrl = profileImageUrl;
+    }
+    return $result;
+  }
+  PhotoThemePlayer._() : super();
+  factory PhotoThemePlayer.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PhotoThemePlayer.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PhotoThemePlayer', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'playerId', $pb.PbFieldType.O3, protoName: 'playerId')
+    ..aOS(2, _omitFieldNames ? '' : 'nickname')
+    ..aOS(3, _omitFieldNames ? '' : 'themeImageUrl', protoName: 'themeImageUrl')
+    ..aOS(4, _omitFieldNames ? '' : 'profileImageUrl', protoName: 'profileImageUrl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PhotoThemePlayer clone() => PhotoThemePlayer()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PhotoThemePlayer copyWith(void Function(PhotoThemePlayer) updates) => super.copyWith((message) => updates(message as PhotoThemePlayer)) as PhotoThemePlayer;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PhotoThemePlayer create() => PhotoThemePlayer._();
+  PhotoThemePlayer createEmptyInstance() => create();
+  static $pb.PbList<PhotoThemePlayer> createRepeated() => $pb.PbList<PhotoThemePlayer>();
+  @$core.pragma('dart2js:noInline')
+  static PhotoThemePlayer getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PhotoThemePlayer>(create);
+  static PhotoThemePlayer? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get playerId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set playerId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlayerId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlayerId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get nickname => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nickname($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNickname() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNickname() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get themeImageUrl => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set themeImageUrl($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasThemeImageUrl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearThemeImageUrl() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get profileImageUrl => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set profileImageUrl($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasProfileImageUrl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProfileImageUrl() => $_clearField(4);
+}
+
+class CreatePhotoThemeEvent extends $pb.GeneratedMessage {
+  factory CreatePhotoThemeEvent({
+    $core.String? name,
+  }) {
+    final $result = create();
+    if (name != null) {
+      $result.name = name;
+    }
+    return $result;
+  }
+  CreatePhotoThemeEvent._() : super();
+  factory CreatePhotoThemeEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreatePhotoThemeEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePhotoThemeEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CreatePhotoThemeEvent clone() => CreatePhotoThemeEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreatePhotoThemeEvent copyWith(void Function(CreatePhotoThemeEvent) updates) => super.copyWith((message) => updates(message as CreatePhotoThemeEvent)) as CreatePhotoThemeEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreatePhotoThemeEvent create() => CreatePhotoThemeEvent._();
+  CreatePhotoThemeEvent createEmptyInstance() => create();
+  static $pb.PbList<CreatePhotoThemeEvent> createRepeated() => $pb.PbList<CreatePhotoThemeEvent>();
+  @$core.pragma('dart2js:noInline')
+  static CreatePhotoThemeEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreatePhotoThemeEvent>(create);
+  static CreatePhotoThemeEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+}
+
+class CreatePhotoThemeEventOut extends $pb.GeneratedMessage {
+  factory CreatePhotoThemeEventOut({
+    $core.int? id,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    return $result;
+  }
+  CreatePhotoThemeEventOut._() : super();
+  factory CreatePhotoThemeEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreatePhotoThemeEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePhotoThemeEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CreatePhotoThemeEventOut clone() => CreatePhotoThemeEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CreatePhotoThemeEventOut copyWith(void Function(CreatePhotoThemeEventOut) updates) => super.copyWith((message) => updates(message as CreatePhotoThemeEventOut)) as CreatePhotoThemeEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreatePhotoThemeEventOut create() => CreatePhotoThemeEventOut._();
+  CreatePhotoThemeEventOut createEmptyInstance() => create();
+  static $pb.PbList<CreatePhotoThemeEventOut> createRepeated() => $pb.PbList<CreatePhotoThemeEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static CreatePhotoThemeEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreatePhotoThemeEventOut>(create);
+  static CreatePhotoThemeEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+}
+
+class UpdatePhotoThemeEvent extends $pb.GeneratedMessage {
+  factory UpdatePhotoThemeEvent({
+    $core.String? name,
+  }) {
+    final $result = create();
+    if (name != null) {
+      $result.name = name;
+    }
+    return $result;
+  }
+  UpdatePhotoThemeEvent._() : super();
+  factory UpdatePhotoThemeEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdatePhotoThemeEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePhotoThemeEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdatePhotoThemeEvent clone() => UpdatePhotoThemeEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdatePhotoThemeEvent copyWith(void Function(UpdatePhotoThemeEvent) updates) => super.copyWith((message) => updates(message as UpdatePhotoThemeEvent)) as UpdatePhotoThemeEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdatePhotoThemeEvent create() => UpdatePhotoThemeEvent._();
+  UpdatePhotoThemeEvent createEmptyInstance() => create();
+  static $pb.PbList<UpdatePhotoThemeEvent> createRepeated() => $pb.PbList<UpdatePhotoThemeEvent>();
+  @$core.pragma('dart2js:noInline')
+  static UpdatePhotoThemeEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdatePhotoThemeEvent>(create);
+  static UpdatePhotoThemeEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+}
+
+class GetPhotoThemesEventOut extends $pb.GeneratedMessage {
+  factory GetPhotoThemesEventOut({
+    $core.Iterable<PhotoTheme>? themes,
+  }) {
+    final $result = create();
+    if (themes != null) {
+      $result.themes.addAll(themes);
+    }
+    return $result;
+  }
+  GetPhotoThemesEventOut._() : super();
+  factory GetPhotoThemesEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetPhotoThemesEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPhotoThemesEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<PhotoTheme>(1, _omitFieldNames ? '' : 'themes', $pb.PbFieldType.PM, subBuilder: PhotoTheme.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetPhotoThemesEventOut clone() => GetPhotoThemesEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetPhotoThemesEventOut copyWith(void Function(GetPhotoThemesEventOut) updates) => super.copyWith((message) => updates(message as GetPhotoThemesEventOut)) as GetPhotoThemesEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPhotoThemesEventOut create() => GetPhotoThemesEventOut._();
+  GetPhotoThemesEventOut createEmptyInstance() => create();
+  static $pb.PbList<GetPhotoThemesEventOut> createRepeated() => $pb.PbList<GetPhotoThemesEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static GetPhotoThemesEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPhotoThemesEventOut>(create);
+  static GetPhotoThemesEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<PhotoTheme> get themes => $_getList(0);
+}
+
+class GetPhotoThemePlayersEventOut extends $pb.GeneratedMessage {
+  factory GetPhotoThemePlayersEventOut({
+    $core.Iterable<PhotoThemePlayer>? players,
+  }) {
+    final $result = create();
+    if (players != null) {
+      $result.players.addAll(players);
+    }
+    return $result;
+  }
+  GetPhotoThemePlayersEventOut._() : super();
+  factory GetPhotoThemePlayersEventOut.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetPhotoThemePlayersEventOut.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPhotoThemePlayersEventOut', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pc<PhotoThemePlayer>(1, _omitFieldNames ? '' : 'players', $pb.PbFieldType.PM, subBuilder: PhotoThemePlayer.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetPhotoThemePlayersEventOut clone() => GetPhotoThemePlayersEventOut()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetPhotoThemePlayersEventOut copyWith(void Function(GetPhotoThemePlayersEventOut) updates) => super.copyWith((message) => updates(message as GetPhotoThemePlayersEventOut)) as GetPhotoThemePlayersEventOut;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPhotoThemePlayersEventOut create() => GetPhotoThemePlayersEventOut._();
+  GetPhotoThemePlayersEventOut createEmptyInstance() => create();
+  static $pb.PbList<GetPhotoThemePlayersEventOut> createRepeated() => $pb.PbList<GetPhotoThemePlayersEventOut>();
+  @$core.pragma('dart2js:noInline')
+  static GetPhotoThemePlayersEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPhotoThemePlayersEventOut>(create);
+  static GetPhotoThemePlayersEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<PhotoThemePlayer> get players => $_getList(0);
+}
+
+class SetTournamentPhotoThemeEvent extends $pb.GeneratedMessage {
+  factory SetTournamentPhotoThemeEvent({
+    $core.int? themeId,
+  }) {
+    final $result = create();
+    if (themeId != null) {
+      $result.themeId = themeId;
+    }
+    return $result;
+  }
+  SetTournamentPhotoThemeEvent._() : super();
+  factory SetTournamentPhotoThemeEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SetTournamentPhotoThemeEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetTournamentPhotoThemeEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'themeId', $pb.PbFieldType.O3, protoName: 'themeId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SetTournamentPhotoThemeEvent clone() => SetTournamentPhotoThemeEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SetTournamentPhotoThemeEvent copyWith(void Function(SetTournamentPhotoThemeEvent) updates) => super.copyWith((message) => updates(message as SetTournamentPhotoThemeEvent)) as SetTournamentPhotoThemeEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetTournamentPhotoThemeEvent create() => SetTournamentPhotoThemeEvent._();
+  SetTournamentPhotoThemeEvent createEmptyInstance() => create();
+  static $pb.PbList<SetTournamentPhotoThemeEvent> createRepeated() => $pb.PbList<SetTournamentPhotoThemeEvent>();
+  @$core.pragma('dart2js:noInline')
+  static SetTournamentPhotoThemeEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetTournamentPhotoThemeEvent>(create);
+  static SetTournamentPhotoThemeEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get themeId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set themeId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasThemeId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearThemeId() => $_clearField(1);
 }
 
 
