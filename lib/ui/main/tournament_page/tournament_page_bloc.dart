@@ -16,6 +16,7 @@ import 'package:seating_generator_web/domain/interactors/start_game_info_interac
 import 'package:seating_generator_web/domain/interactors/tournament_check_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
@@ -44,6 +45,7 @@ class TournamentPageBloc
 
   final CustomTextInfoInteractor _customTextInfoInteractor = getIt();
   final StartGameInfoInteractor _startGameInfoInteractor = getIt();
+  final PhotoThemeRepository _photoThemeRepository = getIt();
 
   late final BillTournamentInteractor _billTournamentInteractor = getIt(
     param1: _context,
@@ -69,6 +71,8 @@ class TournamentPageBloc
     on<TournamentPageEventSetFinalPlayers>(_onSetFinalPlayers);
     on<TournamentPageEventStartGameInfo>(_onStartGameInfo);
     on<TournamentPageEventCustomTextInfo>(_onCustomTextInfo);
+    on<TournamentPageEventSelectPhotoTheme>(_onSelectPhotoTheme);
+    on<TournamentPageEventSetActivePhotoTheme>(_onSetActivePhotoTheme);
   }
 
   Future _onStartGameInfo(
@@ -149,6 +153,7 @@ class TournamentPageBloc
             billedTranslation: tournament.billedTranslation,
             notificationEnabled: tournament.notificationEnabled,
             gomafiaUrl: tournament.gomafiaUrl,
+            activePhotoThemeId: tournament.photoThemeId,
           ),
         );
       }),
@@ -274,4 +279,46 @@ class TournamentPageBloc
     return Future.wait([first, second]);
   }
 
+  Future<void> _onSelectPhotoTheme(
+    TournamentPageEventSelectPhotoTheme event,
+    Emitter<TournamentPageState> emit,
+  ) async {
+    final themeId = event.themeId;
+    if (themeId == null) {
+      emit(state.copyWith(
+        activePhotoThemeId: null,
+        activeThemePhotos: {},
+      ),);
+      return;
+    }
+    try {
+      final players = await _photoThemeRepository.getThemePlayers(themeId);
+      final photosMap = <int, String>{};
+      for (final player in players) {
+        if (player.themeImageUrl != null) {
+          photosMap[player.playerId] = player.themeImageUrl!;
+        }
+      }
+      emit(state.copyWith(
+        activePhotoThemeId: themeId,
+        activeThemePhotos: photosMap,
+      ),);
+    } catch (_) {
+      emit(state.copyWith(
+        activePhotoThemeId: themeId,
+        activeThemePhotos: {},
+      ),);
+    }
+  }
+
+  Future<void> _onSetActivePhotoTheme(
+    TournamentPageEventSetActivePhotoTheme event,
+    Emitter<TournamentPageState> emit,
+  ) async {
+    await _photoThemeRepository.setTournamentPhotoTheme(
+      tournamentId,
+      event.themeId,
+    );
+    emit(state.copyWith(activePhotoThemeId: event.themeId));
+  }
 }

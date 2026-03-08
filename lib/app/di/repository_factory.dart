@@ -7,6 +7,8 @@ import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/domain/repositories/owners_repository.dart';
 import 'package:seating_generator_web/feature/custom_columns/data/repository/custom_columns_repository_impl.dart';
 import 'package:seating_generator_web/feature/custom_columns/domain/repository/custom_columns_repository.dart';
+import 'package:seating_generator_web/feature/photo_themes/data/photo_theme_repository_impl.dart';
+import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 import 'package:seating_generator_web/feature/player_statistics/data/repository/player_statistics_repository_impl.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/repository/player_statistics_repository.dart';
 import 'package:seating_generator_web/feature/profile/data/repository/profile_repository_impl.dart';
@@ -32,4 +34,7 @@ class RepositoryFactory {
 
   late final PlayerStatisticsRepository playerStatisticsRepository =
       PlayerStatisticsRepositoryImpl(client);
+
+  late final PhotoThemeRepository photoThemeRepository =
+      PhotoThemeRepositoryImpl(client);
 }

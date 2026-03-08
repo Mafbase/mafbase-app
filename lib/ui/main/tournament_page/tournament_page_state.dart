@@ -25,5 +25,7 @@ class TournamentPageState with _$TournamentPageState {
     @Default(false) bool isMyTournament,
     @Default(false) bool notificationEnabled,
     String? gomafiaUrl,
+    int? activePhotoThemeId,
+    @Default({}) Map<int, String> activeThemePhotos,
   }) = _TournamentPageState;
 }

@@ -79,5 +79,6 @@ extension TournamentExt on Tournament {
         billedPlayers: billedPlayers,
         notificationEnabled: notificationEnabled,
         gomafiaUrl: description.gomafiaUrl,
+        photoThemeId: hasPhotoThemeId() ? photoThemeId : null,
       );
 }

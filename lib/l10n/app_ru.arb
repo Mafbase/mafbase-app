@@ -693,5 +693,68 @@
   "playerStatsError": "Не удалось загрузить статистику",
   "@playerStatsError": {},
   "playerStatsNoData": "Нет данных о парах",
-  "@playerStatsNoData": {}
+  "@playerStatsNoData": {},
+
+  "photoThemesTitle": "Темы фотографий",
+  "@photoThemesTitle": {},
+  "photoThemesCreate": "Создание темы",
+  "@photoThemesCreate": {},
+  "photoThemesRename": "Переименование темы",
+  "@photoThemesRename": {},
+  "photoThemesNameHint": "Название темы",
+  "@photoThemesNameHint": {},
+  "photoThemesSave": "Сохранить",
+  "@photoThemesSave": {},
+  "photoThemesCreateButton": "+ Создать тему",
+  "@photoThemesCreateButton": {},
+  "photoThemesCreateShort": "Создать",
+  "@photoThemesCreateShort": {},
+  "photoThemesRenameShort": "Переименовать",
+  "@photoThemesRenameShort": {},
+  "photoThemesDeleteShort": "Удалить",
+  "@photoThemesDeleteShort": {},
+  "photoThemesDeleteConfirm": "Вы уверены, что хотите удалить эту тему?",
+  "@photoThemesDeleteConfirm": {},
+  "photoThemesPhotosCount": "{count, plural, =0{0 фото} =1{{count} фото} other{{count} фото}}",
+  "@photoThemesPhotosCount": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "photoThemesApplied": "Применена к турниру",
+  "@photoThemesApplied": {},
+  "photoThemesNotApplied": "Не применена",
+  "@photoThemesNotApplied": {},
+  "photoThemesApply": "Применить",
+  "@photoThemesApply": {},
+  "photoThemesRemove": "Снять",
+  "@photoThemesRemove": {},
+  "photoThemesSelectThemeHint": "Выберите тему для просмотра",
+  "@photoThemesSelectThemeHint": {},
+  "photoThemesNoPlayers": "Нет участников для отображения",
+  "@photoThemesNoPlayers": {},
+  "photoThemesSelectorLabel": "Тема фото:",
+  "@photoThemesSelectorLabel": {},
+  "photoThemesProfilePhotos": "Профильные фото",
+  "@photoThemesProfilePhotos": {},
+  "photoThemesAddPlayer": "Добавить игрока",
+  "@photoThemesAddPlayer": {},
+  "photoThemesAddFromTournament": "Добавить игроков из турнира",
+  "@photoThemesAddFromTournament": {},
+  "photoThemesAddedCount": "Добавлено игроков: {count}",
+  "@photoThemesAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "photoThemesSaveFromTournament": "Сохранить всех игроков турнира",
+  "@photoThemesSaveFromTournament": {},
+  "photoThemesRemovePlayer": "Удалить из темы",
+  "@photoThemesRemovePlayer": {}
 }

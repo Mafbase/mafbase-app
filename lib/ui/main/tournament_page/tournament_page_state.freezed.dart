@@ -27,6 +27,8 @@ mixin _$TournamentPageState {
   bool get isMyTournament => throw _privateConstructorUsedError;
   bool get notificationEnabled => throw _privateConstructorUsedError;
   String? get gomafiaUrl => throw _privateConstructorUsedError;
+  int? get activePhotoThemeId => throw _privateConstructorUsedError;
+  Map<int, String> get activeThemePhotos => throw _privateConstructorUsedError;
 
   /// Create a copy of TournamentPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -52,7 +54,9 @@ abstract class $TournamentPageStateCopyWith<$Res> {
       bool billedTranslation,
       bool isMyTournament,
       bool notificationEnabled,
-      String? gomafiaUrl});
+      String? gomafiaUrl,
+      int? activePhotoThemeId,
+      Map<int, String> activeThemePhotos});
 
   $TournamentSettingsModelCopyWith<$Res> get settings;
 }
@@ -83,6 +87,8 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
     Object? isMyTournament = null,
     Object? notificationEnabled = null,
     Object? gomafiaUrl = freezed,
+    Object? activePhotoThemeId = freezed,
+    Object? activeThemePhotos = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -129,6 +135,14 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.gomafiaUrl
           : gomafiaUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      activePhotoThemeId: freezed == activePhotoThemeId
+          ? _value.activePhotoThemeId
+          : activePhotoThemeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      activeThemePhotos: null == activeThemePhotos
+          ? _value.activeThemePhotos
+          : activeThemePhotos // ignore: cast_nullable_to_non_nullable
+              as Map<int, String>,
     ) as $Val);
   }
 
@@ -162,7 +176,9 @@ abstract class _$$TournamentPageStateImplCopyWith<$Res>
       bool billedTranslation,
       bool isMyTournament,
       bool notificationEnabled,
-      String? gomafiaUrl});
+      String? gomafiaUrl,
+      int? activePhotoThemeId,
+      Map<int, String> activeThemePhotos});
 
   @override
   $TournamentSettingsModelCopyWith<$Res> get settings;
@@ -192,6 +208,8 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
     Object? isMyTournament = null,
     Object? notificationEnabled = null,
     Object? gomafiaUrl = freezed,
+    Object? activePhotoThemeId = freezed,
+    Object? activeThemePhotos = null,
   }) {
     return _then(_$TournamentPageStateImpl(
       isLoading: null == isLoading
@@ -238,6 +256,14 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
           ? _value.gomafiaUrl
           : gomafiaUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      activePhotoThemeId: freezed == activePhotoThemeId
+          ? _value.activePhotoThemeId
+          : activePhotoThemeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      activeThemePhotos: null == activeThemePhotos
+          ? _value._activeThemePhotos
+          : activeThemePhotos // ignore: cast_nullable_to_non_nullable
+              as Map<int, String>,
     ));
   }
 }
@@ -257,11 +283,14 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
       this.billedTranslation = false,
       this.isMyTournament = false,
       this.notificationEnabled = false,
-      this.gomafiaUrl})
+      this.gomafiaUrl,
+      this.activePhotoThemeId,
+      final Map<int, String> activeThemePhotos = const {}})
       : _players = players,
         _tournamentPlayers = tournamentPlayers,
         _cannotMeet = cannotMeet,
-        _finalPlayers = finalPlayers;
+        _finalPlayers = finalPlayers,
+        _activeThemePhotos = activeThemePhotos;
 
   @override
   @JsonKey()
@@ -320,10 +349,21 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
   final bool notificationEnabled;
   @override
   final String? gomafiaUrl;
+  @override
+  final int? activePhotoThemeId;
+  final Map<int, String> _activeThemePhotos;
+  @override
+  @JsonKey()
+  Map<int, String> get activeThemePhotos {
+    if (_activeThemePhotos is EqualUnmodifiableMapView)
+      return _activeThemePhotos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_activeThemePhotos);
+  }
 
   @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl)';
+    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl, activePhotoThemeId: $activePhotoThemeId, activeThemePhotos: $activeThemePhotos)';
   }
 
   @override
@@ -351,7 +391,11 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
             (identical(other.notificationEnabled, notificationEnabled) ||
                 other.notificationEnabled == notificationEnabled) &&
             (identical(other.gomafiaUrl, gomafiaUrl) ||
-                other.gomafiaUrl == gomafiaUrl));
+                other.gomafiaUrl == gomafiaUrl) &&
+            (identical(other.activePhotoThemeId, activePhotoThemeId) ||
+                other.activePhotoThemeId == activePhotoThemeId) &&
+            const DeepCollectionEquality()
+                .equals(other._activeThemePhotos, _activeThemePhotos));
   }
 
   @override
@@ -367,7 +411,9 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
       billedTranslation,
       isMyTournament,
       notificationEnabled,
-      gomafiaUrl);
+      gomafiaUrl,
+      activePhotoThemeId,
+      const DeepCollectionEquality().hash(_activeThemePhotos));
 
   /// Create a copy of TournamentPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -391,7 +437,9 @@ abstract class _TournamentPageState implements TournamentPageState {
       final bool billedTranslation,
       final bool isMyTournament,
       final bool notificationEnabled,
-      final String? gomafiaUrl}) = _$TournamentPageStateImpl;
+      final String? gomafiaUrl,
+      final int? activePhotoThemeId,
+      final Map<int, String> activeThemePhotos}) = _$TournamentPageStateImpl;
 
   @override
   bool get isLoading;
@@ -415,6 +463,10 @@ abstract class _TournamentPageState implements TournamentPageState {
   bool get notificationEnabled;
   @override
   String? get gomafiaUrl;
+  @override
+  int? get activePhotoThemeId;
+  @override
+  Map<int, String> get activeThemePhotos;
 
   /// Create a copy of TournamentPageState
   /// with the given fields replaced by the non-null parameter values.
