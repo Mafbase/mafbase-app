@@ -79,7 +79,7 @@ class _PlayersListBodyState extends State<PlayersListBody> {
                           _selectedTheme = theme;
                         });
                         context.read<TournamentPageBloc>().add(
-                              TournamentPageEvent.selectPhotoTheme(
+                              TournamentPageEvent.setActivePhotoTheme(
                                 themeId: theme?.id,
                               ),
                             );

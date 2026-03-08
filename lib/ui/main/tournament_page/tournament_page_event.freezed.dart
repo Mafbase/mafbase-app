@@ -33,7 +33,6 @@ mixin _$TournamentPageEvent {
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +53,6 @@ mixin _$TournamentPageEvent {
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +73,6 @@ mixin _$TournamentPageEvent {
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) =>
@@ -109,8 +106,6 @@ mixin _$TournamentPageEvent {
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) =>
@@ -139,8 +134,6 @@ mixin _$TournamentPageEvent {
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) =>
@@ -167,8 +160,6 @@ mixin _$TournamentPageEvent {
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -258,7 +249,6 @@ class _$TournamentPageBackButtonPreesedEventImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return backButtonPressed();
@@ -282,7 +272,6 @@ class _$TournamentPageBackButtonPreesedEventImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return backButtonPressed?.call();
@@ -306,7 +295,6 @@ class _$TournamentPageBackButtonPreesedEventImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -346,8 +334,6 @@ class _$TournamentPageBackButtonPreesedEventImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -379,8 +365,6 @@ class _$TournamentPageBackButtonPreesedEventImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -410,8 +394,6 @@ class _$TournamentPageBackButtonPreesedEventImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -490,7 +472,6 @@ class _$TournamentPageEventPlayersListTappedImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return playersListTapped();
@@ -514,7 +495,6 @@ class _$TournamentPageEventPlayersListTappedImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return playersListTapped?.call();
@@ -538,7 +518,6 @@ class _$TournamentPageEventPlayersListTappedImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -578,8 +557,6 @@ class _$TournamentPageEventPlayersListTappedImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -611,8 +588,6 @@ class _$TournamentPageEventPlayersListTappedImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -642,8 +617,6 @@ class _$TournamentPageEventPlayersListTappedImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -763,7 +736,6 @@ class _$TournamentPageEventUpdateSettingsImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return updateSettings(settings);
@@ -787,7 +759,6 @@ class _$TournamentPageEventUpdateSettingsImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return updateSettings?.call(settings);
@@ -811,7 +782,6 @@ class _$TournamentPageEventUpdateSettingsImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -851,8 +821,6 @@ class _$TournamentPageEventUpdateSettingsImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -884,8 +852,6 @@ class _$TournamentPageEventUpdateSettingsImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -915,8 +881,6 @@ class _$TournamentPageEventUpdateSettingsImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -1005,7 +969,6 @@ class _$TournamentPageEventOpenRatingImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return openRating();
@@ -1029,7 +992,6 @@ class _$TournamentPageEventOpenRatingImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return openRating?.call();
@@ -1053,7 +1015,6 @@ class _$TournamentPageEventOpenRatingImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -1093,8 +1054,6 @@ class _$TournamentPageEventOpenRatingImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -1126,8 +1085,6 @@ class _$TournamentPageEventOpenRatingImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -1157,8 +1114,6 @@ class _$TournamentPageEventOpenRatingImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -1236,7 +1191,6 @@ class _$TournamentPagePlayerListOpenedEventImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return playersListOpened();
@@ -1260,7 +1214,6 @@ class _$TournamentPagePlayerListOpenedEventImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return playersListOpened?.call();
@@ -1284,7 +1237,6 @@ class _$TournamentPagePlayerListOpenedEventImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -1324,8 +1276,6 @@ class _$TournamentPagePlayerListOpenedEventImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -1357,8 +1307,6 @@ class _$TournamentPagePlayerListOpenedEventImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -1388,8 +1336,6 @@ class _$TournamentPagePlayerListOpenedEventImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -1468,7 +1414,6 @@ class _$TournamentPageEventAddPlayerImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return addPlayerTapped();
@@ -1492,7 +1437,6 @@ class _$TournamentPageEventAddPlayerImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return addPlayerTapped?.call();
@@ -1516,7 +1460,6 @@ class _$TournamentPageEventAddPlayerImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -1556,8 +1499,6 @@ class _$TournamentPageEventAddPlayerImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -1589,8 +1530,6 @@ class _$TournamentPageEventAddPlayerImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -1620,8 +1559,6 @@ class _$TournamentPageEventAddPlayerImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -1699,7 +1636,6 @@ class _$TournamentPageEventEditSettingsImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return editTournamentSettings();
@@ -1723,7 +1659,6 @@ class _$TournamentPageEventEditSettingsImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return editTournamentSettings?.call();
@@ -1747,7 +1682,6 @@ class _$TournamentPageEventEditSettingsImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -1787,8 +1721,6 @@ class _$TournamentPageEventEditSettingsImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -1820,8 +1752,6 @@ class _$TournamentPageEventEditSettingsImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -1851,8 +1781,6 @@ class _$TournamentPageEventEditSettingsImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -1970,7 +1898,6 @@ class _$TournamentPageEventDeletePlayerImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return deletePlayer(player);
@@ -1994,7 +1921,6 @@ class _$TournamentPageEventDeletePlayerImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return deletePlayer?.call(player);
@@ -2018,7 +1944,6 @@ class _$TournamentPageEventDeletePlayerImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -2058,8 +1983,6 @@ class _$TournamentPageEventDeletePlayerImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -2091,8 +2014,6 @@ class _$TournamentPageEventDeletePlayerImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -2122,8 +2043,6 @@ class _$TournamentPageEventDeletePlayerImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -2251,7 +2170,6 @@ class _$TournamentPageEventOpenProfileDialogImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return openProfileDialog(player);
@@ -2275,7 +2193,6 @@ class _$TournamentPageEventOpenProfileDialogImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return openProfileDialog?.call(player);
@@ -2299,7 +2216,6 @@ class _$TournamentPageEventOpenProfileDialogImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -2339,8 +2255,6 @@ class _$TournamentPageEventOpenProfileDialogImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -2372,8 +2286,6 @@ class _$TournamentPageEventOpenProfileDialogImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -2403,8 +2315,6 @@ class _$TournamentPageEventOpenProfileDialogImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -2493,7 +2403,6 @@ class _$TournamentPageEventOpenSeatingPageImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return openSeatingPage();
@@ -2517,7 +2426,6 @@ class _$TournamentPageEventOpenSeatingPageImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return openSeatingPage?.call();
@@ -2541,7 +2449,6 @@ class _$TournamentPageEventOpenSeatingPageImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -2581,8 +2488,6 @@ class _$TournamentPageEventOpenSeatingPageImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -2614,8 +2519,6 @@ class _$TournamentPageEventOpenSeatingPageImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -2645,8 +2548,6 @@ class _$TournamentPageEventOpenSeatingPageImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -2762,7 +2663,6 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return bill(playersCount, billedTranlsation);
@@ -2786,7 +2686,6 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return bill?.call(playersCount, billedTranlsation);
@@ -2810,7 +2709,6 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -2850,8 +2748,6 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -2883,8 +2779,6 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -2914,8 +2808,6 @@ class _$TournamentPageEventBillImpl implements TournamentPageEventBill {
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -3003,7 +2895,6 @@ class _$TournamentPageEventPageOpenedImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return pageOpened();
@@ -3027,7 +2918,6 @@ class _$TournamentPageEventPageOpenedImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return pageOpened?.call();
@@ -3051,7 +2941,6 @@ class _$TournamentPageEventPageOpenedImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -3091,8 +2980,6 @@ class _$TournamentPageEventPageOpenedImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -3124,8 +3011,6 @@ class _$TournamentPageEventPageOpenedImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -3155,8 +3040,6 @@ class _$TournamentPageEventPageOpenedImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -3270,7 +3153,6 @@ class _$TournamentPageEventSetFinalPlayersImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return setFinalPlayers(players);
@@ -3294,7 +3176,6 @@ class _$TournamentPageEventSetFinalPlayersImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return setFinalPlayers?.call(players);
@@ -3318,7 +3199,6 @@ class _$TournamentPageEventSetFinalPlayersImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -3358,8 +3238,6 @@ class _$TournamentPageEventSetFinalPlayersImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -3391,8 +3269,6 @@ class _$TournamentPageEventSetFinalPlayersImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -3422,8 +3298,6 @@ class _$TournamentPageEventSetFinalPlayersImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -3548,7 +3422,6 @@ class _$TournamentPageEventStartGameInfoImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return startGameInfo(game, time);
@@ -3572,7 +3445,6 @@ class _$TournamentPageEventStartGameInfoImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return startGameInfo?.call(game, time);
@@ -3596,7 +3468,6 @@ class _$TournamentPageEventStartGameInfoImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -3636,8 +3507,6 @@ class _$TournamentPageEventStartGameInfoImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -3669,8 +3538,6 @@ class _$TournamentPageEventStartGameInfoImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -3700,8 +3567,6 @@ class _$TournamentPageEventStartGameInfoImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -3818,7 +3683,6 @@ class _$TournamentPageEventCustomTextInfoImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return customTextInfo(text);
@@ -3842,7 +3706,6 @@ class _$TournamentPageEventCustomTextInfoImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return customTextInfo?.call(text);
@@ -3866,7 +3729,6 @@ class _$TournamentPageEventCustomTextInfoImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -3906,8 +3768,6 @@ class _$TournamentPageEventCustomTextInfoImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -3939,8 +3799,6 @@ class _$TournamentPageEventCustomTextInfoImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -3970,8 +3828,6 @@ class _$TournamentPageEventCustomTextInfoImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
@@ -3995,275 +3851,6 @@ abstract class TournamentPageEventCustomTextInfo
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TournamentPageEventCustomTextInfoImplCopyWith<
           _$TournamentPageEventCustomTextInfoImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TournamentPageEventSelectPhotoThemeImplCopyWith<$Res> {
-  factory _$$TournamentPageEventSelectPhotoThemeImplCopyWith(
-          _$TournamentPageEventSelectPhotoThemeImpl value,
-          $Res Function(_$TournamentPageEventSelectPhotoThemeImpl) then) =
-      __$$TournamentPageEventSelectPhotoThemeImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int? themeId});
-}
-
-/// @nodoc
-class __$$TournamentPageEventSelectPhotoThemeImplCopyWithImpl<$Res>
-    extends _$TournamentPageEventCopyWithImpl<$Res,
-        _$TournamentPageEventSelectPhotoThemeImpl>
-    implements _$$TournamentPageEventSelectPhotoThemeImplCopyWith<$Res> {
-  __$$TournamentPageEventSelectPhotoThemeImplCopyWithImpl(
-      _$TournamentPageEventSelectPhotoThemeImpl _value,
-      $Res Function(_$TournamentPageEventSelectPhotoThemeImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TournamentPageEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? themeId = freezed,
-  }) {
-    return _then(_$TournamentPageEventSelectPhotoThemeImpl(
-      themeId: freezed == themeId
-          ? _value.themeId
-          : themeId // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TournamentPageEventSelectPhotoThemeImpl
-    implements TournamentPageEventSelectPhotoTheme {
-  const _$TournamentPageEventSelectPhotoThemeImpl({this.themeId});
-
-  @override
-  final int? themeId;
-
-  @override
-  String toString() {
-    return 'TournamentPageEvent.selectPhotoTheme(themeId: $themeId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TournamentPageEventSelectPhotoThemeImpl &&
-            (identical(other.themeId, themeId) || other.themeId == themeId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, themeId);
-
-  /// Create a copy of TournamentPageEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TournamentPageEventSelectPhotoThemeImplCopyWith<
-          _$TournamentPageEventSelectPhotoThemeImpl>
-      get copyWith => __$$TournamentPageEventSelectPhotoThemeImplCopyWithImpl<
-          _$TournamentPageEventSelectPhotoThemeImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() backButtonPressed,
-    required TResult Function() playersListTapped,
-    required TResult Function(TournamentSettingsModel settings) updateSettings,
-    required TResult Function() openRating,
-    required TResult Function() playersListOpened,
-    required TResult Function() addPlayerTapped,
-    required TResult Function() editTournamentSettings,
-    required TResult Function(PlayerModel player) deletePlayer,
-    required TResult Function(PlayerModel player) openProfileDialog,
-    required TResult Function() openSeatingPage,
-    required TResult Function(int playersCount, bool billedTranlsation) bill,
-    required TResult Function() pageOpened,
-    required TResult Function(List<PlayerModel> players) setFinalPlayers,
-    required TResult Function(int game, TimeOfDay? time) startGameInfo,
-    required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
-    required TResult Function(int? themeId) setActivePhotoTheme,
-  }) {
-    return selectPhotoTheme(themeId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? backButtonPressed,
-    TResult? Function()? playersListTapped,
-    TResult? Function(TournamentSettingsModel settings)? updateSettings,
-    TResult? Function()? openRating,
-    TResult? Function()? playersListOpened,
-    TResult? Function()? addPlayerTapped,
-    TResult? Function()? editTournamentSettings,
-    TResult? Function(PlayerModel player)? deletePlayer,
-    TResult? Function(PlayerModel player)? openProfileDialog,
-    TResult? Function()? openSeatingPage,
-    TResult? Function(int playersCount, bool billedTranlsation)? bill,
-    TResult? Function()? pageOpened,
-    TResult? Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult? Function(int game, TimeOfDay? time)? startGameInfo,
-    TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
-    TResult? Function(int? themeId)? setActivePhotoTheme,
-  }) {
-    return selectPhotoTheme?.call(themeId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? backButtonPressed,
-    TResult Function()? playersListTapped,
-    TResult Function(TournamentSettingsModel settings)? updateSettings,
-    TResult Function()? openRating,
-    TResult Function()? playersListOpened,
-    TResult Function()? addPlayerTapped,
-    TResult Function()? editTournamentSettings,
-    TResult Function(PlayerModel player)? deletePlayer,
-    TResult Function(PlayerModel player)? openProfileDialog,
-    TResult Function()? openSeatingPage,
-    TResult Function(int playersCount, bool billedTranlsation)? bill,
-    TResult Function()? pageOpened,
-    TResult Function(List<PlayerModel> players)? setFinalPlayers,
-    TResult Function(int game, TimeOfDay? time)? startGameInfo,
-    TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
-    TResult Function(int? themeId)? setActivePhotoTheme,
-    required TResult orElse(),
-  }) {
-    if (selectPhotoTheme != null) {
-      return selectPhotoTheme(themeId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TournamentPageBackButtonPreesedEvent value)
-        backButtonPressed,
-    required TResult Function(TournamentPageEventPlayersListTapped value)
-        playersListTapped,
-    required TResult Function(TournamentPageEventUpdateSettings value)
-        updateSettings,
-    required TResult Function(TournamentPageEventOpenRating value) openRating,
-    required TResult Function(TournamentPagePlayerListOpenedEvent value)
-        playersListOpened,
-    required TResult Function(TournamentPageEventAddPlayer value)
-        addPlayerTapped,
-    required TResult Function(TournamentPageEventEditSettings value)
-        editTournamentSettings,
-    required TResult Function(TournamentPageEventDeletePlayer value)
-        deletePlayer,
-    required TResult Function(TournamentPageEventOpenProfileDialog value)
-        openProfileDialog,
-    required TResult Function(TournamentPageEventOpenSeatingPage value)
-        openSeatingPage,
-    required TResult Function(TournamentPageEventBill value) bill,
-    required TResult Function(TournamentPageEventPageOpened value) pageOpened,
-    required TResult Function(TournamentPageEventSetFinalPlayers value)
-        setFinalPlayers,
-    required TResult Function(TournamentPageEventStartGameInfo value)
-        startGameInfo,
-    required TResult Function(TournamentPageEventCustomTextInfo value)
-        customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
-    required TResult Function(TournamentPageEventSetActivePhotoTheme value)
-        setActivePhotoTheme,
-  }) {
-    return selectPhotoTheme(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TournamentPageBackButtonPreesedEvent value)?
-        backButtonPressed,
-    TResult? Function(TournamentPageEventPlayersListTapped value)?
-        playersListTapped,
-    TResult? Function(TournamentPageEventUpdateSettings value)? updateSettings,
-    TResult? Function(TournamentPageEventOpenRating value)? openRating,
-    TResult? Function(TournamentPagePlayerListOpenedEvent value)?
-        playersListOpened,
-    TResult? Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult? Function(TournamentPageEventEditSettings value)?
-        editTournamentSettings,
-    TResult? Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult? Function(TournamentPageEventOpenProfileDialog value)?
-        openProfileDialog,
-    TResult? Function(TournamentPageEventOpenSeatingPage value)?
-        openSeatingPage,
-    TResult? Function(TournamentPageEventBill value)? bill,
-    TResult? Function(TournamentPageEventPageOpened value)? pageOpened,
-    TResult? Function(TournamentPageEventSetFinalPlayers value)?
-        setFinalPlayers,
-    TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
-    TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
-    TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
-        setActivePhotoTheme,
-  }) {
-    return selectPhotoTheme?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TournamentPageBackButtonPreesedEvent value)?
-        backButtonPressed,
-    TResult Function(TournamentPageEventPlayersListTapped value)?
-        playersListTapped,
-    TResult Function(TournamentPageEventUpdateSettings value)? updateSettings,
-    TResult Function(TournamentPageEventOpenRating value)? openRating,
-    TResult Function(TournamentPagePlayerListOpenedEvent value)?
-        playersListOpened,
-    TResult Function(TournamentPageEventAddPlayer value)? addPlayerTapped,
-    TResult Function(TournamentPageEventEditSettings value)?
-        editTournamentSettings,
-    TResult Function(TournamentPageEventDeletePlayer value)? deletePlayer,
-    TResult Function(TournamentPageEventOpenProfileDialog value)?
-        openProfileDialog,
-    TResult Function(TournamentPageEventOpenSeatingPage value)? openSeatingPage,
-    TResult Function(TournamentPageEventBill value)? bill,
-    TResult Function(TournamentPageEventPageOpened value)? pageOpened,
-    TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
-    TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
-    TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
-    TResult Function(TournamentPageEventSetActivePhotoTheme value)?
-        setActivePhotoTheme,
-    required TResult orElse(),
-  }) {
-    if (selectPhotoTheme != null) {
-      return selectPhotoTheme(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TournamentPageEventSelectPhotoTheme
-    implements TournamentPageEvent {
-  const factory TournamentPageEventSelectPhotoTheme({final int? themeId}) =
-      _$TournamentPageEventSelectPhotoThemeImpl;
-
-  int? get themeId;
-
-  /// Create a copy of TournamentPageEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TournamentPageEventSelectPhotoThemeImplCopyWith<
-          _$TournamentPageEventSelectPhotoThemeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -4357,7 +3944,6 @@ class _$TournamentPageEventSetActivePhotoThemeImpl
     required TResult Function(List<PlayerModel> players) setFinalPlayers,
     required TResult Function(int game, TimeOfDay? time) startGameInfo,
     required TResult Function(String text) customTextInfo,
-    required TResult Function(int? themeId) selectPhotoTheme,
     required TResult Function(int? themeId) setActivePhotoTheme,
   }) {
     return setActivePhotoTheme(themeId);
@@ -4381,7 +3967,6 @@ class _$TournamentPageEventSetActivePhotoThemeImpl
     TResult? Function(List<PlayerModel> players)? setFinalPlayers,
     TResult? Function(int game, TimeOfDay? time)? startGameInfo,
     TResult? Function(String text)? customTextInfo,
-    TResult? Function(int? themeId)? selectPhotoTheme,
     TResult? Function(int? themeId)? setActivePhotoTheme,
   }) {
     return setActivePhotoTheme?.call(themeId);
@@ -4405,7 +3990,6 @@ class _$TournamentPageEventSetActivePhotoThemeImpl
     TResult Function(List<PlayerModel> players)? setFinalPlayers,
     TResult Function(int game, TimeOfDay? time)? startGameInfo,
     TResult Function(String text)? customTextInfo,
-    TResult Function(int? themeId)? selectPhotoTheme,
     TResult Function(int? themeId)? setActivePhotoTheme,
     required TResult orElse(),
   }) {
@@ -4445,8 +4029,6 @@ class _$TournamentPageEventSetActivePhotoThemeImpl
         startGameInfo,
     required TResult Function(TournamentPageEventCustomTextInfo value)
         customTextInfo,
-    required TResult Function(TournamentPageEventSelectPhotoTheme value)
-        selectPhotoTheme,
     required TResult Function(TournamentPageEventSetActivePhotoTheme value)
         setActivePhotoTheme,
   }) {
@@ -4478,8 +4060,6 @@ class _$TournamentPageEventSetActivePhotoThemeImpl
         setFinalPlayers,
     TResult? Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult? Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult? Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult? Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
   }) {
@@ -4509,8 +4089,6 @@ class _$TournamentPageEventSetActivePhotoThemeImpl
     TResult Function(TournamentPageEventSetFinalPlayers value)? setFinalPlayers,
     TResult Function(TournamentPageEventStartGameInfo value)? startGameInfo,
     TResult Function(TournamentPageEventCustomTextInfo value)? customTextInfo,
-    TResult Function(TournamentPageEventSelectPhotoTheme value)?
-        selectPhotoTheme,
     TResult Function(TournamentPageEventSetActivePhotoTheme value)?
         setActivePhotoTheme,
     required TResult orElse(),
