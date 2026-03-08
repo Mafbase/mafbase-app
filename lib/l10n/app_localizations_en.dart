@@ -930,4 +930,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get playerStatsNoData => 'No pair data available';
+
+  @override
+  String get photoThemesTitle => 'Темы фотографий';
+
+  @override
+  String get photoThemesCreate => 'Создание темы';
+
+  @override
+  String get photoThemesRename => 'Переименование темы';
+
+  @override
+  String get photoThemesNameHint => 'Название темы';
+
+  @override
+  String get photoThemesSave => 'Сохранить';
+
+  @override
+  String get photoThemesCreateButton => '+ Создать тему';
+
+  @override
+  String get photoThemesCreateShort => 'Создать';
+
+  @override
+  String get photoThemesRenameShort => 'Переименовать';
+
+  @override
+  String get photoThemesDeleteShort => 'Удалить';
+
+  @override
+  String get photoThemesDeleteConfirm =>
+      'Вы уверены, что хотите удалить эту тему?';
+
+  @override
+  String photoThemesPhotosCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count фото',
+      one: '$count фото',
+      zero: '0 фото',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get photoThemesApplied => 'Применена к турниру';
+
+  @override
+  String get photoThemesNotApplied => 'Не применена';
+
+  @override
+  String get photoThemesApply => 'Применить';
+
+  @override
+  String get photoThemesRemove => 'Снять';
+
+  @override
+  String get photoThemesSelectThemeHint => 'Выберите тему для просмотра';
+
+  @override
+  String get photoThemesNoPlayers => 'Нет участников для отображения';
+
+  @override
+  String get photoThemesSelectorLabel => 'Тема фото:';
+
+  @override
+  String get photoThemesProfilePhotos => 'Профильные фото';
+
+  @override
+  String get photoThemesAddPlayer => 'Добавить игрока';
+
+  @override
+  String get photoThemesAddFromTournament => 'Добавить игроков из турнира';
+
+  @override
+  String photoThemesAddedCount(int count) {
+    return 'Добавлено игроков: $count';
+  }
+
+  @override
+  String get photoThemesSaveFromTournament => 'Сохранить всех игроков турнира';
+
+  @override
+  String get photoThemesRemovePlayer => 'Удалить из темы';
 }

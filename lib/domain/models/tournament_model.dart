@@ -16,6 +16,7 @@ class TournamentModel with _$TournamentModel {
     required bool billedTranslation,
     required bool notificationEnabled,
     @Default("") String gomafiaUrl,
+    int? photoThemeId,
   }) = _TournamentModel;
 }
 

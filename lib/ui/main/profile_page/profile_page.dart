@@ -190,6 +190,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     CustomButton(
+                      text: context.locale.photoThemesTitle,
+                      onTap: () => context.go('/photo-themes'),
+                      minimize: true,
+                    ),
+                    const SizedBox(height: 16),
+                    CustomButton(
                       text: context.locale.logout,
                       onTap: () {
                         context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed());

@@ -79,6 +79,8 @@ import 'package:seating_generator_web/feature/info_table_description/data/info_t
 import 'package:seating_generator_web/feature/info_table_description/domain/info_table_description_repository.dart';
 import 'package:seating_generator_web/feature/fantasy/data/fantasy_repository_impl.dart';
 import 'package:seating_generator_web/feature/fantasy/domain/fantasy_repository.dart';
+import 'package:seating_generator_web/feature/photo_themes/data/photo_theme_repository_impl.dart';
+import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_state.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
@@ -406,6 +408,7 @@ void registerSharedGetIt() {
     ..registerLazySingleton<UpdateSettingsInteractor>(() => UpdateSettingsInteractor(getIt()))
     ..registerLazySingleton<InfoTableDescriptionRepository>(() => InfoTableDescriptionRepositoryImpl(getIt()))
     ..registerLazySingleton<FantasyRepository>(() => FantasyRepositoryImpl(getIt()))
+    ..registerLazySingleton<PhotoThemeRepository>(() => PhotoThemeRepositoryImpl(getIt()))
     ..registerLazySingleton<DeviceIdService>(
       () => DeviceIdService(),
     )

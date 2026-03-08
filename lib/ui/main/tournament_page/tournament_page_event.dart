@@ -59,4 +59,8 @@ class TournamentPageEvent with _$TournamentPageEvent {
 
   const factory TournamentPageEvent.customTextInfo({required String text}) =
       TournamentPageEventCustomTextInfo;
+
+  const factory TournamentPageEvent.setActivePhotoTheme({
+    int? themeId,
+  }) = TournamentPageEventSetActivePhotoTheme;
 }

@@ -13,6 +13,7 @@ import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_page.dart';
+import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
@@ -108,6 +109,7 @@ class AppRouter {
           ProfilePage.route,
           ContactsPage.route,
           PlayerStatsPage.route,
+          PhotoThemesPage.profileRoute,
         ],
       ),
     ],

@@ -1813,6 +1813,150 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Нет данных о парах'**
   String get playerStatsNoData;
+
+  /// No description provided for @photoThemesTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Темы фотографий'**
+  String get photoThemesTitle;
+
+  /// No description provided for @photoThemesCreate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Создание темы'**
+  String get photoThemesCreate;
+
+  /// No description provided for @photoThemesRename.
+  ///
+  /// In ru, this message translates to:
+  /// **'Переименование темы'**
+  String get photoThemesRename;
+
+  /// No description provided for @photoThemesNameHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Название темы'**
+  String get photoThemesNameHint;
+
+  /// No description provided for @photoThemesSave.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить'**
+  String get photoThemesSave;
+
+  /// No description provided for @photoThemesCreateButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'+ Создать тему'**
+  String get photoThemesCreateButton;
+
+  /// No description provided for @photoThemesCreateShort.
+  ///
+  /// In ru, this message translates to:
+  /// **'Создать'**
+  String get photoThemesCreateShort;
+
+  /// No description provided for @photoThemesRenameShort.
+  ///
+  /// In ru, this message translates to:
+  /// **'Переименовать'**
+  String get photoThemesRenameShort;
+
+  /// No description provided for @photoThemesDeleteShort.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить'**
+  String get photoThemesDeleteShort;
+
+  /// No description provided for @photoThemesDeleteConfirm.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы уверены, что хотите удалить эту тему?'**
+  String get photoThemesDeleteConfirm;
+
+  /// No description provided for @photoThemesPhotosCount.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, =0{0 фото} =1{{count} фото} other{{count} фото}}'**
+  String photoThemesPhotosCount(int count);
+
+  /// No description provided for @photoThemesApplied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Применена к турниру'**
+  String get photoThemesApplied;
+
+  /// No description provided for @photoThemesNotApplied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не применена'**
+  String get photoThemesNotApplied;
+
+  /// No description provided for @photoThemesApply.
+  ///
+  /// In ru, this message translates to:
+  /// **'Применить'**
+  String get photoThemesApply;
+
+  /// No description provided for @photoThemesRemove.
+  ///
+  /// In ru, this message translates to:
+  /// **'Снять'**
+  String get photoThemesRemove;
+
+  /// No description provided for @photoThemesSelectThemeHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите тему для просмотра'**
+  String get photoThemesSelectThemeHint;
+
+  /// No description provided for @photoThemesNoPlayers.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет участников для отображения'**
+  String get photoThemesNoPlayers;
+
+  /// No description provided for @photoThemesSelectorLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тема фото:'**
+  String get photoThemesSelectorLabel;
+
+  /// No description provided for @photoThemesProfilePhotos.
+  ///
+  /// In ru, this message translates to:
+  /// **'Профильные фото'**
+  String get photoThemesProfilePhotos;
+
+  /// No description provided for @photoThemesAddPlayer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавить игрока'**
+  String get photoThemesAddPlayer;
+
+  /// No description provided for @photoThemesAddFromTournament.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавить игроков из турнира'**
+  String get photoThemesAddFromTournament;
+
+  /// No description provided for @photoThemesAddedCount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавлено игроков: {count}'**
+  String photoThemesAddedCount(int count);
+
+  /// No description provided for @photoThemesSaveFromTournament.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить всех игроков турнира'**
+  String get photoThemesSaveFromTournament;
+
+  /// No description provided for @photoThemesRemovePlayer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить из темы'**
+  String get photoThemesRemovePlayer;
 }
 
 class _AppLocalizationsDelegate

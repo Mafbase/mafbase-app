@@ -26,6 +26,7 @@ mixin _$TournamentModel {
   bool get billedTranslation => throw _privateConstructorUsedError;
   bool get notificationEnabled => throw _privateConstructorUsedError;
   String get gomafiaUrl => throw _privateConstructorUsedError;
+  int? get photoThemeId => throw _privateConstructorUsedError;
 
   /// Create a copy of TournamentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -50,7 +51,8 @@ abstract class $TournamentModelCopyWith<$Res> {
       int billedPlayers,
       bool billedTranslation,
       bool notificationEnabled,
-      String gomafiaUrl});
+      String gomafiaUrl,
+      int? photoThemeId});
 }
 
 /// @nodoc
@@ -78,6 +80,7 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
     Object? billedTranslation = null,
     Object? notificationEnabled = null,
     Object? gomafiaUrl = null,
+    Object? photoThemeId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -120,6 +123,10 @@ class _$TournamentModelCopyWithImpl<$Res, $Val extends TournamentModel>
           ? _value.gomafiaUrl
           : gomafiaUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      photoThemeId: freezed == photoThemeId
+          ? _value.photoThemeId
+          : photoThemeId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -142,7 +149,8 @@ abstract class _$$TournamentModelImplCopyWith<$Res>
       int billedPlayers,
       bool billedTranslation,
       bool notificationEnabled,
-      String gomafiaUrl});
+      String gomafiaUrl,
+      int? photoThemeId});
 }
 
 /// @nodoc
@@ -168,6 +176,7 @@ class __$$TournamentModelImplCopyWithImpl<$Res>
     Object? billedTranslation = null,
     Object? notificationEnabled = null,
     Object? gomafiaUrl = null,
+    Object? photoThemeId = freezed,
   }) {
     return _then(_$TournamentModelImpl(
       id: null == id
@@ -210,6 +219,10 @@ class __$$TournamentModelImplCopyWithImpl<$Res>
           ? _value.gomafiaUrl
           : gomafiaUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      photoThemeId: freezed == photoThemeId
+          ? _value.photoThemeId
+          : photoThemeId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -227,7 +240,8 @@ class _$TournamentModelImpl implements _TournamentModel {
       required this.billedPlayers,
       required this.billedTranslation,
       required this.notificationEnabled,
-      this.gomafiaUrl = ""});
+      this.gomafiaUrl = "",
+      this.photoThemeId});
 
   @override
   final int id;
@@ -250,10 +264,12 @@ class _$TournamentModelImpl implements _TournamentModel {
   @override
   @JsonKey()
   final String gomafiaUrl;
+  @override
+  final int? photoThemeId;
 
   @override
   String toString() {
-    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl)';
+    return 'TournamentModel(id: $id, name: $name, status: $status, dateStart: $dateStart, dateEnd: $dateEnd, gamesCount: $gamesCount, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl, photoThemeId: $photoThemeId)';
   }
 
   @override
@@ -276,7 +292,9 @@ class _$TournamentModelImpl implements _TournamentModel {
             (identical(other.notificationEnabled, notificationEnabled) ||
                 other.notificationEnabled == notificationEnabled) &&
             (identical(other.gomafiaUrl, gomafiaUrl) ||
-                other.gomafiaUrl == gomafiaUrl));
+                other.gomafiaUrl == gomafiaUrl) &&
+            (identical(other.photoThemeId, photoThemeId) ||
+                other.photoThemeId == photoThemeId));
   }
 
   @override
@@ -291,7 +309,8 @@ class _$TournamentModelImpl implements _TournamentModel {
       billedPlayers,
       billedTranslation,
       notificationEnabled,
-      gomafiaUrl);
+      gomafiaUrl,
+      photoThemeId);
 
   /// Create a copy of TournamentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -314,7 +333,8 @@ abstract class _TournamentModel implements TournamentModel {
       required final int billedPlayers,
       required final bool billedTranslation,
       required final bool notificationEnabled,
-      final String gomafiaUrl}) = _$TournamentModelImpl;
+      final String gomafiaUrl,
+      final int? photoThemeId}) = _$TournamentModelImpl;
 
   @override
   int get id;
@@ -336,6 +356,8 @@ abstract class _TournamentModel implements TournamentModel {
   bool get notificationEnabled;
   @override
   String get gomafiaUrl;
+  @override
+  int? get photoThemeId;
 
   /// Create a copy of TournamentModel
   /// with the given fields replaced by the non-null parameter values.

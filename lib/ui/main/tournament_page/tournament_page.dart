@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
+import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/get_it_register.dart';
@@ -65,6 +66,7 @@ class TournamentPage extends StatefulWidget {
               RatingPage.tournamentRoute,
               AdministrationPage.tournamentRoute,
               FantasyPage.tournamentRoute,
+              PhotoThemesPage.tournamentRoute,
             ],
             builder: (context, state) {
               return PlayersListBody(
@@ -300,6 +302,18 @@ class _TournamentPageState extends CustomState<TournamentPage>
             context.go(
               AdministrationPage.createTournamentLocation(
                 tournamentId: context.read<TournamentPageBloc>().tournamentId,
+                context: context,
+              ),
+            );
+          },
+        ),
+      if (state.isMyTournament)
+        MenuItemModel(
+          text: context.locale.photoThemesTitle,
+          onTap: () {
+            context.go(
+              PhotoThemesPage.createTournamentLocation(
+                tournamentId: widget.tournamentId,
                 context: context,
               ),
             );
