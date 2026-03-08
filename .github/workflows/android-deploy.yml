@@ -20,7 +20,7 @@ on:
 
 jobs:
   deploy-android:
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux]
     env:
       PACKAGE_NAME: ${{ inputs.package_name || 'ru.mafbase.app' }}
       DEVELOPER_EMAIL: ${{ secrets.DEVELOPER_EMAIL }}
