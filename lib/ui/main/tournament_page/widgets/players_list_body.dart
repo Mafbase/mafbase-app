@@ -7,8 +7,6 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bl
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/player_row.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_selector.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -25,38 +23,24 @@ class PlayersListBody extends StatefulWidget {
 }
 
 class _PlayersListBodyState extends State<PlayersListBody> {
-  List<PhotoThemeModel> _themes = [];
-  PhotoThemeModel? _selectedTheme;
-
   @override
   void initState() {
     context.read<TournamentPageBloc>().add(
           const TournamentPageEvent.playersListOpened(),
         );
-    _loadThemes();
     super.initState();
-  }
-
-  Future<void> _loadThemes() async {
-    try {
-      final repository =
-          RepositoryFactory.of(context).photoThemeRepository;
-      final themes = await repository.getThemes();
-      if (mounted) {
-        setState(() {
-          _themes = themes;
-        });
-      }
-    } catch (_) {
-      // Themes loading is optional
-    }
   }
 
   @override
   Widget build(BuildContext context) => Container(
       color: MyTheme.of(context).background2,
       child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
-        builder: (context, state) => Stack(
+        builder: (context, state) {
+          final selectedTheme = state.photoThemes
+              .where((t) => t.id == state.activePhotoThemeId)
+              .firstOrNull;
+
+          return Stack(
             children: [
               Column(
                 children: [
@@ -70,14 +54,11 @@ class _PlayersListBodyState extends State<PlayersListBody> {
                   const SizedBox(
                     height: 8,
                   ),
-                  if (state.isMyTournament && _themes.isNotEmpty)
+                  if (state.isMyTournament && state.photoThemes.isNotEmpty)
                     PhotoThemeSelector(
-                      themes: _themes,
-                      selectedTheme: _selectedTheme,
+                      themes: state.photoThemes,
+                      selectedTheme: selectedTheme,
                       onChanged: (theme) {
-                        setState(() {
-                          _selectedTheme = theme;
-                        });
                         context.read<TournamentPageBloc>().add(
                               TournamentPageEvent.setActivePhotoTheme(
                                 themeId: theme?.id,
@@ -143,7 +124,8 @@ class _PlayersListBodyState extends State<PlayersListBody> {
               ),
               if (state.isLoading) const LoadingOverlayWidget(),
             ],
-          ),
+          );
+        },
       ),
     );
 }

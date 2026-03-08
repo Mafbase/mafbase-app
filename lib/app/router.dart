@@ -34,7 +34,7 @@ class AppRouter {
     initialLocation: initLocation,
     redirect: (context, state) {
       return Future<String?>.microtask(() async {
-        if (!context.mounted) return;
+        if (!context.mounted) return null;
 
         final authNotifier = context.read<AuthNotifier>();
         if (authNotifier.value is AuthNotifierLoadingModel) {

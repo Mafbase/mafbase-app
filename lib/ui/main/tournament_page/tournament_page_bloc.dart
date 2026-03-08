@@ -254,8 +254,29 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
       _getSettingsInteractor.run(tournamentId: tournamentId).then((settings) {
         emit(state.copyWith(settings: settings));
       }),
+      _photoThemeRepository.getThemes().then((themes) {
+        emit(state.copyWith(photoThemes: themes));
+      }).onError((_, __) {}),
     ]);
+    if (state.activePhotoThemeId != null) {
+      await _loadThemePhotos(state.activePhotoThemeId!, emit);
+    }
     emit(state.copyWith(isLoading: false));
+  }
+
+  Future<void> _loadThemePhotos(int themeId, Emitter<TournamentPageState> emit) async {
+    try {
+      final players = await _photoThemeRepository.getThemePlayers(themeId);
+      final photosMap = <int, String>{};
+      for (final player in players) {
+        if (player.themeImageUrl != null) {
+          photosMap[player.playerId] = player.themeImageUrl!;
+        }
+      }
+      emit(state.copyWith(activeThemePhotos: photosMap));
+    } catch (_) {
+      // Theme photos loading is optional
+    }
   }
 
   Future _updatePlayers(Emitter<TournamentPageState> emit) {
@@ -289,27 +310,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
       return;
     }
 
-    try {
-      final players = await _photoThemeRepository.getThemePlayers(themeId);
-      final photosMap = <int, String>{};
-      for (final player in players) {
-        if (player.themeImageUrl != null) {
-          photosMap[player.playerId] = player.themeImageUrl!;
-        }
-      }
-      emit(
-        state.copyWith(
-          activePhotoThemeId: themeId,
-          activeThemePhotos: photosMap,
-        ),
-      );
-    } catch (_) {
-      emit(
-        state.copyWith(
-          activePhotoThemeId: themeId,
-          activeThemePhotos: {},
-        ),
-      );
-    }
+    emit(state.copyWith(activePhotoThemeId: themeId));
+    await _loadThemePhotos(themeId, emit);
   }
 }
