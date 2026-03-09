@@ -1014,4 +1014,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get photoThemesRemovePlayer => 'Удалить из темы';
+
+  @override
+  String get sidebarNavigation => 'NAVIGATION';
+
+  @override
+  String get sidebarAdditional => 'ADDITIONAL';
 }

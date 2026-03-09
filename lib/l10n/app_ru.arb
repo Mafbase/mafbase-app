@@ -756,5 +756,10 @@
   "photoThemesSaveFromTournament": "Сохранить всех игроков турнира",
   "@photoThemesSaveFromTournament": {},
   "photoThemesRemovePlayer": "Удалить из темы",
-  "@photoThemesRemovePlayer": {}
+  "@photoThemesRemovePlayer": {},
+
+  "sidebarNavigation": "НАВИГАЦИЯ",
+  "@sidebarNavigation": {},
+  "sidebarAdditional": "ДОПОЛНИТЕЛЬНО",
+  "@sidebarAdditional": {}
 }

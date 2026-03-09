@@ -1957,6 +1957,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Удалить из темы'**
   String get photoThemesRemovePlayer;
+
+  /// No description provided for @sidebarNavigation.
+  ///
+  /// In ru, this message translates to:
+  /// **'НАВИГАЦИЯ'**
+  String get sidebarNavigation;
+
+  /// No description provided for @sidebarAdditional.
+  ///
+  /// In ru, this message translates to:
+  /// **'ДОПОЛНИТЕЛЬНО'**
+  String get sidebarAdditional;
 }
 
 class _AppLocalizationsDelegate

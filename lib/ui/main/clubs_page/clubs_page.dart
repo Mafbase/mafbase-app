@@ -38,9 +38,6 @@ class ClubsPage extends StatefulWidget {
       },
       child: const ClubsPage(),
     ),
-    routes: [
-      ClubPage.route,
-    ],
   );
 }
 

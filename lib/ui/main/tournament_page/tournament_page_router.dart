@@ -42,7 +42,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openSeatingPage({required int tournamentId}) {
-    _context.go(
+    _context.push(
       SeatingPage.createLocation(
         tournamentId: tournamentId,
         context: _context,
@@ -52,7 +52,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openPlayersList({required int tournamentId}) {
-    _context.go(
+    _context.push(
       TournamentPage.createLocation(
         context: _context,
         tournamentId: tournamentId,
@@ -62,7 +62,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openRating({required int tournamentId}) {
-    _context.go(
+    _context.push(
       RatingPage.createTournamentLocation(
         tournamentId: tournamentId,
         context: _context,

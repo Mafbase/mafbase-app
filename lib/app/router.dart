@@ -8,10 +8,12 @@ import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
-import 'package:seating_generator_web/ui/main/main_page.dart';
+import 'package:seating_generator_web/ui/app_shell/app_shell.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
@@ -95,10 +97,12 @@ class AppRouter {
             create: (context) => MainBloc(
               MainPageRouterImpl(context),
             ),
-            child: MainPage(child: child),
+            child: AppShell(child: child),
           );
         },
         routes: [
+          TournamentPage.createRoute(),
+          ClubPage.route,
           RailWrapper.route,
           LoginPageBody.route,
           ProfilePage.route,

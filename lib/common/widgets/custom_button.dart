@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final bool disabled;
   final bool isRed;
   final bool minimize;
+  final bool expand;
 
   const CustomButton({
     super.key,
@@ -15,11 +16,20 @@ class CustomButton extends StatelessWidget {
     this.isRed = false,
     this.disabled = false,
     this.minimize = false,
+    this.expand = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = MyTheme.of(context);
+
+    final textWidget = Text(
+      text,
+      style: theme.btnTextStyle.copyWith(
+        fontSize: minimize ? 15 : 18,
+      ),
+      textAlign: TextAlign.center,
+    );
 
     return ElevatedButton(
       style: ButtonStyle(
@@ -48,13 +58,7 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       onPressed: disabled ? null : onTap,
-      child: Text(
-        text,
-        style: theme.btnTextStyle.copyWith(
-          fontSize: minimize ? 15 : 18,
-        ),
-        textAlign: TextAlign.center,
-      ),
+      child: expand ? Center(child: textWidget) : textWidget,
     );
   }
 }

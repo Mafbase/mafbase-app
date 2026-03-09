@@ -35,9 +35,6 @@ class TournamentsPage extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: '/tournament',
     name: _name,
-    routes: [
-      TournamentPage.createRoute(),
-    ],
     pageBuilder: (context, state) => const NoTransitionPage(
       child: TournamentsPage._(),
     ),

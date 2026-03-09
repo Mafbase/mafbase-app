@@ -21,7 +21,7 @@ class TournamentsRouterImpl implements TournamentsRouter {
 
   @override
   void openTournament(int id) {
-    GoRouter.of(context).go(
+    GoRouter.of(context).push(
       TournamentPage.createLocation(
         context: context,
         tournamentId: id,

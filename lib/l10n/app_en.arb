@@ -667,5 +667,10 @@
   "playerStatsError": "Failed to load statistics",
   "@playerStatsError": {},
   "playerStatsNoData": "No pair data available",
-  "@playerStatsNoData": {}
+  "@playerStatsNoData": {},
+
+  "sidebarNavigation": "NAVIGATION",
+  "@sidebarNavigation": {},
+  "sidebarAdditional": "ADDITIONAL",
+  "@sidebarAdditional": {}
 }

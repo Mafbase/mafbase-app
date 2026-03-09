@@ -145,6 +145,17 @@ class _MafbaseAppState extends State<MafbaseApp> {
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData.light(useMaterial3: true).copyWith(
                     scaffoldBackgroundColor: context.theme.background2,
+                    appBarTheme: AppBarTheme(
+                      backgroundColor: context.theme.darkBlueColor,
+                      foregroundColor: Colors.white,
+                      iconTheme: const IconThemeData(color: Colors.white),
+                      actionsIconTheme: const IconThemeData(color: Colors.white),
+                      titleTextStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 24,
+                      ),
+                    ),
                     dividerTheme: const DividerThemeData(
                       color: Color(0xFFCAC4D0),
                       thickness: 1,
@@ -190,34 +201,34 @@ class _MafbaseAppState extends State<MafbaseApp> {
                               );
                             }
 
-                      return context.theme.btnTextStyle;
-                    },
+                          return context.theme.btnTextStyle;
+                        },
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            routerDelegate: context.read<AppRouter>().router.routerDelegate,
-            routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
-            routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
-            builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: TextScaler.noScaling,
-                boldText: false,
-              ),
-              child: child ?? const SizedBox.shrink(),
-            ),
-          );
-        },
-      ),
-    ),
-  );
+                routerDelegate: context.read<AppRouter>().router.routerDelegate,
+                routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
+                routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+                builder: (context, child) => MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: TextScaler.noScaling,
+                    boldText: false,
+                  ),
+                  child: child ?? const SizedBox.shrink(),
+                ),
+              );
+            },
+          ),
+        ),
+      );
 }
 
 class ThemeProvider extends SingleChildStatefulWidget {

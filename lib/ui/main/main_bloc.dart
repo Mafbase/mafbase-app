@@ -125,7 +125,7 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void openTournament(int id) {
-    GoRouter.of(context).go(
+    GoRouter.of(context).push(
       TournamentPage.createLocation(
         context: context,
         tournamentId: id,

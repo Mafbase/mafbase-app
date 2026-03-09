@@ -30,6 +30,10 @@ abstract class MyTheme {
   abstract final Color positiveColor;
   abstract final Color negativeColor;
   abstract final Color diedColor;
+  abstract final Color sidebarDividerColor;
+  abstract final Color sidebarSectionTitleColor;
+  abstract final Color sidebarInactiveTextColor;
+  abstract final Color sidebarActiveItemBgColor;
 
   MyTheme();
 
@@ -148,4 +152,16 @@ class _LightTheme implements MyTheme {
 
   @override
   Color get positiveColor => const Color(0xFFC8B75E);
+
+  @override
+  Color get sidebarDividerColor => Colors.white.withValues(alpha: 0.08);
+
+  @override
+  Color get sidebarSectionTitleColor => Colors.white.withValues(alpha: 0.4);
+
+  @override
+  Color get sidebarInactiveTextColor => Colors.white.withValues(alpha: 0.6);
+
+  @override
+  Color get sidebarActiveItemBgColor => Colors.white.withValues(alpha: 0.12);
 }

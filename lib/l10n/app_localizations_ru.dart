@@ -1017,4 +1017,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get photoThemesRemovePlayer => 'Удалить из темы';
+
+  @override
+  String get sidebarNavigation => 'НАВИГАЦИЯ';
+
+  @override
+  String get sidebarAdditional => 'ДОПОЛНИТЕЛЬНО';
 }

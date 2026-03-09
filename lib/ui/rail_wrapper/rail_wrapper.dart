@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_my_tournaments_interactor.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
+import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
@@ -61,8 +64,6 @@ class RailWrapper extends StatefulWidget {
 }
 
 class _RailWrapperState extends CustomState<RailWrapper> {
-  double railWidth = 100;
-
   void onDestinationSelected(int index) => widget.shell.goBranch(
         index,
         initialLocation: widget.shell.currentIndex == index,
@@ -73,6 +74,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) {
         return Scaffold(
+          appBar: _buildMobileAppBar(context),
           body: widget.shell,
           bottomNavigationBar: BottomNavigationBar(
             useLegacyColorScheme: false,
@@ -94,61 +96,105 @@ class _RailWrapperState extends CustomState<RailWrapper> {
     );
   }
 
-  @override
-  Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<MainBloc, MainState>(
-      builder: (BuildContext context, state) {
-        return Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: railWidth,
-              right: 0,
-              bottom: 0,
-              child: widget.shell,
-            ),
-            Positioned(
-              top: 0,
-              left: 0,
-              bottom: 0,
-              width: railWidth,
-              child: NavigationRail(
-                useIndicator: true,
-                unselectedIconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                selectedIconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                indicatorColor: context.theme.darkBlueColor,
-                backgroundColor: context.theme.darkGreyColor,
-                labelType: NavigationRailLabelType.all,
-                elevation: 5,
-                onDestinationSelected: onDestinationSelected,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.table_chart_outlined),
-                    label: Text(
-                      context.locale.tournamentsListTitle,
-                      style: const TextStyle()
-                          .copyWith(color: context.theme.background1),
-                    ),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.people_alt_outlined),
-                    label: Text(
-                      context.locale.clubsHeader,
-                      style: const TextStyle()
-                          .copyWith(color: context.theme.background1),
-                    ),
-                  ),
-                ],
-                selectedIndex: widget.shell.currentIndex,
+  AppBar _buildMobileAppBar(BuildContext context) {
+    return AppBar(
+      leading: ListenableBuilder(
+        listenable: GoRouter.of(context).routeInformationProvider,
+        builder: (context, child) {
+          return context.canPop()
+              ? BackButton(onPressed: context.pop)
+              : Navigator.canPop(context)
+                  ? BackButton(onPressed: () => Navigator.pop(context))
+                  : BackButton(onPressed: () => context.go('/'));
+        },
+      ),
+      title: InkWell(
+        onTap: () => context.go('/'),
+        child: Text(
+          'Mafbase',
+          style: GoogleFonts.balooBhai2(
+            color: Colors.white,
+            fontSize: 48,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+      actions: _buildMobileActions(context),
+    );
+  }
+
+  List<Widget> _buildMobileActions(BuildContext context) {
+    final theme = context.theme;
+    return [
+      ValueListenableBuilder(
+        valueListenable: context.read<AuthNotifier>(),
+        builder: (context, model, child) => model.map(
+          unauthorized: (_) => TextButton(
+            onPressed: () {
+              context.read<MainBloc>().add(const MainEvent.onEnterPressed());
+            },
+            child: Text(
+              context.locale.loginIn,
+              style: theme.defaultTextStyle.copyWith(
+                color: theme.background1,
               ),
             ),
-          ],
-        );
-      },
-    );
+          ),
+          loading: (_) => Container(),
+          authorized: (_) => IconButton(
+            tooltip: context.locale.profile,
+            onPressed: () {
+              context
+                  .read<MainBloc>()
+                  .add(const MainEvent.onProfilePressed());
+            },
+            hoverColor: theme.background1.withValues(alpha: 0.2),
+            icon: Icon(
+              Icons.person,
+              color: theme.background1,
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(width: 8),
+      PopupMenuButton(
+        splashRadius: 24,
+        color: theme.darkBlueColor,
+        child: Icon(
+          Icons.more_vert_outlined,
+          color: theme.btnTextColor,
+        ),
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+              onTap: () {
+                context
+                    .read<MainBloc>()
+                    .add(const MainEvent.openContacts());
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.contacts_outlined,
+                    color: theme.btnTextColor,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    context.locale.contacts,
+                    style: theme.btnTextStyle.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+          ];
+        },
+      ),
+      const SizedBox(width: 8),
+    ];
+  }
+
+  @override
+  Widget buildDesktop(BuildContext context) {
+    return widget.shell;
   }
 }

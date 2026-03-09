@@ -21,6 +21,7 @@ import 'package:seating_generator_web/ui/main/club_page/widgets/club_bill_dialog
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_owners_bottom_sheet.dart';
+import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -36,7 +37,7 @@ class ClubPage extends StatefulWidget {
     required int id,
     ClubModel? cachedModel,
   }) {
-    context.goNamed(
+    context.pushNamed(
       'club',
       pathParameters: {"clubId": id.toString()},
       extra: cachedModel,
@@ -45,7 +46,7 @@ class ClubPage extends StatefulWidget {
 
   static final route = GoRoute(
     name: 'club',
-    path: ':clubId',
+    path: '/club/:clubId',
     builder: (context, state) => BlocProvider<ClubBloc>(
       create: (context) {
         final repos = RepositoryFactory.of(context);
@@ -84,32 +85,41 @@ class _ClubPageState extends CustomState<ClubPage> {
   }
 
   @override
-  Widget? buildMobile(BuildContext context) => BlocBuilder<ClubBloc, ClubState>(
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+  Widget? buildMobile(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Клуб"),
+          leading: BackButton(
+            onPressed: Navigator.canPop(context)
+                ? () => Navigator.pop(context)
+                : () => context.go(ClubsPage.createLocation(context)),
+          ),
+        ),
+        body: BlocBuilder<ClubBloc, ClubState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-          return Stack(
-            children: [
-              if (state.model != null)
-                ClubInfoWidget(
-                  clubModel: state.model!,
-                  isMobile: true,
-                  onAddGame: state.isOwner ? _addNewGame : null,
-                  billClub: state.isOwner ? _bill : null,
-                  changeHideDate: state.isOwner ? _changeHideDate : null,
-                  onEditDescription: state.isOwner ? _editDescription : null,
-                  onEditPhoto: state.isOwner ? _editPhoto : null,
-                  onEditOwners: state.isOwner ? _editOwners : null,
-                  onEditCustomColumns:
-                      state.isOwner ? _editCustomColumns : null,
-                ),
-            ],
-          );
-        },
+            return Stack(
+              children: [
+                if (state.model != null)
+                  ClubInfoWidget(
+                    clubModel: state.model!,
+                    isMobile: true,
+                    onAddGame: state.isOwner ? _addNewGame : null,
+                    billClub: state.isOwner ? _bill : null,
+                    changeHideDate: state.isOwner ? _changeHideDate : null,
+                    onEditDescription: state.isOwner ? _editDescription : null,
+                    onEditPhoto: state.isOwner ? _editPhoto : null,
+                    onEditOwners: state.isOwner ? _editOwners : null,
+                    onEditCustomColumns: state.isOwner ? _editCustomColumns : null,
+                  ),
+              ],
+            );
+          },
+        ),
       );
 
   @override
@@ -134,14 +144,11 @@ class _ClubPageState extends CustomState<ClubPage> {
                           clubModel: state.model!,
                           onAddGame: state.isOwner ? _addNewGame : null,
                           billClub: state.isOwner ? _bill : null,
-                          changeHideDate:
-                              state.isOwner ? _changeHideDate : null,
-                          onEditDescription:
-                              state.isOwner ? _editDescription : null,
+                          changeHideDate: state.isOwner ? _changeHideDate : null,
+                          onEditDescription: state.isOwner ? _editDescription : null,
                           onEditPhoto: state.isOwner ? _editPhoto : null,
                           onEditOwners: state.isOwner ? _editOwners : null,
-                          onEditCustomColumns:
-                              state.isOwner ? _editCustomColumns : null,
+                          onEditCustomColumns: state.isOwner ? _editCustomColumns : null,
                         ),
                       ),
                   ],

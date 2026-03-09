@@ -62,7 +62,7 @@ class TournamentPage extends StatefulWidget {
         routes: [
           GoRoute(
             name: "tournament_page",
-            path: ":id",
+            path: "/tournament/:id",
             routes: [
               SeatingPage.route,
               SeatingInsertingPage.route,
@@ -139,39 +139,41 @@ class _TournamentPageState extends CustomState<TournamentPage>
 
   @override
   Widget? buildMobile(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned.fill(child: widget.child),
-        if (!context.watch<TournamentPageBloc>().state.isLoading && !context.watch<SeatingPageBloc>().state.isLoading)
-          Positioned(
-            bottom: 8,
-            right: 8,
-            child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
-              builder: (context, state) => PopupMenuButton<MenuItemModel>(
-                itemBuilder: (_) => menuItems(state, listen: false)
-                    .map<PopupMenuEntry<MenuItemModel>>(
-                      (e) => PopupMenuItem<MenuItemModel>(
-                        value: e,
-                        onTap: e.onTap,
-                        child: Text(e.text),
-                      ),
-                    )
-                    .toList(),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: context.theme.darkBlueColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  child: const Icon(
-                    Icons.more_vert,
-                    color: Colors.white,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(child: widget.child),
+          if (!context.watch<TournamentPageBloc>().state.isLoading && !context.watch<SeatingPageBloc>().state.isLoading)
+            Positioned(
+              bottom: 8,
+              right: 8,
+              child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
+                builder: (context, state) => PopupMenuButton<MenuItemModel>(
+                  itemBuilder: (_) => menuItems(state, listen: false)
+                      .map<PopupMenuEntry<MenuItemModel>>(
+                        (e) => PopupMenuItem<MenuItemModel>(
+                          value: e,
+                          onTap: e.onTap,
+                          child: Text(e.text),
+                        ),
+                      )
+                      .toList(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: context.theme.darkBlueColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.all(16),
+                    child: const Icon(
+                      Icons.more_vert,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 
