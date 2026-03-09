@@ -24,12 +24,15 @@ Prepare a release by writing a changelog entry and bumping the version in `pubsp
    - Reset lower segments to 0 (e.g. minor bump: `2.4.0` → `2.5.0`)
    - Always increment the build number by 1 (e.g. `+54` → `+55`)
 
-4. **Analyze recent changes** to write the changelog:
-   - Run `git log --oneline <last_tag_or_last_changelog_version>..HEAD` to see commits since last release
-   - Read changed files if needed to understand what was done
+4. **Check for UNRELEASED section** in `CHANGELOG.md`:
+   - If `## [UNRELEASED]` section exists at the top — use its entries as the base for the changelog
+   - Additionally, run `git log --oneline <last_tag_or_last_changelog_version>..HEAD` to check for any user-visible changes not yet captured in UNRELEASED
+   - If no UNRELEASED section — analyze changes from git log and changed files as before
    - Focus on **user-visible changes only**
 
 5. **Write the changelog entry** at the top of `CHANGELOG.md`:
+   - Replace `## [UNRELEASED]` with `## [new_version] - DD.MM.YYYY` (if UNRELEASED existed)
+   - Or create a new section at the top (if no UNRELEASED)
    - Format: `## [new_version] - DD.MM.YYYY`
    - Date format: `DD.MM.YYYY` (e.g. `04.03.2026`)
    - Each item starts with `- ` (dash + space)

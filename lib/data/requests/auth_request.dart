@@ -6,7 +6,6 @@ class AuthRequest extends BaseRequest<AuthEventOut> {
     "/api/auth",
     data: event,
     forcePost: true,
-    resendOnUnauth: false,
   );
 
   @override
