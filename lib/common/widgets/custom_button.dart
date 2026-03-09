@@ -19,42 +19,42 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textWidget = ConstrainedBox(
-      constraints: const BoxConstraints(
-        minHeight: 48,
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: MyTheme.of(context).btnTextStyle,
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
+    final theme = MyTheme.of(context);
+
     return ElevatedButton(
       style: ButtonStyle(
+        minimumSize: WidgetStatePropertyAll(
+          Size(0, minimize ? 40 : 48),
+        ),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: minimize ? 20 : 32),
+        ),
+        shape: const WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+        ),
+        elevation: const WidgetStatePropertyAll(0),
         backgroundColor: WidgetStateProperty.resolveWith(
           (states) {
             if (states.contains(WidgetState.disabled)) {
-              return MyTheme.of(context).buttonDisabledColor;
+              return theme.buttonDisabledColor;
             }
             if (states.contains(WidgetState.pressed)) {
-              if (isRed) {
-                return MyTheme.of(context).btnRedColor1;
-              } else {
-                return MyTheme.of(context).btnColor1;
-              }
+              return isRed ? theme.btnRedColor1 : theme.btnColor1;
             }
-            if (isRed) {
-              return MyTheme.of(context).btnRedColor;
-            } else {
-              return MyTheme.of(context).darkGreyColor;
-            }
+            return isRed ? theme.btnRedColor : theme.darkGreyColor;
           },
         ),
       ),
       onPressed: disabled ? null : onTap,
-      child: minimize ? textWidget : Center(child: textWidget),
+      child: Text(
+        text,
+        style: theme.btnTextStyle.copyWith(
+          fontSize: minimize ? 15 : 18,
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

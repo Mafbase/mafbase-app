@@ -61,11 +61,9 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
             children: [
               AutofillGroup(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 16,
-                    bottom: 25,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 24,
                   ),
                   child: Form(
                     key: _formKey,
@@ -75,35 +73,33 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                         Center(
                           child: Text(
                             context.locale.forgotPasswordTitle,
-                            style: const TextStyle(
-                              fontSize: 36,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
+                            style: MyTheme.of(context).headerTextStyle,
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 16),
                         Text(
                           context.locale.forgotPasswordDescription,
                           textAlign: TextAlign.center,
                           style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                fontSize: 14,
+                                fontSize: 12,
                               ),
                         ),
-                        const SizedBox(height: 35),
+                        const SizedBox(height: 20),
                         CustomTextField(
                           controller: _emailController,
                           autoFillHints: const [
                             AutofillHints.username,
                             AutofillHints.email,
                           ],
-                          isRequiredField: true,
                           icon: Icon(
                             Icons.email_outlined,
                             color: MyTheme.of(context).borderColor,
+                            size: 20,
                           ),
                           hint: context.locale.loginEmailHint,
-                          errorText: state.hasError ? context.locale.forgotPasswordEmailNotFound : null,
+                          errorText: state.hasError
+                              ? context.locale.forgotPasswordEmailNotFound
+                              : null,
                           validate: (value) {
                             if (value != null) {
                               if (EmailValidator.validate(value)) {
@@ -113,7 +109,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                             return context.locale.fantasyEmailInvalid;
                           },
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 20),
                         ListenableBuilder(
                           listenable: _emailController,
                           builder: (context, _) => CustomButton(
@@ -122,18 +118,26 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                             ),
                             text: context.locale.send,
                             onTap: _onSubmit,
+                            minimize: true,
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        TextButton(
-                          onPressed: () {
-                            context.read<ForgotPasswordBloc>().add(
-                                  const ForgotPasswordEvents.backButtonTapped(),
-                                );
-                          },
-                          child: Text(
-                            context.locale.authorization,
-                            style: MyTheme.of(context).defaultTextStyle,
+                        const SizedBox(height: 14),
+                        Center(
+                          child: TextButton(
+                            onPressed: () {
+                              context.read<ForgotPasswordBloc>().add(
+                                    const ForgotPasswordEvents
+                                        .backButtonTapped(),
+                                  );
+                            },
+                            child: Text(
+                              context.locale.authorization,
+                              style: MyTheme.of(context)
+                                  .defaultTextStyle
+                                  .copyWith(
+                                    color: MyTheme.of(context).darkGreyColor,
+                                  ),
+                            ),
                           ),
                         ),
                       ],
@@ -157,12 +161,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
           children: [
             AutofillGroup(
               child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 40,
-                  right: 40,
-                  top: 36,
-                  bottom: 45,
-                ),
+                padding: const EdgeInsets.all(40),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -171,14 +170,10 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                       Center(
                         child: Text(
                           context.locale.forgotPasswordTitle,
-                          style: const TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
+                          style: MyTheme.of(context).headerTextStyle,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
                       Text(
                         context.locale.forgotPasswordDescription,
                         textAlign: TextAlign.center,
@@ -186,17 +181,19 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                               fontSize: 14,
                             ),
                       ),
-                      const SizedBox(height: 45),
+                      const SizedBox(height: 28),
                       CustomTextField(
                         controller: _emailController,
                         autoFillHints: const [AutofillHints.email],
-                        isRequiredField: true,
                         icon: Icon(
                           Icons.email_outlined,
                           color: MyTheme.of(context).borderColor,
+                          size: 20,
                         ),
                         hint: context.locale.loginEmailHint,
-                        errorText: state.hasError ? context.locale.forgotPasswordEmailNotFound : null,
+                        errorText: state.hasError
+                            ? context.locale.forgotPasswordEmailNotFound
+                            : null,
                         validate: (value) {
                           if (value != null) {
                             if (EmailValidator.validate(value)) {
@@ -218,15 +215,19 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      TextButton(
-                        onPressed: () {
-                          context.read<ForgotPasswordBloc>().add(
-                                const ForgotPasswordEvents.backButtonTapped(),
-                              );
-                        },
-                        child: Text(
-                          context.locale.authorization,
-                          style: MyTheme.of(context).defaultTextStyle,
+                      Center(
+                        child: TextButton(
+                          onPressed: () {
+                            context.read<ForgotPasswordBloc>().add(
+                                  const ForgotPasswordEvents.backButtonTapped(),
+                                );
+                          },
+                          child: Text(
+                            context.locale.authorization,
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                  color: MyTheme.of(context).darkGreyColor,
+                                ),
+                          ),
                         ),
                       ),
                     ],
@@ -235,8 +236,8 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
               ),
             ),
             if (state.isLoading)
-              Positioned.fill(
-                child: const LoadingOverlayWidget(),
+              const Positioned.fill(
+                child: LoadingOverlayWidget(),
               ),
           ],
         ),

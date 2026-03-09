@@ -190,35 +190,34 @@ class _MafbaseAppState extends State<MafbaseApp> {
                               );
                             }
 
-                            return context.theme.btnTextStyle;
-                          },
-                        ),
-                      ),
-                    ),
+                      return context.theme.btnTextStyle;
+                    },
                   ),
-                  routerDelegate: context.read<AppRouter>().router.routerDelegate,
-                  routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
-                  routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  builder: (context, child) => MediaQuery(
-                    data: MediaQuery.of(context).copyWith(
-                      textScaler: TextScaler.noScaling,
-                      boldText: false,
-                    ),
-                    child: child ?? const SizedBox.shrink(),
-                  ),
-                );
-              },
+                ),
+              ),
             ),
-          ),
-        ),
-      );
+            routerDelegate: context.read<AppRouter>().router.routerDelegate,
+            routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
+            routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                textScaler: TextScaler.noScaling,
+                boldText: false,
+              ),
+              child: child ?? const SizedBox.shrink(),
+            ),
+          );
+        },
+      ),
+    ),
+  );
 }
 
 class ThemeProvider extends SingleChildStatefulWidget {

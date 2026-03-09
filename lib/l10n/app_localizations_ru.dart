@@ -12,7 +12,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get loginAuth => 'Авторизация';
 
   @override
-  String get loginEmailHint => 'Ваша электронная почта';
+  String get loginEmailHint => 'Электронная почта';
 
   @override
   String get loginPasswordHint => 'Пароль';

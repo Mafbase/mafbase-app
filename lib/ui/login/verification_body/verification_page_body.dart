@@ -122,7 +122,6 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                         hint: context.locale.enterCode,
                         errorText:
                             state.hasError ? context.locale.invalidCode : null,
-                        isRequiredField: false,
                       ),
                       const SizedBox(
                         height: 15,

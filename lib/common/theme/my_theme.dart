@@ -9,6 +9,7 @@ abstract class MyTheme {
   abstract final Color btnTextColor;
   abstract final Color textColor;
   abstract final Color borderColor;
+  abstract final Color hintColor;
   abstract final TextStyle defaultTextStyle;
   abstract final TextStyle hintTextStyle;
   abstract final TextStyle fieldTextStyle;
@@ -66,11 +67,14 @@ class _LightTheme implements MyTheme {
   late final textColor = Colors.black;
 
   @override
-  late final Color borderColor = const Color(0x3B1C2B40);
+  late final Color borderColor = const Color(0x403B1C2B);
+
+  @override
+  Color get hintColor => const Color(0xFFB4B9BF);
 
   @override
   late final TextStyle btnTextStyle = _defaultTextStyle.copyWith(
-    fontSize: _isMobile ? 18 : 24,
+    fontSize: _isMobile ? 15 : 18,
     fontWeight: FontWeight.w600,
     color: btnTextColor,
   );
@@ -92,8 +96,9 @@ class _LightTheme implements MyTheme {
 
   @override
   TextStyle get headerTextStyle => _defaultTextStyle.copyWith(
-        fontSize: _isMobile ? 20 : 28,
+        fontSize: _isMobile ? 22 : 28,
         fontWeight: FontWeight.w600,
+        color: darkBlueColor,
       );
 
   @override
