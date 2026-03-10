@@ -26,6 +26,10 @@ class TournamentSettingsModel with _$TournamentSettingsModel {
       );
 }
 
+extension TournamentSettingsModelGamesExt on TournamentSettingsModel {
+  int get totalGames => defaultGames + swissGames + finalGames;
+}
+
 extension TournamentSettingsModelExt on TournamentSettingsModel {
   TournamentSettings toProto() => TournamentSettings(
         defaultGamesCount: defaultGames,

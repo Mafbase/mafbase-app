@@ -152,6 +152,9 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
         );
       }),
       _updateFinalPlayers(emit),
+      _getSettingsInteractor.run(tournamentId: tournamentId)
+          .then((settings) => emit(state.copyWith(settings: settings)))
+          .onError((_, __) {}),
     ]);
   }
 

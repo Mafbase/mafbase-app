@@ -16,6 +16,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bl
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
+import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/custom_text_info_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/final_players_dialog.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/widgets/players_list_body.dart';
@@ -319,7 +320,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
             );
           },
         ),
-      if (context.read<SeatingPageBloc>().state.games.length case int games)
+      if (context.read<TournamentPageBloc>().state.settings.totalGames case int games when games > 0)
         if (state.isMyTournament && state.notificationEnabled && !context.read<SeatingPageBloc>().state.isLoading) ...[
           MenuItemModel(
             text: 'Оповещение об игре',
