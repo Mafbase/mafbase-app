@@ -10,4 +10,4 @@ jobs:
     uses: Mafbase/mafbase-backend/.github/workflows/reusable-stage-deploy.yml@main
     with:
       image_name: seating-generator-web
-      service_name: web
+      service_name: frontend
