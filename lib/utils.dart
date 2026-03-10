@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -7,6 +8,8 @@ extension BuildContextLocaleExt on BuildContext {
   AppLocalizations get locale => AppLocalizations.of(this)!;
 
   MyTheme get theme => MyTheme.of(this);
+
+  VoidCallback get backOrGoToDefault => Navigator.canPop(this) ? () => Navigator.pop(this) : () => go('/');
 }
 
 final dateFormatForRequests = DateFormat("yyyy-MM-dd");
@@ -114,9 +117,7 @@ class Pair<F, S> {
 
   @override
   bool operator ==(Object other) {
-    return other is Pair<F, S> &&
-        other.first == first &&
-        other.second == second;
+    return other is Pair<F, S> && other.first == first && other.second == second;
   }
 
   @override

@@ -88,11 +88,7 @@ class _ClubPageState extends CustomState<ClubPage> {
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text("Клуб"),
-          leading: BackButton(
-            onPressed: Navigator.canPop(context)
-                ? () => Navigator.pop(context)
-                : () => context.go(ClubsPage.createLocation(context)),
-          ),
+          leading: BackButton(onPressed: context.backOrGoToDefault),
         ),
         body: BlocBuilder<ClubBloc, ClubState>(
           builder: (context, state) {

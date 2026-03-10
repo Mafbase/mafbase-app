@@ -15,15 +15,14 @@ class TournamentMenu extends StatefulWidget {
 
 class _TournamentMenuState extends State<TournamentMenu> {
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
         width: 380,
-        color: MyTheme.of(context).darkBlueColor,
-        child: Column(
-          children: widget.items
-              .map(
-                (e) => Material(
-                  color: MyTheme.of(context).darkGreyColor,
-                  child: InkWell(
+        child: Material(
+          color: MyTheme.of(context).darkBlueColor,
+          child: Column(
+            children: widget.items
+                .map(
+                  (e) => InkWell(
                     onTap: e.onTap,
                     child: SizedBox(
                       height: 64,
@@ -35,9 +34,9 @@ class _TournamentMenuState extends State<TournamentMenu> {
                       ),
                     ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
         ),
       );
 }

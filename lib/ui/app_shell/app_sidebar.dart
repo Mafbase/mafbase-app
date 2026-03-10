@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,8 @@ import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class AppSidebar extends StatelessWidget {
@@ -164,25 +167,23 @@ class AppSidebar extends StatelessWidget {
     );
   }
 
-  Widget _buildFooter(BuildContext context, MyTheme theme) {
-    return Container(
-      height: 85,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: theme.sidebarDividerColor),
+  Widget _buildFooter(BuildContext context, MyTheme theme) => Container(
+        height: 85,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: theme.sidebarDividerColor),
+          ),
         ),
-      ),
-      child: ValueListenableBuilder(
-        valueListenable: context.read<AuthNotifier>(),
-        builder: (context, model, _) => model.map(
-          loading: (_) => const SizedBox.shrink(),
-          unauthorized: (_) => _buildLoginButton(context, theme),
-          authorized: (_) => _buildUserInfo(context, theme),
+        child: ValueListenableBuilder(
+          valueListenable: context.read<AuthNotifier>(),
+          builder: (context, model, _) => model.map(
+            loading: (_) => const SizedBox.shrink(),
+            unauthorized: (_) => _buildLoginButton(context, theme),
+            authorized: (_) => _buildUserInfo(context, theme),
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   Widget _buildLoginButton(BuildContext context, MyTheme theme) {
     return Center(
@@ -213,45 +214,70 @@ class AppSidebar extends StatelessWidget {
   }
 
   Widget _buildUserInfo(BuildContext context, MyTheme theme) {
-    return InkWell(
-      onTap: () {
-        context.read<MainBloc>().add(const MainEvent.onProfilePressed());
-      },
-      borderRadius: BorderRadius.circular(8),
-      child: Row(
-        children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: theme.darkGreyColor,
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 20,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              context.locale.profile,
-              style: GoogleFonts.inter(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, profileState) {
+        final player = profileState.playerProfile;
+        return InkWell(
+          onTap: () {
+            context.read<MainBloc>().add(const MainEvent.onProfilePressed());
+          },
+          borderRadius: BorderRadius.circular(8),
+          child: Row(
+            children: [
+              _buildAvatar(player?.imageUrl, theme),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  player?.nickname ?? context.locale.profile,
+                  style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              overflow: TextOverflow.ellipsis,
-            ),
+              Icon(
+                Icons.settings_outlined,
+                color: theme.sidebarSectionTitleColor,
+                size: 20,
+              ),
+            ],
           ),
-          Icon(
-            Icons.settings_outlined,
-            color: theme.sidebarSectionTitleColor,
-            size: 20,
-          ),
-        ],
+        );
+      },
+    );
+  }
+
+  Widget _buildAvatar(String? imageUrl, MyTheme theme) {
+    if (imageUrl != null) {
+      return ClipOval(
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          width: 36,
+          height: 36,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => _buildDefaultAvatar(theme),
+          errorWidget: (context, url, error) => _buildDefaultAvatar(theme),
+        ),
+      );
+    }
+    return _buildDefaultAvatar(theme);
+  }
+
+  Widget _buildDefaultAvatar(MyTheme theme) {
+    return Container(
+      width: 36,
+      height: 36,
+      decoration: BoxDecoration(
+        color: theme.darkGreyColor,
+        shape: BoxShape.circle,
+      ),
+      alignment: Alignment.center,
+      child: const Icon(
+        Icons.person,
+        color: Colors.white,
+        size: 20,
       ),
     );
   }

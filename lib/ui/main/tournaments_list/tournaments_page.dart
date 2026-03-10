@@ -49,75 +49,20 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
   }
 
   @override
-  Widget? buildMobile(BuildContext context) => RefreshIndicator(
-        onRefresh: () {
-          final completer = Completer();
-
-          context
-              .read<TournamentsBloc>()
-              .add(TournamentsEvent.opened(completer: completer));
-
-          return completer.future;
-        },
-        child: Container(
-          color: context.theme.background2,
-          child: Material(
-            child: BlocBuilder<TournamentsBloc, TournamentsState>(
-              builder: (context, state) => ValueListenableBuilder(
-                valueListenable: context.read<AuthNotifier>(),
-                builder: (context, authModel, child) {
-                  return Stack(
-                    children: [
-                      child ?? Container(),
-                      if (authModel is AuthNotifierAuthorizedModel)
-                        Positioned(
-                          bottom: 8,
-                          right: 8,
-                          child: FloatingActionButton(
-                            elevation: 10,
-                            onPressed: () {
-                              context
-                                  .read<TournamentsBloc>()
-                                  .add(const TournamentsEvent.create());
-                            },
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      if (state.isLoading) const LoadingOverlayWidget(),
-                    ],
-                  );
-                },
-                child: ListView.builder(
-                  itemCount: state.tournaments.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
-                      child: TournamentItemRow(
-                        tournamentModel: state.tournaments[index],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
+  Widget? buildMobile(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(context.locale.tournamentsListTitle),
         ),
-      );
+        body: RefreshIndicator(
+          onRefresh: () {
+            final completer = Completer();
 
-  @override
-  Widget buildDesktop(BuildContext context) {
-    return Container(
-      color: context.theme.background2,
-      child: Material(
-        child: BlocBuilder<TournamentsBloc, TournamentsState>(
-          builder: (context, state) {
-            return ValueListenableBuilder(
+            context.read<TournamentsBloc>().add(TournamentsEvent.opened(completer: completer));
+
+            return completer.future;
+          },
+          child: BlocBuilder<TournamentsBloc, TournamentsState>(
+            builder: (context, state) => ValueListenableBuilder(
               valueListenable: context.read<AuthNotifier>(),
               builder: (context, authModel, child) {
                 return Stack(
@@ -125,14 +70,12 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                     child ?? Container(),
                     if (authModel is AuthNotifierAuthorizedModel)
                       Positioned(
-                        bottom: 35,
-                        right: 35,
-                        child: FloatingActionButton.large(
+                        bottom: 8,
+                        right: 8,
+                        child: FloatingActionButton(
                           elevation: 10,
                           onPressed: () {
-                            context
-                                .read<TournamentsBloc>()
-                                .add(const TournamentsEvent.create());
+                            context.read<TournamentsBloc>().add(const TournamentsEvent.create());
                           },
                           child: const Icon(
                             Icons.add,
@@ -144,25 +87,61 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                   ],
                 );
               },
-              child: CustomScrollView(
-                slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        Center(
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 50),
-                            child: Text(
-                              AppLocalizations.of(context)!
-                                  .tournamentsListTitle,
-                              style: MyTheme.of(context).headerTextStyle,
-                            ),
-                          ),
-                        ),
-                      ],
+              child: ListView.builder(
+                itemCount: state.tournaments.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
                     ),
-                  ),
-                  SliverList(
+                    child: TournamentItemRow(
+                      tournamentModel: state.tournaments[index],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      );
+
+  @override
+  Widget buildDesktop(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(context.locale.tournamentsListTitle),
+        ),
+        body: BlocBuilder<TournamentsBloc, TournamentsState>(
+          builder: (context, state) => ValueListenableBuilder(
+            valueListenable: context.read<AuthNotifier>(),
+            builder: (context, authModel, child) {
+              return Stack(
+                children: [
+                  child ?? Container(),
+                  if (authModel is AuthNotifierAuthorizedModel)
+                    Positioned(
+                      bottom: 35,
+                      right: 35,
+                      child: FloatingActionButton.large(
+                        elevation: 10,
+                        onPressed: () {
+                          context.read<TournamentsBloc>().add(const TournamentsEvent.create());
+                        },
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  if (state.isLoading) const LoadingOverlayWidget(),
+                ],
+              );
+            },
+            child: CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.all(16),
+                  sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: state.tournaments.length,
                       (context, index) {
@@ -191,9 +170,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: MyTheme.of(context)
-                                      .greyColor
-                                      .withValues(alpha: 0.16),
+                                  color: MyTheme.of(context).greyColor.withValues(alpha: 0.16),
                                 ),
                                 child: Row(
                                   children: [
@@ -201,26 +178,22 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                                       DateFormat('dd-MM-yyyy').format(
                                         tournament.dateStart,
                                       ),
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
+                                      style: MyTheme.of(context).defaultTextStyle,
                                     ),
                                     const SizedBox(
                                       width: 35,
                                     ),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             tournament.name,
-                                            style: MyTheme.of(context)
-                                                .defaultTextStyle,
+                                            style: MyTheme.of(context).defaultTextStyle,
                                           ),
                                           Text(
                                             'ID: ${tournament.id}',
-                                            style: MyTheme.of(context)
-                                                .hintTextStyle,
+                                            style: MyTheme.of(context).hintTextStyle,
                                           ),
                                         ],
                                       ),
@@ -240,12 +213,10 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
                       },
                     ),
                   ),
-                ],
-              ),
-            );
-          },
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

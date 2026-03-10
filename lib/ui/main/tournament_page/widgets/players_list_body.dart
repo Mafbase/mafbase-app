@@ -36,9 +36,7 @@ class _PlayersListBodyState extends State<PlayersListBody> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(
-            onPressed: Navigator.canPop(context) ? () => Navigator.pop(context) : () => context.go(TournamentsPage.createLocation(context)),
-          ),
+          leading: BackButton(onPressed: context.backOrGoToDefault),
           title: Text(context.locale.participants),
         ),
         body: Container(

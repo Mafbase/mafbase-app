@@ -98,16 +98,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
 
   AppBar _buildMobileAppBar(BuildContext context) {
     return AppBar(
-      leading: ListenableBuilder(
-        listenable: GoRouter.of(context).routeInformationProvider,
-        builder: (context, child) {
-          return context.canPop()
-              ? BackButton(onPressed: context.pop)
-              : Navigator.canPop(context)
-                  ? BackButton(onPressed: () => Navigator.pop(context))
-                  : BackButton(onPressed: () => context.go('/'));
-        },
-      ),
+      leading: BackButton(onPressed: context.backOrGoToDefault),
       title: InkWell(
         onTap: () => context.go('/'),
         child: Text(

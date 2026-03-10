@@ -49,100 +49,90 @@ class _ClubsPageState extends CustomState<ClubsPage> {
   }
 
   @override
-  Widget? buildMobile(BuildContext context) {
-    return ColoredBox(
-      color: context.theme.background2,
-      child: BlocBuilder<ClubsBloc, ClubsState>(
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const LoadingOverlayWidget();
-          }
+  Widget? buildMobile(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: BackButton(onPressed: context.backOrGoToDefault),
+          title: Text(context.locale.clubsHeader),
+        ),
+        body: BlocBuilder<ClubsBloc, ClubsState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const LoadingOverlayWidget();
+            }
 
-          return RefreshIndicator(
-            onRefresh: () {
-              final completer = Completer();
-              context.read<ClubsBloc>().add(
-                    ClubsEvent.pageOpened(completer: completer),
-                  );
+            return RefreshIndicator(
+              onRefresh: () {
+                final completer = Completer();
+                context.read<ClubsBloc>().add(
+                      ClubsEvent.pageOpened(completer: completer),
+                    );
 
-              return completer.future;
-            },
-            child: ListView.builder(
-              itemCount: state.clubs.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 16.0,
-                  ),
-                  child: SingleClubRow(
-                    style: ClubRowStyle.mobile,
-                    model: state.clubs[index],
-                    onTap: () {
-                      context.read<ClubsBloc>().add(
-                            ClubsEvent.clubSelected(
-                              clubModel: state.clubs[index],
-                            ),
-                          );
-                    },
-                  ),
-                );
+                return completer.future;
               },
-            ),
-          );
-        },
-      ),
-    );
-  }
+              child: ListView.builder(
+                itemCount: state.clubs.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 16.0,
+                    ),
+                    child: SingleClubRow(
+                      style: ClubRowStyle.mobile,
+                      model: state.clubs[index],
+                      onTap: () {
+                        context.read<ClubsBloc>().add(
+                              ClubsEvent.clubSelected(
+                                clubModel: state.clubs[index],
+                              ),
+                            );
+                      },
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      );
 
   @override
-  Widget buildDesktop(BuildContext context) {
-    return Container(
-      color: context.theme.background2,
-      child: Material(
-        child: BlocBuilder<ClubsBloc, ClubsState>(
+  Widget buildDesktop(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(context.locale.clubsHeader),
+        ),
+        body: BlocBuilder<ClubsBloc, ClubsState>(
           builder: (context, state) {
             if (state.isLoading) {
               return const LoadingOverlayWidget();
             }
             return CustomScrollView(
               slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      Center(
-                        child: Text(
-                          context.locale.clubsHeader,
-                          style: context.theme.headerTextStyle,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: state.clubs.length,
-                    (context, index) {
-                      return Center(
-                        child: SingleClubRow(
-                          model: state.clubs[index],
-                          onTap: () {
-                            context.read<ClubsBloc>().add(
-                                  ClubsEvent.clubSelected(
-                                    clubModel: state.clubs[index],
-                                  ),
-                                );
-                          },
-                        ),
-                      );
-                    },
+                SliverPadding(
+                  padding: EdgeInsets.all(16),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: state.clubs.length,
+                      (context, index) {
+                        return Center(
+                          child: SingleClubRow(
+                            model: state.clubs[index],
+                            onTap: () {
+                              context.read<ClubsBloc>().add(
+                                    ClubsEvent.clubSelected(
+                                      clubModel: state.clubs[index],
+                                    ),
+                                  );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
             );
           },
         ),
-      ),
-    );
-  }
+      );
 }

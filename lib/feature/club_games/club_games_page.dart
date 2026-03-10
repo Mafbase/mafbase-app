@@ -10,6 +10,7 @@ import 'package:seating_generator_web/feature/club_games/club_games_bloc.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_event.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_state.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubGamesPage extends StatefulWidget {
@@ -43,12 +44,9 @@ class ClubGamesPage extends StatefulWidget {
     name: _name,
     builder: (context, state) {
       final clubId = int.parse(state.pathParameters["clubId"]!);
-      final dateStart =
-          DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
-              DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd =
-          DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ??
-              DateTime.now();
+      final dateStart = DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
+          DateTime.now().subtract(const Duration(days: 30));
+      final dateEnd = DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ?? DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
 
       return BlocProvider(
@@ -71,43 +69,51 @@ class ClubGamesPage extends StatefulWidget {
 
 class _ClubGamesPageState extends CustomState<ClubGamesPage> {
   @override
-  Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<ClubGamesBloc, ClubGamesState>(
-      builder: (context, state) => state.loading
-          ? const LoadingOverlayWidget()
-          : LayoutBuilder(
-              builder: (context, constraints) {
-                final crossAxisCount = (constraints.maxWidth - 16) /
-                    (GameResultWidget.baseWidth + 16);
+  Widget buildDesktop(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: BackButton(onPressed: context.backOrGoToDefault),
+          title: Text('Игры клуба'),
+        ),
+        body: BlocBuilder<ClubGamesBloc, ClubGamesState>(
+          builder: (context, state) => state.loading
+              ? const LoadingOverlayWidget()
+              : LayoutBuilder(
+                  builder: (context, constraints) {
+                    final crossAxisCount = (constraints.maxWidth - 16) / (GameResultWidget.baseWidth + 16);
 
-                return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount.floor(),
-                  ),
-                  itemCount: state.games.length,
-                  itemBuilder: (context, index) {
-                    return Center(
-                      child: GestureDetector(
-                        onTap: () => openGame(state.games[index].gameId),
-                        child: GameResultWidget(
-                          model: state.games[index].copyWith(
-                            game: index + 1,
-                            table: 1,
-                          ),
-                        ),
+                    return GridView.builder(
+                      padding: EdgeInsets.all(16),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount.floor(),
+                        mainAxisSpacing: 16,
                       ),
+                      itemCount: state.games.length,
+                      itemBuilder: (context, index) {
+                        return Center(
+                          child: GestureDetector(
+                            onTap: () => openGame(state.games[index].gameId),
+                            child: GameResultWidget(
+                              model: state.games[index].copyWith(
+                                game: index + 1,
+                                table: 1,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
-    );
-  }
+                ),
+        ),
+      );
 
   @override
-  Widget? buildMobile(BuildContext context) =>
-      BlocBuilder<ClubGamesBloc, ClubGamesState>(
+  Widget? buildMobile(BuildContext context) => BlocBuilder<ClubGamesBloc, ClubGamesState>(
         builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            leading: BackButton(onPressed: context.backOrGoToDefault),
+            title: Text('Игры клуба'),
+          ),
           body: state.loading
               ? const LoadingOverlayWidget()
               : PageView.builder(
@@ -117,11 +123,9 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
                     builder: (context, constraints) {
                       final double coef;
 
-                      final widthCoef = (constraints.maxWidth - 32) /
-                          GameResultWidget.baseWidth;
+                      final widthCoef = (constraints.maxWidth - 32) / GameResultWidget.baseWidth;
 
-                      final heightCoef = (constraints.maxHeight - 32) /
-                          GameResultWidget.baseHeight;
+                      final heightCoef = (constraints.maxHeight - 32) / GameResultWidget.baseHeight;
 
                       coef = min(widthCoef, heightCoef);
 
@@ -144,6 +148,5 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
         ),
       );
 
-  void openGame(int gameId) => context
-      .push(AddClubGamePage.createViewLocation(context, widget.clubId, gameId));
+  void openGame(int gameId) => context.push(AddClubGamePage.createViewLocation(context, widget.clubId, gameId));
 }

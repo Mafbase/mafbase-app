@@ -1,19 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/app/di/storage_factory.dart';
+import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
-import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 import 'package:seating_generator_web/ui/main/profile_page/widgets/tournament_subscription_section.dart';
@@ -32,32 +28,20 @@ class ProfilePage extends StatefulWidget {
     path: '/profile',
     name: 'profile',
     pageBuilder: (context, state) => FadeTransitionPage(
-      child: BlocProvider<ProfileBloc>(
-        create: (context) {
-          final logoutInteractor = LogoutInteractor(
-            StorageFactory.of(context).tokenStorage,
-            DependencyScope.of(context).authNotifier,
-            StorageFactory.of(context).credentialStorage,
-          );
-
-          return ProfileBloc(
-            logoutInteractor,
-            DeleteProfileInteractor(
-              logoutInteractor,
-              RepositoryFactory.of(context).profileRepository,
-            ),
-            RepositoryFactory.of(context).profileRepository,
-            CreatePlayerInteractor(RepositoryFactory.of(context).playersRepository),
-            context,
-          )..add(const ProfileEvent.loadUserProfile());
-        },
-        child: const ProfilePage._(),
-      ),
+      child: const ProfilePage._(),
     ),
   );
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage>
+    with EffectListener<ProfileEffect, ProfileState, ProfileBloc, ProfilePage> {
+  @override
+  void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
+    on<ProfileEffectNavigateBack>((effect) {
+      if (mounted) context.go('/');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final showBillingSection = !(context.watch<AuthNotifier>().value.mapOrNull(
@@ -66,6 +50,10 @@ class _ProfilePageState extends State<ProfilePage> {
         false);
 
     return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault),
+        title: Text(context.locale.profile),
+      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
