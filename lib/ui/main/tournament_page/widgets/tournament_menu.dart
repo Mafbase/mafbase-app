@@ -17,7 +17,7 @@ class _TournamentMenuState extends State<TournamentMenu> {
   @override
   Widget build(BuildContext context) => Container(
         width: 380,
-        color: MyTheme.of(context).darkGreyColor,
+        color: MyTheme.of(context).darkBlueColor,
         child: Column(
           children: widget.items
               .map(

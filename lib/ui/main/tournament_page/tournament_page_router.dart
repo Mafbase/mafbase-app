@@ -52,7 +52,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openPlayersList({required int tournamentId}) {
-    _context.push(
+    _context.pushReplacement(
       TournamentPage.createLocation(
         context: _context,
         tournamentId: tournamentId,
