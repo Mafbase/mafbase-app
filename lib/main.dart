@@ -110,7 +110,7 @@ class MafbaseApp extends StatefulWidget {
 }
 
 class _MafbaseAppState extends State<MafbaseApp> {
-  late final router = AppRouter(widget.initLocation);
+  late final router = AppRouter(widget.initLocation, widget.scope);
   StreamSubscription? subscription;
 
   @override
@@ -122,6 +122,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
   @override
   void dispose() {
     subscription?.cancel();
+    widget.scope.dispose();
     super.dispose();
   }
 

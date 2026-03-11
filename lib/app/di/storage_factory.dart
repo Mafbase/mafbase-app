@@ -5,6 +5,7 @@ import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/data/storages/token_in_memory_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_hive_impl.dart';
+import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
 
 class StorageFactory {
   static const _useHiveStorage = true;
@@ -16,7 +17,7 @@ class StorageFactory {
 
   late final TokenStorage tokenStorage = _isIntegrationTest
       ? TokenInMemoryStorage()
-      : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageHiveImpl());
+      : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl());
 
   late final CredentialStorage credentialStorage =
       CredentialSecureStorageImpl();

@@ -46,7 +46,6 @@ class RepositoryFactory {
   static RepositoryFactory of(BuildContext context) =>
       DependencyScope.of(context).repositoryFactory;
 
-  // Existing repositories
   late final ProfileRepository profileRepository =
       ProfileRepositoryImpl(client);
 

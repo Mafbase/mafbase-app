@@ -23,6 +23,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 class AppRouter {
   final String initLocation;
+  final DependencyScope scope;
   late final router = GoRouter(
     navigatorKey: rootNavigationKey,
     observers: [
@@ -36,7 +37,6 @@ class AppRouter {
         final authNotifier = context.read<AuthNotifier>();
         if (authNotifier.value is AuthNotifierLoadingModel) {
           try {
-            final scope = DependencyScope.of(context);
             final authRepository = scope.repositoryFactory.authRepository;
             final pushTokenService = scope.pushTokenService;
 
@@ -119,7 +119,7 @@ class AppRouter {
     },
   );
 
-  AppRouter(this.initLocation);
+  AppRouter(this.initLocation, this.scope);
 
   static void showErrorDialog(BuildContext context, String message) {
     showDialog(

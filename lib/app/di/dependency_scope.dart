@@ -48,8 +48,15 @@ class DependencyScope {
     deviceIdService,
   );
 
-  late final NotificationPermissionService notificationPermissionService =
-      NotificationPermissionServiceImpl(pushTokenService);
+  NotificationPermissionServiceImpl? _notificationPermissionService;
+
+  NotificationPermissionService get notificationPermissionService =>
+      _notificationPermissionService ??=
+          NotificationPermissionServiceImpl(pushTokenService);
+
+  void dispose() {
+    _notificationPermissionService?.dispose();
+  }
 
   static DependencyScope of(BuildContext context) => context
       .getInheritedWidgetOfExactType<DependencyScopeWidget>()!
