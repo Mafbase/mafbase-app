@@ -50,9 +50,6 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
 
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(context.locale.tournamentsListTitle),
-        ),
         body: RefreshIndicator(
           onRefresh: () {
             final completer = Completer();

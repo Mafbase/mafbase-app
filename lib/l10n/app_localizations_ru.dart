@@ -243,19 +243,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get openRating => 'Открыть рейтинг клуба';
 
   @override
-  String billClubButtonText(int amount) {
-    return 'Оплатить $amount₽';
-  }
-
-  @override
-  String get billClubButtonDisabledText => 'Оплатить';
-
-  @override
-  String billClubDialogOption(int days) {
-    return '$days дней';
-  }
-
-  @override
   String get clubDescription => 'Описание клуба';
 
   @override
@@ -1023,4 +1010,78 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get sidebarAdditional => 'ДОПОЛНИТЕЛЬНО';
+
+  @override
+  String get profilePlayerCardTitle => 'Игрок';
+
+  @override
+  String get profilePlayerNotLinked => 'Игрок не привязан';
+
+  @override
+  String get profilePlayerLinkButton => 'Привязать';
+
+  @override
+  String get profilePlayerChangeButtonMobile => 'Изменить игрока';
+
+  @override
+  String get profilePlayerChangeButtonDesktop => 'Изменить';
+
+  @override
+  String get profileSubscriptionStatusLabel => 'Статус';
+
+  @override
+  String get profileSubscriptionTariffLabel => 'Тариф';
+
+  @override
+  String get profileSubscriptionBilledForLabel => 'Оплачено до';
+
+  @override
+  String get profileSubscriptionExpiredLabel => 'Истекла';
+
+  @override
+  String get profileSubscriptionErrorMessage =>
+      'Не удалось загрузить данные подписки';
+
+  @override
+  String get profileSubscriptionRetryButton => 'Повторить';
+
+  @override
+  String get profileBillDialogTitle => 'Выберите период';
+
+  @override
+  String get profileBillDialogSubtitle =>
+      'Подписка даёт доступ к расширенным функциям';
+
+  @override
+  String profileBillDialogPayButton(int amount) {
+    return 'Оплатить $amount ₽';
+  }
+
+  @override
+  String get profileBillOptionOneMonth => '1 месяц';
+
+  @override
+  String get profileBillOptionThreeMonths => '3 месяца';
+
+  @override
+  String get profileBillOptionSixMonths => '6 месяцев';
+
+  @override
+  String get profileBillOptionYear => '1 год';
+
+  @override
+  String profileBillPerMonth(int amount) {
+    return '$amount ₽/мес';
+  }
+
+  @override
+  String profileBillDiscountBadge(int percent) {
+    return '-$percent%';
+  }
+
+  @override
+  String get profileSubscriptionPayButton => 'Оплатить подписку';
+
+  @override
+  String get profileSubscriptionRenewButton => 'Продлить подписку';
 }

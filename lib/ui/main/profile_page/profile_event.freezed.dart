@@ -22,6 +22,8 @@ mixin _$ProfileEvent {
     required TResult Function() deleteProfile,
     required TResult Function() loadUserProfile,
     required TResult Function(PlayerModel player) setUserProfile,
+    required TResult Function() loadSubscription,
+    required TResult Function(int days, String redirectPath) billSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +32,8 @@ mixin _$ProfileEvent {
     TResult? Function()? deleteProfile,
     TResult? Function()? loadUserProfile,
     TResult? Function(PlayerModel player)? setUserProfile,
+    TResult? Function()? loadSubscription,
+    TResult? Function(int days, String redirectPath)? billSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +42,8 @@ mixin _$ProfileEvent {
     TResult Function()? deleteProfile,
     TResult Function()? loadUserProfile,
     TResult Function(PlayerModel player)? setUserProfile,
+    TResult Function()? loadSubscription,
+    TResult Function(int days, String redirectPath)? billSubscription,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +54,10 @@ mixin _$ProfileEvent {
     required TResult Function(ProfileEventLoadUserProfile value)
         loadUserProfile,
     required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+    required TResult Function(ProfileEventLoadSubscription value)
+        loadSubscription,
+    required TResult Function(ProfileEventBillSubscription value)
+        billSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +66,8 @@ mixin _$ProfileEvent {
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult? Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult? Function(ProfileEventBillSubscription value)? billSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +76,8 @@ mixin _$ProfileEvent {
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult Function(ProfileEventBillSubscription value)? billSubscription,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,6 +152,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     required TResult Function() deleteProfile,
     required TResult Function() loadUserProfile,
     required TResult Function(PlayerModel player) setUserProfile,
+    required TResult Function() loadSubscription,
+    required TResult Function(int days, String redirectPath) billSubscription,
   }) {
     return onLogoutPressed();
   }
@@ -149,6 +165,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult? Function()? deleteProfile,
     TResult? Function()? loadUserProfile,
     TResult? Function(PlayerModel player)? setUserProfile,
+    TResult? Function()? loadSubscription,
+    TResult? Function(int days, String redirectPath)? billSubscription,
   }) {
     return onLogoutPressed?.call();
   }
@@ -160,6 +178,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult Function()? deleteProfile,
     TResult Function()? loadUserProfile,
     TResult Function(PlayerModel player)? setUserProfile,
+    TResult Function()? loadSubscription,
+    TResult Function(int days, String redirectPath)? billSubscription,
     required TResult orElse(),
   }) {
     if (onLogoutPressed != null) {
@@ -176,6 +196,10 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     required TResult Function(ProfileEventLoadUserProfile value)
         loadUserProfile,
     required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+    required TResult Function(ProfileEventLoadSubscription value)
+        loadSubscription,
+    required TResult Function(ProfileEventBillSubscription value)
+        billSubscription,
   }) {
     return onLogoutPressed(this);
   }
@@ -187,6 +211,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult? Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult? Function(ProfileEventBillSubscription value)? billSubscription,
   }) {
     return onLogoutPressed?.call(this);
   }
@@ -198,6 +224,8 @@ class _$ProfileEventLogoutPressedImpl implements ProfileEventLogoutPressed {
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult Function(ProfileEventBillSubscription value)? billSubscription,
     required TResult orElse(),
   }) {
     if (onLogoutPressed != null) {
@@ -259,6 +287,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     required TResult Function() deleteProfile,
     required TResult Function() loadUserProfile,
     required TResult Function(PlayerModel player) setUserProfile,
+    required TResult Function() loadSubscription,
+    required TResult Function(int days, String redirectPath) billSubscription,
   }) {
     return deleteProfile();
   }
@@ -270,6 +300,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult? Function()? deleteProfile,
     TResult? Function()? loadUserProfile,
     TResult? Function(PlayerModel player)? setUserProfile,
+    TResult? Function()? loadSubscription,
+    TResult? Function(int days, String redirectPath)? billSubscription,
   }) {
     return deleteProfile?.call();
   }
@@ -281,6 +313,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult Function()? deleteProfile,
     TResult Function()? loadUserProfile,
     TResult Function(PlayerModel player)? setUserProfile,
+    TResult Function()? loadSubscription,
+    TResult Function(int days, String redirectPath)? billSubscription,
     required TResult orElse(),
   }) {
     if (deleteProfile != null) {
@@ -297,6 +331,10 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     required TResult Function(ProfileEventLoadUserProfile value)
         loadUserProfile,
     required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+    required TResult Function(ProfileEventLoadSubscription value)
+        loadSubscription,
+    required TResult Function(ProfileEventBillSubscription value)
+        billSubscription,
   }) {
     return deleteProfile(this);
   }
@@ -308,6 +346,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult? Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult? Function(ProfileEventBillSubscription value)? billSubscription,
   }) {
     return deleteProfile?.call(this);
   }
@@ -319,6 +359,8 @@ class _$ProfileEventDeleteProfileImpl implements ProfileEventDeleteProfile {
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult Function(ProfileEventBillSubscription value)? billSubscription,
     required TResult orElse(),
   }) {
     if (deleteProfile != null) {
@@ -380,6 +422,8 @@ class _$ProfileEventLoadUserProfileImpl implements ProfileEventLoadUserProfile {
     required TResult Function() deleteProfile,
     required TResult Function() loadUserProfile,
     required TResult Function(PlayerModel player) setUserProfile,
+    required TResult Function() loadSubscription,
+    required TResult Function(int days, String redirectPath) billSubscription,
   }) {
     return loadUserProfile();
   }
@@ -391,6 +435,8 @@ class _$ProfileEventLoadUserProfileImpl implements ProfileEventLoadUserProfile {
     TResult? Function()? deleteProfile,
     TResult? Function()? loadUserProfile,
     TResult? Function(PlayerModel player)? setUserProfile,
+    TResult? Function()? loadSubscription,
+    TResult? Function(int days, String redirectPath)? billSubscription,
   }) {
     return loadUserProfile?.call();
   }
@@ -402,6 +448,8 @@ class _$ProfileEventLoadUserProfileImpl implements ProfileEventLoadUserProfile {
     TResult Function()? deleteProfile,
     TResult Function()? loadUserProfile,
     TResult Function(PlayerModel player)? setUserProfile,
+    TResult Function()? loadSubscription,
+    TResult Function(int days, String redirectPath)? billSubscription,
     required TResult orElse(),
   }) {
     if (loadUserProfile != null) {
@@ -418,6 +466,10 @@ class _$ProfileEventLoadUserProfileImpl implements ProfileEventLoadUserProfile {
     required TResult Function(ProfileEventLoadUserProfile value)
         loadUserProfile,
     required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+    required TResult Function(ProfileEventLoadSubscription value)
+        loadSubscription,
+    required TResult Function(ProfileEventBillSubscription value)
+        billSubscription,
   }) {
     return loadUserProfile(this);
   }
@@ -429,6 +481,8 @@ class _$ProfileEventLoadUserProfileImpl implements ProfileEventLoadUserProfile {
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult? Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult? Function(ProfileEventBillSubscription value)? billSubscription,
   }) {
     return loadUserProfile?.call(this);
   }
@@ -440,6 +494,8 @@ class _$ProfileEventLoadUserProfileImpl implements ProfileEventLoadUserProfile {
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult Function(ProfileEventBillSubscription value)? billSubscription,
     required TResult orElse(),
   }) {
     if (loadUserProfile != null) {
@@ -541,6 +597,8 @@ class _$ProfileEventSetUserProfileImpl implements ProfileEventSetUserProfile {
     required TResult Function() deleteProfile,
     required TResult Function() loadUserProfile,
     required TResult Function(PlayerModel player) setUserProfile,
+    required TResult Function() loadSubscription,
+    required TResult Function(int days, String redirectPath) billSubscription,
   }) {
     return setUserProfile(player);
   }
@@ -552,6 +610,8 @@ class _$ProfileEventSetUserProfileImpl implements ProfileEventSetUserProfile {
     TResult? Function()? deleteProfile,
     TResult? Function()? loadUserProfile,
     TResult? Function(PlayerModel player)? setUserProfile,
+    TResult? Function()? loadSubscription,
+    TResult? Function(int days, String redirectPath)? billSubscription,
   }) {
     return setUserProfile?.call(player);
   }
@@ -563,6 +623,8 @@ class _$ProfileEventSetUserProfileImpl implements ProfileEventSetUserProfile {
     TResult Function()? deleteProfile,
     TResult Function()? loadUserProfile,
     TResult Function(PlayerModel player)? setUserProfile,
+    TResult Function()? loadSubscription,
+    TResult Function(int days, String redirectPath)? billSubscription,
     required TResult orElse(),
   }) {
     if (setUserProfile != null) {
@@ -579,6 +641,10 @@ class _$ProfileEventSetUserProfileImpl implements ProfileEventSetUserProfile {
     required TResult Function(ProfileEventLoadUserProfile value)
         loadUserProfile,
     required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+    required TResult Function(ProfileEventLoadSubscription value)
+        loadSubscription,
+    required TResult Function(ProfileEventBillSubscription value)
+        billSubscription,
   }) {
     return setUserProfile(this);
   }
@@ -590,6 +656,8 @@ class _$ProfileEventSetUserProfileImpl implements ProfileEventSetUserProfile {
     TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult? Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult? Function(ProfileEventBillSubscription value)? billSubscription,
   }) {
     return setUserProfile?.call(this);
   }
@@ -601,6 +669,8 @@ class _$ProfileEventSetUserProfileImpl implements ProfileEventSetUserProfile {
     TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
     TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
     TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult Function(ProfileEventBillSubscription value)? billSubscription,
     required TResult orElse(),
   }) {
     if (setUserProfile != null) {
@@ -620,5 +690,327 @@ abstract class ProfileEventSetUserProfile implements ProfileEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileEventSetUserProfileImplCopyWith<_$ProfileEventSetUserProfileImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ProfileEventLoadSubscriptionImplCopyWith<$Res> {
+  factory _$$ProfileEventLoadSubscriptionImplCopyWith(
+          _$ProfileEventLoadSubscriptionImpl value,
+          $Res Function(_$ProfileEventLoadSubscriptionImpl) then) =
+      __$$ProfileEventLoadSubscriptionImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProfileEventLoadSubscriptionImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventLoadSubscriptionImpl>
+    implements _$$ProfileEventLoadSubscriptionImplCopyWith<$Res> {
+  __$$ProfileEventLoadSubscriptionImplCopyWithImpl(
+      _$ProfileEventLoadSubscriptionImpl _value,
+      $Res Function(_$ProfileEventLoadSubscriptionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ProfileEventLoadSubscriptionImpl
+    implements ProfileEventLoadSubscription {
+  const _$ProfileEventLoadSubscriptionImpl();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.loadSubscription()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileEventLoadSubscriptionImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
+    required TResult Function() loadSubscription,
+    required TResult Function(int days, String redirectPath) billSubscription,
+  }) {
+    return loadSubscription();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
+    TResult? Function()? loadSubscription,
+    TResult? Function(int days, String redirectPath)? billSubscription,
+  }) {
+    return loadSubscription?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
+    TResult Function()? loadSubscription,
+    TResult Function(int days, String redirectPath)? billSubscription,
+    required TResult orElse(),
+  }) {
+    if (loadSubscription != null) {
+      return loadSubscription();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+    required TResult Function(ProfileEventLoadSubscription value)
+        loadSubscription,
+    required TResult Function(ProfileEventBillSubscription value)
+        billSubscription,
+  }) {
+    return loadSubscription(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult? Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult? Function(ProfileEventBillSubscription value)? billSubscription,
+  }) {
+    return loadSubscription?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult Function(ProfileEventBillSubscription value)? billSubscription,
+    required TResult orElse(),
+  }) {
+    if (loadSubscription != null) {
+      return loadSubscription(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProfileEventLoadSubscription implements ProfileEvent {
+  const factory ProfileEventLoadSubscription() =
+      _$ProfileEventLoadSubscriptionImpl;
+}
+
+/// @nodoc
+abstract class _$$ProfileEventBillSubscriptionImplCopyWith<$Res> {
+  factory _$$ProfileEventBillSubscriptionImplCopyWith(
+          _$ProfileEventBillSubscriptionImpl value,
+          $Res Function(_$ProfileEventBillSubscriptionImpl) then) =
+      __$$ProfileEventBillSubscriptionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int days, String redirectPath});
+}
+
+/// @nodoc
+class __$$ProfileEventBillSubscriptionImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$ProfileEventBillSubscriptionImpl>
+    implements _$$ProfileEventBillSubscriptionImplCopyWith<$Res> {
+  __$$ProfileEventBillSubscriptionImplCopyWithImpl(
+      _$ProfileEventBillSubscriptionImpl _value,
+      $Res Function(_$ProfileEventBillSubscriptionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? days = null,
+    Object? redirectPath = null,
+  }) {
+    return _then(_$ProfileEventBillSubscriptionImpl(
+      null == days
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == redirectPath
+          ? _value.redirectPath
+          : redirectPath // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ProfileEventBillSubscriptionImpl
+    implements ProfileEventBillSubscription {
+  const _$ProfileEventBillSubscriptionImpl(this.days, this.redirectPath);
+
+  @override
+  final int days;
+  @override
+  final String redirectPath;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.billSubscription(days: $days, redirectPath: $redirectPath)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileEventBillSubscriptionImpl &&
+            (identical(other.days, days) || other.days == days) &&
+            (identical(other.redirectPath, redirectPath) ||
+                other.redirectPath == redirectPath));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, days, redirectPath);
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProfileEventBillSubscriptionImplCopyWith<
+          _$ProfileEventBillSubscriptionImpl>
+      get copyWith => __$$ProfileEventBillSubscriptionImplCopyWithImpl<
+          _$ProfileEventBillSubscriptionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onLogoutPressed,
+    required TResult Function() deleteProfile,
+    required TResult Function() loadUserProfile,
+    required TResult Function(PlayerModel player) setUserProfile,
+    required TResult Function() loadSubscription,
+    required TResult Function(int days, String redirectPath) billSubscription,
+  }) {
+    return billSubscription(days, redirectPath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onLogoutPressed,
+    TResult? Function()? deleteProfile,
+    TResult? Function()? loadUserProfile,
+    TResult? Function(PlayerModel player)? setUserProfile,
+    TResult? Function()? loadSubscription,
+    TResult? Function(int days, String redirectPath)? billSubscription,
+  }) {
+    return billSubscription?.call(days, redirectPath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onLogoutPressed,
+    TResult Function()? deleteProfile,
+    TResult Function()? loadUserProfile,
+    TResult Function(PlayerModel player)? setUserProfile,
+    TResult Function()? loadSubscription,
+    TResult Function(int days, String redirectPath)? billSubscription,
+    required TResult orElse(),
+  }) {
+    if (billSubscription != null) {
+      return billSubscription(days, redirectPath);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileEventLogoutPressed value) onLogoutPressed,
+    required TResult Function(ProfileEventDeleteProfile value) deleteProfile,
+    required TResult Function(ProfileEventLoadUserProfile value)
+        loadUserProfile,
+    required TResult Function(ProfileEventSetUserProfile value) setUserProfile,
+    required TResult Function(ProfileEventLoadSubscription value)
+        loadSubscription,
+    required TResult Function(ProfileEventBillSubscription value)
+        billSubscription,
+  }) {
+    return billSubscription(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult? Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult? Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult? Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult? Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult? Function(ProfileEventBillSubscription value)? billSubscription,
+  }) {
+    return billSubscription?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileEventLogoutPressed value)? onLogoutPressed,
+    TResult Function(ProfileEventDeleteProfile value)? deleteProfile,
+    TResult Function(ProfileEventLoadUserProfile value)? loadUserProfile,
+    TResult Function(ProfileEventSetUserProfile value)? setUserProfile,
+    TResult Function(ProfileEventLoadSubscription value)? loadSubscription,
+    TResult Function(ProfileEventBillSubscription value)? billSubscription,
+    required TResult orElse(),
+  }) {
+    if (billSubscription != null) {
+      return billSubscription(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProfileEventBillSubscription implements ProfileEvent {
+  const factory ProfileEventBillSubscription(
+          final int days, final String redirectPath) =
+      _$ProfileEventBillSubscriptionImpl;
+
+  int get days;
+  String get redirectPath;
+
+  /// Create a copy of ProfileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProfileEventBillSubscriptionImplCopyWith<
+          _$ProfileEventBillSubscriptionImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

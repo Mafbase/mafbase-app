@@ -90,6 +90,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                   _focusNodeFsm.requestFocus();
                 },
               ),
+              const SizedBox(height: 8),
               PlayerAutoComplete(
                 hint: context.locale.fsmNicknameHint,
                 controller: _controllerFsm,
@@ -100,6 +101,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                   _focusNodeMafbank.requestFocus();
                 },
               ),
+              const SizedBox(height: 8),
               PlayerAutoComplete(
                 hint: context.locale.mafbankNicknameHint,
                 controller: _controllerMafbank,

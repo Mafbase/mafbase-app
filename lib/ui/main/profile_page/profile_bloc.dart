@@ -6,6 +6,7 @@ import 'package:seating_generator_web/domain/interactors/create_player_interacto
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
+import 'package:seating_generator_web/feature/profile/domain/model/tournament_subscription_plan_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/repository/profile_repository.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
@@ -32,11 +33,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     on<ProfileEventDeleteProfile>(_deleteProfile);
     on<ProfileEventLoadUserProfile>(_loadUserProfile);
     on<ProfileEventSetUserProfile>(_setUserProfile);
+    on<ProfileEventLoadSubscription>(_loadSubscription);
+    on<ProfileEventBillSubscription>(_billSubscription);
 
     _authListener = () {
       final model = _authNotifier.value;
       if (model is AuthNotifierAuthorizedModel) {
         add(const ProfileEvent.loadUserProfile());
+        add(const ProfileEvent.loadSubscription());
       } else if (model is AuthNotifierUnauthorizedModel) {
         // ignore: invalid_use_of_visible_for_testing_member
         emit(const ProfileState());
@@ -44,9 +48,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     };
     _authNotifier.addListener(_authListener);
 
-    // Загрузить профиль сразу, если уже авторизован
     if (_authNotifier.value is AuthNotifierAuthorizedModel) {
       add(const ProfileEvent.loadUserProfile());
+      add(const ProfileEvent.loadSubscription());
     }
   }
 
@@ -90,16 +94,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     try {
       PlayerModel playerToSet = event.player;
 
-      // Если id == 0, сначала создаем нового игрока
       if (playerToSet.id == 0) {
         final newPlayerId = await _createPlayerInteractor.run(
           playerModel: playerToSet,
         );
-        // Обновляем игрока с полученным id
         playerToSet = playerToSet.copyWith(id: newPlayerId);
       }
 
-      // Отправляем POST запрос с игроком (созданным или существующим)
       await _profileRepository.setUserProfile(playerToSet);
       emit(
         state.copyWith(
@@ -110,6 +111,48 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     } catch (e) {
       emit(state.copyWith(isLoading: false));
       rethrow;
+    }
+  }
+
+  Future<void> _loadSubscription(
+    ProfileEventLoadSubscription event,
+    Emitter emit,
+  ) async {
+    emit(state.copyWith(isLoadingSubscription: true, subscriptionError: null));
+    try {
+      final plan =
+          await _profileRepository.getTournamentSubscriptionCurrentPlan();
+      emit(
+        state.copyWith(
+          isLoadingSubscription: false,
+          subscriptionPlan: plan,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoadingSubscription: false,
+          subscriptionError: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _billSubscription(
+    ProfileEventBillSubscription event,
+    Emitter emit,
+  ) async {
+    emit(state.copyWith(isBilling: true));
+    try {
+      final redirectLink = await _profileRepository.billTournamentSubscription(
+        subscriptionType:
+            TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players,
+        days: event.days,
+        redirectPath: event.redirectPath,
+      );
+      emitEffect(ProfileEffect.openBillingUrl(redirectLink));
+    } finally {
+      emit(state.copyWith(isBilling: false));
     }
   }
 

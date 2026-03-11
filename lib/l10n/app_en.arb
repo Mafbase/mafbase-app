@@ -162,26 +162,6 @@
   "@description": {},
   "openRating": "Open club rating",
   "@openRating": {},
-  "billClubButtonText": "Pay {amount}₽",
-  "@billClubButtonText": {
-    "placeholders": {
-      "amount": {
-        "type": "int",
-        "example": "100"
-      }
-    }
-  },
-  "billClubButtonDisabledText": "Pay",
-  "@billClubButtonDisabledText": {},
-  "billClubDialogOption": "{days} days",
-  "@billClubDialogOption": {
-    "placeholders": {
-      "days": {
-        "type": "int",
-        "example": "30"
-      }
-    }
-  },
   "clubDescription": "Club description",
   "@clubDescription": {},
   "clubEditOwners": "Edit administrators",
@@ -672,5 +652,71 @@
   "sidebarNavigation": "NAVIGATION",
   "@sidebarNavigation": {},
   "sidebarAdditional": "ADDITIONAL",
-  "@sidebarAdditional": {}
+  "@sidebarAdditional": {},
+
+  "profilePlayerCardTitle": "Player",
+  "@profilePlayerCardTitle": {},
+  "profilePlayerNotLinked": "Player not linked",
+  "@profilePlayerNotLinked": {},
+  "profilePlayerLinkButton": "Link",
+  "@profilePlayerLinkButton": {},
+  "profilePlayerChangeButtonMobile": "Change player",
+  "@profilePlayerChangeButtonMobile": {},
+  "profilePlayerChangeButtonDesktop": "Change",
+  "@profilePlayerChangeButtonDesktop": {},
+  "profileSubscriptionStatusLabel": "Status",
+  "@profileSubscriptionStatusLabel": {},
+  "profileSubscriptionTariffLabel": "Plan",
+  "@profileSubscriptionTariffLabel": {},
+  "profileSubscriptionBilledForLabel": "Paid until",
+  "@profileSubscriptionBilledForLabel": {},
+  "profileSubscriptionExpiredLabel": "Expired",
+  "@profileSubscriptionExpiredLabel": {},
+  "profileSubscriptionErrorMessage": "Failed to load subscription data",
+  "@profileSubscriptionErrorMessage": {},
+  "profileSubscriptionRetryButton": "Retry",
+  "@profileSubscriptionRetryButton": {},
+  "profileBillDialogTitle": "Choose period",
+  "@profileBillDialogTitle": {},
+  "profileBillDialogSubtitle": "Subscription gives access to advanced features",
+  "@profileBillDialogSubtitle": {},
+  "profileBillDialogPayButton": "Pay {amount}\u00A0₽",
+  "@profileBillDialogPayButton": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "example": "500"
+      }
+    }
+  },
+  "profileBillOptionOneMonth": "1 month",
+  "@profileBillOptionOneMonth": {},
+  "profileBillOptionThreeMonths": "3 months",
+  "@profileBillOptionThreeMonths": {},
+  "profileBillOptionSixMonths": "6 months",
+  "@profileBillOptionSixMonths": {},
+  "profileBillOptionYear": "1 year",
+  "@profileBillOptionYear": {},
+  "profileBillPerMonth": "{amount} ₽/mo",
+  "@profileBillPerMonth": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "example": "500"
+      }
+    }
+  },
+  "profileBillDiscountBadge": "-{percent}%",
+  "@profileBillDiscountBadge": {
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "profileSubscriptionPayButton": "Subscribe",
+  "@profileSubscriptionPayButton": {},
+  "profileSubscriptionRenewButton": "Renew subscription",
+  "@profileSubscriptionRenewButton": {}
 }

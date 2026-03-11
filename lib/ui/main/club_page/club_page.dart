@@ -17,7 +17,8 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.d
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
-import 'package:seating_generator_web/ui/main/club_page/widgets/club_bill_dialog.dart';
+import 'package:intl/intl.dart';
+import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_owners_bottom_sheet.dart';
@@ -188,18 +189,25 @@ class _ClubPageState extends CustomState<ClubPage> {
 
   void _bill() async {
     final bloc = context.read<ClubBloc>();
-    final option = await ClubBillDialog.open(
+    final locale = context.locale;
+    final billedFor = bloc.state.model?.billedFor;
+
+    String? subtitle;
+    if (billedFor != null) {
+      final localeCode = Localizations.localeOf(context).languageCode;
+      final formatted = DateFormat('dd MMMM yyyy', localeCode).format(billedFor);
+      subtitle = locale.billedFor(formatted);
+    }
+
+    final days = await BillPlanDialog.open(
       context: context,
-      billedFor: bloc.state.model?.billedFor,
+      title: locale.profileBillDialogTitle,
+      subtitle: subtitle ?? locale.profileBillDialogSubtitle,
     );
 
     if (!context.mounted) return;
-    if (option != null) {
-      bloc.add(
-        ClubEvent.billClub(
-          days: option.days,
-        ),
-      );
+    if (days != null) {
+      bloc.add(ClubEvent.billClub(days: days));
     }
   }
 

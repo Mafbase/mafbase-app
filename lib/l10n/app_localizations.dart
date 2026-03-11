@@ -554,24 +554,6 @@ abstract class AppLocalizations {
   /// **'Открыть рейтинг клуба'**
   String get openRating;
 
-  /// No description provided for @billClubButtonText.
-  ///
-  /// In ru, this message translates to:
-  /// **'Оплатить {amount}₽'**
-  String billClubButtonText(int amount);
-
-  /// No description provided for @billClubButtonDisabledText.
-  ///
-  /// In ru, this message translates to:
-  /// **'Оплатить'**
-  String get billClubButtonDisabledText;
-
-  /// No description provided for @billClubDialogOption.
-  ///
-  /// In ru, this message translates to:
-  /// **'{days} дней'**
-  String billClubDialogOption(int days);
-
   /// No description provided for @clubDescription.
   ///
   /// In ru, this message translates to:
@@ -1969,6 +1951,138 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'ДОПОЛНИТЕЛЬНО'**
   String get sidebarAdditional;
+
+  /// No description provided for @profilePlayerCardTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игрок'**
+  String get profilePlayerCardTitle;
+
+  /// No description provided for @profilePlayerNotLinked.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игрок не привязан'**
+  String get profilePlayerNotLinked;
+
+  /// No description provided for @profilePlayerLinkButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Привязать'**
+  String get profilePlayerLinkButton;
+
+  /// No description provided for @profilePlayerChangeButtonMobile.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить игрока'**
+  String get profilePlayerChangeButtonMobile;
+
+  /// No description provided for @profilePlayerChangeButtonDesktop.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить'**
+  String get profilePlayerChangeButtonDesktop;
+
+  /// No description provided for @profileSubscriptionStatusLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Статус'**
+  String get profileSubscriptionStatusLabel;
+
+  /// No description provided for @profileSubscriptionTariffLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тариф'**
+  String get profileSubscriptionTariffLabel;
+
+  /// No description provided for @profileSubscriptionBilledForLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплачено до'**
+  String get profileSubscriptionBilledForLabel;
+
+  /// No description provided for @profileSubscriptionExpiredLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Истекла'**
+  String get profileSubscriptionExpiredLabel;
+
+  /// No description provided for @profileSubscriptionErrorMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось загрузить данные подписки'**
+  String get profileSubscriptionErrorMessage;
+
+  /// No description provided for @profileSubscriptionRetryButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Повторить'**
+  String get profileSubscriptionRetryButton;
+
+  /// No description provided for @profileBillDialogTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите период'**
+  String get profileBillDialogTitle;
+
+  /// No description provided for @profileBillDialogSubtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подписка даёт доступ к расширенным функциям'**
+  String get profileBillDialogSubtitle;
+
+  /// No description provided for @profileBillDialogPayButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплатить {amount} ₽'**
+  String profileBillDialogPayButton(int amount);
+
+  /// No description provided for @profileBillOptionOneMonth.
+  ///
+  /// In ru, this message translates to:
+  /// **'1 месяц'**
+  String get profileBillOptionOneMonth;
+
+  /// No description provided for @profileBillOptionThreeMonths.
+  ///
+  /// In ru, this message translates to:
+  /// **'3 месяца'**
+  String get profileBillOptionThreeMonths;
+
+  /// No description provided for @profileBillOptionSixMonths.
+  ///
+  /// In ru, this message translates to:
+  /// **'6 месяцев'**
+  String get profileBillOptionSixMonths;
+
+  /// No description provided for @profileBillOptionYear.
+  ///
+  /// In ru, this message translates to:
+  /// **'1 год'**
+  String get profileBillOptionYear;
+
+  /// No description provided for @profileBillPerMonth.
+  ///
+  /// In ru, this message translates to:
+  /// **'{amount} ₽/мес'**
+  String profileBillPerMonth(int amount);
+
+  /// No description provided for @profileBillDiscountBadge.
+  ///
+  /// In ru, this message translates to:
+  /// **'-{percent}%'**
+  String profileBillDiscountBadge(int percent);
+
+  /// No description provided for @profileSubscriptionPayButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплатить подписку'**
+  String get profileSubscriptionPayButton;
+
+  /// No description provided for @profileSubscriptionRenewButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продлить подписку'**
+  String get profileSubscriptionRenewButton;
 }
 
 class _AppLocalizationsDelegate

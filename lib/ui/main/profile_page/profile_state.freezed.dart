@@ -20,6 +20,11 @@ mixin _$ProfileState {
   bool get isLogoutLoading => throw _privateConstructorUsedError;
   String? get login => throw _privateConstructorUsedError;
   PlayerModel? get playerProfile => throw _privateConstructorUsedError;
+  bool get isLoadingSubscription => throw _privateConstructorUsedError;
+  TournamentSubscriptionPlanModel? get subscriptionPlan =>
+      throw _privateConstructorUsedError;
+  String? get subscriptionError => throw _privateConstructorUsedError;
+  bool get isBilling => throw _privateConstructorUsedError;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -38,7 +43,11 @@ abstract class $ProfileStateCopyWith<$Res> {
       {bool isLoading,
       bool isLogoutLoading,
       String? login,
-      PlayerModel? playerProfile});
+      PlayerModel? playerProfile,
+      bool isLoadingSubscription,
+      TournamentSubscriptionPlanModel? subscriptionPlan,
+      String? subscriptionError,
+      bool isBilling});
 
   $PlayerModelCopyWith<$Res>? get playerProfile;
 }
@@ -62,6 +71,10 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
     Object? isLogoutLoading = null,
     Object? login = freezed,
     Object? playerProfile = freezed,
+    Object? isLoadingSubscription = null,
+    Object? subscriptionPlan = freezed,
+    Object? subscriptionError = freezed,
+    Object? isBilling = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -80,6 +93,22 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.playerProfile
           : playerProfile // ignore: cast_nullable_to_non_nullable
               as PlayerModel?,
+      isLoadingSubscription: null == isLoadingSubscription
+          ? _value.isLoadingSubscription
+          : isLoadingSubscription // ignore: cast_nullable_to_non_nullable
+              as bool,
+      subscriptionPlan: freezed == subscriptionPlan
+          ? _value.subscriptionPlan
+          : subscriptionPlan // ignore: cast_nullable_to_non_nullable
+              as TournamentSubscriptionPlanModel?,
+      subscriptionError: freezed == subscriptionError
+          ? _value.subscriptionError
+          : subscriptionError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isBilling: null == isBilling
+          ? _value.isBilling
+          : isBilling // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -110,7 +139,11 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
       {bool isLoading,
       bool isLogoutLoading,
       String? login,
-      PlayerModel? playerProfile});
+      PlayerModel? playerProfile,
+      bool isLoadingSubscription,
+      TournamentSubscriptionPlanModel? subscriptionPlan,
+      String? subscriptionError,
+      bool isBilling});
 
   @override
   $PlayerModelCopyWith<$Res>? get playerProfile;
@@ -133,6 +166,10 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
     Object? isLogoutLoading = null,
     Object? login = freezed,
     Object? playerProfile = freezed,
+    Object? isLoadingSubscription = null,
+    Object? subscriptionPlan = freezed,
+    Object? subscriptionError = freezed,
+    Object? isBilling = null,
   }) {
     return _then(_$ProfileStateImpl(
       isLoading: null == isLoading
@@ -151,6 +188,22 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
           ? _value.playerProfile
           : playerProfile // ignore: cast_nullable_to_non_nullable
               as PlayerModel?,
+      isLoadingSubscription: null == isLoadingSubscription
+          ? _value.isLoadingSubscription
+          : isLoadingSubscription // ignore: cast_nullable_to_non_nullable
+              as bool,
+      subscriptionPlan: freezed == subscriptionPlan
+          ? _value.subscriptionPlan
+          : subscriptionPlan // ignore: cast_nullable_to_non_nullable
+              as TournamentSubscriptionPlanModel?,
+      subscriptionError: freezed == subscriptionError
+          ? _value.subscriptionError
+          : subscriptionError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isBilling: null == isBilling
+          ? _value.isBilling
+          : isBilling // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -162,7 +215,11 @@ class _$ProfileStateImpl implements _ProfileState {
       {this.isLoading = false,
       this.isLogoutLoading = false,
       this.login,
-      this.playerProfile});
+      this.playerProfile,
+      this.isLoadingSubscription = true,
+      this.subscriptionPlan,
+      this.subscriptionError,
+      this.isBilling = false});
 
   @override
   @JsonKey()
@@ -174,10 +231,20 @@ class _$ProfileStateImpl implements _ProfileState {
   final String? login;
   @override
   final PlayerModel? playerProfile;
+  @override
+  @JsonKey()
+  final bool isLoadingSubscription;
+  @override
+  final TournamentSubscriptionPlanModel? subscriptionPlan;
+  @override
+  final String? subscriptionError;
+  @override
+  @JsonKey()
+  final bool isBilling;
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, isLogoutLoading: $isLogoutLoading, login: $login, playerProfile: $playerProfile)';
+    return 'ProfileState(isLoading: $isLoading, isLogoutLoading: $isLogoutLoading, login: $login, playerProfile: $playerProfile, isLoadingSubscription: $isLoadingSubscription, subscriptionPlan: $subscriptionPlan, subscriptionError: $subscriptionError, isBilling: $isBilling)';
   }
 
   @override
@@ -191,12 +258,28 @@ class _$ProfileStateImpl implements _ProfileState {
                 other.isLogoutLoading == isLogoutLoading) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.playerProfile, playerProfile) ||
-                other.playerProfile == playerProfile));
+                other.playerProfile == playerProfile) &&
+            (identical(other.isLoadingSubscription, isLoadingSubscription) ||
+                other.isLoadingSubscription == isLoadingSubscription) &&
+            (identical(other.subscriptionPlan, subscriptionPlan) ||
+                other.subscriptionPlan == subscriptionPlan) &&
+            (identical(other.subscriptionError, subscriptionError) ||
+                other.subscriptionError == subscriptionError) &&
+            (identical(other.isBilling, isBilling) ||
+                other.isBilling == isBilling));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLoading, isLogoutLoading, login, playerProfile);
+      runtimeType,
+      isLoading,
+      isLogoutLoading,
+      login,
+      playerProfile,
+      isLoadingSubscription,
+      subscriptionPlan,
+      subscriptionError,
+      isBilling);
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -212,7 +295,11 @@ abstract class _ProfileState implements ProfileState {
       {final bool isLoading,
       final bool isLogoutLoading,
       final String? login,
-      final PlayerModel? playerProfile}) = _$ProfileStateImpl;
+      final PlayerModel? playerProfile,
+      final bool isLoadingSubscription,
+      final TournamentSubscriptionPlanModel? subscriptionPlan,
+      final String? subscriptionError,
+      final bool isBilling}) = _$ProfileStateImpl;
 
   @override
   bool get isLoading;
@@ -222,6 +309,14 @@ abstract class _ProfileState implements ProfileState {
   String? get login;
   @override
   PlayerModel? get playerProfile;
+  @override
+  bool get isLoadingSubscription;
+  @override
+  TournamentSubscriptionPlanModel? get subscriptionPlan;
+  @override
+  String? get subscriptionError;
+  @override
+  bool get isBilling;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.

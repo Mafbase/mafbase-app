@@ -162,26 +162,6 @@
   "@description": {},
   "openRating": "Открыть рейтинг клуба",
   "@openRating": {},
-  "billClubButtonText": "Оплатить {amount}₽",
-  "@billClubButtonText": {
-    "placeholders": {
-      "amount": {
-        "type": "int",
-        "example": "100"
-      }
-    }
-  },
-  "billClubButtonDisabledText": "Оплатить",
-  "@billClubButtonDisabledText": {},
-  "billClubDialogOption": "{days} дней",
-  "@billClubDialogOption": {
-    "placeholders": {
-      "days": {
-        "type": "int",
-        "example": "30"
-      }
-    }
-  },
   "clubDescription": "Описание клуба",
   "@clubDescription": {},
   "clubEditOwners": "Редактировать администраторов",
@@ -761,5 +741,71 @@
   "sidebarNavigation": "НАВИГАЦИЯ",
   "@sidebarNavigation": {},
   "sidebarAdditional": "ДОПОЛНИТЕЛЬНО",
-  "@sidebarAdditional": {}
+  "@sidebarAdditional": {},
+
+  "profilePlayerCardTitle": "Игрок",
+  "@profilePlayerCardTitle": {},
+  "profilePlayerNotLinked": "Игрок не привязан",
+  "@profilePlayerNotLinked": {},
+  "profilePlayerLinkButton": "Привязать",
+  "@profilePlayerLinkButton": {},
+  "profilePlayerChangeButtonMobile": "Изменить игрока",
+  "@profilePlayerChangeButtonMobile": {},
+  "profilePlayerChangeButtonDesktop": "Изменить",
+  "@profilePlayerChangeButtonDesktop": {},
+  "profileSubscriptionStatusLabel": "Статус",
+  "@profileSubscriptionStatusLabel": {},
+  "profileSubscriptionTariffLabel": "Тариф",
+  "@profileSubscriptionTariffLabel": {},
+  "profileSubscriptionBilledForLabel": "Оплачено до",
+  "@profileSubscriptionBilledForLabel": {},
+  "profileSubscriptionExpiredLabel": "Истекла",
+  "@profileSubscriptionExpiredLabel": {},
+  "profileSubscriptionErrorMessage": "Не удалось загрузить данные подписки",
+  "@profileSubscriptionErrorMessage": {},
+  "profileSubscriptionRetryButton": "Повторить",
+  "@profileSubscriptionRetryButton": {},
+  "profileBillDialogTitle": "Выберите период",
+  "@profileBillDialogTitle": {},
+  "profileBillDialogSubtitle": "Подписка даёт доступ к расширенным функциям",
+  "@profileBillDialogSubtitle": {},
+  "profileBillDialogPayButton": "Оплатить {amount}\u00A0₽",
+  "@profileBillDialogPayButton": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "example": "500"
+      }
+    }
+  },
+  "profileBillOptionOneMonth": "1 месяц",
+  "@profileBillOptionOneMonth": {},
+  "profileBillOptionThreeMonths": "3 месяца",
+  "@profileBillOptionThreeMonths": {},
+  "profileBillOptionSixMonths": "6 месяцев",
+  "@profileBillOptionSixMonths": {},
+  "profileBillOptionYear": "1 год",
+  "@profileBillOptionYear": {},
+  "profileBillPerMonth": "{amount} ₽/мес",
+  "@profileBillPerMonth": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "example": "500"
+      }
+    }
+  },
+  "profileBillDiscountBadge": "-{percent}%",
+  "@profileBillDiscountBadge": {
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "profileSubscriptionPayButton": "Оплатить подписку",
+  "@profileSubscriptionPayButton": {},
+  "profileSubscriptionRenewButton": "Продлить подписку",
+  "@profileSubscriptionRenewButton": {}
 }

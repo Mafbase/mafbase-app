@@ -34,6 +34,8 @@ abstract class MyTheme {
   abstract final Color sidebarSectionTitleColor;
   abstract final Color sidebarInactiveTextColor;
   abstract final Color sidebarActiveItemBgColor;
+  abstract final Color cardShadowColor;
+  abstract final Color successColor;
 
   MyTheme();
 
@@ -164,4 +166,10 @@ class _LightTheme implements MyTheme {
 
   @override
   Color get sidebarActiveItemBgColor => Colors.white.withValues(alpha: 0.12);
+
+  @override
+  Color get cardShadowColor => const Color(0x141A2D42);
+
+  @override
+  Color get successColor => const Color(0xFF4CAF50);
 }

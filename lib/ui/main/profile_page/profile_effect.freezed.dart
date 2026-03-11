@@ -19,32 +19,38 @@ mixin _$ProfileEffect {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() navigateBack,
+    required TResult Function(String url) openBillingUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? navigateBack,
+    TResult? Function(String url)? openBillingUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? navigateBack,
+    TResult Function(String url)? openBillingUrl,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProfileEffectNavigateBack value) navigateBack,
+    required TResult Function(ProfileEffectOpenBillingUrl value) openBillingUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProfileEffectNavigateBack value)? navigateBack,
+    TResult? Function(ProfileEffectOpenBillingUrl value)? openBillingUrl,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProfileEffectNavigateBack value)? navigateBack,
+    TResult Function(ProfileEffectOpenBillingUrl value)? openBillingUrl,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,6 +122,7 @@ class _$ProfileEffectNavigateBackImpl implements ProfileEffectNavigateBack {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() navigateBack,
+    required TResult Function(String url) openBillingUrl,
   }) {
     return navigateBack();
   }
@@ -124,6 +131,7 @@ class _$ProfileEffectNavigateBackImpl implements ProfileEffectNavigateBack {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? navigateBack,
+    TResult? Function(String url)? openBillingUrl,
   }) {
     return navigateBack?.call();
   }
@@ -132,6 +140,7 @@ class _$ProfileEffectNavigateBackImpl implements ProfileEffectNavigateBack {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? navigateBack,
+    TResult Function(String url)? openBillingUrl,
     required TResult orElse(),
   }) {
     if (navigateBack != null) {
@@ -144,6 +153,7 @@ class _$ProfileEffectNavigateBackImpl implements ProfileEffectNavigateBack {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProfileEffectNavigateBack value) navigateBack,
+    required TResult Function(ProfileEffectOpenBillingUrl value) openBillingUrl,
   }) {
     return navigateBack(this);
   }
@@ -152,6 +162,7 @@ class _$ProfileEffectNavigateBackImpl implements ProfileEffectNavigateBack {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProfileEffectNavigateBack value)? navigateBack,
+    TResult? Function(ProfileEffectOpenBillingUrl value)? openBillingUrl,
   }) {
     return navigateBack?.call(this);
   }
@@ -160,6 +171,7 @@ class _$ProfileEffectNavigateBackImpl implements ProfileEffectNavigateBack {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProfileEffectNavigateBack value)? navigateBack,
+    TResult Function(ProfileEffectOpenBillingUrl value)? openBillingUrl,
     required TResult orElse(),
   }) {
     if (navigateBack != null) {
@@ -171,4 +183,148 @@ class _$ProfileEffectNavigateBackImpl implements ProfileEffectNavigateBack {
 
 abstract class ProfileEffectNavigateBack implements ProfileEffect {
   const factory ProfileEffectNavigateBack() = _$ProfileEffectNavigateBackImpl;
+}
+
+/// @nodoc
+abstract class _$$ProfileEffectOpenBillingUrlImplCopyWith<$Res> {
+  factory _$$ProfileEffectOpenBillingUrlImplCopyWith(
+          _$ProfileEffectOpenBillingUrlImpl value,
+          $Res Function(_$ProfileEffectOpenBillingUrlImpl) then) =
+      __$$ProfileEffectOpenBillingUrlImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String url});
+}
+
+/// @nodoc
+class __$$ProfileEffectOpenBillingUrlImplCopyWithImpl<$Res>
+    extends _$ProfileEffectCopyWithImpl<$Res, _$ProfileEffectOpenBillingUrlImpl>
+    implements _$$ProfileEffectOpenBillingUrlImplCopyWith<$Res> {
+  __$$ProfileEffectOpenBillingUrlImplCopyWithImpl(
+      _$ProfileEffectOpenBillingUrlImpl _value,
+      $Res Function(_$ProfileEffectOpenBillingUrlImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileEffect
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? url = null,
+  }) {
+    return _then(_$ProfileEffectOpenBillingUrlImpl(
+      null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ProfileEffectOpenBillingUrlImpl implements ProfileEffectOpenBillingUrl {
+  const _$ProfileEffectOpenBillingUrlImpl(this.url);
+
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'ProfileEffect.openBillingUrl(url: $url)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileEffectOpenBillingUrlImpl &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, url);
+
+  /// Create a copy of ProfileEffect
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProfileEffectOpenBillingUrlImplCopyWith<_$ProfileEffectOpenBillingUrlImpl>
+      get copyWith => __$$ProfileEffectOpenBillingUrlImplCopyWithImpl<
+          _$ProfileEffectOpenBillingUrlImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() navigateBack,
+    required TResult Function(String url) openBillingUrl,
+  }) {
+    return openBillingUrl(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? navigateBack,
+    TResult? Function(String url)? openBillingUrl,
+  }) {
+    return openBillingUrl?.call(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? navigateBack,
+    TResult Function(String url)? openBillingUrl,
+    required TResult orElse(),
+  }) {
+    if (openBillingUrl != null) {
+      return openBillingUrl(url);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProfileEffectNavigateBack value) navigateBack,
+    required TResult Function(ProfileEffectOpenBillingUrl value) openBillingUrl,
+  }) {
+    return openBillingUrl(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProfileEffectNavigateBack value)? navigateBack,
+    TResult? Function(ProfileEffectOpenBillingUrl value)? openBillingUrl,
+  }) {
+    return openBillingUrl?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProfileEffectNavigateBack value)? navigateBack,
+    TResult Function(ProfileEffectOpenBillingUrl value)? openBillingUrl,
+    required TResult orElse(),
+  }) {
+    if (openBillingUrl != null) {
+      return openBillingUrl(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProfileEffectOpenBillingUrl implements ProfileEffect {
+  const factory ProfileEffectOpenBillingUrl(final String url) =
+      _$ProfileEffectOpenBillingUrlImpl;
+
+  String get url;
+
+  /// Create a copy of ProfileEffect
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProfileEffectOpenBillingUrlImplCopyWith<_$ProfileEffectOpenBillingUrlImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
