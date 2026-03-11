@@ -20,7 +20,7 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
   @override
   void initState() {
     super.initState();
-    _notificationPermissionService = DependencyScope.of(context).notificationPermissionService;
+    _notificationPermissionService = DependencyScope.of(context).serviceProvider.notificationPermissionService;
   }
 
   @override

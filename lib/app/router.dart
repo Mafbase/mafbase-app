@@ -44,7 +44,7 @@ class AppRouter {
         if (authNotifier.value is AuthNotifierLoadingModel) {
           try {
             final authRepository = scope.repositoryFactory.authRepository;
-            final pushTokenService = scope.pushTokenService;
+            final pushTokenService = scope.serviceProvider.pushTokenService;
 
             // Получаем FCM токен и deviceId если разрешение уже выдано
             final fcmToken = await pushTokenService.getFcmToken();
