@@ -1,25 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_rating_interactor.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
-import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 
 class RatingBloc extends Bloc<RatingEvent, RatingState> {
-  final BuildContext? _context;
-  final DownloadRatingInteractor _downloadRatingInteractor = getIt();
-  final GetRatingInteractor _getRatingRepository = getIt();
-  final GetTournamentRatingInteractor _getTournamentRatingInteractor = getIt();
-  final ClubRepository _clubRepository = getIt();
-  late final RatingRouter _router = getIt(param1: _context);
+  final RepositoryFactory _repos;
+  final RatingRouter _router;
+  late final DownloadRatingInteractor _downloadRatingInteractor =
+      DownloadRatingInteractor(_repos.clubRepository);
+  late final GetRatingInteractor _getRatingRepository =
+      GetRatingInteractor(_repos.clubRepository);
+  late final GetTournamentRatingInteractor _getTournamentRatingInteractor =
+      GetTournamentRatingInteractor(_repos.tournamentResultRepository);
 
-  RatingBloc([BuildContext? context])
-      : _context = context,
+  RatingBloc({
+    required RepositoryFactory repos,
+    required RatingRouter router,
+  })  : _repos = repos,
+        _router = router,
         super(const RatingState()) {
     on<RatingEventPageOpened>(_onPageOpened);
     on<RatingEventRangeChanged>(_onRangeChanged);
@@ -28,7 +31,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
     on<RatingEventDownloadStats>(_onStatsDownload);
   }
 
-  _onStatsDownload(RatingEventDownloadStats event, Emitter emit) => _clubRepository.downloadStats(
+  _onStatsDownload(RatingEventDownloadStats event, Emitter emit) => _repos.clubRepository.downloadStats(
       clubId: event.clubId,
       range: event.range,
     );

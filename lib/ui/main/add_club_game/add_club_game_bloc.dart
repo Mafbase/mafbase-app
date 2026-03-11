@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/storages/prefer_add_game_settings_storage.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
@@ -26,28 +26,41 @@ import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player
 
 class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     with EffectEmitter<AddClubGameEffect, AddClubGameState> {
-  final GetAllPlayersInteractor _getAllPlayersInteractor = getIt();
-  final AddClubGameInteractor _addClubGameInteractor = getIt();
-  final ClubRepository _repository = getIt();
+  final RepositoryFactory _repos;
+  late final GetAllPlayersInteractor _getAllPlayersInteractor =
+      GetAllPlayersInteractor(_repos.playersRepository);
+  late final AddClubGameInteractor _addClubGameInteractor =
+      AddClubGameInteractor(_repos.clubRepository);
+  late final ClubRepository _repository = _repos.clubRepository;
   final int? clubId;
   final int? tournamentId;
   final BuildContext? _context;
-  late final AddClubGameRouter router = getIt(param1: _context);
-  final CreatePlayerInteractor _createPlayerInteractor = getIt();
-  final GetCiSchemesInteractor _getCiSchemesInteractor = getIt();
-  final GetClubInteractor _getClubInteractor = getIt();
-  final EditTournamentGameInteractor _editTournamentGameInteractor = getIt();
-  final GetTournamentGameInteractor _getTournamentGameInteractor = getIt();
-  final GetTournamentInteractor _getTournamentInteractor = getIt();
-  final TournamentsRepository _tournamentsRepository = getIt();
+  final AddClubGameRouter router;
+  late final CreatePlayerInteractor _createPlayerInteractor =
+      CreatePlayerInteractor(_repos.playersRepository);
+  late final GetCiSchemesInteractor _getCiSchemesInteractor =
+      GetCiSchemesInteractor(_repos.tournamentEditRepository);
+  late final GetClubInteractor _getClubInteractor =
+      GetClubInteractor(_repos.clubRepository);
+  late final EditTournamentGameInteractor _editTournamentGameInteractor =
+      EditTournamentGameInteractor(_repos.tournamentResultRepository);
+  late final GetTournamentGameInteractor _getTournamentGameInteractor =
+      GetTournamentGameInteractor(_repos.tournamentResultRepository);
+  late final GetTournamentInteractor _getTournamentInteractor =
+      GetTournamentInteractor(_repos.tournamentsRepository);
+  late final TournamentsRepository _tournamentsRepository =
+      _repos.tournamentsRepository;
   final PreferAddGameSettingsStorage _settingsStorage =
       PreferAddGameSettingsStorageImpl();
 
   AddClubGameBloc({
     this.clubId,
     this.tournamentId,
+    required RepositoryFactory repos,
+    required this.router,
     BuildContext? context,
   })  : assert((clubId == null) != (tournamentId == null)),
+        _repos = repos,
         _context = context,
         super(AddClubGameState(isTournament: tournamentId != null)) {
     on<AddClubGameEventPageOpened>(_onPageOpened);

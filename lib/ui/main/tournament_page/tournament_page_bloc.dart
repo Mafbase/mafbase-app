@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/bill_tournament_interactor.dart';
@@ -15,7 +15,6 @@ import 'package:seating_generator_web/domain/interactors/set_final_players_inter
 import 'package:seating_generator_web/domain/interactors/start_game_info_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/tournament_check_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
 import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
@@ -26,34 +25,48 @@ import 'package:url_launcher/url_launcher.dart';
 class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     with EffectEmitter<TournamentPageEffect, TournamentPageState> {
   final int tournamentId;
+  final RepositoryFactory _repos;
   final BuildContext? _context;
-  final GetAllPlayersInteractor _getAllPlayersInteractor = getIt();
-  final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor = getIt();
-  final PlayersRepository playerRepository = getIt();
 
-  final AddTournamentPlayerInteractor _addPlayerInteractor = getIt();
-  final DeletePlayerInteractor _deletePlayerInteractor = getIt();
-  final GetSettingsInteractor _getSettingsInteractor = getIt();
-  final UpdateSettingsInteractor _updateSettingsInteractor = getIt();
-  final TournamentCheckInteractor _tournamentCheckInteractor = getIt();
-
-  final GetTournamentInteractor _getTournamentInteractor = getIt();
-  final GetFinalPlayersInteractor _getFinalPlayersInteractor = getIt();
-  final SetFinalPlayersInteractor _setFinalPlayersInteractor = getIt();
-
-  final CustomTextInfoInteractor _customTextInfoInteractor = getIt();
-  final StartGameInfoInteractor _startGameInfoInteractor = getIt();
-  final PhotoThemeRepository _photoThemeRepository = getIt();
-
-  late final BillTournamentInteractor _billTournamentInteractor = getIt(
-    param1: _context,
-  );
+  late final GetAllPlayersInteractor _getAllPlayersInteractor =
+      GetAllPlayersInteractor(_repos.playersRepository);
+  late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
+      GetTournamentsPlayersInteractor(_repos.playersRepository);
+  late final AddTournamentPlayerInteractor _addPlayerInteractor =
+      AddTournamentPlayerInteractor(_repos.playersRepository);
+  late final DeletePlayerInteractor _deletePlayerInteractor =
+      DeletePlayerInteractor(_repos.playersRepository);
+  late final GetSettingsInteractor _getSettingsInteractor =
+      GetSettingsInteractor(_repos.tournamentEditRepository);
+  late final UpdateSettingsInteractor _updateSettingsInteractor =
+      UpdateSettingsInteractor(_repos.tournamentEditRepository);
+  late final TournamentCheckInteractor _tournamentCheckInteractor =
+      TournamentCheckInteractor(_repos.tournamentsRepository);
+  late final GetTournamentInteractor _getTournamentInteractor =
+      GetTournamentInteractor(_repos.tournamentsRepository);
+  late final GetFinalPlayersInteractor _getFinalPlayersInteractor =
+      GetFinalPlayersInteractor(_repos.tournamentEditRepository);
+  late final SetFinalPlayersInteractor _setFinalPlayersInteractor =
+      SetFinalPlayersInteractor(_repos.tournamentEditRepository);
+  late final CustomTextInfoInteractor _customTextInfoInteractor =
+      CustomTextInfoInteractor(_repos.infoRepository);
+  late final StartGameInfoInteractor _startGameInfoInteractor =
+      StartGameInfoInteractor(_repos.infoRepository);
+  late final PhotoThemeRepository _photoThemeRepository =
+      _repos.photoThemeRepository;
+  late final BillTournamentInteractor _billTournamentInteractor =
+      BillTournamentInteractor(_repos.purchaseRepository, _context!);
 
   @visibleForTesting
-  late final TournamentPageRouter router = getIt<TournamentPageRouter>(param1: _context);
+  final TournamentPageRouter router;
 
-  TournamentPageBloc({BuildContext? context, required this.tournamentId})
-      : _context = context,
+  TournamentPageBloc({
+    required RepositoryFactory repos,
+    required this.router,
+    required this.tournamentId,
+    BuildContext? context,
+  })  : _repos = repos,
+        _context = context,
         super(const TournamentPageState()) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);

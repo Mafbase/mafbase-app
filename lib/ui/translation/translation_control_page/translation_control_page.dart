@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/common/widgets/role_picker.dart';
 import 'package:seating_generator_web/common/widgets/status_picker.dart';
@@ -23,13 +23,13 @@ class TranslationControlPage extends StatefulWidget {
       final key = state.uri.queryParameters["key"] ?? "";
 
       return BlocProvider<TranslationControlBloc>(
-        create: (context) => getIt(
-          param1: context,
-          param2: TranslationContentBlocParams(
+        create: (context) => TranslationControlBloc(
+          params: TranslationContentBlocParams(
             tournamentId: tournamentId,
             table: table,
             key: key,
           ),
+          repository: RepositoryFactory.of(context).translationRepository,
         )..add(const TranslationControlEvent.pageOpened()),
         child: const TranslationControlPage(),
       );

@@ -6,7 +6,6 @@ import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/app/di/storage_factory.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
@@ -49,7 +48,7 @@ class ProfilePage extends StatefulWidget {
               RepositoryFactory.of(context).profileRepository,
             ),
             RepositoryFactory.of(context).profileRepository,
-            getIt<CreatePlayerInteractor>(),
+            CreatePlayerInteractor(RepositoryFactory.of(context).playersRepository),
             context,
           )..add(const ProfileEvent.loadUserProfile());
         },
@@ -225,7 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _selectPlayerProfile(BuildContext context) async {
     final bloc = context.read<ProfileBloc>();
-    final getAllPlayersInteractor = getIt<GetAllPlayersInteractor>();
+    final getAllPlayersInteractor = GetAllPlayersInteractor(RepositoryFactory.of(context).playersRepository);
     final availablePlayers = await getAllPlayersInteractor.run();
 
     if (!context.mounted) return;

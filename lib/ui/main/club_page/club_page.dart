@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/domain/interactors/bill_club_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/check_club_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
@@ -44,11 +48,19 @@ class ClubPage extends StatefulWidget {
     path: ':clubId',
     builder: (context, state) => BlocProvider<ClubBloc>(
       create: (context) {
+        final repos = RepositoryFactory.of(context);
         final args = ClubBlocArgs(
           clubId: int.parse(state.pathParameters["clubId"]!),
           cachedModel: state.extra as ClubModel?,
         );
-        return getIt(param1: context, param2: args);
+        return ClubBloc(
+          router: ClubRouterImpl(context),
+          args: args,
+          getClubInteractor: GetClubInteractor(repos.clubRepository),
+          billClubInteractor: BillClubInteractor(repos.purchaseRepository),
+          checkClubInteractor: CheckClubInteractor(repos.clubRepository),
+          clubRepository: repos.clubRepository,
+        );
       },
       child: Container(
         color: context.theme.background1,

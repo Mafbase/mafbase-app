@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_my_tournaments_interactor.dart';
@@ -16,10 +15,9 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
 
   TournamentsBloc(
     this._getTournamentsInteractor,
-    this._createTournamentInteractor, [
-    BuildContext? context,
-  ])  : router = getIt(param1: context),
-        super(
+    this._createTournamentInteractor,
+    this.router,
+  ) : super(
           const TournamentsState(tournaments: [], isLoading: true),
         ) {
     on<TournamentOpenedEvent>(_onOpened);

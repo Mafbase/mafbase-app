@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -34,7 +33,7 @@ class ForgotPasswordPageBody extends StatefulWidget {
       child: BlocProvider<ForgotPasswordBloc>(
         key: const Key('ForgotPasswordBlocProvider'),
         create: (context) => ForgotPasswordBloc(
-          getIt.get<AuthRepository>(),
+          RepositoryFactory.of(context).authRepository,
           ForgotPasswordPageRouterImpl(context),
         ),
         child: const ForgotPasswordPageBody(),

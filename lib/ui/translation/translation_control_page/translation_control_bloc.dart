@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/data/sockets/tournament_content_socket.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -12,12 +11,15 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 class TranslationControlBloc
     extends Bloc<TranslationControlEvent, TranslationContentState> {
   TournamentContentSocket? _socket;
-  final TranslationRepository _repository = getIt();
+  final TranslationRepository _repository;
   final TranslationContentBlocParams params;
   final List<StreamSubscription> toDispose = [];
 
-  TranslationControlBloc(this.params)
-      : super(
+  TranslationControlBloc({
+    required this.params,
+    required TranslationRepository repository,
+  })  : _repository = repository,
+        super(
           const TranslationContentState(),
         ) {
     on<TranslationControlEventStateReceived>(_onStateReceived);

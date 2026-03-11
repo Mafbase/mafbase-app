@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/domain/services/notification_permission_service.dart';
@@ -20,7 +20,7 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
   @override
   void initState() {
     super.initState();
-    _notificationPermissionService = getIt<NotificationPermissionService>();
+    _notificationPermissionService = DependencyScope.of(context).notificationPermissionService;
   }
 
   @override

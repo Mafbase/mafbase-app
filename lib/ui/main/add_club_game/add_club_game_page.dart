@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -16,6 +17,7 @@ import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_bloc.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
@@ -67,6 +69,8 @@ class AddClubGamePage extends StatefulWidget {
         create: (context) => AddClubGameBloc(
           context: context,
           tournamentId: tournamentId,
+          repos: RepositoryFactory.of(context),
+          router: AddClubGameRouterImpl(context),
         ),
         child: AddClubGamePage(
           key: ValueKey(gameId),
@@ -88,8 +92,9 @@ class AddClubGamePage extends StatefulWidget {
           create: (context) => AddClubGameBloc(
             clubId: clubId,
             context: context,
+            repos: RepositoryFactory.of(context),
+            router: AddClubGameRouterImpl(context),
           ),
-          // TODO: REGISTER IN GET IT
           child: AddClubGamePage(
             key: const ValueKey(null),
             initDateTime: initDateTime,
@@ -108,6 +113,8 @@ class AddClubGamePage extends StatefulWidget {
           create: (context) => AddClubGameBloc(
             clubId: clubId,
             context: context,
+            repos: RepositoryFactory.of(context),
+            router: AddClubGameRouterImpl(context),
           ),
           child: AddClubGamePage(
             key: ValueKey(gameId),

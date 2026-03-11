@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -36,11 +37,15 @@ class SignUpPageBody extends StatefulWidget {
     pageBuilder: (context, state) => FadeTransitionPage(
       child: BlocProvider<SignUpBloc>(
         key: const Key('SignUpBlocProvider'),
-        create: (context) => SignUpBloc(
-          getIt.get<SignUpInteractor>(),
-          getIt.get<LoginInteractor>(),
-          SignUpPageRouterImpl(context),
-        ),
+        create: (context) {
+          final scope = DependencyScope.of(context);
+          final repos = scope.repositoryFactory;
+          return SignUpBloc(
+            SignUpInteractor(repos.authRepository),
+            LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
+            SignUpPageRouterImpl(context),
+          );
+        },
         child: const SignUpPageBody(),
       ),
     ),
