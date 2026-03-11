@@ -18,7 +18,6 @@ import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -201,31 +200,32 @@ class _MafbaseAppState extends State<MafbaseApp> {
                               );
                             }
 
-                          return context.theme.btnTextStyle;
-                        },
+                            return context.theme.btnTextStyle;
+                          },
+                        ),
                       ),
                     ),
                   ),
-                ),
-                routerDelegate: context.read<AppRouter>().router.routerDelegate,
-                routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
-                routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: AppLocalizations.supportedLocales,
-                builder: (context, child) => MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: TextScaler.noScaling,
-                    boldText: false,
+                  routerDelegate: context.read<AppRouter>().router.routerDelegate,
+                  routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
+                  routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  builder: (context, child) => MediaQuery(
+                    data: MediaQuery.of(context).copyWith(
+                      textScaler: TextScaler.noScaling,
+                      boldText: false,
+                    ),
+                    child: child ?? const SizedBox.shrink(),
                   ),
-                  child: child ?? const SizedBox.shrink(),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       );
