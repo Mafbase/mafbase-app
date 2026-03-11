@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
-import 'package:seating_generator_web/data/services/push_token_service.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
@@ -26,6 +23,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 class AppRouter {
   final String initLocation;
+  final DependencyScope scope;
   late final router = GoRouter(
     navigatorKey: rootNavigationKey,
     observers: [
@@ -39,20 +37,20 @@ class AppRouter {
         final authNotifier = context.read<AuthNotifier>();
         if (authNotifier.value is AuthNotifierLoadingModel) {
           try {
-            final authRepository = getIt<AuthRepository>();
-            final pushTokenService = getIt<PushTokenService>();
-            
+            final authRepository = scope.repositoryFactory.authRepository;
+            final pushTokenService = scope.pushTokenService;
+
             // Получаем FCM токен и deviceId если разрешение уже выдано
             final fcmToken = await pushTokenService.getFcmToken();
             final deviceId = await pushTokenService.getDeviceId();
-            
+
             final userId = await authRepository.auth(
               pushToken: fcmToken,
               deviceId: deviceId,
             );
 
             if (userId != null) {
-              final value = await getIt<CredentialStorage>().read();
+              final value = await scope.storageFactory.credentialStorage.read();
 
               Sentry.configureScope(
                 (p0) => p0.setUser(
@@ -94,11 +92,8 @@ class AppRouter {
         builder: (context, state, child) {
           return BlocProvider(
             key: const Key("MainBlocProvider"),
-            create: (context) => getIt.get<MainBloc>(
-              param1: context,
-              param2: state.uri.toString().startsWith('/club')
-                  ? MainPageTab.clubs
-                  : MainPageTab.tournaments,
+            create: (context) => MainBloc(
+              MainPageRouterImpl(context),
             ),
             child: MainPage(child: child),
           );
@@ -124,7 +119,7 @@ class AppRouter {
     },
   );
 
-  AppRouter(this.initLocation);
+  AppRouter(this.initLocation, this.scope);
 
   static void showErrorDialog(BuildContext context, String message) {
     showDialog(

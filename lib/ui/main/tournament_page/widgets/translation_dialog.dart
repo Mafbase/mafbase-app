@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
@@ -16,9 +16,12 @@ class TranslationDialog extends StatefulWidget {
   final int tablesCount;
   final int tournamentId;
 
+  final TranslationRepository repository;
+
   const TranslationDialog._({
     required this.tournamentId,
     required this.tablesCount,
+    required this.repository,
   });
 
   static Future open({
@@ -26,11 +29,13 @@ class TranslationDialog extends StatefulWidget {
     required int tournamentId,
     required int tablesCount,
   }) {
+    final repository = RepositoryFactory.of(context).translationRepository;
     return showDialog(
       context: context,
       builder: (_) => TranslationDialog._(
         tournamentId: tournamentId,
         tablesCount: tablesCount,
+        repository: repository,
       ),
     );
   }
@@ -40,14 +45,13 @@ class TranslationDialog extends StatefulWidget {
 }
 
 class _TranslationDialogState extends State<TranslationDialog> {
-  final TranslationRepository repository = getIt();
   late final Future<TranslationKeyModel> keyFuture;
   int table = 1;
   DesignModel? selectedDesign;
 
   @override
   void initState() {
-    keyFuture = repository.getKey(tournamentId: widget.tournamentId);
+    keyFuture = widget.repository.getKey(tournamentId: widget.tournamentId);
     super.initState();
   }
 

@@ -3,8 +3,11 @@ import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
+import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
@@ -82,20 +85,29 @@ class TournamentPage extends StatefulWidget {
             providers: [
               BlocProvider<TournamentPageBloc>(
                 key: const Key("TournamentPageBloc"),
-                create: (context) => getIt<TournamentPageBloc>(
-                  param1: context,
-                  param2: tournamentId,
-                )..add(const TournamentPageEvent.pageOpened()),
+                create: (context) {
+                  final repos = RepositoryFactory.of(context);
+                  return TournamentPageBloc(
+                    repos: repos,
+                    router: TournamentPageRouterImpl(context),
+                    tournamentId: tournamentId,
+                    context: context,
+                  )..add(const TournamentPageEvent.pageOpened());
+                },
               ),
               BlocProvider<SeatingPageBloc>(
                 key: const Key("SeatingPageBloc"),
-                create: (context) => getIt<SeatingPageBloc>(
-                  param1: context,
-                )..add(
-                    SeatingPageEvent.pageOpened(
-                      tournamentId: tournamentId,
-                    ),
-                  ),
+                create: (context) {
+                  final repos = RepositoryFactory.of(context);
+                  return SeatingPageBloc(
+                    repos: repos,
+                    router: SeatingPageRouterImpl(context),
+                  )..add(
+                      SeatingPageEvent.pageOpened(
+                        tournamentId: tournamentId,
+                      ),
+                    );
+                },
               ),
             ],
             child: TournamentPage(

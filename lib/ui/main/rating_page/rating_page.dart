@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
@@ -114,7 +115,10 @@ class RatingPage extends StatefulWidget {
           0;
       return BlocProvider<RatingBloc>(
         create: (context) {
-          return getIt(param1: context);
+          return RatingBloc(
+            repos: RepositoryFactory.of(context),
+            router: RatingRouterImpl(context),
+          );
         },
         child: RatingPage(
           tournamentId: tournamentId,
@@ -155,7 +159,10 @@ class RatingPage extends StatefulWidget {
           0;
       return BlocProvider<RatingBloc>(
         create: (context) {
-          return getIt(param1: context);
+          return RatingBloc(
+            repos: RepositoryFactory.of(context),
+            router: RatingRouterImpl(context),
+          );
         },
         child: RatingPage(
           clubId: clubId,

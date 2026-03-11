@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -24,7 +25,12 @@ class VerificationPageBody extends StatefulWidget {
       return FadeTransitionPage(
         child: BlocProvider<VerificationBloc>(
           create: (BuildContext context) {
-            return getIt<VerificationBloc>(param1: context, param2: id);
+            final repos = RepositoryFactory.of(context);
+            return VerificationBloc(
+              VerificationPageRouterImpl(context),
+              VerificationInteractor(repos.authRepository),
+              id,
+            );
           },
           child: const VerificationPageBody(),
         ),

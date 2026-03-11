@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/storage_factory.dart';
+import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -50,10 +53,15 @@ class LoginPageBody extends StatefulWidget {
     ],
     pageBuilder: (context, state) => FadeTransitionPage(
       child: BlocProvider(
-        create: (context) => getIt.get<LoginBloc>(
-          param1: context,
-          param2: state.uri.queryParameters['next'],
-        ),
+        create: (context) {
+          final scope = DependencyScope.of(context);
+          final repos = scope.repositoryFactory;
+          final storages = scope.storageFactory;
+          return LoginBloc(
+            LoginInteractor(repos.authRepository, storages.credentialStorage, scope.authNotifier),
+            LoginPageRouterImpl(context, state.uri.queryParameters['next']),
+          );
+        },
         child: const LoginPageBody(),
       ),
     ),

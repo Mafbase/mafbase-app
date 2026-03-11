@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_bloc.dart';
@@ -21,7 +22,11 @@ class SeatingInsertingPage extends StatefulWidget {
     builder: (context, state) {
       final id = int.parse(state.pathParameters["id"]!);
       return BlocProvider<SeatingInsertingBloc>(
-        create: (context) => getIt(param1: context, param2: id),
+        create: (context) => SeatingInsertingBloc(
+          router: SeatingInsertingRouterImpl(context),
+          repos: RepositoryFactory.of(context),
+          tournamentId: id,
+        ),
         child: const SeatingInsertingPage(),
       );
     },

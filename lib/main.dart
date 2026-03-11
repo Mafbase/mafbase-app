@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
@@ -80,7 +79,6 @@ void _startApp() async {
     sound: true,
   );
   final initPush = await FirebaseMessaging.instance.getInitialMessage().onError((_, __) => null);
-  registerGetIt();
   SplashManager.deferSplash(
     binding ??= WidgetsFlutterBinding.ensureInitialized(),
   );
@@ -112,7 +110,7 @@ class MafbaseApp extends StatefulWidget {
 }
 
 class _MafbaseAppState extends State<MafbaseApp> {
-  late final router = AppRouter(widget.initLocation);
+  late final router = AppRouter(widget.initLocation, widget.scope);
   StreamSubscription? subscription;
 
   @override
@@ -124,6 +122,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
   @override
   void dispose() {
     subscription?.cancel();
+    widget.scope.dispose();
     super.dispose();
   }
 
@@ -134,7 +133,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
           scope: widget.scope,
           child: MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (_) => getIt<AuthNotifier>()),
+              ChangeNotifierProvider(create: (_) => widget.scope.authNotifier),
               Provider.value(value: router),
               const ThemeProvider(),
             ],

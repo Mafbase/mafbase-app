@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
@@ -25,9 +25,10 @@ class SeatingPageDialog extends StatefulWidget {
 
   static Widget create(List<String> players) =>
       BlocProvider<SeatingPageDialogBloc>(
-        create: (context) => getIt(
-          param1: players,
-          param2: context,
+        create: (context) => SeatingPageDialogBloc(
+          SeatingPageDialogState(notFound: players),
+          RepositoryFactory.of(context).playersRepository,
+          context,
         )..add(const SeatingPageDialogEvent.init()),
         child: const SeatingPageDialog._(),
       );

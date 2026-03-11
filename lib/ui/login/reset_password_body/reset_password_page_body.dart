@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -52,12 +52,16 @@ class ResetPasswordPageBody extends StatefulWidget {
       return FadeTransitionPage(
         child: BlocProvider<ResetPasswordBloc>(
           key: const Key('ResetPasswordBlocProvider'),
-          create: (context) => ResetPasswordBloc(
-            getIt.get<AuthRepository>(),
-            getIt.get<LoginInteractor>(),
+          create: (context) {
+          final scope = DependencyScope.of(context);
+          final repos = scope.repositoryFactory;
+          return ResetPasswordBloc(
+            repos.authRepository,
+            LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
             ResetPasswordPageRouterImpl(context),
             email,
-          ),
+          );
+        },
           child: const ResetPasswordPageBody(),
         ),
       );

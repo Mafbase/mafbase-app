@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
@@ -19,7 +19,7 @@ class InfoTableDialog extends StatefulWidget {
         builder: (_) => BlocProvider(
           create: (_) => InfoTableDescriptionBloc(
             const InfoTableState(),
-            getIt(),
+            RepositoryFactory.of(context).infoTableDescriptionRepository,
           )..add(InfoTableDescriptionEventInit(tournamentId)),
           child: InfoTableDialog(),
         ),

@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/domain/interactors/get_clubs_interactor.dart';
+import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_bloc.dart';
@@ -27,7 +29,13 @@ class ClubsPage extends StatefulWidget {
     path: '/club',
     name: 'clubs',
     builder: (context, state) => BlocProvider<ClubsBloc>(
-      create: (context) => getIt(param1: context),
+      create: (context) {
+        final repos = RepositoryFactory.of(context);
+        return ClubsBloc(
+          getClubsInteractor: GetClubsInteractor(repos.clubRepository),
+          router: ClubsRouterImpl(context),
+        );
+      },
       child: const ClubsPage(),
     ),
     routes: [

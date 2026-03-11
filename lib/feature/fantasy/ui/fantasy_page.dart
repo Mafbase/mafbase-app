@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_event.dart';
@@ -55,7 +55,7 @@ class FantasyPage extends StatefulWidget {
 
       return BlocProvider<FantasyBloc>(
         key: ValueKey("$tournamentId$isOwner"),
-        create: (context) => getIt<FantasyBloc>(param1: context)
+        create: (context) => FantasyBloc(FantasyState(), RepositoryFactory.of(context).fantasyRepository)
           ..add(
             FantasyEventInit(
               tournamentId: tournamentId,

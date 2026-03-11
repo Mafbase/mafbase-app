@@ -3,16 +3,15 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/main.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  setUpAll(() => registerGetIt(isIntegrationTest: true));
   testWidgets('clubs page flow', (tester) async {
-    await getIt<CredentialStorage>().save(
+    final scope = DependencyScope(isIntegrationTest: true);
+    await scope.storageFactory.credentialStorage.save(
       Credentials(
         "test@mail.ru",
         "testtest",
@@ -20,7 +19,7 @@ void main() {
     );
     await tester.pumpWidget(
       MafbaseApp(
-        scope: DependencyScope(),
+        scope: scope,
       ),
     );
     await tester.pump(const Duration(seconds: 2));
@@ -40,7 +39,8 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('tournament add and delete player flow', (tester) async {
-    await getIt<CredentialStorage>().save(
+    final scope = DependencyScope(isIntegrationTest: true);
+    await scope.storageFactory.credentialStorage.save(
       Credentials(
         "test@mail.ru",
         "testtest",
@@ -48,7 +48,7 @@ void main() {
     );
     await tester.pumpWidget(
       MafbaseApp(
-        scope: DependencyScope(),
+        scope: scope,
       ),
     );
     await tester.pump(const Duration(seconds: 2));

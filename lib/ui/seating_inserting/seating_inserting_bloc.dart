@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/insert_seating_interactor.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_event.dart';
@@ -9,12 +9,19 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_sta
 class SeatingInsertingBloc
     extends Bloc<SeatingInsertingEvent, SeatingInsertingState> {
   final SeatingInsertingRouter _router;
-  final InsertSeatingInteractor _insertSeatingInteractor = getIt();
+  late final InsertSeatingInteractor _insertSeatingInteractor =
+      InsertSeatingInteractor(_repos.translationRepository);
+  final RepositoryFactory _repos;
   final int tournamentId;
   List<int> bytes = [];
 
-  SeatingInsertingBloc(this._router, this.tournamentId, [BuildContext? context])
-      : super(const SeatingInsertingState()) {
+  SeatingInsertingBloc({
+    required SeatingInsertingRouter router,
+    required RepositoryFactory repos,
+    required this.tournamentId,
+  })  : _router = router,
+        _repos = repos,
+        super(const SeatingInsertingState()) {
     on<SeatingInsertingSaveEvent>(_onSaveEvent);
     on<SeatingInsertingFileSelectedEvent>(_onFileSelected);
   }

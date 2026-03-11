@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_seating_interactor.dart';
@@ -8,7 +8,6 @@ import 'package:seating_generator_web/domain/interactors/generate_final_seating_
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
@@ -17,21 +16,27 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.da
 class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     with EffectEmitter<SeatingPageEffect, SeatingPageState> {
   late int tournamentId;
-  final BuildContext? _context;
-  final GetSeparationInteractor _getSeparationInteractor = getIt();
-  final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
-      getIt();
-  final AddSeparationInteractor _addSeparationInteractor = getIt();
-  final DeleteSeparationInteractor _deleteSeparationInteractor = getIt();
-  final CreateSeatingInteractor _createSeatingInteractor = getIt();
-  final GetSeatingInteractor _getSeatingInteractor = getIt();
-  final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
-      getIt();
-  final TournamentEditRepository _tournamentEditRepository = getIt();
-  late final SeatingPageRouter router = getIt(param1: _context);
+  final RepositoryFactory _repos;
+  late final GetSeparationInteractor _getSeparationInteractor =
+      GetSeparationInteractor(_repos.tournamentEditRepository);
+  late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
+      GetTournamentsPlayersInteractor(_repos.playersRepository);
+  late final AddSeparationInteractor _addSeparationInteractor =
+      AddSeparationInteractor(_repos.tournamentEditRepository);
+  late final DeleteSeparationInteractor _deleteSeparationInteractor =
+      DeleteSeparationInteractor(_repos.tournamentEditRepository);
+  late final CreateSeatingInteractor _createSeatingInteractor =
+      CreateSeatingInteractor(_repos.tournamentsRepository);
+  late final GetSeatingInteractor _getSeatingInteractor =
+      GetSeatingInteractor(_repos.tournamentEditRepository);
+  late final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
+      GenerateFinalSeatingInteractor(_repos.tournamentEditRepository);
+  final SeatingPageRouter router;
 
-  SeatingPageBloc([BuildContext? context])
-      : _context = context,
+  SeatingPageBloc({
+    required RepositoryFactory repos,
+    required this.router,
+  })  : _repos = repos,
         super(const SeatingPageState()) {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
@@ -51,7 +56,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     SeatingPageEventGetPlayersSeating event,
     Emitter emit,
   ) async =>
-      _tournamentEditRepository.downloadPlayersSeating(
+      _repos.tournamentEditRepository.downloadPlayersSeating(
         tournamentId: tournamentId,
       );
 
@@ -59,7 +64,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     SeatingPageEventGetTablesSeating event,
     Emitter emit,
   ) async =>
-      _tournamentEditRepository.downloadTablesSeating(
+      _repos.tournamentEditRepository.downloadTablesSeating(
         tournamentId: tournamentId,
       );
 
@@ -67,14 +72,14 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     SeatingPageEventGetCrossStats event,
     Emitter emit,
   ) async =>
-      _tournamentEditRepository.downloadCrossStats(tournamentId: tournamentId);
+      _repos.tournamentEditRepository.downloadCrossStats(tournamentId: tournamentId);
 
   Future<void> _autoFsmSeating(
     SeatingPageEventAutoFsmSeating event,
     Emitter emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    final notFound = await _tournamentEditRepository
+    final notFound = await _repos.tournamentEditRepository
         .getGomafiaSeating(
           tournamentId: tournamentId,
           gomafiaId: event.gomafiaId,
@@ -95,7 +100,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     SeatingPageEventCreateSwissGame event,
     Emitter emit,
   ) async {
-    await _tournamentEditRepository.generateSwissGame(
+    await _repos.tournamentEditRepository.generateSwissGame(
       tournamentId: tournamentId,
       game: event.game,
     );

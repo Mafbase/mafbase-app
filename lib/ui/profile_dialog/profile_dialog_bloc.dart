@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/get_it_register.dart';
+import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_player_interactor.dart';
@@ -10,15 +10,20 @@ import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_state.dar
 
 class ProfileDialogBloc
     extends Bloc<ProfileDialogEvent, ProfileDialogState> {
-  final BuildContext? _context;
-  late final ProfileDialogRouter router = getIt(param1: _context);
-  final EditPlayerInteractor _editPlayerInteractor = getIt();
-  final AddPhotoInteractor _addPhotoInteractor = getIt();
+  final ProfileDialogRouter router;
+  late final EditPlayerInteractor _editPlayerInteractor =
+      EditPlayerInteractor(_repos.playersRepository);
+  late final AddPhotoInteractor _addPhotoInteractor =
+      AddPhotoInteractor(_repos.playersRepository);
+  final RepositoryFactory _repos;
   final int playerId;
 
-  ProfileDialogBloc(PlayerModel player, [BuildContext? context])
-      : playerId = player.id,
-        _context = context,
+  ProfileDialogBloc({
+    required PlayerModel player,
+    required RepositoryFactory repos,
+    required this.router,
+  })  : playerId = player.id,
+        _repos = repos,
         super(
           ProfileDialogState(
             imageUrl: player.imageUrl,
