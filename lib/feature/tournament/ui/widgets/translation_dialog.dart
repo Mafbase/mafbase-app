@@ -8,7 +8,7 @@ import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/widgets/design_picker_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/design_picker_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 

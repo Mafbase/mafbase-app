@@ -11,7 +11,7 @@ import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournament_item_row.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournament_status_widget.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';

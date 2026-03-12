@@ -80,34 +80,31 @@ class _ProfileDialogState extends State<ProfileDialog> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
+                    const SizedBox(height: 8),
                     Text(
                       widget.player.nickname,
                       style: MyTheme.of(context).headerTextStyle,
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
+                    const SizedBox(height: 8),
+                    Wrap(
+                      runSpacing: 8,
+                      alignment: WrapAlignment.center,
                       children: [
                         InkWell(
                           onTap: () async {
-                            final image = await ImagePicker()
-                                .pickImage(source: ImageSource.gallery);
+                            final image = await ImagePicker().pickImage(source: ImageSource.gallery);
                             if (image != null && context.mounted) {
                               context.read<ProfileDialogBloc>().add(
-                                ProfileDialogEvent.editImage(
-                                  bytes: Uint8List.fromList(
-                                    await image.openRead().fold<List<int>>(
-                                      [],
+                                    ProfileDialogEvent.editImage(
+                                      bytes: Uint8List.fromList(
+                                        await image.openRead().fold<List<int>>(
+                                          [],
                                           (previous, element) => previous + element,
+                                        ),
+                                      ),
+                                      fileName: image.name,
                                     ),
-                                  ),
-                                  fileName: image.name,
-                                ),
-                              );
+                                  );
                             }
                           },
                           child: SizedBox(
@@ -115,18 +112,18 @@ class _ProfileDialogState extends State<ProfileDialog> {
                             height: 150,
                             child: state.imageUrl == null
                                 ? Image.asset(
-                              AppAssets.playerPhoto,
-                              fit: BoxFit.cover,
-                            )
+                                    AppAssets.playerPhoto,
+                                    fit: BoxFit.cover,
+                                  )
                                 : CachedNetworkImage(
-                              imageUrl: state.imageUrl ?? "",
-                              fit: BoxFit.cover,
-                            ),
+                                    imageUrl: state.imageUrl ?? "",
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
-                        const SizedBox(width: 20),
                         Flexible(
                           child: Column(
+                            spacing: 8,
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               CustomTextField(
@@ -158,14 +155,14 @@ class _ProfileDialogState extends State<ProfileDialog> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 12),
                     CustomButton(
                       text: context.locale.save,
                       onTap: () {
                         context.read<ProfileDialogBloc>().add(
                               ProfileDialogEvent.onSubmit(
                                 nickname: nicknameController.text,
-                                mafbankNickname:
-                                    mafbankNicknameController.text,
+                                mafbankNickname: mafbankNicknameController.text,
                                 fsmNickname: fsmNicknameController.text,
                               ),
                             );
@@ -175,8 +172,7 @@ class _ProfileDialogState extends State<ProfileDialog> {
                 ),
               ),
             ),
-            if (state.isLoading)
-              const Positioned.fill(child: LoadingOverlayWidget()),
+            if (state.isLoading) const Positioned.fill(child: LoadingOverlayWidget()),
           ],
         ),
       ),

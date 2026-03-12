@@ -22,7 +22,7 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 
 class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     with EffectEmitter<AddClubGameEffect, AddClubGameState> {

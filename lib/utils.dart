@@ -9,7 +9,11 @@ extension BuildContextLocaleExt on BuildContext {
 
   MyTheme get theme => MyTheme.of(this);
 
-  VoidCallback get backOrGoToDefault => Navigator.canPop(this) ? () => Navigator.pop(this) : () => go('/');
+  VoidCallback get backOrGoToDefault => Navigator.canPop(this)
+      ? () => Navigator.pop(this)
+      : canPop()
+          ? pop
+          : () => go('/');
 }
 
 final dateFormatForRequests = DateFormat("yyyy-MM-dd");

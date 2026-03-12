@@ -11,7 +11,7 @@ import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {

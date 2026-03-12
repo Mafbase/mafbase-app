@@ -17,6 +17,8 @@ import 'package:seating_generator_web/ui/main/rating_page/widgets/game_filter_di
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class RatingPage extends StatefulWidget {
@@ -59,8 +61,7 @@ class RatingPage extends StatefulWidget {
         "style": tableStyle.name,
         "sort": sort.name,
         "game-filter": gameFilter.toString(),
-        if (customSortColumnIndex > 0)
-          "custom-sort-column": customSortColumnIndex.toString(),
+        if (customSortColumnIndex > 0) "custom-sort-column": customSortColumnIndex.toString(),
       },
     );
   }
@@ -78,15 +79,12 @@ class RatingPage extends StatefulWidget {
       _clubName,
       pathParameters: {"clubId": clubId.toString()},
       queryParameters: {
-        "date-start":
-            range == null ? null : dateFormatForRequests.format(range.start),
-        "date-end":
-            range == null ? null : dateFormatForRequests.format(range.end),
+        "date-start": range == null ? null : dateFormatForRequests.format(range.start),
+        "date-end": range == null ? null : dateFormatForRequests.format(range.end),
         "style": tableStyle.name,
         "sort": sort.name,
         "game-filter": gameFilter.toString(),
-        if (customSortColumnIndex > 0)
-          "custom-sort-column": customSortColumnIndex.toString(),
+        if (customSortColumnIndex > 0) "custom-sort-column": customSortColumnIndex.toString(),
       },
     );
   }
@@ -107,8 +105,7 @@ class RatingPage extends StatefulWidget {
             (element) => state.uri.queryParameters["sort"] == element.name,
           ) ??
           RatingSort.score;
-      final gameFilter =
-          int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final gameFilter = int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
       final customSortColumnIndex = int.tryParse(
             state.uri.queryParameters["custom-sort-column"] ?? "",
           ) ??
@@ -136,12 +133,9 @@ class RatingPage extends StatefulWidget {
     name: _clubName,
     builder: (context, state) {
       final clubId = int.parse(state.pathParameters["clubId"]!);
-      final dateStart =
-          DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
-              DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd =
-          DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ??
-              DateTime.now();
+      final dateStart = DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
+          DateTime.now().subtract(const Duration(days: 30));
+      final dateEnd = DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ?? DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
       final style = RatingTableStyle.values.firstWhereOrNull(
             (element) => state.uri.queryParameters["style"] == element.name,
@@ -151,8 +145,7 @@ class RatingPage extends StatefulWidget {
             (element) => state.uri.queryParameters["sort"] == element.name,
           ) ??
           RatingSort.score;
-      final gameFilter =
-          int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final gameFilter = int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
       final customSortColumnIndex = int.tryParse(
             state.uri.queryParameters["custom-sort-column"] ?? "",
           ) ??
@@ -297,95 +290,89 @@ class _RatingPageState extends CustomState<RatingPage> {
           );
         }
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (state.rows.isNotEmpty)
-                    IconButton(
-                      onPressed: openFullscreen,
-                      icon: Icon(Icons.fullscreen_outlined),
+        return Scaffold(
+          appBar: AppBar(
+            leading: BackButton(onPressed: context.backOrGoToDefault),
+            title: Text(state.clubName),
+            actions: [
+              if (state.rows.isNotEmpty)
+                IconButton(
+                  onPressed: openFullscreen,
+                  icon: const Icon(Icons.fullscreen_outlined),
+                ),
+              if (widget.clubId != null)
+                IconButton(
+                  onPressed: () => context.push(
+                    ClubGamesPage.createLocation(
+                      context: context,
+                      clubId: widget.clubId!,
+                      range: widget.range,
                     ),
-                  Flexible(
+                  ),
+                  icon: const Icon(Icons.table_chart_outlined),
+                ),
+              if (widget.tournamentId != null)
+                TournamentMenuAction(
+                  tournamentId: widget.tournamentId!,
+                  openDrawer: () => Scaffold.of(context).openEndDrawer(),
+                ),
+            ],
+          ),
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.range != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: TextButton(
+                    onPressed: onChangeRangeTap,
                     child: Text(
-                      state.clubName,
-                      style: context.theme.headerTextStyle,
+                      "${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  if (widget.clubId != null)
-                    IconButton(
-                      onPressed: () => context.push(
-                        ClubGamesPage.createLocation(
-                          context: context,
-                          clubId: widget.clubId!,
-                          range: widget.range,
-                        ),
-                      ),
-                      icon: const Icon(Icons.table_chart_outlined),
-                    ),
-                ],
-              ),
-            ),
-            if (widget.range != null)
+                ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: TextButton(
-                  onPressed: onChangeRangeTap,
-                  child: Text(
-                    "${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
-                    textAlign: TextAlign.center,
-                  ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    gameFilterWidget(),
+                    const SizedBox(width: 8),
+                    styleSwitcher(
+                      hasCustomColumns: state.hasCustomColumns,
+                    ),
+                    const SizedBox(width: 8),
+                    downloadRatingButton(),
+                  ],
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  gameFilterWidget(),
-                  const SizedBox(width: 8),
-                  styleSwitcher(
-                    hasCustomColumns: state.hasCustomColumns,
-                  ),
-                  const SizedBox(width: 8),
-                  downloadRatingButton(),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            winRate(state),
-            const SizedBox(
-              height: 16,
-            ),
-            Expanded(
-              child: state.rows.isEmpty
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          context.locale.ratingNoGamesFound,
-                          style: MyTheme.of(context).defaultTextStyle,
-                          textAlign: TextAlign.center,
+              const SizedBox(height: 8),
+              winRate(state),
+              const SizedBox(height: 16),
+              Expanded(
+                child: state.rows.isEmpty
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            context.locale.ratingNoGamesFound,
+                            style: MyTheme.of(context).defaultTextStyle,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    )
-                  : ratingTable(singlePage: false),
-            ),
-          ],
+                      )
+                    : ratingTable(singlePage: false),
+              ),
+            ],
+          ),
         );
       },
     );
   }
 
   @override
-  Widget buildDesktop(BuildContext context) =>
-      BlocBuilder<RatingBloc, RatingState>(
+  Widget buildDesktop(BuildContext context) => BlocBuilder<RatingBloc, RatingState>(
         builder: (context, state) {
           return Stack(
             children: [
@@ -428,8 +415,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                         children: [
                           if (widget.range != null)
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16.0, right: 8),
+                              padding: const EdgeInsets.only(left: 16.0, right: 8),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -437,8 +423,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                                   CustomButton(
                                     onTap: onChangeRangeTap,
                                     disabled: widget.tournamentId != null,
-                                    text:
-                                        "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
+                                    text: "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
                                   ),
                                 ],
                               ),
@@ -486,8 +471,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                                       tournamentId: widget.tournamentId,
                                       sort: sort,
                                       gameFilter: widget.gameFilter,
-                                      customSortColumnIndex:
-                                          customSortColumnIndex ?? 0,
+                                      customSortColumnIndex: customSortColumnIndex ?? 0,
                                     ),
                                   );
                             },

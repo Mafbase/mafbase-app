@@ -1081,4 +1081,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileSubscriptionRenewButton => 'Renew subscription';
+
+  @override
+  String get tournamentMenuTitle => 'Tournament menu';
+
+  @override
+  String get tournamentMenuSectionMain => 'MAIN';
+
+  @override
+  String get tournamentMenuSectionManagement => 'MANAGEMENT';
+
+  @override
+  String get tournamentMenuSectionFeatures => 'FEATURES';
+
+  @override
+  String get tournamentMenuSectionNotifications => 'NOTIFICATIONS';
+
+  @override
+  String get tournamentMenuTable => 'Table';
+
+  @override
+  String get tournamentMenuPayment => 'Payment';
+
+  @override
+  String get tournamentMenuAdmins => 'Administrators';
+
+  @override
+  String get tournamentMenuGameNotification => 'Game notification';
+
+  @override
+  String get tournamentMenuTextNotification => 'Text notification';
+
+  @override
+  String get tournamentMenuNoPlayers => 'No participants added yet';
 }

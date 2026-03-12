@@ -26,7 +26,7 @@ class DependencyScope {
 
   late final StorageFactory storageFactory = StorageFactory(isIntegrationTest: isIntegrationTest);
 
-  late final MyHttpClient client = (kReleaseMode && kIsWeb ? MyHttpClient.autoForWeb : MyHttpClient.withDefaultUrl)(
+  late final MyHttpClient client = (kReleaseMode && kIsWeb && false ? MyHttpClient.autoForWeb : MyHttpClient.withDefaultUrl)(
     storageFactory.tokenStorage,
     storageFactory.credentialStorage,
   );

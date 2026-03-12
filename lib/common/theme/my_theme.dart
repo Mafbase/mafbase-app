@@ -40,7 +40,7 @@ abstract class MyTheme {
   MyTheme();
 
   static MyTheme of(BuildContext context) => context.watch();
-  static MyTheme read(BuildContext context) => context.watch();
+  static MyTheme read(BuildContext context) => context.read();
 
   factory MyTheme.light(bool isMobile) => _LightTheme._(isMobile);
 }

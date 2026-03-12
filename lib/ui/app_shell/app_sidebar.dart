@@ -113,6 +113,7 @@ class AppSidebar extends StatelessWidget {
                   );
             },
           ),
+          const SizedBox(height: 4),
           _SidebarItem(
             icon: Icons.people_alt_outlined,
             label: context.locale.clubsHeader,

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/widgets/player_row.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/player_row.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_selector.dart';
-import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class PlayersListBody extends StatefulWidget {
+class PlayersListBody extends StatelessWidget {
   final int tournamentId;
 
   const PlayersListBody({
@@ -21,23 +20,16 @@ class PlayersListBody extends StatefulWidget {
   });
 
   @override
-  State<PlayersListBody> createState() => _PlayersListBodyState();
-}
-
-class _PlayersListBodyState extends State<PlayersListBody> {
-  @override
-  void initState() {
-    context.read<TournamentPageBloc>().add(
-          const TournamentPageEvent.playersListOpened(),
-        );
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: BackButton(onPressed: context.backOrGoToDefault),
           title: Text(context.locale.participants),
+          actions: [
+            TournamentMenuAction(
+              tournamentId: tournamentId,
+              openDrawer: () => Scaffold.of(context).openEndDrawer(),
+            ),
+          ],
         ),
         body: Container(
           color: MyTheme.of(context).background2,
@@ -67,19 +59,27 @@ class _PlayersListBodyState extends State<PlayersListBody> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: Text(
-                                    'Пока не добавлен ни один участник',
+                                    context.locale.tournamentMenuNoPlayers,
                                     textAlign: TextAlign.center,
                                     style: MyTheme.of(context).defaultTextStyle,
                                   ),
                                 ),
                               )
-                            : ListView.builder(
+                            : ListView.separated(
                                 itemCount: state.tournamentPlayers.length,
+                                separatorBuilder: (_, __) => Divider(
+                                  height: 1,
+                                  indent: 16,
+                                  endIndent: 16,
+                                  color: MyTheme.of(context).greyColor.withValues(alpha: 0.3),
+                                ),
                                 itemBuilder: (context, index) {
                                   final player = state.tournamentPlayers[index];
                                   final resolvedImageUrl = state.activeThemePhotos[player.id] ?? player.imageUrl;
                                   return PlayerRow(
                                     index: index,
+                                    player: player,
+                                    imageUrlOverride: resolvedImageUrl != player.imageUrl ? resolvedImageUrl : null,
                                     onTap: state.isMyTournament
                                         ? () async {
                                             context.read<TournamentPageBloc>().add(
@@ -103,8 +103,6 @@ class _PlayersListBodyState extends State<PlayersListBody> {
                                             });
                                           }
                                         : null,
-                                    nickname: player.nickname,
-                                    imageUrl: resolvedImageUrl,
                                   );
                                 },
                               ),

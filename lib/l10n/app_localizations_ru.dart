@@ -1084,4 +1084,37 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileSubscriptionRenewButton => 'Продлить подписку';
+
+  @override
+  String get tournamentMenuTitle => 'Меню турнира';
+
+  @override
+  String get tournamentMenuSectionMain => 'ОСНОВНОЕ';
+
+  @override
+  String get tournamentMenuSectionManagement => 'УПРАВЛЕНИЕ';
+
+  @override
+  String get tournamentMenuSectionFeatures => 'ФУНКЦИИ';
+
+  @override
+  String get tournamentMenuSectionNotifications => 'ОПОВЕЩЕНИЯ';
+
+  @override
+  String get tournamentMenuTable => 'Таблица';
+
+  @override
+  String get tournamentMenuPayment => 'Оплата';
+
+  @override
+  String get tournamentMenuAdmins => 'Администраторы';
+
+  @override
+  String get tournamentMenuGameNotification => 'Оповещение об игре';
+
+  @override
+  String get tournamentMenuTextNotification => 'Текстовое оповещение';
+
+  @override
+  String get tournamentMenuNoPlayers => 'Пока не добавлен ни один участник';
 }

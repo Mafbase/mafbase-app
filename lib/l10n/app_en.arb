@@ -718,5 +718,16 @@
   "profileSubscriptionPayButton": "Subscribe",
   "@profileSubscriptionPayButton": {},
   "profileSubscriptionRenewButton": "Renew subscription",
-  "@profileSubscriptionRenewButton": {}
+  "@profileSubscriptionRenewButton": {},
+  "tournamentMenuTitle": "Tournament menu",
+  "tournamentMenuSectionMain": "MAIN",
+  "tournamentMenuSectionManagement": "MANAGEMENT",
+  "tournamentMenuSectionFeatures": "FEATURES",
+  "tournamentMenuSectionNotifications": "NOTIFICATIONS",
+  "tournamentMenuTable": "Table",
+  "tournamentMenuPayment": "Payment",
+  "tournamentMenuAdmins": "Administrators",
+  "tournamentMenuGameNotification": "Game notification",
+  "tournamentMenuTextNotification": "Text notification",
+  "tournamentMenuNoPlayers": "No participants added yet"
 }

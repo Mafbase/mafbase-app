@@ -15,10 +15,10 @@ import 'package:seating_generator_web/domain/interactors/start_game_info_interac
 import 'package:seating_generator_web/domain/interactors/tournament_check_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_effect.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_router.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_effect.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_router.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>

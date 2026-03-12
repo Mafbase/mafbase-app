@@ -13,10 +13,12 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.da
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class SeatingPage extends StatefulWidget {
@@ -50,9 +52,7 @@ class SeatingPage extends StatefulWidget {
 }
 
 class _SeatingPageState extends State<SeatingPage>
-    with
-        EffectListener<SeatingPageEffect, SeatingPageState, SeatingPageBloc,
-            SeatingPage> {
+    with EffectListener<SeatingPageEffect, SeatingPageState, SeatingPageBloc, SeatingPage> {
   final seatingKey = GlobalKey();
 
   Widget buildActions() => Row(
@@ -62,9 +62,7 @@ class _SeatingPageState extends State<SeatingPage>
             message: 'По игрокам',
             child: IconButton(
               splashRadius: 16,
-              onPressed: () => context
-                  .read<SeatingPageBloc>()
-                  .add(const SeatingPageEvent.getPlayersSeating()),
+              onPressed: () => context.read<SeatingPageBloc>().add(const SeatingPageEvent.getPlayersSeating()),
               icon: const Icon(Icons.person),
             ),
           ),
@@ -72,9 +70,7 @@ class _SeatingPageState extends State<SeatingPage>
             message: 'По столам',
             child: IconButton(
               splashRadius: 16,
-              onPressed: () => context
-                  .read<SeatingPageBloc>()
-                  .add(const SeatingPageEvent.getTablesSeating()),
+              onPressed: () => context.read<SeatingPageBloc>().add(const SeatingPageEvent.getTablesSeating()),
               icon: const Icon(Icons.table_bar_outlined),
             ),
           ),
@@ -82,9 +78,7 @@ class _SeatingPageState extends State<SeatingPage>
             message: 'Статистика пересечений',
             child: IconButton(
               splashRadius: 16,
-              onPressed: () => context
-                  .read<SeatingPageBloc>()
-                  .add(const SeatingPageEvent.getCrossStats()),
+              onPressed: () => context.read<SeatingPageBloc>().add(const SeatingPageEvent.getCrossStats()),
               icon: const Icon(Icons.people),
             ),
           ),
@@ -92,189 +86,171 @@ class _SeatingPageState extends State<SeatingPage>
       );
 
   @override
-  Widget build(BuildContext context) => Container(
-        color: MyTheme.of(context).background2,
-        child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
-          builder: (context, tournamentState) =>
-              BlocBuilder<SeatingPageBloc, SeatingPageState>(
-            builder: (context, state) => Stack(
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            tournamentState.isMyTournament
-                                ? context.locale.separateTitle
-                                : context.locale.seating,
-                            style: MyTheme.of(context).headerTextStyle,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        buildActions(),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    if (tournamentState.isMyTournament) ...[
-                      Container(
-                        constraints: const BoxConstraints(maxHeight: 100),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: state.cannotMeet.length,
-                          itemBuilder: (context, index) {
-                            return Row(
-                              children: [
-                                    state.cannotMeet[index].first,
-                                    state.cannotMeet[index].second,
-                                  ]
-                                      .map<Widget>(
-                                        (playerModel) => Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: MyTheme.of(context)
-                                                    .borderColor,
+  Widget build(BuildContext context) => BlocBuilder<TournamentPageBloc, TournamentPageState>(
+        builder: (context, tournamentState) => Scaffold(
+          appBar: AppBar(
+            leading: BackButton(onPressed: context.backOrGoToDefault),
+            title: Text(
+              tournamentState.isMyTournament ? context.locale.separateTitle : context.locale.seating,
+            ),
+            actions: [
+              buildActions(),
+              TournamentMenuAction(
+                tournamentId: widget.tournamentId,
+                openDrawer: () => Scaffold.of(context).openEndDrawer(),
+              ),
+            ],
+          ),
+          body: Container(
+            color: MyTheme.of(context).background2,
+            child: BlocBuilder<SeatingPageBloc, SeatingPageState>(
+              builder: (context, state) => Stack(
+                children: [
+                  Column(
+                    children: [
+                      if (tournamentState.isMyTournament) ...[
+                        Container(
+                          constraints: const BoxConstraints(maxHeight: 100),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.cannotMeet.length,
+                            itemBuilder: (context, index) {
+                              return Row(
+                                children: [
+                                      state.cannotMeet[index].first,
+                                      state.cannotMeet[index].second,
+                                    ]
+                                        .map<Widget>(
+                                          (playerModel) => Expanded(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: MyTheme.of(context).borderColor,
+                                                ),
                                               ),
-                                            ),
-                                            child: Center(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  playerModel.nickname,
-                                                  style: MyTheme.of(context)
-                                                      .defaultTextStyle,
+                                              child: Center(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    playerModel.nickname,
+                                                    style: MyTheme.of(context).defaultTextStyle,
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
+                                        )
+                                        .toList() +
+                                    <Widget>[
+                                      IconButton(
+                                        onPressed: () {
+                                          final bloc = context.read<SeatingPageBloc>();
+                                          showDialog<bool>(
+                                            context: context,
+                                            builder: (context) => const ConfirmDialog(),
+                                          ).then(
+                                            (value) {
+                                              if (value == true) {
+                                                bloc.add(
+                                                  SeatingPageEvent.deletePair(
+                                                    first: state.cannotMeet[index].first,
+                                                    second: state.cannotMeet[index].second,
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: MyTheme.of(context).redColor,
                                         ),
-                                      )
-                                      .toList() +
-                                  <Widget>[
-                                    IconButton(
-                                      onPressed: () {
-                                        final bloc =
-                                            context.read<SeatingPageBloc>();
-                                        showDialog<bool>(
-                                          context: context,
-                                          builder: (context) =>
-                                              const ConfirmDialog(),
-                                        ).then(
-                                          (value) {
-                                            if (value == true) {
-                                              bloc.add(
-                                                SeatingPageEvent.deletePair(
-                                                  first: state
-                                                      .cannotMeet[index].first,
-                                                  second: state
-                                                      .cannotMeet[index].second,
-                                                ),
-                                              );
-                                            }
-                                          },
-                                        );
-                                      },
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: MyTheme.of(context).redColor,
                                       ),
-                                    ),
-                                  ],
-                            );
-                          },
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.read<SeatingPageBloc>().add(
-                                const SeatingPageEvent.addPair(),
-                              );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            context.locale.addSeparationBtnText,
-                          ),
-                        ),
-                      ),
-                    ],
-                    Expanded(
-                      flex: 100,
-                      child: SeatingList(
-                        models: state.games,
-                      ),
-                    ),
-                    if (tournamentState.isMyTournament)
-                      if (context.isMobile)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: TextButton(
-                            key: seatingKey,
-                            onPressed: () {
-                              final button = (seatingKey.currentContext
-                                  ?.findRenderObject() as RenderBox);
-                              final overlay = Navigator.of(context)
-                                  .overlay!
-                                  .context
-                                  .findRenderObject()! as RenderBox;
-                              const offset = Offset.zero;
-
-                              final RelativeRect position =
-                                  RelativeRect.fromRect(
-                                Rect.fromPoints(
-                                  button.localToGlobal(
-                                    offset,
-                                    ancestor: overlay,
-                                  ),
-                                  button.localToGlobal(
-                                    button.size.bottomRight(Offset.zero) +
-                                        offset,
-                                    ancestor: overlay,
-                                  ),
-                                ),
-                                Offset.zero & overlay.size,
-                              );
-
-                              showMenu(
-                                context: context,
-                                position: position,
-                                items: actions(tournamentState, state)
-                                    .map(
-                                      (e) => PopupMenuItem(
-                                        onTap: e.onTap,
-                                        child: Text(e.title),
-                                      ),
-                                    )
-                                    .toList(),
+                                    ],
                               );
                             },
-                            child: Text(context.locale.seating),
                           ),
-                        )
-                      else
-                        Wrap(
-                          children: actions(tournamentState, state)
-                              .map(
-                                (e) => TextButton(
-                                  onPressed: e.onTap,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Text(e.title),
-                                  ),
-                                ),
-                              )
-                              .toList(),
                         ),
-                  ],
-                ),
-                if (state.isLoading)
-                  const Positioned.fill(child: LoadingOverlayWidget()),
-              ],
+                        TextButton(
+                          onPressed: () {
+                            context.read<SeatingPageBloc>().add(
+                                  const SeatingPageEvent.addPair(),
+                                );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              context.locale.addSeparationBtnText,
+                            ),
+                          ),
+                        ),
+                      ],
+                      Expanded(
+                        flex: 100,
+                        child: SeatingList(
+                          models: state.games,
+                        ),
+                      ),
+                      if (tournamentState.isMyTournament)
+                        if (context.isMobile)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: TextButton(
+                              key: seatingKey,
+                              onPressed: () {
+                                final button = (seatingKey.currentContext?.findRenderObject() as RenderBox);
+                                final overlay = Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
+                                const offset = Offset.zero;
+
+                                final RelativeRect position = RelativeRect.fromRect(
+                                  Rect.fromPoints(
+                                    button.localToGlobal(
+                                      offset,
+                                      ancestor: overlay,
+                                    ),
+                                    button.localToGlobal(
+                                      button.size.bottomRight(Offset.zero) + offset,
+                                      ancestor: overlay,
+                                    ),
+                                  ),
+                                  Offset.zero & overlay.size,
+                                );
+
+                                showMenu(
+                                  context: context,
+                                  position: position,
+                                  items: actions(tournamentState, state)
+                                      .map(
+                                        (e) => PopupMenuItem(
+                                          onTap: e.onTap,
+                                          child: Text(e.title),
+                                        ),
+                                      )
+                                      .toList(),
+                                );
+                              },
+                              child: Text(context.locale.seating),
+                            ),
+                          )
+                        else
+                          Wrap(
+                            children: actions(tournamentState, state)
+                                .map(
+                                  (e) => TextButton(
+                                    onPressed: e.onTap,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4),
+                                      child: Text(e.title),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                    ],
+                  ),
+                  if (state.isLoading) const Positioned.fill(child: LoadingOverlayWidget()),
+                ],
+              ),
             ),
           ),
         ),
@@ -294,9 +270,7 @@ class _SeatingPageState extends State<SeatingPage>
   ) =>
       [
         if (tournamentState.settings.swissGames > 0)
-          if (state.games.lastOrNull
-                  ?.any((element) => element.gameWin != null) ==
-              true)
+          if (state.games.lastOrNull?.any((element) => element.gameWin != null) == true)
             (
               onTap: () {
                 onSwissGameCreate(state, true);

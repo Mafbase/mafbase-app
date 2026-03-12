@@ -2083,6 +2083,72 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Продлить подписку'**
   String get profileSubscriptionRenewButton;
+
+  /// No description provided for @tournamentMenuTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Меню турнира'**
+  String get tournamentMenuTitle;
+
+  /// No description provided for @tournamentMenuSectionMain.
+  ///
+  /// In ru, this message translates to:
+  /// **'ОСНОВНОЕ'**
+  String get tournamentMenuSectionMain;
+
+  /// No description provided for @tournamentMenuSectionManagement.
+  ///
+  /// In ru, this message translates to:
+  /// **'УПРАВЛЕНИЕ'**
+  String get tournamentMenuSectionManagement;
+
+  /// No description provided for @tournamentMenuSectionFeatures.
+  ///
+  /// In ru, this message translates to:
+  /// **'ФУНКЦИИ'**
+  String get tournamentMenuSectionFeatures;
+
+  /// No description provided for @tournamentMenuSectionNotifications.
+  ///
+  /// In ru, this message translates to:
+  /// **'ОПОВЕЩЕНИЯ'**
+  String get tournamentMenuSectionNotifications;
+
+  /// No description provided for @tournamentMenuTable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Таблица'**
+  String get tournamentMenuTable;
+
+  /// No description provided for @tournamentMenuPayment.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата'**
+  String get tournamentMenuPayment;
+
+  /// No description provided for @tournamentMenuAdmins.
+  ///
+  /// In ru, this message translates to:
+  /// **'Администраторы'**
+  String get tournamentMenuAdmins;
+
+  /// No description provided for @tournamentMenuGameNotification.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оповещение об игре'**
+  String get tournamentMenuGameNotification;
+
+  /// No description provided for @tournamentMenuTextNotification.
+  ///
+  /// In ru, this message translates to:
+  /// **'Текстовое оповещение'**
+  String get tournamentMenuTextNotification;
+
+  /// No description provided for @tournamentMenuNoPlayers.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пока не добавлен ни один участник'**
+  String get tournamentMenuNoPlayers;
 }
 
 class _AppLocalizationsDelegate

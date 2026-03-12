@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 
 abstract class RatingRouter {
   void changeRange(

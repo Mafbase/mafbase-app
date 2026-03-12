@@ -15,7 +15,7 @@ import 'package:seating_generator_web/ui/main/profile_page/widgets/profile_actio
 import 'package:seating_generator_web/ui/main/profile_page/widgets/profile_loading_skeletons.dart';
 import 'package:seating_generator_web/ui/main/profile_page/widgets/profile_player_card.dart';
 import 'package:seating_generator_web/ui/main/profile_page/widgets/tournament_subscription_section.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';

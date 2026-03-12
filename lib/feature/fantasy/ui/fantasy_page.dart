@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_event.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_state.dart';
-import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_header.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_notifications_banner.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_participants_bottom_sheet.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_prediction_section.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_rating_section.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class FantasyPage extends StatefulWidget {
@@ -97,69 +100,85 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
   }
 
   @override
-  Widget? buildMobile(BuildContext context) => BlocBuilder<FantasyBloc, FantasyState>(
-        builder: (context, state) {
-          if (state.isLoading && state.rating == null) {
-            return const LoadingOverlayWidget();
-          }
+  Widget? buildMobile(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: BackButton(onPressed: context.backOrGoToDefault),
+          title: Text(context.locale.fantasy),
+          actions: [
+            BlocBuilder<FantasyBloc, FantasyState>(
+              builder: (context, state) {
+                if (!state.isOwner) return const SizedBox.shrink();
+                return IconButton(
+                  onPressed: () => FantasyParticipantsBottomSheet.show(
+                    context,
+                    widget.tournamentId,
+                  ),
+                  icon: const Icon(Icons.people),
+                  tooltip: context.locale.fantasyParticipants,
+                );
+              },
+            ),
+            TournamentMenuAction(
+              tournamentId: widget.tournamentId,
+              openDrawer: () => Scaffold.of(context).openEndDrawer(),
+            ),
+          ],
+        ),
+        body: BlocBuilder<FantasyBloc, FantasyState>(
+          builder: (context, state) {
+            if (state.isLoading && state.rating == null) {
+              return const LoadingOverlayWidget();
+            }
 
-          return Column(
-            children: [
-              FantasyHeader(
-                state: state,
-                onParticipantsPressed: state.isOwner
-                    ? () => FantasyParticipantsBottomSheet.show(
-                          context,
-                          widget.tournamentId,
-                        )
-                    : null,
-              ),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () async {
-                    final completer = Completer<void>();
-                    context.read<FantasyBloc>().add(
-                          FantasyEventRefresh(
-                            tournamentId: widget.tournamentId,
-                            completer: completer,
+            return Column(
+              children: [
+                Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      final completer = Completer<void>();
+                      context.read<FantasyBloc>().add(
+                            FantasyEventRefresh(
+                              tournamentId: widget.tournamentId,
+                              completer: completer,
+                            ),
+                          );
+
+                      await completer.future;
+                    },
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          FantasyNotificationsBanner(),
+                          ValueListenableBuilder(
+                            valueListenable: context.read<AuthNotifier>(),
+                            builder: (context, state, child) =>
+                                state.mapOrNull(
+                                  authorized: (_) => child,
+                                ) ??
+                                const SizedBox.shrink(),
+                            child: FantasyPredictionSection(
+                              state: state,
+                              tournamentId: widget.tournamentId,
+                            ),
                           ),
-                        );
-
-                    await completer.future;
-                  },
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        FantasyNotificationsBanner(),
-                        ValueListenableBuilder(
-                          valueListenable: context.read<AuthNotifier>(),
-                          builder: (context, state, child) =>
-                              state.mapOrNull(
-                                authorized: (_) => child,
-                              ) ??
-                              const SizedBox.shrink(),
-                          child: FantasyPredictionSection(
+                          const SizedBox(height: 16),
+                          FantasyRatingSection(
                             state: state,
-                            tournamentId: widget.tournamentId,
+                            isMobile: true,
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        FantasyRatingSection(
-                          state: state,
-                          isMobile: true,
-                        ),
-                        const SizedBox(height: 16),
-                      ],
+                          const SizedBox(height: 16),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       );
 
   @override
@@ -170,17 +189,27 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
           }
           return Column(
             children: [
-              const SizedBox(height: 8),
-              FantasyHeader(
-                state: state,
-                onParticipantsPressed: state.isOwner
-                    ? () => FantasyParticipantsBottomSheet.show(
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      context.locale.fantasy,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                    if (state.isOwner)
+                      IconButton(
+                        onPressed: () => FantasyParticipantsBottomSheet.show(
                           context,
                           widget.tournamentId,
-                        )
-                    : null,
+                        ),
+                        icon: const Icon(Icons.people),
+                        tooltip: context.locale.fantasyParticipants,
+                      ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 8),
               const Padding(
                 padding: EdgeInsets.only(top: 16, left: 16, right: 16),
                 child: FantasyNotificationsBanner(),
