@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -53,15 +52,15 @@ class ResetPasswordPageBody extends StatefulWidget {
         child: BlocProvider<ResetPasswordBloc>(
           key: const Key('ResetPasswordBlocProvider'),
           create: (context) {
-          final scope = DependencyScope.of(context);
-          final repos = scope.repositoryFactory;
-          return ResetPasswordBloc(
-            repos.authRepository,
-            LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
-            ResetPasswordPageRouterImpl(context),
-            email,
-          );
-        },
+            final scope = DependencyScope.of(context);
+            final repos = scope.repositoryFactory;
+            return ResetPasswordBloc(
+              repos.authRepository,
+              LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
+              ResetPasswordPageRouterImpl(context),
+              email,
+            );
+          },
           child: const ResetPasswordPageBody(),
         ),
       );
@@ -72,8 +71,7 @@ class ResetPasswordPageBody extends StatefulWidget {
 class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
   final TextEditingController _tokenController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _repeatPasswordController =
-      TextEditingController();
+  final TextEditingController _repeatPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool setRepeatError = false;
 
@@ -121,10 +119,9 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                         CustomTextField(
                           controller: _tokenController,
                           hint: context.locale.resetPasswordTokenHint,
-                          errorText:
-                              state.error == ResetPasswordError.invalidToken
-                                  ? context.locale.resetPasswordInvalidToken
-                                  : null,
+                          errorText: state.error == ResetPasswordError.invalidToken
+                              ? context.locale.resetPasswordInvalidToken
+                              : null,
                         ),
                         const SizedBox(height: 20),
                         CustomTextField(
@@ -138,9 +135,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                           ),
                           hint: context.locale.enterPassword,
                           errorText:
-                              state.error == ResetPasswordError.weakPassword
-                                  ? context.locale.invalidPassword
-                                  : null,
+                              state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
                         ),
                         const SizedBox(height: 20),
                         CustomTextField(
@@ -153,9 +148,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                             size: 20,
                           ),
                           hint: context.locale.repeatPassword,
-                          errorText: setRepeatError
-                              ? context.locale.notMatchPasswords
-                              : null,
+                          errorText: setRepeatError ? context.locale.notMatchPasswords : null,
                         ),
                         const SizedBox(height: 20),
                         CustomButton(
@@ -171,15 +164,12 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                           child: TextButton(
                             onPressed: () {
                               context.read<ResetPasswordBloc>().add(
-                                    const ResetPasswordEvents
-                                        .backButtonTapped(),
+                                    const ResetPasswordEvents.backButtonTapped(),
                                   );
                             },
                             child: Text(
                               context.locale.authorization,
-                              style: MyTheme.of(context)
-                                  .defaultTextStyle
-                                  .copyWith(
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
                                     color: MyTheme.of(context).darkGreyColor,
                                   ),
                             ),
@@ -231,10 +221,9 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                         CustomTextField(
                           controller: _tokenController,
                           hint: context.locale.resetPasswordTokenHint,
-                          errorText:
-                              state.error == ResetPasswordError.invalidToken
-                                  ? context.locale.resetPasswordInvalidToken
-                                  : null,
+                          errorText: state.error == ResetPasswordError.invalidToken
+                              ? context.locale.resetPasswordInvalidToken
+                              : null,
                         ),
                         const SizedBox(height: 20),
                         CustomTextField(
@@ -248,9 +237,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                           ),
                           hint: context.locale.enterPassword,
                           errorText:
-                              state.error == ResetPasswordError.weakPassword
-                                  ? context.locale.invalidPassword
-                                  : null,
+                              state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
                         ),
                         const SizedBox(height: 20),
                         CustomTextField(
@@ -263,9 +250,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                             size: 20,
                           ),
                           hint: context.locale.repeatPassword,
-                          errorText: setRepeatError
-                              ? context.locale.notMatchPasswords
-                              : null,
+                          errorText: setRepeatError ? context.locale.notMatchPasswords : null,
                         ),
                         const SizedBox(height: 24),
                         ListenableBuilder(
@@ -285,15 +270,12 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
                           child: TextButton(
                             onPressed: () {
                               context.read<ResetPasswordBloc>().add(
-                                    const ResetPasswordEvents
-                                        .backButtonTapped(),
+                                    const ResetPasswordEvents.backButtonTapped(),
                                   );
                             },
                             child: Text(
                               context.locale.authorization,
-                              style: MyTheme.of(context)
-                                  .defaultTextStyle
-                                  .copyWith(
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
                                     color: MyTheme.of(context).darkGreyColor,
                                   ),
                             ),

@@ -8,7 +8,7 @@ class UpdateSettingsInteractor extends BaseInteractor {
   UpdateSettingsInteractor(this._tournamentEditRepository);
 
   @override
-  String get interactorName => "UpdateSettingsInteractor.run()";
+  String get interactorName => 'UpdateSettingsInteractor.run()';
 
   Future run({
     required int tournamentId,

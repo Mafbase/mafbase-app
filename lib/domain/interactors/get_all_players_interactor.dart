@@ -8,9 +8,9 @@ class GetAllPlayersInteractor extends BaseInteractor {
   GetAllPlayersInteractor(this._repository);
 
   @override
-  String get interactorName => "GetAllPlayersInteractor";
+  String get interactorName => 'GetAllPlayersInteractor';
 
   Future<List<PlayerModel>> run() {
-   return wrap(() => _repository.players);
+    return wrap(() => _repository.players);
   }
 }

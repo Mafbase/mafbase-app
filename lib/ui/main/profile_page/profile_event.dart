@@ -11,11 +11,9 @@ class ProfileEvent with _$ProfileEvent {
 
   const factory ProfileEvent.loadUserProfile() = ProfileEventLoadUserProfile;
 
-  const factory ProfileEvent.setUserProfile(PlayerModel player) =
-      ProfileEventSetUserProfile;
+  const factory ProfileEvent.setUserProfile(PlayerModel player) = ProfileEventSetUserProfile;
 
-  const factory ProfileEvent.loadSubscription() =
-      ProfileEventLoadSubscription;
+  const factory ProfileEvent.loadSubscription() = ProfileEventLoadSubscription;
 
   const factory ProfileEvent.billSubscription(
     int days,

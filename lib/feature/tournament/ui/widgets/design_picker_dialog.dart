@@ -136,7 +136,7 @@ class _DesignPickerDialogState extends State<DesignPickerDialog> {
                               children: [
                                 Expanded(
                                   child: FullscreenViewerWrapper(
-                                    closeIcon: CloseButton(color: Colors.white),
+                                    closeIcon: const CloseButton(color: Colors.white),
                                     heroTag: 'design-preview-${design.designKey}',
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),

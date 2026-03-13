@@ -50,7 +50,7 @@ class _StartGameInfoDialogState extends State<StartGameInfoDialog> {
                 children: [
                   Flexible(
                     child: Text(
-                      "Оповещение об игре",
+                      'Оповещение об игре',
                       style: MyTheme.of(context).headerTextStyle,
                     ),
                   ),
@@ -101,7 +101,7 @@ class _StartGameInfoDialogState extends State<StartGameInfoDialog> {
                       ),
                       const SizedBox(width: 8),
                       CustomButton(
-                        text: "Отправить",
+                        text: 'Отправить',
                         onTap: () {
                           Navigator.pop(
                             context,

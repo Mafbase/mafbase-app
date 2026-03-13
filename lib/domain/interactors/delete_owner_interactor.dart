@@ -7,15 +7,14 @@ class DeleteOwnerInteractor extends BaseInteractor {
   DeleteOwnerInteractor(this._ownersRepository);
 
   @override
-  String get interactorName => "DeleteOwnerInteractor";
+  String get interactorName => 'DeleteOwnerInteractor';
 
   Future run({
     required int tournamentId,
     required int ownerId,
   }) {
     return wrap(
-      () =>
-          _ownersRepository.deleteOwner(tournamentId: tournamentId, ownerId: ownerId),
+      () => _ownersRepository.deleteOwner(tournamentId: tournamentId, ownerId: ownerId),
     );
   }
 }

@@ -8,7 +8,7 @@ class UpdateSettingsRequest extends BaseRequest<void> {
     required int tournamentId,
     required TournamentSettings settings,
   }) : super(
-          "/api/tournament/$tournamentId/updateSettings",
+          '/api/tournament/$tournamentId/updateSettings',
           data: settings,
         );
 

@@ -14,11 +14,9 @@ class ClubEvent with _$ClubEvent {
     required int days,
   }) = ClubEventBillClub;
 
-  const factory ClubEvent.changeHideDate({required DateTime? dateTime}) =
-      ClubEventChangeHideDate;
+  const factory ClubEvent.changeHideDate({required DateTime? dateTime}) = ClubEventChangeHideDate;
 
-  const factory ClubEvent.editDescription({required String description}) =
-      ClubEventEditDescription;
+  const factory ClubEvent.editDescription({required String description}) = ClubEventEditDescription;
 
   const factory ClubEvent.editPhoto({
     required Uint8List bytes,

@@ -18,37 +18,28 @@ import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_t
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 
-class PhotoThemeRepositoryImpl extends BaseRepository
-    implements PhotoThemeRepository {
+class PhotoThemeRepositoryImpl extends BaseRepository implements PhotoThemeRepository {
   PhotoThemeRepositoryImpl(super.client);
 
   @override
-  Future<List<PhotoThemeModel>> getThemes() =>
-      GetPhotoThemesRequest().execute(client).then(
-            (value) =>
-                value.themes.map(PhotoThemeModel.fromProto).toList(),
-          );
+  Future<List<PhotoThemeModel>> getThemes() => GetPhotoThemesRequest().execute(client).then(
+        (value) => value.themes.map(PhotoThemeModel.fromProto).toList(),
+      );
 
   @override
-  Future<int> createTheme(String name) =>
-      CreatePhotoThemeRequest(name: name)
-          .execute(client)
-          .then((value) => value.id);
+  Future<int> createTheme(String name) => CreatePhotoThemeRequest(name: name).execute(client).then((value) => value.id);
 
   @override
   Future<void> updateTheme(int themeId, String name) =>
       UpdatePhotoThemeRequest(themeId: themeId, name: name).execute(client);
 
   @override
-  Future<void> deleteTheme(int themeId) =>
-      DeletePhotoThemeRequest(themeId: themeId).execute(client);
+  Future<void> deleteTheme(int themeId) => DeletePhotoThemeRequest(themeId: themeId).execute(client);
 
   @override
   Future<List<PhotoThemeEntryModel>> getThemePlayers(int themeId) =>
       GetThemePlayersRequest(themeId: themeId).execute(client).then(
-            (value) => value.players
-                .map(PhotoThemeEntryModel.fromProto)
-                .toList(),
+            (value) => value.players.map(PhotoThemeEntryModel.fromProto).toList(),
           );
 
   @override
@@ -67,35 +58,28 @@ class PhotoThemeRepositoryImpl extends BaseRepository
 
   @override
   Future<void> deletePhoto(int themeId, int playerId) =>
-      DeleteThemePhotoRequest(themeId: themeId, playerId: playerId)
-          .execute(client);
+      DeleteThemePhotoRequest(themeId: themeId, playerId: playerId).execute(client);
 
   @override
   Future<void> setTournamentPhotoTheme(int tournamentId, int? themeId) =>
-      SetActiveThemeRequest(tournamentId: tournamentId, themeId: themeId)
-          .execute(client);
+      SetActiveThemeRequest(tournamentId: tournamentId, themeId: themeId).execute(client);
 
   @override
   Future<void> addPlayerToTheme(int themeId, int playerId) =>
-      AddPlayerToThemeRequest(themeId: themeId, playerId: playerId)
-          .execute(client);
+      AddPlayerToThemeRequest(themeId: themeId, playerId: playerId).execute(client);
 
   @override
-  Future<int> addPlayersFromTournament(int themeId, int tournamentId) =>
-      AddPlayersFromTournamentRequest(
+  Future<int> addPlayersFromTournament(int themeId, int tournamentId) => AddPlayersFromTournamentRequest(
         themeId: themeId,
         tournamentId: tournamentId,
       ).execute(client).then((value) => value.addedCount);
 
   @override
   Future<void> removePlayerFromTheme(int themeId, int playerId) =>
-      RemovePlayerFromThemeRequest(themeId: themeId, playerId: playerId)
-          .execute(client);
+      RemovePlayerFromThemeRequest(themeId: themeId, playerId: playerId).execute(client);
 
   @override
-  Future<List<PlayerModel>> getAvailablePlayers() =>
-      GetAllPlayersRequest().execute(client).then(
-            (value) =>
-                value.players.map(PlayerModel.fromProto).toList(),
-          );
+  Future<List<PlayerModel>> getAvailablePlayers() => GetAllPlayersRequest().execute(client).then(
+        (value) => value.players.map(PlayerModel.fromProto).toList(),
+      );
 }

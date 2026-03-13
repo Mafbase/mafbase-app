@@ -11,7 +11,6 @@ abstract class BaseSocket {
 
   BaseSocket(this.url);
 
-
   void connect() {
     _socket?.sink.close();
     _socket = WebSocketChannel.connect(Uri.parse(url));

@@ -7,13 +7,10 @@ import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_event.dar
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_router.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_state.dart';
 
-class ProfileDialogBloc
-    extends Bloc<ProfileDialogEvent, ProfileDialogState> {
+class ProfileDialogBloc extends Bloc<ProfileDialogEvent, ProfileDialogState> {
   final ProfileDialogRouter router;
-  late final EditPlayerInteractor _editPlayerInteractor =
-      EditPlayerInteractor(_repos.playersRepository);
-  late final AddPhotoInteractor _addPhotoInteractor =
-      AddPhotoInteractor(_repos.playersRepository);
+  late final EditPlayerInteractor _editPlayerInteractor = EditPlayerInteractor(_repos.playersRepository);
+  late final AddPhotoInteractor _addPhotoInteractor = AddPhotoInteractor(_repos.playersRepository);
   final RepositoryFactory _repos;
   final int playerId;
 
@@ -49,12 +46,10 @@ class ProfileDialogBloc
       PlayerModel(
         id: playerId,
         nickname: event.nickname,
-        mafbankNickname:
-            event.mafbankNickname.isEmpty ? null : event.mafbankNickname,
+        mafbankNickname: event.mafbankNickname.isEmpty ? null : event.mafbankNickname,
         fsmNickaname: event.fsmNickname.isEmpty ? null : event.fsmNickname,
       ),
     );
     router.close();
   }
-
 }

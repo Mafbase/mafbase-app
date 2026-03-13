@@ -12,5 +12,5 @@ class GetMyTournamentsInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "GetMyTournamentsInteractor";
+  String get interactorName => 'GetMyTournamentsInteractor';
 }

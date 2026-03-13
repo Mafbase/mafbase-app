@@ -6,8 +6,7 @@ import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
-class CannotMeetTournamentRepositoryImpl extends BaseRepository
-    implements CannotMeetTournamentRepository {
+class CannotMeetTournamentRepositoryImpl extends BaseRepository implements CannotMeetTournamentRepository {
   CannotMeetTournamentRepositoryImpl(super.client);
 
   @override
@@ -34,9 +33,7 @@ class CannotMeetTournamentRepositoryImpl extends BaseRepository
 
   @override
   Future<List<List<PlayerModel>>> pairs(int tournamentId) {
-    return GetCannotMeetPairsRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then((eventOut) {
+    return GetCannotMeetPairsRequest(tournamentId: tournamentId).execute(client).then((eventOut) {
       return eventOut.pairs
           .map(
             (e) => [

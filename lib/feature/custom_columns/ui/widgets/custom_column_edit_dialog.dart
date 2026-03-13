@@ -48,8 +48,7 @@ class _CustomColumnEditDialogState extends State<CustomColumnEditDialog> {
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.column?.title ?? '');
-    _formulaController = TextEditingController(text: widget.column?.formula ?? '')
-      ..addListener(_onFormulaChanged);
+    _formulaController = TextEditingController(text: widget.column?.formula ?? '')..addListener(_onFormulaChanged);
   }
 
   @override

@@ -11,8 +11,7 @@ class CustomColumnModel with _$CustomColumnModel {
     required String formula,
   }) = _CustomColumnModel;
 
-  factory CustomColumnModel.fromProto(CustomColumnDefinition proto) =>
-      CustomColumnModel(
+  factory CustomColumnModel.fromProto(CustomColumnDefinition proto) => CustomColumnModel(
         id: proto.id,
         title: proto.title,
         formula: proto.formula,

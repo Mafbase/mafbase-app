@@ -30,6 +30,5 @@ class InfoTableDescriptionEventChange implements InfoTableDescriptionEvent {
 class InfoTableDescriptionEventSave implements InfoTableDescriptionEvent {
   final Completer<void> completer;
 
-  InfoTableDescriptionEventSave({Completer<void>? completer})
-      : completer = completer ?? Completer<void>();
+  InfoTableDescriptionEventSave({Completer<void>? completer}) : completer = completer ?? Completer<void>();
 }

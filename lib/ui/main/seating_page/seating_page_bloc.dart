@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
@@ -25,10 +24,8 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
       AddSeparationInteractor(_repos.tournamentEditRepository);
   late final DeleteSeparationInteractor _deleteSeparationInteractor =
       DeleteSeparationInteractor(_repos.tournamentEditRepository);
-  late final CreateSeatingInteractor _createSeatingInteractor =
-      CreateSeatingInteractor(_repos.tournamentsRepository);
-  late final GetSeatingInteractor _getSeatingInteractor =
-      GetSeatingInteractor(_repos.tournamentEditRepository);
+  late final CreateSeatingInteractor _createSeatingInteractor = CreateSeatingInteractor(_repos.tournamentsRepository);
+  late final GetSeatingInteractor _getSeatingInteractor = GetSeatingInteractor(_repos.tournamentEditRepository);
   late final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
       GenerateFinalSeatingInteractor(_repos.tournamentEditRepository);
   final SeatingPageRouter router;
@@ -79,11 +76,10 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     Emitter emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    final notFound = await _repos.tournamentEditRepository
-        .getGomafiaSeating(
-          tournamentId: tournamentId,
-          gomafiaId: event.gomafiaId,
-        );
+    final notFound = await _repos.tournamentEditRepository.getGomafiaSeating(
+      tournamentId: tournamentId,
+      gomafiaId: event.gomafiaId,
+    );
 
     event.completer?.complete();
 
@@ -152,8 +148,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     final players = await _getTournamentsPlayersInteractor.run(
       tournamentId: tournamentId,
     );
-    final newPair =
-        await router.openSeparationDialog(availablePlayers: players);
+    final newPair = await router.openSeparationDialog(availablePlayers: players);
     if (newPair != null) {
       await _addSeparationInteractor.run(
         first: newPair.first,
@@ -193,5 +188,4 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
 
     emit(state.copyWith(isLoading: false, cannotMeet: pairs, games: seating));
   }
-
 }

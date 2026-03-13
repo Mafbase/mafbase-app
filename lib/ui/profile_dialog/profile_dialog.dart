@@ -54,8 +54,8 @@ class _ProfileDialogState extends State<ProfileDialog> {
   @override
   void initState() {
     nicknameController.text = widget.player.nickname;
-    fsmNicknameController.text = widget.player.fsmNickaname ?? "";
-    mafbankNicknameController.text = widget.player.mafbankNickname ?? "";
+    fsmNicknameController.text = widget.player.fsmNickaname ?? '';
+    mafbankNicknameController.text = widget.player.mafbankNickname ?? '';
     super.initState();
   }
 
@@ -116,7 +116,7 @@ class _ProfileDialogState extends State<ProfileDialog> {
                                     fit: BoxFit.cover,
                                   )
                                 : CachedNetworkImage(
-                                    imageUrl: state.imageUrl ?? "",
+                                    imageUrl: state.imageUrl ?? '',
                                     fit: BoxFit.cover,
                                   ),
                           ),

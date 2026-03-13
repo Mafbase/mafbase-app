@@ -23,8 +23,7 @@ import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
-
-import 'firebase_options.dart';
+import 'package:seating_generator_web/firebase_options.dart';
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
@@ -127,105 +126,105 @@ class _MafbaseAppState extends State<MafbaseApp> {
 
   @override
   Widget build(BuildContext context) => DependencyScopeWidget(
-    scope: widget.scope,
-    child: MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => widget.scope.authNotifier),
-        Provider.value(value: router),
-        const ThemeProvider(),
-      ],
-      child: Builder(
-        builder: (context) {
-          return MaterialApp.router(
-            scrollBehavior: MyCustomScrollBehavior(),
-            title: 'Mafbase',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData.light(useMaterial3: true).copyWith(
-              scaffoldBackgroundColor: context.theme.background2,
-              appBarTheme: AppBarTheme(
-                backgroundColor: context.theme.darkBlueColor,
-                foregroundColor: Colors.white,
-                iconTheme: const IconThemeData(color: Colors.white),
-                actionsIconTheme: const IconThemeData(color: Colors.white),
-                titleTextStyle: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 24,
-                ),
-              ),
-              dividerTheme: const DividerThemeData(
-                color: Color(0xFFCAC4D0),
-                thickness: 1,
-                space: 0,
-                indent: 0,
-                endIndent: 0,
-              ),
-              colorScheme: ThemeData.light(useMaterial3: true).colorScheme.copyWith(
-                    primary: MyTheme.of(context).darkGreyColor,
-                    primaryContainer: MyTheme.of(context).darkBlueColor,
-                    secondary: MyTheme.of(context).redColor,
-                    secondaryContainer: MyTheme.of(context).redColor,
+        scope: widget.scope,
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => widget.scope.authNotifier),
+            Provider.value(value: router),
+            const ThemeProvider(),
+          ],
+          child: Builder(
+            builder: (context) {
+              return MaterialApp.router(
+                scrollBehavior: MyCustomScrollBehavior(),
+                title: 'Mafbase',
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData.light(useMaterial3: true).copyWith(
+                  scaffoldBackgroundColor: context.theme.background2,
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: context.theme.darkBlueColor,
+                    foregroundColor: Colors.white,
+                    iconTheme: const IconThemeData(color: Colors.white),
+                    actionsIconTheme: const IconThemeData(color: Colors.white),
+                    titleTextStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 24,
+                    ),
                   ),
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                selectedItemColor: context.theme.darkGreyColor,
-                elevation: 5,
-                backgroundColor: context.theme.darkBlueColor,
-                selectedLabelStyle: const TextStyle().copyWith(
-                  color: Colors.white,
-                ),
-                unselectedLabelStyle: const TextStyle().copyWith(
-                  color: Colors.white,
-                ),
-                selectedIconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                unselectedIconTheme: const IconThemeData(
-                  color: Colors.white60,
-                ),
-              ),
-              iconTheme: IconThemeData(
-                color: context.theme.darkGreyColor,
-              ),
-              textButtonTheme: TextButtonThemeData(
-                style: ButtonStyle(
-                  textStyle: WidgetStateProperty.resolveWith(
-                    (states) {
-                      if (states.contains(WidgetState.disabled)) {
-                        return context.theme.btnTextStyle.copyWith(
-                          color: context.theme.btnTextColor.withValues(
-                            alpha: 0.5,
-                          ),
-                        );
-                      }
+                  dividerTheme: const DividerThemeData(
+                    color: Color(0xFFCAC4D0),
+                    thickness: 1,
+                    space: 0,
+                    indent: 0,
+                    endIndent: 0,
+                  ),
+                  colorScheme: ThemeData.light(useMaterial3: true).colorScheme.copyWith(
+                        primary: MyTheme.of(context).darkGreyColor,
+                        primaryContainer: MyTheme.of(context).darkBlueColor,
+                        secondary: MyTheme.of(context).redColor,
+                        secondaryContainer: MyTheme.of(context).redColor,
+                      ),
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    selectedItemColor: context.theme.darkGreyColor,
+                    elevation: 5,
+                    backgroundColor: context.theme.darkBlueColor,
+                    selectedLabelStyle: const TextStyle().copyWith(
+                      color: Colors.white,
+                    ),
+                    unselectedLabelStyle: const TextStyle().copyWith(
+                      color: Colors.white,
+                    ),
+                    selectedIconTheme: const IconThemeData(
+                      color: Colors.white,
+                    ),
+                    unselectedIconTheme: const IconThemeData(
+                      color: Colors.white60,
+                    ),
+                  ),
+                  iconTheme: IconThemeData(
+                    color: context.theme.darkGreyColor,
+                  ),
+                  textButtonTheme: TextButtonThemeData(
+                    style: ButtonStyle(
+                      textStyle: WidgetStateProperty.resolveWith(
+                        (states) {
+                          if (states.contains(WidgetState.disabled)) {
+                            return context.theme.btnTextStyle.copyWith(
+                              color: context.theme.btnTextColor.withValues(
+                                alpha: 0.5,
+                              ),
+                            );
+                          }
 
-                      return context.theme.btnTextStyle;
-                    },
+                          return context.theme.btnTextStyle;
+                        },
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            routerDelegate: context.read<AppRouter>().router.routerDelegate,
-            routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
-            routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
-            builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: TextScaler.noScaling,
-                boldText: false,
-              ),
-              child: child ?? const SizedBox.shrink(),
-            ),
-          );
-        },
-      ),
-    ),
-  );
+                routerDelegate: context.read<AppRouter>().router.routerDelegate,
+                routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
+                routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+                builder: (context, child) => MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: TextScaler.noScaling,
+                    boldText: false,
+                  ),
+                  child: child ?? const SizedBox.shrink(),
+                ),
+              );
+            },
+          ),
+        ),
+      );
 }
 
 class ThemeProvider extends SingleChildStatefulWidget {

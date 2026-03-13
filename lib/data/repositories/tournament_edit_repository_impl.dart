@@ -22,17 +22,14 @@ import 'package:seating_generator_web/domain/repositories/tournament_edit_reposi
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/downloader/downloader.dart';
 
-class TournamentEditRepositoryImpl extends BaseRepository
-    implements TournamentEditRepository {
+class TournamentEditRepositoryImpl extends BaseRepository implements TournamentEditRepository {
   TournamentEditRepositoryImpl(super.client);
 
   @override
   Future<List<Pair<PlayerModel, PlayerModel>>> getSeparations({
     required int tournamentId,
   }) {
-    return GetSeparationsRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then(
+    return GetSeparationsRequest(tournamentId: tournamentId).execute(client).then(
           (value) => value.pairs
               .map(
                 (e) => Pair(
@@ -85,9 +82,7 @@ class TournamentEditRepositoryImpl extends BaseRepository
   Future<List<List<GameResultModel>>> getResultModels({
     required int tournamentId,
   }) {
-    return GetSeatingRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then((value) {
+    return GetSeatingRequest(tournamentId: tournamentId).execute(client).then((value) {
       return value.item
           .splitBetween((first, second) => first.game != second.game)
           .map((e) => e.map((e) => GameResultModel.fromProto(e)).toList())
@@ -126,17 +121,14 @@ class TournamentEditRepositoryImpl extends BaseRepository
 
   @override
   Future<List<PlayerModel>> getFinalPlayers({required int tournamentId}) {
-    return GetFinalPlayersRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then(
+    return GetFinalPlayersRequest(tournamentId: tournamentId).execute(client).then(
           (value) => value.player.map((e) => PlayerModel.fromProto(e)).toList(),
         );
   }
 
   @override
   Future generateFinalGames({required int tournamentId}) {
-    return GenerateFinalSeatingRequest(tournamentId: tournamentId)
-        .execute(client);
+    return GenerateFinalSeatingRequest(tournamentId: tournamentId).execute(client);
   }
 
   @override
@@ -144,8 +136,7 @@ class TournamentEditRepositoryImpl extends BaseRepository
     required int tournamentId,
     required int game,
   }) async {
-    await CreateSwissGameRequest(tournamentId: tournamentId, game: game)
-        .execute(client);
+    await CreateSwissGameRequest(tournamentId: tournamentId, game: game).execute(client);
   }
 
   @override

@@ -39,10 +39,10 @@ class PushTokenService {
     try {
       final token = await getFcmToken();
       final deviceId = await getDeviceId();
-      
+
       final shouldSendToken = token != null && token.isNotEmpty && token != _lastSentToken;
       final shouldSendDeviceId = deviceId != null && deviceId.isNotEmpty && deviceId != _lastSentDeviceId;
-      
+
       if (shouldSendToken || shouldSendDeviceId) {
         await _authRepository.auth(
           pushToken: token,

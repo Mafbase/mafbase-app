@@ -42,9 +42,9 @@ class TournamentPage extends StatefulWidget {
     required int tournamentId,
   }) {
     return context.namedLocation(
-      "tournament_page",
+      'tournament_page',
       pathParameters: {
-        "id": "$tournamentId",
+        'id': '$tournamentId',
       },
     );
   }
@@ -52,8 +52,8 @@ class TournamentPage extends StatefulWidget {
   static RouteBase createRoute() => ShellRoute(
         routes: [
           GoRoute(
-            name: "tournament_page",
-            path: "/tournament/:id",
+            name: 'tournament_page',
+            path: '/tournament/:id',
             routes: [
               SeatingPage.route,
               SeatingInsertingPage.route,
@@ -65,17 +65,17 @@ class TournamentPage extends StatefulWidget {
             ],
             builder: (context, state) {
               return PlayersListBody(
-                tournamentId: int.parse(state.pathParameters["id"] ?? ""),
+                tournamentId: int.parse(state.pathParameters['id'] ?? ''),
               );
             },
           ),
         ],
         builder: (context, state, child) {
-          final tournamentId = int.parse(state.pathParameters["id"] ?? "");
+          final tournamentId = int.parse(state.pathParameters['id'] ?? '');
           return MultiBlocProvider(
             providers: [
               BlocProvider<TournamentPageBloc>(
-                key: const Key("TournamentPageBloc"),
+                key: const Key('TournamentPageBloc'),
                 create: (context) {
                   final repos = RepositoryFactory.of(context);
                   return TournamentPageBloc(
@@ -89,7 +89,7 @@ class TournamentPage extends StatefulWidget {
                 },
               ),
               BlocProvider<SeatingPageBloc>(
-                key: const Key("SeatingPageBloc"),
+                key: const Key('SeatingPageBloc'),
                 create: (context) {
                   final repos = RepositoryFactory.of(context);
                   return SeatingPageBloc(
@@ -104,7 +104,7 @@ class TournamentPage extends StatefulWidget {
               ),
             ],
             child: TournamentPage(
-              tournamentId: int.parse(state.pathParameters["id"] ?? ""),
+              tournamentId: int.parse(state.pathParameters['id'] ?? ''),
               child: child,
             ),
           );

@@ -8,7 +8,7 @@ class GetClubsInteractor extends BaseInteractor {
   GetClubsInteractor(this._clubRepository);
 
   @override
-  String get interactorName => "GetClubsInteractor";
+  String get interactorName => 'GetClubsInteractor';
 
   Future<List<ClubModel>> run({bool onlyMy = false}) => wrap(
         () => _clubRepository.getClubs(

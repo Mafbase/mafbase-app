@@ -10,8 +10,7 @@ class CustomColumnValueModel with _$CustomColumnValueModel {
     double? value,
   }) = _CustomColumnValueModel;
 
-  factory CustomColumnValueModel.fromProto(CustomColumnValue proto) =>
-      CustomColumnValueModel(
+  factory CustomColumnValueModel.fromProto(CustomColumnValue proto) => CustomColumnValueModel(
         title: proto.title,
         value: proto.hasValue() ? proto.value : null,
       );

@@ -74,5 +74,4 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
       rethrow;
     }
   }
-
 }

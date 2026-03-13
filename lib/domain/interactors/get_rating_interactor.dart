@@ -16,5 +16,5 @@ class GetRatingInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "GetRatingInteractor";
+  String get interactorName => 'GetRatingInteractor';
 }

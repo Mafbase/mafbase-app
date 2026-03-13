@@ -38,11 +38,13 @@ class TournamentMenu extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: sections
-                    .map((section) => _buildSection(
-                          context,
-                          section,
-                          theme,
-                        ),)
+                    .map(
+                      (section) => _buildSection(
+                        context,
+                        section,
+                        theme,
+                      ),
+                    )
                     .toList(),
               ),
             ),
@@ -85,7 +87,6 @@ class TournamentMenu extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class _TournamentMenuItem extends StatelessWidget {
@@ -109,18 +110,14 @@ class _TournamentMenuItem extends StatelessWidget {
           height: 42,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: item.selected
-                ? theme.sidebarActiveItemBgColor
-                : Colors.transparent,
+            color: item.selected ? theme.sidebarActiveItemBgColor : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
             children: [
               Icon(
                 item.icon,
-                color: item.selected
-                    ? Colors.white
-                    : theme.sidebarInactiveTextColor,
+                color: item.selected ? Colors.white : theme.sidebarInactiveTextColor,
                 size: 20,
               ),
               const SizedBox(width: 12),
@@ -128,9 +125,7 @@ class _TournamentMenuItem extends StatelessWidget {
                 child: Text(
                   item.text,
                   style: GoogleFonts.inter(
-                    color: item.selected
-                        ? Colors.white
-                        : theme.sidebarInactiveTextColor,
+                    color: item.selected ? Colors.white : theme.sidebarInactiveTextColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),

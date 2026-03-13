@@ -15,8 +15,7 @@ class AddClubGameEvent with _$AddClubGameEvent {
     int? gameId,
   }) = AddClubGameEventSubmit;
 
-  const factory AddClubGameEvent.edit({required int gameId}) =
-      AddClubGameEventPageEdit;
+  const factory AddClubGameEvent.edit({required int gameId}) = AddClubGameEventPageEdit;
 
   const factory AddClubGameEvent.onNewPlayer({
     required int index,
@@ -27,6 +26,5 @@ class AddClubGameEvent with _$AddClubGameEvent {
     required DateTime dateTime,
   }) = AddClubGameEventNewGame;
 
-  const factory AddClubGameEvent.deleteGame({required int gameId}) =
-      AddClubGameEventDeleteGame;
+  const factory AddClubGameEvent.deleteGame({required int gameId}) = AddClubGameEventDeleteGame;
 }

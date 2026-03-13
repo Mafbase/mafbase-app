@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -55,8 +53,7 @@ class SignUpPageBody extends StatefulWidget {
 
 class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _repeatPasswordController =
-      TextEditingController();
+  final TextEditingController _repeatPasswordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   bool setRepeatError = false;
 
@@ -111,9 +108,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                           size: 20,
                         ),
                         hint: context.locale.yourEmail,
-                        errorText: state.emailExist
-                            ? context.locale.wrongEmail
-                            : null,
+                        errorText: state.emailExist ? context.locale.wrongEmail : null,
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
@@ -126,9 +121,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                           size: 20,
                         ),
                         hint: context.locale.enterPassword,
-                        errorText: state.weakPassword
-                            ? context.locale.invalidPassword
-                            : null,
+                        errorText: state.weakPassword ? context.locale.invalidPassword : null,
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
@@ -141,9 +134,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                           size: 20,
                         ),
                         hint: context.locale.repeatPassword,
-                        errorText: setRepeatError
-                            ? context.locale.notMatchPasswords
-                            : null,
+                        errorText: setRepeatError ? context.locale.notMatchPasswords : null,
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
@@ -159,8 +150,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           style: context.theme.defaultTextStyle.copyWith(
-                            color: context.theme.defaultTextStyle.color
-                                ?.withValues(alpha: 0.5),
+                            color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
                             fontSize: 12,
                           ),
                           children: [
@@ -171,7 +161,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                                 ..onTap = () {
                                   launchUrl(
                                     Uri.parse(
-                                      "https://mafbase.ru/images/politika.pdf",
+                                      'https://mafbase.ru/images/politika.pdf',
                                     ),
                                   );
                                 },
@@ -242,9 +232,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                           size: 20,
                         ),
                         hint: context.locale.yourEmail,
-                        errorText: state.emailExist
-                            ? context.locale.wrongEmail
-                            : null,
+                        errorText: state.emailExist ? context.locale.wrongEmail : null,
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
@@ -257,9 +245,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                           size: 20,
                         ),
                         hint: context.locale.enterPassword,
-                        errorText: state.weakPassword
-                            ? context.locale.invalidPassword
-                            : null,
+                        errorText: state.weakPassword ? context.locale.invalidPassword : null,
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
@@ -272,9 +258,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                           size: 20,
                         ),
                         hint: context.locale.repeatPassword,
-                        errorText: setRepeatError
-                            ? context.locale.notMatchPasswords
-                            : null,
+                        errorText: setRepeatError ? context.locale.notMatchPasswords : null,
                       ),
                       const SizedBox(height: 24),
                       CustomButton(
@@ -289,8 +273,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           style: context.theme.defaultTextStyle.copyWith(
-                            color: context.theme.defaultTextStyle.color
-                                ?.withValues(alpha: 0.5),
+                            color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
                             fontSize: 14,
                           ),
                           children: [
@@ -301,7 +284,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
                                 ..onTap = () {
                                   launchUrl(
                                     Uri.parse(
-                                      "https://mafbase.ru/images/politika.pdf",
+                                      'https://mafbase.ru/images/politika.pdf',
                                     ),
                                   );
                                 },

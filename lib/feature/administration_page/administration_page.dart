@@ -13,11 +13,9 @@ import 'package:seating_generator_web/feature/administration_page/administration
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/utils.dart';
-
-import 'widgets/add_owner_dialog.dart';
-import 'widgets/onwer_row.dart';
+import 'package:seating_generator_web/feature/administration_page/widgets/add_owner_dialog.dart';
+import 'package:seating_generator_web/feature/administration_page/widgets/onwer_row.dart';
 
 class AdministrationPage extends StatefulWidget {
   final int tournamentId;
@@ -37,7 +35,7 @@ class AdministrationPage extends StatefulWidget {
     return context.namedLocation(
       _tournamentName,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
     );
   }
@@ -48,7 +46,7 @@ class AdministrationPage extends StatefulWidget {
     path: 'administration',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final tournamentId = int.parse(state.pathParameters['id']!);
       final OwnersRepository ownersRepository = RepositoryFactory.of(context).ownersRepository;
       final getAdministrationInteractor = GetAdministrationInteractor(ownersRepository);
       final addOwnerInteractor = AddOwnerInteractor(ownersRepository);

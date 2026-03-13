@@ -12,6 +12,5 @@ class CreatePhotoThemeRequest extends BaseRequest<CreatePhotoThemeEventOut> {
         );
 
   @override
-  FutureOr<CreatePhotoThemeEventOut> parse(List<int> bytes) =>
-      compute(CreatePhotoThemeEventOut.fromBuffer, bytes);
+  FutureOr<CreatePhotoThemeEventOut> parse(List<int> bytes) => compute(CreatePhotoThemeEventOut.fromBuffer, bytes);
 }

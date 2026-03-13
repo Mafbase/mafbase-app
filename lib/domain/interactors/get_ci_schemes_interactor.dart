@@ -12,5 +12,5 @@ class GetCiSchemesInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "GetCiSchemesInteractor";
+  String get interactorName => 'GetCiSchemesInteractor';
 }

@@ -7,27 +7,21 @@ part 'tournament_page_event.freezed.dart';
 
 @freezed
 class TournamentPageEvent with _$TournamentPageEvent {
-  const factory TournamentPageEvent.backButtonPressed() =
-      TournamentPageBackButtonPreesedEvent;
+  const factory TournamentPageEvent.backButtonPressed() = TournamentPageBackButtonPreesedEvent;
 
-  const factory TournamentPageEvent.playersListTapped() =
-      TournamentPageEventPlayersListTapped;
+  const factory TournamentPageEvent.playersListTapped() = TournamentPageEventPlayersListTapped;
 
   const factory TournamentPageEvent.updateSettings({
     required TournamentSettingsModel settings,
   }) = TournamentPageEventUpdateSettings;
 
-  const factory TournamentPageEvent.openRating() =
-      TournamentPageEventOpenRating;
+  const factory TournamentPageEvent.openRating() = TournamentPageEventOpenRating;
 
-  const factory TournamentPageEvent.playersListOpened() =
-      TournamentPagePlayerListOpenedEvent;
+  const factory TournamentPageEvent.playersListOpened() = TournamentPagePlayerListOpenedEvent;
 
-  const factory TournamentPageEvent.addPlayerTapped() =
-      TournamentPageEventAddPlayer;
+  const factory TournamentPageEvent.addPlayerTapped() = TournamentPageEventAddPlayer;
 
-  const factory TournamentPageEvent.editTournamentSettings() =
-      TournamentPageEventEditSettings;
+  const factory TournamentPageEvent.editTournamentSettings() = TournamentPageEventEditSettings;
 
   const factory TournamentPageEvent.deletePlayer({
     required PlayerModel player,
@@ -37,16 +31,14 @@ class TournamentPageEvent with _$TournamentPageEvent {
     required PlayerModel player,
   }) = TournamentPageEventOpenProfileDialog;
 
-  const factory TournamentPageEvent.openSeatingPage() =
-      TournamentPageEventOpenSeatingPage;
+  const factory TournamentPageEvent.openSeatingPage() = TournamentPageEventOpenSeatingPage;
 
   const factory TournamentPageEvent.bill({
     required int playersCount,
     required bool billedTranlsation,
   }) = TournamentPageEventBill;
 
-  const factory TournamentPageEvent.pageOpened() =
-      TournamentPageEventPageOpened;
+  const factory TournamentPageEvent.pageOpened() = TournamentPageEventPageOpened;
 
   const factory TournamentPageEvent.setFinalPlayers({
     required List<PlayerModel> players,
@@ -57,8 +49,7 @@ class TournamentPageEvent with _$TournamentPageEvent {
     TimeOfDay? time,
   }) = TournamentPageEventStartGameInfo;
 
-  const factory TournamentPageEvent.customTextInfo({required String text}) =
-      TournamentPageEventCustomTextInfo;
+  const factory TournamentPageEvent.customTextInfo({required String text}) = TournamentPageEventCustomTextInfo;
 
   const factory TournamentPageEvent.setActivePhotoTheme({
     int? themeId,

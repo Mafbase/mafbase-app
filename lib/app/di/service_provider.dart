@@ -11,8 +11,7 @@ class ServiceProvider {
 
   ServiceProvider(this._repositoryFactory);
 
-  static ServiceProvider of(BuildContext context) =>
-      DependencyScope.of(context).serviceProvider;
+  static ServiceProvider of(BuildContext context) => DependencyScope.of(context).serviceProvider;
 
   late final DeviceIdService deviceIdService = DeviceIdService();
 

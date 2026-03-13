@@ -280,7 +280,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get nicknamePrototype => wrap(
         Text(
-          widget.sortedRows.map((e) => e.nickname).sortedBy<num>((element) => element.length).lastOrNull ?? "",
+          widget.sortedRows.map((e) => e.nickname).sortedBy<num>((element) => element.length).lastOrNull ?? '',
         ),
       );
 
@@ -298,7 +298,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get scorePrototype => wrap(
         Text(
-          widget.sortedRows.map((e) => e.score.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
+          widget.sortedRows.map((e) => e.score.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? '',
         ),
       );
 
@@ -311,7 +311,7 @@ class _RatingTableState extends State<RatingTable> {
   Widget get addScorePrototype => wrap(
         Text(
           widget.sortedRows.map((e) => e.addScore.toString()).sortedBy<num>((element) => element.length).lastOrNull ??
-              "",
+              '',
         ),
       );
 
@@ -324,7 +324,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get winPrototype => wrap(
         Text(
-          widget.sortedRows.map((e) => e.wins.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
+          widget.sortedRows.map((e) => e.wins.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? '',
         ),
       );
 
@@ -337,7 +337,7 @@ class _RatingTableState extends State<RatingTable> {
   Widget get roleWinPrototype => wrap(
         Text(
           widget.sortedRows.map((e) => e.roleWins.toString()).sortedBy<num>((element) => element.length).lastOrNull ??
-              "",
+              '',
         ),
       );
 
@@ -349,7 +349,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get ciPrototype => wrap(
         Text(
-          widget.sortedRows.map((e) => e.ci.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
+          widget.sortedRows.map((e) => e.ci.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? '',
         ),
       );
 
@@ -371,7 +371,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get diesPrototype => wrap(
         Text(
-          widget.sortedRows.map((e) => e.died.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? "",
+          widget.sortedRows.map((e) => e.died.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? '',
         ),
       );
 
@@ -415,7 +415,7 @@ class _RatingTableState extends State<RatingTable> {
               }
               return ListView.builder(
                 key: Key(
-                  "GameHeader${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}",
+                  'GameHeader${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}',
                 ),
                 physics: const ClampingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
@@ -453,7 +453,7 @@ class _RatingTableState extends State<RatingTable> {
                 ),
                 child: Center(
                   child: Text(
-                    widget.sortedRows[rowIndex].games[index].score?.toString() ?? "",
+                    widget.sortedRows[rowIndex].games[index].score?.toString() ?? '',
                   ),
                 ),
               ),
@@ -471,7 +471,7 @@ class _RatingTableState extends State<RatingTable> {
           }
           return ListView.builder(
             key: Key(
-              "GameRow$rowIndex/${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}",
+              'GameRow$rowIndex/${widget.sortedRows.length}/${widget.clubId}/${widget.tournamentId}',
             ),
             physics: const ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -496,7 +496,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget winRateFromModel(ClubRatingRowModel model) => wrap(
         Text(
-          "${(customDivideForPercents(model.wins, model.gamesCount)).round()}% (${model.wins}/${model.gamesCount})",
+          '${(customDivideForPercents(model.wins, model.gamesCount)).round()}% (${model.wins}/${model.gamesCount})',
         ),
       );
 
@@ -514,10 +514,10 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget citizenWinRateFromModel(ClubRatingRowModel model) => wrap(
         Text(
-          "${customDivideForPercents(
+          '${customDivideForPercents(
             model.citizenWinsCount,
             model.citizenGamesCount,
-          ).round()}% (${model.citizenWinsCount}/${model.citizenGamesCount})",
+          ).round()}% (${model.citizenWinsCount}/${model.citizenGamesCount})',
         ),
       );
 
@@ -535,10 +535,10 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget donWinRateFromModel(ClubRatingRowModel model) => wrap(
         Text(
-          "${customDivideForPercents(
+          '${customDivideForPercents(
             model.donsWinsCount,
             model.donsGamesCount,
-          ).round()}% (${model.donsWinsCount}/${model.donsGamesCount})",
+          ).round()}% (${model.donsWinsCount}/${model.donsGamesCount})',
         ),
       );
 
@@ -556,10 +556,10 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget sheriffWinRateFromModel(ClubRatingRowModel model) => wrap(
         Text(
-          "${customDivideForPercents(
+          '${customDivideForPercents(
             model.sheriffWinsCount,
             model.sheriffGamesCount,
-          ).round()}% (${model.sheriffWinsCount}/${model.sheriffGamesCount})",
+          ).round()}% (${model.sheriffWinsCount}/${model.sheriffGamesCount})',
         ),
       );
 
@@ -577,10 +577,10 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget mafiaWinRateFromModel(ClubRatingRowModel model) => wrap(
         Text(
-          "${customDivideForPercents(
+          '${customDivideForPercents(
             model.mafiaWinsCount,
             model.mafiaGamesCount,
-          ).round()}% (${model.mafiaWinsCount}/${model.mafiaGamesCount})",
+          ).round()}% (${model.mafiaWinsCount}/${model.mafiaGamesCount})',
         ),
       );
 
@@ -600,55 +600,55 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget diesStatFromModel(ClubRatingRowModel model) => wrap(
         Text(
-          "${customDivideForPercents(
+          '${customDivideForPercents(
             model.died,
             model.citizenGamesCount + model.sheriffGamesCount,
-          ).round()}% (${model.died}/${model.citizenGamesCount + model.sheriffGamesCount})",
+          ).round()}% (${model.died}/${model.citizenGamesCount + model.sheriffGamesCount})',
         ),
       );
 
   Widget diesStat(int index) => diesStatFromModel(widget.sortedRows[index]);
 
   Widget scorePerGame(int index) => wrap(
-        Text("${customDivide(
+        Text('${customDivide(
           widget.sortedRows[index].score,
           widget.sortedRows[index].gamesCount,
-        )}"),
+        )}'),
       );
 
   Widget addScorePerGame(int index) => wrap(
-        Text("${customDivide(
+        Text('${customDivide(
           widget.sortedRows[index].addScore,
           widget.sortedRows[index].gamesCount,
-        )}"),
+        )}'),
       );
 
   Widget citizenAddScorePerGame(int index) => wrap(
-        Text("${widget.isTournament ? widget.sortedRows[index].citizenAddScore : customDivide(
+        Text('${widget.isTournament ? widget.sortedRows[index].citizenAddScore : customDivide(
             widget.sortedRows[index].citizenAddScore,
             widget.sortedRows[index].citizenGamesCount,
-          )}"),
+          )}'),
       );
 
   Widget sheriffAddScorePerGame(int index) => wrap(
-        Text("${widget.isTournament ? widget.sortedRows[index].sheriffAddScore : customDivide(
+        Text('${widget.isTournament ? widget.sortedRows[index].sheriffAddScore : customDivide(
             widget.sortedRows[index].sheriffAddScore,
             widget.sortedRows[index].sheriffGamesCount,
-          )}"),
+          )}'),
       );
 
   Widget donAddScorePerGame(int index) => wrap(
-        Text("${widget.isTournament ? widget.sortedRows[index].donAddScore : customDivide(
+        Text('${widget.isTournament ? widget.sortedRows[index].donAddScore : customDivide(
             widget.sortedRows[index].donAddScore,
             widget.sortedRows[index].donsGamesCount,
-          )}"),
+          )}'),
       );
 
   Widget mafiaAddScorePerGame(int index) => wrap(
-        Text("${widget.isTournament ? widget.sortedRows[index].mafiaAddScore : customDivide(
+        Text('${widget.isTournament ? widget.sortedRows[index].mafiaAddScore : customDivide(
             widget.sortedRows[index].mafiaAddScore,
             widget.sortedRows[index].mafiaGamesCount,
-          )}"),
+          )}'),
       );
 
   @override
@@ -667,7 +667,7 @@ class _RatingTableState extends State<RatingTable> {
                       ...columns.take(2),
                       Expanded(
                         child: ListView(
-                          padding: EdgeInsets.only(right: 16),
+                          padding: const EdgeInsets.only(right: 16),
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           children: columns.skip(2).toList(),
@@ -707,21 +707,21 @@ class _RatingTableState extends State<RatingTable> {
   List<Widget> get scoreColumns => [
         column(
           mainControllers[0],
-          key: const Key("scoreColumn0"),
+          key: const Key('scoreColumn0'),
           builder: indexWidgets,
           header: Text(context.locale.ratingNumber),
           prototype: indexProtoype,
         ),
         column(
           mainControllers[1],
-          key: const Key("scoreColumn1"),
+          key: const Key('scoreColumn1'),
           builder: nicknames,
           header: Text(context.locale.ratingPlayer),
           prototype: nicknamePrototype,
         ),
         column(
           mainControllers[2],
-          key: const Key("scoreColumn2"),
+          key: const Key('scoreColumn2'),
           builder: scorePerGame,
           header: InkWell(
             onTap: () {
@@ -732,7 +732,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[3],
-          key: const Key("scoreColumn3"),
+          key: const Key('scoreColumn3'),
           builder: addScorePerGame,
           header: InkWell(
             onTap: () {
@@ -743,7 +743,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[4],
-          key: const Key("scoreColumn4"),
+          key: const Key('scoreColumn4'),
           builder: citizenAddScorePerGame,
           header: InkWell(
             onTap: () {
@@ -754,7 +754,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[5],
-          key: const Key("scoreColumn5"),
+          key: const Key('scoreColumn5'),
           builder: sheriffAddScorePerGame,
           header: InkWell(
             onTap: () {
@@ -765,7 +765,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[6],
-          key: const Key("scoreColumn6"),
+          key: const Key('scoreColumn6'),
           builder: donAddScorePerGame,
           header: InkWell(
             onTap: () {
@@ -776,7 +776,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[7],
-          key: const Key("scoreColumn7"),
+          key: const Key('scoreColumn7'),
           builder: mafiaAddScorePerGame,
           header: InkWell(
             onTap: () {
@@ -792,14 +792,14 @@ class _RatingTableState extends State<RatingTable> {
     return [
       column(
         mainControllers[0],
-        key: const Key("customColumn0"),
+        key: const Key('customColumn0'),
         builder: indexWidgets,
         header: Text(context.locale.ratingNumber),
         prototype: indexProtoype,
       ),
       column(
         mainControllers[1],
-        key: const Key("customColumn1"),
+        key: const Key('customColumn1'),
         builder: nicknames,
         header: Text(context.locale.ratingPlayer),
         prototype: nicknamePrototype,
@@ -807,12 +807,12 @@ class _RatingTableState extends State<RatingTable> {
       for (int i = 0; i < customColumnDefs.length; i++)
         column(
           mainControllers[2 + i],
-          key: Key("customColumn${2 + i}"),
+          key: Key('customColumn${2 + i}'),
           builder: (index) => wrap(
             Text(
               widget.sortedRows[index].customColumns.length > i
-                  ? widget.sortedRows[index].customColumns[i].value?.toString() ?? "—"
-                  : "—",
+                  ? widget.sortedRows[index].customColumns[i].value?.toString() ?? '—'
+                  : '—',
             ),
           ),
           header: InkWell(
@@ -832,21 +832,21 @@ class _RatingTableState extends State<RatingTable> {
   List<Widget> get statsColumn => [
         column(
           mainControllers[0],
-          key: const Key("statsColumn0"),
+          key: const Key('statsColumn0'),
           builder: indexWidgets,
           header: Text(context.locale.ratingNumber),
           prototype: indexProtoype,
         ),
         column(
           mainControllers[1],
-          key: const Key("statsColumn0"),
+          key: const Key('statsColumn0'),
           builder: nicknames,
           header: Text(context.locale.ratingPlayer),
           prototype: nicknamePrototype,
         ),
         column(
           mainControllers[2],
-          key: const Key("statsColumn2"),
+          key: const Key('statsColumn2'),
           builder: winRate,
           header: InkWell(
             onTap: () {
@@ -858,7 +858,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[3],
-          key: const Key("statsColumn3"),
+          key: const Key('statsColumn3'),
           builder: citizenWinRate,
           header: InkWell(
             onTap: () {
@@ -870,7 +870,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[4],
-          key: const Key("statsColumn4"),
+          key: const Key('statsColumn4'),
           builder: sheriffWinRate,
           header: InkWell(
             onTap: () {
@@ -882,7 +882,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[5],
-          key: const Key("statsColumn5"),
+          key: const Key('statsColumn5'),
           builder: mafiaWinRate,
           header: InkWell(
             onTap: () {
@@ -894,7 +894,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[6],
-          key: const Key("statsColumn6"),
+          key: const Key('statsColumn6'),
           builder: donWinRate,
           header: InkWell(
             onTap: () {
@@ -906,7 +906,7 @@ class _RatingTableState extends State<RatingTable> {
         ),
         column(
           mainControllers[7],
-          key: const Key("statsColumn7"),
+          key: const Key('statsColumn7'),
           builder: diesStat,
           header: InkWell(
             child: Text(context.locale.ratingKillPercentage),
@@ -927,7 +927,7 @@ class _RatingTableState extends State<RatingTable> {
         final expand = width * gamesCount > constraints.maxWidth && !widget.isMobile;
         final header = gameHeader(width, expand);
         final listView = ListView.builder(
-          key: const Key("fullColumns2"),
+          key: const Key('fullColumns2'),
           physics: const ClampingScrollPhysics(),
           controller: mainControllers[2],
           itemCount: widget.sortedRows.length,
@@ -962,21 +962,21 @@ class _RatingTableState extends State<RatingTable> {
     return [
       column(
         mainControllers[0],
-        key: const Key("fullColumns0"),
+        key: const Key('fullColumns0'),
         builder: indexWidgets,
-        header: const Text("№"),
+        header: const Text('№'),
         prototype: indexProtoype,
       ),
       column(
         mainControllers[1],
-        key: const Key("fullColumns1"),
+        key: const Key('fullColumns1'),
         builder: (index) => nicknames(index),
         header: Text(context.locale.ratingPlayer),
         prototype: nicknamePrototype,
       ),
       column(
         mainControllers[3],
-        key: const Key("fullColumns3"),
+        key: const Key('fullColumns3'),
         builder: scores,
         header: InkWell(
           onTap: () {
@@ -988,7 +988,7 @@ class _RatingTableState extends State<RatingTable> {
       ),
       column(
         mainControllers[4],
-        key: const Key("fullColumns4"),
+        key: const Key('fullColumns4'),
         builder: addScores,
         header: Text(context.locale.ratingPlus),
         prototype: addScorePrototype,
@@ -1002,7 +1002,7 @@ class _RatingTableState extends State<RatingTable> {
             ),
       column(
         mainControllers[5],
-        key: const Key("fullColumns5"),
+        key: const Key('fullColumns5'),
         header: Text(context.locale.ratingCi),
         prototype: ciPrototype,
         builder: ciWidget,
@@ -1010,13 +1010,13 @@ class _RatingTableState extends State<RatingTable> {
       ),
       column(
         mainControllers[6],
-        key: const Key("fullColumns6"),
+        key: const Key('fullColumns6'),
         header: Text(context.locale.ratingWin),
         prototype: winPrototype,
         builder: wins,
       ),
       column(
-        key: const Key("fullColumns7"),
+        key: const Key('fullColumns7'),
         mainControllers[7],
         header: Text(context.locale.ratingRoleWin),
         prototype: roleWinPrototype,
@@ -1024,14 +1024,14 @@ class _RatingTableState extends State<RatingTable> {
       ),
       column(
         mainControllers[8],
-        key: const Key("fullColumns8"),
+        key: const Key('fullColumns8'),
         builder: dies,
         header: Text(context.locale.ratingDies),
         prototype: diesPrototype,
       ),
       column(
         mainControllers[9],
-        key: const Key("fullColumns9"),
+        key: const Key('fullColumns9'),
         builder: totalGamesWidget,
         isLastColumn: true,
         header: Text(context.locale.ratingGames),

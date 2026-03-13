@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/app/di/storage_factory.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -92,7 +90,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
           child: Form(
             key: _formKey,
             child: Container(
-              key: const Key("loginBox"),
+              key: const Key('loginBox'),
               child: AutofillGroup(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -111,7 +109,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
-                        key: const Key("login_field"),
+                        key: const Key('login_field'),
                         autoFillHints: const [
                           AutofillHints.username,
                           AutofillHints.email,
@@ -122,13 +120,11 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                               return null;
                             }
                           }
-                          return "Введите корректный адрес электронной почты";
+                          return 'Введите корректный адрес электронной почты';
                         },
                         controller: _emailController,
                         hint: AppLocalizations.of(context)!.loginEmailHint,
-                        errorText: state.hasError
-                            ? context.locale.invalidEmailOrPassword
-                            : null,
+                        errorText: state.hasError ? context.locale.invalidEmailOrPassword : null,
                         focusNode: _emailFocusNode,
                         onSubmit: (_) {
                           _emailFocusNode.unfocus();
@@ -142,7 +138,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
-                        key: const Key("password_field"),
+                        key: const Key('password_field'),
                         autoFillHints: const [AutofillHints.password],
                         controller: _passwordController,
                         focusNode: _passwordFocusNode,
@@ -182,7 +178,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       const SizedBox(height: 20),
                       CustomButton(
                         disabled: state.isLoading,
-                        key: const Key("auth_button"),
+                        key: const Key('auth_button'),
                         text: AppLocalizations.of(context)!.loginIn,
                         minimize: true,
                         onTap: _onSubmit,
@@ -205,8 +201,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           style: context.theme.defaultTextStyle.copyWith(
-                            color: context.theme.defaultTextStyle.color
-                                ?.withValues(alpha: 0.5),
+                            color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
                             fontSize: 12,
                           ),
                           children: [
@@ -217,7 +212,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                                 ..onTap = () {
                                   launchUrl(
                                     Uri.parse(
-                                      "https://mafbase.ru/images/politika.pdf",
+                                      'https://mafbase.ru/images/politika.pdf',
                                     ),
                                   );
                                 },
@@ -259,7 +254,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
           child: Form(
             key: _formKey,
             child: Container(
-              key: const Key("loginBox"),
+              key: const Key('loginBox'),
               child: AutofillGroup(
                 child: Padding(
                   padding: const EdgeInsets.all(40),
@@ -275,7 +270,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       ),
                       const SizedBox(height: 28),
                       CustomTextField(
-                        key: const Key("login_field"),
+                        key: const Key('login_field'),
                         autoFillHints: const [
                           AutofillHints.username,
                           AutofillHints.email,
@@ -286,13 +281,11 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                               return null;
                             }
                           }
-                          return "Введите корректный адрес электронной почты";
+                          return 'Введите корректный адрес электронной почты';
                         },
                         controller: _emailController,
                         hint: AppLocalizations.of(context)!.loginEmailHint,
-                        errorText: state.hasError
-                            ? context.locale.invalidEmailOrPassword
-                            : null,
+                        errorText: state.hasError ? context.locale.invalidEmailOrPassword : null,
                         focusNode: _emailFocusNode,
                         onSubmit: (_) {
                           _emailFocusNode.unfocus();
@@ -306,7 +299,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
-                        key: const Key("password_field"),
+                        key: const Key('password_field'),
                         autoFillHints: const [AutofillHints.password],
                         controller: _passwordController,
                         focusNode: _passwordFocusNode,
@@ -346,7 +339,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                       const SizedBox(height: 24),
                       CustomButton(
                         disabled: state.isLoading,
-                        key: const Key("auth_button"),
+                        key: const Key('auth_button'),
                         text: AppLocalizations.of(context)!.loginIn,
                         onTap: _onSubmit,
                       ),
@@ -368,8 +361,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           style: context.theme.defaultTextStyle.copyWith(
-                            color: context.theme.defaultTextStyle.color
-                                ?.withValues(alpha: 0.5),
+                            color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
                             fontSize: 14,
                           ),
                           children: [
@@ -380,7 +372,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
                                 ..onTap = () {
                                   launchUrl(
                                     Uri.parse(
-                                      "https://mafbase.ru/images/politika.pdf",
+                                      'https://mafbase.ru/images/politika.pdf',
                                     ),
                                   );
                                 },

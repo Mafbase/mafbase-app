@@ -24,14 +24,10 @@ class PhotoThemeCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected
-              ? MyTheme.of(context).darkBlueColor.withValues(alpha: 0.15)
-              : null,
+          color: isSelected ? MyTheme.of(context).darkBlueColor.withValues(alpha: 0.15) : null,
           border: Border(
             left: BorderSide(
-              color: isSelected
-                  ? MyTheme.of(context).darkBlueColor
-                  : Colors.transparent,
+              color: isSelected ? MyTheme.of(context).darkBlueColor : Colors.transparent,
               width: 3,
             ),
           ),
@@ -45,8 +41,7 @@ class PhotoThemeCard extends StatelessWidget {
                   Text(
                     theme.name,
                     style: MyTheme.of(context).defaultTextStyle.copyWith(
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                         ),
                     overflow: TextOverflow.ellipsis,
                   ),

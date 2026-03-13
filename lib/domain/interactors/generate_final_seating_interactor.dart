@@ -13,5 +13,5 @@ class GenerateFinalSeatingInteractor extends BaseInteractor {
       );
 
   @override
-  String get interactorName => "GenerateFinalSeatingInteractor";
+  String get interactorName => 'GenerateFinalSeatingInteractor';
 }

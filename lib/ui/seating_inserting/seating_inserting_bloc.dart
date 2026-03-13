@@ -5,11 +5,9 @@ import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_eve
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_router.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_state.dart';
 
-class SeatingInsertingBloc
-    extends Bloc<SeatingInsertingEvent, SeatingInsertingState> {
+class SeatingInsertingBloc extends Bloc<SeatingInsertingEvent, SeatingInsertingState> {
   final SeatingInsertingRouter _router;
-  late final InsertSeatingInteractor _insertSeatingInteractor =
-      InsertSeatingInteractor(_repos.translationRepository);
+  late final InsertSeatingInteractor _insertSeatingInteractor = InsertSeatingInteractor(_repos.translationRepository);
   final RepositoryFactory _repos;
   final int tournamentId;
   List<int> bytes = [];
@@ -30,8 +28,7 @@ class SeatingInsertingBloc
     Emitter<SeatingInsertingState> emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    bytes = await event.bytesStream
-        .fold(<int>[], (previous, element) => previous..addAll(element));
+    bytes = await event.bytesStream.fold(<int>[], (previous, element) => previous..addAll(element));
     emit(state.copyWith(isLoading: false));
   }
 
@@ -47,5 +44,4 @@ class SeatingInsertingBloc
     );
     _router.showSuccessDialog();
   }
-
 }

@@ -32,19 +32,17 @@ class CustomColumnsEditorPage extends StatefulWidget {
     name: _name,
     builder: (context, state) {
       final clubId = int.parse(state.pathParameters['clubId']!);
-      final repository =
-          RepositoryFactory.of(context).customColumnsRepository;
+      final repository = RepositoryFactory.of(context).customColumnsRepository;
       return BlocProvider<CustomColumnsEditorBloc>(
-        create: (context) => CustomColumnsEditorBloc(repository, clubId)
-          ..add(const CustomColumnsEditorEvent.pageOpened()),
+        create: (context) =>
+            CustomColumnsEditorBloc(repository, clubId)..add(const CustomColumnsEditorEvent.pageOpened()),
         child: CustomColumnsEditorPage(clubId: clubId),
       );
     },
   );
 
   @override
-  State<CustomColumnsEditorPage> createState() =>
-      _CustomColumnsEditorPageState();
+  State<CustomColumnsEditorPage> createState() => _CustomColumnsEditorPageState();
 }
 
 class _CustomColumnsEditorPageState extends State<CustomColumnsEditorPage> {
@@ -63,10 +61,8 @@ class _CustomColumnsEditorPageState extends State<CustomColumnsEditorPage> {
                   ? _EmptyState()
                   : _ColumnsList(
                       columns: state.columns,
-                      onEdit: (column) =>
-                          _showEditDialog(context, column: column),
-                      onDelete: (column) =>
-                          _showDeleteConfirmation(context, column),
+                      onEdit: (column) => _showEditDialog(context, column: column),
+                      onDelete: (column) => _showDeleteConfirmation(context, column),
                     ),
         );
       },

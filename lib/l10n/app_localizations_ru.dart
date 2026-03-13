@@ -39,8 +39,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get insertSeatingSuccess => 'Рассадка успешно сохранена';
 
   @override
-  String get insertSeatingError =>
-      'Произошла какая-то ошибка при сохранении рассадки';
+  String get insertSeatingError => 'Произошла какая-то ошибка при сохранении рассадки';
 
   @override
   String get send => 'Отправить';
@@ -115,8 +114,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get yourEmail => 'Ваша электронная почта';
 
   @override
-  String get wrongEmail =>
-      'Профиль с такой почтой уже существует / Неверная почта';
+  String get wrongEmail => 'Профиль с такой почтой уже существует / Неверная почта';
 
   @override
   String get enterPassword => 'Введите пароль';
@@ -230,8 +228,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get draw => 'Ничья';
 
   @override
-  String get tournamentSettingsUpdateSuccess =>
-      'Настройки турнира успешно обновлены';
+  String get tournamentSettingsUpdateSuccess => 'Настройки турнира успешно обновлены';
 
   @override
   String get clubsHeader => 'Клубы';
@@ -340,16 +337,14 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get profileTournamentSubscriptionPlanUnavailable =>
-      'Подписка не оформлена';
+  String get profileTournamentSubscriptionPlanUnavailable => 'Подписка не оформлена';
 
   @override
   String get profileTournamentSubscriptionTypeUnknown => 'Неизвестный тариф';
 
   @override
-  String
-      get profileTournamentSubscriptionTypeTournamentWithAllAddons10Players =>
-          'Турниры + все дополнения (10 игроков)';
+  String get profileTournamentSubscriptionTypeTournamentWithAllAddons10Players =>
+      'Турниры + все дополнения (10 игроков)';
 
   @override
   String get profileTournamentSubscriptionCreate => 'Оформить подписку';
@@ -369,8 +364,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileTournamentSubscriptionReload => 'Обновить';
 
   @override
-  String get profileTournamentSubscriptionErrorGeneric =>
-      'Не удалось загрузить данные о подписке';
+  String get profileTournamentSubscriptionErrorGeneric => 'Не удалось загрузить данные о подписке';
 
   @override
   String get profileTournamentSubscriptionInfoTitle => 'О подписке';
@@ -463,8 +457,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get fantasyCurrentGameInfoUnavailable =>
-      'Информация о текущей игре недоступна';
+  String get fantasyCurrentGameInfoUnavailable => 'Информация о текущей игре недоступна';
 
   @override
   String get fantasyCurrentGame => 'Текущая игра';
@@ -492,8 +485,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get fantasyEmail => 'Почта';
 
   @override
-  String get fantasyEmailInvalid =>
-      'Введите корректный адрес электронной почты';
+  String get fantasyEmailInvalid => 'Введите корректный адрес электронной почты';
 
   @override
   String fantasyRemoveParticipant(String email) {
@@ -525,12 +517,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get seatingPlayerNotFound => 'Не найден игрок с никнеймом: ';
 
   @override
-  String get seatingSelectOrCreatePlayer =>
-      'Выберите игрока из списка, либо создайте нового';
+  String get seatingSelectOrCreatePlayer => 'Выберите игрока из списка, либо создайте нового';
 
   @override
-  String get seatingCurrentFsmNickname =>
-      'Текущий ФСМ никнейм выбранного игрока: ';
+  String get seatingCurrentFsmNickname => 'Текущий ФСМ никнейм выбранного игрока: ';
 
   @override
   String get confirm => 'Подтвердить';
@@ -545,8 +535,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get period => 'Период: ';
 
   @override
-  String get ratingNoGamesFound =>
-      'За данный период не найдено ни одной игры. Попробуйте изменить период.';
+  String get ratingNoGamesFound => 'За данный период не найдено ни одной игры. Попробуйте изменить период.';
 
   @override
   String get ratingNumber => '№';
@@ -662,19 +651,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get forgotPasswordTitle => 'Восстановление пароля';
 
   @override
-  String get forgotPasswordDescription =>
-      'Введите ваш email, и мы отправим вам инструкции по восстановлению пароля';
+  String get forgotPasswordDescription => 'Введите ваш email, и мы отправим вам инструкции по восстановлению пароля';
 
   @override
-  String get forgotPasswordEmailNotFound =>
-      'Пользователь с таким email не найден';
+  String get forgotPasswordEmailNotFound => 'Пользователь с таким email не найден';
 
   @override
   String get resetPasswordTitle => 'Сброс пароля';
 
   @override
-  String get resetPasswordDescription =>
-      'Введите токен из письма и новый пароль';
+  String get resetPasswordDescription => 'Введите токен из письма и новый пароль';
 
   @override
   String get resetPasswordTokenHint => 'Токен из письма';
@@ -711,8 +697,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get customColumnsFormula => 'Формула';
 
   @override
-  String get customColumnsFormulaHint =>
-      'Введите формулу (напр. score / totalGames)';
+  String get customColumnsFormulaHint => 'Введите формулу (напр. score / totalGames)';
 
   @override
   String get customColumnsValidate => 'Проверить';
@@ -752,12 +737,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get customColumnsEdit => 'Редактировать';
 
   @override
-  String get customColumnsOperations =>
-      'Операции: +, -, *, /, ^ (степень), % (остаток), скобки';
+  String get customColumnsOperations => 'Операции: +, -, *, /, ^ (степень), % (остаток), скобки';
 
   @override
-  String get customColumnsFunctions =>
-      'Функции: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan';
+  String get customColumnsFunctions => 'Функции: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan';
 
   @override
   String get tooltipScore => 'Общий балл';
@@ -949,8 +932,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get photoThemesDeleteShort => 'Удалить';
 
   @override
-  String get photoThemesDeleteConfirm =>
-      'Вы уверены, что хотите удалить эту тему?';
+  String get photoThemesDeleteConfirm => 'Вы уверены, что хотите удалить эту тему?';
 
   @override
   String photoThemesPhotosCount(int count) {
@@ -1039,8 +1021,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileSubscriptionExpiredLabel => 'Истекла';
 
   @override
-  String get profileSubscriptionErrorMessage =>
-      'Не удалось загрузить данные подписки';
+  String get profileSubscriptionErrorMessage => 'Не удалось загрузить данные подписки';
 
   @override
   String get profileSubscriptionRetryButton => 'Повторить';
@@ -1049,8 +1030,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileBillDialogTitle => 'Выберите период';
 
   @override
-  String get profileBillDialogSubtitle =>
-      'Подписка даёт доступ к расширенным функциям';
+  String get profileBillDialogSubtitle => 'Подписка даёт доступ к расширенным функциям';
 
   @override
   String profileBillDialogPayButton(int amount) {

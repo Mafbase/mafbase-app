@@ -12,8 +12,7 @@ import 'package:seating_generator_web/domain/repositories/tournaments_repository
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class TournamentsRepositoryImpl extends BaseRepository
-    implements TournamentsRepository {
+class TournamentsRepositoryImpl extends BaseRepository implements TournamentsRepository {
   TournamentsRepositoryImpl(super.client);
 
   @override
@@ -30,9 +29,7 @@ class TournamentsRepositoryImpl extends BaseRepository
     required String name,
     required DateTimeRange range,
   }) {
-    return CreateTournamentRequest(name: name, dateTimeRange: range)
-        .execute(client)
-        .then((value) => value.id);
+    return CreateTournamentRequest(name: name, dateTimeRange: range).execute(client).then((value) => value.id);
   }
 
   @override
@@ -42,9 +39,7 @@ class TournamentsRepositoryImpl extends BaseRepository
 
   @override
   Future<TournamentModel> getTournament({required int tournamentId}) {
-    return GetTournamentRequest(id: tournamentId)
-        .execute(client)
-        .then((value) => value.toDomainModel());
+    return GetTournamentRequest(id: tournamentId).execute(client).then((value) => value.toDomainModel());
   }
 
   @override
@@ -58,9 +53,7 @@ class TournamentsRepositoryImpl extends BaseRepository
 
   @override
   Future<bool> isOwner(int tournamentId) {
-    return TournamentCheckRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then(
+    return TournamentCheckRequest(tournamentId: tournamentId).execute(client).then(
           (value) => value,
           onError: (err) => err is UnauthenticatedError ? false : throw err,
         );

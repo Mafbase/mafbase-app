@@ -19,8 +19,7 @@ class PlayerModel with _$PlayerModel {
         id: proto.id,
         nickname: proto.nickname,
         fsmNickaname: proto.fsmNickname.isNotEmpty ? proto.fsmNickname : null,
-        mafbankNickname:
-            proto.mafbankNickname.isNotEmpty ? proto.mafbankNickname : null,
+        mafbankNickname: proto.mafbankNickname.isNotEmpty ? proto.mafbankNickname : null,
         imageUrl: proto.hasImage() ? proto.image : null,
       );
 }

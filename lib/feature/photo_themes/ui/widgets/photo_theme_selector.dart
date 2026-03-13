@@ -30,8 +30,7 @@ class PhotoThemeSelector extends StatelessWidget {
             child: CustomDropdown<PhotoThemeModel?>(
               items: [null, ...themes],
               initValue: selectedTheme,
-              mapToString: (item) =>
-                  item?.name ?? context.locale.photoThemesProfilePhotos,
+              mapToString: (item) => item?.name ?? context.locale.photoThemesProfilePhotos,
               onChanged: (value) => onChanged(value),
             ),
           ),

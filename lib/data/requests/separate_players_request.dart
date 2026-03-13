@@ -9,7 +9,7 @@ class SeparatePlayersRequest extends BaseRequest<void> {
     required Player first,
     required Player second,
   }) : super(
-          "/api/tournament/$tournamentId/separate",
+          '/api/tournament/$tournamentId/separate',
           data: CannotMeetEditionEvent(
             player1: first,
             player2: second,

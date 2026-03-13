@@ -5,7 +5,7 @@ class DeleteOwnerRequest extends BaseRequest<void> {
     required int tournamentId,
     required int ownerId,
   }) : super(
-          "/api/tournaments/$tournamentId/owners/$ownerId",
+          '/api/tournaments/$tournamentId/owners/$ownerId',
           methodType: Method.delete,
         );
 

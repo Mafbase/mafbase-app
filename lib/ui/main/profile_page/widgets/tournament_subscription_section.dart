@@ -83,9 +83,7 @@ class TournamentSubscriptionSection extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           OutlinedButton(
-            onPressed: () => context
-                .read<ProfileBloc>()
-                .add(const ProfileEvent.loadSubscription()),
+            onPressed: () => context.read<ProfileBloc>().add(const ProfileEvent.loadSubscription()),
             style: OutlinedButton.styleFrom(
               foregroundColor: theme.redColor,
               side: BorderSide(color: theme.redColor),
@@ -110,9 +108,7 @@ class TournamentSubscriptionSection extends StatelessWidget {
     final localeCode = Localizations.localeOf(context).languageCode;
     const divider = Divider(height: 1);
 
-    final isExpired = plan.billedFor != null &&
-        plan.billedFor!.isBefore(DateTime.now()) &&
-        !plan.isActive;
+    final isExpired = plan.billedFor != null && plan.billedFor!.isBefore(DateTime.now()) && !plan.isActive;
 
     return Container(
       width: double.infinity,
@@ -175,9 +171,7 @@ class TournamentSubscriptionSection extends StatelessWidget {
             context,
             label: locale.profileSubscriptionTariffLabel,
             child: Text(
-              plan.subscriptionType != null
-                  ? _resolveTypeText(context, plan.subscriptionType!)
-                  : '—',
+              plan.subscriptionType != null ? _resolveTypeText(context, plan.subscriptionType!) : '—',
               style: theme.defaultTextStyle.copyWith(
                 color: theme.darkBlueColor,
                 fontWeight: FontWeight.w500,
@@ -191,12 +185,9 @@ class TournamentSubscriptionSection extends StatelessWidget {
           if (plan.billedFor != null) ...[
             _buildRow(
               context,
-              label: isExpired
-                  ? locale.profileSubscriptionExpiredLabel
-                  : locale.profileSubscriptionBilledForLabel,
+              label: isExpired ? locale.profileSubscriptionExpiredLabel : locale.profileSubscriptionBilledForLabel,
               child: Text(
-                DateFormat('dd MMMM yyyy', localeCode)
-                    .format(plan.billedFor!),
+                DateFormat('dd MMMM yyyy', localeCode).format(plan.billedFor!),
                 style: theme.defaultTextStyle.copyWith(
                   color: isExpired ? theme.redColor : theme.darkBlueColor,
                   fontWeight: FontWeight.w500,
@@ -213,9 +204,7 @@ class TournamentSubscriptionSection extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: isBilling
-                    ? null
-                    : () => _onBillPressed(context, plan),
+                onPressed: isBilling ? null : () => _onBillPressed(context, plan),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: theme.darkBlueColor,
                   foregroundColor: Colors.white,
@@ -277,8 +266,7 @@ class TournamentSubscriptionSection extends StatelessWidget {
       case TournamentSubscriptionTypeModel.unknownTournamentSubscriptionType:
         return context.locale.profileTournamentSubscriptionTypeUnknown;
       case TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players:
-        return context
-            .locale.profileTournamentSubscriptionTypeTournamentWithAllAddons10Players;
+        return context.locale.profileTournamentSubscriptionTypeTournamentWithAllAddons10Players;
     }
   }
 
@@ -328,9 +316,7 @@ class _StatusBadge extends StatelessWidget {
     final locale = context.locale;
     final theme = MyTheme.of(context);
     final color = isActive ? theme.successColor : theme.redColor;
-    final bgColor = isActive
-        ? theme.successColor.withValues(alpha: 0.12)
-        : theme.redColor.withValues(alpha: 0.1);
+    final bgColor = isActive ? theme.successColor.withValues(alpha: 0.12) : theme.redColor.withValues(alpha: 0.1);
     final text = isActive
         ? locale.profileTournamentSubscriptionStatusActive
         : locale.profileTournamentSubscriptionStatusInactive;

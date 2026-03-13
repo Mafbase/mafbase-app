@@ -11,7 +11,7 @@ class StartGameInfoRequest extends BaseRequest<bool> {
     required int game,
     TimeOfDay? time,
   }) : super(
-          "/api/tournament/$tournamentId/startGameInfo",
+          '/api/tournament/$tournamentId/startGameInfo',
           data: StartGameInfoEvent(
             game: game,
             localDate: switch (time) {

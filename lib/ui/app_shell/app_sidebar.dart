@@ -107,7 +107,7 @@ class AppSidebar extends StatelessWidget {
             isActive: isTournaments,
             onTap: () {
               context.read<MainBloc>().add(
-                    MainEvent.switchTab(
+                    const MainEvent.switchTab(
                       tab: MainPageTab.tournaments,
                     ),
                   );
@@ -120,7 +120,7 @@ class AppSidebar extends StatelessWidget {
             isActive: isClubs,
             onTap: () {
               context.read<MainBloc>().add(
-                    MainEvent.switchTab(
+                    const MainEvent.switchTab(
                       tab: MainPageTab.clubs,
                     ),
                   );

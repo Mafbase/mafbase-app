@@ -11,7 +11,7 @@ class BillTournamentRequest extends BaseRequest<BillTournamentEventOut> {
     required bool billedTranslation,
     required String redirectPath,
   }) : super(
-          "/api/tournament/$tournamentId/bill",
+          '/api/tournament/$tournamentId/bill',
           data: BillTournamentEvent(
             hasTranslation: billedTranslation,
             players: billedCount,

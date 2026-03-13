@@ -22,7 +22,6 @@ import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_owners_bottom_sheet.dart';
-import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -40,7 +39,7 @@ class ClubPage extends StatefulWidget {
   }) {
     context.pushNamed(
       'club',
-      pathParameters: {"clubId": id.toString()},
+      pathParameters: {'clubId': id.toString()},
       extra: cachedModel,
     );
   }
@@ -52,7 +51,7 @@ class ClubPage extends StatefulWidget {
       create: (context) {
         final repos = RepositoryFactory.of(context);
         final args = ClubBlocArgs(
-          clubId: int.parse(state.pathParameters["clubId"]!),
+          clubId: int.parse(state.pathParameters['clubId']!),
           cachedModel: state.extra as ClubModel?,
         );
         return ClubBloc(
@@ -88,7 +87,7 @@ class _ClubPageState extends CustomState<ClubPage> {
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Клуб"),
+          title: const Text('Клуб'),
           leading: BackButton(onPressed: context.backOrGoToDefault),
         ),
         body: BlocBuilder<ClubBloc, ClubState>(
@@ -165,7 +164,7 @@ class _ClubPageState extends CustomState<ClubPage> {
     );
   }
 
-  void _addNewGame() => context.go(
+  void _addNewGame() => context.push(
         AddClubGamePage.createLocation(
           context,
           context.read<ClubBloc>().state.model!.id,

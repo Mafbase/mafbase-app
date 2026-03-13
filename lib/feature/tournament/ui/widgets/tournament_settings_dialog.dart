@@ -123,15 +123,15 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                     height: 16,
                   ),
                   CustomTextField(
-                    hint: "6",
-                    validate: (value) => int.tryParse(value ?? "") == null ? "Неверный формат числа" : null,
+                    hint: '6',
+                    validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
                     label: context.locale.defaultGamesLabel,
                     controller: defaultGamesController,
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                    validate: (value) => int.tryParse(value ?? "") == null ? "Неверный формат числа" : null,
-                    hint: "6",
+                    validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                    hint: '6',
                     label: context.locale.swissGamesLabel,
                     controller: swissGamesController,
                   ),
@@ -173,7 +173,7 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                             return null;
                           }
 
-                          return (value?.split(";").any(
+                          return (value?.split(';').any(
                                     (element) {
                                       final count = int.tryParse(element);
                                       return count == null || count % 10 > 0;
@@ -191,8 +191,8 @@ class _TournamentSettingsDialogState extends State<TournamentSettingsDialog> {
                     children: [
                       Expanded(
                         child: CustomTextField(
-                          hint: "6",
-                          validate: (value) => int.tryParse(value ?? "") == null ? "Неверный формат числа" : null,
+                          hint: '6',
+                          validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
                           label: context.locale.finalGamesLabel,
                           controller: finalGamesController,
                         ),

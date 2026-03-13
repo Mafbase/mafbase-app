@@ -21,5 +21,5 @@ class BillClubInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "BillClubInteractor";
+  String get interactorName => 'BillClubInteractor';
 }

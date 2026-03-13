@@ -7,7 +7,6 @@ import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/get_clubs_interactor.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_bloc.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_event.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_state.dart';
@@ -105,7 +104,7 @@ class _ClubsPageState extends CustomState<ClubsPage> {
             return CustomScrollView(
               slivers: [
                 SliverPadding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: state.clubs.length,

@@ -14,5 +14,5 @@ class SignUpInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "SignUpInteractor";
+  String get interactorName => 'SignUpInteractor';
 }

@@ -40,13 +40,13 @@ class ClubGamesPage extends StatefulWidget {
       );
 
   static final GoRoute route = GoRoute(
-    path: "games",
+    path: 'games',
     name: _name,
     builder: (context, state) {
-      final clubId = int.parse(state.pathParameters["clubId"]!);
-      final dateStart = DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
+      final clubId = int.parse(state.pathParameters['clubId']!);
+      final dateStart = DateTime.tryParse(state.uri.queryParameters['date-start'] ?? '') ??
           DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd = DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ?? DateTime.now();
+      final dateEnd = DateTime.tryParse(state.uri.queryParameters['date-end'] ?? '') ?? DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
 
       return BlocProvider(
@@ -72,7 +72,7 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
   Widget buildDesktop(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: BackButton(onPressed: context.backOrGoToDefault),
-          title: Text('Игры клуба'),
+          title: const Text('Игры клуба'),
         ),
         body: BlocBuilder<ClubGamesBloc, ClubGamesState>(
           builder: (context, state) => state.loading
@@ -82,7 +82,7 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
                     final crossAxisCount = (constraints.maxWidth - 16) / (GameResultWidget.baseWidth + 16);
 
                     return GridView.builder(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount.floor(),
                         mainAxisSpacing: 16,
@@ -112,7 +112,7 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             leading: BackButton(onPressed: context.backOrGoToDefault),
-            title: Text('Игры клуба'),
+            title: const Text('Игры клуба'),
           ),
           body: state.loading
               ? const LoadingOverlayWidget()

@@ -8,8 +8,7 @@ import 'package:seating_generator_web/ui/translation/translation_content_page/tr
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
 
-class TranslationControlBloc
-    extends Bloc<TranslationControlEvent, TranslationContentState> {
+class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationContentState> {
   TournamentContentSocket? _socket;
   final TranslationRepository _repository;
   final TranslationContentBlocParams params;

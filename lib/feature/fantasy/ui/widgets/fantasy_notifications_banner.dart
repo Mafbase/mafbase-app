@@ -53,7 +53,7 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.notifications_off,
                       color: Colors.orange,
                       size: 20,

@@ -35,5 +35,4 @@ class ClubsBloc extends Bloc<ClubsEvent, ClubsState> {
       event.completer?.complete();
     }
   }
-
 }

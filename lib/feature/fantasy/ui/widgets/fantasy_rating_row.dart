@@ -48,9 +48,7 @@ class FantasyRatingRow extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 4,
-            children: row.predictions
-                .map((prediction) => FantasyPredictionChip(prediction: prediction))
-                .toList(),
+            children: row.predictions.map((prediction) => FantasyPredictionChip(prediction: prediction)).toList(),
           ),
         ],
       ),

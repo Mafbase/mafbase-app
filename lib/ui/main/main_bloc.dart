@@ -79,7 +79,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       router.switchTabTo(event.tab);
     }
   }
-
 }
 
 abstract class MainPageRouter {
@@ -120,7 +119,7 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void pop() {
-    GoRouter.of(context).go("/");
+    GoRouter.of(context).go('/');
   }
 
   @override
@@ -152,8 +151,7 @@ class MainPageRouterImpl implements MainPageRouter {
     context.push(
       LoginPageBody.createLocation(
         context: context,
-        nextPath:
-            GoRouter.of(context).routeInformationProvider.value.uri.toString(),
+        nextPath: GoRouter.of(context).routeInformationProvider.value.uri.toString(),
       ),
     );
   }

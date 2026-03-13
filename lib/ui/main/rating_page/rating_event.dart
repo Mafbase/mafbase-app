@@ -6,8 +6,7 @@ part 'rating_event.freezed.dart';
 
 @freezed
 sealed class RatingEvent with _$RatingEvent {
-  const factory RatingEvent.playerSelected({required int playerId}) =
-      RatingEventPlayerSelected;
+  const factory RatingEvent.playerSelected({required int playerId}) = RatingEventPlayerSelected;
 
   const factory RatingEvent.downloadRating({
     required DateTimeRange range,

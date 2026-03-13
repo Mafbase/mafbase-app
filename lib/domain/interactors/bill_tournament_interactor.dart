@@ -10,7 +10,7 @@ class BillTournamentInteractor extends BaseInteractor {
   BillTournamentInteractor(this._purchaseRepository, this._context);
 
   @override
-  String get interactorName => "BillTournamentInteractor";
+  String get interactorName => 'BillTournamentInteractor';
 
   Future<String> call({
     required int tournamentId,
@@ -22,11 +22,7 @@ class BillTournamentInteractor extends BaseInteractor {
           tournamentId: tournamentId,
           playersCount: playersCount,
           billedTranslation: billedTranslation,
-          redirectPath: GoRouter.of(_context)
-              .routeInformationProvider
-              .value
-              .uri
-              .toString(),
+          redirectPath: GoRouter.of(_context).routeInformationProvider.value.uri.toString(),
         ),
       );
 }

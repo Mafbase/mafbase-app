@@ -8,7 +8,7 @@ class SetFinalPlayersRequest extends BaseRequest<dynamic> {
     required int tournamentId,
     required List<int> players,
   }) : super(
-          "/api/tournaments/$tournamentId/setFinalPlayers",
+          '/api/tournaments/$tournamentId/setFinalPlayers',
           data: SetFinalPlayersEvent(id: players),
         );
 

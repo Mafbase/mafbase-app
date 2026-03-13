@@ -36,7 +36,7 @@ class _CustomTextInfoDialogState extends State<CustomTextInfoDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Текстовое уведомление",
+              'Текстовое уведомление',
               style: MyTheme.of(context).headerTextStyle,
             ),
             const SizedBox(height: 24),
@@ -44,7 +44,7 @@ class _CustomTextInfoDialogState extends State<CustomTextInfoDialog> {
               width: 300,
               child: CustomTextField(
                 controller: controller,
-                label: "Сообщение",
+                label: 'Сообщение',
                 textInputType: TextInputType.multiline,
                 textInputAction: TextInputAction.newline,
                 maxLines: 5,
@@ -55,7 +55,7 @@ class _CustomTextInfoDialogState extends State<CustomTextInfoDialog> {
               listenable: controller,
               builder: (context, _) {
                 return CustomButton(
-                  text: "Отправить",
+                  text: 'Отправить',
                   onTap: () => Navigator.pop(context, controller.text),
                   disabled: controller.text.isEmpty,
                   minimize: true,

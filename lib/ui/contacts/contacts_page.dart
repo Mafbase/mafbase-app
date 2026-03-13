@@ -8,8 +8,7 @@ class ContactsPage extends StatefulWidget {
   @override
   State<ContactsPage> createState() => _ContactsPageState();
 
-  static String createLocation(BuildContext context) =>
-      context.namedLocation('contacts');
+  static String createLocation(BuildContext context) => context.namedLocation('contacts');
 
   static final route = GoRoute(
     path: '/contacts',
@@ -40,7 +39,7 @@ class _ContactsPageState extends State<ContactsPage> {
                     children: [
                       Icon(Icons.phone, size: 32),
                       SizedBox(width: 8),
-                      Flexible(child: Text("+79528828343")),
+                      Flexible(child: Text('+79528828343')),
                     ],
                   ),
                   SizedBox(height: 8),
@@ -49,7 +48,7 @@ class _ContactsPageState extends State<ContactsPage> {
                     children: [
                       Icon(Icons.person, size: 32),
                       SizedBox(width: 8),
-                      Flexible(child: Text("Анисов Сергей Владимирович")),
+                      Flexible(child: Text('Анисов Сергей Владимирович')),
                     ],
                   ),
                   SizedBox(height: 8),
@@ -58,7 +57,7 @@ class _ContactsPageState extends State<ContactsPage> {
                     children: [
                       Icon(Icons.perm_contact_cal_outlined, size: 32),
                       SizedBox(width: 8),
-                      Flexible(child: Text("ИНН: 701724290760")),
+                      Flexible(child: Text('ИНН: 701724290760')),
                     ],
                   ),
                   SizedBox(height: 8),
@@ -69,7 +68,7 @@ class _ContactsPageState extends State<ContactsPage> {
                       SizedBox(width: 8),
                       Flexible(
                         child: Text(
-                          "Адрес: 634045, Россия, Томская Обл, г Томск, Улица Мокрушина 24, кв 67",
+                          'Адрес: 634045, Россия, Томская Обл, г Томск, Улица Мокрушина 24, кв 67',
                         ),
                       ),
                     ],

@@ -10,8 +10,7 @@ class TranslationKeyModel with _$TranslationKeyModel {
     required List<DesignModel> designs,
   }) = _TranslationKeyModel;
 
-  factory TranslationKeyModel.fromProto(TranslationKeyEventOut proto) =>
-      TranslationKeyModel(
+  factory TranslationKeyModel.fromProto(TranslationKeyEventOut proto) => TranslationKeyModel(
         key: proto.key,
         designs: proto.designs.map(DesignModel.fromProto).toList(),
       );

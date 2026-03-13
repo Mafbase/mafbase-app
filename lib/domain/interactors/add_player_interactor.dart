@@ -8,7 +8,7 @@ class AddTournamentPlayerInteractor extends BaseInteractor {
   AddTournamentPlayerInteractor(this._repository);
 
   @override
-  String get interactorName => "AddPlayerInteractor";
+  String get interactorName => 'AddPlayerInteractor';
 
   Future run({
     required int tournamentId,

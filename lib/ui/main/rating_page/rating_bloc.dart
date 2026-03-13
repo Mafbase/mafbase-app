@@ -11,10 +11,8 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 class RatingBloc extends Bloc<RatingEvent, RatingState> {
   final RepositoryFactory _repos;
   final RatingRouter _router;
-  late final DownloadRatingInteractor _downloadRatingInteractor =
-      DownloadRatingInteractor(_repos.clubRepository);
-  late final GetRatingInteractor _getRatingRepository =
-      GetRatingInteractor(_repos.clubRepository);
+  late final DownloadRatingInteractor _downloadRatingInteractor = DownloadRatingInteractor(_repos.clubRepository);
+  late final GetRatingInteractor _getRatingRepository = GetRatingInteractor(_repos.clubRepository);
   late final GetTournamentRatingInteractor _getTournamentRatingInteractor =
       GetTournamentRatingInteractor(_repos.tournamentResultRepository);
 
@@ -32,9 +30,9 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
   }
 
   _onStatsDownload(RatingEventDownloadStats event, Emitter emit) => _repos.clubRepository.downloadStats(
-      clubId: event.clubId,
-      range: event.range,
-    );
+        clubId: event.clubId,
+        range: event.range,
+      );
 
   _onGameSelected(RatingEventGameSelected event, Emitter emit) {
     final clubId = event.clubId;
@@ -105,5 +103,4 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
       ),
     );
   }
-
 }

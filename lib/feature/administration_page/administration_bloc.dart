@@ -67,5 +67,4 @@ class AdministrationBloc extends Bloc<AdministrationEvent, AdministrationState> 
     );
     emit(state.copyWith(isLoading: false, owners: owners));
   }
-
 }

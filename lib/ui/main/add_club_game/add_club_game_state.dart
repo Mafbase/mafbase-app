@@ -10,7 +10,7 @@ class AddClubGameState with _$AddClubGameState {
     @Default(true) bool isLoading,
     @Default([]) List<PlayerModel> players,
     @Default(false) bool canEdit,
-    @Default("") String clubName,
+    @Default('') String clubName,
     @Default([]) List<CiSchemeModel> ciSchemes,
     @Default(false) bool isTournament,
   }) = _AddClubGameState;

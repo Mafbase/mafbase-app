@@ -12,5 +12,5 @@ class GetFinalPlayersInteractor extends BaseInteractor {
       );
 
   @override
-  String get interactorName => "GetFinalPlayersInteractor";
+  String get interactorName => 'GetFinalPlayersInteractor';
 }

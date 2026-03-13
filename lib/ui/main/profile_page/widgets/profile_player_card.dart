@@ -83,9 +83,7 @@ class ProfilePlayerCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
       ),
       child: Text(
-        isMobile
-            ? locale.profilePlayerChangeButtonMobile
-            : locale.profilePlayerChangeButtonDesktop,
+        isMobile ? locale.profilePlayerChangeButtonMobile : locale.profilePlayerChangeButtonDesktop,
         style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
       ),
     );

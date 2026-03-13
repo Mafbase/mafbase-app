@@ -14,13 +14,12 @@ class TranslationControlPage extends StatefulWidget {
   const TranslationControlPage({super.key});
 
   static final route = GoRoute(
-    path: "/translationControl",
-    name: "translation_control",
+    path: '/translationControl',
+    name: 'translation_control',
     builder: (context, state) {
-      final tournamentId =
-          int.parse(state.uri.queryParameters["tournamentId"] ?? "");
-      final table = int.parse(state.uri.queryParameters["table"] ?? "");
-      final key = state.uri.queryParameters["key"] ?? "";
+      final tournamentId = int.parse(state.uri.queryParameters['tournamentId'] ?? '');
+      final table = int.parse(state.uri.queryParameters['table'] ?? '');
+      final key = state.uri.queryParameters['key'] ?? '';
 
       return BlocProvider<TranslationControlBloc>(
         create: (context) => TranslationControlBloc(
@@ -40,8 +39,7 @@ class TranslationControlPage extends StatefulWidget {
   State<TranslationControlPage> createState() => _TranslationControlPageState();
 }
 
-class _TranslationControlPageState extends State<TranslationControlPage>
-    with WidgetsBindingObserver {
+class _TranslationControlPageState extends State<TranslationControlPage> with WidgetsBindingObserver {
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -68,7 +66,7 @@ class _TranslationControlPageState extends State<TranslationControlPage>
                     child: CustomDropdown<int>(
                       initValue: state.game,
                       mapToString: (index) =>
-                          index == null ? "" : index.toString(),
+                          index == null ? '' : index.toString(),
                       items: List.generate(
                         state.totalGames,
                         (index) => index + 1,
@@ -91,7 +89,7 @@ class _TranslationControlPageState extends State<TranslationControlPage>
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Flexible(
-                            child: Text("${index + 1}."),
+                            child: Text('${index + 1}.'),
                           ),
                           Transform.scale(
                             scale: 0.9,
@@ -138,9 +136,7 @@ class _TranslationControlPageState extends State<TranslationControlPage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      context
-          .read<TranslationControlBloc>()
-          .add(const TranslationControlEvent.pageOpened());
+      context.read<TranslationControlBloc>().add(const TranslationControlEvent.pageOpened());
     }
   }
 }

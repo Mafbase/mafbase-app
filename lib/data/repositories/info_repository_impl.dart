@@ -9,8 +9,7 @@ class InfoRepositoryImpl extends BaseRepository implements InfoRepository {
 
   @override
   Future customTextInfo({required int tournamentId, required String text}) {
-    return CustomTextInfoRequest(tournamentId: tournamentId, text: text)
-        .execute(client);
+    return CustomTextInfoRequest(tournamentId: tournamentId, text: text).execute(client);
   }
 
   @override

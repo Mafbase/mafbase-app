@@ -62,8 +62,8 @@ class AddClubGamePage extends StatefulWidget {
     path: 'editGame/:gameId',
     name: 'editTournamentGame',
     builder: (context, state) {
-      final gameId = int.parse(state.pathParameters["gameId"]!);
-      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final gameId = int.parse(state.pathParameters['gameId']!);
+      final tournamentId = int.parse(state.pathParameters['id']!);
       final edit = bool.tryParse(state.uri.queryParameters['edit'] ?? '') ?? true;
       return BlocProvider<AddClubGameBloc>(
         create: (context) => AddClubGameBloc(
@@ -84,9 +84,9 @@ class AddClubGamePage extends StatefulWidget {
   static final List<GoRoute> routes = [
     GoRoute(
       path: 'addGame',
-      name: "addGame",
+      name: 'addGame',
       builder: (context, state) {
-        final clubId = int.parse(state.pathParameters["clubId"]!);
+        final clubId = int.parse(state.pathParameters['clubId']!);
         final initDateTime = state.extra as DateTime?;
         return BlocProvider<AddClubGameBloc>(
           create: (context) => AddClubGameBloc(
@@ -104,11 +104,11 @@ class AddClubGamePage extends StatefulWidget {
     ),
     GoRoute(
       name: 'viewGame',
-      path: "game/:gameId",
+      path: 'game/:gameId',
       builder: (context, state) {
-        final clubId = int.parse(state.pathParameters["clubId"]!);
-        final gameId = int.parse(state.pathParameters["gameId"]!);
-        final edit = state.uri.queryParameters["edit"] == true.toString();
+        final clubId = int.parse(state.pathParameters['clubId']!);
+        final gameId = int.parse(state.pathParameters['gameId']!);
+        final edit = state.uri.queryParameters['edit'] == true.toString();
         return BlocProvider<AddClubGameBloc>(
           create: (context) => AddClubGameBloc(
             clubId: clubId,
@@ -133,12 +133,12 @@ class AddClubGamePage extends StatefulWidget {
     bool canEdit = false,
   }) {
     return context.namedLocation(
-      "viewGame",
+      'viewGame',
       pathParameters: {
-        "clubId": clubId.toString(),
-        "gameId": gameId.toString(),
+        'clubId': clubId.toString(),
+        'gameId': gameId.toString(),
       },
-      queryParameters: {"edit": canEdit.toString()},
+      queryParameters: {'edit': canEdit.toString()},
     );
   }
 
@@ -147,9 +147,9 @@ class AddClubGamePage extends StatefulWidget {
     int clubId,
   ) {
     return context.namedLocation(
-      "addGame",
+      'addGame',
       pathParameters: {
-        "clubId": clubId.toString(),
+        'clubId': clubId.toString(),
       },
     );
   }
@@ -160,11 +160,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   final controllers = List.generate(10, (index) => TextEditingController());
   final addScoreControllers = List.generate(
     10,
-    (index) => TextEditingController()..text = "0.0",
+    (index) => TextEditingController()..text = '0.0',
   );
   final minusScoreControllers = List.generate(
     10,
-    (index) => TextEditingController()..text = "0.0",
+    (index) => TextEditingController()..text = '0.0',
   );
   final refereeController = TextEditingController();
   final refereeFocusNode = FocusNode();
@@ -241,7 +241,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
         case List<double> minusScore when minusScore.length == 10:
           minusScoreControllers[i].text = minusScore[i].toString();
         default:
-          minusScoreControllers[i].text = "0.0";
+          minusScoreControllers[i].text = '0.0';
       }
 
       // Обрабатываем addScore
@@ -249,7 +249,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
         case List<double> addScore when addScore.length == 10:
           addScoreControllers[i].text = addScore[i].toString();
         default:
-          addScoreControllers[i].text = "0.0";
+          addScoreControllers[i].text = '0.0';
       }
 
       if (effect.players case final players?) {
@@ -286,24 +286,24 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   }
 
   @override
-  Widget? buildMobile(BuildContext context) => GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: SingleChildScrollView(
-          child: BlocBuilder<AddClubGameBloc, AddClubGameState>(
-            builder: (context, state) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-                child: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+  Widget? buildMobile(BuildContext context) => BlocBuilder<AddClubGameBloc, AddClubGameState>(
+        builder: (context, state) => Stack(
+          children: [
+            Scaffold(
+              appBar: AppBar(
+                leading: BackButton(onPressed: context.backOrGoToDefault),
+                title: Text(state.clubName),
+              ),
+              body: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    child: Stack(
                       children: [
-                        Text(
-                          state.clubName,
-                          style: MyTheme.of(context).headerTextStyle,
-                        ),
                         Column(
+                          spacing: 8,
                           children: [
                             ...buildPlayersRow(state),
                             buildGameInfoWidget(state),
@@ -311,12 +311,12 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                         ),
                       ],
                     ),
-                    if (state.isLoading) const LoadingOverlayWidget(),
-                  ],
+                  ),
                 ),
-              );
-            },
-          ),
+              ),
+            ),
+            if (state.isLoading) const LoadingOverlayWidget(),
+          ],
         ),
       );
 
@@ -376,6 +376,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 
   Widget buildGameInfoWidget(AddClubGameState state) => Container(
         padding: context.isMobile ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 30),
+        margin: const EdgeInsets.only(left: 8),
         decoration: context.isMobile
             ? null
             : const BoxDecoration(
@@ -386,330 +387,322 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                   ),
                 ),
               ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            NicknameField(
-              down: true,
-              controller: refereeController,
-              focusNode: refereeFocusNode,
-              readOnly: widget.readOnly || state.isTournament,
-              hint: "Судья",
-              onSelected: (player) => players.add(player),
-              onNewPlayer: ({String? initValue}) async {
-                context.read<AddClubGameBloc>().add(
-                      AddClubGameEvent.onNewPlayer(
-                        nickname: initValue ?? "",
-                        index: 10,
-                      ),
-                    );
-              },
-            ),
-            Wrap(
-              children: [
+        child: SizedBox(
+          width: context.isMobile ? null : 250,
+          child: Column(
+            crossAxisAlignment: context.isMobile ? CrossAxisAlignment.stretch : CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              NicknameField(
+                down: true,
+                controller: refereeController,
+                focusNode: refereeFocusNode,
+                availablePlayers: state.players,
+                onSelected: (player) => players.add(player),
+                readOnly: widget.readOnly || state.isTournament,
+                hint: 'Судья',
+                onNewPlayer: ({String? initValue}) async {
+                  context.read<AddClubGameBloc>().add(
+                        AddClubGameEvent.onNewPlayer(
+                          nickname: initValue ?? '',
+                          index: 10,
+                        ),
+                      );
+                },
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Первый отстрел:',
+                style: MyTheme.of(context).defaultTextStyle,
+              ),
+              const SizedBox(height: 4),
+              CustomDropdown<int>(
+                readOnly: widget.readOnly,
+                initValue: firstDie,
+                items: List.generate(
+                  11,
+                  (index) {
+                    return index - 1;
+                  },
+                ),
+                mapToString: (index) => index == null
+                    ? 'Не указан'
+                    : index == -1
+                        ? 'Промах'
+                        : (index + 1).toString(),
+                onChanged: widget.readOnly
+                    ? null
+                    : (value) {
+                        setState(() {
+                          firstDie = value ?? -1;
+                          if (firstDie == -1) {
+                            bestMove = BestMove.miss;
+                          }
+                        });
+                      },
+              ),
+              const SizedBox(height: 8),
+              if (firstDie != null && firstDie != -1) ...[
                 Text(
-                  "Первый отстрел:",
+                  'Лучший ход:',
                   style: MyTheme.of(context).defaultTextStyle,
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
-                CustomDropdown<int>(
+                const SizedBox(height: 4),
+                CustomDropdown<BestMove>(
                   readOnly: widget.readOnly,
-                  initValue: firstDie,
-                  items: List.generate(
-                    11,
-                    (index) {
-                      return index - 1;
-                    },
-                  ),
-                  mapToString: (index) => index == null
-                      ? 'Не указан'
-                      : index == -1
-                          ? "Промах"
-                          : (index + 1).toString(),
-                  onChanged: widget.readOnly
-                      ? null
-                      : (value) {
-                          setState(() {
-                            firstDie = value ?? -1;
-                            if (firstDie == -1) {
-                              bestMove = BestMove.miss;
-                            }
-                          });
-                        },
+                  initValue: bestMove ?? BestMove.miss,
+                  items: const [
+                    BestMove.miss,
+                    BestMove.one,
+                    BestMove.half,
+                    BestMove.full,
+                  ],
+                  mapToString: (bestMove) {
+                    final String text;
+                    switch (bestMove) {
+                      case BestMove.full:
+                        text = 'Полный лучший ход';
+                        break;
+                      case BestMove.half:
+                        text = 'Двойка черных';
+                        break;
+                      case BestMove.miss:
+                        text = 'Мимо';
+                        break;
+                      case BestMove.one:
+                        text = 'Один маф';
+                        break;
+                      default:
+                        text = '';
+                        break;
+                    }
+                    return text;
+                  },
+                  onChanged: widget.readOnly ? null : (value) => bestMove = value,
                 ),
+                const SizedBox(height: 8),
               ],
-            ),
-            if (firstDie != null && firstDie != -1)
-              Wrap(
-                key: const Key("best_move_row"),
-                children: [
-                  Text(
-                    "Лучший ход:",
-                    style: MyTheme.of(context).defaultTextStyle,
-                  ),
-                  CustomDropdown<BestMove>(
+              Text(
+                'Результат:',
+                style: MyTheme.of(context).defaultTextStyle,
+              ),
+              const SizedBox(height: 4),
+              StatefulBuilder(
+                builder: (context, setState) {
+                  return CustomDropdown<GameWin>(
                     readOnly: widget.readOnly,
-                    initValue: bestMove ?? BestMove.miss,
-                    items: const [
-                      BestMove.miss,
-                      BestMove.one,
-                      BestMove.half,
-                      BestMove.full,
-                    ],
-                    mapToString: (bestMove) {
+                    initValue: winSelected,
+                    mapToString: (win) {
                       final String text;
-                      switch (bestMove) {
-                        case BestMove.full:
-                          text = "Полный лучший ход";
+                      switch (win) {
+                        case GameWin.city:
+                          text = 'Победа города';
                           break;
-                        case BestMove.half:
-                          text = "Двойка черных";
+                        case GameWin.draw:
+                          text = 'Ничья';
                           break;
-                        case BestMove.miss:
-                          text = "Мимо";
-                          break;
-                        case BestMove.one:
-                          text = "Один маф";
+                        case GameWin.mafia:
+                          text = 'Победа мафии';
                           break;
                         default:
-                          text = "";
+                          text = '';
                           break;
                       }
                       return text;
                     },
-                    onChanged: widget.readOnly ? null : (value) => bestMove = value,
-                  ),
-                ],
+                    items: GameWin.values,
+                    onChanged: widget.readOnly
+                        ? null
+                        : (value) {
+                            setState(() {
+                              winSelected = value;
+                            });
+                          },
+                  );
+                },
               ),
-            Wrap(
-              key: const Key("result_row"),
-              children: [
+              const SizedBox(height: 8),
+              if (!state.isTournament) ...[
                 Text(
-                  "Результат:",
+                  context.locale.ci,
                   style: MyTheme.of(context).defaultTextStyle,
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
+                const SizedBox(height: 4),
                 StatefulBuilder(
                   builder: (context, setState) {
-                    return CustomDropdown<GameWin>(
-                      readOnly: widget.readOnly,
-                      initValue: winSelected,
-                      mapToString: (win) {
-                        final String text;
-                        switch (win) {
-                          case GameWin.city:
-                            text = "Победа города";
-                            break;
-                          case GameWin.draw:
-                            text = "Ничья";
-                            break;
-                          case GameWin.mafia:
-                            text = "Победа мафии";
-                            break;
-                          default:
-                            text = "";
-                            break;
-                        }
-                        return text;
+                    return CustomDropdown<CiSchemeModel>(
+                      readOnly: widget.readOnly || state.isTournament,
+                      initValue: ciSchemeModel,
+                      mapToString: (model) {
+                        return model?.name ?? context.locale.withoutCi;
                       },
-                      items: GameWin.values,
-                      onChanged: widget.readOnly
-                          ? null
-                          : (value) {
-                              setState(() {
-                                winSelected = value;
-                              });
-                            },
+                      items: [
+                        CiSchemeModel.empty,
+                        ...state.ciSchemes,
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          ciSchemeModel = value;
+                        });
+                      },
                     );
                   },
                 ),
+                const SizedBox(height: 8),
               ],
-            ),
-            if (!state.isTournament)
-              Wrap(
-                children: [
-                  Text(
-                    context.locale.ci,
-                    style: MyTheme.of(context).defaultTextStyle,
-                  ),
-                  const SizedBox(width: 8),
-                  StatefulBuilder(
-                    builder: (context, setState) {
-                      return CustomDropdown<CiSchemeModel>(
-                        readOnly: widget.readOnly || state.isTournament,
-                        initValue: ciSchemeModel,
-                        mapToString: (model) {
-                          return model?.name ?? context.locale.withoutCi;
-                        },
-                        items: [
-                          CiSchemeModel.empty,
-                          ...state.ciSchemes,
-                        ],
-                        onChanged: (value) {
-                          setState(() {
-                            ciSchemeModel = value;
-                          });
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            if (!state.isTournament)
-              Wrap(
-                children: [
-                  Text(
-                    context.locale.rating_schema,
-                    style: MyTheme.of(context).defaultTextStyle,
-                  ),
-                  const SizedBox(width: 8),
-                  StatefulBuilder(
-                    builder: (context, setState) {
-                      return CustomDropdown<RatingScheme>(
-                        readOnly: widget.readOnly,
-                        initValue: ratingScheme,
-                        mapToString: (model) {
-                          switch (model) {
-                            case RatingScheme.minusFSM:
-                              return context.locale.minus_fsm_schema;
-                            default:
-                              return context.locale.old_fsm_schema;
-                          }
-                        },
-                        items: [
-                          RatingScheme.oldFSM,
-                          RatingScheme.minusFSM,
-                        ],
-                        onChanged: (value) {
-                          setState(() {
-                            ratingScheme = value;
-                          });
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            StatefulBuilder(
-              builder: (context, setState) => InkWell(
-                onTap: widget.readOnly || state.isTournament
-                    ? null
-                    : () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: date,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime.now(),
-                        ).then((value) async {
-                          if (!context.mounted) return null;
-                          if (value != null) {
-                            final timeOfDay = await showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.fromDateTime(
-                                date,
-                              ),
-                              initialEntryMode: TimePickerEntryMode.input,
-                              builder: (context, child) => MediaQuery(
-                                data: MediaQuery.of(context).copyWith(
-                                  alwaysUse24HourFormat: true,
-                                ),
-                                child: child ?? Container(),
-                              ),
-                            );
-                            if (timeOfDay != null) {
-                              return DateTime(
-                                value.year,
-                                value.month,
-                                value.day,
-                                timeOfDay.hour,
-                                timeOfDay.minute,
-                              );
-                            }
-                          }
-                          return null;
-                        }).then((value) {
-                          setState(() {
-                            date = value ?? date;
-                          });
+              if (!state.isTournament) ...[
+                Text(
+                  context.locale.rating_schema,
+                  style: MyTheme.of(context).defaultTextStyle,
+                ),
+                const SizedBox(height: 4),
+                StatefulBuilder(
+                  builder: (context, setState) {
+                    return CustomDropdown<RatingScheme>(
+                      readOnly: widget.readOnly,
+                      initValue: ratingScheme,
+                      mapToString: (model) {
+                        switch (model) {
+                          case RatingScheme.minusFSM:
+                            return context.locale.minus_fsm_schema;
+                          default:
+                            return context.locale.old_fsm_schema;
+                        }
+                      },
+                      items: [
+                        RatingScheme.oldFSM,
+                        RatingScheme.minusFSM,
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          ratingScheme = value;
                         });
                       },
-                child: DefaultTextStyle(
-                  style: MyTheme.of(context).defaultTextStyle.copyWith(
-                        color: Theme.of(context).hintColor,
+                    );
+                  },
+                ),
+                const SizedBox(height: 8),
+              ],
+              StatefulBuilder(
+                builder: (context, setState) => InkWell(
+                  customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  onTap: widget.readOnly || state.isTournament
+                      ? null
+                      : () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: date,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime.now(),
+                          ).then((value) async {
+                            if (!context.mounted) return null;
+                            if (value != null) {
+                              final timeOfDay = await showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.fromDateTime(
+                                  date,
+                                ),
+                                initialEntryMode: TimePickerEntryMode.input,
+                                builder: (context, child) => MediaQuery(
+                                  data: MediaQuery.of(context).copyWith(
+                                    alwaysUse24HourFormat: true,
+                                  ),
+                                  child: child ?? Container(),
+                                ),
+                              );
+                              if (timeOfDay != null) {
+                                return DateTime(
+                                  value.year,
+                                  value.month,
+                                  value.day,
+                                  timeOfDay.hour,
+                                  timeOfDay.minute,
+                                );
+                              }
+                            }
+                            return null;
+                          }).then((value) {
+                            setState(() {
+                              date = value ?? date;
+                            });
+                          });
+                        },
+                  child: DefaultTextStyle(
+                    style: MyTheme.of(context).defaultTextStyle.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        children: [
+                          Text(context.locale.date),
+                          const Spacer(),
+                          Text(
+                            DateFormat('dd:MM:yyy HH:mm').format(date),
+                          ),
+                        ],
                       ),
-                  child: Wrap(
-                    children: [
-                      Text(context.locale.date),
-                      const SizedBox(width: 80),
-                      Text(
-                        DateFormat("dd:MM:yyy HH:mm").format(date),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            if (state.canEdit)
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 400,
-                    padding: const EdgeInsets.all(20),
-                    child: CustomButton(
-                      text: widget.readOnly ? "Изменить" : "Сохранить",
-                      onTap: () => submit(state),
-                      disabled: state.isLoading,
-                    ),
-                  ),
-                  if (widget.readOnly)
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: TextButton(
-                        onPressed: () {
-                          context.read<AddClubGameBloc>().add(
-                                AddClubGameEvent.newGame(
-                                  dateTime: date,
-                                ),
-                              );
-                        },
-                        child: Text(
-                          context.locale.addGame,
-                          style: MyTheme.of(context).textBtnTextStyle,
-                        ),
+              if (state.canEdit)
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 400,
+                      padding: const EdgeInsets.all(20),
+                      child: CustomButton(
+                        text: widget.readOnly ? 'Изменить' : 'Сохранить',
+                        onTap: () => submit(state),
+                        disabled: state.isLoading,
                       ),
                     ),
-                  if (widget.readOnly && widget.gameId != null && !state.isTournament && state.canEdit)
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: TextButton(
-                        onPressed: () async {
-                          final confirm = await ConfirmDialog.open(context);
-                          if (!mounted || confirm != true) return;
+                    if (widget.readOnly)
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextButton(
+                          onPressed: () {
+                            context.read<AddClubGameBloc>().add(
+                                  AddClubGameEvent.newGame(
+                                    dateTime: date,
+                                  ),
+                                );
+                          },
+                          child: Text(
+                            context.locale.addGame,
+                            style: MyTheme.of(context).textBtnTextStyle,
+                          ),
+                        ),
+                      ),
+                    if (widget.readOnly && widget.gameId != null && !state.isTournament && state.canEdit)
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextButton(
+                          onPressed: () async {
+                            final confirm = await ConfirmDialog.open(context);
+                            if (!mounted || confirm != true) return;
 
-                          context.read<AddClubGameBloc>().add(
-                                AddClubGameEvent.deleteGame(
-                                  gameId: widget.gameId!,
+                            context.read<AddClubGameBloc>().add(
+                                  AddClubGameEvent.deleteGame(
+                                    gameId: widget.gameId!,
+                                  ),
+                                );
+                          },
+                          child: Text(
+                            context.locale.deleteGame,
+                            style: MyTheme.of(context).textBtnTextStyle.copyWith(
+                                  color: MyTheme.of(context).btnRedColor,
                                 ),
-                              );
-                        },
-                        child: Text(
-                          context.locale.deleteGame,
-                          style: MyTheme.of(context).textBtnTextStyle.copyWith(
-                                color: MyTheme.of(context).btnRedColor,
-                              ),
+                          ),
                         ),
                       ),
-                    ),
-                ],
-              ),
-          ],
+                  ],
+                ),
+            ],
+          ),
         ),
       );
 
@@ -731,7 +724,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               nicknameController: controllers[i],
               focusNode: focusNodes[i],
               readOnly: widget.readOnly,
-              hint: "Игрок ${i + 1}",
+              hint: 'Игрок ${i + 1}',
               onSelected: (player) {
                 players.add(player);
                 if (i < 9) {
@@ -744,7 +737,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               onNewPlayer: ({String? initValue}) async {
                 context.read<AddClubGameBloc>().add(
                       AddClubGameEvent.onNewPlayer(
-                        nickname: initValue ?? "",
+                        nickname: initValue ?? '',
                         index: i,
                       ),
                     );
@@ -767,11 +760,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     if (roles.where((element) => element == PlayerRole.maf).length != 2 ||
         roles.where((element) => element == PlayerRole.don).length != 1 ||
         roles.where((element) => element == PlayerRole.sheriff).length != 1) {
-      AppRouter.showErrorDialog(context, "Проверьте роли");
+      AppRouter.showErrorDialog(context, 'Проверьте роли');
       return;
     }
     if (winSelected == null) {
-      AppRouter.showErrorDialog(context, "Не выбран результат игры");
+      AppRouter.showErrorDialog(context, 'Не выбран результат игры');
       return;
     }
 
@@ -784,13 +777,13 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     )) {
       AppRouter.showErrorDialog(
         context,
-        "Не найден игрок: ${controllers.firstWhere(
+        'Не найден игрок: ${controllers.firstWhere(
               (e) =>
                   players.firstWhereOrNull(
                     (element) => e.text == element.nickname,
                   ) ==
                   null,
-            ).text}",
+            ).text}',
       );
       return;
     }
@@ -802,13 +795,13 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
         !state.isTournament) {
       AppRouter.showErrorDialog(
         context,
-        "Не найден судья: ${refereeController.text}",
+        'Не найден судья: ${refereeController.text}',
       );
       return;
     }
 
     if (firstDie != -1 && bestMove == null) {
-      AppRouter.showErrorDialog(context, "Установите лучший ход");
+      AppRouter.showErrorDialog(context, 'Установите лучший ход');
       return;
     }
 
@@ -824,13 +817,13 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     // Проверка что все значения addScore неотрицательные
     final addScores = addScoreControllers
         .map(
-          (e) => double.parse(e.text.replaceAll(",", ".")),
+          (e) => double.parse(e.text.replaceAll(',', '.')),
         )
         .toList();
     if (addScores.any((score) => score < 0)) {
       AppRouter.showErrorDialog(
         context,
-        "Положительные баллы не могут быть отрицательными",
+        'Положительные баллы не могут быть отрицательными',
       );
       return;
     }
@@ -838,13 +831,13 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     // Проверка что все значения minusScore неотрицательные
     final minusScores = minusScoreControllers
         .map(
-          (e) => double.parse(e.text.replaceAll(",", ".")),
+          (e) => double.parse(e.text.replaceAll(',', '.')),
         )
         .toList();
     if (minusScores.any((score) => score < 0)) {
       AppRouter.showErrorDialog(
         context,
-        "Отрицательные баллы не могут быть отрицательными (используйте положительное значение)",
+        'Отрицательные баллы не могут быть отрицательными (используйте положительное значение)',
       );
       return;
     }
@@ -969,7 +962,9 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           buildNicknameField(),
+          const SizedBox(height: 4),
           Wrap(
+            alignment: WrapAlignment.spaceBetween,
             children: [
               RolePicker(
                 readOnly: widget.readOnly,
@@ -1011,24 +1006,24 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
   }
 
   Widget buildAddScoreField() => SizedBox(
-        width: 50,
+        width: 60,
         child: CustomTextField(
           focusNode: widget.addScoreFocusNode,
           readOnly: widget.readOnly,
           controller: widget.addScoreController,
-          hint: "0.0",
-          label: "+ балл",
+          hint: '0.0',
+          label: context.isMobile ? '+' : '+ балл',
         ),
       );
 
   Widget buildMinusScoreField() => SizedBox(
-        width: 50,
+        width: 60,
         child: CustomTextField(
           focusNode: widget.minusScoreFocusNode,
           readOnly: widget.readOnly,
           controller: widget.minusScoreController,
-          hint: "0.0",
-          label: "- балл",
+          hint: '0.0',
+          label: context.isMobile ? '-' : '- балл',
         ),
       );
 

@@ -45,7 +45,6 @@ abstract class MyTheme {
   factory MyTheme.light(bool isMobile) => _LightTheme._(isMobile);
 }
 
-
 class _LightTheme implements MyTheme {
   final bool _isMobile;
   final _defaultTextStyle = const TextStyle(

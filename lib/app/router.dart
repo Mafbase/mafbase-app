@@ -99,7 +99,7 @@ class AppRouter {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                key: const Key("MainBlocProvider"),
+                key: const Key('MainBlocProvider'),
                 create: (context) => MainBloc(
                   MainPageRouterImpl(context),
                 ),
@@ -144,7 +144,7 @@ class AppRouter {
       return Scaffold(
         body: Center(
           child: Text(
-            "errorRoute: ${state.toString()}",
+            'errorRoute: ${state.toString()}',
           ),
         ),
       );

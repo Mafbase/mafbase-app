@@ -87,9 +87,7 @@ class _TempPageState extends State<TempPage> {
                     CustomButton(
                       text: context.locale.next,
                       onTap: () {
-                        context
-                            .read<TempBloc>()
-                            .add(const TempEvent.generate());
+                        context.read<TempBloc>().add(const TempEvent.generate());
                       },
                     ),
                   ],

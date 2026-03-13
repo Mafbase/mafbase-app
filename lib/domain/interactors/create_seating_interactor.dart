@@ -11,5 +11,5 @@ class CreateSeatingInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "CreateSeatingInteractor";
+  String get interactorName => 'CreateSeatingInteractor';
 }

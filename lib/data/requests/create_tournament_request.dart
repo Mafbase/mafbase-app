@@ -11,7 +11,7 @@ class CreateTournamentRequest extends BaseRequest<CreateTournamentEventOut> {
     required String name,
     required DateTimeRange dateTimeRange,
   }) : super(
-          "/api/createTournament",
+          '/api/createTournament',
           data: CreateTournamentEvent(
             name: name,
             dateStart: dateFormatForRequests.format(dateTimeRange.start),

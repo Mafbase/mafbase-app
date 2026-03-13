@@ -72,7 +72,6 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
   ) async {
     router.openLoginPage();
   }
-
 }
 
 abstract class SignUpPageRouter {

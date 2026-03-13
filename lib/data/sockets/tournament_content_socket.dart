@@ -4,7 +4,7 @@ import 'package:seating_generator_web/data/base_socket.dart';
 class TournamentContentSocket extends BaseSocket {
   TournamentContentSocket({required int tournamentId, required int table})
       : super(
-          "${getScheme()}://${getHost()}/api/seatingContent?table=$table&tournamentId=$tournamentId",
+          '${getScheme()}://${getHost()}/api/seatingContent?table=$table&tournamentId=$tournamentId',
         );
 }
 
@@ -18,8 +18,8 @@ String getScheme() {
 
 String getHost() {
   if (kIsWeb && kReleaseMode) {
-    return "${Uri.base.host}:${Uri.base.port}";
+    return '${Uri.base.host}:${Uri.base.port}';
   }
 
-  return "mafbase.ru";
+  return 'mafbase.ru';
 }

@@ -21,14 +21,10 @@ class AppBlocObserver extends BlocObserver {
       if (error is RequestError) {
         AppRouter.showErrorDialog(
           navigatorContext,
-          error.message ?? "",
+          error.message ?? '',
         );
       } else if (error is UnauthenticatedError) {
-        final location = GoRouter.of(navigatorContext)
-            .routeInformationProvider
-            .value
-            .uri
-            .toString();
+        final location = GoRouter.of(navigatorContext).routeInformationProvider.value.uri.toString();
         navigatorContext.go(
           LoginPageBody.createLocation(
             context: navigatorContext,
@@ -38,7 +34,7 @@ class AppBlocObserver extends BlocObserver {
 
         AppRouter.showErrorDialog(
           navigatorContext,
-          error.message ?? "",
+          error.message ?? '',
         );
       } else {
         AppRouter.showErrorDialog(

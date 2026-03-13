@@ -22,9 +22,7 @@ class PlayerRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = MyTheme.of(context);
-    final displayPlayer = imageUrlOverride != null
-        ? player.copyWith(imageUrl: imageUrlOverride)
-        : player;
+    final displayPlayer = imageUrlOverride != null ? player.copyWith(imageUrl: imageUrlOverride) : player;
 
     return InkWell(
       onTap: onTap,

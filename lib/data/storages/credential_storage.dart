@@ -14,6 +14,6 @@ class Credentials {
 
   @override
   String toString() {
-    return "Credentials { login: $login, password: $password }";
+    return 'Credentials { login: $login, password: $password }';
   }
 }

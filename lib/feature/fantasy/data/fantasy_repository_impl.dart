@@ -17,21 +17,15 @@ class FantasyRepositoryImpl extends BaseRepository implements FantasyRepository 
 
   @override
   Future<FantasyRatingModel> getRating(int tournamentId) =>
-      GetFantasyRatingRequest(tournamentId: tournamentId)
-          .execute(client)
-          .then((value) => value.toDomain());
+      GetFantasyRatingRequest(tournamentId: tournamentId).execute(client).then((value) => value.toDomain());
 
   @override
   Future<FantasyCurrentGameInfoModel> getCurrentGameInfo(int tournamentId) =>
-      GetFantasyCurrentGameRequest(tournamentId: tournamentId)
-          .execute(client)
-          .then((value) => value.toDomain());
+      GetFantasyCurrentGameRequest(tournamentId: tournamentId).execute(client).then((value) => value.toDomain());
 
   @override
   Future<List<UserModel>> getParticipants(int tournamentId) =>
-      GetFantasyParticipantsRequest(tournamentId: tournamentId)
-          .execute(client)
-          .then((value) => value.toDomain());
+      GetFantasyParticipantsRequest(tournamentId: tournamentId).execute(client).then((value) => value.toDomain());
 
   @override
   Future<void> addParticipant(int tournamentId, String email) =>

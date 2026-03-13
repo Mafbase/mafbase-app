@@ -7,8 +7,7 @@ part 'clubs_event.freezed.dart';
 
 @freezed
 class ClubsEvent with _$ClubsEvent {
-  const factory ClubsEvent.pageOpened({Completer? completer}) =
-      ClubsEventPageOpened;
+  const factory ClubsEvent.pageOpened({Completer? completer}) = ClubsEventPageOpened;
 
   const factory ClubsEvent.clubSelected({
     required ClubModel clubModel,

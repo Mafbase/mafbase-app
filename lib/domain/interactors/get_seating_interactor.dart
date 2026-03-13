@@ -8,7 +8,7 @@ class GetSeatingInteractor extends BaseInteractor {
   GetSeatingInteractor(this._repository);
 
   @override
-  String get interactorName => "GetSeatingInteractor";
+  String get interactorName => 'GetSeatingInteractor';
 
   Future<List<List<GameResultModel>>> run({required int tournamentId}) =>
       wrap(() => _repository.getResultModels(tournamentId: tournamentId));

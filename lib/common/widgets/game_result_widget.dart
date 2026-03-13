@@ -61,11 +61,10 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                         ),
                         child: Center(
                           child: Text(
-                            "№",
-                            style:
-                                MyTheme.of(context).defaultTextStyle.copyWith(
-                                      color: const Color(0xFF979A9D),
-                                    ),
+                            '№',
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                  color: const Color(0xFF979A9D),
+                                ),
                           ),
                         ),
                       ),
@@ -76,13 +75,12 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                         children: [
                           if (widget.model.table != 0 && widget.model.game != 0)
                             Text(
-                              "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
+                              '${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  MyTheme.of(context).defaultTextStyle.copyWith(
-                                        color: const Color(0xFF979A9D),
-                                      ),
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    color: const Color(0xFF979A9D),
+                                  ),
                             ),
                           Expanded(
                             child: _GameResultWidget(
@@ -149,7 +147,7 @@ class _PlayerRowWidget extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.all(4),
                 child: Text(
-                  "$place",
+                  '$place',
                   style: context.theme.defaultTextStyle,
                 ),
               ),
@@ -183,7 +181,7 @@ class _PlayerRowWidget extends StatelessWidget {
                   height: double.infinity,
                   padding: const EdgeInsets.all(4),
                   child: Text(
-                    "$score",
+                    '$score',
                     style: context.theme.defaultTextStyle,
                   ),
                 ),
@@ -243,23 +241,21 @@ class _RoleWidget extends StatelessWidget {
   }
 
   TextStyle textStyle(BuildContext context) {
-    return status == null
-        ? MyTheme.of(context).defaultTextStyle
-        : MyTheme.of(context).btnTextStyle;
+    return status == null ? MyTheme.of(context).defaultTextStyle : MyTheme.of(context).btnTextStyle;
   }
 
   String get text {
     switch (role) {
       case PlayerRole.citizen:
-        return "Мир";
+        return 'Мир';
       case PlayerRole.don:
-        return "Дон";
+        return 'Дон';
       case PlayerRole.maf:
-        return "Маф";
+        return 'Маф';
       case PlayerRole.sheriff:
-        return "Шер";
+        return 'Шер';
     }
-    return "";
+    return '';
   }
 }
 

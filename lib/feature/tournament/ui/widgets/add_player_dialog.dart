@@ -41,7 +41,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
 
   @override
   void initState() {
-    _controller.text = widget.initValue ?? "";
+    _controller.text = widget.initValue ?? '';
     super.initState();
   }
 
@@ -130,10 +130,8 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
         PlayerModel(
           id: 0,
           nickname: _controller.text,
-          fsmNickaname:
-              _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
-          mafbankNickname:
-              _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,
+          fsmNickaname: _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
+          mafbankNickname: _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,
         );
 
     Navigator.pop(context, player);

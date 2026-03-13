@@ -18,7 +18,6 @@ import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.d
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class RatingPage extends StatefulWidget {
@@ -55,13 +54,13 @@ class RatingPage extends StatefulWidget {
     return context.namedLocation(
       _tournamentName,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
       queryParameters: {
-        "style": tableStyle.name,
-        "sort": sort.name,
-        "game-filter": gameFilter.toString(),
-        if (customSortColumnIndex > 0) "custom-sort-column": customSortColumnIndex.toString(),
+        'style': tableStyle.name,
+        'sort': sort.name,
+        'game-filter': gameFilter.toString(),
+        if (customSortColumnIndex > 0) 'custom-sort-column': customSortColumnIndex.toString(),
       },
     );
   }
@@ -77,14 +76,14 @@ class RatingPage extends StatefulWidget {
   }) {
     return context.namedLocation(
       _clubName,
-      pathParameters: {"clubId": clubId.toString()},
+      pathParameters: {'clubId': clubId.toString()},
       queryParameters: {
-        "date-start": range == null ? null : dateFormatForRequests.format(range.start),
-        "date-end": range == null ? null : dateFormatForRequests.format(range.end),
-        "style": tableStyle.name,
-        "sort": sort.name,
-        "game-filter": gameFilter.toString(),
-        if (customSortColumnIndex > 0) "custom-sort-column": customSortColumnIndex.toString(),
+        'date-start': range == null ? null : dateFormatForRequests.format(range.start),
+        'date-end': range == null ? null : dateFormatForRequests.format(range.end),
+        'style': tableStyle.name,
+        'sort': sort.name,
+        'game-filter': gameFilter.toString(),
+        if (customSortColumnIndex > 0) 'custom-sort-column': customSortColumnIndex.toString(),
       },
     );
   }
@@ -96,18 +95,18 @@ class RatingPage extends StatefulWidget {
     path: 'rating',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final tournamentId = int.parse(state.pathParameters['id']!);
       final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["style"] == element.name,
+            (element) => state.uri.queryParameters['style'] == element.name,
           ) ??
           RatingTableStyle.full;
       final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["sort"] == element.name,
+            (element) => state.uri.queryParameters['sort'] == element.name,
           ) ??
           RatingSort.score;
-      final gameFilter = int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final gameFilter = int.tryParse(state.uri.queryParameters['game-filter'] ?? '') ?? 0;
       final customSortColumnIndex = int.tryParse(
-            state.uri.queryParameters["custom-sort-column"] ?? "",
+            state.uri.queryParameters['custom-sort-column'] ?? '',
           ) ??
           0;
       return BlocProvider<RatingBloc>(
@@ -129,25 +128,25 @@ class RatingPage extends StatefulWidget {
   );
 
   static final GoRoute clubRoute = GoRoute(
-    path: "rating",
+    path: 'rating',
     name: _clubName,
     builder: (context, state) {
-      final clubId = int.parse(state.pathParameters["clubId"]!);
-      final dateStart = DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
+      final clubId = int.parse(state.pathParameters['clubId']!);
+      final dateStart = DateTime.tryParse(state.uri.queryParameters['date-start'] ?? '') ??
           DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd = DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ?? DateTime.now();
+      final dateEnd = DateTime.tryParse(state.uri.queryParameters['date-end'] ?? '') ?? DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
       final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["style"] == element.name,
+            (element) => state.uri.queryParameters['style'] == element.name,
           ) ??
           RatingTableStyle.full;
       final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["sort"] == element.name,
+            (element) => state.uri.queryParameters['sort'] == element.name,
           ) ??
           RatingSort.score;
-      final gameFilter = int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final gameFilter = int.tryParse(state.uri.queryParameters['game-filter'] ?? '') ?? 0;
       final customSortColumnIndex = int.tryParse(
-            state.uri.queryParameters["custom-sort-column"] ?? "",
+            state.uri.queryParameters['custom-sort-column'] ?? '',
           ) ??
           0;
       return BlocProvider<RatingBloc>(
@@ -171,7 +170,7 @@ class RatingPage extends StatefulWidget {
 }
 
 class _RatingPageState extends CustomState<RatingPage> {
-  final format = DateFormat("dd:MM:yyyy");
+  final format = DateFormat('dd:MM:yyyy');
   int carouselIndex = 1;
   final _carouselController = carousel.CarouselSliderController();
 
@@ -199,9 +198,9 @@ class _RatingPageState extends CustomState<RatingPage> {
       case RatingTableStyle.full:
         return 'Рейтинг';
       case RatingTableStyle.stats:
-        return "Винрейт";
+        return 'Винрейт';
       case RatingTableStyle.score:
-        return "Баллы";
+        return 'Баллы';
       case RatingTableStyle.custom:
         return context.locale.customColumns;
     }
@@ -327,7 +326,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                   child: TextButton(
                     onPressed: onChangeRangeTap,
                     child: Text(
-                      "${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
+                      '${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -423,7 +422,7 @@ class _RatingPageState extends CustomState<RatingPage> {
                                   CustomButton(
                                     onTap: onChangeRangeTap,
                                     disabled: widget.tournamentId != null,
-                                    text: "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
+                                    text: '${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
                                   ),
                                 ],
                               ),
@@ -572,11 +571,11 @@ class _RatingPageState extends CustomState<RatingPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})",
+          'Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})',
         ),
         const SizedBox(height: 4),
         Text(
-          "Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})",
+          'Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})',
         ),
       ],
     );

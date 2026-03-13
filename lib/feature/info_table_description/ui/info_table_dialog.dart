@@ -21,7 +21,7 @@ class InfoTableDialog extends StatefulWidget {
             const InfoTableState(),
             RepositoryFactory.of(context).infoTableDescriptionRepository,
           )..add(InfoTableDescriptionEventInit(tournamentId)),
-          child: InfoTableDialog(),
+          child: const InfoTableDialog(),
         ),
       );
 
@@ -63,10 +63,10 @@ class _InfoTableDialogState extends State<InfoTableDialog> {
   Widget build(BuildContext context) => BlocBuilder<InfoTableDescriptionBloc, InfoTableState>(
         builder: (context, state) => CustomDialog(
           child: state.loading
-              ? SizedBox(
+              ? const SizedBox(
                   width: 100,
                   height: 100,
-                  child: Center(child: const CircularProgressIndicator()),
+                  child: Center(child: CircularProgressIndicator()),
                 )
               : ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 600),
@@ -105,7 +105,7 @@ class _InfoTableDialogState extends State<InfoTableDialog> {
                               IconButton(
                                 onPressed: () => _bloc.add(InfoTableDescriptionEventDelete(entry.key)),
                                 icon: const Icon(Icons.delete_outline_outlined),
-                              )
+                              ),
                             ],
                           ),
                         ListenableBuilder(

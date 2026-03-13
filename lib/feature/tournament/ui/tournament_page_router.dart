@@ -79,5 +79,4 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
       ),
     );
   }
-
 }

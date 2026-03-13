@@ -97,9 +97,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                             size: 20,
                           ),
                           hint: context.locale.loginEmailHint,
-                          errorText: state.hasError
-                              ? context.locale.forgotPasswordEmailNotFound
-                              : null,
+                          errorText: state.hasError ? context.locale.forgotPasswordEmailNotFound : null,
                           validate: (value) {
                             if (value != null) {
                               if (EmailValidator.validate(value)) {
@@ -126,15 +124,12 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                           child: TextButton(
                             onPressed: () {
                               context.read<ForgotPasswordBloc>().add(
-                                    const ForgotPasswordEvents
-                                        .backButtonTapped(),
+                                    const ForgotPasswordEvents.backButtonTapped(),
                                   );
                             },
                             child: Text(
                               context.locale.authorization,
-                              style: MyTheme.of(context)
-                                  .defaultTextStyle
-                                  .copyWith(
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
                                     color: MyTheme.of(context).darkGreyColor,
                                   ),
                             ),
@@ -191,9 +186,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                           size: 20,
                         ),
                         hint: context.locale.loginEmailHint,
-                        errorText: state.hasError
-                            ? context.locale.forgotPasswordEmailNotFound
-                            : null,
+                        errorText: state.hasError ? context.locale.forgotPasswordEmailNotFound : null,
                         validate: (value) {
                           if (value != null) {
                             if (EmailValidator.validate(value)) {

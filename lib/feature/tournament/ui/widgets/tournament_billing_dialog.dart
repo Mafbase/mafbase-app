@@ -13,8 +13,7 @@ class TournamentBillingDialog extends StatefulWidget {
   });
 
   @override
-  State<TournamentBillingDialog> createState() =>
-      _TournamentBillingDialogState();
+  State<TournamentBillingDialog> createState() => _TournamentBillingDialogState();
 
   static Future<TournamentBillingDialogResult?> open({
     required BuildContext context,
@@ -61,10 +60,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
             children: [
               FormField<int>(
                 initialValue: widget.playersCount,
-                validator: (value) =>
-                    (value != null) && value % 10 == 0 && value > 0
-                        ? null
-                        : "Некорректное значение",
+                validator: (value) => (value != null) && value % 10 == 0 && value > 0 ? null : 'Некорректное значение',
                 onSaved: (value) => count = value ?? count,
                 builder: (field) {
                   return Wrap(
@@ -80,13 +76,12 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                           TextButton(
                             onPressed: () {
                               final value = field.value;
-                              if (value != null &&
-                                  value > widget.playersCount) {
+                              if (value != null && value > widget.playersCount) {
                                 field.didChange(value - 10);
                               }
                             },
                             child: const Text(
-                              "-",
+                              '-',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
@@ -95,7 +90,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            "${field.value}",
+                            '${field.value}',
                             style: const TextStyle(fontSize: 24),
                           ),
                           const SizedBox(width: 8),
@@ -107,7 +102,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                               }
                             },
                             child: const Text(
-                              "+",
+                              '+',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
@@ -123,10 +118,8 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
               const SizedBox(height: 20),
               FormField<bool>(
                 initialValue: widget.billedTranslation,
-                validator: (value) =>
-                    value == null ? null : "Некорректное значение",
-                onSaved: (value) =>
-                    enableTranslation = value ?? enableTranslation,
+                validator: (value) => value == null ? null : 'Некорректное значение',
+                onSaved: (value) => enableTranslation = value ?? enableTranslation,
                 builder: (field) {
                   return Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
@@ -155,8 +148,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                 width: 400,
                 child: Builder(
                   builder: (context) {
-                    final price = widget.playersCount != count ||
-                            widget.billedTranslation != enableTranslation
+                    final price = widget.playersCount != count || widget.billedTranslation != enableTranslation
                         ? calculatePrice(
                               count,
                               enableTranslation,
@@ -169,9 +161,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                     return Center(
                       child: CustomButton(
                         text: 'Оплатить${price == null ? '' : ' $price₽'}',
-                        disabled:
-                            widget.billedTranslation == enableTranslation &&
-                                widget.playersCount == count,
+                        disabled: widget.billedTranslation == enableTranslation && widget.playersCount == count,
                         onTap: () {
                           formKey.currentState?.save();
                           Navigator.pop(

@@ -18,7 +18,6 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_even
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class SeatingPage extends StatefulWidget {
@@ -34,7 +33,7 @@ class SeatingPage extends StatefulWidget {
     path: 'editSeating',
     name: name,
     builder: (context, state) => SeatingPage(
-      tournamentId: int.parse(state.pathParameters["id"] ?? ""),
+      tournamentId: int.parse(state.pathParameters['id'] ?? ''),
     ),
   );
 
@@ -45,7 +44,7 @@ class SeatingPage extends StatefulWidget {
     return context.namedLocation(
       name,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
     );
   }
@@ -282,7 +281,7 @@ class _SeatingPageState extends State<SeatingPage>
               onTap: () {
                 ConfirmDialog.open(
                   context,
-                  "Новая рассадка заменит старую",
+                  'Новая рассадка заменит старую',
                 ).then((value) {
                   if (value == true) {
                     onSwissGameCreate(state, false);
@@ -296,7 +295,7 @@ class _SeatingPageState extends State<SeatingPage>
             onTap: () {
               ConfirmDialog.open(
                 context,
-                "Новая рассадка заменит старую",
+                'Новая рассадка заменит старую',
               ).then(
                 (value) {
                   if (value == true && mounted) {
@@ -313,7 +312,7 @@ class _SeatingPageState extends State<SeatingPage>
           onTap: () {
             ConfirmDialog.open(
               context,
-              "Новая рассадка заменит старую",
+              'Новая рассадка заменит старую',
             ).then((value) {
               if (value == true) {
                 if (!mounted) return;

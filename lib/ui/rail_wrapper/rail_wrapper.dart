@@ -36,7 +36,7 @@ class RailWrapper extends StatefulWidget {
       return MultiBlocProvider(
         providers: [
           BlocProvider<TournamentsBloc>(
-            key: const Key("TournamentsBlocProvider"),
+            key: const Key('TournamentsBlocProvider'),
             create: (context) {
               final repos = RepositoryFactory.of(context);
               return TournamentsBloc(
@@ -135,9 +135,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
           authorized: (_) => IconButton(
             tooltip: context.locale.profile,
             onPressed: () {
-              context
-                  .read<MainBloc>()
-                  .add(const MainEvent.onProfilePressed());
+              context.read<MainBloc>().add(const MainEvent.onProfilePressed());
             },
             hoverColor: theme.background1.withValues(alpha: 0.2),
             icon: Icon(
@@ -159,9 +157,7 @@ class _RailWrapperState extends CustomState<RailWrapper> {
           return [
             PopupMenuItem(
               onTap: () {
-                context
-                    .read<MainBloc>()
-                    .add(const MainEvent.openContacts());
+                context.read<MainBloc>().add(const MainEvent.openContacts());
               },
               child: Row(
                 children: [

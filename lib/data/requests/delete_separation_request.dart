@@ -9,7 +9,7 @@ class DeleteSeparationRequest extends BaseRequest<void> {
     required Player first,
     required Player second,
   }) : super(
-          "/api/tournament/$tournamentId/deleteSeparation",
+          '/api/tournament/$tournamentId/deleteSeparation',
           data: CannotMeetEditionEvent(
             player1: first,
             player2: second,

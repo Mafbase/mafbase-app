@@ -64,7 +64,7 @@ class SingleClubRow extends StatelessWidget {
                             ),
                             const Spacer(),
                             Text(
-                              model.city != null ? "г. ${model.city}" : " ",
+                              model.city != null ? 'г. ${model.city}' : ' ',
                               style: context.theme.defaultTextStyle,
                             ),
                           ],
@@ -115,7 +115,7 @@ class SingleClubRow extends StatelessWidget {
               if (model.city != null)
                 Expanded(
                   child: Text(
-                    "г. ${model.city}",
+                    'г. ${model.city}',
                     style: context.theme.defaultTextStyle,
                   ),
                 )

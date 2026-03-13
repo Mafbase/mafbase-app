@@ -93,9 +93,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 child: widget.icon,
               )
             : null,
-        prefixIconConstraints: widget.icon != null
-            ? const BoxConstraints(minWidth: 44, minHeight: 20)
-            : null,
+        prefixIconConstraints: widget.icon != null ? const BoxConstraints(minWidth: 44, minHeight: 20) : null,
         suffixIcon: _buildSuffixIcon(),
         errorText: widget.errorText,
         errorMaxLines: 1,

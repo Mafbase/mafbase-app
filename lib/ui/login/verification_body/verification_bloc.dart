@@ -9,8 +9,7 @@ import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.da
 import 'package:seating_generator_web/ui/login/verification_body/verification_events.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_state.dart';
 
-class VerificationBloc
-    extends Bloc<VerificationEvents, VerificationState> {
+class VerificationBloc extends Bloc<VerificationEvents, VerificationState> {
   @visibleForTesting
   final VerificationPageRouter router;
   final VerificationInteractor _interactor;
@@ -56,7 +55,6 @@ class VerificationBloc
   ) async {
     router.openSignUpPage();
   }
-
 }
 
 abstract class VerificationPageRouter {

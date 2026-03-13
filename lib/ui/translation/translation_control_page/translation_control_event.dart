@@ -23,6 +23,5 @@ class TranslationControlEvent with _$TranslationControlEvent {
     required SeatingContent event,
   }) = TranslationControlEventStateReceived;
 
-  const factory TranslationControlEvent.pageOpened() =
-      TranslationControlEventPageOpened;
+  const factory TranslationControlEvent.pageOpened() = TranslationControlEventPageOpened;
 }

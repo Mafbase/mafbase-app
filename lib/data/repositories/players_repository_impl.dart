@@ -13,8 +13,7 @@ import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
-class PlayersRepositoryImpl extends BaseRepository
-    implements PlayersRepository {
+class PlayersRepositoryImpl extends BaseRepository implements PlayersRepository {
   PlayersRepositoryImpl(super.client);
 
   @override
@@ -47,19 +46,14 @@ class PlayersRepositoryImpl extends BaseRepository
           );
 
   @override
-  Future<List<PlayerModel>> get players =>
-      GetAllPlayersRequest().execute(client).then(
-            (value) =>
-                value.players.map((e) => PlayerModel.fromProto(e)).toList(),
-          );
+  Future<List<PlayerModel>> get players => GetAllPlayersRequest().execute(client).then(
+        (value) => value.players.map((e) => PlayerModel.fromProto(e)).toList(),
+      );
 
   @override
   Future<List<PlayerModel>> tournamentsPlayer(int tournamentId) {
-    return GetTournamentsPlayersRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then(
-          (value) =>
-              value.players.map((e) => PlayerModel.fromProto(e)).toList(),
+    return GetTournamentsPlayersRequest(tournamentId: tournamentId).execute(client).then(
+          (value) => value.players.map((e) => PlayerModel.fromProto(e)).toList(),
         );
   }
 

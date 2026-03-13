@@ -15,7 +15,6 @@ import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_rating_
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -39,7 +38,7 @@ class FantasyPage extends StatefulWidget {
     return context.namedLocation(
       _tournamentName,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
     );
   }
@@ -50,15 +49,15 @@ class FantasyPage extends StatefulWidget {
     path: 'fantasy',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final tournamentId = int.parse(state.pathParameters['id']!);
       final isOwner = context.watch<TournamentPageBloc>().state.isMyTournament;
       final userId = context.read<AuthNotifier>().value.mapOrNull(
             authorized: (model) => model.userId,
           );
 
       return BlocProvider<FantasyBloc>(
-        key: ValueKey("$tournamentId$isOwner"),
-        create: (context) => FantasyBloc(FantasyState(), RepositoryFactory.of(context).fantasyRepository)
+        key: ValueKey('$tournamentId$isOwner'),
+        create: (context) => FantasyBloc(const FantasyState(), RepositoryFactory.of(context).fantasyRepository)
           ..add(
             FantasyEventInit(
               tournamentId: tournamentId,
@@ -151,7 +150,7 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          FantasyNotificationsBanner(),
+                          const FantasyNotificationsBanner(),
                           ValueListenableBuilder(
                             valueListenable: context.read<AuthNotifier>(),
                             builder: (context, state, child) =>

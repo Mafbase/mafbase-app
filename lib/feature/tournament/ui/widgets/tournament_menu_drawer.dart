@@ -69,7 +69,7 @@ class TournamentMenuDrawer extends StatelessWidget {
                             _buildSectionTitle(section.title, theme),
                             ...section.items.map(
                               (item) => Padding(
-                                padding: EdgeInsets.only(bottom: 4),
+                                padding: const EdgeInsets.only(bottom: 4),
                                 child: _buildItem(context, item, theme),
                               ),
                             ),

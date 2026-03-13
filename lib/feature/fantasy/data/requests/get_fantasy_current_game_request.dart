@@ -9,6 +9,5 @@ class GetFantasyCurrentGameRequest extends BaseRequest<FantasyCurrentGameEventOu
       : super('/api/tournament/$tournamentId/fantasy/currentGame');
 
   @override
-  FutureOr<FantasyCurrentGameEventOut> parse(List<int> bytes) =>
-      compute(FantasyCurrentGameEventOut.fromBuffer, bytes);
+  FutureOr<FantasyCurrentGameEventOut> parse(List<int> bytes) => compute(FantasyCurrentGameEventOut.fromBuffer, bytes);
 }

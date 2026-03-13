@@ -12,16 +12,12 @@ class StorageFactory {
 
   final bool _isIntegrationTest;
 
-  StorageFactory({bool isIntegrationTest = false})
-      : _isIntegrationTest = isIntegrationTest;
+  StorageFactory({bool isIntegrationTest = false}) : _isIntegrationTest = isIntegrationTest;
 
-  late final TokenStorage tokenStorage = _isIntegrationTest
-      ? TokenInMemoryStorage()
-      : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl());
+  late final TokenStorage tokenStorage =
+      _isIntegrationTest ? TokenInMemoryStorage() : (_useHiveStorage ? TokenStorageHiveImpl() : TokenStorageImpl());
 
-  late final CredentialStorage credentialStorage =
-      CredentialSecureStorageImpl();
+  late final CredentialStorage credentialStorage = CredentialSecureStorageImpl();
 
-  static StorageFactory of(BuildContext context) =>
-      DependencyScope.of(context).storageFactory;
+  static StorageFactory of(BuildContext context) => DependencyScope.of(context).storageFactory;
 }

@@ -35,8 +35,7 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
     @Default([]) List<CustomColumnValueModel> customColumns,
   }) = _ClubRatingRowModel;
 
-  factory ClubRatingRowModel.fromProto(ClubRatingRow proto) =>
-      ClubRatingRowModel(
+  factory ClubRatingRowModel.fromProto(ClubRatingRow proto) => ClubRatingRowModel(
         playerId: proto.playerId,
         nickname: proto.nickname,
         score: proto.score,
@@ -62,9 +61,7 @@ class ClubRatingRowModel with _$ClubRatingRowModel {
         sheriffScore: proto.sheriffScore,
         donScore: proto.donScore,
         mafiaScore: proto.mafiaScore,
-        customColumns: proto.customColumns
-            .map((e) => CustomColumnValueModel.fromProto(e))
-            .toList(),
+        customColumns: proto.customColumns.map((e) => CustomColumnValueModel.fromProto(e)).toList(),
       );
 }
 
@@ -74,11 +71,9 @@ extension ClubRatingRowModelExt on ClubRatingRowModel {
 
 @freezed
 class GameRowItemModel with _$GameRowItemModel {
-  const factory GameRowItemModel({double? score, required int gameId}) =
-      _GameRowItemModel;
+  const factory GameRowItemModel({double? score, required int gameId}) = _GameRowItemModel;
 
-  factory GameRowItemModel.fromProto(ClubRatingRow_GameItem proto) =>
-      GameRowItemModel(
+  factory GameRowItemModel.fromProto(ClubRatingRow_GameItem proto) => GameRowItemModel(
         gameId: proto.gameId,
         score: proto.hasScore() ? proto.score : null,
       );

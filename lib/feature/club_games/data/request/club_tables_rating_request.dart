@@ -9,7 +9,7 @@ class ClubTablesRatingRequest extends BaseRequest<SeatingEventOut> {
     required DateTimeRange range,
     required int clubId,
   }) : super(
-          "/api/club/$clubId/tables-rating?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}",
+          '/api/club/$clubId/tables-rating?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}',
         );
 
   @override

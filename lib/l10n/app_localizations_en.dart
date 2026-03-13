@@ -114,8 +114,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourEmail => 'Your email';
 
   @override
-  String get wrongEmail =>
-      'Profile with this email already exists / Invalid email';
+  String get wrongEmail => 'Profile with this email already exists / Invalid email';
 
   @override
   String get enterPassword => 'Enter password';
@@ -229,8 +228,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get draw => 'Draw';
 
   @override
-  String get tournamentSettingsUpdateSuccess =>
-      'Tournament settings successfully updated';
+  String get tournamentSettingsUpdateSuccess => 'Tournament settings successfully updated';
 
   @override
   String get clubsHeader => 'Clubs';
@@ -277,8 +275,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutApp => 'About app';
 
   @override
-  String get politicaAlert =>
-      'By clicking the Sign in button, you fully accept ';
+  String get politicaAlert => 'By clicking the Sign in button, you fully accept ';
 
   @override
   String get politicaHref => 'Privacy Policy';
@@ -340,16 +337,14 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get profileTournamentSubscriptionPlanUnavailable =>
-      'No active subscription';
+  String get profileTournamentSubscriptionPlanUnavailable => 'No active subscription';
 
   @override
   String get profileTournamentSubscriptionTypeUnknown => 'Unknown plan';
 
   @override
-  String
-      get profileTournamentSubscriptionTypeTournamentWithAllAddons10Players =>
-          'Tournaments + all addons (10 players)';
+  String get profileTournamentSubscriptionTypeTournamentWithAllAddons10Players =>
+      'Tournaments + all addons (10 players)';
 
   @override
   String get profileTournamentSubscriptionCreate => 'Start subscription';
@@ -369,8 +364,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileTournamentSubscriptionReload => 'Refresh';
 
   @override
-  String get profileTournamentSubscriptionErrorGeneric =>
-      'Failed to load subscription data';
+  String get profileTournamentSubscriptionErrorGeneric => 'Failed to load subscription data';
 
   @override
   String get profileTournamentSubscriptionInfoTitle => 'About subscription';
@@ -461,8 +455,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get fantasyCurrentGameInfoUnavailable =>
-      'Current game information unavailable';
+  String get fantasyCurrentGameInfoUnavailable => 'Current game information unavailable';
 
   @override
   String get fantasyCurrentGame => 'Current game';
@@ -522,12 +515,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get seatingPlayerNotFound => 'Player with nickname not found: ';
 
   @override
-  String get seatingSelectOrCreatePlayer =>
-      'Select a player from the list or create a new one';
+  String get seatingSelectOrCreatePlayer => 'Select a player from the list or create a new one';
 
   @override
-  String get seatingCurrentFsmNickname =>
-      'Current FSM nickname of selected player: ';
+  String get seatingCurrentFsmNickname => 'Current FSM nickname of selected player: ';
 
   @override
   String get confirm => 'Confirm';
@@ -542,8 +533,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get period => 'Period: ';
 
   @override
-  String get ratingNoGamesFound =>
-      'No games found for this period. Try changing the period.';
+  String get ratingNoGamesFound => 'No games found for this period. Try changing the period.';
 
   @override
   String get ratingNumber => '#';
@@ -659,19 +649,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgotPasswordTitle => 'Восстановление пароля';
 
   @override
-  String get forgotPasswordDescription =>
-      'Введите ваш email, и мы отправим вам инструкции по восстановлению пароля';
+  String get forgotPasswordDescription => 'Введите ваш email, и мы отправим вам инструкции по восстановлению пароля';
 
   @override
-  String get forgotPasswordEmailNotFound =>
-      'Пользователь с таким email не найден';
+  String get forgotPasswordEmailNotFound => 'Пользователь с таким email не найден';
 
   @override
   String get resetPasswordTitle => 'Сброс пароля';
 
   @override
-  String get resetPasswordDescription =>
-      'Введите токен из письма и новый пароль';
+  String get resetPasswordDescription => 'Введите токен из письма и новый пароль';
 
   @override
   String get resetPasswordTokenHint => 'Токен из письма';
@@ -708,8 +695,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customColumnsFormula => 'Formula';
 
   @override
-  String get customColumnsFormulaHint =>
-      'Enter formula (e.g. score / totalGames)';
+  String get customColumnsFormulaHint => 'Enter formula (e.g. score / totalGames)';
 
   @override
   String get customColumnsValidate => 'Validate';
@@ -749,12 +735,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customColumnsEdit => 'Edit';
 
   @override
-  String get customColumnsOperations =>
-      'Operations: +, -, *, /, ^ (power), % (remainder), parentheses';
+  String get customColumnsOperations => 'Operations: +, -, *, /, ^ (power), % (remainder), parentheses';
 
   @override
-  String get customColumnsFunctions =>
-      'Functions: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan';
+  String get customColumnsFunctions => 'Functions: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan';
 
   @override
   String get tooltipScore => 'Total score';
@@ -946,8 +930,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get photoThemesDeleteShort => 'Удалить';
 
   @override
-  String get photoThemesDeleteConfirm =>
-      'Вы уверены, что хотите удалить эту тему?';
+  String get photoThemesDeleteConfirm => 'Вы уверены, что хотите удалить эту тему?';
 
   @override
   String photoThemesPhotosCount(int count) {
@@ -1036,8 +1019,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSubscriptionExpiredLabel => 'Expired';
 
   @override
-  String get profileSubscriptionErrorMessage =>
-      'Failed to load subscription data';
+  String get profileSubscriptionErrorMessage => 'Failed to load subscription data';
 
   @override
   String get profileSubscriptionRetryButton => 'Retry';
@@ -1046,8 +1028,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileBillDialogTitle => 'Choose period';
 
   @override
-  String get profileBillDialogSubtitle =>
-      'Subscription gives access to advanced features';
+  String get profileBillDialogSubtitle => 'Subscription gives access to advanced features';
 
   @override
   String profileBillDialogPayButton(int amount) {

@@ -8,7 +8,7 @@ class DeletePlayerInteractor extends BaseInteractor {
   DeletePlayerInteractor(this._repository);
 
   @override
-  String get interactorName => "DeletePlayerInteractor";
+  String get interactorName => 'DeletePlayerInteractor';
 
   Future run({
     required int tournamentId,

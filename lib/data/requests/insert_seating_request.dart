@@ -3,7 +3,7 @@ import 'package:seating_generator_web/data/http_client.dart';
 
 class InsertSeatingRequest extends BaseRequest<bool> {
   final List<int> _bytes;
-  InsertSeatingRequest(int tournamentId, this._bytes) : super("/api/insertSeating/$tournamentId");
+  InsertSeatingRequest(int tournamentId, this._bytes) : super('/api/insertSeating/$tournamentId');
 
   @override
   bool parse(List<int> bytes) {

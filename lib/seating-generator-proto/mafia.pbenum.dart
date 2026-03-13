@@ -19,7 +19,7 @@ class BestMove extends $pb.ProtobufEnum {
   static const BestMove full = BestMove._(2, _omitEnumNames ? '' : 'full');
   static const BestMove one = BestMove._(3, _omitEnumNames ? '' : 'one');
 
-  static const $core.List<BestMove> values = <BestMove> [
+  static const $core.List<BestMove> values = <BestMove>[
     miss,
     half,
     full,
@@ -37,7 +37,7 @@ class GameWin extends $pb.ProtobufEnum {
   static const GameWin mafia = GameWin._(1, _omitEnumNames ? '' : 'mafia');
   static const GameWin draw = GameWin._(2, _omitEnumNames ? '' : 'draw');
 
-  static const $core.List<GameWin> values = <GameWin> [
+  static const $core.List<GameWin> values = <GameWin>[
     city,
     mafia,
     draw,
@@ -54,7 +54,7 @@ class FantasyStatus extends $pb.ProtobufEnum {
   static const FantasyStatus enabledForSelected = FantasyStatus._(1, _omitEnumNames ? '' : 'enabledForSelected');
   static const FantasyStatus enabledForAll = FantasyStatus._(2, _omitEnumNames ? '' : 'enabledForAll');
 
-  static const $core.List<FantasyStatus> values = <FantasyStatus> [
+  static const $core.List<FantasyStatus> values = <FantasyStatus>[
     disabled,
     enabledForSelected,
     enabledForAll,
@@ -72,7 +72,7 @@ class PlayerRole extends $pb.ProtobufEnum {
   static const PlayerRole don = PlayerRole._(2, _omitEnumNames ? '' : 'don');
   static const PlayerRole sheriff = PlayerRole._(3, _omitEnumNames ? '' : 'sheriff');
 
-  static const $core.List<PlayerRole> values = <PlayerRole> [
+  static const $core.List<PlayerRole> values = <PlayerRole>[
     citizen,
     maf,
     don,
@@ -91,7 +91,7 @@ class PlayerStatus extends $pb.ProtobufEnum {
   static const PlayerStatus deleted = PlayerStatus._(2, _omitEnumNames ? '' : 'deleted');
   static const PlayerStatus killed = PlayerStatus._(3, _omitEnumNames ? '' : 'killed');
 
-  static const $core.List<PlayerStatus> values = <PlayerStatus> [
+  static const $core.List<PlayerStatus> values = <PlayerStatus>[
     alive,
     voted,
     deleted,
@@ -105,10 +105,12 @@ class PlayerStatus extends $pb.ProtobufEnum {
 }
 
 class TournamentSubscriptionType extends $pb.ProtobufEnum {
-  static const TournamentSubscriptionType unknownTournamentSubscriptionType = TournamentSubscriptionType._(0, _omitEnumNames ? '' : 'unknownTournamentSubscriptionType');
-  static const TournamentSubscriptionType tournamentWithAllAddons10Players = TournamentSubscriptionType._(1, _omitEnumNames ? '' : 'tournamentWithAllAddons10Players');
+  static const TournamentSubscriptionType unknownTournamentSubscriptionType =
+      TournamentSubscriptionType._(0, _omitEnumNames ? '' : 'unknownTournamentSubscriptionType');
+  static const TournamentSubscriptionType tournamentWithAllAddons10Players =
+      TournamentSubscriptionType._(1, _omitEnumNames ? '' : 'tournamentWithAllAddons10Players');
 
-  static const $core.List<TournamentSubscriptionType> values = <TournamentSubscriptionType> [
+  static const $core.List<TournamentSubscriptionType> values = <TournamentSubscriptionType>[
     unknownTournamentSubscriptionType,
     tournamentWithAllAddons10Players,
   ];
@@ -123,7 +125,7 @@ class RatingScheme extends $pb.ProtobufEnum {
   static const RatingScheme oldFSM = RatingScheme._(0, _omitEnumNames ? '' : 'oldFSM');
   static const RatingScheme minusFSM = RatingScheme._(1, _omitEnumNames ? '' : 'minusFSM');
 
-  static const $core.List<RatingScheme> values = <RatingScheme> [
+  static const $core.List<RatingScheme> values = <RatingScheme>[
     oldFSM,
     minusFSM,
   ];
@@ -136,10 +138,12 @@ class RatingScheme extends $pb.ProtobufEnum {
 
 class LoginEventOut_Error extends $pb.ProtobufEnum {
   static const LoginEventOut_Error noError = LoginEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
-  static const LoginEventOut_Error needVerification = LoginEventOut_Error._(1, _omitEnumNames ? '' : 'needVerification');
-  static const LoginEventOut_Error invalidCredentials = LoginEventOut_Error._(2, _omitEnumNames ? '' : 'invalidCredentials');
+  static const LoginEventOut_Error needVerification =
+      LoginEventOut_Error._(1, _omitEnumNames ? '' : 'needVerification');
+  static const LoginEventOut_Error invalidCredentials =
+      LoginEventOut_Error._(2, _omitEnumNames ? '' : 'invalidCredentials');
 
-  static const $core.List<LoginEventOut_Error> values = <LoginEventOut_Error> [
+  static const $core.List<LoginEventOut_Error> values = <LoginEventOut_Error>[
     noError,
     needVerification,
     invalidCredentials,
@@ -153,10 +157,12 @@ class LoginEventOut_Error extends $pb.ProtobufEnum {
 
 class LoginByTokenEventOut_Error extends $pb.ProtobufEnum {
   static const LoginByTokenEventOut_Error noError = LoginByTokenEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
-  static const LoginByTokenEventOut_Error needVerification = LoginByTokenEventOut_Error._(1, _omitEnumNames ? '' : 'needVerification');
-  static const LoginByTokenEventOut_Error invalidCredentials = LoginByTokenEventOut_Error._(2, _omitEnumNames ? '' : 'invalidCredentials');
+  static const LoginByTokenEventOut_Error needVerification =
+      LoginByTokenEventOut_Error._(1, _omitEnumNames ? '' : 'needVerification');
+  static const LoginByTokenEventOut_Error invalidCredentials =
+      LoginByTokenEventOut_Error._(2, _omitEnumNames ? '' : 'invalidCredentials');
 
-  static const $core.List<LoginByTokenEventOut_Error> values = <LoginByTokenEventOut_Error> [
+  static const $core.List<LoginByTokenEventOut_Error> values = <LoginByTokenEventOut_Error>[
     noError,
     needVerification,
     invalidCredentials,
@@ -172,9 +178,10 @@ class SignUpEventOut_Error extends $pb.ProtobufEnum {
   static const SignUpEventOut_Error noError = SignUpEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
   static const SignUpEventOut_Error emailExist = SignUpEventOut_Error._(1, _omitEnumNames ? '' : 'emailExist');
   static const SignUpEventOut_Error weakPassword = SignUpEventOut_Error._(2, _omitEnumNames ? '' : 'weakPassword');
-  static const SignUpEventOut_Error needVerification = SignUpEventOut_Error._(4, _omitEnumNames ? '' : 'needVerification');
+  static const SignUpEventOut_Error needVerification =
+      SignUpEventOut_Error._(4, _omitEnumNames ? '' : 'needVerification');
 
-  static const $core.List<SignUpEventOut_Error> values = <SignUpEventOut_Error> [
+  static const $core.List<SignUpEventOut_Error> values = <SignUpEventOut_Error>[
     noError,
     emailExist,
     weakPassword,
@@ -188,10 +195,12 @@ class SignUpEventOut_Error extends $pb.ProtobufEnum {
 }
 
 class EmailVerificationEventOut_Status extends $pb.ProtobufEnum {
-  static const EmailVerificationEventOut_Status success = EmailVerificationEventOut_Status._(0, _omitEnumNames ? '' : 'success');
-  static const EmailVerificationEventOut_Status incorrectToken = EmailVerificationEventOut_Status._(1, _omitEnumNames ? '' : 'incorrectToken');
+  static const EmailVerificationEventOut_Status success =
+      EmailVerificationEventOut_Status._(0, _omitEnumNames ? '' : 'success');
+  static const EmailVerificationEventOut_Status incorrectToken =
+      EmailVerificationEventOut_Status._(1, _omitEnumNames ? '' : 'incorrectToken');
 
-  static const $core.List<EmailVerificationEventOut_Status> values = <EmailVerificationEventOut_Status> [
+  static const $core.List<EmailVerificationEventOut_Status> values = <EmailVerificationEventOut_Status>[
     success,
     incorrectToken,
   ];
@@ -207,7 +216,7 @@ class Tournament_Status extends $pb.ProtobufEnum {
   static const Tournament_Status active = Tournament_Status._(1, _omitEnumNames ? '' : 'active');
   static const Tournament_Status ended = Tournament_Status._(2, _omitEnumNames ? '' : 'ended');
 
-  static const $core.List<Tournament_Status> values = <Tournament_Status> [
+  static const $core.List<Tournament_Status> values = <Tournament_Status>[
     waitForBilling,
     active,
     ended,
@@ -220,10 +229,12 @@ class Tournament_Status extends $pb.ProtobufEnum {
 }
 
 class ForgotPasswordEventOut_Error extends $pb.ProtobufEnum {
-  static const ForgotPasswordEventOut_Error noError = ForgotPasswordEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
-  static const ForgotPasswordEventOut_Error emailNotFound = ForgotPasswordEventOut_Error._(1, _omitEnumNames ? '' : 'emailNotFound');
+  static const ForgotPasswordEventOut_Error noError =
+      ForgotPasswordEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
+  static const ForgotPasswordEventOut_Error emailNotFound =
+      ForgotPasswordEventOut_Error._(1, _omitEnumNames ? '' : 'emailNotFound');
 
-  static const $core.List<ForgotPasswordEventOut_Error> values = <ForgotPasswordEventOut_Error> [
+  static const $core.List<ForgotPasswordEventOut_Error> values = <ForgotPasswordEventOut_Error>[
     noError,
     emailNotFound,
   ];
@@ -236,10 +247,12 @@ class ForgotPasswordEventOut_Error extends $pb.ProtobufEnum {
 
 class ResetPasswordEventOut_Error extends $pb.ProtobufEnum {
   static const ResetPasswordEventOut_Error noError = ResetPasswordEventOut_Error._(0, _omitEnumNames ? '' : 'noError');
-  static const ResetPasswordEventOut_Error invalidToken = ResetPasswordEventOut_Error._(1, _omitEnumNames ? '' : 'invalidToken');
-  static const ResetPasswordEventOut_Error weakPassword = ResetPasswordEventOut_Error._(2, _omitEnumNames ? '' : 'weakPassword');
+  static const ResetPasswordEventOut_Error invalidToken =
+      ResetPasswordEventOut_Error._(1, _omitEnumNames ? '' : 'invalidToken');
+  static const ResetPasswordEventOut_Error weakPassword =
+      ResetPasswordEventOut_Error._(2, _omitEnumNames ? '' : 'weakPassword');
 
-  static const $core.List<ResetPasswordEventOut_Error> values = <ResetPasswordEventOut_Error> [
+  static const $core.List<ResetPasswordEventOut_Error> values = <ResetPasswordEventOut_Error>[
     noError,
     invalidToken,
     weakPassword,
@@ -250,6 +263,5 @@ class ResetPasswordEventOut_Error extends $pb.ProtobufEnum {
 
   const ResetPasswordEventOut_Error._(super.v, super.n);
 }
-
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

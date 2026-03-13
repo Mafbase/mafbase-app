@@ -23,7 +23,6 @@ import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_them
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_create_dialog.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_player_cell.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -45,7 +44,7 @@ class PhotoThemesPage extends StatefulWidget {
     return context.namedLocation(
       _tournamentName,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
     );
   }
@@ -57,9 +56,9 @@ class PhotoThemesPage extends StatefulWidget {
     path: 'photo-themes',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final tournamentId = int.parse(state.pathParameters['id']!);
       return PhotoThemesBlocInjector(
-        key: ValueKey("photoThemes_$tournamentId"),
+        key: ValueKey('photoThemes_$tournamentId'),
         tournamentId: tournamentId,
         child: PhotoThemesPage(tournamentId: tournamentId),
       );
@@ -70,8 +69,8 @@ class PhotoThemesPage extends StatefulWidget {
     path: '/photo-themes',
     name: _profileName,
     pageBuilder: (context, state) => FadeTransitionPage(
-      child: PhotoThemesBlocInjector(
-        child: const PhotoThemesPage(),
+      child: const PhotoThemesBlocInjector(
+        child: PhotoThemesPage(),
       ),
     ),
   );

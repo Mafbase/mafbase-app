@@ -3,13 +3,11 @@ import 'package:seating_generator_web/feature/custom_columns/domain/repository/c
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_event.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_state.dart';
 
-class CustomColumnsEditorBloc
-    extends Bloc<CustomColumnsEditorEvent, CustomColumnsEditorState> {
+class CustomColumnsEditorBloc extends Bloc<CustomColumnsEditorEvent, CustomColumnsEditorState> {
   final CustomColumnsRepository _repository;
   final int _clubId;
 
-  CustomColumnsEditorBloc(this._repository, this._clubId)
-      : super(const CustomColumnsEditorState()) {
+  CustomColumnsEditorBloc(this._repository, this._clubId) : super(const CustomColumnsEditorState()) {
     on<CustomColumnsEditorEventPageOpened>(_onPageOpened);
     on<CustomColumnsEditorEventCreateColumn>(_onCreateColumn);
     on<CustomColumnsEditorEventUpdateColumn>(_onUpdateColumn);

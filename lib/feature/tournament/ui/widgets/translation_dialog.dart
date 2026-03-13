@@ -71,8 +71,8 @@ class _TranslationDialogState extends State<TranslationDialog> {
             ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 433 ? ':${Uri.base.port}' : ''}'
             : 'https://mafbase.ru';
 
-        final defaultDesign = data?.designs.where((d) => d.designKey == 'mafbase').firstOrNull
-            ?? data?.designs.firstOrNull;
+        final defaultDesign =
+            data?.designs.where((d) => d.designKey == 'mafbase').firstOrNull ?? data?.designs.firstOrNull;
         final effectiveDesign = selectedDesign ?? defaultDesign;
         final key = data?.key;
         final contentLink = _buildLink(root, 'translation', key ?? '', table, effectiveDesign);
@@ -81,8 +81,8 @@ class _TranslationDialogState extends State<TranslationDialog> {
         return CustomDialog(
           child: SelectionArea(
             child: key == null
-                ? Padding(
-                    padding: const EdgeInsets.all(20),
+                ? const Padding(
+                    padding: EdgeInsets.all(20),
                     child: Center(child: CircularProgressIndicator()),
                   )
                 : Stack(

@@ -8,7 +8,7 @@ class AddClubGameRequest extends BaseRequest<AddGameEventOut> {
   AddClubGameRequest({
     required int clubId,
     required ClubGameResult result,
-  }) : super("/api/club/$clubId/addGame", data: result);
+  }) : super('/api/club/$clubId/addGame', data: result);
 
   @override
   FutureOr<AddGameEventOut> parse(List<int> bytes) {

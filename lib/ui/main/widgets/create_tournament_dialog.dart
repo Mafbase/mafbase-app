@@ -22,7 +22,7 @@ class CreateTournamentDialog extends StatefulWidget {
 
 class _CreateTournamentDialogState extends State<CreateTournamentDialog> {
   final controller = TextEditingController();
-  static final _format = DateFormat("dd MM yyyy");
+  static final _format = DateFormat('dd MM yyyy');
   DateTimeRange? range;
 
   @override
@@ -71,7 +71,7 @@ class _CreateTournamentDialogState extends State<CreateTournamentDialog> {
                 child: Text(
                   range == null
                       ? context.locale.dateTimeRangePlaceholder
-                      : "${_format.format(range!.start)} - ${_format.format(range!.end)}",
+                      : '${_format.format(range!.start)} - ${_format.format(range!.end)}',
                   style: MyTheme.of(context).textBtnTextStyle,
                 ),
               ),

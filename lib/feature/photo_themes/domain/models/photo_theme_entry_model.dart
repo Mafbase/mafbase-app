@@ -12,13 +12,10 @@ class PhotoThemeEntryModel with _$PhotoThemeEntryModel {
     String? profileImageUrl,
   }) = _PhotoThemeEntryModel;
 
-  factory PhotoThemeEntryModel.fromProto(PhotoThemePlayer proto) =>
-      PhotoThemeEntryModel(
+  factory PhotoThemeEntryModel.fromProto(PhotoThemePlayer proto) => PhotoThemeEntryModel(
         playerId: proto.playerId,
         nickname: proto.nickname,
-        themeImageUrl:
-            proto.hasThemeImageUrl() ? proto.themeImageUrl : null,
-        profileImageUrl:
-            proto.hasProfileImageUrl() ? proto.profileImageUrl : null,
+        themeImageUrl: proto.hasThemeImageUrl() ? proto.themeImageUrl : null,
+        profileImageUrl: proto.hasProfileImageUrl() ? proto.profileImageUrl : null,
       );
 }

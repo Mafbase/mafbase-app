@@ -1,11 +1,9 @@
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
 sealed class SeatingPageDialogEvent {
-  const factory SeatingPageDialogEvent.newPlayer(String nickname) =
-      SeatingPageDialogEventNewPlayer;
+  const factory SeatingPageDialogEvent.newPlayer(String nickname) = SeatingPageDialogEventNewPlayer;
 
-  const factory SeatingPageDialogEvent.existingPlayer(PlayerModel player) =
-      SeatingPageDialogEventExistingPlayer;
+  const factory SeatingPageDialogEvent.existingPlayer(PlayerModel player) = SeatingPageDialogEventExistingPlayer;
 
   const factory SeatingPageDialogEvent.init() = SeatingPageDialogEventInit;
 }

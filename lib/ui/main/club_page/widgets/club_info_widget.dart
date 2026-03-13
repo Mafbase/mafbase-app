@@ -66,7 +66,7 @@ class ClubInfoWidget extends StatelessWidget {
                                     onEditPhoto: onEditPhoto,
                                     onEditOwners: onEditOwners,
                                   ),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   _ClubDescription(
                                     onEditDescription: onEditDescription,
                                   ),
@@ -99,8 +99,7 @@ class ClubInfoWidget extends StatelessWidget {
                                 ),
                               ),
                             const Flexible(child: _ClubRatingButton()),
-                            if (onAddGame != null)
-                              _AddGameButton(onTap: onAddGame!),
+                            if (onAddGame != null) _AddGameButton(onTap: onAddGame!),
                           ],
                         ),
                       ],
@@ -111,11 +110,7 @@ class ClubInfoWidget extends StatelessWidget {
       );
 
   Widget buildMobile(BuildContext context) {
-    final showBill = context
-            .watch<AuthNotifier>()
-            .value
-            .mapOrNull(authorized: (model) => !model.hideBilling) ??
-        true;
+    final showBill = context.watch<AuthNotifier>().value.mapOrNull(authorized: (model) => !model.hideBilling) ?? true;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -269,7 +264,7 @@ class _ClubDescription extends StatelessWidget {
             color: context.theme.background1,
           ),
           child: Text(
-            model.description ?? "Тут пусто",
+            model.description ?? 'Тут пусто',
             style: context.theme.defaultTextStyle,
           ),
         ),
@@ -325,7 +320,7 @@ class _ClubDescription extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20),
             child: Text(
-              model.description ?? "Тут пусто",
+              model.description ?? 'Тут пусто',
               style: context.theme.defaultTextStyle,
             ),
           ),
@@ -401,7 +396,7 @@ class _ClubInfoHeader extends StatelessWidget {
               children: [
                 const Icon(Icons.location_city_outlined),
                 const SizedBox(width: 4),
-                Text(model.city ?? "Не установлен"),
+                Text(model.city ?? 'Не установлен'),
               ],
             ),
           ],
@@ -476,7 +471,7 @@ class _ClubInfoHeader extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            Text(clubModel.city ?? "Не установлен"),
+            Text(clubModel.city ?? 'Не установлен'),
           ],
         ),
       ],

@@ -9,14 +9,14 @@ extension BuildContextLocaleExt on BuildContext {
 
   MyTheme get theme => MyTheme.of(this);
 
-  VoidCallback get backOrGoToDefault => Navigator.canPop(this)
-      ? () => Navigator.pop(this)
-      : canPop()
-          ? pop
+  VoidCallback get backOrGoToDefault => canPop()
+      ? pop
+      : Navigator.canPop(this)
+          ? () => Navigator.pop(this)
           : () => go('/');
 }
 
-final dateFormatForRequests = DateFormat("yyyy-MM-dd");
+final dateFormatForRequests = DateFormat('yyyy-MM-dd');
 
 String get sentryUrl => String.fromCharCodes([
       104,

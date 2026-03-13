@@ -64,19 +64,16 @@ class _FinalPlayersDialogState extends State<FinalPlayersDialog> {
                         children: [
                           Checkbox(
                             value: field.value?.contains(player.id),
-                            onChanged: disabled &&
-                                    (field.value?.contains(player.id) == false)
+                            onChanged: disabled && (field.value?.contains(player.id) == false)
                                 ? null
                                 : (value) {
                                     if (value == true) {
                                       field.didChange(
-                                        field.value?.union({player.id}) ??
-                                            {player.id},
+                                        field.value?.union({player.id}) ?? {player.id},
                                       );
                                     } else {
                                       field.didChange(
-                                        field.value?.difference({player.id}) ??
-                                            {},
+                                        field.value?.difference({player.id}) ?? {},
                                       );
                                     }
                                   },

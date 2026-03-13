@@ -12,8 +12,7 @@ import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 
-class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
-    with EffectEmitter<ProfileEffect, ProfileState> {
+class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<ProfileEffect, ProfileState> {
   final LogoutInteractor _logoutInteractor;
   final DeleteProfileInteractor _deleteProfileInteractor;
   final ProfileRepository _profileRepository;
@@ -64,9 +63,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     ProfileEventDeleteProfile event,
     Emitter emit,
   ) =>
-      _deleteProfileInteractor
-          .run()
-          .whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
+      _deleteProfileInteractor.run().whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
 
   Future<void> _loadUserProfile(
     ProfileEventLoadUserProfile event,
@@ -120,8 +117,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
   ) async {
     emit(state.copyWith(isLoadingSubscription: true, subscriptionError: null));
     try {
-      final plan =
-          await _profileRepository.getTournamentSubscriptionCurrentPlan();
+      final plan = await _profileRepository.getTournamentSubscriptionCurrentPlan();
       emit(
         state.copyWith(
           isLoadingSubscription: false,
@@ -145,8 +141,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     emit(state.copyWith(isBilling: true));
     try {
       final redirectLink = await _profileRepository.billTournamentSubscription(
-        subscriptionType:
-            TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players,
+        subscriptionType: TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players,
         days: event.days,
         redirectPath: event.redirectPath,
       );
@@ -157,7 +152,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
   }
 
   _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {
-    return _logoutInteractor()
-        .whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
+    return _logoutInteractor().whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
   }
 }
