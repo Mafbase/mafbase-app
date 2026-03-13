@@ -61,6 +61,7 @@ class TournamentMenu extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 4,
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 12, bottom: 8),

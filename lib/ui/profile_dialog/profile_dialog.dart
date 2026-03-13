@@ -121,37 +121,35 @@ class _ProfileDialogState extends State<ProfileDialog> {
                                   ),
                           ),
                         ),
-                        Flexible(
-                          child: Column(
-                            spacing: 8,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomTextField(
-                                controller: nicknameController,
-                                onSubmit: (_) {
-                                  fsmFocusNode.requestFocus();
-                                },
-                                focusNode: nicknameFocusNode,
-                                label: context.locale.nicknameHint,
-                              ),
-                              CustomTextField(
-                                controller: fsmNicknameController,
-                                onSubmit: (_) {
-                                  mafbankFocusNode.requestFocus();
-                                },
-                                focusNode: fsmFocusNode,
-                                label: context.locale.fsmNicknameHint,
-                              ),
-                              CustomTextField(
-                                controller: mafbankNicknameController,
-                                onSubmit: (_) {
-                                  mafbankFocusNode.unfocus();
-                                },
-                                focusNode: mafbankFocusNode,
-                                label: context.locale.mafbankNicknameHint,
-                              ),
-                            ],
-                          ),
+                        Column(
+                          spacing: 8,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CustomTextField(
+                              controller: nicknameController,
+                              onSubmit: (_) {
+                                fsmFocusNode.requestFocus();
+                              },
+                              focusNode: nicknameFocusNode,
+                              label: context.locale.nicknameHint,
+                            ),
+                            CustomTextField(
+                              controller: fsmNicknameController,
+                              onSubmit: (_) {
+                                mafbankFocusNode.requestFocus();
+                              },
+                              focusNode: fsmFocusNode,
+                              label: context.locale.fsmNicknameHint,
+                            ),
+                            CustomTextField(
+                              controller: mafbankNicknameController,
+                              onSubmit: (_) {
+                                mafbankFocusNode.unfocus();
+                              },
+                              focusNode: mafbankFocusNode,
+                              label: context.locale.mafbankNicknameHint,
+                            ),
+                          ],
                         ),
                       ],
                     ),
