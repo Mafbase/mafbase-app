@@ -68,10 +68,10 @@ class _TranslationControlPageState extends State<TranslationControlPage>
                     child: CustomDropdown<int>(
                       initValue: state.game,
                       mapToString: (index) =>
-                          index == null ? "" : (index + 1).toString(),
+                          index == null ? "" : index.toString(),
                       items: List.generate(
                         state.totalGames,
-                        (index) => index,
+                        (index) => index + 1,
                       ),
                       onChanged: (index) {
                         if (index != null) {
