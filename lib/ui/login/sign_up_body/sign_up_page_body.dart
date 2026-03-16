@@ -75,251 +75,249 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
 
   @override
   Widget? buildMobile(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(
-      builder: (context, state) {
-        return WrapperLoginPage(
-          child: Stack(
-            children: [
-              AutofillGroup(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 24,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Center(
-                        child: Text(
-                          context.locale.loginRegister,
-                          style: MyTheme.of(context).headerTextStyle,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      CustomTextField(
-                        controller: _emailController,
-                        autoFillHints: const [
-                          AutofillHints.newUsername,
-                          AutofillHints.email,
-                        ],
-                        icon: Icon(
-                          Icons.email_outlined,
-                          color: MyTheme.of(context).borderColor,
-                          size: 20,
-                        ),
-                        hint: context.locale.yourEmail,
-                        errorText: state.emailExist ? context.locale.wrongEmail : null,
-                      ),
-                      const SizedBox(height: 20),
-                      CustomTextField(
-                        canObscure: true,
-                        controller: _passwordController,
-                        autoFillHints: const [AutofillHints.newPassword],
-                        icon: Icon(
-                          Icons.lock_outline,
-                          color: MyTheme.of(context).borderColor,
-                          size: 20,
-                        ),
-                        hint: context.locale.enterPassword,
-                        errorText: state.weakPassword ? context.locale.invalidPassword : null,
-                      ),
-                      const SizedBox(height: 20),
-                      CustomTextField(
-                        canObscure: true,
-                        controller: _repeatPasswordController,
-                        autoFillHints: const [AutofillHints.newPassword],
-                        icon: Icon(
-                          Icons.lock_outline,
-                          color: MyTheme.of(context).borderColor,
-                          size: 20,
-                        ),
-                        hint: context.locale.repeatPassword,
-                        errorText: setRepeatError ? context.locale.notMatchPasswords : null,
-                      ),
-                      const SizedBox(height: 20),
-                      CustomButton(
-                        disabled: !EmailValidator.validate(
-                          _emailController.text,
-                        ),
-                        text: context.locale.loginRegistration,
-                        minimize: true,
-                        onTap: _onSubmit,
-                      ),
-                      const SizedBox(height: 12),
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          style: context.theme.defaultTextStyle.copyWith(
-                            color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
-                            fontSize: 12,
-                          ),
-                          children: [
-                            TextSpan(text: context.locale.politicaAlert),
-                            TextSpan(
-                              text: context.locale.politicaHref,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  launchUrl(
-                                    Uri.parse(
-                                      'https://mafbase.ru/images/politika.pdf',
-                                    ),
-                                  );
-                                },
-                              style: const TextStyle(
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault),
+        title: Text(context.locale.loginRegister),
+      ),
+      body: BlocBuilder<SignUpBloc, SignUpState>(
+        builder: (context, state) {
+          return WrapperLoginPage(
+            child: Stack(
+              children: [
+                AutofillGroup(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 24,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomTextField(
+                          controller: _emailController,
+                          autoFillHints: const [
+                            AutofillHints.newUsername,
+                            AutofillHints.email,
                           ],
+                          icon: Icon(
+                            Icons.email_outlined,
+                            color: MyTheme.of(context).borderColor,
+                            size: 20,
+                          ),
+                          hint: context.locale.yourEmail,
+                          errorText: state.emailExist ? context.locale.wrongEmail : null,
                         ),
-                      ),
-                      const SizedBox(height: 14),
-                      Center(
-                        child: TextButton(
-                          onPressed: () {
-                            context.read<SignUpBloc>().add(
-                                  const SignUpEvents.backButtonTapped(),
-                                );
-                          },
-                          child: Text(
-                            context.locale.authorization,
-                            style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                  color: MyTheme.of(context).darkGreyColor,
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          canObscure: true,
+                          controller: _passwordController,
+                          autoFillHints: const [AutofillHints.newPassword],
+                          icon: Icon(
+                            Icons.lock_outline,
+                            color: MyTheme.of(context).borderColor,
+                            size: 20,
+                          ),
+                          hint: context.locale.enterPassword,
+                          errorText: state.weakPassword ? context.locale.invalidPassword : null,
+                        ),
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          canObscure: true,
+                          controller: _repeatPasswordController,
+                          autoFillHints: const [AutofillHints.newPassword],
+                          icon: Icon(
+                            Icons.lock_outline,
+                            color: MyTheme.of(context).borderColor,
+                            size: 20,
+                          ),
+                          hint: context.locale.repeatPassword,
+                          errorText: setRepeatError ? context.locale.notMatchPasswords : null,
+                        ),
+                        const SizedBox(height: 20),
+                        CustomButton(
+                          disabled: !EmailValidator.validate(
+                            _emailController.text,
+                          ),
+                          text: context.locale.loginRegistration,
+                          minimize: true,
+                          onTap: _onSubmit,
+                        ),
+                        const SizedBox(height: 12),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: context.theme.defaultTextStyle.copyWith(
+                              color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
+                              fontSize: 12,
+                            ),
+                            children: [
+                              TextSpan(text: context.locale.politicaAlert),
+                              TextSpan(
+                                text: context.locale.politicaHref,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launchUrl(
+                                      Uri.parse(
+                                        'https://mafbase.ru/images/politika.pdf',
+                                      ),
+                                    );
+                                  },
+                                style: const TextStyle(
+                                  decoration: TextDecoration.underline,
                                 ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 14),
+                        Center(
+                          child: TextButton(
+                            onPressed: () {
+                              context.read<SignUpBloc>().add(
+                                    const SignUpEvents.backButtonTapped(),
+                                  );
+                            },
+                            child: Text(
+                              context.locale.authorization,
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    color: MyTheme.of(context).darkGreyColor,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
-          ),
-        );
-      },
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
   @override
   Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(
-      builder: (context, state) {
-        return WrapperLoginPage(
-          child: Stack(
-            children: [
-              AutofillGroup(
-                child: Padding(
-                  padding: const EdgeInsets.all(40),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Center(
-                        child: Text(
-                          context.locale.loginRegister,
-                          style: MyTheme.of(context).headerTextStyle,
-                        ),
-                      ),
-                      const SizedBox(height: 28),
-                      CustomTextField(
-                        controller: _emailController,
-                        autoFillHints: const [
-                          AutofillHints.newUsername,
-                          AutofillHints.email,
-                        ],
-                        icon: Icon(
-                          Icons.email_outlined,
-                          color: MyTheme.of(context).borderColor,
-                          size: 20,
-                        ),
-                        hint: context.locale.yourEmail,
-                        errorText: state.emailExist ? context.locale.wrongEmail : null,
-                      ),
-                      const SizedBox(height: 20),
-                      CustomTextField(
-                        canObscure: true,
-                        controller: _passwordController,
-                        autoFillHints: const [AutofillHints.newPassword],
-                        icon: Icon(
-                          Icons.lock_outline,
-                          color: MyTheme.of(context).borderColor,
-                          size: 20,
-                        ),
-                        hint: context.locale.enterPassword,
-                        errorText: state.weakPassword ? context.locale.invalidPassword : null,
-                      ),
-                      const SizedBox(height: 20),
-                      CustomTextField(
-                        canObscure: true,
-                        controller: _repeatPasswordController,
-                        autoFillHints: const [AutofillHints.newPassword],
-                        icon: Icon(
-                          Icons.lock_outline,
-                          color: MyTheme.of(context).borderColor,
-                          size: 20,
-                        ),
-                        hint: context.locale.repeatPassword,
-                        errorText: setRepeatError ? context.locale.notMatchPasswords : null,
-                      ),
-                      const SizedBox(height: 24),
-                      CustomButton(
-                        disabled: !EmailValidator.validate(
-                          _emailController.text,
-                        ),
-                        text: context.locale.loginRegistration,
-                        onTap: _onSubmit,
-                      ),
-                      const SizedBox(height: 12),
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          style: context.theme.defaultTextStyle.copyWith(
-                            color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
-                            fontSize: 14,
-                          ),
-                          children: [
-                            TextSpan(text: context.locale.politicaAlert),
-                            TextSpan(
-                              text: context.locale.politicaHref,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  launchUrl(
-                                    Uri.parse(
-                                      'https://mafbase.ru/images/politika.pdf',
-                                    ),
-                                  );
-                                },
-                              style: const TextStyle(
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault),
+        title: Text(context.locale.loginRegister),
+      ),
+      body: BlocBuilder<SignUpBloc, SignUpState>(
+        builder: (context, state) {
+          return WrapperLoginPage(
+            child: Stack(
+              children: [
+                AutofillGroup(
+                  child: Padding(
+                    padding: const EdgeInsets.all(40),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomTextField(
+                          controller: _emailController,
+                          autoFillHints: const [
+                            AutofillHints.newUsername,
+                            AutofillHints.email,
                           ],
+                          icon: Icon(
+                            Icons.email_outlined,
+                            color: MyTheme.of(context).borderColor,
+                            size: 20,
+                          ),
+                          hint: context.locale.yourEmail,
+                          errorText: state.emailExist ? context.locale.wrongEmail : null,
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Center(
-                        child: TextButton(
-                          onPressed: () {
-                            context.read<SignUpBloc>().add(
-                                  const SignUpEvents.backButtonTapped(),
-                                );
-                          },
-                          child: Text(
-                            context.locale.authorization,
-                            style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                  color: MyTheme.of(context).darkGreyColor,
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          canObscure: true,
+                          controller: _passwordController,
+                          autoFillHints: const [AutofillHints.newPassword],
+                          icon: Icon(
+                            Icons.lock_outline,
+                            color: MyTheme.of(context).borderColor,
+                            size: 20,
+                          ),
+                          hint: context.locale.enterPassword,
+                          errorText: state.weakPassword ? context.locale.invalidPassword : null,
+                        ),
+                        const SizedBox(height: 20),
+                        CustomTextField(
+                          canObscure: true,
+                          controller: _repeatPasswordController,
+                          autoFillHints: const [AutofillHints.newPassword],
+                          icon: Icon(
+                            Icons.lock_outline,
+                            color: MyTheme.of(context).borderColor,
+                            size: 20,
+                          ),
+                          hint: context.locale.repeatPassword,
+                          errorText: setRepeatError ? context.locale.notMatchPasswords : null,
+                        ),
+                        const SizedBox(height: 24),
+                        CustomButton(
+                          disabled: !EmailValidator.validate(
+                            _emailController.text,
+                          ),
+                          text: context.locale.loginRegistration,
+                          onTap: _onSubmit,
+                        ),
+                        const SizedBox(height: 12),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: context.theme.defaultTextStyle.copyWith(
+                              color: context.theme.defaultTextStyle.color?.withValues(alpha: 0.5),
+                              fontSize: 14,
+                            ),
+                            children: [
+                              TextSpan(text: context.locale.politicaAlert),
+                              TextSpan(
+                                text: context.locale.politicaHref,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launchUrl(
+                                      Uri.parse(
+                                        'https://mafbase.ru/images/politika.pdf',
+                                      ),
+                                    );
+                                  },
+                                style: const TextStyle(
+                                  decoration: TextDecoration.underline,
                                 ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+                        Center(
+                          child: TextButton(
+                            onPressed: () {
+                              context.read<SignUpBloc>().add(
+                                    const SignUpEvents.backButtonTapped(),
+                                  );
+                            },
+                            child: Text(
+                              context.locale.authorization,
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    color: MyTheme.of(context).darkGreyColor,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
-          ),
-        );
-      },
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
