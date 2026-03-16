@@ -209,13 +209,13 @@ abstract class AppLocalizations {
   /// No description provided for @tournamentStatusActive.
   ///
   /// In ru, this message translates to:
-  /// **'Активен'**
+  /// **'Активный'**
   String get tournamentStatusActive;
 
   /// No description provided for @tournamentStatusWaitForBilling.
   ///
   /// In ru, this message translates to:
-  /// **'Ожидание оплаты'**
+  /// **'Ожидает оплаты'**
   String get tournamentStatusWaitForBilling;
 
   /// No description provided for @tournamentStatusEnded.
@@ -2143,6 +2143,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Пока не добавлен ни один участник'**
   String get tournamentMenuNoPlayers;
+
+  /// No description provided for @tournamentCardGames.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, =1{{count} игра} few{{count} игры} many{{count} игр} other{{count} игр}}'**
+  String tournamentCardGames(int count);
+
+  /// No description provided for @tournamentCardPlayers.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, =1{{count} игрок} few{{count} игрока} many{{count} игроков} other{{count} игроков}}'**
+  String tournamentCardPlayers(int count);
+
+  /// No description provided for @tournamentCardPlayersLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'игроков'**
+  String get tournamentCardPlayersLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

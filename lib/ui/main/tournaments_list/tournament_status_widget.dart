@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -9,34 +10,25 @@ class TournamentStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          height: 18,
-          width: 18,
-          decoration: BoxDecoration(
-            color: getColor(
-              status,
-              context,
-            ),
-            shape: BoxShape.circle,
-          ),
+    final theme = MyTheme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      decoration: BoxDecoration(
+        color: _backgroundColor(status, theme),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        _text(status, context),
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: _textColor(status, theme),
         ),
-        const SizedBox(
-          width: 5,
-        ),
-        Text(
-          getText(
-            status,
-            context,
-          ),
-          style: context.theme.defaultTextStyle,
-        ),
-      ],
+      ),
     );
   }
 
-  String getText(TournamentStatus status, BuildContext context) {
+  String _text(TournamentStatus status, BuildContext context) {
     switch (status) {
       case TournamentStatus.active:
         return context.locale.tournamentStatusActive;
@@ -47,14 +39,25 @@ class TournamentStatusWidget extends StatelessWidget {
     }
   }
 
-  Color getColor(TournamentStatus status, BuildContext context) {
+  Color _backgroundColor(TournamentStatus status, MyTheme theme) {
     switch (status) {
       case TournamentStatus.active:
-        return const Color(0xFF66CCA7);
+        return const Color(0xFF66CCA7).withValues(alpha: 0.15);
       case TournamentStatus.waitForBilling:
-        return const Color(0xFFFFE600);
+        return const Color(0xFFFFE600).withValues(alpha: 0.15);
       case TournamentStatus.ended:
-        return const Color(0xFFDE5462);
+        return theme.greyColor.withValues(alpha: 0.15);
+    }
+  }
+
+  Color _textColor(TournamentStatus status, MyTheme theme) {
+    switch (status) {
+      case TournamentStatus.active:
+        return const Color(0xFF3D9E76);
+      case TournamentStatus.waitForBilling:
+        return const Color(0xFFC4A600);
+      case TournamentStatus.ended:
+        return const Color(0xFF8E9199);
     }
   }
 }

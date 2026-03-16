@@ -37,9 +37,9 @@
   "@tournamentsListStatusHeader": {},
   "tournamentsListNameHeader": "Название турнира",
   "@tournamentsListNameHeader": {},
-  "tournamentStatusActive": "Активен",
+  "tournamentStatusActive": "Активный",
   "@tournamentStatusActive": {},
-  "tournamentStatusWaitForBilling": "Ожидание оплаты",
+  "tournamentStatusWaitForBilling": "Ожидает оплаты",
   "@tournamentStatusWaitForBilling": {},
   "tournamentStatusEnded": "Завершён",
   "@tournamentStatusEnded": {},
@@ -829,5 +829,26 @@
   "tournamentMenuTextNotification": "Текстовое оповещение",
   "@tournamentMenuTextNotification": {},
   "tournamentMenuNoPlayers": "Пока не добавлен ни один участник",
-  "@tournamentMenuNoPlayers": {}
+  "@tournamentMenuNoPlayers": {},
+
+  "tournamentCardGames": "{count, plural, =1{{count} игра} few{{count} игры} many{{count} игр} other{{count} игр}}",
+  "@tournamentCardGames": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "tournamentCardPlayers": "{count, plural, =1{{count} игрок} few{{count} игрока} many{{count} игроков} other{{count} игроков}}",
+  "@tournamentCardPlayers": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "tournamentCardPlayersLabel": "игроков",
+  "@tournamentCardPlayersLabel": {}
 }

@@ -729,5 +729,26 @@
   "tournamentMenuAdmins": "Administrators",
   "tournamentMenuGameNotification": "Game notification",
   "tournamentMenuTextNotification": "Text notification",
-  "tournamentMenuNoPlayers": "No participants added yet"
+  "tournamentMenuNoPlayers": "No participants added yet",
+
+  "tournamentCardGames": "{count, plural, =1{{count} game} other{{count} games}}",
+  "@tournamentCardGames": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "tournamentCardPlayers": "{count, plural, =1{{count} player} other{{count} players}}",
+  "@tournamentCardPlayers": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "tournamentCardPlayersLabel": "players",
+  "@tournamentCardPlayersLabel": {}
 }

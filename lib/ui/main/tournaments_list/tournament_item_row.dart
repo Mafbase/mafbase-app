@@ -15,9 +15,11 @@ class TournamentItemRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
+
     return InkWell(
       customBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ),
       onTap: () {
         context.read<MainBloc>().add(
@@ -28,49 +30,131 @@ class TournamentItemRow extends StatelessWidget {
       },
       child: Ink(
         decoration: BoxDecoration(
-          color: context.theme.greyColor.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(16),
+          color: theme.background2,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: theme.cardShadowColor,
+              blurRadius: 3,
+              offset: const Offset(0, 1),
+            ),
+          ],
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 24),
+        padding: const EdgeInsets.all(12),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                _buildIcon(theme),
+                const SizedBox(width: 10),
                 Expanded(
-                  child: Text(
-                    tournamentModel.name,
-                    style: context.theme.headerTextStyle.copyWith(fontSize: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tournamentModel.name,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: theme.darkBlueColor,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Text(
+                            'ID: ${tournamentModel.id}',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: theme.hintColor,
+                            ),
+                          ),
+                          const Spacer(),
+                          TournamentStatusWidget(status: tournamentModel.status),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  'ID: ${tournamentModel.id}',
-                  style: MyTheme.of(context).hintTextStyle,
                 ),
               ],
             ),
-            const SizedBox(height: 24),
-            IntrinsicHeight(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      DateFormat('dd.MM.yyyy').format(tournamentModel.dateStart),
-                      style: context.theme.defaultTextStyle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  TournamentStatusWidget(status: tournamentModel.status),
-                ],
-              ),
-            ),
+            const SizedBox(height: 8),
+            _buildMetadata(context, theme),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildIcon(MyTheme theme) {
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(
+        color: _iconColor(theme),
+        borderRadius: BorderRadius.circular(7),
+      ),
+      child: const Icon(
+        Icons.emoji_events,
+        size: 18,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  Widget _buildMetadata(BuildContext context, MyTheme theme) {
+    final locale = context.locale;
+    final dateRange = _formatDateRange(tournamentModel.dateStart, tournamentModel.dateEnd);
+    final metaStyle = TextStyle(fontSize: 12, color: theme.greyColor);
+    final iconColor = theme.greyColor;
+
+    return Row(
+      children: [
+        Icon(Icons.calendar_today, size: 12, color: iconColor),
+        const SizedBox(width: 4),
+        Text(dateRange, style: metaStyle),
+        const SizedBox(width: 6),
+        _dot(theme),
+        const SizedBox(width: 6),
+        Icon(Icons.sports_esports, size: 12, color: iconColor),
+        const SizedBox(width: 4),
+        Text(locale.tournamentCardGames(tournamentModel.gamesCount), style: metaStyle),
+        const SizedBox(width: 6),
+        _dot(theme),
+        const SizedBox(width: 6),
+        Text(locale.tournamentCardPlayers(tournamentModel.billedPlayers), style: metaStyle),
+      ],
+    );
+  }
+
+  Widget _dot(MyTheme theme) {
+    return Container(
+      width: 3,
+      height: 3,
+      decoration: BoxDecoration(
+        color: theme.greyColor,
+        borderRadius: BorderRadius.circular(1.5),
+      ),
+    );
+  }
+
+  Color _iconColor(MyTheme theme) {
+    switch (tournamentModel.status) {
+      case TournamentStatus.active:
+        return theme.darkBlueColor;
+      case TournamentStatus.waitForBilling:
+        return theme.positiveColor;
+      case TournamentStatus.ended:
+        return theme.darkGreyColor;
+    }
+  }
+
+  String _formatDateRange(DateTime start, DateTime end) {
+    final fmt = DateFormat('d MMM', 'ru');
+    return '${fmt.format(start)} – ${fmt.format(end)}';
   }
 }

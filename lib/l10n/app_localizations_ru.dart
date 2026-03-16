@@ -66,10 +66,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tournamentsListNameHeader => 'Название турнира';
 
   @override
-  String get tournamentStatusActive => 'Активен';
+  String get tournamentStatusActive => 'Активный';
 
   @override
-  String get tournamentStatusWaitForBilling => 'Ожидание оплаты';
+  String get tournamentStatusWaitForBilling => 'Ожидает оплаты';
 
   @override
   String get tournamentStatusEnded => 'Завершён';
@@ -1097,4 +1097,33 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tournamentMenuNoPlayers => 'Пока не добавлен ни один участник';
+
+  @override
+  String tournamentCardGames(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count игр',
+      many: '$count игр',
+      few: '$count игры',
+      one: '$count игра',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tournamentCardPlayers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count игроков',
+      many: '$count игроков',
+      few: '$count игрока',
+      one: '$count игрок',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tournamentCardPlayersLabel => 'игроков';
 }

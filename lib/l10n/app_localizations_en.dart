@@ -1095,4 +1095,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tournamentMenuNoPlayers => 'No participants added yet';
+
+  @override
+  String tournamentCardGames(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count games',
+      one: '$count game',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String tournamentCardPlayers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count players',
+      one: '$count player',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get tournamentCardPlayersLabel => 'players';
 }
