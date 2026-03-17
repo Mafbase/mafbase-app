@@ -397,7 +397,6 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                 down: true,
                 controller: refereeController,
                 focusNode: refereeFocusNode,
-                availablePlayers: state.players,
                 onSelected: (player) => players.add(player),
                 readOnly: widget.readOnly || state.isTournament,
                 hint: 'Судья',

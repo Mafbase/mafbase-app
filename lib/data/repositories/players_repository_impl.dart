@@ -5,7 +5,7 @@ import 'package:seating_generator_web/data/requests/add_player_request.dart';
 import 'package:seating_generator_web/data/requests/create_player_request.dart';
 import 'package:seating_generator_web/data/requests/delete_player_request.dart';
 import 'package:seating_generator_web/data/requests/edit_player_request.dart';
-import 'package:seating_generator_web/data/requests/get_all_players_request.dart';
+import 'package:seating_generator_web/data/requests/get_players_by_ids_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_players_request.dart';
 import 'package:seating_generator_web/data/requests/search_players_request.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
@@ -46,9 +46,10 @@ class PlayersRepositoryImpl extends BaseRepository implements PlayersRepository 
           );
 
   @override
-  Future<List<PlayerModel>> get players => GetAllPlayersRequest().execute(client).then(
-        (value) => value.players.map((e) => PlayerModel.fromProto(e)).toList(),
-      );
+  Future<List<PlayerModel>> getPlayersByIds(List<int> ids) =>
+      GetPlayersByIdsRequest(ids: ids).execute(client).then(
+            (value) => value.players.map((e) => PlayerModel.fromProto(e)).toList(),
+          );
 
   @override
   Future<List<PlayerModel>> tournamentsPlayer(int tournamentId) {

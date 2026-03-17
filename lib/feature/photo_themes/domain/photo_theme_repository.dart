@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_entry_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
 
@@ -31,6 +30,4 @@ abstract interface class PhotoThemeRepository {
   Future<int> addPlayersFromTournament(int themeId, int tournamentId);
 
   Future<void> removePlayerFromTheme(int themeId, int playerId);
-
-  Future<List<PlayerModel>> getAvailablePlayers();
 }

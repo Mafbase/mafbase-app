@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
 abstract class PlayersRepository {
-  Future<List<PlayerModel>> get players;
+  Future<List<PlayerModel>> getPlayersByIds(List<int> ids);
 
   Future<List<PlayerModel>> searchPlayers(
     String search, {

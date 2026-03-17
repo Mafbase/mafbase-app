@@ -73,11 +73,9 @@ class SeatingPageDialogBloc extends Bloc<SeatingPageDialogEvent, SeatingPageDial
     SeatingPageDialogEventInit event,
     _Emit emit,
   ) async {
-    final players = await _playersRepository.players;
     emit(
       state.copyWith(
         loading: false,
-        players: players,
         incorrectPlayer: state.notFound.first,
       ),
     );

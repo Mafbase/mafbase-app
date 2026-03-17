@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:seating_generator_web/data/base_repository.dart';
-import 'package:seating_generator_web/data/requests/get_all_players_request.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/add_theme_photo_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/add_player_to_theme_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/add_players_from_tournament_request.dart';
@@ -77,9 +75,4 @@ class PhotoThemeRepositoryImpl extends BaseRepository implements PhotoThemeRepos
   @override
   Future<void> removePlayerFromTheme(int themeId, int playerId) =>
       RemovePlayerFromThemeRequest(themeId: themeId, playerId: playerId).execute(client);
-
-  @override
-  Future<List<PlayerModel>> getAvailablePlayers() => GetAllPlayersRequest().execute(client).then(
-        (value) => value.players.map(PlayerModel.fromProto).toList(),
-      );
 }

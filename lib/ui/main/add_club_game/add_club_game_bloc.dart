@@ -6,7 +6,6 @@ import 'package:seating_generator_web/data/storages/prefer_add_game_settings_sto
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_tournament_game_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_ci_schemes_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_game_interactor.dart';
@@ -27,7 +26,6 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_d
 class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     with EffectEmitter<AddClubGameEffect, AddClubGameState> {
   final RepositoryFactory _repos;
-  late final GetAllPlayersInteractor _getAllPlayersInteractor = GetAllPlayersInteractor(_repos.playersRepository);
   late final AddClubGameInteractor _addClubGameInteractor = AddClubGameInteractor(_repos.clubRepository);
   late final ClubRepository _repository = _repos.clubRepository;
   final int? clubId;
@@ -156,15 +154,13 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     emit(state.copyWith(isLoading: true));
     if (clubId != null) {
       final list = await Future.wait([
-        _getAllPlayersInteractor.run(),
         _repository.isOwner(clubId!),
         _getClubInteractor.run(clubId: clubId!),
         _getCiSchemesInteractor.run(),
       ]);
-      final players = list[0] as List<PlayerModel>;
-      final isOwner = list[1] as bool;
-      final club = list[2] as ClubModel;
-      final ciSchemes = list[3] as List<CiSchemeModel>;
+      final isOwner = list[0] as bool;
+      final club = list[1] as ClubModel;
+      final ciSchemes = list[2] as List<CiSchemeModel>;
       if (!event.viewOnly && !isOwner) {
         router.openLoginPage();
         return;
@@ -173,7 +169,6 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       emit(
         state.copyWith(
           isLoading: event.gameId != null,
-          players: players,
           canEdit: isOwner,
           clubName: club.name,
           ciSchemes: ciSchemes,
@@ -181,6 +176,8 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       );
       if (event.gameId != null) {
         final game = await _repository.getGame(event.gameId!, clubId!);
+        final allIds = [...game.players, game.referee];
+        final players = await _repos.playersRepository.getPlayersByIds(allIds);
         emitEffect(
           AddClubGameEffect.setValues(
             ratingsSchema: game.ratingScheme,
@@ -231,7 +228,6 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       }
     } else {
       final list = await Future.wait([
-        _getAllPlayersInteractor.run(),
         _getTournamentGameInteractor(
           gameId: event.gameId!,
           tournamentId: tournamentId!,
@@ -239,10 +235,12 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
         _getTournamentInteractor(tournamentId: tournamentId!),
         _tournamentsRepository.isOwner(tournamentId!),
       ]);
-      final players = list[0] as List<PlayerModel>;
-      final game = list[1] as ClubGameResult;
-      final tournament = list[2] as TournamentModel;
-      final isOwner = list[3] as bool;
+      final game = list[0] as ClubGameResult;
+      final tournament = list[1] as TournamentModel;
+      final isOwner = list[2] as bool;
+
+      final allIds = [...game.players, game.referee];
+      final players = await _repos.playersRepository.getPlayersByIds(allIds);
 
       emitEffect(
         AddClubGameEffect.setValues(
@@ -279,7 +277,6 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       emit(
         state.copyWith(
           isLoading: false,
-          players: players,
           canEdit: isOwner,
           clubName: tournament.name,
           ciSchemes: [],

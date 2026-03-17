@@ -95,7 +95,6 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                           NicknameField(
                             controller: controller,
                             focusNode: focusNode,
-                            availablePlayers: state.players,
                             readOnly: false,
                             hint: context.locale.nicknameHint,
                             down: true,
