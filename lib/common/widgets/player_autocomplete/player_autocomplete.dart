@@ -141,7 +141,7 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
       optionsViewOpenDirection: widget.openDirection,
       textEditingController: _controller,
       displayStringForOption: (model) =>
-          model.id == PlayerModel.undefinedId ? "+" : widget.displayStringForOption(model),
+          model.id == PlayerModel.undefinedId ? '+' : widget.displayStringForOption(model),
       focusNode: _focusNode,
       optionsViewBuilder: (context, onSelected, options) {
         return Align(

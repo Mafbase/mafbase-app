@@ -59,8 +59,8 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
   void _onPlayerSelected(PlayerModel player) {
     _selectedPlayer = player;
     _controller.text = player.nickname;
-    _controllerFsm.text = player.fsmNickaname ?? "";
-    _controllerMafbank.text = player.mafbankNickname ?? "";
+    _controllerFsm.text = player.fsmNickaname ?? '';
+    _controllerMafbank.text = player.mafbankNickname ?? '';
   }
 
   @override

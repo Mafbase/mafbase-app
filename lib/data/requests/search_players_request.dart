@@ -6,7 +6,7 @@ class SearchPlayersRequest extends BaseRequest<GetAvailablePlayerEventOut> {
     required String search,
     int limit = 5,
     int offset = 0,
-  }) : super("/api/availablePlayers?search=$search&limit=$limit&offset=$offset");
+  }) : super('/api/availablePlayers?search=$search&limit=$limit&offset=$offset');
 
   @override
   GetAvailablePlayerEventOut parse(List<int> bytes) {

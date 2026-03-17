@@ -269,7 +269,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
           }),
           win: game.win,
           bestMove: game.bestMove,
-          referee: players.firstWhereOrNull((element) => game.referee == element.id)?.nickname ?? "Не указан",
+          referee: players.firstWhereOrNull((element) => game.referee == element.id)?.nickname ?? 'Не указан',
           died: game.hasFirstDie() ? game.firstDie : null,
           date: DateTime.now(),
           ciModel: CiSchemeModel.empty,

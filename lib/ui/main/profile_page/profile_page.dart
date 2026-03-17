@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
