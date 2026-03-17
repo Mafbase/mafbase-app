@@ -7,6 +7,7 @@ import 'package:seating_generator_web/data/requests/delete_player_request.dart';
 import 'package:seating_generator_web/data/requests/edit_player_request.dart';
 import 'package:seating_generator_web/data/requests/get_all_players_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_players_request.dart';
+import 'package:seating_generator_web/data/requests/search_players_request.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
@@ -31,6 +32,19 @@ class PlayersRepositoryImpl extends BaseRepository
       event: AddPlayerEvent(player: player.toProto()),
     ).execute(client);
   }
+
+  @override
+  Future<List<PlayerModel>> searchPlayers(
+    String search, {
+    int limit = 5,
+    int offset = 0,
+  }) =>
+      SearchPlayersRequest(search: search, limit: limit, offset: offset)
+          .execute(client)
+          .then(
+            (value) =>
+                value.players.map((e) => PlayerModel.fromProto(e)).toList(),
+          );
 
   @override
   Future<List<PlayerModel>> get players =>

@@ -11,7 +11,7 @@ import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/common/widgets/player_autocomplete.dart';
+import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
 import 'package:seating_generator_web/common/widgets/role_picker.dart';
 import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
@@ -178,6 +178,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   late DateTime date = widget.initDateTime ?? DateTime.now();
   CiSchemeModel? ciSchemeModel;
   RatingScheme? ratingScheme;
+  final Set<PlayerModel> players = {};
 
   @override
   void dispose() {
@@ -393,9 +394,9 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               down: true,
               controller: refereeController,
               focusNode: refereeFocusNode,
-              availablePlayers: state.players,
               readOnly: widget.readOnly || state.isTournament,
               hint: "Судья",
+              onSelected: (player) => players.add(player),
               onNewPlayer: ({String? initValue}) async {
                 context.read<AddClubGameBloc>().add(
                       AddClubGameEvent.onNewPlayer(
@@ -730,9 +731,9 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               nicknameController: controllers[i],
               focusNode: focusNodes[i],
               readOnly: widget.readOnly,
-              availablePlayers: state.players,
               hint: "Игрок ${i + 1}",
-              onSelected: () {
+              onSelected: (player) {
+                players.add(player);
                 if (i < 9) {
                   focusNodes[i + 1].requestFocus();
                 } else {
@@ -776,7 +777,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 
     if (controllers.any(
       (e) =>
-          state.players.firstWhereOrNull(
+          players.firstWhereOrNull(
             (element) => e.text == element.nickname,
           ) ==
           null,
@@ -785,7 +786,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
         context,
         "Не найден игрок: ${controllers.firstWhere(
               (e) =>
-                  state.players.firstWhereOrNull(
+                  players.firstWhereOrNull(
                     (element) => e.text == element.nickname,
                   ) ==
                   null,
@@ -794,7 +795,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
       return;
     }
 
-    if (state.players.firstWhereOrNull(
+    if (players.firstWhereOrNull(
               (element) => refereeController.text == element.nickname,
             ) ==
             null &&
@@ -855,11 +856,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               addScore: addScores.map((e) => (e * 100).floor()).toList(),
               minusScore: minusScores.map((e) => (e * 100).floor()).toList(),
               players: controllers.map(
-                (e) => state.players.firstWhere((element) => e.text == element.nickname).id,
+                (e) => players.firstWhere((element) => e.text == element.nickname).id,
               ),
               mafia1: roles.indexOf(PlayerRole.maf),
               mafia2: roles.lastIndexOf(PlayerRole.maf),
-              referee: state.players
+              referee: players
                   .firstWhereOrNull(
                     (element) => refereeController.text == element.nickname,
                   )
@@ -881,112 +882,46 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
 class NicknameField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
-  final List<PlayerModel> availablePlayers;
 
   final Function(PlayerModel player)? onSelected;
   final Function({String? initValue})? onNewPlayer;
   final bool readOnly;
   final String hint;
   final bool down;
+  final List<PlayerModel>? availablePlayers;
 
   const NicknameField({
     super.key,
     required this.controller,
     required this.focusNode,
-    required this.availablePlayers,
     required this.readOnly,
     this.onNewPlayer,
     this.onSelected,
     required this.hint,
     required this.down,
+    this.availablePlayers,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 250,
-      child: CustomAutoComplete(
+      child: PlayerAutoComplete(
         readOnly: readOnly,
         openDirection: down ? OptionsViewOpenDirection.down : OptionsViewOpenDirection.up,
         controller: controller,
-        displayStringForOption: (model) => model.id == PlayerModel.undefinedId ? "+" : model.nickname,
         focusNode: focusNode,
-        onSelected: (playerModel) async {
-          if (playerModel.id == PlayerModel.undefinedId) {
-            onNewPlayer?.call(initValue: playerModel.nickname);
-          } else {
-            controller.text = playerModel.nickname;
-            onSelected?.call(playerModel);
-          }
+        availablePlayers: availablePlayers,
+        onSelected: (playerModel) {
+          controller.text = playerModel.nickname;
+          onSelected?.call(playerModel);
         },
-        onSubmit: () {},
-        optionsBuilder: (value) {
-          var players = availablePlayers
-              .where(
-                (element) => element.nickname.toLowerCase().contains(value.text.toLowerCase()),
-              )
-              .sortedBy<num>(
-                (element) => element.nickname.length,
-              );
-
-          players += availablePlayers
-              .where(
-                (element) => map(element.nickname).toLowerCase().contains(map(value.text.toLowerCase())),
-              )
-              .where((element) => !players.contains(element))
-              .sortedBy<num>(
-                (element) => element.nickname.length,
-              );
-
-          return players.take(3).toList() +
-              [
-                if (onNewPlayer != null) PlayerModel(nickname: value.text),
-              ];
-        },
+        onNewPlayer: onNewPlayer != null
+            ? ({required String initValue}) => onNewPlayer?.call(initValue: initValue)
+            : null,
         hint: hint,
       ),
     );
-  }
-
-  String map(String value) {
-    final map = {
-      "q": "й",
-      "w": "ц",
-      "e": "у",
-      "r": "к",
-      "t": "е",
-      "y": "н",
-      "u": "г",
-      "i": "ш",
-      "o": "щ",
-      "p": "з",
-      "[": "х",
-      "]": "ъ",
-      "a": "ф",
-      "s": "ы",
-      "d": "в",
-      "f": "а",
-      "g": "п",
-      "h": "р",
-      "j": "о",
-      "k": "л",
-      "l": "д",
-      ";": "ж",
-      "'": "э",
-      "\\": "й",
-      "z": "я",
-      "x": "ч",
-      "c": "с",
-      "v": "м",
-      "b": "и",
-      "n": "т",
-      "m": "ь",
-      ",": "б",
-      ".": "ю",
-    };
-    return value.characters.map((e) {
-      return map[e.toLowerCase()] ?? e.toLowerCase();
-    }).fold("", (value, element) => value + element);
   }
 }
 
@@ -995,13 +930,12 @@ class PlayerRowWidget extends StatefulWidget {
   final TextEditingController addScoreController;
   final TextEditingController minusScoreController;
   final TextEditingController nicknameController;
-  final VoidCallback onSelected;
+  final Function(PlayerModel) onSelected;
   final FocusNode focusNode;
   final FocusNode addScoreFocusNode;
   final FocusNode minusScoreFocusNode;
   final bool readOnly;
   final bool isTournament;
-  final List<PlayerModel> availablePlayers;
   final String hint;
   final PlayerRole role;
   final Function({String? initValue}) onNewPlayer;
@@ -1015,7 +949,6 @@ class PlayerRowWidget extends StatefulWidget {
     required this.nicknameController,
     required this.focusNode,
     required this.readOnly,
-    required this.availablePlayers,
     required this.hint,
     required this.onSelected,
     required this.role,
@@ -1104,9 +1037,8 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
         readOnly: widget.readOnly || widget.isTournament,
         controller: widget.nicknameController,
         focusNode: widget.focusNode,
-        availablePlayers: widget.availablePlayers,
         hint: widget.hint,
         onNewPlayer: widget.onNewPlayer,
-        onSelected: (_) => widget.onSelected(),
+        onSelected: widget.onSelected,
       );
 }

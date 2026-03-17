@@ -11,7 +11,6 @@ import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
 import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
@@ -224,14 +223,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _selectPlayerProfile(BuildContext context) async {
     final bloc = context.read<ProfileBloc>();
-    final getAllPlayersInteractor = GetAllPlayersInteractor(RepositoryFactory.of(context).playersRepository);
-    final availablePlayers = await getAllPlayersInteractor.run();
-
-    if (!context.mounted) return;
 
     final selectedPlayer = await AddPlayerDialog.open(
       context: context,
-      availablePlayers: availablePlayers,
     );
 
     if (!context.mounted) return;

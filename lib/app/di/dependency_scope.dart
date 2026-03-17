@@ -27,17 +27,19 @@ class DependencyScope {
 
   DependencyScope({this.isIntegrationTest = false});
 
-  late final StorageFactory storageFactory =
-      StorageFactory(isIntegrationTest: isIntegrationTest);
+  late final StorageFactory storageFactory = StorageFactory(isIntegrationTest: isIntegrationTest);
 
   late final MyHttpClient client = kReleaseMode && kIsWeb
       ? MyHttpClient.autoForWeb(
-          storageFactory.tokenStorage, storageFactory.credentialStorage)
+          storageFactory.tokenStorage,
+          storageFactory.credentialStorage,
+        )
       : MyHttpClient.withDefaultUrl(
-          storageFactory.tokenStorage, storageFactory.credentialStorage);
+          storageFactory.tokenStorage,
+          storageFactory.credentialStorage,
+        );
 
-  late final RepositoryFactory repositoryFactory =
-      RepositoryFactory(client, storageFactory);
+  late final RepositoryFactory repositoryFactory = RepositoryFactory(client, storageFactory);
 
   late final AuthNotifier authNotifier = AuthNotifier();
 
@@ -51,14 +53,12 @@ class DependencyScope {
   NotificationPermissionServiceImpl? _notificationPermissionService;
 
   NotificationPermissionService get notificationPermissionService =>
-      _notificationPermissionService ??=
-          NotificationPermissionServiceImpl(pushTokenService);
+      _notificationPermissionService ??= NotificationPermissionServiceImpl(pushTokenService);
 
   void dispose() {
     _notificationPermissionService?.dispose();
   }
 
-  static DependencyScope of(BuildContext context) => context
-      .getInheritedWidgetOfExactType<DependencyScopeWidget>()!
-      .scope;
+  static DependencyScope of(BuildContext context) =>
+      context.getInheritedWidgetOfExactType<DependencyScopeWidget>()!.scope;
 }

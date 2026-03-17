@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/common/widgets/player_autocomplete.dart';
+import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_event.dart';
@@ -28,9 +28,7 @@ class _AddPlayerToThemeWidgetState extends State<AddPlayerToThemeWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PhotoThemesBloc, PhotoThemesState>(
-      buildWhen: (prev, curr) =>
-          prev.availablePlayers != curr.availablePlayers ||
-          prev.selectedThemeId != curr.selectedThemeId,
+      buildWhen: (prev, curr) => prev.selectedThemeId != curr.selectedThemeId,
       builder: (context, state) {
         if (state.selectedThemeId == null) {
           return const SizedBox.shrink();
@@ -40,11 +38,10 @@ class _AddPlayerToThemeWidgetState extends State<AddPlayerToThemeWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           child: SizedBox(
             width: 250,
-            child: CustomAutoComplete(
+            child: PlayerAutoComplete(
               controller: _controller,
               focusNode: _focusNode,
               hint: context.locale.photoThemesAddPlayer,
-              displayStringForOption: (model) => model.nickname,
               onSelected: (player) {
                 if (player.id != PlayerModel.undefinedId) {
                   context.read<PhotoThemesBloc>().add(
@@ -52,17 +49,6 @@ class _AddPlayerToThemeWidgetState extends State<AddPlayerToThemeWidget> {
                       );
                   _controller.clear();
                 }
-              },
-              onSubmit: () {},
-              optionsBuilder: (value) {
-                if (value.text.isEmpty) return [];
-                final query = value.text.toLowerCase();
-                return state.availablePlayers
-                    .where(
-                      (p) => p.nickname.toLowerCase().contains(query),
-                    )
-                    .take(5)
-                    .toList();
               },
             ),
           ),

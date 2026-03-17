@@ -27,31 +27,23 @@ import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player
 class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     with EffectEmitter<AddClubGameEffect, AddClubGameState> {
   final RepositoryFactory _repos;
-  late final GetAllPlayersInteractor _getAllPlayersInteractor =
-      GetAllPlayersInteractor(_repos.playersRepository);
-  late final AddClubGameInteractor _addClubGameInteractor =
-      AddClubGameInteractor(_repos.clubRepository);
+  late final GetAllPlayersInteractor _getAllPlayersInteractor = GetAllPlayersInteractor(_repos.playersRepository);
+  late final AddClubGameInteractor _addClubGameInteractor = AddClubGameInteractor(_repos.clubRepository);
   late final ClubRepository _repository = _repos.clubRepository;
   final int? clubId;
   final int? tournamentId;
   final BuildContext? _context;
   final AddClubGameRouter router;
-  late final CreatePlayerInteractor _createPlayerInteractor =
-      CreatePlayerInteractor(_repos.playersRepository);
-  late final GetCiSchemesInteractor _getCiSchemesInteractor =
-      GetCiSchemesInteractor(_repos.tournamentEditRepository);
-  late final GetClubInteractor _getClubInteractor =
-      GetClubInteractor(_repos.clubRepository);
+  late final CreatePlayerInteractor _createPlayerInteractor = CreatePlayerInteractor(_repos.playersRepository);
+  late final GetCiSchemesInteractor _getCiSchemesInteractor = GetCiSchemesInteractor(_repos.tournamentEditRepository);
+  late final GetClubInteractor _getClubInteractor = GetClubInteractor(_repos.clubRepository);
   late final EditTournamentGameInteractor _editTournamentGameInteractor =
       EditTournamentGameInteractor(_repos.tournamentResultRepository);
   late final GetTournamentGameInteractor _getTournamentGameInteractor =
       GetTournamentGameInteractor(_repos.tournamentResultRepository);
-  late final GetTournamentInteractor _getTournamentInteractor =
-      GetTournamentInteractor(_repos.tournamentsRepository);
-  late final TournamentsRepository _tournamentsRepository =
-      _repos.tournamentsRepository;
-  final PreferAddGameSettingsStorage _settingsStorage =
-      PreferAddGameSettingsStorageImpl();
+  late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_repos.tournamentsRepository);
+  late final TournamentsRepository _tournamentsRepository = _repos.tournamentsRepository;
+  final PreferAddGameSettingsStorage _settingsStorage = PreferAddGameSettingsStorageImpl();
 
   AddClubGameBloc({
     this.clubId,
@@ -97,7 +89,6 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
 
     final newPlayer = await AddPlayerDialog.open(
       context: _context!,
-      availablePlayers: state.players,
       initValue: event.nickname,
     );
 
@@ -106,14 +97,11 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     }
     emit(state.copyWith(isLoading: true));
     final id = await _createPlayerInteractor.run(playerModel: newPlayer);
-    final players = await _getAllPlayersInteractor.run();
-    emit(state.copyWith(players: players));
+
     emitEffect(
       AddClubGameEffect.setPlayer(
         index: event.index,
-        player: players.firstWhere(
-          (element) => element.id == id,
-        ),
+        player: newPlayer.copyWith(id: id),
       ),
     );
     emit(state.copyWith(isLoading: false));
@@ -136,26 +124,29 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     }
 
     emit(state.copyWith(isLoading: true));
-    if (clubId != null) {
-      int? gameId;
-      if (event.gameId == null) {
-        gameId = await _addClubGameInteractor.run(
-          clubId: clubId!,
+    try {
+      if (clubId != null) {
+        int? gameId;
+        if (event.gameId == null) {
+          gameId = await _addClubGameInteractor.run(
+            clubId: clubId!,
+            result: event.gameResult,
+          );
+        } else {
+          await _repository.editGame(event.gameResult, clubId!, event.gameId!);
+        }
+        router.openGame(clubId!, gameId ?? event.gameId!);
+      } else {
+        await _editTournamentGameInteractor.call(
+          tournamentId: tournamentId!,
+          gameId: event.gameId!,
           result: event.gameResult,
         );
-      } else {
-        await _repository.editGame(event.gameResult, clubId!, event.gameId!);
+        router.pop();
       }
-      router.openGame(clubId!, gameId ?? event.gameId!);
-    } else {
-      await _editTournamentGameInteractor.call(
-        tournamentId: tournamentId!,
-        gameId: event.gameId!,
-        result: event.gameResult,
-      );
-      router.pop();
+    } finally {
+      emit(state.copyWith(isLoading: false));
     }
-    emit(state.copyWith(isLoading: false));
   }
 
   _onPageOpened(
@@ -195,14 +186,11 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
             ratingsSchema: game.ratingScheme,
             players: game.players
                 .map(
-                  (e) =>
-                      players.firstWhere((element) => element.id == e).nickname,
+                  (e) => players.firstWhere((element) => element.id == e).nickname,
                 )
                 .toList(),
             addScore: game.addScore.map((e) => e / 100).toList(),
-            minusScore: game.minusScore.isNotEmpty 
-                ? game.minusScore.map((e) => e / 100).toList()
-                : null,
+            minusScore: game.minusScore.isNotEmpty ? game.minusScore.map((e) => e / 100).toList() : null,
             roles: List.generate(
               10,
               (index) {
@@ -220,9 +208,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
             ),
             win: game.win,
             bestMove: game.bestMove,
-            referee: players
-                .firstWhere((element) => element.id == game.referee)
-                .nickname,
+            referee: players.firstWhere((element) => element.id == game.referee).nickname,
             died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
             ciModel: (game.hasCiId()
@@ -268,12 +254,9 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
               .map((e) => e.nickname)
               .toList(),
           addScore: game.addScore.map((e) => e / 100).toList(),
-          minusScore: game.minusScore.isNotEmpty 
-              ? game.minusScore.map((e) => e / 100).toList()
-              : null,
+          minusScore: game.minusScore.isNotEmpty ? game.minusScore.map((e) => e / 100).toList() : null,
           roles: List.generate(10, (index) {
-            if (game.hasMafia1() && index == game.mafia1 ||
-                game.hasMafia2() && index == game.mafia2) {
+            if (game.hasMafia1() && index == game.mafia1 || game.hasMafia2() && index == game.mafia2) {
               return PlayerRole.maf;
             }
             if (game.hasDon() && index == game.don) {
@@ -286,10 +269,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
           }),
           win: game.win,
           bestMove: game.bestMove,
-          referee: players
-                  .firstWhereOrNull((element) => game.referee == element.id)
-                  ?.nickname ??
-              "Не указан",
+          referee: players.firstWhereOrNull((element) => game.referee == element.id)?.nickname ?? "Не указан",
           died: game.hasFirstDie() ? game.firstDie : null,
           date: DateTime.now(),
           ciModel: CiSchemeModel.empty,
@@ -308,5 +288,4 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       );
     }
   }
-
 }

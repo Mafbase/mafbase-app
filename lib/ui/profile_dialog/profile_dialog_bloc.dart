@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';

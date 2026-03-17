@@ -21,7 +21,6 @@ mixin _$PhotoThemesState {
   List<PhotoThemeEntryModel> get players => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  List<PlayerModel> get availablePlayers => throw _privateConstructorUsedError;
 
   /// Create a copy of PhotoThemesState
   /// with the given fields replaced by the non-null parameter values.
@@ -41,8 +40,7 @@ abstract class $PhotoThemesStateCopyWith<$Res> {
       int? selectedThemeId,
       List<PhotoThemeEntryModel> players,
       bool isLoading,
-      String? error,
-      List<PlayerModel> availablePlayers});
+      String? error});
 }
 
 /// @nodoc
@@ -65,7 +63,6 @@ class _$PhotoThemesStateCopyWithImpl<$Res, $Val extends PhotoThemesState>
     Object? players = null,
     Object? isLoading = null,
     Object? error = freezed,
-    Object? availablePlayers = null,
   }) {
     return _then(_value.copyWith(
       themes: null == themes
@@ -88,10 +85,6 @@ class _$PhotoThemesStateCopyWithImpl<$Res, $Val extends PhotoThemesState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      availablePlayers: null == availablePlayers
-          ? _value.availablePlayers
-          : availablePlayers // ignore: cast_nullable_to_non_nullable
-              as List<PlayerModel>,
     ) as $Val);
   }
 }
@@ -109,8 +102,7 @@ abstract class _$$PhotoThemesStateImplCopyWith<$Res>
       int? selectedThemeId,
       List<PhotoThemeEntryModel> players,
       bool isLoading,
-      String? error,
-      List<PlayerModel> availablePlayers});
+      String? error});
 }
 
 /// @nodoc
@@ -131,7 +123,6 @@ class __$$PhotoThemesStateImplCopyWithImpl<$Res>
     Object? players = null,
     Object? isLoading = null,
     Object? error = freezed,
-    Object? availablePlayers = null,
   }) {
     return _then(_$PhotoThemesStateImpl(
       themes: null == themes
@@ -154,10 +145,6 @@ class __$$PhotoThemesStateImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      availablePlayers: null == availablePlayers
-          ? _value._availablePlayers
-          : availablePlayers // ignore: cast_nullable_to_non_nullable
-              as List<PlayerModel>,
     ));
   }
 }
@@ -170,11 +157,9 @@ class _$PhotoThemesStateImpl implements _PhotoThemesState {
       this.selectedThemeId,
       final List<PhotoThemeEntryModel> players = const [],
       this.isLoading = true,
-      this.error,
-      final List<PlayerModel> availablePlayers = const []})
+      this.error})
       : _themes = themes,
-        _players = players,
-        _availablePlayers = availablePlayers;
+        _players = players;
 
   final List<PhotoThemeModel> _themes;
   @override
@@ -201,19 +186,10 @@ class _$PhotoThemesStateImpl implements _PhotoThemesState {
   final bool isLoading;
   @override
   final String? error;
-  final List<PlayerModel> _availablePlayers;
-  @override
-  @JsonKey()
-  List<PlayerModel> get availablePlayers {
-    if (_availablePlayers is EqualUnmodifiableListView)
-      return _availablePlayers;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_availablePlayers);
-  }
 
   @override
   String toString() {
-    return 'PhotoThemesState(themes: $themes, selectedThemeId: $selectedThemeId, players: $players, isLoading: $isLoading, error: $error, availablePlayers: $availablePlayers)';
+    return 'PhotoThemesState(themes: $themes, selectedThemeId: $selectedThemeId, players: $players, isLoading: $isLoading, error: $error)';
   }
 
   @override
@@ -227,9 +203,7 @@ class _$PhotoThemesStateImpl implements _PhotoThemesState {
             const DeepCollectionEquality().equals(other._players, _players) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality()
-                .equals(other._availablePlayers, _availablePlayers));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
@@ -239,8 +213,7 @@ class _$PhotoThemesStateImpl implements _PhotoThemesState {
       selectedThemeId,
       const DeepCollectionEquality().hash(_players),
       isLoading,
-      error,
-      const DeepCollectionEquality().hash(_availablePlayers));
+      error);
 
   /// Create a copy of PhotoThemesState
   /// with the given fields replaced by the non-null parameter values.
@@ -258,8 +231,7 @@ abstract class _PhotoThemesState implements PhotoThemesState {
       final int? selectedThemeId,
       final List<PhotoThemeEntryModel> players,
       final bool isLoading,
-      final String? error,
-      final List<PlayerModel> availablePlayers}) = _$PhotoThemesStateImpl;
+      final String? error}) = _$PhotoThemesStateImpl;
 
   @override
   List<PhotoThemeModel> get themes;
@@ -271,8 +243,6 @@ abstract class _PhotoThemesState implements PhotoThemesState {
   bool get isLoading;
   @override
   String? get error;
-  @override
-  List<PlayerModel> get availablePlayers;
 
   /// Create a copy of PhotoThemesState
   /// with the given fields replaced by the non-null parameter values.

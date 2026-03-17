@@ -41,9 +41,6 @@ class PhotoThemesBloc extends Bloc<PhotoThemesEvent, PhotoThemesState> {
         ),
       );
 
-      final availablePlayers = await _repository.getAvailablePlayers();
-      emit(state.copyWith(availablePlayers: availablePlayers));
-
       if (themes.isNotEmpty) {
         final firstThemeId = themes.first.id;
         emit(state.copyWith(selectedThemeId: firstThemeId));

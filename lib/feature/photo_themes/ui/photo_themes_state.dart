@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_entry_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
 
@@ -13,6 +12,5 @@ class PhotoThemesState with _$PhotoThemesState {
     @Default([]) List<PhotoThemeEntryModel> players,
     @Default(true) bool isLoading,
     String? error,
-    @Default([]) List<PlayerModel> availablePlayers,
   }) = _PhotoThemesState;
 }

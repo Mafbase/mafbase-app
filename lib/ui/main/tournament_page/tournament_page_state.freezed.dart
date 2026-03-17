@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TournamentPageState {
   bool get isLoading => throw _privateConstructorUsedError;
-  List<PlayerModel> get players => throw _privateConstructorUsedError;
   List<PlayerModel> get tournamentPlayers => throw _privateConstructorUsedError;
   List<List<PlayerModel>> get cannotMeet => throw _privateConstructorUsedError;
   List<PlayerModel> get finalPlayers => throw _privateConstructorUsedError;
@@ -46,7 +45,6 @@ abstract class $TournamentPageStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
       List<List<PlayerModel>> cannotMeet,
       List<PlayerModel> finalPlayers,
@@ -79,7 +77,6 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? players = null,
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
     Object? finalPlayers = null,
@@ -98,10 +95,6 @@ class _$TournamentPageStateCopyWithImpl<$Res, $Val extends TournamentPageState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      players: null == players
-          ? _value.players
-          : players // ignore: cast_nullable_to_non_nullable
-              as List<PlayerModel>,
       tournamentPlayers: null == tournamentPlayers
           ? _value.tournamentPlayers
           : tournamentPlayers // ignore: cast_nullable_to_non_nullable
@@ -174,7 +167,6 @@ abstract class _$$TournamentPageStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      List<PlayerModel> players,
       List<PlayerModel> tournamentPlayers,
       List<List<PlayerModel>> cannotMeet,
       List<PlayerModel> finalPlayers,
@@ -206,7 +198,6 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? players = null,
     Object? tournamentPlayers = null,
     Object? cannotMeet = null,
     Object? finalPlayers = null,
@@ -225,10 +216,6 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      players: null == players
-          ? _value._players
-          : players // ignore: cast_nullable_to_non_nullable
-              as List<PlayerModel>,
       tournamentPlayers: null == tournamentPlayers
           ? _value._tournamentPlayers
           : tournamentPlayers // ignore: cast_nullable_to_non_nullable
@@ -286,7 +273,6 @@ class __$$TournamentPageStateImplCopyWithImpl<$Res>
 class _$TournamentPageStateImpl implements _TournamentPageState {
   const _$TournamentPageStateImpl(
       {this.isLoading = true,
-      final List<PlayerModel> players = const [],
       final List<PlayerModel> tournamentPlayers = const [],
       final List<List<PlayerModel>> cannotMeet = const [],
       final List<PlayerModel> finalPlayers = const [],
@@ -300,8 +286,7 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
       this.activePhotoThemeId,
       final Map<int, String> activeThemePhotos = const {},
       final List<PhotoThemeModel> photoThemes = const []})
-      : _players = players,
-        _tournamentPlayers = tournamentPlayers,
+      : _tournamentPlayers = tournamentPlayers,
         _cannotMeet = cannotMeet,
         _finalPlayers = finalPlayers,
         _activeThemePhotos = activeThemePhotos,
@@ -310,15 +295,6 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
   @override
   @JsonKey()
   final bool isLoading;
-  final List<PlayerModel> _players;
-  @override
-  @JsonKey()
-  List<PlayerModel> get players {
-    if (_players is EqualUnmodifiableListView) return _players;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_players);
-  }
-
   final List<PlayerModel> _tournamentPlayers;
   @override
   @JsonKey()
@@ -387,7 +363,7 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
 
   @override
   String toString() {
-    return 'TournamentPageState(isLoading: $isLoading, players: $players, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl, activePhotoThemeId: $activePhotoThemeId, activeThemePhotos: $activeThemePhotos, photoThemes: $photoThemes)';
+    return 'TournamentPageState(isLoading: $isLoading, tournamentPlayers: $tournamentPlayers, cannotMeet: $cannotMeet, finalPlayers: $finalPlayers, settings: $settings, billedPlayers: $billedPlayers, billedTranslation: $billedTranslation, isMyTournament: $isMyTournament, notificationEnabled: $notificationEnabled, gomafiaUrl: $gomafiaUrl, activePhotoThemeId: $activePhotoThemeId, activeThemePhotos: $activeThemePhotos, photoThemes: $photoThemes)';
   }
 
   @override
@@ -397,7 +373,6 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
             other is _$TournamentPageStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality().equals(other._players, _players) &&
             const DeepCollectionEquality()
                 .equals(other._tournamentPlayers, _tournamentPlayers) &&
             const DeepCollectionEquality()
@@ -428,7 +403,6 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
-      const DeepCollectionEquality().hash(_players),
       const DeepCollectionEquality().hash(_tournamentPlayers),
       const DeepCollectionEquality().hash(_cannotMeet),
       const DeepCollectionEquality().hash(_finalPlayers),
@@ -455,7 +429,6 @@ class _$TournamentPageStateImpl implements _TournamentPageState {
 abstract class _TournamentPageState implements TournamentPageState {
   const factory _TournamentPageState(
       {final bool isLoading,
-      final List<PlayerModel> players,
       final List<PlayerModel> tournamentPlayers,
       final List<List<PlayerModel>> cannotMeet,
       final List<PlayerModel> finalPlayers,
@@ -471,8 +444,6 @@ abstract class _TournamentPageState implements TournamentPageState {
 
   @override
   bool get isLoading;
-  @override
-  List<PlayerModel> get players;
   @override
   List<PlayerModel> get tournamentPlayers;
   @override

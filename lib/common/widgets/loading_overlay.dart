@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/common/theme/my_theme.dart';
 
 class LoadingOverlayWidget extends StatelessWidget {
   final double? value;

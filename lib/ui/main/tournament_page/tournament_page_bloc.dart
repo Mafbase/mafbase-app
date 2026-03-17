@@ -6,7 +6,6 @@ import 'package:seating_generator_web/domain/interactors/add_player_interactor.d
 import 'package:seating_generator_web/domain/interactors/bill_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/custom_text_info_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/get_all_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_final_players_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_interactor.dart';
@@ -28,32 +27,24 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   final RepositoryFactory _repos;
   final BuildContext? _context;
 
-  late final GetAllPlayersInteractor _getAllPlayersInteractor =
-      GetAllPlayersInteractor(_repos.playersRepository);
   late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
       GetTournamentsPlayersInteractor(_repos.playersRepository);
   late final AddTournamentPlayerInteractor _addPlayerInteractor =
       AddTournamentPlayerInteractor(_repos.playersRepository);
-  late final DeletePlayerInteractor _deletePlayerInteractor =
-      DeletePlayerInteractor(_repos.playersRepository);
-  late final GetSettingsInteractor _getSettingsInteractor =
-      GetSettingsInteractor(_repos.tournamentEditRepository);
+  late final DeletePlayerInteractor _deletePlayerInteractor = DeletePlayerInteractor(_repos.playersRepository);
+  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_repos.tournamentEditRepository);
   late final UpdateSettingsInteractor _updateSettingsInteractor =
       UpdateSettingsInteractor(_repos.tournamentEditRepository);
   late final TournamentCheckInteractor _tournamentCheckInteractor =
       TournamentCheckInteractor(_repos.tournamentsRepository);
-  late final GetTournamentInteractor _getTournamentInteractor =
-      GetTournamentInteractor(_repos.tournamentsRepository);
+  late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_repos.tournamentsRepository);
   late final GetFinalPlayersInteractor _getFinalPlayersInteractor =
       GetFinalPlayersInteractor(_repos.tournamentEditRepository);
   late final SetFinalPlayersInteractor _setFinalPlayersInteractor =
       SetFinalPlayersInteractor(_repos.tournamentEditRepository);
-  late final CustomTextInfoInteractor _customTextInfoInteractor =
-      CustomTextInfoInteractor(_repos.infoRepository);
-  late final StartGameInfoInteractor _startGameInfoInteractor =
-      StartGameInfoInteractor(_repos.infoRepository);
-  late final PhotoThemeRepository _photoThemeRepository =
-      _repos.photoThemeRepository;
+  late final CustomTextInfoInteractor _customTextInfoInteractor = CustomTextInfoInteractor(_repos.infoRepository);
+  late final StartGameInfoInteractor _startGameInfoInteractor = StartGameInfoInteractor(_repos.infoRepository);
+  late final PhotoThemeRepository _photoThemeRepository = _repos.photoThemeRepository;
   late final BillTournamentInteractor _billTournamentInteractor =
       BillTournamentInteractor(_repos.purchaseRepository, _context!);
 
@@ -165,7 +156,8 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
         );
       }),
       _updateFinalPlayers(emit),
-      _getSettingsInteractor.run(tournamentId: tournamentId)
+      _getSettingsInteractor
+          .run(tournamentId: tournamentId)
           .then((settings) => emit(state.copyWith(settings: settings)))
           .onError((_, __) {}),
     ]);
@@ -220,9 +212,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     TournamentPageEventAddPlayer event,
     Emitter<TournamentPageState> emit,
   ) async {
-    final player = await router.showAddPlayerDialog(
-      availablePlayers: state.players.where((element) => !state.tournamentPlayers.contains(element)).toList(),
-    );
+    final player = await router.showAddPlayerDialog();
     if (player == null) {
       return;
     }
@@ -295,14 +285,9 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     }
   }
 
-  Future _updatePlayers(Emitter<TournamentPageState> emit) {
-    final first = _getAllPlayersInteractor.run().then((value) {
-      emit(state.copyWith(players: value));
-    });
-    final second = _getTournamentsPlayersInteractor.run(tournamentId: tournamentId).then((value) {
-      emit(state.copyWith(tournamentPlayers: value));
-    });
-    return Future.wait([first, second]);
+  Future _updatePlayers(Emitter<TournamentPageState> emit) async {
+    final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
+    emit(state.copyWith(tournamentPlayers: players));
   }
 
   Future<void> _applyPhotoTheme(

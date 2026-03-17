@@ -65,6 +65,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.0.0"
+  bloc_concurrency:
+    dependency: "direct main"
+    description:
+      name: bloc_concurrency
+      sha256: "86b7b17a0a78f77fca0d7c030632b59b593b22acea2d96972588f40d4ef53a94"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
+  bloc_event_transformers:
+    dependency: "direct main"
+    description:
+      name: bloc_event_transformers
+      sha256: "74fb6cd2f89a2144e467732d9fa25a29d7803b348435cd54dc01bd8fd176535e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   bloc_test:
     dependency: "direct dev"
     description:

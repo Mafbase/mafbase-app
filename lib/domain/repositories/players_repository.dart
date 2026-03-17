@@ -5,6 +5,12 @@ import 'package:seating_generator_web/domain/models/player_model.dart';
 abstract class PlayersRepository {
   Future<List<PlayerModel>> get players;
 
+  Future<List<PlayerModel>> searchPlayers(
+    String search, {
+    int limit = 5,
+    int offset = 0,
+  });
+
   Future<List<PlayerModel>> tournamentsPlayer(int tournamentId);
 
   Future addPlayer(int tournamentId, PlayerModel player);

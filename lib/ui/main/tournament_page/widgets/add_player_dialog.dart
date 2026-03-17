@@ -1,23 +1,17 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
-import 'package:seating_generator_web/common/widgets/player_autocomplete.dart';
+import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class AddPlayerDialog extends StatefulWidget {
-  final List<PlayerModel> availablePlayers;
-  final bool showAvailablePlayers;
   final String? initValue;
 
   const AddPlayerDialog({
     super.key,
-    required this.availablePlayers,
     this.initValue,
-    this.showAvailablePlayers = true,
   });
 
   @override
@@ -25,15 +19,11 @@ class AddPlayerDialog extends StatefulWidget {
 
   static Future<PlayerModel?> open({
     required BuildContext context,
-    required List<PlayerModel> availablePlayers,
     String? initValue,
-    bool showAvailablePlayers = true,
   }) =>
       showDialog(
         context: context,
         builder: (context) => AddPlayerDialog(
-          availablePlayers: availablePlayers,
-          showAvailablePlayers: showAvailablePlayers,
           initValue: initValue,
         ),
       );
@@ -47,6 +37,8 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
   final _controllerMafbank = TextEditingController();
   final _controllerFsm = TextEditingController();
 
+  PlayerModel? _selectedPlayer;
+
   @override
   void initState() {
     _controller.text = widget.initValue ?? "";
@@ -56,10 +48,19 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
   @override
   void dispose() {
     _focusNode.dispose();
+    _focusNodeMafbank.dispose();
+    _focusNodeFsm.dispose();
     _controller.dispose();
     _controllerFsm.dispose();
     _controllerMafbank.dispose();
     super.dispose();
+  }
+
+  void _onPlayerSelected(PlayerModel player) {
+    _selectedPlayer = player;
+    _controller.text = player.nickname;
+    _controllerFsm.text = player.fsmNickaname ?? "";
+    _controllerMafbank.text = player.mafbankNickname ?? "";
   }
 
   @override
@@ -80,77 +81,31 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                 style: MyTheme.of(context).headerTextStyle,
               ),
               const SizedBox(height: 24),
-              CustomAutoComplete(
+              PlayerAutoComplete(
                 hint: context.locale.nicknameHint,
                 controller: _controller,
-                displayStringForOption: (model) => model.nickname,
                 focusNode: _focusNode,
-                onSelected: (player) {
-                  _controllerFsm.text = player.fsmNickaname ?? "";
-                  _controllerMafbank.text = player.mafbankNickname ?? "";
-                  _controller.text = player.nickname;
-                },
-                optionsBuilder: (text) {
-                  return widget.showAvailablePlayers
-                      ? widget.availablePlayers
-                          .where(
-                            (element) => element.nickname
-                                .toLowerCase()
-                                .contains(text.text.toLowerCase()),
-                          )
-                          .sortedBy<num>((element) => element.nickname.length)
-                      : [];
-                },
+                onSelected: _onPlayerSelected,
                 onSubmit: () {
                   _focusNodeFsm.requestFocus();
                 },
               ),
-              CustomAutoComplete(
+              PlayerAutoComplete(
                 hint: context.locale.fsmNicknameHint,
                 controller: _controllerFsm,
-                displayStringForOption: (model) => model.fsmNickaname ?? "",
                 focusNode: _focusNodeFsm,
-                onSelected: (player) {
-                  _controllerFsm.text = player.fsmNickaname ?? "";
-                  _controllerMafbank.text = player.mafbankNickname ?? "";
-                  _controller.text = player.nickname;
-                },
-                optionsBuilder: (text) {
-                  return widget.showAvailablePlayers
-                      ? widget.availablePlayers
-                          .where(
-                            (element) => element.nickname
-                                .toLowerCase()
-                                .contains(text.text.toLowerCase()),
-                          )
-                          .sortedBy<num>((element) => element.nickname.length)
-                      : [];
-                },
+                displayStringForOption: (m) => m.fsmNickaname ?? '',
+                onSelected: _onPlayerSelected,
                 onSubmit: () {
                   _focusNodeMafbank.requestFocus();
                 },
               ),
-              CustomAutoComplete(
+              PlayerAutoComplete(
                 hint: context.locale.mafbankNicknameHint,
                 controller: _controllerMafbank,
-                displayStringForOption: (model) => model.mafbankNickname ?? "",
                 focusNode: _focusNodeMafbank,
-                onSelected: (player) {
-                  _controllerFsm.text = player.fsmNickaname ?? "";
-                  _controllerMafbank.text = player.mafbankNickname ?? "";
-                  _controller.text = player.nickname;
-                },
-                optionsBuilder: (text) {
-                  return widget.showAvailablePlayers
-                      ? widget.availablePlayers
-                          .where(
-                            (element) => element.nickname
-                                .toLowerCase()
-                                .contains(text.text.toLowerCase()),
-                          )
-                          .sortedBy<num>((element) => element.nickname.length)
-                      : [];
-                },
+                displayStringForOption: (m) => m.mafbankNickname ?? '',
+                onSelected: _onPlayerSelected,
                 onSubmit: onSubmit,
               ),
               const SizedBox(height: 24),
@@ -163,23 +118,13 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
   }
 
   void onSubmit() {
-    final player = widget.availablePlayers
-            .firstWhereOrNull(
-              (element) =>
-                  element.nickname == _controller.text &&
-                  (element.fsmNickaname == null ||
-                      (element.fsmNickaname ?? "") == _controllerFsm.text) &&
-                  (element.mafbankNickname == null ||
-                      (element.mafbankNickname ?? "") ==
-                          _controllerMafbank.text),
-            )
-            ?.copyWith(
-              mafbankNickname: _controllerMafbank.text.isEmpty
-                  ? null
-                  : _controllerMafbank.text,
-              fsmNickaname:
-                  _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
-            ) ??
+    final player = _selectedPlayer?.copyWith(
+          mafbankNickname: _controllerMafbank.text.isEmpty
+              ? null
+              : _controllerMafbank.text,
+          fsmNickaname:
+              _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
+        ) ??
         PlayerModel(
           id: 0,
           nickname: _controller.text,
@@ -189,15 +134,6 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,
         );
 
-    if (player.id == 0 &&
-        widget.availablePlayers
-            .any((element) => element.nickname == player.nickname)) {
-      AppRouter.showErrorDialog(
-        context,
-        "Игрок с таким никнеймом уже существует",
-      );
-    } else {
-      Navigator.pop(context, player);
-    }
+    Navigator.pop(context, player);
   }
 }

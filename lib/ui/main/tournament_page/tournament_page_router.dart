@@ -9,9 +9,7 @@ import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog.dart';
 
 abstract class TournamentPageRouter {
-  Future<PlayerModel?> showAddPlayerDialog({
-    required List<PlayerModel> availablePlayers,
-  });
+  Future<PlayerModel?> showAddPlayerDialog();
 
   Future<bool> showPlayerProfileDialog({required PlayerModel player});
 
@@ -31,12 +29,9 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
   TournamentPageRouterImpl(this._context);
 
   @override
-  Future<PlayerModel?> showAddPlayerDialog({
-    required List<PlayerModel> availablePlayers,
-  }) async {
+  Future<PlayerModel?> showAddPlayerDialog() async {
     return AddPlayerDialog.open(
       context: _context,
-      availablePlayers: availablePlayers,
     );
   }
 
