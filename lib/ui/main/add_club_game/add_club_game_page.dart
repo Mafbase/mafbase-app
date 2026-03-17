@@ -909,9 +909,8 @@ class NicknameField extends StatelessWidget {
           controller.text = playerModel.nickname;
           onSelected?.call(playerModel);
         },
-        onNewPlayer: onNewPlayer != null
-            ? ({required String initValue}) => onNewPlayer?.call(initValue: initValue)
-            : null,
+        onNewPlayer:
+            onNewPlayer != null ? ({required String initValue}) => onNewPlayer?.call(initValue: initValue) : null,
         hint: hint,
       ),
     );
@@ -1006,24 +1005,24 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
   }
 
   Widget buildAddScoreField() => SizedBox(
-        width: 60,
+        width: context.isMobile ? 60 : 64,
         child: CustomTextField(
           focusNode: widget.addScoreFocusNode,
           readOnly: widget.readOnly,
           controller: widget.addScoreController,
           hint: '0.0',
-          label: context.isMobile ? '+' : '+ балл',
+          label: '+',
         ),
       );
 
   Widget buildMinusScoreField() => SizedBox(
-        width: 60,
+        width: context.isMobile ? 60 : 64,
         child: CustomTextField(
           focusNode: widget.minusScoreFocusNode,
           readOnly: widget.readOnly,
           controller: widget.minusScoreController,
           hint: '0.0',
-          label: context.isMobile ? '-' : '- балл',
+          label: '-',
         ),
       );
 
