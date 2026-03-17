@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
@@ -15,6 +16,7 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournament_item_r
 import 'package:seating_generator_web/ui/main/tournaments_list/tournament_status_widget.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_search_field.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -41,17 +43,59 @@ class TournamentsPage extends StatefulWidget {
 }
 
 class _TournamentsPageState extends CustomState<TournamentsPage> {
+  final _scrollController = ScrollController();
+  final _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     context.read<TournamentsBloc>().add(const TournamentsEvent.opened());
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      context.read<TournamentsBloc>().add(const TournamentsEvent.loadMore());
+    }
+  }
+
+  void _onSearchChanged(String query) {
+    context.read<TournamentsBloc>().add(TournamentsEvent.search(query));
+  }
+
+  void _onSearchClear() {
+    context.read<TournamentsBloc>().add(const TournamentsEvent.search(''));
   }
 
   @override
   Widget? buildMobile(BuildContext context) {
     final theme = MyTheme.of(context);
+    final locale = context.locale;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault),
+        title: InkWell(
+          onTap: () => context.go('/'),
+          child: Text(
+            'Mafbase',
+            style: GoogleFonts.balooBhai2(
+              color: Colors.white,
+              fontSize: 32,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        actions: _buildMobileActions(context, theme),
+      ),
       body: RefreshIndicator(
         onRefresh: () {
           final completer = Completer();
@@ -59,19 +103,67 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
           return completer.future;
         },
         child: BlocBuilder<TournamentsBloc, TournamentsState>(
-          builder: (context, state) => Stack(
-            children: [
-              ListView.separated(
-                padding: const EdgeInsets.all(12),
-                itemCount: state.tournaments.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  return TournamentItemRow(
-                    tournamentModel: state.tournaments[index],
-                  );
-                },
+          builder: (context, state) => CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              SliverPersistentHeader(
+                floating: true,
+                delegate: _SearchHeaderDelegate(
+                  child: Container(
+                    color: theme.background1,
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: TournamentsSearchField(
+                      controller: _searchController,
+                      onChanged: _onSearchChanged,
+                      onClear: _onSearchClear,
+                      hintText: locale.tournamentsSearchHint,
+                    ),
+                  ),
+                ),
               ),
-              if (state.isLoading) const LoadingOverlayWidget(),
+              if (state.isLoading)
+                const SliverFillRemaining(
+                  child: LoadingOverlayWidget(),
+                )
+              else if (state.tournaments.isEmpty)
+                SliverFillRemaining(
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.search_off, size: 64, color: theme.greyColor),
+                        const SizedBox(height: 16),
+                        Text(
+                          locale.tournamentsSearchEmpty,
+                          style: TextStyle(fontSize: 16, color: theme.greyColor),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              else ...[
+                SliverPadding(
+                  padding: const EdgeInsets.all(12),
+                  sliver: SliverList.separated(
+                    itemCount: state.tournaments.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (context, index) {
+                      return TournamentItemRow(
+                        tournamentModel: state.tournaments[index],
+                      );
+                    },
+                  ),
+                ),
+                if (state.isLoadingMore)
+                  const SliverToBoxAdapter(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  ),
+              ],
             ],
           ),
         ),
@@ -93,6 +185,71 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
     );
   }
 
+  List<Widget> _buildMobileActions(BuildContext context, MyTheme theme) {
+    return [
+      ValueListenableBuilder(
+        valueListenable: context.read<AuthNotifier>(),
+        builder: (context, model, child) => model.map(
+          unauthorized: (_) => TextButton(
+            onPressed: () {
+              context.read<MainBloc>().add(const MainEvent.onEnterPressed());
+            },
+            child: Text(
+              context.locale.loginIn,
+              style: theme.defaultTextStyle.copyWith(
+                color: theme.background1,
+              ),
+            ),
+          ),
+          loading: (_) => Container(),
+          authorized: (_) => IconButton(
+            tooltip: context.locale.profile,
+            onPressed: () {
+              context.read<MainBloc>().add(const MainEvent.onProfilePressed());
+            },
+            hoverColor: theme.background1.withValues(alpha: 0.2),
+            icon: Icon(
+              Icons.person,
+              color: theme.background1,
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(width: 8),
+      PopupMenuButton(
+        splashRadius: 24,
+        color: theme.darkBlueColor,
+        child: Icon(
+          Icons.more_vert_outlined,
+          color: theme.btnTextColor,
+        ),
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+              onTap: () {
+                context.read<MainBloc>().add(const MainEvent.openContacts());
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.contacts_outlined,
+                    color: theme.btnTextColor,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    context.locale.contacts,
+                    style: theme.btnTextStyle.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+          ];
+        },
+      ),
+      const SizedBox(width: 8),
+    ];
+  }
+
   @override
   Widget buildDesktop(BuildContext context) {
     final theme = MyTheme.of(context);
@@ -101,34 +258,76 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(locale.tournamentsListTitle),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 900),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: TournamentsSearchField(
+                  controller: _searchController,
+                  onChanged: _onSearchChanged,
+                  onClear: _onSearchClear,
+                  hintText: locale.tournamentsSearchHint,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
       body: BlocBuilder<TournamentsBloc, TournamentsState>(
         builder: (context, state) => Stack(
           children: [
-            CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding: const EdgeInsets.all(16),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: state.tournaments.length,
-                      (context, index) {
-                        final tournament = state.tournaments[index];
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 900),
-                              child: _DesktopTournamentCard(tournament: tournament),
+            if (!state.isLoading && state.tournaments.isEmpty)
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.search_off, size: 64, color: theme.greyColor),
+                    const SizedBox(height: 16),
+                    Text(
+                      locale.tournamentsSearchEmpty,
+                      style: TextStyle(fontSize: 16, color: theme.greyColor),
+                    ),
+                  ],
+                ),
+              )
+            else
+              CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  SliverPadding(
+                    padding: const EdgeInsets.all(16),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: state.tournaments.length,
+                        (context, index) {
+                          final tournament = state.tournaments[index];
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(maxWidth: 900),
+                                child: _DesktopTournamentCard(tournament: tournament),
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                  if (state.isLoadingMore)
+                    const SliverToBoxAdapter(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             if (state.isLoading) const LoadingOverlayWidget(),
           ],
         ),
@@ -149,6 +348,26 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
       ),
     );
   }
+}
+
+class _SearchHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _SearchHeaderDelegate({required this.child});
+
+  @override
+  double get minExtent => 64;
+
+  @override
+  double get maxExtent => 64;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(covariant _SearchHeaderDelegate oldDelegate) => false;
 }
 
 class _DesktopTournamentCard extends StatelessWidget {
@@ -228,7 +447,7 @@ class _DesktopTournamentCard extends StatelessWidget {
             ),
             const SizedBox(width: 16),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   '${tournament.billedPlayers}',
@@ -299,6 +518,9 @@ class _DesktopTournamentCard extends StatelessWidget {
 
   String _formatDateRange(DateTime start, DateTime end) {
     final fmt = DateFormat('d MMM', 'ru');
+    if (start.year == end.year && start.month == end.month && start.day == end.day) {
+      return fmt.format(start);
+    }
     return '${fmt.format(start)} – ${fmt.format(end)}';
   }
 }

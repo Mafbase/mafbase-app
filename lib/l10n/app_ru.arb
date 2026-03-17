@@ -850,5 +850,9 @@
     }
   },
   "tournamentCardPlayersLabel": "игроков",
-  "@tournamentCardPlayersLabel": {}
+  "@tournamentCardPlayersLabel": {},
+  "tournamentsSearchHint": "Поиск турниров...",
+  "@tournamentsSearchHint": {},
+  "tournamentsSearchEmpty": "Турниры не найдены",
+  "@tournamentsSearchEmpty": {}
 }

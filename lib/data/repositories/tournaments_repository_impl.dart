@@ -3,7 +3,6 @@ import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/requests/create_seating_request.dart';
 import 'package:seating_generator_web/data/requests/create_tournament_request.dart';
-import 'package:seating_generator_web/data/requests/get_my_tournaments_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournament_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_request.dart';
 import 'package:seating_generator_web/data/requests/tournament_check_request.dart';
@@ -14,15 +13,6 @@ import 'package:seating_generator_web/utils.dart';
 
 class TournamentsRepositoryImpl extends BaseRepository implements TournamentsRepository {
   TournamentsRepositoryImpl(super.client);
-
-  @override
-  Future<List<TournamentModel>> getTournaments() {
-    return GetTournamentsRequest().execute(client).then((value) {
-      return value.tournaments.map((tournament) {
-        return tournament.toDomainModel();
-      }).toList();
-    });
-  }
 
   @override
   Future<int> createTournament({
@@ -43,8 +33,12 @@ class TournamentsRepositoryImpl extends BaseRepository implements TournamentsRep
   }
 
   @override
-  Future<List<TournamentModel>> getMyTournaments() {
-    return GetMyTournamentsRequest().execute(client).then((value) {
+  Future<List<TournamentModel>> getTournaments({
+    required int limit,
+    required int offset,
+    String? search,
+  }) {
+    return GetTournamentsRequest(limit: limit, offset: offset, search: search).execute(client).then((value) {
       return value.tournaments.map((tournament) {
         return tournament.toDomainModel();
       }).toList();

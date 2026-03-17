@@ -750,5 +750,9 @@
     }
   },
   "tournamentCardPlayersLabel": "players",
-  "@tournamentCardPlayersLabel": {}
+  "@tournamentCardPlayersLabel": {},
+  "tournamentsSearchHint": "Search tournaments...",
+  "@tournamentsSearchHint": {},
+  "tournamentsSearchEmpty": "No tournaments found",
+  "@tournamentsSearchEmpty": {}
 }

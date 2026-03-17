@@ -155,6 +155,9 @@ class TournamentItemRow extends StatelessWidget {
 
   String _formatDateRange(DateTime start, DateTime end) {
     final fmt = DateFormat('d MMM', 'ru');
+    if (start.year == end.year && start.month == end.month && start.day == end.day) {
+      return fmt.format(start);
+    }
     return '${fmt.format(start)} – ${fmt.format(end)}';
   }
 }

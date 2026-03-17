@@ -7,5 +7,8 @@ class TournamentsState with _$TournamentsState {
   const factory TournamentsState({
     required List<TournamentModel> tournaments,
     required bool isLoading,
+    @Default(false) bool isLoadingMore,
+    @Default(true) bool hasMore,
+    @Default('') String searchQuery,
   }) = _TournamentsState;
 }
