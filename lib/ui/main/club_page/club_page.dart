@@ -4,23 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/interactors/bill_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/check_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
-import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_page.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
-import 'package:intl/intl.dart';
-import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_actions_section.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_bottom_bar.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_card.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
-import 'package:seating_generator_web/ui/main/club_page/widgets/club_info_widget.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_hero_card.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_owners_bottom_sheet.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -87,31 +90,75 @@ class _ClubPageState extends CustomState<ClubPage> {
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Клуб'),
           leading: BackButton(onPressed: context.backOrGoToDefault),
+          title: Text(context.locale.clubPageTitle),
+          actions: [
+            BlocBuilder<ClubBloc, ClubState>(
+              builder: (context, state) {
+                if (!state.isOwner) return const SizedBox.shrink();
+                return IconButton(
+                  icon: const Icon(Icons.settings_outlined),
+                  onPressed: _editOwners,
+                );
+              },
+            ),
+          ],
         ),
         body: BlocBuilder<ClubBloc, ClubState>(
           builder: (context, state) {
             if (state.isLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             }
+            final model = state.model;
+            if (model == null) return const SizedBox.shrink();
 
-            return Stack(
+            final showBill = !(context.watch<AuthNotifier>().value.mapOrNull(
+                      authorized: (m) => m.hideBilling,
+                    ) ??
+                false);
+
+            return Column(
               children: [
-                if (state.model != null)
-                  ClubInfoWidget(
-                    clubModel: state.model!,
-                    isMobile: true,
-                    onAddGame: state.isOwner ? _addNewGame : null,
-                    billClub: state.isOwner ? _bill : null,
-                    changeHideDate: state.isOwner ? _changeHideDate : null,
-                    onEditDescription: state.isOwner ? _editDescription : null,
-                    onEditPhoto: state.isOwner ? _editPhoto : null,
-                    onEditOwners: state.isOwner ? _editOwners : null,
-                    onEditCustomColumns: state.isOwner ? _editCustomColumns : null,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ClubHeroCard(
+                          clubModel: model,
+                          isOwner: state.isOwner,
+                          onEditPhoto: state.isOwner ? _editPhoto : null,
+                        ),
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: ClubDescriptionCard(
+                            description: model.description,
+                            onEditDescription:
+                                state.isOwner ? _editDescription : null,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: ClubActionsSection(
+                            isOwner: state.isOwner,
+                            billedFor: model.billedFor,
+                            onOpenRating: _openRating,
+                            onAddGame: state.isOwner ? _addNewGame : null,
+                            onRenewSubscription:
+                                state.isOwner && showBill ? _bill : null,
+                            onCustomColumns:
+                                state.isOwner ? _editCustomColumns : null,
+                            onHideRating:
+                                state.isOwner ? _changeHideDate : null,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
                   ),
+                ),
+                ClubBottomBar(onOpenRating: _openRating),
               ],
             );
           },
@@ -125,43 +172,74 @@ class _ClubPageState extends CustomState<ClubPage> {
             ) ??
         false);
 
-    return BlocBuilder<ClubBloc, ClubState>(
-      builder: (context, state) => state.isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Stack(
-              children: [
-                Row(
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault),
+        title: Text(context.locale.clubPageTitle),
+        actions: [
+          BlocBuilder<ClubBloc, ClubState>(
+            builder: (context, state) {
+              if (!state.isOwner) return const SizedBox.shrink();
+              return IconButton(
+                icon: const Icon(Icons.settings_outlined),
+                onPressed: _editOwners,
+              );
+            },
+          ),
+        ],
+      ),
+      body: BlocBuilder<ClubBloc, ClubState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final model = state.model;
+          if (model == null) return const SizedBox.shrink();
+
+          return SingleChildScrollView(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 720),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (state.model != null)
-                      Expanded(
-                        child: ClubInfoWidget(
-                          clubModel: state.model!,
-                          onAddGame: state.isOwner ? _addNewGame : null,
-                          billClub: state.isOwner ? _bill : null,
-                          changeHideDate: state.isOwner ? _changeHideDate : null,
-                          onEditDescription: state.isOwner ? _editDescription : null,
-                          onEditPhoto: state.isOwner ? _editPhoto : null,
-                          onEditOwners: state.isOwner ? _editOwners : null,
-                          onEditCustomColumns: state.isOwner ? _editCustomColumns : null,
-                        ),
-                      ),
+                    ClubHeroCard(
+                      clubModel: model,
+                      isOwner: state.isOwner,
+                      onEditPhoto: state.isOwner ? _editPhoto : null,
+                    ),
+                    const SizedBox(height: 24),
+                    ClubDescriptionCard(
+                      description: model.description,
+                      onEditDescription:
+                          state.isOwner ? _editDescription : null,
+                    ),
+                    const SizedBox(height: 24),
+                    ClubActionsSection(
+                      isOwner: state.isOwner,
+                      billedFor: model.billedFor,
+                      onOpenRating: _openRating,
+                      onAddGame: state.isOwner ? _addNewGame : null,
+                      onRenewSubscription:
+                          state.isOwner && showBill ? _bill : null,
+                      onCustomColumns:
+                          state.isOwner ? _editCustomColumns : null,
+                      onHideRating: state.isOwner ? _changeHideDate : null,
+                    ),
                   ],
                 ),
-                if (state.isOwner && showBill)
-                  Positioned(
-                    bottom: 20,
-                    right: 20,
-                    child: FloatingActionButton.large(
-                      backgroundColor: context.theme.redColor,
-                      onPressed: _bill,
-                      child: const Icon(Icons.monetization_on_outlined),
-                    ),
-                  ),
-              ],
+              ),
             ),
+          );
+        },
+      ),
     );
+  }
+
+  void _openRating() {
+    context.read<ClubBloc>().add(const ClubEvent.openRating());
   }
 
   void _addNewGame() => context.push(
@@ -194,7 +272,8 @@ class _ClubPageState extends CustomState<ClubPage> {
     String? subtitle;
     if (billedFor != null) {
       final localeCode = Localizations.localeOf(context).languageCode;
-      final formatted = DateFormat('dd MMMM yyyy', localeCode).format(billedFor);
+      final formatted =
+          DateFormat('dd MMMM yyyy', localeCode).format(billedFor);
       subtitle = locale.billedFor(formatted);
     }
 

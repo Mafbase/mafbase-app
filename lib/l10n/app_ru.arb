@@ -854,5 +854,46 @@
   "tournamentsSearchHint": "Поиск турниров...",
   "@tournamentsSearchHint": {},
   "tournamentsSearchEmpty": "Турниры не найдены",
-  "@tournamentsSearchEmpty": {}
+  "@tournamentsSearchEmpty": {},
+
+  "clubPageTitle": "Клуб",
+  "@clubPageTitle": {},
+  "clubSubscriptionUntil": "Подписка до {date}",
+  "@clubSubscriptionUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "01.01.2025"
+      }
+    }
+  },
+  "clubActionOpenRating": "Открыть рейтинг",
+  "@clubActionOpenRating": {},
+  "clubActionOpenRatingSubtitle": "Рейтинг игроков клуба",
+  "@clubActionOpenRatingSubtitle": {},
+  "clubActionAddGame": "Добавить игру",
+  "@clubActionAddGame": {},
+  "clubActionAddGameSubtitle": "Создать новую игру",
+  "@clubActionAddGameSubtitle": {},
+  "clubActionRenewSubscription": "Продлить подписку",
+  "@clubActionRenewSubscription": {},
+  "clubActionPaidUntil": "Оплачена до {date}",
+  "@clubActionPaidUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "01.01.2025"
+      }
+    }
+  },
+  "clubActionCustomColumns": "Свои колонки",
+  "@clubActionCustomColumns": {},
+  "clubActionCustomColumnsSubtitle": "Настройка таблицы рейтинга",
+  "@clubActionCustomColumnsSubtitle": {},
+  "clubActionHideRating": "Скрыть рейтинг",
+  "@clubActionHideRating": {},
+  "clubActionHideRatingSubtitle": "Установить дату скрытия",
+  "@clubActionHideRatingSubtitle": {},
+  "clubDescriptionEmpty": "Тут пусто",
+  "@clubDescriptionEmpty": {}
 }

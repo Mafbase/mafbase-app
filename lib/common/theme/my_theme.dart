@@ -36,6 +36,7 @@ abstract class MyTheme {
   abstract final Color sidebarActiveItemBgColor;
   abstract final Color cardShadowColor;
   abstract final Color successColor;
+  abstract final Color hoverColor;
 
   MyTheme();
 
@@ -171,4 +172,7 @@ class _LightTheme implements MyTheme {
 
   @override
   Color get successColor => const Color(0xFF4CAF50);
+
+  @override
+  Color get hoverColor => const Color(0xFFF0F0F0);
 }

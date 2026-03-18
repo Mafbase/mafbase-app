@@ -140,7 +140,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 title: 'Mafbase',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData.light(useMaterial3: true).copyWith(
-                  scaffoldBackgroundColor: context.theme.background2,
+                  scaffoldBackgroundColor: context.theme.background1,
                   appBarTheme: AppBarTheme(
                     backgroundColor: context.theme.darkBlueColor,
                     foregroundColor: Colors.white,
