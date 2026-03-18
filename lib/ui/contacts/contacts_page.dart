@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage._();
@@ -20,64 +22,104 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
+
     return Scaffold(
-      body: DefaultTextStyle(
-        style: TextStyle(
-          fontSize: 24,
-          color: MyTheme.of(context).textColor,
-        ),
-        child: const SelectionArea(
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.phone, size: 32),
-                      SizedBox(width: 8),
-                      Flexible(child: Text('+79528828343')),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.person, size: 32),
-                      SizedBox(width: 8),
-                      Flexible(child: Text('Анисов Сергей Владимирович')),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.perm_contact_cal_outlined, size: 32),
-                      SizedBox(width: 8),
-                      Flexible(child: Text('ИНН: 701724290760')),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.location_city_outlined, size: 32),
-                      SizedBox(width: 8),
-                      Flexible(
-                        child: Text(
-                          'Адрес: 634045, Россия, Томская Обл, г Томск, Улица Мокрушина 24, кв 67',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault),
+        title: Text(context.locale.contacts),
+      ),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 480),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: theme.background2,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: theme.borderColor),
+              boxShadow: [
+                BoxShadow(
+                  color: theme.cardShadowColor,
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: DefaultTextStyle(
+              style: theme.defaultTextStyle,
+              child: SelectionArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildClickableRow(
+                      icon: Icons.phone,
+                      text: '+79528828343',
+                      url: 'tel:+79528828343',
+                      theme: theme,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildRow(
+                      icon: Icons.person,
+                      text: 'Анисов Сергей Владимирович',
+                      theme: theme,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildRow(
+                      icon: Icons.perm_contact_cal_outlined,
+                      text: 'ИНН: 701724290760',
+                      theme: theme,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildClickableRow(
+                      icon: Icons.telegram,
+                      text: '@strelas70',
+                      url: 'https://t.me/strelas70',
+                      theme: theme,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildRow({
+    required IconData icon,
+    required String text,
+    required MyTheme theme,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 24, color: theme.btnColor2),
+        const SizedBox(width: 8),
+        Flexible(child: Text(text)),
+      ],
+    );
+  }
+
+  Widget _buildClickableRow({
+    required IconData icon,
+    required String text,
+    required String url,
+    required MyTheme theme,
+  }) {
+    return InkWell(
+      onTap: () => launchUrl(Uri.parse(url)),
+      mouseCursor: SystemMouseCursors.click,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 24, color: theme.btnColor2),
+          const SizedBox(width: 8),
+          Flexible(child: Text(text)),
+        ],
       ),
     );
   }
