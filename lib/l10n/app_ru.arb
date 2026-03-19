@@ -915,5 +915,7 @@
   "seatingUploadGomafia": "Загрузить с Gomafia",
   "@seatingUploadGomafia": {},
   "seatingReplaceWarning": "Новая рассадка заменит старую",
-  "@seatingReplaceWarning": {}
+  "@seatingReplaceWarning": {},
+  "notificationNoGamesWarning": "Укажите количество игр в настройках турнира",
+  "@notificationNoGamesWarning": {}
 }

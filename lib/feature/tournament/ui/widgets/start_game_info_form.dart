@@ -6,6 +6,7 @@ import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class StartGameInfoForm extends StatefulWidget {
   final int maxGame;
@@ -28,6 +29,17 @@ class _StartGameInfoFormState extends State<StartGameInfoForm> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
+    final theme = context.theme;
+
+    if (widget.maxGame == 0) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        child: Text(
+          locale.notificationNoGamesWarning,
+          style: TextStyle(color: theme.redColor, fontSize: 14),
+        ),
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

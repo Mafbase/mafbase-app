@@ -216,7 +216,7 @@ class TournamentMenuBuilder {
     // ОПОВЕЩЕНИЯ
     final totalGames = context.read<TournamentPageBloc>().state.settings.totalGames;
     final seatingLoading = context.read<SeatingPageBloc>().state.isLoading;
-    if (totalGames > 0 && state.isMyTournament && state.notificationEnabled && !seatingLoading) {
+    if (state.isMyTournament && state.notificationEnabled && !seatingLoading) {
       final notificationItems = <TournamentMenuItemModel>[
         TournamentMenuExpandableItem(
           text: locale.tournamentMenuGameNotification,
