@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:provider/provider.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_bloc.dart';
@@ -219,17 +218,17 @@ MockPlayerStatsBloc _createMockBloc(PlayerStatsState state) {
 }
 
 Widget _buildPage(PlayerStatsBloc bloc) {
-  return Provider<MyTheme>.value(
-    value: MyTheme.light(false),
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale('ru'),
-      home: BlocProvider<PlayerStatsBloc>.value(
-        value: bloc,
-        child: const PlayerStatsPage(playerId: 1),
-      ),
+  return MaterialApp(
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData.light(useMaterial3: true).copyWith(
+      extensions: [MyTheme.light(isMobile: false)],
+    ),
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    locale: const Locale('ru'),
+    home: BlocProvider<PlayerStatsBloc>.value(
+      value: bloc,
+      child: const PlayerStatsPage(playerId: 1),
     ),
   );
 }
