@@ -226,10 +226,6 @@ class _RatingPageState extends CustomState<RatingPage> {
   Widget buildMobile(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
-        if (state.isLoading) {
-          return const LoadingOverlayWidget();
-        }
-
         Widget ratingTable({bool singlePage = false}) => RatingTable(
               isTournament: widget.tournamentId != null,
               isMobile: true,
@@ -317,52 +313,58 @@ class _RatingPageState extends CustomState<RatingPage> {
                 ),
             ],
           ),
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
+          body: Stack(
             children: [
-              if (widget.range != null)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: TextButton(
-                    onPressed: onChangeRangeTap,
-                    child: Text(
-                      '${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
-                      textAlign: TextAlign.center,
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 8),
+                  if (widget.range != null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: TextButton(
+                        onPressed: onChangeRangeTap,
+                        child: Text(
+                          '${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        gameFilterWidget(),
+                        const SizedBox(width: 8),
+                        styleSwitcher(
+                          hasCustomColumns: state.hasCustomColumns,
+                        ),
+                        const SizedBox(width: 8),
+                        downloadRatingButton(),
+                      ],
                     ),
                   ),
-                ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    gameFilterWidget(),
-                    const SizedBox(width: 8),
-                    styleSwitcher(
-                      hasCustomColumns: state.hasCustomColumns,
-                    ),
-                    const SizedBox(width: 8),
-                    downloadRatingButton(),
-                  ],
-                ),
+                  const SizedBox(height: 8),
+                  winRate(state),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: state.rows.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(
+                                context.locale.ratingNoGamesFound,
+                                style: MyTheme.of(context).defaultTextStyle,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
+                        : ratingTable(singlePage: false),
+                  ),
+                ],
               ),
-              const SizedBox(height: 8),
-              winRate(state),
-              const SizedBox(height: 16),
-              Expanded(
-                child: state.rows.isEmpty
-                    ? Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Text(
-                            context.locale.ratingNoGamesFound,
-                            style: MyTheme.of(context).defaultTextStyle,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      )
-                    : ratingTable(singlePage: false),
-              ),
+              if (state.isLoading) const LoadingOverlayWidget(),
             ],
           ),
         );
@@ -373,118 +375,110 @@ class _RatingPageState extends CustomState<RatingPage> {
   @override
   Widget buildDesktop(BuildContext context) => BlocBuilder<RatingBloc, RatingState>(
         builder: (context, state) {
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                    bottom: 20,
+          return Scaffold(
+            appBar: AppBar(
+              leading: BackButton(onPressed: context.backOrGoToDefault),
+              title: Text(state.clubName),
+              actions: [
+                downloadRatingButton(),
+                gameFilterWidget(),
+                if (widget.clubId != null)
+                  IconButton(
+                    onPressed: () => context.push(
+                      ClubGamesPage.createLocation(
+                        context: context,
+                        clubId: widget.clubId!,
+                        range: widget.range,
+                      ),
+                    ),
+                    icon: const Icon(Icons.table_chart_outlined),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              state.clubName,
-                              style: MyTheme.of(context).headerTextStyle,
-                            ),
-                          ),
-                          if (widget.clubId != null)
-                            IconButton(
-                              onPressed: () => context.push(
-                                ClubGamesPage.createLocation(
-                                  context: context,
-                                  clubId: widget.clubId!,
-                                  range: widget.range,
+              ],
+            ),
+            body: Stack(
+              children: [
+                Positioned.fill(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 20,
+                      bottom: 20,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (widget.range != null)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0, right: 8),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(context.locale.period),
+                                    CustomButton(
+                                      onTap: onChangeRangeTap,
+                                      disabled: widget.tournamentId != null,
+                                      text:
+                                          '${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
+                                    ),
+                                  ],
                                 ),
                               ),
-                              icon: const Icon(Icons.table_chart_outlined),
+                            styleSwitcher(
+                              hasCustomColumns: state.hasCustomColumns,
                             ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (widget.range != null)
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0, right: 8),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(context.locale.period),
-                                  CustomButton(
-                                    onTap: onChangeRangeTap,
-                                    disabled: widget.tournamentId != null,
-                                    text: '${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
-                                  ),
-                                ],
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        winRate(state),
+                        const SizedBox(height: 16),
+                        Expanded(
+                          child: Center(
+                            child: RatingTable(
+                              style: widget.style,
+                              rows: state.rows,
+                              clubId: widget.clubId,
+                              sort: widget.sort,
+                              gameFilter: widget.gameFilter,
+                              openGame: openGame,
+                              customSortColumnIndex: widget.customSortColumnIndex,
+                              onPlayerTap: (playerId) => context.push(
+                                PlayerStatsPage.createLocation(
+                                  context: context,
+                                  playerId: playerId,
+                                ),
                               ),
+                              changeSort: (
+                                RatingSort sort, {
+                                int? customSortColumnIndex,
+                              }) {
+                                context.read<RatingBloc>().add(
+                                      RatingEvent.rangeChanged(
+                                        range: widget.range,
+                                        clubId: widget.clubId,
+                                        style: widget.style,
+                                        tournamentId: widget.tournamentId,
+                                        sort: sort,
+                                        gameFilter: widget.gameFilter,
+                                        customSortColumnIndex: customSortColumnIndex ?? 0,
+                                      ),
+                                    );
+                              },
+                              tournamentId: widget.tournamentId,
+                              isTournament: widget.tournamentId != null,
                             ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0, right: 8),
-                            child: gameFilterWidget(),
-                          ),
-                          styleSwitcher(
-                            hasCustomColumns: state.hasCustomColumns,
-                          ),
-                          downloadRatingButton(),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      winRate(state),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: RatingTable(
-                            style: widget.style,
-                            rows: state.rows,
-                            clubId: widget.clubId,
-                            sort: widget.sort,
-                            gameFilter: widget.gameFilter,
-                            openGame: openGame,
-                            customSortColumnIndex: widget.customSortColumnIndex,
-                            onPlayerTap: (playerId) => context.push(
-                              PlayerStatsPage.createLocation(
-                                context: context,
-                                playerId: playerId,
-                              ),
-                            ),
-                            changeSort: (
-                              RatingSort sort, {
-                              int? customSortColumnIndex,
-                            }) {
-                              context.read<RatingBloc>().add(
-                                    RatingEvent.rangeChanged(
-                                      range: widget.range,
-                                      clubId: widget.clubId,
-                                      style: widget.style,
-                                      tournamentId: widget.tournamentId,
-                                      sort: sort,
-                                      gameFilter: widget.gameFilter,
-                                      customSortColumnIndex: customSortColumnIndex ?? 0,
-                                    ),
-                                  );
-                            },
-                            tournamentId: widget.tournamentId,
-                            isTournament: widget.tournamentId != null,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
           );
         },
       );

@@ -152,6 +152,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
                       fontSize: 24,
                     ),
                   ),
+                  floatingActionButtonTheme: const FloatingActionButtonThemeData(foregroundColor: Colors.white),
                   dividerTheme: const DividerThemeData(
                     color: Color(0xFFCAC4D0),
                     thickness: 1,

@@ -563,7 +563,6 @@
   "@customColumnsOperations": {},
   "customColumnsFunctions": "Функции: sqrt, abs, log, log2, log10, ceil, floor, sin, cos, tan",
   "@customColumnsFunctions": {},
-
   "tooltipScore": "Общий балл",
   "@tooltipScore": {},
   "tooltipAddScore": "Общий доп. балл",
@@ -624,7 +623,6 @@
   "@tooltipBestMoveSheriff": {},
   "tooltipRefereeCount": "Кол-во судейств",
   "@tooltipRefereeCount": {},
-
   "tooltipFnMin": "Минимум из двух значений",
   "@tooltipFnMin": {},
   "tooltipFnMax": "Максимум из двух значений",
@@ -637,7 +635,6 @@
   "@tooltipFnFloor": {},
   "tooltipFnCeil": "Округление вверх",
   "@tooltipFnCeil": {},
-
   "playerStatsTitle": "Статистика игрока",
   "@playerStatsTitle": {},
   "playerStatsOverall": "Общая статистика",
@@ -674,7 +671,6 @@
   "@playerStatsError": {},
   "playerStatsNoData": "Нет данных о парах",
   "@playerStatsNoData": {},
-
   "photoThemesTitle": "Темы фотографий",
   "@photoThemesTitle": {},
   "photoThemesCreate": "Создание темы",
@@ -737,12 +733,10 @@
   "@photoThemesSaveFromTournament": {},
   "photoThemesRemovePlayer": "Удалить из темы",
   "@photoThemesRemovePlayer": {},
-
   "sidebarNavigation": "НАВИГАЦИЯ",
   "@sidebarNavigation": {},
   "sidebarAdditional": "ДОПОЛНИТЕЛЬНО",
   "@sidebarAdditional": {},
-
   "profilePlayerCardTitle": "Игрок",
   "@profilePlayerCardTitle": {},
   "profilePlayerNotLinked": "Игрок не привязан",
@@ -830,7 +824,6 @@
   "@tournamentMenuTextNotification": {},
   "tournamentMenuNoPlayers": "Пока не добавлен ни один участник",
   "@tournamentMenuNoPlayers": {},
-
   "tournamentCardGames": "{count, plural, =1{{count} игра} few{{count} игры} many{{count} игр} other{{count} игр}}",
   "@tournamentCardGames": {
     "placeholders": {
@@ -855,7 +848,6 @@
   "@tournamentsSearchHint": {},
   "tournamentsSearchEmpty": "Турниры не найдены",
   "@tournamentsSearchEmpty": {},
-
   "clubPageTitle": "Клуб",
   "@clubPageTitle": {},
   "clubSubscriptionUntil": "Подписка до {date}",
@@ -888,7 +880,7 @@
   },
   "clubActionCustomColumns": "Свои колонки",
   "@clubActionCustomColumns": {},
-  "clubActionCustomColumnsSubtitle": "Настройка таблицы рейтинга",
+  "clubActionCustomColumnsSubtitle": "Настройка формул рейтинга",
   "@clubActionCustomColumnsSubtitle": {},
   "clubActionHideRating": "Скрыть рейтинг",
   "@clubActionHideRating": {},
@@ -897,5 +889,31 @@
   "clubDescriptionEmpty": "Тут пусто",
   "@clubDescriptionEmpty": {},
   "notificationSentSuccess": "Оповещение успешно отправлено",
-  "@notificationSentSuccess": {}
+  "@notificationSentSuccess": {},
+  "seatingByPlayers": "По игрокам",
+  "@seatingByPlayers": {},
+  "seatingByTables": "По столам",
+  "@seatingByTables": {},
+  "seatingCrossStats": "Статистика пересечений",
+  "@seatingCrossStats": {},
+  "seatingEmptyState": "Рассадка ещё не сгенерирована",
+  "@seatingEmptyState": {},
+  "seatingActions": "Действия",
+  "@seatingActions": {},
+  "seatingSeparations": "Разделения",
+  "@seatingSeparations": {},
+  "seatingGenerate": "Сгенерировать рассадку",
+  "@seatingGenerate": {},
+  "seatingGenerateNext": "Сгенерировать следующий полуфинальный тур",
+  "@seatingGenerateNext": {},
+  "seatingRegenerateCurrent": "Перегенерировать текущий полуфинальный тур",
+  "@seatingRegenerateCurrent": {},
+  "seatingGenerateFinal": "Сгенерировать рассадку на финал",
+  "@seatingGenerateFinal": {},
+  "seatingUploadReady": "Загрузить готовую рассадку",
+  "@seatingUploadReady": {},
+  "seatingUploadGomafia": "Загрузить с Gomafia",
+  "@seatingUploadGomafia": {},
+  "seatingReplaceWarning": "Новая рассадка заменит старую",
+  "@seatingReplaceWarning": {}
 }

@@ -51,6 +51,10 @@ class _CustomColumnsEditorPageState extends State<CustomColumnsEditorPage> {
     return BlocBuilder<CustomColumnsEditorBloc, CustomColumnsEditorState>(
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(
+            title: Text(context.locale.customColumns),
+            leading: BackButton(onPressed: context.backOrGoToDefault),
+          ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _showEditDialog(context),
             child: const Icon(Icons.add, color: Colors.white),
