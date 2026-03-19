@@ -1,16 +1,14 @@
-import 'golden_path.dart';
+import 'golden_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_bloc.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_event.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_state.dart';
-import 'package:seating_generator_web/l10n/app_localizations.dart';
 
 class MockPlayerStatsBloc extends MockBloc<PlayerStatsEvent, PlayerStatsState> implements PlayerStatsBloc {}
 
@@ -217,21 +215,12 @@ MockPlayerStatsBloc _createMockBloc(PlayerStatsState state) {
   return bloc;
 }
 
-Widget _buildPage(PlayerStatsBloc bloc) {
-  return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData.light(useMaterial3: true).copyWith(
-      extensions: [MyTheme.light(isMobile: false)],
-    ),
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-    locale: const Locale('ru'),
-    home: BlocProvider<PlayerStatsBloc>.value(
-      value: bloc,
-      child: const PlayerStatsPage(playerId: 1),
-    ),
-  );
-}
+Widget _pageWidget(PlayerStatsBloc bloc) => themedWidget(
+      BlocProvider<PlayerStatsBloc>.value(
+        value: bloc,
+        child: const PlayerStatsPage(playerId: 1),
+      ),
+    );
 
 void main() {
   setUpAll(() async {
@@ -239,76 +228,68 @@ void main() {
   });
 
   group('PlayerStatsPage golden tests', () {
-    testWidgets('loading state', (tester) async {
+    testGoldens('loading state', (tester) async {
       final bloc = _createMockBloc(const PlayerStatsState(isLoading: true));
+      addTearDown(bloc.close);
 
-      await tester.pumpWidget(_buildPage(bloc));
-      await tester.pump();
-      await tester.pump();
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'loading');
 
-      await expectLater(
-        find.byType(MaterialApp),
-        matchesGoldenFile(goldenPath('player_stats_loading')),
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('player_stats_loading'),
+        customPump: (t) => t.pump(),
       );
-
-      await bloc.close();
     });
 
-    testWidgets('error state', (tester) async {
+    testGoldens('error state', (tester) async {
       final bloc = _createMockBloc(
         const PlayerStatsState(isLoading: false, hasError: true),
       );
+      addTearDown(bloc.close);
 
-      await tester.pumpWidget(_buildPage(bloc));
-      await tester.pump();
-      await tester.pump();
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'error');
 
-      await expectLater(
-        find.byType(MaterialApp),
-        matchesGoldenFile(goldenPath('player_stats_error')),
-      );
-
-      await bloc.close();
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(tester, goldenName('player_stats_error'));
     });
 
-    testWidgets('data state — full page', (tester) async {
+    testGoldens('data state — full page', (tester) async {
       final bloc = _createMockBloc(
         const PlayerStatsState(
           isLoading: false,
           statistics: _fullStatistics,
         ),
       );
+      addTearDown(bloc.close);
 
-      await tester.pumpWidget(_buildPage(bloc));
-      await tester.pump();
-      await tester.pump();
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'data');
 
-      await expectLater(
-        find.byType(MaterialApp),
-        matchesGoldenFile(goldenPath('player_stats_data')),
-      );
-
-      await bloc.close();
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(tester, goldenName('player_stats_data'));
     });
 
-    testWidgets('data state — empty pair lists', (tester) async {
+    testGoldens('data state — empty pair lists', (tester) async {
       final bloc = _createMockBloc(
         const PlayerStatsState(
           isLoading: false,
           statistics: _emptyPairsStatistics,
         ),
       );
+      addTearDown(bloc.close);
 
-      await tester.pumpWidget(_buildPage(bloc));
-      await tester.pump();
-      await tester.pump();
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'empty_pairs');
 
-      await expectLater(
-        find.byType(MaterialApp),
-        matchesGoldenFile(goldenPath('player_stats_empty_pairs')),
-      );
-
-      await bloc.close();
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(tester, goldenName('player_stats_empty_pairs'));
     });
   });
 }

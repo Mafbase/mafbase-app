@@ -145,6 +145,65 @@ class MyTheme extends ThemeExtension<MyTheme> {
     );
   }
 
+  factory MyTheme.dark({required bool isMobile}) {
+    const darkBlueColor = Color(0xFF0A1620);
+    const background1 = Color(0xFF0F1D2E);
+    const background2 = Color(0xFF152232);
+    const textColor = Color(0xFFE8EAED);
+    const darkGreyColor = Color(0xFF8A9AB5);
+    const greyColor = Color(0xFF4A5568);
+    const redColor = Color(0xFFDF5650);
+    const blueForCard = Color(0xCC4A7A9B);
+    const base = TextStyle(color: textColor);
+
+    final defaultTextStyle = base.copyWith(
+      fontSize: isMobile ? 12.0 : 16.0,
+      fontWeight: FontWeight.w400,
+    );
+
+    return MyTheme(
+      background1: background1,
+      background2: background2,
+      btnColor1: darkGreyColor.withValues(alpha: 0.64),
+      btnColor2: const Color(0xFF6B8FCC),
+      btnTextColor: Colors.white,
+      textColor: textColor,
+      borderColor: Colors.white.withValues(alpha: 0.12),
+      hintColor: const Color(0xFF7A8A9E),
+      defaultTextStyle: defaultTextStyle,
+      hintTextStyle: base.copyWith(fontSize: isMobile ? 10.0 : 12.0, color: greyColor),
+      fieldTextStyle: defaultTextStyle,
+      btnTextStyle: base.copyWith(fontSize: isMobile ? 15.0 : 18.0, fontWeight: FontWeight.w600),
+      textBtnTextStyle: base.copyWith(color: blueForCard, fontSize: isMobile ? 18.0 : 24.0),
+      headerTextStyle: base.copyWith(
+        fontSize: isMobile ? 22.0 : 28.0,
+        fontWeight: FontWeight.w600,
+        color: textColor,
+      ),
+      darkBlueColor: darkBlueColor,
+      redColor: redColor,
+      greyColor: greyColor,
+      darkGreyColor: darkGreyColor,
+      redForCard: const Color(0xCC81332C),
+      greenForCard: const Color(0xCC285927),
+      blueForCard: blueForCard,
+      buttonDisabledColor: const Color(0xFF4A5568),
+      btnRedColor: redColor,
+      btnRedColor1: redColor.withValues(alpha: 0.7),
+      diedPositiveColor: const Color(0xFF47644A),
+      positiveColor: const Color(0xFFC8B75E),
+      negativeColor: redColor,
+      diedColor: darkGreyColor,
+      sidebarDividerColor: Colors.white.withValues(alpha: 0.08),
+      sidebarSectionTitleColor: Colors.white.withValues(alpha: 0.4),
+      sidebarInactiveTextColor: Colors.white.withValues(alpha: 0.6),
+      sidebarActiveItemBgColor: Colors.white.withValues(alpha: 0.12),
+      cardShadowColor: Colors.black.withValues(alpha: 0.3),
+      successColor: const Color(0xFF4CAF50),
+      hoverColor: const Color(0xFF1E3045),
+    );
+  }
+
   @override
   MyTheme copyWith({
     Color? background1,
