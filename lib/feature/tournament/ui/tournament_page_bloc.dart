@@ -78,21 +78,25 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   Future _onStartGameInfo(
     TournamentPageEventStartGameInfo event,
     Emitter emit,
-  ) =>
-      _startGameInfoInteractor(
-        tournamentId: tournamentId,
-        game: event.game,
-        time: event.time,
-      );
+  ) async {
+    await _startGameInfoInteractor(
+      tournamentId: tournamentId,
+      game: event.game,
+      time: event.time,
+    );
+    emitEffect(const TournamentPageEffect.showNotificationSentSuccess());
+  }
 
   Future _onCustomTextInfo(
     TournamentPageEventCustomTextInfo event,
     Emitter emit,
-  ) =>
-      _customTextInfoInteractor(
-        tournamentId: tournamentId,
-        text: event.text,
-      );
+  ) async {
+    await _customTextInfoInteractor(
+      tournamentId: tournamentId,
+      text: event.text,
+    );
+    emitEffect(const TournamentPageEffect.showNotificationSentSuccess());
+  }
 
   Future _updateFinalPlayers(Emitter emit) async {
     final finalPlayer = await _getFinalPlayersInteractor(

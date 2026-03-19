@@ -4,13 +4,26 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class TournamentMenu extends StatelessWidget {
+class TournamentMenu extends StatefulWidget {
   final List<TournamentMenuSection> sections;
+  final int tournamentId;
 
   const TournamentMenu({
     super.key,
     required this.sections,
+    required this.tournamentId,
   });
+
+  @override
+  State<TournamentMenu> createState() => _TournamentMenuState();
+}
+
+class _TournamentMenuState extends State<TournamentMenu> {
+  TournamentMenuExpandableItem? _expandedItem;
+
+  void _collapse() {
+    setState(() => _expandedItem = null);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +50,7 @@ class TournamentMenu extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: sections
+                children: widget.sections
                     .map(
                       (section) => _buildSection(
                         context,
@@ -78,10 +91,23 @@ class TournamentMenu extends StatelessWidget {
             ),
           ),
           ...section.items.map(
-            (item) => _TournamentMenuItem(
-              item: item,
-              theme: theme,
-            ),
+            (item) => switch (item) {
+              TournamentMenuTapItem() => _TournamentMenuItem(
+                  item: item,
+                  theme: theme,
+                ),
+              TournamentMenuExpandableItem() => _ExpandableTournamentMenuItem(
+                  item: item,
+                  theme: theme,
+                  expanded: _expandedItem == item,
+                  onToggle: () {
+                    setState(() {
+                      _expandedItem = _expandedItem == item ? null : item;
+                    });
+                  },
+                  onCollapse: _collapse,
+                ),
+            },
           ),
         ],
       ),
@@ -90,7 +116,7 @@ class TournamentMenu extends StatelessWidget {
 }
 
 class _TournamentMenuItem extends StatelessWidget {
-  final TournamentMenuItemModel item;
+  final TournamentMenuTapItem item;
   final MyTheme theme;
 
   const _TournamentMenuItem({
@@ -136,6 +162,80 @@ class _TournamentMenuItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ExpandableTournamentMenuItem extends StatelessWidget {
+  final TournamentMenuExpandableItem item;
+  final MyTheme theme;
+  final bool expanded;
+  final VoidCallback onToggle;
+  final VoidCallback onCollapse;
+
+  const _ExpandableTournamentMenuItem({
+    required this.item,
+    required this.theme,
+    required this.expanded,
+    required this.onToggle,
+    required this.onCollapse,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onToggle,
+            borderRadius: BorderRadius.circular(8),
+            hoverColor: theme.sidebarActiveItemBgColor,
+            child: Container(
+              height: 42,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                color: expanded ? theme.sidebarActiveItemBgColor : Colors.transparent,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    item.icon,
+                    color: expanded ? Colors.white : theme.sidebarInactiveTextColor,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      item.text,
+                      style: GoogleFonts.inter(
+                        color: expanded ? Colors.white : theme.sidebarInactiveTextColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Icon(
+                    expanded ? Icons.expand_less : Icons.expand_more,
+                    color: expanded ? Colors.white : theme.sidebarInactiveTextColor,
+                    size: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        AnimatedSize(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+          alignment: Alignment.topCenter,
+          child: expanded
+              ? item.contentBuilder(onCollapse)
+              : const SizedBox.shrink(),
+        ),
+      ],
     );
   }
 }

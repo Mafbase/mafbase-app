@@ -94,10 +94,13 @@ class _StartGameInfoDialogState extends State<StartGameInfoDialog> {
                   return Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CustomDropdown(
-                        items: List.generate(widget.maxGame, (index) => index + 1),
-                        initValue: field.value,
-                        onChanged: (value) => field.didChange(value),
+                      SizedBox(
+                        width: 60,
+                        child: CustomDropdown(
+                          items: List.generate(widget.maxGame, (index) => index + 1),
+                          initValue: field.value,
+                          onChanged: (value) => field.didChange(value),
+                        ),
                       ),
                       const SizedBox(width: 8),
                       CustomButton(

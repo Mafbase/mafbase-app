@@ -19,6 +19,7 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_even
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/players_list_body.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_settings_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_builder.dart';
 import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -60,6 +61,7 @@ class TournamentPage extends StatefulWidget {
               AddClubGamePage.tournamentEditRoute,
               RatingPage.tournamentRoute,
               AdministrationPage.tournamentRoute,
+              TournamentSettingsPage.tournamentRoute,
               FantasyPage.tournamentRoute,
               PhotoThemesPage.tournamentRoute,
             ],
@@ -137,6 +139,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
             );
             return TournamentMenu(
               sections: sections,
+              tournamentId: widget.tournamentId,
             );
           },
         ),
@@ -147,6 +150,7 @@ class _TournamentPageState extends CustomState<TournamentPage>
   @override
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
     on<TournamentPageEffectUpdateSettingsSuccess>(onShowSuccessUpdate);
+    on<TournamentPageEffectNotificationSentSuccess>(onShowNotificationSentSuccess);
     super.registerEffectHandlers(on);
   }
 
@@ -154,6 +158,14 @@ class _TournamentPageState extends CustomState<TournamentPage>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(context.locale.tournamentSettingsUpdateSuccess),
+      ),
+    );
+  }
+
+  onShowNotificationSentSuccess(TournamentPageEffectNotificationSentSuccess effect) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(context.locale.notificationSentSuccess),
       ),
     );
   }

@@ -61,12 +61,10 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
           child: DropdownButtonHideUnderline(
             child: DropdownButton<T>(
               value: value,
-              icon: Text(
-                '▾',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: theme.darkGreyColor,
-                ),
+              icon: Icon(
+                Icons.expand_more_outlined,
+                color: theme.darkGreyColor,
+                size: 16,
               ),
               style: theme.defaultTextStyle.copyWith(
                 color: widget.readOnly ? theme.greyColor : Colors.black,

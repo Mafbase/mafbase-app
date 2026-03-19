@@ -1,0 +1,314 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/common/widgets/custom_button.dart';
+import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/final_players_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
+import 'package:seating_generator_web/utils.dart';
+
+class TournamentSettingsPage extends StatefulWidget {
+  final int tournamentId;
+
+  const TournamentSettingsPage({
+    super.key,
+    required this.tournamentId,
+  });
+
+  @override
+  State<TournamentSettingsPage> createState() => _TournamentSettingsPageState();
+
+  static String createLocation({
+    required int tournamentId,
+    required BuildContext context,
+  }) {
+    return context.namedLocation(
+      _routeName,
+      pathParameters: {
+        'id': tournamentId.toString(),
+      },
+    );
+  }
+
+  static const _routeName = 'tournament_settings';
+
+  static final GoRoute tournamentRoute = GoRoute(
+    path: 'settings',
+    name: _routeName,
+    builder: (context, state) {
+      final tournamentId = int.parse(state.pathParameters['id']!);
+      return TournamentSettingsPage(
+        tournamentId: tournamentId,
+      );
+    },
+  );
+}
+
+class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
+  final defaultGamesController = TextEditingController();
+  final finalGamesController = TextEditingController();
+  final swissGamesController = TextEditingController();
+  final bucketsController = TextEditingController();
+  late bool hideResult;
+  late RatingScheme? ratingScheme;
+  late FantasyStatus? fantasyStatus;
+
+  final formState = GlobalKey<FormState>();
+  bool _initialized = false;
+
+  void _initFromSettings(TournamentSettingsModel settings) {
+    if (_initialized) return;
+    _initialized = true;
+    defaultGamesController.text = settings.defaultGames.toString();
+    finalGamesController.text = settings.finalGames.toString();
+    swissGamesController.text = settings.swissGames.toString();
+    bucketsController.text = settings.buckets?.join(';') ?? '';
+    hideResult = settings.hideResult;
+    ratingScheme = settings.ratingScheme;
+    fantasyStatus = settings.fantasyStatus;
+
+    Listenable.merge([
+      defaultGamesController,
+      finalGamesController,
+      swissGamesController,
+      bucketsController,
+    ]).addListener(() {
+      setState(() {});
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    defaultGamesController.dispose();
+    swissGamesController.dispose();
+    finalGamesController.dispose();
+    bucketsController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TournamentPageBloc, TournamentPageState>(
+      builder: (context, state) {
+        _initFromSettings(state.settings);
+
+        return Scaffold(
+          appBar: AppBar(
+            leading: BackButton(onPressed: context.backOrGoToDefault),
+            title: Text(context.locale.tournamentSettingsTitle),
+            actions: [
+              TournamentMenuAction(
+                tournamentId: widget.tournamentId,
+                openDrawer: () => Scaffold.of(context).openEndDrawer(),
+              ),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 600),
+                child: Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: formState,
+                  onChanged: () => setState(() {}),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextField(
+                          hint: '6',
+                          validate: (value) =>
+                              int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                          label: context.locale.defaultGamesLabel,
+                          controller: defaultGamesController,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                          validate: (value) =>
+                              int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                          hint: '6',
+                          label: context.locale.swissGamesLabel,
+                          controller: swissGamesController,
+                        ),
+                        const SizedBox(height: 16),
+                        DropdownButton<RatingScheme>(
+                          items: RatingScheme.values
+                              .map(
+                                (e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(
+                                    switch (e) {
+                                      RatingScheme.oldFSM => context.locale.old_fsm_schema,
+                                      RatingScheme.minusFSM => context.locale.minus_fsm_schema,
+                                      _ => '',
+                                    },
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          value: ratingScheme,
+                          onChanged: (value) {
+                            setState(() {
+                              ratingScheme = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        IgnorePointer(
+                          ignoring: (int.tryParse(swissGamesController.text) ?? 0) == 0,
+                          child: Opacity(
+                            opacity: (int.tryParse(swissGamesController.text) ?? 0) == 0 ? 0.5 : 1,
+                            child: CustomTextField(
+                              label: context.locale.bucketFieldTitle,
+                              hint: context.locale.bucketFieldHint,
+                              readOnly: (int.tryParse(swissGamesController.text) ?? 0) == 0,
+                              controller: bucketsController,
+                              validate: (value) {
+                                if ((int.tryParse(swissGamesController.text) ?? 0) == 0) {
+                                  return null;
+                                }
+                                return (value?.split(';').any(
+                                          (element) {
+                                            final count = int.tryParse(element);
+                                            return count == null || count % 10 > 0;
+                                          },
+                                        ) ??
+                                        true)
+                                    ? 'Неверный формат корзин'
+                                    : null;
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextField(
+                                hint: '6',
+                                validate: (value) =>
+                                    int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                                label: context.locale.finalGamesLabel,
+                                controller: finalGamesController,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                FinalPlayersDialog.open(
+                                  context: context,
+                                  initValue: state.finalPlayers,
+                                  players: state.tournamentPlayers,
+                                ).then((value) {
+                                  if (value != null && context.mounted) {
+                                    context.read<TournamentPageBloc>().add(
+                                          TournamentPageEvent.setFinalPlayers(
+                                            players: value,
+                                          ),
+                                        );
+                                  }
+                                });
+                              },
+                              icon: const Icon(Icons.person),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Checkbox(
+                              value: hideResult,
+                              onChanged: (value) {
+                                setState(() {
+                                  hideResult = value ?? hideResult;
+                                });
+                              },
+                            ),
+                            const SizedBox(width: 4),
+                            Text(context.locale.hideResult),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          context.locale.fantasyStatusLabel,
+                          style: MyTheme.of(context).defaultTextStyle,
+                        ),
+                        const SizedBox(height: 8),
+                        DropdownButton<FantasyStatus>(
+                          isExpanded: true,
+                          hint: Text(context.locale.fantasyStatusLabel),
+                          items: FantasyStatus.values
+                              .map(
+                                (e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(
+                                    switch (e) {
+                                      FantasyStatus.enabledForSelected =>
+                                        context.locale.fantasyStatusEnabledForSelected,
+                                      FantasyStatus.enabledForAll => context.locale.fantasyStatusEnabledForAll,
+                                      _ => context.locale.fantasyStatusDisabled,
+                                    },
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          value: fantasyStatus,
+                          onChanged: (value) {
+                            setState(() {
+                              fantasyStatus = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        CustomButton(
+                          text: context.locale.save,
+                          disabled: formState.currentState?.validate() != true,
+                          onTap: () {
+                            final newSettings = TournamentSettingsModel(
+                              defaultGames: int.parse(defaultGamesController.text),
+                              swissGames: int.parse(swissGamesController.text),
+                              finalGames: int.parse(finalGamesController.text),
+                              buckets: bucketsController.text
+                                  .split(';')
+                                  .map((e) => int.tryParse(e))
+                                  .nonNulls
+                                  .toList(),
+                              hideResult: hideResult,
+                              ratingScheme: ratingScheme,
+                              fantasyStatus: fantasyStatus,
+                            );
+
+                            if (newSettings != state.settings) {
+                              context.read<TournamentPageBloc>().add(
+                                    TournamentPageEvent.updateSettings(
+                                      settings: newSettings,
+                                    ),
+                                  );
+                            }
+
+                            context.backOrGoToDefault();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

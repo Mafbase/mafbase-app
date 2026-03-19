@@ -895,5 +895,7 @@
   "clubActionHideRatingSubtitle": "Установить дату скрытия",
   "@clubActionHideRatingSubtitle": {},
   "clubDescriptionEmpty": "Тут пусто",
-  "@clubDescriptionEmpty": {}
+  "@clubDescriptionEmpty": {},
+  "notificationSentSuccess": "Оповещение успешно отправлено",
+  "@notificationSentSuccess": {}
 }

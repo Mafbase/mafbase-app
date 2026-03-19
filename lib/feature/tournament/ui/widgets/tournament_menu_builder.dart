@@ -10,12 +10,11 @@ import 'package:seating_generator_web/feature/tournament/ui/models/tournament_me
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/custom_text_info_dialog.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/final_players_dialog.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/start_game_info_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_settings_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/custom_text_info_form.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/start_game_info_form.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_billing_dialog.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_settings_dialog.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/translation_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/translation_panel.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
@@ -48,7 +47,7 @@ class TournamentMenuBuilder {
     final sections = <TournamentMenuSection>[];
 
     final mainItems = <TournamentMenuItemModel>[
-      TournamentMenuItemModel(
+      TournamentMenuTapItem(
         text: locale.tournamentPageListOfPlayers,
         icon: Icons.people_outline,
         selected: isActive(null, isDefault: true),
@@ -59,7 +58,7 @@ class TournamentMenuBuilder {
         },
       ),
       if (state.isMyTournament)
-        TournamentMenuItemModel(
+        TournamentMenuTapItem(
           text: AppLocalizations.of(context)!.addPlayer,
           icon: Icons.person_add_outlined,
           onTap: () {
@@ -68,7 +67,7 @@ class TournamentMenuBuilder {
                 );
           },
         ),
-      TournamentMenuItemModel(
+      TournamentMenuTapItem(
         text: locale.seating,
         icon: Icons.grid_view_outlined,
         routeSegment: 'editSeating',
@@ -79,7 +78,7 @@ class TournamentMenuBuilder {
               );
         },
       ),
-      TournamentMenuItemModel(
+      TournamentMenuTapItem(
         text: locale.tournamentMenuTable,
         icon: Icons.table_chart_outlined,
         routeSegment: 'rating',
@@ -101,42 +100,22 @@ class TournamentMenuBuilder {
     // УПРАВЛЕНИЕ
     final managementItems = <TournamentMenuItemModel>[
       if (state.isMyTournament && !state.isLoading)
-        TournamentMenuItemModel(
+        TournamentMenuTapItem(
           text: locale.tournamentSettingsTitle,
           icon: Icons.settings_outlined,
-          onTap: () async {
-            final bloc = context.read<TournamentPageBloc>();
-            final oldSettings = bloc.state.settings;
-            final settings = await TournamentSettingsDialog.open(
-              context: context,
-              initValue: oldSettings,
-              onFinalPlayersTapped: () {
-                FinalPlayersDialog.open(
-                  context: context,
-                  initValue: state.finalPlayers,
-                  players: state.tournamentPlayers,
-                ).then((value) {
-                  if (value != null && context.mounted) {
-                    context.read<TournamentPageBloc>().add(
-                          TournamentPageEvent.setFinalPlayers(
-                            players: value,
-                          ),
-                        );
-                  }
-                });
-              },
+          routeSegment: 'settings',
+          selected: isActive('settings'),
+          onTap: () {
+            context.go(
+              TournamentSettingsPage.createLocation(
+                tournamentId: tournamentId,
+                context: context,
+              ),
             );
-            if (context.mounted && settings != null && settings != oldSettings) {
-              bloc.add(
-                TournamentPageEvent.updateSettings(
-                  settings: settings,
-                ),
-              );
-            }
           },
         ),
       if (state.isMyTournament)
-        TournamentMenuItemModel(
+        TournamentMenuTapItem(
           text: locale.tournamentMenuAdmins,
           icon: Icons.admin_panel_settings_outlined,
           routeSegment: 'administration',
@@ -151,7 +130,7 @@ class TournamentMenuBuilder {
           },
         ),
       if (state.isMyTournament && showBill && !state.isLoading)
-        TournamentMenuItemModel(
+        TournamentMenuTapItem(
           text: locale.tournamentMenuPayment,
           icon: Icons.payment_outlined,
           onTap: () async {
@@ -186,7 +165,7 @@ class TournamentMenuBuilder {
       if (!state.isLoading &&
           state.settings.fantasyStatus != null &&
           state.settings.fantasyStatus != FantasyStatus.disabled)
-        TournamentMenuItemModel(
+        TournamentMenuTapItem(
           text: locale.fantasy,
           icon: Icons.casino_outlined,
           routeSegment: 'fantasy',
@@ -201,19 +180,16 @@ class TournamentMenuBuilder {
           },
         ),
       if (state.billedTranslation && state.isMyTournament && !state.isLoading)
-        TournamentMenuItemModel(
+        TournamentMenuExpandableItem(
           text: locale.translationDialogTitle,
           icon: Icons.live_tv_outlined,
-          onTap: () {
-            TranslationDialog.open(
-              context: context,
-              tournamentId: tournamentId,
-              tablesCount: (state.tournamentPlayers.length / 10).floor(),
-            );
-          },
+          contentBuilder: (onCollapse) => TranslationPanel(
+            tournamentId: tournamentId,
+            tablesCount: (state.tournamentPlayers.length / 10).floor(),
+          ),
         ),
       if (state.isMyTournament)
-        TournamentMenuItemModel(
+        TournamentMenuTapItem(
           text: locale.photoThemesTitle,
           icon: Icons.photo_library_outlined,
           routeSegment: 'photo-themes',
@@ -242,40 +218,20 @@ class TournamentMenuBuilder {
     final seatingLoading = context.read<SeatingPageBloc>().state.isLoading;
     if (totalGames > 0 && state.isMyTournament && state.notificationEnabled && !seatingLoading) {
       final notificationItems = <TournamentMenuItemModel>[
-        TournamentMenuItemModel(
+        TournamentMenuExpandableItem(
           text: locale.tournamentMenuGameNotification,
           icon: Icons.notifications_outlined,
-          onTap: () {
-            StartGameInfoDialog.show(
-              context: context,
-              maxGame: totalGames,
-              tournamentId: tournamentId.toString(),
-            ).then((result) {
-              if (result == null || !context.mounted) {
-                return;
-              }
-              context.read<TournamentPageBloc>().add(
-                    TournamentPageEvent.startGameInfo(
-                      game: result.$1,
-                      time: result.$2,
-                    ),
-                  );
-            });
-          },
+          contentBuilder: (onCollapse) => StartGameInfoForm(
+            maxGame: totalGames,
+            onCollapse: onCollapse,
+          ),
         ),
-        TournamentMenuItemModel(
+        TournamentMenuExpandableItem(
           text: locale.tournamentMenuTextNotification,
           icon: Icons.message_outlined,
-          onTap: () {
-            CustomTextInfoDialog.show(context: context).then((text) {
-              if (text == null || !context.mounted) {
-                return;
-              }
-              context.read<TournamentPageBloc>().add(
-                    TournamentPageEvent.customTextInfo(text: text),
-                  );
-            });
-          },
+          contentBuilder: (onCollapse) => CustomTextInfoForm(
+            onCollapse: onCollapse,
+          ),
         ),
       ];
       sections.add(

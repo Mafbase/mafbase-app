@@ -9,13 +9,24 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_m
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class TournamentMenuDrawer extends StatelessWidget {
+class TournamentMenuDrawer extends StatefulWidget {
   final int tournamentId;
 
   const TournamentMenuDrawer({
     super.key,
     required this.tournamentId,
   });
+
+  @override
+  State<TournamentMenuDrawer> createState() => _TournamentMenuDrawerState();
+}
+
+class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
+  TournamentMenuExpandableItem? _expandedItem;
+
+  void _collapse() {
+    setState(() => _expandedItem = null);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +40,7 @@ class TournamentMenuDrawer extends StatelessWidget {
           final sections = TournamentMenuBuilder.buildSections(
             context,
             state,
-            tournamentId,
+            widget.tournamentId,
           );
 
           return SafeArea(
@@ -70,7 +81,10 @@ class TournamentMenuDrawer extends StatelessWidget {
                             ...section.items.map(
                               (item) => Padding(
                                 padding: const EdgeInsets.only(bottom: 4),
-                                child: _buildItem(context, item, theme),
+                                child: switch (item) {
+                                  TournamentMenuTapItem() => _buildTapItem(context, item, theme),
+                                  TournamentMenuExpandableItem() => _buildExpandableItem(context, item, theme),
+                                },
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -102,9 +116,9 @@ class TournamentMenuDrawer extends StatelessWidget {
     );
   }
 
-  static Widget _buildItem(
+  Widget _buildTapItem(
     BuildContext context,
-    TournamentMenuItemModel item,
+    TournamentMenuTapItem item,
     MyTheme theme,
   ) {
     return Material(
@@ -142,6 +156,69 @@ class TournamentMenuDrawer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildExpandableItem(
+    BuildContext context,
+    TournamentMenuExpandableItem item,
+    MyTheme theme,
+  ) {
+    final expanded = _expandedItem?.text == item.text;
+
+    return Column(
+      children: [
+        Material(
+          borderRadius: BorderRadius.circular(8),
+          color: expanded ? theme.sidebarActiveItemBgColor : Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                _expandedItem = expanded ? null : item;
+              });
+            },
+            borderRadius: BorderRadius.circular(8),
+            hoverColor: theme.sidebarActiveItemBgColor,
+            child: Container(
+              height: 46,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  Icon(
+                    item.icon,
+                    color: expanded ? Colors.white : theme.sidebarInactiveTextColor,
+                    size: 22,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      item.text,
+                      style: GoogleFonts.inter(
+                        color: expanded ? Colors.white : theme.sidebarInactiveTextColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    expanded ? Icons.expand_less : Icons.expand_more,
+                    color: expanded ? Colors.white : theme.sidebarInactiveTextColor,
+                    size: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        AnimatedSize(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+          alignment: Alignment.topCenter,
+          child: expanded
+              ? item.contentBuilder(_collapse)
+              : const SizedBox.shrink(),
+        ),
+      ],
     );
   }
 }
