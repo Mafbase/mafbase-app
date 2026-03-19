@@ -19,7 +19,7 @@ class ClubDesktopHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.background2,
         border: const Border(
-          bottom: BorderSide(color: Color(0xFFCAC4D0)),
+          bottom: BorderSide(),
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 32),
