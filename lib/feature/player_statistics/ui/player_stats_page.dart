@@ -47,7 +47,10 @@ class PlayerStatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.of(context).background1,
+      appBar: AppBar(
+        title: Text(context.locale.playerStatsTitle),
+        leading: BackButton(onPressed: context.backOrGoToDefault),
+      ),
       body: SafeArea(
         child: BlocBuilder<PlayerStatsBloc, PlayerStatsState>(
           builder: (context, state) {
@@ -99,10 +102,6 @@ class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            context.locale.playerStatsTitle,
-            style: MyTheme.of(context).defaultTextStyle,
-          ),
           Text(
             statistics.nickname,
             style: MyTheme.of(context).headerTextStyle,

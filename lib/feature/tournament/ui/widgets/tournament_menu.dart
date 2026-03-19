@@ -30,7 +30,7 @@ class _TournamentMenuState extends State<TournamentMenu> {
     final theme = context.theme;
 
     return Container(
-      width: 240,
+      width: 300,
       color: theme.darkBlueColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +99,7 @@ class _TournamentMenuState extends State<TournamentMenu> {
               TournamentMenuExpandableItem() => _ExpandableTournamentMenuItem(
                   item: item,
                   theme: theme,
-                  expanded: _expandedItem == item,
+                  expanded: _expandedItem?.text == item.text,
                   onToggle: () {
                     setState(() {
                       _expandedItem = _expandedItem == item ? null : item;

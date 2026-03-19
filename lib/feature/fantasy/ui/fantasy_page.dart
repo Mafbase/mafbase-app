@@ -183,80 +183,80 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
   @override
   Widget buildDesktop(BuildContext context) => BlocBuilder<FantasyBloc, FantasyState>(
         builder: (context, state) {
-          if (state.isLoading && state.rating == null) {
-            return const LoadingOverlayWidget();
-          }
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      context.locale.fantasy,
-                      style: MyTheme.of(context).headerTextStyle,
+          return Scaffold(
+            appBar: AppBar(
+              leading: BackButton(
+                onPressed: context.backOrGoToDefault,
+              ),
+              title: Text(context.locale.fantasy),
+              actions: [
+                if (state.isOwner)
+                  IconButton(
+                    onPressed: () => FantasyParticipantsBottomSheet.show(
+                      context,
+                      widget.tournamentId,
                     ),
-                    if (state.isOwner)
-                      IconButton(
-                        onPressed: () => FantasyParticipantsBottomSheet.show(
-                          context,
-                          widget.tournamentId,
+                    icon: const Icon(Icons.people),
+                    tooltip: context.locale.fantasyParticipants,
+                  ),
+              ],
+            ),
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+                      child: FantasyNotificationsBanner(),
+                    ),
+                    const SizedBox(height: 8),
+                    Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          final completer = Completer<void>();
+                          context.read<FantasyBloc>().add(
+                                FantasyEventRefresh(
+                                  tournamentId: widget.tournamentId,
+                                  completer: completer,
+                                ),
+                              );
+                          await completer.future;
+                        },
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            return ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: constraints.maxHeight,
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    flex: 3,
+                                    child: FantasyRatingSection(state: state),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    flex: 1,
+                                    child: FantasyPredictionSection(
+                                      state: state,
+                                      tournamentId: widget.tournamentId,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                        icon: const Icon(Icons.people),
-                        tooltip: context.locale.fantasyParticipants,
                       ),
+                    ),
                   ],
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-                child: FantasyNotificationsBanner(),
-              ),
-              const SizedBox(height: 8),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () async {
-                    final completer = Completer<void>();
-                    context.read<FantasyBloc>().add(
-                          FantasyEventRefresh(
-                            tournamentId: widget.tournamentId,
-                            completer: completer,
-                          ),
-                        );
-                    await completer.future;
-                  },
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minHeight: constraints.maxHeight,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const SizedBox(width: 16),
-                            Expanded(
-                              flex: 3,
-                              child: FantasyRatingSection(state: state),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              flex: 1,
-                              child: FantasyPredictionSection(
-                                state: state,
-                                tournamentId: widget.tournamentId,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
+                if (state.isLoading && state.rating == null) const LoadingOverlayWidget(),
+              ],
+            ),
           );
         },
       );

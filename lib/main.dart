@@ -160,32 +160,32 @@ class _MafbaseAppState extends State<MafbaseApp> {
                     indent: 0,
                     endIndent: 0,
                   ),
+                  cardTheme: CardThemeData(color: MyTheme.of(context).background2),
                   colorScheme: ThemeData.light(useMaterial3: true).colorScheme.copyWith(
                         primary: MyTheme.of(context).darkGreyColor,
                         primaryContainer: MyTheme.of(context).darkBlueColor,
                         secondary: MyTheme.of(context).redColor,
                         secondaryContainer: MyTheme.of(context).redColor,
                       ),
+                  timePickerTheme: TimePickerThemeData(
+                    hourMinuteTextColor: WidgetStateColor.fromMap({
+                      WidgetState.selected: context.theme.background1,
+                      WidgetState.any: context.theme.textColor,
+                    }),
+                  ),
+                  datePickerTheme: DatePickerThemeData(
+                    rangeSelectionBackgroundColor: context.theme.darkBlueColor.withValues(alpha: .15),
+                  ),
                   bottomNavigationBarTheme: BottomNavigationBarThemeData(
                     selectedItemColor: context.theme.darkGreyColor,
                     elevation: 5,
                     backgroundColor: context.theme.darkBlueColor,
-                    selectedLabelStyle: const TextStyle().copyWith(
-                      color: Colors.white,
-                    ),
-                    unselectedLabelStyle: const TextStyle().copyWith(
-                      color: Colors.white,
-                    ),
-                    selectedIconTheme: const IconThemeData(
-                      color: Colors.white,
-                    ),
-                    unselectedIconTheme: const IconThemeData(
-                      color: Colors.white60,
-                    ),
+                    selectedLabelStyle: const TextStyle().copyWith(color: Colors.white),
+                    unselectedLabelStyle: const TextStyle().copyWith(color: Colors.white),
+                    selectedIconTheme: const IconThemeData(color: Colors.white),
+                    unselectedIconTheme: const IconThemeData(color: Colors.white60),
                   ),
-                  iconTheme: IconThemeData(
-                    color: context.theme.darkGreyColor,
-                  ),
+                  iconTheme: IconThemeData(color: context.theme.darkGreyColor),
                   textButtonTheme: TextButtonThemeData(
                     style: ButtonStyle(
                       textStyle: WidgetStateProperty.resolveWith(
