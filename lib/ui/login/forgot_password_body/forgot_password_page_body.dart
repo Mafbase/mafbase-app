@@ -114,12 +114,15 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                           },
                         ),
                         const SizedBox(height: 24),
-                        CustomButton(
-                          disabled: !EmailValidator.validate(
-                            _emailController.text,
+                        ListenableBuilder(
+                          listenable: _emailController,
+                          builder: (context, _) => CustomButton(
+                            disabled: !EmailValidator.validate(
+                              _emailController.text,
+                            ),
+                            text: context.locale.send,
+                            onTap: _onSubmit,
                           ),
-                          text: context.locale.send,
-                          onTap: _onSubmit,
                         ),
                         const SizedBox(height: 16),
                         TextButton(
