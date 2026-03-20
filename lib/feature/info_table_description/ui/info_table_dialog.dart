@@ -56,7 +56,7 @@ class _InfoTableDialogState extends State<InfoTableDialog> {
   }
 
   bool _areAllDescriptionsFilled(List<MapEntry<int, String>> descriptions) {
-    return descriptions.isNotEmpty && descriptions.every((entry) => entry.value.isNotEmpty);
+    return descriptions.every((entry) => entry.value.isNotEmpty);
   }
 
   @override
