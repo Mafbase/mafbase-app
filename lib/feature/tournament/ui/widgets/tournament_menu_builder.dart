@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
+import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_page.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
@@ -231,6 +232,18 @@ class TournamentMenuBuilder {
           icon: Icons.message_outlined,
           contentBuilder: (onCollapse) => CustomTextInfoForm(
             onCollapse: onCollapse,
+          ),
+        ),
+        TournamentMenuTapItem(
+          text: locale.tableDescriptionsTitle,
+          icon: Icons.location_on_outlined,
+          routeSegment: 'table-descriptions',
+          selected: isActive('table-descriptions'),
+          onTap: () => context.go(
+            InfoTableDescriptionPage.createLocation(
+              tournamentId: tournamentId,
+              context: context,
+            ),
           ),
         ),
       ];

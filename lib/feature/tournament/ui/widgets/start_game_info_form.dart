@@ -76,13 +76,10 @@ class _StartGameInfoFormState extends State<StartGameInfoForm> {
             children: [
               SizedBox(
                 width: 60,
-                child: Theme(
-                  data: ThemeData.dark(),
-                  child: CustomDropdown<int>(
-                    items: List.generate(widget.maxGame, (i) => i + 1),
-                    initValue: selectedGame,
-                    onChanged: (value) => setState(() => selectedGame = value),
-                  ),
+                child: CustomDropdown<int>(
+                  items: List.generate(widget.maxGame, (i) => i + 1),
+                  initValue: selectedGame,
+                  onChanged: (value) => setState(() => selectedGame = value),
                 ),
               ),
               const SizedBox(width: 8),

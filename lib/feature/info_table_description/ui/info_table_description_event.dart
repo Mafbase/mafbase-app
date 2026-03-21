@@ -20,6 +20,13 @@ class InfoTableDescriptionEventAdd implements InfoTableDescriptionEvent {
   const InfoTableDescriptionEventAdd(this.table);
 }
 
+class InfoTableDescriptionEventAddWithDescription implements InfoTableDescriptionEvent {
+  final int table;
+  final String description;
+
+  const InfoTableDescriptionEventAddWithDescription({required this.table, required this.description});
+}
+
 class InfoTableDescriptionEventChange implements InfoTableDescriptionEvent {
   final int table;
   final String description;

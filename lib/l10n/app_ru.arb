@@ -951,5 +951,11 @@
   "invalidBucketsFormat": "Неверный формат корзин",
   "@invalidBucketsFormat": {},
   "invalidValue": "Некорректное значение",
-  "@invalidValue": {}
+  "@invalidValue": {},
+  "tableDescriptionsTitle": "Описания локаций",
+  "@tableDescriptionsTitle": {},
+  "tableDescriptionsTableNumber": "№",
+  "@tableDescriptionsTableNumber": {},
+  "tableDescriptionsDescription": "Описание",
+  "@tableDescriptionsDescription": {}
 }
