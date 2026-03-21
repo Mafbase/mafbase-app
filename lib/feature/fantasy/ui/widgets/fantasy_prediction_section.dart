@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_event.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_state.dart';
@@ -62,32 +64,40 @@ class FantasyPredictionSection extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               if (!currentGameInfo.canParticipate) ...[
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.orange.withValues(alpha: 0.1),
-                    border: Border.all(color: Colors.orange),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.info_outline,
-                        color: Colors.orange,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          context.locale.fantasyNotParticipating,
-                          style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                color: Colors.orange.shade700,
-                              ),
+                Builder(builder: (context) {
+                  final isAuthorized = context.read<AuthNotifier>().value
+                      is AuthNotifierAuthorizedModel;
+                  final message = isAuthorized
+                      ? context.locale.fantasyNotParticipating
+                      : context.locale.fantasyNotAuthorized;
+                  return Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.withValues(alpha: 0.1),
+                      border: Border.all(color: Colors.orange),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.info_outline,
+                          color: Colors.orange,
+                          size: 20,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            message,
+                            style:
+                                MyTheme.of(context).defaultTextStyle.copyWith(
+                                      color: Colors.orange.shade700,
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },),
               ] else if (currentGameInfo.canPredict) ...[
                 Text(
                   context.locale.fantasyYourPrediction,

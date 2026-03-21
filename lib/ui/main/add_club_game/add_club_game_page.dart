@@ -323,52 +323,47 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   @override
   Widget buildDesktop(BuildContext context) => BlocBuilder<AddClubGameBloc, AddClubGameState>(
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-            child: Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      state.clubName,
-                      style: MyTheme.of(context).headerTextStyle,
-                    ),
-                    Expanded(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) => SingleChildScrollView(
-                          child: Wrap(
-                            alignment: WrapAlignment.spaceAround,
-                            runSpacing: 20,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  minHeight: constraints.maxHeight,
-                                ),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: buildPlayersRow(state)
-                                        .map(
-                                          (e) => e,
-                                        )
-                                        .toList(),
-                                  ),
-                                ),
+          return Scaffold(
+            appBar: AppBar(
+              leading: BackButton(onPressed: context.backOrGoToDefault),
+              title: Text(state.clubName),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: Stack(
+                children: [
+                  LayoutBuilder(
+                    builder: (context, constraints) => SingleChildScrollView(
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceAround,
+                        runSpacing: 20,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: constraints.maxHeight,
+                            ),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: buildPlayersRow(state)
+                                    .map(
+                                      (e) => e,
+                                    )
+                                    .toList(),
                               ),
-                              buildGameInfoWidget(state),
-                            ],
+                            ),
                           ),
-                        ),
+                          buildGameInfoWidget(state),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                if (state.isLoading) const LoadingOverlayWidget(),
-              ],
+                  ),
+                  if (state.isLoading) const LoadingOverlayWidget(),
+                ],
+              ),
             ),
           );
         },

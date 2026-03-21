@@ -150,17 +150,9 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           const FantasyNotificationsBanner(),
-                          ValueListenableBuilder(
-                            valueListenable: context.read<AuthNotifier>(),
-                            builder: (context, state, child) =>
-                                state.mapOrNull(
-                                  authorized: (_) => child,
-                                ) ??
-                                const SizedBox.shrink(),
-                            child: FantasyPredictionSection(
-                              state: state,
-                              tournamentId: widget.tournamentId,
-                            ),
+                          FantasyPredictionSection(
+                            state: state,
+                            tournamentId: widget.tournamentId,
                           ),
                           const SizedBox(height: 16),
                           FantasyRatingSection(

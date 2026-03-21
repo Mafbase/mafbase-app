@@ -352,6 +352,8 @@
   "@fantasyCurrentGameInfoUnavailable": {},
   "fantasyCurrentGame": "Current game",
   "@fantasyCurrentGame": {},
+  "fantasyNotAuthorized": "Log in to participate in fantasy",
+  "@fantasyNotAuthorized": {},
   "fantasyNotParticipating": "You are not allowed to participate in fantasy. Contact the tournament administrator to get access.",
   "@fantasyNotParticipating": {},
   "fantasyYourPrediction": "Your prediction:",

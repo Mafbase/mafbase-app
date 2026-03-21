@@ -352,6 +352,8 @@
   "@fantasyCurrentGameInfoUnavailable": {},
   "fantasyCurrentGame": "Текущая игра",
   "@fantasyCurrentGame": {},
+  "fantasyNotAuthorized": "Войдите в аккаунт для участия в фентези",
+  "@fantasyNotAuthorized": {},
   "fantasyNotParticipating": "Вы не допущены к участию в фентези. Обратитесь к администратору турнира для получения доступа.",
   "@fantasyNotParticipating": {},
   "fantasyYourPrediction": "Ваше предсказание:",
