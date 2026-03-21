@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+
 import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_page.dart';
@@ -18,22 +18,20 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_b
 import 'package:seating_generator_web/feature/tournament/ui/widgets/translation_panel.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
+
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentMenuBuilder {
   static List<TournamentMenuSection> buildSections(
     BuildContext context,
     TournamentPageState state,
-    int tournamentId,
-  ) {
+    int tournamentId, {
+    required bool showBill,
+    required bool seatingLoading,
+  }) {
     final locale = context.locale;
     final currentPath = GoRouterState.of(context).uri.path;
     final basePath = '/tournament/$tournamentId';
-    final showBill = context.read<AuthNotifier>().value.mapOrNull(
-              authorized: (model) => !model.hideBilling,
-            ) ??
-        true;
 
     bool isActive(String? routeSegment, {bool isDefault = false}) {
       if (routeSegment != null) {
@@ -215,8 +213,7 @@ class TournamentMenuBuilder {
     }
 
     // ОПОВЕЩЕНИЯ
-    final totalGames = context.read<TournamentPageBloc>().state.settings.totalGames;
-    final seatingLoading = context.read<SeatingPageBloc>().state.isLoading;
+    final totalGames = state.settings.totalGames;
     if (state.isMyTournament && state.notificationEnabled && !seatingLoading) {
       final notificationItems = <TournamentMenuItemModel>[
         TournamentMenuExpandableItem(

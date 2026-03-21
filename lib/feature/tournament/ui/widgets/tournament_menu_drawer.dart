@@ -6,7 +6,9 @@ import 'package:seating_generator_web/feature/tournament/ui/models/tournament_me
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_builder.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentMenuDrawer extends StatefulWidget {
@@ -34,14 +36,22 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
 
     return Drawer(
       backgroundColor: theme.darkBlueColor,
-      child: BlocBuilder<TournamentPageBloc, TournamentPageState>(
-        builder: (context, state) {
-          context.watch<SeatingPageBloc>();
-          final sections = TournamentMenuBuilder.buildSections(
-            context,
-            state,
-            widget.tournamentId,
-          );
+      child: BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
+        selector: (state) => state.isLoading,
+        builder: (context, seatingLoading) {
+          return BlocBuilder<TournamentPageBloc, TournamentPageState>(
+            builder: (context, state) {
+              final showBill = context.read<AuthNotifier>().value.mapOrNull(
+                        authorized: (model) => !model.hideBilling,
+                      ) ??
+                  true;
+              final sections = TournamentMenuBuilder.buildSections(
+                context,
+                state,
+                widget.tournamentId,
+                showBill: showBill,
+                seatingLoading: seatingLoading,
+              );
 
           return SafeArea(
             child: Column(
@@ -95,6 +105,8 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
                 ),
               ],
             ),
+          );
+            },
           );
         },
       ),

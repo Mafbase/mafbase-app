@@ -12,8 +12,10 @@ import 'package:seating_generator_web/feature/administration_page/administration
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_effect.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
@@ -136,16 +138,27 @@ class _TournamentPageState extends CustomState<TournamentPage>
     return Row(
       children: [
         Expanded(child: widget.child),
-        BlocBuilder<TournamentPageBloc, TournamentPageState>(
-          builder: (context, state) {
-            final sections = TournamentMenuBuilder.buildSections(
-              context,
-              state,
-              widget.tournamentId,
-            );
-            return TournamentMenu(
-              sections: sections,
-              tournamentId: widget.tournamentId,
+        BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
+          selector: (state) => state.isLoading,
+          builder: (context, seatingLoading) {
+            return BlocBuilder<TournamentPageBloc, TournamentPageState>(
+              builder: (context, state) {
+                final showBill = context.read<AuthNotifier>().value.mapOrNull(
+                          authorized: (model) => !model.hideBilling,
+                        ) ??
+                    true;
+                final sections = TournamentMenuBuilder.buildSections(
+                  context,
+                  state,
+                  widget.tournamentId,
+                  showBill: showBill,
+                  seatingLoading: seatingLoading,
+                );
+                return TournamentMenu(
+                  sections: sections,
+                  tournamentId: widget.tournamentId,
+                );
+              },
             );
           },
         ),
