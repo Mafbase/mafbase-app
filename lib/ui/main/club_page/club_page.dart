@@ -15,6 +15,7 @@ import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_page.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
+import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
@@ -90,7 +91,7 @@ class _ClubPageState extends CustomState<ClubPage> {
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault),
+          leading: BackButton(onPressed: context.backOrGoToDefault(ClubsPage.createLocation)),
           title: Text(context.locale.clubPageTitle),
           actions: [
             BlocBuilder<ClubBloc, ClubState>(
@@ -133,8 +134,7 @@ class _ClubPageState extends CustomState<ClubPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: ClubDescriptionCard(
                             description: model.description,
-                            onEditDescription:
-                                state.isOwner ? _editDescription : null,
+                            onEditDescription: state.isOwner ? _editDescription : null,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -145,12 +145,9 @@ class _ClubPageState extends CustomState<ClubPage> {
                             billedFor: model.billedFor,
                             onOpenRating: _openRating,
                             onAddGame: state.isOwner ? _addNewGame : null,
-                            onRenewSubscription:
-                                state.isOwner && showBill ? _bill : null,
-                            onCustomColumns:
-                                state.isOwner ? _editCustomColumns : null,
-                            onHideRating:
-                                state.isOwner ? _changeHideDate : null,
+                            onRenewSubscription: state.isOwner && showBill ? _bill : null,
+                            onCustomColumns: state.isOwner ? _editCustomColumns : null,
+                            onHideRating: state.isOwner ? _changeHideDate : null,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -174,7 +171,7 @@ class _ClubPageState extends CustomState<ClubPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault(ClubsPage.createLocation)),
         title: Text(context.locale.clubPageTitle),
         actions: [
           BlocBuilder<ClubBloc, ClubState>(
@@ -197,8 +194,7 @@ class _ClubPageState extends CustomState<ClubPage> {
           if (model == null) return const SizedBox.shrink();
 
           return SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
             child: Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 720),
@@ -213,8 +209,7 @@ class _ClubPageState extends CustomState<ClubPage> {
                     const SizedBox(height: 24),
                     ClubDescriptionCard(
                       description: model.description,
-                      onEditDescription:
-                          state.isOwner ? _editDescription : null,
+                      onEditDescription: state.isOwner ? _editDescription : null,
                     ),
                     const SizedBox(height: 24),
                     ClubActionsSection(
@@ -222,10 +217,8 @@ class _ClubPageState extends CustomState<ClubPage> {
                       billedFor: model.billedFor,
                       onOpenRating: _openRating,
                       onAddGame: state.isOwner ? _addNewGame : null,
-                      onRenewSubscription:
-                          state.isOwner && showBill ? _bill : null,
-                      onCustomColumns:
-                          state.isOwner ? _editCustomColumns : null,
+                      onRenewSubscription: state.isOwner && showBill ? _bill : null,
+                      onCustomColumns: state.isOwner ? _editCustomColumns : null,
                       onHideRating: state.isOwner ? _changeHideDate : null,
                     ),
                   ],
@@ -272,8 +265,7 @@ class _ClubPageState extends CustomState<ClubPage> {
     String? subtitle;
     if (billedFor != null) {
       final localeCode = Localizations.localeOf(context).languageCode;
-      final formatted =
-          DateFormat('dd MMMM yyyy', localeCode).format(billedFor);
+      final formatted = DateFormat('dd MMMM yyyy', localeCode).format(billedFor);
       subtitle = locale.billedFor(formatted);
     }
 

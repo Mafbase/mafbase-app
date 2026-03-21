@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       backgroundColor: theme.background1,
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.profile),
       ),
       body: BlocBuilder<ProfileBloc, ProfileState>(

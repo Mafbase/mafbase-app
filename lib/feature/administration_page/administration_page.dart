@@ -12,6 +12,7 @@ import 'package:seating_generator_web/domain/repositories/owners_repository.dart
 import 'package:seating_generator_web/feature/administration_page/administration_bloc.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/administration_page/widgets/add_owner_dialog.dart';
@@ -73,7 +74,9 @@ class _AdministrationPageState extends State<AdministrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(
+            onPressed: context.backOrGoToDefault(
+                (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
         title: Text(context.locale.ownersTitle),
         actions: [
           IconButton(

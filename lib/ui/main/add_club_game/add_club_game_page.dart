@@ -21,7 +21,9 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -291,7 +293,14 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
           children: [
             Scaffold(
               appBar: AppBar(
-                leading: BackButton(onPressed: context.backOrGoToDefault),
+                leading: BackButton(
+                  onPressed: context.backOrGoToDefault((c) {
+                    final bloc = c.read<AddClubGameBloc>();
+                    return bloc.clubId != null
+                        ? RatingPage.createClubLocation(clubId: bloc.clubId!, context: c)
+                        : TournamentPage.createLocation(context: c, tournamentId: bloc.tournamentId!);
+                  }),
+                ),
                 title: Text(state.clubName),
               ),
               body: GestureDetector(
@@ -325,7 +334,14 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: BackButton(onPressed: context.backOrGoToDefault),
+              leading: BackButton(
+                onPressed: context.backOrGoToDefault((c) {
+                  final bloc = c.read<AddClubGameBloc>();
+                  return bloc.clubId != null
+                      ? RatingPage.createClubLocation(clubId: bloc.clubId!, context: c)
+                      : TournamentPage.createLocation(context: c, tournamentId: bloc.tournamentId!);
+                }),
+              ),
               title: Text(state.clubName),
             ),
             body: Padding(

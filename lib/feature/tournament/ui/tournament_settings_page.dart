@@ -5,6 +5,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
@@ -104,7 +105,9 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
 
         return Scaffold(
           appBar: AppBar(
-            leading: BackButton(onPressed: context.backOrGoToDefault),
+            leading: BackButton(
+                onPressed: context.backOrGoToDefault(
+                    (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
             title: Text(context.locale.tournamentSettingsTitle),
             actions: [
               TournamentMenuAction(
@@ -128,15 +131,13 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                       children: [
                         CustomTextField(
                           hint: '6',
-                          validate: (value) =>
-                              int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                          validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
                           label: context.locale.defaultGamesLabel,
                           controller: defaultGamesController,
                         ),
                         const SizedBox(height: 16),
                         CustomTextField(
-                          validate: (value) =>
-                              int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                          validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
                           hint: '6',
                           label: context.locale.swissGamesLabel,
                           controller: swissGamesController,
@@ -197,8 +198,7 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                             Expanded(
                               child: CustomTextField(
                                 hint: '6',
-                                validate: (value) =>
-                                    int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                                validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
                                 label: context.locale.finalGamesLabel,
                                 controller: finalGamesController,
                               ),
@@ -279,11 +279,7 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                               defaultGames: int.parse(defaultGamesController.text),
                               swissGames: int.parse(swissGamesController.text),
                               finalGames: int.parse(finalGamesController.text),
-                              buckets: bucketsController.text
-                                  .split(';')
-                                  .map((e) => int.tryParse(e))
-                                  .nonNulls
-                                  .toList(),
+                              buckets: bucketsController.text.split(';').map((e) => int.tryParse(e)).nonNulls.toList(),
                               hideResult: hideResult,
                               ratingScheme: ratingScheme,
                               fantasyStatus: fantasyStatus,
@@ -297,7 +293,8 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                                   );
                             }
 
-                            context.backOrGoToDefault();
+                            context.backOrGoToDefault(
+                                (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))();
                           },
                         ),
                       ],

@@ -61,8 +61,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 200) {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200) {
       context.read<TournamentsBloc>().add(const TournamentsEvent.loadMore());
     }
   }
@@ -82,7 +81,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: InkWell(
           onTap: () => context.go('/'),
           child: Text(

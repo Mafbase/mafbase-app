@@ -86,7 +86,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
   Widget buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.loginAuth),
       ),
       body: BlocBuilder<LoginBloc, LoginState>(
@@ -249,7 +249,7 @@ class _LoginPageBodyState extends CustomState<LoginPageBody> {
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.loginAuth),
       ),
       body: BlocBuilder<LoginBloc, LoginState>(

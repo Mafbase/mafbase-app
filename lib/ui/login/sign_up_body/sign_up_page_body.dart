@@ -12,6 +12,7 @@ import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
@@ -77,7 +78,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
         title: Text(context.locale.loginRegister),
       ),
       body: BlocBuilder<SignUpBloc, SignUpState>(
@@ -203,7 +204,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
         title: Text(context.locale.loginRegister),
       ),
       body: BlocBuilder<SignUpBloc, SignUpState>(

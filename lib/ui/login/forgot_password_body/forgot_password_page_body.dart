@@ -10,6 +10,7 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_bloc.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_events.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_state.dart';
 import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
@@ -56,7 +57,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
         title: Text(context.locale.forgotPasswordTitle),
       ),
       body: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
@@ -151,7 +152,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
         title: Text(context.locale.forgotPasswordTitle),
       ),
       body: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(

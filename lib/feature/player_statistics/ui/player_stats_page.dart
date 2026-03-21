@@ -49,7 +49,7 @@ class PlayerStatsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.locale.playerStatsTitle),
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
       ),
       body: SafeArea(
         child: BlocBuilder<PlayerStatsBloc, PlayerStatsState>(

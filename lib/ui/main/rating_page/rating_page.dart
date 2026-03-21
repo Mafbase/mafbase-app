@@ -10,6 +10,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
@@ -287,7 +288,10 @@ class _RatingPageState extends CustomState<RatingPage> {
 
         return Scaffold(
           appBar: AppBar(
-            leading: BackButton(onPressed: context.backOrGoToDefault),
+            leading: BackButton(
+                onPressed: context.backOrGoToDefault((c) => widget.clubId != null
+                    ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
+                    : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!))),
             title: Text(state.clubName),
             actions: [
               if (state.rows.isNotEmpty)
@@ -377,7 +381,10 @@ class _RatingPageState extends CustomState<RatingPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: BackButton(onPressed: context.backOrGoToDefault),
+              leading: BackButton(
+                  onPressed: context.backOrGoToDefault((c) => widget.clubId != null
+                      ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
+                      : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!))),
               title: Text(state.clubName),
               actions: [
                 downloadRatingButton(),

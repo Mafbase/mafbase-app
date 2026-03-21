@@ -16,6 +16,8 @@ import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc.
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc_injector.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_event.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/add_player_to_theme_widget.dart';
@@ -237,7 +239,10 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(
+            onPressed: context.backOrGoToDefault((c) => widget.tournamentId != null
+                ? TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!)
+                : ProfilePage.createLocation(c))),
         title: Text(context.locale.photoThemesTitle),
         actions: [
           if (widget.tournamentId != null)

@@ -12,6 +12,7 @@ import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_partici
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_prediction_section.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_rating_section.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -100,7 +101,9 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault),
+          leading: BackButton(
+              onPressed: context.backOrGoToDefault(
+                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
           title: Text(context.locale.fantasy),
           actions: [
             BlocBuilder<FantasyBloc, FantasyState>(
@@ -177,7 +180,8 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
           return Scaffold(
             appBar: AppBar(
               leading: BackButton(
-                onPressed: context.backOrGoToDefault,
+                onPressed: context.backOrGoToDefault(
+                    (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId)),
               ),
               title: Text(context.locale.fantasy),
               actions: [

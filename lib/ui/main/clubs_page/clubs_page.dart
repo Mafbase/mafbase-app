@@ -56,7 +56,7 @@ class _ClubsPageState extends CustomState<ClubsPage> {
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault),
+          leading: BackButton(onPressed: context.backOrGoToDefault()),
           title: Text(context.locale.clubsHeader),
         ),
         body: BlocBuilder<ClubsBloc, ClubsState>(

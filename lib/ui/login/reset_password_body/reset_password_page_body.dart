@@ -10,6 +10,7 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/domain/models/password_reset_model.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_bloc.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_events.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_state.dart';
@@ -87,7 +88,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
         title: Text(context.locale.resetPasswordTitle),
       ),
       body: BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
@@ -191,7 +192,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault),
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
         title: Text(context.locale.resetPasswordTitle),
       ),
       body: BlocBuilder<ResetPasswordBloc, ResetPasswordState>(

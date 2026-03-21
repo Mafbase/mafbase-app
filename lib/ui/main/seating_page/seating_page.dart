@@ -15,6 +15,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.da
 import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/separations_section.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
@@ -268,7 +269,9 @@ class _SeatingPageState extends CustomState<SeatingPage>
     return BlocBuilder<TournamentPageBloc, TournamentPageState>(
       builder: (context, tournamentState) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault),
+          leading: BackButton(
+              onPressed: context.backOrGoToDefault(
+                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
           title: Text(
             tournamentState.isMyTournament ? context.locale.separateTitle : context.locale.seating,
           ),
@@ -315,7 +318,9 @@ class _SeatingPageState extends CustomState<SeatingPage>
     return BlocBuilder<TournamentPageBloc, TournamentPageState>(
       builder: (context, tournamentState) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault),
+          leading: BackButton(
+              onPressed: context.backOrGoToDefault(
+                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
           title: Text(
             tournamentState.isMyTournament ? context.locale.separateTitle : context.locale.seating,
           ),
@@ -338,8 +343,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
                         ? _buildEmptyState(tournamentState.isMyTournament)
                         : SeatingList(models: state.games),
                   ),
-                  if (tournamentState.isMyTournament)
-                    _buildDesktopBottomBar(tournamentState, state),
+                  if (tournamentState.isMyTournament) _buildDesktopBottomBar(tournamentState, state),
                 ],
               ),
               if (state.isLoading) const Positioned.fill(child: LoadingOverlayWidget()),
