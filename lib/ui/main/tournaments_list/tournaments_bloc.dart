@@ -27,9 +27,7 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     on<TournamentsEventLoadMore>(_onLoadMore);
     on<TournamentsEventSearch>(
       _onSearch,
-      transformer: (events, mapper) => events
-          .debounceTime(const Duration(milliseconds: 300))
-          .switchMap(mapper),
+      transformer: (events, mapper) => events.debounceTime(const Duration(milliseconds: 300)).switchMap(mapper),
     );
   }
 

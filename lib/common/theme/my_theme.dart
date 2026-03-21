@@ -75,8 +75,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
   final Color successColor;
   final Color hoverColor;
 
-  static MyTheme of(BuildContext context) =>
-      Theme.of(context).extension<MyTheme>()!;
+  static MyTheme of(BuildContext context) => Theme.of(context).extension<MyTheme>()!;
 
   factory MyTheme.light({required bool isMobile}) {
     const darkBlueColor = Color(0xFF1A2D42);

@@ -214,9 +214,7 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
           alignment: Alignment.topCenter,
-          child: expanded
-              ? item.contentBuilder(_collapse)
-              : const SizedBox.shrink(),
+          child: expanded ? item.contentBuilder(_collapse) : const SizedBox.shrink(),
         ),
       ],
     );

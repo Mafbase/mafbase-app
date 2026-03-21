@@ -73,15 +73,11 @@ class ClubDescriptionCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
             child: Text(
-              description?.isNotEmpty == true
-                  ? description!
-                  : context.locale.clubDescriptionEmpty,
+              description?.isNotEmpty == true ? description! : context.locale.clubDescriptionEmpty,
               style: TextStyle(
                 fontSize: 14,
                 height: 1.6,
-                color: description?.isNotEmpty == true
-                    ? theme.darkGreyColor
-                    : theme.hintColor,
+                color: description?.isNotEmpty == true ? theme.darkGreyColor : theme.hintColor,
               ),
             ),
           ),

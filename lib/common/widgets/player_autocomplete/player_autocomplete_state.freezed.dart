@@ -22,22 +22,19 @@ mixin _$PlayerAutoCompleteState {
   /// Create a copy of PlayerAutoCompleteState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PlayerAutoCompleteStateCopyWith<PlayerAutoCompleteState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $PlayerAutoCompleteStateCopyWith<PlayerAutoCompleteState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlayerAutoCompleteStateCopyWith<$Res> {
-  factory $PlayerAutoCompleteStateCopyWith(PlayerAutoCompleteState value,
-          $Res Function(PlayerAutoCompleteState) then) =
+  factory $PlayerAutoCompleteStateCopyWith(PlayerAutoCompleteState value, $Res Function(PlayerAutoCompleteState) then) =
       _$PlayerAutoCompleteStateCopyWithImpl<$Res, PlayerAutoCompleteState>;
   @useResult
   $Res call({List<PlayerModel> results, String? query});
 }
 
 /// @nodoc
-class _$PlayerAutoCompleteStateCopyWithImpl<$Res,
-        $Val extends PlayerAutoCompleteState>
+class _$PlayerAutoCompleteStateCopyWithImpl<$Res, $Val extends PlayerAutoCompleteState>
     implements $PlayerAutoCompleteStateCopyWith<$Res> {
   _$PlayerAutoCompleteStateCopyWithImpl(this._value, this._then);
 
@@ -68,11 +65,9 @@ class _$PlayerAutoCompleteStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$PlayerAutoCompleteStateImplCopyWith<$Res>
-    implements $PlayerAutoCompleteStateCopyWith<$Res> {
+abstract class _$$PlayerAutoCompleteStateImplCopyWith<$Res> implements $PlayerAutoCompleteStateCopyWith<$Res> {
   factory _$$PlayerAutoCompleteStateImplCopyWith(
-          _$PlayerAutoCompleteStateImpl value,
-          $Res Function(_$PlayerAutoCompleteStateImpl) then) =
+          _$PlayerAutoCompleteStateImpl value, $Res Function(_$PlayerAutoCompleteStateImpl) then) =
       __$$PlayerAutoCompleteStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -81,12 +76,10 @@ abstract class _$$PlayerAutoCompleteStateImplCopyWith<$Res>
 
 /// @nodoc
 class __$$PlayerAutoCompleteStateImplCopyWithImpl<$Res>
-    extends _$PlayerAutoCompleteStateCopyWithImpl<$Res,
-        _$PlayerAutoCompleteStateImpl>
+    extends _$PlayerAutoCompleteStateCopyWithImpl<$Res, _$PlayerAutoCompleteStateImpl>
     implements _$$PlayerAutoCompleteStateImplCopyWith<$Res> {
   __$$PlayerAutoCompleteStateImplCopyWithImpl(
-      _$PlayerAutoCompleteStateImpl _value,
-      $Res Function(_$PlayerAutoCompleteStateImpl) _then)
+      _$PlayerAutoCompleteStateImpl _value, $Res Function(_$PlayerAutoCompleteStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of PlayerAutoCompleteState
@@ -113,9 +106,7 @@ class __$$PlayerAutoCompleteStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlayerAutoCompleteStateImpl implements _PlayerAutoCompleteState {
-  const _$PlayerAutoCompleteStateImpl(
-      {final List<PlayerModel> results = const [], this.query})
-      : _results = results;
+  const _$PlayerAutoCompleteStateImpl({final List<PlayerModel> results = const [], this.query}) : _results = results;
 
   final List<PlayerModel> _results;
   @override
@@ -144,23 +135,20 @@ class _$PlayerAutoCompleteStateImpl implements _PlayerAutoCompleteState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_results), query);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_results), query);
 
   /// Create a copy of PlayerAutoCompleteState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PlayerAutoCompleteStateImplCopyWith<_$PlayerAutoCompleteStateImpl>
-      get copyWith => __$$PlayerAutoCompleteStateImplCopyWithImpl<
-          _$PlayerAutoCompleteStateImpl>(this, _$identity);
+  _$$PlayerAutoCompleteStateImplCopyWith<_$PlayerAutoCompleteStateImpl> get copyWith =>
+      __$$PlayerAutoCompleteStateImplCopyWithImpl<_$PlayerAutoCompleteStateImpl>(this, _$identity);
 }
 
 abstract class _PlayerAutoCompleteState implements PlayerAutoCompleteState {
-  const factory _PlayerAutoCompleteState(
-      {final List<PlayerModel> results,
-      final String? query}) = _$PlayerAutoCompleteStateImpl;
+  const factory _PlayerAutoCompleteState({final List<PlayerModel> results, final String? query}) =
+      _$PlayerAutoCompleteStateImpl;
 
   @override
   List<PlayerModel> get results;
@@ -171,6 +159,6 @@ abstract class _PlayerAutoCompleteState implements PlayerAutoCompleteState {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PlayerAutoCompleteStateImplCopyWith<_$PlayerAutoCompleteStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$PlayerAutoCompleteStateImplCopyWith<_$PlayerAutoCompleteStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

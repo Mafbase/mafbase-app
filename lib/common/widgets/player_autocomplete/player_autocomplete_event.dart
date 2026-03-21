@@ -4,9 +4,7 @@ part 'player_autocomplete_event.freezed.dart';
 
 @freezed
 class PlayerAutoCompleteEvent with _$PlayerAutoCompleteEvent {
-  const factory PlayerAutoCompleteEvent.search(String query) =
-      PlayerAutoCompleteEventSearch;
+  const factory PlayerAutoCompleteEvent.search(String query) = PlayerAutoCompleteEventSearch;
 
-  const factory PlayerAutoCompleteEvent.clear() =
-      PlayerAutoCompleteEventClear;
+  const factory PlayerAutoCompleteEvent.clear() = PlayerAutoCompleteEventClear;
 }

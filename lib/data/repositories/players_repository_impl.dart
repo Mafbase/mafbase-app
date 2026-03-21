@@ -38,18 +38,14 @@ class PlayersRepositoryImpl extends BaseRepository implements PlayersRepository 
     int limit = 5,
     int offset = 0,
   }) =>
-      SearchPlayersRequest(search: search, limit: limit, offset: offset)
-          .execute(client)
-          .then(
-            (value) =>
-                value.players.map((e) => PlayerModel.fromProto(e)).toList(),
+      SearchPlayersRequest(search: search, limit: limit, offset: offset).execute(client).then(
+            (value) => value.players.map((e) => PlayerModel.fromProto(e)).toList(),
           );
 
   @override
-  Future<List<PlayerModel>> getPlayersByIds(List<int> ids) =>
-      GetPlayersByIdsRequest(ids: ids).execute(client).then(
-            (value) => value.players.map((e) => PlayerModel.fromProto(e)).toList(),
-          );
+  Future<List<PlayerModel>> getPlayersByIds(List<int> ids) => GetPlayersByIdsRequest(ids: ids).execute(client).then(
+        (value) => value.players.map((e) => PlayerModel.fromProto(e)).toList(),
+      );
 
   @override
   Future<List<PlayerModel>> tournamentsPlayer(int tournamentId) {

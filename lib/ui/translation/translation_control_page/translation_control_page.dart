@@ -65,8 +65,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
                   Center(
                     child: CustomDropdown<int>(
                       initValue: state.game,
-                      mapToString: (index) =>
-                          index == null ? '' : index.toString(),
+                      mapToString: (index) => index == null ? '' : index.toString(),
                       items: List.generate(
                         state.totalGames,
                         (index) => index + 1,

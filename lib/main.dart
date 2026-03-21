@@ -163,4 +163,3 @@ class _MafbaseAppState extends State<MafbaseApp> {
         ),
       );
 }
-

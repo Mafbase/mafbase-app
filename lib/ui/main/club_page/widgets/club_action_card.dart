@@ -73,8 +73,7 @@ class ClubActionCard extends StatelessWidget {
                   ],
                 ),
               ),
-              if (showChevron)
-                Icon(Icons.chevron_right, size: 22, color: theme.hintColor),
+              if (showChevron) Icon(Icons.chevron_right, size: 22, color: theme.hintColor),
             ],
           ),
         ),

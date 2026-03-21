@@ -121,11 +121,8 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
 
   void onSubmit() {
     final player = _selectedPlayer?.copyWith(
-          mafbankNickname: _controllerMafbank.text.isEmpty
-              ? null
-              : _controllerMafbank.text,
-          fsmNickaname:
-              _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
+          mafbankNickname: _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,
+          fsmNickaname: _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
         ) ??
         PlayerModel(
           id: 0,

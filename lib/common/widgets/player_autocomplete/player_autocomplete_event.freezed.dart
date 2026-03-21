@@ -58,14 +58,12 @@ mixin _$PlayerAutoCompleteEvent {
 
 /// @nodoc
 abstract class $PlayerAutoCompleteEventCopyWith<$Res> {
-  factory $PlayerAutoCompleteEventCopyWith(PlayerAutoCompleteEvent value,
-          $Res Function(PlayerAutoCompleteEvent) then) =
+  factory $PlayerAutoCompleteEventCopyWith(PlayerAutoCompleteEvent value, $Res Function(PlayerAutoCompleteEvent) then) =
       _$PlayerAutoCompleteEventCopyWithImpl<$Res, PlayerAutoCompleteEvent>;
 }
 
 /// @nodoc
-class _$PlayerAutoCompleteEventCopyWithImpl<$Res,
-        $Val extends PlayerAutoCompleteEvent>
+class _$PlayerAutoCompleteEventCopyWithImpl<$Res, $Val extends PlayerAutoCompleteEvent>
     implements $PlayerAutoCompleteEventCopyWith<$Res> {
   _$PlayerAutoCompleteEventCopyWithImpl(this._value, this._then);
 
@@ -81,8 +79,7 @@ class _$PlayerAutoCompleteEventCopyWithImpl<$Res,
 /// @nodoc
 abstract class _$$PlayerAutoCompleteEventSearchImplCopyWith<$Res> {
   factory _$$PlayerAutoCompleteEventSearchImplCopyWith(
-          _$PlayerAutoCompleteEventSearchImpl value,
-          $Res Function(_$PlayerAutoCompleteEventSearchImpl) then) =
+          _$PlayerAutoCompleteEventSearchImpl value, $Res Function(_$PlayerAutoCompleteEventSearchImpl) then) =
       __$$PlayerAutoCompleteEventSearchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String query});
@@ -90,12 +87,10 @@ abstract class _$$PlayerAutoCompleteEventSearchImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$PlayerAutoCompleteEventSearchImplCopyWithImpl<$Res>
-    extends _$PlayerAutoCompleteEventCopyWithImpl<$Res,
-        _$PlayerAutoCompleteEventSearchImpl>
+    extends _$PlayerAutoCompleteEventCopyWithImpl<$Res, _$PlayerAutoCompleteEventSearchImpl>
     implements _$$PlayerAutoCompleteEventSearchImplCopyWith<$Res> {
   __$$PlayerAutoCompleteEventSearchImplCopyWithImpl(
-      _$PlayerAutoCompleteEventSearchImpl _value,
-      $Res Function(_$PlayerAutoCompleteEventSearchImpl) _then)
+      _$PlayerAutoCompleteEventSearchImpl _value, $Res Function(_$PlayerAutoCompleteEventSearchImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of PlayerAutoCompleteEvent
@@ -116,8 +111,7 @@ class __$$PlayerAutoCompleteEventSearchImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PlayerAutoCompleteEventSearchImpl
-    implements PlayerAutoCompleteEventSearch {
+class _$PlayerAutoCompleteEventSearchImpl implements PlayerAutoCompleteEventSearch {
   const _$PlayerAutoCompleteEventSearchImpl(this.query);
 
   @override
@@ -144,10 +138,8 @@ class _$PlayerAutoCompleteEventSearchImpl
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PlayerAutoCompleteEventSearchImplCopyWith<
-          _$PlayerAutoCompleteEventSearchImpl>
-      get copyWith => __$$PlayerAutoCompleteEventSearchImplCopyWithImpl<
-          _$PlayerAutoCompleteEventSearchImpl>(this, _$identity);
+  _$$PlayerAutoCompleteEventSearchImplCopyWith<_$PlayerAutoCompleteEventSearchImpl> get copyWith =>
+      __$$PlayerAutoCompleteEventSearchImplCopyWithImpl<_$PlayerAutoCompleteEventSearchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -212,37 +204,31 @@ class _$PlayerAutoCompleteEventSearchImpl
   }
 }
 
-abstract class PlayerAutoCompleteEventSearch
-    implements PlayerAutoCompleteEvent {
-  const factory PlayerAutoCompleteEventSearch(final String query) =
-      _$PlayerAutoCompleteEventSearchImpl;
+abstract class PlayerAutoCompleteEventSearch implements PlayerAutoCompleteEvent {
+  const factory PlayerAutoCompleteEventSearch(final String query) = _$PlayerAutoCompleteEventSearchImpl;
 
   String get query;
 
   /// Create a copy of PlayerAutoCompleteEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PlayerAutoCompleteEventSearchImplCopyWith<
-          _$PlayerAutoCompleteEventSearchImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$PlayerAutoCompleteEventSearchImplCopyWith<_$PlayerAutoCompleteEventSearchImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$PlayerAutoCompleteEventClearImplCopyWith<$Res> {
   factory _$$PlayerAutoCompleteEventClearImplCopyWith(
-          _$PlayerAutoCompleteEventClearImpl value,
-          $Res Function(_$PlayerAutoCompleteEventClearImpl) then) =
+          _$PlayerAutoCompleteEventClearImpl value, $Res Function(_$PlayerAutoCompleteEventClearImpl) then) =
       __$$PlayerAutoCompleteEventClearImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$PlayerAutoCompleteEventClearImplCopyWithImpl<$Res>
-    extends _$PlayerAutoCompleteEventCopyWithImpl<$Res,
-        _$PlayerAutoCompleteEventClearImpl>
+    extends _$PlayerAutoCompleteEventCopyWithImpl<$Res, _$PlayerAutoCompleteEventClearImpl>
     implements _$$PlayerAutoCompleteEventClearImplCopyWith<$Res> {
   __$$PlayerAutoCompleteEventClearImplCopyWithImpl(
-      _$PlayerAutoCompleteEventClearImpl _value,
-      $Res Function(_$PlayerAutoCompleteEventClearImpl) _then)
+      _$PlayerAutoCompleteEventClearImpl _value, $Res Function(_$PlayerAutoCompleteEventClearImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of PlayerAutoCompleteEvent
@@ -251,8 +237,7 @@ class __$$PlayerAutoCompleteEventClearImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PlayerAutoCompleteEventClearImpl
-    implements PlayerAutoCompleteEventClear {
+class _$PlayerAutoCompleteEventClearImpl implements PlayerAutoCompleteEventClear {
   const _$PlayerAutoCompleteEventClearImpl();
 
   @override
@@ -262,9 +247,7 @@ class _$PlayerAutoCompleteEventClearImpl
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PlayerAutoCompleteEventClearImpl);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$PlayerAutoCompleteEventClearImpl);
   }
 
   @override
@@ -334,6 +317,5 @@ class _$PlayerAutoCompleteEventClearImpl
 }
 
 abstract class PlayerAutoCompleteEventClear implements PlayerAutoCompleteEvent {
-  const factory PlayerAutoCompleteEventClear() =
-      _$PlayerAutoCompleteEventClearImpl;
+  const factory PlayerAutoCompleteEventClear() = _$PlayerAutoCompleteEventClearImpl;
 }

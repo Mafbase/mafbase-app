@@ -64,40 +64,39 @@ class FantasyPredictionSection extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               if (!currentGameInfo.canParticipate) ...[
-                Builder(builder: (context) {
-                  final isAuthorized = context.read<AuthNotifier>().value
-                      is AuthNotifierAuthorizedModel;
-                  final message = isAuthorized
-                      ? context.locale.fantasyNotParticipating
-                      : context.locale.fantasyNotAuthorized;
-                  return Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.orange.withValues(alpha: 0.1),
-                      border: Border.all(color: Colors.orange),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.info_outline,
-                          color: Colors.orange,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            message,
-                            style:
-                                MyTheme.of(context).defaultTextStyle.copyWith(
-                                      color: Colors.orange.shade700,
-                                    ),
+                Builder(
+                  builder: (context) {
+                    final isAuthorized = context.read<AuthNotifier>().value is AuthNotifierAuthorizedModel;
+                    final message =
+                        isAuthorized ? context.locale.fantasyNotParticipating : context.locale.fantasyNotAuthorized;
+                    return Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.withValues(alpha: 0.1),
+                        border: Border.all(color: Colors.orange),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.info_outline,
+                            color: Colors.orange,
+                            size: 20,
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              message,
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    color: Colors.orange.shade700,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ] else if (currentGameInfo.canPredict) ...[
                 Text(
                   context.locale.fantasyYourPrediction,
