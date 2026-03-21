@@ -474,7 +474,7 @@ class _DesktopTournamentCard extends StatelessWidget {
   }
 
   Widget _buildMetadata(BuildContext context, MyTheme theme, dynamic locale) {
-    final dateRange = _formatDateRange(tournament.dateStart, tournament.dateEnd);
+    final dateRange = _formatDateRange(context, tournament.dateStart, tournament.dateEnd);
     final metaStyle = TextStyle(fontSize: 13, color: theme.greyColor);
     final iconColor = theme.greyColor;
 
@@ -515,8 +515,8 @@ class _DesktopTournamentCard extends StatelessWidget {
     }
   }
 
-  String _formatDateRange(DateTime start, DateTime end) {
-    final fmt = DateFormat('d MMM', 'ru');
+  String _formatDateRange(BuildContext context, DateTime start, DateTime end) {
+    final fmt = DateFormat('d MMM', Localizations.localeOf(context).languageCode);
     if (start.year == end.year && start.month == end.month && start.day == end.day) {
       return fmt.format(start);
     }

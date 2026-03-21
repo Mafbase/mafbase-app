@@ -188,28 +188,38 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     final hasChange = await router.showPlayerProfileDialog(player: event.player);
     if (hasChange) {
       emit(state.copyWith(isLoading: true));
-      final players = await _getTournamentsPlayersInteractor.run(
-        tournamentId: tournamentId,
-      );
-      emit(state.copyWith(isLoading: false, tournamentPlayers: players));
+      try {
+        final players = await _getTournamentsPlayersInteractor.run(
+          tournamentId: tournamentId,
+        );
+        emit(state.copyWith(isLoading: false, tournamentPlayers: players));
+      } catch (e) {
+        emit(state.copyWith(isLoading: false));
+        rethrow;
+      }
     }
   }
 
   _onDeletePlayer(TournamentPageEventDeletePlayer event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _deletePlayerInteractor.run(
-      tournamentId: tournamentId,
-      playerModel: event.player,
-    );
-    final players = await _getTournamentsPlayersInteractor.run(
-      tournamentId: tournamentId,
-    );
-    emit(
-      state.copyWith(
-        isLoading: false,
-        tournamentPlayers: players,
-      ),
-    );
+    try {
+      await _deletePlayerInteractor.run(
+        tournamentId: tournamentId,
+        playerModel: event.player,
+      );
+      final players = await _getTournamentsPlayersInteractor.run(
+        tournamentId: tournamentId,
+      );
+      emit(
+        state.copyWith(
+          isLoading: false,
+          tournamentPlayers: players,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(isLoading: false));
+      rethrow;
+    }
   }
 
   Future _onAddPlayerTapped(
@@ -222,12 +232,17 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     }
     router.openPlayersList(tournamentId: tournamentId);
     emit(state.copyWith(isLoading: true));
-    await _addPlayerInteractor.run(
-      tournamentId: tournamentId,
-      playerModel: player,
-    );
-    await _updatePlayers(emit);
-    emit(state.copyWith(isLoading: false));
+    try {
+      await _addPlayerInteractor.run(
+        tournamentId: tournamentId,
+        playerModel: player,
+      );
+      await _updatePlayers(emit);
+      emit(state.copyWith(isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(isLoading: false));
+      rethrow;
+    }
   }
 
   Future _onUpdateSettings(
@@ -259,19 +274,24 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     Emitter<TournamentPageState> emit,
   ) async {
     emit(state.copyWith(isLoading: true));
-    await Future.wait([
-      _updatePlayers(emit),
-      _getSettingsInteractor.run(tournamentId: tournamentId).then((settings) {
-        emit(state.copyWith(settings: settings));
-      }),
-      _photoThemeRepository.getThemes().then((themes) {
-        emit(state.copyWith(photoThemes: themes));
-      }).onError((_, __) {}),
-    ]);
-    if (state.activePhotoThemeId != null) {
-      await _loadThemePhotos(state.activePhotoThemeId!, emit);
+    try {
+      await Future.wait([
+        _updatePlayers(emit),
+        _getSettingsInteractor.run(tournamentId: tournamentId).then((settings) {
+          emit(state.copyWith(settings: settings));
+        }),
+        _photoThemeRepository.getThemes().then((themes) {
+          emit(state.copyWith(photoThemes: themes));
+        }).onError((_, __) {}),
+      ]);
+      if (state.activePhotoThemeId != null) {
+        await _loadThemePhotos(state.activePhotoThemeId!, emit);
+      }
+      emit(state.copyWith(isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(isLoading: false));
+      rethrow;
     }
-    emit(state.copyWith(isLoading: false));
   }
 
   Future<void> _loadThemePhotos(int themeId, Emitter<TournamentPageState> emit) async {

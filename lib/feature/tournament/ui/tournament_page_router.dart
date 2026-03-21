@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
@@ -74,7 +75,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
     _context.push(
       WebViewScreen.createLocation(
         url: url,
-        title: 'Оплата',
+        title: _context.locale.payment,
         context: _context,
       ),
     );

@@ -102,8 +102,10 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
+            onPressed: context.backOrGoToDefault(
+              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+            ),
+          ),
           title: Text(context.locale.fantasy),
           actions: [
             BlocBuilder<FantasyBloc, FantasyState>(
@@ -181,7 +183,8 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
             appBar: AppBar(
               leading: BackButton(
                 onPressed: context.backOrGoToDefault(
-                    (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId)),
+                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+                ),
               ),
               title: Text(context.locale.fantasy),
               actions: [

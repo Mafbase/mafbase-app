@@ -54,8 +54,10 @@ class _CustomColumnsEditorPageState extends State<CustomColumnsEditorPage> {
           appBar: AppBar(
             title: Text(context.locale.customColumns),
             leading: BackButton(
-                onPressed: context.backOrGoToDefault(
-                    (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}))),
+              onPressed: context.backOrGoToDefault(
+                (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}),
+              ),
+            ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _showEditDialog(context),

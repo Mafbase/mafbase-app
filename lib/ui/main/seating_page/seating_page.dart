@@ -270,8 +270,10 @@ class _SeatingPageState extends CustomState<SeatingPage>
       builder: (context, tournamentState) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
+            onPressed: context.backOrGoToDefault(
+              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+            ),
+          ),
           title: Text(
             tournamentState.isMyTournament ? context.locale.separateTitle : context.locale.seating,
           ),
@@ -319,8 +321,10 @@ class _SeatingPageState extends CustomState<SeatingPage>
       builder: (context, tournamentState) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
+            onPressed: context.backOrGoToDefault(
+              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+            ),
+          ),
           title: Text(
             tournamentState.isMyTournament ? context.locale.separateTitle : context.locale.seating,
           ),

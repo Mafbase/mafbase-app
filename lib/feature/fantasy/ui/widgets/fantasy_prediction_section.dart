@@ -66,7 +66,7 @@ class FantasyPredictionSection extends StatelessWidget {
               if (!currentGameInfo.canParticipate) ...[
                 Builder(
                   builder: (context) {
-                    final isAuthorized = context.read<AuthNotifier>().value is AuthNotifierAuthorizedModel;
+                    final isAuthorized = context.watch<AuthNotifier>().value is AuthNotifierAuthorizedModel;
                     final message =
                         isAuthorized ? context.locale.fantasyNotParticipating : context.locale.fantasyNotAuthorized;
                     return Container(

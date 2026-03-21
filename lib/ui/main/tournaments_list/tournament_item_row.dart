@@ -108,7 +108,7 @@ class TournamentItemRow extends StatelessWidget {
 
   Widget _buildMetadata(BuildContext context, MyTheme theme) {
     final locale = context.locale;
-    final dateRange = _formatDateRange(tournamentModel.dateStart, tournamentModel.dateEnd);
+    final dateRange = _formatDateRange(context, tournamentModel.dateStart, tournamentModel.dateEnd);
     final metaStyle = TextStyle(fontSize: 12, color: theme.greyColor);
     final iconColor = theme.greyColor;
 
@@ -153,8 +153,8 @@ class TournamentItemRow extends StatelessWidget {
     }
   }
 
-  String _formatDateRange(DateTime start, DateTime end) {
-    final fmt = DateFormat('d MMM', 'ru');
+  String _formatDateRange(BuildContext context, DateTime start, DateTime end) {
+    final fmt = DateFormat('d MMM', Localizations.localeOf(context).languageCode);
     if (start.year == end.year && start.month == end.month && start.day == end.day) {
       return fmt.format(start);
     }

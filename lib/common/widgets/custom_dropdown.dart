@@ -67,9 +67,9 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
                 size: 16,
               ),
               style: theme.defaultTextStyle.copyWith(
-                color: widget.readOnly ? theme.greyColor : Colors.black,
+                color: widget.readOnly ? theme.greyColor : theme.textColor,
               ),
-              dropdownColor: Colors.white,
+              dropdownColor: theme.background2,
               borderRadius: BorderRadius.circular(8),
               elevation: 4,
               menuMaxHeight: 240,

@@ -34,6 +34,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
     on<ProfileEventSetUserProfile>(_setUserProfile);
     on<ProfileEventLoadSubscription>(_loadSubscription);
     on<ProfileEventBillSubscription>(_billSubscription);
+    on<ProfileEventReset>(_onReset);
 
     _authListener = () {
       final model = _authNotifier.value;
@@ -41,8 +42,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
         add(const ProfileEvent.loadUserProfile());
         add(const ProfileEvent.loadSubscription());
       } else if (model is AuthNotifierUnauthorizedModel) {
-        // ignore: invalid_use_of_visible_for_testing_member
-        emit(const ProfileState());
+        add(const ProfileEvent.reset());
       }
     };
     _authNotifier.addListener(_authListener);
@@ -149,6 +149,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
     } finally {
       emit(state.copyWith(isBilling: false));
     }
+  }
+
+  void _onReset(ProfileEventReset event, Emitter emit) {
+    emit(const ProfileState());
   }
 
   _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {

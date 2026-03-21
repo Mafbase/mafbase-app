@@ -75,8 +75,10 @@ class _AdministrationPageState extends State<AdministrationPage> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-            onPressed: context.backOrGoToDefault(
-                (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
+          onPressed: context.backOrGoToDefault(
+            (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+          ),
+        ),
         title: Text(context.locale.ownersTitle),
         actions: [
           IconButton(

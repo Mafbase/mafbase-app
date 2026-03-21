@@ -55,6 +55,11 @@ class TournamentPage extends StatefulWidget {
           GoRoute(
             name: 'tournament_page',
             path: '/tournament/:id',
+            redirect: (context, state) {
+              final id = int.tryParse(state.pathParameters['id'] ?? '');
+              if (id == null) return '/tournament';
+              return null;
+            },
             routes: [
               SeatingPage.route,
               SeatingInsertingPage.route,
@@ -131,7 +136,6 @@ class _TournamentPageState extends CustomState<TournamentPage>
         Expanded(child: widget.child),
         BlocBuilder<TournamentPageBloc, TournamentPageState>(
           builder: (context, state) {
-            context.watch<SeatingPageBloc>();
             final sections = TournamentMenuBuilder.buildSections(
               context,
               state,

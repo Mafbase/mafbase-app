@@ -62,7 +62,7 @@ class _TranslationPanelState extends State<TranslationPanel> {
 
         final data = snapshot.data!;
         final root = kIsWeb && !kDebugMode
-            ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 433 ? ':${Uri.base.port}' : ''}'
+            ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 443 ? ':${Uri.base.port}' : ''}'
             : 'https://mafbase.ru';
 
         final defaultDesign =

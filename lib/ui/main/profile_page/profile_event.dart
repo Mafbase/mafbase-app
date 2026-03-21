@@ -19,4 +19,6 @@ class ProfileEvent with _$ProfileEvent {
     int days,
     String redirectPath,
   ) = ProfileEventBillSubscription;
+
+  const factory ProfileEvent.reset() = ProfileEventReset;
 }

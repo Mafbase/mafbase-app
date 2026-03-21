@@ -72,8 +72,10 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
   Widget buildDesktop(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                  (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}))),
+            onPressed: context.backOrGoToDefault(
+              (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}),
+            ),
+          ),
           title: const Text('Игры клуба'),
         ),
         body: BlocBuilder<ClubGamesBloc, ClubGamesState>(
@@ -114,8 +116,10 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             leading: BackButton(
-                onPressed: context.backOrGoToDefault(
-                    (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}))),
+              onPressed: context.backOrGoToDefault(
+                (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}),
+              ),
+            ),
             title: const Text('Игры клуба'),
           ),
           body: state.loading

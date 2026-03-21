@@ -60,7 +60,8 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
             children: [
               FormField<int>(
                 initialValue: widget.playersCount,
-                validator: (value) => (value != null) && value % 10 == 0 && value > 0 ? null : 'Некорректное значение',
+                validator: (value) =>
+                    (value != null) && value % 10 == 0 && value > 0 ? null : context.locale.invalidValue,
                 onSaved: (value) => count = value ?? count,
                 builder: (field) {
                   return Wrap(
@@ -118,7 +119,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
               const SizedBox(height: 20),
               FormField<bool>(
                 initialValue: widget.billedTranslation,
-                validator: (value) => value == null ? null : 'Некорректное значение',
+                validator: (value) => value != null ? null : context.locale.invalidValue,
                 onSaved: (value) => enableTranslation = value ?? enableTranslation,
                 builder: (field) {
                   return Wrap(

@@ -35,13 +35,18 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     final data = await router.openCreateTournamentDialog();
     if (data != null) {
       emit(state.copyWith(isLoading: true));
-      final id = await _createTournamentInteractor.run(
-        name: data.name,
-        range: data.range,
-      );
+      try {
+        final id = await _createTournamentInteractor.run(
+          name: data.name,
+          range: data.range,
+        );
 
-      router.openTournament(id);
-      emit(state.copyWith(isLoading: false));
+        router.openTournament(id);
+        emit(state.copyWith(isLoading: false));
+      } catch (e) {
+        emit(state.copyWith(isLoading: false));
+        rethrow;
+      }
     }
   }
 
@@ -74,20 +79,23 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     if (state.isLoadingMore || !state.hasMore) return;
 
     emit(state.copyWith(isLoadingMore: true));
+    try {
+      final newTournaments = await _getTournamentsInteractor(
+        limit: _limit,
+        offset: state.tournaments.length,
+        search: state.searchQuery.isNotEmpty ? state.searchQuery : null,
+      );
 
-    final newTournaments = await _getTournamentsInteractor(
-      limit: _limit,
-      offset: state.tournaments.length,
-      search: state.searchQuery.isNotEmpty ? state.searchQuery : null,
-    );
-
-    emit(
-      state.copyWith(
-        tournaments: [...state.tournaments, ...newTournaments],
-        isLoadingMore: false,
-        hasMore: newTournaments.length >= _limit,
-      ),
-    );
+      emit(
+        state.copyWith(
+          tournaments: [...state.tournaments, ...newTournaments],
+          isLoadingMore: false,
+          hasMore: newTournaments.length >= _limit,
+        ),
+      );
+    } finally {
+      emit(state.copyWith(isLoadingMore: false));
+    }
   }
 
   _onSearch(

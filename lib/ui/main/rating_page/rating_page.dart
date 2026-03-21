@@ -197,11 +197,11 @@ class _RatingPageState extends CustomState<RatingPage> {
   getTextFrom(RatingTableStyle style) {
     switch (style) {
       case RatingTableStyle.full:
-        return 'Рейтинг';
+        return context.locale.ratingTab;
       case RatingTableStyle.stats:
-        return 'Винрейт';
+        return context.locale.winrateTab;
       case RatingTableStyle.score:
-        return 'Баллы';
+        return context.locale.scoreTab;
       case RatingTableStyle.custom:
         return context.locale.customColumns;
     }
@@ -289,9 +289,12 @@ class _RatingPageState extends CustomState<RatingPage> {
         return Scaffold(
           appBar: AppBar(
             leading: BackButton(
-                onPressed: context.backOrGoToDefault((c) => widget.clubId != null
+              onPressed: context.backOrGoToDefault(
+                (c) => widget.clubId != null
                     ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
-                    : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!))),
+                    : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!),
+              ),
+            ),
             title: Text(state.clubName),
             actions: [
               if (state.rows.isNotEmpty)
@@ -382,9 +385,12 @@ class _RatingPageState extends CustomState<RatingPage> {
           return Scaffold(
             appBar: AppBar(
               leading: BackButton(
-                  onPressed: context.backOrGoToDefault((c) => widget.clubId != null
+                onPressed: context.backOrGoToDefault(
+                  (c) => widget.clubId != null
                       ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
-                      : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!))),
+                      : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!),
+                ),
+              ),
               title: Text(state.clubName),
               actions: [
                 downloadRatingButton(),
@@ -572,11 +578,11 @@ class _RatingPageState extends CustomState<RatingPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})',
+          context.locale.citizenWinrate(citizenWinRate, model.citizenWins, model.games),
         ),
         const SizedBox(height: 4),
         Text(
-          'Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})',
+          context.locale.mafiaWinrate(mafiaWinRate, model.mafiaWins, model.games),
         ),
       ],
     );

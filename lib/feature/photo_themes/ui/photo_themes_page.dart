@@ -240,9 +240,12 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-            onPressed: context.backOrGoToDefault((c) => widget.tournamentId != null
+          onPressed: context.backOrGoToDefault(
+            (c) => widget.tournamentId != null
                 ? TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!)
-                : ProfilePage.createLocation(c))),
+                : ProfilePage.createLocation(c),
+          ),
+        ),
         title: Text(context.locale.photoThemesTitle),
         actions: [
           if (widget.tournamentId != null)

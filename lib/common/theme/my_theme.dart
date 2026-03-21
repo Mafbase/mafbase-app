@@ -37,6 +37,11 @@ class MyTheme extends ThemeExtension<MyTheme> {
     required this.cardShadowColor,
     required this.successColor,
     required this.hoverColor,
+    required this.statusActiveColor,
+    required this.statusActiveBgColor,
+    required this.statusBillingColor,
+    required this.statusBillingBgColor,
+    required this.statusEndedColor,
   });
 
   final Color background1;
@@ -74,6 +79,11 @@ class MyTheme extends ThemeExtension<MyTheme> {
   final Color cardShadowColor;
   final Color successColor;
   final Color hoverColor;
+  final Color statusActiveColor;
+  final Color statusActiveBgColor;
+  final Color statusBillingColor;
+  final Color statusBillingBgColor;
+  final Color statusEndedColor;
 
   static MyTheme of(BuildContext context) => Theme.of(context).extension<MyTheme>()!;
 
@@ -141,6 +151,11 @@ class MyTheme extends ThemeExtension<MyTheme> {
       cardShadowColor: const Color(0x141A2D42),
       successColor: const Color(0xFF4CAF50),
       hoverColor: const Color(0xFFF0F0F0),
+      statusActiveColor: const Color(0xFF3D9E76),
+      statusActiveBgColor: const Color(0xFF66CCA7),
+      statusBillingColor: const Color(0xFFC4A600),
+      statusBillingBgColor: const Color(0xFFFFE600),
+      statusEndedColor: const Color(0xFF8E9199),
     );
   }
 
@@ -200,6 +215,11 @@ class MyTheme extends ThemeExtension<MyTheme> {
       cardShadowColor: Colors.black.withValues(alpha: 0.3),
       successColor: const Color(0xFF4CAF50),
       hoverColor: const Color(0xFF1E3045),
+      statusActiveColor: const Color(0xFF3D9E76),
+      statusActiveBgColor: const Color(0xFF66CCA7),
+      statusBillingColor: const Color(0xFFC4A600),
+      statusBillingBgColor: const Color(0xFFFFE600),
+      statusEndedColor: const Color(0xFF8E9199),
     );
   }
 
@@ -240,6 +260,11 @@ class MyTheme extends ThemeExtension<MyTheme> {
     Color? cardShadowColor,
     Color? successColor,
     Color? hoverColor,
+    Color? statusActiveColor,
+    Color? statusActiveBgColor,
+    Color? statusBillingColor,
+    Color? statusBillingBgColor,
+    Color? statusEndedColor,
   }) =>
       MyTheme(
         background1: background1 ?? this.background1,
@@ -277,6 +302,11 @@ class MyTheme extends ThemeExtension<MyTheme> {
         cardShadowColor: cardShadowColor ?? this.cardShadowColor,
         successColor: successColor ?? this.successColor,
         hoverColor: hoverColor ?? this.hoverColor,
+        statusActiveColor: statusActiveColor ?? this.statusActiveColor,
+        statusActiveBgColor: statusActiveBgColor ?? this.statusActiveBgColor,
+        statusBillingColor: statusBillingColor ?? this.statusBillingColor,
+        statusBillingBgColor: statusBillingBgColor ?? this.statusBillingBgColor,
+        statusEndedColor: statusEndedColor ?? this.statusEndedColor,
       );
 
   @override
@@ -318,6 +348,11 @@ class MyTheme extends ThemeExtension<MyTheme> {
       cardShadowColor: Color.lerp(cardShadowColor, other.cardShadowColor, t)!,
       successColor: Color.lerp(successColor, other.successColor, t)!,
       hoverColor: Color.lerp(hoverColor, other.hoverColor, t)!,
+      statusActiveColor: Color.lerp(statusActiveColor, other.statusActiveColor, t)!,
+      statusActiveBgColor: Color.lerp(statusActiveBgColor, other.statusActiveBgColor, t)!,
+      statusBillingColor: Color.lerp(statusBillingColor, other.statusBillingColor, t)!,
+      statusBillingBgColor: Color.lerp(statusBillingBgColor, other.statusBillingBgColor, t)!,
+      statusEndedColor: Color.lerp(statusEndedColor, other.statusEndedColor, t)!,
     );
   }
 }

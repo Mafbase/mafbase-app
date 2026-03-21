@@ -756,5 +756,37 @@
   "tournamentsSearchHint": "Search tournaments...",
   "@tournamentsSearchHint": {},
   "tournamentsSearchEmpty": "No tournaments found",
-  "@tournamentsSearchEmpty": {}
+  "@tournamentsSearchEmpty": {},
+  "ratingTab": "Rating",
+  "@ratingTab": {},
+  "winrateTab": "Win rate",
+  "@winrateTab": {},
+  "scoreTab": "Score",
+  "@scoreTab": {},
+  "citizenWinrate": "Citizen win rate: {rate}% ({wins}/{games})",
+  "@citizenWinrate": {
+    "placeholders": {
+      "rate": {"type": "int"},
+      "wins": {"type": "int"},
+      "games": {"type": "int"}
+    }
+  },
+  "mafiaWinrate": "Mafia win rate: {rate}% ({wins}/{games})",
+  "@mafiaWinrate": {
+    "placeholders": {
+      "rate": {"type": "int"},
+      "wins": {"type": "int"},
+      "games": {"type": "int"}
+    }
+  },
+  "payment": "Payment",
+  "@payment": {},
+  "gameNotification": "Game notification",
+  "@gameNotification": {},
+  "invalidNumberFormat": "Invalid number format",
+  "@invalidNumberFormat": {},
+  "invalidBucketsFormat": "Invalid buckets format",
+  "@invalidBucketsFormat": {},
+  "invalidValue": "Invalid value",
+  "@invalidValue": {}
 }

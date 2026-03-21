@@ -919,5 +919,37 @@
   "seatingReplaceWarning": "Новая рассадка заменит старую",
   "@seatingReplaceWarning": {},
   "notificationNoGamesWarning": "Укажите количество игр в настройках турнира",
-  "@notificationNoGamesWarning": {}
+  "@notificationNoGamesWarning": {},
+  "ratingTab": "Рейтинг",
+  "@ratingTab": {},
+  "winrateTab": "Винрейт",
+  "@winrateTab": {},
+  "scoreTab": "Баллы",
+  "@scoreTab": {},
+  "citizenWinrate": "Винрейт мирных жителей: {rate}% ({wins}/{games})",
+  "@citizenWinrate": {
+    "placeholders": {
+      "rate": {"type": "int"},
+      "wins": {"type": "int"},
+      "games": {"type": "int"}
+    }
+  },
+  "mafiaWinrate": "Винрейт мафии: {rate}% ({wins}/{games})",
+  "@mafiaWinrate": {
+    "placeholders": {
+      "rate": {"type": "int"},
+      "wins": {"type": "int"},
+      "games": {"type": "int"}
+    }
+  },
+  "payment": "Оплата",
+  "@payment": {},
+  "gameNotification": "Оповещение об игре",
+  "@gameNotification": {},
+  "invalidNumberFormat": "Неверный формат числа",
+  "@invalidNumberFormat": {},
+  "invalidBucketsFormat": "Неверный формат корзин",
+  "@invalidBucketsFormat": {},
+  "invalidValue": "Некорректное значение",
+  "@invalidValue": {}
 }

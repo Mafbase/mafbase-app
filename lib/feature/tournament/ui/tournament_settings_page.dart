@@ -56,16 +56,29 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
   final finalGamesController = TextEditingController();
   final swissGamesController = TextEditingController();
   final bucketsController = TextEditingController();
-  late bool hideResult;
-  late RatingScheme? ratingScheme;
-  late FantasyStatus? fantasyStatus;
+  bool hideResult = false;
+  RatingScheme? ratingScheme;
+  FantasyStatus? fantasyStatus;
 
   final formState = GlobalKey<FormState>();
-  bool _initialized = false;
+  late final VoidCallback _controllersListener;
 
-  void _initFromSettings(TournamentSettingsModel settings) {
-    if (_initialized) return;
-    _initialized = true;
+  @override
+  void initState() {
+    super.initState();
+    _controllersListener = () => setState(() {});
+    Listenable.merge([
+      defaultGamesController,
+      finalGamesController,
+      swissGamesController,
+      bucketsController,
+    ]).addListener(_controllersListener);
+
+    final settings = context.read<TournamentPageBloc>().state.settings;
+    _updateFromSettings(settings);
+  }
+
+  void _updateFromSettings(TournamentSettingsModel settings) {
     defaultGamesController.text = settings.defaultGames.toString();
     finalGamesController.text = settings.finalGames.toString();
     swissGamesController.text = settings.swissGames.toString();
@@ -73,19 +86,6 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
     hideResult = settings.hideResult;
     ratingScheme = settings.ratingScheme;
     fantasyStatus = settings.fantasyStatus;
-
-    Listenable.merge([
-      defaultGamesController,
-      finalGamesController,
-      swissGamesController,
-      bucketsController,
-    ]).addListener(() {
-      setState(() {});
-    });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {});
-    });
   }
 
   @override
@@ -99,15 +99,20 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TournamentPageBloc, TournamentPageState>(
+    return BlocConsumer<TournamentPageBloc, TournamentPageState>(
+      listenWhen: (prev, curr) => prev.settings != curr.settings,
+      listener: (context, state) {
+        _updateFromSettings(state.settings);
+        setState(() {});
+      },
       builder: (context, state) {
-        _initFromSettings(state.settings);
-
         return Scaffold(
           appBar: AppBar(
             leading: BackButton(
-                onPressed: context.backOrGoToDefault(
-                    (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))),
+              onPressed: context.backOrGoToDefault(
+                (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+              ),
+            ),
             title: Text(context.locale.tournamentSettingsTitle),
             actions: [
               TournamentMenuAction(
@@ -131,13 +136,15 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                       children: [
                         CustomTextField(
                           hint: '6',
-                          validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                          validate: (value) =>
+                              int.tryParse(value ?? '') == null ? context.locale.invalidNumberFormat : null,
                           label: context.locale.defaultGamesLabel,
                           controller: defaultGamesController,
                         ),
                         const SizedBox(height: 16),
                         CustomTextField(
-                          validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                          validate: (value) =>
+                              int.tryParse(value ?? '') == null ? context.locale.invalidNumberFormat : null,
                           hint: '6',
                           label: context.locale.swissGamesLabel,
                           controller: swissGamesController,
@@ -186,7 +193,7 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                                           },
                                         ) ??
                                         true)
-                                    ? 'Неверный формат корзин'
+                                    ? context.locale.invalidBucketsFormat
                                     : null;
                               },
                             ),
@@ -198,7 +205,8 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                             Expanded(
                               child: CustomTextField(
                                 hint: '6',
-                                validate: (value) => int.tryParse(value ?? '') == null ? 'Неверный формат числа' : null,
+                                validate: (value) =>
+                                    int.tryParse(value ?? '') == null ? context.locale.invalidNumberFormat : null,
                                 label: context.locale.finalGamesLabel,
                                 controller: finalGamesController,
                               ),
@@ -294,7 +302,8 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                             }
 
                             context.backOrGoToDefault(
-                                (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId))();
+                              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+                            )();
                           },
                         ),
                       ],

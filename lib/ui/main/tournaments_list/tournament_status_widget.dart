@@ -42,9 +42,9 @@ class TournamentStatusWidget extends StatelessWidget {
   Color _backgroundColor(TournamentStatus status, MyTheme theme) {
     switch (status) {
       case TournamentStatus.active:
-        return const Color(0xFF66CCA7).withValues(alpha: 0.15);
+        return theme.statusActiveBgColor.withValues(alpha: 0.15);
       case TournamentStatus.waitForBilling:
-        return const Color(0xFFFFE600).withValues(alpha: 0.15);
+        return theme.statusBillingBgColor.withValues(alpha: 0.15);
       case TournamentStatus.ended:
         return theme.greyColor.withValues(alpha: 0.15);
     }
@@ -53,11 +53,11 @@ class TournamentStatusWidget extends StatelessWidget {
   Color _textColor(TournamentStatus status, MyTheme theme) {
     switch (status) {
       case TournamentStatus.active:
-        return const Color(0xFF3D9E76);
+        return theme.statusActiveColor;
       case TournamentStatus.waitForBilling:
-        return const Color(0xFFC4A600);
+        return theme.statusBillingColor;
       case TournamentStatus.ended:
-        return const Color(0xFF8E9199);
+        return theme.statusEndedColor;
     }
   }
 }
