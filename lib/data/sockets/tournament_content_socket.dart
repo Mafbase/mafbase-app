@@ -9,7 +9,7 @@ class TournamentContentSocket extends BaseSocket {
 }
 
 String getScheme() {
-  if (kIsWeb) {
+  if (kIsWeb && kReleaseMode) {
     return Uri.base.scheme == 'https' ? 'wss' : 'ws';
   }
 
@@ -17,7 +17,7 @@ String getScheme() {
 }
 
 String getHost() {
-  if (kIsWeb) {
+  if (kIsWeb && kReleaseMode) {
     return "${Uri.base.host}:${Uri.base.port}";
   }
 
