@@ -57,7 +57,6 @@ class _BillPlanDialogState extends State<BillPlanDialog> {
                       style: theme.defaultTextStyle.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: theme.darkBlueColor,
                       ),
                     ),
                   ),
@@ -209,7 +208,6 @@ class _OptionCard extends StatelessWidget {
                   style: theme.defaultTextStyle.copyWith(
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
-                    color: theme.darkBlueColor,
                   ),
                 ),
                 if (option.discountPercent > 0) ...[

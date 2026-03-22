@@ -681,10 +681,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                                   ),
                                 );
                           },
-                          child: Text(
-                            context.locale.addGame,
-                            style: MyTheme.of(context).textBtnTextStyle,
-                          ),
+                          child: Text(context.locale.addGame),
                         ),
                       ),
                     if (widget.readOnly && widget.gameId != null && !state.isTournament && state.canEdit)

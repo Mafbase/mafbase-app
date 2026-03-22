@@ -53,7 +53,8 @@ class CustomButton extends StatelessWidget {
             if (states.contains(WidgetState.pressed)) {
               return isRed ? theme.btnRedColor1 : theme.btnColor1;
             }
-            return isRed ? theme.btnRedColor : theme.darkGreyColor;
+
+            return isRed ? theme.btnRedColor : theme.darkBlueColor;
           },
         ),
       ),

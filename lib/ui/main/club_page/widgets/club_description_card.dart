@@ -35,19 +35,17 @@ class ClubDescriptionCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 16, 12, 0),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.description_outlined,
                   size: 18,
-                  color: theme.darkBlueColor,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     context.locale.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: theme.darkBlueColor,
                     ),
                   ),
                 ),

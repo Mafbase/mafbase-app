@@ -114,7 +114,6 @@ class ClubHeroCard extends StatelessWidget {
           style: TextStyle(
             fontSize: titleSize,
             fontWeight: FontWeight.w700,
-            color: theme.darkBlueColor,
           ),
         ),
         if (clubModel.city != null) ...[

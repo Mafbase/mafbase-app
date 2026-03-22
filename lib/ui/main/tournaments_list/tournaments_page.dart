@@ -172,7 +172,6 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
         builder: (context, authModel, _) {
           if (authModel is! AuthNotifierAuthorizedModel) return const SizedBox.shrink();
           return FloatingActionButton(
-            backgroundColor: theme.redColor,
             elevation: 10,
             onPressed: () {
               context.read<TournamentsBloc>().add(const TournamentsEvent.create());
@@ -207,10 +206,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
               context.read<MainBloc>().add(const MainEvent.onProfilePressed());
             },
             hoverColor: theme.background1.withValues(alpha: 0.2),
-            icon: Icon(
-              Icons.person,
-              color: theme.background1,
-            ),
+            icon: const Icon(Icons.person),
           ),
         ),
       ),
@@ -336,7 +332,6 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
         builder: (context, authModel, _) {
           if (authModel is! AuthNotifierAuthorizedModel) return const SizedBox.shrink();
           return FloatingActionButton.large(
-            backgroundColor: theme.redColor,
             elevation: 10,
             onPressed: () {
               context.read<TournamentsBloc>().add(const TournamentsEvent.create());
@@ -423,10 +418,9 @@ class _DesktopTournamentCard extends StatelessWidget {
                     children: [
                       Text(
                         tournament.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: theme.darkBlueColor,
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -450,10 +444,9 @@ class _DesktopTournamentCard extends StatelessWidget {
               children: [
                 Text(
                   '${tournament.billedPlayers}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
-                    color: theme.darkBlueColor,
                   ),
                 ),
                 Text(

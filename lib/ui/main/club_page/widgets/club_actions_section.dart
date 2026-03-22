@@ -35,7 +35,7 @@ class ClubActionsSection extends StatelessWidget {
     final cards = <Widget>[
       ClubActionCard(
         icon: Icons.leaderboard_outlined,
-        iconBackgroundColor: theme.darkBlueColor,
+        iconBackgroundColor: theme.textColor,
         title: locale.clubActionOpenRating,
         subtitle: locale.clubActionOpenRatingSubtitle,
         onTap: onOpenRating,
@@ -112,7 +112,7 @@ class ClubActionsSection extends StatelessWidget {
     final cards = <Widget>[
       ClubActionCard(
         icon: Icons.leaderboard_outlined,
-        iconBackgroundColor: theme.darkBlueColor,
+        iconBackgroundColor: context.theme.textColor,
         title: locale.clubActionOpenRating,
         subtitle: locale.clubActionOpenRatingSubtitle,
         onTap: onOpenRating,

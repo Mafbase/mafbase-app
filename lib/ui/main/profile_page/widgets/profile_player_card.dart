@@ -43,7 +43,7 @@ class ProfilePlayerCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 10),
             child: Row(
               children: [
-                Icon(Icons.person_outline, size: 18, color: theme.darkBlueColor),
+                Icon(Icons.person_outline, size: 18, color: theme.textColor),
                 const SizedBox(width: 8),
                 Text(
                   locale.profilePlayerCardTitle,
@@ -74,8 +74,8 @@ class ProfilePlayerCard extends StatelessWidget {
     final changeButton = OutlinedButton(
       onPressed: onChangePlayer,
       style: OutlinedButton.styleFrom(
-        foregroundColor: theme.darkBlueColor,
-        side: BorderSide(color: theme.darkBlueColor),
+        foregroundColor: theme.textColor,
+        side: BorderSide(color: theme.textColor),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),

@@ -115,7 +115,7 @@ class _ActionTile extends StatelessWidget {
               child: Text(
                 label,
                 style: theme.defaultTextStyle.copyWith(
-                  color: labelColor ?? theme.darkBlueColor,
+                  color: labelColor,
                   fontSize: labelFontSize ?? 14,
                   fontWeight: FontWeight.w500,
                 ),

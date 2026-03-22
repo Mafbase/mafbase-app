@@ -126,12 +126,15 @@ class TournamentSubscriptionSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 14, 8, 10),
             child: Row(
               children: [
-                Icon(Icons.card_membership, size: 18, color: theme.darkBlueColor),
+                Icon(
+                  Icons.card_membership,
+                  size: 18,
+                  color: context.theme.textColor,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -173,7 +176,6 @@ class TournamentSubscriptionSection extends StatelessWidget {
             child: Text(
               plan.subscriptionType != null ? _resolveTypeText(context, plan.subscriptionType!) : '—',
               style: theme.defaultTextStyle.copyWith(
-                color: theme.darkBlueColor,
                 fontWeight: FontWeight.w500,
                 fontSize: 14,
               ),
@@ -189,7 +191,7 @@ class TournamentSubscriptionSection extends StatelessWidget {
               child: Text(
                 DateFormat('dd MMMM yyyy', localeCode).format(plan.billedFor!),
                 style: theme.defaultTextStyle.copyWith(
-                  color: isExpired ? theme.redColor : theme.darkBlueColor,
+                  color: isExpired ? theme.redColor : null,
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                 ),

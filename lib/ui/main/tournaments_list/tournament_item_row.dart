@@ -55,10 +55,9 @@ class TournamentItemRow extends StatelessWidget {
                     children: [
                       Text(
                         tournamentModel.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: theme.darkBlueColor,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

@@ -70,10 +70,9 @@ class SingleClubRow extends StatelessWidget {
                 children: [
                   Text(
                     model.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: theme.darkBlueColor,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

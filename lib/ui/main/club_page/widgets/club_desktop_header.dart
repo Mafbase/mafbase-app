@@ -36,7 +36,6 @@ class ClubDesktopHeader extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
-                color: theme.darkBlueColor,
               ),
             ),
           ),

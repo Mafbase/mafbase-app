@@ -59,10 +59,9 @@ class ClubActionCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: theme.darkBlueColor,
                       ),
                     ),
                     const SizedBox(height: 2),
