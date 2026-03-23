@@ -14,8 +14,7 @@ class GomafiaInputDialog extends StatefulWidget {
   @override
   State<GomafiaInputDialog> createState() => _GomafiaInputDialogState();
 
-  static Future<int?> show(BuildContext context, [String? gomafiaUrl]) =>
-      showDialog(
+  static Future<int?> show(BuildContext context, [String? gomafiaUrl]) => showDialog(
         context: context,
         builder: (context) => GomafiaInputDialog(
           gomafiaUrl: gomafiaUrl,
@@ -28,7 +27,7 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
 
   @override
   void initState() {
-    controller.text = widget.gomafiaUrl ?? "";
+    controller.text = widget.gomafiaUrl ?? '';
     super.initState();
   }
 
@@ -38,8 +37,7 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
     super.dispose();
   }
 
-  bool get validate => RegExp('https:\\/\\/gomafia.pro\\/tournament\\/\\d+')
-      .hasMatch(controller.value.text);
+  bool get validate => RegExp('https:\\/\\/gomafia.pro\\/tournament\\/\\d+').hasMatch(controller.value.text);
 
   @override
   Widget build(BuildContext context) => CustomDialog(

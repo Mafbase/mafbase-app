@@ -22,8 +22,10 @@ class OwnerRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const SizedBox(width: 8,),
-          Text("$email"),
+          const SizedBox(
+            width: 8,
+          ),
+          Text('$email'),
           const Spacer(),
           if (onDelete != null)
             Center(

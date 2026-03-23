@@ -4,11 +4,6 @@ import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
-const BorderSide _side = BorderSide(
-  color: Colors.black26,
-  width: 1,
-);
-
 class GameResultWidget extends StatefulWidget {
   final GameResultModel model;
   static const baseWidth = 400.0;
@@ -30,6 +25,11 @@ class GameResultWidget extends StatefulWidget {
 class _GameResultWidgetState extends State<GameResultWidget> {
   @override
   Widget build(BuildContext context) {
+    final BorderSide side = BorderSide(
+      color: context.theme.textColor.withValues(alpha: .26),
+      width: 1,
+    );
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(
         textScaler: TextScaler.linear(
@@ -39,8 +39,8 @@ class _GameResultWidgetState extends State<GameResultWidget> {
       child: Container(
         width: widget.width,
         height: widget.height,
-        decoration: const BoxDecoration(
-          border: Border(left: _side, right: _side, top: _side, bottom: _side),
+        decoration: BoxDecoration(
+          border: Border(left: side, right: side, top: side, bottom: side),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -54,18 +54,15 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                     Expanded(
                       child: Container(
                         height: double.infinity,
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            right: _side,
-                          ),
+                        decoration: BoxDecoration(
+                          border: Border(right: side),
                         ),
                         child: Center(
                           child: Text(
-                            "№",
-                            style:
-                                MyTheme.of(context).defaultTextStyle.copyWith(
-                                      color: const Color(0xFF979A9D),
-                                    ),
+                            '№',
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                  color: const Color(0xFF979A9D),
+                                ),
                           ),
                         ),
                       ),
@@ -76,13 +73,12 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                         children: [
                           if (widget.model.table != 0 && widget.model.game != 0)
                             Text(
-                              "${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}",
+                              '${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  MyTheme.of(context).defaultTextStyle.copyWith(
-                                        color: const Color(0xFF979A9D),
-                                      ),
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    color: const Color(0xFF979A9D),
+                                  ),
                             ),
                           Expanded(
                             child: _GameResultWidget(
@@ -134,22 +130,27 @@ class _PlayerRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BorderSide side = BorderSide(
+      color: context.theme.textColor.withValues(alpha: .26),
+      width: 1,
+    );
+
     return SelectionArea(
       child: Container(
-        decoration: const BoxDecoration(
-          border: Border(top: _side),
+        decoration: BoxDecoration(
+          border: Border(top: side),
         ),
         child: Row(
           children: [
             Expanded(
               child: Container(
                 height: double.infinity,
-                decoration: const BoxDecoration(
-                  border: Border(right: _side),
+                decoration: BoxDecoration(
+                  border: Border(right: side),
                 ),
                 padding: const EdgeInsets.all(4),
                 child: Text(
-                  "$place",
+                  '$place',
                   style: context.theme.defaultTextStyle,
                 ),
               ),
@@ -158,8 +159,8 @@ class _PlayerRowWidget extends StatelessWidget {
               flex: 3,
               child: Container(
                 height: double.infinity,
-                decoration: const BoxDecoration(
-                  border: Border(right: _side),
+                decoration: BoxDecoration(
+                  border: Border(right: side),
                 ),
                 padding: const EdgeInsets.all(4),
                 child: Text(
@@ -183,7 +184,7 @@ class _PlayerRowWidget extends StatelessWidget {
                   height: double.infinity,
                   padding: const EdgeInsets.all(4),
                   child: Text(
-                    "$score",
+                    '$score',
                     style: context.theme.defaultTextStyle,
                   ),
                 ),
@@ -207,13 +208,18 @@ class _RoleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BorderSide side = BorderSide(
+      color: context.theme.textColor.withValues(alpha: .26),
+      width: 1,
+    );
+
     return Visibility(
       visible: role != null,
       child: Container(
         height: double.infinity,
         width: 130,
         decoration: BoxDecoration(
-          border: const Border(right: _side),
+          border: Border(right: side),
           color: background(context),
         ),
         child: Center(
@@ -243,23 +249,21 @@ class _RoleWidget extends StatelessWidget {
   }
 
   TextStyle textStyle(BuildContext context) {
-    return status == null
-        ? MyTheme.of(context).defaultTextStyle
-        : MyTheme.of(context).btnTextStyle;
+    return status == null ? MyTheme.of(context).defaultTextStyle : MyTheme.of(context).btnTextStyle;
   }
 
   String get text {
     switch (role) {
       case PlayerRole.citizen:
-        return "Мир";
+        return 'Мир';
       case PlayerRole.don:
-        return "Дон";
+        return 'Дон';
       case PlayerRole.maf:
-        return "Маф";
+        return 'Маф';
       case PlayerRole.sheriff:
-        return "Шер";
+        return 'Шер';
     }
-    return "";
+    return '';
   }
 }
 

@@ -23,8 +23,7 @@ class SeatingPageDialog extends StatefulWidget {
         builder: (context) => create(players),
       );
 
-  static Widget create(List<String> players) =>
-      BlocProvider<SeatingPageDialogBloc>(
+  static Widget create(List<String> players) => BlocProvider<SeatingPageDialogBloc>(
         create: (context) => SeatingPageDialogBloc(
           SeatingPageDialogState(notFound: players),
           RepositoryFactory.of(context).playersRepository,
@@ -38,9 +37,7 @@ class SeatingPageDialog extends StatefulWidget {
 }
 
 class _SeatingPageDialogState extends State<SeatingPageDialog>
-    with
-        EffectListener<SeatingPageDialogEffect, SeatingPageDialogState,
-            SeatingPageDialogBloc, SeatingPageDialog> {
+    with EffectListener<SeatingPageDialogEffect, SeatingPageDialogState, SeatingPageDialogBloc, SeatingPageDialog> {
   late final FocusNode focusNode = FocusNode();
   late final TextEditingController controller = TextEditingController();
 
@@ -54,8 +51,7 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocConsumer<SeatingPageDialogBloc, SeatingPageDialogState>(
+  Widget build(BuildContext context) => BlocConsumer<SeatingPageDialogBloc, SeatingPageDialogState>(
         listenWhen: (prev, curr) => prev.loading && !curr.loading,
         listener: (context, state) {
           controller.text = state.incorrectPlayer ?? '';
@@ -99,7 +95,6 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                           NicknameField(
                             controller: controller,
                             focusNode: focusNode,
-                            availablePlayers: state.players,
                             readOnly: false,
                             hint: context.locale.nicknameHint,
                             down: true,
@@ -116,14 +111,12 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                               );
                             },
                           ),
-                          if (selectedPlayer?.fsmNickaname
-                              case String fsmNickname)
+                          if (selectedPlayer?.fsmNickaname case String fsmNickname)
                             Text.rich(
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                    text:
-                                        context.locale.seatingCurrentFsmNickname,
+                                    text: context.locale.seatingCurrentFsmNickname,
                                   ),
                                   TextSpan(
                                     text: fsmNickname,
@@ -162,6 +155,5 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
     on<SeatingPageDialogEffectSuccess>(_success);
   }
 
-  void _success(SeatingPageDialogEffectSuccess effect) =>
-      Navigator.pop(context, true);
+  void _success(SeatingPageDialogEffectSuccess effect) => Navigator.pop(context, true);
 }

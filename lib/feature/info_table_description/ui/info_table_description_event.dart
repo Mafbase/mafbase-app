@@ -20,6 +20,13 @@ class InfoTableDescriptionEventAdd implements InfoTableDescriptionEvent {
   const InfoTableDescriptionEventAdd(this.table);
 }
 
+class InfoTableDescriptionEventAddWithDescription implements InfoTableDescriptionEvent {
+  final int table;
+  final String description;
+
+  const InfoTableDescriptionEventAddWithDescription({required this.table, required this.description});
+}
+
 class InfoTableDescriptionEventChange implements InfoTableDescriptionEvent {
   final int table;
   final String description;
@@ -30,6 +37,5 @@ class InfoTableDescriptionEventChange implements InfoTableDescriptionEvent {
 class InfoTableDescriptionEventSave implements InfoTableDescriptionEvent {
   final Completer<void> completer;
 
-  InfoTableDescriptionEventSave({Completer<void>? completer})
-      : completer = completer ?? Completer<void>();
+  InfoTableDescriptionEventSave({Completer<void>? completer}) : completer = completer ?? Completer<void>();
 }

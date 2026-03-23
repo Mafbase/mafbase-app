@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -7,9 +8,15 @@ extension BuildContextLocaleExt on BuildContext {
   AppLocalizations get locale => AppLocalizations.of(this)!;
 
   MyTheme get theme => MyTheme.of(this);
+
+  VoidCallback backOrGoToDefault([String Function(BuildContext)? fallback]) => () => canPop()
+      ? pop()
+      : Navigator.canPop(this)
+          ? Navigator.pop(this)
+          : go(fallback?.call(this) ?? '/');
 }
 
-final dateFormatForRequests = DateFormat("yyyy-MM-dd");
+final dateFormatForRequests = DateFormat('yyyy-MM-dd');
 
 String get sentryUrl => String.fromCharCodes([
       104,
@@ -114,9 +121,7 @@ class Pair<F, S> {
 
   @override
   bool operator ==(Object other) {
-    return other is Pair<F, S> &&
-        other.first == first &&
-        other.second == second;
+    return other is Pair<F, S> && other.first == first && other.second == second;
   }
 
   @override

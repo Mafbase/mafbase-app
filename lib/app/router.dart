@@ -8,10 +8,16 @@ import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
 import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
-import 'package:seating_generator_web/ui/main/main_page.dart';
+import 'package:seating_generator_web/ui/app_shell/app_shell.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
+import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
+import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
@@ -38,7 +44,7 @@ class AppRouter {
         if (authNotifier.value is AuthNotifierLoadingModel) {
           try {
             final authRepository = scope.repositoryFactory.authRepository;
-            final pushTokenService = scope.pushTokenService;
+            final pushTokenService = scope.serviceProvider.pushTokenService;
 
             // Получаем FCM токен и deviceId если разрешение уже выдано
             final fcmToken = await pushTokenService.getFcmToken();
@@ -90,15 +96,41 @@ class AppRouter {
       ),
       ShellRoute(
         builder: (context, state, child) {
-          return BlocProvider(
-            key: const Key("MainBlocProvider"),
-            create: (context) => MainBloc(
-              MainPageRouterImpl(context),
-            ),
-            child: MainPage(child: child),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                key: const Key('MainBlocProvider'),
+                create: (context) => MainBloc(
+                  MainPageRouterImpl(context),
+                ),
+              ),
+              BlocProvider<ProfileBloc>(
+                create: (context) {
+                  final scope = DependencyScope.of(context);
+                  final logoutInteractor = LogoutInteractor(
+                    scope.storageFactory.tokenStorage,
+                    scope.authNotifier,
+                    scope.storageFactory.credentialStorage,
+                  );
+                  return ProfileBloc(
+                    logoutInteractor,
+                    DeleteProfileInteractor(
+                      logoutInteractor,
+                      scope.repositoryFactory.profileRepository,
+                    ),
+                    scope.repositoryFactory.profileRepository,
+                    CreatePlayerInteractor(scope.repositoryFactory.playersRepository),
+                    scope.authNotifier,
+                  );
+                },
+              ),
+            ],
+            child: AppShell(child: child),
           );
         },
         routes: [
+          TournamentPage.createRoute(),
+          ClubPage.route,
           RailWrapper.route,
           LoginPageBody.route,
           ProfilePage.route,
@@ -112,7 +144,7 @@ class AppRouter {
       return Scaffold(
         body: Center(
           child: Text(
-            "errorRoute: ${state.toString()}",
+            'errorRoute: ${state.toString()}',
           ),
         ),
       );

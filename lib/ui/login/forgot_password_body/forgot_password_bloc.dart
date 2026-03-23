@@ -13,8 +13,7 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvents, ForgotPasswordState>
   final AuthRepository _authRepository;
   final ForgotPasswordPageRouter router;
 
-  ForgotPasswordBloc(this._authRepository, this.router)
-      : super(ForgotPasswordState()) {
+  ForgotPasswordBloc(this._authRepository, this.router) : super(ForgotPasswordState()) {
     on<Submit>(_onSubmit);
     on<BackButtonTapped>(_onBackButtonTapped);
   }

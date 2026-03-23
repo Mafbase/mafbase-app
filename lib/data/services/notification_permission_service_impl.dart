@@ -28,7 +28,7 @@ class NotificationPermissionServiceImpl with WidgetsBindingObserver implements N
               Stream.value(null),
               _pushTokenService.tokenUpdatedStream,
             ])
-          : Stream.empty(),
+          : const Stream.empty(),
     )
         .listen((status) async {
       await _pushTokenService.sendPushTokenToServer();

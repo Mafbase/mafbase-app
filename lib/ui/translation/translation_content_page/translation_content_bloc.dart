@@ -5,8 +5,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_event.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 
-class TranslationContentBloc
-    extends Bloc<TranslationContentEvent, TranslationContentState> {
+class TranslationContentBloc extends Bloc<TranslationContentEvent, TranslationContentState> {
   final TranslationContentBlocParams params;
   late final _socket = TournamentContentSocket(
     table: params.table,
@@ -46,7 +45,6 @@ class TranslationContentBloc
       ),
     );
   }
-
 
   @override
   Future<void> close() {

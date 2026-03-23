@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/get_my_tournaments_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
@@ -33,11 +33,11 @@ class RailWrapper extends StatefulWidget {
       return MultiBlocProvider(
         providers: [
           BlocProvider<TournamentsBloc>(
-            key: const Key("TournamentsBlocProvider"),
+            key: const Key('TournamentsBlocProvider'),
             create: (context) {
               final repos = RepositoryFactory.of(context);
               return TournamentsBloc(
-                GetMyTournamentsInteractor(repos.tournamentsRepository),
+                GetTournamentsInteractor(repos.tournamentsRepository),
                 CreateTournamentInteractor(repos.tournamentsRepository),
                 TournamentsRouterImpl(context),
               );
@@ -61,8 +61,6 @@ class RailWrapper extends StatefulWidget {
 }
 
 class _RailWrapperState extends CustomState<RailWrapper> {
-  double railWidth = 100;
-
   void onDestinationSelected(int index) => widget.shell.goBranch(
         index,
         initialLocation: widget.shell.currentIndex == index,
@@ -96,59 +94,6 @@ class _RailWrapperState extends CustomState<RailWrapper> {
 
   @override
   Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<MainBloc, MainState>(
-      builder: (BuildContext context, state) {
-        return Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: railWidth,
-              right: 0,
-              bottom: 0,
-              child: widget.shell,
-            ),
-            Positioned(
-              top: 0,
-              left: 0,
-              bottom: 0,
-              width: railWidth,
-              child: NavigationRail(
-                useIndicator: true,
-                unselectedIconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                selectedIconTheme: const IconThemeData(
-                  color: Colors.white,
-                ),
-                indicatorColor: context.theme.darkBlueColor,
-                backgroundColor: context.theme.darkGreyColor,
-                labelType: NavigationRailLabelType.all,
-                elevation: 5,
-                onDestinationSelected: onDestinationSelected,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.table_chart_outlined),
-                    label: Text(
-                      context.locale.tournamentsListTitle,
-                      style: const TextStyle()
-                          .copyWith(color: context.theme.background1),
-                    ),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.people_alt_outlined),
-                    label: Text(
-                      context.locale.clubsHeader,
-                      style: const TextStyle()
-                          .copyWith(color: context.theme.background1),
-                    ),
-                  ),
-                ],
-                selectedIndex: widget.shell.currentIndex,
-              ),
-            ),
-          ],
-        );
-      },
-    );
+    return widget.shell;
   }
 }

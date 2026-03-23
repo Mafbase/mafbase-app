@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
@@ -46,5 +45,5 @@ class LoginInteractor extends BaseInteractor {
       });
 
   @override
-  String get interactorName => "LoginInteractor";
+  String get interactorName => 'LoginInteractor';
 }

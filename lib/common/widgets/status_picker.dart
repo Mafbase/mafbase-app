@@ -35,13 +35,10 @@ class _StatusPickerState extends State<StatusPicker> {
               onTap: widget.readOnly
                   ? null
                   : () => onChange(
-                        widget.playerStatus == PlayerStatus.deleted
-                            ? PlayerStatus.alive
-                            : PlayerStatus.deleted,
+                        widget.playerStatus == PlayerStatus.deleted ? PlayerStatus.alive : PlayerStatus.deleted,
                       ),
               child: AnimatedOpacity(
-                opacity:
-                    widget.playerStatus == PlayerStatus.deleted ? 1.0 : 0.3,
+                opacity: widget.playerStatus == PlayerStatus.deleted ? 1.0 : 0.3,
                 duration: duration,
                 child: SvgPicture.asset(
                   AppAssets.deletedStatus,
@@ -58,9 +55,7 @@ class _StatusPickerState extends State<StatusPicker> {
               onTap: widget.readOnly
                   ? null
                   : () => onChange(
-                        widget.playerStatus == PlayerStatus.killed
-                            ? PlayerStatus.alive
-                            : PlayerStatus.killed,
+                        widget.playerStatus == PlayerStatus.killed ? PlayerStatus.alive : PlayerStatus.killed,
                       ),
               child: AnimatedOpacity(
                 opacity: widget.playerStatus == PlayerStatus.killed ? 1.0 : 0.3,
@@ -77,12 +72,11 @@ class _StatusPickerState extends State<StatusPicker> {
           mainAxisSize: MainAxisSize.min,
           children: [
             InkWell(
-              onTap:
-                  widget.readOnly ? null : () => onChange(
-                    widget.playerStatus == PlayerStatus.voted
-                        ? PlayerStatus.alive
-                        : PlayerStatus.voted,
-                  ),
+              onTap: widget.readOnly
+                  ? null
+                  : () => onChange(
+                        widget.playerStatus == PlayerStatus.voted ? PlayerStatus.alive : PlayerStatus.voted,
+                      ),
               child: AnimatedOpacity(
                 opacity: widget.playerStatus == PlayerStatus.voted ? 1.0 : 0.3,
                 duration: duration,

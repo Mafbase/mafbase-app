@@ -9,7 +9,7 @@ class EditTournamentGameRequest extends BaseRequest {
     required int gameId,
     required ClubGameResult result,
   }) : super(
-          "/api/tournaments/$tournamentId/editGame/$gameId",
+          '/api/tournaments/$tournamentId/editGame/$gameId',
           data: result,
         );
 

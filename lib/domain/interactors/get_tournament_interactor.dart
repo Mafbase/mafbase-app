@@ -8,7 +8,7 @@ class GetTournamentInteractor extends BaseInteractor {
   GetTournamentInteractor(this._tournamentsRepository);
 
   @override
-  String get interactorName => "GetTournamentInteractor";
+  String get interactorName => 'GetTournamentInteractor';
 
   Future<TournamentModel> call({required int tournamentId}) => wrap(
         () => _tournamentsRepository.getTournament(tournamentId: tournamentId),

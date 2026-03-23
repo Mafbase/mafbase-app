@@ -81,8 +81,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
       _checkClubInteractor(_clubId),
     ]);
 
-    final hideDate =
-        isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
+    final hideDate = isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
 
     emit(
       state.copyWith(
@@ -123,8 +122,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     await _clubRepository.updateDescription(
       clubId: _clubId,
       club: model.copyWith(
-        description:
-            event.description.trim().isEmpty ? null : event.description.trim(),
+        description: event.description.trim().isEmpty ? null : event.description.trim(),
       ),
     );
     add(const ClubEvent.pageOpened());

@@ -8,17 +8,13 @@ import 'package:seating_generator_web/feature/custom_columns/domain/models/custo
 import 'package:seating_generator_web/feature/custom_columns/domain/models/formula_validation_result.dart';
 import 'package:seating_generator_web/feature/custom_columns/domain/repository/custom_columns_repository.dart';
 
-class CustomColumnsRepositoryImpl extends BaseRepository
-    implements CustomColumnsRepository {
+class CustomColumnsRepositoryImpl extends BaseRepository implements CustomColumnsRepository {
   CustomColumnsRepositoryImpl(super.client);
 
   @override
   Future<List<CustomColumnModel>> getColumns({required int clubId}) async {
-    final response =
-        await GetCustomColumnsRequest(clubId: clubId).execute(client);
-    return response.columns
-        .map((e) => CustomColumnModel.fromProto(e))
-        .toList();
+    final response = await GetCustomColumnsRequest(clubId: clubId).execute(client);
+    return response.columns.map((e) => CustomColumnModel.fromProto(e)).toList();
   }
 
   @override

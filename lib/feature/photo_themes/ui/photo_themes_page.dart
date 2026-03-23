@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
@@ -16,12 +16,15 @@ import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc.
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc_injector.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_event.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_state.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_event.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/add_player_to_theme_widget.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_card.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_create_dialog.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_player_cell.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -43,7 +46,7 @@ class PhotoThemesPage extends StatefulWidget {
     return context.namedLocation(
       _tournamentName,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
     );
   }
@@ -55,9 +58,9 @@ class PhotoThemesPage extends StatefulWidget {
     path: 'photo-themes',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final tournamentId = int.parse(state.pathParameters['id']!);
       return PhotoThemesBlocInjector(
-        key: ValueKey("photoThemes_$tournamentId"),
+        key: ValueKey('photoThemes_$tournamentId'),
         tournamentId: tournamentId,
         child: PhotoThemesPage(tournamentId: tournamentId),
       );
@@ -68,8 +71,8 @@ class PhotoThemesPage extends StatefulWidget {
     path: '/photo-themes',
     name: _profileName,
     pageBuilder: (context, state) => FadeTransitionPage(
-      child: PhotoThemesBlocInjector(
-        child: const PhotoThemesPage(),
+      child: const PhotoThemesBlocInjector(
+        child: PhotoThemesPage(),
       ),
     ),
   );
@@ -234,126 +237,132 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
 
   @override
   Widget? buildMobile(BuildContext context) {
-    return BlocBuilder<PhotoThemesBloc, PhotoThemesState>(
-      builder: (context, state) {
-        final selectedTheme = _findSelectedTheme(state);
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: context.backOrGoToDefault(
+            (c) => widget.tournamentId != null
+                ? TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!)
+                : ProfilePage.createLocation(c),
+          ),
+        ),
+        title: Text(context.locale.photoThemesTitle),
+        actions: [
+          if (widget.tournamentId != null)
+            TournamentMenuAction(
+              tournamentId: widget.tournamentId!,
+              openDrawer: () => Scaffold.of(context).openEndDrawer(),
+            ),
+        ],
+      ),
+      body: BlocBuilder<PhotoThemesBloc, PhotoThemesState>(
+        builder: (context, state) {
+          final selectedTheme = _findSelectedTheme(state);
 
-        return Stack(
-          children: [
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final crossAxisCount =
-                    (constraints.maxWidth / 110).floor().clamp(3, 6);
-                return CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 8),
-                          Text(
-                            context.locale.photoThemesTitle,
-                            style: MyTheme.of(context).headerTextStyle,
-                          ),
-                          const SizedBox(height: 8),
-                          if (state.themes.isNotEmpty)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: CustomDropdown<PhotoThemeModel>(
-                                items: state.themes,
-                                initValue: selectedTheme,
-                                mapToString: (item) => item?.name ?? '',
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    context.read<PhotoThemesBloc>().add(
-                                          PhotoThemesEventSelectTheme(
-                                            themeId: value.id,
-                                          ),
-                                        );
-                                  }
-                                },
-                              ),
-                            ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            child: Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CustomButton(
-                                  text: context.locale.photoThemesCreateShort,
-                                  onTap: () => _onCreateTheme(context),
-                                  minimize: true,
+          return Stack(
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final crossAxisCount = (constraints.maxWidth / 110).floor().clamp(3, 6);
+                  return CustomScrollView(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Column(
+                          children: [
+                            if (state.themes.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: CustomDropdown<PhotoThemeModel>(
+                                  items: state.themes,
+                                  initValue: selectedTheme,
+                                  mapToString: (item) => item?.name ?? '',
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      context.read<PhotoThemesBloc>().add(
+                                            PhotoThemesEventSelectTheme(
+                                              themeId: value.id,
+                                            ),
+                                          );
+                                    }
+                                  },
                                 ),
-                                if (selectedTheme != null) ...[
-                                  const SizedBox(height: 8),
-                                  CustomButton(
-                                    text:
-                                        context.locale.photoThemesRenameShort,
-                                    onTap: () => _onRenameTheme(
-                                      context,
-                                      selectedTheme,
-                                    ),
-                                    minimize: true,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  CustomButton(
-                                    text:
-                                        context.locale.photoThemesDeleteShort,
-                                    isRed: true,
-                                    onTap: () => _onDeleteTheme(
-                                      context,
-                                      selectedTheme.id,
-                                    ),
-                                    minimize: true,
-                                  ),
-                                ],
-                              ],
-                            ),
-                          ),
-                          if (selectedTheme != null && _isFromTournament)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: _buildActiveThemeButton(
-                                context,
-                                selectedThemeId: state.selectedThemeId,
                               ),
-                            ),
-                          if (selectedTheme != null && _isFromTournament)
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 16,
-                                vertical: 4,
+                                vertical: 8,
                               ),
-                              child: CustomButton(
-                                text: context
-                                    .locale.photoThemesSaveFromTournament,
-                                onTap: () => _onAddFromTournament(context),
-                                minimize: true,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CustomButton(
+                                    text: context.locale.photoThemesCreateShort,
+                                    onTap: () => _onCreateTheme(context),
+                                    minimize: true,
+                                  ),
+                                  if (selectedTheme != null) ...[
+                                    const SizedBox(height: 8),
+                                    CustomButton(
+                                      text: context.locale.photoThemesRenameShort,
+                                      onTap: () => _onRenameTheme(
+                                        context,
+                                        selectedTheme,
+                                      ),
+                                      minimize: true,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    CustomButton(
+                                      text: context.locale.photoThemesDeleteShort,
+                                      isRed: true,
+                                      onTap: () => _onDeleteTheme(
+                                        context,
+                                        selectedTheme.id,
+                                      ),
+                                      minimize: true,
+                                    ),
+                                  ],
+                                ],
                               ),
                             ),
-                          const AddPlayerToThemeWidget(),
-                          const SizedBox(height: 8),
-                        ],
+                            if (selectedTheme != null && _isFromTournament)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: _buildActiveThemeButton(
+                                  context,
+                                  selectedThemeId: state.selectedThemeId,
+                                ),
+                              ),
+                            if (selectedTheme != null && _isFromTournament)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 4,
+                                ),
+                                child: CustomButton(
+                                  text: context.locale.photoThemesSaveFromTournament,
+                                  onTap: () => _onAddFromTournament(context),
+                                  minimize: true,
+                                ),
+                              ),
+                            const AddPlayerToThemeWidget(),
+                            const SizedBox(height: 8),
+                          ],
+                        ),
                       ),
-                    ),
-                    ..._buildPlayersSliverGrid(
-                      context,
-                      state,
-                      crossAxisCount,
-                    ),
-                  ],
-                );
-              },
-            ),
-            if (state.isLoading) const LoadingOverlayWidget(),
-          ],
-        );
-      },
+                      ..._buildPlayersSliverGrid(
+                        context,
+                        state,
+                        crossAxisCount,
+                      ),
+                    ],
+                  );
+                },
+              ),
+              if (state.isLoading) const LoadingOverlayWidget(),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -475,15 +484,13 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                         if (selectedTheme != null) ...[
                           const SizedBox(height: 8),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Row(
                               children: [
                                 Expanded(
                                   child: Text(
                                     selectedTheme.name,
-                                    style:
-                                        MyTheme.of(context).headerTextStyle,
+                                    style: MyTheme.of(context).headerTextStyle,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -493,8 +500,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                                     context,
                                     selectedTheme,
                                   ),
-                                  tooltip:
-                                      context.locale.photoThemesRenameShort,
+                                  tooltip: context.locale.photoThemesRenameShort,
                                 ),
                                 IconButton(
                                   icon: Icon(
@@ -506,16 +512,14 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                                     context,
                                     selectedTheme.id,
                                   ),
-                                  tooltip:
-                                      context.locale.photoThemesDeleteShort,
+                                  tooltip: context.locale.photoThemesDeleteShort,
                                 ),
                               ],
                             ),
                           ),
                           if (_isFromTournament)
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
                               child: _buildActiveThemeButton(
                                 context,
                                 selectedThemeId: state.selectedThemeId,
@@ -530,8 +534,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: CustomButton(
-                                  text: context
-                                      .locale.photoThemesSaveFromTournament,
+                                  text: context.locale.photoThemesSaveFromTournament,
                                   onTap: () => _onAddFromTournament(context),
                                   minimize: true,
                                 ),
@@ -543,10 +546,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                         Expanded(
                           child: LayoutBuilder(
                             builder: (context, constraints) {
-                              final crossAxisCount =
-                                  (constraints.maxWidth / 110)
-                                      .floor()
-                                      .clamp(3, 10);
+                              final crossAxisCount = (constraints.maxWidth / 110).floor().clamp(3, 10);
                               return _buildPlayersGrid(
                                 context,
                                 state,
@@ -624,8 +624,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
     return BlocSelector<TournamentPageBloc, TournamentPageState, int?>(
       selector: (state) => state.activePhotoThemeId,
       builder: (context, activePhotoThemeId) {
-        final isActive =
-            selectedThemeId == activePhotoThemeId && activePhotoThemeId != null;
+        final isActive = selectedThemeId == activePhotoThemeId && activePhotoThemeId != null;
 
         return Row(
           children: [
@@ -639,9 +638,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                 ),
               ),
             Text(
-              isActive
-                  ? context.locale.photoThemesApplied
-                  : context.locale.photoThemesNotApplied,
+              isActive ? context.locale.photoThemesApplied : context.locale.photoThemesNotApplied,
               style: MyTheme.of(context).defaultTextStyle.copyWith(
                     color: isActive ? MyTheme.of(context).positiveColor : null,
                     fontSize: 13,
@@ -657,9 +654,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                     );
               },
               child: Text(
-                isActive
-                    ? context.locale.photoThemesRemove
-                    : context.locale.photoThemesApply,
+                isActive ? context.locale.photoThemesRemove : context.locale.photoThemesApply,
               ),
             ),
           ],

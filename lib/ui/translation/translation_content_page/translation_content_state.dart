@@ -17,9 +17,6 @@ class TranslationContentState with _$TranslationContentState {
 
 extension TranslationContentStateExt on TranslationContentState {
   bool isNotEmpty() {
-    return roles != null &&
-        statuses != null &&
-        images != null &&
-        nicknames != null;
+    return roles != null && statuses != null && images != null && nicknames != null;
   }
 }

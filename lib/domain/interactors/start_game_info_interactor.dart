@@ -8,7 +8,7 @@ class StartGameInfoInteractor extends BaseInteractor {
   StartGameInfoInteractor(this._repository);
 
   @override
-  String get interactorName => "StartGameInfoInteractor.run()";
+  String get interactorName => 'StartGameInfoInteractor.run()';
 
   Future call({
     required int tournamentId,

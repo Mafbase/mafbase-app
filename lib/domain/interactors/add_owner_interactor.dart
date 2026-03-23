@@ -7,9 +7,9 @@ class AddOwnerInteractor extends BaseInteractor {
   AddOwnerInteractor(this._ownersRepository);
 
   @override
-  String get interactorName => "GetAdministrationInteractor.run()";
+  String get interactorName => 'GetAdministrationInteractor.run()';
 
   Future<void> run({required int tournamentId, required String email}) => wrap(
         () => _ownersRepository.addOwner(tournamentId: tournamentId, email: email),
-  );
+      );
 }

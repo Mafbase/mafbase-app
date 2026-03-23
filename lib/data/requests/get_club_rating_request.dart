@@ -9,7 +9,7 @@ class GetClubRatingRequest extends BaseRequest<ClubRatingEventOut> {
     required DateTimeRange range,
     required int clubId,
   }) : super(
-          "/api/club/$clubId/rating?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}",
+          '/api/club/$clubId/rating?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}',
         );
 
   @override

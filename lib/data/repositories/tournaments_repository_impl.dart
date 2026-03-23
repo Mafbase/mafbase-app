@@ -3,7 +3,6 @@ import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/http_client.dart';
 import 'package:seating_generator_web/data/requests/create_seating_request.dart';
 import 'package:seating_generator_web/data/requests/create_tournament_request.dart';
-import 'package:seating_generator_web/data/requests/get_my_tournaments_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournament_request.dart';
 import 'package:seating_generator_web/data/requests/get_tournaments_request.dart';
 import 'package:seating_generator_web/data/requests/tournament_check_request.dart';
@@ -12,27 +11,15 @@ import 'package:seating_generator_web/domain/repositories/tournaments_repository
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class TournamentsRepositoryImpl extends BaseRepository
-    implements TournamentsRepository {
+class TournamentsRepositoryImpl extends BaseRepository implements TournamentsRepository {
   TournamentsRepositoryImpl(super.client);
-
-  @override
-  Future<List<TournamentModel>> getTournaments() {
-    return GetTournamentsRequest().execute(client).then((value) {
-      return value.tournaments.map((tournament) {
-        return tournament.toDomainModel();
-      }).toList();
-    });
-  }
 
   @override
   Future<int> createTournament({
     required String name,
     required DateTimeRange range,
   }) {
-    return CreateTournamentRequest(name: name, dateTimeRange: range)
-        .execute(client)
-        .then((value) => value.id);
+    return CreateTournamentRequest(name: name, dateTimeRange: range).execute(client).then((value) => value.id);
   }
 
   @override
@@ -42,14 +29,16 @@ class TournamentsRepositoryImpl extends BaseRepository
 
   @override
   Future<TournamentModel> getTournament({required int tournamentId}) {
-    return GetTournamentRequest(id: tournamentId)
-        .execute(client)
-        .then((value) => value.toDomainModel());
+    return GetTournamentRequest(id: tournamentId).execute(client).then((value) => value.toDomainModel());
   }
 
   @override
-  Future<List<TournamentModel>> getMyTournaments() {
-    return GetMyTournamentsRequest().execute(client).then((value) {
+  Future<List<TournamentModel>> getTournaments({
+    required int limit,
+    required int offset,
+    String? search,
+  }) {
+    return GetTournamentsRequest(limit: limit, offset: offset, search: search).execute(client).then((value) {
       return value.tournaments.map((tournament) {
         return tournament.toDomainModel();
       }).toList();
@@ -58,9 +47,7 @@ class TournamentsRepositoryImpl extends BaseRepository
 
   @override
   Future<bool> isOwner(int tournamentId) {
-    return TournamentCheckRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then(
+    return TournamentCheckRequest(tournamentId: tournamentId).execute(client).then(
           (value) => value,
           onError: (err) => err is UnauthenticatedError ? false : throw err,
         );

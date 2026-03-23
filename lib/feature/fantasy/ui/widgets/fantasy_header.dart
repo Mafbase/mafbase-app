@@ -6,11 +6,13 @@ import 'package:seating_generator_web/utils.dart';
 class FantasyHeader extends StatelessWidget {
   final FantasyState state;
   final VoidCallback? onParticipantsPressed;
+  final Widget? trailing;
 
   const FantasyHeader({
     super.key,
     required this.state,
     this.onParticipantsPressed,
+    this.trailing,
   });
 
   @override
@@ -24,19 +26,20 @@ class FantasyHeader extends StatelessWidget {
             context.locale.fantasy,
             style: MyTheme.of(context).headerTextStyle,
           ),
-          if (onParticipantsPressed != null)
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  onPressed: onParticipantsPressed,
-                  icon: const Icon(Icons.people),
-                  tooltip: context.locale.fantasyParticipants,
-                ),
-              ),
-            )
-          else
-            Spacer(),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if (onParticipantsPressed != null)
+                  IconButton(
+                    onPressed: onParticipantsPressed,
+                    icon: const Icon(Icons.people),
+                    tooltip: context.locale.fantasyParticipants,
+                  ),
+                if (trailing != null) trailing!,
+              ],
+            ),
+          ),
         ],
       ),
     );

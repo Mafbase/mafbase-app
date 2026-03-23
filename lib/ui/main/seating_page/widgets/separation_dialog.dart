@@ -20,8 +20,7 @@ class SeparationDialog extends StatefulWidget {
   ) {
     return showDialog(
       context: context,
-      builder: (context) =>
-          SeparationDialog(availablePlayers: availablePlayers),
+      builder: (context) => SeparationDialog(availablePlayers: availablePlayers),
     );
   }
 
@@ -96,12 +95,10 @@ class _SeparationDialogState extends State<SeparationDialog> {
                     context,
                     Pair(
                       widget.availablePlayers.firstWhere(
-                        (element) =>
-                            element.nickname == firstPlayerTextField.text,
+                        (element) => element.nickname == firstPlayerTextField.text,
                       ),
                       widget.availablePlayers.firstWhere(
-                        (element) =>
-                            element.nickname == secondPlayerTextField.text,
+                        (element) => element.nickname == secondPlayerTextField.text,
                       ),
                     ),
                   );

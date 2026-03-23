@@ -17,9 +17,7 @@ class RatingModel with _$RatingModel {
   factory RatingModel.fromProto(ClubRatingEventOut event) {
     return RatingModel(
       clubName: event.clubName,
-      rows: event.row
-          .map((fromProto) => ClubRatingRowModel.fromProto(fromProto))
-          .toList(),
+      rows: event.row.map((fromProto) => ClubRatingRowModel.fromProto(fromProto)).toList(),
       games: event.games,
       citizenWins: event.citizenWins,
       mafiaWins: event.mafiaWins,

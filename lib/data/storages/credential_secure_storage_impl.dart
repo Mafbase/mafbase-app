@@ -1,9 +1,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 
-const _loginKey = "credential_login_key";
+const _loginKey = 'credential_login_key';
 
-const _passwordKey = "credential_password_key";
+const _passwordKey = 'credential_password_key';
 
 class CredentialSecureStorageImpl implements CredentialStorage {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();

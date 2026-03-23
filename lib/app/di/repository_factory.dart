@@ -43,54 +43,39 @@ class RepositoryFactory {
 
   RepositoryFactory(this.client, this._storageFactory);
 
-  static RepositoryFactory of(BuildContext context) =>
-      DependencyScope.of(context).repositoryFactory;
+  static RepositoryFactory of(BuildContext context) => DependencyScope.of(context).repositoryFactory;
 
-  late final ProfileRepository profileRepository =
-      ProfileRepositoryImpl(client);
+  late final ProfileRepository profileRepository = ProfileRepositoryImpl(client);
 
   late final ClubRepository clubRepository = ClubRepositoryImpl(client);
 
   late final OwnersRepository ownersRepository = OwnersRepositoryImpl(client);
 
-  late final CustomColumnsRepository customColumnsRepository =
-      CustomColumnsRepositoryImpl(client);
+  late final CustomColumnsRepository customColumnsRepository = CustomColumnsRepositoryImpl(client);
 
-  late final PlayerStatisticsRepository playerStatisticsRepository =
-      PlayerStatisticsRepositoryImpl(client);
+  late final PlayerStatisticsRepository playerStatisticsRepository = PlayerStatisticsRepositoryImpl(client);
 
-  late final PhotoThemeRepository photoThemeRepository =
-      PhotoThemeRepositoryImpl(client);
+  late final PhotoThemeRepository photoThemeRepository = PhotoThemeRepositoryImpl(client);
 
-  late final AuthRepository authRepository =
-      AuthRepositoryImpl(client, _storageFactory.tokenStorage);
+  late final AuthRepository authRepository = AuthRepositoryImpl(client, _storageFactory.tokenStorage);
 
-  late final TournamentsRepository tournamentsRepository =
-      TournamentsRepositoryImpl(client);
+  late final TournamentsRepository tournamentsRepository = TournamentsRepositoryImpl(client);
 
-  late final PlayersRepository playersRepository =
-      PlayersRepositoryImpl(client);
+  late final PlayersRepository playersRepository = PlayersRepositoryImpl(client);
 
-  late final TranslationRepository translationRepository =
-      TranslationRepositoryImpl(client);
+  late final TranslationRepository translationRepository = TranslationRepositoryImpl(client);
 
-  late final CannotMeetTournamentRepository cannotMeetTournamentRepository =
-      CannotMeetTournamentRepositoryImpl(client);
+  late final CannotMeetTournamentRepository cannotMeetTournamentRepository = CannotMeetTournamentRepositoryImpl(client);
 
-  late final TournamentEditRepository tournamentEditRepository =
-      TournamentEditRepositoryImpl(client);
+  late final TournamentEditRepository tournamentEditRepository = TournamentEditRepositoryImpl(client);
 
-  late final TournamentResultRepository tournamentResultRepository =
-      TournamentResultRepositoryImpl(client);
+  late final TournamentResultRepository tournamentResultRepository = TournamentResultRepositoryImpl(client);
 
-  late final PurchaseRepository purchaseRepository =
-      PurchaseRepositoryImpl(client);
+  late final PurchaseRepository purchaseRepository = PurchaseRepositoryImpl(client);
 
   late final InfoRepository infoRepository = InfoRepositoryImpl(client);
 
-  late final InfoTableDescriptionRepository infoTableDescriptionRepository =
-      InfoTableDescriptionRepositoryImpl(client);
+  late final InfoTableDescriptionRepository infoTableDescriptionRepository = InfoTableDescriptionRepositoryImpl(client);
 
-  late final FantasyRepository fantasyRepository =
-      FantasyRepositoryImpl(client);
+  late final FantasyRepository fantasyRepository = FantasyRepositoryImpl(client);
 }

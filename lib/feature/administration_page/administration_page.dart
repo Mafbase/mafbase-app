@@ -12,10 +12,11 @@ import 'package:seating_generator_web/domain/repositories/owners_repository.dart
 import 'package:seating_generator_web/feature/administration_page/administration_bloc.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
-
-import 'widgets/add_owner_dialog.dart';
-import 'widgets/onwer_row.dart';
+import 'package:seating_generator_web/feature/administration_page/widgets/add_owner_dialog.dart';
+import 'package:seating_generator_web/feature/administration_page/widgets/onwer_row.dart';
 
 class AdministrationPage extends StatefulWidget {
   final int tournamentId;
@@ -35,7 +36,7 @@ class AdministrationPage extends StatefulWidget {
     return context.namedLocation(
       _tournamentName,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
     );
   }
@@ -46,11 +47,9 @@ class AdministrationPage extends StatefulWidget {
     path: 'administration',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters["id"]!);
-      final OwnersRepository ownersRepository =
-          RepositoryFactory.of(context).ownersRepository;
-      final getAdministrationInteractor =
-          GetAdministrationInteractor(ownersRepository);
+      final tournamentId = int.parse(state.pathParameters['id']!);
+      final OwnersRepository ownersRepository = RepositoryFactory.of(context).ownersRepository;
+      final getAdministrationInteractor = GetAdministrationInteractor(ownersRepository);
       final addOwnerInteractor = AddOwnerInteractor(ownersRepository);
       final deleteOwnerInteractor = DeleteOwnerInteractor(ownersRepository);
       return BlocProvider<AdministrationBloc>(
@@ -73,86 +72,82 @@ class AdministrationPage extends StatefulWidget {
 class _AdministrationPageState extends State<AdministrationPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AdministrationBloc, AdministrationState>(
-      builder: (context, state) {
-        if (state.isLoading) {
-          return const LoadingOverlayWidget();
-        }
-        return Column(
-          children: [
-            const SizedBox(
-              height: 8,
-            ),
-            Row(
-              children: [
-                const Spacer(
-                  flex: 6,
-                ),
-                Text(
-                  context.locale.ownersTitle,
-                  style: MyTheme.of(context).headerTextStyle,
-                ),
-                const Spacer(
-                  flex: 5,
-                ),
-                IconButton(
-                  onPressed: () {
-                    final bloc = context.read<AdministrationBloc>();
-                    AddOwnerDialog.open(
-                      context: context,
-                    ).then((value) {
-                      if (value != null) {
-                        bloc.add(
-                          AdministrationEventAddOwner(
-                            tournamentId: widget.tournamentId,
-                            email: value,
-                          ),
-                        );
-                      }
-                    });
-                  },
-                  icon: Icon(Icons.add),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(
-              child: state.owners.isEmpty
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          context.locale.ownersEmpty,
-                          textAlign: TextAlign.center,
-                          style: MyTheme.of(context).defaultTextStyle,
-                        ),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemBuilder: (context, index) => OwnerRow(
-                        email: state.owners[index].email,
-                        onDelete: () {
-                          final bloc = context.read<AdministrationBloc>();
-                          ConfirmDialog.open(context).then((value) {
-                            if (value == true) {
-                              bloc.add(
-                                AdministrationEventDeleteOwner(
-                                  tournamentId: widget.tournamentId,
-                                  ownerId: state.owners[index].id,
-                                ),
-                              );
-                            }
-                          });
-                        },
-                      ),
-                      itemCount: state.owners.length,
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: context.backOrGoToDefault(
+            (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+          ),
+        ),
+        title: Text(context.locale.ownersTitle),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final bloc = context.read<AdministrationBloc>();
+              AddOwnerDialog.open(
+                context: context,
+              ).then((value) {
+                if (value != null) {
+                  bloc.add(
+                    AdministrationEventAddOwner(
+                      tournamentId: widget.tournamentId,
+                      email: value,
                     ),
-            ),
-          ],
-        );
-      },
+                  );
+                }
+              });
+            },
+            icon: const Icon(Icons.add),
+          ),
+          TournamentMenuAction(
+            tournamentId: widget.tournamentId,
+            openDrawer: () => Scaffold.of(context).openEndDrawer(),
+          ),
+        ],
+      ),
+      body: BlocBuilder<AdministrationBloc, AdministrationState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const LoadingOverlayWidget();
+          }
+          return Column(
+            children: [
+              Expanded(
+                child: state.owners.isEmpty
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            context.locale.ownersEmpty,
+                            textAlign: TextAlign.center,
+                            style: MyTheme.of(context).defaultTextStyle,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) => OwnerRow(
+                          email: state.owners[index].email,
+                          onDelete: () {
+                            final bloc = context.read<AdministrationBloc>();
+                            ConfirmDialog.open(context).then((value) {
+                              if (value == true) {
+                                bloc.add(
+                                  AdministrationEventDeleteOwner(
+                                    tournamentId: widget.tournamentId,
+                                    ownerId: state.owners[index].id,
+                                  ),
+                                );
+                              }
+                            });
+                          },
+                        ),
+                        itemCount: state.owners.length,
+                      ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

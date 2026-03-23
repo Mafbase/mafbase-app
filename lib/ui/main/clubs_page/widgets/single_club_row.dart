@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/club_avatar.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
-import 'package:seating_generator_web/utils.dart';
 
 enum ClubRowStyle {
   mobile,
@@ -21,120 +20,119 @@ class SingleClubRow extends StatelessWidget {
     this.style = ClubRowStyle.desktop,
   });
 
-  Widget buildMobile(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Material(
-        color: context.theme.background1,
-        child: InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClubAvatar(
-                  clubModel: model,
-                  size: 70,
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          model.name,
-                          style: context.theme.defaultTextStyle,
-                        ),
-                        const SizedBox(height: 16),
-                        const Divider(height: 2),
-                        const SizedBox(height: 16),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              'ID: ${model.id}',
-                              style: MyTheme.of(context).hintTextStyle,
-                            ),
-                            const Spacer(),
-                            Text(
-                              model.city != null ? "г. ${model.city}" : " ",
-                              style: context.theme.defaultTextStyle,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildDesktop(BuildContext context) {
-    return Tooltip(
-      message: 'ID: ${model.id}',
-      child: InkWell(
-        borderRadius: BorderRadius.circular(500),
-        onTap: onTap,
-        child: Container(
-          constraints: const BoxConstraints(
-            maxHeight: 100,
-            maxWidth: 1000,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Row(
-            children: [
-              ClubAvatar(
-                clubModel: model,
-                size: 70,
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  model.name,
-                  style: context.theme.defaultTextStyle,
-                ),
-              ),
-              Container(
-                width: 3,
-                height: 30,
-                color: Colors.black,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-              ),
-              if (model.city != null)
-                Expanded(
-                  child: Text(
-                    "г. ${model.city}",
-                    style: context.theme.defaultTextStyle,
-                  ),
-                )
-              else
-                const Spacer(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  static const _avatarColors = [
+    Color(0xFF475264),
+    Color(0xFFDF5650),
+    Color(0xFFC8B75E),
+    Color(0xFF6B8299),
+    Color(0xFF1A2D42),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    switch (style) {
-      case ClubRowStyle.mobile:
-        return buildMobile(context);
-      case ClubRowStyle.desktop:
-        return buildDesktop(context);
-    }
+    final theme = MyTheme.of(context);
+    final isMobile = style == ClubRowStyle.mobile;
+    final avatarSize = isMobile ? 52.0 : 56.0;
+    final avatarColor = _avatarColors[model.id % _avatarColors.length];
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onTap,
+      child: Ink(
+        decoration: BoxDecoration(
+          color: theme.background2,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: theme.cardShadowColor,
+              blurRadius: 3,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? 16 : 20,
+          vertical: isMobile ? 16 : 18,
+        ),
+        child: Row(
+          children: [
+            ClubAvatar(
+              clubModel: model,
+              size: avatarSize,
+              borderRadius: BorderRadius.circular(8),
+              placeholderColor: avatarColor,
+            ),
+            SizedBox(width: isMobile ? 14 : 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    model.name,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: isMobile ? 3 : 4),
+                  _buildMetaRow(theme, isMobile),
+                  if (!isMobile && model.description != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      model.description!,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: theme.darkGreyColor,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            Icon(
+              Icons.chevron_right,
+              size: 22,
+              color: theme.hintColor,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMetaRow(MyTheme theme, bool isMobile) {
+    return Row(
+      children: [
+        if (model.city != null) ...[
+          Icon(
+            Icons.location_on_outlined,
+            size: 14,
+            color: theme.hintColor,
+          ),
+          const SizedBox(width: 3),
+          Text(
+            model.city!,
+            style: TextStyle(
+              fontSize: 13,
+              color: theme.hintColor,
+            ),
+          ),
+        ],
+        if (model.city != null) const SizedBox(width: 12),
+        Text(
+          'ID: ${model.id}',
+          style: TextStyle(
+            fontSize: 12,
+            color: theme.hintColor,
+          ),
+        ),
+      ],
+    );
   }
 }

@@ -17,5 +17,5 @@ class DownloadRatingInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "DownloadRatingInteractor";
+  String get interactorName => 'DownloadRatingInteractor';
 }

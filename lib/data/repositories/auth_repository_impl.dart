@@ -19,9 +19,7 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
 
   @override
   Future<LoginModel> login(String email, String password) {
-    return LoginRequest(LoginEvent(email: email, password: password))
-        .execute(client)
-        .then(
+    return LoginRequest(LoginEvent(email: email, password: password)).execute(client).then(
       (value) async {
         await _storage.onTokensUpdated(value.token, value.recoveryToken);
         switch (value.error) {
@@ -49,9 +47,7 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
 
   @override
   Future<SignUpModel> signUp(String email, String password) async {
-    final value =
-        await SignUpRequest(SignUpEvent(email: email, password: password))
-            .execute(client);
+    final value = await SignUpRequest(SignUpEvent(email: email, password: password)).execute(client);
     switch (value.error) {
       case SignUpEventOut_Error.emailExist:
         return const SignUpModel(error: ErrorEnum.emailExist);
@@ -68,9 +64,7 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
 
   @override
   Future<bool> verificate(int id, String token) async {
-    final value =
-        await VerificationRequest(EmailVerificationEvent(id: id, token: token))
-            .execute(client);
+    final value = await VerificationRequest(EmailVerificationEvent(id: id, token: token)).execute(client);
     switch (value.status) {
       case EmailVerificationEventOut_Status.incorrectToken:
         return false;

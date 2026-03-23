@@ -8,7 +8,7 @@ class GetSettingsInteractor extends BaseInteractor {
   GetSettingsInteractor(this._tournamentEditRepository);
 
   @override
-  String get interactorName => "GetSettingsInteractor.run()";
+  String get interactorName => 'GetSettingsInteractor.run()';
 
   Future<TournamentSettingsModel> run({required int tournamentId}) => wrap(
         () => _tournamentEditRepository.getSettings(tournamentId: tournamentId),

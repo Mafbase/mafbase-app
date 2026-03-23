@@ -6,8 +6,7 @@ part 'login_model.freezed.dart';
 class LoginModel with _$LoginModel {
   const factory LoginModel.success({required int userId}) = Success;
 
-  const factory LoginModel.needVerification({required int id}) =
-      NeedVerification;
+  const factory LoginModel.needVerification({required int id}) = NeedVerification;
 
   const factory LoginModel.error({String? message}) = Error;
 }

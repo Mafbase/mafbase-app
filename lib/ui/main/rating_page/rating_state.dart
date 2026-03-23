@@ -6,7 +6,7 @@ part 'rating_state.freezed.dart';
 @freezed
 class RatingState with _$RatingState {
   const factory RatingState({
-    @Default("") String clubName,
+    @Default('') String clubName,
     @Default([]) List<ClubRatingRowModel> rows,
     @Default(0) int games,
     @Default(0) int mafiaWins,

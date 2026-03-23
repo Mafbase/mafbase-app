@@ -11,7 +11,7 @@ import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
@@ -79,7 +79,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       router.switchTabTo(event.tab);
     }
   }
-
 }
 
 abstract class MainPageRouter {
@@ -120,12 +119,12 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void pop() {
-    GoRouter.of(context).go("/");
+    GoRouter.of(context).go('/');
   }
 
   @override
   void openTournament(int id) {
-    GoRouter.of(context).go(
+    GoRouter.of(context).push(
       TournamentPage.createLocation(
         context: context,
         tournamentId: id,
@@ -152,8 +151,7 @@ class MainPageRouterImpl implements MainPageRouter {
     context.push(
       LoginPageBody.createLocation(
         context: context,
-        nextPath:
-            GoRouter.of(context).routeInformationProvider.value.uri.toString(),
+        nextPath: GoRouter.of(context).routeInformationProvider.value.uri.toString(),
       ),
     );
   }

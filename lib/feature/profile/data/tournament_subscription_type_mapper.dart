@@ -16,13 +16,11 @@ extension TournamentSubscriptionTypeToDomain on TournamentSubscriptionType {
   TournamentSubscriptionTypeModel toDomain() {
     switch (this) {
       case TournamentSubscriptionType.unknownTournamentSubscriptionType:
-        return TournamentSubscriptionTypeModel
-            .unknownTournamentSubscriptionType;
+        return TournamentSubscriptionTypeModel.unknownTournamentSubscriptionType;
       case TournamentSubscriptionType.tournamentWithAllAddons10Players:
         return TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players;
       default:
-        return TournamentSubscriptionTypeModel
-            .unknownTournamentSubscriptionType;
+        return TournamentSubscriptionTypeModel.unknownTournamentSubscriptionType;
     }
   }
 }

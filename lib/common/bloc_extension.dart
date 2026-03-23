@@ -23,8 +23,7 @@ mixin EffectEmitter<E, S> on BlocBase<S> {
   }
 }
 
-mixin EffectListener<E, S, B extends EffectEmitter<E, S>,
-    W extends StatefulWidget> on State<W> {
+mixin EffectListener<E, S, B extends EffectEmitter<E, S>, W extends StatefulWidget> on State<W> {
   final Map<Type, StreamSubscription> _subscriptions = {};
   final Map<Type, EffectHandler> map = {};
 
@@ -34,11 +33,7 @@ mixin EffectListener<E, S, B extends EffectEmitter<E, S>,
     registerEffectHandlers(
       <T>(handler) {
         _subscriptions[T]?.cancel();
-        _subscriptions[T] = context
-            .read<B>()
-            .effectsStream
-            .where((event) => event is T)
-            .listen((event) {
+        _subscriptions[T] = context.read<B>().effectsStream.where((event) => event is T).listen((event) {
           map[T]?.call(event as T);
         });
         map[T] = (effect) => handler(effect);

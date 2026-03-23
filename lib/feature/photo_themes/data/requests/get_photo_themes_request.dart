@@ -8,6 +8,5 @@ class GetPhotoThemesRequest extends BaseRequest<GetPhotoThemesEventOut> {
   GetPhotoThemesRequest() : super('/api/photoThemes');
 
   @override
-  FutureOr<GetPhotoThemesEventOut> parse(List<int> bytes) =>
-      compute(GetPhotoThemesEventOut.fromBuffer, bytes);
+  FutureOr<GetPhotoThemesEventOut> parse(List<int> bytes) => compute(GetPhotoThemesEventOut.fromBuffer, bytes);
 }

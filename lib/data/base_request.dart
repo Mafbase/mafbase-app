@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/http_client.dart';
@@ -78,7 +77,7 @@ List<int> parseResponseData(dynamic data) {
   } else if (data is List<int>) {
     list = data;
   } else {
-    throw FormatException("unsupported type: ${data.runtimeType}");
+    throw FormatException('unsupported type: ${data.runtimeType}');
   }
   return list;
 }

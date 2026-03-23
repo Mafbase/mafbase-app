@@ -8,5 +8,4 @@ class VerificationRequest extends BaseRequest<EmailVerificationEventOut> {
   EmailVerificationEventOut parse(List<int> bytes) {
     return EmailVerificationEventOut.fromBuffer(bytes);
   }
-
 }

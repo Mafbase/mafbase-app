@@ -39,6 +39,13 @@
 - Запусти golden-тесты для новых страниц (скилл `/golden-test`)
 - Убедись что `fvm flutter analyze` проходит без ошибок
 
+# Обработка ошибок в Bloc
+
+Не добавляй try/catch с обработкой ошибок в каждый bloc event handler. Ошибки обрабатываются глобальным BlocObserver. В handler нужно только сбрасывать состояние загрузки (isLoading: false) через try/finally.
+
+- Когда в handler ставится `isLoading: true`, нужен try/finally для сброса загрузки
+- Если isLoading не используется — try/catch не нужен
+
 # Ведение CHANGELOG
 
 При любых пользовательски-видимых изменениях (фичи, баг-фиксы, UI-изменения) обновляй `CHANGELOG.md`:

@@ -26,9 +26,7 @@ class FantasyPredictionChip extends StatelessWidget {
     final predictionText = prediction.prediction != null
         ? context.getGameWinText(prediction.prediction!)
         : context.locale.fantasyNoPrediction;
-    final resultText = prediction.actualResult != null
-        ? context.getGameWinText(prediction.actualResult!)
-        : '?';
+    final resultText = prediction.actualResult != null ? context.getGameWinText(prediction.actualResult!) : '?';
     return '$predictionText${context.locale.fantasyPredictionSeparator}$resultText (${prediction.points}${context.locale.fantasyPointsShort})';
   }
 

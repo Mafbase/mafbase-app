@@ -7,12 +7,11 @@ class InsertSeatingInteractor extends BaseInteractor {
   InsertSeatingInteractor(this._repository);
 
   Future<bool> run(List<int> bytes, int tournamentId) async {
-
     return wrap(() async {
       return await _repository.insertSeating(bytes, tournamentId);
     });
   }
 
   @override
-  String get interactorName => "InsertSeatingInteractor";
+  String get interactorName => 'InsertSeatingInteractor';
 }

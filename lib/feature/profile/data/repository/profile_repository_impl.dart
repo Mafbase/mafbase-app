@@ -9,8 +9,7 @@ import 'package:seating_generator_web/feature/profile/data/tournament_subscripti
 import 'package:seating_generator_web/feature/profile/domain/model/tournament_subscription_plan_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/repository/profile_repository.dart';
 
-class ProfileRepositoryImpl extends BaseRepository
-    implements ProfileRepository {
+class ProfileRepositoryImpl extends BaseRepository implements ProfileRepository {
   ProfileRepositoryImpl(super.client);
 
   @override
@@ -31,19 +30,15 @@ class ProfileRepositoryImpl extends BaseRepository
   }
 
   @override
-  Future<void> setUserProfile(PlayerModel player) =>
-      SetUserProfileRequest(player: player.toProto()).execute(client);
+  Future<void> setUserProfile(PlayerModel player) => SetUserProfileRequest(player: player.toProto()).execute(client);
 
   @override
-  Future<TournamentSubscriptionPlanModel>
-      getTournamentSubscriptionCurrentPlan() async {
-    final plan =
-        await GetTournamentSubscriptionCurrentPlanRequest().execute(client);
+  Future<TournamentSubscriptionPlanModel> getTournamentSubscriptionCurrentPlan() async {
+    final plan = await GetTournamentSubscriptionCurrentPlanRequest().execute(client);
 
     return TournamentSubscriptionPlanModel(
       isActive: plan.isActive,
-      subscriptionType:
-          plan.hasSubscriptionType() ? plan.subscriptionType.toDomain() : null,
+      subscriptionType: plan.hasSubscriptionType() ? plan.subscriptionType.toDomain() : null,
       billedFor: plan.hasBilledFor() ? DateTime.tryParse(plan.billedFor) : null,
     );
   }

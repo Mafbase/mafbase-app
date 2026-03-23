@@ -7,7 +7,6 @@ import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/get_clubs_interactor.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_bloc.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_event.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_state.dart';
@@ -38,9 +37,6 @@ class ClubsPage extends StatefulWidget {
       },
       child: const ClubsPage(),
     ),
-    routes: [
-      ClubPage.route,
-    ],
   );
 }
 
@@ -51,101 +47,66 @@ class _ClubsPageState extends CustomState<ClubsPage> {
     super.initState();
   }
 
-  @override
-  Widget? buildMobile(BuildContext context) {
-    return ColoredBox(
-      color: context.theme.background2,
-      child: BlocBuilder<ClubsBloc, ClubsState>(
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const LoadingOverlayWidget();
-          }
-
-          return RefreshIndicator(
-            onRefresh: () {
-              final completer = Completer();
-              context.read<ClubsBloc>().add(
-                    ClubsEvent.pageOpened(completer: completer),
-                  );
-
-              return completer.future;
-            },
-            child: ListView.builder(
-              itemCount: state.clubs.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 16.0,
-                  ),
-                  child: SingleClubRow(
-                    style: ClubRowStyle.mobile,
-                    model: state.clubs[index],
-                    onTap: () {
-                      context.read<ClubsBloc>().add(
-                            ClubsEvent.clubSelected(
-                              clubModel: state.clubs[index],
-                            ),
-                          );
-                    },
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      ),
-    );
+  void _onClubTap(BuildContext context, int index, ClubsState state) {
+    context.read<ClubsBloc>().add(
+          ClubsEvent.clubSelected(clubModel: state.clubs[index]),
+        );
   }
 
   @override
-  Widget buildDesktop(BuildContext context) {
-    return Container(
-      color: context.theme.background2,
-      child: Material(
-        child: BlocBuilder<ClubsBloc, ClubsState>(
+  Widget? buildMobile(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: BackButton(onPressed: context.backOrGoToDefault()),
+          title: Text(context.locale.clubsHeader),
+        ),
+        body: BlocBuilder<ClubsBloc, ClubsState>(
           builder: (context, state) {
             if (state.isLoading) {
               return const LoadingOverlayWidget();
             }
-            return CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      Center(
-                        child: Text(
-                          context.locale.clubsHeader,
-                          style: context.theme.headerTextStyle,
-                        ),
-                      ),
-                    ],
-                  ),
+            return RefreshIndicator(
+              onRefresh: () {
+                final completer = Completer();
+                context.read<ClubsBloc>().add(
+                      ClubsEvent.pageOpened(completer: completer),
+                    );
+                return completer.future;
+              },
+              child: ListView.separated(
+                padding: const EdgeInsets.all(16),
+                itemCount: state.clubs.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemBuilder: (context, index) => SingleClubRow(
+                  style: ClubRowStyle.mobile,
+                  model: state.clubs[index],
+                  onTap: () => _onClubTap(context, index, state),
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: state.clubs.length,
-                    (context, index) {
-                      return Center(
-                        child: SingleClubRow(
-                          model: state.clubs[index],
-                          onTap: () {
-                            context.read<ClubsBloc>().add(
-                                  ClubsEvent.clubSelected(
-                                    clubModel: state.clubs[index],
-                                  ),
-                                );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+              ),
             );
           },
         ),
-      ),
-    );
-  }
+      );
+
+  @override
+  Widget buildDesktop(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(context.locale.clubsHeader),
+        ),
+        body: BlocBuilder<ClubsBloc, ClubsState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const LoadingOverlayWidget();
+            }
+            return ListView.separated(
+              padding: const EdgeInsets.fromLTRB(32, 24, 32, 24),
+              itemCount: state.clubs.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 8),
+              itemBuilder: (context, index) => SingleClubRow(
+                model: state.clubs[index],
+                onTap: () => _onClubTap(context, index, state),
+              ),
+            );
+          },
+        ),
+      );
 }

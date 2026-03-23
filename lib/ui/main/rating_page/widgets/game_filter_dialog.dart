@@ -69,7 +69,7 @@ class _GameFilterDialogState extends State<GameFilterDialog> {
           onPressed: () => Navigator.of(context).pop(null),
           child: Text(
             context.locale.cancel,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
           ),
         ),
         TextButton(
@@ -79,7 +79,7 @@ class _GameFilterDialogState extends State<GameFilterDialog> {
           },
           child: Text(
             context.locale.confirm,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
           ),
         ),
       ],

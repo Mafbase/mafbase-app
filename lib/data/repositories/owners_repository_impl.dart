@@ -13,25 +13,25 @@ class OwnersRepositoryImpl extends BaseRepository implements OwnersRepository {
 
   @override
   Future<List<UserModel>> getOwners({required int tournamentId}) async {
-    return GetOwnersRequest(tournamentId: tournamentId)
-        .execute(client)
-        .then((value) {
+    return GetOwnersRequest(tournamentId: tournamentId).execute(client).then((value) {
       return value.owners.map((e) => UserModel.fromProto(e)).toList();
     });
   }
 
   @override
-  Future<void> addOwner(
-      {required int tournamentId, required String email}) async {
-    await AddOwnerRequest(tournamentId: tournamentId, email: email)
-        .execute(client);
+  Future<void> addOwner({
+    required int tournamentId,
+    required String email,
+  }) async {
+    await AddOwnerRequest(tournamentId: tournamentId, email: email).execute(client);
   }
 
   @override
-  Future<void> deleteOwner(
-      {required int tournamentId, required int ownerId}) async {
-    await DeleteOwnerRequest(tournamentId: tournamentId, ownerId: ownerId)
-        .execute(client);
+  Future<void> deleteOwner({
+    required int tournamentId,
+    required int ownerId,
+  }) async {
+    await DeleteOwnerRequest(tournamentId: tournamentId, ownerId: ownerId).execute(client);
   }
 
   @override
@@ -42,15 +42,18 @@ class OwnersRepositoryImpl extends BaseRepository implements OwnersRepository {
   }
 
   @override
-  Future<void> addClubOwner(
-      {required int clubId, required String email}) async {
+  Future<void> addClubOwner({
+    required int clubId,
+    required String email,
+  }) async {
     await AddClubOwnerRequest(clubId: clubId, email: email).execute(client);
   }
 
   @override
-  Future<void> deleteClubOwner(
-      {required int clubId, required int ownerId}) async {
-    await DeleteClubOwnerRequest(clubId: clubId, ownerId: ownerId)
-        .execute(client);
+  Future<void> deleteClubOwner({
+    required int clubId,
+    required int ownerId,
+  }) async {
+    await DeleteClubOwnerRequest(clubId: clubId, ownerId: ownerId).execute(client);
   }
 }

@@ -26,7 +26,7 @@ class TranslationContentPage extends StatefulWidget {
   }) {
     return context.namedLocation(
       routeName,
-      queryParameters: {"tournamentId": tournamentId, "table": table},
+      queryParameters: {'tournamentId': tournamentId, 'table': table},
     );
   }
 }
@@ -35,9 +35,7 @@ class _TranslationContentPageState extends State<TranslationContentPage> {
   @override
   void initState() {
     FlutterNativeSplash.remove();
-    context
-        .read<TranslationContentBloc>()
-        .add(const TranslationContentEvent.pageOpened());
+    context.read<TranslationContentBloc>().add(const TranslationContentEvent.pageOpened());
     super.initState();
   }
 
@@ -111,7 +109,7 @@ class _TranslationPlayerCard extends StatelessWidget {
                   ),
                   child: Image.network(
                     image.isEmpty
-                        ? "https://st.depositphotos.com/1594920/2878/i/600/depositphotos_28781557-stock-photo-domestic-goose-anser-anser-domesticus.jpg"
+                        ? 'https://st.depositphotos.com/1594920/2878/i/600/depositphotos_28781557-stock-photo-domestic-goose-anser-anser-domesticus.jpg'
                         : image,
                     fit: BoxFit.cover,
                     width: constraints.maxWidth,
@@ -138,9 +136,7 @@ class _TranslationPlayerCard extends StatelessWidget {
                       child: Text(
                         nickname,
                         textAlign: TextAlign.center,
-                        style: MyTheme.of(context)
-                            .headerTextStyle
-                            .copyWith(fontSize: constraints.maxWidth / 10),
+                        style: MyTheme.of(context).headerTextStyle.copyWith(fontSize: constraints.maxWidth / 10),
                       ),
                     ),
                   ),
@@ -221,8 +217,7 @@ class _RoleWidget extends StatefulWidget {
   State<_RoleWidget> createState() => _RoleWidgetState();
 }
 
-class _RoleWidgetState extends State<_RoleWidget>
-    with TickerProviderStateMixin {
+class _RoleWidgetState extends State<_RoleWidget> with TickerProviderStateMixin {
   static const Duration animationDuration = Duration(milliseconds: 300);
   late final controller = AnimationController(
     vsync: this,
@@ -288,8 +283,7 @@ class _StatusWidget extends StatefulWidget {
   State<_StatusWidget> createState() => _StatusWidgetState();
 }
 
-class _StatusWidgetState extends State<_StatusWidget>
-    with TickerProviderStateMixin {
+class _StatusWidgetState extends State<_StatusWidget> with TickerProviderStateMixin {
   static const Duration animationDuration = Duration(milliseconds: 300);
 
   late final controller = AnimationController(
@@ -363,8 +357,7 @@ class _StatusOverlay extends StatefulWidget {
   State<_StatusOverlay> createState() => _StatusOverlayState();
 }
 
-class _StatusOverlayState extends State<_StatusOverlay>
-    with TickerProviderStateMixin {
+class _StatusOverlayState extends State<_StatusOverlay> with TickerProviderStateMixin {
   static const animationDuration = Duration(milliseconds: 300);
   late final controller = AnimationController(
     vsync: this,
@@ -436,13 +429,13 @@ class _StatusOverlayState extends State<_StatusOverlay>
   String get text {
     switch (status) {
       case PlayerStatus.deleted:
-        return "Удален";
+        return 'Удален';
       case PlayerStatus.killed:
-        return "Убит";
+        return 'Убит';
       case PlayerStatus.voted:
-        return "Заголосован";
+        return 'Заголосован';
       default:
-        return "";
+        return '';
     }
   }
 }

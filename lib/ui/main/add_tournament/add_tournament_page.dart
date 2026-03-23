@@ -13,7 +13,7 @@ class _AddTournamentPageState extends State<AddTournamentPage> {
     return Container(
       color: Colors.red,
       child: const Center(
-        child: Text("AddTournamentPage"),
+        child: Text('AddTournamentPage'),
       ),
     );
   }

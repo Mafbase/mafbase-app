@@ -20,7 +20,7 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
   @override
   void initState() {
     super.initState();
-    _notificationPermissionService = DependencyScope.of(context).notificationPermissionService;
+    _notificationPermissionService = DependencyScope.of(context).serviceProvider.notificationPermissionService;
   }
 
   @override
@@ -53,7 +53,7 @@ class _FantasyNotificationsBannerState extends State<FantasyNotificationsBanner>
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.notifications_off,
                       color: Colors.orange,
                       size: 20,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/widgets/create_tournament_dialog.dart';
 
 abstract class TournamentsRouter {
@@ -21,7 +21,7 @@ class TournamentsRouterImpl implements TournamentsRouter {
 
   @override
   void openTournament(int id) {
-    GoRouter.of(context).go(
+    GoRouter.of(context).push(
       TournamentPage.createLocation(
         context: context,
         tournamentId: id,

@@ -35,34 +35,35 @@ class _WrapperLoginPageState extends CustomState<WrapperLoginPage> {
                     offset: const Offset(0, 25),
                     child: SvgPicture.asset(
                       AppAssets.logoAsset,
-                      width: 200,
+                      width: 140,
                     ),
                   ),
                 ),
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(
+                bottom: 10,
+                left: 20,
+                right: 20,
+              ),
               sliver: SliverToBoxAdapter(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Center(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        constraints: const BoxConstraints(
-                          maxWidth: 600,
-                        ),
-                        decoration: BoxDecoration(
-                          color: MyTheme.of(context).background2,
-                          border: Border.all(
-                            color: MyTheme.of(context).borderColor,
-                            width: 2,
-                          ),
-                        ),
-                        child: widget.child,
+                child: Center(
+                  child: Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 520,
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: MyTheme.of(context).background2,
+                      border: Border.all(
+                        color: MyTheme.of(context).borderColor,
+                        width: 1.5,
                       ),
-                    );
-                  },
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: widget.child,
+                  ),
                 ),
               ),
             ),
@@ -71,6 +72,7 @@ class _WrapperLoginPageState extends CustomState<WrapperLoginPage> {
       ),
     );
   }
+
   @override
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
@@ -90,7 +92,7 @@ class _WrapperLoginPageState extends CustomState<WrapperLoginPage> {
                     offset: const Offset(0, 25),
                     child: SvgPicture.asset(
                       AppAssets.logoAsset,
-                      width: 200,
+                      width: 180,
                     ),
                   ),
                 ),
@@ -99,25 +101,22 @@ class _WrapperLoginPageState extends CustomState<WrapperLoginPage> {
             SliverPadding(
               padding: const EdgeInsets.only(bottom: 10),
               sliver: SliverToBoxAdapter(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Center(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        constraints: const BoxConstraints(
-                          maxWidth: 600,
-                        ),
-                        decoration: BoxDecoration(
-                          color: MyTheme.of(context).background2,
-                          border: Border.all(
-                            color: MyTheme.of(context).borderColor,
-                            width: 2,
-                          ),
-                        ),
-                        child: widget.child,
+                child: Center(
+                  child: Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 520,
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: MyTheme.of(context).background2,
+                      border: Border.all(
+                        color: MyTheme.of(context).borderColor,
+                        width: 1.5,
                       ),
-                    );
-                  },
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: widget.child,
+                  ),
                 ),
               ),
             ),

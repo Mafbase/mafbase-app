@@ -6,8 +6,7 @@ import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_result_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
-class TournamentResultRepositoryImpl extends BaseRepository
-    implements TournamentResultRepository {
+class TournamentResultRepositoryImpl extends BaseRepository implements TournamentResultRepository {
   TournamentResultRepositoryImpl(super.client);
 
   @override
@@ -35,7 +34,6 @@ class TournamentResultRepositoryImpl extends BaseRepository
     required int tournamentId,
     required int gameId,
   }) {
-    return GetTournamentGameRequest(tournamentId: tournamentId, gameId: gameId)
-        .execute(client);
+    return GetTournamentGameRequest(tournamentId: tournamentId, gameId: gameId).execute(client);
   }
 }

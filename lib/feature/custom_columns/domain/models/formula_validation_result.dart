@@ -10,8 +10,7 @@ class FormulaValidationResult with _$FormulaValidationResult {
     String? error,
   }) = _FormulaValidationResult;
 
-  factory FormulaValidationResult.fromProto(ValidateFormulaEventOut proto) =>
-      FormulaValidationResult(
+  factory FormulaValidationResult.fromProto(ValidateFormulaEventOut proto) => FormulaValidationResult(
         valid: proto.valid,
         error: proto.hasError() ? proto.error : null,
       );

@@ -227,18 +227,17 @@ class _FantasyPageState extends State<FantasyPage> {
 
 # Правила Dependency Injection
 
-## Использование DependencyScope/StorageFactory/RepositoryFactory
+## Использование DependencyScope
 
-1. **Используйте DependencyScope для Dependency Injection** - это современный подход для управления зависимостями в приложении
-2. **getIt считается устаревшим** - не используйте `getIt` для получения зависимостей, используйте вместо этого `DependencyScope`, `StorageFactory` и `RepositoryFactory`
-3. **Все зависимости должны передаваться через конструктор** - сервисы и репозитории должны получать свои зависимости через конструктор, а не через глобальный контейнер
+1. **Используйте DependencyScope для Dependency Injection** — основной подход для управления зависимостями в приложении
+2. **Все зависимости должны передаваться через конструктор** — сервисы и репозитории должны получать свои зависимости через конструктор
 
 ## Структура DI
 
 ### DependencyScope
 - Основной контейнер зависимостей, доступный через `DependencyScope.of(context)`
-- Содержит `StorageFactory` и `RepositoryFactory`
-- Используется для получения доступа к фабрикам зависимостей
+- Содержит `StorageFactory`, `RepositoryFactory`, `ServiceProvider` и `AuthNotifier`
+- Используется для получения доступа к фабрикам и провайдерам зависимостей
 
 ### StorageFactory
 - Фабрика для создания и получения хранилищ (Storage)
@@ -250,31 +249,20 @@ class _FantasyPageState extends State<FantasyPage> {
 - Доступ через `RepositoryFactory.of(context)`
 - Примеры: `authRepository`, `clubRepository`, `profileRepository`
 
+### ServiceProvider
+- Провайдер для создания и получения сервисов
+- Доступ через `ServiceProvider.of(context)`
+- Примеры: `deviceIdService`, `pushTokenService`, `notificationPermissionService`
+
 ## Использование в коде
 
-### ❌ ПЛОХО - использование getIt (устаревший подход)
-
-```dart
-import 'package:seating_generator_web/app/get_it_register.dart';
-
-class MyWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final repository = getIt<AuthRepository>(); // ❌ Устаревший подход
-    final storage = getIt<TokenStorage>(); // ❌ Устаревший подход
-    // ...
-  }
-}
-```
-
-### ✅ ХОРОШО - использование DependencyScope/StorageFactory/RepositoryFactory
-
 ```dart
 class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final repository = RepositoryFactory.of(context).authRepository; // ✅ Современный подход
-    final storage = StorageFactory.of(context).tokenStorage; // ✅ Современный подход
+    final repository = RepositoryFactory.of(context).authRepository;
+    final storage = StorageFactory.of(context).tokenStorage;
+    final service = ServiceProvider.of(context).pushTokenService;
     // ...
   }
 }
@@ -288,14 +276,17 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Получение репозитория
     final authRepository = RepositoryFactory.of(context).authRepository;
-    
+
     // Получение хранилища
     final tokenStorage = StorageFactory.of(context).tokenStorage;
     final credentialStorage = StorageFactory.of(context).credentialStorage;
-    
+
+    // Получение сервиса
+    final pushTokenService = ServiceProvider.of(context).pushTokenService;
+
     // Получение notifier через DependencyScope
     final authNotifier = DependencyScope.of(context).authNotifier;
-    
+
     return Scaffold(
       // ...
     );
@@ -306,38 +297,16 @@ class MyPage extends StatelessWidget {
 ### Передача зависимостей через конструктор
 
 ```dart
-// ✅ ХОРОШО - зависимости через конструктор
 class MyService {
   final AuthRepository _authRepository;
   final TokenStorage _tokenStorage;
 
   MyService(this._authRepository, this._tokenStorage);
 }
-
-// ❌ ПЛОХО - зависимости через getIt внутри класса
-class MyService {
-  MyService() {
-    _authRepository = getIt<AuthRepository>(); // ❌ Устаревший подход
-  }
-}
 ```
-
-## Миграция с getIt
-
-При рефакторинге существующего кода:
-
-1. **Замените `getIt<T>()` на соответствующий фабричный метод**:
-   - Репозитории → `RepositoryFactory.of(context).repositoryName`
-   - Хранилища → `StorageFactory.of(context).storageName`
-   - Notifiers → `DependencyScope.of(context).notifierName`
-
-2. **Убедитесь, что виджет имеет доступ к BuildContext** - DependencyScope доступен только через BuildContext
-
-3. **Для сервисов передавайте зависимости через конструктор** - не используйте getIt внутри сервисов
 
 ## Проверка перед коммитом
 
-- [ ] Все использования `getIt` заменены на `DependencyScope`/`StorageFactory`/`RepositoryFactory` (кроме get_it_register.dart)
 - [ ] Все сервисы и репозитории получают зависимости через конструктор
 - [ ] Код компилируется без ошибок
 

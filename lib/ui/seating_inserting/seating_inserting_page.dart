@@ -15,12 +15,12 @@ import 'package:seating_generator_web/utils.dart';
 class SeatingInsertingPage extends StatefulWidget {
   const SeatingInsertingPage({super.key});
 
-  static const name = "fsm_seating";
+  static const name = 'fsm_seating';
   static final route = GoRoute(
     name: name,
     path: 'fsmSeating',
     builder: (context, state) {
-      final id = int.parse(state.pathParameters["id"]!);
+      final id = int.parse(state.pathParameters['id']!);
       return BlocProvider<SeatingInsertingBloc>(
         create: (context) => SeatingInsertingBloc(
           router: SeatingInsertingRouterImpl(context),
@@ -35,7 +35,7 @@ class SeatingInsertingPage extends StatefulWidget {
   static String createLocation(BuildContext context, int id) {
     return context.namedLocation(
       name,
-      pathParameters: {"id": id.toString()},
+      pathParameters: {'id': id.toString()},
     );
   }
 
@@ -78,7 +78,7 @@ class _SeatingInsertingPageState extends State<SeatingInsertingPage> {
                           });
                         },
                   child: Text(
-                    name ?? "Загрузить файл",
+                    name ?? 'Загрузить файл',
                     style: MyTheme.of(context).textBtnTextStyle,
                   ),
                 ),

@@ -10,6 +10,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
@@ -17,6 +18,7 @@ import 'package:seating_generator_web/ui/main/rating_page/widgets/game_filter_di
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class RatingPage extends StatefulWidget {
@@ -53,14 +55,13 @@ class RatingPage extends StatefulWidget {
     return context.namedLocation(
       _tournamentName,
       pathParameters: {
-        "id": tournamentId.toString(),
+        'id': tournamentId.toString(),
       },
       queryParameters: {
-        "style": tableStyle.name,
-        "sort": sort.name,
-        "game-filter": gameFilter.toString(),
-        if (customSortColumnIndex > 0)
-          "custom-sort-column": customSortColumnIndex.toString(),
+        'style': tableStyle.name,
+        'sort': sort.name,
+        'game-filter': gameFilter.toString(),
+        if (customSortColumnIndex > 0) 'custom-sort-column': customSortColumnIndex.toString(),
       },
     );
   }
@@ -76,17 +77,14 @@ class RatingPage extends StatefulWidget {
   }) {
     return context.namedLocation(
       _clubName,
-      pathParameters: {"clubId": clubId.toString()},
+      pathParameters: {'clubId': clubId.toString()},
       queryParameters: {
-        "date-start":
-            range == null ? null : dateFormatForRequests.format(range.start),
-        "date-end":
-            range == null ? null : dateFormatForRequests.format(range.end),
-        "style": tableStyle.name,
-        "sort": sort.name,
-        "game-filter": gameFilter.toString(),
-        if (customSortColumnIndex > 0)
-          "custom-sort-column": customSortColumnIndex.toString(),
+        'date-start': range == null ? null : dateFormatForRequests.format(range.start),
+        'date-end': range == null ? null : dateFormatForRequests.format(range.end),
+        'style': tableStyle.name,
+        'sort': sort.name,
+        'game-filter': gameFilter.toString(),
+        if (customSortColumnIndex > 0) 'custom-sort-column': customSortColumnIndex.toString(),
       },
     );
   }
@@ -98,19 +96,18 @@ class RatingPage extends StatefulWidget {
     path: 'rating',
     name: _tournamentName,
     builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters["id"]!);
+      final tournamentId = int.parse(state.pathParameters['id']!);
       final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["style"] == element.name,
+            (element) => state.uri.queryParameters['style'] == element.name,
           ) ??
           RatingTableStyle.full;
       final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["sort"] == element.name,
+            (element) => state.uri.queryParameters['sort'] == element.name,
           ) ??
           RatingSort.score;
-      final gameFilter =
-          int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final gameFilter = int.tryParse(state.uri.queryParameters['game-filter'] ?? '') ?? 0;
       final customSortColumnIndex = int.tryParse(
-            state.uri.queryParameters["custom-sort-column"] ?? "",
+            state.uri.queryParameters['custom-sort-column'] ?? '',
           ) ??
           0;
       return BlocProvider<RatingBloc>(
@@ -132,29 +129,25 @@ class RatingPage extends StatefulWidget {
   );
 
   static final GoRoute clubRoute = GoRoute(
-    path: "rating",
+    path: 'rating',
     name: _clubName,
     builder: (context, state) {
-      final clubId = int.parse(state.pathParameters["clubId"]!);
-      final dateStart =
-          DateTime.tryParse(state.uri.queryParameters["date-start"] ?? "") ??
-              DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd =
-          DateTime.tryParse(state.uri.queryParameters["date-end"] ?? "") ??
-              DateTime.now();
+      final clubId = int.parse(state.pathParameters['clubId']!);
+      final dateStart = DateTime.tryParse(state.uri.queryParameters['date-start'] ?? '') ??
+          DateTime.now().subtract(const Duration(days: 30));
+      final dateEnd = DateTime.tryParse(state.uri.queryParameters['date-end'] ?? '') ?? DateTime.now();
       final range = DateTimeRange(start: dateStart, end: dateEnd);
       final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["style"] == element.name,
+            (element) => state.uri.queryParameters['style'] == element.name,
           ) ??
           RatingTableStyle.full;
       final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters["sort"] == element.name,
+            (element) => state.uri.queryParameters['sort'] == element.name,
           ) ??
           RatingSort.score;
-      final gameFilter =
-          int.tryParse(state.uri.queryParameters["game-filter"] ?? "") ?? 0;
+      final gameFilter = int.tryParse(state.uri.queryParameters['game-filter'] ?? '') ?? 0;
       final customSortColumnIndex = int.tryParse(
-            state.uri.queryParameters["custom-sort-column"] ?? "",
+            state.uri.queryParameters['custom-sort-column'] ?? '',
           ) ??
           0;
       return BlocProvider<RatingBloc>(
@@ -178,7 +171,7 @@ class RatingPage extends StatefulWidget {
 }
 
 class _RatingPageState extends CustomState<RatingPage> {
-  final format = DateFormat("dd:MM:yyyy");
+  final format = DateFormat('dd:MM:yyyy');
   int carouselIndex = 1;
   final _carouselController = carousel.CarouselSliderController();
 
@@ -204,11 +197,11 @@ class _RatingPageState extends CustomState<RatingPage> {
   getTextFrom(RatingTableStyle style) {
     switch (style) {
       case RatingTableStyle.full:
-        return 'Рейтинг';
+        return context.locale.ratingTab;
       case RatingTableStyle.stats:
-        return "Винрейт";
+        return context.locale.winrateTab;
       case RatingTableStyle.score:
-        return "Баллы";
+        return context.locale.scoreTab;
       case RatingTableStyle.custom:
         return context.locale.customColumns;
     }
@@ -234,10 +227,6 @@ class _RatingPageState extends CustomState<RatingPage> {
   Widget buildMobile(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
-        if (state.isLoading) {
-          return const LoadingOverlayWidget();
-        }
-
         Widget ratingTable({bool singlePage = false}) => RatingTable(
               isTournament: widget.tournamentId != null,
               isMobile: true,
@@ -297,211 +286,212 @@ class _RatingPageState extends CustomState<RatingPage> {
           );
         }
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (state.rows.isNotEmpty)
-                    IconButton(
-                      onPressed: openFullscreen,
-                      icon: Icon(Icons.fullscreen_outlined),
-                    ),
-                  Flexible(
-                    child: Text(
-                      state.clubName,
-                      style: context.theme.headerTextStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  if (widget.clubId != null)
-                    IconButton(
-                      onPressed: () => context.push(
-                        ClubGamesPage.createLocation(
-                          context: context,
-                          clubId: widget.clubId!,
-                          range: widget.range,
-                        ),
-                      ),
-                      icon: const Icon(Icons.table_chart_outlined),
-                    ),
-                ],
+        return Scaffold(
+          appBar: AppBar(
+            leading: BackButton(
+              onPressed: context.backOrGoToDefault(
+                (c) => widget.clubId != null
+                    ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
+                    : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!),
               ),
             ),
-            if (widget.range != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: TextButton(
-                  onPressed: onChangeRangeTap,
-                  child: Text(
-                    "${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
-                    textAlign: TextAlign.center,
-                  ),
+            title: Text(state.clubName),
+            actions: [
+              if (state.rows.isNotEmpty)
+                IconButton(
+                  onPressed: openFullscreen,
+                  icon: const Icon(Icons.fullscreen_outlined),
                 ),
-              ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
+              if (widget.clubId != null)
+                IconButton(
+                  onPressed: () => context.push(
+                    ClubGamesPage.createLocation(
+                      context: context,
+                      clubId: widget.clubId!,
+                      range: widget.range,
+                    ),
+                  ),
+                  icon: const Icon(Icons.table_chart_outlined),
+                ),
+              if (widget.tournamentId != null)
+                TournamentMenuAction(
+                  tournamentId: widget.tournamentId!,
+                  openDrawer: () => Scaffold.of(context).openEndDrawer(),
+                ),
+            ],
+          ),
+          body: Stack(
+            children: [
+              Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  gameFilterWidget(),
-                  const SizedBox(width: 8),
-                  styleSwitcher(
-                    hasCustomColumns: state.hasCustomColumns,
-                  ),
-                  const SizedBox(width: 8),
-                  downloadRatingButton(),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            winRate(state),
-            const SizedBox(
-              height: 16,
-            ),
-            Expanded(
-              child: state.rows.isEmpty
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
+                  const SizedBox(height: 8),
+                  if (widget.range != null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: TextButton(
+                        onPressed: onChangeRangeTap,
                         child: Text(
-                          context.locale.ratingNoGamesFound,
-                          style: MyTheme.of(context).defaultTextStyle,
+                          '${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
                           textAlign: TextAlign.center,
                         ),
                       ),
-                    )
-                  : ratingTable(singlePage: false),
-            ),
-          ],
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        gameFilterWidget(),
+                        const SizedBox(width: 8),
+                        styleSwitcher(
+                          hasCustomColumns: state.hasCustomColumns,
+                        ),
+                        const SizedBox(width: 8),
+                        downloadRatingButton(),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  winRate(state),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: state.rows.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(
+                                context.locale.ratingNoGamesFound,
+                                style: MyTheme.of(context).defaultTextStyle,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
+                        : ratingTable(singlePage: false),
+                  ),
+                ],
+              ),
+              if (state.isLoading) const LoadingOverlayWidget(),
+            ],
+          ),
         );
       },
     );
   }
 
   @override
-  Widget buildDesktop(BuildContext context) =>
-      BlocBuilder<RatingBloc, RatingState>(
+  Widget buildDesktop(BuildContext context) => BlocBuilder<RatingBloc, RatingState>(
         builder: (context, state) {
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                    bottom: 20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              state.clubName,
-                              style: MyTheme.of(context).headerTextStyle,
-                            ),
-                          ),
-                          if (widget.clubId != null)
-                            IconButton(
-                              onPressed: () => context.push(
-                                ClubGamesPage.createLocation(
-                                  context: context,
-                                  clubId: widget.clubId!,
-                                  range: widget.range,
-                                ),
-                              ),
-                              icon: const Icon(Icons.table_chart_outlined),
-                            ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (widget.range != null)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16.0, right: 8),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(context.locale.period),
-                                  CustomButton(
-                                    onTap: onChangeRangeTap,
-                                    disabled: widget.tournamentId != null,
-                                    text:
-                                        "${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}",
-                                  ),
-                                ],
-                              ),
-                            ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0, right: 8),
-                            child: gameFilterWidget(),
-                          ),
-                          styleSwitcher(
-                            hasCustomColumns: state.hasCustomColumns,
-                          ),
-                          downloadRatingButton(),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      winRate(state),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: RatingTable(
-                            style: widget.style,
-                            rows: state.rows,
-                            clubId: widget.clubId,
-                            sort: widget.sort,
-                            gameFilter: widget.gameFilter,
-                            openGame: openGame,
-                            customSortColumnIndex: widget.customSortColumnIndex,
-                            onPlayerTap: (playerId) => context.push(
-                              PlayerStatsPage.createLocation(
-                                context: context,
-                                playerId: playerId,
-                              ),
-                            ),
-                            changeSort: (
-                              RatingSort sort, {
-                              int? customSortColumnIndex,
-                            }) {
-                              context.read<RatingBloc>().add(
-                                    RatingEvent.rangeChanged(
-                                      range: widget.range,
-                                      clubId: widget.clubId,
-                                      style: widget.style,
-                                      tournamentId: widget.tournamentId,
-                                      sort: sort,
-                                      gameFilter: widget.gameFilter,
-                                      customSortColumnIndex:
-                                          customSortColumnIndex ?? 0,
-                                    ),
-                                  );
-                            },
-                            tournamentId: widget.tournamentId,
-                            isTournament: widget.tournamentId != null,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+          return Scaffold(
+            appBar: AppBar(
+              leading: BackButton(
+                onPressed: context.backOrGoToDefault(
+                  (c) => widget.clubId != null
+                      ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
+                      : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!),
                 ),
               ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
+              title: Text(state.clubName),
+              actions: [
+                downloadRatingButton(),
+                gameFilterWidget(),
+                if (widget.clubId != null)
+                  IconButton(
+                    onPressed: () => context.push(
+                      ClubGamesPage.createLocation(
+                        context: context,
+                        clubId: widget.clubId!,
+                        range: widget.range,
+                      ),
+                    ),
+                    icon: const Icon(Icons.table_chart_outlined),
+                  ),
+              ],
+            ),
+            body: Stack(
+              children: [
+                Positioned.fill(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 20,
+                      bottom: 20,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (widget.range != null)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0, right: 8),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(context.locale.period),
+                                    CustomButton(
+                                      onTap: onChangeRangeTap,
+                                      disabled: widget.tournamentId != null,
+                                      text:
+                                          '${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            styleSwitcher(
+                              hasCustomColumns: state.hasCustomColumns,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        winRate(state),
+                        const SizedBox(height: 16),
+                        Expanded(
+                          child: Center(
+                            child: RatingTable(
+                              style: widget.style,
+                              rows: state.rows,
+                              clubId: widget.clubId,
+                              sort: widget.sort,
+                              gameFilter: widget.gameFilter,
+                              openGame: openGame,
+                              customSortColumnIndex: widget.customSortColumnIndex,
+                              onPlayerTap: (playerId) => context.push(
+                                PlayerStatsPage.createLocation(
+                                  context: context,
+                                  playerId: playerId,
+                                ),
+                              ),
+                              changeSort: (
+                                RatingSort sort, {
+                                int? customSortColumnIndex,
+                              }) {
+                                context.read<RatingBloc>().add(
+                                      RatingEvent.rangeChanged(
+                                        range: widget.range,
+                                        clubId: widget.clubId,
+                                        style: widget.style,
+                                        tournamentId: widget.tournamentId,
+                                        sort: sort,
+                                        gameFilter: widget.gameFilter,
+                                        customSortColumnIndex: customSortColumnIndex ?? 0,
+                                      ),
+                                    );
+                              },
+                              tournamentId: widget.tournamentId,
+                              isTournament: widget.tournamentId != null,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
           );
         },
       );
@@ -588,11 +578,11 @@ class _RatingPageState extends CustomState<RatingPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Винрейт мирных жителей: $citizenWinRate% (${model.citizenWins}/${model.games})",
+          context.locale.citizenWinrate(citizenWinRate, model.citizenWins, model.games),
         ),
         const SizedBox(height: 4),
         Text(
-          "Винрейт мафии: $mafiaWinRate% (${model.mafiaWins}/${model.games})",
+          context.locale.mafiaWinrate(mafiaWinRate, model.mafiaWins, model.games),
         ),
       ],
     );

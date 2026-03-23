@@ -5,8 +5,7 @@ import 'package:seating_generator_web/data/base_request.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 class GetTournamentRatingRequest extends BaseRequest<ClubRatingEventOut> {
-  GetTournamentRatingRequest({required int tournamentId})
-      : super("/api/tournaments/$tournamentId/rating");
+  GetTournamentRatingRequest({required int tournamentId}) : super('/api/tournaments/$tournamentId/rating');
 
   @override
   FutureOr<ClubRatingEventOut> parse(List<int> bytes) {

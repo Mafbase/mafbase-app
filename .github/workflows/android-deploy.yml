@@ -71,6 +71,12 @@ jobs:
       - name: Install Flutter dependencies
         run: flutter pub get
 
+      - name: Generate localizations
+        run: flutter gen-l10n
+
+      - name: Generate code
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
       - name: Use Android signing config
         run: |
           cp "$KEY_PROPERTIES_PATH" android/key.properties

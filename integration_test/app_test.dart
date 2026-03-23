@@ -13,8 +13,8 @@ void main() {
     final scope = DependencyScope(isIntegrationTest: true);
     await scope.storageFactory.credentialStorage.save(
       Credentials(
-        "test@mail.ru",
-        "testtest",
+        'test@mail.ru',
+        'testtest',
       ),
     );
     await tester.pumpWidget(
@@ -33,7 +33,7 @@ void main() {
     await tester.tap(clubRow);
     await tester.pumpAndSettle();
 
-    final openRatingButton = find.text("Открыть рейтинг клуба");
+    final openRatingButton = find.text('Открыть рейтинг клуба');
     expect(openRatingButton, findsOneWidget);
     await tester.tap(openRatingButton);
     await tester.pumpAndSettle();
@@ -42,8 +42,8 @@ void main() {
     final scope = DependencyScope(isIntegrationTest: true);
     await scope.storageFactory.credentialStorage.save(
       Credentials(
-        "test@mail.ru",
-        "testtest",
+        'test@mail.ru',
+        'testtest',
       ),
     );
     await tester.pumpWidget(
@@ -57,15 +57,15 @@ void main() {
     expect(tournament, findsOneWidget);
     await tester.tap(tournament);
     await tester.pumpAndSettle();
-    expect(find.text("Домовой"), findsOneWidget);
+    expect(find.text('Домовой'), findsOneWidget);
 
-    final addPlayer = find.text("Добавить участника");
+    final addPlayer = find.text('Добавить участника');
     expect(addPlayer, findsOneWidget);
     await tester.tap(addPlayer, warnIfMissed: false);
     await tester.pumpAndSettle();
-    final nicknameField = find.widgetWithText(CustomTextField, "Никнейм");
+    final nicknameField = find.widgetWithText(CustomTextField, 'Никнейм');
     expect(nicknameField, findsOneWidget);
-    await tester.enterText(nicknameField, "Stre");
+    await tester.enterText(nicknameField, 'Stre');
     await tester.pumpAndSettle();
     final strelasNickname = find.text('Strelas');
     await tester.ensureVisible(strelasNickname);
@@ -73,12 +73,12 @@ void main() {
     await tester.tap(strelasNickname, warnIfMissed: false);
     await tester.pumpAndSettle();
 
-    final addButton = find.text("Добавить");
+    final addButton = find.text('Добавить');
     expect(addButton, findsOneWidget);
     await tester.tap(addButton, warnIfMissed: false);
     await tester.pumpAndSettle();
 
-    final row = find.text("Strelas");
+    final row = find.text('Strelas');
     expect(row, findsOneWidget);
     await tester.tap(row);
     await tester.pumpAndSettle();
@@ -89,11 +89,11 @@ void main() {
     await tester.tap(delete, warnIfMissed: false);
     await tester.pumpAndSettle();
 
-    final confirmButton = find.text("Да");
+    final confirmButton = find.text('Да');
     expect(confirmButton, findsOneWidget);
     await tester.tap(confirmButton, warnIfMissed: false);
     await tester.pumpAndSettle();
-    final strelasRow = find.text("Strelas");
+    final strelasRow = find.text('Strelas');
     expect(strelasRow, findsNothing);
   });
   testWidgets('login flow', (tester) async {

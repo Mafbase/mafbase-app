@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/data/base_request.dart';
 import 'package:seating_generator_web/data/requests/login_request.dart';
@@ -24,8 +23,8 @@ class MyHttpClient {
         return status != null && status <= 500;
       },
       headers: {
-        "Content-Type": "application/protobuf",
-        "Accept": "application/protobuf",
+        'Content-Type': 'application/protobuf',
+        'Accept': 'application/protobuf',
       },
     ),
   )..interceptors.addAll([
@@ -37,8 +36,7 @@ class MyHttpClient {
             return;
           }
 
-          if (response.headers[HttpHeaders.authorizationHeader]?.isEmpty ??
-              true) {
+          if (response.headers[HttpHeaders.authorizationHeader]?.isEmpty ?? true) {
             handler.next(response);
             return;
           }
@@ -65,8 +63,7 @@ class MyHttpClient {
       options: Options(
         headers: {
           HttpHeaders.contentLengthHeader: contentLength,
-          if (token != null && token.isNotEmpty)
-            HttpHeaders.authorizationHeader: "Bearer $token",
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
         },
       ),
     );
@@ -112,8 +109,7 @@ class MyHttpClient {
       method,
       options: Options(
         headers: {
-          if (token != null && token.isNotEmpty)
-            HttpHeaders.authorizationHeader: "Bearer $token",
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
         },
       ),
     );
@@ -162,8 +158,7 @@ class MyHttpClient {
       options: Options(
         headers: {
           HttpHeaders.contentLengthHeader: contentLength,
-          if (token != null && token.isNotEmpty)
-            HttpHeaders.authorizationHeader: "Bearer $token",
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
         },
       ),
     );
@@ -191,7 +186,7 @@ class MyHttpClient {
 
         return post(method, data, contentLength, useRecoveryToken: false);
       }
-      throw UnauthenticatedError("Authentication error");
+      throw UnauthenticatedError('Authentication error');
     }
 
     _checkResponse(response);
@@ -212,8 +207,7 @@ class MyHttpClient {
       options: Options(
         headers: {
           HttpHeaders.contentLengthHeader: contentLength,
-          if (token != null && token.isNotEmpty)
-            HttpHeaders.authorizationHeader: "Bearer $token",
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
         },
       ),
     );
@@ -241,7 +235,7 @@ class MyHttpClient {
 
         return put(method, data, contentLength, useRecoveryToken: false);
       }
-      throw UnauthenticatedError("Authentication error");
+      throw UnauthenticatedError('Authentication error');
     }
 
     _checkResponse(response);
@@ -259,14 +253,13 @@ class MyHttpClient {
       method,
       data: FormData.fromMap(
         {
-          "file":
-              MultipartFile.fromBytes(bytes, filename: fileName ?? "temp.csv"),
+          'file': MultipartFile.fromBytes(bytes, filename: fileName ?? 'temp.csv'),
         },
       ),
       options: Options(
         headers: {
-          HttpHeaders.contentTypeHeader: "multipart/*",
-          HttpHeaders.authorizationHeader: "Bearer ${await _storage.authToken}",
+          HttpHeaders.contentTypeHeader: 'multipart/*',
+          HttpHeaders.authorizationHeader: 'Bearer ${await _storage.authToken}',
         },
       ),
     )
@@ -292,11 +285,10 @@ class MyHttpClient {
     }
   }
 
-  MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage)
-      : baseUrl = "https://mafbase.ru";
+  MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage) : baseUrl = 'https://mafbase.ru';
 
   MyHttpClient.autoForWeb(this._storage, this._credentialStorage)
-      : baseUrl = "${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}";
+      : baseUrl = '${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}';
 }
 
 extension GeneratedExt on GeneratedMessage {
@@ -315,9 +307,9 @@ class RequestError extends Error {
   @override
   String toString() {
     if (message == null) {
-      return "RequestError";
+      return 'RequestError';
     } else {
-      return "RequestError: $message";
+      return 'RequestError: $message';
     }
   }
 }
@@ -330,9 +322,9 @@ class UnauthenticatedError extends Error {
   @override
   String toString() {
     if (message == null) {
-      return "UnauthenticatedError";
+      return 'UnauthenticatedError';
     } else {
-      return "UnauthenticatedError: $message";
+      return 'UnauthenticatedError: $message';
     }
   }
 }

@@ -9,12 +9,14 @@ class CustomDropdown<T> extends StatefulWidget {
   final List<T?> items;
   final String Function(T? item) mapToString;
   final bool readOnly;
+  final bool expand;
 
   const CustomDropdown({
     super.key,
     this.onChanged,
     this.readOnly = false,
     this.mapToString = _mapToString,
+    this.expand = true,
     required this.items,
     required this.initValue,
   });
@@ -44,28 +46,51 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<T>(
-      value: value,
-      alignment: Alignment.center,
-      style: context.theme.defaultTextStyle.copyWith(
-        color: Theme.of(context).hintColor,
-      ),
-      items: widget.items.map((item) {
-        return DropdownMenuItem<T>(
-          value: item,
-          child: Text(
-            widget.mapToString(item),
+    final theme = context.theme;
+
+    return SizedBox(
+      width: widget.expand ? double.infinity : null,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: widget.readOnly ? theme.background1 : theme.background2,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: theme.borderColor),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<T>(
+              value: value,
+              icon: Icon(
+                Icons.expand_more_outlined,
+                color: theme.darkGreyColor,
+                size: 16,
+              ),
+              style: theme.defaultTextStyle.copyWith(
+                color: widget.readOnly ? theme.greyColor : theme.textColor,
+              ),
+              dropdownColor: theme.background2,
+              borderRadius: BorderRadius.circular(8),
+              elevation: 4,
+              menuMaxHeight: 240,
+              items: widget.items.map((item) {
+                return DropdownMenuItem<T>(
+                  value: item,
+                  child: Text(widget.mapToString(item)),
+                );
+              }).toList(),
+              onChanged: widget.readOnly
+                  ? null
+                  : (newValue) {
+                      setState(() {
+                        value = newValue ?? value;
+                      });
+                      widget.onChanged?.call(newValue);
+                    },
+            ),
           ),
-        );
-      }).toList(),
-      onChanged: widget.readOnly
-          ? null
-          : (newValue) {
-              setState(() {
-                value = newValue ?? value;
-              });
-              widget.onChanged?.call(newValue);
-            },
+        ),
+      ),
     );
   }
 }

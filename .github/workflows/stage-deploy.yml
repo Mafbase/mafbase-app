@@ -1,0 +1,13 @@
+name: Stage Deploy
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  stage:
+    uses: Mafbase/mafbase-backend/.github/workflows/reusable-stage-deploy.yml@main
+    with:
+      image_name: seating-generator-web
+      service_name: frontend

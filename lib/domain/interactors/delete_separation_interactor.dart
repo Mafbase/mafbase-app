@@ -22,5 +22,5 @@ class DeleteSeparationInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "DeleteSeparationInteractor";
+  String get interactorName => 'DeleteSeparationInteractor';
 }

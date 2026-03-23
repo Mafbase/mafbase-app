@@ -1,40 +1,69 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter/foundation.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
+import 'package:seating_generator_web/feature/profile/domain/model/tournament_subscription_plan_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/repository/profile_repository.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
 
-class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
+class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<ProfileEffect, ProfileState> {
   final LogoutInteractor _logoutInteractor;
   final DeleteProfileInteractor _deleteProfileInteractor;
   final ProfileRepository _profileRepository;
   final CreatePlayerInteractor _createPlayerInteractor;
-  final BuildContext? _context;
+  final AuthNotifier _authNotifier;
+
+  late final VoidCallback _authListener;
 
   ProfileBloc(
     this._logoutInteractor,
     this._deleteProfileInteractor,
     this._profileRepository,
     this._createPlayerInteractor,
-    BuildContext? context,
-  ) : _context = context,
-        super(const ProfileState()) {
+    this._authNotifier,
+  ) : super(const ProfileState()) {
     on<ProfileEventLogoutPressed>(_onLogoutPressed);
     on<ProfileEventDeleteProfile>(_deleteProfile);
     on<ProfileEventLoadUserProfile>(_loadUserProfile);
     on<ProfileEventSetUserProfile>(_setUserProfile);
+    on<ProfileEventLoadSubscription>(_loadSubscription);
+    on<ProfileEventBillSubscription>(_billSubscription);
+    on<ProfileEventReset>(_onReset);
+
+    _authListener = () {
+      final model = _authNotifier.value;
+      if (model is AuthNotifierAuthorizedModel) {
+        add(const ProfileEvent.loadUserProfile());
+        add(const ProfileEvent.loadSubscription());
+      } else if (model is AuthNotifierUnauthorizedModel) {
+        add(const ProfileEvent.reset());
+      }
+    };
+    _authNotifier.addListener(_authListener);
+
+    if (_authNotifier.value is AuthNotifierAuthorizedModel) {
+      add(const ProfileEvent.loadUserProfile());
+      add(const ProfileEvent.loadSubscription());
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _authNotifier.removeListener(_authListener);
+    return super.close();
   }
 
   Future<void> _deleteProfile(
     ProfileEventDeleteProfile event,
     Emitter emit,
   ) =>
-      _deleteProfileInteractor.run().whenComplete(() => _context?.pop());
+      _deleteProfileInteractor.run().whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
 
   Future<void> _loadUserProfile(
     ProfileEventLoadUserProfile event,
@@ -61,17 +90,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(state.copyWith(isLoading: true));
     try {
       PlayerModel playerToSet = event.player;
-      
-      // Если id == 0, сначала создаем нового игрока
+
       if (playerToSet.id == 0) {
         final newPlayerId = await _createPlayerInteractor.run(
           playerModel: playerToSet,
         );
-        // Обновляем игрока с полученным id
         playerToSet = playerToSet.copyWith(id: newPlayerId);
       }
-      
-      // Отправляем POST запрос с игроком (созданным или существующим)
+
       await _profileRepository.setUserProfile(playerToSet);
       emit(
         state.copyWith(
@@ -85,8 +111,51 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
-  _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {
-    return _logoutInteractor().whenComplete(() => _context?.pop());
+  Future<void> _loadSubscription(
+    ProfileEventLoadSubscription event,
+    Emitter emit,
+  ) async {
+    emit(state.copyWith(isLoadingSubscription: true, subscriptionError: null));
+    try {
+      final plan = await _profileRepository.getTournamentSubscriptionCurrentPlan();
+      emit(
+        state.copyWith(
+          isLoadingSubscription: false,
+          subscriptionPlan: plan,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoadingSubscription: false,
+          subscriptionError: e.toString(),
+        ),
+      );
+    }
   }
 
+  Future<void> _billSubscription(
+    ProfileEventBillSubscription event,
+    Emitter emit,
+  ) async {
+    emit(state.copyWith(isBilling: true));
+    try {
+      final redirectLink = await _profileRepository.billTournamentSubscription(
+        subscriptionType: TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players,
+        days: event.days,
+        redirectPath: event.redirectPath,
+      );
+      emitEffect(ProfileEffect.openBillingUrl(redirectLink));
+    } finally {
+      emit(state.copyWith(isBilling: false));
+    }
+  }
+
+  void _onReset(ProfileEventReset event, Emitter emit) {
+    emit(const ProfileState());
+  }
+
+  _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {
+    return _logoutInteractor().whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
+  }
 }

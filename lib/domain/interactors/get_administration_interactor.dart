@@ -8,9 +8,9 @@ class GetAdministrationInteractor extends BaseInteractor {
   GetAdministrationInteractor(this._ownersRepository);
 
   @override
-  String get interactorName => "GetAdministrationInteractor.run()";
+  String get interactorName => 'GetAdministrationInteractor.run()';
 
   Future<List<UserModel>> run({required int tournamentId}) => wrap(
         () => _ownersRepository.getOwners(tournamentId: tournamentId),
-  );
+      );
 }

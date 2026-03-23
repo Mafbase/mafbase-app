@@ -14,5 +14,4 @@ class VerificationInteractor extends BaseInteractor {
 
   @override
   String get interactorName => 'VerificationInteractor';
-
 }

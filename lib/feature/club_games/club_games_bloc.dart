@@ -29,5 +29,4 @@ class ClubGamesBloc extends Bloc<ClubGamesEvent, ClubGamesState> {
       ),
     );
   }
-
 }

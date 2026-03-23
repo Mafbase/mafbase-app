@@ -13,8 +13,7 @@ class MainEvent with _$MainEvent {
 
   const factory MainEvent.backButtonPressed() = MainEventBackButtonPressed;
 
-  const factory MainEvent.tournamentSelected({required int tournamentId}) =
-      MainEventTournamentSelected;
+  const factory MainEvent.tournamentSelected({required int tournamentId}) = MainEventTournamentSelected;
 
   const factory MainEvent.onTitleTapped() = MainEventTitleTapped;
 

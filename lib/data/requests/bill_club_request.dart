@@ -10,7 +10,7 @@ class BillClubRequest extends BaseRequest<BillTournamentEventOut> {
     required String redirectPath,
     required int days,
   }) : super(
-          "/api/club/$clubId/bill",
+          '/api/club/$clubId/bill',
           data: BillClubEvent(
             redirectPath: redirectPath,
             days: days,

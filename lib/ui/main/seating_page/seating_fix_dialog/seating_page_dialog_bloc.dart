@@ -8,8 +8,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/se
 
 typedef _Emit = Emitter<SeatingPageDialogState>;
 
-class SeatingPageDialogBloc
-    extends Bloc<SeatingPageDialogEvent, SeatingPageDialogState>
+class SeatingPageDialogBloc extends Bloc<SeatingPageDialogEvent, SeatingPageDialogState>
     with EffectEmitter<SeatingPageDialogEffect, SeatingPageDialogState> {
   final PlayersRepository _playersRepository;
 
@@ -24,9 +23,7 @@ class SeatingPageDialogBloc
   }
 
   void _finishEdit(_Emit emit) {
-    final notFound = state.notFound
-        .where((element) => element != state.incorrectPlayer)
-        .toList();
+    final notFound = state.notFound.where((element) => element != state.incorrectPlayer).toList();
 
     if (notFound.isEmpty) {
       emitEffect(const SeatingPageDialogEffect.success());
@@ -76,14 +73,11 @@ class SeatingPageDialogBloc
     SeatingPageDialogEventInit event,
     _Emit emit,
   ) async {
-    final players = await _playersRepository.players;
     emit(
       state.copyWith(
         loading: false,
-        players: players,
         incorrectPlayer: state.notFound.first,
       ),
     );
   }
-
 }

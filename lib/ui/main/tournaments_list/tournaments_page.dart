@@ -2,20 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournament_item_row.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournament_status_widget.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_search_field.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -35,9 +36,6 @@ class TournamentsPage extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: '/tournament',
     name: _name,
-    routes: [
-      TournamentPage.createRoute(),
-    ],
     pageBuilder: (context, state) => const NoTransitionPage(
       child: TournamentsPage._(),
     ),
@@ -45,210 +43,476 @@ class TournamentsPage extends StatefulWidget {
 }
 
 class _TournamentsPageState extends CustomState<TournamentsPage> {
+  final _scrollController = ScrollController();
+  final _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     context.read<TournamentsBloc>().add(const TournamentsEvent.opened());
+    _scrollController.addListener(_onScroll);
   }
 
   @override
-  Widget? buildMobile(BuildContext context) => RefreshIndicator(
+  void dispose() {
+    _scrollController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200) {
+      context.read<TournamentsBloc>().add(const TournamentsEvent.loadMore());
+    }
+  }
+
+  void _onSearchChanged(String query) {
+    context.read<TournamentsBloc>().add(TournamentsEvent.search(query));
+  }
+
+  void _onSearchClear() {
+    context.read<TournamentsBloc>().add(const TournamentsEvent.search(''));
+  }
+
+  @override
+  Widget? buildMobile(BuildContext context) {
+    final theme = MyTheme.of(context);
+    final locale = context.locale;
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
+        title: InkWell(
+          onTap: () => context.go('/'),
+          child: Text(
+            'Mafbase',
+            style: GoogleFonts.balooBhai2(
+              color: Colors.white,
+              fontSize: 32,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        actions: _buildMobileActions(context, theme),
+      ),
+      body: RefreshIndicator(
         onRefresh: () {
           final completer = Completer();
-
-          context
-              .read<TournamentsBloc>()
-              .add(TournamentsEvent.opened(completer: completer));
-
+          context.read<TournamentsBloc>().add(TournamentsEvent.opened(completer: completer));
           return completer.future;
         },
-        child: Container(
-          color: context.theme.background2,
-          child: Material(
-            child: BlocBuilder<TournamentsBloc, TournamentsState>(
-              builder: (context, state) => ValueListenableBuilder(
-                valueListenable: context.read<AuthNotifier>(),
-                builder: (context, authModel, child) {
-                  return Stack(
-                    children: [
-                      child ?? Container(),
-                      if (authModel is AuthNotifierAuthorizedModel)
-                        Positioned(
-                          bottom: 8,
-                          right: 8,
-                          child: FloatingActionButton(
-                            elevation: 10,
-                            onPressed: () {
-                              context
-                                  .read<TournamentsBloc>()
-                                  .add(const TournamentsEvent.create());
-                            },
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                          ),
+        child: BlocBuilder<TournamentsBloc, TournamentsState>(
+          builder: (context, state) => CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              SliverPersistentHeader(
+                floating: true,
+                delegate: _SearchHeaderDelegate(
+                  child: Container(
+                    color: theme.background1,
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: TournamentsSearchField(
+                      controller: _searchController,
+                      onChanged: _onSearchChanged,
+                      onClear: _onSearchClear,
+                      hintText: locale.tournamentsSearchHint,
+                    ),
+                  ),
+                ),
+              ),
+              if (state.isLoading)
+                const SliverFillRemaining(
+                  child: LoadingOverlayWidget(),
+                )
+              else if (state.tournaments.isEmpty)
+                SliverFillRemaining(
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.search_off, size: 64, color: theme.greyColor),
+                        const SizedBox(height: 16),
+                        Text(
+                          locale.tournamentsSearchEmpty,
+                          style: TextStyle(fontSize: 16, color: theme.greyColor),
                         ),
-                      if (state.isLoading) const LoadingOverlayWidget(),
-                    ],
-                  );
-                },
-                child: ListView.builder(
-                  itemCount: state.tournaments.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
-                      child: TournamentItemRow(
+                      ],
+                    ),
+                  ),
+                )
+              else ...[
+                SliverPadding(
+                  padding: const EdgeInsets.all(12),
+                  sliver: SliverList.separated(
+                    itemCount: state.tournaments.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (context, index) {
+                      return TournamentItemRow(
                         tournamentModel: state.tournaments[index],
+                      );
+                    },
+                  ),
+                ),
+                if (state.isLoadingMore)
+                  const SliverToBoxAdapter(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: CircularProgressIndicator(),
                       ),
-                    );
-                  },
+                    ),
+                  ),
+              ],
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: ValueListenableBuilder(
+        valueListenable: context.read<AuthNotifier>(),
+        builder: (context, authModel, _) {
+          if (authModel is! AuthNotifierAuthorizedModel) return const SizedBox.shrink();
+          return FloatingActionButton(
+            elevation: 10,
+            onPressed: () {
+              context.read<TournamentsBloc>().add(const TournamentsEvent.create());
+            },
+            child: const Icon(Icons.add, color: Colors.white),
+          );
+        },
+      ),
+    );
+  }
+
+  List<Widget> _buildMobileActions(BuildContext context, MyTheme theme) {
+    return [
+      ValueListenableBuilder(
+        valueListenable: context.read<AuthNotifier>(),
+        builder: (context, model, child) => model.map(
+          unauthorized: (_) => TextButton(
+            onPressed: () {
+              context.read<MainBloc>().add(const MainEvent.onEnterPressed());
+            },
+            child: Text(
+              context.locale.loginIn,
+              style: theme.defaultTextStyle.copyWith(
+                color: theme.background1,
+              ),
+            ),
+          ),
+          loading: (_) => Container(),
+          authorized: (_) => IconButton(
+            tooltip: context.locale.profile,
+            onPressed: () {
+              context.read<MainBloc>().add(const MainEvent.onProfilePressed());
+            },
+            hoverColor: theme.background1.withValues(alpha: 0.2),
+            icon: const Icon(Icons.person),
+          ),
+        ),
+      ),
+      const SizedBox(width: 8),
+      PopupMenuButton(
+        splashRadius: 24,
+        color: theme.darkBlueColor,
+        child: Icon(
+          Icons.more_vert_outlined,
+          color: theme.btnTextColor,
+        ),
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+              onTap: () {
+                context.read<MainBloc>().add(const MainEvent.openContacts());
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.contacts_outlined,
+                    color: theme.btnTextColor,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    context.locale.contacts,
+                    style: theme.btnTextStyle.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+          ];
+        },
+      ),
+      const SizedBox(width: 8),
+    ];
+  }
+
+  @override
+  Widget buildDesktop(BuildContext context) {
+    final theme = MyTheme.of(context);
+    final locale = context.locale;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(locale.tournamentsListTitle),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 900),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: TournamentsSearchField(
+                  controller: _searchController,
+                  onChanged: _onSearchChanged,
+                  onClear: _onSearchClear,
+                  hintText: locale.tournamentsSearchHint,
                 ),
               ),
             ),
           ),
         ),
-      );
-
-  @override
-  Widget buildDesktop(BuildContext context) {
-    return Container(
-      color: context.theme.background2,
-      child: Material(
-        child: BlocBuilder<TournamentsBloc, TournamentsState>(
-          builder: (context, state) {
-            return ValueListenableBuilder(
-              valueListenable: context.read<AuthNotifier>(),
-              builder: (context, authModel, child) {
-                return Stack(
+      ),
+      body: BlocBuilder<TournamentsBloc, TournamentsState>(
+        builder: (context, state) => Stack(
+          children: [
+            if (!state.isLoading && state.tournaments.isEmpty)
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    child ?? Container(),
-                    if (authModel is AuthNotifierAuthorizedModel)
-                      Positioned(
-                        bottom: 35,
-                        right: 35,
-                        child: FloatingActionButton.large(
-                          elevation: 10,
-                          onPressed: () {
-                            context
-                                .read<TournamentsBloc>()
-                                .add(const TournamentsEvent.create());
-                          },
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    if (state.isLoading) const LoadingOverlayWidget(),
-                  ],
-                );
-              },
-              child: CustomScrollView(
-                slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        Center(
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 50),
-                            child: Text(
-                              AppLocalizations.of(context)!
-                                  .tournamentsListTitle,
-                              style: MyTheme.of(context).headerTextStyle,
-                            ),
-                          ),
-                        ),
-                      ],
+                    Icon(Icons.search_off, size: 64, color: theme.greyColor),
+                    const SizedBox(height: 16),
+                    Text(
+                      locale.tournamentsSearchEmpty,
+                      style: TextStyle(fontSize: 16, color: theme.greyColor),
                     ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: state.tournaments.length,
-                      (context, index) {
-                        final tournament = state.tournaments[index];
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 10,
-                            ),
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(50),
-                              onTap: () {
-                                context.read<MainBloc>().add(
-                                      MainEvent.tournamentSelected(
-                                        tournamentId: tournament.id,
-                                      ),
-                                    );
-                              },
-                              child: Container(
-                                constraints: const BoxConstraints(
-                                  maxWidth: 900,
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 15,
-                                  horizontal: 25,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: MyTheme.of(context)
-                                      .greyColor
-                                      .withValues(alpha: 0.16),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      DateFormat('dd-MM-yyyy').format(
-                                        tournament.dateStart,
-                                      ),
-                                      style:
-                                          MyTheme.of(context).defaultTextStyle,
-                                    ),
-                                    const SizedBox(
-                                      width: 35,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            tournament.name,
-                                            style: MyTheme.of(context)
-                                                .defaultTextStyle,
-                                          ),
-                                          Text(
-                                            'ID: ${tournament.id}',
-                                            style: MyTheme.of(context)
-                                                .hintTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: TournamentStatusWidget(
-                                        status: tournament.status,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                  ],
+                ),
+              )
+            else
+              CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  SliverPadding(
+                    padding: const EdgeInsets.all(16),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: state.tournaments.length,
+                        (context, index) {
+                          final tournament = state.tournaments[index];
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(maxWidth: 900),
+                                child: _DesktopTournamentCard(tournament: tournament),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
+                  if (state.isLoadingMore)
+                    const SliverToBoxAdapter(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
                 ],
               ),
+            if (state.isLoading) const LoadingOverlayWidget(),
+          ],
+        ),
+      ),
+      floatingActionButton: ValueListenableBuilder(
+        valueListenable: context.read<AuthNotifier>(),
+        builder: (context, authModel, _) {
+          if (authModel is! AuthNotifierAuthorizedModel) return const SizedBox.shrink();
+          return FloatingActionButton.large(
+            elevation: 10,
+            onPressed: () {
+              context.read<TournamentsBloc>().add(const TournamentsEvent.create());
+            },
+            child: const Icon(Icons.add, color: Colors.white),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _SearchHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _SearchHeaderDelegate({required this.child});
+
+  @override
+  double get minExtent => 64;
+
+  @override
+  double get maxExtent => 64;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(covariant _SearchHeaderDelegate oldDelegate) => false;
+}
+
+class _DesktopTournamentCard extends StatelessWidget {
+  final TournamentModel tournament;
+
+  const _DesktopTournamentCard({required this.tournament});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
+    final locale = context.locale;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: () {
+        context.read<MainBloc>().add(
+              MainEvent.tournamentSelected(tournamentId: tournament.id),
             );
-          },
+      },
+      child: Ink(
+        decoration: BoxDecoration(
+          color: theme.background2,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: theme.cardShadowColor,
+              blurRadius: 3,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Row(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: _iconColor(theme),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                Icons.emoji_events,
+                size: 24,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        tournament.name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'ID: ${tournament.id}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: theme.hintColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  _buildMetadata(context, theme, locale),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '${tournament.billedPlayers}',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  locale.tournamentCardPlayersLabel,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: theme.greyColor,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 16),
+            TournamentStatusWidget(status: tournament.status),
+          ],
         ),
       ),
     );
+  }
+
+  Widget _buildMetadata(BuildContext context, MyTheme theme, dynamic locale) {
+    final dateRange = _formatDateRange(context, tournament.dateStart, tournament.dateEnd);
+    final metaStyle = TextStyle(fontSize: 13, color: theme.greyColor);
+    final iconColor = theme.greyColor;
+
+    return Row(
+      children: [
+        Icon(Icons.calendar_today, size: 13, color: iconColor),
+        const SizedBox(width: 4),
+        Text(dateRange, style: metaStyle),
+        const SizedBox(width: 8),
+        _dot(theme),
+        const SizedBox(width: 8),
+        Icon(Icons.sports_esports, size: 13, color: iconColor),
+        const SizedBox(width: 4),
+        Text(locale.tournamentCardGames(tournament.gamesCount), style: metaStyle),
+      ],
+    );
+  }
+
+  Widget _dot(MyTheme theme) {
+    return Container(
+      width: 3,
+      height: 3,
+      decoration: BoxDecoration(
+        color: theme.greyColor,
+        borderRadius: BorderRadius.circular(1.5),
+      ),
+    );
+  }
+
+  Color _iconColor(MyTheme theme) {
+    switch (tournament.status) {
+      case TournamentStatus.active:
+        return theme.darkBlueColor;
+      case TournamentStatus.waitForBilling:
+        return theme.positiveColor;
+      case TournamentStatus.ended:
+        return theme.darkGreyColor;
+    }
+  }
+
+  String _formatDateRange(BuildContext context, DateTime start, DateTime end) {
+    final fmt = DateFormat('d MMM', Localizations.localeOf(context).languageCode);
+    if (start.year == end.year && start.month == end.month && start.day == end.day) {
+      return fmt.format(start);
+    }
+    return '${fmt.format(start)} – ${fmt.format(end)}';
   }
 }

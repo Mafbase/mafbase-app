@@ -21,5 +21,4 @@ class TempBloc extends Bloc<TempEvent, TempState> {
       emit(state.copyWith(style: TempStyle.empty));
     }
   }
-
 }

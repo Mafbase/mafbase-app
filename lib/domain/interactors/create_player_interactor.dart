@@ -8,7 +8,7 @@ class CreatePlayerInteractor extends BaseInteractor {
   CreatePlayerInteractor(this._repository);
 
   @override
-  String get interactorName => "CreatePlayerInteractor";
+  String get interactorName => 'CreatePlayerInteractor';
 
   Future<int> run({required PlayerModel playerModel}) {
     return wrap(() {

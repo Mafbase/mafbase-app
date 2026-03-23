@@ -19,5 +19,5 @@ class AddPhotoInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "AddPhotoInteractor";
+  String get interactorName => 'AddPhotoInteractor';
 }

@@ -20,8 +20,7 @@ class ClubDescriptionEditDialog extends StatefulWidget {
   }
 
   @override
-  State<ClubDescriptionEditDialog> createState() =>
-      _ClubDescriptionEditDialogState();
+  State<ClubDescriptionEditDialog> createState() => _ClubDescriptionEditDialogState();
 }
 
 class _ClubDescriptionEditDialogState extends State<ClubDescriptionEditDialog> {

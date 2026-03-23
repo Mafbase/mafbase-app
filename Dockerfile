@@ -6,6 +6,9 @@ RUN mkdir /app/
 COPY . /app/
 WORKDIR /app/
 
+RUN flutter pub get
+RUN flutter gen-l10n
+RUN flutter pub run build_runner build --delete-conflicting-outputs
 RUN flutter build web --release
 
 # Stage 2 - Create the run-time image

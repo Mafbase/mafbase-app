@@ -10,6 +10,7 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_bloc.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_events.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_state.dart';
 import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
@@ -54,35 +55,118 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
 
   @override
   Widget? buildMobile(BuildContext context) {
-    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-      builder: (context, state) {
-        return WrapperLoginPage(
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        title: Text(context.locale.forgotPasswordTitle),
+      ),
+      body: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+        builder: (context, state) {
+          return WrapperLoginPage(
+            child: Stack(
+              children: [
+                AutofillGroup(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 24,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            context.locale.forgotPasswordDescription,
+                            textAlign: TextAlign.center,
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                  fontSize: 12,
+                                ),
+                          ),
+                          const SizedBox(height: 20),
+                          CustomTextField(
+                            controller: _emailController,
+                            autoFillHints: const [
+                              AutofillHints.username,
+                              AutofillHints.email,
+                            ],
+                            icon: Icon(
+                              Icons.email_outlined,
+                              color: MyTheme.of(context).borderColor,
+                              size: 20,
+                            ),
+                            hint: context.locale.loginEmailHint,
+                            errorText: state.hasError ? context.locale.forgotPasswordEmailNotFound : null,
+                            validate: (value) {
+                              if (value != null) {
+                                if (EmailValidator.validate(value)) {
+                                  return null;
+                                }
+                              }
+                              return context.locale.fantasyEmailInvalid;
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          ListenableBuilder(
+                            listenable: _emailController,
+                            builder: (context, _) => CustomButton(
+                              disabled: !EmailValidator.validate(
+                                _emailController.text,
+                              ),
+                              text: context.locale.send,
+                              onTap: _onSubmit,
+                              minimize: true,
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {
+                                context.read<ForgotPasswordBloc>().add(
+                                      const ForgotPasswordEvents.backButtonTapped(),
+                                    );
+                              },
+                              child: Text(
+                                context.locale.authorization,
+                                style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                      color: MyTheme.of(context).darkGreyColor,
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget buildDesktop(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        title: Text(context.locale.forgotPasswordTitle),
+      ),
+      body: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+        builder: (context, state) => WrapperLoginPage(
           child: Stack(
             children: [
               AutofillGroup(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 16,
-                    bottom: 25,
-                  ),
+                  padding: const EdgeInsets.all(40),
                   child: Form(
                     key: _formKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Center(
-                          child: Text(
-                            context.locale.forgotPasswordTitle,
-                            style: const TextStyle(
-                              fontSize: 36,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
                         Text(
                           context.locale.forgotPasswordDescription,
                           textAlign: TextAlign.center,
@@ -90,17 +174,14 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                                 fontSize: 14,
                               ),
                         ),
-                        const SizedBox(height: 35),
+                        const SizedBox(height: 28),
                         CustomTextField(
                           controller: _emailController,
-                          autoFillHints: const [
-                            AutofillHints.username,
-                            AutofillHints.email,
-                          ],
-                          isRequiredField: true,
+                          autoFillHints: const [AutofillHints.email],
                           icon: Icon(
                             Icons.email_outlined,
                             color: MyTheme.of(context).borderColor,
+                            size: 20,
                           ),
                           hint: context.locale.loginEmailHint,
                           errorText: state.hasError ? context.locale.forgotPasswordEmailNotFound : null,
@@ -125,15 +206,19 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        TextButton(
-                          onPressed: () {
-                            context.read<ForgotPasswordBloc>().add(
-                                  const ForgotPasswordEvents.backButtonTapped(),
-                                );
-                          },
-                          child: Text(
-                            context.locale.authorization,
-                            style: MyTheme.of(context).defaultTextStyle,
+                        Center(
+                          child: TextButton(
+                            onPressed: () {
+                              context.read<ForgotPasswordBloc>().add(
+                                    const ForgotPasswordEvents.backButtonTapped(),
+                                  );
+                            },
+                            child: Text(
+                              context.locale.authorization,
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    color: MyTheme.of(context).darkGreyColor,
+                                  ),
+                            ),
                           ),
                         ),
                       ],
@@ -141,104 +226,12 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
                   ),
                 ),
               ),
-              if (state.isLoading) const LoadingOverlayWidget(),
+              if (state.isLoading)
+                const Positioned.fill(
+                  child: LoadingOverlayWidget(),
+                ),
             ],
           ),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-      builder: (context, state) => WrapperLoginPage(
-        child: Stack(
-          children: [
-            AutofillGroup(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 40,
-                  right: 40,
-                  top: 36,
-                  bottom: 45,
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Center(
-                        child: Text(
-                          context.locale.forgotPasswordTitle,
-                          style: const TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        context.locale.forgotPasswordDescription,
-                        textAlign: TextAlign.center,
-                        style: MyTheme.of(context).defaultTextStyle.copyWith(
-                              fontSize: 14,
-                            ),
-                      ),
-                      const SizedBox(height: 45),
-                      CustomTextField(
-                        controller: _emailController,
-                        autoFillHints: const [AutofillHints.email],
-                        isRequiredField: true,
-                        icon: Icon(
-                          Icons.email_outlined,
-                          color: MyTheme.of(context).borderColor,
-                        ),
-                        hint: context.locale.loginEmailHint,
-                        errorText: state.hasError ? context.locale.forgotPasswordEmailNotFound : null,
-                        validate: (value) {
-                          if (value != null) {
-                            if (EmailValidator.validate(value)) {
-                              return null;
-                            }
-                          }
-                          return context.locale.fantasyEmailInvalid;
-                        },
-                      ),
-                      const SizedBox(height: 24),
-                      ListenableBuilder(
-                        listenable: _emailController,
-                        builder: (context, _) => CustomButton(
-                          disabled: !EmailValidator.validate(
-                            _emailController.text,
-                          ),
-                          text: context.locale.send,
-                          onTap: _onSubmit,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      TextButton(
-                        onPressed: () {
-                          context.read<ForgotPasswordBloc>().add(
-                                const ForgotPasswordEvents.backButtonTapped(),
-                              );
-                        },
-                        child: Text(
-                          context.locale.authorization,
-                          style: MyTheme.of(context).defaultTextStyle,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            if (state.isLoading)
-              Positioned.fill(
-                child: const LoadingOverlayWidget(),
-              ),
-          ],
         ),
       ),
     );

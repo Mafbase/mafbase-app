@@ -20,8 +20,7 @@ import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/rating_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/feature/club_games/data/request/club_tables_rating_request.dart';
-import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart'
-    as pb;
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart' as pb;
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/downloader/downloader.dart';
 
@@ -30,9 +29,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
 
   @override
   Future<int> addGame(pb.ClubGameResult result, int clubId) {
-    return AddClubGameRequest(clubId: clubId, result: result)
-        .execute(client)
-        .then((value) => value.gameId);
+    return AddClubGameRequest(clubId: clubId, result: result).execute(client).then((value) => value.gameId);
   }
 
   @override
@@ -40,9 +37,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
     required int clubId,
     required DateTimeRange range,
   }) {
-    return GetClubRatingRequest(range: range, clubId: clubId)
-        .execute(client)
-        .then((event) {
+    return GetClubRatingRequest(range: range, clubId: clubId).execute(client).then((event) {
       return RatingModel.fromProto(event);
     });
   }
@@ -52,9 +47,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
     required int clubId,
     required DateTimeRange range,
   }) {
-    return ClubTablesRatingRequest(range: range, clubId: clubId)
-        .execute(client)
-        .then((event) {
+    return ClubTablesRatingRequest(range: range, clubId: clubId).execute(client).then((event) {
       return event.item.map(GameResultModel.fromProto).toList();
     });
   }
@@ -66,16 +59,12 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
 
   @override
   Future<bool> isOwner(int clubId) async {
-    return ClubCheckRequest(clubId: clubId)
-        .execute(client)
-        .then((value) => true)
-        .onError((error, stackTrace) => false);
+    return ClubCheckRequest(clubId: clubId).execute(client).then((value) => true).onError((error, stackTrace) => false);
   }
 
   @override
   Future editGame(pb.ClubGameResult result, int clubId, int gameId) {
-    return EditClubGameRequest(clubId: clubId, gameId: gameId, result: result)
-        .execute(client);
+    return EditClubGameRequest(clubId: clubId, gameId: gameId, result: result).execute(client);
   }
 
   @override
@@ -130,14 +119,11 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
 
   @override
   Future<DateTime?> getHideDate({required int id}) =>
-      GetHideDateRequest(id.toString())
-          .execute(client)
-          .then((value) => DateTime.tryParse(value.date));
+      GetHideDateRequest(id.toString()).execute(client).then((value) => DateTime.tryParse(value.date));
 
   @override
   Future<void> updateHideDate({required int id, required DateTime? dateTime}) =>
-      UpdateHideDateRequest(clubId: id.toString(), dateTime: dateTime)
-          .execute(client);
+      UpdateHideDateRequest(clubId: id.toString(), dateTime: dateTime).execute(client);
 
   @override
   Future<void> deleteGame({required int gameId, required int clubId}) =>
@@ -166,8 +152,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
       requestClub.billedFor = club.billedFor!.toIso8601String();
     }
 
-    await EditClubDescriptionRequest(clubId: clubId, club: requestClub)
-        .execute(client);
+    await EditClubDescriptionRequest(clubId: clubId, club: requestClub).execute(client);
   }
 
   @override

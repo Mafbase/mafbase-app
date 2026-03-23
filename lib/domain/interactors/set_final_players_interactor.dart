@@ -19,5 +19,5 @@ class SetFinalPlayersInteractor extends BaseInteractor {
       );
 
   @override
-  String get interactorName => "SetFinalPlayersInteractor.run()";
+  String get interactorName => 'SetFinalPlayersInteractor.run()';
 }

@@ -5,8 +5,7 @@ abstract interface class ProfileRepository {
   Future<void> deleteAccount();
   Future<PlayerModel?> getUserProfile();
   Future<void> setUserProfile(PlayerModel player);
-  Future<TournamentSubscriptionPlanModel>
-      getTournamentSubscriptionCurrentPlan();
+  Future<TournamentSubscriptionPlanModel> getTournamentSubscriptionCurrentPlan();
   Future<String> billTournamentSubscription({
     required TournamentSubscriptionTypeModel subscriptionType,
     required int days,

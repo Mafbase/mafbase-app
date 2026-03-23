@@ -27,7 +27,7 @@ class _RolePickerState extends State<RolePicker> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Tooltip(
-          message: "Mафия",
+          message: 'Mафия',
           child: InkWell(
             borderRadius: BorderRadius.circular(500),
             onTap: widget.readOnly ? null : () => onChange(PlayerRole.maf),
@@ -42,7 +42,7 @@ class _RolePickerState extends State<RolePicker> {
           ),
         ),
         Tooltip(
-          message: "Дон",
+          message: 'Дон',
           child: InkWell(
             borderRadius: BorderRadius.circular(500),
             onTap: widget.readOnly ? null : () => onChange(PlayerRole.don),
@@ -57,14 +57,13 @@ class _RolePickerState extends State<RolePicker> {
           ),
         ),
         Tooltip(
-          message: "Шериф",
+          message: 'Шериф',
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               InkWell(
                 borderRadius: BorderRadius.circular(500),
-                onTap:
-                    widget.readOnly ? null : () => onChange(PlayerRole.sheriff),
+                onTap: widget.readOnly ? null : () => onChange(PlayerRole.sheriff),
                 child: AnimatedOpacity(
                   opacity: widget.playerRole == PlayerRole.sheriff ? 1.0 : 0.3,
                   duration: duration,
@@ -78,7 +77,7 @@ class _RolePickerState extends State<RolePicker> {
           ),
         ),
         Tooltip(
-          message: "Мирный житель",
+          message: 'Мирный житель',
           child: InkWell(
             borderRadius: BorderRadius.circular(500),
             onTap: widget.readOnly ? null : () => onChange(PlayerRole.citizen),

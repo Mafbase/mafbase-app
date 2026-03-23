@@ -12,5 +12,5 @@ class EditPlayerInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "EditPlayerInteractor";
+  String get interactorName => 'EditPlayerInteractor';
 }

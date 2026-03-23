@@ -143,5 +143,4 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
       rethrow;
     }
   }
-
 }

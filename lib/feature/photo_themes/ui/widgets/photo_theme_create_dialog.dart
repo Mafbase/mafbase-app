@@ -10,8 +10,7 @@ class PhotoThemeCreateDialog extends StatefulWidget {
 
   const PhotoThemeCreateDialog({super.key, this.initialName});
 
-  static Future<String?> show(BuildContext context, {String? initialName}) =>
-      showDialog<String>(
+  static Future<String?> show(BuildContext context, {String? initialName}) => showDialog<String>(
         context: context,
         builder: (_) => PhotoThemeCreateDialog(initialName: initialName),
       );
@@ -19,8 +18,7 @@ class PhotoThemeCreateDialog extends StatefulWidget {
   bool get isRenameMode => initialName != null;
 
   @override
-  State<PhotoThemeCreateDialog> createState() =>
-      _PhotoThemeCreateDialogState();
+  State<PhotoThemeCreateDialog> createState() => _PhotoThemeCreateDialogState();
 }
 
 class _PhotoThemeCreateDialogState extends State<PhotoThemeCreateDialog> {
@@ -57,9 +55,7 @@ class _PhotoThemeCreateDialogState extends State<PhotoThemeCreateDialog> {
             children: [
               const SizedBox(height: 8),
               Text(
-                widget.isRenameMode
-                    ? context.locale.photoThemesRename
-                    : context.locale.photoThemesCreate,
+                widget.isRenameMode ? context.locale.photoThemesRename : context.locale.photoThemesCreate,
                 style: MyTheme.of(context).headerTextStyle,
               ),
               const SizedBox(height: 16),

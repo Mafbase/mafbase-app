@@ -14,7 +14,7 @@ class PlayerAutoCompleteBloc extends Bloc<PlayerAutoCompleteEvent, PlayerAutoCom
         super(const PlayerAutoCompleteState()) {
     on<PlayerAutoCompleteEventSearch>(
       _onSearch,
-      transformer: availablePlayers != null ? null : debounce(Duration(milliseconds: 300)),
+      transformer: availablePlayers != null ? null : debounce(const Duration(milliseconds: 300)),
     );
     on<PlayerAutoCompleteEventClear>(_onClear);
   }

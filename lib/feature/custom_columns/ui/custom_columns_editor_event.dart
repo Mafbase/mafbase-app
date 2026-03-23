@@ -4,8 +4,7 @@ part 'custom_columns_editor_event.freezed.dart';
 
 @freezed
 sealed class CustomColumnsEditorEvent with _$CustomColumnsEditorEvent {
-  const factory CustomColumnsEditorEvent.pageOpened() =
-      CustomColumnsEditorEventPageOpened;
+  const factory CustomColumnsEditorEvent.pageOpened() = CustomColumnsEditorEventPageOpened;
 
   const factory CustomColumnsEditorEvent.createColumn({
     required String title,

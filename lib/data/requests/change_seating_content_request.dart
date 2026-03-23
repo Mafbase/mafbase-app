@@ -8,7 +8,7 @@ class ChangeSeatingContentRequest extends BaseRequest<void> {
     required String key,
     required ChangeSeatingContent content,
   }) : super(
-          "/api/changeSeatingContent?table=$table&tournamentId=$tournamentId&key=$key",
+          '/api/changeSeatingContent?table=$table&tournamentId=$tournamentId&key=$key',
           data: content,
         );
 

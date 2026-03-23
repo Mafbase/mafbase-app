@@ -7,7 +7,7 @@ class CustomTextInfoInteractor extends BaseInteractor {
   CustomTextInfoInteractor(this._repository);
 
   @override
-  String get interactorName => "CustomTextInfoInteractor.run()";
+  String get interactorName => 'CustomTextInfoInteractor.run()';
 
   Future call({required int tournamentId, required String text}) => wrap(
         () => _repository.customTextInfo(

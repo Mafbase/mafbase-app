@@ -3,8 +3,7 @@ import 'package:seating_generator_web/data/requests/bill_club_request.dart';
 import 'package:seating_generator_web/data/requests/bill_tournament_request.dart';
 import 'package:seating_generator_web/domain/repositories/purchase_repository.dart';
 
-class PurchaseRepositoryImpl extends BaseRepository
-    implements PurchaseRepository {
+class PurchaseRepositoryImpl extends BaseRepository implements PurchaseRepository {
   PurchaseRepositoryImpl(super.client);
 
   @override

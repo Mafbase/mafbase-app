@@ -10,6 +10,7 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
   InfoTableDescriptionBloc(super.initialState, this._repository) {
     on<InfoTableDescriptionEventInit>(_init);
     on<InfoTableDescriptionEventAdd>(_add);
+    on<InfoTableDescriptionEventAddWithDescription>(_addWithDescription);
     on<InfoTableDescriptionEventDelete>(_delete);
     on<InfoTableDescriptionEventChange>(_change);
     on<InfoTableDescriptionEventSave>(_save);
@@ -32,6 +33,17 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
     final descriptions = List<MapEntry<int, String>>.from(state.tableDescriptions);
     if (!descriptions.any((e) => e.key == event.table)) {
       descriptions.add(MapEntry(event.table, ''));
+    }
+    emit(state.copyWith(tableDescriptions: descriptions));
+  }
+
+  Future<void> _addWithDescription(
+    InfoTableDescriptionEventAddWithDescription event,
+    Emitter<InfoTableState> emit,
+  ) async {
+    final descriptions = List<MapEntry<int, String>>.from(state.tableDescriptions);
+    if (!descriptions.any((e) => e.key == event.table)) {
+      descriptions.add(MapEntry(event.table, event.description));
     }
     emit(state.copyWith(tableDescriptions: descriptions));
   }
@@ -74,5 +86,4 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
       rethrow;
     }
   }
-
 }

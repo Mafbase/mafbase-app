@@ -11,8 +11,7 @@ class TokenStorageHiveImpl implements TokenStorage {
   late final Future<LazyBox<String>> _box = Hive.openLazyBox<String>(_boxName);
 
   @override
-  FutureOr<String?> get authToken =>
-      _box.then((value) => value.get(_authTokenKey));
+  FutureOr<String?> get authToken => _box.then((value) => value.get(_authTokenKey));
 
   @override
   Future onTokensUpdated(String authToken, String recoveryToken) async {
@@ -23,8 +22,7 @@ class TokenStorageHiveImpl implements TokenStorage {
   }
 
   @override
-  FutureOr<String?> get recoveryToken =>
-      _box.then((value) => value.get(_recoveryTokenKey));
+  FutureOr<String?> get recoveryToken => _box.then((value) => value.get(_recoveryTokenKey));
 
   @override
   FutureOr clear() {

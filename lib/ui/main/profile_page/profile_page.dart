@@ -1,24 +1,22 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/app/di/storage_factory.dart';
+import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/common/widgets/custom_button.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
-import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
+import 'package:seating_generator_web/ui/main/profile_page/widgets/profile_actions_card.dart';
+import 'package:seating_generator_web/ui/main/profile_page/widgets/profile_loading_skeletons.dart';
+import 'package:seating_generator_web/ui/main/profile_page/widgets/profile_player_card.dart';
 import 'package:seating_generator_web/ui/main/profile_page/widgets/tournament_subscription_section.dart';
-import 'package:seating_generator_web/ui/main/tournament_page/widgets/add_player_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage._();
@@ -31,192 +29,87 @@ class ProfilePage extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: '/profile',
     name: 'profile',
-    pageBuilder: (context, state) => FadeTransitionPage(
-      child: BlocProvider<ProfileBloc>(
-        create: (context) {
-          final logoutInteractor = LogoutInteractor(
-            StorageFactory.of(context).tokenStorage,
-            DependencyScope.of(context).authNotifier,
-            StorageFactory.of(context).credentialStorage,
-          );
-
-          return ProfileBloc(
-            logoutInteractor,
-            DeleteProfileInteractor(
-              logoutInteractor,
-              RepositoryFactory.of(context).profileRepository,
-            ),
-            RepositoryFactory.of(context).profileRepository,
-            CreatePlayerInteractor(RepositoryFactory.of(context).playersRepository),
-            context,
-          )..add(const ProfileEvent.loadUserProfile());
-        },
-        child: const ProfilePage._(),
-      ),
-    ),
+    builder: (context, state) => const ProfilePage._(),
   );
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage>
+    with EffectListener<ProfileEffect, ProfileState, ProfileBloc, ProfilePage> {
+  @override
+  void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
+    on<ProfileEffectNavigateBack>((effect) {
+      if (mounted) context.go('/');
+    });
+    on<ProfileEffectOpenBillingUrl>((effect) {
+      if (!mounted) return;
+      final url = effect.url;
+      final uri = Uri.parse(url);
+      if (kIsWeb) {
+        launchUrl(uri, webOnlyWindowName: '_self');
+      } else {
+        context.push(
+          WebViewScreen.createLocation(
+            url: url,
+            title: context.locale.profilePaymentTitle,
+            context: context,
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
+    final isMobile = context.isMobile;
     final showBillingSection = !(context.watch<AuthNotifier>().value.mapOrNull(
               authorized: (model) => model.hideBilling,
             ) ??
         false);
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Padding(
+      backgroundColor: theme.background1,
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
+        title: Text(context.locale.profile),
+      ),
+      body: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          if (state.isLoading && state.playerProfile == null) {
+            return const ProfileLoadingSkeletons();
+          }
+
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 520),
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    ProfilePlayerCard(
+                      player: state.playerProfile,
+                      isMobile: isMobile,
+                      onChangePlayer: () => _selectPlayerProfile(context),
+                      onLinkPlayer: () => _selectPlayerProfile(context),
+                    ),
+                    const SizedBox(height: 12),
                     if (showBillingSection) ...[
-                      TournamentSubscriptionSection(
-                        repository: RepositoryFactory.of(context).profileRepository,
-                      ),
-                      const SizedBox(height: 24),
+                      const TournamentSubscriptionSection(),
+                      const SizedBox(height: 12),
                     ],
-                    BlocBuilder<ProfileBloc, ProfileState>(
-                      builder: (context, state) {
-                        return Column(
-                          children: [
-                            if (state.playerProfile != null) ...[
-                              Text(
-                                context.locale.profileLinkedPlayer,
-                                style: MyTheme.of(context).fieldTextStyle,
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.grey.shade300,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(4),
-                                      child: state.playerProfile!.imageUrl == null
-                                          ? Image.asset(
-                                              AppAssets.playerPhoto,
-                                              width: 60,
-                                              height: 60,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : CachedNetworkImage(
-                                              imageUrl: state.playerProfile!.imageUrl!,
-                                              width: 60,
-                                              height: 60,
-                                              fit: BoxFit.cover,
-                                              placeholder: (context, url) => Image.asset(
-                                                AppAssets.playerPhoto,
-                                                width: 60,
-                                                height: 60,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              errorWidget: (context, url, error) => Image.asset(
-                                                AppAssets.playerPhoto,
-                                                width: 60,
-                                                height: 60,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          state.playerProfile!.nickname,
-                                          style: MyTheme.of(context).fieldTextStyle.copyWith(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                        if (state.playerProfile!.fsmNickaname != null)
-                                          Text(
-                                            context.locale.profileFsmNickname(
-                                              state.playerProfile!.fsmNickaname!,
-                                            ),
-                                            style: MyTheme.of(context).fieldTextStyle.copyWith(
-                                                  fontSize: 12,
-                                                  color: Colors.grey.shade600,
-                                                ),
-                                          ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                            ] else ...[
-                              Text(
-                                context.locale.profilePlayerNotSelected,
-                                style: MyTheme.of(context).fieldTextStyle,
-                              ),
-                              const SizedBox(height: 16),
-                            ],
-                            TextButton(
-                              onPressed: () => _selectPlayerProfile(context),
-                              child: Text(
-                                state.playerProfile != null
-                                    ? context.locale.profileChangePlayer
-                                    : context.locale.profileSelectPlayer,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
+                    ProfileActionsCard(
+                      onPhotoThemes: () => context.go('/photo-themes'),
+                      onLogout: () => context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed()),
+                      onDeleteAccount: _deleteAccount,
                     ),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(40),
-              child: Container(
-                constraints: const BoxConstraints(maxWidth: 400),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CustomButton(
-                      text: context.locale.photoThemesTitle,
-                      onTap: () => context.go('/photo-themes'),
-                      minimize: true,
-                    ),
-                    const SizedBox(height: 16),
-                    CustomButton(
-                      text: context.locale.logout,
-                      onTap: () {
-                        context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed());
-                      },
-                      isRed: true,
-                      minimize: true,
-                    ),
-                    const SizedBox(height: 16),
-                    TextButton(
-                      onPressed: _deleteAccount,
-                      child: Text(
-                        context.locale.profileDeleteAccount,
-                        style: TextStyle(
-                          color: MyTheme.of(context).greyColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

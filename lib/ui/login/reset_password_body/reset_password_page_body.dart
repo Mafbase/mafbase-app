@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -11,6 +10,7 @@ import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/domain/models/password_reset_model.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_bloc.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_events.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_state.dart';
@@ -53,15 +53,15 @@ class ResetPasswordPageBody extends StatefulWidget {
         child: BlocProvider<ResetPasswordBloc>(
           key: const Key('ResetPasswordBlocProvider'),
           create: (context) {
-          final scope = DependencyScope.of(context);
-          final repos = scope.repositoryFactory;
-          return ResetPasswordBloc(
-            repos.authRepository,
-            LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
-            ResetPasswordPageRouterImpl(context),
-            email,
-          );
-        },
+            final scope = DependencyScope.of(context);
+            final repos = scope.repositoryFactory;
+            return ResetPasswordBloc(
+              repos.authRepository,
+              LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
+              ResetPasswordPageRouterImpl(context),
+              email,
+            );
+          },
           child: const ResetPasswordPageBody(),
         ),
       );
@@ -86,218 +86,210 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
 
   @override
   Widget? buildMobile(BuildContext context) {
-    return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-      builder: (context, state) {
-        return WrapperLoginPage(
-          child: Stack(
-            children: [
-              AutofillGroup(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 16,
-                    bottom: 25,
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Center(
-                          child: Text(
-                            context.locale.resetPasswordTitle,
-                            style: const TextStyle(
-                              fontSize: 36,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        title: Text(context.locale.resetPasswordTitle),
+      ),
+      body: BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+        builder: (context, state) {
+          return WrapperLoginPage(
+            child: Stack(
+              children: [
+                AutofillGroup(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 24,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            context.locale.resetPasswordDescription,
+                            textAlign: TextAlign.center,
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                  fontSize: 12,
+                                ),
+                          ),
+                          const SizedBox(height: 20),
+                          CustomTextField(
+                            controller: _tokenController,
+                            hint: context.locale.resetPasswordTokenHint,
+                            errorText: state.error == ResetPasswordError.invalidToken
+                                ? context.locale.resetPasswordInvalidToken
+                                : null,
+                          ),
+                          const SizedBox(height: 20),
+                          CustomTextField(
+                            canObscure: true,
+                            controller: _passwordController,
+                            autoFillHints: const [AutofillHints.newPassword],
+                            icon: Icon(
+                              Icons.lock_outline,
+                              color: MyTheme.of(context).borderColor,
+                              size: 20,
+                            ),
+                            hint: context.locale.enterPassword,
+                            errorText:
+                                state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
+                          ),
+                          const SizedBox(height: 20),
+                          CustomTextField(
+                            canObscure: true,
+                            controller: _repeatPasswordController,
+                            autoFillHints: const [AutofillHints.newPassword],
+                            icon: Icon(
+                              Icons.lock_outline,
+                              color: MyTheme.of(context).borderColor,
+                              size: 20,
+                            ),
+                            hint: context.locale.repeatPassword,
+                            errorText: setRepeatError ? context.locale.notMatchPasswords : null,
+                          ),
+                          const SizedBox(height: 20),
+                          CustomButton(
+                            disabled: _tokenController.text.isEmpty ||
+                                _passwordController.text.isEmpty ||
+                                _passwordController.text.length < 8,
+                            text: context.locale.save,
+                            minimize: true,
+                            onTap: _onSubmit,
+                          ),
+                          const SizedBox(height: 14),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {
+                                context.read<ResetPasswordBloc>().add(
+                                      const ResetPasswordEvents.backButtonTapped(),
+                                    );
+                              },
+                              child: Text(
+                                context.locale.authorization,
+                                style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                      color: MyTheme.of(context).darkGreyColor,
+                                    ),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          context.locale.resetPasswordDescription,
-                          textAlign: TextAlign.center,
-                          style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                fontSize: 14,
-                              ),
-                        ),
-                        const SizedBox(height: 35),
-                        CustomTextField(
-                          controller: _tokenController,
-                          isRequiredField: true,
-                          hint: context.locale.resetPasswordTokenHint,
-                          errorText: state.error == ResetPasswordError.invalidToken
-                              ? context.locale.resetPasswordInvalidToken
-                              : null,
-                        ),
-                        const SizedBox(height: 15),
-                        CustomTextField(
-                          canObscure: true,
-                          isRequiredField: true,
-                          controller: _passwordController,
-                          autoFillHints: const [AutofillHints.newPassword],
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: MyTheme.of(context).borderColor,
-                          ),
-                          hint: context.locale.enterPassword,
-                          errorText:
-                              state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
-                        ),
-                        const SizedBox(height: 15),
-                        CustomTextField(
-                          canObscure: true,
-                          isRequiredField: true,
-                          controller: _repeatPasswordController,
-                          autoFillHints: const [AutofillHints.newPassword],
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: MyTheme.of(context).borderColor,
-                          ),
-                          hint: context.locale.repeatPassword,
-                          errorText: setRepeatError ? context.locale.notMatchPasswords : null,
-                        ),
-                        const SizedBox(height: 24),
-                        CustomButton(
-                          disabled: _tokenController.text.isEmpty ||
-                              _passwordController.text.isEmpty ||
-                              _passwordController.text.length < 8,
-                          text: context.locale.save,
-                          onTap: _onSubmit,
-                        ),
-                        const SizedBox(height: 16),
-                        TextButton(
-                          onPressed: () {
-                            context.read<ResetPasswordBloc>().add(
-                                  const ResetPasswordEvents.backButtonTapped(),
-                                );
-                          },
-                          child: Text(
-                            context.locale.authorization,
-                            style: MyTheme.of(context).defaultTextStyle,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
-          ),
-        );
-      },
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
   @override
   Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-      builder: (context, state) {
-        return WrapperLoginPage(
-          child: Stack(
-            children: [
-              AutofillGroup(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 40,
-                    right: 40,
-                    top: 36,
-                    bottom: 45,
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Center(
-                          child: Text(
-                            context.locale.resetPasswordTitle,
-                            style: const TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        title: Text(context.locale.resetPasswordTitle),
+      ),
+      body: BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+        builder: (context, state) {
+          return WrapperLoginPage(
+            child: Stack(
+              children: [
+                AutofillGroup(
+                  child: Padding(
+                    padding: const EdgeInsets.all(40),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            context.locale.resetPasswordDescription,
+                            textAlign: TextAlign.center,
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                  fontSize: 14,
+                                ),
+                          ),
+                          const SizedBox(height: 28),
+                          CustomTextField(
+                            controller: _tokenController,
+                            hint: context.locale.resetPasswordTokenHint,
+                            errorText: state.error == ResetPasswordError.invalidToken
+                                ? context.locale.resetPasswordInvalidToken
+                                : null,
+                          ),
+                          const SizedBox(height: 20),
+                          CustomTextField(
+                            canObscure: true,
+                            controller: _passwordController,
+                            autoFillHints: const [AutofillHints.newPassword],
+                            icon: Icon(
+                              Icons.lock_outline,
+                              color: MyTheme.of(context).borderColor,
+                              size: 20,
+                            ),
+                            hint: context.locale.enterPassword,
+                            errorText:
+                                state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
+                          ),
+                          const SizedBox(height: 20),
+                          CustomTextField(
+                            canObscure: true,
+                            controller: _repeatPasswordController,
+                            autoFillHints: const [AutofillHints.newPassword],
+                            icon: Icon(
+                              Icons.lock_outline,
+                              color: MyTheme.of(context).borderColor,
+                              size: 20,
+                            ),
+                            hint: context.locale.repeatPassword,
+                            errorText: setRepeatError ? context.locale.notMatchPasswords : null,
+                          ),
+                          const SizedBox(height: 24),
+                          ListenableBuilder(
+                            listenable: Listenable.merge(
+                              [_tokenController, _passwordController],
+                            ),
+                            builder: (_, __) => CustomButton(
+                              disabled: _tokenController.text.isEmpty ||
+                                  _passwordController.text.isEmpty ||
+                                  _passwordController.text.length < 8,
+                              text: context.locale.save,
+                              onTap: _onSubmit,
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          context.locale.resetPasswordDescription,
-                          textAlign: TextAlign.center,
-                          style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                fontSize: 14,
+                          const SizedBox(height: 16),
+                          Center(
+                            child: TextButton(
+                              onPressed: () {
+                                context.read<ResetPasswordBloc>().add(
+                                      const ResetPasswordEvents.backButtonTapped(),
+                                    );
+                              },
+                              child: Text(
+                                context.locale.authorization,
+                                style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                      color: MyTheme.of(context).darkGreyColor,
+                                    ),
                               ),
-                        ),
-                        const SizedBox(height: 45),
-                        CustomTextField(
-                          controller: _tokenController,
-                          isRequiredField: true,
-                          hint: context.locale.resetPasswordTokenHint,
-                          errorText: state.error == ResetPasswordError.invalidToken
-                              ? context.locale.resetPasswordInvalidToken
-                              : null,
-                        ),
-                        const SizedBox(height: 20),
-                        CustomTextField(
-                          canObscure: true,
-                          isRequiredField: true,
-                          controller: _passwordController,
-                          autoFillHints: const [AutofillHints.newPassword],
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: MyTheme.of(context).borderColor,
+                            ),
                           ),
-                          hint: context.locale.enterPassword,
-                          errorText:
-                              state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
-                        ),
-                        const SizedBox(height: 15),
-                        CustomTextField(
-                          canObscure: true,
-                          isRequiredField: true,
-                          controller: _repeatPasswordController,
-                          autoFillHints: const [AutofillHints.newPassword],
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: MyTheme.of(context).borderColor,
-                          ),
-                          hint: context.locale.repeatPassword,
-                          errorText: setRepeatError ? context.locale.notMatchPasswords : null,
-                        ),
-                        const SizedBox(height: 24),
-                        ListenableBuilder(
-                          listenable: Listenable.merge([_tokenController, _passwordController]),
-                          builder: (_, __) => CustomButton(
-                            disabled: _tokenController.text.isEmpty ||
-                                _passwordController.text.isEmpty ||
-                                _passwordController.text.length < 8,
-                            text: context.locale.save,
-                            onTap: _onSubmit,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        TextButton(
-                          onPressed: () {
-                            context.read<ResetPasswordBloc>().add(
-                                  const ResetPasswordEvents.backButtonTapped(),
-                                );
-                          },
-                          child: Text(
-                            context.locale.authorization,
-                            style: MyTheme.of(context).defaultTextStyle,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (state.isLoading) const LoadingOverlayWidget(),
-            ],
-          ),
-        );
-      },
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 

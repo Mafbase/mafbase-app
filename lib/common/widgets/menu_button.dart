@@ -75,9 +75,7 @@ class _MenuButtonState extends State<MenuButton> {
                       decoration: BoxDecoration(
                         color: tapped
                             ? MyTheme.of(context).darkGreyColor
-                            : (hovered
-                                ? MyTheme.of(context).background2
-                                : MyTheme.of(context).greyColor),
+                            : (hovered ? MyTheme.of(context).background2 : MyTheme.of(context).greyColor),
                         borderRadius: BorderRadius.circular(9),
                       ),
                       child: widget.icon,

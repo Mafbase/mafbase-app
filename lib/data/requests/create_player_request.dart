@@ -7,7 +7,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 class CreatePlayerRequest extends BaseRequest<CreatePlayerEventOut> {
   CreatePlayerRequest({required Player player})
       : super(
-          "/api/createPlayer",
+          '/api/createPlayer',
           data: CreatePlayerEvent(player: player),
         );
 

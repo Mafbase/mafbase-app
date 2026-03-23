@@ -5,7 +5,7 @@ class DeletePlayerRequest extends BaseRequest<void> {
   DeletePlayerRequest({
     required int tournamentId,
     required AddPlayerEvent event,
-  }) : super("/api/tournament/$tournamentId/deletePlayer", data: event);
+  }) : super('/api/tournament/$tournamentId/deletePlayer', data: event);
 
   @override
   void parse(List<int> bytes) {}

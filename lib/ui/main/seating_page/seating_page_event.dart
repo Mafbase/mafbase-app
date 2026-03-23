@@ -9,11 +9,9 @@ part 'seating_page_event.freezed.dart';
 class SeatingPageEvent with _$SeatingPageEvent {
   const factory SeatingPageEvent.addPair() = SeatingPageEventAddPair;
 
-  const factory SeatingPageEvent.createSeating() =
-      SeatingPageEventCreateSeating;
+  const factory SeatingPageEvent.createSeating() = SeatingPageEventCreateSeating;
 
-  const factory SeatingPageEvent.fsmSeatingTapped() =
-      SeatingPageEventFsmSeatingTapped;
+  const factory SeatingPageEvent.fsmSeatingTapped() = SeatingPageEventFsmSeatingTapped;
 
   const factory SeatingPageEvent.autoFsmSeating(
     int gomafiaId, {
@@ -25,24 +23,17 @@ class SeatingPageEvent with _$SeatingPageEvent {
     required PlayerModel second,
   }) = SeatingPageEventDeletePair;
 
-  const factory SeatingPageEvent.pageOpened({required int tournamentId}) =
-      SeatingPageEventPageOpened;
+  const factory SeatingPageEvent.pageOpened({required int tournamentId}) = SeatingPageEventPageOpened;
 
-  const factory SeatingPageEvent.openGameEditing({required int gameId}) =
-      SeatingPageEventGameEditing;
+  const factory SeatingPageEvent.openGameEditing({required int gameId}) = SeatingPageEventGameEditing;
 
-  const factory SeatingPageEvent.createFinalSeating() =
-      SeatingPageEventCreateFinalSeating;
+  const factory SeatingPageEvent.createFinalSeating() = SeatingPageEventCreateFinalSeating;
 
-  const factory SeatingPageEvent.createSwissGame({required int game}) =
-      SeatingPageEventCreateSwissGame;
+  const factory SeatingPageEvent.createSwissGame({required int game}) = SeatingPageEventCreateSwissGame;
 
-  const factory SeatingPageEvent.getPlayersSeating() =
-      SeatingPageEventGetPlayersSeating;
+  const factory SeatingPageEvent.getPlayersSeating() = SeatingPageEventGetPlayersSeating;
 
-  const factory SeatingPageEvent.getTablesSeating() =
-      SeatingPageEventGetTablesSeating;
+  const factory SeatingPageEvent.getTablesSeating() = SeatingPageEventGetTablesSeating;
 
-  const factory SeatingPageEvent.getCrossStats() =
-      SeatingPageEventGetCrossStats;
+  const factory SeatingPageEvent.getCrossStats() = SeatingPageEventGetCrossStats;
 }

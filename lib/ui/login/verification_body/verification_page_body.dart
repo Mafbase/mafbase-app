@@ -21,7 +21,7 @@ class VerificationPageBody extends StatefulWidget {
     path: 'verification/:id',
     name: name,
     pageBuilder: (context, state) {
-      final id = int.parse(state.pathParameters["id"]!);
+      final id = int.parse(state.pathParameters['id']!);
       return FadeTransitionPage(
         child: BlocProvider<VerificationBloc>(
           create: (BuildContext context) {
@@ -97,19 +97,17 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                           children: [
                             TextSpan(
                               text: context.locale.verificationText,
-                              style:
-                                  MyTheme.of(context).defaultTextStyle.copyWith(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                             TextSpan(
                               text: context.locale.sendOneMoreCode,
-                              style:
-                                  MyTheme.of(context).defaultTextStyle.copyWith(
-                                        fontSize: 20,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(
+                                    fontSize: 20,
+                                    decoration: TextDecoration.underline,
+                                  ),
                             ),
                           ],
                         ),
@@ -120,9 +118,7 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                       CustomTextField(
                         controller: codeController,
                         hint: context.locale.enterCode,
-                        errorText:
-                            state.hasError ? context.locale.invalidCode : null,
-                        isRequiredField: false,
+                        errorText: state.hasError ? context.locale.invalidCode : null,
                       ),
                       const SizedBox(
                         height: 15,
@@ -149,9 +145,7 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                         },
                         child: Text(
                           context.locale.authorization,
-                          style: MyTheme.of(context)
-                              .defaultTextStyle
-                              .copyWith(fontSize: 20),
+                          style: MyTheme.of(context).defaultTextStyle.copyWith(fontSize: 20),
                         ),
                       ),
                       const SizedBox(
@@ -165,9 +159,7 @@ class _VerificationPageBodyState extends State<VerificationPageBody> {
                         },
                         child: Text(
                           context.locale.loginRegistration,
-                          style: MyTheme.of(context)
-                              .defaultTextStyle
-                              .copyWith(fontSize: 20),
+                          style: MyTheme.of(context).defaultTextStyle.copyWith(fontSize: 20),
                         ),
                       ),
                     ],

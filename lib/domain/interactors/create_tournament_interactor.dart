@@ -8,7 +8,7 @@ class CreateTournamentInteractor extends BaseInteractor {
   CreateTournamentInteractor(this._tournamentsRepository);
 
   @override
-  String get interactorName => "CreateTournamentInteractor";
+  String get interactorName => 'CreateTournamentInteractor';
 
   Future<int> run({required String name, required DateTimeRange range}) {
     return wrap(

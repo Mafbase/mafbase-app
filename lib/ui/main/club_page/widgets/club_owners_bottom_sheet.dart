@@ -31,12 +31,10 @@ class _ClubOwnersBottomSheetBody extends StatefulWidget {
   const _ClubOwnersBottomSheetBody({required this.clubId});
 
   @override
-  State<_ClubOwnersBottomSheetBody> createState() =>
-      _ClubOwnersBottomSheetBodyState();
+  State<_ClubOwnersBottomSheetBody> createState() => _ClubOwnersBottomSheetBodyState();
 }
 
-class _ClubOwnersBottomSheetBodyState
-    extends State<_ClubOwnersBottomSheetBody> {
+class _ClubOwnersBottomSheetBodyState extends State<_ClubOwnersBottomSheetBody> {
   late final OwnersRepository _ownersRepository;
 
   bool _isLoading = true;

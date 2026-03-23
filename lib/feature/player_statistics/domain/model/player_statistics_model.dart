@@ -21,8 +21,7 @@ class PlayerStatisticsModel with _$PlayerStatisticsModel {
     required List<PlayerPairStatModel> diffTeamBottom,
   }) = _PlayerStatisticsModel;
 
-  factory PlayerStatisticsModel.fromProto(PlayerStatisticsEventOut proto) =>
-      PlayerStatisticsModel(
+  factory PlayerStatisticsModel.fromProto(PlayerStatisticsEventOut proto) => PlayerStatisticsModel(
         playerId: proto.playerId,
         nickname: proto.nickname,
         overall: PlayerRoleStatsModel.fromProto(proto.overall),
@@ -30,24 +29,12 @@ class PlayerStatisticsModel with _$PlayerStatisticsModel {
         mafia: PlayerRoleStatsModel.fromProto(proto.mafia),
         don: PlayerRoleStatsModel.fromProto(proto.don),
         sheriff: PlayerRoleStatsModel.fromProto(proto.sheriff),
-        sameCityTop: proto.sameCityTop
-            .map((e) => PlayerPairStatModel.fromProto(e))
-            .toList(),
-        sameMafiaTop: proto.sameMafiaTop
-            .map((e) => PlayerPairStatModel.fromProto(e))
-            .toList(),
-        diffTeamTop: proto.diffTeamTop
-            .map((e) => PlayerPairStatModel.fromProto(e))
-            .toList(),
-        sameCityBottom: proto.sameCityBottom
-            .map((e) => PlayerPairStatModel.fromProto(e))
-            .toList(),
-        sameMafiaBottom: proto.sameMafiaBottom
-            .map((e) => PlayerPairStatModel.fromProto(e))
-            .toList(),
-        diffTeamBottom: proto.diffTeamBottom
-            .map((e) => PlayerPairStatModel.fromProto(e))
-            .toList(),
+        sameCityTop: proto.sameCityTop.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
+        sameMafiaTop: proto.sameMafiaTop.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
+        diffTeamTop: proto.diffTeamTop.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
+        sameCityBottom: proto.sameCityBottom.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
+        sameMafiaBottom: proto.sameMafiaBottom.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
+        diffTeamBottom: proto.diffTeamBottom.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
       );
 }
 
@@ -60,8 +47,7 @@ class PlayerRoleStatsModel with _$PlayerRoleStatsModel {
     required double avgBonusScore,
   }) = _PlayerRoleStatsModel;
 
-  factory PlayerRoleStatsModel.fromProto(PlayerRoleStats proto) =>
-      PlayerRoleStatsModel(
+  factory PlayerRoleStatsModel.fromProto(PlayerRoleStats proto) => PlayerRoleStatsModel(
         games: proto.games,
         wins: proto.wins,
         winRate: proto.winRate,
@@ -79,8 +65,7 @@ class PlayerPairStatModel with _$PlayerPairStatModel {
     required double winRate,
   }) = _PlayerPairStatModel;
 
-  factory PlayerPairStatModel.fromProto(PlayerPairStat proto) =>
-      PlayerPairStatModel(
+  factory PlayerPairStatModel.fromProto(PlayerPairStat proto) => PlayerPairStatModel(
         playerId: proto.playerId,
         nickname: proto.nickname,
         games: proto.games,

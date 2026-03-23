@@ -22,5 +22,5 @@ class AddSeparationInteractor extends BaseInteractor {
   }
 
   @override
-  String get interactorName => "AddSeparationInteractor";
+  String get interactorName => 'AddSeparationInteractor';
 }
