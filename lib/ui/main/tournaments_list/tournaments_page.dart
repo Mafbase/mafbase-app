@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/common/widgets/main_mobile_app_bar.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
@@ -80,20 +80,7 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
     final locale = context.locale;
 
     return Scaffold(
-      appBar: AppBar(
-        title: InkWell(
-          onTap: () => context.go('/'),
-          child: Text(
-            'Mafbase',
-            style: GoogleFonts.balooBhai2(
-              color: Colors.white,
-              fontSize: 32,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        actions: _buildMobileActions(context, theme),
-      ),
+      appBar: const MainMobileAppBar(),
       body: RefreshIndicator(
         onRefresh: () {
           final completer = Completer();
@@ -180,68 +167,6 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
         },
       ),
     );
-  }
-
-  List<Widget> _buildMobileActions(BuildContext context, MyTheme theme) {
-    return [
-      ValueListenableBuilder(
-        valueListenable: context.read<AuthNotifier>(),
-        builder: (context, model, child) => model.map(
-          unauthorized: (_) => TextButton(
-            onPressed: () {
-              context.read<MainBloc>().add(const MainEvent.onEnterPressed());
-            },
-            child: Text(
-              context.locale.loginIn,
-              style: theme.defaultTextStyle.copyWith(
-                color: theme.background1,
-              ),
-            ),
-          ),
-          loading: (_) => Container(),
-          authorized: (_) => IconButton(
-            tooltip: context.locale.profile,
-            onPressed: () {
-              context.read<MainBloc>().add(const MainEvent.onProfilePressed());
-            },
-            hoverColor: theme.background1.withValues(alpha: 0.2),
-            icon: const Icon(Icons.person),
-          ),
-        ),
-      ),
-      const SizedBox(width: 8),
-      PopupMenuButton(
-        splashRadius: 24,
-        color: theme.darkBlueColor,
-        child: Icon(
-          Icons.more_vert_outlined,
-          color: theme.btnTextColor,
-        ),
-        itemBuilder: (context) {
-          return [
-            PopupMenuItem(
-              onTap: () {
-                context.read<MainBloc>().add(const MainEvent.openContacts());
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.contacts_outlined,
-                    color: theme.btnTextColor,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    context.locale.contacts,
-                    style: theme.btnTextStyle.copyWith(fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-          ];
-        },
-      ),
-      const SizedBox(width: 8),
-    ];
   }
 
   @override

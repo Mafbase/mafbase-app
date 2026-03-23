@@ -9,7 +9,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +66,6 @@ void _startApp() async {
   if (!kIsWeb) {
     binding = WidgetsFlutterBinding.ensureInitialized();
     final directory = await getApplicationDocumentsDirectory();
-    await Hive.initFlutter(directory.path);
   }
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
