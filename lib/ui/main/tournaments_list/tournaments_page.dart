@@ -81,7 +81,6 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: InkWell(
           onTap: () => context.go('/'),
           child: Text(
