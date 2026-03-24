@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart'
 part 'translation_content_state.freezed.dart';
 
 @freezed
-class TranslationContentState with _$TranslationContentState {
+abstract class TranslationContentState with _$TranslationContentState {
   const factory TranslationContentState({
     List<PlayerRole>? roles,
     List<PlayerStatus>? statuses,

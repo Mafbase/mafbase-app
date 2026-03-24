@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'custom_column_model.freezed.dart';
 
 @freezed
-class CustomColumnModel with _$CustomColumnModel {
+abstract class CustomColumnModel with _$CustomColumnModel {
   const factory CustomColumnModel({
     required int id,
     required String title,

@@ -4,7 +4,7 @@ import 'package:seating_generator_web/feature/fantasy/domain/models/fantasy_pred
 part 'fantasy_rating_row_model.freezed.dart';
 
 @freezed
-class FantasyRatingRowModel with _$FantasyRatingRowModel {
+abstract class FantasyRatingRowModel with _$FantasyRatingRowModel {
   const factory FantasyRatingRowModel({
     required String nickname,
     required List<FantasyPredictionItemModel> predictions,

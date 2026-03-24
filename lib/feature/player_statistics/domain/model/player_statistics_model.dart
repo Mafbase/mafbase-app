@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'player_statistics_model.freezed.dart';
 
 @freezed
-class PlayerStatisticsModel with _$PlayerStatisticsModel {
+abstract class PlayerStatisticsModel with _$PlayerStatisticsModel {
   const factory PlayerStatisticsModel({
     required int playerId,
     required String nickname,
@@ -39,7 +39,7 @@ class PlayerStatisticsModel with _$PlayerStatisticsModel {
 }
 
 @freezed
-class PlayerRoleStatsModel with _$PlayerRoleStatsModel {
+abstract class PlayerRoleStatsModel with _$PlayerRoleStatsModel {
   const factory PlayerRoleStatsModel({
     required int games,
     required int wins,
@@ -56,7 +56,7 @@ class PlayerRoleStatsModel with _$PlayerRoleStatsModel {
 }
 
 @freezed
-class PlayerPairStatModel with _$PlayerPairStatModel {
+abstract class PlayerPairStatModel with _$PlayerPairStatModel {
   const factory PlayerPairStatModel({
     required int playerId,
     required String nickname,

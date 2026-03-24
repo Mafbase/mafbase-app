@@ -4,7 +4,7 @@ import 'package:seating_generator_web/feature/custom_columns/domain/models/custo
 part 'custom_columns_editor_state.freezed.dart';
 
 @freezed
-class CustomColumnsEditorState with _$CustomColumnsEditorState {
+abstract class CustomColumnsEditorState with _$CustomColumnsEditorState {
   const factory CustomColumnsEditorState({
     @Default(true) bool isLoading,
     @Default([]) List<CustomColumnModel> columns,

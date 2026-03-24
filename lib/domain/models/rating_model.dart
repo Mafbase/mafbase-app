@@ -5,7 +5,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'rating_model.freezed.dart';
 
 @freezed
-class RatingModel with _$RatingModel {
+abstract class RatingModel with _$RatingModel {
   const factory RatingModel({
     required String clubName,
     required List<ClubRatingRowModel> rows,

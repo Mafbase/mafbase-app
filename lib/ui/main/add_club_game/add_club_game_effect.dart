@@ -6,9 +6,9 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'add_club_game_effect.freezed.dart';
 
 @freezed
-class AddClubGameEffect with _$AddClubGameEffect {
+abstract class AddClubGameEffect with _$AddClubGameEffect {
   const factory AddClubGameEffect.setValues({
-    List<String>? players,
+    List<PlayerModel>? players,
     List<double>? addScore,
     List<double>? minusScore,
     List<PlayerRole>? roles,

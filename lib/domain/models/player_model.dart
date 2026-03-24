@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'player_model.freezed.dart';
 
 @freezed
-class PlayerModel with _$PlayerModel {
+abstract class PlayerModel with _$PlayerModel {
   static const int undefinedId = -1;
 
   const factory PlayerModel({

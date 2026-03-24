@@ -6,7 +6,7 @@ import 'package:seating_generator_web/domain/models/club_model.dart';
 part 'clubs_event.freezed.dart';
 
 @freezed
-class ClubsEvent with _$ClubsEvent {
+abstract class ClubsEvent with _$ClubsEvent {
   const factory ClubsEvent.pageOpened({Completer? completer}) = ClubsEventPageOpened;
 
   const factory ClubsEvent.clubSelected({

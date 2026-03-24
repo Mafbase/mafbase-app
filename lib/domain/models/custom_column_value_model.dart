@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'custom_column_value_model.freezed.dart';
 
 @freezed
-class CustomColumnValueModel with _$CustomColumnValueModel {
+abstract class CustomColumnValueModel with _$CustomColumnValueModel {
   const factory CustomColumnValueModel({
     required String title,
     double? value,

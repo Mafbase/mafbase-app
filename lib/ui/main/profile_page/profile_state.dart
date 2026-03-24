@@ -5,7 +5,7 @@ import 'package:seating_generator_web/feature/profile/domain/model/tournament_su
 part 'profile_state.freezed.dart';
 
 @freezed
-class ProfileState with _$ProfileState {
+abstract class ProfileState with _$ProfileState {
   const factory ProfileState({
     @Default(false) bool isLoading,
     @Default(false) bool isLogoutLoading,

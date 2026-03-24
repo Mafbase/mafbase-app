@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'profile_dialog_event.freezed.dart';
 
 @freezed
-class ProfileDialogEvent with _$ProfileDialogEvent {
+abstract class ProfileDialogEvent with _$ProfileDialogEvent {
   const factory ProfileDialogEvent.onSubmit({
     required String nickname,
     required String mafbankNickname,

@@ -4,7 +4,7 @@ import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 part 'rating_state.freezed.dart';
 
 @freezed
-class RatingState with _$RatingState {
+abstract class RatingState with _$RatingState {
   const factory RatingState({
     @Default('') String clubName,
     @Default([]) List<ClubRatingRowModel> rows,

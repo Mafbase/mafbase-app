@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_page.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';

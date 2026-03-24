@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'tournament_model.freezed.dart';
 
 @freezed
-class TournamentModel with _$TournamentModel {
+abstract class TournamentModel with _$TournamentModel {
   const factory TournamentModel({
     required int id,
     required String name,

@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'login_model.freezed.dart';
 
 @freezed
-class LoginModel with _$LoginModel {
+abstract class LoginModel with _$LoginModel {
   const factory LoginModel.success({required int userId}) = Success;
 
   const factory LoginModel.needVerification({required int id}) = NeedVerification;

@@ -6,7 +6,7 @@ import 'package:seating_generator_web/domain/models/tournament_settings_model.da
 part 'tournament_page_event.freezed.dart';
 
 @freezed
-class TournamentPageEvent with _$TournamentPageEvent {
+abstract class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.backButtonPressed() = TournamentPageBackButtonPreesedEvent;
 
   const factory TournamentPageEvent.playersListTapped() = TournamentPageEventPlayersListTapped;

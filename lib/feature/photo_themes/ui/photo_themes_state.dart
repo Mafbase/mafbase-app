@@ -5,7 +5,7 @@ import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_t
 part 'photo_themes_state.freezed.dart';
 
 @freezed
-class PhotoThemesState with _$PhotoThemesState {
+abstract class PhotoThemesState with _$PhotoThemesState {
   const factory PhotoThemesState({
     @Default([]) List<PhotoThemeModel> themes,
     int? selectedThemeId,

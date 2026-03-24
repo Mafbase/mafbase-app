@@ -255,7 +255,8 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
       }
 
       if (effect.players case final players?) {
-        controllers[i].text = players[i].toString();
+        this.players.add(players[i]);
+        controllers[i].text = players[i].nickname;
       }
     }
 

@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'translation_control_event.freezed.dart';
 
 @freezed
-class TranslationControlEvent with _$TranslationControlEvent {
+abstract class TranslationControlEvent with _$TranslationControlEvent {
   const factory TranslationControlEvent.changeRole({
     required int index,
     required PlayerRole role,

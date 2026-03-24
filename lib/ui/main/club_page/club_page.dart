@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/domain/interactors/bill_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/check_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';

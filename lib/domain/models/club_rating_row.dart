@@ -5,7 +5,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'club_rating_row.freezed.dart';
 
 @freezed
-class ClubRatingRowModel with _$ClubRatingRowModel {
+abstract class ClubRatingRowModel with _$ClubRatingRowModel {
   const factory ClubRatingRowModel({
     required int playerId,
     required String nickname,
@@ -70,7 +70,7 @@ extension ClubRatingRowModelExt on ClubRatingRowModel {
 }
 
 @freezed
-class GameRowItemModel with _$GameRowItemModel {
+abstract class GameRowItemModel with _$GameRowItemModel {
   const factory GameRowItemModel({double? score, required int gameId}) = _GameRowItemModel;
 
   factory GameRowItemModel.fromProto(ClubRatingRow_GameItem proto) => GameRowItemModel(

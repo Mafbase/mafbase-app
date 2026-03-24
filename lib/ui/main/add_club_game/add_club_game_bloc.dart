@@ -183,7 +183,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
             ratingsSchema: game.ratingScheme,
             players: game.players
                 .map(
-                  (e) => players.firstWhere((element) => element.id == e).nickname,
+                  (e) => players.firstWhere((element) => element.id == e),
                 )
                 .toList(),
             addScore: game.addScore.map((e) => e / 100).toList(),
@@ -249,7 +249,6 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
                 (e) => players.firstWhereOrNull((element) => element.id == e),
               )
               .whereType<PlayerModel>()
-              .map((e) => e.nickname)
               .toList(),
           addScore: game.addScore.map((e) => e / 100).toList(),
           minusScore: game.minusScore.isNotEmpty ? game.minusScore.map((e) => e / 100).toList() : null,

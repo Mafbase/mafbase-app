@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'tournament_settings_model.freezed.dart';
 
 @freezed
-class TournamentSettingsModel with _$TournamentSettingsModel {
+abstract class TournamentSettingsModel with _$TournamentSettingsModel {
   const factory TournamentSettingsModel({
     required int defaultGames,
     required int swissGames,

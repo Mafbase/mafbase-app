@@ -3,7 +3,7 @@ import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
 part 'add_club_game_state.freezed.dart';
 
 @freezed
-class AddClubGameState with _$AddClubGameState {
+abstract class AddClubGameState with _$AddClubGameState {
   const factory AddClubGameState({
     @Default(true) bool isLoading,
     @Default(false) bool canEdit,

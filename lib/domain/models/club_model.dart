@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'club_model.freezed.dart';
 
 @freezed
-class ClubModel with _$ClubModel {
+abstract class ClubModel with _$ClubModel {
   const factory ClubModel({
     required int id,
     required String name,

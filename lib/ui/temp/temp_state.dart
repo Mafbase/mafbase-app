@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'temp_state.freezed.dart';
 
 @freezed
-class TempState with _$TempState {
+abstract class TempState with _$TempState {
   const factory TempState({
     required TempStyle style,
   }) = _TempState;

@@ -7,7 +7,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'fantasy_state.freezed.dart';
 
 @freezed
-class FantasyState with _$FantasyState {
+abstract class FantasyState with _$FantasyState {
   const factory FantasyState({
     @Default(true) bool isLoading,
     FantasyRatingModel? rating,

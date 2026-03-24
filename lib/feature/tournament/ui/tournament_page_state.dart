@@ -6,7 +6,7 @@ import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_t
 part 'tournament_page_state.freezed.dart';
 
 @freezed
-class TournamentPageState with _$TournamentPageState {
+abstract class TournamentPageState with _$TournamentPageState {
   const factory TournamentPageState({
     @Default(true) bool isLoading,
     @Default([]) List<PlayerModel> tournamentPlayers,

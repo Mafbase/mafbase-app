@@ -4,7 +4,7 @@ import 'package:seating_generator_web/feature/player_statistics/domain/model/pla
 part 'player_stats_state.freezed.dart';
 
 @freezed
-class PlayerStatsState with _$PlayerStatsState {
+abstract class PlayerStatsState with _$PlayerStatsState {
   const factory PlayerStatsState({
     @Default(true) bool isLoading,
     @Default(false) bool hasError,

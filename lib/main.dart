@@ -9,7 +9,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/bloc_observer.dart';
@@ -65,7 +64,6 @@ void _startApp() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   if (!kIsWeb) {
     binding = WidgetsFlutterBinding.ensureInitialized();
-    final directory = await getApplicationDocumentsDirectory();
   }
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(

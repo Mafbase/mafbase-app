@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'game_result_model.freezed.dart';
 
 @freezed
-class GameResultModel with _$GameResultModel {
+abstract class GameResultModel with _$GameResultModel {
   const factory GameResultModel({
     required int gameId,
     List<PlayerRole>? roles,

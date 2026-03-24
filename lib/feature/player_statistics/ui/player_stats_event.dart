@@ -3,6 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'player_stats_event.freezed.dart';
 
 @freezed
-class PlayerStatsEvent with _$PlayerStatsEvent {
+abstract class PlayerStatsEvent with _$PlayerStatsEvent {
   const factory PlayerStatsEvent.pageOpened({required int playerId}) = PlayerStatsEventPageOpened;
 }

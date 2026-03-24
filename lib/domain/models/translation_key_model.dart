@@ -4,7 +4,7 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 part 'translation_key_model.freezed.dart';
 
 @freezed
-class TranslationKeyModel with _$TranslationKeyModel {
+abstract class TranslationKeyModel with _$TranslationKeyModel {
   const factory TranslationKeyModel({
     required String key,
     required List<DesignModel> designs,
@@ -17,7 +17,7 @@ class TranslationKeyModel with _$TranslationKeyModel {
 }
 
 @freezed
-class DesignModel with _$DesignModel {
+abstract class DesignModel with _$DesignModel {
   const factory DesignModel({
     required String designKey,
     required String title,
