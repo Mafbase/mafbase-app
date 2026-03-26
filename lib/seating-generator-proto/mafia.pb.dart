@@ -6234,12 +6234,14 @@ class PlayerRoleStats extends $pb.GeneratedMessage {
     $core.int? wins,
     $core.double? winRate,
     $core.double? avgBonusScore,
+    $core.int? firstNightDeaths,
   }) {
     final result = create();
     if (games != null) result.games = games;
     if (wins != null) result.wins = wins;
     if (winRate != null) result.winRate = winRate;
     if (avgBonusScore != null) result.avgBonusScore = avgBonusScore;
+    if (firstNightDeaths != null) result.firstNightDeaths = firstNightDeaths;
     return result;
   }
 
@@ -6260,6 +6262,8 @@ class PlayerRoleStats extends $pb.GeneratedMessage {
     ..aI(2, _omitFieldNames ? '' : 'wins')
     ..aD(3, _omitFieldNames ? '' : 'winRate', protoName: 'winRate')
     ..aD(4, _omitFieldNames ? '' : 'avgBonusScore', protoName: 'avgBonusScore')
+    ..aI(5, _omitFieldNames ? '' : 'firstNightDeaths',
+        protoName: 'firstNightDeaths')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6316,6 +6320,15 @@ class PlayerRoleStats extends $pb.GeneratedMessage {
   $core.bool hasAvgBonusScore() => $_has(3);
   @$pb.TagNumber(4)
   void clearAvgBonusScore() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get firstNightDeaths => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set firstNightDeaths($core.int value) => $_setSignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFirstNightDeaths() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFirstNightDeaths() => $_clearField(5);
 }
 
 class PlayerPairStat extends $pb.GeneratedMessage {
@@ -6420,6 +6433,96 @@ class PlayerPairStat extends $pb.GeneratedMessage {
   void clearWinRate() => $_clearField(5);
 }
 
+class BestMoveDistribution extends $pb.GeneratedMessage {
+  factory BestMoveDistribution({
+    $core.int? miss,
+    $core.int? one,
+    $core.int? half,
+    $core.int? full,
+  }) {
+    final result = create();
+    if (miss != null) result.miss = miss;
+    if (one != null) result.one = one;
+    if (half != null) result.half = half;
+    if (full != null) result.full = full;
+    return result;
+  }
+
+  BestMoveDistribution._();
+
+  factory BestMoveDistribution.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory BestMoveDistribution.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'BestMoveDistribution',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'miss')
+    ..aI(2, _omitFieldNames ? '' : 'one')
+    ..aI(3, _omitFieldNames ? '' : 'half')
+    ..aI(4, _omitFieldNames ? '' : 'full')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BestMoveDistribution clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BestMoveDistribution copyWith(void Function(BestMoveDistribution) updates) =>
+      super.copyWith((message) => updates(message as BestMoveDistribution))
+          as BestMoveDistribution;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BestMoveDistribution create() => BestMoveDistribution._();
+  @$core.override
+  BestMoveDistribution createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static BestMoveDistribution getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BestMoveDistribution>(create);
+  static BestMoveDistribution? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get miss => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set miss($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMiss() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMiss() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get one => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set one($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasOne() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOne() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get half => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set half($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHalf() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHalf() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get full => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set full($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFull() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFull() => $_clearField(4);
+}
+
 class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
   factory PlayerStatisticsEventOut({
     $core.int? playerId,
@@ -6435,6 +6538,7 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
     $core.Iterable<PlayerPairStat>? sameCityBottom,
     $core.Iterable<PlayerPairStat>? sameMafiaBottom,
     $core.Iterable<PlayerPairStat>? diffTeamBottom,
+    BestMoveDistribution? bestMoveDistribution,
   }) {
     final result = create();
     if (playerId != null) result.playerId = playerId;
@@ -6450,6 +6554,8 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
     if (sameCityBottom != null) result.sameCityBottom.addAll(sameCityBottom);
     if (sameMafiaBottom != null) result.sameMafiaBottom.addAll(sameMafiaBottom);
     if (diffTeamBottom != null) result.diffTeamBottom.addAll(diffTeamBottom);
+    if (bestMoveDistribution != null)
+      result.bestMoveDistribution = bestMoveDistribution;
     return result;
   }
 
@@ -6490,6 +6596,10 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
         protoName: 'sameMafiaBottom', subBuilder: PlayerPairStat.create)
     ..pPM<PlayerPairStat>(13, _omitFieldNames ? '' : 'diffTeamBottom',
         protoName: 'diffTeamBottom', subBuilder: PlayerPairStat.create)
+    ..aOM<BestMoveDistribution>(
+        14, _omitFieldNames ? '' : 'bestMoveDistribution',
+        protoName: 'bestMoveDistribution',
+        subBuilder: BestMoveDistribution.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6602,6 +6712,17 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(13)
   $pb.PbList<PlayerPairStat> get diffTeamBottom => $_getList(12);
+
+  @$pb.TagNumber(14)
+  BestMoveDistribution get bestMoveDistribution => $_getN(13);
+  @$pb.TagNumber(14)
+  set bestMoveDistribution(BestMoveDistribution value) => $_setField(14, value);
+  @$pb.TagNumber(14)
+  $core.bool hasBestMoveDistribution() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearBestMoveDistribution() => $_clearField(14);
+  @$pb.TagNumber(14)
+  BestMoveDistribution ensureBestMoveDistribution() => $_ensure(13);
 }
 
 class PhotoTheme extends $pb.GeneratedMessage {

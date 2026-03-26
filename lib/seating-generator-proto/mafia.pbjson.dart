@@ -2220,6 +2220,7 @@ const PlayerRoleStats$json = {
     {'1': 'wins', '3': 2, '4': 1, '5': 5, '10': 'wins'},
     {'1': 'winRate', '3': 3, '4': 1, '5': 1, '10': 'winRate'},
     {'1': 'avgBonusScore', '3': 4, '4': 1, '5': 1, '10': 'avgBonusScore'},
+    {'1': 'firstNightDeaths', '3': 5, '4': 1, '5': 5, '10': 'firstNightDeaths'},
   ],
 };
 
@@ -2227,7 +2228,8 @@ const PlayerRoleStats$json = {
 final $typed_data.Uint8List playerRoleStatsDescriptor = $convert.base64Decode(
     'Cg9QbGF5ZXJSb2xlU3RhdHMSFAoFZ2FtZXMYASABKAVSBWdhbWVzEhIKBHdpbnMYAiABKAVSBH'
     'dpbnMSGAoHd2luUmF0ZRgDIAEoAVIHd2luUmF0ZRIkCg1hdmdCb251c1Njb3JlGAQgASgBUg1h'
-    'dmdCb251c1Njb3Jl');
+    'dmdCb251c1Njb3JlEioKEGZpcnN0TmlnaHREZWF0aHMYBSABKAVSEGZpcnN0TmlnaHREZWF0aH'
+    'M=');
 
 @$core.Deprecated('Use playerPairStatDescriptor instead')
 const PlayerPairStat$json = {
@@ -2246,6 +2248,22 @@ final $typed_data.Uint8List playerPairStatDescriptor = $convert.base64Decode(
     'Cg5QbGF5ZXJQYWlyU3RhdBIaCghwbGF5ZXJJZBgBIAEoBVIIcGxheWVySWQSGgoIbmlja25hbW'
     'UYAiABKAlSCG5pY2tuYW1lEhQKBWdhbWVzGAMgASgFUgVnYW1lcxISCgR3aW5zGAQgASgFUgR3'
     'aW5zEhgKB3dpblJhdGUYBSABKAFSB3dpblJhdGU=');
+
+@$core.Deprecated('Use bestMoveDistributionDescriptor instead')
+const BestMoveDistribution$json = {
+  '1': 'BestMoveDistribution',
+  '2': [
+    {'1': 'miss', '3': 1, '4': 1, '5': 5, '10': 'miss'},
+    {'1': 'one', '3': 2, '4': 1, '5': 5, '10': 'one'},
+    {'1': 'half', '3': 3, '4': 1, '5': 5, '10': 'half'},
+    {'1': 'full', '3': 4, '4': 1, '5': 5, '10': 'full'},
+  ],
+};
+
+/// Descriptor for `BestMoveDistribution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List bestMoveDistributionDescriptor = $convert.base64Decode(
+    'ChRCZXN0TW92ZURpc3RyaWJ1dGlvbhISCgRtaXNzGAEgASgFUgRtaXNzEhAKA29uZRgCIAEoBV'
+    'IDb25lEhIKBGhhbGYYAyABKAVSBGhhbGYSEgoEZnVsbBgEIAEoBVIEZnVsbA==');
 
 @$core.Deprecated('Use playerStatisticsEventOutDescriptor instead')
 const PlayerStatisticsEventOut$json = {
@@ -2341,6 +2359,14 @@ const PlayerStatisticsEventOut$json = {
       '6': '.generated.PlayerPairStat',
       '10': 'diffTeamBottom'
     },
+    {
+      '1': 'bestMoveDistribution',
+      '3': 14,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.BestMoveDistribution',
+      '10': 'bestMoveDistribution'
+    },
   ],
 };
 
@@ -2359,7 +2385,8 @@ final $typed_data.Uint8List playerStatisticsEventOutDescriptor = $convert.base64
     'ZXJhdGVkLlBsYXllclBhaXJTdGF0Ug5zYW1lQ2l0eUJvdHRvbRJDCg9zYW1lTWFmaWFCb3R0b2'
     '0YDCADKAsyGS5nZW5lcmF0ZWQuUGxheWVyUGFpclN0YXRSD3NhbWVNYWZpYUJvdHRvbRJBCg5k'
     'aWZmVGVhbUJvdHRvbRgNIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdFIOZGlmZlRlYW'
-    '1Cb3R0b20=');
+    '1Cb3R0b20SUwoUYmVzdE1vdmVEaXN0cmlidXRpb24YDiABKAsyHy5nZW5lcmF0ZWQuQmVzdE1v'
+    'dmVEaXN0cmlidXRpb25SFGJlc3RNb3ZlRGlzdHJpYnV0aW9u');
 
 @$core.Deprecated('Use photoThemeDescriptor instead')
 const PhotoTheme$json = {
