@@ -1862,14 +1862,26 @@ const TranslationKeyEventOut$json = {
       '6': '.generated.DesignItem',
       '10': 'designs'
     },
+    {
+      '1': 'selectedDesignKey',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'selectedDesignKey',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_selectedDesignKey'},
   ],
 };
 
 /// Descriptor for `TranslationKeyEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List translationKeyEventOutDescriptor =
-    $convert.base64Decode(
-        'ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5Ei8KB2Rlc2lnbnMYAi'
-        'ADKAsyFS5nZW5lcmF0ZWQuRGVzaWduSXRlbVIHZGVzaWducw==');
+final $typed_data.Uint8List translationKeyEventOutDescriptor = $convert.base64Decode(
+    'ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5Ei8KB2Rlc2lnbnMYAi'
+    'ADKAsyFS5nZW5lcmF0ZWQuRGVzaWduSXRlbVIHZGVzaWducxIxChFzZWxlY3RlZERlc2lnbktl'
+    'eRgDIAEoCUgAUhFzZWxlY3RlZERlc2lnbktleYgBAUIUChJfc2VsZWN0ZWREZXNpZ25LZXk=');
 
 @$core.Deprecated('Use tableInfoItemDescriptor instead')
 const TableInfoItem$json = {
@@ -2507,6 +2519,31 @@ final $typed_data.Uint8List setTournamentPhotoThemeEventDescriptor =
     $convert.base64Decode(
         'ChxTZXRUb3VybmFtZW50UGhvdG9UaGVtZUV2ZW50Eh0KB3RoZW1lSWQYASABKAVIAFIHdGhlbW'
         'VJZIgBAUIKCghfdGhlbWVJZA==');
+
+@$core.Deprecated('Use setTournamentDesignEventDescriptor instead')
+const SetTournamentDesignEvent$json = {
+  '1': 'SetTournamentDesignEvent',
+  '2': [
+    {
+      '1': 'designKey',
+      '3': 1,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'designKey',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_designKey'},
+  ],
+};
+
+/// Descriptor for `SetTournamentDesignEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setTournamentDesignEventDescriptor =
+    $convert.base64Decode(
+        'ChhTZXRUb3VybmFtZW50RGVzaWduRXZlbnQSIQoJZGVzaWduS2V5GAEgASgJSABSCWRlc2lnbk'
+        'tleYgBAUIMCgpfZGVzaWduS2V5');
 
 @$core.Deprecated('Use addPlayerToThemeEventDescriptor instead')
 const AddPlayerToThemeEvent$json = {

@@ -65,9 +65,12 @@ class _TranslationPanelState extends State<TranslationPanel> {
             ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 443 ? ':${Uri.base.port}' : ''}'
             : 'https://mafbase.ru';
 
-        final defaultDesign =
+        final savedDesign = data.selectedDesignKey != null
+            ? data.designs.where((d) => d.designKey == data.selectedDesignKey).firstOrNull
+            : null;
+        final fallbackDesign =
             data.designs.where((d) => d.designKey == 'mafbase').firstOrNull ?? data.designs.firstOrNull;
-        final effectiveDesign = _selectedDesign ?? defaultDesign;
+        final effectiveDesign = _selectedDesign ?? savedDesign ?? fallbackDesign;
         final key = data.key;
 
         return Padding(
@@ -109,6 +112,10 @@ class _TranslationPanelState extends State<TranslationPanel> {
                       );
                       if (result != null) {
                         setState(() => _selectedDesign = result);
+                        _repository.saveDesign(
+                          tournamentId: widget.tournamentId,
+                          designKey: result.designKey,
+                        );
                       }
                     },
                     child: Row(

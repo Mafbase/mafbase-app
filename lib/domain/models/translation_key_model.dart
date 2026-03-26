@@ -8,11 +8,13 @@ abstract class TranslationKeyModel with _$TranslationKeyModel {
   const factory TranslationKeyModel({
     required String key,
     required List<DesignModel> designs,
+    String? selectedDesignKey,
   }) = _TranslationKeyModel;
 
   factory TranslationKeyModel.fromProto(TranslationKeyEventOut proto) => TranslationKeyModel(
         key: proto.key,
         designs: proto.designs.map(DesignModel.fromProto).toList(),
+        selectedDesignKey: proto.hasSelectedDesignKey() ? proto.selectedDesignKey : null,
       );
 }
 

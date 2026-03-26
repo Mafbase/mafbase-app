@@ -5206,10 +5206,12 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
   factory TranslationKeyEventOut({
     $core.String? key,
     $core.Iterable<DesignItem>? designs,
+    $core.String? selectedDesignKey,
   }) {
     final result = create();
     if (key != null) result.key = key;
     if (designs != null) result.designs.addAll(designs);
+    if (selectedDesignKey != null) result.selectedDesignKey = selectedDesignKey;
     return result;
   }
 
@@ -5229,6 +5231,8 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'key')
     ..pPM<DesignItem>(2, _omitFieldNames ? '' : 'designs',
         subBuilder: DesignItem.create)
+    ..aOS(3, _omitFieldNames ? '' : 'selectedDesignKey',
+        protoName: 'selectedDesignKey')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5262,6 +5266,15 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(2)
   $pb.PbList<DesignItem> get designs => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $core.String get selectedDesignKey => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set selectedDesignKey($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSelectedDesignKey() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSelectedDesignKey() => $_clearField(3);
 }
 
 class TableInfoItem extends $pb.GeneratedMessage {
@@ -7093,6 +7106,61 @@ class SetTournamentPhotoThemeEvent extends $pb.GeneratedMessage {
   $core.bool hasThemeId() => $_has(0);
   @$pb.TagNumber(1)
   void clearThemeId() => $_clearField(1);
+}
+
+class SetTournamentDesignEvent extends $pb.GeneratedMessage {
+  factory SetTournamentDesignEvent({
+    $core.String? designKey,
+  }) {
+    final result = create();
+    if (designKey != null) result.designKey = designKey;
+    return result;
+  }
+
+  SetTournamentDesignEvent._();
+
+  factory SetTournamentDesignEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SetTournamentDesignEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'SetTournamentDesignEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'designKey', protoName: 'designKey')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetTournamentDesignEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetTournamentDesignEvent copyWith(
+          void Function(SetTournamentDesignEvent) updates) =>
+      super.copyWith((message) => updates(message as SetTournamentDesignEvent))
+          as SetTournamentDesignEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetTournamentDesignEvent create() => SetTournamentDesignEvent._();
+  @$core.override
+  SetTournamentDesignEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static SetTournamentDesignEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetTournamentDesignEvent>(create);
+  static SetTournamentDesignEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get designKey => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set designKey($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDesignKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDesignKey() => $_clearField(1);
 }
 
 class AddPlayerToThemeEvent extends $pb.GeneratedMessage {
