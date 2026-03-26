@@ -5,11 +5,15 @@ import 'package:seating_generator_web/utils.dart';
 class PlayerRoleStatsCard extends StatelessWidget {
   final String title;
   final PlayerRoleStatsModel stats;
+  final String? extraLabel;
+  final String? extraTitle;
 
   const PlayerRoleStatsCard({
     super.key,
     required this.title,
     required this.stats,
+    this.extraLabel,
+    this.extraTitle,
   });
 
   @override
@@ -42,6 +46,11 @@ class PlayerRoleStatsCard extends StatelessWidget {
                   label: context.locale.playerStatsAvgBonus,
                   value: stats.avgBonusScore.toStringAsFixed(2),
                 ),
+                if (extraLabel != null && extraTitle != null)
+                  _StatItem(
+                    label: extraLabel!,
+                    value: extraTitle!,
+                  ),
               ],
             ),
           ],

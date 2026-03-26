@@ -20,30 +20,35 @@ const _fullStatistics = PlayerStatisticsModel(
     wins: 78,
     winRate: 65.0,
     avgBonusScore: 0.42,
+    firstNightDeaths: 15,
   ),
   citizen: PlayerRoleStatsModel(
     games: 55,
     wins: 38,
     winRate: 69.1,
     avgBonusScore: 0.35,
+    firstNightDeaths: 8,
   ),
   mafia: PlayerRoleStatsModel(
     games: 35,
     wins: 20,
     winRate: 57.1,
     avgBonusScore: 0.51,
+    firstNightDeaths: 3,
   ),
   don: PlayerRoleStatsModel(
     games: 18,
     wins: 12,
     winRate: 66.7,
     avgBonusScore: 0.60,
+    firstNightDeaths: 2,
   ),
   sheriff: PlayerRoleStatsModel(
     games: 12,
     wins: 8,
     winRate: 66.7,
     avgBonusScore: 0.38,
+    firstNightDeaths: 2,
   ),
   sameCityTop: [
     PlayerPairStatModel(
@@ -162,6 +167,12 @@ const _fullStatistics = PlayerStatisticsModel(
       winRate: 26.3,
     ),
   ],
+  bestMoveDistribution: BestMoveDistributionModel(
+    miss: 10,
+    one: 15,
+    half: 8,
+    full: 5,
+  ),
 );
 
 const _emptyPairsStatistics = PlayerStatisticsModel(
@@ -172,30 +183,35 @@ const _emptyPairsStatistics = PlayerStatisticsModel(
     wins: 1,
     winRate: 33.3,
     avgBonusScore: 0.10,
+    firstNightDeaths: 1,
   ),
   citizen: PlayerRoleStatsModel(
     games: 2,
     wins: 1,
     winRate: 50.0,
     avgBonusScore: 0.05,
+    firstNightDeaths: 1,
   ),
   mafia: PlayerRoleStatsModel(
     games: 1,
     wins: 0,
     winRate: 0.0,
     avgBonusScore: 0.0,
+    firstNightDeaths: 0,
   ),
   don: PlayerRoleStatsModel(
     games: 0,
     wins: 0,
     winRate: 0.0,
     avgBonusScore: 0.0,
+    firstNightDeaths: 0,
   ),
   sheriff: PlayerRoleStatsModel(
     games: 0,
     wins: 0,
     winRate: 0.0,
     avgBonusScore: 0.0,
+    firstNightDeaths: 0,
   ),
   sameCityTop: [],
   sameMafiaTop: [],
@@ -203,6 +219,12 @@ const _emptyPairsStatistics = PlayerStatisticsModel(
   sameCityBottom: [],
   sameMafiaBottom: [],
   diffTeamBottom: [],
+  bestMoveDistribution: BestMoveDistributionModel(
+    miss: 0,
+    one: 0,
+    half: 0,
+    full: 0,
+  ),
 );
 
 MockPlayerStatsBloc _createMockBloc(PlayerStatsState state) {

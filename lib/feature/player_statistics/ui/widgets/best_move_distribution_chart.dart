@@ -5,15 +5,19 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class RoleDistributionChart extends StatelessWidget {
-  final PlayerStatisticsModel statistics;
+class BestMoveDistributionChart extends StatelessWidget {
+  final BestMoveDistributionModel distribution;
 
-  const RoleDistributionChart({super.key, required this.statistics});
+  const BestMoveDistributionChart({super.key, required this.distribution});
 
   @override
   Widget build(BuildContext context) {
     final segments = _buildSegments(context);
-    final totalGames = statistics.overall.games;
+    final total = distribution.miss + distribution.one + distribution.half + distribution.full;
+
+    if (total == 0) {
+      return const SizedBox.shrink();
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -21,7 +25,7 @@ class RoleDistributionChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            context.locale.playerStatsRoleDistribution,
+            context.locale.playerStatsBestMoveDistribution,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -29,31 +33,33 @@ class RoleDistributionChart extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        alignment: WrapAlignment.center,
-        runSpacing: 8,
-        children: [
-          SizedBox(
-            width: 140,
-            height: 140,
-            child: CustomPaint(
-              painter: _DonutChartPainter(segments: segments),
-              child: Center(
-                child: Text(
-                  totalGames.toString(),
-                  style: MyTheme.of(context).headerTextStyle,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.center,
+            runSpacing: 8,
+            children: [
+              SizedBox(
+                width: 140,
+                height: 140,
+                child: CustomPaint(
+                  painter: _DonutChartPainter(segments: segments),
+                  child: Center(
+                    child: Text(
+                      total.toString(),
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(width: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: segments
+                    .map((s) => _LegendItem(segment: s, total: total))
+                    .toList(),
+              ),
+            ],
           ),
-          const SizedBox(width: 24),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: segments.map((s) => _LegendItem(segment: s, totalGames: totalGames)).toList(),
-          ),
-        ],
-      ),
         ],
       ),
     );
@@ -62,24 +68,24 @@ class RoleDistributionChart extends StatelessWidget {
   List<_ChartSegment> _buildSegments(BuildContext context) {
     return [
       _ChartSegment(
-        label: context.locale.playerStatsCitizen,
-        games: statistics.citizen.games,
-        color: const Color(0xFFE53935),
+        label: context.locale.playerStatsBestMoveMiss,
+        value: distribution.miss,
+        color: const Color(0xFF9E9E9E),
       ),
       _ChartSegment(
-        label: context.locale.playerStatsMafia,
-        games: statistics.mafia.games,
-        color: const Color(0xFF616161),
+        label: context.locale.playerStatsBestMoveOne,
+        value: distribution.one,
+        color: const Color(0xFFA5D6A7),
       ),
       _ChartSegment(
-        label: context.locale.playerStatsDon,
-        games: statistics.don.games,
-        color: const Color(0xFF000000),
+        label: context.locale.playerStatsBestMoveHalf,
+        value: distribution.half,
+        color: const Color(0xFF66BB6A),
       ),
       _ChartSegment(
-        label: context.locale.playerStatsSheriff,
-        games: statistics.sheriff.games,
-        color: const Color(0xFF4CAF50),
+        label: context.locale.playerStatsBestMoveFull,
+        value: distribution.full,
+        color: const Color(0xFF2E7D32),
       ),
     ];
   }
@@ -87,22 +93,22 @@ class RoleDistributionChart extends StatelessWidget {
 
 class _ChartSegment {
   final String label;
-  final int games;
+  final int value;
   final Color color;
 
   const _ChartSegment({
     required this.label,
-    required this.games,
+    required this.value,
     required this.color,
   });
 }
 
 class _LegendItem extends StatelessWidget {
   final _ChartSegment segment;
-  final int percentage;
+  final double percentage;
 
-  _LegendItem({required this.segment, required int totalGames})
-      : percentage = totalGames > 0 ? (segment.games / totalGames * 100).round() : 0;
+  _LegendItem({required this.segment, required int total})
+      : percentage = total > 0 ? segment.value / total * 100 : 0;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -120,7 +126,7 @@ class _LegendItem extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              '${segment.label}: ${segment.games} ($percentage%)',
+              '${segment.label}: ${segment.value} (${percentage.toStringAsFixed(1)}%)',
               style: MyTheme.of(context).defaultTextStyle,
             ),
           ],
@@ -135,8 +141,8 @@ class _DonutChartPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final totalGames = segments.fold<int>(0, (sum, s) => sum + s.games);
-    if (totalGames == 0) return;
+    final total = segments.fold<int>(0, (sum, s) => sum + s.value);
+    if (total == 0) return;
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius = min(size.width, size.height) / 2;
@@ -153,8 +159,8 @@ class _DonutChartPainter extends CustomPainter {
 
     var startAngle = -pi / 2;
     for (final segment in segments) {
-      if (segment.games == 0) continue;
-      final sweepAngle = (segment.games / totalGames) * 2 * pi;
+      if (segment.value == 0) continue;
+      final sweepAngle = (segment.value / total) * 2 * pi;
       paint.color = segment.color;
       canvas.drawArc(rect, startAngle, sweepAngle, false, paint);
       startAngle += sweepAngle;

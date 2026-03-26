@@ -19,6 +19,7 @@ abstract class PlayerStatisticsModel with _$PlayerStatisticsModel {
     required List<PlayerPairStatModel> sameCityBottom,
     required List<PlayerPairStatModel> sameMafiaBottom,
     required List<PlayerPairStatModel> diffTeamBottom,
+    required BestMoveDistributionModel bestMoveDistribution,
   }) = _PlayerStatisticsModel;
 
   factory PlayerStatisticsModel.fromProto(PlayerStatisticsEventOut proto) => PlayerStatisticsModel(
@@ -35,6 +36,7 @@ abstract class PlayerStatisticsModel with _$PlayerStatisticsModel {
         sameCityBottom: proto.sameCityBottom.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
         sameMafiaBottom: proto.sameMafiaBottom.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
         diffTeamBottom: proto.diffTeamBottom.map((e) => PlayerPairStatModel.fromProto(e)).toList(),
+        bestMoveDistribution: BestMoveDistributionModel.fromProto(proto.bestMoveDistribution),
       );
 }
 
@@ -45,6 +47,7 @@ abstract class PlayerRoleStatsModel with _$PlayerRoleStatsModel {
     required int wins,
     required double winRate,
     required double avgBonusScore,
+    required int firstNightDeaths,
   }) = _PlayerRoleStatsModel;
 
   factory PlayerRoleStatsModel.fromProto(PlayerRoleStats proto) => PlayerRoleStatsModel(
@@ -52,6 +55,25 @@ abstract class PlayerRoleStatsModel with _$PlayerRoleStatsModel {
         wins: proto.wins,
         winRate: proto.winRate,
         avgBonusScore: proto.avgBonusScore,
+        firstNightDeaths: proto.firstNightDeaths,
+      );
+}
+
+@freezed
+abstract class BestMoveDistributionModel with _$BestMoveDistributionModel {
+  const factory BestMoveDistributionModel({
+    required int miss,
+    required int one,
+    required int half,
+    required int full,
+  }) = _BestMoveDistributionModel;
+
+  factory BestMoveDistributionModel.fromProto(BestMoveDistribution proto) =>
+      BestMoveDistributionModel(
+        miss: proto.miss,
+        one: proto.one,
+        half: proto.half,
+        full: proto.full,
       );
 }
 

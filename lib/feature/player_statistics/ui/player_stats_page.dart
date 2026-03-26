@@ -9,6 +9,7 @@ import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_state.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/widgets/player_pair_stats_section.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/widgets/player_role_stats_card.dart';
+import 'package:seating_generator_web/feature/player_statistics/ui/widgets/best_move_distribution_chart.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/widgets/role_distribution_chart.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -124,18 +125,26 @@ class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
       PlayerRoleStatsCard(
         title: context.locale.playerStatsCitizen,
         stats: statistics.citizen,
-      ),
-      PlayerRoleStatsCard(
-        title: context.locale.playerStatsMafia,
-        stats: statistics.mafia,
-      ),
-      PlayerRoleStatsCard(
-        title: context.locale.playerStatsDon,
-        stats: statistics.don,
+        extraLabel: context.locale.playerStatsFirstNightDeaths,
+        extraTitle: statistics.citizen.extraTitle,
       ),
       PlayerRoleStatsCard(
         title: context.locale.playerStatsSheriff,
         stats: statistics.sheriff,
+        extraLabel: context.locale.playerStatsFirstNightDeaths,
+        extraTitle: statistics.sheriff.extraTitle,
+      ),
+      PlayerRoleStatsCard(
+        title: context.locale.playerStatsMafia,
+        stats: statistics.mafia,
+        extraLabel: context.locale.playerStatsSelfShots,
+        extraTitle: statistics.mafia.extraTitle,
+      ),
+      PlayerRoleStatsCard(
+        title: context.locale.playerStatsDon,
+        stats: statistics.don,
+        extraLabel: context.locale.playerStatsSelfShots,
+        extraTitle: statistics.mafia.extraTitle,
       ),
     ];
   }
@@ -169,6 +178,10 @@ class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
     ];
   }
 
+  Widget _buildBestMoveChart() {
+    return BestMoveDistributionChart(distribution: statistics.bestMoveDistribution);
+  }
+
   @override
   Widget? buildMobile(BuildContext context) {
     return Center(
@@ -180,6 +193,8 @@ class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
             _buildHeader(context),
             const SizedBox(height: 8),
             _buildChart(),
+            const SizedBox(height: 8),
+            _buildBestMoveChart(),
             const SizedBox(height: 8),
             ..._buildRoleCards(context).map(
               (e) => SizedBox(
@@ -203,7 +218,15 @@ class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
       children: [
         _buildHeader(context),
         const SizedBox(height: 8),
-        _buildChart(),
+        Wrap(
+          spacing: 16,
+          runSpacing: 8,
+          alignment: WrapAlignment.center,
+          children: [
+            _buildChart(),
+            _buildBestMoveChart(),
+          ],
+        ),
         const SizedBox(height: 16),
         Wrap(
           spacing: 8,
@@ -221,5 +244,16 @@ class _PlayerStatsContentState extends CustomState<_PlayerStatsContent> {
         const SizedBox(height: 16),
       ],
     );
+  }
+}
+
+extension _StatsExt on PlayerRoleStatsModel {
+  String get extraTitle {
+    final total = games;
+    final dies = firstNightDeaths;
+
+    if (games == 0) return '0% (0)';
+
+    return '${(dies/total*100).toStringAsFixed(1)}% ($dies)';
   }
 }
