@@ -139,7 +139,8 @@ class TournamentMenuBuilder {
               billedPlayers: state.billedPlayers,
               hasTranslation: state.billedTranslation,
             );
-            if (result != null && context.mounted) {
+
+            if (result != null) {
               bloc.add(
                 TournamentPageEvent.bill(
                   playersCount: result.billedPlayers,
