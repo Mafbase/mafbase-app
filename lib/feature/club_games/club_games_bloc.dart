@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_event.dart';
@@ -25,7 +26,7 @@ class ClubGamesBloc extends Bloc<ClubGamesEvent, ClubGamesState> {
     emit(
       state.copyWith(
         loading: false,
-        games: games,
+        games: games.mapIndexed((index, e) => e.copyWith(table: 1, game: games.length - index)).toList(),
       ),
     );
   }

@@ -194,7 +194,7 @@ class _RatingPageState extends CustomState<RatingPage> {
     super.initState();
   }
 
-  getTextFrom(RatingTableStyle style) {
+  String getTextFrom(RatingTableStyle style) {
     switch (style) {
       case RatingTableStyle.full:
         return context.locale.ratingTab;
