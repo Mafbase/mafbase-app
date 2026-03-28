@@ -84,7 +84,11 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
                 ),
                 Expanded(
                   child: ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: EdgeInsets.only(
+                      left: 12,
+                      right: 12,
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
                     children: sections
                         .expand(
                           (section) => [
