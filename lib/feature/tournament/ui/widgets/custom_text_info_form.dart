@@ -30,9 +30,11 @@ class _CustomTextInfoFormState extends State<CustomTextInfoForm> {
 
   void _onFocusChange() {
     if (_focusNode.hasFocus) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        if (!_focusNode.hasFocus) return;
         final context = _fieldKey.currentContext;
-        if (context != null) {
+
+        if (context != null && context.mounted == true) {
           Scrollable.ensureVisible(
             context,
             duration: const Duration(milliseconds: 200),
@@ -61,7 +63,6 @@ class _CustomTextInfoFormState extends State<CustomTextInfoForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextField(
-            key: _fieldKey,
             controller: controller,
             focusNode: _focusNode,
             maxLines: 3,
@@ -97,6 +98,7 @@ class _CustomTextInfoFormState extends State<CustomTextInfoForm> {
             listenable: controller,
             builder: (context, _) {
               return ElevatedButton(
+                key: _fieldKey,
                 onPressed: controller.text.isNotEmpty
                     ? () {
                         context.read<TournamentPageBloc>().add(
