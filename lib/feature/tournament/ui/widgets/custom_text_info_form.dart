@@ -19,9 +19,34 @@ class CustomTextInfoForm extends StatefulWidget {
 
 class _CustomTextInfoFormState extends State<CustomTextInfoForm> {
   final controller = TextEditingController();
+  final _focusNode = FocusNode();
+  final _fieldKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    if (_focusNode.hasFocus) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final context = _fieldKey.currentContext;
+        if (context != null) {
+          Scrollable.ensureVisible(
+            context,
+            duration: const Duration(milliseconds: 200),
+            alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+          );
+        }
+      });
+    }
+  }
 
   @override
   void dispose() {
+    _focusNode.removeListener(_onFocusChange);
+    _focusNode.dispose();
     controller.dispose();
     super.dispose();
   }
@@ -36,7 +61,9 @@ class _CustomTextInfoFormState extends State<CustomTextInfoForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextField(
+            key: _fieldKey,
             controller: controller,
+            focusNode: _focusNode,
             maxLines: 3,
             style: GoogleFonts.inter(
               color: Colors.white,
