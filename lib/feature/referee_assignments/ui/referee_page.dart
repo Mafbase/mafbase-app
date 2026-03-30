@@ -165,7 +165,6 @@ class _RefereePageState extends State<RefereePage> {
                                 focusNode: _nicknameFocusNode,
                                 hint: locale.nicknameHint,
                                 onSelected: (player) {
-                                  print('test25: $player');
                                   setState(() {
                                     _selectedReferee = player;
                                     _nicknameController.text = player.nickname;

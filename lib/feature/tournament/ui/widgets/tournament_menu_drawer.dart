@@ -54,59 +54,64 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
                 seatingLoading: seatingLoading,
               );
 
-          return SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 12, 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          context.locale.tournamentMenuTitle,
-                          style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    children: sections
-                        .expand(
-                          (section) => [
-                            _buildSectionTitle(section.title, theme),
-                            ...section.items.map(
-                              (item) => Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: switch (item) {
-                                  TournamentMenuTapItem() => _buildTapItem(context, item, theme),
-                                  TournamentMenuExpandableItem() => _buildExpandableItem(context, item, theme),
-                                },
+              return SafeArea(
+                bottom: false,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 16, 12, 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              context.locale.tournamentMenuTitle,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                          ],
-                        )
-                        .toList(),
-                  ),
+                          ),
+                          IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        children: sections
+                            .expand(
+                              (section) => [
+                                _buildSectionTitle(section.title, theme),
+                                ...section.items.map(
+                                  (item) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 4),
+                                    child: switch (item) {
+                                      TournamentMenuTapItem() => _buildTapItem(context, item, theme),
+                                      TournamentMenuExpandableItem() => _buildExpandableItem(context, item, theme),
+                                    },
+                                  ),
+                                ),
+                                const SafeArea(
+                                  top: false,
+                                  child: SizedBox(height: 4),
+                                ),
+                              ],
+                            )
+                            .toList(),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
+                  ],
                 ),
-              ],
-            ),
-          );
+              );
             },
           );
         },
