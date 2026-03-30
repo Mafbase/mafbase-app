@@ -36,6 +36,8 @@ import 'package:seating_generator_web/feature/player_statistics/data/repository/
 import 'package:seating_generator_web/feature/player_statistics/domain/repository/player_statistics_repository.dart';
 import 'package:seating_generator_web/feature/profile/data/repository/profile_repository_impl.dart';
 import 'package:seating_generator_web/feature/profile/domain/repository/profile_repository.dart';
+import 'package:seating_generator_web/feature/referee_assignments/data/referee_repository_impl.dart';
+import 'package:seating_generator_web/feature/referee_assignments/domain/referee_repository.dart';
 
 class RepositoryFactory {
   final MyHttpClient client;
@@ -78,4 +80,6 @@ class RepositoryFactory {
   late final InfoTableDescriptionRepository infoTableDescriptionRepository = InfoTableDescriptionRepositoryImpl(client);
 
   late final FantasyRepository fantasyRepository = FantasyRepositoryImpl(client);
+
+  late final RefereeRepository refereeRepository = RefereeRepositoryImpl(client);
 }

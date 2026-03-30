@@ -2612,3 +2612,77 @@ final $typed_data.Uint8List addPlayersFromTournamentEventOutDescriptor =
     $convert.base64Decode(
         'CiBBZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudE91dBIeCgphZGRlZENvdW50GAEgASgFUg'
         'phZGRlZENvdW50');
+
+@$core.Deprecated('Use refereeAssignmentDescriptor instead')
+const RefereeAssignment$json = {
+  '1': 'RefereeAssignment',
+  '2': [
+    {'1': 'table', '3': 1, '4': 1, '5': 5, '10': 'table'},
+    {
+      '1': 'referee',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.Player',
+      '10': 'referee'
+    },
+  ],
+};
+
+/// Descriptor for `RefereeAssignment`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List refereeAssignmentDescriptor = $convert.base64Decode(
+    'ChFSZWZlcmVlQXNzaWdubWVudBIUCgV0YWJsZRgBIAEoBVIFdGFibGUSKwoHcmVmZXJlZRgCIA'
+    'EoCzIRLmdlbmVyYXRlZC5QbGF5ZXJSB3JlZmVyZWU=');
+
+@$core.Deprecated('Use setRefereeEventDescriptor instead')
+const SetRefereeEvent$json = {
+  '1': 'SetRefereeEvent',
+  '2': [
+    {'1': 'table', '3': 1, '4': 1, '5': 5, '10': 'table'},
+    {
+      '1': 'referee',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.Player',
+      '10': 'referee'
+    },
+  ],
+};
+
+/// Descriptor for `SetRefereeEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setRefereeEventDescriptor = $convert.base64Decode(
+    'Cg9TZXRSZWZlcmVlRXZlbnQSFAoFdGFibGUYASABKAVSBXRhYmxlEisKB3JlZmVyZWUYAiABKA'
+    'syES5nZW5lcmF0ZWQuUGxheWVyUgdyZWZlcmVl');
+
+@$core.Deprecated('Use deleteRefereeEventDescriptor instead')
+const DeleteRefereeEvent$json = {
+  '1': 'DeleteRefereeEvent',
+  '2': [
+    {'1': 'table', '3': 1, '4': 1, '5': 5, '10': 'table'},
+  ],
+};
+
+/// Descriptor for `DeleteRefereeEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteRefereeEventDescriptor = $convert
+    .base64Decode('ChJEZWxldGVSZWZlcmVlRXZlbnQSFAoFdGFibGUYASABKAVSBXRhYmxl');
+
+@$core.Deprecated('Use getRefereesEventOutDescriptor instead')
+const GetRefereesEventOut$json = {
+  '1': 'GetRefereesEventOut',
+  '2': [
+    {
+      '1': 'assignments',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.generated.RefereeAssignment',
+      '10': 'assignments'
+    },
+  ],
+};
+
+/// Descriptor for `GetRefereesEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getRefereesEventOutDescriptor = $convert.base64Decode(
+    'ChNHZXRSZWZlcmVlc0V2ZW50T3V0Ej4KC2Fzc2lnbm1lbnRzGAEgAygLMhwuZ2VuZXJhdGVkLl'
+    'JlZmVyZWVBc3NpZ25tZW50Ugthc3NpZ25tZW50cw==');

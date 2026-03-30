@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_page.dart';
+import 'package:seating_generator_web/feature/referee_assignments/ui/referee_page.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
@@ -127,6 +128,19 @@ class TournamentMenuBuilder {
               ),
             );
           },
+        ),
+      if (state.isMyTournament)
+        TournamentMenuTapItem(
+          text: locale.referees,
+          icon: Icons.gavel_outlined,
+          routeSegment: 'referees',
+          selected: isActive('referees'),
+          onTap: () => context.go(
+            RefereePage.createLocation(
+              tournamentId: tournamentId,
+              context: context,
+            ),
+          ),
         ),
       if (state.isMyTournament && showBill && !state.isLoading)
         TournamentMenuTapItem(

@@ -7455,6 +7455,247 @@ class AddPlayersFromTournamentEventOut extends $pb.GeneratedMessage {
   void clearAddedCount() => $_clearField(1);
 }
 
+class RefereeAssignment extends $pb.GeneratedMessage {
+  factory RefereeAssignment({
+    $core.int? table,
+    Player? referee,
+  }) {
+    final result = create();
+    if (table != null) result.table = table;
+    if (referee != null) result.referee = referee;
+    return result;
+  }
+
+  RefereeAssignment._();
+
+  factory RefereeAssignment.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory RefereeAssignment.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'RefereeAssignment',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'table')
+    ..aOM<Player>(2, _omitFieldNames ? '' : 'referee',
+        subBuilder: Player.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RefereeAssignment clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  RefereeAssignment copyWith(void Function(RefereeAssignment) updates) =>
+      super.copyWith((message) => updates(message as RefereeAssignment))
+          as RefereeAssignment;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RefereeAssignment create() => RefereeAssignment._();
+  @$core.override
+  RefereeAssignment createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static RefereeAssignment getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<RefereeAssignment>(create);
+  static RefereeAssignment? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get table => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set table($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTable() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTable() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  Player get referee => $_getN(1);
+  @$pb.TagNumber(2)
+  set referee(Player value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasReferee() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReferee() => $_clearField(2);
+  @$pb.TagNumber(2)
+  Player ensureReferee() => $_ensure(1);
+}
+
+class SetRefereeEvent extends $pb.GeneratedMessage {
+  factory SetRefereeEvent({
+    $core.int? table,
+    Player? referee,
+  }) {
+    final result = create();
+    if (table != null) result.table = table;
+    if (referee != null) result.referee = referee;
+    return result;
+  }
+
+  SetRefereeEvent._();
+
+  factory SetRefereeEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SetRefereeEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'SetRefereeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'table')
+    ..aOM<Player>(2, _omitFieldNames ? '' : 'referee',
+        subBuilder: Player.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetRefereeEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetRefereeEvent copyWith(void Function(SetRefereeEvent) updates) =>
+      super.copyWith((message) => updates(message as SetRefereeEvent))
+          as SetRefereeEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetRefereeEvent create() => SetRefereeEvent._();
+  @$core.override
+  SetRefereeEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static SetRefereeEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetRefereeEvent>(create);
+  static SetRefereeEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get table => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set table($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTable() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTable() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  Player get referee => $_getN(1);
+  @$pb.TagNumber(2)
+  set referee(Player value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasReferee() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReferee() => $_clearField(2);
+  @$pb.TagNumber(2)
+  Player ensureReferee() => $_ensure(1);
+}
+
+class DeleteRefereeEvent extends $pb.GeneratedMessage {
+  factory DeleteRefereeEvent({
+    $core.int? table,
+  }) {
+    final result = create();
+    if (table != null) result.table = table;
+    return result;
+  }
+
+  DeleteRefereeEvent._();
+
+  factory DeleteRefereeEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory DeleteRefereeEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeleteRefereeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'table')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteRefereeEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteRefereeEvent copyWith(void Function(DeleteRefereeEvent) updates) =>
+      super.copyWith((message) => updates(message as DeleteRefereeEvent))
+          as DeleteRefereeEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteRefereeEvent create() => DeleteRefereeEvent._();
+  @$core.override
+  DeleteRefereeEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static DeleteRefereeEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteRefereeEvent>(create);
+  static DeleteRefereeEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get table => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set table($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTable() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTable() => $_clearField(1);
+}
+
+class GetRefereesEventOut extends $pb.GeneratedMessage {
+  factory GetRefereesEventOut({
+    $core.Iterable<RefereeAssignment>? assignments,
+  }) {
+    final result = create();
+    if (assignments != null) result.assignments.addAll(assignments);
+    return result;
+  }
+
+  GetRefereesEventOut._();
+
+  factory GetRefereesEventOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetRefereesEventOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetRefereesEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..pPM<RefereeAssignment>(1, _omitFieldNames ? '' : 'assignments',
+        subBuilder: RefereeAssignment.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetRefereesEventOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetRefereesEventOut copyWith(void Function(GetRefereesEventOut) updates) =>
+      super.copyWith((message) => updates(message as GetRefereesEventOut))
+          as GetRefereesEventOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetRefereesEventOut create() => GetRefereesEventOut._();
+  @$core.override
+  GetRefereesEventOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GetRefereesEventOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetRefereesEventOut>(create);
+  static GetRefereesEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<RefereeAssignment> get assignments => $_getList(0);
+}
+
 const $core.bool _omitFieldNames =
     $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames =

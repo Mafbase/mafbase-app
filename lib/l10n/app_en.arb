@@ -804,5 +804,9 @@
   "invalidBucketsFormat": "Invalid buckets format",
   "@invalidBucketsFormat": {},
   "invalidValue": "Invalid value",
-  "@invalidValue": {}
+  "@invalidValue": {},
+  "referees": "Referees",
+  "@referees": {},
+  "addReferee": "Add referee",
+  "@addReferee": {}
 }

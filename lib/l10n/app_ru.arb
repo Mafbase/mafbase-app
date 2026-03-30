@@ -973,5 +973,9 @@
   "tableDescriptionsTableNumber": "№",
   "@tableDescriptionsTableNumber": {},
   "tableDescriptionsDescription": "Описание",
-  "@tableDescriptionsDescription": {}
+  "@tableDescriptionsDescription": {},
+  "referees": "Судьи",
+  "@referees": {},
+  "addReferee": "Добавить судью",
+  "@addReferee": {}
 }
