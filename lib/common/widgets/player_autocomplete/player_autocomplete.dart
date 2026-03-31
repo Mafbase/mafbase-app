@@ -15,7 +15,7 @@ class PlayerAutoComplete extends StatelessWidget {
   final Function(PlayerModel model) onSelected;
   final VoidCallback? onSubmit;
   final Function({required String initValue})? onNewPlayer;
-  final String label;
+  final String? label;
   final String? hint;
   final bool readOnly;
   final OptionsViewOpenDirection openDirection;
@@ -29,7 +29,7 @@ class PlayerAutoComplete extends StatelessWidget {
     required this.onSelected,
     this.onSubmit,
     this.onNewPlayer,
-    required this.label,
+    this.label,
     this.hint,
     this.readOnly = false,
     this.openDirection = OptionsViewOpenDirection.down,
@@ -66,7 +66,7 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
   final Function(PlayerModel model) onSelected;
   final VoidCallback? onSubmit;
   final Function({required String initValue})? onNewPlayer;
-  final String label;
+  final String? label;
   final String? hint;
   final bool readOnly;
   final OptionsViewOpenDirection openDirection;
@@ -78,7 +78,7 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
     required this.onSelected,
     this.onSubmit,
     this.onNewPlayer,
-    required this.label,
+    this.label,
     this.hint,
     required this.readOnly,
     required this.openDirection,
