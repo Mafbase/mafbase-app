@@ -2686,3 +2686,19 @@ const GetRefereesEventOut$json = {
 final $typed_data.Uint8List getRefereesEventOutDescriptor = $convert.base64Decode(
     'ChNHZXRSZWZlcmVlc0V2ZW50T3V0Ej4KC2Fzc2lnbm1lbnRzGAEgAygLMhwuZ2VuZXJhdGVkLl'
     'JlZmVyZWVBc3NpZ25tZW50Ugthc3NpZ25tZW50cw==');
+
+@$core.Deprecated('Use substitutePlayerEventDescriptor instead')
+const SubstitutePlayerEvent$json = {
+  '1': 'SubstitutePlayerEvent',
+  '2': [
+    {'1': 'oldPlayerId', '3': 1, '4': 1, '5': 5, '10': 'oldPlayerId'},
+    {'1': 'newPlayerId', '3': 2, '4': 1, '5': 5, '10': 'newPlayerId'},
+    {'1': 'games', '3': 3, '4': 3, '5': 5, '10': 'games'},
+  ],
+};
+
+/// Descriptor for `SubstitutePlayerEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List substitutePlayerEventDescriptor = $convert.base64Decode(
+    'ChVTdWJzdGl0dXRlUGxheWVyRXZlbnQSIAoLb2xkUGxheWVySWQYASABKAVSC29sZFBsYXllck'
+    'lkEiAKC25ld1BsYXllcklkGAIgASgFUgtuZXdQbGF5ZXJJZBIUCgVnYW1lcxgDIAMoBVIFZ2Ft'
+    'ZXM=');

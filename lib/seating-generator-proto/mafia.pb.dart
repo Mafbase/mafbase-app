@@ -7696,6 +7696,79 @@ class GetRefereesEventOut extends $pb.GeneratedMessage {
   $pb.PbList<RefereeAssignment> get assignments => $_getList(0);
 }
 
+class SubstitutePlayerEvent extends $pb.GeneratedMessage {
+  factory SubstitutePlayerEvent({
+    $core.int? oldPlayerId,
+    $core.int? newPlayerId,
+    $core.Iterable<$core.int>? games,
+  }) {
+    final result = create();
+    if (oldPlayerId != null) result.oldPlayerId = oldPlayerId;
+    if (newPlayerId != null) result.newPlayerId = newPlayerId;
+    if (games != null) result.games.addAll(games);
+    return result;
+  }
+
+  SubstitutePlayerEvent._();
+
+  factory SubstitutePlayerEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SubstitutePlayerEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'SubstitutePlayerEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'oldPlayerId', protoName: 'oldPlayerId')
+    ..aI(2, _omitFieldNames ? '' : 'newPlayerId', protoName: 'newPlayerId')
+    ..p<$core.int>(3, _omitFieldNames ? '' : 'games', $pb.PbFieldType.K3)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubstitutePlayerEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubstitutePlayerEvent copyWith(
+          void Function(SubstitutePlayerEvent) updates) =>
+      super.copyWith((message) => updates(message as SubstitutePlayerEvent))
+          as SubstitutePlayerEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubstitutePlayerEvent create() => SubstitutePlayerEvent._();
+  @$core.override
+  SubstitutePlayerEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static SubstitutePlayerEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SubstitutePlayerEvent>(create);
+  static SubstitutePlayerEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get oldPlayerId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set oldPlayerId($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOldPlayerId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOldPlayerId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get newPlayerId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set newPlayerId($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNewPlayerId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNewPlayerId() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $pb.PbList<$core.int> get games => $_getList(2);
+}
+
 const $core.bool _omitFieldNames =
     $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames =
