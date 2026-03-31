@@ -58,4 +58,11 @@ abstract class TournamentEditRepository {
   Future<void> downloadTablesSeating({required int tournamentId});
 
   Future<void> downloadCrossStats({required int tournamentId});
+
+  Future<void> substitutePlayer({
+    required int tournamentId,
+    required int oldPlayerId,
+    required int newPlayerId,
+    required List<int> games,
+  });
 }

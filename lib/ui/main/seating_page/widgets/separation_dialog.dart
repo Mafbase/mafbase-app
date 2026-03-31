@@ -66,7 +66,7 @@ class _SeparationDialogState extends State<SeparationDialog> {
                 focusNode: firstFocusNode,
                 availablePlayers: widget.availablePlayers,
                 readOnly: false,
-                hint: context.locale.nicknameHint,
+                label: context.locale.nicknameHint,
                 onSelected: (_) {
                   secondFocusNode.requestFocus();
                 },
@@ -80,7 +80,7 @@ class _SeparationDialogState extends State<SeparationDialog> {
                 focusNode: secondFocusNode,
                 availablePlayers: widget.availablePlayers,
                 readOnly: false,
-                hint: context.locale.nicknameHint,
+                label: context.locale.nicknameHint,
                 onSelected: (_) {
                   secondFocusNode.unfocus();
                 },

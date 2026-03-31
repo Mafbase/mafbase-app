@@ -73,6 +73,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     on<TournamentPageEventStartGameInfo>(_onStartGameInfo);
     on<TournamentPageEventCustomTextInfo>(_onCustomTextInfo);
     on<TournamentPageEventSetActivePhotoTheme>(_applyPhotoTheme);
+    on<TournamentPageEventSubstitutePlayer>(_onSubstitutePlayer);
   }
 
   Future _onStartGameInfo(
@@ -312,6 +313,44 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   Future _updatePlayers(Emitter<TournamentPageState> emit) async {
     final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
     emit(state.copyWith(tournamentPlayers: players));
+  }
+
+  Future _onSubstitutePlayer(
+    TournamentPageEventSubstitutePlayer event,
+    Emitter<TournamentPageState> emit,
+  ) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final allGames = await _repos.tournamentEditRepository.getResultModels(
+        tournamentId: tournamentId,
+      );
+
+      final playerGames = allGames
+          .expand((round) => round)
+          .where((game) => game.nicknames.contains(event.oldPlayer.nickname))
+          .toList();
+
+      final gameNumbers = playerGames.map((g) => g.game).toSet().toList()..sort();
+
+      final result = await router.openSubstituteDialog(
+        oldPlayer: event.oldPlayer,
+        gameNumbers: gameNumbers,
+      );
+
+      if (result != null) {
+        await _repos.tournamentEditRepository.substitutePlayer(
+          tournamentId: tournamentId,
+          oldPlayerId: event.oldPlayer.id,
+          newPlayerId: result.newPlayerId,
+          games: result.games,
+        );
+        await _updatePlayers(emit);
+      }
+      emit(state.copyWith(isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(isLoading: false));
+      rethrow;
+    }
   }
 
   Future<void> _applyPhotoTheme(

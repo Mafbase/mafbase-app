@@ -82,7 +82,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               ),
               const SizedBox(height: 24),
               PlayerAutoComplete(
-                hint: context.locale.nicknameHint,
+                label: context.locale.nicknameHint,
                 controller: _controller,
                 focusNode: _focusNode,
                 onSelected: _onPlayerSelected,
@@ -92,7 +92,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               ),
               const SizedBox(height: 8),
               PlayerAutoComplete(
-                hint: context.locale.fsmNicknameHint,
+                label: context.locale.fsmNicknameHint,
                 controller: _controllerFsm,
                 focusNode: _focusNodeFsm,
                 displayStringForOption: (m) => m.fsmNickaname ?? '',
@@ -103,7 +103,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               ),
               const SizedBox(height: 8),
               PlayerAutoComplete(
-                hint: context.locale.mafbankNicknameHint,
+                label: context.locale.mafbankNicknameHint,
                 controller: _controllerMafbank,
                 focusNode: _focusNodeMafbank,
                 displayStringForOption: (m) => m.mafbankNickname ?? '',

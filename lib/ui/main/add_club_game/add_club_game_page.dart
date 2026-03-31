@@ -411,7 +411,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                 focusNode: refereeFocusNode,
                 onSelected: (player) => players.add(player),
                 readOnly: widget.readOnly || state.isTournament,
-                hint: 'Судья',
+                label: 'Судья',
                 onNewPlayer: ({String? initValue}) async {
                   context.read<AddClubGameBloc>().add(
                         AddClubGameEvent.onNewPlayer(
@@ -732,7 +732,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
               nicknameController: controllers[i],
               focusNode: focusNodes[i],
               readOnly: widget.readOnly,
-              hint: 'Игрок ${i + 1}',
+              label: 'Игрок ${i + 1}',
               onSelected: (player) {
                 players.add(player);
                 if (i < 9) {
@@ -887,7 +887,7 @@ class NicknameField extends StatelessWidget {
   final Function(PlayerModel player)? onSelected;
   final Function({String? initValue})? onNewPlayer;
   final bool readOnly;
-  final String hint;
+  final String label;
   final bool down;
   final List<PlayerModel>? availablePlayers;
 
@@ -898,7 +898,7 @@ class NicknameField extends StatelessWidget {
     required this.readOnly,
     this.onNewPlayer,
     this.onSelected,
-    required this.hint,
+    required this.label,
     required this.down,
     this.availablePlayers,
   });
@@ -919,7 +919,7 @@ class NicknameField extends StatelessWidget {
         },
         onNewPlayer:
             onNewPlayer != null ? ({required String initValue}) => onNewPlayer?.call(initValue: initValue) : null,
-        hint: hint,
+        label: label,
       ),
     );
   }
@@ -936,7 +936,7 @@ class PlayerRowWidget extends StatefulWidget {
   final FocusNode minusScoreFocusNode;
   final bool readOnly;
   final bool isTournament;
-  final String hint;
+  final String label;
   final PlayerRole role;
   final Function({String? initValue}) onNewPlayer;
   final bool down;
@@ -949,7 +949,7 @@ class PlayerRowWidget extends StatefulWidget {
     required this.nicknameController,
     required this.focusNode,
     required this.readOnly,
-    required this.hint,
+    required this.label,
     required this.onSelected,
     required this.role,
     required this.onNewPlayer,
@@ -1039,7 +1039,7 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
         readOnly: widget.readOnly || widget.isTournament,
         controller: widget.nicknameController,
         focusNode: widget.focusNode,
-        hint: widget.hint,
+        label: widget.label,
         onNewPlayer: widget.onNewPlayer,
         onSelected: widget.onSelected,
       );

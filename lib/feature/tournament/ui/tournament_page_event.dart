@@ -54,4 +54,8 @@ abstract class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.setActivePhotoTheme({
     int? themeId,
   }) = TournamentPageEventSetActivePhotoTheme;
+
+  const factory TournamentPageEvent.substitutePlayer({
+    required PlayerModel oldPlayer,
+  }) = TournamentPageEventSubstitutePlayer;
 }

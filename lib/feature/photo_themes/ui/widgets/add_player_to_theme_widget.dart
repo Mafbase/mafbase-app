@@ -41,7 +41,7 @@ class _AddPlayerToThemeWidgetState extends State<AddPlayerToThemeWidget> {
             child: PlayerAutoComplete(
               controller: _controller,
               focusNode: _focusNode,
-              hint: context.locale.photoThemesAddPlayer,
+              label: context.locale.photoThemesAddPlayer,
               onSelected: (player) {
                 if (player.id != PlayerModel.undefinedId) {
                   context.read<PhotoThemesBloc>().add(

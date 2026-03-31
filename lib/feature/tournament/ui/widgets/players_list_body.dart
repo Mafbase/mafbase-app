@@ -88,6 +88,15 @@ class PlayersListBody extends StatelessWidget {
                                               );
                                         }
                                       : null,
+                                  onSubstitute: state.isMyTournament
+                                      ? () {
+                                          context.read<TournamentPageBloc>().add(
+                                                TournamentPageEvent.substitutePlayer(
+                                                  oldPlayer: player,
+                                                ),
+                                              );
+                                        }
+                                      : null,
                                   onDelete: state.isMyTournament
                                       ? () {
                                           final bloc = context.read<TournamentPageBloc>();

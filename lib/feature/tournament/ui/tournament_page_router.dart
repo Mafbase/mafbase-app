@@ -7,6 +7,7 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/substitute_player_dialog.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog.dart';
 
 abstract class TournamentPageRouter {
@@ -21,6 +22,11 @@ abstract class TournamentPageRouter {
   void openRating({required int tournamentId});
 
   void openWebView(String url);
+
+  Future<({int newPlayerId, List<int> games})?> openSubstituteDialog({
+    required PlayerModel oldPlayer,
+    required List<int> gameNumbers,
+  });
 }
 
 class TournamentPageRouterImpl implements TournamentPageRouter {
@@ -67,6 +73,18 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
         tournamentId: tournamentId,
         context: _context,
       ),
+    );
+  }
+
+  @override
+  Future<({int newPlayerId, List<int> games})?> openSubstituteDialog({
+    required PlayerModel oldPlayer,
+    required List<int> gameNumbers,
+  }) {
+    return SubstitutePlayerDialog.show(
+      context: _context,
+      oldPlayer: oldPlayer,
+      gameNumbers: gameNumbers,
     );
   }
 

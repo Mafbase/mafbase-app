@@ -6,6 +6,7 @@ import 'package:seating_generator_web/ui/main/profile_page/widgets/player_avatar
 class PlayerRow extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
+  final VoidCallback? onSubstitute;
   final PlayerModel player;
   final String? imageUrlOverride;
   final int index;
@@ -16,6 +17,7 @@ class PlayerRow extends StatelessWidget {
     required this.index,
     required this.onDelete,
     required this.player,
+    this.onSubstitute,
     this.imageUrlOverride,
   });
 
@@ -52,6 +54,15 @@ class PlayerRow extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+            if (onSubstitute != null)
+              IconButton(
+                onPressed: onSubstitute,
+                icon: Icon(
+                  Icons.swap_horiz,
+                  size: 22,
+                  color: theme.darkGreyColor,
+                ),
+              ),
             if (onDelete != null)
               IconButton(
                 onPressed: onDelete,

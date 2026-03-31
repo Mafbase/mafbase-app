@@ -163,7 +163,7 @@ class _RefereePageState extends State<RefereePage> {
                               child: PlayerAutoComplete(
                                 controller: _nicknameController,
                                 focusNode: _nicknameFocusNode,
-                                hint: locale.nicknameHint,
+                                label: locale.nicknameHint,
                                 onSelected: (player) {
                                   setState(() {
                                     _selectedReferee = player;

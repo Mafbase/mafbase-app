@@ -15,7 +15,8 @@ class PlayerAutoComplete extends StatelessWidget {
   final Function(PlayerModel model) onSelected;
   final VoidCallback? onSubmit;
   final Function({required String initValue})? onNewPlayer;
-  final String hint;
+  final String label;
+  final String? hint;
   final bool readOnly;
   final OptionsViewOpenDirection openDirection;
   final TextEditingController? controller;
@@ -28,7 +29,8 @@ class PlayerAutoComplete extends StatelessWidget {
     required this.onSelected,
     this.onSubmit,
     this.onNewPlayer,
-    required this.hint,
+    required this.label,
+    this.hint,
     this.readOnly = false,
     this.openDirection = OptionsViewOpenDirection.down,
     this.controller,
@@ -48,6 +50,7 @@ class PlayerAutoComplete extends StatelessWidget {
         onSelected: onSelected,
         onSubmit: onSubmit,
         onNewPlayer: onNewPlayer,
+        label: label,
         hint: hint,
         readOnly: readOnly,
         openDirection: openDirection,
@@ -63,7 +66,8 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
   final Function(PlayerModel model) onSelected;
   final VoidCallback? onSubmit;
   final Function({required String initValue})? onNewPlayer;
-  final String hint;
+  final String label;
+  final String? hint;
   final bool readOnly;
   final OptionsViewOpenDirection openDirection;
   final TextEditingController? externalController;
@@ -74,7 +78,8 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
     required this.onSelected,
     this.onSubmit,
     this.onNewPlayer,
-    required this.hint,
+    required this.label,
+    this.hint,
     required this.readOnly,
     required this.openDirection,
     this.externalController,
@@ -227,7 +232,8 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
           readOnly: widget.readOnly,
           focusNode: focusNode,
           controller: controller,
-          label: widget.hint,
+          label: widget.label,
+          hint: widget.hint,
           onSubmit: (text) {
             onSubmit();
             widget.onSubmit?.call();

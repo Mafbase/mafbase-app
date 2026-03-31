@@ -96,7 +96,7 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                             controller: controller,
                             focusNode: focusNode,
                             readOnly: false,
-                            hint: context.locale.nicknameHint,
+                            label: context.locale.nicknameHint,
                             down: true,
                             onNewPlayer: ({initValue}) {
                               if (initValue == null) return;

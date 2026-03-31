@@ -977,5 +977,24 @@
   "referees": "Судьи",
   "@referees": {},
   "addReferee": "Добавить судью",
-  "@addReferee": {}
+  "@addReferee": {},
+  "substitutePlayer": "Замена игрока",
+  "@substitutePlayer": {},
+  "substitutePlayerNew": "Игрок на замену",
+  "@substitutePlayerNew": {},
+  "substitutePlayerSelectGames": "Игры для замены",
+  "@substitutePlayerSelectGames": {},
+  "substitutePlayerButton": "Заменить",
+  "@substitutePlayerButton": {},
+  "substitutePlayerOld": "Заменяемый игрок",
+  "@substitutePlayerOld": {},
+  "substitutePlayerGameNumber": "Тур {number}",
+  "@substitutePlayerGameNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  }
 }
