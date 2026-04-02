@@ -276,13 +276,16 @@ class _GameResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
     return Container(
       width: double.infinity,
       color: color(context),
       child: Center(
         child: Text(
           text(context),
-          style: MyTheme.of(context).btnTextStyle.copyWith(),
+          style: win == null
+              ? theme.defaultTextStyle.copyWith(fontWeight: FontWeight.w600)
+              : theme.btnTextStyle.copyWith(),
         ),
       ),
     );
