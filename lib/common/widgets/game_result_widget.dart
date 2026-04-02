@@ -276,16 +276,16 @@ class _GameResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: win == null ? 0 : 1,
-      child: Container(
-        width: double.infinity,
-        color: color(context),
-        child: Center(
-          child: Text(
-            text(context),
-            style: MyTheme.of(context).btnTextStyle.copyWith(),
-          ),
+    final theme = MyTheme.of(context);
+    return Container(
+      width: double.infinity,
+      color: color(context),
+      child: Center(
+        child: Text(
+          text(context),
+          style: win == null
+              ? theme.defaultTextStyle.copyWith(fontWeight: FontWeight.w600)
+              : theme.btnTextStyle.copyWith(),
         ),
       ),
     );
@@ -299,8 +299,9 @@ class _GameResultWidget extends StatelessWidget {
         return context.theme.diedPositiveColor;
       case GameWin.mafia:
         return context.theme.diedColor;
+      default:
+        return context.theme.greyColor;
     }
-    return const Color(0x00000000);
   }
 
   String text(BuildContext context) {
@@ -312,7 +313,7 @@ class _GameResultWidget extends StatelessWidget {
       case GameWin.mafia:
         return context.locale.mafiaWon;
       default:
-        return context.locale.draw;
+        return context.locale.resultUnknown;
     }
   }
 }

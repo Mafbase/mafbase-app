@@ -154,6 +154,8 @@
   "@cityWon": {},
   "draw": "Ничья",
   "@draw": {},
+  "resultUnknown": "Результат неизвестен",
+  "@resultUnknown": {},
   "tournamentSettingsUpdateSuccess": "Настройки турнира успешно обновлены",
   "@tournamentSettingsUpdateSuccess": {},
   "clubsHeader": "Клубы",
