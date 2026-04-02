@@ -51,11 +51,6 @@ class AppSidebar extends StatelessWidget {
     return Container(
       height: 89,
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: theme.sidebarDividerColor),
-        ),
-      ),
       child: Row(
         children: [
           Image.asset(
