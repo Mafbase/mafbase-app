@@ -15,6 +15,8 @@ abstract class GameResultModel with _$GameResultModel {
     List<PlayerResultStatus?>? statuses,
     required int table,
     required int game,
+    List<int>? playerIds,
+    int? refereeId,
   }) = _GameResultModel;
 
   factory GameResultModel.fromProto(TableSeatingItem proto) {
@@ -27,6 +29,12 @@ abstract class GameResultModel with _$GameResultModel {
       gameWin: proto.hasResult() ? proto.result.win : null,
       roles: proto.hasResult() ? proto.result.role : null,
       game: proto.game,
+      playerIds: proto.seating.players.isNotEmpty
+          ? proto.seating.players.map((p) => p.id).toList()
+          : null,
+      refereeId: proto.seating.hasRefereeModel()
+          ? proto.seating.refereeModel.id
+          : null,
       statuses: proto.hasResult()
           ? List.generate(10, (index) {
               if (proto.result.died == index) {

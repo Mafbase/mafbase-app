@@ -7,6 +7,13 @@ class AppTheme {
     return ThemeData.light(useMaterial3: true).copyWith(
       extensions: [myTheme],
       scaffoldBackgroundColor: myTheme.background1,
+      chipTheme: ChipThemeData(
+        backgroundColor: myTheme.background2,
+        selectedColor: myTheme.darkBlueColor,
+        checkmarkColor: myTheme.background1,
+        secondaryLabelStyle: TextStyle(color: myTheme.background1),
+        labelStyle: TextStyle(color: myTheme.textColor),
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: myTheme.darkBlueColor,
         foregroundColor: Colors.white,

@@ -996,5 +996,15 @@
         "example": "1"
       }
     }
-  }
+  },
+  "editSeatingTitle": "Редактирование рассадки",
+  "@editSeatingTitle": {},
+  "editSeatingButton": "Редактировать рассадку",
+  "@editSeatingButton": {},
+  "editSeatingSave": "Сохранить",
+  "@editSeatingSave": {},
+  "editSeatingSaveSuccess": "Рассадка сохранена",
+  "@editSeatingSaveSuccess": {},
+  "round": "Тур",
+  "@round": {}
 }

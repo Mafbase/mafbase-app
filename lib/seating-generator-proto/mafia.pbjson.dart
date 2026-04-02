@@ -148,16 +148,38 @@ const TableSeating$json = {
       '17': true
     },
     {'1': 'table', '3': 3, '4': 1, '5': 5, '10': 'table'},
+    {
+      '1': 'players',
+      '3': 4,
+      '4': 3,
+      '5': 11,
+      '6': '.generated.Player',
+      '10': 'players'
+    },
+    {
+      '1': 'refereeModel',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.Player',
+      '9': 1,
+      '10': 'refereeModel',
+      '17': true
+    },
   ],
   '8': [
     {'1': '_referee'},
+    {'1': '_refereeModel'},
   ],
 };
 
 /// Descriptor for `TableSeating`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List tableSeatingDescriptor = $convert.base64Decode(
     'CgxUYWJsZVNlYXRpbmcSGgoIbmlja25hbWUYASADKAlSCG5pY2tuYW1lEh0KB3JlZmVyZWUYAi'
-    'ABKAlIAFIHcmVmZXJlZYgBARIUCgV0YWJsZRgDIAEoBVIFdGFibGVCCgoIX3JlZmVyZWU=');
+    'ABKAlIAFIHcmVmZXJlZYgBARIUCgV0YWJsZRgDIAEoBVIFdGFibGUSKwoHcGxheWVycxgEIAMo'
+    'CzIRLmdlbmVyYXRlZC5QbGF5ZXJSB3BsYXllcnMSOgoMcmVmZXJlZU1vZGVsGAUgASgLMhEuZ2'
+    'VuZXJhdGVkLlBsYXllckgBUgxyZWZlcmVlTW9kZWyIAQFCCgoIX3JlZmVyZWVCDwoNX3JlZmVy'
+    'ZWVNb2RlbA==');
 
 @$core.Deprecated('Use tableSeatingResultDescriptor instead')
 const TableSeatingResult$json = {
@@ -315,6 +337,23 @@ final $typed_data.Uint8List loginEventOutDescriptor = $convert.base64Decode(
     'bnRPdXQuRXJyb3JSBWVycm9yEhMKAmlkGAQgASgFSABSAmlkiAEBIkIKBUVycm9yEgsKB25vRX'
     'Jyb3IQABIUChBuZWVkVmVyaWZpY2F0aW9uEAESFgoSaW52YWxpZENyZWRlbnRpYWxzEAJCBQoD'
     'X2lk');
+
+@$core.Deprecated('Use editSeatingEventDescriptor instead')
+const EditSeatingEvent$json = {
+  '1': 'EditSeatingEvent',
+  '2': [
+    {'1': 'game', '3': 1, '4': 1, '5': 5, '10': 'game'},
+    {'1': 'table', '3': 2, '4': 1, '5': 5, '10': 'table'},
+    {'1': 'players', '3': 3, '4': 3, '5': 5, '10': 'players'},
+    {'1': 'referee', '3': 4, '4': 1, '5': 5, '10': 'referee'},
+  ],
+};
+
+/// Descriptor for `EditSeatingEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List editSeatingEventDescriptor = $convert.base64Decode(
+    'ChBFZGl0U2VhdGluZ0V2ZW50EhIKBGdhbWUYASABKAVSBGdhbWUSFAoFdGFibGUYAiABKAVSBX'
+    'RhYmxlEhgKB3BsYXllcnMYAyADKAVSB3BsYXllcnMSGAoHcmVmZXJlZRgEIAEoBVIHcmVmZXJl'
+    'ZQ==');
 
 @$core.Deprecated('Use changeSeatingContentDescriptor instead')
 const ChangeSeatingContent$json = {

@@ -231,7 +231,6 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     if (player == null) {
       return;
     }
-    router.openPlayersList(tournamentId: tournamentId);
     emit(state.copyWith(isLoading: true));
     try {
       await _addPlayerInteractor.run(

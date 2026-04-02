@@ -808,5 +808,15 @@
   "referees": "Referees",
   "@referees": {},
   "addReferee": "Add referee",
-  "@addReferee": {}
+  "@addReferee": {},
+  "editSeatingTitle": "Edit Seating",
+  "@editSeatingTitle": {},
+  "editSeatingButton": "Edit Seating",
+  "@editSeatingButton": {},
+  "editSeatingSave": "Save",
+  "@editSeatingSave": {},
+  "editSeatingSaveSuccess": "Seating saved",
+  "@editSeatingSaveSuccess": {},
+  "round": "Round",
+  "@round": {}
 }

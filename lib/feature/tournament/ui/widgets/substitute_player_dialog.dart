@@ -5,7 +5,6 @@ import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/utils.dart';
-import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class SubstitutePlayerDialog extends StatefulWidget {
   final PlayerModel oldPlayer;

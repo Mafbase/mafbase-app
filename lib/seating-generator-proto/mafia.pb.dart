@@ -90,11 +90,15 @@ class TableSeating extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? nickname,
     $core.String? referee,
     $core.int? table,
+    $core.Iterable<Player>? players,
+    Player? refereeModel,
   }) {
     final result = create();
     if (nickname != null) result.nickname.addAll(nickname);
     if (referee != null) result.referee = referee;
     if (table != null) result.table = table;
+    if (players != null) result.players.addAll(players);
+    if (refereeModel != null) result.refereeModel = refereeModel;
     return result;
   }
 
@@ -114,6 +118,10 @@ class TableSeating extends $pb.GeneratedMessage {
     ..pPS(1, _omitFieldNames ? '' : 'nickname')
     ..aOS(2, _omitFieldNames ? '' : 'referee')
     ..aI(3, _omitFieldNames ? '' : 'table')
+    ..pPM<Player>(4, _omitFieldNames ? '' : 'players',
+        subBuilder: Player.create)
+    ..aOM<Player>(5, _omitFieldNames ? '' : 'refereeModel',
+        protoName: 'refereeModel', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -155,6 +163,20 @@ class TableSeating extends $pb.GeneratedMessage {
   $core.bool hasTable() => $_has(2);
   @$pb.TagNumber(3)
   void clearTable() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $pb.PbList<Player> get players => $_getList(3);
+
+  @$pb.TagNumber(5)
+  Player get refereeModel => $_getN(4);
+  @$pb.TagNumber(5)
+  set refereeModel(Player value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasRefereeModel() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRefereeModel() => $_clearField(5);
+  @$pb.TagNumber(5)
+  Player ensureRefereeModel() => $_ensure(4);
 }
 
 class TableSeatingResult extends $pb.GeneratedMessage {
@@ -567,6 +589,90 @@ class LoginEventOut extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(3);
   @$pb.TagNumber(4)
   void clearId() => $_clearField(4);
+}
+
+class EditSeatingEvent extends $pb.GeneratedMessage {
+  factory EditSeatingEvent({
+    $core.int? game,
+    $core.int? table,
+    $core.Iterable<$core.int>? players,
+    $core.int? referee,
+  }) {
+    final result = create();
+    if (game != null) result.game = game;
+    if (table != null) result.table = table;
+    if (players != null) result.players.addAll(players);
+    if (referee != null) result.referee = referee;
+    return result;
+  }
+
+  EditSeatingEvent._();
+
+  factory EditSeatingEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory EditSeatingEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'EditSeatingEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'game')
+    ..aI(2, _omitFieldNames ? '' : 'table')
+    ..p<$core.int>(3, _omitFieldNames ? '' : 'players', $pb.PbFieldType.K3)
+    ..aI(4, _omitFieldNames ? '' : 'referee')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EditSeatingEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EditSeatingEvent copyWith(void Function(EditSeatingEvent) updates) =>
+      super.copyWith((message) => updates(message as EditSeatingEvent))
+          as EditSeatingEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditSeatingEvent create() => EditSeatingEvent._();
+  @$core.override
+  EditSeatingEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static EditSeatingEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EditSeatingEvent>(create);
+  static EditSeatingEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get game => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set game($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasGame() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGame() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get table => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set table($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTable() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTable() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $pb.PbList<$core.int> get players => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.int get referee => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set referee($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasReferee() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearReferee() => $_clearField(4);
 }
 
 class ChangeSeatingContent extends $pb.GeneratedMessage {

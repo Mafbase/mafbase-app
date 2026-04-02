@@ -7,6 +7,7 @@ import 'package:seating_generator_web/data/requests/delete_separation_request.da
 import 'package:seating_generator_web/data/requests/generate_final_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_ci_schemes_request.dart';
 import 'package:seating_generator_web/data/requests/substitute_player_request.dart';
+import 'package:seating_generator_web/feature/edit_seating/data/requests/edit_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_final_players_request.dart';
 import 'package:seating_generator_web/data/requests/get_seating_request.dart';
 import 'package:seating_generator_web/data/requests/get_separations_request.dart';
@@ -206,6 +207,23 @@ class TournamentEditRepositoryImpl extends BaseRepository implements TournamentE
       oldPlayerId: oldPlayerId,
       newPlayerId: newPlayerId,
       games: games,
+    ).execute(client);
+  }
+
+  @override
+  Future<void> editSeating({
+    required int tournamentId,
+    required int game,
+    required int table,
+    required List<int> playerIds,
+    required int refereeId,
+  }) async {
+    await EditSeatingRequest(
+      tournamentId: tournamentId,
+      game: game,
+      table: table,
+      playerIds: playerIds,
+      refereeId: refereeId,
     ).execute(client);
   }
 }

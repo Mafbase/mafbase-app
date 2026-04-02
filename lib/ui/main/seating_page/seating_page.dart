@@ -15,6 +15,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.da
 import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/separations_section.dart';
+import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
@@ -38,6 +39,9 @@ class SeatingPage extends StatefulWidget {
     builder: (context, state) => SeatingPage(
       tournamentId: int.parse(state.pathParameters['id'] ?? ''),
     ),
+    routes: [
+      EditSeatingPage.tournamentRoute,
+    ]
   );
 
   static String createLocation({
@@ -121,6 +125,16 @@ class _SeatingPageState extends CustomState<SeatingPage>
         },
         title: locale.seatingUploadGomafia,
       ),
+      if (state.games.isNotEmpty)
+        (
+          onTap: () => context.go(
+                EditSeatingPage.createLocation(
+                  tournamentId: widget.tournamentId,
+                  context: context,
+                ),
+              ),
+          title: locale.editSeatingButton,
+        ),
     ];
   }
 
@@ -243,23 +257,29 @@ class _SeatingPageState extends CustomState<SeatingPage>
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: Row(
-        children: [
-          for (int i = 0; i < actionsList.length; i++) ...[
-            if (actionsList[i].title == context.locale.seatingGenerate)
-              CustomButton(
-                text: actionsList[i].title,
-                expand: false,
-                onTap: actionsList[i].onTap,
-              )
-            else
-              TextButton(
-                onPressed: actionsList[i].onTap,
-                child: Text(actionsList[i].title),
-              ),
-            if (i < actionsList.length - 1) const SizedBox(width: 8),
-          ],
-        ],
+      child: SizedBox(
+        width: double.infinity,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              for (int i = 0; i < actionsList.length; i++) ...[
+                if (actionsList[i].title == context.locale.seatingGenerate)
+                  CustomButton(
+                    text: actionsList[i].title,
+                    expand: false,
+                    onTap: actionsList[i].onTap,
+                  )
+                else
+                  TextButton(
+                    onPressed: actionsList[i].onTap,
+                    child: Text(actionsList[i].title),
+                  ),
+                if (i < actionsList.length - 1) const SizedBox(width: 8),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -65,4 +65,12 @@ abstract class TournamentEditRepository {
     required int newPlayerId,
     required List<int> games,
   });
+
+  Future<void> editSeating({
+    required int tournamentId,
+    required int game,
+    required int table,
+    required List<int> playerIds,
+    required int refereeId,
+  });
 }

@@ -42,6 +42,8 @@ class MyTheme extends ThemeExtension<MyTheme> {
     required this.statusBillingColor,
     required this.statusBillingBgColor,
     required this.statusEndedColor,
+    required this.changedPlayerColor,
+    required this.dragTargetHoverColor,
   });
 
   final Color background1;
@@ -84,6 +86,8 @@ class MyTheme extends ThemeExtension<MyTheme> {
   final Color statusBillingColor;
   final Color statusBillingBgColor;
   final Color statusEndedColor;
+  final Color changedPlayerColor;
+  final Color dragTargetHoverColor;
 
   static MyTheme of(BuildContext context) => Theme.of(context).extension<MyTheme>()!;
 
@@ -156,6 +160,8 @@ class MyTheme extends ThemeExtension<MyTheme> {
       statusBillingColor: const Color(0xFFC4A600),
       statusBillingBgColor: const Color(0xFFFFE600),
       statusEndedColor: const Color(0xFF8E9199),
+      changedPlayerColor: const Color(0x26C8B75E),
+      dragTargetHoverColor: const Color(0x1A4E6B9B),
     );
   }
 
@@ -220,6 +226,8 @@ class MyTheme extends ThemeExtension<MyTheme> {
       statusBillingColor: const Color(0xFFC4A600),
       statusBillingBgColor: const Color(0xFFFFE600),
       statusEndedColor: const Color(0xFF8E9199),
+      changedPlayerColor: const Color(0x33C8B75E),
+      dragTargetHoverColor: const Color(0x264A7A9B),
     );
   }
 
@@ -265,6 +273,8 @@ class MyTheme extends ThemeExtension<MyTheme> {
     Color? statusBillingColor,
     Color? statusBillingBgColor,
     Color? statusEndedColor,
+    Color? changedPlayerColor,
+    Color? dragTargetHoverColor,
   }) =>
       MyTheme(
         background1: background1 ?? this.background1,
@@ -307,6 +317,8 @@ class MyTheme extends ThemeExtension<MyTheme> {
         statusBillingColor: statusBillingColor ?? this.statusBillingColor,
         statusBillingBgColor: statusBillingBgColor ?? this.statusBillingBgColor,
         statusEndedColor: statusEndedColor ?? this.statusEndedColor,
+        changedPlayerColor: changedPlayerColor ?? this.changedPlayerColor,
+        dragTargetHoverColor: dragTargetHoverColor ?? this.dragTargetHoverColor,
       );
 
   @override
@@ -353,6 +365,8 @@ class MyTheme extends ThemeExtension<MyTheme> {
       statusBillingColor: Color.lerp(statusBillingColor, other.statusBillingColor, t)!,
       statusBillingBgColor: Color.lerp(statusBillingBgColor, other.statusBillingBgColor, t)!,
       statusEndedColor: Color.lerp(statusEndedColor, other.statusEndedColor, t)!,
+      changedPlayerColor: Color.lerp(changedPlayerColor, other.changedPlayerColor, t)!,
+      dragTargetHoverColor: Color.lerp(dragTargetHoverColor, other.dragTargetHoverColor, t)!,
     );
   }
 }
