@@ -135,7 +135,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.light(isMobile: context.isMobile),
                 darkTheme: AppTheme.dark(isMobile: context.isMobile),
-                themeMode: ThemeMode.light,
+                themeMode: ThemeMode.system,
                 routerDelegate: context.read<AppRouter>().router.routerDelegate,
                 routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
                 routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
