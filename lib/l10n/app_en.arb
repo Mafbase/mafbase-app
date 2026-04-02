@@ -154,6 +154,8 @@
   "@cityWon": {},
   "draw": "Draw",
   "@draw": {},
+  "resultUnknown": "Result unknown",
+  "@resultUnknown": {},
   "tournamentSettingsUpdateSuccess": "Tournament settings successfully updated",
   "@tournamentSettingsUpdateSuccess": {},
   "clubsHeader": "Clubs",
