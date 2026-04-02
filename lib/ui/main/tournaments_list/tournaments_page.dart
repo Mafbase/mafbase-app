@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -174,95 +175,100 @@ class _TournamentsPageState extends CustomState<TournamentsPage> {
     final theme = MyTheme.of(context);
     final locale = context.locale;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(locale.tournamentsListTitle),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48),
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 900),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: TournamentsSearchField(
-                  controller: _searchController,
-                  onChanged: _onSearchChanged,
-                  onClear: _onSearchClear,
-                  hintText: locale.tournamentsSearchHint,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      body: BlocBuilder<TournamentsBloc, TournamentsState>(
-        builder: (context, state) => Stack(
-          children: [
-            if (!state.isLoading && state.tournaments.isEmpty)
-              Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.search_off, size: 64, color: theme.greyColor),
-                    const SizedBox(height: 16),
-                    Text(
-                      locale.tournamentsSearchEmpty,
-                      style: TextStyle(fontSize: 16, color: theme.greyColor),
-                    ),
-                  ],
-                ),
-              )
-            else
-              CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  SliverPadding(
-                    padding: const EdgeInsets.all(16),
-                    sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        childCount: state.tournaments.length,
-                        (context, index) {
-                          final tournament = state.tournaments[index];
-                          return Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(maxWidth: 900),
-                                child: _DesktopTournamentCard(tournament: tournament),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+    return LayoutBuilder(
+      builder: (context, constraints) => Scaffold(
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Text(locale.tournamentsListTitle),
+              const SizedBox(width: 24),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 900),
+                    child: TournamentsSearchField(
+                      controller: _searchController,
+                      onChanged: _onSearchChanged,
+                      onClear: _onSearchClear,
+                      hintText: locale.tournamentsSearchHint,
                     ),
                   ),
-                  if (state.isLoadingMore)
-                    const SliverToBoxAdapter(
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: CircularProgressIndicator(),
+                ),
+              ),
+              SizedBox(width: max((constraints.maxWidth - 900) / 2 - 16, 0)),
+            ],
+          ),
+        ),
+        body: BlocBuilder<TournamentsBloc, TournamentsState>(
+          builder: (context, state) => Stack(
+            children: [
+              if (!state.isLoading && state.tournaments.isEmpty)
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.search_off, size: 64, color: theme.greyColor),
+                      const SizedBox(height: 16),
+                      Text(
+                        locale.tournamentsSearchEmpty,
+                        style: TextStyle(fontSize: 16, color: theme.greyColor),
+                      ),
+                    ],
+                  ),
+                )
+              else
+                CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    SliverPadding(
+                      padding: const EdgeInsets.all(16),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          childCount: state.tournaments.length,
+                          (context, index) {
+                            final tournament = state.tournaments[index];
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(maxWidth: 900),
+                                  child: _DesktopTournamentCard(tournament: tournament),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
-                ],
-              ),
-            if (state.isLoading) const LoadingOverlayWidget(),
-          ],
+                    if (state.isLoadingMore)
+                      const SliverToBoxAdapter(
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              if (state.isLoading) const LoadingOverlayWidget(),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: ValueListenableBuilder(
-        valueListenable: context.read<AuthNotifier>(),
-        builder: (context, authModel, _) {
-          if (authModel is! AuthNotifierAuthorizedModel) return const SizedBox.shrink();
-          return FloatingActionButton.large(
-            elevation: 10,
-            onPressed: () {
-              context.read<TournamentsBloc>().add(const TournamentsEvent.create());
-            },
-            child: const Icon(Icons.add, color: Colors.white),
-          );
-        },
+        floatingActionButton: ValueListenableBuilder(
+          valueListenable: context.read<AuthNotifier>(),
+          builder: (context, authModel, _) {
+            if (authModel is! AuthNotifierAuthorizedModel) return const SizedBox.shrink();
+            return FloatingActionButton.large(
+              elevation: 10,
+              onPressed: () {
+                context.read<TournamentsBloc>().add(const TournamentsEvent.create());
+              },
+              child: const Icon(Icons.add, color: Colors.white),
+            );
+          },
+        ),
       ),
     );
   }
