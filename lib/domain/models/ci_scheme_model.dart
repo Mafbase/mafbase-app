@@ -15,5 +15,5 @@ abstract class CiSchemeModel with _$CiSchemeModel {
         name: proto.name,
       );
 
-  static const CiSchemeModel empty = CiSchemeModel(id: -1, name: 'Без коменсации');
+  static const CiSchemeModel empty = CiSchemeModel(id: -1, name: 'Без компенсации');
 }
