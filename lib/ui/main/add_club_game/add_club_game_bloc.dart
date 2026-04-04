@@ -178,13 +178,15 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
         final game = await _repository.getGame(event.gameId!, clubId!);
         final allIds = [...game.players, game.referee];
         final players = await _repos.playersRepository.getPlayersByIds(allIds);
+        final refereePlayer = players.firstWhereOrNull((element) => element.id == game.referee);
         emitEffect(
           AddClubGameEffect.setValues(
             ratingsSchema: game.ratingScheme,
             players: game.players
                 .map(
-                  (e) => players.firstWhere((element) => element.id == e),
+                  (e) => players.firstWhereOrNull((element) => element.id == e),
                 )
+                .whereType<PlayerModel>()
                 .toList(),
             addScore: game.addScore.map((e) => e / 100).toList(),
             minusScore: game.minusScore.isNotEmpty ? game.minusScore.map((e) => e / 100).toList() : null,
@@ -205,7 +207,8 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
             ),
             win: game.win,
             bestMove: game.bestMove,
-            referee: players.firstWhere((element) => element.id == game.referee).nickname,
+            referee: refereePlayer?.nickname,
+            refereePlayer: refereePlayer,
             died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
             ciModel: (game.hasCiId()
@@ -242,6 +245,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       final allIds = [...game.players, game.referee];
       final players = await _repos.playersRepository.getPlayersByIds(allIds);
 
+      final refereePlayer = players.firstWhereOrNull((element) => element.id == game.referee);
       emitEffect(
         AddClubGameEffect.setValues(
           players: game.players
@@ -266,7 +270,8 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
           }),
           win: game.win,
           bestMove: game.bestMove,
-          referee: players.firstWhereOrNull((element) => game.referee == element.id)?.nickname ?? 'Не указан',
+          referee: refereePlayer?.nickname ?? 'Не указан',
+          refereePlayer: refereePlayer,
           died: game.hasFirstDie() ? game.firstDie : null,
           date: DateTime.now(),
           ciModel: CiSchemeModel.empty,

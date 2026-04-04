@@ -261,6 +261,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     }
 
     if (effect.referee case final referee?) refereeController.text = referee;
+    if (effect.refereePlayer case final refereePlayer?) players.add(refereePlayer);
 
     setState(() {
       winSelected = effect.win;

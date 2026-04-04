@@ -15,6 +15,7 @@ abstract class AddClubGameEffect with _$AddClubGameEffect {
     GameWin? win,
     BestMove? bestMove,
     String? referee,
+    PlayerModel? refereePlayer,
     int? died,
     DateTime? date,
     CiSchemeModel? ciModel,
