@@ -140,7 +140,7 @@ class _EditSeatingPageState extends State<EditSeatingPage>
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: CustomButton(
-                        disabled: hasChanges && !state.isSaving,
+                        disabled: !hasChanges || state.isSaving,
                         onTap: () => context.read<EditSeatingBloc>().add(const EditSeatingPageEvent.save()),
                         text: context.locale.editSeatingSave,
                       ),
