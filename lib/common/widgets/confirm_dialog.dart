@@ -27,12 +27,17 @@ class ConfirmDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [CloseButton()],
-              ),
-              Text(
-                context.locale.confirmText,
-                style: MyTheme.of(context).headerTextStyle,
+                children: [
+                  const SizedBox(width: 48),
+                  Expanded(
+                    child: Text(
+                      context.locale.confirmText,
+                      textAlign: TextAlign.center,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
+                  const CloseButton(),
+                ],
               ),
               const SizedBox(
                 height: 16,

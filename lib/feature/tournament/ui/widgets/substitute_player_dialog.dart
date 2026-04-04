@@ -109,14 +109,17 @@ class _SubstitutePlayerDialogState extends State<SubstitutePlayerDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [CloseButton()],
-            ),
-            Center(
-              child: Text(
-                locale.substitutePlayer,
-                style: theme.headerTextStyle,
-              ),
+              children: [
+                const SizedBox(width: 48),
+                Expanded(
+                  child: Text(
+                    locale.substitutePlayer,
+                    textAlign: TextAlign.center,
+                    style: theme.headerTextStyle,
+                  ),
+                ),
+                const CloseButton(),
+              ],
             ),
             const SizedBox(height: 24),
             Text(

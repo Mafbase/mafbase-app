@@ -77,12 +77,17 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [CloseButton()],
-              ),
-              Text(
-                context.locale.addPlayerDialogTitle,
-                style: MyTheme.of(context).headerTextStyle,
+                children: [
+                  const SizedBox(width: 48),
+                  Expanded(
+                    child: Text(
+                      context.locale.addPlayerDialogTitle,
+                      textAlign: TextAlign.center,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
+                  const CloseButton(),
+                ],
               ),
               const SizedBox(height: 24),
               PlayerAutoComplete(

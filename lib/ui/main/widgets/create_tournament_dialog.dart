@@ -49,9 +49,9 @@ class _CreateTournamentDialogState extends State<CreateTournamentDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [CloseButton()],
+              const Align(
+                alignment: Alignment.centerRight,
+                child: CloseButton(),
               ),
               CustomTextField(
                 controller: controller,

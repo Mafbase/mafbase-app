@@ -58,12 +58,17 @@ class _AddOwnerDialogState extends State<AddOwnerDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [CloseButton()],
-              ),
-              Text(
-                widget.title ?? context.locale.ownersAddTitle,
-                style: MyTheme.of(context).headerTextStyle,
+                children: [
+                  const SizedBox(width: 48),
+                  Expanded(
+                    child: Text(
+                      widget.title ?? context.locale.ownersAddTitle,
+                      textAlign: TextAlign.center,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
+                  const CloseButton(),
+                ],
               ),
               const SizedBox(height: 24),
               Form(

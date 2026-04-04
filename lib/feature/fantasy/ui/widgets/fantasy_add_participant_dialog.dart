@@ -27,12 +27,17 @@ class FantasyAddParticipantDialog {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [CloseButton()],
-                ),
-                Text(
-                  context.locale.fantasyAddParticipant,
-                  style: MyTheme.of(context).headerTextStyle,
+                  children: [
+                    const SizedBox(width: 48),
+                    Expanded(
+                      child: Text(
+                        context.locale.fantasyAddParticipant,
+                        textAlign: TextAlign.center,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
+                    ),
+                    const CloseButton(),
+                  ],
                 ),
                 const SizedBox(height: 24),
                 Form(

@@ -8,11 +8,9 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.only(
-        left: 40,
-        right: 40,
-        top: 24,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: 40,
+        vertical: 24,
       ),
       child: child,
     );

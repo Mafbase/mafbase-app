@@ -49,12 +49,17 @@ class _ClubDescriptionEditDialogState extends State<ClubDescriptionEditDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [CloseButton()],
-              ),
-              Text(
-                'Описание клуба',
-                style: MyTheme.of(context).headerTextStyle,
+                children: [
+                  const SizedBox(width: 48),
+                  Expanded(
+                    child: Text(
+                      'Описание клуба',
+                      textAlign: TextAlign.center,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
+                  const CloseButton(),
+                ],
               ),
               const SizedBox(height: 20),
               CustomTextField(

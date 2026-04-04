@@ -50,12 +50,17 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [CloseButton()],
-                ),
-                Text(
-                  'Укажите ссылку на турнир',
-                  style: MyTheme.of(context).headerTextStyle,
+                  children: [
+                    const SizedBox(width: 48),
+                    Expanded(
+                      child: Text(
+                        'Укажите ссылку на турнир',
+                        textAlign: TextAlign.center,
+                        style: MyTheme.of(context).headerTextStyle,
+                      ),
+                    ),
+                    const CloseButton(),
+                  ],
                 ),
                 TextField(
                   controller: controller,
