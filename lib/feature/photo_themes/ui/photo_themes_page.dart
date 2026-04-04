@@ -24,6 +24,7 @@ import 'package:seating_generator_web/feature/photo_themes/ui/widgets/add_player
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_card.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_create_dialog.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_player_cell.dart';
+import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_themes_empty_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -174,26 +175,16 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
     int crossAxisCount,
   ) {
     if (state.selectedThemeId == null) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            context.locale.photoThemesSelectThemeHint,
-            style: MyTheme.of(context).hintTextStyle,
-          ),
-        ),
+      return PhotoThemesEmptyState(
+        icon: Icons.photo_library_outlined,
+        title: context.locale.photoThemesSelectThemeHint,
       );
     }
 
     if (state.players.isEmpty && !state.isLoading) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            context.locale.photoThemesNoPlayers,
-            style: MyTheme.of(context).hintTextStyle,
-          ),
-        ),
+      return PhotoThemesEmptyState(
+        icon: Icons.group_outlined,
+        title: context.locale.photoThemesNoPlayers,
       );
     }
 
@@ -371,18 +362,28 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
     PhotoThemesState state,
     int crossAxisCount,
   ) {
+    if (state.themes.isEmpty && !state.isLoading) {
+      return [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: PhotoThemesEmptyState(
+            icon: Icons.photo_library_outlined,
+            title: context.locale.photoThemesNoThemesTitle,
+            subtitle: context.locale.photoThemesNoThemesSubtitle,
+            buttonLabel: context.locale.photoThemesCreateShort,
+            onButtonTap: () => _onCreateTheme(context),
+          ),
+        ),
+      ];
+    }
+
     if (state.selectedThemeId == null) {
       return [
         SliverFillRemaining(
           hasScrollBody: false,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                context.locale.photoThemesSelectThemeHint,
-                style: MyTheme.of(context).hintTextStyle,
-              ),
-            ),
+          child: PhotoThemesEmptyState(
+            icon: Icons.photo_library_outlined,
+            title: context.locale.photoThemesSelectThemeHint,
           ),
         ),
       ];
@@ -392,14 +393,9 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
       return [
         SliverFillRemaining(
           hasScrollBody: false,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                context.locale.photoThemesNoPlayers,
-                style: MyTheme.of(context).hintTextStyle,
-              ),
-            ),
+          child: PhotoThemesEmptyState(
+            icon: Icons.group_outlined,
+            title: context.locale.photoThemesNoPlayers,
           ),
         ),
       ];
@@ -443,6 +439,16 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
     return BlocBuilder<PhotoThemesBloc, PhotoThemesState>(
       builder: (context, state) {
         final selectedTheme = _findSelectedTheme(state);
+
+        if (state.themes.isEmpty && !state.isLoading) {
+          return PhotoThemesEmptyState(
+            icon: Icons.photo_library_outlined,
+            title: context.locale.photoThemesNoThemesTitle,
+            subtitle: context.locale.photoThemesNoThemesSubtitle,
+            buttonLabel: context.locale.photoThemesCreateButton,
+            onButtonTap: () => _onCreateTheme(context),
+          );
+        }
 
         return Stack(
           children: [
