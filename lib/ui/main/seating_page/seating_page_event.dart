@@ -11,8 +11,6 @@ abstract class SeatingPageEvent with _$SeatingPageEvent {
 
   const factory SeatingPageEvent.createSeating() = SeatingPageEventCreateSeating;
 
-  const factory SeatingPageEvent.fsmSeatingTapped() = SeatingPageEventFsmSeatingTapped;
-
   const factory SeatingPageEvent.autoFsmSeating(
     int gomafiaId, {
     Completer? completer,

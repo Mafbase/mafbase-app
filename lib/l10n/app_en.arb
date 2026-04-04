@@ -117,8 +117,6 @@
   "@create": {},
   "dateTimeRangePlaceholder": "Tournament dates",
   "@dateTimeRangePlaceholder": {},
-  "fsmSeatingHeader": "Load seating from FSM tournament",
-  "@fsmSeatingHeader": {},
   "tournamentSettingsTitle": "Tournament settings",
   "@tournamentSettingsTitle": {},
   "defaultGamesLabel": "Number of regular games",

@@ -38,7 +38,6 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
-    on<SeatingPageEventFsmSeatingTapped>(_onFsm);
     on<SeatingPageEventCreateSeating>(_onCreateSeating);
     on<SeatingPageEventGameEditing>(_onOpenGameEditing);
     on<SeatingPageEventCreateFinalSeating>(_onGenerateFinalSeating);
@@ -137,10 +136,6 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     emit(state.copyWith(isLoading: true));
     await _createSeatingInteractor.run(tournamentId: tournamentId);
     await _updateSeating(emit);
-  }
-
-  _onFsm(SeatingPageEventFsmSeatingTapped event, Emitter emit) {
-    router.openFsmSeatingPage(id: tournamentId);
   }
 
   _onAddPair(SeatingPageEventAddPair event, Emitter emit) async {
