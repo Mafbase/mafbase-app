@@ -33,12 +33,13 @@ jobs:
 
       - name: Install or update Claude Code
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           if command -v claude &> /dev/null; then
-            echo "Claude Code already installed, checking for updates..."
-            npm update -g @anthropic-ai/claude-code
+            echo "Claude Code already installed ($(claude --version)), checking for updates..."
+            claude update || true
           else
             echo "Installing Claude Code..."
-            npm install -g @anthropic-ai/claude-code
+            curl -fsSL https://claude.ai/install.sh | sh
           fi
 
       - name: Run Claude Code
@@ -46,7 +47,8 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          path_to_claude_code_executable: claude
+          path_to_claude_code_executable: ${{ runner.home }}/.local/bin/claude
+          show_full_output: true
           additional_permissions: |
             actions: read
 
