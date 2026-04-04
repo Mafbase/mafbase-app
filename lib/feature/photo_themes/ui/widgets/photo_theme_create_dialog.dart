@@ -53,7 +53,10 @@ class _PhotoThemeCreateDialogState extends State<PhotoThemeCreateDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CloseButton()],
+              ),
               Text(
                 widget.isRenameMode ? context.locale.photoThemesRename : context.locale.photoThemesCreate,
                 style: MyTheme.of(context).headerTextStyle,

@@ -49,6 +49,10 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [CloseButton()],
+                ),
                 Text(
                   'Укажите ссылку на турнир',
                   style: MyTheme.of(context).headerTextStyle,

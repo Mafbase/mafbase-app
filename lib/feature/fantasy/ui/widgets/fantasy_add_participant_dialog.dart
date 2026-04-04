@@ -26,6 +26,10 @@ class FantasyAddParticipantDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [CloseButton()],
+                ),
                 Text(
                   context.locale.fantasyAddParticipant,
                   style: MyTheme.of(context).headerTextStyle,

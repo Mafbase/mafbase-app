@@ -76,6 +76,10 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CloseButton()],
+              ),
               Text(
                 context.locale.addPlayerDialogTitle,
                 style: MyTheme.of(context).headerTextStyle,

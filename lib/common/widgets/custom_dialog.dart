@@ -1,34 +1,20 @@
 import 'package:flutter/material.dart';
 
-class CustomDialog extends StatefulWidget {
+class CustomDialog extends StatelessWidget {
   final Widget child;
 
   const CustomDialog({super.key, required this.child});
 
   @override
-  State<CustomDialog> createState() => _CustomDialogState();
-}
-
-class _CustomDialogState extends State<CustomDialog> {
-  @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Stack(
-        fit: StackFit.passthrough,
-        children: [
-          widget.child,
-          Positioned(
-            top: 5,
-            right: 5,
-            child: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-        ],
+      insetPadding: EdgeInsets.only(
+        left: 40,
+        right: 40,
+        top: 24,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
       ),
+      child: child,
     );
   }
 }

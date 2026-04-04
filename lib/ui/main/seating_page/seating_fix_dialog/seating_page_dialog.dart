@@ -59,7 +59,10 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
         },
         builder: (context, state) {
           return CustomDialog(
-            child: ConstrainedBox(
+            child: Stack(
+              fit: StackFit.passthrough,
+              children: [
+                ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 600),
               child: state.loading
                   ? const SizedBox(
@@ -145,6 +148,9 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                         ],
                       ),
                     ),
+                ),
+                const Positioned(top: 0, right: 0, child: CloseButton()),
+              ],
             ),
           );
         },
