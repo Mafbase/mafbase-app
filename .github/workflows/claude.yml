@@ -40,4 +40,4 @@ jobs:
           show_full_output: true
           additional_permissions: |
             actions: read
-
+          claude_args: --allowedTools "Bash(fvm flutter *)"
