@@ -31,23 +31,12 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Install or update Claude Code
-        run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          if command -v claude &> /dev/null; then
-            echo "Claude Code already installed ($(claude --version)), checking for updates..."
-            claude update || true
-          else
-            echo "Installing Claude Code..."
-            curl -fsSL https://claude.ai/install.sh | sh
-          fi
-
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          path_to_claude_code_executable: ${{ runner.home }}/.local/bin/claude
+          path_to_claude_code_executable: claude
           show_full_output: true
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
