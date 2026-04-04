@@ -27,7 +27,6 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/players_list
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_settings_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_builder.dart';
-import 'package:seating_generator_web/ui/seating_inserting/seating_inserting_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -68,7 +67,6 @@ class TournamentPage extends StatefulWidget {
             },
             routes: [
               SeatingPage.route,
-              SeatingInsertingPage.route,
               AddClubGamePage.tournamentEditRoute,
               RatingPage.tournamentRoute,
               AdministrationPage.tournamentRoute,

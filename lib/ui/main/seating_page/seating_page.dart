@@ -102,12 +102,6 @@ class _SeatingPageState extends CustomState<SeatingPage>
         title: locale.seatingGenerate,
       ),
       (
-        onTap: () {
-          context.read<SeatingPageBloc>().add(const SeatingPageEvent.fsmSeatingTapped());
-        },
-        title: locale.seatingUploadReady,
-      ),
-      (
         onTap: () async {
           final id = await GomafiaInputDialog.show(context, tournamentState.gomafiaUrl);
           if (id == null || !mounted) return;
