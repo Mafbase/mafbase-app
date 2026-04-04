@@ -48,6 +48,10 @@ class _ClubDescriptionEditDialogState extends State<ClubDescriptionEditDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CloseButton()],
+              ),
               Text(
                 'Описание клуба',
                 style: MyTheme.of(context).headerTextStyle,

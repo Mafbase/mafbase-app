@@ -49,6 +49,10 @@ class _CreateTournamentDialogState extends State<CreateTournamentDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CloseButton()],
+              ),
               CustomTextField(
                 controller: controller,
                 label: context.locale.createTournamentLabel,

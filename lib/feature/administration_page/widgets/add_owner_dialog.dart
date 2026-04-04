@@ -57,6 +57,10 @@ class _AddOwnerDialogState extends State<AddOwnerDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CloseButton()],
+              ),
               Text(
                 widget.title ?? context.locale.ownersAddTitle,
                 style: MyTheme.of(context).headerTextStyle,

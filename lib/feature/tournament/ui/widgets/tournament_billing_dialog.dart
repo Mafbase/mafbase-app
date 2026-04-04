@@ -58,6 +58,10 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CloseButton()],
+              ),
               FormField<int>(
                 initialValue: widget.playersCount,
                 validator: (value) =>

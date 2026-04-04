@@ -53,6 +53,10 @@ class _SeparationDialogState extends State<SeparationDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CloseButton()],
+              ),
               Text(
                 context.locale.separateTitle,
                 style: MyTheme.of(context).headerTextStyle,
