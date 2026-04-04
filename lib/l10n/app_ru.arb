@@ -980,6 +980,8 @@
   "@referees": {},
   "addReferee": "Добавить судью",
   "@addReferee": {},
+  "refereeTableLabel": "Стол",
+  "@refereeTableLabel": {},
   "substitutePlayer": "Замена игрока",
   "@substitutePlayer": {},
   "substitutePlayerNew": "Игрок на замену",

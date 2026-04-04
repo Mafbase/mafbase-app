@@ -809,6 +809,8 @@
   "@referees": {},
   "addReferee": "Add referee",
   "@addReferee": {},
+  "refereeTableLabel": "Table",
+  "@refereeTableLabel": {},
   "editSeatingTitle": "Edit Seating",
   "@editSeatingTitle": {},
   "editSeatingButton": "Edit Seating",

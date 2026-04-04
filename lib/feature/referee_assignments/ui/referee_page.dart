@@ -153,7 +153,8 @@ class _RefereePageState extends State<RefereePage> {
                               width: 70,
                               child: CustomTextField(
                                 hint: '1',
-                                label: locale.tableDescriptionsTableNumber,
+                                label: locale.refereeTableLabel,
+                                labelStyle: const TextStyle(fontSize: 11),
                                 controller: _tableController,
                                 textInputType: TextInputType.number,
                               ),

@@ -20,11 +20,13 @@ class CustomTextField extends StatefulWidget {
   final bool readOnly;
   final String? Function(String? value) validate;
   final int? maxLines;
+  final TextStyle? labelStyle;
 
   const CustomTextField({
     super.key,
     this.icon,
     this.label,
+    this.labelStyle,
     this.textInputType,
     this.readOnly = false,
     required this.controller,
@@ -103,6 +105,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         hintText: widget.hint,
         labelText: widget.label,
+        labelStyle: widget.labelStyle,
+        floatingLabelStyle: widget.labelStyle,
         hintStyle: TextStyle(color: theme.hintColor),
         filled: false,
         contentPadding: const EdgeInsets.symmetric(
