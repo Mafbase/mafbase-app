@@ -170,6 +170,7 @@ class _ProfileDialogState extends State<ProfileDialog> {
                 ),
               ),
             ),
+            const Positioned(top: 0, right: 0, child: CloseButton()),
             if (state.isLoading) const Positioned.fill(child: LoadingOverlayWidget()),
           ],
         ),

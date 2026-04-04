@@ -48,9 +48,18 @@ class _ClubDescriptionEditDialogState extends State<ClubDescriptionEditDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Описание клуба',
-                style: MyTheme.of(context).headerTextStyle,
+              Row(
+                children: [
+                  const SizedBox(width: 48),
+                  Expanded(
+                    child: Text(
+                      'Описание клуба',
+                      textAlign: TextAlign.center,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
+                  const CloseButton(),
+                ],
               ),
               const SizedBox(height: 20),
               CustomTextField(

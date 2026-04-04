@@ -53,9 +53,18 @@ class _SeparationDialogState extends State<SeparationDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                context.locale.separateTitle,
-                style: MyTheme.of(context).headerTextStyle,
+              Row(
+                children: [
+                  const SizedBox(width: 48),
+                  Expanded(
+                    child: Text(
+                      context.locale.separateTitle,
+                      textAlign: TextAlign.center,
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
+                  const CloseButton(),
+                ],
               ),
               const SizedBox(
                 height: 8,

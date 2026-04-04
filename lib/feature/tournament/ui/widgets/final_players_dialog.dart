@@ -37,7 +37,10 @@ class _FinalPlayersDialogState extends State<FinalPlayersDialog> {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-      child: Container(
+      child: Stack(
+        fit: StackFit.passthrough,
+        children: [
+          Container(
         constraints: const BoxConstraints(maxHeight: 600, maxWidth: 400),
         child: FormField<Set<int>>(
           initialValue: widget.initValue.map((e) => e.id).toSet(),
@@ -107,6 +110,9 @@ class _FinalPlayersDialogState extends State<FinalPlayersDialog> {
             ],
           ),
         ),
+          ),
+          const Positioned(top: 0, right: 0, child: CloseButton()),
+        ],
       ),
     );
   }
