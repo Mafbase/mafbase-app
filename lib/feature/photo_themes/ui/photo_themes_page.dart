@@ -286,11 +286,12 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  CustomButton(
-                                    text: context.locale.photoThemesCreateShort,
-                                    onTap: () => _onCreateTheme(context),
-                                    minimize: true,
-                                  ),
+                                  if (state.themes.isNotEmpty)
+                                    CustomButton(
+                                      text: context.locale.photoThemesCreateShort,
+                                      onTap: () => _onCreateTheme(context),
+                                      minimize: true,
+                                    ),
                                   if (selectedTheme != null) ...[
                                     const SizedBox(height: 8),
                                     CustomButton(
