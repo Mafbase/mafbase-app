@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
-import 'package:seating_generator_web/common/widgets/role_picker.dart';
-import 'package:seating_generator_web/common/widgets/status_picker.dart';
+import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_game_selector.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_player_card.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class TranslationControlPage extends StatefulWidget {
   const TranslationControlPage({super.key});
@@ -54,78 +55,73 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
 
   @override
   Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
     return BlocBuilder<TranslationControlBloc, TranslationContentState>(
       builder: (context, state) {
         return Scaffold(
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: CustomDropdown<int>(
-                      initValue: state.game,
-                      mapToString: (index) => index == null ? '' : index.toString(),
-                      items: List.generate(
-                        state.totalGames,
-                        (index) => index + 1,
-                      ),
-                      onChanged: (index) {
-                        if (index != null) {
-                          context.read<TranslationControlBloc>().add(
-                                TranslationControlEvent.selectGame(
-                                  gameIndex: index,
-                                ),
-                              );
-                        }
-                      },
-                    ),
-                  ),
-                  if (state.isNotEmpty())
-                    ...List.generate(
-                      10,
-                      (index) => Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Flexible(
-                            child: Text('${index + 1}.'),
-                          ),
-                          Transform.scale(
-                            scale: 0.9,
-                            child: RolePicker(
-                              playerRole: state.roles![index],
-                              onChange: (role) {
-                                context.read<TranslationControlBloc>().add(
-                                      TranslationControlEvent.changeRole(
-                                        index: index,
-                                        role: role,
-                                      ),
-                                    );
-                              },
-                              readOnly: false,
-                            ),
-                          ),
-                          Transform.scale(
-                            scale: 0.9,
-                            child: StatusPicker(
-                              playerStatus: state.statuses![index],
-                              onChange: (status) {
-                                context.read<TranslationControlBloc>().add(
-                                      TranslationControlEvent.changeStatus(
-                                        index: index,
-                                        status: status,
-                                      ),
-                                    );
-                              },
-                              readOnly: false,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
+          backgroundColor: theme.background1,
+          appBar: AppBar(
+            backgroundColor: theme.background2,
+            elevation: 0,
+            title: Text(
+              context.locale.translationControlTitle,
+              style: theme.defaultTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
               ),
             ),
+          ),
+          body: Column(
+            children: [
+              if (state.totalGames > 0)
+                TranslationControlGameSelector(
+                  game: state.game,
+                  totalGames: state.totalGames,
+                  onChanged: (index) {
+                    context.read<TranslationControlBloc>().add(
+                          TranslationControlEvent.selectGame(gameIndex: index),
+                        );
+                  },
+                ),
+              Expanded(
+                child: state.isNotEmpty()
+                    ? ListView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return TranslationControlPlayerCard(
+                            index: index,
+                            nickname: state.nicknames![index],
+                            imageUrl: state.images![index],
+                            role: state.roles![index],
+                            status: state.statuses![index],
+                            onRoleChanged: (role) {
+                              context.read<TranslationControlBloc>().add(
+                                    TranslationControlEvent.changeRole(
+                                      index: index,
+                                      role: role,
+                                    ),
+                                  );
+                            },
+                            onStatusChanged: (status) {
+                              context.read<TranslationControlBloc>().add(
+                                    TranslationControlEvent.changeStatus(
+                                      index: index,
+                                      status: status,
+                                    ),
+                                  );
+                            },
+                          );
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                          context.locale.translationControlEmpty,
+                          style: theme.hintTextStyle,
+                        ),
+                      ),
+              ),
+            ],
           ),
         );
       },
