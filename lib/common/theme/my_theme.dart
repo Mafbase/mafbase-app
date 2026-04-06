@@ -98,7 +98,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
     const darkGreyColor = Color(0xFF475264);
     const blueForCard = Color(0xCC182D42);
     const background1 = Color(0xFFF5F5F5);
-    const base = TextStyle(color: Colors.black);
+    const base = TextStyle(color: Colors.black, fontFamily: 'Roboto');
 
     final defaultTextStyle = base.copyWith(
       fontSize: isMobile ? 12.0 : 16.0,
@@ -174,7 +174,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
     const greyColor = Color(0xFF4A5568);
     const redColor = Color(0xFFDF5650);
     const blueForCard = Color(0xCC4A7A9B);
-    const base = TextStyle(color: textColor);
+    const base = TextStyle(color: textColor, fontFamily: 'Roboto');
 
     final defaultTextStyle = base.copyWith(
       fontSize: isMobile ? 12.0 : 16.0,

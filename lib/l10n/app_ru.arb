@@ -1010,5 +1010,22 @@
   "editSeatingSaveSuccess": "Рассадка сохранена",
   "@editSeatingSaveSuccess": {},
   "round": "Тур",
-  "@round": {}
+  "@round": {},
+  "translationControlTitle": "Управление трансляцией",
+  "@translationControlTitle": {},
+  "translationControlEmpty": "Ожидание данных...",
+  "@translationControlEmpty": {},
+  "translationControlGame": "Игра {game} / {total}",
+  "@translationControlGame": {
+    "placeholders": {
+      "game": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

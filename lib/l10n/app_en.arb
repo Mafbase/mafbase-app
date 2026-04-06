@@ -820,5 +820,22 @@
   "editSeatingSaveSuccess": "Seating saved",
   "@editSeatingSaveSuccess": {},
   "round": "Round",
-  "@round": {}
+  "@round": {},
+  "translationControlTitle": "Translation Control",
+  "@translationControlTitle": {},
+  "translationControlEmpty": "Waiting for data...",
+  "@translationControlEmpty": {},
+  "translationControlGame": "Game {game} / {total}",
+  "@translationControlGame": {
+    "placeholders": {
+      "game": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }
