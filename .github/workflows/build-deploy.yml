@@ -10,6 +10,6 @@ on:
 jobs:
   pipeline:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
-    uses: Mafbase/Mafbase-workflows/reusable-build-deploy.yml@main
+    uses: Mafbase/Mafbase-workflows/.github/workflows/reusable-build-deploy.yml@main
     with:
       image_name: seating-generator-web
