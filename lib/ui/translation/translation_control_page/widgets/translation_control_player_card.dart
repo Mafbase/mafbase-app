@@ -54,39 +54,48 @@ class TranslationControlPlayerCard extends StatelessWidget {
       child: Opacity(
         opacity: _isDead ? 0.55 : 1.0,
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _PlayerNumber(index: index, theme: theme),
-              const SizedBox(width: 8),
-              _PlayerAvatar(imageUrl: imageUrl, nickname: nickname, theme: theme),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  nickname,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.defaultTextStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+              Row(
+                children: [
+                  _PlayerNumber(index: index, theme: theme),
+                  const SizedBox(width: 8),
+                  _PlayerAvatar(imageUrl: imageUrl, nickname: nickname, theme: theme),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      nickname,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.defaultTextStyle.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              const SizedBox(width: 8),
-              _StatusPicker(
-                status: status,
-                onChanged: onStatusChanged,
-                theme: theme,
-              ),
-              Container(
-                width: 1,
-                height: 28,
-                color: theme.borderColor,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-              ),
-              _RolePicker(
-                role: role,
-                onChanged: onRoleChanged,
-                theme: theme,
+              const SizedBox(height: 6),
+              Row(
+                children: [
+                  _StatusPicker(
+                    status: status,
+                    onChanged: onStatusChanged,
+                    theme: theme,
+                  ),
+                  Container(
+                    width: 1,
+                    height: 28,
+                    color: theme.borderColor,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                  ),
+                  _RolePicker(
+                    role: role,
+                    onChanged: onRoleChanged,
+                    theme: theme,
+                  ),
+                ],
               ),
             ],
           ),
@@ -172,7 +181,7 @@ class _AvatarPlaceholder extends StatelessWidget {
         child: Center(
           child: Text(
             initials,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 15,
@@ -200,7 +209,7 @@ class _StatusPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 120,
+      width: 130,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
