@@ -17,49 +17,38 @@ class TranslationControlGameSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = MyTheme.of(context);
-    final canGoPrev = game > 1;
-    final canGoNext = game < totalGames;
 
     return Container(
       height: 52,
       color: theme.background2,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 48,
-            height: 48,
-            child: IconButton(
-              icon: Icon(
-                Icons.chevron_left,
-                size: 28,
-                color: canGoPrev ? theme.btnColor2 : theme.buttonDisabledColor,
-              ),
-              onPressed: canGoPrev ? () => onChanged(game - 1) : null,
+          DropdownButton<int>(
+            value: game,
+            dropdownColor: theme.background2,
+            underline: const SizedBox.shrink(),
+            style: theme.defaultTextStyle.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
             ),
-          ),
-          SizedBox(
-            width: 120,
-            child: Text(
-              context.locale.translationControlGame(game, totalGames),
-              textAlign: TextAlign.center,
-              style: theme.defaultTextStyle.copyWith(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
+            items: List.generate(
+              totalGames,
+              (i) => DropdownMenuItem<int>(
+                value: i + 1,
+                child: Text(
+                  context.locale.translationControlGame(i + 1, totalGames),
+                  style: theme.defaultTextStyle.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 48,
-            height: 48,
-            child: IconButton(
-              icon: Icon(
-                Icons.chevron_right,
-                size: 28,
-                color: canGoNext ? theme.btnColor2 : theme.buttonDisabledColor,
-              ),
-              onPressed: canGoNext ? () => onChanged(game + 1) : null,
-            ),
+            onChanged: (value) {
+              if (value != null) onChanged(value);
+            },
           ),
         ],
       ),

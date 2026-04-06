@@ -98,7 +98,7 @@ void main() {
       await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
       await screenMatchesGolden(
         tester,
-        goldenName('translation_control_empty'),
+        goldenName('translation_control/empty'),
         customPump: (t) => t.pump(),
       );
     });
@@ -114,7 +114,7 @@ void main() {
       await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
       await screenMatchesGolden(
         tester,
-        goldenName('translation_control_data'),
+        goldenName('translation_control/data'),
         customPump: (t) => t.pump(),
       );
     });

@@ -261,7 +261,7 @@ void main() {
       await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
       await screenMatchesGolden(
         tester,
-        goldenName('player_stats_loading'),
+        goldenName('player_stats/loading'),
         customPump: (t) => t.pump(),
       );
     });
@@ -277,7 +277,7 @@ void main() {
         ..addScenario(widget: _pageWidget(bloc), name: 'error');
 
       await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
-      await screenMatchesGolden(tester, goldenName('player_stats_error'));
+      await screenMatchesGolden(tester, goldenName('player_stats/error'));
     });
 
     testGoldens('data state — full page', (tester) async {
@@ -294,7 +294,7 @@ void main() {
         ..addScenario(widget: _pageWidget(bloc), name: 'data');
 
       await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
-      await screenMatchesGolden(tester, goldenName('player_stats_data'));
+      await screenMatchesGolden(tester, goldenName('player_stats/data'));
     });
 
     testGoldens('data state — empty pair lists', (tester) async {
@@ -311,7 +311,7 @@ void main() {
         ..addScenario(widget: _pageWidget(bloc), name: 'empty_pairs');
 
       await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
-      await screenMatchesGolden(tester, goldenName('player_stats_empty_pairs'));
+      await screenMatchesGolden(tester, goldenName('player_stats/empty_pairs'));
     });
   });
 }
