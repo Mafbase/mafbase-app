@@ -7,7 +7,7 @@ on:
 
 jobs:
   stage:
-    uses: Mafbase/mafbase-backend/.github/workflows/reusable-stage-deploy.yml@main
+    uses: Mafbase/Mafbase-workflows/reusable-stage-deploy.yml@main
     with:
       image_name: seating-generator-web
       service_name: frontend
