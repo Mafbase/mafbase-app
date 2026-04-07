@@ -6,7 +6,7 @@ part 'club_state.freezed.dart';
 @freezed
 abstract class ClubState with _$ClubState {
   const factory ClubState({
-    @Default(true) isLoading,
+    @Default(true) bool isLoading,
     ClubModel? model,
     @Default(false) isOwner,
     DateTime? hideDate,

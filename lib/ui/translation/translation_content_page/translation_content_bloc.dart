@@ -27,11 +27,11 @@ class TranslationContentBloc extends Bloc<TranslationContentEvent, TranslationCo
     });
   }
 
-  _onPageOpened(event, Emitter emit) {
+  void _onPageOpened(TranslationContentEventPageOpened event, Emitter emit) {
     _socket.connect();
   }
 
-  _onStateReceived(
+  void _onStateReceived(
     TranslationContentEventStateReceived event,
     Emitter emit,
   ) {

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -136,7 +135,7 @@ class _EditSeatingPageContentState extends State<_EditSeatingPageContent>
                         onTap: () => context.read<EditSeatingBloc>().add(const EditSeatingPageEvent.save()),
                         text: context.locale.editSeatingSave,
                       ),
-                    )
+                    ),
                   ],
                 ),
               );

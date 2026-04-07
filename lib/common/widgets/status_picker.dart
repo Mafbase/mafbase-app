@@ -99,7 +99,7 @@ class _StatusPickerState extends State<StatusPicker> {
     );
   }
 
-  onChange(PlayerStatus status) {
+  void onChange(PlayerStatus status) {
     widget.onChange(status);
   }
 }

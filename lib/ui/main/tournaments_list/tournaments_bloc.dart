@@ -31,7 +31,7 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     );
   }
 
-  _onCreateNew(TournamentsEventCreate event, Emitter emit) async {
+  Future<void> _onCreateNew(TournamentsEventCreate event, Emitter emit) async {
     final data = await router.openCreateTournamentDialog();
     if (data != null) {
       emit(state.copyWith(isLoading: true));
@@ -50,7 +50,7 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     }
   }
 
-  _onOpened(
+  Future<void> _onOpened(
     TournamentOpenedEvent event,
     Emitter<TournamentsState> emit,
   ) async {
@@ -72,7 +72,7 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     }
   }
 
-  _onLoadMore(
+  Future<void> _onLoadMore(
     TournamentsEventLoadMore event,
     Emitter<TournamentsState> emit,
   ) async {
@@ -98,7 +98,7 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     }
   }
 
-  _onSearch(
+  Future<void> _onSearch(
     TournamentsEventSearch event,
     Emitter<TournamentsState> emit,
   ) async {

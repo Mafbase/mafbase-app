@@ -9,7 +9,7 @@ class TempBloc extends Bloc<TempEvent, TempState> {
     on<TempEventGenerate>(_onGenerate);
   }
 
-  _onGenerate(TempEventGenerate event, Emitter emit) {
+  void _onGenerate(TempEventGenerate event, Emitter emit) {
     final a = Random().nextInt(250);
     if (state.style != TempStyle.hide) {
       emit(state.copyWith(style: TempStyle.hide));

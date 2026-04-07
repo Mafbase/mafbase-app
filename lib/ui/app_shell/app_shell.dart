@@ -56,11 +56,11 @@ class _AppShellState extends CustomState<AppShellPage> {
 
   @override
   Widget buildDesktop(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Row(
         children: [
-          const AppSidebar(),
-          const Expanded(child: AutoRouter()),
+          AppSidebar(),
+          Expanded(child: AutoRouter()),
         ],
       ),
     );

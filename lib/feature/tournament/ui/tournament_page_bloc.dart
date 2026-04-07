@@ -106,7 +106,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     emit(state.copyWith(finalPlayers: finalPlayer));
   }
 
-  _onSetFinalPlayers(
+  Future<void> _onSetFinalPlayers(
     TournamentPageEventSetFinalPlayers event,
     Emitter emit,
   ) async {
@@ -117,11 +117,11 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     await _updateFinalPlayers(emit);
   }
 
-  _openRating(TournamentPageEventOpenRating event, Emitter emit) async {
+  Future<void> _openRating(TournamentPageEventOpenRating event, Emitter emit) async {
     router.openRating(tournamentId: tournamentId);
   }
 
-  _onBill(TournamentPageEventBill event, Emitter emit) async {
+  Future<void> _onBill(TournamentPageEventBill event, Emitter emit) async {
     final url = await _billTournamentInteractor(
       tournamentId: tournamentId,
       playersCount: event.playersCount,
@@ -138,7 +138,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     }
   }
 
-  _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {
+  Future<void> _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {
     await Future.wait([
       _tournamentCheckInteractor(tournamentId: tournamentId).onError((error, _) => false).then(
             (value) => emit(
@@ -168,21 +168,21 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     ]);
   }
 
-  _onPlayersListTapped(
+  void _onPlayersListTapped(
     TournamentPageEventPlayersListTapped event,
     Emitter emit,
   ) {
     router.openPlayersList(tournamentId: tournamentId);
   }
 
-  _onOpenSeatingPage(
+  void _onOpenSeatingPage(
     TournamentPageEventOpenSeatingPage event,
     Emitter emit,
   ) {
     router.openSeatingPage(tournamentId: tournamentId);
   }
 
-  _onOpenProfile(
+  Future<void> _onOpenProfile(
     TournamentPageEventOpenProfileDialog event,
     Emitter emit,
   ) async {
@@ -201,7 +201,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     }
   }
 
-  _onDeletePlayer(TournamentPageEventDeletePlayer event, Emitter emit) async {
+  Future<void> _onDeletePlayer(TournamentPageEventDeletePlayer event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     try {
       await _deletePlayerInteractor.run(

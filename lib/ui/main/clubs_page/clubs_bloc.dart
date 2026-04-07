@@ -20,14 +20,14 @@ class ClubsBloc extends Bloc<ClubsEvent, ClubsState> {
     on<ClubsEventClubSelected>(_onClubSelected);
   }
 
-  _onClubSelected(ClubsEventClubSelected event, Emitter emit) {
+  void _onClubSelected(ClubsEventClubSelected event, Emitter emit) {
     _router.openClubPage(
       id: event.clubModel.id,
       cachedModel: event.clubModel,
     );
   }
 
-  _onPageOpened(ClubsEventPageOpened event, Emitter emit) async {
+  Future<void> _onPageOpened(ClubsEventPageOpened event, Emitter emit) async {
     try {
       final clubs = await _getClubsInteractor.run();
       emit(state.copyWith(clubs: clubs, isLoading: false));

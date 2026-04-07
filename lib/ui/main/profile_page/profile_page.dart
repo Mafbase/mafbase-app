@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage>
                       const SizedBox(height: 12),
                     ],
                     ProfileActionsCard(
-                      onPhotoThemes: () => context.router.push(const PhotoThemesRoute()),
+                      onPhotoThemes: () => context.router.push(PhotoThemesRoute()),
                       onLogout: () => context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed()),
                       onDeleteAccount: _deleteAccount,
                     ),

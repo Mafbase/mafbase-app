@@ -318,7 +318,7 @@ class _SignUpPageContentState extends CustomState<_SignUpPageContent> {
     );
   }
 
-  _onSubmit() {
+  void _onSubmit() {
     if (_passwordController.text != _repeatPasswordController.text) {
       setState(() {
         setRepeatError = true;

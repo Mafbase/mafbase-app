@@ -102,7 +102,7 @@ class _RolePickerState extends State<RolePicker> {
     );
   }
 
-  onChange(PlayerRole role) {
+  void onChange(PlayerRole role) {
     widget.onChange(role);
   }
 }

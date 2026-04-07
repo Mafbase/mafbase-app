@@ -407,7 +407,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
           ],
         );
 
-  onChangeRangeTap() async {
+  Future<void> onChangeRangeTap() async {
     final bloc = context.read<RatingBloc>();
     final range = await showDateRangePicker(
       context: context,

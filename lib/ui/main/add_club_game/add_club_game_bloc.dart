@@ -61,7 +61,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     on<AddClubGameEventDeleteGame>(_onDeleteGame);
   }
 
-  _onDeleteGame(
+  Future<void> _onDeleteGame(
     AddClubGameEventDeleteGame event,
     Emitter emit,
   ) async {
@@ -73,14 +73,14 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     router.pop();
   }
 
-  _onNewGame(AddClubGameEventNewGame event, Emitter emit) async {
+  Future<void> _onNewGame(AddClubGameEventNewGame event, Emitter emit) async {
     if (clubId == null) {
       return;
     }
     router.openNewGame(clubId!, event.dateTime);
   }
 
-  _onNewPlayer(AddClubGameEventNewPlayer event, Emitter emit) async {
+  Future<void> _onNewPlayer(AddClubGameEventNewPlayer event, Emitter emit) async {
     if (_context == null) {
       return;
     }
@@ -105,7 +105,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     emit(state.copyWith(isLoading: false));
   }
 
-  _onEdit(AddClubGameEventPageEdit event, Emitter emit) {
+  void _onEdit(AddClubGameEventPageEdit event, Emitter emit) {
     router.editPage(
       clubId,
       tournamentId,
@@ -113,7 +113,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     );
   }
 
-  _onSubmit(
+  Future<void> _onSubmit(
     AddClubGameEventSubmit event,
     Emitter emit,
   ) async {
@@ -147,7 +147,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     }
   }
 
-  _onPageOpened(
+  Future<void> _onPageOpened(
     AddClubGameEventPageOpened event,
     Emitter emit,
   ) async {

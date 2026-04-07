@@ -691,7 +691,7 @@ class _RatingTableState extends State<RatingTable> {
     );
   }
 
-  List<Widget> columns([withoutFlex = false]) {
+  List<Widget> columns([bool withoutFlex = false]) {
     switch (widget.style) {
       case RatingTableStyle.full:
         return fullColumns(withoutFlex);

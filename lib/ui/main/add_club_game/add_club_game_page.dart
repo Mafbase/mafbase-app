@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/app/router.dart';
@@ -691,7 +690,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     return context.watch<TournamentPageBloc>().state.isMyTournament;
   }
 
-  submit(AddClubGameState state) {
+  void submit(AddClubGameState state) {
     if (widget.readOnly) {
       context.read<AddClubGameBloc>().add(AddClubGameEvent.edit(gameId: widget.gameId!));
       return;

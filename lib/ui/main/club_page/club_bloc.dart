@@ -59,7 +59,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     on<ClubEventEditPhoto>(_onEditPhoto);
   }
 
-  _onChangeHideDate(ClubEventChangeHideDate event, Emitter emit) async {
+  Future<void> _onChangeHideDate(ClubEventChangeHideDate event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     await _clubRepository.updateHideDate(
       id: _clubId,
@@ -68,11 +68,11 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     add(const ClubEvent.pageOpened());
   }
 
-  _onOpenRating(ClubEventOpenRating event, Emitter emit) async {
+  Future<void> _onOpenRating(ClubEventOpenRating event, Emitter emit) async {
     router.openRating(clubId: _clubId);
   }
 
-  _onPageOpened(ClubEventPageOpened event, Emitter emit) async {
+  Future<void> _onPageOpened(ClubEventPageOpened event, Emitter emit) async {
     final [
       ClubModel club,
       bool isOwner,
@@ -93,7 +93,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     );
   }
 
-  _onBillClub(ClubEventBillClub event, Emitter emit) async {
+  Future<void> _onBillClub(ClubEventBillClub event, Emitter emit) async {
     final url = await _billClubInteractor(
       clubId: _clubId,
       redirectPath: router.getLocation(),

@@ -30,19 +30,19 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<MainEventOpenContacts>(_onOpenContacts);
   }
 
-  _onOpenContacts(MainEventOpenContacts event, Emitter emit) {
+  void _onOpenContacts(MainEventOpenContacts event, Emitter emit) {
     router.openContactsPage();
   }
 
-  _onProfilePressed(MainEventProfilePressed event, Emitter emit) {
+  void _onProfilePressed(MainEventProfilePressed event, Emitter emit) {
     router.openProfilePage();
   }
 
-  _onEnterPressed(MainEventEnterPressed event, Emitter emit) {
+  void _onEnterPressed(MainEventEnterPressed event, Emitter emit) {
     router.openAuthPage();
   }
 
-  _onTitleTapped(MainEventTitleTapped event, Emitter emit) {
+  void _onTitleTapped(MainEventTitleTapped event, Emitter emit) {
     router.openDefaultPage();
   }
 
