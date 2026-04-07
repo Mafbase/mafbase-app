@@ -50,4 +50,4 @@ jobs:
             actions: read
           system_prompt: |
             IMPORTANT: Ты запущен в CI-окружении. Используй команды `flutter` и `dart` напрямую (без fvm). Не используй `fvm flutter` или `fvm dart`.
-          claude_args: --allowedTools "Bash(flutter *)" "Bash(dart *)"
+          claude_args: --allowedTools "Skill" "Bash(flutter *)" "Bash(dart *)"
