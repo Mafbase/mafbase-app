@@ -248,7 +248,7 @@ class _EditableAvatar extends StatelessWidget {
             Positioned(
               right: -2,
               bottom: -2,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: onEditPhoto,
                 child: Container(
                   width: badgeSize,

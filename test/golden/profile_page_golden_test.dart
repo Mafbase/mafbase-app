@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/feature/profile/domain/model/tournament_subscription_plan_model.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
@@ -23,6 +24,18 @@ const _player = PlayerModel(
   id: 1,
   nickname: 'Белый Волк',
   fsmNickaname: 'BW2024',
+);
+
+final _activePlan = TournamentSubscriptionPlanModel(
+  isActive: true,
+  subscriptionType: TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players,
+  billedFor: DateTime(2099, 12, 31),
+);
+
+final _expiredPlan = TournamentSubscriptionPlanModel(
+  isActive: false,
+  subscriptionType: TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players,
+  billedFor: DateTime(2020, 1, 15),
 );
 
 MockProfileBloc _createMockBloc(ProfileState state) {
@@ -151,6 +164,103 @@ void main() {
       await screenMatchesGolden(
         tester,
         goldenName('profile_page/billing_hidden'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('subscription error', (tester) async {
+      final bloc = _createMockBloc(
+        const ProfileState(
+          playerProfile: _player,
+          isLoadingSubscription: false,
+          subscriptionError: 'Error',
+        ),
+      );
+      final authNotifier = _authorizedNotifier();
+      addTearDown(bloc.close);
+      addTearDown(authNotifier.dispose);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc, authNotifier), name: 'subscription_error');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('profile_page/subscription_error'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('subscription active', (tester) async {
+      final bloc = _createMockBloc(
+        ProfileState(
+          playerProfile: _player,
+          isLoadingSubscription: false,
+          subscriptionPlan: _activePlan,
+        ),
+      );
+      final authNotifier = _authorizedNotifier();
+      addTearDown(bloc.close);
+      addTearDown(authNotifier.dispose);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc, authNotifier), name: 'subscription_active');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('profile_page/subscription_active'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('subscription expired', (tester) async {
+      final bloc = _createMockBloc(
+        ProfileState(
+          playerProfile: _player,
+          isLoadingSubscription: false,
+          subscriptionPlan: _expiredPlan,
+        ),
+      );
+      final authNotifier = _authorizedNotifier();
+      addTearDown(bloc.close);
+      addTearDown(authNotifier.dispose);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc, authNotifier), name: 'subscription_expired');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('profile_page/subscription_expired'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('subscription billing', (tester) async {
+      final bloc = _createMockBloc(
+        ProfileState(
+          playerProfile: _player,
+          isLoadingSubscription: false,
+          isBilling: true,
+          subscriptionPlan: _activePlan,
+        ),
+      );
+      final authNotifier = _authorizedNotifier();
+      addTearDown(bloc.close);
+      addTearDown(authNotifier.dispose);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc, authNotifier), name: 'subscription_billing');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('profile_page/subscription_billing'),
         customPump: (t) => t.pump(),
       );
     });
