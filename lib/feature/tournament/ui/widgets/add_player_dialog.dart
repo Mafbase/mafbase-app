@@ -133,6 +133,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               CustomButton(
                 text: context.locale.add,
                 onTap: onSubmit,
+                isLoading: _isNicknameSearching,
                 disabled: _isNicknameSearching ||
                     (_controller.text.isNotEmpty &&
                         _controller.text != (_lastNicknameSearchedQuery ?? '')),

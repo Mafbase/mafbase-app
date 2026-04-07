@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final bool isRed;
   final bool minimize;
   final bool expand;
+  final bool isLoading;
 
   const CustomButton({
     super.key,
@@ -17,6 +18,7 @@ class CustomButton extends StatelessWidget {
     this.disabled = false,
     this.minimize = false,
     this.expand = true,
+    this.isLoading = false,
   });
 
   @override
@@ -59,7 +61,41 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       onPressed: disabled ? null : onTap,
-      child: expand ? Center(child: textWidget) : textWidget,
+      child: expand
+          ? Center(
+              child: isLoading
+                  ? Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        textWidget,
+                        SizedBox(
+                          width: minimize ? 16 : 20,
+                          height: minimize ? 16 : 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: MyTheme.of(context).btnTextStyle.color,
+                          ),
+                        ),
+                      ],
+                    )
+                  : textWidget,
+            )
+          : isLoading
+              ? Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    textWidget,
+                    SizedBox(
+                      width: minimize ? 16 : 20,
+                      height: minimize ? 16 : 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: MyTheme.of(context).btnTextStyle.color,
+                      ),
+                    ),
+                  ],
+                )
+              : textWidget,
     );
   }
 }
