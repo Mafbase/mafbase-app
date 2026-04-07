@@ -8,5 +8,6 @@ abstract class PlayerAutoCompleteState with _$PlayerAutoCompleteState {
   const factory PlayerAutoCompleteState({
     @Default([]) List<PlayerModel> results,
     String? query,
+    @Default(false) bool isLoading,
   }) = _PlayerAutoCompleteState;
 }

@@ -35,8 +35,13 @@ class PlayerAutoCompleteBloc extends Bloc<PlayerAutoCompleteEvent, PlayerAutoCom
       return;
     }
 
-    final results = await _repository!.searchPlayers(event.query, limit: 5);
-    emit(state.copyWith(results: results, query: event.query));
+    emit(state.copyWith(isLoading: true, query: event.query));
+    try {
+      final results = await _repository!.searchPlayers(event.query, limit: 5);
+      emit(state.copyWith(results: results, query: event.query, isLoading: false));
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   void _onClear(

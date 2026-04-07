@@ -39,6 +39,8 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
 
   PlayerModel? _selectedPlayer;
   List<PlayerModel> _nicknameSearchResults = [];
+  bool _isNicknameSearching = false;
+  String? _lastNicknameSearchedQuery;
 
   @override
   void initState() {
@@ -97,6 +99,12 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                 focusNode: _focusNode,
                 onSelected: _onPlayerSelected,
                 onResultsChanged: (results) => _nicknameSearchResults = results,
+                onSearchStateChanged: (isLoading, query) {
+                  setState(() {
+                    _isNicknameSearching = isLoading;
+                    _lastNicknameSearchedQuery = query;
+                  });
+                },
                 onSubmit: () {
                   _focusNodeFsm.requestFocus();
                 },
@@ -122,7 +130,13 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                 onSubmit: onSubmit,
               ),
               const SizedBox(height: 24),
-              CustomButton(text: context.locale.add, onTap: onSubmit),
+              CustomButton(
+                text: context.locale.add,
+                onTap: onSubmit,
+                disabled: _isNicknameSearching ||
+                    (_controller.text.isNotEmpty &&
+                        _controller.text != (_lastNicknameSearchedQuery ?? '')),
+              ),
             ],
           ),
         ),

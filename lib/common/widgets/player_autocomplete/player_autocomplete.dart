@@ -17,6 +17,7 @@ class PlayerAutoComplete extends StatelessWidget {
   final VoidCallback? onSubmit;
   final Function({required String initValue})? onNewPlayer;
   final Function(List<PlayerModel> results)? onResultsChanged;
+  final Function(bool isLoading, String? query)? onSearchStateChanged;
   final String? label;
   final String? hint;
   final bool readOnly;
@@ -32,6 +33,7 @@ class PlayerAutoComplete extends StatelessWidget {
     this.onSubmit,
     this.onNewPlayer,
     this.onResultsChanged,
+    this.onSearchStateChanged,
     this.label,
     this.hint,
     this.readOnly = false,
@@ -54,6 +56,7 @@ class PlayerAutoComplete extends StatelessWidget {
         onSubmit: onSubmit,
         onNewPlayer: onNewPlayer,
         onResultsChanged: onResultsChanged,
+        onSearchStateChanged: onSearchStateChanged,
         label: label,
         hint: hint,
         readOnly: readOnly,
@@ -71,6 +74,7 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
   final VoidCallback? onSubmit;
   final Function({required String initValue})? onNewPlayer;
   final Function(List<PlayerModel> results)? onResultsChanged;
+  final Function(bool isLoading, String? query)? onSearchStateChanged;
   final String? label;
   final String? hint;
   final bool readOnly;
@@ -84,6 +88,7 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
     this.onSubmit,
     this.onNewPlayer,
     this.onResultsChanged,
+    this.onSearchStateChanged,
     this.label,
     this.hint,
     required this.readOnly,
@@ -128,6 +133,7 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
     return BlocListener<PlayerAutoCompleteBloc, PlayerAutoCompleteState>(
       listener: (context, state) {
         widget.onResultsChanged?.call(state.results);
+        widget.onSearchStateChanged?.call(state.isLoading, state.query);
       },
       child: RawAutocomplete<PlayerModel>(
         optionsBuilder: widget.readOnly
