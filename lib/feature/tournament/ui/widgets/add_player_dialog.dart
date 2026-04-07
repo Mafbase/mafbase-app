@@ -81,6 +81,10 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final loading = _isNicknameSearching ||
+        (_controller.text.isNotEmpty &&
+            _controller.text != (_lastNicknameSearchedQuery ?? ''));
+
     return CustomDialog(
       child: Container(
         width: 580,
@@ -146,10 +150,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
               CustomButton(
                 text: context.locale.add,
                 onTap: onSubmit,
-                isLoading: _isNicknameSearching,
-                disabled: _isNicknameSearching ||
-                    (_controller.text.isNotEmpty &&
-                        _controller.text != (_lastNicknameSearchedQuery ?? '')),
+                isLoading: loading,
               ),
             ],
           ),

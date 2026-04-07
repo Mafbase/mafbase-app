@@ -60,7 +60,7 @@ class CustomButton extends StatelessWidget {
           },
         ),
       ),
-      onPressed: disabled ? null : onTap,
+      onPressed: (disabled || isLoading) ? null : onTap,
       child: expand
           ? Center(
               child: isLoading
