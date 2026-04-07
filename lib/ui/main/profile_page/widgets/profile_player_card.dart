@@ -9,6 +9,8 @@ class ProfilePlayerCard extends StatelessWidget {
   final bool isMobile;
   final VoidCallback onChangePlayer;
   final VoidCallback onLinkPlayer;
+  final VoidCallback? onEditPhoto;
+  final bool isUploadingPhoto;
 
   const ProfilePlayerCard({
     super.key,
@@ -16,6 +18,8 @@ class ProfilePlayerCard extends StatelessWidget {
     required this.isMobile,
     required this.onChangePlayer,
     required this.onLinkPlayer,
+    this.onEditPhoto,
+    this.isUploadingPhoto = false,
   });
 
   @override
@@ -88,6 +92,13 @@ class ProfilePlayerCard extends StatelessWidget {
       ),
     );
 
+    final avatar = _EditableAvatar(
+      player: player,
+      size: 52,
+      isUploading: isUploadingPhoto,
+      onEditPhoto: onEditPhoto,
+    );
+
     if (isMobile) {
       return Padding(
         padding: const EdgeInsets.all(16),
@@ -95,7 +106,7 @@ class ProfilePlayerCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                PlayerAvatarWidget(player: player, size: 52),
+                avatar,
                 const SizedBox(width: 12),
                 Expanded(child: _playerInfo(player, theme, locale)),
               ],
@@ -111,7 +122,7 @@ class ProfilePlayerCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          PlayerAvatarWidget(player: player, size: 52),
+          avatar,
           const SizedBox(width: 12),
           Expanded(child: _playerInfo(player, theme, locale)),
           const SizedBox(width: 12),
@@ -184,6 +195,77 @@ class ProfilePlayerCard extends StatelessWidget {
               style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EditableAvatar extends StatelessWidget {
+  final PlayerModel player;
+  final double size;
+  final bool isUploading;
+  final VoidCallback? onEditPhoto;
+
+  const _EditableAvatar({
+    required this.player,
+    required this.size,
+    required this.isUploading,
+    this.onEditPhoto,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
+    final badgeSize = size * 0.54;
+
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          PlayerAvatarWidget(player: player, size: size),
+          if (isUploading)
+            Positioned.fill(
+              child: ClipOval(
+                child: ColoredBox(
+                  color: theme.avatarUploadOverlayColor,
+                  child: Center(
+                    child: SizedBox(
+                      width: size * 0.4,
+                      height: size * 0.4,
+                      child: CircularProgressIndicator(
+                        color: theme.btnTextColor,
+                        strokeWidth: 2.5,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          else if (onEditPhoto != null)
+            Positioned(
+              right: -2,
+              bottom: -2,
+              child: InkWell(
+                onTap: onEditPhoto,
+                child: Container(
+                  width: badgeSize,
+                  height: badgeSize,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: theme.darkBlueColor,
+                    border: Border.all(color: theme.background2, width: 2),
+                  ),
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: theme.btnTextColor,
+                    size: badgeSize * 0.55,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );

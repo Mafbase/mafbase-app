@@ -44,6 +44,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
     required this.statusEndedColor,
     required this.changedPlayerColor,
     required this.dragTargetHoverColor,
+    required this.avatarUploadOverlayColor,
   });
 
   final Color background1;
@@ -88,6 +89,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
   final Color statusEndedColor;
   final Color changedPlayerColor;
   final Color dragTargetHoverColor;
+  final Color avatarUploadOverlayColor;
 
   static MyTheme of(BuildContext context) => Theme.of(context).extension<MyTheme>()!;
 
@@ -162,6 +164,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
       statusEndedColor: const Color(0xFF8E9199),
       changedPlayerColor: const Color(0x26C8B75E),
       dragTargetHoverColor: const Color(0x1A4E6B9B),
+      avatarUploadOverlayColor: const Color(0x991A2D42),
     );
   }
 
@@ -228,6 +231,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
       statusEndedColor: const Color(0xFF8E9199),
       changedPlayerColor: const Color(0x33C8B75E),
       dragTargetHoverColor: const Color(0x264A7A9B),
+      avatarUploadOverlayColor: const Color(0xB30A1620),
     );
   }
 
@@ -275,6 +279,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
     Color? statusEndedColor,
     Color? changedPlayerColor,
     Color? dragTargetHoverColor,
+    Color? avatarUploadOverlayColor,
   }) =>
       MyTheme(
         background1: background1 ?? this.background1,
@@ -319,6 +324,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
         statusEndedColor: statusEndedColor ?? this.statusEndedColor,
         changedPlayerColor: changedPlayerColor ?? this.changedPlayerColor,
         dragTargetHoverColor: dragTargetHoverColor ?? this.dragTargetHoverColor,
+        avatarUploadOverlayColor: avatarUploadOverlayColor ?? this.avatarUploadOverlayColor,
       );
 
   @override
@@ -367,6 +373,7 @@ class MyTheme extends ThemeExtension<MyTheme> {
       statusEndedColor: Color.lerp(statusEndedColor, other.statusEndedColor, t)!,
       changedPlayerColor: Color.lerp(changedPlayerColor, other.changedPlayerColor, t)!,
       dragTargetHoverColor: Color.lerp(dragTargetHoverColor, other.dragTargetHoverColor, t)!,
+      avatarUploadOverlayColor: Color.lerp(avatarUploadOverlayColor, other.avatarUploadOverlayColor, t)!,
     );
   }
 }

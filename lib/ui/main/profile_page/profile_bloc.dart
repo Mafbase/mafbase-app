@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
@@ -17,6 +18,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
   final DeleteProfileInteractor _deleteProfileInteractor;
   final ProfileRepository _profileRepository;
   final CreatePlayerInteractor _createPlayerInteractor;
+  final AddPhotoInteractor _addPhotoInteractor;
   final AuthNotifier _authNotifier;
 
   late final VoidCallback _authListener;
@@ -26,6 +28,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
     this._deleteProfileInteractor,
     this._profileRepository,
     this._createPlayerInteractor,
+    this._addPhotoInteractor,
     this._authNotifier,
   ) : super(const ProfileState()) {
     on<ProfileEventLogoutPressed>(_onLogoutPressed);
@@ -35,6 +38,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
     on<ProfileEventLoadSubscription>(_loadSubscription);
     on<ProfileEventBillSubscription>(_billSubscription);
     on<ProfileEventReset>(_onReset);
+    on<ProfileEventEditPhoto>(_editPhoto);
 
     _authListener = () {
       final model = _authNotifier.value;
@@ -157,5 +161,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
 
   _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {
     return _logoutInteractor().whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
+  }
+
+  Future<void> _editPhoto(ProfileEventEditPhoto event, Emitter emit) async {
+    final playerId = state.playerProfile?.id;
+    if (playerId == null) return;
+
+    emit(state.copyWith(isUploadingPhoto: true));
+    try {
+      await _addPhotoInteractor.run(
+        bytes: event.bytes,
+        filename: event.fileName,
+        playerId: playerId,
+      );
+      final updatedProfile = await _profileRepository.getUserProfile();
+      emit(state.copyWith(isUploadingPhoto: false, playerProfile: updatedProfile));
+    } finally {
+      emit(state.copyWith(isUploadingPhoto: false));
+    }
   }
 }

@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
@@ -20,7 +23,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage._();
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -30,7 +33,7 @@ class ProfilePage extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: '/profile',
     name: 'profile',
-    builder: (context, state) => const ProfilePage._(),
+    builder: (context, state) => const ProfilePage(),
   );
 }
 
@@ -93,6 +96,8 @@ class _ProfilePageState extends State<ProfilePage>
                       isMobile: isMobile,
                       onChangePlayer: () => _selectPlayerProfile(context),
                       onLinkPlayer: () => _selectPlayerProfile(context),
+                      onEditPhoto: state.playerProfile != null ? () => _editPhoto(context) : null,
+                      isUploadingPhoto: state.isUploadingPhoto,
                     ),
                     const SizedBox(height: 12),
                     if (showBillingSection) ...[
@@ -113,6 +118,15 @@ class _ProfilePageState extends State<ProfilePage>
         },
       ),
     );
+  }
+
+  Future<void> _editPhoto(BuildContext context) async {
+    final bloc = context.read<ProfileBloc>();
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (!context.mounted || image == null) return;
+
+    final bytes = Uint8List.fromList(await image.readAsBytes());
+    bloc.add(ProfileEvent.editPhoto(bytes: bytes, fileName: image.name));
   }
 
   Future<void> _selectPlayerProfile(BuildContext context) async {
