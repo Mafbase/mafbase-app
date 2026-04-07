@@ -437,7 +437,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
 
   @override
   Widget buildDesktop(BuildContext context) {
-    return BlocBuilder<PhotoThemesBloc, PhotoThemesState>(
+    final content = BlocBuilder<PhotoThemesBloc, PhotoThemesState>(
       builder: (context, state) {
         final selectedTheme = _findSelectedTheme(state);
 
@@ -572,6 +572,22 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
           ],
         );
       },
+    );
+
+    if (_isFromTournament) {
+      return content;
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: context.backOrGoToDefault(
+            (c) => ProfilePage.createLocation(c),
+          ),
+        ),
+        title: Text(context.locale.photoThemesTitle),
+      ),
+      body: content,
     );
   }
 
