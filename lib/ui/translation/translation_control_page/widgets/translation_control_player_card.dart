@@ -263,7 +263,7 @@ class _StatusIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(4),
@@ -364,7 +364,7 @@ class _RoleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(4),

@@ -23,16 +23,19 @@ class TranslationControlGameSelector extends StatelessWidget {
       height: 52,
       color: theme.background2,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: CustomDropdown(
-        mapToString: (game) => 'Игра $game',
-        items: List.generate(
-          totalGames,
-          (i) => i + 1,
+      child: Padding(
+        padding: const EdgeInsets.all(4),
+        child: CustomDropdown(
+          mapToString: (game) => 'Игра $game',
+          items: List.generate(
+            totalGames,
+            (i) => i + 1,
+          ),
+          initValue: game,
+          onChanged: (value) {
+            if (value != null) onChanged(value);
+          },
         ),
-        initValue: game,
-        onChanged: (value) {
-          if (value != null) onChanged(value);
-        },
       ),
     );
   }
