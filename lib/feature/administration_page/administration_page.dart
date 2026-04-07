@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
@@ -12,72 +12,56 @@ import 'package:seating_generator_web/domain/repositories/owners_repository.dart
 import 'package:seating_generator_web/feature/administration_page/administration_bloc.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/administration_page/widgets/add_owner_dialog.dart';
 import 'package:seating_generator_web/feature/administration_page/widgets/onwer_row.dart';
 
-class AdministrationPage extends StatefulWidget {
+@RoutePage()
+class AdministrationPage extends StatelessWidget {
   final int tournamentId;
 
   const AdministrationPage({
     super.key,
-    required this.tournamentId,
+    @PathParam('id') required this.tournamentId,
   });
 
   @override
-  State<AdministrationPage> createState() => _AdministrationPageState();
-
-  static String createTournamentLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      _tournamentName,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
+  Widget build(BuildContext context) {
+    final OwnersRepository ownersRepository = RepositoryFactory.of(context).ownersRepository;
+    final getAdministrationInteractor = GetAdministrationInteractor(ownersRepository);
+    final addOwnerInteractor = AddOwnerInteractor(ownersRepository);
+    final deleteOwnerInteractor = DeleteOwnerInteractor(ownersRepository);
+    return BlocProvider<AdministrationBloc>(
+      create: (context) => AdministrationBloc(
+        const AdministrationState(),
+        addOwnerInteractor,
+        deleteOwnerInteractor,
+        getAdministrationInteractor,
+      )..add(
+          AdministrationEventPageOpened(tournamentId: tournamentId),
+        ),
+      child: _AdministrationPageContent(tournamentId: tournamentId),
     );
   }
-
-  static const _tournamentName = 'tournament_administration';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'administration',
-    name: _tournamentName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      final OwnersRepository ownersRepository = RepositoryFactory.of(context).ownersRepository;
-      final getAdministrationInteractor = GetAdministrationInteractor(ownersRepository);
-      final addOwnerInteractor = AddOwnerInteractor(ownersRepository);
-      final deleteOwnerInteractor = DeleteOwnerInteractor(ownersRepository);
-      return BlocProvider<AdministrationBloc>(
-        create: (context) => AdministrationBloc(
-          const AdministrationState(),
-          addOwnerInteractor,
-          deleteOwnerInteractor,
-          getAdministrationInteractor,
-        )..add(
-            AdministrationEventPageOpened(tournamentId: tournamentId),
-          ),
-        child: AdministrationPage(
-          tournamentId: tournamentId,
-        ),
-      );
-    },
-  );
 }
 
-class _AdministrationPageState extends State<AdministrationPage> {
+class _AdministrationPageContent extends StatefulWidget {
+  final int tournamentId;
+
+  const _AdministrationPageContent({required this.tournamentId});
+
+  @override
+  State<_AdministrationPageContent> createState() => _AdministrationPageContentState();
+}
+
+class _AdministrationPageContentState extends State<_AdministrationPageContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: context.backOrGoToDefault(
-            (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
-          ),
+          onPressed: context.backOrGoToDefault(),
         ),
         title: Text(context.locale.ownersTitle),
         actions: [

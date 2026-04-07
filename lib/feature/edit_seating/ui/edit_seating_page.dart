@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -17,46 +18,37 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.da
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class EditSeatingPage extends StatefulWidget {
+@RoutePage()
+class EditSeatingPage extends StatelessWidget {
   final int tournamentId;
 
   const EditSeatingPage({
     super.key,
-    required this.tournamentId,
+    @PathParam('id') required this.tournamentId,
   });
 
   @override
-  State<EditSeatingPage> createState() => _EditSeatingPageState();
-
-  static String createLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      _routeName,
-      pathParameters: {'id': tournamentId.toString()},
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => EditSeatingBloc(
+        repos: RepositoryFactory.of(context),
+      ),
+      child: _EditSeatingPageContent(tournamentId: tournamentId),
     );
   }
-
-  static const _routeName = 'tournament_edit_seating_dnd';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'manual',
-    name: _routeName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      return BlocProvider(
-        create: (context) => EditSeatingBloc(
-          repos: RepositoryFactory.of(context),
-        ),
-        child: EditSeatingPage(tournamentId: tournamentId),
-      );
-    },
-  );
 }
 
-class _EditSeatingPageState extends State<EditSeatingPage>
-    with EffectListener<EditSeatingPageEffect, EditSeatingPageState, EditSeatingBloc, EditSeatingPage> {
+class _EditSeatingPageContent extends StatefulWidget {
+  final int tournamentId;
+
+  const _EditSeatingPageContent({required this.tournamentId});
+
+  @override
+  State<_EditSeatingPageContent> createState() => _EditSeatingPageContentState();
+}
+
+class _EditSeatingPageContentState extends State<_EditSeatingPageContent>
+    with EffectListener<EditSeatingPageEffect, EditSeatingPageState, EditSeatingBloc, _EditSeatingPageContent> {
   final _scrollController = ScrollController();
   bool _initialized = false;
 

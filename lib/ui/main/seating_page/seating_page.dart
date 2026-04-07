@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
@@ -15,8 +15,6 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.da
 import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/seating_list.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/separations_section.dart';
-import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
@@ -24,37 +22,14 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
+@RoutePage()
 class SeatingPage extends StatefulWidget {
   final int tournamentId;
 
-  const SeatingPage({super.key, required this.tournamentId});
+  const SeatingPage({super.key, @PathParam('id') required this.tournamentId});
 
   @override
   State<SeatingPage> createState() => _SeatingPageState();
-
-  static const name = 'tournament_seating';
-  static final RouteBase route = GoRoute(
-    path: 'editSeating',
-    name: name,
-    builder: (context, state) => SeatingPage(
-      tournamentId: int.parse(state.pathParameters['id'] ?? ''),
-    ),
-    routes: [
-      EditSeatingPage.tournamentRoute,
-    ]
-  );
-
-  static String createLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      name,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
-    );
-  }
 }
 
 class _SeatingPageState extends CustomState<SeatingPage>
@@ -121,12 +96,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
       ),
       if (state.games.isNotEmpty)
         (
-          onTap: () => context.go(
-                EditSeatingPage.createLocation(
-                  tournamentId: widget.tournamentId,
-                  context: context,
-                ),
-              ),
+          onTap: () => context.router.push(EditSeatingRoute(tournamentId: widget.tournamentId)),
           title: locale.editSeatingButton,
         ),
     ];
@@ -284,9 +254,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
       builder: (context, tournamentState) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-            onPressed: context.backOrGoToDefault(
-              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
-            ),
+            onPressed: context.backOrGoToDefault(),
           ),
           title: Text(
             tournamentState.isMyTournament ? context.locale.separateTitle : context.locale.seating,
@@ -335,9 +303,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
       builder: (context, tournamentState) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-            onPressed: context.backOrGoToDefault(
-              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
-            ),
+            onPressed: context.backOrGoToDefault(),
           ),
           title: Text(
             tournamentState.isMyTournament ? context.locale.separateTitle : context.locale.seating,
