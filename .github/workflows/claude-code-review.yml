@@ -23,10 +23,10 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.41.3'
-      - name: Setup GitHub CLI
-        uses: actions4gh/setup-gh@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install GitHub CLI
+        run: |
+          brew install gh
+          gh --version
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@v1
