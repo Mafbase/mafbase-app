@@ -8,10 +8,12 @@ import 'package:seating_generator_web/utils.dart';
 
 class AddPlayerDialog extends StatefulWidget {
   final String? initValue;
+  final PlayerModel? player;
 
   const AddPlayerDialog({
     super.key,
     this.initValue,
+    this.player,
   });
 
   @override
@@ -20,11 +22,13 @@ class AddPlayerDialog extends StatefulWidget {
   static Future<PlayerModel?> open({
     required BuildContext context,
     String? initValue,
+    PlayerModel? player,
   }) =>
       showDialog(
         context: context,
         builder: (context) => AddPlayerDialog(
           initValue: initValue,
+          player: player,
         ),
       );
 }
@@ -44,7 +48,16 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
 
   @override
   void initState() {
-    _controller.text = widget.initValue ?? '';
+    if (widget.player != null) {
+      final player = widget.player!;
+      _controller.text = player.nickname;
+      _controllerFsm.text = player.fsmNickaname ?? '';
+      _controllerMafbank.text = player.mafbankNickname ?? '';
+      _selectedPlayer = player;
+      _lastNicknameSearchedQuery = player.nickname;
+    } else {
+      _controller.text = widget.initValue ?? '';
+    }
     super.initState();
   }
 
