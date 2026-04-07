@@ -104,7 +104,7 @@ class MafbaseApp extends StatefulWidget {
 
 class _MafbaseAppState extends State<MafbaseApp> {
   late final _appRouter = AppRouter(
-    authGuard: AuthGuard(widget.scope.authNotifier),
+    authGuard: AuthGuard(widget.scope.authNotifier, widget.scope),
     railWrapperGuard: RailWrapperGuard(),
   );
   StreamSubscription? subscription;
