@@ -40,4 +40,4 @@ jobs:
           claude_args: '--allowedTools Skill,"Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh api:*),Bash(flutter analyze:*),Bash(dart analyze:*),Bash(flutter test:*)"'
           prompt: |
             IMPORTANT: Ты запущен в CI-окружении. Используй команды `flutter` и `dart` напрямую (без fvm). Не используй `fvm flutter` или `fvm dart`.
-            /code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
+            /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
