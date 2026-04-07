@@ -52,7 +52,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
               shouldOverrideUrlLoading: (controller, action) async {
                 final url = action.request.url;
                 if (url != null && url.host == 'mafbase.ru') {
-                  context.router.navigateNamed(
+                  context.router.navigatePath(
                     url.hasFragment ? url.fragment : '${url.path}?${url.query}',
                   );
                   return NavigationActionPolicy.CANCEL;

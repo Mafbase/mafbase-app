@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -149,9 +150,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
               openGame: openGame,
               pinNicknames: singlePage,
               customSortColumnIndex: widget.customSortColumnIndex,
-              onPlayerTap: (playerId) => context.router.pushNamed(
-                '/player/$playerId/statistics',
-              ),
+              onPlayerTap: (playerId) => context.router.push(PlayerStatsRoute(playerId: playerId)),
               changeSort: (
                 RatingSort sort, {
                 int? customSortColumnIndex,
@@ -206,9 +205,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                 ),
               if (widget.clubId != null)
                 IconButton(
-                  onPressed: () => context.router.pushNamed(
-                    '/club/${widget.clubId}/games',
-                  ),
+                  onPressed: () => context.router.push(ClubGamesRoute(clubId: widget.clubId!)),
                   icon: const Icon(Icons.table_chart_outlined),
                 ),
               if (widget.tournamentId != null)
@@ -289,9 +286,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                 gameFilterWidget(),
                 if (widget.clubId != null)
                   IconButton(
-                    onPressed: () => context.router.pushNamed(
-                      '/club/${widget.clubId}/games',
-                    ),
+                    onPressed: () => context.router.push(ClubGamesRoute(clubId: widget.clubId!)),
                     icon: const Icon(Icons.table_chart_outlined),
                   ),
               ],
@@ -346,9 +341,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                               gameFilter: widget.gameFilter,
                               openGame: openGame,
                               customSortColumnIndex: widget.customSortColumnIndex,
-                              onPlayerTap: (playerId) => context.router.pushNamed(
-                                '/player/$playerId/statistics',
-                              ),
+                              onPlayerTap: (playerId) => context.router.push(PlayerStatsRoute(playerId: playerId)),
                               changeSort: (
                                 RatingSort sort, {
                                 int? customSortColumnIndex,

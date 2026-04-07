@@ -23,7 +23,7 @@ class AppBlocObserver extends BlocObserver {
           error.message ?? '',
         );
       } else if (error is UnauthenticatedError) {
-        navigatorContext.router.pushNamed('/auth');
+        navigatorContext.router.push(const LoginPageRoute());
 
         AppRouterHelper.showErrorDialog(
           navigatorContext,

@@ -17,7 +17,7 @@ class ClubRouterImpl implements ClubRouter {
 
   @override
   void openRating({required int clubId}) {
-    context.router.pushNamed('/club/$clubId/rating');
+    context.router.push(RatingRoute(clubId: clubId));
   }
 
   @override

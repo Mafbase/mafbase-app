@@ -50,7 +50,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openPlayersList({required int tournamentId}) {
-    _context.router.pushNamed('/tournament/$tournamentId');
+    _context.router.push(TournamentRoute(tournamentId: tournamentId));
   }
 
   @override

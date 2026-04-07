@@ -116,7 +116,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
         .map((e) => e.location)
         .where((path) => path != null)
         .cast<String>()
-        .listen((path) => _appRouter.navigateNamed(path));
+        .listen((path) => _appRouter.navigatePath(path));
   }
 
   @override

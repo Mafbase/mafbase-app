@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
@@ -229,7 +230,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
   void _addNewGame() {
     final clubId = context.read<ClubBloc>().state.model?.id;
     if (clubId == null) return;
-    context.router.pushNamed('/club/$clubId/addGame');
+    context.router.push(AddClubGameRoute(clubId: clubId));
   }
 
   void _changeHideDate() async {
@@ -312,6 +313,6 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
   void _editCustomColumns() {
     final clubId = context.read<ClubBloc>().state.model?.id;
     if (clubId == null) return;
-    context.router.pushNamed('/club/$clubId/custom-columns');
+    context.router.push(CustomColumnsEditorRoute(clubId: clubId));
   }
 }

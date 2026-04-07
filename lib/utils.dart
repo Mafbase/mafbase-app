@@ -16,7 +16,7 @@ extension BuildContextLocaleExt on BuildContext {
         } else if (Navigator.canPop(this)) {
           Navigator.pop(this);
         } else {
-          router.navigateNamed(fallback?.call(this) ?? '/');
+          router.navigatePath(fallback?.call(this) ?? '/');
         }
       };
 }

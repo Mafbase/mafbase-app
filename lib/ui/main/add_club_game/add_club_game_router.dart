@@ -48,7 +48,7 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
 
   @override
   void openLoginPage() {
-    context.router.pushNamed('/auth');
+    context.router.push(const LoginPageRoute());
   }
 
   @override

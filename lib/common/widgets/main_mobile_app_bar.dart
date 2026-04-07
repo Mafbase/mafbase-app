@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
@@ -21,7 +22,7 @@ class MainMobileAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       title: InkWell(
-        onTap: () => context.router.navigateNamed('/club'),
+        onTap: () => context.router.navigate(const ClubsRoute()),
         child: Text(
           'Mafbase',
           style: GoogleFonts.balooBhai2(

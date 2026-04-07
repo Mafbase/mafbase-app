@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
@@ -100,7 +101,7 @@ class TournamentMenuBuilder {
           routeSegment: 'settings',
           selected: isActive('settings'),
           onTap: () {
-            context.router.navigateNamed('/tournament/$tournamentId/settings');
+            context.router.push(TournamentSettingsRoute(tournamentId: tournamentId));
           },
         ),
       if (state.isMyTournament)
@@ -110,7 +111,7 @@ class TournamentMenuBuilder {
           routeSegment: 'administration',
           selected: isActive('administration'),
           onTap: () {
-            context.router.navigateNamed('/tournament/$tournamentId/administration');
+            context.router.push(AdministrationRoute(tournamentId: tournamentId));
           },
         ),
       if (state.isMyTournament)
@@ -119,7 +120,7 @@ class TournamentMenuBuilder {
           icon: Icons.gavel_outlined,
           routeSegment: 'referees',
           selected: isActive('referees'),
-          onTap: () => context.router.navigateNamed('/tournament/$tournamentId/referees'),
+          onTap: () => context.router.push(RefereeRoute(tournamentId: tournamentId)),
         ),
       if (state.isMyTournament && showBill && !state.isLoading)
         TournamentMenuTapItem(
@@ -164,7 +165,7 @@ class TournamentMenuBuilder {
           routeSegment: 'fantasy',
           selected: isActive('fantasy'),
           onTap: () {
-            context.router.navigateNamed('/tournament/$tournamentId/fantasy');
+            context.router.push(FantasyRoute(tournamentId: tournamentId));
           },
         ),
       if (state.billedTranslation && state.isMyTournament && !state.isLoading)
@@ -183,7 +184,7 @@ class TournamentMenuBuilder {
           routeSegment: 'photo-themes',
           selected: isActive('photo-themes'),
           onTap: () {
-            context.router.navigateNamed('/tournament/$tournamentId/photo-themes');
+            context.router.push(PhotoThemesRoute(tournamentId: tournamentId));
           },
         ),
     ];
@@ -220,7 +221,7 @@ class TournamentMenuBuilder {
           icon: Icons.location_on_outlined,
           routeSegment: 'table-descriptions',
           selected: isActive('table-descriptions'),
-          onTap: () => context.router.navigateNamed('/tournament/$tournamentId/table-descriptions'),
+          onTap: () => context.router.push(InfoTableDescriptionRoute(tournamentId: tournamentId)),
         ),
       ];
       sections.add(

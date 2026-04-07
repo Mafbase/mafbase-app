@@ -35,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
     on<ProfileEffectNavigateBack>((effect) {
-      if (mounted) context.router.pushNamed('/club');
+      if (mounted) context.router.navigate(const ClubsRoute());
     });
     on<ProfileEffectOpenBillingUrl>((effect) {
       if (!mounted) return;
@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage>
                       const SizedBox(height: 12),
                     ],
                     ProfileActionsCard(
-                      onPhotoThemes: () => context.router.pushNamed('/photo-themes'),
+                      onPhotoThemes: () => context.router.push(const PhotoThemesRoute()),
                       onLogout: () => context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed()),
                       onDeleteAccount: _deleteAccount,
                     ),

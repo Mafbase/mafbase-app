@@ -103,17 +103,17 @@ class MainPageRouterImpl implements MainPageRouter {
   void switchTabTo(MainPageTab tab) {
     switch (tab) {
       case MainPageTab.clubs:
-        context.router.navigateNamed('/club');
+        context.router.navigate(const ClubsRoute());
         break;
       case MainPageTab.tournaments:
-        context.router.navigateNamed('/tournament');
+        context.router.navigate(const TournamentsRoute());
         break;
     }
   }
 
   @override
   void pop() {
-    context.router.navigateNamed('/club');
+    context.router.navigate(const ClubsRoute());
   }
 
   @override
@@ -123,7 +123,7 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void openDefaultPage() {
-    context.router.navigateNamed('/club');
+    context.router.navigate(const ClubsRoute());
   }
 
   @override
@@ -137,7 +137,7 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void openAuthPage() {
-    context.router.pushNamed('/auth');
+    context.router.push(const LoginPageRoute());
   }
 
   @override
