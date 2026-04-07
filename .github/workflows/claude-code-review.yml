@@ -23,7 +23,8 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.41.3'
-
+      - name: Install GitHub CLI
+        uses: cli/cli@v2
       - name: Run Claude Code Review
         id: claude-review
         uses: anthropics/claude-code-action@v1
