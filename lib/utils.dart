@@ -1,5 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -9,11 +9,16 @@ extension BuildContextLocaleExt on BuildContext {
 
   MyTheme get theme => MyTheme.of(this);
 
-  VoidCallback backOrGoToDefault([String Function(BuildContext)? fallback]) => () => canPop()
-      ? pop()
-      : Navigator.canPop(this)
-          ? Navigator.pop(this)
-          : go(fallback?.call(this) ?? '/');
+  VoidCallback backOrGoToDefault([String Function(BuildContext)? fallback]) => () {
+        final router = this.router;
+        if (router.canPop()) {
+          router.pop();
+        } else if (Navigator.canPop(this)) {
+          Navigator.pop(this);
+        } else {
+          router.navigateNamed(fallback?.call(this) ?? '/');
+        }
+      };
 }
 
 final dateFormatForRequests = DateFormat('yyyy-MM-dd');

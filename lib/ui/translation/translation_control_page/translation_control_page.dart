@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
@@ -11,30 +11,21 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/wi
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_player_card.dart';
 import 'package:seating_generator_web/utils.dart';
 
+@RoutePage()
 class TranslationControlPage extends StatefulWidget {
-  const TranslationControlPage({super.key});
+  @QueryParam('tournamentId')
+  final int tournamentId;
+  @QueryParam('table')
+  final int table;
+  @QueryParam('key')
+  final String key;
 
-  static final route = GoRoute(
-    path: '/translationControl',
-    name: 'translation_control',
-    builder: (context, state) {
-      final tournamentId = int.parse(state.uri.queryParameters['tournamentId'] ?? '');
-      final table = int.parse(state.uri.queryParameters['table'] ?? '');
-      final key = state.uri.queryParameters['key'] ?? '';
-
-      return BlocProvider<TranslationControlBloc>(
-        create: (context) => TranslationControlBloc(
-          params: TranslationContentBlocParams(
-            tournamentId: tournamentId,
-            table: table,
-            key: key,
-          ),
-          repository: RepositoryFactory.of(context).translationRepository,
-        )..add(const TranslationControlEvent.pageOpened()),
-        child: const TranslationControlPage(),
-      );
-    },
-  );
+  const TranslationControlPage({
+    super.key,
+    required this.tournamentId,
+    required this.table,
+    this.key = '',
+  });
 
   @override
   State<TranslationControlPage> createState() => _TranslationControlPageState();
@@ -56,7 +47,16 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
   @override
   Widget build(BuildContext context) {
     final theme = MyTheme.of(context);
-    return BlocBuilder<TranslationControlBloc, TranslationContentState>(
+    return BlocProvider<TranslationControlBloc>(
+      create: (context) => TranslationControlBloc(
+        params: TranslationContentBlocParams(
+          tournamentId: widget.tournamentId,
+          table: widget.table,
+          key: widget.key,
+        ),
+        repository: RepositoryFactory.of(context).translationRepository,
+      )..add(const TranslationControlEvent.pageOpened()),
+      child: BlocBuilder<TranslationControlBloc, TranslationContentState>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: theme.background1,
@@ -125,6 +125,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
           ),
         );
       },
+      ),
     );
   }
 

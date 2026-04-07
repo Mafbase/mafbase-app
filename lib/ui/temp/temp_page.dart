@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/flip_widget.dart';
 import 'package:seating_generator_web/ui/temp/temp_bloc.dart';
@@ -8,20 +8,9 @@ import 'package:seating_generator_web/ui/temp/temp_event.dart';
 import 'package:seating_generator_web/ui/temp/temp_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
+@RoutePage()
 class TempPage extends StatefulWidget {
   const TempPage({super.key});
-
-  static const String name = 'temp';
-  static final GoRoute route = GoRoute(
-    path: '/temp',
-    name: name,
-    builder: (context, state) {
-      return BlocProvider<TempBloc>(
-        create: (context) => TempBloc(),
-        child: const TempPage(),
-      );
-    },
-  );
 
   @override
   State<TempPage> createState() => _TempPageState();
@@ -30,7 +19,9 @@ class TempPage extends StatefulWidget {
 class _TempPageState extends State<TempPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TempBloc, TempState>(
+    return BlocProvider<TempBloc>(
+      create: (context) => TempBloc(),
+      child: BlocBuilder<TempBloc, TempState>(
       builder: (context, state) {
         final Widget child;
         switch (state.style) {
@@ -97,6 +88,7 @@ class _TempPageState extends State<TempPage> {
           ),
         );
       },
+      ),
     );
   }
 }

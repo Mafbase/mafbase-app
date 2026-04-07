@@ -14,7 +14,6 @@ import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_predict
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_rating_section.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
@@ -87,7 +86,7 @@ class _FantasyPageContentState extends CustomState<_FantasyPageContent> with Wid
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-            onPressed: context.backOrGoToDefault(TournamentsPage.createLocation),
+            onPressed: context.backOrGoToDefault((_) => '/tournament'),
           ),
           title: Text(context.locale.fantasy),
           actions: [
@@ -165,7 +164,7 @@ class _FantasyPageContentState extends CustomState<_FantasyPageContent> with Wid
           return Scaffold(
             appBar: AppBar(
               leading: BackButton(
-                onPressed: context.backOrGoToDefault(TournamentsPage.createLocation),
+                onPressed: context.backOrGoToDefault((_) => '/tournament'),
               ),
               title: Text(context.locale.fantasy),
               actions: [

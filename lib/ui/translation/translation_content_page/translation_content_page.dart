@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -16,19 +15,6 @@ class TranslationContentPage extends StatefulWidget {
 
   @override
   State<TranslationContentPage> createState() => _TranslationContentPageState();
-
-  static const routeName = 'translation_content';
-
-  static String createLocation({
-    required BuildContext context,
-    required int tournamentId,
-    required int table,
-  }) {
-    return context.namedLocation(
-      routeName,
-      queryParameters: {'tournamentId': tournamentId, 'table': table},
-    );
-  }
 }
 
 class _TranslationContentPageState extends State<TranslationContentPage> {

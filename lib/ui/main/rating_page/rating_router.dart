@@ -1,8 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
-import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 
@@ -37,45 +36,33 @@ class RatingRouterImpl implements RatingRouter {
     int gameFilter, {
     int customSortColumnIndex = 0,
   }) {
-    final String location;
     if (clubId != null) {
-      location = RatingPage.createClubLocation(
-        range: range,
-        clubId: clubId,
-        context: context,
-        tableStyle: style,
-        sort: sort,
-        gameFilter: gameFilter,
-        customSortColumnIndex: customSortColumnIndex,
+      context.router.replace(
+        RatingRoute(clubId: clubId),
       );
     } else if (tournamentId != null) {
-      location = RatingPage.createTournamentLocation(
-        context: context,
-        tableStyle: style,
-        sort: sort,
-        tournamentId: tournamentId,
-        gameFilter: gameFilter,
-        customSortColumnIndex: customSortColumnIndex,
+      context.router.replace(
+        RatingRoute(tournamentId: tournamentId),
       );
     } else {
       throw ArgumentError();
     }
-    context.go(location);
   }
 
   @override
   void openGame(int clubId, int gameId) {
-    context.push(AddClubGamePage.createViewLocation(context, clubId, gameId));
+    context.router.push(
+      AddClubGameRoute(clubId: clubId, gameId: gameId, editParam: false),
+    );
   }
 
   @override
   void openTournamentGame(int tournamentId, int gameId) {
-    context.push(
-      AddClubGamePage.createTournamentEditLocation(
-        context: context,
+    context.router.push(
+      AddClubGameRoute(
         tournamentId: tournamentId,
         gameId: gameId,
-        edit: context.read<TournamentPageBloc>().state.isMyTournament,
+        editParam: context.read<TournamentPageBloc>().state.isMyTournament,
       ),
     );
   }

@@ -1,5 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -284,7 +284,7 @@ class TournamentSubscriptionSection extends StatelessWidget {
 
     if (!context.mounted || days == null) return;
 
-    final redirectPath = GoRouterState.of(context).uri.toString();
+    final redirectPath = context.router.currentUrl;
     context.read<ProfileBloc>().add(
           ProfileEvent.billSubscription(days, redirectPath),
         );

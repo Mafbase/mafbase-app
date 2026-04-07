@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/bloc_observer.dart';
@@ -61,7 +60,6 @@ extension LocationPathExt on RemoteMessage {
 void _startApp() async {
   WidgetsBinding? binding;
   setPathUrlStrategy();
-  GoRouter.optionURLReflectsImperativeAPIs = true;
   if (!kIsWeb) {
     binding = WidgetsFlutterBinding.ensureInitialized();
   }

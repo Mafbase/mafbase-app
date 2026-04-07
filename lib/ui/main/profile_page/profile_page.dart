@@ -19,8 +19,8 @@ import 'package:seating_generator_web/ui/main/profile_page/widgets/tournament_su
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 
 @RoutePage()
 class ProfilePage extends StatefulWidget {
@@ -44,12 +44,8 @@ class _ProfilePageState extends State<ProfilePage>
       if (kIsWeb) {
         launchUrl(uri, webOnlyWindowName: '_self');
       } else {
-        context.router.pushNamed(
-          WebViewScreen.createLocation(
-            url: url,
-            title: context.locale.profilePaymentTitle,
-            context: context,
-          ),
+        context.router.push(
+          WebViewRoute(url: url, title: context.locale.profilePaymentTitle),
         );
       }
     });

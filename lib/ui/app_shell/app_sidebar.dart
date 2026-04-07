@@ -1,7 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
@@ -21,8 +21,7 @@ class AppSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final uri = GoRouterState.of(context).uri;
-    final currentPath = uri.path;
+    final currentPath = context.router.currentUrl;
 
     return Container(
       width: width,
