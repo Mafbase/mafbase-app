@@ -38,6 +38,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
   final _controllerFsm = TextEditingController();
 
   PlayerModel? _selectedPlayer;
+  List<PlayerModel> _nicknameSearchResults = [];
 
   @override
   void initState() {
@@ -95,6 +96,7 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                 controller: _controller,
                 focusNode: _focusNode,
                 onSelected: _onPlayerSelected,
+                onResultsChanged: (results) => _nicknameSearchResults = results,
                 onSubmit: () {
                   _focusNodeFsm.requestFocus();
                 },
@@ -129,7 +131,8 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
   }
 
   void onSubmit() {
-    final player = _selectedPlayer?.copyWith(
+    final selectedPlayer = _selectedPlayer ?? _findExactMatch();
+    final player = selectedPlayer?.copyWith(
           mafbankNickname: _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,
           fsmNickaname: _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
         ) ??
@@ -141,5 +144,12 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
         );
 
     Navigator.pop(context, player);
+  }
+
+  PlayerModel? _findExactMatch() {
+    final lowerText = _controller.text.toLowerCase();
+    return _nicknameSearchResults
+        .where((p) => p.nickname.toLowerCase() == lowerText)
+        .firstOrNull;
   }
 }
