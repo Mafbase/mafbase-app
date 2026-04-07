@@ -46,6 +46,6 @@ Widget themedWidget(Widget child) => Builder(
 
 // CI-friendly имя для screenMatchesGolden
 String goldenName(String name) {
-  final isCi = Platform.environment['CI'] == 'true';
+  final isCi = Platform.environment['GOLDEN_CI'] == 'true';
   return 'goldens/$name${isCi ? '_ci' : ''}';
 }
