@@ -28,22 +28,18 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
 class AddClubGamePage extends StatelessWidget {
-  @PathParam('clubId')
   final int? clubId;
-  @PathParam('id')
   final int? tournamentId;
-  @PathParam('gameId')
   final int? gameId;
-  @QueryParam('edit')
   final bool? editParam;
   final DateTime? initDateTime;
 
   const AddClubGamePage({
     super.key,
-    this.clubId,
-    this.tournamentId,
-    this.gameId,
-    this.editParam,
+    @PathParam('clubId') this.clubId,
+    @PathParam('id') this.tournamentId,
+    @PathParam('gameId') this.gameId,
+    @QueryParam('edit') this.editParam,
     this.initDateTime,
   });
 
@@ -211,7 +207,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
   }
 
   @override
-  void didUpdateWidget(covariant AddClubGamePage oldWidget) {
+  void didUpdateWidget(covariant _AddClubGamePageContent oldWidget) {
     if (oldWidget.gameId != widget.gameId) {
       context.read<AddClubGameBloc>().add(
             AddClubGameEvent.pageOpened(
@@ -703,11 +699,11 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     if (roles.where((element) => element == PlayerRole.maf).length != 2 ||
         roles.where((element) => element == PlayerRole.don).length != 1 ||
         roles.where((element) => element == PlayerRole.sheriff).length != 1) {
-      AppRouter.showErrorDialog(context, 'Проверьте роли');
+      AppRouterHelper.showErrorDialog(context, 'Проверьте роли');
       return;
     }
     if (winSelected == null) {
-      AppRouter.showErrorDialog(context, 'Не выбран результат игры');
+      AppRouterHelper.showErrorDialog(context, 'Не выбран результат игры');
       return;
     }
 
@@ -718,7 +714,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
           ) ==
           null,
     )) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Не найден игрок: ${controllers.firstWhere(
               (e) =>
@@ -736,7 +732,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
             ) ==
             null &&
         !state.isTournament) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Не найден судья: ${refereeController.text}',
       );
@@ -744,16 +740,16 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     }
 
     if (firstDie != -1 && bestMove == null) {
-      AppRouter.showErrorDialog(context, 'Установите лучший ход');
+      AppRouterHelper.showErrorDialog(context, 'Установите лучший ход');
       return;
     }
 
     if (firstDie == null) {
-      AppRouter.showErrorDialog(context, 'Не указан первый отстрел');
+      AppRouterHelper.showErrorDialog(context, 'Не указан первый отстрел');
       return;
     }
     if (ciSchemeModel == null) {
-      AppRouter.showErrorDialog(context, 'Не указана схема компенсации');
+      AppRouterHelper.showErrorDialog(context, 'Не указана схема компенсации');
       return;
     }
 
@@ -764,7 +760,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
         )
         .toList();
     if (addScores.any((score) => score < 0)) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Положительные баллы не могут быть отрицательными',
       );
@@ -778,7 +774,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
         )
         .toList();
     if (minusScores.any((score) => score < 0)) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Отрицательные баллы не могут быть отрицательными (используйте положительное значение)',
       );

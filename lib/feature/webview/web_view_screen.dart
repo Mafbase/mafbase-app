@@ -6,15 +6,13 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 @RoutePage()
 class WebViewScreen extends StatefulWidget {
-  @QueryParam('title')
   final String title;
-  @QueryParam('url')
   final String url;
 
   const WebViewScreen({
     super.key,
-    this.title = '',
-    required this.url,
+    @QueryParam('title') this.title = '',
+    @QueryParam('url') this.url = '',
   });
 
   @override

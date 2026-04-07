@@ -19,7 +19,7 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-@RoutePage()
+@RoutePage(name: 'SignUpPageRoute')
 class SignUpPageBody extends StatelessWidget {
   const SignUpPageBody({super.key});
 

@@ -14,7 +14,7 @@ import 'package:seating_generator_web/ui/login/verification_body/verification_ev
 import 'package:seating_generator_web/ui/login/verification_body/verification_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
-@RoutePage()
+@RoutePage(name: 'VerificationPageRoute')
 class VerificationPageBody extends StatelessWidget {
   final int id;
 

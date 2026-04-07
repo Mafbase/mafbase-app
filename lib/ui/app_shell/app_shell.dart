@@ -4,14 +4,14 @@ import 'package:seating_generator_web/ui/app_shell/app_sidebar.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
-class AppShell extends StatefulWidget {
-  const AppShell({super.key});
+class AppShellPage extends StatefulWidget {
+  const AppShellPage({super.key});
 
   @override
-  State<AppShell> createState() => _AppShellState();
+  State<AppShellPage> createState() => _AppShellState();
 }
 
-class _AppShellState extends CustomState<AppShell> {
+class _AppShellState extends CustomState<AppShellPage> {
   @override
   Widget buildDesktop(BuildContext context) {
     return Scaffold(

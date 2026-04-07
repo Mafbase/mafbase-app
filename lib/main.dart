@@ -114,7 +114,8 @@ class _MafbaseAppState extends State<MafbaseApp> {
     super.initState();
     subscription = FirebaseMessaging.onMessageOpenedApp
         .map((e) => e.location)
-        .whereType<String>()
+        .where((path) => path != null)
+        .cast<String>()
         .listen((path) => _appRouter.navigateNamed(path));
   }
 
@@ -142,10 +143,12 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 darkTheme: AppTheme.dark(isMobile: context.isMobile),
                 themeMode: ThemeMode.system,
                 routerConfig: _appRouter.config(
-                  initialDeepLink: widget.initLocation != null
-                      ? DeepLink.path(widget.initLocation!)
-                      : null,
                   deepLinkBuilder: (deepLink) {
+                    // Handle initial push notification deep link
+                    if (widget.initLocation != null) {
+                      return DeepLink.path(widget.initLocation!);
+                    }
+                    // Redirect fragment-based deep links (/#/club → /club)
                     final uri = deepLink.uri;
                     if (uri.fragment.isNotEmpty) {
                       return DeepLink.path('/${uri.fragment}');

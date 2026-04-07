@@ -13,18 +13,15 @@ import 'package:seating_generator_web/utils.dart';
 
 @RoutePage()
 class TranslationControlPage extends StatefulWidget {
-  @QueryParam('tournamentId')
   final int tournamentId;
-  @QueryParam('table')
   final int table;
-  @QueryParam('key')
-  final String key;
+  final String translationKey;
 
   const TranslationControlPage({
     super.key,
-    required this.tournamentId,
-    required this.table,
-    this.key = '',
+    @QueryParam('tournamentId') this.tournamentId = 0,
+    @QueryParam('table') this.table = 0,
+    @QueryParam('key') this.translationKey = '',
   });
 
   @override
@@ -52,7 +49,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
         params: TranslationContentBlocParams(
           tournamentId: widget.tournamentId,
           table: widget.table,
-          key: widget.key,
+          key: widget.translationKey,
         ),
         repository: RepositoryFactory.of(context).translationRepository,
       )..add(const TranslationControlEvent.pageOpened()),

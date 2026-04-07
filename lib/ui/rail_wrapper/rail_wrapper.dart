@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/app/router.gr.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';

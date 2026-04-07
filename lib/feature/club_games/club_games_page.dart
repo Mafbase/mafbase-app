@@ -13,18 +13,15 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
 class ClubGamesPage extends StatelessWidget {
-  @PathParam('clubId')
   final int clubId;
-  @QueryParam('date-start')
   final String? dateStartParam;
-  @QueryParam('date-end')
   final String? dateEndParam;
 
   const ClubGamesPage({
     super.key,
-    required this.clubId,
-    this.dateStartParam,
-    this.dateEndParam,
+    @PathParam('clubId') required this.clubId,
+    @QueryParam('date-start') this.dateStartParam,
+    @QueryParam('date-end') this.dateEndParam,
   });
 
   @override

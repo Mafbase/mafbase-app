@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
-import 'package:seating_generator_web/utils.dart';
 
 class TranslationControlGameSelector extends StatelessWidget {
   final int game;

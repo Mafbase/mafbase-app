@@ -18,7 +18,7 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-@RoutePage()
+@RoutePage(name: 'LoginPageRoute')
 class LoginPageBody extends StatelessWidget {
   const LoginPageBody({super.key});
 

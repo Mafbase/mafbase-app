@@ -17,11 +17,9 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
 class PlayerStatsPage extends StatelessWidget {
-  @PathParam('playerId')
   final int playerId;
 
-  @visibleForTesting
-  const PlayerStatsPage({super.key, required this.playerId});
+  const PlayerStatsPage({super.key, @PathParam('playerId') required this.playerId});
 
   @override
   Widget build(BuildContext context) {

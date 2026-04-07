@@ -28,13 +28,12 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
 class ClubPage extends StatelessWidget {
-  @PathParam('clubId')
   final int clubId;
   final ClubModel? cachedModel;
 
   const ClubPage({
     super.key,
-    required this.clubId,
+    @PathParam('clubId') required this.clubId,
     this.cachedModel,
   });
 

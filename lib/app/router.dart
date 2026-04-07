@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/guards/auth_guard.dart';
 import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
@@ -28,6 +29,8 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
+import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 
@@ -126,6 +129,16 @@ class AppRouter extends RootStackRouter {
           ],
         ),
       ];
+}
+
+// ignore: avoid_classes_with_only_static_members
+class AppRouterHelper {
+  static void showErrorDialog(BuildContext context, String message) {
+    if (message.isEmpty) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
 }
 
 enum MainPageTab { clubs, tournaments }

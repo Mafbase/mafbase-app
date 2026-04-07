@@ -18,19 +18,19 @@ class AppBlocObserver extends BlocObserver {
 
     try {
       if (error is RequestError) {
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           error.message ?? '',
         );
       } else if (error is UnauthenticatedError) {
         navigatorContext.router.pushNamed('/auth');
 
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           error.message ?? '',
         );
       } else {
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           navigatorContext.locale.unknownError(error.toString()),
         );

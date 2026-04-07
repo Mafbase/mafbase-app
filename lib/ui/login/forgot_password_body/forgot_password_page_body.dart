@@ -15,7 +15,7 @@ import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-@RoutePage()
+@RoutePage(name: 'ForgotPasswordPageRoute')
 class ForgotPasswordPageBody extends StatelessWidget {
   const ForgotPasswordPageBody({super.key});
 

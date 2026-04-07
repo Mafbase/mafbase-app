@@ -12,10 +12,9 @@ import 'package:seating_generator_web/utils.dart';
 
 @RoutePage()
 class CustomColumnsEditorPage extends StatelessWidget {
-  @PathParam('clubId')
   final int clubId;
 
-  const CustomColumnsEditorPage({super.key, required this.clubId});
+  const CustomColumnsEditorPage({super.key, @PathParam('clubId') required this.clubId});
 
   @override
   Widget build(BuildContext context) {

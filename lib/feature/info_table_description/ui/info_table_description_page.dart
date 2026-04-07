@@ -14,12 +14,11 @@ import 'package:seating_generator_web/utils.dart';
 
 @RoutePage()
 class InfoTableDescriptionPage extends StatelessWidget {
-  @PathParam('id')
   final int tournamentId;
 
   const InfoTableDescriptionPage({
     super.key,
-    required this.tournamentId,
+    @PathParam('id') required this.tournamentId,
   });
 
   @override
