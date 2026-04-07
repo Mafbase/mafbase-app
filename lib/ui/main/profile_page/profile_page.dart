@@ -134,6 +134,7 @@ class _ProfilePageState extends State<ProfilePage>
 
     final selectedPlayer = await AddPlayerDialog.open(
       context: context,
+      player: bloc.state.playerProfile,
     );
 
     if (!context.mounted) return;
