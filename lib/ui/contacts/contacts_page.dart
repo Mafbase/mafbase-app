@@ -1,22 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+@RoutePage()
 class ContactsPage extends StatefulWidget {
-  const ContactsPage._();
+  const ContactsPage({super.key});
 
   @override
   State<ContactsPage> createState() => _ContactsPageState();
-
-  static String createLocation(BuildContext context) => context.namedLocation('contacts');
-
-  static final route = GoRoute(
-    path: '/contacts',
-    name: 'contacts',
-    builder: (context, state) => const ContactsPage._(),
-  );
 }
 
 class _ContactsPageState extends State<ContactsPage> {
@@ -26,7 +19,7 @@ class _ContactsPageState extends State<ContactsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault()),
+        leading: const BackButton(),
         title: Text(context.locale.contacts),
       ),
       body: Center(

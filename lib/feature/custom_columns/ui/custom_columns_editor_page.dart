@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/custom_columns/domain/models/custom_column_model.dart';
@@ -10,42 +10,34 @@ import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_e
 import 'package:seating_generator_web/feature/custom_columns/ui/widgets/custom_column_edit_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class CustomColumnsEditorPage extends StatefulWidget {
+@RoutePage()
+class CustomColumnsEditorPage extends StatelessWidget {
+  @PathParam('clubId')
   final int clubId;
 
   const CustomColumnsEditorPage({super.key, required this.clubId});
 
-  static const _name = 'custom-columns-editor';
-
-  static String createLocation({
-    required BuildContext context,
-    required int clubId,
-  }) {
-    return context.namedLocation(
-      _name,
-      pathParameters: {'clubId': clubId.toString()},
+  @override
+  Widget build(BuildContext context) {
+    final repository = RepositoryFactory.of(context).customColumnsRepository;
+    return BlocProvider<CustomColumnsEditorBloc>(
+      create: (context) =>
+          CustomColumnsEditorBloc(repository, clubId)..add(const CustomColumnsEditorEvent.pageOpened()),
+      child: _CustomColumnsEditorContent(clubId: clubId),
     );
   }
-
-  static final GoRoute route = GoRoute(
-    path: 'custom-columns',
-    name: _name,
-    builder: (context, state) {
-      final clubId = int.parse(state.pathParameters['clubId']!);
-      final repository = RepositoryFactory.of(context).customColumnsRepository;
-      return BlocProvider<CustomColumnsEditorBloc>(
-        create: (context) =>
-            CustomColumnsEditorBloc(repository, clubId)..add(const CustomColumnsEditorEvent.pageOpened()),
-        child: CustomColumnsEditorPage(clubId: clubId),
-      );
-    },
-  );
-
-  @override
-  State<CustomColumnsEditorPage> createState() => _CustomColumnsEditorPageState();
 }
 
-class _CustomColumnsEditorPageState extends State<CustomColumnsEditorPage> {
+class _CustomColumnsEditorContent extends StatefulWidget {
+  final int clubId;
+
+  const _CustomColumnsEditorContent({required this.clubId});
+
+  @override
+  State<_CustomColumnsEditorContent> createState() => _CustomColumnsEditorPageState();
+}
+
+class _CustomColumnsEditorPageState extends State<_CustomColumnsEditorContent> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomColumnsEditorBloc, CustomColumnsEditorState>(
@@ -53,11 +45,7 @@ class _CustomColumnsEditorPageState extends State<CustomColumnsEditorPage> {
         return Scaffold(
           appBar: AppBar(
             title: Text(context.locale.customColumns),
-            leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}),
-              ),
-            ),
+            leading: const BackButton(),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _showEditDialog(context),

@@ -1,81 +1,66 @@
 import 'dart:math';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/game_result_widget.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_bloc.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_event.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_state.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
-import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class ClubGamesPage extends StatefulWidget {
+@RoutePage()
+class ClubGamesPage extends StatelessWidget {
+  @PathParam('clubId')
   final int clubId;
+  @QueryParam('date-start')
+  final String? dateStartParam;
+  @QueryParam('date-end')
+  final String? dateEndParam;
 
   const ClubGamesPage({
     super.key,
     required this.clubId,
+    this.dateStartParam,
+    this.dateEndParam,
   });
 
-  static const _name = 'club-games';
-
-  static String createLocation({
-    required BuildContext context,
-    required int clubId,
-    DateTimeRange? range,
-  }) =>
-      context.namedLocation(
-        _name,
-        pathParameters: {
-          'clubId': clubId.toString(),
-        },
-        queryParameters: {
-          'date-start': range?.start.toIso8601String(),
-          'date-end': range?.end.toIso8601String(),
-        },
-      );
-
-  static final GoRoute route = GoRoute(
-    path: 'games',
-    name: _name,
-    builder: (context, state) {
-      final clubId = int.parse(state.pathParameters['clubId']!);
-      final dateStart = DateTime.tryParse(state.uri.queryParameters['date-start'] ?? '') ??
-          DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd = DateTime.tryParse(state.uri.queryParameters['date-end'] ?? '') ?? DateTime.now();
-      final range = DateTimeRange(start: dateStart, end: dateEnd);
-
-      return BlocProvider(
-        create: (context) {
-          final repository = RepositoryFactory.of(context).clubRepository;
-
-          return ClubGamesBloc(
-            const ClubGamesState(),
-            repository,
-          )..add(ClubGamesEvent.init(clubId: clubId, range: range));
-        },
-        child: ClubGamesPage(clubId: clubId),
-      );
-    },
-  );
-
   @override
-  State<ClubGamesPage> createState() => _ClubGamesPageState();
+  Widget build(BuildContext context) {
+    final dateStart = DateTime.tryParse(dateStartParam ?? '') ??
+        DateTime.now().subtract(const Duration(days: 30));
+    final dateEnd = DateTime.tryParse(dateEndParam ?? '') ?? DateTime.now();
+    final range = DateTimeRange(start: dateStart, end: dateEnd);
+
+    return BlocProvider(
+      create: (context) {
+        final repository = RepositoryFactory.of(context).clubRepository;
+        return ClubGamesBloc(
+          const ClubGamesState(),
+          repository,
+        )..add(ClubGamesEvent.init(clubId: clubId, range: range));
+      },
+      child: _ClubGamesPageContent(clubId: clubId),
+    );
+  }
 }
 
-class _ClubGamesPageState extends CustomState<ClubGamesPage> {
+class _ClubGamesPageContent extends StatefulWidget {
+  final int clubId;
+
+  const _ClubGamesPageContent({required this.clubId});
+
+  @override
+  State<_ClubGamesPageContent> createState() => _ClubGamesPageState();
+}
+
+class _ClubGamesPageState extends CustomState<_ClubGamesPageContent> {
   @override
   Widget buildDesktop(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(
-            onPressed: context.backOrGoToDefault(
-              (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}),
-            ),
-          ),
+          leading: const BackButton(),
           title: const Text('Игры клуба'),
         ),
         body: BlocBuilder<ClubGamesBloc, ClubGamesState>(
@@ -110,11 +95,7 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
   Widget? buildMobile(BuildContext context) => BlocBuilder<ClubGamesBloc, ClubGamesState>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                (c) => c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()}),
-              ),
-            ),
+            leading: const BackButton(),
             title: const Text('Игры клуба'),
           ),
           body: state.loading
@@ -151,5 +132,6 @@ class _ClubGamesPageState extends CustomState<ClubGamesPage> {
         ),
       );
 
-  void openGame(int gameId) => context.push(AddClubGamePage.createViewLocation(context, widget.clubId, gameId));
+  void openGame(int gameId) =>
+      context.router.pushNamed('/club/${widget.clubId}/game/$gameId');
 }

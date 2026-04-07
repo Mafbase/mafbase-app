@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
@@ -22,25 +22,12 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
+@RoutePage()
 class TournamentsPage extends StatefulWidget {
-  const TournamentsPage._();
+  const TournamentsPage({super.key});
 
   @override
   State<TournamentsPage> createState() => _TournamentsPageState();
-
-  static const String _name = 'tournaments';
-
-  static String createLocation(BuildContext context) {
-    return context.namedLocation(_name);
-  }
-
-  static final GoRoute route = GoRoute(
-    path: '/tournament',
-    name: _name,
-    pageBuilder: (context, state) => const NoTransitionPage(
-      child: TournamentsPage._(),
-    ),
-  );
 }
 
 class _TournamentsPageState extends CustomState<TournamentsPage> {

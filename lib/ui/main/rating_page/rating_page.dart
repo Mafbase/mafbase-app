@@ -1,27 +1,24 @@
 import 'package:carousel_slider/carousel_slider.dart' as carousel;
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_bloc.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/game_filter_dialog.dart';
 import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
-import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class RatingPage extends StatefulWidget {
+@RoutePage()
+class RatingPage extends StatelessWidget {
   final int? clubId;
   final int? tournamentId;
   final DateTimeRange? range;
@@ -42,135 +39,49 @@ class RatingPage extends StatefulWidget {
   }) : assert((clubId == null) != (tournamentId == null));
 
   @override
-  State<RatingPage> createState() => _RatingPageState();
-
-  static String createTournamentLocation({
-    required int tournamentId,
-    required BuildContext context,
-    RatingTableStyle tableStyle = RatingTableStyle.full,
-    RatingSort sort = RatingSort.score,
-    int gameFilter = 0,
-    int customSortColumnIndex = 0,
-  }) {
-    return context.namedLocation(
-      _tournamentName,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
-      queryParameters: {
-        'style': tableStyle.name,
-        'sort': sort.name,
-        'game-filter': gameFilter.toString(),
-        if (customSortColumnIndex > 0) 'custom-sort-column': customSortColumnIndex.toString(),
-      },
+  Widget build(BuildContext context) {
+    return BlocProvider<RatingBloc>(
+      create: (context) => RatingBloc(
+        repos: RepositoryFactory.of(context),
+        router: RatingRouterImpl(context),
+      ),
+      child: _RatingPageContent(
+        clubId: clubId,
+        tournamentId: tournamentId,
+        range: range,
+        style: style,
+        sort: sort,
+        gameFilter: gameFilter,
+        customSortColumnIndex: customSortColumnIndex,
+      ),
     );
   }
-
-  static String createClubLocation({
-    DateTimeRange? range,
-    required int clubId,
-    required BuildContext context,
-    RatingTableStyle tableStyle = RatingTableStyle.full,
-    RatingSort sort = RatingSort.score,
-    int gameFilter = 0,
-    int customSortColumnIndex = 0,
-  }) {
-    return context.namedLocation(
-      _clubName,
-      pathParameters: {'clubId': clubId.toString()},
-      queryParameters: {
-        'date-start': range == null ? null : dateFormatForRequests.format(range.start),
-        'date-end': range == null ? null : dateFormatForRequests.format(range.end),
-        'style': tableStyle.name,
-        'sort': sort.name,
-        'game-filter': gameFilter.toString(),
-        if (customSortColumnIndex > 0) 'custom-sort-column': customSortColumnIndex.toString(),
-      },
-    );
-  }
-
-  static const _tournamentName = 'tournament_rating';
-  static const _clubName = 'club_rating';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'rating',
-    name: _tournamentName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters['style'] == element.name,
-          ) ??
-          RatingTableStyle.full;
-      final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters['sort'] == element.name,
-          ) ??
-          RatingSort.score;
-      final gameFilter = int.tryParse(state.uri.queryParameters['game-filter'] ?? '') ?? 0;
-      final customSortColumnIndex = int.tryParse(
-            state.uri.queryParameters['custom-sort-column'] ?? '',
-          ) ??
-          0;
-      return BlocProvider<RatingBloc>(
-        create: (context) {
-          return RatingBloc(
-            repos: RepositoryFactory.of(context),
-            router: RatingRouterImpl(context),
-          );
-        },
-        child: RatingPage(
-          tournamentId: tournamentId,
-          style: style,
-          sort: sort,
-          gameFilter: gameFilter,
-          customSortColumnIndex: customSortColumnIndex,
-        ),
-      );
-    },
-  );
-
-  static final GoRoute clubRoute = GoRoute(
-    path: 'rating',
-    name: _clubName,
-    builder: (context, state) {
-      final clubId = int.parse(state.pathParameters['clubId']!);
-      final dateStart = DateTime.tryParse(state.uri.queryParameters['date-start'] ?? '') ??
-          DateTime.now().subtract(const Duration(days: 30));
-      final dateEnd = DateTime.tryParse(state.uri.queryParameters['date-end'] ?? '') ?? DateTime.now();
-      final range = DateTimeRange(start: dateStart, end: dateEnd);
-      final style = RatingTableStyle.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters['style'] == element.name,
-          ) ??
-          RatingTableStyle.full;
-      final sort = RatingSort.values.firstWhereOrNull(
-            (element) => state.uri.queryParameters['sort'] == element.name,
-          ) ??
-          RatingSort.score;
-      final gameFilter = int.tryParse(state.uri.queryParameters['game-filter'] ?? '') ?? 0;
-      final customSortColumnIndex = int.tryParse(
-            state.uri.queryParameters['custom-sort-column'] ?? '',
-          ) ??
-          0;
-      return BlocProvider<RatingBloc>(
-        create: (context) {
-          return RatingBloc(
-            repos: RepositoryFactory.of(context),
-            router: RatingRouterImpl(context),
-          );
-        },
-        child: RatingPage(
-          clubId: clubId,
-          range: range,
-          style: style,
-          sort: sort,
-          gameFilter: gameFilter,
-          customSortColumnIndex: customSortColumnIndex,
-        ),
-      );
-    },
-  );
 }
 
-class _RatingPageState extends CustomState<RatingPage> {
+class _RatingPageContent extends StatefulWidget {
+  final int? clubId;
+  final int? tournamentId;
+  final DateTimeRange? range;
+  final RatingTableStyle style;
+  final RatingSort sort;
+  final int gameFilter;
+  final int customSortColumnIndex;
+
+  const _RatingPageContent({
+    this.clubId,
+    this.tournamentId,
+    this.range,
+    this.style = RatingTableStyle.full,
+    this.sort = RatingSort.score,
+    this.gameFilter = 0,
+    this.customSortColumnIndex = 0,
+  });
+
+  @override
+  State<_RatingPageContent> createState() => _RatingPageState();
+}
+
+class _RatingPageState extends CustomState<_RatingPageContent> {
   final format = DateFormat('dd:MM:yyyy');
   int carouselIndex = 1;
   final _carouselController = carousel.CarouselSliderController();
@@ -208,7 +119,7 @@ class _RatingPageState extends CustomState<RatingPage> {
   }
 
   @override
-  void didUpdateWidget(covariant RatingPage oldWidget) {
+  void didUpdateWidget(covariant _RatingPageContent oldWidget) {
     if (oldWidget.range != widget.range ||
         oldWidget.clubId != widget.clubId ||
         oldWidget.tournamentId != widget.tournamentId) {
@@ -238,11 +149,8 @@ class _RatingPageState extends CustomState<RatingPage> {
               openGame: openGame,
               pinNicknames: singlePage,
               customSortColumnIndex: widget.customSortColumnIndex,
-              onPlayerTap: (playerId) => context.push(
-                PlayerStatsPage.createLocation(
-                  context: context,
-                  playerId: playerId,
-                ),
+              onPlayerTap: (playerId) => context.router.pushNamed(
+                '/player/$playerId/statistics',
               ),
               changeSort: (
                 RatingSort sort, {
@@ -288,13 +196,7 @@ class _RatingPageState extends CustomState<RatingPage> {
 
         return Scaffold(
           appBar: AppBar(
-            leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                (c) => widget.clubId != null
-                    ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
-                    : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!),
-              ),
-            ),
+            leading: const BackButton(),
             title: Text(state.clubName),
             actions: [
               if (state.rows.isNotEmpty)
@@ -304,12 +206,8 @@ class _RatingPageState extends CustomState<RatingPage> {
                 ),
               if (widget.clubId != null)
                 IconButton(
-                  onPressed: () => context.push(
-                    ClubGamesPage.createLocation(
-                      context: context,
-                      clubId: widget.clubId!,
-                      range: widget.range,
-                    ),
+                  onPressed: () => context.router.pushNamed(
+                    '/club/${widget.clubId}/games',
                   ),
                   icon: const Icon(Icons.table_chart_outlined),
                 ),
@@ -384,25 +282,15 @@ class _RatingPageState extends CustomState<RatingPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: BackButton(
-                onPressed: context.backOrGoToDefault(
-                  (c) => widget.clubId != null
-                      ? c.namedLocation('club', pathParameters: {'clubId': widget.clubId.toString()})
-                      : TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!),
-                ),
-              ),
+              leading: const BackButton(),
               title: Text(state.clubName),
               actions: [
                 downloadRatingButton(),
                 gameFilterWidget(),
                 if (widget.clubId != null)
                   IconButton(
-                    onPressed: () => context.push(
-                      ClubGamesPage.createLocation(
-                        context: context,
-                        clubId: widget.clubId!,
-                        range: widget.range,
-                      ),
+                    onPressed: () => context.router.pushNamed(
+                      '/club/${widget.clubId}/games',
                     ),
                     icon: const Icon(Icons.table_chart_outlined),
                   ),
@@ -458,11 +346,8 @@ class _RatingPageState extends CustomState<RatingPage> {
                               gameFilter: widget.gameFilter,
                               openGame: openGame,
                               customSortColumnIndex: widget.customSortColumnIndex,
-                              onPlayerTap: (playerId) => context.push(
-                                PlayerStatsPage.createLocation(
-                                  context: context,
-                                  playerId: playerId,
-                                ),
+                              onPlayerTap: (playerId) => context.router.pushNamed(
+                                '/player/$playerId/statistics',
                               ),
                               changeSort: (
                                 RatingSort sort, {
