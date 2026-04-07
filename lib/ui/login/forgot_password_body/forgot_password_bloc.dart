@@ -1,14 +1,13 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/models/password_reset_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_events.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_state.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
-import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_page_body.dart';
 
 class ForgotPasswordBloc extends Bloc<ForgotPasswordEvents, ForgotPasswordState> {
   final AuthRepository _authRepository;
@@ -58,13 +57,11 @@ class ForgotPasswordPageRouterImpl implements ForgotPasswordPageRouter {
 
   @override
   void openLoginPage() {
-    GoRouter.of(_context).go(LoginPageBody.createLocation(context: _context));
+    _context.router.push(const LoginPageRoute());
   }
 
   @override
   void openResetPasswordPage(String email) {
-    GoRouter.of(_context).go(
-      ResetPasswordPageBody.createLocation(context: _context, email: email),
-    );
+    _context.router.push(ResetPasswordPageRoute(email: email));
   }
 }

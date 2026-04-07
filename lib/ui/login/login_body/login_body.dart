@@ -1,72 +1,52 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/ui/login/login_bloc.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
-import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_page_body.dart';
-import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_page_body.dart';
-import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
-import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class LoginPageBody extends StatefulWidget {
+@RoutePage()
+class LoginPageBody extends StatelessWidget {
   const LoginPageBody({super.key});
 
   @override
-  State<LoginPageBody> createState() => _LoginPageBodyState();
-
-  static String createLocation({
-    required BuildContext context,
-    String? nextPath,
-  }) =>
-      context.namedLocation(
-        'login',
-        queryParameters: {
-          if (nextPath != null) 'next': nextPath,
-        },
-      );
-
-  static final GoRoute route = GoRoute(
-    path: '/auth',
-    name: 'login',
-    routes: [
-      SignUpPageBody.route,
-      VerificationPageBody.route,
-      ForgotPasswordPageBody.route,
-      ResetPasswordPageBody.route,
-    ],
-    pageBuilder: (context, state) => FadeTransitionPage(
-      child: BlocProvider(
-        create: (context) {
-          final scope = DependencyScope.of(context);
-          final repos = scope.repositoryFactory;
-          final storages = scope.storageFactory;
-          return LoginBloc(
-            LoginInteractor(repos.authRepository, storages.credentialStorage, scope.authNotifier),
-            LoginPageRouterImpl(context, state.uri.queryParameters['next']),
-          );
-        },
-        child: const LoginPageBody(),
-      ),
-    ),
-  );
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        final scope = DependencyScope.of(context);
+        final repos = scope.repositoryFactory;
+        final storages = scope.storageFactory;
+        return LoginBloc(
+          LoginInteractor(repos.authRepository, storages.credentialStorage, scope.authNotifier),
+          LoginPageRouterImpl(context),
+        );
+      },
+      child: const _LoginPageContent(),
+    );
+  }
 }
 
-class _LoginPageBodyState extends CustomState<LoginPageBody> {
+class _LoginPageContent extends StatefulWidget {
+  const _LoginPageContent();
+
+  @override
+  State<_LoginPageContent> createState() => _LoginPageContentState();
+}
+
+class _LoginPageContentState extends CustomState<_LoginPageContent> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _emailFocusNode = FocusNode();

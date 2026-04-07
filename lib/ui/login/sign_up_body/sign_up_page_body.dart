@@ -1,18 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_bloc.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
@@ -21,38 +19,36 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SignUpPageBody extends StatefulWidget {
+@RoutePage()
+class SignUpPageBody extends StatelessWidget {
   const SignUpPageBody({super.key});
 
   @override
-  State<SignUpPageBody> createState() => _SignUpPageBodyState();
-
-  static String createLocation({required BuildContext context}) {
-    return context.namedLocation('signUp');
+  Widget build(BuildContext context) {
+    return BlocProvider<SignUpBloc>(
+      key: const Key('SignUpBlocProvider'),
+      create: (context) {
+        final scope = DependencyScope.of(context);
+        final repos = scope.repositoryFactory;
+        return SignUpBloc(
+          SignUpInteractor(repos.authRepository),
+          LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
+          SignUpPageRouterImpl(context),
+        );
+      },
+      child: const _SignUpPageContent(),
+    );
   }
-
-  static final route = GoRoute(
-    path: 'signUp',
-    name: 'signUp',
-    pageBuilder: (context, state) => FadeTransitionPage(
-      child: BlocProvider<SignUpBloc>(
-        key: const Key('SignUpBlocProvider'),
-        create: (context) {
-          final scope = DependencyScope.of(context);
-          final repos = scope.repositoryFactory;
-          return SignUpBloc(
-            SignUpInteractor(repos.authRepository),
-            LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
-            SignUpPageRouterImpl(context),
-          );
-        },
-        child: const SignUpPageBody(),
-      ),
-    ),
-  );
 }
 
-class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
+class _SignUpPageContent extends StatefulWidget {
+  const _SignUpPageContent();
+
+  @override
+  State<_SignUpPageContent> createState() => _SignUpPageContentState();
+}
+
+class _SignUpPageContentState extends CustomState<_SignUpPageContent> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repeatPasswordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -78,7 +74,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.loginRegister),
       ),
       body: BlocBuilder<SignUpBloc, SignUpState>(
@@ -204,7 +200,7 @@ class _SignUpPageBodyState extends CustomState<SignUpPageBody> {
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.loginRegister),
       ),
       body: BlocBuilder<SignUpBloc, SignUpState>(

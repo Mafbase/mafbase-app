@@ -1,49 +1,45 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_bloc.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_events.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_state.dart';
 import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class ForgotPasswordPageBody extends StatefulWidget {
+@RoutePage()
+class ForgotPasswordPageBody extends StatelessWidget {
   const ForgotPasswordPageBody({super.key});
 
   @override
-  State<ForgotPasswordPageBody> createState() => _ForgotPasswordPageBodyState();
-
-  static String createLocation({required BuildContext context}) {
-    return context.namedLocation('forgotPassword');
-  }
-
-  static final route = GoRoute(
-    path: 'forgotPassword',
-    name: 'forgotPassword',
-    pageBuilder: (context, state) => FadeTransitionPage(
-      child: BlocProvider<ForgotPasswordBloc>(
-        key: const Key('ForgotPasswordBlocProvider'),
-        create: (context) => ForgotPasswordBloc(
-          RepositoryFactory.of(context).authRepository,
-          ForgotPasswordPageRouterImpl(context),
-        ),
-        child: const ForgotPasswordPageBody(),
+  Widget build(BuildContext context) {
+    return BlocProvider<ForgotPasswordBloc>(
+      key: const Key('ForgotPasswordBlocProvider'),
+      create: (context) => ForgotPasswordBloc(
+        RepositoryFactory.of(context).authRepository,
+        ForgotPasswordPageRouterImpl(context),
       ),
-    ),
-  );
+      child: const _ForgotPasswordPageContent(),
+    );
+  }
 }
 
-class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
+class _ForgotPasswordPageContent extends StatefulWidget {
+  const _ForgotPasswordPageContent();
+
+  @override
+  State<_ForgotPasswordPageContent> createState() => _ForgotPasswordPageContentState();
+}
+
+class _ForgotPasswordPageContentState extends CustomState<_ForgotPasswordPageContent> {
   final TextEditingController _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -57,7 +53,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.forgotPasswordTitle),
       ),
       body: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
@@ -152,7 +148,7 @@ class _ForgotPasswordPageBodyState extends CustomState<ForgotPasswordPageBody> {
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.forgotPasswordTitle),
       ),
       body: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(

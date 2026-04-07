@@ -1,11 +1,10 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
-import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_events.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_state.dart';
 
@@ -72,16 +71,16 @@ class VerificationPageRouterImpl implements VerificationPageRouter {
 
   @override
   void openLoginPage() {
-    _context.go(LoginPageBody.createLocation(context: _context));
+    _context.router.push(const LoginPageRoute());
   }
 
   @override
   void openMainPage() {
-    GoRouter.of(_context).go('/');
+    _context.router.replaceAll([const ClubsRoute()]);
   }
 
   @override
   void openSignUpPage() {
-    _context.push(SignUpPageBody.createLocation(context: _context));
+    _context.router.push(const SignUpPageRoute());
   }
 }
