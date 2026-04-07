@@ -1,11 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/ui/app_shell/app_sidebar.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
+@RoutePage()
 class AppShell extends StatefulWidget {
-  final Widget child;
-
-  const AppShell({super.key, required this.child});
+  const AppShell({super.key});
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -18,12 +18,12 @@ class _AppShellState extends CustomState<AppShell> {
       body: Row(
         children: [
           const AppSidebar(),
-          Expanded(child: widget.child),
+          const Expanded(child: AutoRouter()),
         ],
       ),
     );
   }
 
   @override
-  Widget? buildMobile(BuildContext context) => widget.child;
+  Widget? buildMobile(BuildContext context) => const AutoRouter();
 }
