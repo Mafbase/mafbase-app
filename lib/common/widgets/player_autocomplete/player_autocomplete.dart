@@ -9,6 +9,7 @@ import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_bloc.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_event.dart';
+import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_state.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
 class PlayerAutoComplete extends StatelessWidget {
