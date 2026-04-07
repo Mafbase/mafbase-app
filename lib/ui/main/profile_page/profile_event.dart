@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
@@ -21,4 +23,9 @@ abstract class ProfileEvent with _$ProfileEvent {
   ) = ProfileEventBillSubscription;
 
   const factory ProfileEvent.reset() = ProfileEventReset;
+
+  const factory ProfileEvent.editPhoto({
+    required Uint8List bytes,
+    required String fileName,
+  }) = ProfileEventEditPhoto;
 }

@@ -13,6 +13,7 @@ import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/app_shell/app_shell.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
@@ -120,6 +121,7 @@ class AppRouter {
                     ),
                     scope.repositoryFactory.profileRepository,
                     CreatePlayerInteractor(scope.repositoryFactory.playersRepository),
+                    AddPhotoInteractor(scope.repositoryFactory.playersRepository),
                     scope.authNotifier,
                   );
                 },

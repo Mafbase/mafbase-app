@@ -15,5 +15,6 @@ abstract class ProfileState with _$ProfileState {
     TournamentSubscriptionPlanModel? subscriptionPlan,
     String? subscriptionError,
     @Default(false) bool isBilling,
+    @Default(false) bool isUploadingPhoto,
   }) = _ProfileState;
 }
