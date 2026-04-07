@@ -23,7 +23,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage._();
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -33,7 +33,7 @@ class ProfilePage extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: '/profile',
     name: 'profile',
-    builder: (context, state) => const ProfilePage._(),
+    builder: (context, state) => const ProfilePage(),
   );
 }
 
