@@ -230,13 +230,13 @@ class _EditableAvatar extends StatelessWidget {
             Positioned.fill(
               child: ClipOval(
                 child: ColoredBox(
-                  color: Colors.black45,
+                  color: theme.avatarUploadOverlayColor,
                   child: Center(
                     child: SizedBox(
                       width: size * 0.4,
                       height: size * 0.4,
-                      child: const CircularProgressIndicator(
-                        color: Colors.white,
+                      child: CircularProgressIndicator(
+                        color: theme.btnTextColor,
                         strokeWidth: 2.5,
                       ),
                     ),
@@ -260,7 +260,7 @@ class _EditableAvatar extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.camera_alt,
-                    color: Colors.white,
+                    color: theme.btnTextColor,
                     size: badgeSize * 0.55,
                   ),
                 ),
