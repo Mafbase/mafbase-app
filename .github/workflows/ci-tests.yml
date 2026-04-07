@@ -13,7 +13,7 @@ jobs:
   test:
     runs-on: [self-hosted, linux]
     env:
-      CI: 'true'
+      GOLDEN_CI: 'true'
     steps:
       - uses: actions/checkout@v4
         with:
