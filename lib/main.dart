@@ -144,7 +144,9 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 themeMode: ThemeMode.system,
                 routerConfig: _appRouter.config(
                   includePrefixMatches: true,
-                  deepLinkBuilder: (deepLink) {
+                routerConfig: _appRouter.config(
+                  navigatorKey: rootNavigationKey,
+                  includePrefixMatches: true,
                     // Handle initial push notification deep link
                     if (widget.initLocation != null) {
                       return DeepLink.path(widget.initLocation!);
