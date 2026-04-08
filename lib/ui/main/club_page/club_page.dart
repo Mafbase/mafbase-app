@@ -230,7 +230,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
   void _addNewGame() {
     final clubId = context.read<ClubBloc>().state.model?.id;
     if (clubId == null) return;
-    context.router.push(AddClubGameRoute(clubId: clubId));
+    context.router.push(NewClubGameRoute(clubId: clubId));
   }
 
   void _changeHideDate() async {

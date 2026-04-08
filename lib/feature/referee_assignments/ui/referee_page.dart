@@ -86,7 +86,6 @@ class _RefereePageState extends State<_RefereePageContent> {
         title: Text(locale.referees),
         actions: [
           TournamentMenuAction(
-            tournamentId: widget.tournamentId,
             openDrawer: () => Scaffold.of(context).openEndDrawer(),
           ),
         ],

@@ -210,7 +210,6 @@ class _PhotoThemesPageState extends CustomState<_PhotoThemesContent> {
         actions: [
           if (widget.tournamentId != null)
             TournamentMenuAction(
-              tournamentId: widget.tournamentId!,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
         ],

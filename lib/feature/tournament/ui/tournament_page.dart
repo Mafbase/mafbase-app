@@ -99,6 +99,7 @@ class _TournamentPageContentState extends CustomState<_TournamentPageContent>
                           authorized: (model) => !model.hideBilling,
                         ) ??
                     true;
+
                 final sections = TournamentMenuBuilder.buildSections(
                   context,
                   state,
@@ -106,6 +107,7 @@ class _TournamentPageContentState extends CustomState<_TournamentPageContent>
                   showBill: showBill,
                   seatingLoading: seatingLoading,
                 );
+
                 return TournamentMenu(
                   sections: sections,
                   tournamentId: widget.tournamentId,

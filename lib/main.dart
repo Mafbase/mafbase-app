@@ -116,7 +116,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
         .map((e) => e.location)
         .where((path) => path != null)
         .cast<String>()
-        .listen((path) => _appRouter.navigatePath(path));
+        .listen((path) => _appRouter.navigatePath(path, includePrefixMatches: true));
   }
 
   @override
@@ -143,6 +143,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 darkTheme: AppTheme.dark(isMobile: context.isMobile),
                 themeMode: ThemeMode.system,
                 routerConfig: _appRouter.config(
+                  includePrefixMatches: true,
                   deepLinkBuilder: (deepLink) {
                     // Handle initial push notification deep link
                     if (widget.initLocation != null) {

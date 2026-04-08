@@ -89,7 +89,6 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
             title: Text(context.locale.tournamentSettingsTitle),
             actions: [
               TournamentMenuAction(
-                tournamentId: widget.tournamentId,
                 openDrawer: () => Scaffold.of(context).openEndDrawer(),
               ),
             ],

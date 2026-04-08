@@ -104,7 +104,6 @@ class _FantasyPageContentState extends CustomState<_FantasyPageContent> with Wid
               },
             ),
             TournamentMenuAction(
-              tournamentId: widget.tournamentId,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
           ],

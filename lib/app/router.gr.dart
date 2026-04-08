@@ -11,112 +11,6 @@
 part of 'router.dart';
 
 /// generated route for
-/// [AddClubGamePage]
-class AddClubGameRoute extends PageRouteInfo<AddClubGameRouteArgs> {
-  AddClubGameRoute({
-    Key? key,
-    int? clubId,
-    int? tournamentId,
-    int? gameId,
-    bool? editParam,
-    DateTime? initDateTime,
-    List<PageRouteInfo>? children,
-  }) : super(
-          AddClubGameRoute.name,
-          args: AddClubGameRouteArgs(
-            key: key,
-            clubId: clubId,
-            tournamentId: tournamentId,
-            gameId: gameId,
-            editParam: editParam,
-            initDateTime: initDateTime,
-          ),
-          rawPathParams: {
-            'clubId': clubId,
-            'id': tournamentId,
-            'gameId': gameId,
-          },
-          rawQueryParams: {'edit': editParam},
-          initialChildren: children,
-        );
-
-  static const String name = 'AddClubGameRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final pathParams = data.inheritedPathParams;
-      final queryParams = data.queryParams;
-      final args = data.argsAs<AddClubGameRouteArgs>(
-        orElse: () => AddClubGameRouteArgs(
-          clubId: pathParams.optInt('clubId'),
-          tournamentId: pathParams.optInt('id'),
-          gameId: pathParams.optInt('gameId'),
-          editParam: queryParams.optBool('edit'),
-        ),
-      );
-      return AddClubGamePage(
-        key: args.key,
-        clubId: args.clubId,
-        tournamentId: args.tournamentId,
-        gameId: args.gameId,
-        editParam: args.editParam,
-        initDateTime: args.initDateTime,
-      );
-    },
-  );
-}
-
-class AddClubGameRouteArgs {
-  const AddClubGameRouteArgs({
-    this.key,
-    this.clubId,
-    this.tournamentId,
-    this.gameId,
-    this.editParam,
-    this.initDateTime,
-  });
-
-  final Key? key;
-
-  final int? clubId;
-
-  final int? tournamentId;
-
-  final int? gameId;
-
-  final bool? editParam;
-
-  final DateTime? initDateTime;
-
-  @override
-  String toString() {
-    return 'AddClubGameRouteArgs{key: $key, clubId: $clubId, tournamentId: $tournamentId, gameId: $gameId, editParam: $editParam, initDateTime: $initDateTime}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! AddClubGameRouteArgs) return false;
-    return key == other.key &&
-        clubId == other.clubId &&
-        tournamentId == other.tournamentId &&
-        gameId == other.gameId &&
-        editParam == other.editParam &&
-        initDateTime == other.initDateTime;
-  }
-
-  @override
-  int get hashCode =>
-      key.hashCode ^
-      clubId.hashCode ^
-      tournamentId.hashCode ^
-      gameId.hashCode ^
-      editParam.hashCode ^
-      initDateTime.hashCode;
-}
-
-/// generated route for
 /// [AdministrationPage]
 class AdministrationRoute extends PageRouteInfo<AdministrationRouteArgs> {
   AdministrationRoute({
@@ -182,6 +76,88 @@ class AppShellRoute extends PageRouteInfo<void> {
       return const AppShellPage();
     },
   );
+}
+
+/// generated route for
+/// [ClubGameDetailPage]
+class ClubGameDetailRoute extends PageRouteInfo<ClubGameDetailRouteArgs> {
+  ClubGameDetailRoute({
+    Key? key,
+    int? clubId,
+    int? gameId,
+    bool? editParam,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ClubGameDetailRoute.name,
+          args: ClubGameDetailRouteArgs(
+            key: key,
+            clubId: clubId,
+            gameId: gameId,
+            editParam: editParam,
+          ),
+          rawPathParams: {'clubId': clubId, 'gameId': gameId},
+          rawQueryParams: {'edit': editParam},
+          initialChildren: children,
+        );
+
+  static const String name = 'ClubGameDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final queryParams = data.queryParams;
+      final args = data.argsAs<ClubGameDetailRouteArgs>(
+        orElse: () => ClubGameDetailRouteArgs(
+          clubId: pathParams.optInt('clubId'),
+          gameId: pathParams.optInt('gameId'),
+          editParam: queryParams.optBool('edit'),
+        ),
+      );
+      return ClubGameDetailPage(
+        key: args.key,
+        clubId: args.clubId,
+        gameId: args.gameId,
+        editParam: args.editParam,
+      );
+    },
+  );
+}
+
+class ClubGameDetailRouteArgs {
+  const ClubGameDetailRouteArgs({
+    this.key,
+    this.clubId,
+    this.gameId,
+    this.editParam,
+  });
+
+  final Key? key;
+
+  final int? clubId;
+
+  final int? gameId;
+
+  final bool? editParam;
+
+  @override
+  String toString() {
+    return 'ClubGameDetailRouteArgs{key: $key, clubId: $clubId, gameId: $gameId, editParam: $editParam}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ClubGameDetailRouteArgs) return false;
+    return key == other.key &&
+        clubId == other.clubId &&
+        gameId == other.gameId &&
+        editParam == other.editParam;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^ clubId.hashCode ^ gameId.hashCode ^ editParam.hashCode;
 }
 
 /// generated route for
@@ -334,6 +310,134 @@ class ClubRouteArgs {
 
   @override
   int get hashCode => key.hashCode ^ clubId.hashCode ^ cachedModel.hashCode;
+}
+
+/// generated route for
+/// [ClubRatingPage]
+class ClubRatingRoute extends PageRouteInfo<ClubRatingRouteArgs> {
+  ClubRatingRoute({
+    Key? key,
+    int? clubId,
+    String? dateStart,
+    String? dateEnd,
+    String? style,
+    String? sort,
+    int? gameFilter,
+    int? customSortColumnIndex,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ClubRatingRoute.name,
+          args: ClubRatingRouteArgs(
+            key: key,
+            clubId: clubId,
+            dateStart: dateStart,
+            dateEnd: dateEnd,
+            style: style,
+            sort: sort,
+            gameFilter: gameFilter,
+            customSortColumnIndex: customSortColumnIndex,
+          ),
+          rawPathParams: {'clubId': clubId},
+          rawQueryParams: {
+            'date-start': dateStart,
+            'date-end': dateEnd,
+            'style': style,
+            'sort': sort,
+            'game-filter': gameFilter,
+            'custom-sort-column': customSortColumnIndex,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'ClubRatingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final queryParams = data.queryParams;
+      final args = data.argsAs<ClubRatingRouteArgs>(
+        orElse: () => ClubRatingRouteArgs(
+          clubId: pathParams.optInt('clubId'),
+          dateStart: queryParams.optString('date-start'),
+          dateEnd: queryParams.optString('date-end'),
+          style: queryParams.optString('style'),
+          sort: queryParams.optString('sort'),
+          gameFilter: queryParams.optInt('game-filter'),
+          customSortColumnIndex: queryParams.optInt('custom-sort-column'),
+        ),
+      );
+      return ClubRatingPage(
+        key: args.key,
+        clubId: args.clubId,
+        dateStart: args.dateStart,
+        dateEnd: args.dateEnd,
+        style: args.style,
+        sort: args.sort,
+        gameFilter: args.gameFilter,
+        customSortColumnIndex: args.customSortColumnIndex,
+      );
+    },
+  );
+}
+
+class ClubRatingRouteArgs {
+  const ClubRatingRouteArgs({
+    this.key,
+    this.clubId,
+    this.dateStart,
+    this.dateEnd,
+    this.style,
+    this.sort,
+    this.gameFilter,
+    this.customSortColumnIndex,
+  });
+
+  final Key? key;
+
+  final int? clubId;
+
+  final String? dateStart;
+
+  final String? dateEnd;
+
+  final String? style;
+
+  final String? sort;
+
+  final int? gameFilter;
+
+  final int? customSortColumnIndex;
+
+  @override
+  String toString() {
+    return 'ClubRatingRouteArgs{key: $key, clubId: $clubId, dateStart: $dateStart, dateEnd: $dateEnd, style: $style, sort: $sort, gameFilter: $gameFilter, customSortColumnIndex: $customSortColumnIndex}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ClubRatingRouteArgs) return false;
+    return key == other.key &&
+        clubId == other.clubId &&
+        dateStart == other.dateStart &&
+        dateEnd == other.dateEnd &&
+        style == other.style &&
+        sort == other.sort &&
+        gameFilter == other.gameFilter &&
+        customSortColumnIndex == other.customSortColumnIndex;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^
+      clubId.hashCode ^
+      dateStart.hashCode ^
+      dateEnd.hashCode ^
+      style.hashCode ^
+      sort.hashCode ^
+      gameFilter.hashCode ^
+      customSortColumnIndex.hashCode;
 }
 
 /// generated route for
@@ -617,6 +721,70 @@ class LoginPageRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [NewClubGamePage]
+class NewClubGameRoute extends PageRouteInfo<NewClubGameRouteArgs> {
+  NewClubGameRoute({
+    Key? key,
+    int? clubId,
+    DateTime? initDateTime,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NewClubGameRoute.name,
+          args: NewClubGameRouteArgs(
+            key: key,
+            clubId: clubId,
+            initDateTime: initDateTime,
+          ),
+          rawPathParams: {'clubId': clubId},
+          initialChildren: children,
+        );
+
+  static const String name = 'NewClubGameRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<NewClubGameRouteArgs>(
+        orElse: () => NewClubGameRouteArgs(clubId: pathParams.optInt('clubId')),
+      );
+      return NewClubGamePage(
+        key: args.key,
+        clubId: args.clubId,
+        initDateTime: args.initDateTime,
+      );
+    },
+  );
+}
+
+class NewClubGameRouteArgs {
+  const NewClubGameRouteArgs({this.key, this.clubId, this.initDateTime});
+
+  final Key? key;
+
+  final int? clubId;
+
+  final DateTime? initDateTime;
+
+  @override
+  String toString() {
+    return 'NewClubGameRouteArgs{key: $key, clubId: $clubId, initDateTime: $initDateTime}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! NewClubGameRouteArgs) return false;
+    return key == other.key &&
+        clubId == other.clubId &&
+        initDateTime == other.initDateTime;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ clubId.hashCode ^ initDateTime.hashCode;
+}
+
+/// generated route for
 /// [PhotoThemesPage]
 class PhotoThemesRoute extends PageRouteInfo<PhotoThemesRouteArgs> {
   PhotoThemesRoute({Key? key, int? tournamentId, List<PageRouteInfo>? children})
@@ -715,6 +883,22 @@ class PlayerStatsRouteArgs {
 }
 
 /// generated route for
+/// [PlayersListBody]
+class TournamentPlayersRoute extends PageRouteInfo<void> {
+  const TournamentPlayersRoute({List<PageRouteInfo>? children})
+      : super(TournamentPlayersRoute.name, initialChildren: children);
+
+  static const String name = 'TournamentPlayersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PlayersListBody();
+    },
+  );
+}
+
+/// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute({List<PageRouteInfo>? children})
@@ -744,115 +928,6 @@ class RailWrapperRoute extends PageRouteInfo<void> {
       return const RailWrapperPage();
     },
   );
-}
-
-/// generated route for
-/// [RatingPage]
-class RatingRoute extends PageRouteInfo<RatingRouteArgs> {
-  RatingRoute({
-    Key? key,
-    int? clubId,
-    int? tournamentId,
-    DateTimeRange<DateTime>? range,
-    RatingTableStyle style = RatingTableStyle.full,
-    RatingSort sort = RatingSort.score,
-    int gameFilter = 0,
-    int customSortColumnIndex = 0,
-    List<PageRouteInfo>? children,
-  }) : super(
-          RatingRoute.name,
-          args: RatingRouteArgs(
-            key: key,
-            clubId: clubId,
-            tournamentId: tournamentId,
-            range: range,
-            style: style,
-            sort: sort,
-            gameFilter: gameFilter,
-            customSortColumnIndex: customSortColumnIndex,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'RatingRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<RatingRouteArgs>(
-        orElse: () => const RatingRouteArgs(),
-      );
-      return RatingPage(
-        key: args.key,
-        clubId: args.clubId,
-        tournamentId: args.tournamentId,
-        range: args.range,
-        style: args.style,
-        sort: args.sort,
-        gameFilter: args.gameFilter,
-        customSortColumnIndex: args.customSortColumnIndex,
-      );
-    },
-  );
-}
-
-class RatingRouteArgs {
-  const RatingRouteArgs({
-    this.key,
-    this.clubId,
-    this.tournamentId,
-    this.range,
-    this.style = RatingTableStyle.full,
-    this.sort = RatingSort.score,
-    this.gameFilter = 0,
-    this.customSortColumnIndex = 0,
-  });
-
-  final Key? key;
-
-  final int? clubId;
-
-  final int? tournamentId;
-
-  final DateTimeRange<DateTime>? range;
-
-  final RatingTableStyle style;
-
-  final RatingSort sort;
-
-  final int gameFilter;
-
-  final int customSortColumnIndex;
-
-  @override
-  String toString() {
-    return 'RatingRouteArgs{key: $key, clubId: $clubId, tournamentId: $tournamentId, range: $range, style: $style, sort: $sort, gameFilter: $gameFilter, customSortColumnIndex: $customSortColumnIndex}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! RatingRouteArgs) return false;
-    return key == other.key &&
-        clubId == other.clubId &&
-        tournamentId == other.tournamentId &&
-        range == other.range &&
-        style == other.style &&
-        sort == other.sort &&
-        gameFilter == other.gameFilter &&
-        customSortColumnIndex == other.customSortColumnIndex;
-  }
-
-  @override
-  int get hashCode =>
-      key.hashCode ^
-      clubId.hashCode ^
-      tournamentId.hashCode ^
-      range.hashCode ^
-      style.hashCode ^
-      sort.hashCode ^
-      gameFilter.hashCode ^
-      customSortColumnIndex.hashCode;
 }
 
 /// generated route for
@@ -1043,6 +1118,92 @@ class TempRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TournamentGameDetailPage]
+class TournamentGameDetailRoute
+    extends PageRouteInfo<TournamentGameDetailRouteArgs> {
+  TournamentGameDetailRoute({
+    Key? key,
+    int? tournamentId,
+    int? gameId,
+    bool? editParam,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TournamentGameDetailRoute.name,
+          args: TournamentGameDetailRouteArgs(
+            key: key,
+            tournamentId: tournamentId,
+            gameId: gameId,
+            editParam: editParam,
+          ),
+          rawPathParams: {'id': tournamentId, 'gameId': gameId},
+          rawQueryParams: {'edit': editParam},
+          initialChildren: children,
+        );
+
+  static const String name = 'TournamentGameDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final queryParams = data.queryParams;
+      final args = data.argsAs<TournamentGameDetailRouteArgs>(
+        orElse: () => TournamentGameDetailRouteArgs(
+          tournamentId: pathParams.optInt('id'),
+          gameId: pathParams.optInt('gameId'),
+          editParam: queryParams.optBool('edit'),
+        ),
+      );
+      return TournamentGameDetailPage(
+        key: args.key,
+        tournamentId: args.tournamentId,
+        gameId: args.gameId,
+        editParam: args.editParam,
+      );
+    },
+  );
+}
+
+class TournamentGameDetailRouteArgs {
+  const TournamentGameDetailRouteArgs({
+    this.key,
+    this.tournamentId,
+    this.gameId,
+    this.editParam,
+  });
+
+  final Key? key;
+
+  final int? tournamentId;
+
+  final int? gameId;
+
+  final bool? editParam;
+
+  @override
+  String toString() {
+    return 'TournamentGameDetailRouteArgs{key: $key, tournamentId: $tournamentId, gameId: $gameId, editParam: $editParam}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TournamentGameDetailRouteArgs) return false;
+    return key == other.key &&
+        tournamentId == other.tournamentId &&
+        gameId == other.gameId &&
+        editParam == other.editParam;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^
+      tournamentId.hashCode ^
+      gameId.hashCode ^
+      editParam.hashCode;
+}
+
+/// generated route for
 /// [TournamentPage]
 class TournamentRoute extends PageRouteInfo<TournamentRouteArgs> {
   TournamentRoute({
@@ -1092,6 +1253,114 @@ class TournamentRouteArgs {
 
   @override
   int get hashCode => key.hashCode ^ tournamentId.hashCode;
+}
+
+/// generated route for
+/// [TournamentRatingPage]
+class TournamentRatingRoute extends PageRouteInfo<TournamentRatingRouteArgs> {
+  TournamentRatingRoute({
+    Key? key,
+    int? tournamentId,
+    String? style,
+    String? sort,
+    int? gameFilter,
+    int? customSortColumnIndex,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TournamentRatingRoute.name,
+          args: TournamentRatingRouteArgs(
+            key: key,
+            tournamentId: tournamentId,
+            style: style,
+            sort: sort,
+            gameFilter: gameFilter,
+            customSortColumnIndex: customSortColumnIndex,
+          ),
+          rawPathParams: {'id': tournamentId},
+          rawQueryParams: {
+            'style': style,
+            'sort': sort,
+            'game-filter': gameFilter,
+            'custom-sort-column': customSortColumnIndex,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'TournamentRatingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final queryParams = data.queryParams;
+      final args = data.argsAs<TournamentRatingRouteArgs>(
+        orElse: () => TournamentRatingRouteArgs(
+          tournamentId: pathParams.optInt('id'),
+          style: queryParams.optString('style'),
+          sort: queryParams.optString('sort'),
+          gameFilter: queryParams.optInt('game-filter'),
+          customSortColumnIndex: queryParams.optInt('custom-sort-column'),
+        ),
+      );
+      return TournamentRatingPage(
+        key: args.key,
+        tournamentId: args.tournamentId,
+        style: args.style,
+        sort: args.sort,
+        gameFilter: args.gameFilter,
+        customSortColumnIndex: args.customSortColumnIndex,
+      );
+    },
+  );
+}
+
+class TournamentRatingRouteArgs {
+  const TournamentRatingRouteArgs({
+    this.key,
+    this.tournamentId,
+    this.style,
+    this.sort,
+    this.gameFilter,
+    this.customSortColumnIndex,
+  });
+
+  final Key? key;
+
+  final int? tournamentId;
+
+  final String? style;
+
+  final String? sort;
+
+  final int? gameFilter;
+
+  final int? customSortColumnIndex;
+
+  @override
+  String toString() {
+    return 'TournamentRatingRouteArgs{key: $key, tournamentId: $tournamentId, style: $style, sort: $sort, gameFilter: $gameFilter, customSortColumnIndex: $customSortColumnIndex}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TournamentRatingRouteArgs) return false;
+    return key == other.key &&
+        tournamentId == other.tournamentId &&
+        style == other.style &&
+        sort == other.sort &&
+        gameFilter == other.gameFilter &&
+        customSortColumnIndex == other.customSortColumnIndex;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^
+      tournamentId.hashCode ^
+      style.hashCode ^
+      sort.hashCode ^
+      gameFilter.hashCode ^
+      customSortColumnIndex.hashCode;
 }
 
 /// generated route for

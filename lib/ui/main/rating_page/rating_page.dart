@@ -18,7 +18,6 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-@RoutePage()
 class RatingPage extends StatelessWidget {
   final int? clubId;
   final int? tournamentId;
@@ -210,7 +209,6 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                 ),
               if (widget.tournamentId != null)
                 TournamentMenuAction(
-                  tournamentId: widget.tournamentId!,
                   openDrawer: () => Scaffold.of(context).openEndDrawer(),
                 ),
             ],

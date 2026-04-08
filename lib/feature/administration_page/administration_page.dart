@@ -84,7 +84,6 @@ class _AdministrationPageContentState extends State<_AdministrationPageContent> 
             icon: const Icon(Icons.add),
           ),
           TournamentMenuAction(
-            tournamentId: widget.tournamentId,
             openDrawer: () => Scaffold.of(context).openEndDrawer(),
           ),
         ],

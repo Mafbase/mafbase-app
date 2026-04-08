@@ -12,7 +12,7 @@ extension BuildContextLocaleExt on BuildContext {
   VoidCallback backOrGoToDefault([String Function(BuildContext)? fallback]) => () {
         final router = this.router;
         if (router.canPop()) {
-          router.pop();
+          router.maybePop();
         } else if (Navigator.canPop(this)) {
           Navigator.pop(this);
         } else {

@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -11,13 +12,9 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_m
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_selector.dart';
 import 'package:seating_generator_web/utils.dart';
 
+@RoutePage(name: 'TournamentPlayersRoute')
 class PlayersListBody extends StatelessWidget {
-  final int tournamentId;
-
-  const PlayersListBody({
-    super.key,
-    required this.tournamentId,
-  });
+  const PlayersListBody({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -26,7 +23,6 @@ class PlayersListBody extends StatelessWidget {
           title: Text(context.locale.participants),
           actions: [
             TournamentMenuAction(
-              tournamentId: tournamentId,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
           ],

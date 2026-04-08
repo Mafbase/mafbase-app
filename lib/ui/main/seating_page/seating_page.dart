@@ -263,7 +263,6 @@ class _SeatingPageState extends CustomState<SeatingPage>
           actions: [
             _buildDownloadMenu(),
             TournamentMenuAction(
-              tournamentId: widget.tournamentId,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
           ],
@@ -312,7 +311,6 @@ class _SeatingPageState extends CustomState<SeatingPage>
           actions: [
             _buildDownloadMenu(),
             TournamentMenuAction(
-              tournamentId: widget.tournamentId,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
           ],

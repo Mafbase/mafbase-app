@@ -37,7 +37,7 @@ class SeatingPageRouterImpl implements SeatingPageRouter {
     required int tournamentId,
   }) {
     return context.router.push(
-      AddClubGameRoute(
+      TournamentGameDetailRoute(
         tournamentId: tournamentId,
         gameId: gameId,
         editParam: context.read<TournamentPageBloc>().state.isMyTournament,

@@ -23,11 +23,11 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
   void editPage(int? clubId, int? tournamentId, int gameId) {
     if (clubId != null) {
       context.router.replace(
-        AddClubGameRoute(clubId: clubId, gameId: gameId, editParam: true),
+        ClubGameDetailRoute(clubId: clubId, gameId: gameId, editParam: true),
       );
     } else if (tournamentId != null) {
       context.router.replace(
-        AddClubGameRoute(tournamentId: tournamentId, gameId: gameId, editParam: true),
+        TournamentGameDetailRoute(tournamentId: tournamentId, gameId: gameId, editParam: true),
       );
     }
   }
@@ -35,14 +35,14 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
   @override
   void openGame(int clubId, int gameId) {
     context.router.replace(
-      AddClubGameRoute(clubId: clubId, gameId: gameId, editParam: false),
+      ClubGameDetailRoute(clubId: clubId, gameId: gameId, editParam: false),
     );
   }
 
   @override
   void openNewGame(int clubId, [DateTime? initDateTime]) {
     context.router.replace(
-      AddClubGameRoute(clubId: clubId, initDateTime: initDateTime),
+      NewClubGameRoute(clubId: clubId, initDateTime: initDateTime),
     );
   }
 

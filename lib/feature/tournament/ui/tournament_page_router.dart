@@ -55,7 +55,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openRating({required int tournamentId}) {
-    _context.router.push(RatingRoute(tournamentId: tournamentId));
+    _context.router.push(TournamentRatingRoute(tournamentId: tournamentId));
   }
 
   @override

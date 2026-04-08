@@ -25,7 +25,6 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-@RoutePage()
 class AddClubGamePage extends StatelessWidget {
   final int? clubId;
   final int? tournamentId;

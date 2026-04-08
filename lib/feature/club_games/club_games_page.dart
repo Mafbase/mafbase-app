@@ -131,5 +131,5 @@ class _ClubGamesPageState extends CustomState<_ClubGamesPageContent> {
       );
 
   void openGame(int gameId) =>
-      context.router.push(AddClubGameRoute(clubId: widget.clubId, gameId: gameId));
+      context.router.push(ClubGameDetailRoute(clubId: widget.clubId, gameId: gameId));
 }

@@ -13,6 +13,7 @@ import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_settings_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/players_list_body.dart';
 import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 import 'package:seating_generator_web/ui/app_shell/app_shell.dart';
 import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
@@ -21,16 +22,15 @@ import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_page_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_wrappers.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_wrappers.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
-import 'package:seating_generator_web/ui/main/rating_page/widgets/rating_table.dart';
 import 'package:seating_generator_web/ui/temp/temp_page.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 
@@ -56,27 +56,20 @@ class AppRouter extends RootStackRouter {
         // Shell route with auth guard
         AutoRoute(
           page: AppShellRoute.page,
-          path: '',
+          path: '/',
           guards: [authGuard],
           children: [
-            // Login route with sub-routes
-            // LoginPageBody → LoginPageRoute (replaceInRouteName replaces 'Body' suffix)
-            AutoRoute(
-              page: LoginPageRoute.page,
-              path: '/auth',
-              children: [
-                AutoRoute(page: SignUpPageRoute.page, path: 'signUp'),
-                AutoRoute(page: VerificationPageRoute.page, path: 'verification/:id'),
-                AutoRoute(page: ForgotPasswordPageRoute.page, path: 'forgotPassword'),
-                AutoRoute(page: ResetPasswordPageRoute.page, path: 'resetPassword'),
-              ],
-            ),
+            AutoRoute(page: LoginPageRoute.page, path: 'auth'),
+            AutoRoute(page: SignUpPageRoute.page, path: 'auth/signUp'),
+            AutoRoute(page: VerificationPageRoute.page, path: 'auth/verification/:id'),
+            AutoRoute(page: ForgotPasswordPageRoute.page, path: 'auth/forgotPassword'),
+            AutoRoute(page: ResetPasswordPageRoute.page, path: 'auth/resetPassword'),
 
-            AutoRoute(page: ProfileRoute.page, path: '/profile'),
-            AutoRoute(page: ContactsRoute.page, path: '/contacts'),
-            AutoRoute(page: PlayerStatsRoute.page, path: '/player/:playerId/statistics'),
+            AutoRoute(page: ProfileRoute.page, path: 'profile'),
+            AutoRoute(page: ContactsRoute.page, path: 'contacts'),
+            AutoRoute(page: PlayerStatsRoute.page, path: 'player/:playerId/statistics'),
             // PhotoThemesPage reused at top-level (profile context) and under tournament
-            AutoRoute(page: PhotoThemesRoute.page, path: '/photo-themes'),
+            AutoRoute(page: PhotoThemesRoute.page, path: 'photo-themes'),
 
             // RailWrapper (tabs: tournaments + clubs)
             AutoRoute(
@@ -84,40 +77,28 @@ class AppRouter extends RootStackRouter {
               path: '',
               guards: [railWrapperGuard],
               children: [
-                AutoRoute(page: TournamentsRoute.page, path: '/tournament'),
-                AutoRoute(page: ClubsRoute.page, path: '/club'),
+                AutoRoute(page: TournamentsRoute.page, path: 'tournament'),
+                AutoRoute(page: ClubsRoute.page, path: 'club'),
               ],
             ),
 
-            // Club detail with sub-routes
-            AutoRoute(
-              page: ClubRoute.page,
-              path: '/club/:clubId',
-              children: [
-                AutoRoute(page: AddClubGameRoute.page, path: 'addGame'),
-                AutoRoute(page: AddClubGameRoute.page, path: 'game/:gameId'),
-                AutoRoute(page: ClubGamesRoute.page, path: 'games'),
-                AutoRoute(page: CustomColumnsEditorRoute.page, path: 'custom-columns'),
-                // RatingPage reused for club rating and tournament rating
-                AutoRoute(page: RatingRoute.page, path: 'rating'),
-              ],
-            ),
+            AutoRoute(page: ClubRoute.page, path: 'club/:clubId'),
+            AutoRoute(page: NewClubGameRoute.page, path: 'club/:clubId/addGame'),
+            AutoRoute(page: ClubGameDetailRoute.page, path: 'club/:clubId/game/:gameId'),
+            AutoRoute(page: ClubGamesRoute.page, path: 'club/:clubId/games'),
+            AutoRoute(page: CustomColumnsEditorRoute.page, path: 'club/:clubId/custom-columns'),
+            AutoRoute(page: ClubRatingRoute.page, path: 'club/:clubId/rating'),
 
             // Tournament detail with sub-routes
             AutoRoute(
               page: TournamentRoute.page,
-              path: '/tournament/:id',
+              path: 'tournament/:id',
               children: [
-                AutoRoute(
-                  page: SeatingRoute.page,
-                  path: 'editSeating',
-                  children: [
-                    AutoRoute(page: EditSeatingRoute.page, path: 'manual'),
-                  ],
-                ),
-                AutoRoute(page: AddClubGameRoute.page, path: 'editGame/:gameId'),
-                // RatingPage reused for tournament rating
-                AutoRoute(page: RatingRoute.page, path: 'rating'),
+                AutoRoute(page: TournamentPlayersRoute.page, path: ''),
+                AutoRoute(page: SeatingRoute.page, path: 'editSeating'),
+                AutoRoute(page: EditSeatingRoute.page, path: 'editSeating/manual'),
+                AutoRoute(page: TournamentGameDetailRoute.page, path: 'editGame/:gameId'),
+                AutoRoute(page: TournamentRatingRoute.page, path: 'rating'),
                 AutoRoute(page: AdministrationRoute.page, path: 'administration'),
                 AutoRoute(page: TournamentSettingsRoute.page, path: 'settings'),
                 AutoRoute(page: FantasyRoute.page, path: 'fantasy'),

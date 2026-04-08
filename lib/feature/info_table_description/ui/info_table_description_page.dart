@@ -101,7 +101,6 @@ class _InfoTableDescriptionPageState extends State<_InfoTableDescriptionPageCont
         title: Text(locale.tableDescriptionsTitle),
         actions: [
           TournamentMenuAction(
-            tournamentId: widget.tournamentId,
             openDrawer: () => Scaffold.of(context).openEndDrawer(),
           ),
         ],
