@@ -19,6 +19,17 @@ extension BuildContextLocaleExt on BuildContext {
           router.navigatePath(fallback?.call(this) ?? '/');
         }
       };
+
+  VoidCallback backOrNavigateTo(PageRouteInfo fallbackRoute) => () {
+        final router = this.router;
+        if (router.canPop()) {
+          router.maybePop();
+        } else if (Navigator.canPop(this)) {
+          Navigator.pop(this);
+        } else {
+          router.navigate(fallbackRoute);
+        }
+      };
 }
 
 final dateFormatForRequests = DateFormat('yyyy-MM-dd');

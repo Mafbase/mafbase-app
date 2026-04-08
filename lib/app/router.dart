@@ -25,6 +25,7 @@ import 'package:seating_generator_web/ui/login/verification_body/verification_pa
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_wrappers.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_wrappers.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
@@ -116,8 +117,18 @@ class AppRouter extends RootStackRouter {
 class AppRouterHelper {
   static void showErrorDialog(BuildContext context, String message) {
     if (message.isEmpty) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(context.locale.error),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(context.locale.cancel),
+          ),
+        ],
+      ),
     );
   }
 }

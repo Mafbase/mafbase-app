@@ -71,7 +71,7 @@ class VerificationPageRouterImpl implements VerificationPageRouter {
 
   @override
   void openLoginPage() {
-    _context.router.push(const LoginPageRoute());
+    _context.router.push(LoginPageRoute());
   }
 
   @override

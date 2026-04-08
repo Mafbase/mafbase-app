@@ -137,7 +137,7 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void openAuthPage() {
-    context.router.push(const LoginPageRoute());
+    context.router.push(LoginPageRoute());
   }
 
   @override

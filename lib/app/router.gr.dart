@@ -706,18 +706,51 @@ class InfoTableDescriptionRouteArgs {
 
 /// generated route for
 /// [LoginPageBody]
-class LoginPageRoute extends PageRouteInfo<void> {
-  const LoginPageRoute({List<PageRouteInfo>? children})
-      : super(LoginPageRoute.name, initialChildren: children);
+class LoginPageRoute extends PageRouteInfo<LoginPageRouteArgs> {
+  LoginPageRoute({Key? key, String? nextPath, List<PageRouteInfo>? children})
+      : super(
+          LoginPageRoute.name,
+          args: LoginPageRouteArgs(key: key, nextPath: nextPath),
+          rawQueryParams: {'next': nextPath},
+          initialChildren: children,
+        );
 
   static const String name = 'LoginPageRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const LoginPageBody();
+      final queryParams = data.queryParams;
+      final args = data.argsAs<LoginPageRouteArgs>(
+        orElse: () =>
+            LoginPageRouteArgs(nextPath: queryParams.optString('next')),
+      );
+      return LoginPageBody(key: args.key, nextPath: args.nextPath);
     },
   );
+}
+
+class LoginPageRouteArgs {
+  const LoginPageRouteArgs({this.key, this.nextPath});
+
+  final Key? key;
+
+  final String? nextPath;
+
+  @override
+  String toString() {
+    return 'LoginPageRouteArgs{key: $key, nextPath: $nextPath}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! LoginPageRouteArgs) return false;
+    return key == other.key && nextPath == other.nextPath;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ nextPath.hashCode;
 }
 
 /// generated route for

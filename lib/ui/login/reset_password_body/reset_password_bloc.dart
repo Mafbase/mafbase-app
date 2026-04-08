@@ -82,7 +82,7 @@ class ResetPasswordPageRouterImpl implements ResetPasswordPageRouter {
 
   @override
   void openLoginPage() {
-    _context.router.push(const LoginPageRoute());
+    _context.router.push(LoginPageRoute());
   }
 
   @override

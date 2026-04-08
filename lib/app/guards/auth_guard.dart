@@ -15,7 +15,6 @@ class AuthGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     // Bootstrap auth state on first navigation
-    print('test25: start auth guard');
     if (_authNotifier.value is AuthNotifierLoadingModel) {
       try {
         final authRepository = _scope.repositoryFactory.authRepository;
@@ -47,8 +46,6 @@ class AuthGuard extends AutoRouteGuard {
         _authNotifier.value = const AuthNotifierModel.unauthorized();
       }
     }
-
-    print('test25: removeSplash');
 
     SplashManager.removeSplash();
 

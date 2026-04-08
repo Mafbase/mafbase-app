@@ -224,12 +224,13 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
             Scaffold(
               appBar: AppBar(
                 leading: BackButton(
-                  onPressed: context.backOrGoToDefault((c) {
-                    final bloc = c.read<AddClubGameBloc>();
-                    return bloc.clubId != null
-                        ? '/club/${bloc.clubId}/rating'
-                        : '/tournament/${bloc.tournamentId}';
-                  }),
+                  onPressed: () {
+                    final bloc = context.read<AddClubGameBloc>();
+                    final route = bloc.clubId != null
+                        ? ClubRatingRoute(clubId: bloc.clubId!) as PageRouteInfo
+                        : TournamentRoute(tournamentId: bloc.tournamentId!);
+                    context.backOrNavigateTo(route)();
+                  },
                 ),
                 title: Text(state.clubName),
               ),

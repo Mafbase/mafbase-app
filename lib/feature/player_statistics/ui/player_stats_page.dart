@@ -27,15 +27,15 @@ class PlayerStatsPage extends StatelessWidget {
       create: (context) => PlayerStatsBloc(
         RepositoryFactory.of(context).playerStatisticsRepository,
       )..add(PlayerStatsEvent.pageOpened(playerId: playerId)),
-      child: _PlayerStatsView(playerId: playerId),
+      child: PlayerStatsView(playerId: playerId),
     );
   }
 }
 
-class _PlayerStatsView extends StatelessWidget {
+class PlayerStatsView extends StatelessWidget {
   final int playerId;
 
-  const _PlayerStatsView({required this.playerId});
+  const PlayerStatsView({super.key, required this.playerId});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -19,7 +20,7 @@ class PlayersListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault((_) => '/tournament')),
+          leading: BackButton(onPressed: context.backOrNavigateTo(const TournamentsRoute())),
           title: Text(context.locale.participants),
           actions: [
             TournamentMenuAction(

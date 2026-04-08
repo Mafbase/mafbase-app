@@ -20,7 +20,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage(name: 'LoginPageRoute')
 class LoginPageBody extends StatelessWidget {
-  const LoginPageBody({super.key});
+  final String? nextPath;
+
+  const LoginPageBody({super.key, @QueryParam('next') this.nextPath});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class LoginPageBody extends StatelessWidget {
         final storages = scope.storageFactory;
         return LoginBloc(
           LoginInteractor(repos.authRepository, storages.credentialStorage, scope.authNotifier),
-          LoginPageRouterImpl(context),
+          LoginPageRouterImpl(context, nextPath),
         );
       },
       child: const _LoginPageContent(),

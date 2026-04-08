@@ -73,12 +73,17 @@ abstract class LoginPageRouter {
 
 class LoginPageRouterImpl implements LoginPageRouter {
   final BuildContext _context;
+  final String? _nextPath;
 
-  const LoginPageRouterImpl(this._context);
+  const LoginPageRouterImpl(this._context, [this._nextPath]);
 
   @override
   void openMainPage() {
-    _context.router.replaceAll([const ClubsRoute()]);
+    if (_nextPath != null && _nextPath!.isNotEmpty) {
+      _context.router.navigatePath(_nextPath!);
+    } else {
+      _context.router.replaceAll([const ClubsRoute()]);
+    }
   }
 
   @override
