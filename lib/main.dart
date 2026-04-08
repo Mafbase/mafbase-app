@@ -106,6 +106,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
   late final _appRouter = AppRouter(
     authGuard: AuthGuard(widget.scope.authNotifier, widget.scope),
     railWrapperGuard: RailWrapperGuard(),
+    navigatorKey: rootNavigationKey,
   );
   StreamSubscription? subscription;
 
@@ -144,9 +145,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 themeMode: ThemeMode.system,
                 routerConfig: _appRouter.config(
                   includePrefixMatches: true,
-                routerConfig: _appRouter.config(
-                  navigatorKey: rootNavigationKey,
-                  includePrefixMatches: true,
+                  deepLinkBuilder: (deepLink) {
                     // Handle initial push notification deep link
                     if (widget.initLocation != null) {
                       return DeepLink.path(widget.initLocation!);

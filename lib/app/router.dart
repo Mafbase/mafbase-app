@@ -42,7 +42,14 @@ class AppRouter extends RootStackRouter {
   final AuthGuard authGuard;
   final RailWrapperGuard railWrapperGuard;
 
-  AppRouter({required this.authGuard, required this.railWrapperGuard});
+  AppRouter({
+    required this.authGuard,
+    required this.railWrapperGuard,
+    required this.navigatorKey,
+  });
+
+  @override
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   List<AutoRoute> get routes => [
