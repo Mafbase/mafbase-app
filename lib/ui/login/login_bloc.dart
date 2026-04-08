@@ -46,19 +46,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     emit(LoginState(hasError: false, isLoading: true));
-
-    final result = await _loginInteractor.run(
-      event.email,
-      event.password,
-    );
-    if (result is Success) {
-      router.openMainPage();
-      emit(LoginState(hasError: false));
-    } else if (result is NeedVerification) {
-      router.openVerificationPage(result.id);
-      emit(LoginState(hasError: false));
-    } else {
-      emit(LoginState(hasError: true));
+    try {
+      final result = await _loginInteractor.run(
+        event.email,
+        event.password,
+      );
+      if (result is Success) {
+        router.openMainPage();
+        emit(LoginState(hasError: false));
+      } else if (result is NeedVerification) {
+        router.openVerificationPage(result.id);
+        emit(LoginState(hasError: false));
+      } else {
+        emit(LoginState(hasError: true));
+      }
+    } finally {
+      if (state.isLoading) emit(state.copyWith(isLoading: false));
     }
   }
 }

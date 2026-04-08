@@ -18,31 +18,24 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
   AuthRepositoryImpl(super.client, this._storage);
 
   @override
-  Future<LoginModel> login(String email, String password) {
-    return LoginRequest(LoginEvent(email: email, password: password)).execute(client).then(
-      (value) async {
-        await _storage.onTokensUpdated(value.token, value.recoveryToken);
-        switch (value.error) {
-          case LoginEventOut_Error.invalidCredentials:
-            return const LoginModel.error();
-          case LoginEventOut_Error.needVerification:
-            return LoginModel.needVerification(id: value.id);
-          case LoginEventOut_Error.noError:
-            if (!value.hasId()) {
-              throw Exception('User ID is missing in login response');
-            }
-            return LoginModel.success(userId: value.id);
-        }
+  Future<LoginModel> login(String email, String password) async {
+    final value = await LoginRequest(LoginEvent(email: email, password: password)).execute(client);
+    await _storage.onTokensUpdated(value.token, value.recoveryToken);
+    switch (value.error) {
+      case LoginEventOut_Error.invalidCredentials:
+        return const LoginModel.error();
+      case LoginEventOut_Error.needVerification:
+        return LoginModel.needVerification(id: value.id);
+      case LoginEventOut_Error.noError:
         if (!value.hasId()) {
           throw Exception('User ID is missing in login response');
         }
         return LoginModel.success(userId: value.id);
-      },
-    ).onError(
-      (error, stackTrace) => LoginModel.error(
-        message: error?.toString(),
-      ),
-    );
+    }
+    if (!value.hasId()) {
+      throw Exception('User ID is missing in login response');
+    }
+    return LoginModel.success(userId: value.id);
   }
 
   @override
