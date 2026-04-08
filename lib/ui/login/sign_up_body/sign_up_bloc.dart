@@ -31,38 +31,41 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
     Emitter<SignUpState> emit,
   ) async {
     emit(SignUpState(isLoading: true, emailExist: false, weakPassword: false));
+    try {
+      final result = await _signUpInteractor.run(event.email, event.password);
 
-    final result = await _signUpInteractor.run(event.email, event.password);
-
-    switch (result.error) {
-      case ErrorEnum.needVerification:
-        emit(state.copyWith(isLoading: false));
-        router.openVerificationPage(result.id!);
-        break;
-      case ErrorEnum.emailExist:
-        emit(
-          state.copyWith(isLoading: false, emailExist: true),
-        );
-        break;
-      case ErrorEnum.weakPassword:
-        emit(state.copyWith(isLoading: false, weakPassword: true));
-        break;
-      default:
-        // После успешной регистрации автоматически входим в аккаунт
-        final loginResult = await _loginInteractor.run(
-          event.email,
-          event.password,
-        );
-
-        if (loginResult is Success) {
+      switch (result.error) {
+        case ErrorEnum.needVerification:
           emit(state.copyWith(isLoading: false));
-          router.openMainPage();
-        } else {
-          // Если вход не удался, все равно переходим на главную
-          emit(state.copyWith(isLoading: false));
-          router.openMainPage();
-        }
-        break;
+          router.openVerificationPage(result.id!);
+          break;
+        case ErrorEnum.emailExist:
+          emit(
+            state.copyWith(isLoading: false, emailExist: true),
+          );
+          break;
+        case ErrorEnum.weakPassword:
+          emit(state.copyWith(isLoading: false, weakPassword: true));
+          break;
+        default:
+          // После успешной регистрации автоматически входим в аккаунт
+          final loginResult = await _loginInteractor.run(
+            event.email,
+            event.password,
+          );
+
+          if (loginResult is Success) {
+            emit(state.copyWith(isLoading: false));
+            router.openMainPage();
+          } else {
+            // Если вход не удался, все равно переходим на главную
+            emit(state.copyWith(isLoading: false));
+            router.openMainPage();
+          }
+          break;
+      }
+    } finally {
+      if (state.isLoading) emit(state.copyWith(isLoading: false));
     }
   }
 

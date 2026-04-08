@@ -484,6 +484,8 @@
   "@tempGotGoldCard": {},
   "next": "Дальше",
   "@next": {},
+  "networkError": "Ошибка сети",
+  "@networkError": {},
   "unknownError": "Произошла неизвестная ошибка {error}",
   "@unknownError": {
     "placeholders": {
