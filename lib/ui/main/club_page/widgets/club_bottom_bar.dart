@@ -19,7 +19,12 @@ class ClubBottomBar extends StatelessWidget {
           top: BorderSide(color: theme.greyColor.withValues(alpha: 0.3)),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 13,
+        bottom: 13 + MediaQuery.of(context).padding.bottom,
+      ),
       child: CustomButton(
         text: context.locale.clubActionOpenRating,
         onTap: onOpenRating,
