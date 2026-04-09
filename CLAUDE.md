@@ -50,6 +50,15 @@
 - Когда в handler ставится `isLoading: true`, нужен try/finally для сброса загрузки
 - Если isLoading не используется — try/catch не нужен
 
+# UI-компоненты
+
+Всегда используй готовые компоненты проекта вместо стандартных Flutter-виджетов:
+
+- `CustomButton` вместо `ElevatedButton` / `TextButton` / `OutlinedButton`
+- `CustomDropdown` вместо стандартного `DropdownButton`
+
+Компоненты находятся в `lib/common/widgets/`.
+
 # Ведение CHANGELOG
 
 При любых пользовательски-видимых изменениях (фичи, баг-фиксы, UI-изменения) обновляй `CHANGELOG.md`:
