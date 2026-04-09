@@ -13,16 +13,24 @@ class ClubBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: theme.greyColor.withValues(alpha: 0.3)),
+    return SafeArea(
+      top: false,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: theme.greyColor.withValues(alpha: 0.3)),
+          ),
         ),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
-      child: CustomButton(
-        text: context.locale.clubActionOpenRating,
-        onTap: onOpenRating,
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 12,
+          bottom: 12,
+        ),
+        child: CustomButton(
+          text: context.locale.clubActionOpenRating,
+          onTap: onOpenRating,
+        ),
       ),
     );
   }

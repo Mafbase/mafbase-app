@@ -32,34 +32,37 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvents, ResetPasswordState> {
     Emitter<ResetPasswordState> emit,
   ) async {
     emit(state.copyWith(isLoading: true, error: null));
+    try {
+      final resetResult = await _authRepository.resetPassword(
+        event.token,
+        event.email,
+        event.newPassword,
+      );
 
-    final resetResult = await _authRepository.resetPassword(
-      event.token,
-      event.email,
-      event.newPassword,
-    );
+      await resetResult.when(
+        success: () async {
+          // После успешного сброса пароля автоматически входим в аккаунт
+          final loginResult = await _loginInteractor.run(
+            event.email,
+            event.newPassword,
+          );
 
-    await resetResult.when(
-      success: () async {
-        // После успешного сброса пароля автоматически входим в аккаунт
-        final loginResult = await _loginInteractor.run(
-          event.email,
-          event.newPassword,
-        );
-
-        if (loginResult is Success) {
-          emit(state.copyWith(isLoading: false));
-          router.openMainPage();
-        } else {
-          // Если вход не удался, все равно переходим на страницу логина
-          emit(state.copyWith(isLoading: false));
-          router.openLoginPage();
-        }
-      },
-      error: (error) {
-        emit(state.copyWith(isLoading: false, error: error));
-      },
-    );
+          if (loginResult is Success) {
+            emit(state.copyWith(isLoading: false));
+            router.openMainPage();
+          } else {
+            // Если вход не удался, все равно переходим на страницу логина
+            emit(state.copyWith(isLoading: false));
+            router.openLoginPage();
+          }
+        },
+        error: (error) {
+          emit(state.copyWith(isLoading: false, error: error));
+        },
+      );
+    } finally {
+      if (state.isLoading) emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future _onBackButtonTapped(
