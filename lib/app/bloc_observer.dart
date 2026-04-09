@@ -32,7 +32,7 @@ class AppBlocObserver extends BlocObserver {
           error.message ?? '',
         );
       } else if (error is DioException) {
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           navigatorContext.locale.networkError,
         );
