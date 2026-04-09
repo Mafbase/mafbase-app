@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class TournamentMenuAction extends StatelessWidget {
-  final int tournamentId;
   final VoidCallback openDrawer;
 
   const TournamentMenuAction({
     super.key,
-    required this.tournamentId,
     required this.openDrawer,
   });
 

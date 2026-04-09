@@ -14,7 +14,7 @@ Future<void> downloadFile({
   try {
     await tempFile.create();
     await tempFile.writeAsBytes(bytes);
-    await Share.shareXFiles([XFile(tempFile.path)]);
+    await SharePlus.instance.share(ShareParams(files: [XFile(tempFile.path)]));
   } finally {
     tempFile.delete();
   }

@@ -240,7 +240,7 @@ MockPlayerStatsBloc _createMockBloc(PlayerStatsState state) {
 Widget _pageWidget(PlayerStatsBloc bloc) => themedWidget(
       BlocProvider<PlayerStatsBloc>.value(
         value: bloc,
-        child: const PlayerStatsPage(playerId: 1),
+        child: const PlayerStatsView(playerId: 1),
       ),
     );
 

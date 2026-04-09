@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
+import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/separation_dialog.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
-import 'package:seating_generator_web/utils.dart';
 
 abstract class SeatingPageRouter {
   Future<Pair<PlayerModel, PlayerModel>?> openSeparationDialog({
@@ -35,12 +36,11 @@ class SeatingPageRouterImpl implements SeatingPageRouter {
     required int gameId,
     required int tournamentId,
   }) {
-    return context.push(
-      AddClubGamePage.createTournamentEditLocation(
-        context: context,
+    return context.router.push(
+      TournamentGameDetailRoute(
         tournamentId: tournamentId,
         gameId: gameId,
-        edit: context.read<TournamentPageBloc>().state.isMyTournament,
+        editParam: context.read<TournamentPageBloc>().state.isMyTournament,
       ),
     );
   }

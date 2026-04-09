@@ -111,7 +111,7 @@ class AppTheme {
         ),
       ),
       datePickerTheme: DatePickerThemeData(
-        rangeSelectionBackgroundColor: myTheme.darkBlueColor.withValues(alpha: .15),
+        rangeSelectionBackgroundColor: myTheme.darkBlueColor.withValues(alpha: .65),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: myTheme.darkGreyColor,

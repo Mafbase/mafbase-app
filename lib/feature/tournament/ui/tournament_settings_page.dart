@@ -1,11 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
@@ -14,41 +13,17 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_m
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 import 'package:seating_generator_web/utils.dart';
 
+@RoutePage()
 class TournamentSettingsPage extends StatefulWidget {
   final int tournamentId;
 
   const TournamentSettingsPage({
     super.key,
-    required this.tournamentId,
+    @PathParam('id') required this.tournamentId,
   });
 
   @override
   State<TournamentSettingsPage> createState() => _TournamentSettingsPageState();
-
-  static String createLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      _routeName,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
-    );
-  }
-
-  static const _routeName = 'tournament_settings';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'settings',
-    name: _routeName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      return TournamentSettingsPage(
-        tournamentId: tournamentId,
-      );
-    },
-  );
 }
 
 class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
@@ -109,14 +84,11 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
         return Scaffold(
           appBar: AppBar(
             leading: BackButton(
-              onPressed: context.backOrGoToDefault(
-                (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
-              ),
+              onPressed: context.backOrGoToDefault(),
             ),
             title: Text(context.locale.tournamentSettingsTitle),
             actions: [
               TournamentMenuAction(
-                tournamentId: widget.tournamentId,
                 openDrawer: () => Scaffold.of(context).openEndDrawer(),
               ),
             ],
@@ -301,9 +273,7 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                                   );
                             }
 
-                            context.backOrGoToDefault(
-                              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
-                            )();
+                            context.backOrGoToDefault()();
                           },
                         ),
                       ],

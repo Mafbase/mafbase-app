@@ -1,16 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/domain/models/password_reset_model.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_bloc.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_events.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_state.dart';
@@ -18,58 +16,42 @@ import 'package:seating_generator_web/ui/login/wrapper_login_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class ResetPasswordPageBody extends StatefulWidget {
-  const ResetPasswordPageBody({super.key});
+@RoutePage(name: 'ResetPasswordPageRoute')
+class ResetPasswordPageBody extends StatelessWidget {
+  final String email;
+
+  const ResetPasswordPageBody({
+    super.key,
+    @QueryParam('email') this.email = '',
+  });
 
   @override
-  State<ResetPasswordPageBody> createState() => _ResetPasswordPageBodyState();
-
-  static String createLocation({
-    required BuildContext context,
-    required String email,
-  }) {
-    return context.namedLocation(
-      'resetPassword',
-      queryParameters: {
-        'email': email,
+  Widget build(BuildContext context) {
+    return BlocProvider<ResetPasswordBloc>(
+      key: const Key('ResetPasswordBlocProvider'),
+      create: (context) {
+        final scope = DependencyScope.of(context);
+        final repos = scope.repositoryFactory;
+        return ResetPasswordBloc(
+          repos.authRepository,
+          LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
+          ResetPasswordPageRouterImpl(context),
+          email,
+        );
       },
+      child: const _ResetPasswordPageContent(),
     );
   }
-
-  static final route = GoRoute(
-    path: 'resetPassword',
-    name: 'resetPassword',
-    redirect: (context, state) {
-      if (state.uri.queryParameters['email'] == null) {
-        return '/';
-      }
-
-      return null;
-    },
-    pageBuilder: (context, state) {
-      final email = state.uri.queryParameters['email'] ?? '';
-
-      return FadeTransitionPage(
-        child: BlocProvider<ResetPasswordBloc>(
-          key: const Key('ResetPasswordBlocProvider'),
-          create: (context) {
-            final scope = DependencyScope.of(context);
-            final repos = scope.repositoryFactory;
-            return ResetPasswordBloc(
-              repos.authRepository,
-              LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
-              ResetPasswordPageRouterImpl(context),
-              email,
-            );
-          },
-          child: const ResetPasswordPageBody(),
-        ),
-      );
-    },
-  );
 }
 
-class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
+class _ResetPasswordPageContent extends StatefulWidget {
+  const _ResetPasswordPageContent();
+
+  @override
+  State<_ResetPasswordPageContent> createState() => _ResetPasswordPageContentState();
+}
+
+class _ResetPasswordPageContentState extends CustomState<_ResetPasswordPageContent> {
   final TextEditingController _tokenController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repeatPasswordController = TextEditingController();
@@ -88,7 +70,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.resetPasswordTitle),
       ),
       body: BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
@@ -192,7 +174,7 @@ class _ResetPasswordPageBodyState extends CustomState<ResetPasswordPageBody> {
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault((c) => LoginPageBody.createLocation(context: c))),
+        leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(context.locale.resetPasswordTitle),
       ),
       body: BlocBuilder<ResetPasswordBloc, ResetPasswordState>(

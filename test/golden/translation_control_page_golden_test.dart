@@ -77,7 +77,7 @@ MockTranslationControlBloc _createMockBloc(TranslationContentState state) {
 Widget _pageWidget(TranslationControlBloc bloc) => themedWidget(
       BlocProvider<TranslationControlBloc>.value(
         value: bloc,
-        child: const TranslationControlPage(),
+        child: const TranslationControlContent(),
       ),
     );
 

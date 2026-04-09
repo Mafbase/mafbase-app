@@ -1,23 +1,20 @@
 import 'dart:typed_data';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc_injector.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_event.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_state.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/add_player_to_theme_widget.dart';
@@ -29,7 +26,8 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_m
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class PhotoThemesPage extends StatefulWidget {
+@RoutePage()
+class PhotoThemesPage extends StatelessWidget {
   final int? tournamentId;
 
   const PhotoThemesPage({
@@ -38,48 +36,25 @@ class PhotoThemesPage extends StatefulWidget {
   });
 
   @override
-  State<PhotoThemesPage> createState() => _PhotoThemesPageState();
-
-  static String createTournamentLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      _tournamentName,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
+  Widget build(BuildContext context) {
+    return PhotoThemesBlocInjector(
+      key: tournamentId != null ? ValueKey('photoThemes_$tournamentId') : null,
+      tournamentId: tournamentId,
+      child: _PhotoThemesContent(tournamentId: tournamentId),
     );
   }
-
-  static const _tournamentName = 'tournament_photo_themes';
-  static const _profileName = 'profile_photo_themes';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'photo-themes',
-    name: _tournamentName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      return PhotoThemesBlocInjector(
-        key: ValueKey('photoThemes_$tournamentId'),
-        tournamentId: tournamentId,
-        child: PhotoThemesPage(tournamentId: tournamentId),
-      );
-    },
-  );
-
-  static final GoRoute profileRoute = GoRoute(
-    path: '/photo-themes',
-    name: _profileName,
-    pageBuilder: (context, state) => FadeTransitionPage(
-      child: const PhotoThemesBlocInjector(
-        child: PhotoThemesPage(),
-      ),
-    ),
-  );
 }
 
-class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
+class _PhotoThemesContent extends StatefulWidget {
+  final int? tournamentId;
+
+  const _PhotoThemesContent({this.tournamentId});
+
+  @override
+  State<_PhotoThemesContent> createState() => _PhotoThemesPageState();
+}
+
+class _PhotoThemesPageState extends CustomState<_PhotoThemesContent> {
   bool get _isFromTournament => widget.tournamentId != null;
 
   Future<void> _pickAndUploadPhoto(
@@ -230,18 +205,11 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: context.backOrGoToDefault(
-            (c) => widget.tournamentId != null
-                ? TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId!)
-                : ProfilePage.createLocation(c),
-          ),
-        ),
+        leading: const BackButton(),
         title: Text(context.locale.photoThemesTitle),
         actions: [
           if (widget.tournamentId != null)
             TournamentMenuAction(
-              tournamentId: widget.tournamentId!,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
         ],
@@ -580,11 +548,7 @@ class _PhotoThemesPageState extends CustomState<PhotoThemesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: context.backOrGoToDefault(
-            (c) => ProfilePage.createLocation(c),
-          ),
-        ),
+        leading: const BackButton(),
         title: Text(context.locale.photoThemesTitle),
       ),
       body: content,

@@ -1,18 +1,12 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
-import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/main_state.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
-import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   @visibleForTesting
@@ -36,19 +30,19 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<MainEventOpenContacts>(_onOpenContacts);
   }
 
-  _onOpenContacts(MainEventOpenContacts event, Emitter emit) {
+  void _onOpenContacts(MainEventOpenContacts event, Emitter emit) {
     router.openContactsPage();
   }
 
-  _onProfilePressed(MainEventProfilePressed event, Emitter emit) {
+  void _onProfilePressed(MainEventProfilePressed event, Emitter emit) {
     router.openProfilePage();
   }
 
-  _onEnterPressed(MainEventEnterPressed event, Emitter emit) {
+  void _onEnterPressed(MainEventEnterPressed event, Emitter emit) {
     router.openAuthPage();
   }
 
-  _onTitleTapped(MainEventTitleTapped event, Emitter emit) {
+  void _onTitleTapped(MainEventTitleTapped event, Emitter emit) {
     router.openDefaultPage();
   }
 
@@ -109,38 +103,33 @@ class MainPageRouterImpl implements MainPageRouter {
   void switchTabTo(MainPageTab tab) {
     switch (tab) {
       case MainPageTab.clubs:
-        context.go(ClubsPage.createLocation(context));
+        context.router.navigate(const ClubsRoute());
         break;
       case MainPageTab.tournaments:
-        context.go(TournamentsPage.createLocation(context));
+        context.router.navigate(const TournamentsRoute());
         break;
     }
   }
 
   @override
   void pop() {
-    GoRouter.of(context).go('/');
+    context.router.navigate(const ClubsRoute());
   }
 
   @override
   void openTournament(int id) {
-    GoRouter.of(context).push(
-      TournamentPage.createLocation(
-        context: context,
-        tournamentId: id,
-      ),
-    );
+    context.router.push(TournamentRoute(tournamentId: id));
   }
 
   @override
   void openDefaultPage() {
-    GoRouter.of(context).go('/');
+    context.router.navigate(const ClubsRoute());
   }
 
   @override
   bool get canPop {
     try {
-      return GoRouter.of(context).canPop();
+      return context.router.canPop();
     } catch (_) {
       return false;
     }
@@ -148,21 +137,16 @@ class MainPageRouterImpl implements MainPageRouter {
 
   @override
   void openAuthPage() {
-    context.push(
-      LoginPageBody.createLocation(
-        context: context,
-        nextPath: GoRouter.of(context).routeInformationProvider.value.uri.toString(),
-      ),
-    );
+    context.router.push(LoginPageRoute());
   }
 
   @override
   void openProfilePage() {
-    context.push(ProfilePage.createLocation(context));
+    context.router.push(const ProfileRoute());
   }
 
   @override
   void openContactsPage() {
-    context.push(ContactsPage.createLocation(context));
+    context.router.push(const ContactsRoute());
   }
 }

@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/get_clubs_interactor.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
@@ -15,33 +15,31 @@ import 'package:seating_generator_web/ui/main/clubs_page/widgets/single_club_row
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class ClubsPage extends StatefulWidget {
+@RoutePage()
+class ClubsPage extends StatelessWidget {
   const ClubsPage({super.key});
 
   @override
-  State<ClubsPage> createState() => _ClubsPageState();
-
-  static String createLocation(BuildContext context) {
-    return context.namedLocation('clubs');
+  Widget build(BuildContext context) {
+    final repos = RepositoryFactory.of(context);
+    return BlocProvider<ClubsBloc>(
+      create: (context) => ClubsBloc(
+        getClubsInteractor: GetClubsInteractor(repos.clubRepository),
+        router: ClubsRouterImpl(context),
+      ),
+      child: const _ClubsPageContent(),
+    );
   }
-
-  static final GoRoute route = GoRoute(
-    path: '/club',
-    name: 'clubs',
-    builder: (context, state) => BlocProvider<ClubsBloc>(
-      create: (context) {
-        final repos = RepositoryFactory.of(context);
-        return ClubsBloc(
-          getClubsInteractor: GetClubsInteractor(repos.clubRepository),
-          router: ClubsRouterImpl(context),
-        );
-      },
-      child: const ClubsPage(),
-    ),
-  );
 }
 
-class _ClubsPageState extends CustomState<ClubsPage> {
+class _ClubsPageContent extends StatefulWidget {
+  const _ClubsPageContent();
+
+  @override
+  State<_ClubsPageContent> createState() => _ClubsPageContentState();
+}
+
+class _ClubsPageContentState extends CustomState<_ClubsPageContent> {
   @override
   void initState() {
     context.read<ClubsBloc>().add(const ClubsEvent.pageOpened());

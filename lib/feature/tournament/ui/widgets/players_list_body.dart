@@ -1,10 +1,11 @@
+import 'package:auto_route/annotations.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/player_row.dart';
@@ -12,22 +13,17 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_m
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_selector.dart';
 import 'package:seating_generator_web/utils.dart';
 
+@RoutePage(name: 'TournamentPlayersRoute')
 class PlayersListBody extends StatelessWidget {
-  final int tournamentId;
-
-  const PlayersListBody({
-    super.key,
-    required this.tournamentId,
-  });
+  const PlayersListBody({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault(TournamentsPage.createLocation)),
+          leading: BackButton(onPressed: context.backOrNavigateTo(const TournamentsRoute())),
           title: Text(context.locale.participants),
           actions: [
             TournamentMenuAction(
-              tournamentId: tournamentId,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
           ],

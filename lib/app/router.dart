@@ -1,161 +1,129 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
-import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
-import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
-import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
-import 'package:seating_generator_web/ui/main/main_bloc.dart';
-import 'package:seating_generator_web/ui/app_shell/app_shell.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
-import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
-import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
+import 'package:seating_generator_web/app/guards/auth_guard.dart';
+import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
+import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
+import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
+import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_page.dart';
+import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_page.dart';
+import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
+import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_page.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
-import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
-import 'package:seating_generator_web/ui/temp/temp_page.dart';
-import 'package:seating_generator_web/app/bloc_observer.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
+import 'package:seating_generator_web/feature/referee_assignments/ui/referee_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_settings_page.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/players_list_body.dart';
+import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
+import 'package:seating_generator_web/ui/app_shell/app_shell.dart';
+import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
+import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_page_body.dart';
+import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
+import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_page_body.dart';
+import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
+import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
+import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_wrappers.dart';
+import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
+import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/utils.dart';
-import 'package:seating_generator_web/utils/splash_manager.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
+import 'package:seating_generator_web/ui/main/rating_page/rating_wrappers.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
+import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
+import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/ui/temp/temp_page.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 
-class AppRouter {
-  final String initLocation;
-  final DependencyScope scope;
-  late final router = GoRouter(
-    navigatorKey: rootNavigationKey,
-    observers: [
-      SentryNavigatorObserver(),
-    ],
-    initialLocation: initLocation,
-    redirect: (context, state) {
-      return Future<String?>.microtask(() async {
-        if (!context.mounted) return null;
+part 'router.gr.dart';
 
-        final authNotifier = context.read<AuthNotifier>();
-        if (authNotifier.value is AuthNotifierLoadingModel) {
-          try {
-            final authRepository = scope.repositoryFactory.authRepository;
-            final pushTokenService = scope.serviceProvider.pushTokenService;
+@AutoRouterConfig(replaceInRouteName: 'Page|Body|Screen,Route')
+class AppRouter extends RootStackRouter {
+  final AuthGuard authGuard;
+  final RailWrapperGuard railWrapperGuard;
 
-            // Получаем FCM токен и deviceId если разрешение уже выдано
-            final fcmToken = await pushTokenService.getFcmToken();
-            final deviceId = await pushTokenService.getDeviceId();
+  AppRouter({
+    required this.authGuard,
+    required this.railWrapperGuard,
+    required this.navigatorKey,
+  });
 
-            final userId = await authRepository.auth(
-              pushToken: fcmToken,
-              deviceId: deviceId,
-            );
+  @override
+  final GlobalKey<NavigatorState> navigatorKey;
 
-            if (userId != null) {
-              final value = await scope.storageFactory.credentialStorage.read();
+  @override
+  List<AutoRoute> get routes => [
+        // Standalone routes (no shell)
+        AutoRoute(page: TempRoute.page, path: '/temp'),
+        AutoRoute(page: TranslationControlRoute.page, path: '/translationControl'),
+        AutoRoute(page: WebViewRoute.page, path: '/web-view'),
 
-              Sentry.configureScope(
-                (p0) => p0.setUser(
-                  SentryUser(email: value?.login),
-                ),
-              );
+        // Redirect fragment-based deep links (/#/club → /club)
+        RedirectRoute(path: '/', redirectTo: '/club'),
 
-              authNotifier.value = AuthNotifierModel.authorized(
-                userId: userId,
-                hideBilling: LoginInteractor.hideBillEmails.contains(
-                  value?.login,
-                ),
-              );
-            } else {
-              authNotifier.value = const AuthNotifierModel.unauthorized();
-            }
-          } catch (_) {
-            authNotifier.value = const AuthNotifierModel.unauthorized();
-          }
-        }
-        return null;
-      }).whenComplete(() => SplashManager.removeSplash());
-    },
-    routes: [
-      TempPage.route,
-      TranslationControlPage.route,
-      WebViewScreen.route,
-      GoRoute(
-        path: '/',
-        redirect: (_, state) {
-          if (state.uri.hasFragment) {
-            return state.uri.fragment;
-          }
+        // Shell route with auth guard
+        AutoRoute(
+          page: AppShellRoute.page,
+          path: '/',
+          guards: [authGuard],
+          children: [
+            AutoRoute(page: LoginPageRoute.page, path: 'auth'),
+            AutoRoute(page: SignUpPageRoute.page, path: 'auth/signUp'),
+            AutoRoute(page: VerificationPageRoute.page, path: 'auth/verification/:id'),
+            AutoRoute(page: ForgotPasswordPageRoute.page, path: 'auth/forgotPassword'),
+            AutoRoute(page: ResetPasswordPageRoute.page, path: 'auth/resetPassword'),
 
-          return '/club';
-        },
-      ),
-      ShellRoute(
-        builder: (context, state, child) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                key: const Key('MainBlocProvider'),
-                create: (context) => MainBloc(
-                  MainPageRouterImpl(context),
-                ),
-              ),
-              BlocProvider<ProfileBloc>(
-                create: (context) {
-                  final scope = DependencyScope.of(context);
-                  final logoutInteractor = LogoutInteractor(
-                    scope.storageFactory.tokenStorage,
-                    scope.authNotifier,
-                    scope.storageFactory.credentialStorage,
-                  );
-                  return ProfileBloc(
-                    logoutInteractor,
-                    DeleteProfileInteractor(
-                      logoutInteractor,
-                      scope.repositoryFactory.profileRepository,
-                    ),
-                    scope.repositoryFactory.profileRepository,
-                    CreatePlayerInteractor(scope.repositoryFactory.playersRepository),
-                    AddPhotoInteractor(scope.repositoryFactory.playersRepository),
-                    scope.authNotifier,
-                  );
-                },
-              ),
-            ],
-            child: AppShell(child: child),
-          );
-        },
-        routes: [
-          TournamentPage.createRoute(),
-          ClubPage.route,
-          RailWrapper.route,
-          LoginPageBody.route,
-          ProfilePage.route,
-          ContactsPage.route,
-          PlayerStatsPage.route,
-          PhotoThemesPage.profileRoute,
-        ],
-      ),
-    ],
-    errorBuilder: (context, state) {
-      return Scaffold(
-        body: Center(
-          child: Text(
-            'errorRoute: ${state.toString()}',
-          ),
+            AutoRoute(page: ProfileRoute.page, path: 'profile'),
+            AutoRoute(page: ContactsRoute.page, path: 'contacts'),
+            AutoRoute(page: PlayerStatsRoute.page, path: 'player/:playerId/statistics'),
+            // PhotoThemesPage reused at top-level (profile context) and under tournament
+            AutoRoute(page: PhotoThemesRoute.page, path: 'photo-themes'),
+
+            // RailWrapper (tabs: tournaments + clubs)
+            AutoRoute(
+              page: RailWrapperRoute.page,
+              path: '',
+              guards: [railWrapperGuard],
+              children: [
+                AutoRoute(page: TournamentsRoute.page, path: 'tournament'),
+                AutoRoute(page: ClubsRoute.page, path: 'club'),
+              ],
+            ),
+
+            AutoRoute(page: ClubRoute.page, path: 'club/:clubId'),
+            AutoRoute(page: NewClubGameRoute.page, path: 'club/:clubId/addGame'),
+            AutoRoute(page: ClubGameDetailRoute.page, path: 'club/:clubId/game/:gameId'),
+            AutoRoute(page: ClubGamesRoute.page, path: 'club/:clubId/games'),
+            AutoRoute(page: CustomColumnsEditorRoute.page, path: 'club/:clubId/custom-columns'),
+            AutoRoute(page: ClubRatingRoute.page, path: 'club/:clubId/rating'),
+
+            // Tournament detail with sub-routes
+            AutoRoute(
+              page: TournamentRoute.page,
+              path: 'tournament/:id',
+              children: [
+                AutoRoute(page: TournamentPlayersRoute.page, path: ''),
+                AutoRoute(page: SeatingRoute.page, path: 'editSeating'),
+                AutoRoute(page: EditSeatingRoute.page, path: 'editSeating/manual'),
+                AutoRoute(page: TournamentGameDetailRoute.page, path: 'editGame/:gameId'),
+                AutoRoute(page: TournamentRatingRoute.page, path: 'rating'),
+                AutoRoute(page: AdministrationRoute.page, path: 'administration'),
+                AutoRoute(page: TournamentSettingsRoute.page, path: 'settings'),
+                AutoRoute(page: FantasyRoute.page, path: 'fantasy'),
+                AutoRoute(page: PhotoThemesRoute.page, path: 'photo-themes'),
+                AutoRoute(page: InfoTableDescriptionRoute.page, path: 'table-descriptions'),
+                AutoRoute(page: RefereeRoute.page, path: 'referees'),
+              ],
+            ),
+          ],
         ),
-      );
-    },
-  );
+      ];
+}
 
-  AppRouter(this.initLocation, this.scope);
-
+// ignore: avoid_classes_with_only_static_members
+class AppRouterHelper {
   static void showErrorDialog(BuildContext context, String message) {
+    if (message.isEmpty) return;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -163,9 +131,7 @@ class AppRouter {
         content: Text(message),
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: () => Navigator.pop(context),
             child: Text(context.locale.cancel),
           ),
         ],

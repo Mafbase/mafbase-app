@@ -33,7 +33,7 @@ class ClubDesktopHeader extends StatelessWidget {
           Expanded(
             child: Text(
               context.locale.clubPageTitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
               ),

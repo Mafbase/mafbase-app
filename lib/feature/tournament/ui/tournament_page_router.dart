@@ -1,11 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
-import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/substitute_player_dialog.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog.dart';
@@ -48,32 +45,17 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openSeatingPage({required int tournamentId}) {
-    _context.push(
-      SeatingPage.createLocation(
-        tournamentId: tournamentId,
-        context: _context,
-      ),
-    );
+    _context.router.push(SeatingRoute(tournamentId: tournamentId));
   }
 
   @override
   void openPlayersList({required int tournamentId}) {
-    _context.go(
-      TournamentPage.createLocation(
-        context: _context,
-        tournamentId: tournamentId,
-      ),
-    );
+    _context.router.push(TournamentRoute(tournamentId: tournamentId));
   }
 
   @override
   void openRating({required int tournamentId}) {
-    _context.push(
-      RatingPage.createTournamentLocation(
-        tournamentId: tournamentId,
-        context: _context,
-      ),
-    );
+    _context.router.push(TournamentRatingRoute(tournamentId: tournamentId));
   }
 
   @override
@@ -90,12 +72,8 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   void openWebView(String url) {
-    _context.push(
-      WebViewScreen.createLocation(
-        url: url,
-        title: _context.locale.payment,
-        context: _context,
-      ),
+    _context.router.push(
+      WebViewRoute(url: url, title: _context.locale.payment),
     );
   }
 }

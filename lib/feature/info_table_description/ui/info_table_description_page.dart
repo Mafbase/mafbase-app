@@ -1,60 +1,48 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_bloc.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_event.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_state.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class InfoTableDescriptionPage extends StatefulWidget {
+@RoutePage()
+class InfoTableDescriptionPage extends StatelessWidget {
   final int tournamentId;
 
   const InfoTableDescriptionPage({
     super.key,
-    required this.tournamentId,
+    @PathParam('id') required this.tournamentId,
   });
 
   @override
-  State<InfoTableDescriptionPage> createState() => _InfoTableDescriptionPageState();
-
-  static String createLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      _routeName,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => InfoTableDescriptionBloc(
+        const InfoTableState(),
+        RepositoryFactory.of(context).infoTableDescriptionRepository,
+      )..add(InfoTableDescriptionEventInit(tournamentId.toString())),
+      child: _InfoTableDescriptionPageContent(tournamentId: tournamentId),
     );
   }
-
-  static const _routeName = 'tournament_table_descriptions';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'table-descriptions',
-    name: _routeName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      return BlocProvider(
-        create: (context) => InfoTableDescriptionBloc(
-          const InfoTableState(),
-          RepositoryFactory.of(context).infoTableDescriptionRepository,
-        )..add(InfoTableDescriptionEventInit(tournamentId.toString())),
-        child: InfoTableDescriptionPage(tournamentId: tournamentId),
-      );
-    },
-  );
 }
 
-class _InfoTableDescriptionPageState extends State<InfoTableDescriptionPage> {
+class _InfoTableDescriptionPageContent extends StatefulWidget {
+  final int tournamentId;
+
+  const _InfoTableDescriptionPageContent({required this.tournamentId});
+
+  @override
+  State<_InfoTableDescriptionPageContent> createState() => _InfoTableDescriptionPageState();
+}
+
+class _InfoTableDescriptionPageState extends State<_InfoTableDescriptionPageContent> {
   final _tableController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _controllers = <int, TextEditingController>{};
@@ -107,13 +95,12 @@ class _InfoTableDescriptionPageState extends State<InfoTableDescriptionPage> {
       appBar: AppBar(
         leading: BackButton(
           onPressed: context.backOrGoToDefault(
-            (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+            (c) => '/tournament/${widget.tournamentId}',
           ),
         ),
         title: Text(locale.tableDescriptionsTitle),
         actions: [
           TournamentMenuAction(
-            tournamentId: widget.tournamentId,
             openDrawer: () => Scaffold.of(context).openEndDrawer(),
           ),
         ],
@@ -207,10 +194,7 @@ class _InfoTableDescriptionPageState extends State<InfoTableDescriptionPage> {
                           await completer.future;
                           if (context.mounted) {
                             context.backOrGoToDefault(
-                              (c) => TournamentPage.createLocation(
-                                context: c,
-                                tournamentId: widget.tournamentId,
-                              ),
+                              (c) => '/tournament/${widget.tournamentId}',
                             )();
                           }
                         },

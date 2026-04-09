@@ -1,54 +1,52 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/common/widgets/fade_transition_page.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_bloc.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_events.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class VerificationPageBody extends StatefulWidget {
-  static const String name = 'verification';
-  static GoRoute route = GoRoute(
-    path: 'verification/:id',
-    name: name,
-    pageBuilder: (context, state) {
-      final id = int.parse(state.pathParameters['id']!);
-      return FadeTransitionPage(
-        child: BlocProvider<VerificationBloc>(
-          create: (BuildContext context) {
-            final repos = RepositoryFactory.of(context);
-            return VerificationBloc(
-              VerificationPageRouterImpl(context),
-              VerificationInteractor(repos.authRepository),
-              id,
-            );
-          },
-          child: const VerificationPageBody(),
-        ),
-      );
-    },
-  );
+@RoutePage(name: 'VerificationPageRoute')
+class VerificationPageBody extends StatelessWidget {
+  final int id;
 
-  static String namedLocation(BuildContext context, int id) {
-    return context.namedLocation(name, pathParameters: {'id': id.toString()});
-  }
-
-  const VerificationPageBody({super.key});
+  const VerificationPageBody({
+    super.key,
+    @PathParam('id') required this.id,
+  });
 
   @override
-  State<VerificationPageBody> createState() => _VerificationPageBodyState();
+  Widget build(BuildContext context) {
+    return BlocProvider<VerificationBloc>(
+      create: (BuildContext context) {
+        final repos = RepositoryFactory.of(context);
+        return VerificationBloc(
+          VerificationPageRouterImpl(context),
+          VerificationInteractor(repos.authRepository),
+          id,
+        );
+      },
+      child: const _VerificationPageContent(),
+    );
+  }
 }
 
-class _VerificationPageBodyState extends State<VerificationPageBody> {
+class _VerificationPageContent extends StatefulWidget {
+  const _VerificationPageContent();
+
+  @override
+  State<_VerificationPageContent> createState() => _VerificationPageContentState();
+}
+
+class _VerificationPageContentState extends State<_VerificationPageContent> {
   TextEditingController codeController = TextEditingController();
 
   @override

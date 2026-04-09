@@ -53,7 +53,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
-  _onGameSelected(TranslationControlEventSelectGame event, Emitter emit) {
+  Future<dynamic> _onGameSelected(TranslationControlEventSelectGame event, Emitter emit) {
     return _repository.selectGame(
       gameIndex: event.gameIndex,
       table: params.table,
@@ -62,7 +62,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
-  _onStatusChanged(TranslationControlEventChangeStatus event, Emitter emit) {
+  Future<dynamic> _onStatusChanged(TranslationControlEventChangeStatus event, Emitter emit) {
     return _repository.changeStatus(
       playerIndex: event.index,
       status: event.status,
@@ -72,7 +72,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
-  _onRoleChanged(TranslationControlEventChangeRole event, Emitter emit) {
+  Future<dynamic> _onRoleChanged(TranslationControlEventChangeRole event, Emitter emit) {
     return _repository.changeRole(
       playerIndex: event.index,
       role: event.role,
@@ -82,7 +82,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
-  _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
+  void _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
     emit(
       TranslationContentState(
         roles: event.event.roles,

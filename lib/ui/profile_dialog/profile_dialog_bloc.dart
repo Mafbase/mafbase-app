@@ -30,7 +30,7 @@ class ProfileDialogBloc extends Bloc<ProfileDialogEvent, ProfileDialogState> {
     on<ProfileDialogEventEditImage>(_onEditImage);
   }
 
-  _onEditImage(ProfileDialogEventEditImage event, Emitter emit) async {
+  Future<void> _onEditImage(ProfileDialogEventEditImage event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     await _addPhotoInteractor.run(
       bytes: event.bytes,
@@ -40,7 +40,7 @@ class ProfileDialogBloc extends Bloc<ProfileDialogEvent, ProfileDialogState> {
     router.close();
   }
 
-  _onSubmit(ProfileDialogEventSubmit event, Emitter emit) async {
+  Future<void> _onSubmit(ProfileDialogEventSubmit event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     await _editPlayerInteractor.run(
       PlayerModel(

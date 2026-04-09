@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/app/router.dart';
@@ -21,144 +21,72 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_router
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_effect.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class AddClubGamePage extends StatefulWidget {
-  final bool readOnly;
+class AddClubGamePage extends StatelessWidget {
+  final int? clubId;
+  final int? tournamentId;
   final int? gameId;
+  final bool? editParam;
   final DateTime? initDateTime;
 
   const AddClubGamePage({
     super.key,
-    this.readOnly = false,
-    this.gameId,
+    @PathParam('clubId') this.clubId,
+    @PathParam('id') this.tournamentId,
+    @PathParam('gameId') this.gameId,
+    @QueryParam('edit') this.editParam,
     this.initDateTime,
   });
 
+  bool get readOnly => editParam == false;
+
   @override
-  State<AddClubGamePage> createState() => _AddClubGamePageState();
-
-  static String createTournamentEditLocation({
-    required BuildContext context,
-    required int tournamentId,
-    required int gameId,
-    required bool edit,
-  }) {
-    return context.namedLocation(
-      'editTournamentGame',
-      pathParameters: {
-        'id': tournamentId.toString(),
-        'gameId': gameId.toString(),
-      },
-      queryParameters: {
-        'edit': edit.toString(),
-      },
-    );
-  }
-
-  static final GoRoute tournamentEditRoute = GoRoute(
-    path: 'editGame/:gameId',
-    name: 'editTournamentGame',
-    builder: (context, state) {
-      final gameId = int.parse(state.pathParameters['gameId']!);
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      final edit = bool.tryParse(state.uri.queryParameters['edit'] ?? '') ?? true;
-      return BlocProvider<AddClubGameBloc>(
-        create: (context) => AddClubGameBloc(
-          context: context,
-          tournamentId: tournamentId,
-          repos: RepositoryFactory.of(context),
-          router: AddClubGameRouterImpl(context),
-        ),
-        child: AddClubGamePage(
-          key: ValueKey(gameId),
-          readOnly: !edit,
-          gameId: gameId,
-        ),
-      );
-    },
-  );
-
-  static final List<GoRoute> routes = [
-    GoRoute(
-      path: 'addGame',
-      name: 'addGame',
-      builder: (context, state) {
-        final clubId = int.parse(state.pathParameters['clubId']!);
-        final initDateTime = state.extra as DateTime?;
-        return BlocProvider<AddClubGameBloc>(
-          create: (context) => AddClubGameBloc(
-            clubId: clubId,
-            context: context,
-            repos: RepositoryFactory.of(context),
-            router: AddClubGameRouterImpl(context),
-          ),
-          child: AddClubGamePage(
-            key: const ValueKey(null),
-            initDateTime: initDateTime,
-          ),
-        );
-      },
-    ),
-    GoRoute(
-      name: 'viewGame',
-      path: 'game/:gameId',
-      builder: (context, state) {
-        final clubId = int.parse(state.pathParameters['clubId']!);
-        final gameId = int.parse(state.pathParameters['gameId']!);
-        final edit = state.uri.queryParameters['edit'] == true.toString();
-        return BlocProvider<AddClubGameBloc>(
-          create: (context) => AddClubGameBloc(
-            clubId: clubId,
-            context: context,
-            repos: RepositoryFactory.of(context),
-            router: AddClubGameRouterImpl(context),
-          ),
-          child: AddClubGamePage(
-            key: ValueKey(gameId),
-            readOnly: !edit,
-            gameId: gameId,
-          ),
-        );
-      },
-    ),
-  ];
-
-  static String createViewLocation(
-    BuildContext context,
-    int clubId,
-    int gameId, {
-    bool canEdit = false,
-  }) {
-    return context.namedLocation(
-      'viewGame',
-      pathParameters: {
-        'clubId': clubId.toString(),
-        'gameId': gameId.toString(),
-      },
-      queryParameters: {'edit': canEdit.toString()},
-    );
-  }
-
-  static String createLocation(
-    BuildContext context,
-    int clubId,
-  ) {
-    return context.namedLocation(
-      'addGame',
-      pathParameters: {
-        'clubId': clubId.toString(),
-      },
+  Widget build(BuildContext context) {
+    return BlocProvider<AddClubGameBloc>(
+      create: (context) => AddClubGameBloc(
+        clubId: clubId,
+        tournamentId: tournamentId,
+        context: context,
+        repos: RepositoryFactory.of(context),
+        router: AddClubGameRouterImpl(context),
+      ),
+      child: _AddClubGamePageContent(
+        key: ValueKey(gameId),
+        clubId: clubId,
+        tournamentId: tournamentId,
+        gameId: gameId,
+        readOnly: readOnly,
+        initDateTime: initDateTime,
+      ),
     );
   }
 }
 
-class _AddClubGamePageState extends CustomState<AddClubGamePage>
-    with EffectListener<AddClubGameEffect, AddClubGameState, AddClubGameBloc, AddClubGamePage> {
+class _AddClubGamePageContent extends StatefulWidget {
+  final int? clubId;
+  final int? tournamentId;
+  final int? gameId;
+  final bool readOnly;
+  final DateTime? initDateTime;
+
+  const _AddClubGamePageContent({
+    super.key,
+    this.clubId,
+    this.tournamentId,
+    this.gameId,
+    this.readOnly = false,
+    this.initDateTime,
+  });
+
+  @override
+  State<_AddClubGamePageContent> createState() => _AddClubGamePageState();
+}
+
+class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
+    with EffectListener<AddClubGameEffect, AddClubGameState, AddClubGameBloc, _AddClubGamePageContent> {
   final controllers = List.generate(10, (index) => TextEditingController());
   final addScoreControllers = List.generate(
     10,
@@ -277,7 +205,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
   }
 
   @override
-  void didUpdateWidget(covariant AddClubGamePage oldWidget) {
+  void didUpdateWidget(covariant _AddClubGamePageContent oldWidget) {
     if (oldWidget.gameId != widget.gameId) {
       context.read<AddClubGameBloc>().add(
             AddClubGameEvent.pageOpened(
@@ -296,12 +224,13 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
             Scaffold(
               appBar: AppBar(
                 leading: BackButton(
-                  onPressed: context.backOrGoToDefault((c) {
-                    final bloc = c.read<AddClubGameBloc>();
-                    return bloc.clubId != null
-                        ? RatingPage.createClubLocation(clubId: bloc.clubId!, context: c)
-                        : TournamentPage.createLocation(context: c, tournamentId: bloc.tournamentId!);
-                  }),
+                  onPressed: () {
+                    final bloc = context.read<AddClubGameBloc>();
+                    final route = bloc.clubId != null
+                        ? ClubRatingRoute(clubId: bloc.clubId!) as PageRouteInfo
+                        : TournamentRoute(tournamentId: bloc.tournamentId!);
+                    context.backOrNavigateTo(route)();
+                  },
                 ),
                 title: Text(state.clubName),
               ),
@@ -340,8 +269,8 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
                 onPressed: context.backOrGoToDefault((c) {
                   final bloc = c.read<AddClubGameBloc>();
                   return bloc.clubId != null
-                      ? RatingPage.createClubLocation(clubId: bloc.clubId!, context: c)
-                      : TournamentPage.createLocation(context: c, tournamentId: bloc.tournamentId!);
+                      ? '/club/${bloc.clubId}/rating'
+                      : '/tournament/${bloc.tournamentId}';
                 }),
               ),
               title: Text(state.clubName),
@@ -761,7 +690,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     return context.watch<TournamentPageBloc>().state.isMyTournament;
   }
 
-  submit(AddClubGameState state) {
+  void submit(AddClubGameState state) {
     if (widget.readOnly) {
       context.read<AddClubGameBloc>().add(AddClubGameEvent.edit(gameId: widget.gameId!));
       return;
@@ -769,11 +698,11 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     if (roles.where((element) => element == PlayerRole.maf).length != 2 ||
         roles.where((element) => element == PlayerRole.don).length != 1 ||
         roles.where((element) => element == PlayerRole.sheriff).length != 1) {
-      AppRouter.showErrorDialog(context, 'Проверьте роли');
+      AppRouterHelper.showErrorDialog(context, 'Проверьте роли');
       return;
     }
     if (winSelected == null) {
-      AppRouter.showErrorDialog(context, 'Не выбран результат игры');
+      AppRouterHelper.showErrorDialog(context, 'Не выбран результат игры');
       return;
     }
 
@@ -784,7 +713,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
           ) ==
           null,
     )) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Не найден игрок: ${controllers.firstWhere(
               (e) =>
@@ -802,7 +731,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
             ) ==
             null &&
         !state.isTournament) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Не найден судья: ${refereeController.text}',
       );
@@ -810,16 +739,16 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
     }
 
     if (firstDie != -1 && bestMove == null) {
-      AppRouter.showErrorDialog(context, 'Установите лучший ход');
+      AppRouterHelper.showErrorDialog(context, 'Установите лучший ход');
       return;
     }
 
     if (firstDie == null) {
-      AppRouter.showErrorDialog(context, 'Не указан первый отстрел');
+      AppRouterHelper.showErrorDialog(context, 'Не указан первый отстрел');
       return;
     }
     if (ciSchemeModel == null) {
-      AppRouter.showErrorDialog(context, 'Не указана схема компенсации');
+      AppRouterHelper.showErrorDialog(context, 'Не указана схема компенсации');
       return;
     }
 
@@ -830,7 +759,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
         )
         .toList();
     if (addScores.any((score) => score < 0)) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Положительные баллы не могут быть отрицательными',
       );
@@ -844,7 +773,7 @@ class _AddClubGamePageState extends CustomState<AddClubGamePage>
         )
         .toList();
     if (minusScores.any((score) => score < 0)) {
-      AppRouter.showErrorDialog(
+      AppRouterHelper.showErrorDialog(
         context,
         'Отрицательные баллы не могут быть отрицательными (используйте положительное значение)',
       );

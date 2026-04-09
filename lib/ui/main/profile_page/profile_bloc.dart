@@ -159,7 +159,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
     emit(const ProfileState());
   }
 
-  _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {
+  Future<dynamic> _onLogoutPressed(ProfileEventLogoutPressed event, Emitter emit) {
     return _logoutInteractor().whenComplete(() => emitEffect(const ProfileEffect.navigateBack()));
   }
 

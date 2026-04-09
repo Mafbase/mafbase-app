@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
@@ -8,52 +8,40 @@ import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_bloc.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_event.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_state.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 
-class RefereePage extends StatefulWidget {
+@RoutePage()
+class RefereePage extends StatelessWidget {
   final int tournamentId;
 
   const RefereePage({
     super.key,
-    required this.tournamentId,
+    @PathParam('id') required this.tournamentId,
   });
 
   @override
-  State<RefereePage> createState() => _RefereePageState();
-
-  static String createLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      _routeName,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => RefereeBloc(
+        const RefereeState(),
+        RepositoryFactory.of(context).refereeRepository,
+      )..add(RefereeEventInit(tournamentId)),
+      child: _RefereePageContent(tournamentId: tournamentId),
     );
   }
-
-  static const _routeName = 'tournament_referees';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'referees',
-    name: _routeName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      return BlocProvider(
-        create: (context) => RefereeBloc(
-          const RefereeState(),
-          RepositoryFactory.of(context).refereeRepository,
-        )..add(RefereeEventInit(tournamentId)),
-        child: RefereePage(tournamentId: tournamentId),
-      );
-    },
-  );
 }
 
-class _RefereePageState extends State<RefereePage> {
+class _RefereePageContent extends StatefulWidget {
+  final int tournamentId;
+
+  const _RefereePageContent({required this.tournamentId});
+
+  @override
+  State<_RefereePageContent> createState() => _RefereePageState();
+}
+
+class _RefereePageState extends State<_RefereePageContent> {
   final _tableController = TextEditingController();
   final _nicknameController = TextEditingController();
   final _nicknameFocusNode = FocusNode();
@@ -92,13 +80,12 @@ class _RefereePageState extends State<RefereePage> {
       appBar: AppBar(
         leading: BackButton(
           onPressed: context.backOrGoToDefault(
-            (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
+            (c) => '/tournament/${widget.tournamentId}',
           ),
         ),
         title: Text(locale.referees),
         actions: [
           TournamentMenuAction(
-            tournamentId: widget.tournamentId,
             openDrawer: () => Scaffold.of(context).openEndDrawer(),
           ),
         ],

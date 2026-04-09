@@ -1,10 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/data/http_client.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -20,30 +19,25 @@ class AppBlocObserver extends BlocObserver {
 
     try {
       if (error is RequestError) {
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           error.message ?? '',
         );
       } else if (error is UnauthenticatedError) {
-        final location = GoRouter.of(navigatorContext).routeInformationProvider.value.uri.toString();
-        navigatorContext.go(
-          LoginPageBody.createLocation(
-            context: navigatorContext,
-            nextPath: location,
-          ),
-        );
+        final currentUrl = navigatorContext.router.currentUrl;
+        navigatorContext.router.push(LoginPageRoute(nextPath: currentUrl));
 
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           error.message ?? '',
         );
       } else if (error is DioException) {
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           navigatorContext.locale.networkError,
         );
       } else {
-        AppRouter.showErrorDialog(
+        AppRouterHelper.showErrorDialog(
           navigatorContext,
           navigatorContext.locale.unknownError(error.toString()),
         );

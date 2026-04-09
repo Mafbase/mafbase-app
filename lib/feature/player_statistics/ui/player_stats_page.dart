@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
@@ -15,42 +15,34 @@ import 'package:seating_generator_web/feature/player_statistics/domain/model/pla
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
+@RoutePage()
 class PlayerStatsPage extends StatelessWidget {
   final int playerId;
 
-  @visibleForTesting
-  const PlayerStatsPage({super.key, required this.playerId});
+  const PlayerStatsPage({super.key, @PathParam('playerId') required this.playerId});
 
-  static String createLocation({
-    required BuildContext context,
-    required int playerId,
-  }) {
-    return context.namedLocation(
-      'player_statistics',
-      pathParameters: {'playerId': playerId.toString()},
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<PlayerStatsBloc>(
+      create: (context) => PlayerStatsBloc(
+        RepositoryFactory.of(context).playerStatisticsRepository,
+      )..add(PlayerStatsEvent.pageOpened(playerId: playerId)),
+      child: PlayerStatsView(playerId: playerId),
     );
   }
+}
 
-  static final GoRoute route = GoRoute(
-    path: '/player/:playerId/statistics',
-    name: 'player_statistics',
-    builder: (context, state) {
-      final playerId = int.parse(state.pathParameters['playerId']!);
-      return BlocProvider<PlayerStatsBloc>(
-        create: (context) => PlayerStatsBloc(
-          RepositoryFactory.of(context).playerStatisticsRepository,
-        )..add(PlayerStatsEvent.pageOpened(playerId: playerId)),
-        child: PlayerStatsPage(playerId: playerId),
-      );
-    },
-  );
+class PlayerStatsView extends StatelessWidget {
+  final int playerId;
+
+  const PlayerStatsView({super.key, required this.playerId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.locale.playerStatsTitle),
-        leading: BackButton(onPressed: context.backOrGoToDefault()),
+        leading: const BackButton(),
       ),
       body: SafeArea(
         child: BlocBuilder<PlayerStatsBloc, PlayerStatsState>(

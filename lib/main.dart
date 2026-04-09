@@ -1,18 +1,19 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/guards/auth_guard.dart';
+import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -61,7 +62,6 @@ extension LocationPathExt on RemoteMessage {
 void _startApp() async {
   WidgetsBinding? binding;
   setPathUrlStrategy();
-  GoRouter.optionURLReflectsImperativeAPIs = true;
   if (!kIsWeb) {
     binding = WidgetsFlutterBinding.ensureInitialized();
   }
@@ -83,18 +83,18 @@ void _startApp() async {
   runApp(
     MafbaseApp(
       scope: scope,
-      initLocation: initPush?.location ?? '/',
+      initLocation: initPush?.location,
     ),
   );
 }
 
 class MafbaseApp extends StatefulWidget {
-  final String initLocation;
+  final String? initLocation;
   final DependencyScope scope;
 
   const MafbaseApp({
     super.key,
-    this.initLocation = '/',
+    this.initLocation,
     required this.scope,
   });
 
@@ -103,13 +103,21 @@ class MafbaseApp extends StatefulWidget {
 }
 
 class _MafbaseAppState extends State<MafbaseApp> {
-  late final router = AppRouter(widget.initLocation, widget.scope);
+  late final _appRouter = AppRouter(
+    authGuard: AuthGuard(widget.scope.authNotifier, widget.scope),
+    railWrapperGuard: RailWrapperGuard(),
+    navigatorKey: rootNavigationKey,
+  );
   StreamSubscription? subscription;
 
   @override
   void initState() {
-    subscription = FirebaseMessaging.onMessageOpenedApp.map((e) => e.location).whereNotNull().listen(router.router.go);
     super.initState();
+    subscription = FirebaseMessaging.onMessageOpenedApp
+        .map((e) => e.location)
+        .where((path) => path != null)
+        .cast<String>()
+        .listen((path) => _appRouter.navigatePath(path, includePrefixMatches: true));
   }
 
   @override
@@ -125,7 +133,6 @@ class _MafbaseAppState extends State<MafbaseApp> {
         child: MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => widget.scope.authNotifier),
-            Provider.value(value: router),
           ],
           child: Builder(
             builder: (context) {
@@ -136,9 +143,21 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 theme: AppTheme.light(isMobile: context.isMobile),
                 darkTheme: AppTheme.dark(isMobile: context.isMobile),
                 themeMode: ThemeMode.system,
-                routerDelegate: context.read<AppRouter>().router.routerDelegate,
-                routeInformationProvider: context.read<AppRouter>().router.routeInformationProvider,
-                routeInformationParser: context.read<AppRouter>().router.routeInformationParser,
+                routerConfig: _appRouter.config(
+                  includePrefixMatches: true,
+                  deepLinkBuilder: (deepLink) {
+                    // Handle initial push notification deep link
+                    if (widget.initLocation != null) {
+                      return DeepLink.path(widget.initLocation!);
+                    }
+                    // Redirect fragment-based deep links (/#/club → /club)
+                    final uri = deepLink.uri;
+                    if (uri.fragment.isNotEmpty) {
+                      return DeepLink.path('/${uri.fragment}');
+                    }
+                    return deepLink;
+                  },
+                ),
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,

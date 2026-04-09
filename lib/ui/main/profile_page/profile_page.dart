@@ -1,8 +1,6 @@
-import 'dart:typed_data';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -19,22 +17,15 @@ import 'package:seating_generator_web/ui/main/profile_page/widgets/tournament_su
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
 
+@RoutePage()
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
-
-  static String createLocation(BuildContext context) => context.namedLocation('profile');
-
-  static final GoRoute route = GoRoute(
-    path: '/profile',
-    name: 'profile',
-    builder: (context, state) => const ProfilePage(),
-  );
 }
 
 class _ProfilePageState extends State<ProfilePage>
@@ -42,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
     on<ProfileEffectNavigateBack>((effect) {
-      if (mounted) context.go('/');
+      if (mounted) context.router.navigate(const ClubsRoute());
     });
     on<ProfileEffectOpenBillingUrl>((effect) {
       if (!mounted) return;
@@ -51,12 +42,8 @@ class _ProfilePageState extends State<ProfilePage>
       if (kIsWeb) {
         launchUrl(uri, webOnlyWindowName: '_self');
       } else {
-        context.push(
-          WebViewScreen.createLocation(
-            url: url,
-            title: context.locale.profilePaymentTitle,
-            context: context,
-          ),
+        context.router.push(
+          WebViewRoute(url: url, title: context.locale.profilePaymentTitle),
         );
       }
     });
@@ -74,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       backgroundColor: theme.background1,
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault()),
+        leading: const BackButton(),
         title: Text(context.locale.profile),
       ),
       body: BlocBuilder<ProfileBloc, ProfileState>(
@@ -105,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage>
                       const SizedBox(height: 12),
                     ],
                     ProfileActionsCard(
-                      onPhotoThemes: () => context.go('/photo-themes'),
+                      onPhotoThemes: () => context.router.push(PhotoThemesRoute()),
                       onLogout: () => context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed()),
                       onDeleteAccount: _deleteAccount,
                     ),

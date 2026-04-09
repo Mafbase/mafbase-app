@@ -1,13 +1,13 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/domain/models/password_reset_model.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_events.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_state.dart';
 
@@ -85,11 +85,11 @@ class ResetPasswordPageRouterImpl implements ResetPasswordPageRouter {
 
   @override
   void openLoginPage() {
-    GoRouter.of(_context).go(LoginPageBody.createLocation(context: _context));
+    _context.router.push(LoginPageRoute());
   }
 
   @override
   void openMainPage() {
-    GoRouter.of(_context).go('/');
+    _context.router.replaceAll([const ClubsRoute()]);
   }
 }

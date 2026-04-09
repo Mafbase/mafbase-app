@@ -1,16 +1,15 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/domain/models/sign_up_model.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
-import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
 class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
   final SignUpInteractor _signUpInteractor;
@@ -92,16 +91,16 @@ class SignUpPageRouterImpl implements SignUpPageRouter {
 
   @override
   void openMainPage() {
-    GoRouter.of(_context).go('/');
+    _context.router.replaceAll([const ClubsRoute()]);
   }
 
   @override
   void openLoginPage() {
-    GoRouter.of(_context).go(LoginPageBody.createLocation(context: _context));
+    _context.router.push(LoginPageRoute());
   }
 
   @override
   void openVerificationPage(int id) {
-    GoRouter.of(_context).go(VerificationPageBody.namedLocation(_context, id));
+    _context.router.push(VerificationPageRoute(id: id));
   }
 }

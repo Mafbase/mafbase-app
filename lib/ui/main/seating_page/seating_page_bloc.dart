@@ -103,7 +103,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     return _updateSeating(emit);
   }
 
-  _onGenerateFinalSeating(
+  Future<void> _onGenerateFinalSeating(
     SeatingPageEventCreateFinalSeating event,
     Emitter emit,
   ) async {
@@ -111,7 +111,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     await _updateSeating(emit);
   }
 
-  _onOpenGameEditing(SeatingPageEventGameEditing event, Emitter emit) {
+  void _onOpenGameEditing(SeatingPageEventGameEditing event, Emitter emit) {
     router
         .openGameEditing(
           gameId: event.gameId,
@@ -124,12 +124,12 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
         );
   }
 
-  _updateSeating(Emitter emit) async {
+  Future<void> _updateSeating(Emitter emit) async {
     final seating = await _getSeatingInteractor.run(tournamentId: tournamentId);
     emit(state.copyWith(isLoading: false, games: seating));
   }
 
-  _onCreateSeating(
+  Future<void> _onCreateSeating(
     SeatingPageEventCreateSeating event,
     Emitter emit,
   ) async {
@@ -138,7 +138,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     await _updateSeating(emit);
   }
 
-  _onAddPair(SeatingPageEventAddPair event, Emitter emit) async {
+  Future<void> _onAddPair(SeatingPageEventAddPair event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     final players = await _getTournamentsPlayersInteractor.run(
       tournamentId: tournamentId,
@@ -158,7 +158,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     emit(state.copyWith(isLoading: false));
   }
 
-  _onDeletePair(SeatingPageEventDeletePair event, Emitter emit) async {
+  Future<void> _onDeletePair(SeatingPageEventDeletePair event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     await _deleteSeparationInteractor.run(
       first: event.first,
@@ -171,7 +171,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     emit(state.copyWith(isLoading: false, cannotMeet: newPairs));
   }
 
-  _onPageOpened(
+  Future<void> _onPageOpened(
     SeatingPageEventPageOpened event,
     Emitter emit,
   ) async {

@@ -1,5 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/domain/base_interactor.dart';
 import 'package:seating_generator_web/domain/repositories/purchase_repository.dart';
 
@@ -22,7 +22,7 @@ class BillTournamentInteractor extends BaseInteractor {
           tournamentId: tournamentId,
           playersCount: playersCount,
           billedTranslation: billedTranslation,
-          redirectPath: GoRouter.of(_context).routeInformationProvider.value.uri.toString(),
+          redirectPath: _context.router.currentUrl,
         ),
       );
 }

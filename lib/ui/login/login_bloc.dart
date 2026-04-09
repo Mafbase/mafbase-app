@@ -1,15 +1,13 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/models/login_model.dart';
 import 'package:seating_generator_web/ui/login/login_events.dart';
 import 'package:seating_generator_web/ui/login/login_state.dart';
-import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_page_body.dart';
-import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
-import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginInteractor _loginInteractor;
@@ -84,21 +82,25 @@ class LoginPageRouterImpl implements LoginPageRouter {
 
   @override
   void openMainPage() {
-    GoRouter.of(_context).go(_nextPath ?? '/');
+    if (_nextPath != null && _nextPath!.isNotEmpty) {
+      _context.router.navigatePath(_nextPath!);
+    } else {
+      _context.router.replaceAll([const ClubsRoute()]);
+    }
   }
 
   @override
   void openForgotPasswordPage() {
-    _context.go(ForgotPasswordPageBody.createLocation(context: _context));
+    _context.router.push(const ForgotPasswordPageRoute());
   }
 
   @override
   void openSignUpPage() {
-    _context.go(SignUpPageBody.createLocation(context: _context));
+    _context.router.push(const SignUpPageRoute());
   }
 
   @override
   void openVerificationPage(int id) {
-    _context.go(VerificationPageBody.namedLocation(_context, id));
+    _context.router.push(VerificationPageRoute(id: id));
   }
 }

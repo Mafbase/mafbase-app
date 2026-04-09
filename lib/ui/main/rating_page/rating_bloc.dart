@@ -29,12 +29,12 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
     on<RatingEventDownloadStats>(_onStatsDownload);
   }
 
-  _onStatsDownload(RatingEventDownloadStats event, Emitter emit) => _repos.clubRepository.downloadStats(
+  Future<dynamic> _onStatsDownload(RatingEventDownloadStats event, Emitter emit) => _repos.clubRepository.downloadStats(
         clubId: event.clubId,
         range: event.range,
       );
 
-  _onGameSelected(RatingEventGameSelected event, Emitter emit) {
+  void _onGameSelected(RatingEventGameSelected event, Emitter emit) {
     final clubId = event.clubId;
     if (clubId != null) {
       _router.openGame(clubId, event.gameId);
@@ -50,7 +50,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
     }
   }
 
-  _onDownloadRatingClicked(
+  Future<void> _onDownloadRatingClicked(
     RatingEventDownload event,
     Emitter emit,
   ) async {
@@ -60,7 +60,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
     );
   }
 
-  _onRangeChanged(RatingEventRangeChanged event, Emitter emit) {
+  void _onRangeChanged(RatingEventRangeChanged event, Emitter emit) {
     _router.changeRange(
       event.range,
       event.clubId,
@@ -72,7 +72,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
     );
   }
 
-  _onPageOpened(RatingEventPageOpened event, Emitter emit) async {
+  Future<void> _onPageOpened(RatingEventPageOpened event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     final RatingModel rating;
     if (event.clubId != null) {

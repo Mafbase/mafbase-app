@@ -1,7 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
+import 'package:seating_generator_web/app/router.dart';
 
 abstract class AddClubGameRouter {
   void editPage(int? clubId, int? tournamentId, int gameId);
@@ -23,58 +22,37 @@ class AddClubGameRouterImpl implements AddClubGameRouter {
   @override
   void editPage(int? clubId, int? tournamentId, int gameId) {
     if (clubId != null) {
-      context.replace(
-        AddClubGamePage.createViewLocation(
-          context,
-          clubId,
-          gameId,
-          canEdit: true,
-        ),
+      context.router.replace(
+        ClubGameDetailRoute(clubId: clubId, gameId: gameId, editParam: true),
       );
     } else if (tournamentId != null) {
-      context.replace(
-        AddClubGamePage.createTournamentEditLocation(
-          context: context,
-          tournamentId: tournamentId,
-          gameId: gameId,
-          edit: true,
-        ),
+      context.router.replace(
+        TournamentGameDetailRoute(tournamentId: tournamentId, gameId: gameId, editParam: true),
       );
     }
   }
 
   @override
   void openGame(int clubId, int gameId) {
-    context.replace(
-      AddClubGamePage.createViewLocation(
-        context,
-        clubId,
-        gameId,
-        canEdit: false,
-      ),
+    context.router.replace(
+      ClubGameDetailRoute(clubId: clubId, gameId: gameId, editParam: false),
     );
   }
 
   @override
   void openNewGame(int clubId, [DateTime? initDateTime]) {
-    context.replace(
-      AddClubGamePage.createLocation(context, clubId),
-      extra: initDateTime,
+    context.router.replace(
+      NewClubGameRoute(clubId: clubId, initDateTime: initDateTime),
     );
   }
 
   @override
   void openLoginPage() {
-    context.go(
-      LoginPageBody.createLocation(
-        context: context,
-        nextPath: GoRouter.of(context).routeInformationProvider.value.uri.toString(),
-      ),
-    );
+    context.router.push(LoginPageRoute());
   }
 
   @override
   void pop() {
-    context.pop();
+    context.router.pop();
   }
 }

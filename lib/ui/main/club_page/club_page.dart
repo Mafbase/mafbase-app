@@ -1,11 +1,12 @@
 import 'dart:typed_data';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
@@ -13,10 +14,6 @@ import 'package:seating_generator_web/domain/interactors/bill_club_interactor.da
 import 'package:seating_generator_web/domain/interactors/check_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
-import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
-import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_page.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
-import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
@@ -27,37 +24,28 @@ import 'package:seating_generator_web/ui/main/club_page/widgets/club_description
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_hero_card.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_owners_bottom_sheet.dart';
-import 'package:seating_generator_web/ui/main/rating_page/rating_page.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class ClubPage extends StatefulWidget {
-  const ClubPage._();
+@RoutePage()
+class ClubPage extends StatelessWidget {
+  final int clubId;
+  final ClubModel? cachedModel;
+
+  const ClubPage({
+    super.key,
+    @PathParam('clubId') required this.clubId,
+    this.cachedModel,
+  });
 
   @override
-  State<ClubPage> createState() => _ClubPageState();
-
-  static void open({
-    required BuildContext context,
-    required int id,
-    ClubModel? cachedModel,
-  }) {
-    context.pushNamed(
-      'club',
-      pathParameters: {'clubId': id.toString()},
-      extra: cachedModel,
-    );
-  }
-
-  static final route = GoRoute(
-    name: 'club',
-    path: '/club/:clubId',
-    builder: (context, state) => BlocProvider<ClubBloc>(
+  Widget build(BuildContext context) {
+    final repos = RepositoryFactory.of(context);
+    return BlocProvider<ClubBloc>(
       create: (context) {
-        final repos = RepositoryFactory.of(context);
         final args = ClubBlocArgs(
-          clubId: int.parse(state.pathParameters['clubId']!),
-          cachedModel: state.extra as ClubModel?,
+          clubId: clubId,
+          cachedModel: cachedModel,
         );
         return ClubBloc(
           router: ClubRouterImpl(context),
@@ -70,19 +58,22 @@ class ClubPage extends StatefulWidget {
       },
       child: Container(
         color: context.theme.background1,
-        child: const ClubPage._(),
+        child: _ClubPageContent(clubId: clubId),
       ),
-    ),
-    routes: [
-      ...AddClubGamePage.routes,
-      RatingPage.clubRoute,
-      ClubGamesPage.route,
-      CustomColumnsEditorPage.route,
-    ],
-  );
+    );
+  }
 }
 
-class _ClubPageState extends CustomState<ClubPage> {
+class _ClubPageContent extends StatefulWidget {
+  final int clubId;
+
+  const _ClubPageContent({required this.clubId});
+
+  @override
+  State<_ClubPageContent> createState() => _ClubPageContentState();
+}
+
+class _ClubPageContentState extends CustomState<_ClubPageContent> {
   @override
   void initState() {
     context.read<ClubBloc>().add(const ClubEvent.pageOpened());
@@ -92,7 +83,7 @@ class _ClubPageState extends CustomState<ClubPage> {
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: context.backOrGoToDefault(ClubsPage.createLocation)),
+          leading: const BackButton(),
           title: Text(context.locale.clubPageTitle),
           actions: [
             BlocBuilder<ClubBloc, ClubState>(
@@ -172,7 +163,7 @@ class _ClubPageState extends CustomState<ClubPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault(ClubsPage.createLocation)),
+        leading: const BackButton(),
         title: Text(context.locale.clubPageTitle),
         actions: [
           BlocBuilder<ClubBloc, ClubState>(
@@ -236,12 +227,11 @@ class _ClubPageState extends CustomState<ClubPage> {
     context.read<ClubBloc>().add(const ClubEvent.openRating());
   }
 
-  void _addNewGame() => context.push(
-        AddClubGamePage.createLocation(
-          context,
-          context.read<ClubBloc>().state.model!.id,
-        ),
-      );
+  void _addNewGame() {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) return;
+    context.router.push(NewClubGameRoute(clubId: clubId));
+  }
 
   void _changeHideDate() async {
     final bloc = context.read<ClubBloc>();
@@ -323,11 +313,6 @@ class _ClubPageState extends CustomState<ClubPage> {
   void _editCustomColumns() {
     final clubId = context.read<ClubBloc>().state.model?.id;
     if (clubId == null) return;
-    context.push(
-      CustomColumnsEditorPage.createLocation(
-        context: context,
-        clubId: clubId,
-      ),
-    );
+    context.router.push(CustomColumnsEditorRoute(clubId: clubId));
   }
 }

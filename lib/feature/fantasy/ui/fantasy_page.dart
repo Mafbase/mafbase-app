@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
@@ -13,69 +13,52 @@ import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_partici
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_prediction_section.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_rating_section.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
-class FantasyPage extends StatefulWidget {
+@RoutePage()
+class FantasyPage extends StatelessWidget {
   final int tournamentId;
-  final bool isOwner;
 
   const FantasyPage({
     super.key,
-    required this.tournamentId,
-    required this.isOwner,
+    @PathParam('id') required this.tournamentId,
   });
 
   @override
-  State<FantasyPage> createState() => _FantasyPageState();
+  Widget build(BuildContext context) {
+    final isOwner = context.watch<TournamentPageBloc>().state.isMyTournament;
+    final userId = context.read<AuthNotifier>().value.mapOrNull(
+          authorized: (model) => model.userId,
+        );
 
-  static String createTournamentLocation({
-    required int tournamentId,
-    required BuildContext context,
-  }) {
-    return context.namedLocation(
-      _tournamentName,
-      pathParameters: {
-        'id': tournamentId.toString(),
-      },
+    return BlocProvider<FantasyBloc>(
+      key: ValueKey('$tournamentId$isOwner'),
+      create: (context) => FantasyBloc(const FantasyState(), RepositoryFactory.of(context).fantasyRepository)
+        ..add(
+          FantasyEventInit(
+            tournamentId: tournamentId,
+            isOwner: isOwner,
+            userId: userId,
+          ),
+        ),
+      child: _FantasyPageContent(tournamentId: tournamentId),
     );
   }
-
-  static const _tournamentName = 'tournament_fantasy';
-
-  static final GoRoute tournamentRoute = GoRoute(
-    path: 'fantasy',
-    name: _tournamentName,
-    builder: (context, state) {
-      final tournamentId = int.parse(state.pathParameters['id']!);
-      final isOwner = context.watch<TournamentPageBloc>().state.isMyTournament;
-      final userId = context.read<AuthNotifier>().value.mapOrNull(
-            authorized: (model) => model.userId,
-          );
-
-      return BlocProvider<FantasyBloc>(
-        key: ValueKey('$tournamentId$isOwner'),
-        create: (context) => FantasyBloc(const FantasyState(), RepositoryFactory.of(context).fantasyRepository)
-          ..add(
-            FantasyEventInit(
-              tournamentId: tournamentId,
-              isOwner: isOwner,
-              userId: userId,
-            ),
-          ),
-        child: FantasyPage(
-          tournamentId: tournamentId,
-          isOwner: isOwner,
-        ),
-      );
-    },
-  );
 }
 
-class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObserver {
+class _FantasyPageContent extends StatefulWidget {
+  final int tournamentId;
+
+  const _FantasyPageContent({required this.tournamentId});
+
+  @override
+  State<_FantasyPageContent> createState() => _FantasyPageContentState();
+}
+
+class _FantasyPageContentState extends CustomState<_FantasyPageContent> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -103,9 +86,7 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: BackButton(
-            onPressed: context.backOrGoToDefault(
-              (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
-            ),
+            onPressed: context.backOrGoToDefault((_) => '/tournament'),
           ),
           title: Text(context.locale.fantasy),
           actions: [
@@ -123,7 +104,6 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
               },
             ),
             TournamentMenuAction(
-              tournamentId: widget.tournamentId,
               openDrawer: () => Scaffold.of(context).openEndDrawer(),
             ),
           ],
@@ -183,9 +163,7 @@ class _FantasyPageState extends CustomState<FantasyPage> with WidgetsBindingObse
           return Scaffold(
             appBar: AppBar(
               leading: BackButton(
-                onPressed: context.backOrGoToDefault(
-                  (c) => TournamentPage.createLocation(context: c, tournamentId: widget.tournamentId),
-                ),
+                onPressed: context.backOrGoToDefault((_) => '/tournament'),
               ),
               title: Text(context.locale.fantasy),
               actions: [
