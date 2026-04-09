@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dropdown.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
@@ -102,12 +103,12 @@ class FantasyPredictionSection extends StatelessWidget {
                         ),
                         if (!isAuthorized) ...[
                           const SizedBox(height: 8),
-                          ElevatedButton(
-                            onPressed: () {
+                          CustomButton(
+                            text: context.locale.loginIn,
+                            onTap: () {
                               final currentUrl = context.router.currentUrl;
                               context.router.push(LoginPageRoute(nextPath: currentUrl));
                             },
-                            child: Text(context.locale.loginIn),
                           ),
                         ],
                       ],
