@@ -3,12 +3,14 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class ProfileActionsCard extends StatelessWidget {
+  final VoidCallback? onViewStatistics;
   final VoidCallback onPhotoThemes;
   final VoidCallback onLogout;
   final VoidCallback onDeleteAccount;
 
   const ProfileActionsCard({
     super.key,
+    this.onViewStatistics,
     required this.onPhotoThemes,
     required this.onLogout,
     required this.onDeleteAccount,
@@ -28,6 +30,20 @@ class ProfileActionsCard extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: [
+            if (onViewStatistics != null) ...[
+              _ActionTile(
+                icon: Icons.bar_chart,
+                iconBgColor: theme.background1,
+                label: locale.profileViewStatistics,
+                onTap: onViewStatistics!,
+                trailing: Icon(
+                  Icons.chevron_right,
+                  color: theme.darkGreyColor,
+                  size: 20,
+                ),
+              ),
+              const Divider(height: 1),
+            ],
             _ActionTile(
               icon: Icons.photo_library_outlined,
               iconBgColor: theme.background1,
