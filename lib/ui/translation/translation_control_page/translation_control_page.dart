@@ -28,6 +28,15 @@ class TranslationControlPage extends StatefulWidget {
 }
 
 class _TranslationControlPageState extends State<TranslationControlPage> with WidgetsBindingObserver {
+  late final bloc = TranslationControlBloc(
+    params: TranslationContentBlocParams(
+      tournamentId: widget.tournamentId,
+      table: widget.table,
+      key: widget.translationKey,
+    ),
+    repository: RepositoryFactory.of(context).translationRepository,
+  )..add(const TranslationControlEvent.pageOpened());
+
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -42,21 +51,14 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
 
   @override
   Widget build(BuildContext context) => BlocProvider<TranslationControlBloc>(
-      create: (context) => TranslationControlBloc(
-        params: TranslationContentBlocParams(
-          tournamentId: widget.tournamentId,
-          table: widget.table,
-          key: widget.translationKey,
-        ),
-        repository: RepositoryFactory.of(context).translationRepository,
-      )..add(const TranslationControlEvent.pageOpened()),
-      child: const TranslationControlContent(),
-    );
+        create: (context) => bloc,
+        child: const TranslationControlContent(),
+      );
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      context.read<TranslationControlBloc>().add(const TranslationControlEvent.pageOpened());
+      bloc.add(const TranslationControlEvent.pageOpened());
     }
   }
 }
@@ -66,75 +68,74 @@ class TranslationControlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TranslationControlBloc, TranslationContentState>(
-    builder: (context, state) {
-      final theme = context.theme;
-      return Scaffold(
-        backgroundColor: theme.background1,
-        appBar: AppBar(
-          backgroundColor: theme.background2,
-          elevation: 0,
-          title: Text(
-            context.locale.translationControlTitle,
-            style: theme.defaultTextStyle.copyWith(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        body: Column(
-          children: [
-            if (state.totalGames > 0)
-              TranslationControlGameSelector(
-                game: state.game,
-                totalGames: state.totalGames,
-                onChanged: (index) {
-                  context.read<TranslationControlBloc>().add(
-                    TranslationControlEvent.selectGame(gameIndex: index),
-                  );
-                },
-              ),
-            Expanded(
-              child: state.isNotEmpty()
-                  ? ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return TranslationControlPlayerCard(
-                    index: index,
-                    nickname: state.nicknames![index],
-                    imageUrl: state.images![index],
-                    role: state.roles![index],
-                    status: state.statuses![index],
-                    onRoleChanged: (role) {
-                      context.read<TranslationControlBloc>().add(
-                        TranslationControlEvent.changeRole(
-                          index: index,
-                          role: role,
-                        ),
-                      );
-                    },
-                    onStatusChanged: (status) {
-                      context.read<TranslationControlBloc>().add(
-                        TranslationControlEvent.changeStatus(
-                          index: index,
-                          status: status,
-                        ),
-                      );
-                    },
-                  );
-                },
-              )
-                  : Center(
-                child: Text(
-                  context.locale.translationControlEmpty,
-                  style: theme.hintTextStyle,
+        builder: (context, state) {
+          final theme = context.theme;
+          return Scaffold(
+            backgroundColor: theme.background1,
+            appBar: AppBar(
+              backgroundColor: theme.background2,
+              elevation: 0,
+              title: Text(
+                context.locale.translationControlTitle,
+                style: theme.defaultTextStyle.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-          ],
-        ),
+            body: Column(
+              children: [
+                if (state.totalGames > 0)
+                  TranslationControlGameSelector(
+                    game: state.game,
+                    totalGames: state.totalGames,
+                    onChanged: (index) {
+                      context.read<TranslationControlBloc>().add(
+                            TranslationControlEvent.selectGame(gameIndex: index),
+                          );
+                    },
+                  ),
+                Expanded(
+                  child: state.isNotEmpty()
+                      ? ListView.builder(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return TranslationControlPlayerCard(
+                              index: index,
+                              nickname: state.nicknames![index],
+                              imageUrl: state.images![index],
+                              role: state.roles![index],
+                              status: state.statuses![index],
+                              onRoleChanged: (role) {
+                                context.read<TranslationControlBloc>().add(
+                                      TranslationControlEvent.changeRole(
+                                        index: index,
+                                        role: role,
+                                      ),
+                                    );
+                              },
+                              onStatusChanged: (status) {
+                                context.read<TranslationControlBloc>().add(
+                                      TranslationControlEvent.changeStatus(
+                                        index: index,
+                                        status: status,
+                                      ),
+                                    );
+                              },
+                            );
+                          },
+                        )
+                      : Center(
+                          child: Text(
+                            context.locale.translationControlEmpty,
+                            style: theme.hintTextStyle,
+                          ),
+                        ),
+                ),
+              ],
+            ),
+          );
+        },
       );
-    },
-  );
 }
-
