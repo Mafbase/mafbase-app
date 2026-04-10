@@ -53,14 +53,29 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
           });
         },
         child: Padding(
-          padding: const EdgeInsets.all(40.0),
+          padding: const EdgeInsets.fromLTRB(40.0, 24.0, 40.0, 40.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Align(
-                alignment: Alignment.centerRight,
-                child: CloseButton(),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      context.locale.tournamentMenuPayment,
+                      style: context.theme.defaultTextStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close),
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                  ),
+                ],
               ),
               FormField<int>(
                 initialValue: widget.playersCount,
