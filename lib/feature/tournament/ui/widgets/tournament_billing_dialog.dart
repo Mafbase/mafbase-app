@@ -53,7 +53,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
           });
         },
         child: Padding(
-          padding: const EdgeInsets.all(40.0),
+          padding: const EdgeInsets.fromLTRB(40.0, 24.0, 40.0, 40.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
