@@ -52,6 +52,9 @@ class AppRouter extends RootStackRouter {
   final GlobalKey<NavigatorState> navigatorKey;
 
   @override
+  List<AutoRouteGuard> get guards => [authGuard];
+
+  @override
   List<AutoRoute> get routes => [
         // Standalone routes (no shell)
         AutoRoute(page: TempRoute.page, path: '/temp'),
@@ -65,7 +68,6 @@ class AppRouter extends RootStackRouter {
         AutoRoute(
           page: AppShellRoute.page,
           path: '/',
-          guards: [authGuard],
           children: [
             AutoRoute(page: LoginPageRoute.page, path: 'auth'),
             AutoRoute(page: SignUpPageRoute.page, path: 'auth/signUp'),
