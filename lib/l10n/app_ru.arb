@@ -641,6 +641,8 @@
   "@tooltipFnCeil": {},
   "playerStatsTitle": "Статистика игрока",
   "@playerStatsTitle": {},
+  "profileViewStatistics": "Посмотреть статистику",
+  "@profileViewStatistics": {},
   "playerStatsOverall": "Общая статистика",
   "@playerStatsOverall": {},
   "playerStatsCitizen": "Мирный житель",

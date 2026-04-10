@@ -92,6 +92,9 @@ class _ProfilePageState extends State<ProfilePage>
                       const SizedBox(height: 12),
                     ],
                     ProfileActionsCard(
+                      onViewStatistics: state.playerProfile != null && state.playerProfile!.id != -1
+                          ? () => context.router.push(PlayerStatsRoute(playerId: state.playerProfile!.id))
+                          : null,
                       onPhotoThemes: () => context.router.push(PhotoThemesRoute()),
                       onLogout: () => context.read<ProfileBloc>().add(const ProfileEvent.onLogoutPressed()),
                       onDeleteAccount: _deleteAccount,
