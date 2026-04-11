@@ -374,11 +374,13 @@ class _RoleIcon extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AnimatedCrossFade(
+            AnimatedSwitcher(
               duration: duration,
-              crossFadeState: isActive ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-              firstChild: SvgPicture.asset(asset, height: 34),
-              secondChild: SvgPicture.asset(disabledAsset, height: 34),
+              child: SvgPicture.asset(
+                isActive ? asset : disabledAsset,
+                key: ValueKey(isActive),
+                height: 34,
+              ),
             ),
             const SizedBox(height: 3),
             isActive
