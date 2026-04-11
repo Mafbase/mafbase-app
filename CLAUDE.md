@@ -36,12 +36,12 @@
 3. **UI** — страница и виджеты по согласованному дизайну
 4. **Локализация** — строки в `app_ru.arb` + `fvm flutter gen-l10n`
 5. **Роутинг** — добавить маршрут в `router.dart`
-6. **Проверка** — `fvm flutter analyze`
+6. **Проверка** — `fvm dart format .`, `fvm flutter analyze`, `fvm flutter test`
 
 ## Этап 4 — Финализация
 
 - Запусти golden-тесты для новых страниц (скилл `/golden-test`)
-- Убедись что `fvm flutter analyze` проходит без ошибок
+- Убедись что `fvm dart format .`, `fvm flutter analyze` и `fvm flutter test` проходят без ошибок
 
 # Обработка ошибок в Bloc
 

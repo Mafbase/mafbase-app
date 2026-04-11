@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class TranslationControlPlayerCard extends StatelessWidget {
   final int index;
@@ -212,6 +213,7 @@ class _StatusPicker extends StatelessWidget {
         children: [
           _StatusIcon(
             asset: AppAssets.deletedStatus,
+            tooltip: context.locale.translationControlStatusDeleted,
             isActive: status == PlayerStatus.deleted,
             activeColor: theme.btnColor2,
             duration: _duration,
@@ -221,6 +223,7 @@ class _StatusPicker extends StatelessWidget {
           ),
           _StatusIcon(
             asset: AppAssets.killedStatus,
+            tooltip: context.locale.translationControlStatusKilled,
             isActive: status == PlayerStatus.killed,
             activeColor: theme.btnColor2,
             duration: _duration,
@@ -230,6 +233,7 @@ class _StatusPicker extends StatelessWidget {
           ),
           _StatusIcon(
             asset: AppAssets.votedStatus,
+            tooltip: context.locale.translationControlStatusVoted,
             isActive: status == PlayerStatus.voted,
             activeColor: theme.btnColor2,
             duration: _duration,
@@ -245,6 +249,7 @@ class _StatusPicker extends StatelessWidget {
 
 class _StatusIcon extends StatelessWidget {
   final String asset;
+  final String tooltip;
   final bool isActive;
   final Color activeColor;
   final Duration duration;
@@ -252,6 +257,7 @@ class _StatusIcon extends StatelessWidget {
 
   const _StatusIcon({
     required this.asset,
+    required this.tooltip,
     required this.isActive,
     required this.activeColor,
     required this.duration,
@@ -260,30 +266,33 @@ class _StatusIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(4),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AnimatedOpacity(
-              opacity: isActive ? 1.0 : 0.25,
-              duration: duration,
-              child: SvgPicture.asset(asset, height: 34),
-            ),
-            const SizedBox(height: 3),
-            isActive
-                ? Container(
-                    width: 4,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: activeColor,
-                    ),
-                  )
-                : const SizedBox(height: 4),
-          ],
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedOpacity(
+                opacity: isActive ? 1.0 : 0.25,
+                duration: duration,
+                child: SvgPicture.asset(asset, height: 34),
+              ),
+              const SizedBox(height: 3),
+              isActive
+                  ? Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: activeColor,
+                      ),
+                    )
+                  : const SizedBox(height: 4),
+            ],
+          ),
         ),
       ),
     );
@@ -313,6 +322,7 @@ class _RolePicker extends StatelessWidget {
           _RoleIcon(
             asset: AppAssets.mafiaSvg,
             disabledAsset: AppAssets.mafiaDisabledSvg,
+            tooltip: context.locale.translationControlRoleMafia,
             isActive: role == PlayerRole.maf,
             activeColor: theme.positiveColor,
             duration: _duration,
@@ -321,6 +331,7 @@ class _RolePicker extends StatelessWidget {
           _RoleIcon(
             asset: AppAssets.donSvg,
             disabledAsset: AppAssets.donDisabledSvg,
+            tooltip: context.locale.translationControlRoleDon,
             isActive: role == PlayerRole.don,
             activeColor: theme.positiveColor,
             duration: _duration,
@@ -329,6 +340,7 @@ class _RolePicker extends StatelessWidget {
           _RoleIcon(
             asset: AppAssets.sheriffSvg,
             disabledAsset: AppAssets.sheriffDisabledSvg,
+            tooltip: context.locale.translationControlRoleSheriff,
             isActive: role == PlayerRole.sheriff,
             activeColor: theme.positiveColor,
             duration: _duration,
@@ -337,6 +349,7 @@ class _RolePicker extends StatelessWidget {
           _RoleIcon(
             asset: AppAssets.citizenSvg,
             disabledAsset: AppAssets.citizenDisabledSvg,
+            tooltip: context.locale.translationControlRoleCitizen,
             isActive: role == PlayerRole.citizen,
             activeColor: theme.positiveColor,
             duration: _duration,
@@ -351,6 +364,7 @@ class _RolePicker extends StatelessWidget {
 class _RoleIcon extends StatelessWidget {
   final String asset;
   final String disabledAsset;
+  final String tooltip;
   final bool isActive;
   final Color activeColor;
   final Duration duration;
@@ -359,6 +373,7 @@ class _RoleIcon extends StatelessWidget {
   const _RoleIcon({
     required this.asset,
     required this.disabledAsset,
+    required this.tooltip,
     required this.isActive,
     required this.activeColor,
     required this.duration,
@@ -367,33 +382,36 @@ class _RoleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(4),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AnimatedSwitcher(
-              duration: duration,
-              child: SvgPicture.asset(
-                isActive ? asset : disabledAsset,
-                key: ValueKey(isActive),
-                height: 34,
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedSwitcher(
+                duration: duration,
+                child: SvgPicture.asset(
+                  isActive ? asset : disabledAsset,
+                  key: ValueKey(isActive),
+                  height: 34,
+                ),
               ),
-            ),
-            const SizedBox(height: 3),
-            isActive
-                ? Container(
-                    width: 4,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: activeColor,
-                    ),
-                  )
-                : const SizedBox(height: 4),
-          ],
+              const SizedBox(height: 3),
+              isActive
+                  ? Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: activeColor,
+                      ),
+                    )
+                  : const SizedBox(height: 4),
+            ],
+          ),
         ),
       ),
     );
