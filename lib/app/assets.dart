@@ -14,12 +14,20 @@ class AppAssets {
   static const String votedStatus = 'assets/voted_status.svg';
 
   static String donAsset() => 'assets/don.png';
+  static const String donSvg = 'assets/don.svg';
+  static const String donDisabledSvg = 'assets/don_disabled.svg';
 
   static String citizenAsset() => 'assets/citizen.png';
+  static const String citizenSvg = 'assets/citizen.svg';
+  static const String citizenDisabledSvg = 'assets/citizen_disabled.svg';
 
   static String mafiaAsset() => 'assets/mafia.png';
+  static const String mafiaSvg = 'assets/mafia.svg';
+  static const String mafiaDisabledSvg = 'assets/mafia_disabled.svg';
 
   static String sheriffAsset() => 'assets/sheriff.png';
+  static const String sheriffSvg = 'assets/sheriff.svg';
+  static const String sheriffDisabledSvg = 'assets/sheriff_disabled.svg';
 
   static const playerPhoto = 'assets/player_photo.png';
 }

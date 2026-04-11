@@ -51,54 +51,51 @@ class TranslationControlPlayerCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Opacity(
-        opacity: _isDead ? 0.55 : 1.0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  _PlayerNumber(index: index, theme: theme),
-                  const SizedBox(width: 8),
-                  _PlayerAvatar(imageUrl: imageUrl, nickname: nickname, theme: theme),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      nickname,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.defaultTextStyle.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                _PlayerNumber(index: index, theme: theme),
+                const SizedBox(width: 8),
+                _PlayerAvatar(imageUrl: imageUrl, nickname: nickname, theme: theme),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    nickname,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.defaultTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              Row(
-                children: [
-                  _StatusPicker(
-                    status: status,
-                    onChanged: onStatusChanged,
-                    theme: theme,
-                  ),
-                  Container(
-                    width: 1,
-                    height: 28,
-                    color: theme.borderColor,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                  ),
-                  _RolePicker(
-                    role: role,
-                    onChanged: onRoleChanged,
-                    theme: theme,
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                _StatusPicker(
+                  status: status,
+                  onChanged: onStatusChanged,
+                  theme: theme,
+                ),
+                Container(
+                  width: 1,
+                  height: 28,
+                  color: theme.borderColor,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                ),
+                _RolePicker(
+                  role: role,
+                  onChanged: onRoleChanged,
+                  theme: theme,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -314,28 +311,32 @@ class _RolePicker extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _RoleIcon(
-            asset: AppAssets.mafiaAsset(),
+            asset: AppAssets.mafiaSvg,
+            disabledAsset: AppAssets.mafiaDisabledSvg,
             isActive: role == PlayerRole.maf,
             activeColor: theme.positiveColor,
             duration: _duration,
             onTap: () => onChanged(PlayerRole.maf),
           ),
           _RoleIcon(
-            asset: AppAssets.donAsset(),
+            asset: AppAssets.donSvg,
+            disabledAsset: AppAssets.donDisabledSvg,
             isActive: role == PlayerRole.don,
             activeColor: theme.positiveColor,
             duration: _duration,
             onTap: () => onChanged(PlayerRole.don),
           ),
           _RoleIcon(
-            asset: AppAssets.sheriffAsset(),
+            asset: AppAssets.sheriffSvg,
+            disabledAsset: AppAssets.sheriffDisabledSvg,
             isActive: role == PlayerRole.sheriff,
             activeColor: theme.positiveColor,
             duration: _duration,
             onTap: () => onChanged(PlayerRole.sheriff),
           ),
           _RoleIcon(
-            asset: AppAssets.citizenAsset(),
+            asset: AppAssets.citizenSvg,
+            disabledAsset: AppAssets.citizenDisabledSvg,
             isActive: role == PlayerRole.citizen,
             activeColor: theme.positiveColor,
             duration: _duration,
@@ -349,6 +350,7 @@ class _RolePicker extends StatelessWidget {
 
 class _RoleIcon extends StatelessWidget {
   final String asset;
+  final String disabledAsset;
   final bool isActive;
   final Color activeColor;
   final Duration duration;
@@ -356,6 +358,7 @@ class _RoleIcon extends StatelessWidget {
 
   const _RoleIcon({
     required this.asset,
+    required this.disabledAsset,
     required this.isActive,
     required this.activeColor,
     required this.duration,
@@ -371,10 +374,11 @@ class _RoleIcon extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AnimatedOpacity(
-              opacity: isActive ? 1.0 : 0.22,
+            AnimatedCrossFade(
               duration: duration,
-              child: Image.asset(asset, height: 34),
+              crossFadeState: isActive ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              firstChild: SvgPicture.asset(asset, height: 34),
+              secondChild: SvgPicture.asset(disabledAsset, height: 34),
             ),
             const SizedBox(height: 3),
             isActive
