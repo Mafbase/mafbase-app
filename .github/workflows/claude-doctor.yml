@@ -11,7 +11,7 @@ on:
 jobs:
   diagnose:
     name: Diagnose Claude Workflow
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS]
     permissions:
       actions: read       # Читать логи workflow
       issues: write       # Создавать GitHub Issues
