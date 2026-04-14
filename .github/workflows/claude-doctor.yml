@@ -20,7 +20,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - name: Install GitHub CLI
+        run: |
+          brew install gh
+          gh --version
       - name: Download workflow logs
         id: get-logs
         env:
