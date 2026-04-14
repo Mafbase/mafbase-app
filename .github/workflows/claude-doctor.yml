@@ -1,0 +1,87 @@
+name: 🩺 Claude Workflow Doctor
+
+on:
+  workflow_run:
+    workflows:
+      - "Claude Code Review"
+      - "Claude Code"
+    types:
+      - completed  # Срабатывает всегда — и при success, и при failure
+
+jobs:
+  diagnose:
+    name: Diagnose Claude Workflow
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read       # Читать логи workflow
+      issues: write       # Создавать GitHub Issues
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download workflow logs
+        id: get-logs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Fetching logs for run: $RUN_ID"
+
+          gh api \
+            "repos/$REPO/actions/runs/$RUN_ID/logs" \
+            --header "Accept: application/vnd.github+json" \
+            > logs.zip 2>/dev/null || true
+
+          if [ -f logs.zip ] && [ -s logs.zip ]; then
+            mkdir -p logs_dir
+            unzip -q logs.zip -d logs_dir || true
+            find logs_dir -name "*.txt" | sort | xargs cat > all_logs.txt 2>/dev/null || true
+            echo "LOG_SIZE=$(wc -c < all_logs.txt)" >> $GITHUB_OUTPUT
+            echo "Logs fetched: $(wc -l < all_logs.txt) lines"
+          else
+            echo "" > all_logs.txt
+            echo "LOG_SIZE=0" >> $GITHUB_OUTPUT
+            echo "Warning: Could not fetch logs"
+          fi
+
+      - name: Run Doctor analysis
+        id: doctor
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
+          WORKFLOW_STATUS: ${{ github.event.workflow_run.conclusion }}
+          WORKFLOW_URL: ${{ github.event.workflow_run.html_url }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          python3 .github/scripts/claude_doctor.py
+
+      - name: Create GitHub Issue if problems found
+        if: steps.doctor.outputs.has_problems == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_TITLE: ${{ steps.doctor.outputs.issue_title }}
+          ISSUE_BODY_FILE: /tmp/doctor_issue_body.md
+          LABELS: ${{ steps.doctor.outputs.severity == 'critical' && 'bug,claude-doctor,critical' || 'claude-doctor' }}
+        run: |
+          gh issue create \
+            --repo "$REPO" \
+            --title "$ISSUE_TITLE" \
+            --body-file "$ISSUE_BODY_FILE" \
+            --label "$LABELS" \
+          || echo "Warning: Could not create issue (labels may not exist yet)"
+
+      - name: Create labels if missing
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh label create "claude-doctor" --color "0075ca" --description "Created by Claude Workflow Doctor" --repo "$REPO" 2>/dev/null || true
+          gh label create "critical" --color "d73a4a" --description "Critical severity" --repo "$REPO" 2>/dev/null || true
