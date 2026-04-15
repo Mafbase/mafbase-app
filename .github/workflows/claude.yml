@@ -37,7 +37,7 @@ jobs:
           flutter-version: '3.41.3'
       - name: Install GitHub CLI
         run: |
-          brew install gh
+          command -v gh >/dev/null 2>&1 || brew install gh
           gh --version
       - name: Run Claude Code
         id: claude
@@ -48,6 +48,6 @@ jobs:
           show_full_output: true
           additional_permissions: |
             actions: read
-          system_prompt: |
-            IMPORTANT: Ты запущен в CI-окружении. Используй команды `flutter` и `dart` напрямую (без fvm). Не используй `fvm flutter` или `fvm dart`.
-          claude_args: --allowedTools "Skill" "Bash(git fetch:*)" "Bash(git pull:*)" "Bash(flutter *)" "Bash(dart *)"
+          claude_args: >-
+            --append-system-prompt "IMPORTANT: Ты запущен в CI-окружении. Используй команды flutter и dart напрямую (без fvm). Не используй fvm flutter или fvm dart."
+            --allowedTools "Skill" "Bash(git fetch:*)" "Bash(git pull:*)" "Bash(flutter *)" "Bash(dart *)"
