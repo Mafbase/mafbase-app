@@ -48,4 +48,6 @@ jobs:
           show_full_output: true
           additional_permissions: |
             actions: read
-          claude_args: --append-system-prompt "IMPORTANT: Ты запущен в CI-окружении. Используй команды flutter и dart напрямую (без fvm). Не используй fvm flutter или fvm dart." --allowedTools "Skill" "Bash(git fetch:*)" "Bash(git pull:*)" "Bash(flutter *)" "Bash(dart *)"
+          claude_args: >-
+            --append-system-prompt "IMPORTANT: Ты запущен в CI-окружении. Используй команды flutter и dart напрямую (без fvm). Не используй fvm flutter или fvm dart."
+            --allowedTools "Skill" "Bash(git fetch:*)" "Bash(git pull:*)" "Bash(flutter *)" "Bash(dart *)"
