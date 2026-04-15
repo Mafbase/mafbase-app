@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install GitHub CLI
         run: |
-          brew install gh
+          command -v gh >/dev/null 2>&1 || brew install gh
           gh --version
       - name: Download workflow logs
         id: get-logs
