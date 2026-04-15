@@ -12,4 +12,6 @@ abstract class ClubsEvent with _$ClubsEvent {
   const factory ClubsEvent.clubSelected({
     required ClubModel clubModel,
   }) = ClubsEventClubSelected;
+
+  const factory ClubsEvent.createClubTapped() = ClubsEventCreateClubTapped;
 }

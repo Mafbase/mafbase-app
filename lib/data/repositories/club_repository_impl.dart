@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/data/requests/add_club_game_request.dart';
+import 'package:seating_generator_web/data/requests/create_club_request.dart';
 import 'package:seating_generator_web/data/requests/club_check_request.dart';
 import 'package:seating_generator_web/data/requests/clubs_list_request.dart';
 import 'package:seating_generator_web/data/requests/clubs_my_request.dart';
@@ -166,4 +167,16 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
         bytes: bytes,
         filename: fileName,
       ).execute(client);
+
+  @override
+  Future<ClubModel> createClub({
+    required String name,
+    String? description,
+    String? groupLink,
+  }) =>
+      CreateClubRequest(
+        name: name,
+        description: description,
+        groupLink: groupLink,
+      ).execute(client).then(ClubModel.fromProto);
 }

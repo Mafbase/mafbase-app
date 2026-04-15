@@ -55,6 +55,10 @@ class _ClubsPageContentState extends CustomState<_ClubsPageContent> {
   @override
   Widget? buildMobile(BuildContext context) => Scaffold(
         appBar: const MainMobileAppBar(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => context.read<ClubsBloc>().add(const ClubsEvent.createClubTapped()),
+          child: const Icon(Icons.add),
+        ),
         body: BlocBuilder<ClubsBloc, ClubsState>(
           builder: (context, state) {
             if (state.isLoading) {
@@ -87,6 +91,13 @@ class _ClubsPageContentState extends CustomState<_ClubsPageContent> {
   Widget buildDesktop(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(context.locale.clubsHeader),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.add),
+              tooltip: context.locale.addClubTitle,
+              onPressed: () => context.read<ClubsBloc>().add(const ClubsEvent.createClubTapped()),
+            ),
+          ],
         ),
         body: BlocBuilder<ClubsBloc, ClubsState>(
           builder: (context, state) {

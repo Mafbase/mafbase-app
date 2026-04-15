@@ -23,6 +23,7 @@ import 'package:seating_generator_web/ui/login/reset_password_body/reset_passwor
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
 import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_wrappers.dart';
+import 'package:seating_generator_web/ui/main/add_club/add_club_page.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -92,6 +93,7 @@ class AppRouter extends RootStackRouter {
               ],
             ),
 
+            AutoRoute(page: AddClubRoute.page, path: 'club/add'),
             AutoRoute(page: ClubRoute.page, path: 'club/:clubId'),
             AutoRoute(page: NewClubGameRoute.page, path: 'club/:clubId/addGame'),
             AutoRoute(page: ClubGameDetailRoute.page, path: 'club/:clubId/game/:gameId'),
