@@ -9,7 +9,10 @@ class CreateClubRequest extends BaseRequest<Club> {
     required String name,
     String? description,
     String? groupLink,
-  }) : super('/api/club', data: _buildClub(name, description, groupLink));
+  }) : super(
+         '/api/club/create',
+         data: _buildClub(name, description, groupLink),
+       );
 
   static Club _buildClub(String name, String? description, String? groupLink) {
     final club = Club()..name = name;
