@@ -49,27 +49,28 @@ class _AddClubPageContentState extends State<_AddClubPageContent> {
   }
 
   void _submit(BuildContext context) {
+    final bloc = context.read<AddClubBloc>();
+    if (bloc.state.isLoading) return;
+
     final name = _nameController.text.trim();
     if (name.isEmpty) return;
 
     final description = _descriptionController.text.trim();
     final groupLink = _groupLinkController.text.trim();
 
-    context.read<AddClubBloc>().add(
-          AddClubEvent.formSubmitted(
-            name: name,
-            description: description.isEmpty ? null : description,
-            groupLink: groupLink.isEmpty ? null : groupLink,
-          ),
-        );
+    bloc.add(
+      AddClubEvent.formSubmitted(
+        name: name,
+        description: description.isEmpty ? null : description,
+        groupLink: groupLink.isEmpty ? null : groupLink,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.locale.addClubTitle),
-      ),
+      appBar: AppBar(title: Text(context.locale.addClubTitle)),
       body: BlocBuilder<AddClubBloc, AddClubState>(
         builder: (context, state) {
           return SingleChildScrollView(
