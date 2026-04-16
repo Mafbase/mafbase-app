@@ -28,7 +28,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          submodules: recursive
+          token: ${{ secrets.PAT_WITH_SUBMODULE_ACCESS }}
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -38,6 +39,5 @@ jobs:
       - name: Run Claude Code
         uses: Mafbase/Mafbase-workflows/.github/actions/claude-interactive@main
         with:
-          allowed_tools: '"Bash(git fetch:*)" "Bash(git pull:*)" "Bash(flutter *)" "Bash(dart *)" "Bash(ls *)"'
           system_prompt: 'IMPORTANT: Ты запущен в CI-окружении. Используй команды flutter и dart напрямую (без fvm). Не используй fvm flutter или fvm dart.'
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
