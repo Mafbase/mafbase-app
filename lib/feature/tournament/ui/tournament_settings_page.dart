@@ -131,7 +131,7 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                                     switch (e) {
                                       RatingScheme.oldFSM => context.locale.old_fsm_schema,
                                       RatingScheme.minusFSM => context.locale.minus_fsm_schema,
-                                      RatingScheme.msl => context.locale.msl_schema,
+                                      RatingScheme.mediagameMSL => context.locale.msl_schema,
                                       _ => '',
                                     },
                                   ),
