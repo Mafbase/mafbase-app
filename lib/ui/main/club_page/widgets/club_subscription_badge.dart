@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class ClubSubscriptionBadge extends StatelessWidget {
-  final String? dateText;
-  final bool isActive;
+  final DateTime billedFor;
 
-  const ClubSubscriptionBadge({super.key, this.dateText, this.isActive = true});
+  const ClubSubscriptionBadge({super.key, required this.billedFor});
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
+    final isActive = billedFor.isAfter(DateTime.now());
     final color = isActive ? theme.positiveColor : theme.redColor;
     final text = isActive
-        ? context.locale.clubSubscriptionUntil(dateText!)
+        ? context.locale.clubSubscriptionUntil(
+            DateFormat('dd.MM.yyyy').format(billedFor),
+          )
         : context.locale.clubSubscriptionInactive;
 
     return Container(
