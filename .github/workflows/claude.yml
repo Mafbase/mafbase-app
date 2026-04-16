@@ -50,4 +50,4 @@ jobs:
             actions: read
           claude_args: >-
             --append-system-prompt "IMPORTANT: Ты запущен в CI-окружении. Используй команды flutter и dart напрямую (без fvm). Не используй fvm flutter или fvm dart."
-            --allowedTools "Skill" "WebFetch(*)" "Bash(git fetch:*)" "Bash(git pull:*)" "Bash(flutter *)" "Bash(dart *)"
+            --allowedTools "Skill" "Read" "Glob" "Grep" "WebFetch(*)" "Bash(git fetch:*)" "Bash(git pull:*)" "Bash(flutter *)" "Bash(dart *)" "Bash(ls *)"
