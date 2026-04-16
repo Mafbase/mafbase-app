@@ -22,6 +22,12 @@ Status: {workflow_status}
 {logs}
 === LOGS END ===
 
+## IGNORE these messages (they are known noise, NOT problems):
+- "Internal error: directory mismatch for directory ... You don't need to do anything, but this indicates a bug." — this is a known runner-level bug, not actionable.
+- "##[warning]Node.js 20 actions are deprecated..." / "Actions will be forced to run with Node.js 24 by default starting ..." — GitHub deprecation notice, not a workflow problem.
+
+Do NOT report these as problems. Skip them entirely.
+
 ## Detect these patterns:
 
 **Tool access errors:** "Tool X is not in the list of allowed tools", "not allowed to use tool"
