@@ -37,7 +37,7 @@ jobs:
           allowed_bots: '*'
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
-          claude_args: '--allowedTools Skill,"Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh api:*),Bash(flutter analyze:*),Bash(dart analyze:*),Bash(flutter test:*)"'
+          claude_args: '--allowedTools "Skill" "Bash(gh pr view:*)" "Bash(gh pr diff:*)" "Bash(gh api:*)" "Bash(flutter analyze:*)" "Bash(dart analyze:*)" "Bash(flutter test:*)"'
           prompt: |
             IMPORTANT: Ты запущен в CI-окружении. Используй команды `flutter` и `dart` напрямую (без fvm). Не используй `fvm flutter` или `fvm dart`.
             /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
