@@ -897,6 +897,8 @@
       }
     }
   },
+  "clubSubscriptionInactive": "Подписка неактивна",
+  "@clubSubscriptionInactive": {},
   "clubActionOpenRating": "Открыть рейтинг",
   "@clubActionOpenRating": {},
   "clubActionOpenRatingSubtitle": "Рейтинг игроков клуба",

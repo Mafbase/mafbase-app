@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:seating_generator_web/common/widgets/club_avatar.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
@@ -155,9 +154,7 @@ class ClubHeroCard extends StatelessWidget {
         ],
         if (isOwner && clubModel.billedFor != null) ...[
           const SizedBox(height: 10),
-          ClubSubscriptionBadge(
-            dateText: DateFormat('dd.MM.yyyy').format(clubModel.billedFor!),
-          ),
+          ClubSubscriptionBadge(billedFor: clubModel.billedFor!),
         ],
       ],
     );
