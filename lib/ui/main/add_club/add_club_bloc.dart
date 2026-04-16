@@ -11,21 +11,24 @@ class AddClubBloc extends Bloc<AddClubEvent, AddClubState> {
   AddClubBloc({
     required CreateClubInteractor createClubInteractor,
     required AddClubRouter router,
-  })  : _createClubInteractor = createClubInteractor,
-        _router = router,
-        super(const AddClubState()) {
+  }) : _createClubInteractor = createClubInteractor,
+       _router = router,
+       super(const AddClubState()) {
     on<AddClubEventFormSubmitted>(_onFormSubmitted);
   }
 
-  Future<void> _onFormSubmitted(AddClubEventFormSubmitted event, Emitter emit) async {
+  Future<void> _onFormSubmitted(
+    AddClubEventFormSubmitted event,
+    Emitter emit,
+  ) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final club = await _createClubInteractor.run(
+      await _createClubInteractor.run(
         name: event.name,
         description: event.description,
         groupLink: event.groupLink,
       );
-      _router.openClubPage(club);
+      _router.openClubsPage();
     } finally {
       emit(state.copyWith(isLoading: false));
     }
