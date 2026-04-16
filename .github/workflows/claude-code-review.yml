@@ -12,7 +12,6 @@ jobs:
       pull-requests: write
       issues: read
       id-token: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,21 +22,10 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.41.3'
-      - name: Install GitHub CLI
-        run: |
-          command -v gh >/dev/null 2>&1 || brew install gh
-          gh --version
+
       - name: Run Claude Code Review
-        id: claude-review
-        uses: anthropics/claude-code-action@v1
+        uses: Mafbase/Mafbase-workflows/.github/actions/claude-code-review@main
         with:
+          allowed_tools: '"Bash(flutter analyze:*)" "Bash(dart analyze:*)" "Bash(flutter test:*)"'
+          system_prompt: 'IMPORTANT: Ты запущен в CI-окружении. Используй команды flutter и dart напрямую (без fvm). Не используй fvm flutter или fvm dart.'
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          path_to_claude_code_executable: claude
-          show_full_output: true
-          allowed_bots: '*'
-          plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
-          plugins: 'code-review@claude-code-plugins'
-          claude_args: '--allowedTools "Skill" "Bash(gh pr view:*)" "Bash(gh pr diff:*)" "Bash(gh api:*)" "Bash(flutter analyze:*)" "Bash(dart analyze:*)" "Bash(flutter test:*)"'
-          prompt: |
-            IMPORTANT: Ты запущен в CI-окружении. Используй команды `flutter` и `dart` напрямую (без fvm). Не используй `fvm flutter` или `fvm dart`.
-            /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
