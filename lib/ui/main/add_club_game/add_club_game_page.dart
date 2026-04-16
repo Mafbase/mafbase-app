@@ -179,7 +179,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
         case List<double> addScore when addScore.length == 10:
           addScoreControllers[i].text = addScore[i].toString();
         default:
-          addScoreControllers[i].text = '0.0';
+          addScoreControllers[i].text = effect.ratingsSchema == RatingScheme.msl ? '2.5' : '0.0';
       }
 
       if (effect.players case final players?) {
@@ -506,6 +506,8 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                         switch (model) {
                           case RatingScheme.minusFSM:
                             return context.locale.minus_fsm_schema;
+                          case RatingScheme.msl:
+                            return context.locale.msl_schema;
                           default:
                             return context.locale.old_fsm_schema;
                         }
@@ -513,6 +515,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                       items: [
                         RatingScheme.oldFSM,
                         RatingScheme.minusFSM,
+                        RatingScheme.msl,
                       ],
                       onChanged: (value) {
                         setState(() {

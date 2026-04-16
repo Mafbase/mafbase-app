@@ -112,12 +112,13 @@ const RatingScheme$json = {
   '2': [
     {'1': 'oldFSM', '2': 0},
     {'1': 'minusFSM', '2': 1},
+    {'1': 'msl', '2': 2},
   ],
 };
 
 /// Descriptor for `RatingScheme`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List ratingSchemeDescriptor = $convert
-    .base64Decode('CgxSYXRpbmdTY2hlbWUSCgoGb2xkRlNNEAASDAoIbWludXNGU00QAQ==');
+    .base64Decode('CgxSYXRpbmdTY2hlbWUSCgoGb2xkRlNNEAASDAoIbWludXNGU00QARIHCgNtc2wQAg==');
 
 @$core.Deprecated('Use loginEventDescriptor instead')
 const LoginEvent$json = {

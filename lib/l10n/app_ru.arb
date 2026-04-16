@@ -336,6 +336,7 @@
   "rating_schema": "Схема рассчета",
   "old_fsm_schema": "Старая схема ФСМ",
   "minus_fsm_schema": "Схема ФСМ с минусами",
+  "msl_schema": "MediaGame (МСЛ)",
   "fantasy": "Фэнтези",
   "@fantasy": {},
   "fantasyRatingEmpty": "Рейтинг пока пуст",
