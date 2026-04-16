@@ -157,6 +157,7 @@ class ClubHeroCard extends StatelessWidget {
           const SizedBox(height: 10),
           ClubSubscriptionBadge(
             dateText: DateFormat('dd.MM.yyyy').format(clubModel.billedFor!),
+            isActive: clubModel.billedFor!.isAfter(DateTime.now()),
           ),
         ],
       ],
