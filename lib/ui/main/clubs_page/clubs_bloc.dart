@@ -18,6 +18,7 @@ class ClubsBloc extends Bloc<ClubsEvent, ClubsState> {
         super(const ClubsState()) {
     on<ClubsEventPageOpened>(_onPageOpened);
     on<ClubsEventClubSelected>(_onClubSelected);
+    on<ClubsEventCreateClubTapped>(_onCreateClubTapped);
   }
 
   void _onClubSelected(ClubsEventClubSelected event, Emitter emit) {
@@ -25,6 +26,10 @@ class ClubsBloc extends Bloc<ClubsEvent, ClubsState> {
       id: event.clubModel.id,
       cachedModel: event.clubModel,
     );
+  }
+
+  void _onCreateClubTapped(ClubsEventCreateClubTapped event, Emitter emit) {
+    _router.openCreateClub();
   }
 
   Future<void> _onPageOpened(ClubsEventPageOpened event, Emitter emit) async {

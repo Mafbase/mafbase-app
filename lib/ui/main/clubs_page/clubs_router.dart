@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 
+
 abstract class ClubsRouter {
   void openClubPage({required int id, ClubModel? cachedModel});
+  void openCreateClub();
 }
 
 class ClubsRouterImpl implements ClubsRouter {
@@ -15,5 +17,10 @@ class ClubsRouterImpl implements ClubsRouter {
   @override
   void openClubPage({required int id, ClubModel? cachedModel}) {
     context.router.push(ClubRoute(clubId: id, cachedModel: cachedModel));
+  }
+
+  @override
+  void openCreateClub() {
+    context.router.push(const AddClubRoute());
   }
 }

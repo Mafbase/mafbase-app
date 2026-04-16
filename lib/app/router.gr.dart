@@ -11,6 +11,22 @@
 part of 'router.dart';
 
 /// generated route for
+/// [AddClubPage]
+class AddClubRoute extends PageRouteInfo<void> {
+  const AddClubRoute({List<PageRouteInfo>? children})
+      : super(AddClubRoute.name, initialChildren: children);
+
+  static const String name = 'AddClubRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AddClubPage();
+    },
+  );
+}
+
+/// generated route for
 /// [AdministrationPage]
 class AdministrationRoute extends PageRouteInfo<AdministrationRouteArgs> {
   AdministrationRoute({

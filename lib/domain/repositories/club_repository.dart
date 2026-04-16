@@ -60,4 +60,10 @@ abstract class ClubRepository {
     required Uint8List bytes,
     required String fileName,
   });
+
+  Future<ClubModel> createClub({
+    required String name,
+    String? description,
+    String? groupLink,
+  });
 }
