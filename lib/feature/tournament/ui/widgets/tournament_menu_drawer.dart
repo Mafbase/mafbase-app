@@ -143,10 +143,7 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
       borderRadius: BorderRadius.circular(8),
       color: item.selected ? MyTheme.of(context).darkGreyColor : Colors.transparent,
       child: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-          item.onTap();
-        },
+        onTap: item.selected ? () {} : item.onTap,
         borderRadius: BorderRadius.circular(8),
         hoverColor: theme.sidebarActiveItemBgColor,
         child: Container(

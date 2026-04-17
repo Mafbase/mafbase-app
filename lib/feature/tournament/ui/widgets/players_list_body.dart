@@ -10,7 +10,6 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_even
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/player_row.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
-import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_selector.dart';
 import 'package:seating_generator_web/utils.dart';
 
 @RoutePage(name: 'TournamentPlayersRoute')

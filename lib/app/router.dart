@@ -114,7 +114,7 @@ class AppRouter extends RootStackRouter {
                 AutoRoute(page: AdministrationRoute.page, path: 'administration'),
                 AutoRoute(page: TournamentSettingsRoute.page, path: 'settings'),
                 AutoRoute(page: FantasyRoute.page, path: 'fantasy'),
-                AutoRoute(page: PhotoThemesRoute.page, path: 'photo-themes'),
+                AutoRoute(page: PhotoThemesTournamentRoute.page, path: 'photo-themes'),
                 AutoRoute(page: InfoTableDescriptionRoute.page, path: 'table-descriptions'),
                 AutoRoute(page: RefereeRoute.page, path: 'referees'),
               ],
