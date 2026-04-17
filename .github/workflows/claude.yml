@@ -28,8 +28,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           submodules: recursive
-          token: ${{ secrets.PAT_WITH_SUBMODULE_ACCESS }}
+          repository: Mafbase/mafbase-app
       - name: Fix submodule URL for CI
         run: git config --global url."git@github.com:".insteadOf "git@github-alt:"
       - name: Setup Flutter
