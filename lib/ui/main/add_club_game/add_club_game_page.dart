@@ -946,7 +946,7 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
   }
 
   Widget buildAddScoreField() => SizedBox(
-        width: context.isMobile ? 60 : 64,
+        width: 80,
         child: CustomTextField(
           focusNode: widget.addScoreFocusNode,
           readOnly: widget.readOnly,
@@ -957,7 +957,7 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
       );
 
   Widget buildMinusScoreField() => SizedBox(
-        width: context.isMobile ? 60 : 64,
+        width: 80,
         child: CustomTextField(
           focusNode: widget.minusScoreFocusNode,
           readOnly: widget.readOnly,
