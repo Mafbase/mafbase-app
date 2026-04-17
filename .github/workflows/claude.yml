@@ -33,6 +33,12 @@ jobs:
           repository: Mafbase/mafbase-app
       - name: Fix submodule URL for CI
         run: git config --global url."git@github.com:".insteadOf "git@github-alt:"
+      - name: Install protoc
+        run: |
+          if ! command -v protoc &> /dev/null; then
+            brew install protobuf
+          fi
+          protoc --version
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
