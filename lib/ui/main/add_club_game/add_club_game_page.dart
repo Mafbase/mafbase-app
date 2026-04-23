@@ -86,22 +86,10 @@ class _AddClubGamePageContent extends StatefulWidget {
 }
 
 class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
-    with
-        EffectListener<
-          AddClubGameEffect,
-          AddClubGameState,
-          AddClubGameBloc,
-          _AddClubGamePageContent
-        > {
+    with EffectListener<AddClubGameEffect, AddClubGameState, AddClubGameBloc, _AddClubGamePageContent> {
   final controllers = List.generate(10, (index) => TextEditingController());
-  final addScoreControllers = List.generate(
-    10,
-    (index) => TextEditingController()..text = '0.0',
-  );
-  final minusScoreControllers = List.generate(
-    10,
-    (index) => TextEditingController()..text = '0.0',
-  );
+  final addScoreControllers = List.generate(10, (index) => TextEditingController()..text = '0.0');
+  final minusScoreControllers = List.generate(10, (index) => TextEditingController()..text = '0.0');
   final refereeController = TextEditingController();
   final refereeFocusNode = FocusNode();
   final focusNodes = List.generate(10, (index) => FocusNode());
@@ -142,12 +130,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
 
   @override
   void initState() {
-    context.read<AddClubGameBloc>().add(
-      AddClubGameEvent.pageOpened(
-        gameId: widget.gameId,
-        viewOnly: widget.readOnly,
-      ),
-    );
+    context.read<AddClubGameBloc>().add(AddClubGameEvent.pageOpened(gameId: widget.gameId, viewOnly: widget.readOnly));
 
     if (context.read<AddClubGameBloc>().state.isTournament) {
       ciSchemeModel = CiSchemeModel.empty;
@@ -185,8 +168,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
         case List<double> addScore when addScore.length == 10:
           addScoreControllers[i].text = addScore[i].toString();
         default:
-          addScoreControllers[i].text =
-              effect.ratingsSchema == RatingScheme.mediagameMSL ? '2.5' : '0.0';
+          addScoreControllers[i].text = '0.0';
       }
 
       if (effect.players case final players?) {
@@ -196,8 +178,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     }
 
     if (effect.referee case final referee?) refereeController.text = referee;
-    if (effect.refereePlayer case final refereePlayer?)
-      players.add(refereePlayer);
+    if (effect.refereePlayer case final refereePlayer?) players.add(refereePlayer);
 
     setState(() {
       winSelected = effect.win;
@@ -216,123 +197,99 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
   void didUpdateWidget(covariant _AddClubGamePageContent oldWidget) {
     if (oldWidget.gameId != widget.gameId) {
       context.read<AddClubGameBloc>().add(
-        AddClubGameEvent.pageOpened(
-          gameId: widget.gameId,
-          viewOnly: widget.readOnly,
-        ),
+        AddClubGameEvent.pageOpened(gameId: widget.gameId, viewOnly: widget.readOnly),
       );
     }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
-  Widget? buildMobile(BuildContext context) =>
-      BlocBuilder<AddClubGameBloc, AddClubGameState>(
-        builder: (context, state) => Stack(
-          children: [
-            Scaffold(
-              appBar: AppBar(
-                leading: BackButton(
-                  onPressed: () {
-                    final bloc = context.read<AddClubGameBloc>();
-                    final route = bloc.clubId != null
-                        ? ClubRatingRoute(clubId: bloc.clubId!) as PageRouteInfo
-                        : TournamentRoute(tournamentId: bloc.tournamentId!);
-                    context.backOrNavigateTo(route)();
-                  },
-                ),
-                title: Text(state.clubName),
-              ),
-              body: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 20,
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Stack(
-                      children: [
-                        Column(
-                          spacing: 8,
-                          children: [
-                            ...buildPlayersRow(state),
-                            buildGameInfoWidget(state),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+  Widget? buildMobile(BuildContext context) => BlocBuilder<AddClubGameBloc, AddClubGameState>(
+    builder: (context, state) => Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            leading: BackButton(
+              onPressed: () {
+                final bloc = context.read<AddClubGameBloc>();
+                final route = bloc.clubId != null
+                    ? ClubRatingRoute(clubId: bloc.clubId!) as PageRouteInfo
+                    : TournamentRoute(tournamentId: bloc.tournamentId!);
+                context.backOrNavigateTo(route)();
+              },
+            ),
+            title: Text(state.clubName),
+          ),
+          body: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                child: Stack(
+                  children: [
+                    Column(spacing: 8, children: [...buildPlayersRow(state), buildGameInfoWidget(state)]),
+                  ],
                 ),
               ),
             ),
-            if (state.isLoading) const LoadingOverlayWidget(),
-          ],
+          ),
         ),
-      );
+        if (state.isLoading) const LoadingOverlayWidget(),
+      ],
+    ),
+  );
 
   @override
-  Widget buildDesktop(BuildContext context) =>
-      BlocBuilder<AddClubGameBloc, AddClubGameState>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: BackButton(
-                onPressed: context.backOrGoToDefault((c) {
-                  final bloc = c.read<AddClubGameBloc>();
-                  return bloc.clubId != null
-                      ? '/club/${bloc.clubId}/rating'
-                      : '/tournament/${bloc.tournamentId}';
-                }),
-              ),
-              title: Text(state.clubName),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: Stack(
-                children: [
-                  LayoutBuilder(
-                    builder: (context, constraints) => SingleChildScrollView(
-                      child: Wrap(
-                        alignment: WrapAlignment.spaceAround,
-                        runSpacing: 20,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minHeight: constraints.maxHeight,
-                            ),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: buildPlayersRow(
-                                  state,
-                                ).map((e) => e).toList(),
-                              ),
-                            ),
+  Widget buildDesktop(BuildContext context) => BlocBuilder<AddClubGameBloc, AddClubGameState>(
+    builder: (context, state) {
+      return Scaffold(
+        appBar: AppBar(
+          leading: BackButton(
+            onPressed: context.backOrGoToDefault((c) {
+              final bloc = c.read<AddClubGameBloc>();
+              return bloc.clubId != null ? '/club/${bloc.clubId}/rating' : '/tournament/${bloc.tournamentId}';
+            }),
+          ),
+          title: Text(state.clubName),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+          child: Stack(
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) => SingleChildScrollView(
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceAround,
+                    runSpacing: 20,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      ConstrainedBox(
+                        constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: buildPlayersRow(state).map((e) => e).toList(),
                           ),
-                          buildGameInfoWidget(state),
-                        ],
+                        ),
                       ),
-                    ),
+                      buildGameInfoWidget(state),
+                    ],
                   ),
-                  if (state.isLoading) const LoadingOverlayWidget(),
-                ],
+                ),
               ),
-            ),
-          );
-        },
+              if (state.isLoading) const LoadingOverlayWidget(),
+            ],
+          ),
+        ),
       );
+    },
+  );
 
   Widget buildGameInfoWidget(AddClubGameState state) => Container(
-    padding: context.isMobile
-        ? EdgeInsets.zero
-        : const EdgeInsets.symmetric(horizontal: 30),
+    padding: context.isMobile ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 30),
     margin: const EdgeInsets.only(left: 8),
     decoration: context.isMobile
         ? null
@@ -342,9 +299,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     child: SizedBox(
       width: context.isMobile ? null : 250,
       child: Column(
-        crossAxisAlignment: context.isMobile
-            ? CrossAxisAlignment.stretch
-            : CrossAxisAlignment.start,
+        crossAxisAlignment: context.isMobile ? CrossAxisAlignment.stretch : CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           NicknameField(
@@ -355,12 +310,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
             readOnly: widget.readOnly || state.isTournament,
             label: 'Судья',
             onNewPlayer: ({String? initValue}) async {
-              context.read<AddClubGameBloc>().add(
-                AddClubGameEvent.onNewPlayer(
-                  nickname: initValue ?? '',
-                  index: 10,
-                ),
-              );
+              context.read<AddClubGameBloc>().add(AddClubGameEvent.onNewPlayer(nickname: initValue ?? '', index: 10));
             },
           ),
           const SizedBox(height: 8),
@@ -395,12 +345,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
             CustomDropdown<BestMove>(
               readOnly: widget.readOnly,
               initValue: bestMove ?? BestMove.miss,
-              items: const [
-                BestMove.miss,
-                BestMove.one,
-                BestMove.half,
-                BestMove.full,
-              ],
+              items: const [BestMove.miss, BestMove.one, BestMove.half, BestMove.full],
               mapToString: (bestMove) {
                 final String text;
                 switch (bestMove) {
@@ -464,10 +409,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
           ),
           const SizedBox(height: 8),
           if (!state.isTournament) ...[
-            Text(
-              context.locale.ci,
-              style: MyTheme.of(context).defaultTextStyle,
-            ),
+            Text(context.locale.ci, style: MyTheme.of(context).defaultTextStyle),
             const SizedBox(height: 4),
             StatefulBuilder(
               builder: (context, setState) {
@@ -489,10 +431,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
             const SizedBox(height: 8),
           ],
           if (!state.isTournament) ...[
-            Text(
-              context.locale.rating_schema,
-              style: MyTheme.of(context).defaultTextStyle,
-            ),
+            Text(context.locale.rating_schema, style: MyTheme.of(context).defaultTextStyle),
             const SizedBox(height: 4),
             StatefulBuilder(
               builder: (context, setState) {
@@ -509,18 +448,12 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                         return context.locale.old_fsm_schema;
                     }
                   },
-                  items: [
-                    RatingScheme.oldFSM,
-                    RatingScheme.minusFSM,
-                    RatingScheme.mediagameMSL,
-                  ],
+                  items: [RatingScheme.oldFSM, RatingScheme.minusFSM, RatingScheme.mediagameMSL],
                   onChanged: (value) {
                     setState(() {
                       ratingScheme = value;
                       for (final c in addScoreControllers) {
-                        c.text = value == RatingScheme.mediagameMSL
-                            ? '2.5'
-                            : '0.0';
+                        c.text = value == RatingScheme.mediagameMSL ? '2.5' : '0.0';
                       }
                     });
                   },
@@ -531,9 +464,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
           ],
           StatefulBuilder(
             builder: (context, setState) => InkWell(
-              customBorder: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
+              customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               onTap: widget.readOnly || state.isTournament
                   ? null
                   : () {
@@ -551,20 +482,12 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                                 initialTime: TimeOfDay.fromDateTime(date),
                                 initialEntryMode: TimePickerEntryMode.input,
                                 builder: (context, child) => MediaQuery(
-                                  data: MediaQuery.of(
-                                    context,
-                                  ).copyWith(alwaysUse24HourFormat: true),
+                                  data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
                                   child: child ?? Container(),
                                 ),
                               );
                               if (timeOfDay != null) {
-                                return DateTime(
-                                  value.year,
-                                  value.month,
-                                  value.day,
-                                  timeOfDay.hour,
-                                  timeOfDay.minute,
-                                );
+                                return DateTime(value.year, value.month, value.day, timeOfDay.hour, timeOfDay.minute);
                               }
                             }
                             return null;
@@ -576,9 +499,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                           });
                     },
               child: DefaultTextStyle(
-                style: MyTheme.of(
-                  context,
-                ).defaultTextStyle.copyWith(color: Theme.of(context).hintColor),
+                style: MyTheme.of(context).defaultTextStyle.copyWith(color: Theme.of(context).hintColor),
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Row(
@@ -611,17 +532,12 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                     padding: const EdgeInsets.all(16.0),
                     child: TextButton(
                       onPressed: () {
-                        context.read<AddClubGameBloc>().add(
-                          AddClubGameEvent.newGame(dateTime: date),
-                        );
+                        context.read<AddClubGameBloc>().add(AddClubGameEvent.newGame(dateTime: date));
                       },
                       child: Text(context.locale.addGame),
                     ),
                   ),
-                if (widget.readOnly &&
-                    widget.gameId != null &&
-                    !state.isTournament &&
-                    state.canEdit)
+                if (widget.readOnly && widget.gameId != null && !state.isTournament && state.canEdit)
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: TextButton(
@@ -629,15 +545,11 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                         final confirm = await ConfirmDialog.open(context);
                         if (!mounted || confirm != true) return;
 
-                        context.read<AddClubGameBloc>().add(
-                          AddClubGameEvent.deleteGame(gameId: widget.gameId!),
-                        );
+                        context.read<AddClubGameBloc>().add(AddClubGameEvent.deleteGame(gameId: widget.gameId!));
                       },
                       child: Text(
                         context.locale.deleteGame,
-                        style: MyTheme.of(context).textBtnTextStyle.copyWith(
-                          color: MyTheme.of(context).btnRedColor,
-                        ),
+                        style: MyTheme.of(context).textBtnTextStyle.copyWith(color: MyTheme.of(context).btnRedColor),
                       ),
                     ),
                   ),
@@ -677,9 +589,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
           },
           role: roles[i],
           onNewPlayer: ({String? initValue}) async {
-            context.read<AddClubGameBloc>().add(
-              AddClubGameEvent.onNewPlayer(nickname: initValue ?? '', index: i),
-            );
+            context.read<AddClubGameBloc>().add(AddClubGameEvent.onNewPlayer(nickname: initValue ?? '', index: i));
           },
         ),
       ),
@@ -693,9 +603,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
 
   void submit(AddClubGameState state) {
     if (widget.readOnly) {
-      context.read<AddClubGameBloc>().add(
-        AddClubGameEvent.edit(gameId: widget.gameId!),
-      );
+      context.read<AddClubGameBloc>().add(AddClubGameEvent.edit(gameId: widget.gameId!));
       return;
     }
     if (roles.where((element) => element == PlayerRole.maf).length != 2 ||
@@ -709,11 +617,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
       return;
     }
 
-    if (controllers.any(
-      (e) =>
-          players.firstWhereOrNull((element) => e.text == element.nickname) ==
-          null,
-    )) {
+    if (controllers.any((e) => players.firstWhereOrNull((element) => e.text == element.nickname) == null)) {
       AppRouterHelper.showErrorDialog(
         context,
         'Не найден игрок: ${controllers.firstWhere((e) => players.firstWhereOrNull((element) => e.text == element.nickname) == null).text}',
@@ -721,15 +625,9 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
       return;
     }
 
-    if (players.firstWhereOrNull(
-              (element) => refereeController.text == element.nickname,
-            ) ==
-            null &&
+    if (players.firstWhereOrNull((element) => refereeController.text == element.nickname) == null &&
         !state.isTournament) {
-      AppRouterHelper.showErrorDialog(
-        context,
-        'Не найден судья: ${refereeController.text}',
-      );
+      AppRouterHelper.showErrorDialog(context, 'Не найден судья: ${refereeController.text}');
       return;
     }
 
@@ -748,21 +646,14 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     }
 
     // Проверка что все значения addScore неотрицательные
-    final addScores = addScoreControllers
-        .map((e) => double.parse(e.text.replaceAll(',', '.')))
-        .toList();
+    final addScores = addScoreControllers.map((e) => double.parse(e.text.replaceAll(',', '.'))).toList();
     if (addScores.any((score) => score < 0)) {
-      AppRouterHelper.showErrorDialog(
-        context,
-        'Положительные баллы не могут быть отрицательными',
-      );
+      AppRouterHelper.showErrorDialog(context, 'Положительные баллы не могут быть отрицательными');
       return;
     }
 
     // Проверка что все значения minusScore неотрицательные
-    final minusScores = minusScoreControllers
-        .map((e) => double.parse(e.text.replaceAll(',', '.')))
-        .toList();
+    final minusScores = minusScoreControllers.map((e) => double.parse(e.text.replaceAll(',', '.'))).toList();
     if (minusScores.any((score) => score < 0)) {
       AppRouterHelper.showErrorDialog(
         context,
@@ -777,17 +668,10 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
           date: date.toIso8601String(),
           addScore: addScores.map((e) => (e * 100).floor()).toList(),
           minusScore: minusScores.map((e) => (e * 100).floor()).toList(),
-          players: controllers.map(
-            (e) =>
-                players.firstWhere((element) => e.text == element.nickname).id,
-          ),
+          players: controllers.map((e) => players.firstWhere((element) => e.text == element.nickname).id),
           mafia1: roles.indexOf(PlayerRole.maf),
           mafia2: roles.lastIndexOf(PlayerRole.maf),
-          referee: players
-              .firstWhereOrNull(
-                (element) => refereeController.text == element.nickname,
-              )
-              ?.id,
+          referee: players.firstWhereOrNull((element) => refereeController.text == element.nickname)?.id,
           don: roles.indexOf(PlayerRole.don),
           sheriff: roles.indexOf(PlayerRole.sheriff),
           firstDie: firstDie,
@@ -831,9 +715,7 @@ class NicknameField extends StatelessWidget {
       width: 250,
       child: PlayerAutoComplete(
         readOnly: readOnly,
-        openDirection: down
-            ? OptionsViewOpenDirection.down
-            : OptionsViewOpenDirection.up,
+        openDirection: down ? OptionsViewOpenDirection.down : OptionsViewOpenDirection.up,
         controller: controller,
         focusNode: focusNode,
         availablePlayers: availablePlayers,
@@ -842,8 +724,7 @@ class NicknameField extends StatelessWidget {
           onSelected?.call(playerModel);
         },
         onNewPlayer: onNewPlayer != null
-            ? ({required String initValue}) =>
-                  onNewPlayer?.call(initValue: initValue)
+            ? ({required String initValue}) => onNewPlayer?.call(initValue: initValue)
             : null,
         label: label,
       ),
@@ -899,19 +780,11 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
       Wrap(
         alignment: WrapAlignment.spaceBetween,
         children: [
-          RolePicker(
-            readOnly: widget.readOnly,
-            playerRole: widget.role,
-            onChange: widget.onRoleChanged,
-          ),
+          RolePicker(readOnly: widget.readOnly, playerRole: widget.role, onChange: widget.onRoleChanged),
           const SizedBox(width: 8),
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
-              buildAddScoreField(),
-              const SizedBox(width: 8),
-              buildMinusScoreField(),
-            ],
+            children: [buildAddScoreField(), const SizedBox(width: 8), buildMinusScoreField()],
           ),
         ],
       ),
@@ -925,11 +798,7 @@ class _PlayerRowWidgetState extends CustomState<PlayerRowWidget> {
       children: [
         buildNicknameField(),
         const SizedBox(width: 40),
-        RolePicker(
-          readOnly: widget.readOnly,
-          playerRole: widget.role,
-          onChange: widget.onRoleChanged,
-        ),
+        RolePicker(readOnly: widget.readOnly, playerRole: widget.role, onChange: widget.onRoleChanged),
         const SizedBox(width: 40),
         buildAddScoreField(),
         const SizedBox(width: 8),
