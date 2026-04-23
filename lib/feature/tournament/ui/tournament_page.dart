@@ -93,26 +93,29 @@ class _TournamentPageContentState extends CustomState<_TournamentPageContent>
         BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
           selector: (state) => state.isLoading,
           builder: (context, seatingLoading) {
-            return BlocBuilder<TournamentPageBloc, TournamentPageState>(
-              builder: (context, state) {
-                final showBill = context.read<AuthNotifier>().value.mapOrNull(
-                          authorized: (model) => !model.hideBilling,
-                        ) ??
-                    true;
+            return ListenableBuilder(
+              listenable: context.router,
+              builder: (context, _) => BlocBuilder<TournamentPageBloc, TournamentPageState>(
+                builder: (context, state) {
+                  final showBill = context.read<AuthNotifier>().value.mapOrNull(
+                            authorized: (model) => !model.hideBilling,
+                          ) ??
+                      true;
 
-                final sections = TournamentMenuBuilder.buildSections(
-                  context,
-                  state,
-                  widget.tournamentId,
-                  showBill: showBill,
-                  seatingLoading: seatingLoading,
-                );
+                  final sections = TournamentMenuBuilder.buildSections(
+                    context,
+                    state,
+                    widget.tournamentId,
+                    showBill: showBill,
+                    seatingLoading: seatingLoading,
+                  );
 
-                return TournamentMenu(
-                  sections: sections,
-                  tournamentId: widget.tournamentId,
-                );
-              },
+                  return TournamentMenu(
+                    sections: sections,
+                    tournamentId: widget.tournamentId,
+                  );
+                },
+              ),
             );
           },
         ),

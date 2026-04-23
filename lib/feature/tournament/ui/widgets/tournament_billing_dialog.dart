@@ -46,7 +46,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 600),
+        constraints: const BoxConstraints(maxWidth: 600),
         child: CustomDialog(
           child: Form(
             key: formKey,

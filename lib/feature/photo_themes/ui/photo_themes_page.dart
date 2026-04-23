@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -28,19 +29,28 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
 class PhotoThemesPage extends StatelessWidget {
-  final int? tournamentId;
+  const PhotoThemesPage({super.key});
 
-  const PhotoThemesPage({
-    super.key,
-    this.tournamentId,
-  });
+  @override
+  Widget build(BuildContext context) {
+    return const PhotoThemesBlocInjector(
+      child: _PhotoThemesContent(),
+    );
+  }
+}
+
+@RoutePage()
+class PhotoThemesTournamentPage extends StatelessWidget {
+  final int tournamentId;
+
+  const PhotoThemesTournamentPage({super.key, @PathParam.inherit('id') required this.tournamentId});
 
   @override
   Widget build(BuildContext context) {
     return PhotoThemesBlocInjector(
-      key: tournamentId != null ? ValueKey('photoThemes_$tournamentId') : null,
-      tournamentId: tournamentId,
-      child: _PhotoThemesContent(tournamentId: tournamentId),
+      child: _PhotoThemesContent(
+        tournamentId: tournamentId,
+      ),
     );
   }
 }
@@ -424,30 +434,32 @@ class _PhotoThemesPageState extends CustomState<_PhotoThemesContent> {
             Row(
               children: [
                 // Left panel - themes list
-                SizedBox(
-                  width: 250,
-                  child: Container(
-                    color: MyTheme.of(context).background2,
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 8),
-                        Text(
+                Container(
+                  width: 266,
+                  color: MyTheme.of(context).background2,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(
                           context.locale.photoThemesTitle,
                           style: MyTheme.of(context).headerTextStyle,
                         ),
-                        const SizedBox(height: 8),
-                        Expanded(
-                          child: _buildThemesList(context, state),
+                      ),
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: _buildThemesList(context, state),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: CustomButton(
+                          expand: false,
+                          text: context.locale.photoThemesCreateButton,
+                          onTap: () => _onCreateTheme(context),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: CustomButton(
-                            text: context.locale.photoThemesCreateButton,
-                            onTap: () => _onCreateTheme(context),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 // Right panel - theme details
@@ -462,6 +474,14 @@ class _PhotoThemesPageState extends CustomState<_PhotoThemesContent> {
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Row(
                               children: [
+                                BackButton(
+                                  onPressed: context.backOrNavigateTo(
+                                    widget.tournamentId == null
+                                        ? const ProfileRoute() as PageRouteInfo
+                                        : TournamentRoute(tournamentId: widget.tournamentId!) as PageRouteInfo,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
                                     selectedTheme.name,

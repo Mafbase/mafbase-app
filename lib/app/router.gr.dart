@@ -835,48 +835,67 @@ class NewClubGameRouteArgs {
 
 /// generated route for
 /// [PhotoThemesPage]
-class PhotoThemesRoute extends PageRouteInfo<PhotoThemesRouteArgs> {
-  PhotoThemesRoute({Key? key, int? tournamentId, List<PageRouteInfo>? children})
-      : super(
-          PhotoThemesRoute.name,
-          args: PhotoThemesRouteArgs(key: key, tournamentId: tournamentId),
-          initialChildren: children,
-        );
+class PhotoThemesRoute extends PageRouteInfo<void> {
+  const PhotoThemesRoute({List<PageRouteInfo>? children})
+      : super(PhotoThemesRoute.name, initialChildren: children);
 
   static const String name = 'PhotoThemesRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<PhotoThemesRouteArgs>(
-        orElse: () => const PhotoThemesRouteArgs(),
-      );
-      return PhotoThemesPage(key: args.key, tournamentId: args.tournamentId);
+      return const PhotoThemesPage();
     },
   );
 }
 
-class PhotoThemesRouteArgs {
-  const PhotoThemesRouteArgs({this.key, this.tournamentId});
+/// generated route for
+/// [PhotoThemesTournamentPage]
+class PhotoThemesTournamentRoute
+    extends PageRouteInfo<PhotoThemesTournamentRouteArgs> {
+  PhotoThemesTournamentRoute({Key? key, List<PageRouteInfo>? children})
+      : super(
+          PhotoThemesTournamentRoute.name,
+          args: PhotoThemesTournamentRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'PhotoThemesTournamentRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<PhotoThemesTournamentRouteArgs>(
+        orElse: () => PhotoThemesTournamentRouteArgs(),
+      );
+      return PhotoThemesTournamentPage(
+        key: args.key,
+        tournamentId: pathParams.getInt('id'),
+      );
+    },
+  );
+}
+
+class PhotoThemesTournamentRouteArgs {
+  const PhotoThemesTournamentRouteArgs({this.key});
 
   final Key? key;
 
-  final int? tournamentId;
-
   @override
   String toString() {
-    return 'PhotoThemesRouteArgs{key: $key, tournamentId: $tournamentId}';
+    return 'PhotoThemesTournamentRouteArgs{key: $key}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! PhotoThemesRouteArgs) return false;
-    return key == other.key && tournamentId == other.tournamentId;
+    if (other is! PhotoThemesTournamentRouteArgs) return false;
+    return key == other.key;
   }
 
   @override
-  int get hashCode => key.hashCode ^ tournamentId.hashCode;
+  int get hashCode => key.hashCode;
 }
 
 /// generated route for

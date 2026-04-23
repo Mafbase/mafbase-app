@@ -129,7 +129,7 @@ class _TournamentMenuItem extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: item.onTap,
+        onTap: item.selected ? () {} : item.onTap,
         borderRadius: BorderRadius.circular(8),
         hoverColor: theme.sidebarActiveItemBgColor,
         child: Container(

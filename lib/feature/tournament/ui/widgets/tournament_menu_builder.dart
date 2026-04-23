@@ -26,7 +26,7 @@ class TournamentMenuBuilder {
     required bool seatingLoading,
   }) {
     final locale = context.locale;
-    final currentPath = context.router.currentUrl;
+    final currentPath = context.watchRouter.currentUrl;
     final basePath = '/tournament/$tournamentId';
 
     bool isActive(String? routeSegment, {bool isDefault = false}) {
@@ -184,7 +184,7 @@ class TournamentMenuBuilder {
           routeSegment: 'photo-themes',
           selected: isActive('photo-themes'),
           onTap: () {
-            context.router.push(PhotoThemesRoute(tournamentId: tournamentId));
+            context.router.push(PhotoThemesTournamentRoute());
           },
         ),
     ];
