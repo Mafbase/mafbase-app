@@ -7,6 +7,8 @@ import 'package:seating_generator_web/domain/interactors/add_club_game_interacto
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_tournament_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_ci_schemes_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
+import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_interactor.dart';
@@ -26,22 +28,32 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_d
 class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     with EffectEmitter<AddClubGameEffect, AddClubGameState> {
   final RepositoryFactory _repos;
-  late final AddClubGameInteractor _addClubGameInteractor = AddClubGameInteractor(_repos.clubRepository);
+  late final AddClubGameInteractor _addClubGameInteractor =
+      AddClubGameInteractor(_repos.clubRepository);
   late final ClubRepository _repository = _repos.clubRepository;
   final int? clubId;
   final int? tournamentId;
   final BuildContext? _context;
   final AddClubGameRouter router;
-  late final CreatePlayerInteractor _createPlayerInteractor = CreatePlayerInteractor(_repos.playersRepository);
-  late final GetCiSchemesInteractor _getCiSchemesInteractor = GetCiSchemesInteractor(_repos.tournamentEditRepository);
-  late final GetClubInteractor _getClubInteractor = GetClubInteractor(_repos.clubRepository);
+  late final CreatePlayerInteractor _createPlayerInteractor =
+      CreatePlayerInteractor(_repos.playersRepository);
+  late final GetCiSchemesInteractor _getCiSchemesInteractor =
+      GetCiSchemesInteractor(_repos.tournamentEditRepository);
+  late final GetSettingsInteractor _getSettingsInteractor =
+      GetSettingsInteractor(_repos.tournamentEditRepository);
+  late final GetClubInteractor _getClubInteractor = GetClubInteractor(
+    _repos.clubRepository,
+  );
   late final EditTournamentGameInteractor _editTournamentGameInteractor =
       EditTournamentGameInteractor(_repos.tournamentResultRepository);
   late final GetTournamentGameInteractor _getTournamentGameInteractor =
       GetTournamentGameInteractor(_repos.tournamentResultRepository);
-  late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_repos.tournamentsRepository);
-  late final TournamentsRepository _tournamentsRepository = _repos.tournamentsRepository;
-  final PreferAddGameSettingsStorage _settingsStorage = PreferAddGameSettingsStorageImpl();
+  late final GetTournamentInteractor _getTournamentInteractor =
+      GetTournamentInteractor(_repos.tournamentsRepository);
+  late final TournamentsRepository _tournamentsRepository =
+      _repos.tournamentsRepository;
+  final PreferAddGameSettingsStorage _settingsStorage =
+      PreferAddGameSettingsStorageImpl();
 
   AddClubGameBloc({
     this.clubId,
@@ -49,10 +61,10 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     required RepositoryFactory repos,
     required this.router,
     BuildContext? context,
-  })  : assert((clubId == null) != (tournamentId == null)),
-        _repos = repos,
-        _context = context,
-        super(AddClubGameState(isTournament: tournamentId != null)) {
+  }) : assert((clubId == null) != (tournamentId == null)),
+       _repos = repos,
+       _context = context,
+       super(AddClubGameState(isTournament: tournamentId != null)) {
     on<AddClubGameEventPageOpened>(_onPageOpened);
     on<AddClubGameEventSubmit>(_onSubmit);
     on<AddClubGameEventPageEdit>(_onEdit);
@@ -80,7 +92,10 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     router.openNewGame(clubId!, event.dateTime);
   }
 
-  Future<void> _onNewPlayer(AddClubGameEventNewPlayer event, Emitter emit) async {
+  Future<void> _onNewPlayer(
+    AddClubGameEventNewPlayer event,
+    Emitter emit,
+  ) async {
     if (_context == null) {
       return;
     }
@@ -106,17 +121,10 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
   }
 
   void _onEdit(AddClubGameEventPageEdit event, Emitter emit) {
-    router.editPage(
-      clubId,
-      tournamentId,
-      event.gameId,
-    );
+    router.editPage(clubId, tournamentId, event.gameId);
   }
 
-  Future<void> _onSubmit(
-    AddClubGameEventSubmit event,
-    Emitter emit,
-  ) async {
+  Future<void> _onSubmit(AddClubGameEventSubmit event, Emitter emit) async {
     if (event.gameResult.hasRatingScheme()) {
       _settingsStorage.saveScheme(event.gameResult.ratingScheme);
     }
@@ -178,7 +186,9 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
         final game = await _repository.getGame(event.gameId!, clubId!);
         final allIds = [...game.players, game.referee];
         final players = await _repos.playersRepository.getPlayersByIds(allIds);
-        final refereePlayer = players.firstWhereOrNull((element) => element.id == game.referee);
+        final refereePlayer = players.firstWhereOrNull(
+          (element) => element.id == game.referee,
+        );
         emitEffect(
           AddClubGameEffect.setValues(
             ratingsSchema: game.ratingScheme,
@@ -189,29 +199,29 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
                 .whereType<PlayerModel>()
                 .toList(),
             addScore: game.addScore.map((e) => e / 100).toList(),
-            minusScore: game.minusScore.isNotEmpty ? game.minusScore.map((e) => e / 100).toList() : null,
-            roles: List.generate(
-              10,
-              (index) {
-                if (game.sheriff == index) {
-                  return PlayerRole.sheriff;
-                }
-                if (game.don == index) {
-                  return PlayerRole.don;
-                }
-                if (game.mafia1 == index || game.mafia2 == index) {
-                  return PlayerRole.maf;
-                }
-                return PlayerRole.citizen;
-              },
-            ),
+            minusScore: game.minusScore.isNotEmpty
+                ? game.minusScore.map((e) => e / 100).toList()
+                : null,
+            roles: List.generate(10, (index) {
+              if (game.sheriff == index) {
+                return PlayerRole.sheriff;
+              }
+              if (game.don == index) {
+                return PlayerRole.don;
+              }
+              if (game.mafia1 == index || game.mafia2 == index) {
+                return PlayerRole.maf;
+              }
+              return PlayerRole.citizen;
+            }),
             win: game.win,
             bestMove: game.bestMove,
             referee: refereePlayer?.nickname,
             refereePlayer: refereePlayer,
             died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
-            ciModel: (game.hasCiId()
+            ciModel:
+                (game.hasCiId()
                     ? state.ciSchemes.firstWhereOrNull(
                         (element) => element.id == game.ciId,
                       )
@@ -237,15 +247,24 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
         ),
         _getTournamentInteractor(tournamentId: tournamentId!),
         _tournamentsRepository.isOwner(tournamentId!),
+        _getSettingsInteractor.run(tournamentId: tournamentId!),
       ]);
       final game = list[0] as ClubGameResult;
       final tournament = list[1] as TournamentModel;
       final isOwner = list[2] as bool;
+      final settings = list[3] as TournamentSettingsModel;
 
       final allIds = [...game.players, game.referee];
       final players = await _repos.playersRepository.getPlayersByIds(allIds);
 
-      final refereePlayer = players.firstWhereOrNull((element) => element.id == game.referee);
+      final refereePlayer = players.firstWhereOrNull(
+        (element) => element.id == game.referee,
+      );
+      final hasScores = game.addScore.any((s) => s != 0);
+      final effectiveAddScore =
+          (!hasScores && settings.ratingScheme == RatingScheme.mediagameMSL)
+          ? null
+          : game.addScore.map((e) => e / 100).toList();
       emitEffect(
         AddClubGameEffect.setValues(
           players: game.players
@@ -254,10 +273,14 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
               )
               .whereType<PlayerModel>()
               .toList(),
-          addScore: game.addScore.map((e) => e / 100).toList(),
-          minusScore: game.minusScore.isNotEmpty ? game.minusScore.map((e) => e / 100).toList() : null,
+          addScore: effectiveAddScore,
+          ratingsSchema: settings.ratingScheme,
+          minusScore: game.minusScore.isNotEmpty
+              ? game.minusScore.map((e) => e / 100).toList()
+              : null,
           roles: List.generate(10, (index) {
-            if (game.hasMafia1() && index == game.mafia1 || game.hasMafia2() && index == game.mafia2) {
+            if (game.hasMafia1() && index == game.mafia1 ||
+                game.hasMafia2() && index == game.mafia2) {
               return PlayerRole.maf;
             }
             if (game.hasDon() && index == game.don) {
