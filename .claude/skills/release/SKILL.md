@@ -53,6 +53,7 @@ Prepare a release by writing a changelog entry and bumping the version in `pubsp
 - Write in **Russian**
 - Use verbs: "Добавлена", "Исправлена", "Изменена", "Улучшена"
 - Be concise — one line per change
+- **Maximum 5 items** per release — group minor fixes into one summary line (e.g. "Исправлены ошибки навигации и отображения"), prioritize the most important features
 - No technical jargon — "страница статистики игрока" not "PlayerStatsPage"
 
 ### Examples
