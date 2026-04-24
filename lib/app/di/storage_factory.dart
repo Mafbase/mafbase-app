@@ -6,7 +6,6 @@ import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
 
 class StorageFactory {
-
   StorageFactory();
 
   late final TokenStorage tokenStorage = TokenStorageImpl();

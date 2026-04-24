@@ -43,8 +43,7 @@ class _AutoScrollDragRegionState extends State<AutoScrollDragRegion> {
       final intensity = 1.0 - (localY / widget.edgeThreshold);
       _startScrolling(-intensity);
     } else if (localY > height - widget.edgeThreshold) {
-      final intensity =
-          1.0 - ((height - localY) / widget.edgeThreshold);
+      final intensity = 1.0 - ((height - localY) / widget.edgeThreshold);
       _startScrolling(intensity);
     } else {
       _stopScrolling();
@@ -63,8 +62,7 @@ class _AutoScrollDragRegionState extends State<AutoScrollDragRegion> {
       final controller = widget.scrollController;
       if (!controller.hasClients) return;
 
-      final offset = controller.offset +
-          widget.scrollSpeed * _scrollDirection;
+      final offset = controller.offset + widget.scrollSpeed * _scrollDirection;
       controller.jumpTo(
         offset.clamp(0, controller.position.maxScrollExtent),
       );

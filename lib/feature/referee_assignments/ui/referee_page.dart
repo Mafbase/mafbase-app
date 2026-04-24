@@ -123,9 +123,8 @@ class _RefereePageState extends State<_RefereePageContent> {
                               ),
                               const SizedBox(width: 8),
                               IconButton(
-                                onPressed: state.loading
-                                    ? null
-                                    : () => _bloc.add(RefereeEventDeleteReferee(assignment.table)),
+                                onPressed:
+                                    state.loading ? null : () => _bloc.add(RefereeEventDeleteReferee(assignment.table)),
                                 icon: const Icon(Icons.delete_outline_outlined),
                               ),
                             ],

@@ -11,9 +11,9 @@ class AddClubBloc extends Bloc<AddClubEvent, AddClubState> {
   AddClubBloc({
     required CreateClubInteractor createClubInteractor,
     required AddClubRouter router,
-  }) : _createClubInteractor = createClubInteractor,
-       _router = router,
-       super(const AddClubState()) {
+  })  : _createClubInteractor = createClubInteractor,
+        _router = router,
+        super(const AddClubState()) {
     on<AddClubEventFormSubmitted>(_onFormSubmitted);
   }
 

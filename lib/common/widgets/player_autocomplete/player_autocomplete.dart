@@ -142,10 +142,8 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
                 _completer?.complete([]);
                 final completer = Completer<Iterable<PlayerModel>>();
                 _completer = completer;
-                final future = context
-                    .read<PlayerAutoCompleteBloc>()
-                    .stream
-                    .firstWhere((element) => element.query == event.text);
+                final future =
+                    context.read<PlayerAutoCompleteBloc>().stream.firstWhere((element) => element.query == event.text);
                 context.read<PlayerAutoCompleteBloc>().add(PlayerAutoCompleteEvent.search(event.text));
                 future.then((e) {
                   if (completer.isCompleted) {
@@ -158,7 +156,8 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
 
                 return [
                   ...(await completer.future),
-                  if (widget.onNewPlayer != null && _controller.text.isNotEmpty) PlayerModel(nickname: _controller.text),
+                  if (widget.onNewPlayer != null && _controller.text.isNotEmpty)
+                    PlayerModel(nickname: _controller.text),
                 ];
               },
         optionsViewOpenDirection: widget.openDirection,

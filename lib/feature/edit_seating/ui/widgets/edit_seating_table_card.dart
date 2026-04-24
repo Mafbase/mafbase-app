@@ -67,9 +67,8 @@ class EditSeatingTableCard extends StatelessWidget {
               place: i + 1,
               tableIndex: tableIndex,
               slotIndex: i,
-              isChanged: i < originalTable.players.length &&
-                  table.players[i].playerId !=
-                      originalTable.players[i].playerId,
+              isChanged:
+                  i < originalTable.players.length && table.players[i].playerId != originalTable.players[i].playerId,
               onSwap: (source) => onSwap(source, i),
             ),
         ],

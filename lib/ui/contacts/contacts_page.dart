@@ -19,7 +19,9 @@ class _ContactsPageState extends State<ContactsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: context.backOrGoToDefault(),),
+        leading: BackButton(
+          onPressed: context.backOrGoToDefault(),
+        ),
         title: Text(context.locale.contacts),
       ),
       body: Center(

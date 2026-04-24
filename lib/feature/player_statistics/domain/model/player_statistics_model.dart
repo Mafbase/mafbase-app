@@ -68,8 +68,7 @@ abstract class BestMoveDistributionModel with _$BestMoveDistributionModel {
     required int full,
   }) = _BestMoveDistributionModel;
 
-  factory BestMoveDistributionModel.fromProto(BestMoveDistribution proto) =>
-      BestMoveDistributionModel(
+  factory BestMoveDistributionModel.fromProto(BestMoveDistribution proto) => BestMoveDistributionModel(
         miss: proto.miss,
         one: proto.one,
         half: proto.half,

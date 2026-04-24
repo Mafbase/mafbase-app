@@ -324,10 +324,8 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
         tournamentId: tournamentId,
       );
 
-      final playerGames = allGames
-          .expand((round) => round)
-          .where((game) => game.nicknames.contains(event.oldPlayer.nickname))
-          .toList();
+      final playerGames =
+          allGames.expand((round) => round).where((game) => game.nicknames.contains(event.oldPlayer.nickname)).toList();
 
       final gameNumbers = playerGames.map((g) => g.game).toSet().toList()..sort();
 

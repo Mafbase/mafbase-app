@@ -54,9 +54,7 @@ class BestMoveDistributionChart extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
-                children: segments
-                    .map((s) => _LegendItem(segment: s, total: total))
-                    .toList(),
+                children: segments.map((s) => _LegendItem(segment: s, total: total)).toList(),
               ),
             ],
           ),
@@ -107,8 +105,7 @@ class _LegendItem extends StatelessWidget {
   final _ChartSegment segment;
   final double percentage;
 
-  _LegendItem({required this.segment, required int total})
-      : percentage = total > 0 ? segment.value / total * 100 : 0;
+  _LegendItem({required this.segment, required int total}) : percentage = total > 0 ? segment.value / total * 100 : 0;
 
   @override
   Widget build(BuildContext context) => Padding(

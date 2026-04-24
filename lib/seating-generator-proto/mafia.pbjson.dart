@@ -27,8 +27,8 @@ const BestMove$json = {
 };
 
 /// Descriptor for `BestMove`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List bestMoveDescriptor = $convert.base64Decode(
-    'CghCZXN0TW92ZRIICgRtaXNzEAASCAoEaGFsZhABEggKBGZ1bGwQAhIHCgNvbmUQAw==');
+final $typed_data.Uint8List bestMoveDescriptor =
+    $convert.base64Decode('CghCZXN0TW92ZRIICgRtaXNzEAASCAoEaGFsZhABEggKBGZ1bGwQAhIHCgNvbmUQAw==');
 
 @$core.Deprecated('Use gameWinDescriptor instead')
 const GameWin$json = {
@@ -41,8 +41,8 @@ const GameWin$json = {
 };
 
 /// Descriptor for `GameWin`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List gameWinDescriptor = $convert
-    .base64Decode('CgdHYW1lV2luEggKBGNpdHkQABIJCgVtYWZpYRABEggKBGRyYXcQAg==');
+final $typed_data.Uint8List gameWinDescriptor =
+    $convert.base64Decode('CgdHYW1lV2luEggKBGNpdHkQABIJCgVtYWZpYRABEggKBGRyYXcQAg==');
 
 @$core.Deprecated('Use fantasyStatusDescriptor instead')
 const FantasyStatus$json = {
@@ -55,9 +55,9 @@ const FantasyStatus$json = {
 };
 
 /// Descriptor for `FantasyStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List fantasyStatusDescriptor = $convert.base64Decode(
-    'Cg1GYW50YXN5U3RhdHVzEgwKCGRpc2FibGVkEAASFgoSZW5hYmxlZEZvclNlbGVjdGVkEAESEQ'
-    'oNZW5hYmxlZEZvckFsbBAC');
+final $typed_data.Uint8List fantasyStatusDescriptor =
+    $convert.base64Decode('Cg1GYW50YXN5U3RhdHVzEgwKCGRpc2FibGVkEAASFgoSZW5hYmxlZEZvclNlbGVjdGVkEAESEQ'
+        'oNZW5hYmxlZEZvckFsbBAC');
 
 @$core.Deprecated('Use playerRoleDescriptor instead')
 const PlayerRole$json = {
@@ -71,9 +71,9 @@ const PlayerRole$json = {
 };
 
 /// Descriptor for `PlayerRole`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List playerRoleDescriptor = $convert.base64Decode(
-    'CgpQbGF5ZXJSb2xlEgsKB2NpdGl6ZW4QABIHCgNtYWYQARIHCgNkb24QAhILCgdzaGVyaWZmEA'
-    'M=');
+final $typed_data.Uint8List playerRoleDescriptor =
+    $convert.base64Decode('CgpQbGF5ZXJSb2xlEgsKB2NpdGl6ZW4QABIHCgNtYWYQARIHCgNkb24QAhILCgdzaGVyaWZmEA'
+        'M=');
 
 @$core.Deprecated('Use playerStatusDescriptor instead')
 const PlayerStatus$json = {
@@ -87,9 +87,9 @@ const PlayerStatus$json = {
 };
 
 /// Descriptor for `PlayerStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List playerStatusDescriptor = $convert.base64Decode(
-    'CgxQbGF5ZXJTdGF0dXMSCQoFYWxpdmUQABIJCgV2b3RlZBABEgsKB2RlbGV0ZWQQAhIKCgZraW'
-    'xsZWQQAw==');
+final $typed_data.Uint8List playerStatusDescriptor =
+    $convert.base64Decode('CgxQbGF5ZXJTdGF0dXMSCQoFYWxpdmUQABIJCgV2b3RlZBABEgsKB2RlbGV0ZWQQAhIKCgZraW'
+        'xsZWQQAw==');
 
 @$core.Deprecated('Use tournamentSubscriptionTypeDescriptor instead')
 const TournamentSubscriptionType$json = {
@@ -102,8 +102,7 @@ const TournamentSubscriptionType$json = {
 
 /// Descriptor for `TournamentSubscriptionType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List tournamentSubscriptionTypeDescriptor =
-    $convert.base64Decode(
-        'ChpUb3VybmFtZW50U3Vic2NyaXB0aW9uVHlwZRIlCiF1bmtub3duVG91cm5hbWVudFN1YnNjcm'
+    $convert.base64Decode('ChpUb3VybmFtZW50U3Vic2NyaXB0aW9uVHlwZRIlCiF1bmtub3duVG91cm5hbWVudFN1YnNjcm'
         'lwdGlvblR5cGUQABIkCiB0b3VybmFtZW50V2l0aEFsbEFkZG9uczEwUGxheWVycxAB');
 
 @$core.Deprecated('Use ratingSchemeDescriptor instead')
@@ -117,9 +116,9 @@ const RatingScheme$json = {
 };
 
 /// Descriptor for `RatingScheme`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List ratingSchemeDescriptor = $convert.base64Decode(
-    'CgxSYXRpbmdTY2hlbWUSCgoGb2xkRlNNEAASDAoIbWludXNGU00QARIQCgxtZWRpYWdhbWVNU0'
-    'wQAg==');
+final $typed_data.Uint8List ratingSchemeDescriptor =
+    $convert.base64Decode('CgxSYXRpbmdTY2hlbWUSCgoGb2xkRlNNEAASDAoIbWludXNGU00QARIQCgxtZWRpYWdhbWVNU0'
+        'wQAg==');
 
 @$core.Deprecated('Use loginEventDescriptor instead')
 const LoginEvent$json = {
@@ -131,43 +130,19 @@ const LoginEvent$json = {
 };
 
 /// Descriptor for `LoginEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List loginEventDescriptor = $convert.base64Decode(
-    'CgpMb2dpbkV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbBIaCghwYXNzd29yZBgCIAEoCVIIcG'
-    'Fzc3dvcmQ=');
+final $typed_data.Uint8List loginEventDescriptor =
+    $convert.base64Decode('CgpMb2dpbkV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbBIaCghwYXNzd29yZBgCIAEoCVIIcG'
+        'Fzc3dvcmQ=');
 
 @$core.Deprecated('Use tableSeatingDescriptor instead')
 const TableSeating$json = {
   '1': 'TableSeating',
   '2': [
     {'1': 'nickname', '3': 1, '4': 3, '5': 9, '10': 'nickname'},
-    {
-      '1': 'referee',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'referee',
-      '17': true
-    },
+    {'1': 'referee', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'referee', '17': true},
     {'1': 'table', '3': 3, '4': 1, '5': 5, '10': 'table'},
-    {
-      '1': 'players',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'players'
-    },
-    {
-      '1': 'refereeModel',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '9': 1,
-      '10': 'refereeModel',
-      '17': true
-    },
+    {'1': 'players', '3': 4, '4': 3, '5': 11, '6': '.generated.Player', '10': 'players'},
+    {'1': 'refereeModel', '3': 5, '4': 1, '5': 11, '6': '.generated.Player', '9': 1, '10': 'refereeModel', '17': true},
   ],
   '8': [
     {'1': '_referee'},
@@ -176,43 +151,22 @@ const TableSeating$json = {
 };
 
 /// Descriptor for `TableSeating`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tableSeatingDescriptor = $convert.base64Decode(
-    'CgxUYWJsZVNlYXRpbmcSGgoIbmlja25hbWUYASADKAlSCG5pY2tuYW1lEh0KB3JlZmVyZWUYAi'
-    'ABKAlIAFIHcmVmZXJlZYgBARIUCgV0YWJsZRgDIAEoBVIFdGFibGUSKwoHcGxheWVycxgEIAMo'
-    'CzIRLmdlbmVyYXRlZC5QbGF5ZXJSB3BsYXllcnMSOgoMcmVmZXJlZU1vZGVsGAUgASgLMhEuZ2'
-    'VuZXJhdGVkLlBsYXllckgBUgxyZWZlcmVlTW9kZWyIAQFCCgoIX3JlZmVyZWVCDwoNX3JlZmVy'
-    'ZWVNb2RlbA==');
+final $typed_data.Uint8List tableSeatingDescriptor =
+    $convert.base64Decode('CgxUYWJsZVNlYXRpbmcSGgoIbmlja25hbWUYASADKAlSCG5pY2tuYW1lEh0KB3JlZmVyZWUYAi'
+        'ABKAlIAFIHcmVmZXJlZYgBARIUCgV0YWJsZRgDIAEoBVIFdGFibGUSKwoHcGxheWVycxgEIAMo'
+        'CzIRLmdlbmVyYXRlZC5QbGF5ZXJSB3BsYXllcnMSOgoMcmVmZXJlZU1vZGVsGAUgASgLMhEuZ2'
+        'VuZXJhdGVkLlBsYXllckgBUgxyZWZlcmVlTW9kZWyIAQFCCgoIX3JlZmVyZWVCDwoNX3JlZmVy'
+        'ZWVNb2RlbA==');
 
 @$core.Deprecated('Use tableSeatingResultDescriptor instead')
 const TableSeatingResult$json = {
   '1': 'TableSeatingResult',
   '2': [
-    {
-      '1': 'role',
-      '3': 1,
-      '4': 3,
-      '5': 14,
-      '6': '.generated.PlayerRole',
-      '10': 'role'
-    },
+    {'1': 'role', '3': 1, '4': 3, '5': 14, '6': '.generated.PlayerRole', '10': 'role'},
     {'1': 'score', '3': 2, '4': 3, '5': 1, '10': 'score'},
     {'1': 'died', '3': 3, '4': 1, '5': 5, '9': 0, '10': 'died', '17': true},
-    {
-      '1': 'win',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.GameWin',
-      '10': 'win'
-    },
-    {
-      '1': 'bestMove',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.BestMove',
-      '10': 'bestMove'
-    },
+    {'1': 'win', '3': 4, '4': 1, '5': 14, '6': '.generated.GameWin', '10': 'win'},
+    {'1': 'bestMove', '3': 5, '4': 1, '5': 14, '6': '.generated.BestMove', '10': 'bestMove'},
     {'1': 'addScore', '3': 6, '4': 3, '5': 1, '10': 'addScore'},
     {'1': 'minusScore', '3': 7, '4': 3, '5': 1, '10': 'minusScore'},
   ],
@@ -222,12 +176,12 @@ const TableSeatingResult$json = {
 };
 
 /// Descriptor for `TableSeatingResult`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tableSeatingResultDescriptor = $convert.base64Decode(
-    'ChJUYWJsZVNlYXRpbmdSZXN1bHQSKQoEcm9sZRgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2'
-    'xlUgRyb2xlEhQKBXNjb3JlGAIgAygBUgVzY29yZRIXCgRkaWVkGAMgASgFSABSBGRpZWSIAQES'
-    'JAoDd2luGAQgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5SA3dpbhIvCghiZXN0TW92ZRgFIAEoDj'
-    'ITLmdlbmVyYXRlZC5CZXN0TW92ZVIIYmVzdE1vdmUSGgoIYWRkU2NvcmUYBiADKAFSCGFkZFNj'
-    'b3JlEh4KCm1pbnVzU2NvcmUYByADKAFSCm1pbnVzU2NvcmVCBwoFX2RpZWQ=');
+final $typed_data.Uint8List tableSeatingResultDescriptor =
+    $convert.base64Decode('ChJUYWJsZVNlYXRpbmdSZXN1bHQSKQoEcm9sZRgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2'
+        'xlUgRyb2xlEhQKBXNjb3JlGAIgAygBUgVzY29yZRIXCgRkaWVkGAMgASgFSABSBGRpZWSIAQES'
+        'JAoDd2luGAQgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5SA3dpbhIvCghiZXN0TW92ZRgFIAEoDj'
+        'ITLmdlbmVyYXRlZC5CZXN0TW92ZVIIYmVzdE1vdmUSGgoIYWRkU2NvcmUYBiADKAFSCGFkZFNj'
+        'b3JlEh4KCm1pbnVzU2NvcmUYByADKAFSCm1pbnVzU2NvcmVCBwoFX2RpZWQ=');
 
 @$core.Deprecated('Use updateHideDateRequestDescriptor instead')
 const UpdateHideDateRequest$json = {
@@ -239,32 +193,15 @@ const UpdateHideDateRequest$json = {
 
 /// Descriptor for `UpdateHideDateRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateHideDateRequestDescriptor =
-    $convert.base64Decode(
-        'ChVVcGRhdGVIaWRlRGF0ZVJlcXVlc3QSEgoEZGF0ZRgBIAEoCVIEZGF0ZQ==');
+    $convert.base64Decode('ChVVcGRhdGVIaWRlRGF0ZVJlcXVlc3QSEgoEZGF0ZRgBIAEoCVIEZGF0ZQ==');
 
 @$core.Deprecated('Use tableSeatingItemDescriptor instead')
 const TableSeatingItem$json = {
   '1': 'TableSeatingItem',
   '2': [
     {'1': 'gameId', '3': 1, '4': 1, '5': 5, '10': 'gameId'},
-    {
-      '1': 'seating',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.TableSeating',
-      '10': 'seating'
-    },
-    {
-      '1': 'result',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.TableSeatingResult',
-      '9': 0,
-      '10': 'result',
-      '17': true
-    },
+    {'1': 'seating', '3': 2, '4': 1, '5': 11, '6': '.generated.TableSeating', '10': 'seating'},
+    {'1': 'result', '3': 3, '4': 1, '5': 11, '6': '.generated.TableSeatingResult', '9': 0, '10': 'result', '17': true},
     {'1': 'game', '3': 4, '4': 1, '5': 5, '10': 'game'},
     {'1': 'table', '3': 5, '4': 1, '5': 5, '10': 'table'},
   ],
@@ -274,31 +211,24 @@ const TableSeatingItem$json = {
 };
 
 /// Descriptor for `TableSeatingItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tableSeatingItemDescriptor = $convert.base64Decode(
-    'ChBUYWJsZVNlYXRpbmdJdGVtEhYKBmdhbWVJZBgBIAEoBVIGZ2FtZUlkEjEKB3NlYXRpbmcYAi'
-    'ABKAsyFy5nZW5lcmF0ZWQuVGFibGVTZWF0aW5nUgdzZWF0aW5nEjoKBnJlc3VsdBgDIAEoCzId'
-    'LmdlbmVyYXRlZC5UYWJsZVNlYXRpbmdSZXN1bHRIAFIGcmVzdWx0iAEBEhIKBGdhbWUYBCABKA'
-    'VSBGdhbWUSFAoFdGFibGUYBSABKAVSBXRhYmxlQgkKB19yZXN1bHQ=');
+final $typed_data.Uint8List tableSeatingItemDescriptor =
+    $convert.base64Decode('ChBUYWJsZVNlYXRpbmdJdGVtEhYKBmdhbWVJZBgBIAEoBVIGZ2FtZUlkEjEKB3NlYXRpbmcYAi'
+        'ABKAsyFy5nZW5lcmF0ZWQuVGFibGVTZWF0aW5nUgdzZWF0aW5nEjoKBnJlc3VsdBgDIAEoCzId'
+        'LmdlbmVyYXRlZC5UYWJsZVNlYXRpbmdSZXN1bHRIAFIGcmVzdWx0iAEBEhIKBGdhbWUYBCABKA'
+        'VSBGdhbWUSFAoFdGFibGUYBSABKAVSBXRhYmxlQgkKB19yZXN1bHQ=');
 
 @$core.Deprecated('Use seatingEventOutDescriptor instead')
 const SeatingEventOut$json = {
   '1': 'SeatingEventOut',
   '2': [
-    {
-      '1': 'item',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.TableSeatingItem',
-      '10': 'item'
-    },
+    {'1': 'item', '3': 1, '4': 3, '5': 11, '6': '.generated.TableSeatingItem', '10': 'item'},
   ],
 };
 
 /// Descriptor for `SeatingEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List seatingEventOutDescriptor = $convert.base64Decode(
-    'Cg9TZWF0aW5nRXZlbnRPdXQSLwoEaXRlbRgBIAMoCzIbLmdlbmVyYXRlZC5UYWJsZVNlYXRpbm'
-    'dJdGVtUgRpdGVt');
+final $typed_data.Uint8List seatingEventOutDescriptor =
+    $convert.base64Decode('Cg9TZWF0aW5nRXZlbnRPdXQSLwoEaXRlbRgBIAMoCzIbLmdlbmVyYXRlZC5UYWJsZVNlYXRpbm'
+        'dJdGVtUgRpdGVt');
 
 @$core.Deprecated('Use loginEventOutDescriptor instead')
 const LoginEventOut$json = {
@@ -306,14 +236,7 @@ const LoginEventOut$json = {
   '2': [
     {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
     {'1': 'recoveryToken', '3': 2, '4': 1, '5': 9, '10': 'recoveryToken'},
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.LoginEventOut.Error',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 3, '4': 1, '5': 14, '6': '.generated.LoginEventOut.Error', '10': 'error'},
     {'1': 'id', '3': 4, '4': 1, '5': 5, '9': 0, '10': 'id', '17': true},
   ],
   '4': [LoginEventOut_Error$json],
@@ -333,12 +256,12 @@ const LoginEventOut_Error$json = {
 };
 
 /// Descriptor for `LoginEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List loginEventOutDescriptor = $convert.base64Decode(
-    'Cg1Mb2dpbkV2ZW50T3V0EhQKBXRva2VuGAEgASgJUgV0b2tlbhIkCg1yZWNvdmVyeVRva2VuGA'
-    'IgASgJUg1yZWNvdmVyeVRva2VuEjQKBWVycm9yGAMgASgOMh4uZ2VuZXJhdGVkLkxvZ2luRXZl'
-    'bnRPdXQuRXJyb3JSBWVycm9yEhMKAmlkGAQgASgFSABSAmlkiAEBIkIKBUVycm9yEgsKB25vRX'
-    'Jyb3IQABIUChBuZWVkVmVyaWZpY2F0aW9uEAESFgoSaW52YWxpZENyZWRlbnRpYWxzEAJCBQoD'
-    'X2lk');
+final $typed_data.Uint8List loginEventOutDescriptor =
+    $convert.base64Decode('Cg1Mb2dpbkV2ZW50T3V0EhQKBXRva2VuGAEgASgJUgV0b2tlbhIkCg1yZWNvdmVyeVRva2VuGA'
+        'IgASgJUg1yZWNvdmVyeVRva2VuEjQKBWVycm9yGAMgASgOMh4uZ2VuZXJhdGVkLkxvZ2luRXZl'
+        'bnRPdXQuRXJyb3JSBWVycm9yEhMKAmlkGAQgASgFSABSAmlkiAEBIkIKBUVycm9yEgsKB25vRX'
+        'Jyb3IQABIUChBuZWVkVmVyaWZpY2F0aW9uEAESFgoSaW52YWxpZENyZWRlbnRpYWxzEAJCBQoD'
+        'X2lk');
 
 @$core.Deprecated('Use editSeatingEventDescriptor instead')
 const EditSeatingEvent$json = {
@@ -352,54 +275,20 @@ const EditSeatingEvent$json = {
 };
 
 /// Descriptor for `EditSeatingEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List editSeatingEventDescriptor = $convert.base64Decode(
-    'ChBFZGl0U2VhdGluZ0V2ZW50EhIKBGdhbWUYASABKAVSBGdhbWUSFAoFdGFibGUYAiABKAVSBX'
-    'RhYmxlEhgKB3BsYXllcnMYAyADKAVSB3BsYXllcnMSGAoHcmVmZXJlZRgEIAEoBVIHcmVmZXJl'
-    'ZQ==');
+final $typed_data.Uint8List editSeatingEventDescriptor =
+    $convert.base64Decode('ChBFZGl0U2VhdGluZ0V2ZW50EhIKBGdhbWUYASABKAVSBGdhbWUSFAoFdGFibGUYAiABKAVSBX'
+        'RhYmxlEhgKB3BsYXllcnMYAyADKAVSB3BsYXllcnMSGAoHcmVmZXJlZRgEIAEoBVIHcmVmZXJl'
+        'ZQ==');
 
 @$core.Deprecated('Use changeSeatingContentDescriptor instead')
 const ChangeSeatingContent$json = {
   '1': 'ChangeSeatingContent',
   '2': [
     {'1': 'player', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'player', '17': true},
-    {
-      '1': 'imageUrl',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'imageUrl',
-      '17': true
-    },
-    {
-      '1': 'role',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.PlayerRole',
-      '9': 2,
-      '10': 'role',
-      '17': true
-    },
-    {
-      '1': 'status',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.PlayerStatus',
-      '9': 3,
-      '10': 'status',
-      '17': true
-    },
-    {
-      '1': 'selectedGame',
-      '3': 5,
-      '4': 1,
-      '5': 5,
-      '9': 4,
-      '10': 'selectedGame',
-      '17': true
-    },
+    {'1': 'imageUrl', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'imageUrl', '17': true},
+    {'1': 'role', '3': 3, '4': 1, '5': 14, '6': '.generated.PlayerRole', '9': 2, '10': 'role', '17': true},
+    {'1': 'status', '3': 4, '4': 1, '5': 14, '6': '.generated.PlayerStatus', '9': 3, '10': 'status', '17': true},
+    {'1': 'selectedGame', '3': 5, '4': 1, '5': 5, '9': 4, '10': 'selectedGame', '17': true},
   ],
   '8': [
     {'1': '_player'},
@@ -411,13 +300,13 @@ const ChangeSeatingContent$json = {
 };
 
 /// Descriptor for `ChangeSeatingContent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List changeSeatingContentDescriptor = $convert.base64Decode(
-    'ChRDaGFuZ2VTZWF0aW5nQ29udGVudBIbCgZwbGF5ZXIYASABKAVIAFIGcGxheWVyiAEBEh8KCG'
-    'ltYWdlVXJsGAIgASgJSAFSCGltYWdlVXJsiAEBEi4KBHJvbGUYAyABKA4yFS5nZW5lcmF0ZWQu'
-    'UGxheWVyUm9sZUgCUgRyb2xliAEBEjQKBnN0YXR1cxgEIAEoDjIXLmdlbmVyYXRlZC5QbGF5ZX'
-    'JTdGF0dXNIA1IGc3RhdHVziAEBEicKDHNlbGVjdGVkR2FtZRgFIAEoBUgEUgxzZWxlY3RlZEdh'
-    'bWWIAQFCCQoHX3BsYXllckILCglfaW1hZ2VVcmxCBwoFX3JvbGVCCQoHX3N0YXR1c0IPCg1fc2'
-    'VsZWN0ZWRHYW1l');
+final $typed_data.Uint8List changeSeatingContentDescriptor =
+    $convert.base64Decode('ChRDaGFuZ2VTZWF0aW5nQ29udGVudBIbCgZwbGF5ZXIYASABKAVIAFIGcGxheWVyiAEBEh8KCG'
+        'ltYWdlVXJsGAIgASgJSAFSCGltYWdlVXJsiAEBEi4KBHJvbGUYAyABKA4yFS5nZW5lcmF0ZWQu'
+        'UGxheWVyUm9sZUgCUgRyb2xliAEBEjQKBnN0YXR1cxgEIAEoDjIXLmdlbmVyYXRlZC5QbGF5ZX'
+        'JTdGF0dXNIA1IGc3RhdHVziAEBEicKDHNlbGVjdGVkR2FtZRgFIAEoBUgEUgxzZWxlY3RlZEdh'
+        'bWWIAQFCCQoHX3BsYXllckILCglfaW1hZ2VVcmxCBwoFX3JvbGVCCQoHX3N0YXR1c0IPCg1fc2'
+        'VsZWN0ZWRHYW1l');
 
 @$core.Deprecated('Use clubDescriptor instead')
 const Club$json = {
@@ -425,43 +314,11 @@ const Club$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'description',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'description',
-      '17': true
-    },
-    {
-      '1': 'imageUrl',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'imageUrl',
-      '17': true
-    },
-    {
-      '1': 'groupLink',
-      '3': 5,
-      '4': 1,
-      '5': 9,
-      '9': 2,
-      '10': 'groupLink',
-      '17': true
-    },
+    {'1': 'description', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'description', '17': true},
+    {'1': 'imageUrl', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'imageUrl', '17': true},
+    {'1': 'groupLink', '3': 5, '4': 1, '5': 9, '9': 2, '10': 'groupLink', '17': true},
     {'1': 'city', '3': 6, '4': 1, '5': 9, '9': 3, '10': 'city', '17': true},
-    {
-      '1': 'billedFor',
-      '3': 7,
-      '4': 1,
-      '5': 9,
-      '9': 4,
-      '10': 'billedFor',
-      '17': true
-    },
+    {'1': 'billedFor', '3': 7, '4': 1, '5': 9, '9': 4, '10': 'billedFor', '17': true},
   ],
   '8': [
     {'1': '_description'},
@@ -473,25 +330,18 @@ const Club$json = {
 };
 
 /// Descriptor for `Club`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubDescriptor = $convert.base64Decode(
-    'CgRDbHViEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiUKC2Rlc2NyaXB0aW'
-    '9uGAMgASgJSABSC2Rlc2NyaXB0aW9uiAEBEh8KCGltYWdlVXJsGAQgASgJSAFSCGltYWdlVXJs'
-    'iAEBEiEKCWdyb3VwTGluaxgFIAEoCUgCUglncm91cExpbmuIAQESFwoEY2l0eRgGIAEoCUgDUg'
-    'RjaXR5iAEBEiEKCWJpbGxlZEZvchgHIAEoCUgEUgliaWxsZWRGb3KIAQFCDgoMX2Rlc2NyaXB0'
-    'aW9uQgsKCV9pbWFnZVVybEIMCgpfZ3JvdXBMaW5rQgcKBV9jaXR5QgwKCl9iaWxsZWRGb3I=');
+final $typed_data.Uint8List clubDescriptor =
+    $convert.base64Decode('CgRDbHViEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEiUKC2Rlc2NyaXB0aW'
+        '9uGAMgASgJSABSC2Rlc2NyaXB0aW9uiAEBEh8KCGltYWdlVXJsGAQgASgJSAFSCGltYWdlVXJs'
+        'iAEBEiEKCWdyb3VwTGluaxgFIAEoCUgCUglncm91cExpbmuIAQESFwoEY2l0eRgGIAEoCUgDUg'
+        'RjaXR5iAEBEiEKCWJpbGxlZEZvchgHIAEoCUgEUgliaWxsZWRGb3KIAQFCDgoMX2Rlc2NyaXB0'
+        'aW9uQgsKCV9pbWFnZVVybEIMCgpfZ3JvdXBMaW5rQgcKBV9jaXR5QgwKCl9iaWxsZWRGb3I=');
 
 @$core.Deprecated('Use clubRatingEventOutDescriptor instead')
 const ClubRatingEventOut$json = {
   '1': 'ClubRatingEventOut',
   '2': [
-    {
-      '1': 'row',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.ClubRatingRow',
-      '10': 'row'
-    },
+    {'1': 'row', '3': 1, '4': 3, '5': 11, '6': '.generated.ClubRatingRow', '10': 'row'},
     {'1': 'clubName', '3': 2, '4': 1, '5': 9, '10': 'clubName'},
     {'1': 'games', '3': 3, '4': 1, '5': 5, '10': 'games'},
     {'1': 'mafiaWins', '3': 4, '4': 1, '5': 5, '10': 'mafiaWins'},
@@ -500,11 +350,11 @@ const ClubRatingEventOut$json = {
 };
 
 /// Descriptor for `ClubRatingEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubRatingEventOutDescriptor = $convert.base64Decode(
-    'ChJDbHViUmF0aW5nRXZlbnRPdXQSKgoDcm93GAEgAygLMhguZ2VuZXJhdGVkLkNsdWJSYXRpbm'
-    'dSb3dSA3JvdxIaCghjbHViTmFtZRgCIAEoCVIIY2x1Yk5hbWUSFAoFZ2FtZXMYAyABKAVSBWdh'
-    'bWVzEhwKCW1hZmlhV2lucxgEIAEoBVIJbWFmaWFXaW5zEiAKC2NpdGl6ZW5XaW5zGAUgASgFUg'
-    'tjaXRpemVuV2lucw==');
+final $typed_data.Uint8List clubRatingEventOutDescriptor =
+    $convert.base64Decode('ChJDbHViUmF0aW5nRXZlbnRPdXQSKgoDcm93GAEgAygLMhguZ2VuZXJhdGVkLkNsdWJSYXRpbm'
+        'dSb3dSA3JvdxIaCghjbHViTmFtZRgCIAEoCVIIY2x1Yk5hbWUSFAoFZ2FtZXMYAyABKAVSBWdh'
+        'bWVzEhwKCW1hZmlhV2lucxgEIAEoBVIJbWFmaWFXaW5zEiAKC2NpdGl6ZW5XaW5zGAUgASgFUg'
+        'tjaXRpemVuV2lucw==');
 
 @$core.Deprecated('Use clubRatingRowDescriptor instead')
 const ClubRatingRow$json = {
@@ -516,14 +366,7 @@ const ClubRatingRow$json = {
     {'1': 'firstDie', '3': 4, '4': 1, '5': 5, '10': 'firstDie'},
     {'1': 'donWins', '3': 5, '4': 1, '5': 5, '10': 'donWins'},
     {'1': 'sheriffWins', '3': 6, '4': 1, '5': 5, '10': 'sheriffWins'},
-    {
-      '1': 'item',
-      '3': 7,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.ClubRatingRow.GameItem',
-      '10': 'item'
-    },
+    {'1': 'item', '3': 7, '4': 3, '5': 11, '6': '.generated.ClubRatingRow.GameItem', '10': 'item'},
     {'1': 'wins', '3': 8, '4': 1, '5': 5, '10': 'wins'},
     {'1': 'ci', '3': 9, '4': 1, '5': 5, '10': 'ci'},
     {'1': 'totalGames', '3': 10, '4': 1, '5': 5, '10': 'totalGames'},
@@ -544,32 +387,13 @@ const ClubRatingRow$json = {
     {'1': 'playerId', '3': 25, '4': 1, '5': 5, '10': 'playerId'},
     {'1': 'refereeCount', '3': 26, '4': 1, '5': 5, '10': 'refereeCount'},
     {'1': 'minusScore', '3': 27, '4': 1, '5': 1, '10': 'minusScore'},
-    {
-      '1': 'citizenMinusScore',
-      '3': 28,
-      '4': 1,
-      '5': 1,
-      '10': 'citizenMinusScore'
-    },
+    {'1': 'citizenMinusScore', '3': 28, '4': 1, '5': 1, '10': 'citizenMinusScore'},
     {'1': 'mafiaMinusScore', '3': 29, '4': 1, '5': 1, '10': 'mafiaMinusScore'},
     {'1': 'donMinusScore', '3': 30, '4': 1, '5': 1, '10': 'donMinusScore'},
-    {
-      '1': 'sheriffMinusScore',
-      '3': 31,
-      '4': 1,
-      '5': 1,
-      '10': 'sheriffMinusScore'
-    },
+    {'1': 'sheriffMinusScore', '3': 31, '4': 1, '5': 1, '10': 'sheriffMinusScore'},
     {'1': 'bestMoveCitizen', '3': 32, '4': 1, '5': 1, '10': 'bestMoveCitizen'},
     {'1': 'bestMoveSheriff', '3': 33, '4': 1, '5': 1, '10': 'bestMoveSheriff'},
-    {
-      '1': 'customColumns',
-      '3': 34,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.CustomColumnValue',
-      '10': 'customColumns'
-    },
+    {'1': 'customColumns', '3': 34, '4': 3, '5': 11, '6': '.generated.CustomColumnValue', '10': 'customColumns'},
   ],
   '3': [ClubRatingRow_GameItem$json],
 };
@@ -587,31 +411,31 @@ const ClubRatingRow_GameItem$json = {
 };
 
 /// Descriptor for `ClubRatingRow`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubRatingRowDescriptor = $convert.base64Decode(
-    'Cg1DbHViUmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRIUCgVzY29yZRgCIA'
-    'EoAVIFc2NvcmUSGgoIYWRkU2NvcmUYAyABKAFSCGFkZFNjb3JlEhoKCGZpcnN0RGllGAQgASgF'
-    'UghmaXJzdERpZRIYCgdkb25XaW5zGAUgASgFUgdkb25XaW5zEiAKC3NoZXJpZmZXaW5zGAYgAS'
-    'gFUgtzaGVyaWZmV2lucxI1CgRpdGVtGAcgAygLMiEuZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3cu'
-    'R2FtZUl0ZW1SBGl0ZW0SEgoEd2lucxgIIAEoBVIEd2lucxIOCgJjaRgJIAEoBVICY2kSHgoKdG'
-    '90YWxHYW1lcxgKIAEoBVIKdG90YWxHYW1lcxIiCgxjaXRpemVuR2FtZXMYCyABKAVSDGNpdGl6'
-    'ZW5HYW1lcxIaCghkb25HYW1lcxgMIAEoBVIIZG9uR2FtZXMSIgoMc2hlcmlmZkdhbWVzGA0gAS'
-    'gFUgxzaGVyaWZmR2FtZXMSHgoKbWFmaWFHYW1lcxgOIAEoBVIKbWFmaWFHYW1lcxIcCgltYWZp'
-    'YVdpbnMYDyABKAVSCW1hZmlhV2lucxIgCgtjaXRpemVuV2lucxgQIAEoBVILY2l0aXplbldpbn'
-    'MSKAoPY2l0aXplbkFkZFNjb3JlGBEgASgBUg9jaXRpemVuQWRkU2NvcmUSJAoNbWFmaWFBZGRT'
-    'Y29yZRgSIAEoAVINbWFmaWFBZGRTY29yZRIgCgtkb25BZGRTY29yZRgTIAEoAVILZG9uQWRkU2'
-    'NvcmUSKAoPc2hlcmlmZkFkZFNjb3JlGBQgASgBUg9zaGVyaWZmQWRkU2NvcmUSIgoMY2l0aXpl'
-    'blNjb3JlGBUgASgBUgxjaXRpemVuU2NvcmUSHgoKbWFmaWFTY29yZRgWIAEoAVIKbWFmaWFTY2'
-    '9yZRIaCghkb25TY29yZRgXIAEoAVIIZG9uU2NvcmUSIgoMc2hlcmlmZlNjb3JlGBggASgBUgxz'
-    'aGVyaWZmU2NvcmUSGgoIcGxheWVySWQYGSABKAVSCHBsYXllcklkEiIKDHJlZmVyZWVDb3VudB'
-    'gaIAEoBVIMcmVmZXJlZUNvdW50Eh4KCm1pbnVzU2NvcmUYGyABKAFSCm1pbnVzU2NvcmUSLAoR'
-    'Y2l0aXplbk1pbnVzU2NvcmUYHCABKAFSEWNpdGl6ZW5NaW51c1Njb3JlEigKD21hZmlhTWludX'
-    'NTY29yZRgdIAEoAVIPbWFmaWFNaW51c1Njb3JlEiQKDWRvbk1pbnVzU2NvcmUYHiABKAFSDWRv'
-    'bk1pbnVzU2NvcmUSLAoRc2hlcmlmZk1pbnVzU2NvcmUYHyABKAFSEXNoZXJpZmZNaW51c1Njb3'
-    'JlEigKD2Jlc3RNb3ZlQ2l0aXplbhggIAEoAVIPYmVzdE1vdmVDaXRpemVuEigKD2Jlc3RNb3Zl'
-    'U2hlcmlmZhghIAEoAVIPYmVzdE1vdmVTaGVyaWZmEkIKDWN1c3RvbUNvbHVtbnMYIiADKAsyHC'
-    '5nZW5lcmF0ZWQuQ3VzdG9tQ29sdW1uVmFsdWVSDWN1c3RvbUNvbHVtbnMaRwoIR2FtZUl0ZW0S'
-    'FgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQSGQoFc2NvcmUYAiABKAFIAFIFc2NvcmWIAQFCCAoGX3'
-    'Njb3Jl');
+final $typed_data.Uint8List clubRatingRowDescriptor =
+    $convert.base64Decode('Cg1DbHViUmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRIUCgVzY29yZRgCIA'
+        'EoAVIFc2NvcmUSGgoIYWRkU2NvcmUYAyABKAFSCGFkZFNjb3JlEhoKCGZpcnN0RGllGAQgASgF'
+        'UghmaXJzdERpZRIYCgdkb25XaW5zGAUgASgFUgdkb25XaW5zEiAKC3NoZXJpZmZXaW5zGAYgAS'
+        'gFUgtzaGVyaWZmV2lucxI1CgRpdGVtGAcgAygLMiEuZ2VuZXJhdGVkLkNsdWJSYXRpbmdSb3cu'
+        'R2FtZUl0ZW1SBGl0ZW0SEgoEd2lucxgIIAEoBVIEd2lucxIOCgJjaRgJIAEoBVICY2kSHgoKdG'
+        '90YWxHYW1lcxgKIAEoBVIKdG90YWxHYW1lcxIiCgxjaXRpemVuR2FtZXMYCyABKAVSDGNpdGl6'
+        'ZW5HYW1lcxIaCghkb25HYW1lcxgMIAEoBVIIZG9uR2FtZXMSIgoMc2hlcmlmZkdhbWVzGA0gAS'
+        'gFUgxzaGVyaWZmR2FtZXMSHgoKbWFmaWFHYW1lcxgOIAEoBVIKbWFmaWFHYW1lcxIcCgltYWZp'
+        'YVdpbnMYDyABKAVSCW1hZmlhV2lucxIgCgtjaXRpemVuV2lucxgQIAEoBVILY2l0aXplbldpbn'
+        'MSKAoPY2l0aXplbkFkZFNjb3JlGBEgASgBUg9jaXRpemVuQWRkU2NvcmUSJAoNbWFmaWFBZGRT'
+        'Y29yZRgSIAEoAVINbWFmaWFBZGRTY29yZRIgCgtkb25BZGRTY29yZRgTIAEoAVILZG9uQWRkU2'
+        'NvcmUSKAoPc2hlcmlmZkFkZFNjb3JlGBQgASgBUg9zaGVyaWZmQWRkU2NvcmUSIgoMY2l0aXpl'
+        'blNjb3JlGBUgASgBUgxjaXRpemVuU2NvcmUSHgoKbWFmaWFTY29yZRgWIAEoAVIKbWFmaWFTY2'
+        '9yZRIaCghkb25TY29yZRgXIAEoAVIIZG9uU2NvcmUSIgoMc2hlcmlmZlNjb3JlGBggASgBUgxz'
+        'aGVyaWZmU2NvcmUSGgoIcGxheWVySWQYGSABKAVSCHBsYXllcklkEiIKDHJlZmVyZWVDb3VudB'
+        'gaIAEoBVIMcmVmZXJlZUNvdW50Eh4KCm1pbnVzU2NvcmUYGyABKAFSCm1pbnVzU2NvcmUSLAoR'
+        'Y2l0aXplbk1pbnVzU2NvcmUYHCABKAFSEWNpdGl6ZW5NaW51c1Njb3JlEigKD21hZmlhTWludX'
+        'NTY29yZRgdIAEoAVIPbWFmaWFNaW51c1Njb3JlEiQKDWRvbk1pbnVzU2NvcmUYHiABKAFSDWRv'
+        'bk1pbnVzU2NvcmUSLAoRc2hlcmlmZk1pbnVzU2NvcmUYHyABKAFSEXNoZXJpZmZNaW51c1Njb3'
+        'JlEigKD2Jlc3RNb3ZlQ2l0aXplbhggIAEoAVIPYmVzdE1vdmVDaXRpemVuEigKD2Jlc3RNb3Zl'
+        'U2hlcmlmZhghIAEoAVIPYmVzdE1vdmVTaGVyaWZmEkIKDWN1c3RvbUNvbHVtbnMYIiADKAsyHC'
+        '5nZW5lcmF0ZWQuQ3VzdG9tQ29sdW1uVmFsdWVSDWN1c3RvbUNvbHVtbnMaRwoIR2FtZUl0ZW0S'
+        'FgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQSGQoFc2NvcmUYAiABKAFIAFIFc2NvcmWIAQFCCAoGX3'
+        'Njb3Jl');
 
 @$core.Deprecated('Use customColumnValueDescriptor instead')
 const CustomColumnValue$json = {
@@ -626,9 +450,9 @@ const CustomColumnValue$json = {
 };
 
 /// Descriptor for `CustomColumnValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List customColumnValueDescriptor = $convert.base64Decode(
-    'ChFDdXN0b21Db2x1bW5WYWx1ZRIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGQoFdmFsdWUYAiABKA'
-    'FIAFIFdmFsdWWIAQFCCAoGX3ZhbHVl');
+final $typed_data.Uint8List customColumnValueDescriptor =
+    $convert.base64Decode('ChFDdXN0b21Db2x1bW5WYWx1ZRIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGQoFdmFsdWUYAiABKA'
+        'FIAFIFdmFsdWWIAQFCCAoGX3ZhbHVl');
 
 @$core.Deprecated('Use customColumnDefinitionDescriptor instead')
 const CustomColumnDefinition$json = {
@@ -642,29 +466,21 @@ const CustomColumnDefinition$json = {
 
 /// Descriptor for `CustomColumnDefinition`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List customColumnDefinitionDescriptor =
-    $convert.base64Decode(
-        'ChZDdXN0b21Db2x1bW5EZWZpbml0aW9uEg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCV'
+    $convert.base64Decode('ChZDdXN0b21Db2x1bW5EZWZpbml0aW9uEg4KAmlkGAEgASgFUgJpZBIUCgV0aXRsZRgCIAEoCV'
         'IFdGl0bGUSGAoHZm9ybXVsYRgDIAEoCVIHZm9ybXVsYQ==');
 
 @$core.Deprecated('Use customColumnsEventOutDescriptor instead')
 const CustomColumnsEventOut$json = {
   '1': 'CustomColumnsEventOut',
   '2': [
-    {
-      '1': 'columns',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.CustomColumnDefinition',
-      '10': 'columns'
-    },
+    {'1': 'columns', '3': 1, '4': 3, '5': 11, '6': '.generated.CustomColumnDefinition', '10': 'columns'},
   ],
 };
 
 /// Descriptor for `CustomColumnsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List customColumnsEventOutDescriptor = $convert.base64Decode(
-    'ChVDdXN0b21Db2x1bW5zRXZlbnRPdXQSOwoHY29sdW1ucxgBIAMoCzIhLmdlbmVyYXRlZC5DdX'
-    'N0b21Db2x1bW5EZWZpbml0aW9uUgdjb2x1bW5z');
+final $typed_data.Uint8List customColumnsEventOutDescriptor =
+    $convert.base64Decode('ChVDdXN0b21Db2x1bW5zRXZlbnRPdXQSOwoHY29sdW1ucxgBIAMoCzIhLmdlbmVyYXRlZC5DdX'
+        'N0b21Db2x1bW5EZWZpbml0aW9uUgdjb2x1bW5z');
 
 @$core.Deprecated('Use createCustomColumnEventDescriptor instead')
 const CreateCustomColumnEvent$json = {
@@ -677,8 +493,7 @@ const CreateCustomColumnEvent$json = {
 
 /// Descriptor for `CreateCustomColumnEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createCustomColumnEventDescriptor =
-    $convert.base64Decode(
-        'ChdDcmVhdGVDdXN0b21Db2x1bW5FdmVudBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGAoHZm9ybX'
+    $convert.base64Decode('ChdDcmVhdGVDdXN0b21Db2x1bW5FdmVudBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGAoHZm9ybX'
         'VsYRgCIAEoCVIHZm9ybXVsYQ==');
 
 @$core.Deprecated('Use updateCustomColumnEventDescriptor instead')
@@ -692,8 +507,7 @@ const UpdateCustomColumnEvent$json = {
 
 /// Descriptor for `UpdateCustomColumnEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateCustomColumnEventDescriptor =
-    $convert.base64Decode(
-        'ChdVcGRhdGVDdXN0b21Db2x1bW5FdmVudBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGAoHZm9ybX'
+    $convert.base64Decode('ChdVcGRhdGVDdXN0b21Db2x1bW5FdmVudBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSGAoHZm9ybX'
         'VsYRgCIAEoCVIHZm9ybXVsYQ==');
 
 @$core.Deprecated('Use validateFormulaEventDescriptor instead')
@@ -706,8 +520,7 @@ const ValidateFormulaEvent$json = {
 
 /// Descriptor for `ValidateFormulaEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List validateFormulaEventDescriptor =
-    $convert.base64Decode(
-        'ChRWYWxpZGF0ZUZvcm11bGFFdmVudBIYCgdmb3JtdWxhGAEgASgJUgdmb3JtdWxh');
+    $convert.base64Decode('ChRWYWxpZGF0ZUZvcm11bGFFdmVudBIYCgdmb3JtdWxhGAEgASgJUgdmb3JtdWxh');
 
 @$core.Deprecated('Use validateFormulaEventOutDescriptor instead')
 const ValidateFormulaEventOut$json = {
@@ -723,8 +536,7 @@ const ValidateFormulaEventOut$json = {
 
 /// Descriptor for `ValidateFormulaEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List validateFormulaEventOutDescriptor =
-    $convert.base64Decode(
-        'ChdWYWxpZGF0ZUZvcm11bGFFdmVudE91dBIUCgV2YWxpZBgBIAEoCFIFdmFsaWQSGQoFZXJyb3'
+    $convert.base64Decode('ChdWYWxpZGF0ZUZvcm11bGFFdmVudE91dBIUCgV2YWxpZBgBIAEoCFIFdmFsaWQSGQoFZXJyb3'
         'IYAiABKAlIAFIFZXJyb3KIAQFCCAoGX2Vycm9y');
 
 @$core.Deprecated('Use addGameEventOutDescriptor instead')
@@ -736,8 +548,8 @@ const AddGameEventOut$json = {
 };
 
 /// Descriptor for `AddGameEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addGameEventOutDescriptor = $convert
-    .base64Decode('Cg9BZGRHYW1lRXZlbnRPdXQSFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQ=');
+final $typed_data.Uint8List addGameEventOutDescriptor =
+    $convert.base64Decode('Cg9BZGRHYW1lRXZlbnRPdXQSFgoGZ2FtZUlkGAEgASgFUgZnYW1lSWQ=');
 
 @$core.Deprecated('Use ciSchemeDescriptor instead')
 const CiScheme$json = {
@@ -749,28 +561,21 @@ const CiScheme$json = {
 };
 
 /// Descriptor for `CiScheme`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List ciSchemeDescriptor = $convert.base64Decode(
-    'CghDaVNjaGVtZRIOCgJpZBgBIAEoBVICaWQSEgoEbmFtZRgCIAEoCVIEbmFtZQ==');
+final $typed_data.Uint8List ciSchemeDescriptor =
+    $convert.base64Decode('CghDaVNjaGVtZRIOCgJpZBgBIAEoBVICaWQSEgoEbmFtZRgCIAEoCVIEbmFtZQ==');
 
 @$core.Deprecated('Use availableCiEventOutDescriptor instead')
 const AvailableCiEventOut$json = {
   '1': 'AvailableCiEventOut',
   '2': [
-    {
-      '1': 'schemes',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.CiScheme',
-      '10': 'schemes'
-    },
+    {'1': 'schemes', '3': 1, '4': 3, '5': 11, '6': '.generated.CiScheme', '10': 'schemes'},
   ],
 };
 
 /// Descriptor for `AvailableCiEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List availableCiEventOutDescriptor = $convert.base64Decode(
-    'ChNBdmFpbGFibGVDaUV2ZW50T3V0Ei0KB3NjaGVtZXMYASADKAsyEy5nZW5lcmF0ZWQuQ2lTY2'
-    'hlbWVSB3NjaGVtZXM=');
+final $typed_data.Uint8List availableCiEventOutDescriptor =
+    $convert.base64Decode('ChNBdmFpbGFibGVDaUV2ZW50T3V0Ei0KB3NjaGVtZXMYASADKAsyEy5nZW5lcmF0ZWQuQ2lTY2'
+        'hlbWVSB3NjaGVtZXM=');
 
 @$core.Deprecated('Use setFinalPlayersEventDescriptor instead')
 const SetFinalPlayersEvent$json = {
@@ -781,8 +586,8 @@ const SetFinalPlayersEvent$json = {
 };
 
 /// Descriptor for `SetFinalPlayersEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setFinalPlayersEventDescriptor = $convert
-    .base64Decode('ChRTZXRGaW5hbFBsYXllcnNFdmVudBIOCgJpZBgBIAMoBVICaWQ=');
+final $typed_data.Uint8List setFinalPlayersEventDescriptor =
+    $convert.base64Decode('ChRTZXRGaW5hbFBsYXllcnNFdmVudBIOCgJpZBgBIAMoBVICaWQ=');
 
 @$core.Deprecated('Use clubGameResultDescriptor instead')
 const ClubGameResult$json = {
@@ -790,49 +595,15 @@ const ClubGameResult$json = {
   '2': [
     {'1': 'addScore', '3': 1, '4': 3, '5': 5, '10': 'addScore'},
     {'1': 'players', '3': 2, '4': 3, '5': 5, '10': 'players'},
-    {
-      '1': 'win',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.GameWin',
-      '9': 0,
-      '10': 'win',
-      '17': true
-    },
-    {
-      '1': 'firstDie',
-      '3': 4,
-      '4': 1,
-      '5': 5,
-      '9': 1,
-      '10': 'firstDie',
-      '17': true
-    },
-    {
-      '1': 'bestMove',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.BestMove',
-      '9': 2,
-      '10': 'bestMove',
-      '17': true
-    },
+    {'1': 'win', '3': 3, '4': 1, '5': 14, '6': '.generated.GameWin', '9': 0, '10': 'win', '17': true},
+    {'1': 'firstDie', '3': 4, '4': 1, '5': 5, '9': 1, '10': 'firstDie', '17': true},
+    {'1': 'bestMove', '3': 5, '4': 1, '5': 14, '6': '.generated.BestMove', '9': 2, '10': 'bestMove', '17': true},
     {'1': 'date', '3': 6, '4': 1, '5': 9, '9': 3, '10': 'date', '17': true},
     {'1': 'referee', '3': 7, '4': 1, '5': 5, '10': 'referee'},
     {'1': 'mafia1', '3': 8, '4': 1, '5': 5, '9': 4, '10': 'mafia1', '17': true},
     {'1': 'mafia2', '3': 9, '4': 1, '5': 5, '9': 5, '10': 'mafia2', '17': true},
     {'1': 'don', '3': 10, '4': 1, '5': 5, '9': 6, '10': 'don', '17': true},
-    {
-      '1': 'sheriff',
-      '3': 11,
-      '4': 1,
-      '5': 5,
-      '9': 7,
-      '10': 'sheriff',
-      '17': true
-    },
+    {'1': 'sheriff', '3': 11, '4': 1, '5': 5, '9': 7, '10': 'sheriff', '17': true},
     {'1': 'ciId', '3': 12, '4': 1, '5': 5, '9': 8, '10': 'ciId', '17': true},
     {
       '1': 'ratingScheme',
@@ -861,58 +632,37 @@ const ClubGameResult$json = {
 };
 
 /// Descriptor for `ClubGameResult`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubGameResultDescriptor = $convert.base64Decode(
-    'Cg5DbHViR2FtZVJlc3VsdBIaCghhZGRTY29yZRgBIAMoBVIIYWRkU2NvcmUSGAoHcGxheWVycx'
-    'gCIAMoBVIHcGxheWVycxIpCgN3aW4YAyABKA4yEi5nZW5lcmF0ZWQuR2FtZVdpbkgAUgN3aW6I'
-    'AQESHwoIZmlyc3REaWUYBCABKAVIAVIIZmlyc3REaWWIAQESNAoIYmVzdE1vdmUYBSABKA4yEy'
-    '5nZW5lcmF0ZWQuQmVzdE1vdmVIAlIIYmVzdE1vdmWIAQESFwoEZGF0ZRgGIAEoCUgDUgRkYXRl'
-    'iAEBEhgKB3JlZmVyZWUYByABKAVSB3JlZmVyZWUSGwoGbWFmaWExGAggASgFSARSBm1hZmlhMY'
-    'gBARIbCgZtYWZpYTIYCSABKAVIBVIGbWFmaWEyiAEBEhUKA2RvbhgKIAEoBUgGUgNkb26IAQES'
-    'HQoHc2hlcmlmZhgLIAEoBUgHUgdzaGVyaWZmiAEBEhcKBGNpSWQYDCABKAVICFIEY2lJZIgBAR'
-    'JACgxyYXRpbmdTY2hlbWUYDSABKA4yFy5nZW5lcmF0ZWQuUmF0aW5nU2NoZW1lSAlSDHJhdGlu'
-    'Z1NjaGVtZYgBARIeCgptaW51c1Njb3JlGA4gAygFUgptaW51c1Njb3JlQgYKBF93aW5CCwoJX2'
-    'ZpcnN0RGllQgsKCV9iZXN0TW92ZUIHCgVfZGF0ZUIJCgdfbWFmaWExQgkKB19tYWZpYTJCBgoE'
-    'X2RvbkIKCghfc2hlcmlmZkIHCgVfY2lJZEIPCg1fcmF0aW5nU2NoZW1l');
+final $typed_data.Uint8List clubGameResultDescriptor =
+    $convert.base64Decode('Cg5DbHViR2FtZVJlc3VsdBIaCghhZGRTY29yZRgBIAMoBVIIYWRkU2NvcmUSGAoHcGxheWVycx'
+        'gCIAMoBVIHcGxheWVycxIpCgN3aW4YAyABKA4yEi5nZW5lcmF0ZWQuR2FtZVdpbkgAUgN3aW6I'
+        'AQESHwoIZmlyc3REaWUYBCABKAVIAVIIZmlyc3REaWWIAQESNAoIYmVzdE1vdmUYBSABKA4yEy'
+        '5nZW5lcmF0ZWQuQmVzdE1vdmVIAlIIYmVzdE1vdmWIAQESFwoEZGF0ZRgGIAEoCUgDUgRkYXRl'
+        'iAEBEhgKB3JlZmVyZWUYByABKAVSB3JlZmVyZWUSGwoGbWFmaWExGAggASgFSARSBm1hZmlhMY'
+        'gBARIbCgZtYWZpYTIYCSABKAVIBVIGbWFmaWEyiAEBEhUKA2RvbhgKIAEoBUgGUgNkb26IAQES'
+        'HQoHc2hlcmlmZhgLIAEoBUgHUgdzaGVyaWZmiAEBEhcKBGNpSWQYDCABKAVICFIEY2lJZIgBAR'
+        'JACgxyYXRpbmdTY2hlbWUYDSABKA4yFy5nZW5lcmF0ZWQuUmF0aW5nU2NoZW1lSAlSDHJhdGlu'
+        'Z1NjaGVtZYgBARIeCgptaW51c1Njb3JlGA4gAygFUgptaW51c1Njb3JlQgYKBF93aW5CCwoJX2'
+        'ZpcnN0RGllQgsKCV9iZXN0TW92ZUIHCgVfZGF0ZUIJCgdfbWFmaWExQgkKB19tYWZpYTJCBgoE'
+        'X2RvbkIKCghfc2hlcmlmZkIHCgVfY2lJZEIPCg1fcmF0aW5nU2NoZW1l');
 
 @$core.Deprecated('Use clubsEventOutDescriptor instead')
 const ClubsEventOut$json = {
   '1': 'ClubsEventOut',
   '2': [
-    {
-      '1': 'club',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.Club',
-      '10': 'club'
-    },
+    {'1': 'club', '3': 1, '4': 3, '5': 11, '6': '.generated.Club', '10': 'club'},
   ],
 };
 
 /// Descriptor for `ClubsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubsEventOutDescriptor = $convert.base64Decode(
-    'Cg1DbHVic0V2ZW50T3V0EiMKBGNsdWIYASADKAsyDy5nZW5lcmF0ZWQuQ2x1YlIEY2x1Yg==');
+final $typed_data.Uint8List clubsEventOutDescriptor =
+    $convert.base64Decode('Cg1DbHVic0V2ZW50T3V0EiMKBGNsdWIYASADKAsyDy5nZW5lcmF0ZWQuQ2x1YlIEY2x1Yg==');
 
 @$core.Deprecated('Use seatingContentDescriptor instead')
 const SeatingContent$json = {
   '1': 'SeatingContent',
   '2': [
-    {
-      '1': 'roles',
-      '3': 1,
-      '4': 3,
-      '5': 14,
-      '6': '.generated.PlayerRole',
-      '10': 'roles'
-    },
-    {
-      '1': 'status',
-      '3': 2,
-      '4': 3,
-      '5': 14,
-      '6': '.generated.PlayerStatus',
-      '10': 'status'
-    },
+    {'1': 'roles', '3': 1, '4': 3, '5': 14, '6': '.generated.PlayerRole', '10': 'roles'},
+    {'1': 'status', '3': 2, '4': 3, '5': 14, '6': '.generated.PlayerStatus', '10': 'status'},
     {'1': 'images', '3': 3, '4': 3, '5': 9, '10': 'images'},
     {'1': 'names', '3': 4, '4': 3, '5': 9, '10': 'names'},
     {'1': 'game', '3': 5, '4': 1, '5': 5, '10': 'game'},
@@ -921,11 +671,11 @@ const SeatingContent$json = {
 };
 
 /// Descriptor for `SeatingContent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List seatingContentDescriptor = $convert.base64Decode(
-    'Cg5TZWF0aW5nQ29udGVudBIrCgVyb2xlcxgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUg'
-    'Vyb2xlcxIvCgZzdGF0dXMYAiADKA4yFy5nZW5lcmF0ZWQuUGxheWVyU3RhdHVzUgZzdGF0dXMS'
-    'FgoGaW1hZ2VzGAMgAygJUgZpbWFnZXMSFAoFbmFtZXMYBCADKAlSBW5hbWVzEhIKBGdhbWUYBS'
-    'ABKAVSBGdhbWUSHgoKdG90YWxHYW1lcxgGIAEoBVIKdG90YWxHYW1lcw==');
+final $typed_data.Uint8List seatingContentDescriptor =
+    $convert.base64Decode('Cg5TZWF0aW5nQ29udGVudBIrCgVyb2xlcxgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUg'
+        'Vyb2xlcxIvCgZzdGF0dXMYAiADKA4yFy5nZW5lcmF0ZWQuUGxheWVyU3RhdHVzUgZzdGF0dXMS'
+        'FgoGaW1hZ2VzGAMgAygJUgZpbWFnZXMSFAoFbmFtZXMYBCADKAlSBW5hbWVzEhIKBGdhbWUYBS'
+        'ABKAVSBGdhbWUSHgoKdG90YWxHYW1lcxgGIAEoBVIKdG90YWxHYW1lcw==');
 
 @$core.Deprecated('Use loginByTokenEventDescriptor instead')
 const LoginByTokenEvent$json = {
@@ -936,8 +686,8 @@ const LoginByTokenEvent$json = {
 };
 
 /// Descriptor for `LoginByTokenEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List loginByTokenEventDescriptor = $convert
-    .base64Decode('ChFMb2dpbkJ5VG9rZW5FdmVudBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4=');
+final $typed_data.Uint8List loginByTokenEventDescriptor =
+    $convert.base64Decode('ChFMb2dpbkJ5VG9rZW5FdmVudBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4=');
 
 @$core.Deprecated('Use loginByTokenEventOutDescriptor instead')
 const LoginByTokenEventOut$json = {
@@ -945,14 +695,7 @@ const LoginByTokenEventOut$json = {
   '2': [
     {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
     {'1': 'recoveryToken', '3': 2, '4': 1, '5': 9, '10': 'recoveryToken'},
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.LoginByTokenEventOut.Error',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 3, '4': 1, '5': 14, '6': '.generated.LoginByTokenEventOut.Error', '10': 'error'},
   ],
   '4': [LoginByTokenEventOut_Error$json],
 };
@@ -968,43 +711,19 @@ const LoginByTokenEventOut_Error$json = {
 };
 
 /// Descriptor for `LoginByTokenEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List loginByTokenEventOutDescriptor = $convert.base64Decode(
-    'ChRMb2dpbkJ5VG9rZW5FdmVudE91dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SJAoNcmVjb3Zlcn'
-    'lUb2tlbhgCIAEoCVINcmVjb3ZlcnlUb2tlbhI7CgVlcnJvchgDIAEoDjIlLmdlbmVyYXRlZC5M'
-    'b2dpbkJ5VG9rZW5FdmVudE91dC5FcnJvclIFZXJyb3IiQgoFRXJyb3ISCwoHbm9FcnJvchAAEh'
-    'QKEG5lZWRWZXJpZmljYXRpb24QARIWChJpbnZhbGlkQ3JlZGVudGlhbHMQAg==');
+final $typed_data.Uint8List loginByTokenEventOutDescriptor =
+    $convert.base64Decode('ChRMb2dpbkJ5VG9rZW5FdmVudE91dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SJAoNcmVjb3Zlcn'
+        'lUb2tlbhgCIAEoCVINcmVjb3ZlcnlUb2tlbhI7CgVlcnJvchgDIAEoDjIlLmdlbmVyYXRlZC5M'
+        'b2dpbkJ5VG9rZW5FdmVudE91dC5FcnJvclIFZXJyb3IiQgoFRXJyb3ISCwoHbm9FcnJvchAAEh'
+        'QKEG5lZWRWZXJpZmljYXRpb24QARIWChJpbnZhbGlkQ3JlZGVudGlhbHMQAg==');
 
 @$core.Deprecated('Use tournamentDescriptionDescriptor instead')
 const TournamentDescription$json = {
   '1': 'TournamentDescription',
   '2': [
-    {
-      '1': 'gomafiaUrl',
-      '3': 1,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'gomafiaUrl',
-      '17': true
-    },
-    {
-      '1': 'vkGroupUrl',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'vkGroupUrl',
-      '17': true
-    },
-    {
-      '1': 'vkOwnerUrl',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '9': 2,
-      '10': 'vkOwnerUrl',
-      '17': true
-    },
+    {'1': 'gomafiaUrl', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'gomafiaUrl', '17': true},
+    {'1': 'vkGroupUrl', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'vkGroupUrl', '17': true},
+    {'1': 'vkOwnerUrl', '3': 3, '4': 1, '5': 9, '9': 2, '10': 'vkOwnerUrl', '17': true},
   ],
   '8': [
     {'1': '_gomafiaUrl'},
@@ -1014,11 +733,11 @@ const TournamentDescription$json = {
 };
 
 /// Descriptor for `TournamentDescription`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tournamentDescriptionDescriptor = $convert.base64Decode(
-    'ChVUb3VybmFtZW50RGVzY3JpcHRpb24SIwoKZ29tYWZpYVVybBgBIAEoCUgAUgpnb21hZmlhVX'
-    'JsiAEBEiMKCnZrR3JvdXBVcmwYAiABKAlIAVIKdmtHcm91cFVybIgBARIjCgp2a093bmVyVXJs'
-    'GAMgASgJSAJSCnZrT3duZXJVcmyIAQFCDQoLX2dvbWFmaWFVcmxCDQoLX3ZrR3JvdXBVcmxCDQ'
-    'oLX3ZrT3duZXJVcmw=');
+final $typed_data.Uint8List tournamentDescriptionDescriptor =
+    $convert.base64Decode('ChVUb3VybmFtZW50RGVzY3JpcHRpb24SIwoKZ29tYWZpYVVybBgBIAEoCUgAUgpnb21hZmlhVX'
+        'JsiAEBEiMKCnZrR3JvdXBVcmwYAiABKAlIAVIKdmtHcm91cFVybIgBARIjCgp2a093bmVyVXJs'
+        'GAMgASgJSAJSCnZrT3duZXJVcmyIAQFCDQoLX2dvbWFmaWFVcmxCDQoLX3ZrR3JvdXBVcmxCDQ'
+        'oLX3ZrT3duZXJVcmw=');
 
 @$core.Deprecated('Use signUpEventDescriptor instead')
 const SignUpEvent$json = {
@@ -1030,9 +749,9 @@ const SignUpEvent$json = {
 };
 
 /// Descriptor for `SignUpEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List signUpEventDescriptor = $convert.base64Decode(
-    'CgtTaWduVXBFdmVudBIUCgVlbWFpbBgBIAEoCVIFZW1haWwSGgoIcGFzc3dvcmQYAiABKAlSCH'
-    'Bhc3N3b3Jk');
+final $typed_data.Uint8List signUpEventDescriptor =
+    $convert.base64Decode('CgtTaWduVXBFdmVudBIUCgVlbWFpbBgBIAEoCVIFZW1haWwSGgoIcGFzc3dvcmQYAiABKAlSCH'
+        'Bhc3N3b3Jk');
 
 @$core.Deprecated('Use signUpEventOutDescriptor instead')
 const SignUpEventOut$json = {
@@ -1040,14 +759,7 @@ const SignUpEventOut$json = {
   '2': [
     {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
     {'1': 'recoveryToken', '3': 2, '4': 1, '5': 9, '10': 'recoveryToken'},
-    {
-      '1': 'error',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.SignUpEventOut.Error',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 3, '4': 1, '5': 14, '6': '.generated.SignUpEventOut.Error', '10': 'error'},
     {'1': 'id', '3': 4, '4': 1, '5': 5, '10': 'id'},
   ],
   '4': [SignUpEventOut_Error$json],
@@ -1065,12 +777,12 @@ const SignUpEventOut_Error$json = {
 };
 
 /// Descriptor for `SignUpEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List signUpEventOutDescriptor = $convert.base64Decode(
-    'Cg5TaWduVXBFdmVudE91dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SJAoNcmVjb3ZlcnlUb2tlbh'
-    'gCIAEoCVINcmVjb3ZlcnlUb2tlbhI1CgVlcnJvchgDIAEoDjIfLmdlbmVyYXRlZC5TaWduVXBF'
-    'dmVudE91dC5FcnJvclIFZXJyb3ISDgoCaWQYBCABKAVSAmlkIkwKBUVycm9yEgsKB25vRXJyb3'
-    'IQABIOCgplbWFpbEV4aXN0EAESEAoMd2Vha1Bhc3N3b3JkEAISFAoQbmVlZFZlcmlmaWNhdGlv'
-    'bhAE');
+final $typed_data.Uint8List signUpEventOutDescriptor =
+    $convert.base64Decode('Cg5TaWduVXBFdmVudE91dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SJAoNcmVjb3ZlcnlUb2tlbh'
+        'gCIAEoCVINcmVjb3ZlcnlUb2tlbhI1CgVlcnJvchgDIAEoDjIfLmdlbmVyYXRlZC5TaWduVXBF'
+        'dmVudE91dC5FcnJvclIFZXJyb3ISDgoCaWQYBCABKAVSAmlkIkwKBUVycm9yEgsKB25vRXJyb3'
+        'IQABIOCgplbWFpbEV4aXN0EAESEAoMd2Vha1Bhc3N3b3JkEAISFAoQbmVlZFZlcmlmaWNhdGlv'
+        'bhAE');
 
 @$core.Deprecated('Use emailVerificationEventDescriptor instead')
 const EmailVerificationEvent$json = {
@@ -1083,8 +795,7 @@ const EmailVerificationEvent$json = {
 
 /// Descriptor for `EmailVerificationEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List emailVerificationEventDescriptor =
-    $convert.base64Decode(
-        'ChZFbWFpbFZlcmlmaWNhdGlvbkV2ZW50Eg4KAmlkGAEgASgFUgJpZBIUCgV0b2tlbhgCIAEoCV'
+    $convert.base64Decode('ChZFbWFpbFZlcmlmaWNhdGlvbkV2ZW50Eg4KAmlkGAEgASgFUgJpZBIUCgV0b2tlbhgCIAEoCV'
         'IFdG9rZW4=');
 
 @$core.Deprecated('Use createTournamentEventDescriptor instead')
@@ -1098,9 +809,9 @@ const CreateTournamentEvent$json = {
 };
 
 /// Descriptor for `CreateTournamentEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createTournamentEventDescriptor = $convert.base64Decode(
-    'ChVDcmVhdGVUb3VybmFtZW50RXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZRIcCglkYXRlU3Rhcn'
-    'QYAiABKAlSCWRhdGVTdGFydBIYCgdkYXRlRW5kGAMgASgJUgdkYXRlRW5k');
+final $typed_data.Uint8List createTournamentEventDescriptor =
+    $convert.base64Decode('ChVDcmVhdGVUb3VybmFtZW50RXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZRIcCglkYXRlU3Rhcn'
+        'QYAiABKAlSCWRhdGVTdGFydBIYCgdkYXRlRW5kGAMgASgJUgdkYXRlRW5k');
 
 @$core.Deprecated('Use createTournamentEventOutDescriptor instead')
 const CreateTournamentEventOut$json = {
@@ -1111,150 +822,73 @@ const CreateTournamentEventOut$json = {
 };
 
 /// Descriptor for `CreateTournamentEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createTournamentEventOutDescriptor = $convert
-    .base64Decode('ChhDcmVhdGVUb3VybmFtZW50RXZlbnRPdXQSDgoCaWQYASABKAVSAmlk');
+final $typed_data.Uint8List createTournamentEventOutDescriptor =
+    $convert.base64Decode('ChhDcmVhdGVUb3VybmFtZW50RXZlbnRPdXQSDgoCaWQYASABKAVSAmlk');
 
 @$core.Deprecated('Use addPlayerEventDescriptor instead')
 const AddPlayerEvent$json = {
   '1': 'AddPlayerEvent',
   '2': [
-    {
-      '1': 'player',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'player'
-    },
+    {'1': 'player', '3': 1, '4': 1, '5': 11, '6': '.generated.Player', '10': 'player'},
   ],
 };
 
 /// Descriptor for `AddPlayerEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addPlayerEventDescriptor = $convert.base64Decode(
-    'Cg5BZGRQbGF5ZXJFdmVudBIpCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVyUgZwbG'
-    'F5ZXI=');
+final $typed_data.Uint8List addPlayerEventDescriptor =
+    $convert.base64Decode('Cg5BZGRQbGF5ZXJFdmVudBIpCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVyUgZwbG'
+        'F5ZXI=');
 
 @$core.Deprecated('Use cannotMeetEditionEventDescriptor instead')
 const CannotMeetEditionEvent$json = {
   '1': 'CannotMeetEditionEvent',
   '2': [
-    {
-      '1': 'player1',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'player1'
-    },
-    {
-      '1': 'player2',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'player2'
-    },
+    {'1': 'player1', '3': 1, '4': 1, '5': 11, '6': '.generated.Player', '10': 'player1'},
+    {'1': 'player2', '3': 2, '4': 1, '5': 11, '6': '.generated.Player', '10': 'player2'},
   ],
 };
 
 /// Descriptor for `CannotMeetEditionEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cannotMeetEditionEventDescriptor = $convert.base64Decode(
-    'ChZDYW5ub3RNZWV0RWRpdGlvbkV2ZW50EisKB3BsYXllcjEYASABKAsyES5nZW5lcmF0ZWQuUG'
-    'xheWVyUgdwbGF5ZXIxEisKB3BsYXllcjIYAiABKAsyES5nZW5lcmF0ZWQuUGxheWVyUgdwbGF5'
-    'ZXIy');
+final $typed_data.Uint8List cannotMeetEditionEventDescriptor =
+    $convert.base64Decode('ChZDYW5ub3RNZWV0RWRpdGlvbkV2ZW50EisKB3BsYXllcjEYASABKAsyES5nZW5lcmF0ZWQuUG'
+        'xheWVyUgdwbGF5ZXIxEisKB3BsYXllcjIYAiABKAsyES5nZW5lcmF0ZWQuUGxheWVyUgdwbGF5'
+        'ZXIy');
 
 @$core.Deprecated('Use cannotMeetEventOutDescriptor instead')
 const CannotMeetEventOut$json = {
   '1': 'CannotMeetEventOut',
   '2': [
-    {
-      '1': 'pairs',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.CannotMeetEditionEvent',
-      '10': 'pairs'
-    },
+    {'1': 'pairs', '3': 1, '4': 3, '5': 11, '6': '.generated.CannotMeetEditionEvent', '10': 'pairs'},
   ],
 };
 
 /// Descriptor for `CannotMeetEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cannotMeetEventOutDescriptor = $convert.base64Decode(
-    'ChJDYW5ub3RNZWV0RXZlbnRPdXQSNwoFcGFpcnMYASADKAsyIS5nZW5lcmF0ZWQuQ2Fubm90TW'
-    'VldEVkaXRpb25FdmVudFIFcGFpcnM=');
+final $typed_data.Uint8List cannotMeetEventOutDescriptor =
+    $convert.base64Decode('ChJDYW5ub3RNZWV0RXZlbnRPdXQSNwoFcGFpcnMYASADKAsyIS5nZW5lcmF0ZWQuQ2Fubm90TW'
+        'VldEVkaXRpb25FdmVudFIFcGFpcnM=');
 
 @$core.Deprecated('Use getAvailablePlayerEventOutDescriptor instead')
 const GetAvailablePlayerEventOut$json = {
   '1': 'GetAvailablePlayerEventOut',
   '2': [
-    {
-      '1': 'players',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'players'
-    },
+    {'1': 'players', '3': 1, '4': 3, '5': 11, '6': '.generated.Player', '10': 'players'},
   ],
 };
 
 /// Descriptor for `GetAvailablePlayerEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getAvailablePlayerEventOutDescriptor =
-    $convert.base64Decode(
-        'ChpHZXRBdmFpbGFibGVQbGF5ZXJFdmVudE91dBIrCgdwbGF5ZXJzGAEgAygLMhEuZ2VuZXJhdG'
+    $convert.base64Decode('ChpHZXRBdmFpbGFibGVQbGF5ZXJFdmVudE91dBIrCgdwbGF5ZXJzGAEgAygLMhEuZ2VuZXJhdG'
         'VkLlBsYXllclIHcGxheWVycw==');
 
 @$core.Deprecated('Use tournamentSettingsDescriptor instead')
 const TournamentSettings$json = {
   '1': 'TournamentSettings',
   '2': [
-    {
-      '1': 'defaultGamesCount',
-      '3': 1,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'defaultGamesCount',
-      '17': true
-    },
-    {
-      '1': 'swissGamesCount',
-      '3': 2,
-      '4': 1,
-      '5': 5,
-      '9': 1,
-      '10': 'swissGamesCount',
-      '17': true
-    },
-    {
-      '1': 'finalGamesCount',
-      '3': 3,
-      '4': 1,
-      '5': 5,
-      '9': 2,
-      '10': 'finalGamesCount',
-      '17': true
-    },
+    {'1': 'defaultGamesCount', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'defaultGamesCount', '17': true},
+    {'1': 'swissGamesCount', '3': 2, '4': 1, '5': 5, '9': 1, '10': 'swissGamesCount', '17': true},
+    {'1': 'finalGamesCount', '3': 3, '4': 1, '5': 5, '9': 2, '10': 'finalGamesCount', '17': true},
     {'1': 'buckets', '3': 4, '4': 3, '5': 5, '10': 'buckets'},
-    {
-      '1': 'hideResult',
-      '3': 5,
-      '4': 1,
-      '5': 8,
-      '9': 3,
-      '10': 'hideResult',
-      '17': true
-    },
-    {
-      '1': 'scheme',
-      '3': 6,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.RatingScheme',
-      '9': 4,
-      '10': 'scheme',
-      '17': true
-    },
+    {'1': 'hideResult', '3': 5, '4': 1, '5': 8, '9': 3, '10': 'hideResult', '17': true},
+    {'1': 'scheme', '3': 6, '4': 1, '5': 14, '6': '.generated.RatingScheme', '9': 4, '10': 'scheme', '17': true},
     {
       '1': 'fantasyStatus',
       '3': 7,
@@ -1277,31 +911,22 @@ const TournamentSettings$json = {
 };
 
 /// Descriptor for `TournamentSettings`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tournamentSettingsDescriptor = $convert.base64Decode(
-    'ChJUb3VybmFtZW50U2V0dGluZ3MSMQoRZGVmYXVsdEdhbWVzQ291bnQYASABKAVIAFIRZGVmYX'
-    'VsdEdhbWVzQ291bnSIAQESLQoPc3dpc3NHYW1lc0NvdW50GAIgASgFSAFSD3N3aXNzR2FtZXND'
-    'b3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBEh'
-    'gKB2J1Y2tldHMYBCADKAVSB2J1Y2tldHMSIwoKaGlkZVJlc3VsdBgFIAEoCEgDUgpoaWRlUmVz'
-    'dWx0iAEBEjQKBnNjaGVtZRgGIAEoDjIXLmdlbmVyYXRlZC5SYXRpbmdTY2hlbWVIBFIGc2NoZW'
-    '1liAEBEkMKDWZhbnRhc3lTdGF0dXMYByABKA4yGC5nZW5lcmF0ZWQuRmFudGFzeVN0YXR1c0gF'
-    'Ug1mYW50YXN5U3RhdHVziAEBQhQKEl9kZWZhdWx0R2FtZXNDb3VudEISChBfc3dpc3NHYW1lc0'
-    'NvdW50QhIKEF9maW5hbEdhbWVzQ291bnRCDQoLX2hpZGVSZXN1bHRCCQoHX3NjaGVtZUIQCg5f'
-    'ZmFudGFzeVN0YXR1cw==');
+final $typed_data.Uint8List tournamentSettingsDescriptor =
+    $convert.base64Decode('ChJUb3VybmFtZW50U2V0dGluZ3MSMQoRZGVmYXVsdEdhbWVzQ291bnQYASABKAVIAFIRZGVmYX'
+        'VsdEdhbWVzQ291bnSIAQESLQoPc3dpc3NHYW1lc0NvdW50GAIgASgFSAFSD3N3aXNzR2FtZXND'
+        'b3VudIgBARItCg9maW5hbEdhbWVzQ291bnQYAyABKAVIAlIPZmluYWxHYW1lc0NvdW50iAEBEh'
+        'gKB2J1Y2tldHMYBCADKAVSB2J1Y2tldHMSIwoKaGlkZVJlc3VsdBgFIAEoCEgDUgpoaWRlUmVz'
+        'dWx0iAEBEjQKBnNjaGVtZRgGIAEoDjIXLmdlbmVyYXRlZC5SYXRpbmdTY2hlbWVIBFIGc2NoZW'
+        '1liAEBEkMKDWZhbnRhc3lTdGF0dXMYByABKA4yGC5nZW5lcmF0ZWQuRmFudGFzeVN0YXR1c0gF'
+        'Ug1mYW50YXN5U3RhdHVziAEBQhQKEl9kZWZhdWx0R2FtZXNDb3VudEISChBfc3dpc3NHYW1lc0'
+        'NvdW50QhIKEF9maW5hbEdhbWVzQ291bnRCDQoLX2hpZGVSZXN1bHRCCQoHX3NjaGVtZUIQCg5f'
+        'ZmFudGFzeVN0YXR1cw==');
 
 @$core.Deprecated('Use userProfileDescriptor instead')
 const UserProfile$json = {
   '1': 'UserProfile',
   '2': [
-    {
-      '1': 'player',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '9': 0,
-      '10': 'player',
-      '17': true
-    },
+    {'1': 'player', '3': 1, '4': 1, '5': 11, '6': '.generated.Player', '9': 0, '10': 'player', '17': true},
   ],
   '8': [
     {'1': '_player'},
@@ -1309,32 +934,16 @@ const UserProfile$json = {
 };
 
 /// Descriptor for `UserProfile`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List userProfileDescriptor = $convert.base64Decode(
-    'CgtVc2VyUHJvZmlsZRIuCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVySABSBnBsYX'
-    'llcogBAUIJCgdfcGxheWVy');
+final $typed_data.Uint8List userProfileDescriptor =
+    $convert.base64Decode('CgtVc2VyUHJvZmlsZRIuCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVySABSBnBsYX'
+        'llcogBAUIJCgdfcGxheWVy');
 
 @$core.Deprecated('Use profileDescriptor instead')
 const Profile$json = {
   '1': 'Profile',
   '2': [
-    {
-      '1': 'firstName',
-      '3': 1,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'firstName',
-      '17': true
-    },
-    {
-      '1': 'secondName',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'secondName',
-      '17': true
-    },
+    {'1': 'firstName', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'firstName', '17': true},
+    {'1': 'secondName', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'secondName', '17': true},
   ],
   '8': [
     {'1': '_firstName'},
@@ -1343,9 +952,9 @@ const Profile$json = {
 };
 
 /// Descriptor for `Profile`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List profileDescriptor = $convert.base64Decode(
-    'CgdQcm9maWxlEiEKCWZpcnN0TmFtZRgBIAEoCUgAUglmaXJzdE5hbWWIAQESIwoKc2Vjb25kTm'
-    'FtZRgCIAEoCUgBUgpzZWNvbmROYW1liAEBQgwKCl9maXJzdE5hbWVCDQoLX3NlY29uZE5hbWU=');
+final $typed_data.Uint8List profileDescriptor =
+    $convert.base64Decode('CgdQcm9maWxlEiEKCWZpcnN0TmFtZRgBIAEoCUgAUglmaXJzdE5hbWWIAQESIwoKc2Vjb25kTm'
+        'FtZRgCIAEoCUgBUgpzZWNvbmROYW1liAEBQgwKCl9maXJzdE5hbWVCDQoLX3NlY29uZE5hbWU=');
 
 @$core.Deprecated('Use createPlayerEventOutDescriptor instead')
 const CreatePlayerEventOut$json = {
@@ -1356,28 +965,21 @@ const CreatePlayerEventOut$json = {
 };
 
 /// Descriptor for `CreatePlayerEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createPlayerEventOutDescriptor = $convert
-    .base64Decode('ChRDcmVhdGVQbGF5ZXJFdmVudE91dBIOCgJpZBgBIAEoBVICaWQ=');
+final $typed_data.Uint8List createPlayerEventOutDescriptor =
+    $convert.base64Decode('ChRDcmVhdGVQbGF5ZXJFdmVudE91dBIOCgJpZBgBIAEoBVICaWQ=');
 
 @$core.Deprecated('Use createPlayerEventDescriptor instead')
 const CreatePlayerEvent$json = {
   '1': 'CreatePlayerEvent',
   '2': [
-    {
-      '1': 'player',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'player'
-    },
+    {'1': 'player', '3': 1, '4': 1, '5': 11, '6': '.generated.Player', '10': 'player'},
   ],
 };
 
 /// Descriptor for `CreatePlayerEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createPlayerEventDescriptor = $convert.base64Decode(
-    'ChFDcmVhdGVQbGF5ZXJFdmVudBIpCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVyUg'
-    'ZwbGF5ZXI=');
+final $typed_data.Uint8List createPlayerEventDescriptor =
+    $convert.base64Decode('ChFDcmVhdGVQbGF5ZXJFdmVudBIpCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVyUg'
+        'ZwbGF5ZXI=');
 
 @$core.Deprecated('Use playerDescriptor instead')
 const Player$json = {
@@ -1385,24 +987,8 @@ const Player$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'nickname', '3': 2, '4': 1, '5': 9, '10': 'nickname'},
-    {
-      '1': 'fsmNickname',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'fsmNickname',
-      '17': true
-    },
-    {
-      '1': 'mafbankNickname',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'mafbankNickname',
-      '17': true
-    },
+    {'1': 'fsmNickname', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'fsmNickname', '17': true},
+    {'1': 'mafbankNickname', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'mafbankNickname', '17': true},
     {'1': 'image', '3': 5, '4': 1, '5': 9, '9': 2, '10': 'image', '17': true},
   ],
   '8': [
@@ -1413,11 +999,11 @@ const Player$json = {
 };
 
 /// Descriptor for `Player`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List playerDescriptor = $convert.base64Decode(
-    'CgZQbGF5ZXISDgoCaWQYASABKAVSAmlkEhoKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRIlCg'
-    'tmc21OaWNrbmFtZRgDIAEoCUgAUgtmc21OaWNrbmFtZYgBARItCg9tYWZiYW5rTmlja25hbWUY'
-    'BCABKAlIAVIPbWFmYmFua05pY2tuYW1liAEBEhkKBWltYWdlGAUgASgJSAJSBWltYWdliAEBQg'
-    '4KDF9mc21OaWNrbmFtZUISChBfbWFmYmFua05pY2tuYW1lQggKBl9pbWFnZQ==');
+final $typed_data.Uint8List playerDescriptor =
+    $convert.base64Decode('CgZQbGF5ZXISDgoCaWQYASABKAVSAmlkEhoKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRIlCg'
+        'tmc21OaWNrbmFtZRgDIAEoCUgAUgtmc21OaWNrbmFtZYgBARItCg9tYWZiYW5rTmlja25hbWUY'
+        'BCABKAlIAVIPbWFmYmFua05pY2tuYW1liAEBEhkKBWltYWdlGAUgASgJSAJSBWltYWdliAEBQg'
+        '4KDF9mc21OaWNrbmFtZUISChBfbWFmYmFua05pY2tuYW1lQggKBl9pbWFnZQ==');
 
 @$core.Deprecated('Use createSwissRoundDescriptor instead')
 const CreateSwissRound$json = {
@@ -1428,21 +1014,14 @@ const CreateSwissRound$json = {
 };
 
 /// Descriptor for `CreateSwissRound`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createSwissRoundDescriptor = $convert
-    .base64Decode('ChBDcmVhdGVTd2lzc1JvdW5kEhIKBGdhbWUYASABKAVSBGdhbWU=');
+final $typed_data.Uint8List createSwissRoundDescriptor =
+    $convert.base64Decode('ChBDcmVhdGVTd2lzc1JvdW5kEhIKBGdhbWUYASABKAVSBGdhbWU=');
 
 @$core.Deprecated('Use emailVerificationEventOutDescriptor instead')
 const EmailVerificationEventOut$json = {
   '1': 'EmailVerificationEventOut',
   '2': [
-    {
-      '1': 'status',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.EmailVerificationEventOut.Status',
-      '10': 'status'
-    },
+    {'1': 'status', '3': 1, '4': 1, '5': 14, '6': '.generated.EmailVerificationEventOut.Status', '10': 'status'},
   ],
   '4': [EmailVerificationEventOut_Status$json],
 };
@@ -1457,30 +1036,23 @@ const EmailVerificationEventOut_Status$json = {
 };
 
 /// Descriptor for `EmailVerificationEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List emailVerificationEventOutDescriptor = $convert.base64Decode(
-    'ChlFbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0EkMKBnN0YXR1cxgBIAEoDjIrLmdlbmVyYXRlZC'
-    '5FbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0LlN0YXR1c1IGc3RhdHVzIikKBlN0YXR1cxILCgdz'
-    'dWNjZXNzEAASEgoOaW5jb3JyZWN0VG9rZW4QAQ==');
+final $typed_data.Uint8List emailVerificationEventOutDescriptor =
+    $convert.base64Decode('ChlFbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0EkMKBnN0YXR1cxgBIAEoDjIrLmdlbmVyYXRlZC'
+        '5FbWFpbFZlcmlmaWNhdGlvbkV2ZW50T3V0LlN0YXR1c1IGc3RhdHVzIikKBlN0YXR1cxILCgdz'
+        'dWNjZXNzEAASEgoOaW5jb3JyZWN0VG9rZW4QAQ==');
 
 @$core.Deprecated('Use getFinalPlayersOutDescriptor instead')
 const GetFinalPlayersOut$json = {
   '1': 'GetFinalPlayersOut',
   '2': [
-    {
-      '1': 'player',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'player'
-    },
+    {'1': 'player', '3': 1, '4': 3, '5': 11, '6': '.generated.Player', '10': 'player'},
   ],
 };
 
 /// Descriptor for `GetFinalPlayersOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getFinalPlayersOutDescriptor = $convert.base64Decode(
-    'ChJHZXRGaW5hbFBsYXllcnNPdXQSKQoGcGxheWVyGAEgAygLMhEuZ2VuZXJhdGVkLlBsYXllcl'
-    'IGcGxheWVy');
+final $typed_data.Uint8List getFinalPlayersOutDescriptor =
+    $convert.base64Decode('ChJHZXRGaW5hbFBsYXllcnNPdXQSKQoGcGxheWVyGAEgAygLMhEuZ2VuZXJhdGVkLlBsYXllcl'
+        'IGcGxheWVy');
 
 @$core.Deprecated('Use seatingForTranslationEventDescriptor instead')
 const SeatingForTranslationEvent$json = {
@@ -1494,8 +1066,7 @@ const SeatingForTranslationEvent$json = {
 
 /// Descriptor for `SeatingForTranslationEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List seatingForTranslationEventDescriptor =
-    $convert.base64Decode(
-        'ChpTZWF0aW5nRm9yVHJhbnNsYXRpb25FdmVudBIiCgx0b3VybmFtZW50SWQYASABKAVSDHRvdX'
+    $convert.base64Decode('ChpTZWF0aW5nRm9yVHJhbnNsYXRpb25FdmVudBIiCgx0b3VybmFtZW50SWQYASABKAVSDHRvdX'
         'JuYW1lbnRJZBIUCgV0YWJsZRgCIAEoBVIFdGFibGUSEgoEZ2FtZRgDIAEoBVIEZ2FtZQ==');
 
 @$core.Deprecated('Use seatingForTranslationEventOutDescriptor instead')
@@ -1508,8 +1079,7 @@ const SeatingForTranslationEventOut$json = {
 
 /// Descriptor for `SeatingForTranslationEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List seatingForTranslationEventOutDescriptor =
-    $convert.base64Decode(
-        'Ch1TZWF0aW5nRm9yVHJhbnNsYXRpb25FdmVudE91dBIYCgdwbGF5ZXJzGAEgAygJUgdwbGF5ZX'
+    $convert.base64Decode('Ch1TZWF0aW5nRm9yVHJhbnNsYXRpb25FdmVudE91dBIYCgdwbGF5ZXJzGAEgAygJUgdwbGF5ZX'
         'Jz');
 
 @$core.Deprecated('Use insertSeatingEventDescriptor instead')
@@ -1522,29 +1092,21 @@ const InsertSeatingEvent$json = {
 };
 
 /// Descriptor for `InsertSeatingEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List insertSeatingEventDescriptor = $convert.base64Decode(
-    'ChJJbnNlcnRTZWF0aW5nRXZlbnQSFAoFYnl0ZXMYASABKAxSBWJ5dGVzEiIKDHRvdXJuYW1lbn'
-    'RJZBgCIAEoBVIMdG91cm5hbWVudElk');
+final $typed_data.Uint8List insertSeatingEventDescriptor =
+    $convert.base64Decode('ChJJbnNlcnRTZWF0aW5nRXZlbnQSFAoFYnl0ZXMYASABKAxSBWJ5dGVzEiIKDHRvdXJuYW1lbn'
+        'RJZBgCIAEoBVIMdG91cm5hbWVudElk');
 
 @$core.Deprecated('Use getTournamentsEventOutDescriptor instead')
 const GetTournamentsEventOut$json = {
   '1': 'GetTournamentsEventOut',
   '2': [
-    {
-      '1': 'tournaments',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.Tournament',
-      '10': 'tournaments'
-    },
+    {'1': 'tournaments', '3': 1, '4': 3, '5': 11, '6': '.generated.Tournament', '10': 'tournaments'},
   ],
 };
 
 /// Descriptor for `GetTournamentsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTournamentsEventOutDescriptor =
-    $convert.base64Decode(
-        'ChZHZXRUb3VybmFtZW50c0V2ZW50T3V0EjcKC3RvdXJuYW1lbnRzGAEgAygLMhUuZ2VuZXJhdG'
+    $convert.base64Decode('ChZHZXRUb3VybmFtZW50c0V2ZW50T3V0EjcKC3RvdXJuYW1lbnRzGAEgAygLMhUuZ2VuZXJhdG'
         'VkLlRvdXJuYW1lbnRSC3RvdXJuYW1lbnRz');
 
 @$core.Deprecated('Use tournamentDescriptor instead')
@@ -1553,49 +1115,15 @@ const Tournament$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {
-      '1': 'status',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.Tournament.Status',
-      '10': 'status'
-    },
+    {'1': 'status', '3': 3, '4': 1, '5': 14, '6': '.generated.Tournament.Status', '10': 'status'},
     {'1': 'dateStart', '3': 4, '4': 1, '5': 9, '10': 'dateStart'},
     {'1': 'dateEnd', '3': 5, '4': 1, '5': 9, '10': 'dateEnd'},
     {'1': 'gamesCount', '3': 6, '4': 1, '5': 5, '10': 'gamesCount'},
     {'1': 'billedPlayers', '3': 7, '4': 1, '5': 5, '10': 'billedPlayers'},
-    {
-      '1': 'billedTranslation',
-      '3': 8,
-      '4': 1,
-      '5': 8,
-      '10': 'billedTranslation'
-    },
-    {
-      '1': 'notificationEnabled',
-      '3': 9,
-      '4': 1,
-      '5': 8,
-      '10': 'notificationEnabled'
-    },
-    {
-      '1': 'description',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.TournamentDescription',
-      '10': 'description'
-    },
-    {
-      '1': 'photoThemeId',
-      '3': 11,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'photoThemeId',
-      '17': true
-    },
+    {'1': 'billedTranslation', '3': 8, '4': 1, '5': 8, '10': 'billedTranslation'},
+    {'1': 'notificationEnabled', '3': 9, '4': 1, '5': 8, '10': 'notificationEnabled'},
+    {'1': 'description', '3': 10, '4': 1, '5': 11, '6': '.generated.TournamentDescription', '10': 'description'},
+    {'1': 'photoThemeId', '3': 11, '4': 1, '5': 5, '9': 0, '10': 'photoThemeId', '17': true},
   ],
   '4': [Tournament_Status$json],
   '8': [
@@ -1614,17 +1142,17 @@ const Tournament_Status$json = {
 };
 
 /// Descriptor for `Tournament`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tournamentDescriptor = $convert.base64Decode(
-    'CgpUb3VybmFtZW50Eg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEjQKBnN0YX'
-    'R1cxgDIAEoDjIcLmdlbmVyYXRlZC5Ub3VybmFtZW50LlN0YXR1c1IGc3RhdHVzEhwKCWRhdGVT'
-    'dGFydBgEIAEoCVIJZGF0ZVN0YXJ0EhgKB2RhdGVFbmQYBSABKAlSB2RhdGVFbmQSHgoKZ2FtZX'
-    'NDb3VudBgGIAEoBVIKZ2FtZXNDb3VudBIkCg1iaWxsZWRQbGF5ZXJzGAcgASgFUg1iaWxsZWRQ'
-    'bGF5ZXJzEiwKEWJpbGxlZFRyYW5zbGF0aW9uGAggASgIUhFiaWxsZWRUcmFuc2xhdGlvbhIwCh'
-    'Nub3RpZmljYXRpb25FbmFibGVkGAkgASgIUhNub3RpZmljYXRpb25FbmFibGVkEkIKC2Rlc2Ny'
-    'aXB0aW9uGAogASgLMiAuZ2VuZXJhdGVkLlRvdXJuYW1lbnREZXNjcmlwdGlvblILZGVzY3JpcH'
-    'Rpb24SJwoMcGhvdG9UaGVtZUlkGAsgASgFSABSDHBob3RvVGhlbWVJZIgBASIzCgZTdGF0dXMS'
-    'EgoOd2FpdEZvckJpbGxpbmcQABIKCgZhY3RpdmUQARIJCgVlbmRlZBACQg8KDV9waG90b1RoZW'
-    '1lSWQ=');
+final $typed_data.Uint8List tournamentDescriptor =
+    $convert.base64Decode('CgpUb3VybmFtZW50Eg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEjQKBnN0YX'
+        'R1cxgDIAEoDjIcLmdlbmVyYXRlZC5Ub3VybmFtZW50LlN0YXR1c1IGc3RhdHVzEhwKCWRhdGVT'
+        'dGFydBgEIAEoCVIJZGF0ZVN0YXJ0EhgKB2RhdGVFbmQYBSABKAlSB2RhdGVFbmQSHgoKZ2FtZX'
+        'NDb3VudBgGIAEoBVIKZ2FtZXNDb3VudBIkCg1iaWxsZWRQbGF5ZXJzGAcgASgFUg1iaWxsZWRQ'
+        'bGF5ZXJzEiwKEWJpbGxlZFRyYW5zbGF0aW9uGAggASgIUhFiaWxsZWRUcmFuc2xhdGlvbhIwCh'
+        'Nub3RpZmljYXRpb25FbmFibGVkGAkgASgIUhNub3RpZmljYXRpb25FbmFibGVkEkIKC2Rlc2Ny'
+        'aXB0aW9uGAogASgLMiAuZ2VuZXJhdGVkLlRvdXJuYW1lbnREZXNjcmlwdGlvblILZGVzY3JpcH'
+        'Rpb24SJwoMcGhvdG9UaGVtZUlkGAsgASgFSABSDHBob3RvVGhlbWVJZIgBASIzCgZTdGF0dXMS'
+        'EgoOd2FpdEZvckJpbGxpbmcQABIKCgZhY3RpdmUQARIJCgVlbmRlZBACQg8KDV9waG90b1RoZW'
+        '1lSWQ=');
 
 @$core.Deprecated('Use errorOutDescriptor instead')
 const ErrorOut$json = {
@@ -1649,10 +1177,10 @@ const BillTournamentEvent$json = {
 };
 
 /// Descriptor for `BillTournamentEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List billTournamentEventDescriptor = $convert.base64Decode(
-    'ChNCaWxsVG91cm5hbWVudEV2ZW50EhgKB3BsYXllcnMYASABKAVSB3BsYXllcnMSJgoOaGFzVH'
-    'JhbnNsYXRpb24YAiABKAhSDmhhc1RyYW5zbGF0aW9uEiIKDHJlZGlyZWN0UGF0aBgDIAEoCVIM'
-    'cmVkaXJlY3RQYXRo');
+final $typed_data.Uint8List billTournamentEventDescriptor =
+    $convert.base64Decode('ChNCaWxsVG91cm5hbWVudEV2ZW50EhgKB3BsYXllcnMYASABKAVSB3BsYXllcnMSJgoOaGFzVH'
+        'JhbnNsYXRpb24YAiABKAhSDmhhc1RyYW5zbGF0aW9uEiIKDHJlZGlyZWN0UGF0aBgDIAEoCVIM'
+        'cmVkaXJlY3RQYXRo');
 
 @$core.Deprecated('Use billClubEventDescriptor instead')
 const BillClubEvent$json = {
@@ -1664,9 +1192,9 @@ const BillClubEvent$json = {
 };
 
 /// Descriptor for `BillClubEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List billClubEventDescriptor = $convert.base64Decode(
-    'Cg1CaWxsQ2x1YkV2ZW50EhIKBGRheXMYASABKAVSBGRheXMSIgoMcmVkaXJlY3RQYXRoGAIgAS'
-    'gJUgxyZWRpcmVjdFBhdGg=');
+final $typed_data.Uint8List billClubEventDescriptor =
+    $convert.base64Decode('Cg1CaWxsQ2x1YkV2ZW50EhIKBGRheXMYASABKAVSBGRheXMSIgoMcmVkaXJlY3RQYXRoGAIgAS'
+        'gJUgxyZWRpcmVjdFBhdGg=');
 
 @$core.Deprecated('Use billTournamentSubscriptionEventDescriptor instead')
 const BillTournamentSubscriptionEvent$json = {
@@ -1687,8 +1215,7 @@ const BillTournamentSubscriptionEvent$json = {
 
 /// Descriptor for `BillTournamentSubscriptionEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List billTournamentSubscriptionEventDescriptor =
-    $convert.base64Decode(
-        'Ch9CaWxsVG91cm5hbWVudFN1YnNjcmlwdGlvbkV2ZW50ElEKEHN1YnNjcmlwdGlvblR5cGUYAS'
+    $convert.base64Decode('Ch9CaWxsVG91cm5hbWVudFN1YnNjcmlwdGlvbkV2ZW50ElEKEHN1YnNjcmlwdGlvblR5cGUYAS'
         'ABKA4yJS5nZW5lcmF0ZWQuVG91cm5hbWVudFN1YnNjcmlwdGlvblR5cGVSEHN1YnNjcmlwdGlv'
         'blR5cGUSEgoEZGF5cxgCIAEoBVIEZGF5cxIiCgxyZWRpcmVjdFBhdGgYAyABKAlSDHJlZGlyZW'
         'N0UGF0aA==');
@@ -1703,8 +1230,7 @@ const BillTournamentEventOut$json = {
 
 /// Descriptor for `BillTournamentEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List billTournamentEventOutDescriptor =
-    $convert.base64Decode(
-        'ChZCaWxsVG91cm5hbWVudEV2ZW50T3V0EiIKDHJlZGlyZWN0TGluaxgBIAEoCVIMcmVkaXJlY3'
+    $convert.base64Decode('ChZCaWxsVG91cm5hbWVudEV2ZW50T3V0EiIKDHJlZGlyZWN0TGluaxgBIAEoCVIMcmVkaXJlY3'
         'RMaW5r');
 
 @$core.Deprecated('Use tournamentSubscriptionPlanEventOutDescriptor instead')
@@ -1722,15 +1248,7 @@ const TournamentSubscriptionPlanEventOut$json = {
       '10': 'subscriptionType',
       '17': true
     },
-    {
-      '1': 'billedFor',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'billedFor',
-      '17': true
-    },
+    {'1': 'billedFor', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'billedFor', '17': true},
   ],
   '8': [
     {'1': '_subscriptionType'},
@@ -1740,8 +1258,7 @@ const TournamentSubscriptionPlanEventOut$json = {
 
 /// Descriptor for `TournamentSubscriptionPlanEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List tournamentSubscriptionPlanEventOutDescriptor =
-    $convert.base64Decode(
-        'CiJUb3VybmFtZW50U3Vic2NyaXB0aW9uUGxhbkV2ZW50T3V0EhoKCGlzQWN0aXZlGAEgASgIUg'
+    $convert.base64Decode('CiJUb3VybmFtZW50U3Vic2NyaXB0aW9uUGxhbkV2ZW50T3V0EhoKCGlzQWN0aXZlGAEgASgIUg'
         'hpc0FjdGl2ZRJWChBzdWJzY3JpcHRpb25UeXBlGAIgASgOMiUuZ2VuZXJhdGVkLlRvdXJuYW1l'
         'bnRTdWJzY3JpcHRpb25UeXBlSABSEHN1YnNjcmlwdGlvblR5cGWIAQESIQoJYmlsbGVkRm9yGA'
         'MgASgJSAFSCWJpbGxlZEZvcogBAUITChFfc3Vic2NyaXB0aW9uVHlwZUIMCgpfYmlsbGVkRm9y');
@@ -1751,15 +1268,7 @@ const StartGameInfoEvent$json = {
   '1': 'StartGameInfoEvent',
   '2': [
     {'1': 'game', '3': 1, '4': 1, '5': 5, '10': 'game'},
-    {
-      '1': 'localDate',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'localDate',
-      '17': true
-    },
+    {'1': 'localDate', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'localDate', '17': true},
   ],
   '8': [
     {'1': '_localDate'},
@@ -1767,9 +1276,9 @@ const StartGameInfoEvent$json = {
 };
 
 /// Descriptor for `StartGameInfoEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List startGameInfoEventDescriptor = $convert.base64Decode(
-    'ChJTdGFydEdhbWVJbmZvRXZlbnQSEgoEZ2FtZRgBIAEoBVIEZ2FtZRIhCglsb2NhbERhdGUYAi'
-    'ABKAlIAFIJbG9jYWxEYXRliAEBQgwKCl9sb2NhbERhdGU=');
+final $typed_data.Uint8List startGameInfoEventDescriptor =
+    $convert.base64Decode('ChJTdGFydEdhbWVJbmZvRXZlbnQSEgoEZ2FtZRgBIAEoBVIEZ2FtZRIhCglsb2NhbERhdGUYAi'
+        'ABKAlIAFIJbG9jYWxEYXRliAEBQgwKCl9sb2NhbERhdGU=');
 
 @$core.Deprecated('Use customTextInfoEventDescriptor instead')
 const CustomTextInfoEvent$json = {
@@ -1780,8 +1289,8 @@ const CustomTextInfoEvent$json = {
 };
 
 /// Descriptor for `CustomTextInfoEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List customTextInfoEventDescriptor = $convert
-    .base64Decode('ChNDdXN0b21UZXh0SW5mb0V2ZW50EhIKBHRleHQYASABKAlSBHRleHQ=');
+final $typed_data.Uint8List customTextInfoEventDescriptor =
+    $convert.base64Decode('ChNDdXN0b21UZXh0SW5mb0V2ZW50EhIKBHRleHQYASABKAlSBHRleHQ=');
 
 @$core.Deprecated('Use takeGomafiaSeatingEventDescriptor instead')
 const TakeGomafiaSeatingEvent$json = {
@@ -1792,8 +1301,8 @@ const TakeGomafiaSeatingEvent$json = {
 };
 
 /// Descriptor for `TakeGomafiaSeatingEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List takeGomafiaSeatingEventDescriptor = $convert
-    .base64Decode('ChdUYWtlR29tYWZpYVNlYXRpbmdFdmVudBIOCgJpZBgBIAEoBVICaWQ=');
+final $typed_data.Uint8List takeGomafiaSeatingEventDescriptor =
+    $convert.base64Decode('ChdUYWtlR29tYWZpYVNlYXRpbmdFdmVudBIOCgJpZBgBIAEoBVICaWQ=');
 
 @$core.Deprecated('Use takeGomafiaSeatingEventOutDescriptor instead')
 const TakeGomafiaSeatingEventOut$json = {
@@ -1805,8 +1314,7 @@ const TakeGomafiaSeatingEventOut$json = {
 
 /// Descriptor for `TakeGomafiaSeatingEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List takeGomafiaSeatingEventOutDescriptor =
-    $convert.base64Decode(
-        'ChpUYWtlR29tYWZpYVNlYXRpbmdFdmVudE91dBIaCghub3RGb3VuZBgBIAMoCVIIbm90Rm91bm'
+    $convert.base64Decode('ChpUYWtlR29tYWZpYVNlYXRpbmdFdmVudE91dBIaCghub3RGb3VuZBgBIAMoCVIIbm90Rm91bm'
         'Q=');
 
 @$core.Deprecated('Use userDescriptor instead')
@@ -1819,49 +1327,34 @@ const User$json = {
 };
 
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
-    'CgRVc2VyEg4KAmlkGAEgASgFUgJpZBIUCgVlbWFpbBgCIAEoCVIFZW1haWw=');
+final $typed_data.Uint8List userDescriptor =
+    $convert.base64Decode('CgRVc2VyEg4KAmlkGAEgASgFUgJpZBIUCgVlbWFpbBgCIAEoCVIFZW1haWw=');
 
 @$core.Deprecated('Use tournamentOwnersEventOutDescriptor instead')
 const TournamentOwnersEventOut$json = {
   '1': 'TournamentOwnersEventOut',
   '2': [
-    {
-      '1': 'owners',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.User',
-      '10': 'owners'
-    },
+    {'1': 'owners', '3': 1, '4': 3, '5': 11, '6': '.generated.User', '10': 'owners'},
   ],
 };
 
 /// Descriptor for `TournamentOwnersEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List tournamentOwnersEventOutDescriptor =
-    $convert.base64Decode(
-        'ChhUb3VybmFtZW50T3duZXJzRXZlbnRPdXQSJwoGb3duZXJzGAEgAygLMg8uZ2VuZXJhdGVkLl'
+    $convert.base64Decode('ChhUb3VybmFtZW50T3duZXJzRXZlbnRPdXQSJwoGb3duZXJzGAEgAygLMg8uZ2VuZXJhdGVkLl'
         'VzZXJSBm93bmVycw==');
 
 @$core.Deprecated('Use clubOwnersEventOutDescriptor instead')
 const ClubOwnersEventOut$json = {
   '1': 'ClubOwnersEventOut',
   '2': [
-    {
-      '1': 'owners',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.User',
-      '10': 'owners'
-    },
+    {'1': 'owners', '3': 1, '4': 3, '5': 11, '6': '.generated.User', '10': 'owners'},
   ],
 };
 
 /// Descriptor for `ClubOwnersEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List clubOwnersEventOutDescriptor = $convert.base64Decode(
-    'ChJDbHViT3duZXJzRXZlbnRPdXQSJwoGb3duZXJzGAEgAygLMg8uZ2VuZXJhdGVkLlVzZXJSBm'
-    '93bmVycw==');
+final $typed_data.Uint8List clubOwnersEventOutDescriptor =
+    $convert.base64Decode('ChJDbHViT3duZXJzRXZlbnRPdXQSJwoGb3duZXJzGAEgAygLMg8uZ2VuZXJhdGVkLlVzZXJSBm'
+        '93bmVycw==');
 
 @$core.Deprecated('Use updateOwnerEventDescriptor instead')
 const UpdateOwnerEvent$json = {
@@ -1872,8 +1365,8 @@ const UpdateOwnerEvent$json = {
 };
 
 /// Descriptor for `UpdateOwnerEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateOwnerEventDescriptor = $convert
-    .base64Decode('ChBVcGRhdGVPd25lckV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
+final $typed_data.Uint8List updateOwnerEventDescriptor =
+    $convert.base64Decode('ChBVcGRhdGVPd25lckV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
 
 @$core.Deprecated('Use designItemDescriptor instead')
 const DesignItem$json = {
@@ -1886,32 +1379,17 @@ const DesignItem$json = {
 };
 
 /// Descriptor for `DesignItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List designItemDescriptor = $convert.base64Decode(
-    'CgpEZXNpZ25JdGVtEhwKCWRlc2lnbktleRgBIAEoCVIJZGVzaWduS2V5EhQKBXRpdGxlGAIgAS'
-    'gJUgV0aXRsZRIYCgdwcmV2aWV3GAMgASgJUgdwcmV2aWV3');
+final $typed_data.Uint8List designItemDescriptor =
+    $convert.base64Decode('CgpEZXNpZ25JdGVtEhwKCWRlc2lnbktleRgBIAEoCVIJZGVzaWduS2V5EhQKBXRpdGxlGAIgAS'
+        'gJUgV0aXRsZRIYCgdwcmV2aWV3GAMgASgJUgdwcmV2aWV3');
 
 @$core.Deprecated('Use translationKeyEventOutDescriptor instead')
 const TranslationKeyEventOut$json = {
   '1': 'TranslationKeyEventOut',
   '2': [
     {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {
-      '1': 'designs',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.DesignItem',
-      '10': 'designs'
-    },
-    {
-      '1': 'selectedDesignKey',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'selectedDesignKey',
-      '17': true
-    },
+    {'1': 'designs', '3': 2, '4': 3, '5': 11, '6': '.generated.DesignItem', '10': 'designs'},
+    {'1': 'selectedDesignKey', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'selectedDesignKey', '17': true},
   ],
   '8': [
     {'1': '_selectedDesignKey'},
@@ -1919,10 +1397,10 @@ const TranslationKeyEventOut$json = {
 };
 
 /// Descriptor for `TranslationKeyEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List translationKeyEventOutDescriptor = $convert.base64Decode(
-    'ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5Ei8KB2Rlc2lnbnMYAi'
-    'ADKAsyFS5nZW5lcmF0ZWQuRGVzaWduSXRlbVIHZGVzaWducxIxChFzZWxlY3RlZERlc2lnbktl'
-    'eRgDIAEoCUgAUhFzZWxlY3RlZERlc2lnbktleYgBAUIUChJfc2VsZWN0ZWREZXNpZ25LZXk=');
+final $typed_data.Uint8List translationKeyEventOutDescriptor =
+    $convert.base64Decode('ChZUcmFuc2xhdGlvbktleUV2ZW50T3V0EhAKA2tleRgBIAEoCVIDa2V5Ei8KB2Rlc2lnbnMYAi'
+        'ADKAsyFS5nZW5lcmF0ZWQuRGVzaWduSXRlbVIHZGVzaWducxIxChFzZWxlY3RlZERlc2lnbktl'
+        'eRgDIAEoCUgAUhFzZWxlY3RlZERlc2lnbktleYgBAUIUChJfc2VsZWN0ZWREZXNpZ25LZXk=');
 
 @$core.Deprecated('Use tableInfoItemDescriptor instead')
 const TableInfoItem$json = {
@@ -1934,49 +1412,34 @@ const TableInfoItem$json = {
 };
 
 /// Descriptor for `TableInfoItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tableInfoItemDescriptor = $convert.base64Decode(
-    'Cg1UYWJsZUluZm9JdGVtEhQKBXRhYmxlGAEgASgFUgV0YWJsZRISCgRpbmZvGAIgASgJUgRpbm'
-    'Zv');
+final $typed_data.Uint8List tableInfoItemDescriptor =
+    $convert.base64Decode('Cg1UYWJsZUluZm9JdGVtEhQKBXRhYmxlGAEgASgFUgV0YWJsZRISCgRpbmZvGAIgASgJUgRpbm'
+        'Zv');
 
 @$core.Deprecated('Use tableInfoEventDescriptor instead')
 const TableInfoEvent$json = {
   '1': 'TableInfoEvent',
   '2': [
-    {
-      '1': 'items',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.TableInfoItem',
-      '10': 'items'
-    },
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.generated.TableInfoItem', '10': 'items'},
   ],
 };
 
 /// Descriptor for `TableInfoEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List tableInfoEventDescriptor = $convert.base64Decode(
-    'Cg5UYWJsZUluZm9FdmVudBIuCgVpdGVtcxgBIAMoCzIYLmdlbmVyYXRlZC5UYWJsZUluZm9JdG'
-    'VtUgVpdGVtcw==');
+final $typed_data.Uint8List tableInfoEventDescriptor =
+    $convert.base64Decode('Cg5UYWJsZUluZm9FdmVudBIuCgVpdGVtcxgBIAMoCzIYLmdlbmVyYXRlZC5UYWJsZUluZm9JdG'
+        'VtUgVpdGVtcw==');
 
 @$core.Deprecated('Use fantasyParticipantsEventOutDescriptor instead')
 const FantasyParticipantsEventOut$json = {
   '1': 'FantasyParticipantsEventOut',
   '2': [
-    {
-      '1': 'participants',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.User',
-      '10': 'participants'
-    },
+    {'1': 'participants', '3': 1, '4': 3, '5': 11, '6': '.generated.User', '10': 'participants'},
   ],
 };
 
 /// Descriptor for `FantasyParticipantsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fantasyParticipantsEventOutDescriptor =
-    $convert.base64Decode(
-        'ChtGYW50YXN5UGFydGljaXBhbnRzRXZlbnRPdXQSMwoMcGFydGljaXBhbnRzGAEgAygLMg8uZ2'
+    $convert.base64Decode('ChtGYW50YXN5UGFydGljaXBhbnRzRXZlbnRPdXQSMwoMcGFydGljaXBhbnRzGAEgAygLMg8uZ2'
         'VuZXJhdGVkLlVzZXJSDHBhcnRpY2lwYW50cw==');
 
 @$core.Deprecated('Use setFantasyParticipantEventDescriptor instead')
@@ -1989,59 +1452,33 @@ const SetFantasyParticipantEvent$json = {
 
 /// Descriptor for `SetFantasyParticipantEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List setFantasyParticipantEventDescriptor =
-    $convert.base64Decode(
-        'ChpTZXRGYW50YXN5UGFydGljaXBhbnRFdmVudBIUCgVlbWFpbBgBIAEoCVIFZW1haWw=');
+    $convert.base64Decode('ChpTZXRGYW50YXN5UGFydGljaXBhbnRFdmVudBIUCgVlbWFpbBgBIAEoCVIFZW1haWw=');
 
 @$core.Deprecated('Use fantasyRatingRowDescriptor instead')
 const FantasyRatingRow$json = {
   '1': 'FantasyRatingRow',
   '2': [
     {'1': 'nickname', '3': 1, '4': 1, '5': 9, '10': 'nickname'},
-    {
-      '1': 'predictions',
-      '3': 2,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.FantasyPredictionItem',
-      '10': 'predictions'
-    },
+    {'1': 'predictions', '3': 2, '4': 3, '5': 11, '6': '.generated.FantasyPredictionItem', '10': 'predictions'},
     {'1': 'totalPoints', '3': 3, '4': 1, '5': 5, '10': 'totalPoints'},
     {'1': 'playerId', '3': 4, '4': 1, '5': 5, '10': 'playerId'},
   ],
 };
 
 /// Descriptor for `FantasyRatingRow`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List fantasyRatingRowDescriptor = $convert.base64Decode(
-    'ChBGYW50YXN5UmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRJCCgtwcmVkaW'
-    'N0aW9ucxgCIAMoCzIgLmdlbmVyYXRlZC5GYW50YXN5UHJlZGljdGlvbkl0ZW1SC3ByZWRpY3Rp'
-    'b25zEiAKC3RvdGFsUG9pbnRzGAMgASgFUgt0b3RhbFBvaW50cxIaCghwbGF5ZXJJZBgEIAEoBV'
-    'IIcGxheWVySWQ=');
+final $typed_data.Uint8List fantasyRatingRowDescriptor =
+    $convert.base64Decode('ChBGYW50YXN5UmF0aW5nUm93EhoKCG5pY2tuYW1lGAEgASgJUghuaWNrbmFtZRJCCgtwcmVkaW'
+        'N0aW9ucxgCIAMoCzIgLmdlbmVyYXRlZC5GYW50YXN5UHJlZGljdGlvbkl0ZW1SC3ByZWRpY3Rp'
+        'b25zEiAKC3RvdGFsUG9pbnRzGAMgASgFUgt0b3RhbFBvaW50cxIaCghwbGF5ZXJJZBgEIAEoBV'
+        'IIcGxheWVySWQ=');
 
 @$core.Deprecated('Use fantasyPredictionItemDescriptor instead')
 const FantasyPredictionItem$json = {
   '1': 'FantasyPredictionItem',
   '2': [
     {'1': 'gameNumber', '3': 1, '4': 1, '5': 5, '10': 'gameNumber'},
-    {
-      '1': 'prediction',
-      '3': 2,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.GameWin',
-      '9': 0,
-      '10': 'prediction',
-      '17': true
-    },
-    {
-      '1': 'actualResult',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.GameWin',
-      '9': 1,
-      '10': 'actualResult',
-      '17': true
-    },
+    {'1': 'prediction', '3': 2, '4': 1, '5': 14, '6': '.generated.GameWin', '9': 0, '10': 'prediction', '17': true},
+    {'1': 'actualResult', '3': 3, '4': 1, '5': 14, '6': '.generated.GameWin', '9': 1, '10': 'actualResult', '17': true},
     {'1': 'points', '3': 4, '4': 1, '5': 5, '10': 'points'},
   ],
   '8': [
@@ -2051,55 +1488,32 @@ const FantasyPredictionItem$json = {
 };
 
 /// Descriptor for `FantasyPredictionItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List fantasyPredictionItemDescriptor = $convert.base64Decode(
-    'ChVGYW50YXN5UHJlZGljdGlvbkl0ZW0SHgoKZ2FtZU51bWJlchgBIAEoBVIKZ2FtZU51bWJlch'
-    'I3CgpwcmVkaWN0aW9uGAIgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5IAFIKcHJlZGljdGlvbogB'
-    'ARI7CgxhY3R1YWxSZXN1bHQYAyABKA4yEi5nZW5lcmF0ZWQuR2FtZVdpbkgBUgxhY3R1YWxSZX'
-    'N1bHSIAQESFgoGcG9pbnRzGAQgASgFUgZwb2ludHNCDQoLX3ByZWRpY3Rpb25CDwoNX2FjdHVh'
-    'bFJlc3VsdA==');
+final $typed_data.Uint8List fantasyPredictionItemDescriptor =
+    $convert.base64Decode('ChVGYW50YXN5UHJlZGljdGlvbkl0ZW0SHgoKZ2FtZU51bWJlchgBIAEoBVIKZ2FtZU51bWJlch'
+        'I3CgpwcmVkaWN0aW9uGAIgASgOMhIuZ2VuZXJhdGVkLkdhbWVXaW5IAFIKcHJlZGljdGlvbogB'
+        'ARI7CgxhY3R1YWxSZXN1bHQYAyABKA4yEi5nZW5lcmF0ZWQuR2FtZVdpbkgBUgxhY3R1YWxSZX'
+        'N1bHSIAQESFgoGcG9pbnRzGAQgASgFUgZwb2ludHNCDQoLX3ByZWRpY3Rpb25CDwoNX2FjdHVh'
+        'bFJlc3VsdA==');
 
 @$core.Deprecated('Use fantasyRatingEventOutDescriptor instead')
 const FantasyRatingEventOut$json = {
   '1': 'FantasyRatingEventOut',
   '2': [
-    {
-      '1': 'rows',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.FantasyRatingRow',
-      '10': 'rows'
-    },
+    {'1': 'rows', '3': 1, '4': 3, '5': 11, '6': '.generated.FantasyRatingRow', '10': 'rows'},
   ],
 };
 
 /// Descriptor for `FantasyRatingEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List fantasyRatingEventOutDescriptor = $convert.base64Decode(
-    'ChVGYW50YXN5UmF0aW5nRXZlbnRPdXQSLwoEcm93cxgBIAMoCzIbLmdlbmVyYXRlZC5GYW50YX'
-    'N5UmF0aW5nUm93UgRyb3dz');
+final $typed_data.Uint8List fantasyRatingEventOutDescriptor =
+    $convert.base64Decode('ChVGYW50YXN5UmF0aW5nRXZlbnRPdXQSLwoEcm93cxgBIAMoCzIbLmdlbmVyYXRlZC5GYW50YX'
+        'N5UmF0aW5nUm93UgRyb3dz');
 
 @$core.Deprecated('Use authEventDescriptor instead')
 const AuthEvent$json = {
   '1': 'AuthEvent',
   '2': [
-    {
-      '1': 'deviceId',
-      '3': 1,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'deviceId',
-      '17': true
-    },
-    {
-      '1': 'pushToken',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'pushToken',
-      '17': true
-    },
+    {'1': 'deviceId', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'deviceId', '17': true},
+    {'1': 'pushToken', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pushToken', '17': true},
   ],
   '8': [
     {'1': '_deviceId'},
@@ -2108,9 +1522,9 @@ const AuthEvent$json = {
 };
 
 /// Descriptor for `AuthEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List authEventDescriptor = $convert.base64Decode(
-    'CglBdXRoRXZlbnQSHwoIZGV2aWNlSWQYASABKAlIAFIIZGV2aWNlSWSIAQESIQoJcHVzaFRva2'
-    'VuGAIgASgJSAFSCXB1c2hUb2tlbogBAUILCglfZGV2aWNlSWRCDAoKX3B1c2hUb2tlbg==');
+final $typed_data.Uint8List authEventDescriptor =
+    $convert.base64Decode('CglBdXRoRXZlbnQSHwoIZGV2aWNlSWQYASABKAlIAFIIZGV2aWNlSWSIAQESIQoJcHVzaFRva2'
+        'VuGAIgASgJSAFSCXB1c2hUb2tlbogBAUILCglfZGV2aWNlSWRCDAoKX3B1c2hUb2tlbg==');
 
 @$core.Deprecated('Use authEventOutDescriptor instead')
 const AuthEventOut$json = {
@@ -2121,28 +1535,20 @@ const AuthEventOut$json = {
 };
 
 /// Descriptor for `AuthEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List authEventOutDescriptor = $convert
-    .base64Decode('CgxBdXRoRXZlbnRPdXQSFgoGdXNlcklkGAEgASgFUgZ1c2VySWQ=');
+final $typed_data.Uint8List authEventOutDescriptor =
+    $convert.base64Decode('CgxBdXRoRXZlbnRPdXQSFgoGdXNlcklkGAEgASgFUgZ1c2VySWQ=');
 
 @$core.Deprecated('Use setFantasyPredictionEventDescriptor instead')
 const SetFantasyPredictionEvent$json = {
   '1': 'SetFantasyPredictionEvent',
   '2': [
-    {
-      '1': 'prediction',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.GameWin',
-      '10': 'prediction'
-    },
+    {'1': 'prediction', '3': 1, '4': 1, '5': 14, '6': '.generated.GameWin', '10': 'prediction'},
   ],
 };
 
 /// Descriptor for `SetFantasyPredictionEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List setFantasyPredictionEventDescriptor =
-    $convert.base64Decode(
-        'ChlTZXRGYW50YXN5UHJlZGljdGlvbkV2ZW50EjIKCnByZWRpY3Rpb24YASABKA4yEi5nZW5lcm'
+    $convert.base64Decode('ChlTZXRGYW50YXN5UHJlZGljdGlvbkV2ZW50EjIKCnByZWRpY3Rpb24YASABKA4yEi5nZW5lcm'
         'F0ZWQuR2FtZVdpblIKcHJlZGljdGlvbg==');
 
 @$core.Deprecated('Use fantasyCurrentGameEventOutDescriptor instead')
@@ -2157,8 +1563,7 @@ const FantasyCurrentGameEventOut$json = {
 
 /// Descriptor for `FantasyCurrentGameEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fantasyCurrentGameEventOutDescriptor =
-    $convert.base64Decode(
-        'ChpGYW50YXN5Q3VycmVudEdhbWVFdmVudE91dBIeCgpnYW1lTnVtYmVyGAEgASgFUgpnYW1lTn'
+    $convert.base64Decode('ChpGYW50YXN5Q3VycmVudEdhbWVFdmVudE91dBIeCgpnYW1lTnVtYmVyGAEgASgFUgpnYW1lTn'
         'VtYmVyEh4KCmNhblByZWRpY3QYAiABKAhSCmNhblByZWRpY3QSJgoOY2FuUGFydGljaXBhdGUY'
         'AyABKAhSDmNhblBhcnRpY2lwYXRl');
 
@@ -2172,21 +1577,13 @@ const ForgotPasswordEvent$json = {
 
 /// Descriptor for `ForgotPasswordEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List forgotPasswordEventDescriptor =
-    $convert.base64Decode(
-        'ChNGb3Jnb3RQYXNzd29yZEV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
+    $convert.base64Decode('ChNGb3Jnb3RQYXNzd29yZEV2ZW50EhQKBWVtYWlsGAEgASgJUgVlbWFpbA==');
 
 @$core.Deprecated('Use forgotPasswordEventOutDescriptor instead')
 const ForgotPasswordEventOut$json = {
   '1': 'ForgotPasswordEventOut',
   '2': [
-    {
-      '1': 'error',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.ForgotPasswordEventOut.Error',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 1, '4': 1, '5': 14, '6': '.generated.ForgotPasswordEventOut.Error', '10': 'error'},
   ],
   '4': [ForgotPasswordEventOut_Error$json],
 };
@@ -2201,10 +1598,10 @@ const ForgotPasswordEventOut_Error$json = {
 };
 
 /// Descriptor for `ForgotPasswordEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List forgotPasswordEventOutDescriptor = $convert.base64Decode(
-    'ChZGb3Jnb3RQYXNzd29yZEV2ZW50T3V0Ej0KBWVycm9yGAEgASgOMicuZ2VuZXJhdGVkLkZvcm'
-    'dvdFBhc3N3b3JkRXZlbnRPdXQuRXJyb3JSBWVycm9yIicKBUVycm9yEgsKB25vRXJyb3IQABIR'
-    'Cg1lbWFpbE5vdEZvdW5kEAE=');
+final $typed_data.Uint8List forgotPasswordEventOutDescriptor =
+    $convert.base64Decode('ChZGb3Jnb3RQYXNzd29yZEV2ZW50T3V0Ej0KBWVycm9yGAEgASgOMicuZ2VuZXJhdGVkLkZvcm'
+        'dvdFBhc3N3b3JkRXZlbnRPdXQuRXJyb3JSBWVycm9yIicKBUVycm9yEgsKB25vRXJyb3IQABIR'
+        'Cg1lbWFpbE5vdEZvdW5kEAE=');
 
 @$core.Deprecated('Use resetPasswordEventDescriptor instead')
 const ResetPasswordEvent$json = {
@@ -2217,22 +1614,15 @@ const ResetPasswordEvent$json = {
 };
 
 /// Descriptor for `ResetPasswordEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List resetPasswordEventDescriptor = $convert.base64Decode(
-    'ChJSZXNldFBhc3N3b3JkRXZlbnQSFAoFdG9rZW4YASABKAlSBXRva2VuEiAKC25ld1Bhc3N3b3'
-    'JkGAIgASgJUgtuZXdQYXNzd29yZBIUCgVlbWFpbBgDIAEoCVIFZW1haWw=');
+final $typed_data.Uint8List resetPasswordEventDescriptor =
+    $convert.base64Decode('ChJSZXNldFBhc3N3b3JkRXZlbnQSFAoFdG9rZW4YASABKAlSBXRva2VuEiAKC25ld1Bhc3N3b3'
+        'JkGAIgASgJUgtuZXdQYXNzd29yZBIUCgVlbWFpbBgDIAEoCVIFZW1haWw=');
 
 @$core.Deprecated('Use resetPasswordEventOutDescriptor instead')
 const ResetPasswordEventOut$json = {
   '1': 'ResetPasswordEventOut',
   '2': [
-    {
-      '1': 'error',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.generated.ResetPasswordEventOut.Error',
-      '10': 'error'
-    },
+    {'1': 'error', '3': 1, '4': 1, '5': 14, '6': '.generated.ResetPasswordEventOut.Error', '10': 'error'},
   ],
   '4': [ResetPasswordEventOut_Error$json],
 };
@@ -2248,10 +1638,10 @@ const ResetPasswordEventOut_Error$json = {
 };
 
 /// Descriptor for `ResetPasswordEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List resetPasswordEventOutDescriptor = $convert.base64Decode(
-    'ChVSZXNldFBhc3N3b3JkRXZlbnRPdXQSPAoFZXJyb3IYASABKA4yJi5nZW5lcmF0ZWQuUmVzZX'
-    'RQYXNzd29yZEV2ZW50T3V0LkVycm9yUgVlcnJvciI4CgVFcnJvchILCgdub0Vycm9yEAASEAoM'
-    'aW52YWxpZFRva2VuEAESEAoMd2Vha1Bhc3N3b3JkEAI=');
+final $typed_data.Uint8List resetPasswordEventOutDescriptor =
+    $convert.base64Decode('ChVSZXNldFBhc3N3b3JkRXZlbnRPdXQSPAoFZXJyb3IYASABKA4yJi5nZW5lcmF0ZWQuUmVzZX'
+        'RQYXNzd29yZEV2ZW50T3V0LkVycm9yUgVlcnJvciI4CgVFcnJvchILCgdub0Vycm9yEAASEAoM'
+        'aW52YWxpZFRva2VuEAESEAoMd2Vha1Bhc3N3b3JkEAI=');
 
 @$core.Deprecated('Use playerRoleStatsDescriptor instead')
 const PlayerRoleStats$json = {
@@ -2266,11 +1656,11 @@ const PlayerRoleStats$json = {
 };
 
 /// Descriptor for `PlayerRoleStats`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List playerRoleStatsDescriptor = $convert.base64Decode(
-    'Cg9QbGF5ZXJSb2xlU3RhdHMSFAoFZ2FtZXMYASABKAVSBWdhbWVzEhIKBHdpbnMYAiABKAVSBH'
-    'dpbnMSGAoHd2luUmF0ZRgDIAEoAVIHd2luUmF0ZRIkCg1hdmdCb251c1Njb3JlGAQgASgBUg1h'
-    'dmdCb251c1Njb3JlEioKEGZpcnN0TmlnaHREZWF0aHMYBSABKAVSEGZpcnN0TmlnaHREZWF0aH'
-    'M=');
+final $typed_data.Uint8List playerRoleStatsDescriptor =
+    $convert.base64Decode('Cg9QbGF5ZXJSb2xlU3RhdHMSFAoFZ2FtZXMYASABKAVSBWdhbWVzEhIKBHdpbnMYAiABKAVSBH'
+        'dpbnMSGAoHd2luUmF0ZRgDIAEoAVIHd2luUmF0ZRIkCg1hdmdCb251c1Njb3JlGAQgASgBUg1h'
+        'dmdCb251c1Njb3JlEioKEGZpcnN0TmlnaHREZWF0aHMYBSABKAVSEGZpcnN0TmlnaHREZWF0aH'
+        'M=');
 
 @$core.Deprecated('Use playerPairStatDescriptor instead')
 const PlayerPairStat$json = {
@@ -2285,10 +1675,10 @@ const PlayerPairStat$json = {
 };
 
 /// Descriptor for `PlayerPairStat`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List playerPairStatDescriptor = $convert.base64Decode(
-    'Cg5QbGF5ZXJQYWlyU3RhdBIaCghwbGF5ZXJJZBgBIAEoBVIIcGxheWVySWQSGgoIbmlja25hbW'
-    'UYAiABKAlSCG5pY2tuYW1lEhQKBWdhbWVzGAMgASgFUgVnYW1lcxISCgR3aW5zGAQgASgFUgR3'
-    'aW5zEhgKB3dpblJhdGUYBSABKAFSB3dpblJhdGU=');
+final $typed_data.Uint8List playerPairStatDescriptor =
+    $convert.base64Decode('Cg5QbGF5ZXJQYWlyU3RhdBIaCghwbGF5ZXJJZBgBIAEoBVIIcGxheWVySWQSGgoIbmlja25hbW'
+        'UYAiABKAlSCG5pY2tuYW1lEhQKBWdhbWVzGAMgASgFUgVnYW1lcxISCgR3aW5zGAQgASgFUgR3'
+        'aW5zEhgKB3dpblJhdGUYBSABKAFSB3dpblJhdGU=');
 
 @$core.Deprecated('Use bestMoveDistributionDescriptor instead')
 const BestMoveDistribution$json = {
@@ -2302,9 +1692,9 @@ const BestMoveDistribution$json = {
 };
 
 /// Descriptor for `BestMoveDistribution`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List bestMoveDistributionDescriptor = $convert.base64Decode(
-    'ChRCZXN0TW92ZURpc3RyaWJ1dGlvbhISCgRtaXNzGAEgASgFUgRtaXNzEhAKA29uZRgCIAEoBV'
-    'IDb25lEhIKBGhhbGYYAyABKAVSBGhhbGYSEgoEZnVsbBgEIAEoBVIEZnVsbA==');
+final $typed_data.Uint8List bestMoveDistributionDescriptor =
+    $convert.base64Decode('ChRCZXN0TW92ZURpc3RyaWJ1dGlvbhISCgRtaXNzGAEgASgFUgRtaXNzEhAKA29uZRgCIAEoBV'
+        'IDb25lEhIKBGhhbGYYAyABKAVSBGhhbGYSEgoEZnVsbBgEIAEoBVIEZnVsbA==');
 
 @$core.Deprecated('Use playerStatisticsEventOutDescriptor instead')
 const PlayerStatisticsEventOut$json = {
@@ -2312,94 +1702,17 @@ const PlayerStatisticsEventOut$json = {
   '2': [
     {'1': 'playerId', '3': 1, '4': 1, '5': 5, '10': 'playerId'},
     {'1': 'nickname', '3': 2, '4': 1, '5': 9, '10': 'nickname'},
-    {
-      '1': 'overall',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.PlayerRoleStats',
-      '10': 'overall'
-    },
-    {
-      '1': 'citizen',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.PlayerRoleStats',
-      '10': 'citizen'
-    },
-    {
-      '1': 'mafia',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.PlayerRoleStats',
-      '10': 'mafia'
-    },
-    {
-      '1': 'don',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.PlayerRoleStats',
-      '10': 'don'
-    },
-    {
-      '1': 'sheriff',
-      '3': 7,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.PlayerRoleStats',
-      '10': 'sheriff'
-    },
-    {
-      '1': 'sameCityTop',
-      '3': 8,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PlayerPairStat',
-      '10': 'sameCityTop'
-    },
-    {
-      '1': 'sameMafiaTop',
-      '3': 9,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PlayerPairStat',
-      '10': 'sameMafiaTop'
-    },
-    {
-      '1': 'diffTeamTop',
-      '3': 10,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PlayerPairStat',
-      '10': 'diffTeamTop'
-    },
-    {
-      '1': 'sameCityBottom',
-      '3': 11,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PlayerPairStat',
-      '10': 'sameCityBottom'
-    },
-    {
-      '1': 'sameMafiaBottom',
-      '3': 12,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PlayerPairStat',
-      '10': 'sameMafiaBottom'
-    },
-    {
-      '1': 'diffTeamBottom',
-      '3': 13,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PlayerPairStat',
-      '10': 'diffTeamBottom'
-    },
+    {'1': 'overall', '3': 3, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'overall'},
+    {'1': 'citizen', '3': 4, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'citizen'},
+    {'1': 'mafia', '3': 5, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'mafia'},
+    {'1': 'don', '3': 6, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'don'},
+    {'1': 'sheriff', '3': 7, '4': 1, '5': 11, '6': '.generated.PlayerRoleStats', '10': 'sheriff'},
+    {'1': 'sameCityTop', '3': 8, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameCityTop'},
+    {'1': 'sameMafiaTop', '3': 9, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameMafiaTop'},
+    {'1': 'diffTeamTop', '3': 10, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'diffTeamTop'},
+    {'1': 'sameCityBottom', '3': 11, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameCityBottom'},
+    {'1': 'sameMafiaBottom', '3': 12, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'sameMafiaBottom'},
+    {'1': 'diffTeamBottom', '3': 13, '4': 3, '5': 11, '6': '.generated.PlayerPairStat', '10': 'diffTeamBottom'},
     {
       '1': 'bestMoveDistribution',
       '3': 14,
@@ -2412,22 +1725,22 @@ const PlayerStatisticsEventOut$json = {
 };
 
 /// Descriptor for `PlayerStatisticsEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List playerStatisticsEventOutDescriptor = $convert.base64Decode(
-    'ChhQbGF5ZXJTdGF0aXN0aWNzRXZlbnRPdXQSGgoIcGxheWVySWQYASABKAVSCHBsYXllcklkEh'
-    'oKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRI0CgdvdmVyYWxsGAMgASgLMhouZ2VuZXJhdGVk'
-    'LlBsYXllclJvbGVTdGF0c1IHb3ZlcmFsbBI0CgdjaXRpemVuGAQgASgLMhouZ2VuZXJhdGVkLl'
-    'BsYXllclJvbGVTdGF0c1IHY2l0aXplbhIwCgVtYWZpYRgFIAEoCzIaLmdlbmVyYXRlZC5QbGF5'
-    'ZXJSb2xlU3RhdHNSBW1hZmlhEiwKA2RvbhgGIAEoCzIaLmdlbmVyYXRlZC5QbGF5ZXJSb2xlU3'
-    'RhdHNSA2RvbhI0CgdzaGVyaWZmGAcgASgLMhouZ2VuZXJhdGVkLlBsYXllclJvbGVTdGF0c1IH'
-    'c2hlcmlmZhI7CgtzYW1lQ2l0eVRvcBgIIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdF'
-    'ILc2FtZUNpdHlUb3ASPQoMc2FtZU1hZmlhVG9wGAkgAygLMhkuZ2VuZXJhdGVkLlBsYXllclBh'
-    'aXJTdGF0UgxzYW1lTWFmaWFUb3ASOwoLZGlmZlRlYW1Ub3AYCiADKAsyGS5nZW5lcmF0ZWQuUG'
-    'xheWVyUGFpclN0YXRSC2RpZmZUZWFtVG9wEkEKDnNhbWVDaXR5Qm90dG9tGAsgAygLMhkuZ2Vu'
-    'ZXJhdGVkLlBsYXllclBhaXJTdGF0Ug5zYW1lQ2l0eUJvdHRvbRJDCg9zYW1lTWFmaWFCb3R0b2'
-    '0YDCADKAsyGS5nZW5lcmF0ZWQuUGxheWVyUGFpclN0YXRSD3NhbWVNYWZpYUJvdHRvbRJBCg5k'
-    'aWZmVGVhbUJvdHRvbRgNIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdFIOZGlmZlRlYW'
-    '1Cb3R0b20SUwoUYmVzdE1vdmVEaXN0cmlidXRpb24YDiABKAsyHy5nZW5lcmF0ZWQuQmVzdE1v'
-    'dmVEaXN0cmlidXRpb25SFGJlc3RNb3ZlRGlzdHJpYnV0aW9u');
+final $typed_data.Uint8List playerStatisticsEventOutDescriptor =
+    $convert.base64Decode('ChhQbGF5ZXJTdGF0aXN0aWNzRXZlbnRPdXQSGgoIcGxheWVySWQYASABKAVSCHBsYXllcklkEh'
+        'oKCG5pY2tuYW1lGAIgASgJUghuaWNrbmFtZRI0CgdvdmVyYWxsGAMgASgLMhouZ2VuZXJhdGVk'
+        'LlBsYXllclJvbGVTdGF0c1IHb3ZlcmFsbBI0CgdjaXRpemVuGAQgASgLMhouZ2VuZXJhdGVkLl'
+        'BsYXllclJvbGVTdGF0c1IHY2l0aXplbhIwCgVtYWZpYRgFIAEoCzIaLmdlbmVyYXRlZC5QbGF5'
+        'ZXJSb2xlU3RhdHNSBW1hZmlhEiwKA2RvbhgGIAEoCzIaLmdlbmVyYXRlZC5QbGF5ZXJSb2xlU3'
+        'RhdHNSA2RvbhI0CgdzaGVyaWZmGAcgASgLMhouZ2VuZXJhdGVkLlBsYXllclJvbGVTdGF0c1IH'
+        'c2hlcmlmZhI7CgtzYW1lQ2l0eVRvcBgIIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdF'
+        'ILc2FtZUNpdHlUb3ASPQoMc2FtZU1hZmlhVG9wGAkgAygLMhkuZ2VuZXJhdGVkLlBsYXllclBh'
+        'aXJTdGF0UgxzYW1lTWFmaWFUb3ASOwoLZGlmZlRlYW1Ub3AYCiADKAsyGS5nZW5lcmF0ZWQuUG'
+        'xheWVyUGFpclN0YXRSC2RpZmZUZWFtVG9wEkEKDnNhbWVDaXR5Qm90dG9tGAsgAygLMhkuZ2Vu'
+        'ZXJhdGVkLlBsYXllclBhaXJTdGF0Ug5zYW1lQ2l0eUJvdHRvbRJDCg9zYW1lTWFmaWFCb3R0b2'
+        '0YDCADKAsyGS5nZW5lcmF0ZWQuUGxheWVyUGFpclN0YXRSD3NhbWVNYWZpYUJvdHRvbRJBCg5k'
+        'aWZmVGVhbUJvdHRvbRgNIAMoCzIZLmdlbmVyYXRlZC5QbGF5ZXJQYWlyU3RhdFIOZGlmZlRlYW'
+        '1Cb3R0b20SUwoUYmVzdE1vdmVEaXN0cmlidXRpb24YDiABKAsyHy5nZW5lcmF0ZWQuQmVzdE1v'
+        'dmVEaXN0cmlidXRpb25SFGJlc3RNb3ZlRGlzdHJpYnV0aW9u');
 
 @$core.Deprecated('Use photoThemeDescriptor instead')
 const PhotoTheme$json = {
@@ -2441,9 +1754,9 @@ const PhotoTheme$json = {
 };
 
 /// Descriptor for `PhotoTheme`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List photoThemeDescriptor = $convert.base64Decode(
-    'CgpQaG90b1RoZW1lEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhgKB293bm'
-    'VySWQYAyABKAVSB293bmVySWQSIAoLcGhvdG9zQ291bnQYBCABKAVSC3Bob3Rvc0NvdW50');
+final $typed_data.Uint8List photoThemeDescriptor =
+    $convert.base64Decode('CgpQaG90b1RoZW1lEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhgKB293bm'
+        'VySWQYAyABKAVSB293bmVySWQSIAoLcGhvdG9zQ291bnQYBCABKAVSC3Bob3Rvc0NvdW50');
 
 @$core.Deprecated('Use photoThemePlayerDescriptor instead')
 const PhotoThemePlayer$json = {
@@ -2451,24 +1764,8 @@ const PhotoThemePlayer$json = {
   '2': [
     {'1': 'playerId', '3': 1, '4': 1, '5': 5, '10': 'playerId'},
     {'1': 'nickname', '3': 2, '4': 1, '5': 9, '10': 'nickname'},
-    {
-      '1': 'themeImageUrl',
-      '3': 3,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'themeImageUrl',
-      '17': true
-    },
-    {
-      '1': 'profileImageUrl',
-      '3': 4,
-      '4': 1,
-      '5': 9,
-      '9': 1,
-      '10': 'profileImageUrl',
-      '17': true
-    },
+    {'1': 'themeImageUrl', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'themeImageUrl', '17': true},
+    {'1': 'profileImageUrl', '3': 4, '4': 1, '5': 9, '9': 1, '10': 'profileImageUrl', '17': true},
   ],
   '8': [
     {'1': '_themeImageUrl'},
@@ -2477,11 +1774,11 @@ const PhotoThemePlayer$json = {
 };
 
 /// Descriptor for `PhotoThemePlayer`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List photoThemePlayerDescriptor = $convert.base64Decode(
-    'ChBQaG90b1RoZW1lUGxheWVyEhoKCHBsYXllcklkGAEgASgFUghwbGF5ZXJJZBIaCghuaWNrbm'
-    'FtZRgCIAEoCVIIbmlja25hbWUSKQoNdGhlbWVJbWFnZVVybBgDIAEoCUgAUg10aGVtZUltYWdl'
-    'VXJsiAEBEi0KD3Byb2ZpbGVJbWFnZVVybBgEIAEoCUgBUg9wcm9maWxlSW1hZ2VVcmyIAQFCEA'
-    'oOX3RoZW1lSW1hZ2VVcmxCEgoQX3Byb2ZpbGVJbWFnZVVybA==');
+final $typed_data.Uint8List photoThemePlayerDescriptor =
+    $convert.base64Decode('ChBQaG90b1RoZW1lUGxheWVyEhoKCHBsYXllcklkGAEgASgFUghwbGF5ZXJJZBIaCghuaWNrbm'
+        'FtZRgCIAEoCVIIbmlja25hbWUSKQoNdGhlbWVJbWFnZVVybBgDIAEoCUgAUg10aGVtZUltYWdl'
+        'VXJsiAEBEi0KD3Byb2ZpbGVJbWFnZVVybBgEIAEoCUgBUg9wcm9maWxlSW1hZ2VVcmyIAQFCEA'
+        'oOX3RoZW1lSW1hZ2VVcmxCEgoQX3Byb2ZpbGVJbWFnZVVybA==');
 
 @$core.Deprecated('Use createPhotoThemeEventDescriptor instead')
 const CreatePhotoThemeEvent$json = {
@@ -2493,8 +1790,7 @@ const CreatePhotoThemeEvent$json = {
 
 /// Descriptor for `CreatePhotoThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createPhotoThemeEventDescriptor =
-    $convert.base64Decode(
-        'ChVDcmVhdGVQaG90b1RoZW1lRXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
+    $convert.base64Decode('ChVDcmVhdGVQaG90b1RoZW1lRXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
 
 @$core.Deprecated('Use createPhotoThemeEventOutDescriptor instead')
 const CreatePhotoThemeEventOut$json = {
@@ -2505,8 +1801,8 @@ const CreatePhotoThemeEventOut$json = {
 };
 
 /// Descriptor for `CreatePhotoThemeEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createPhotoThemeEventOutDescriptor = $convert
-    .base64Decode('ChhDcmVhdGVQaG90b1RoZW1lRXZlbnRPdXQSDgoCaWQYASABKAVSAmlk');
+final $typed_data.Uint8List createPhotoThemeEventOutDescriptor =
+    $convert.base64Decode('ChhDcmVhdGVQaG90b1RoZW1lRXZlbnRPdXQSDgoCaWQYASABKAVSAmlk');
 
 @$core.Deprecated('Use updatePhotoThemeEventDescriptor instead')
 const UpdatePhotoThemeEvent$json = {
@@ -2518,64 +1814,39 @@ const UpdatePhotoThemeEvent$json = {
 
 /// Descriptor for `UpdatePhotoThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updatePhotoThemeEventDescriptor =
-    $convert.base64Decode(
-        'ChVVcGRhdGVQaG90b1RoZW1lRXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
+    $convert.base64Decode('ChVVcGRhdGVQaG90b1RoZW1lRXZlbnQSEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
 
 @$core.Deprecated('Use getPhotoThemesEventOutDescriptor instead')
 const GetPhotoThemesEventOut$json = {
   '1': 'GetPhotoThemesEventOut',
   '2': [
-    {
-      '1': 'themes',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PhotoTheme',
-      '10': 'themes'
-    },
+    {'1': 'themes', '3': 1, '4': 3, '5': 11, '6': '.generated.PhotoTheme', '10': 'themes'},
   ],
 };
 
 /// Descriptor for `GetPhotoThemesEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getPhotoThemesEventOutDescriptor =
-    $convert.base64Decode(
-        'ChZHZXRQaG90b1RoZW1lc0V2ZW50T3V0Ei0KBnRoZW1lcxgBIAMoCzIVLmdlbmVyYXRlZC5QaG'
+    $convert.base64Decode('ChZHZXRQaG90b1RoZW1lc0V2ZW50T3V0Ei0KBnRoZW1lcxgBIAMoCzIVLmdlbmVyYXRlZC5QaG'
         '90b1RoZW1lUgZ0aGVtZXM=');
 
 @$core.Deprecated('Use getPhotoThemePlayersEventOutDescriptor instead')
 const GetPhotoThemePlayersEventOut$json = {
   '1': 'GetPhotoThemePlayersEventOut',
   '2': [
-    {
-      '1': 'players',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.PhotoThemePlayer',
-      '10': 'players'
-    },
+    {'1': 'players', '3': 1, '4': 3, '5': 11, '6': '.generated.PhotoThemePlayer', '10': 'players'},
   ],
 };
 
 /// Descriptor for `GetPhotoThemePlayersEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getPhotoThemePlayersEventOutDescriptor =
-    $convert.base64Decode(
-        'ChxHZXRQaG90b1RoZW1lUGxheWVyc0V2ZW50T3V0EjUKB3BsYXllcnMYASADKAsyGy5nZW5lcm'
+    $convert.base64Decode('ChxHZXRQaG90b1RoZW1lUGxheWVyc0V2ZW50T3V0EjUKB3BsYXllcnMYASADKAsyGy5nZW5lcm'
         'F0ZWQuUGhvdG9UaGVtZVBsYXllclIHcGxheWVycw==');
 
 @$core.Deprecated('Use setTournamentPhotoThemeEventDescriptor instead')
 const SetTournamentPhotoThemeEvent$json = {
   '1': 'SetTournamentPhotoThemeEvent',
   '2': [
-    {
-      '1': 'themeId',
-      '3': 1,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'themeId',
-      '17': true
-    },
+    {'1': 'themeId', '3': 1, '4': 1, '5': 5, '9': 0, '10': 'themeId', '17': true},
   ],
   '8': [
     {'1': '_themeId'},
@@ -2584,23 +1855,14 @@ const SetTournamentPhotoThemeEvent$json = {
 
 /// Descriptor for `SetTournamentPhotoThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List setTournamentPhotoThemeEventDescriptor =
-    $convert.base64Decode(
-        'ChxTZXRUb3VybmFtZW50UGhvdG9UaGVtZUV2ZW50Eh0KB3RoZW1lSWQYASABKAVIAFIHdGhlbW'
+    $convert.base64Decode('ChxTZXRUb3VybmFtZW50UGhvdG9UaGVtZUV2ZW50Eh0KB3RoZW1lSWQYASABKAVIAFIHdGhlbW'
         'VJZIgBAUIKCghfdGhlbWVJZA==');
 
 @$core.Deprecated('Use setTournamentDesignEventDescriptor instead')
 const SetTournamentDesignEvent$json = {
   '1': 'SetTournamentDesignEvent',
   '2': [
-    {
-      '1': 'designKey',
-      '3': 1,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'designKey',
-      '17': true
-    },
+    {'1': 'designKey', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'designKey', '17': true},
   ],
   '8': [
     {'1': '_designKey'},
@@ -2609,8 +1871,7 @@ const SetTournamentDesignEvent$json = {
 
 /// Descriptor for `SetTournamentDesignEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List setTournamentDesignEventDescriptor =
-    $convert.base64Decode(
-        'ChhTZXRUb3VybmFtZW50RGVzaWduRXZlbnQSIQoJZGVzaWduS2V5GAEgASgJSABSCWRlc2lnbk'
+    $convert.base64Decode('ChhTZXRUb3VybmFtZW50RGVzaWduRXZlbnQSIQoJZGVzaWduS2V5GAEgASgJSABSCWRlc2lnbk'
         'tleYgBAUIMCgpfZGVzaWduS2V5');
 
 @$core.Deprecated('Use addPlayerToThemeEventDescriptor instead')
@@ -2623,8 +1884,7 @@ const AddPlayerToThemeEvent$json = {
 
 /// Descriptor for `AddPlayerToThemeEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addPlayerToThemeEventDescriptor =
-    $convert.base64Decode(
-        'ChVBZGRQbGF5ZXJUb1RoZW1lRXZlbnQSGgoIcGxheWVySWQYASABKAVSCHBsYXllcklk');
+    $convert.base64Decode('ChVBZGRQbGF5ZXJUb1RoZW1lRXZlbnQSGgoIcGxheWVySWQYASABKAVSCHBsYXllcklk');
 
 @$core.Deprecated('Use addPlayersFromTournamentEventDescriptor instead')
 const AddPlayersFromTournamentEvent$json = {
@@ -2636,8 +1896,7 @@ const AddPlayersFromTournamentEvent$json = {
 
 /// Descriptor for `AddPlayersFromTournamentEvent`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addPlayersFromTournamentEventDescriptor =
-    $convert.base64Decode(
-        'Ch1BZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudBIiCgx0b3VybmFtZW50SWQYASABKAVSDH'
+    $convert.base64Decode('Ch1BZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudBIiCgx0b3VybmFtZW50SWQYASABKAVSDH'
         'RvdXJuYW1lbnRJZA==');
 
 @$core.Deprecated('Use addPlayersFromTournamentEventOutDescriptor instead')
@@ -2650,8 +1909,7 @@ const AddPlayersFromTournamentEventOut$json = {
 
 /// Descriptor for `AddPlayersFromTournamentEventOut`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addPlayersFromTournamentEventOutDescriptor =
-    $convert.base64Decode(
-        'CiBBZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudE91dBIeCgphZGRlZENvdW50GAEgASgFUg'
+    $convert.base64Decode('CiBBZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudE91dBIeCgphZGRlZENvdW50GAEgASgFUg'
         'phZGRlZENvdW50');
 
 @$core.Deprecated('Use refereeAssignmentDescriptor instead')
@@ -2659,42 +1917,28 @@ const RefereeAssignment$json = {
   '1': 'RefereeAssignment',
   '2': [
     {'1': 'table', '3': 1, '4': 1, '5': 5, '10': 'table'},
-    {
-      '1': 'referee',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'referee'
-    },
+    {'1': 'referee', '3': 2, '4': 1, '5': 11, '6': '.generated.Player', '10': 'referee'},
   ],
 };
 
 /// Descriptor for `RefereeAssignment`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List refereeAssignmentDescriptor = $convert.base64Decode(
-    'ChFSZWZlcmVlQXNzaWdubWVudBIUCgV0YWJsZRgBIAEoBVIFdGFibGUSKwoHcmVmZXJlZRgCIA'
-    'EoCzIRLmdlbmVyYXRlZC5QbGF5ZXJSB3JlZmVyZWU=');
+final $typed_data.Uint8List refereeAssignmentDescriptor =
+    $convert.base64Decode('ChFSZWZlcmVlQXNzaWdubWVudBIUCgV0YWJsZRgBIAEoBVIFdGFibGUSKwoHcmVmZXJlZRgCIA'
+        'EoCzIRLmdlbmVyYXRlZC5QbGF5ZXJSB3JlZmVyZWU=');
 
 @$core.Deprecated('Use setRefereeEventDescriptor instead')
 const SetRefereeEvent$json = {
   '1': 'SetRefereeEvent',
   '2': [
     {'1': 'table', '3': 1, '4': 1, '5': 5, '10': 'table'},
-    {
-      '1': 'referee',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.generated.Player',
-      '10': 'referee'
-    },
+    {'1': 'referee', '3': 2, '4': 1, '5': 11, '6': '.generated.Player', '10': 'referee'},
   ],
 };
 
 /// Descriptor for `SetRefereeEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setRefereeEventDescriptor = $convert.base64Decode(
-    'Cg9TZXRSZWZlcmVlRXZlbnQSFAoFdGFibGUYASABKAVSBXRhYmxlEisKB3JlZmVyZWUYAiABKA'
-    'syES5nZW5lcmF0ZWQuUGxheWVyUgdyZWZlcmVl');
+final $typed_data.Uint8List setRefereeEventDescriptor =
+    $convert.base64Decode('Cg9TZXRSZWZlcmVlRXZlbnQSFAoFdGFibGUYASABKAVSBXRhYmxlEisKB3JlZmVyZWUYAiABKA'
+        'syES5nZW5lcmF0ZWQuUGxheWVyUgdyZWZlcmVl');
 
 @$core.Deprecated('Use deleteRefereeEventDescriptor instead')
 const DeleteRefereeEvent$json = {
@@ -2705,28 +1949,21 @@ const DeleteRefereeEvent$json = {
 };
 
 /// Descriptor for `DeleteRefereeEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteRefereeEventDescriptor = $convert
-    .base64Decode('ChJEZWxldGVSZWZlcmVlRXZlbnQSFAoFdGFibGUYASABKAVSBXRhYmxl');
+final $typed_data.Uint8List deleteRefereeEventDescriptor =
+    $convert.base64Decode('ChJEZWxldGVSZWZlcmVlRXZlbnQSFAoFdGFibGUYASABKAVSBXRhYmxl');
 
 @$core.Deprecated('Use getRefereesEventOutDescriptor instead')
 const GetRefereesEventOut$json = {
   '1': 'GetRefereesEventOut',
   '2': [
-    {
-      '1': 'assignments',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.generated.RefereeAssignment',
-      '10': 'assignments'
-    },
+    {'1': 'assignments', '3': 1, '4': 3, '5': 11, '6': '.generated.RefereeAssignment', '10': 'assignments'},
   ],
 };
 
 /// Descriptor for `GetRefereesEventOut`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getRefereesEventOutDescriptor = $convert.base64Decode(
-    'ChNHZXRSZWZlcmVlc0V2ZW50T3V0Ej4KC2Fzc2lnbm1lbnRzGAEgAygLMhwuZ2VuZXJhdGVkLl'
-    'JlZmVyZWVBc3NpZ25tZW50Ugthc3NpZ25tZW50cw==');
+final $typed_data.Uint8List getRefereesEventOutDescriptor =
+    $convert.base64Decode('ChNHZXRSZWZlcmVlc0V2ZW50T3V0Ej4KC2Fzc2lnbm1lbnRzGAEgAygLMhwuZ2VuZXJhdGVkLl'
+        'JlZmVyZWVBc3NpZ25tZW50Ugthc3NpZ25tZW50cw==');
 
 @$core.Deprecated('Use substitutePlayerEventDescriptor instead')
 const SubstitutePlayerEvent$json = {
@@ -2739,7 +1976,7 @@ const SubstitutePlayerEvent$json = {
 };
 
 /// Descriptor for `SubstitutePlayerEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List substitutePlayerEventDescriptor = $convert.base64Decode(
-    'ChVTdWJzdGl0dXRlUGxheWVyRXZlbnQSIAoLb2xkUGxheWVySWQYASABKAVSC29sZFBsYXllck'
-    'lkEiAKC25ld1BsYXllcklkGAIgASgFUgtuZXdQbGF5ZXJJZBIUCgVnYW1lcxgDIAMoBVIFZ2Ft'
-    'ZXM=');
+final $typed_data.Uint8List substitutePlayerEventDescriptor =
+    $convert.base64Decode('ChVTdWJzdGl0dXRlUGxheWVyRXZlbnQSIAoLb2xkUGxheWVySWQYASABKAVSC29sZFBsYXllck'
+        'lkEiAKC25ld1BsYXllcklkGAIgASgFUgtuZXdQbGF5ZXJJZBIUCgVnYW1lcxgDIAMoBVIFZ2Ft'
+        'ZXM=');

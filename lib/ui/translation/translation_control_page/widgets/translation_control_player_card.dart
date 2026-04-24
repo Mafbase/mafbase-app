@@ -26,10 +26,7 @@ class TranslationControlPlayerCard extends StatelessWidget {
     required this.onStatusChanged,
   });
 
-  bool get _isDead =>
-      status == PlayerStatus.killed ||
-      status == PlayerStatus.deleted ||
-      status == PlayerStatus.voted;
+  bool get _isDead => status == PlayerStatus.killed || status == PlayerStatus.deleted || status == PlayerStatus.voted;
 
   @override
   Widget build(BuildContext context) {

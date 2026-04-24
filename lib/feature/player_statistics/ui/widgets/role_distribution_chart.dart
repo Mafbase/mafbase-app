@@ -29,31 +29,31 @@ class RoleDistributionChart extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        alignment: WrapAlignment.center,
-        runSpacing: 8,
-        children: [
-          SizedBox(
-            width: 140,
-            height: 140,
-            child: CustomPaint(
-              painter: _DonutChartPainter(segments: segments),
-              child: Center(
-                child: Text(
-                  totalGames.toString(),
-                  style: MyTheme.of(context).headerTextStyle,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.center,
+            runSpacing: 8,
+            children: [
+              SizedBox(
+                width: 140,
+                height: 140,
+                child: CustomPaint(
+                  painter: _DonutChartPainter(segments: segments),
+                  child: Center(
+                    child: Text(
+                      totalGames.toString(),
+                      style: MyTheme.of(context).headerTextStyle,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(width: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: segments.map((s) => _LegendItem(segment: s, totalGames: totalGames)).toList(),
+              ),
+            ],
           ),
-          const SizedBox(width: 24),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: segments.map((s) => _LegendItem(segment: s, totalGames: totalGames)).toList(),
-          ),
-        ],
-      ),
         ],
       ),
     );

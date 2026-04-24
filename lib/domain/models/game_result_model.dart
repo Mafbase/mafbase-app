@@ -30,12 +30,8 @@ abstract class GameResultModel with _$GameResultModel {
       gameWin: proto.hasResult() ? proto.result.win : null,
       roles: proto.hasResult() ? proto.result.role : null,
       game: proto.game,
-      playerIds: proto.seating.players.isNotEmpty
-          ? proto.seating.players.map((p) => p.id).toList()
-          : null,
-      refereeId: proto.seating.hasRefereeModel()
-          ? proto.seating.refereeModel.id
-          : null,
+      playerIds: proto.seating.players.isNotEmpty ? proto.seating.players.map((p) => p.id).toList() : null,
+      refereeId: proto.seating.hasRefereeModel() ? proto.seating.refereeModel.id : null,
       statuses: proto.hasResult()
           ? List.generate(10, (index) {
               if (proto.result.died == index) {

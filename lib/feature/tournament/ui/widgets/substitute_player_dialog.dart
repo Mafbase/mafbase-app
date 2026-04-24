@@ -23,7 +23,6 @@ class SubstitutePlayerDialog extends StatefulWidget {
     required PlayerModel oldPlayer,
     required List<int> gameNumbers,
   }) {
-
     return showDialog<({int newPlayerId, List<int> games})>(
       context: context,
       builder: (ctx) => SubstitutePlayerDialog(
@@ -34,8 +33,7 @@ class SubstitutePlayerDialog extends StatefulWidget {
   }
 
   @override
-  State<SubstitutePlayerDialog> createState() =>
-      _SubstitutePlayerDialogState();
+  State<SubstitutePlayerDialog> createState() => _SubstitutePlayerDialogState();
 }
 
 class _SubstitutePlayerDialogState extends State<SubstitutePlayerDialog> {
@@ -59,15 +57,9 @@ class _SubstitutePlayerDialogState extends State<SubstitutePlayerDialog> {
     super.dispose();
   }
 
-  bool get _canSubmit =>
-      _selectedPlayer != null &&
-      _selectedGames.values.any((selected) => selected);
+  bool get _canSubmit => _selectedPlayer != null && _selectedGames.values.any((selected) => selected);
 
-  List<int> get _selectedGameNumbers => _selectedGames.entries
-      .where((e) => e.value)
-      .map((e) => e.key)
-      .toList()
-    ..sort();
+  List<int> get _selectedGameNumbers => _selectedGames.entries.where((e) => e.value).map((e) => e.key).toList()..sort();
 
   void _onSubmit() {
     if (!_canSubmit) return;

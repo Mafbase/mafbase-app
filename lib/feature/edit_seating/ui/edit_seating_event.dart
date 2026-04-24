@@ -10,8 +10,7 @@ abstract class EditSeatingPageEvent with _$EditSeatingPageEvent {
     required List<List<EditableTableModel>> seating,
   }) = EditSeatingPageEventInit;
 
-  const factory EditSeatingPageEvent.selectRound(int roundIndex) =
-      EditSeatingPageEventSelectRound;
+  const factory EditSeatingPageEvent.selectRound(int roundIndex) = EditSeatingPageEventSelectRound;
 
   const factory EditSeatingPageEvent.swapPlayers({
     required int sourceTable,

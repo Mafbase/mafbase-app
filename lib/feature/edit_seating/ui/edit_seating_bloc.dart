@@ -25,11 +25,13 @@ class EditSeatingBloc extends Bloc<EditSeatingPageEvent, EditSeatingPageState>
     Emitter<EditSeatingPageState> emit,
   ) {
     _tournamentId = event.tournamentId;
-    emit(state.copyWith(
-      isLoading: false,
-      originalSeating: event.seating,
-      editedSeating: event.seating,
-    ),);
+    emit(
+      state.copyWith(
+        isLoading: false,
+        originalSeating: event.seating,
+        editedSeating: event.seating,
+      ),
+    );
   }
 
   void _onSelectRound(
@@ -54,14 +56,12 @@ class EditSeatingBloc extends Bloc<EditSeatingPageEvent, EditSeatingPageState>
     // Update source table
     final sourcePlayers = [...oldTables[event.sourceTable].players];
     sourcePlayers[event.sourceSlot] = targetPlayer;
-    newTables[event.sourceTable] =
-        oldTables[event.sourceTable].copyWith(players: sourcePlayers);
+    newTables[event.sourceTable] = oldTables[event.sourceTable].copyWith(players: sourcePlayers);
 
     // Update target table (re-read from newTables in case same table)
     final targetPlayers = [...newTables[event.targetTable].players];
     targetPlayers[event.targetSlot] = sourcePlayer;
-    newTables[event.targetTable] =
-        newTables[event.targetTable].copyWith(players: targetPlayers);
+    newTables[event.targetTable] = newTables[event.targetTable].copyWith(players: targetPlayers);
 
     final newSeating = [...state.editedSeating];
     newSeating[round] = newTables;

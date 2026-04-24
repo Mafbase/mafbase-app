@@ -63,91 +63,91 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
               fit: StackFit.passthrough,
               children: [
                 ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 600),
-              child: state.loading
-                  ? const SizedBox(
-                      height: 300,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                              style: const TextStyle(fontSize: 24),
-                              children: [
+                  constraints: const BoxConstraints(maxWidth: 600),
+                  child: state.loading
+                      ? const SizedBox(
+                          height: 300,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text.rich(
                                 TextSpan(
-                                  text: context.locale.seatingPlayerNotFound,
-                                ),
-                                TextSpan(
-                                  text: state.incorrectPlayer,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            context.locale.seatingSelectOrCreatePlayer,
-                          ),
-                          NicknameField(
-                            controller: controller,
-                            focusNode: focusNode,
-                            readOnly: false,
-                            label: context.locale.nicknameHint,
-                            down: true,
-                            onNewPlayer: ({initValue}) {
-                              if (initValue == null) return;
-
-                              context.read<SeatingPageDialogBloc>().add(
-                                    SeatingPageDialogEvent.newPlayer(initValue),
-                                  );
-                            },
-                            onSelected: (player) {
-                              setState(
-                                () => selectedPlayer = player,
-                              );
-                            },
-                          ),
-                          if (selectedPlayer?.fsmNickaname case String fsmNickname)
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: context.locale.seatingCurrentFsmNickname,
-                                  ),
-                                  TextSpan(
-                                    text: fsmNickname,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
+                                  style: const TextStyle(fontSize: 24),
+                                  children: [
+                                    TextSpan(
+                                      text: context.locale.seatingPlayerNotFound,
                                     ),
-                                  ),
-                                ],
+                                    TextSpan(
+                                      text: state.incorrectPlayer,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          const SizedBox(height: 32),
-                          CustomButton(
-                            text: context.locale.confirm,
-                            disabled: selectedPlayer == null,
-                            onTap: () {
-                              final player = selectedPlayer;
-                              if (player == null) return;
+                              Text(
+                                context.locale.seatingSelectOrCreatePlayer,
+                              ),
+                              NicknameField(
+                                controller: controller,
+                                focusNode: focusNode,
+                                readOnly: false,
+                                label: context.locale.nicknameHint,
+                                down: true,
+                                onNewPlayer: ({initValue}) {
+                                  if (initValue == null) return;
 
-                              context.read<SeatingPageDialogBloc>().add(
-                                    SeatingPageDialogEvent.existingPlayer(
-                                      player,
-                                    ),
+                                  context.read<SeatingPageDialogBloc>().add(
+                                        SeatingPageDialogEvent.newPlayer(initValue),
+                                      );
+                                },
+                                onSelected: (player) {
+                                  setState(
+                                    () => selectedPlayer = player,
                                   );
-                            },
+                                },
+                              ),
+                              if (selectedPlayer?.fsmNickaname case String fsmNickname)
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: context.locale.seatingCurrentFsmNickname,
+                                      ),
+                                      TextSpan(
+                                        text: fsmNickname,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              const SizedBox(height: 32),
+                              CustomButton(
+                                text: context.locale.confirm,
+                                disabled: selectedPlayer == null,
+                                onTap: () {
+                                  final player = selectedPlayer;
+                                  if (player == null) return;
+
+                                  context.read<SeatingPageDialogBloc>().add(
+                                        SeatingPageDialogEvent.existingPlayer(
+                                          player,
+                                        ),
+                                      );
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
                 ),
                 const Positioned(top: 0, right: 0, child: CloseButton()),
               ],

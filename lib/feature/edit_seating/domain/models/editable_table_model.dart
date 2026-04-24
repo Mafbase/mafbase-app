@@ -52,13 +52,9 @@ abstract class EditableTableModel with _$EditableTableModel {
       gameId: item.gameId,
       game: item.game,
       table: seating.table,
-      players: seating.players
-          .map((p) => EditablePlayerSlot.fromProto(p))
-          .toList(),
+      players: seating.players.map((p) => EditablePlayerSlot.fromProto(p)).toList(),
       refereeId: seating.hasRefereeModel() ? seating.refereeModel.id : 0,
-      refereeNickname: seating.hasRefereeModel()
-          ? seating.refereeModel.nickname
-          : seating.referee,
+      refereeNickname: seating.hasRefereeModel() ? seating.refereeModel.nickname : seating.referee,
     );
   }
 }

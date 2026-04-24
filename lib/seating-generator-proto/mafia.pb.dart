@@ -36,14 +36,11 @@ class LoginEvent extends $pb.GeneratedMessage {
   factory LoginEvent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory LoginEvent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory LoginEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'LoginEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoginEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'email')
     ..aOS(2, _omitFieldNames ? '' : 'password')
     ..hasRequiredFields = false;
@@ -62,8 +59,7 @@ class LoginEvent extends $pb.GeneratedMessage {
   @$core.override
   LoginEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LoginEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<LoginEvent>(create);
+  static LoginEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoginEvent>(create);
   static LoginEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -107,29 +103,23 @@ class TableSeating extends $pb.GeneratedMessage {
   factory TableSeating.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory TableSeating.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory TableSeating.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TableSeating',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TableSeating',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'nickname')
     ..aOS(2, _omitFieldNames ? '' : 'referee')
     ..aI(3, _omitFieldNames ? '' : 'table')
-    ..pPM<Player>(4, _omitFieldNames ? '' : 'players',
-        subBuilder: Player.create)
-    ..aOM<Player>(5, _omitFieldNames ? '' : 'refereeModel',
-        protoName: 'refereeModel', subBuilder: Player.create)
+    ..pPM<Player>(4, _omitFieldNames ? '' : 'players', subBuilder: Player.create)
+    ..aOM<Player>(5, _omitFieldNames ? '' : 'refereeModel', protoName: 'refereeModel', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeating clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeating copyWith(void Function(TableSeating) updates) =>
-      super.copyWith((message) => updates(message as TableSeating))
-          as TableSeating;
+      super.copyWith((message) => updates(message as TableSeating)) as TableSeating;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -139,8 +129,7 @@ class TableSeating extends $pb.GeneratedMessage {
   @$core.override
   TableSeating createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TableSeating getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TableSeating>(create);
+  static TableSeating getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TableSeating>(create);
   static TableSeating? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -209,32 +198,23 @@ class TableSeatingResult extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TableSeatingResult',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TableSeatingResult',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pc<PlayerRole>(1, _omitFieldNames ? '' : 'role', $pb.PbFieldType.KE,
-        valueOf: PlayerRole.valueOf,
-        enumValues: PlayerRole.values,
-        defaultEnumValue: PlayerRole.citizen)
+        valueOf: PlayerRole.valueOf, enumValues: PlayerRole.values, defaultEnumValue: PlayerRole.citizen)
     ..p<$core.double>(2, _omitFieldNames ? '' : 'score', $pb.PbFieldType.KD)
     ..aI(3, _omitFieldNames ? '' : 'died')
     ..aE<GameWin>(4, _omitFieldNames ? '' : 'win', enumValues: GameWin.values)
-    ..aE<BestMove>(5, _omitFieldNames ? '' : 'bestMove',
-        protoName: 'bestMove', enumValues: BestMove.values)
-    ..p<$core.double>(6, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.KD,
-        protoName: 'addScore')
-    ..p<$core.double>(
-        7, _omitFieldNames ? '' : 'minusScore', $pb.PbFieldType.KD,
-        protoName: 'minusScore')
+    ..aE<BestMove>(5, _omitFieldNames ? '' : 'bestMove', protoName: 'bestMove', enumValues: BestMove.values)
+    ..p<$core.double>(6, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.KD, protoName: 'addScore')
+    ..p<$core.double>(7, _omitFieldNames ? '' : 'minusScore', $pb.PbFieldType.KD, protoName: 'minusScore')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeatingResult clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeatingResult copyWith(void Function(TableSeatingResult) updates) =>
-      super.copyWith((message) => updates(message as TableSeatingResult))
-          as TableSeatingResult;
+      super.copyWith((message) => updates(message as TableSeatingResult)) as TableSeatingResult;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -244,8 +224,8 @@ class TableSeatingResult extends $pb.GeneratedMessage {
   @$core.override
   TableSeatingResult createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TableSeatingResult getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TableSeatingResult>(create);
+  static TableSeatingResult getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TableSeatingResult>(create);
   static TableSeatingResult? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -306,20 +286,16 @@ class UpdateHideDateRequest extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdateHideDateRequest',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHideDateRequest',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'date')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UpdateHideDateRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateHideDateRequest copyWith(
-          void Function(UpdateHideDateRequest) updates) =>
-      super.copyWith((message) => updates(message as UpdateHideDateRequest))
-          as UpdateHideDateRequest;
+  UpdateHideDateRequest copyWith(void Function(UpdateHideDateRequest) updates) =>
+      super.copyWith((message) => updates(message as UpdateHideDateRequest)) as UpdateHideDateRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -329,8 +305,8 @@ class UpdateHideDateRequest extends $pb.GeneratedMessage {
   @$core.override
   UpdateHideDateRequest createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static UpdateHideDateRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateHideDateRequest>(create);
+  static UpdateHideDateRequest getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHideDateRequest>(create);
   static UpdateHideDateRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -369,15 +345,11 @@ class TableSeatingItem extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TableSeatingItem',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TableSeatingItem',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'gameId', protoName: 'gameId')
-    ..aOM<TableSeating>(2, _omitFieldNames ? '' : 'seating',
-        subBuilder: TableSeating.create)
-    ..aOM<TableSeatingResult>(3, _omitFieldNames ? '' : 'result',
-        subBuilder: TableSeatingResult.create)
+    ..aOM<TableSeating>(2, _omitFieldNames ? '' : 'seating', subBuilder: TableSeating.create)
+    ..aOM<TableSeatingResult>(3, _omitFieldNames ? '' : 'result', subBuilder: TableSeatingResult.create)
     ..aI(4, _omitFieldNames ? '' : 'game')
     ..aI(5, _omitFieldNames ? '' : 'table')
     ..hasRequiredFields = false;
@@ -386,8 +358,7 @@ class TableSeatingItem extends $pb.GeneratedMessage {
   TableSeatingItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableSeatingItem copyWith(void Function(TableSeatingItem) updates) =>
-      super.copyWith((message) => updates(message as TableSeatingItem))
-          as TableSeatingItem;
+      super.copyWith((message) => updates(message as TableSeatingItem)) as TableSeatingItem;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -397,8 +368,8 @@ class TableSeatingItem extends $pb.GeneratedMessage {
   @$core.override
   TableSeatingItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TableSeatingItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TableSeatingItem>(create);
+  static TableSeatingItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TableSeatingItem>(create);
   static TableSeatingItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -465,24 +436,19 @@ class SeatingEventOut extends $pb.GeneratedMessage {
   factory SeatingEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory SeatingEventOut.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory SeatingEventOut.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SeatingEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<TableSeatingItem>(1, _omitFieldNames ? '' : 'item',
-        subBuilder: TableSeatingItem.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SeatingEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<TableSeatingItem>(1, _omitFieldNames ? '' : 'item', subBuilder: TableSeatingItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingEventOut copyWith(void Function(SeatingEventOut) updates) =>
-      super.copyWith((message) => updates(message as SeatingEventOut))
-          as SeatingEventOut;
+      super.copyWith((message) => updates(message as SeatingEventOut)) as SeatingEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -492,8 +458,8 @@ class SeatingEventOut extends $pb.GeneratedMessage {
   @$core.override
   SeatingEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SeatingEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SeatingEventOut>(create);
+  static SeatingEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SeatingEventOut>(create);
   static SeatingEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -520,18 +486,14 @@ class LoginEventOut extends $pb.GeneratedMessage {
   factory LoginEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory LoginEventOut.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory LoginEventOut.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'LoginEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoginEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'recoveryToken', protoName: 'recoveryToken')
-    ..aE<LoginEventOut_Error>(3, _omitFieldNames ? '' : 'error',
-        enumValues: LoginEventOut_Error.values)
+    ..aE<LoginEventOut_Error>(3, _omitFieldNames ? '' : 'error', enumValues: LoginEventOut_Error.values)
     ..aI(4, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
@@ -539,8 +501,7 @@ class LoginEventOut extends $pb.GeneratedMessage {
   LoginEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginEventOut copyWith(void Function(LoginEventOut) updates) =>
-      super.copyWith((message) => updates(message as LoginEventOut))
-          as LoginEventOut;
+      super.copyWith((message) => updates(message as LoginEventOut)) as LoginEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -550,8 +511,7 @@ class LoginEventOut extends $pb.GeneratedMessage {
   @$core.override
   LoginEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LoginEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<LoginEventOut>(create);
+  static LoginEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoginEventOut>(create);
   static LoginEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -615,10 +575,8 @@ class EditSeatingEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'EditSeatingEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditSeatingEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'game')
     ..aI(2, _omitFieldNames ? '' : 'table')
     ..p<$core.int>(3, _omitFieldNames ? '' : 'players', $pb.PbFieldType.K3)
@@ -629,8 +587,7 @@ class EditSeatingEvent extends $pb.GeneratedMessage {
   EditSeatingEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EditSeatingEvent copyWith(void Function(EditSeatingEvent) updates) =>
-      super.copyWith((message) => updates(message as EditSeatingEvent))
-          as EditSeatingEvent;
+      super.copyWith((message) => updates(message as EditSeatingEvent)) as EditSeatingEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -640,8 +597,8 @@ class EditSeatingEvent extends $pb.GeneratedMessage {
   @$core.override
   EditSeatingEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EditSeatingEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EditSeatingEvent>(create);
+  static EditSeatingEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditSeatingEvent>(create);
   static EditSeatingEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -701,16 +658,12 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ChangeSeatingContent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChangeSeatingContent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'player')
     ..aOS(2, _omitFieldNames ? '' : 'imageUrl', protoName: 'imageUrl')
-    ..aE<PlayerRole>(3, _omitFieldNames ? '' : 'role',
-        enumValues: PlayerRole.values)
-    ..aE<PlayerStatus>(4, _omitFieldNames ? '' : 'status',
-        enumValues: PlayerStatus.values)
+    ..aE<PlayerRole>(3, _omitFieldNames ? '' : 'role', enumValues: PlayerRole.values)
+    ..aE<PlayerStatus>(4, _omitFieldNames ? '' : 'status', enumValues: PlayerStatus.values)
     ..aI(5, _omitFieldNames ? '' : 'selectedGame', protoName: 'selectedGame')
     ..hasRequiredFields = false;
 
@@ -718,8 +671,7 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
   ChangeSeatingContent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ChangeSeatingContent copyWith(void Function(ChangeSeatingContent) updates) =>
-      super.copyWith((message) => updates(message as ChangeSeatingContent))
-          as ChangeSeatingContent;
+      super.copyWith((message) => updates(message as ChangeSeatingContent)) as ChangeSeatingContent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -729,8 +681,8 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
   @$core.override
   ChangeSeatingContent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ChangeSeatingContent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ChangeSeatingContent>(create);
+  static ChangeSeatingContent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeSeatingContent>(create);
   static ChangeSeatingContent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -802,17 +754,13 @@ class Club extends $pb.GeneratedMessage {
 
   Club._();
 
-  factory Club.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory Club.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Club.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory Club.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Club',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Club',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'description')
@@ -825,8 +773,7 @@ class Club extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Club clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Club copyWith(void Function(Club) updates) =>
-      super.copyWith((message) => updates(message as Club)) as Club;
+  Club copyWith(void Function(Club) updates) => super.copyWith((message) => updates(message as Club)) as Club;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -836,8 +783,7 @@ class Club extends $pb.GeneratedMessage {
   @$core.override
   Club createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Club getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Club>(create);
+  static Club getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Club>(create);
   static Club? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -930,12 +876,9 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClubRatingEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<ClubRatingRow>(1, _omitFieldNames ? '' : 'row',
-        subBuilder: ClubRatingRow.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClubRatingEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<ClubRatingRow>(1, _omitFieldNames ? '' : 'row', subBuilder: ClubRatingRow.create)
     ..aOS(2, _omitFieldNames ? '' : 'clubName', protoName: 'clubName')
     ..aI(3, _omitFieldNames ? '' : 'games')
     ..aI(4, _omitFieldNames ? '' : 'mafiaWins', protoName: 'mafiaWins')
@@ -946,8 +889,7 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
   ClubRatingEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubRatingEventOut copyWith(void Function(ClubRatingEventOut) updates) =>
-      super.copyWith((message) => updates(message as ClubRatingEventOut))
-          as ClubRatingEventOut;
+      super.copyWith((message) => updates(message as ClubRatingEventOut)) as ClubRatingEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -957,8 +899,8 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
   @$core.override
   ClubRatingEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClubRatingEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClubRatingEventOut>(create);
+  static ClubRatingEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubRatingEventOut>(create);
   static ClubRatingEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1021,10 +963,8 @@ class ClubRatingRow_GameItem extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClubRatingRow.GameItem',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClubRatingRow.GameItem',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'gameId', protoName: 'gameId')
     ..aD(2, _omitFieldNames ? '' : 'score')
     ..hasRequiredFields = false;
@@ -1032,10 +972,8 @@ class ClubRatingRow_GameItem extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubRatingRow_GameItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClubRatingRow_GameItem copyWith(
-          void Function(ClubRatingRow_GameItem) updates) =>
-      super.copyWith((message) => updates(message as ClubRatingRow_GameItem))
-          as ClubRatingRow_GameItem;
+  ClubRatingRow_GameItem copyWith(void Function(ClubRatingRow_GameItem) updates) =>
+      super.copyWith((message) => updates(message as ClubRatingRow_GameItem)) as ClubRatingRow_GameItem;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1045,8 +983,8 @@ class ClubRatingRow_GameItem extends $pb.GeneratedMessage {
   @$core.override
   ClubRatingRow_GameItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClubRatingRow_GameItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClubRatingRow_GameItem>(create);
+  static ClubRatingRow_GameItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubRatingRow_GameItem>(create);
   static ClubRatingRow_GameItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1148,22 +1086,18 @@ class ClubRatingRow extends $pb.GeneratedMessage {
   factory ClubRatingRow.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory ClubRatingRow.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory ClubRatingRow.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClubRatingRow',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClubRatingRow',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'nickname')
     ..aD(2, _omitFieldNames ? '' : 'score')
     ..aD(3, _omitFieldNames ? '' : 'addScore', protoName: 'addScore')
     ..aI(4, _omitFieldNames ? '' : 'firstDie', protoName: 'firstDie')
     ..aI(5, _omitFieldNames ? '' : 'donWins', protoName: 'donWins')
     ..aI(6, _omitFieldNames ? '' : 'sheriffWins', protoName: 'sheriffWins')
-    ..pPM<ClubRatingRow_GameItem>(7, _omitFieldNames ? '' : 'item',
-        subBuilder: ClubRatingRow_GameItem.create)
+    ..pPM<ClubRatingRow_GameItem>(7, _omitFieldNames ? '' : 'item', subBuilder: ClubRatingRow_GameItem.create)
     ..aI(8, _omitFieldNames ? '' : 'wins')
     ..aI(9, _omitFieldNames ? '' : 'ci')
     ..aI(10, _omitFieldNames ? '' : 'totalGames', protoName: 'totalGames')
@@ -1173,12 +1107,10 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     ..aI(14, _omitFieldNames ? '' : 'mafiaGames', protoName: 'mafiaGames')
     ..aI(15, _omitFieldNames ? '' : 'mafiaWins', protoName: 'mafiaWins')
     ..aI(16, _omitFieldNames ? '' : 'citizenWins', protoName: 'citizenWins')
-    ..aD(17, _omitFieldNames ? '' : 'citizenAddScore',
-        protoName: 'citizenAddScore')
+    ..aD(17, _omitFieldNames ? '' : 'citizenAddScore', protoName: 'citizenAddScore')
     ..aD(18, _omitFieldNames ? '' : 'mafiaAddScore', protoName: 'mafiaAddScore')
     ..aD(19, _omitFieldNames ? '' : 'donAddScore', protoName: 'donAddScore')
-    ..aD(20, _omitFieldNames ? '' : 'sheriffAddScore',
-        protoName: 'sheriffAddScore')
+    ..aD(20, _omitFieldNames ? '' : 'sheriffAddScore', protoName: 'sheriffAddScore')
     ..aD(21, _omitFieldNames ? '' : 'citizenScore', protoName: 'citizenScore')
     ..aD(22, _omitFieldNames ? '' : 'mafiaScore', protoName: 'mafiaScore')
     ..aD(23, _omitFieldNames ? '' : 'donScore', protoName: 'donScore')
@@ -1186,17 +1118,12 @@ class ClubRatingRow extends $pb.GeneratedMessage {
     ..aI(25, _omitFieldNames ? '' : 'playerId', protoName: 'playerId')
     ..aI(26, _omitFieldNames ? '' : 'refereeCount', protoName: 'refereeCount')
     ..aD(27, _omitFieldNames ? '' : 'minusScore', protoName: 'minusScore')
-    ..aD(28, _omitFieldNames ? '' : 'citizenMinusScore',
-        protoName: 'citizenMinusScore')
-    ..aD(29, _omitFieldNames ? '' : 'mafiaMinusScore',
-        protoName: 'mafiaMinusScore')
+    ..aD(28, _omitFieldNames ? '' : 'citizenMinusScore', protoName: 'citizenMinusScore')
+    ..aD(29, _omitFieldNames ? '' : 'mafiaMinusScore', protoName: 'mafiaMinusScore')
     ..aD(30, _omitFieldNames ? '' : 'donMinusScore', protoName: 'donMinusScore')
-    ..aD(31, _omitFieldNames ? '' : 'sheriffMinusScore',
-        protoName: 'sheriffMinusScore')
-    ..aD(32, _omitFieldNames ? '' : 'bestMoveCitizen',
-        protoName: 'bestMoveCitizen')
-    ..aD(33, _omitFieldNames ? '' : 'bestMoveSheriff',
-        protoName: 'bestMoveSheriff')
+    ..aD(31, _omitFieldNames ? '' : 'sheriffMinusScore', protoName: 'sheriffMinusScore')
+    ..aD(32, _omitFieldNames ? '' : 'bestMoveCitizen', protoName: 'bestMoveCitizen')
+    ..aD(33, _omitFieldNames ? '' : 'bestMoveSheriff', protoName: 'bestMoveSheriff')
     ..pPM<CustomColumnValue>(34, _omitFieldNames ? '' : 'customColumns',
         protoName: 'customColumns', subBuilder: CustomColumnValue.create)
     ..hasRequiredFields = false;
@@ -1205,8 +1132,7 @@ class ClubRatingRow extends $pb.GeneratedMessage {
   ClubRatingRow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubRatingRow copyWith(void Function(ClubRatingRow) updates) =>
-      super.copyWith((message) => updates(message as ClubRatingRow))
-          as ClubRatingRow;
+      super.copyWith((message) => updates(message as ClubRatingRow)) as ClubRatingRow;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1216,8 +1142,7 @@ class ClubRatingRow extends $pb.GeneratedMessage {
   @$core.override
   ClubRatingRow createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClubRatingRow getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClubRatingRow>(create);
+  static ClubRatingRow getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubRatingRow>(create);
   static ClubRatingRow? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1535,10 +1460,8 @@ class CustomColumnValue extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CustomColumnValue',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CustomColumnValue',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aD(2, _omitFieldNames ? '' : 'value')
     ..hasRequiredFields = false;
@@ -1547,8 +1470,7 @@ class CustomColumnValue extends $pb.GeneratedMessage {
   CustomColumnValue clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CustomColumnValue copyWith(void Function(CustomColumnValue) updates) =>
-      super.copyWith((message) => updates(message as CustomColumnValue))
-          as CustomColumnValue;
+      super.copyWith((message) => updates(message as CustomColumnValue)) as CustomColumnValue;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1558,8 +1480,8 @@ class CustomColumnValue extends $pb.GeneratedMessage {
   @$core.override
   CustomColumnValue createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CustomColumnValue getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CustomColumnValue>(create);
+  static CustomColumnValue getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomColumnValue>(create);
   static CustomColumnValue? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1603,10 +1525,8 @@ class CustomColumnDefinition extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CustomColumnDefinition',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CustomColumnDefinition',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'formula')
@@ -1615,10 +1535,8 @@ class CustomColumnDefinition extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CustomColumnDefinition clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CustomColumnDefinition copyWith(
-          void Function(CustomColumnDefinition) updates) =>
-      super.copyWith((message) => updates(message as CustomColumnDefinition))
-          as CustomColumnDefinition;
+  CustomColumnDefinition copyWith(void Function(CustomColumnDefinition) updates) =>
+      super.copyWith((message) => updates(message as CustomColumnDefinition)) as CustomColumnDefinition;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1628,8 +1546,8 @@ class CustomColumnDefinition extends $pb.GeneratedMessage {
   @$core.override
   CustomColumnDefinition createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CustomColumnDefinition getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CustomColumnDefinition>(create);
+  static CustomColumnDefinition getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomColumnDefinition>(create);
   static CustomColumnDefinition? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1678,21 +1596,16 @@ class CustomColumnsEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CustomColumnsEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<CustomColumnDefinition>(1, _omitFieldNames ? '' : 'columns',
-        subBuilder: CustomColumnDefinition.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CustomColumnsEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<CustomColumnDefinition>(1, _omitFieldNames ? '' : 'columns', subBuilder: CustomColumnDefinition.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CustomColumnsEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CustomColumnsEventOut copyWith(
-          void Function(CustomColumnsEventOut) updates) =>
-      super.copyWith((message) => updates(message as CustomColumnsEventOut))
-          as CustomColumnsEventOut;
+  CustomColumnsEventOut copyWith(void Function(CustomColumnsEventOut) updates) =>
+      super.copyWith((message) => updates(message as CustomColumnsEventOut)) as CustomColumnsEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1702,8 +1615,8 @@ class CustomColumnsEventOut extends $pb.GeneratedMessage {
   @$core.override
   CustomColumnsEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CustomColumnsEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CustomColumnsEventOut>(create);
+  static CustomColumnsEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomColumnsEventOut>(create);
   static CustomColumnsEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1730,10 +1643,8 @@ class CreateCustomColumnEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreateCustomColumnEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateCustomColumnEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'formula')
     ..hasRequiredFields = false;
@@ -1741,10 +1652,8 @@ class CreateCustomColumnEvent extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreateCustomColumnEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateCustomColumnEvent copyWith(
-          void Function(CreateCustomColumnEvent) updates) =>
-      super.copyWith((message) => updates(message as CreateCustomColumnEvent))
-          as CreateCustomColumnEvent;
+  CreateCustomColumnEvent copyWith(void Function(CreateCustomColumnEvent) updates) =>
+      super.copyWith((message) => updates(message as CreateCustomColumnEvent)) as CreateCustomColumnEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1754,8 +1663,8 @@ class CreateCustomColumnEvent extends $pb.GeneratedMessage {
   @$core.override
   CreateCustomColumnEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreateCustomColumnEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreateCustomColumnEvent>(create);
+  static CreateCustomColumnEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateCustomColumnEvent>(create);
   static CreateCustomColumnEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1797,10 +1706,8 @@ class UpdateCustomColumnEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdateCustomColumnEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateCustomColumnEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'title')
     ..aOS(2, _omitFieldNames ? '' : 'formula')
     ..hasRequiredFields = false;
@@ -1808,10 +1715,8 @@ class UpdateCustomColumnEvent extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UpdateCustomColumnEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateCustomColumnEvent copyWith(
-          void Function(UpdateCustomColumnEvent) updates) =>
-      super.copyWith((message) => updates(message as UpdateCustomColumnEvent))
-          as UpdateCustomColumnEvent;
+  UpdateCustomColumnEvent copyWith(void Function(UpdateCustomColumnEvent) updates) =>
+      super.copyWith((message) => updates(message as UpdateCustomColumnEvent)) as UpdateCustomColumnEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1821,8 +1726,8 @@ class UpdateCustomColumnEvent extends $pb.GeneratedMessage {
   @$core.override
   UpdateCustomColumnEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static UpdateCustomColumnEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateCustomColumnEvent>(create);
+  static UpdateCustomColumnEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateCustomColumnEvent>(create);
   static UpdateCustomColumnEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1862,10 +1767,8 @@ class ValidateFormulaEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ValidateFormulaEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidateFormulaEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'formula')
     ..hasRequiredFields = false;
 
@@ -1873,8 +1776,7 @@ class ValidateFormulaEvent extends $pb.GeneratedMessage {
   ValidateFormulaEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ValidateFormulaEvent copyWith(void Function(ValidateFormulaEvent) updates) =>
-      super.copyWith((message) => updates(message as ValidateFormulaEvent))
-          as ValidateFormulaEvent;
+      super.copyWith((message) => updates(message as ValidateFormulaEvent)) as ValidateFormulaEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1884,8 +1786,8 @@ class ValidateFormulaEvent extends $pb.GeneratedMessage {
   @$core.override
   ValidateFormulaEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ValidateFormulaEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ValidateFormulaEvent>(create);
+  static ValidateFormulaEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ValidateFormulaEvent>(create);
   static ValidateFormulaEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1918,10 +1820,8 @@ class ValidateFormulaEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ValidateFormulaEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ValidateFormulaEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'valid')
     ..aOS(2, _omitFieldNames ? '' : 'error')
     ..hasRequiredFields = false;
@@ -1929,10 +1829,8 @@ class ValidateFormulaEventOut extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ValidateFormulaEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ValidateFormulaEventOut copyWith(
-          void Function(ValidateFormulaEventOut) updates) =>
-      super.copyWith((message) => updates(message as ValidateFormulaEventOut))
-          as ValidateFormulaEventOut;
+  ValidateFormulaEventOut copyWith(void Function(ValidateFormulaEventOut) updates) =>
+      super.copyWith((message) => updates(message as ValidateFormulaEventOut)) as ValidateFormulaEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -1942,8 +1840,8 @@ class ValidateFormulaEventOut extends $pb.GeneratedMessage {
   @$core.override
   ValidateFormulaEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ValidateFormulaEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ValidateFormulaEventOut>(create);
+  static ValidateFormulaEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ValidateFormulaEventOut>(create);
   static ValidateFormulaEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -1979,14 +1877,11 @@ class AddGameEventOut extends $pb.GeneratedMessage {
   factory AddGameEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory AddGameEventOut.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory AddGameEventOut.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AddGameEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddGameEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'gameId', protoName: 'gameId')
     ..hasRequiredFields = false;
 
@@ -1994,8 +1889,7 @@ class AddGameEventOut extends $pb.GeneratedMessage {
   AddGameEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AddGameEventOut copyWith(void Function(AddGameEventOut) updates) =>
-      super.copyWith((message) => updates(message as AddGameEventOut))
-          as AddGameEventOut;
+      super.copyWith((message) => updates(message as AddGameEventOut)) as AddGameEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2005,8 +1899,8 @@ class AddGameEventOut extends $pb.GeneratedMessage {
   @$core.override
   AddGameEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AddGameEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AddGameEventOut>(create);
+  static AddGameEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddGameEventOut>(create);
   static AddGameEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2035,14 +1929,11 @@ class CiScheme extends $pb.GeneratedMessage {
   factory CiScheme.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory CiScheme.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory CiScheme.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CiScheme',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CiScheme',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
@@ -2061,8 +1952,7 @@ class CiScheme extends $pb.GeneratedMessage {
   @$core.override
   CiScheme createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CiScheme getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CiScheme>(create);
+  static CiScheme getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CiScheme>(create);
   static CiScheme? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2102,20 +1992,16 @@ class AvailableCiEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AvailableCiEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<CiScheme>(1, _omitFieldNames ? '' : 'schemes',
-        subBuilder: CiScheme.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AvailableCiEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<CiScheme>(1, _omitFieldNames ? '' : 'schemes', subBuilder: CiScheme.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AvailableCiEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AvailableCiEventOut copyWith(void Function(AvailableCiEventOut) updates) =>
-      super.copyWith((message) => updates(message as AvailableCiEventOut))
-          as AvailableCiEventOut;
+      super.copyWith((message) => updates(message as AvailableCiEventOut)) as AvailableCiEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2125,8 +2011,8 @@ class AvailableCiEventOut extends $pb.GeneratedMessage {
   @$core.override
   AvailableCiEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AvailableCiEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AvailableCiEventOut>(create);
+  static AvailableCiEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AvailableCiEventOut>(create);
   static AvailableCiEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2151,10 +2037,8 @@ class SetFinalPlayersEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SetFinalPlayersEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetFinalPlayersEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..p<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.K3)
     ..hasRequiredFields = false;
 
@@ -2162,8 +2046,7 @@ class SetFinalPlayersEvent extends $pb.GeneratedMessage {
   SetFinalPlayersEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetFinalPlayersEvent copyWith(void Function(SetFinalPlayersEvent) updates) =>
-      super.copyWith((message) => updates(message as SetFinalPlayersEvent))
-          as SetFinalPlayersEvent;
+      super.copyWith((message) => updates(message as SetFinalPlayersEvent)) as SetFinalPlayersEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2173,8 +2056,8 @@ class SetFinalPlayersEvent extends $pb.GeneratedMessage {
   @$core.override
   SetFinalPlayersEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SetFinalPlayersEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SetFinalPlayersEvent>(create);
+  static SetFinalPlayersEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetFinalPlayersEvent>(create);
   static SetFinalPlayersEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2221,21 +2104,16 @@ class ClubGameResult extends $pb.GeneratedMessage {
   factory ClubGameResult.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory ClubGameResult.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory ClubGameResult.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClubGameResult',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..p<$core.int>(1, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.K3,
-        protoName: 'addScore')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClubGameResult',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..p<$core.int>(1, _omitFieldNames ? '' : 'addScore', $pb.PbFieldType.K3, protoName: 'addScore')
     ..p<$core.int>(2, _omitFieldNames ? '' : 'players', $pb.PbFieldType.K3)
     ..aE<GameWin>(3, _omitFieldNames ? '' : 'win', enumValues: GameWin.values)
     ..aI(4, _omitFieldNames ? '' : 'firstDie', protoName: 'firstDie')
-    ..aE<BestMove>(5, _omitFieldNames ? '' : 'bestMove',
-        protoName: 'bestMove', enumValues: BestMove.values)
+    ..aE<BestMove>(5, _omitFieldNames ? '' : 'bestMove', protoName: 'bestMove', enumValues: BestMove.values)
     ..aOS(6, _omitFieldNames ? '' : 'date')
     ..aI(7, _omitFieldNames ? '' : 'referee')
     ..aI(8, _omitFieldNames ? '' : 'mafia1')
@@ -2245,16 +2123,14 @@ class ClubGameResult extends $pb.GeneratedMessage {
     ..aI(12, _omitFieldNames ? '' : 'ciId', protoName: 'ciId')
     ..aE<RatingScheme>(13, _omitFieldNames ? '' : 'ratingScheme',
         protoName: 'ratingScheme', enumValues: RatingScheme.values)
-    ..p<$core.int>(14, _omitFieldNames ? '' : 'minusScore', $pb.PbFieldType.K3,
-        protoName: 'minusScore')
+    ..p<$core.int>(14, _omitFieldNames ? '' : 'minusScore', $pb.PbFieldType.K3, protoName: 'minusScore')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubGameResult clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubGameResult copyWith(void Function(ClubGameResult) updates) =>
-      super.copyWith((message) => updates(message as ClubGameResult))
-          as ClubGameResult;
+      super.copyWith((message) => updates(message as ClubGameResult)) as ClubGameResult;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2264,8 +2140,7 @@ class ClubGameResult extends $pb.GeneratedMessage {
   @$core.override
   ClubGameResult createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClubGameResult getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClubGameResult>(create);
+  static ClubGameResult getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubGameResult>(create);
   static ClubGameResult? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2391,14 +2266,11 @@ class ClubsEventOut extends $pb.GeneratedMessage {
   factory ClubsEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory ClubsEventOut.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory ClubsEventOut.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClubsEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClubsEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pPM<Club>(1, _omitFieldNames ? '' : 'club', subBuilder: Club.create)
     ..hasRequiredFields = false;
 
@@ -2406,8 +2278,7 @@ class ClubsEventOut extends $pb.GeneratedMessage {
   ClubsEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubsEventOut copyWith(void Function(ClubsEventOut) updates) =>
-      super.copyWith((message) => updates(message as ClubsEventOut))
-          as ClubsEventOut;
+      super.copyWith((message) => updates(message as ClubsEventOut)) as ClubsEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2417,8 +2288,7 @@ class ClubsEventOut extends $pb.GeneratedMessage {
   @$core.override
   ClubsEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClubsEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClubsEventOut>(create);
+  static ClubsEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubsEventOut>(create);
   static ClubsEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2449,22 +2319,15 @@ class SeatingContent extends $pb.GeneratedMessage {
   factory SeatingContent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory SeatingContent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory SeatingContent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SeatingContent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SeatingContent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pc<PlayerRole>(1, _omitFieldNames ? '' : 'roles', $pb.PbFieldType.KE,
-        valueOf: PlayerRole.valueOf,
-        enumValues: PlayerRole.values,
-        defaultEnumValue: PlayerRole.citizen)
+        valueOf: PlayerRole.valueOf, enumValues: PlayerRole.values, defaultEnumValue: PlayerRole.citizen)
     ..pc<PlayerStatus>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.KE,
-        valueOf: PlayerStatus.valueOf,
-        enumValues: PlayerStatus.values,
-        defaultEnumValue: PlayerStatus.alive)
+        valueOf: PlayerStatus.valueOf, enumValues: PlayerStatus.values, defaultEnumValue: PlayerStatus.alive)
     ..pPS(3, _omitFieldNames ? '' : 'images')
     ..pPS(4, _omitFieldNames ? '' : 'names')
     ..aI(5, _omitFieldNames ? '' : 'game')
@@ -2475,8 +2338,7 @@ class SeatingContent extends $pb.GeneratedMessage {
   SeatingContent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingContent copyWith(void Function(SeatingContent) updates) =>
-      super.copyWith((message) => updates(message as SeatingContent))
-          as SeatingContent;
+      super.copyWith((message) => updates(message as SeatingContent)) as SeatingContent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2486,8 +2348,7 @@ class SeatingContent extends $pb.GeneratedMessage {
   @$core.override
   SeatingContent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SeatingContent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SeatingContent>(create);
+  static SeatingContent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SeatingContent>(create);
   static SeatingContent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2539,10 +2400,8 @@ class LoginByTokenEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'LoginByTokenEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoginByTokenEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..hasRequiredFields = false;
 
@@ -2550,8 +2409,7 @@ class LoginByTokenEvent extends $pb.GeneratedMessage {
   LoginByTokenEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginByTokenEvent copyWith(void Function(LoginByTokenEvent) updates) =>
-      super.copyWith((message) => updates(message as LoginByTokenEvent))
-          as LoginByTokenEvent;
+      super.copyWith((message) => updates(message as LoginByTokenEvent)) as LoginByTokenEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2561,8 +2419,8 @@ class LoginByTokenEvent extends $pb.GeneratedMessage {
   @$core.override
   LoginByTokenEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LoginByTokenEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<LoginByTokenEvent>(create);
+  static LoginByTokenEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoginByTokenEvent>(create);
   static LoginByTokenEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2597,22 +2455,18 @@ class LoginByTokenEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'LoginByTokenEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoginByTokenEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'recoveryToken', protoName: 'recoveryToken')
-    ..aE<LoginByTokenEventOut_Error>(3, _omitFieldNames ? '' : 'error',
-        enumValues: LoginByTokenEventOut_Error.values)
+    ..aE<LoginByTokenEventOut_Error>(3, _omitFieldNames ? '' : 'error', enumValues: LoginByTokenEventOut_Error.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginByTokenEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   LoginByTokenEventOut copyWith(void Function(LoginByTokenEventOut) updates) =>
-      super.copyWith((message) => updates(message as LoginByTokenEventOut))
-          as LoginByTokenEventOut;
+      super.copyWith((message) => updates(message as LoginByTokenEventOut)) as LoginByTokenEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2622,8 +2476,8 @@ class LoginByTokenEventOut extends $pb.GeneratedMessage {
   @$core.override
   LoginByTokenEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static LoginByTokenEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<LoginByTokenEventOut>(create);
+  static LoginByTokenEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoginByTokenEventOut>(create);
   static LoginByTokenEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2676,10 +2530,8 @@ class TournamentDescription extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TournamentDescription',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TournamentDescription',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'gomafiaUrl', protoName: 'gomafiaUrl')
     ..aOS(2, _omitFieldNames ? '' : 'vkGroupUrl', protoName: 'vkGroupUrl')
     ..aOS(3, _omitFieldNames ? '' : 'vkOwnerUrl', protoName: 'vkOwnerUrl')
@@ -2688,10 +2540,8 @@ class TournamentDescription extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TournamentDescription clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TournamentDescription copyWith(
-          void Function(TournamentDescription) updates) =>
-      super.copyWith((message) => updates(message as TournamentDescription))
-          as TournamentDescription;
+  TournamentDescription copyWith(void Function(TournamentDescription) updates) =>
+      super.copyWith((message) => updates(message as TournamentDescription)) as TournamentDescription;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2701,8 +2551,8 @@ class TournamentDescription extends $pb.GeneratedMessage {
   @$core.override
   TournamentDescription createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TournamentDescription getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TournamentDescription>(create);
+  static TournamentDescription getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TournamentDescription>(create);
   static TournamentDescription? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2749,14 +2599,11 @@ class SignUpEvent extends $pb.GeneratedMessage {
   factory SignUpEvent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory SignUpEvent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory SignUpEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SignUpEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SignUpEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'email')
     ..aOS(2, _omitFieldNames ? '' : 'password')
     ..hasRequiredFields = false;
@@ -2765,8 +2612,7 @@ class SignUpEvent extends $pb.GeneratedMessage {
   SignUpEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SignUpEvent copyWith(void Function(SignUpEvent) updates) =>
-      super.copyWith((message) => updates(message as SignUpEvent))
-          as SignUpEvent;
+      super.copyWith((message) => updates(message as SignUpEvent)) as SignUpEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2776,8 +2622,7 @@ class SignUpEvent extends $pb.GeneratedMessage {
   @$core.override
   SignUpEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SignUpEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SignUpEvent>(create);
+  static SignUpEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SignUpEvent>(create);
   static SignUpEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2819,18 +2664,14 @@ class SignUpEventOut extends $pb.GeneratedMessage {
   factory SignUpEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory SignUpEventOut.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory SignUpEventOut.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SignUpEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SignUpEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'recoveryToken', protoName: 'recoveryToken')
-    ..aE<SignUpEventOut_Error>(3, _omitFieldNames ? '' : 'error',
-        enumValues: SignUpEventOut_Error.values)
+    ..aE<SignUpEventOut_Error>(3, _omitFieldNames ? '' : 'error', enumValues: SignUpEventOut_Error.values)
     ..aI(4, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
@@ -2838,8 +2679,7 @@ class SignUpEventOut extends $pb.GeneratedMessage {
   SignUpEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SignUpEventOut copyWith(void Function(SignUpEventOut) updates) =>
-      super.copyWith((message) => updates(message as SignUpEventOut))
-          as SignUpEventOut;
+      super.copyWith((message) => updates(message as SignUpEventOut)) as SignUpEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2849,8 +2689,7 @@ class SignUpEventOut extends $pb.GeneratedMessage {
   @$core.override
   SignUpEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SignUpEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SignUpEventOut>(create);
+  static SignUpEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SignUpEventOut>(create);
   static SignUpEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2910,10 +2749,8 @@ class EmailVerificationEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'EmailVerificationEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EmailVerificationEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'token')
     ..hasRequiredFields = false;
@@ -2921,10 +2758,8 @@ class EmailVerificationEvent extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EmailVerificationEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EmailVerificationEvent copyWith(
-          void Function(EmailVerificationEvent) updates) =>
-      super.copyWith((message) => updates(message as EmailVerificationEvent))
-          as EmailVerificationEvent;
+  EmailVerificationEvent copyWith(void Function(EmailVerificationEvent) updates) =>
+      super.copyWith((message) => updates(message as EmailVerificationEvent)) as EmailVerificationEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2934,8 +2769,8 @@ class EmailVerificationEvent extends $pb.GeneratedMessage {
   @$core.override
   EmailVerificationEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EmailVerificationEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EmailVerificationEvent>(create);
+  static EmailVerificationEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EmailVerificationEvent>(create);
   static EmailVerificationEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -2979,10 +2814,8 @@ class CreateTournamentEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreateTournamentEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateTournamentEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'dateStart', protoName: 'dateStart')
     ..aOS(3, _omitFieldNames ? '' : 'dateEnd', protoName: 'dateEnd')
@@ -2991,10 +2824,8 @@ class CreateTournamentEvent extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreateTournamentEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateTournamentEvent copyWith(
-          void Function(CreateTournamentEvent) updates) =>
-      super.copyWith((message) => updates(message as CreateTournamentEvent))
-          as CreateTournamentEvent;
+  CreateTournamentEvent copyWith(void Function(CreateTournamentEvent) updates) =>
+      super.copyWith((message) => updates(message as CreateTournamentEvent)) as CreateTournamentEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3004,8 +2835,8 @@ class CreateTournamentEvent extends $pb.GeneratedMessage {
   @$core.override
   CreateTournamentEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreateTournamentEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreateTournamentEvent>(create);
+  static CreateTournamentEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateTournamentEvent>(create);
   static CreateTournamentEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3054,20 +2885,16 @@ class CreateTournamentEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreateTournamentEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateTournamentEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreateTournamentEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateTournamentEventOut copyWith(
-          void Function(CreateTournamentEventOut) updates) =>
-      super.copyWith((message) => updates(message as CreateTournamentEventOut))
-          as CreateTournamentEventOut;
+  CreateTournamentEventOut copyWith(void Function(CreateTournamentEventOut) updates) =>
+      super.copyWith((message) => updates(message as CreateTournamentEventOut)) as CreateTournamentEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3077,8 +2904,8 @@ class CreateTournamentEventOut extends $pb.GeneratedMessage {
   @$core.override
   CreateTournamentEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreateTournamentEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreateTournamentEventOut>(create);
+  static CreateTournamentEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateTournamentEventOut>(create);
   static CreateTournamentEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3105,14 +2932,11 @@ class AddPlayerEvent extends $pb.GeneratedMessage {
   factory AddPlayerEvent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory AddPlayerEvent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory AddPlayerEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AddPlayerEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPlayerEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOM<Player>(1, _omitFieldNames ? '' : 'player', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
@@ -3120,8 +2944,7 @@ class AddPlayerEvent extends $pb.GeneratedMessage {
   AddPlayerEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AddPlayerEvent copyWith(void Function(AddPlayerEvent) updates) =>
-      super.copyWith((message) => updates(message as AddPlayerEvent))
-          as AddPlayerEvent;
+      super.copyWith((message) => updates(message as AddPlayerEvent)) as AddPlayerEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3131,8 +2954,7 @@ class AddPlayerEvent extends $pb.GeneratedMessage {
   @$core.override
   AddPlayerEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AddPlayerEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AddPlayerEvent>(create);
+  static AddPlayerEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddPlayerEvent>(create);
   static AddPlayerEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3167,23 +2989,17 @@ class CannotMeetEditionEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CannotMeetEditionEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..aOM<Player>(1, _omitFieldNames ? '' : 'player1',
-        subBuilder: Player.create)
-    ..aOM<Player>(2, _omitFieldNames ? '' : 'player2',
-        subBuilder: Player.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CannotMeetEditionEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aOM<Player>(1, _omitFieldNames ? '' : 'player1', subBuilder: Player.create)
+    ..aOM<Player>(2, _omitFieldNames ? '' : 'player2', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CannotMeetEditionEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CannotMeetEditionEvent copyWith(
-          void Function(CannotMeetEditionEvent) updates) =>
-      super.copyWith((message) => updates(message as CannotMeetEditionEvent))
-          as CannotMeetEditionEvent;
+  CannotMeetEditionEvent copyWith(void Function(CannotMeetEditionEvent) updates) =>
+      super.copyWith((message) => updates(message as CannotMeetEditionEvent)) as CannotMeetEditionEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3193,8 +3009,8 @@ class CannotMeetEditionEvent extends $pb.GeneratedMessage {
   @$core.override
   CannotMeetEditionEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CannotMeetEditionEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CannotMeetEditionEvent>(create);
+  static CannotMeetEditionEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CannotMeetEditionEvent>(create);
   static CannotMeetEditionEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3238,20 +3054,16 @@ class CannotMeetEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CannotMeetEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<CannotMeetEditionEvent>(1, _omitFieldNames ? '' : 'pairs',
-        subBuilder: CannotMeetEditionEvent.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CannotMeetEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<CannotMeetEditionEvent>(1, _omitFieldNames ? '' : 'pairs', subBuilder: CannotMeetEditionEvent.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CannotMeetEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CannotMeetEventOut copyWith(void Function(CannotMeetEventOut) updates) =>
-      super.copyWith((message) => updates(message as CannotMeetEventOut))
-          as CannotMeetEventOut;
+      super.copyWith((message) => updates(message as CannotMeetEventOut)) as CannotMeetEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3261,8 +3073,8 @@ class CannotMeetEventOut extends $pb.GeneratedMessage {
   @$core.override
   CannotMeetEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CannotMeetEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CannotMeetEventOut>(create);
+  static CannotMeetEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CannotMeetEventOut>(create);
   static CannotMeetEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3287,22 +3099,16 @@ class GetAvailablePlayerEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetAvailablePlayerEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<Player>(1, _omitFieldNames ? '' : 'players',
-        subBuilder: Player.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAvailablePlayerEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<Player>(1, _omitFieldNames ? '' : 'players', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetAvailablePlayerEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetAvailablePlayerEventOut copyWith(
-          void Function(GetAvailablePlayerEventOut) updates) =>
-      super.copyWith(
-              (message) => updates(message as GetAvailablePlayerEventOut))
-          as GetAvailablePlayerEventOut;
+  GetAvailablePlayerEventOut copyWith(void Function(GetAvailablePlayerEventOut) updates) =>
+      super.copyWith((message) => updates(message as GetAvailablePlayerEventOut)) as GetAvailablePlayerEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3312,8 +3118,8 @@ class GetAvailablePlayerEventOut extends $pb.GeneratedMessage {
   @$core.override
   GetAvailablePlayerEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetAvailablePlayerEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetAvailablePlayerEventOut>(create);
+  static GetAvailablePlayerEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAvailablePlayerEventOut>(create);
   static GetAvailablePlayerEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3350,20 +3156,14 @@ class TournamentSettings extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TournamentSettings',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..aI(1, _omitFieldNames ? '' : 'defaultGamesCount',
-        protoName: 'defaultGamesCount')
-    ..aI(2, _omitFieldNames ? '' : 'swissGamesCount',
-        protoName: 'swissGamesCount')
-    ..aI(3, _omitFieldNames ? '' : 'finalGamesCount',
-        protoName: 'finalGamesCount')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TournamentSettings',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'defaultGamesCount', protoName: 'defaultGamesCount')
+    ..aI(2, _omitFieldNames ? '' : 'swissGamesCount', protoName: 'swissGamesCount')
+    ..aI(3, _omitFieldNames ? '' : 'finalGamesCount', protoName: 'finalGamesCount')
     ..p<$core.int>(4, _omitFieldNames ? '' : 'buckets', $pb.PbFieldType.K3)
     ..aOB(5, _omitFieldNames ? '' : 'hideResult', protoName: 'hideResult')
-    ..aE<RatingScheme>(6, _omitFieldNames ? '' : 'scheme',
-        enumValues: RatingScheme.values)
+    ..aE<RatingScheme>(6, _omitFieldNames ? '' : 'scheme', enumValues: RatingScheme.values)
     ..aE<FantasyStatus>(7, _omitFieldNames ? '' : 'fantasyStatus',
         protoName: 'fantasyStatus', enumValues: FantasyStatus.values)
     ..hasRequiredFields = false;
@@ -3372,8 +3172,7 @@ class TournamentSettings extends $pb.GeneratedMessage {
   TournamentSettings clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TournamentSettings copyWith(void Function(TournamentSettings) updates) =>
-      super.copyWith((message) => updates(message as TournamentSettings))
-          as TournamentSettings;
+      super.copyWith((message) => updates(message as TournamentSettings)) as TournamentSettings;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3383,8 +3182,8 @@ class TournamentSettings extends $pb.GeneratedMessage {
   @$core.override
   TournamentSettings createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TournamentSettings getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TournamentSettings>(create);
+  static TournamentSettings getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TournamentSettings>(create);
   static TournamentSettings? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3459,14 +3258,11 @@ class UserProfile extends $pb.GeneratedMessage {
   factory UserProfile.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory UserProfile.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory UserProfile.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UserProfile',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserProfile',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOM<Player>(1, _omitFieldNames ? '' : 'player', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
@@ -3474,8 +3270,7 @@ class UserProfile extends $pb.GeneratedMessage {
   UserProfile clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UserProfile copyWith(void Function(UserProfile) updates) =>
-      super.copyWith((message) => updates(message as UserProfile))
-          as UserProfile;
+      super.copyWith((message) => updates(message as UserProfile)) as UserProfile;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3485,8 +3280,7 @@ class UserProfile extends $pb.GeneratedMessage {
   @$core.override
   UserProfile createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static UserProfile getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UserProfile>(create);
+  static UserProfile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserProfile>(create);
   static UserProfile? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3517,14 +3311,11 @@ class Profile extends $pb.GeneratedMessage {
   factory Profile.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Profile.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory Profile.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Profile',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Profile',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'firstName', protoName: 'firstName')
     ..aOS(2, _omitFieldNames ? '' : 'secondName', protoName: 'secondName')
     ..hasRequiredFields = false;
@@ -3543,8 +3334,7 @@ class Profile extends $pb.GeneratedMessage {
   @$core.override
   Profile createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Profile getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Profile>(create);
+  static Profile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Profile>(create);
   static Profile? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3584,10 +3374,8 @@ class CreatePlayerEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreatePlayerEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePlayerEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
@@ -3595,8 +3383,7 @@ class CreatePlayerEventOut extends $pb.GeneratedMessage {
   CreatePlayerEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreatePlayerEventOut copyWith(void Function(CreatePlayerEventOut) updates) =>
-      super.copyWith((message) => updates(message as CreatePlayerEventOut))
-          as CreatePlayerEventOut;
+      super.copyWith((message) => updates(message as CreatePlayerEventOut)) as CreatePlayerEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3606,8 +3393,8 @@ class CreatePlayerEventOut extends $pb.GeneratedMessage {
   @$core.override
   CreatePlayerEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreatePlayerEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreatePlayerEventOut>(create);
+  static CreatePlayerEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreatePlayerEventOut>(create);
   static CreatePlayerEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3638,10 +3425,8 @@ class CreatePlayerEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreatePlayerEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePlayerEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOM<Player>(1, _omitFieldNames ? '' : 'player', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
@@ -3649,8 +3434,7 @@ class CreatePlayerEvent extends $pb.GeneratedMessage {
   CreatePlayerEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreatePlayerEvent copyWith(void Function(CreatePlayerEvent) updates) =>
-      super.copyWith((message) => updates(message as CreatePlayerEvent))
-          as CreatePlayerEvent;
+      super.copyWith((message) => updates(message as CreatePlayerEvent)) as CreatePlayerEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3660,8 +3444,8 @@ class CreatePlayerEvent extends $pb.GeneratedMessage {
   @$core.override
   CreatePlayerEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreatePlayerEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreatePlayerEvent>(create);
+  static CreatePlayerEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreatePlayerEvent>(create);
   static CreatePlayerEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3698,27 +3482,22 @@ class Player extends $pb.GeneratedMessage {
   factory Player.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Player.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory Player.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Player',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Player',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'nickname')
     ..aOS(3, _omitFieldNames ? '' : 'fsmNickname', protoName: 'fsmNickname')
-    ..aOS(4, _omitFieldNames ? '' : 'mafbankNickname',
-        protoName: 'mafbankNickname')
+    ..aOS(4, _omitFieldNames ? '' : 'mafbankNickname', protoName: 'mafbankNickname')
     ..aOS(5, _omitFieldNames ? '' : 'image')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Player clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Player copyWith(void Function(Player) updates) =>
-      super.copyWith((message) => updates(message as Player)) as Player;
+  Player copyWith(void Function(Player) updates) => super.copyWith((message) => updates(message as Player)) as Player;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3728,8 +3507,7 @@ class Player extends $pb.GeneratedMessage {
   @$core.override
   Player createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Player getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Player>(create);
+  static Player getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Player>(create);
   static Player? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3796,10 +3574,8 @@ class CreateSwissRound extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreateSwissRound',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateSwissRound',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'game')
     ..hasRequiredFields = false;
 
@@ -3807,8 +3583,7 @@ class CreateSwissRound extends $pb.GeneratedMessage {
   CreateSwissRound clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreateSwissRound copyWith(void Function(CreateSwissRound) updates) =>
-      super.copyWith((message) => updates(message as CreateSwissRound))
-          as CreateSwissRound;
+      super.copyWith((message) => updates(message as CreateSwissRound)) as CreateSwissRound;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3818,8 +3593,8 @@ class CreateSwissRound extends $pb.GeneratedMessage {
   @$core.override
   CreateSwissRound createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreateSwissRound getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreateSwissRound>(create);
+  static CreateSwissRound getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateSwissRound>(create);
   static CreateSwissRound? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3850,10 +3625,8 @@ class EmailVerificationEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'EmailVerificationEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EmailVerificationEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aE<EmailVerificationEventOut_Status>(1, _omitFieldNames ? '' : 'status',
         enumValues: EmailVerificationEventOut_Status.values)
     ..hasRequiredFields = false;
@@ -3861,10 +3634,8 @@ class EmailVerificationEventOut extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EmailVerificationEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EmailVerificationEventOut copyWith(
-          void Function(EmailVerificationEventOut) updates) =>
-      super.copyWith((message) => updates(message as EmailVerificationEventOut))
-          as EmailVerificationEventOut;
+  EmailVerificationEventOut copyWith(void Function(EmailVerificationEventOut) updates) =>
+      super.copyWith((message) => updates(message as EmailVerificationEventOut)) as EmailVerificationEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3874,8 +3645,8 @@ class EmailVerificationEventOut extends $pb.GeneratedMessage {
   @$core.override
   EmailVerificationEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static EmailVerificationEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EmailVerificationEventOut>(create);
+  static EmailVerificationEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EmailVerificationEventOut>(create);
   static EmailVerificationEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3906,10 +3677,8 @@ class GetFinalPlayersOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetFinalPlayersOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFinalPlayersOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pPM<Player>(1, _omitFieldNames ? '' : 'player', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
@@ -3917,8 +3686,7 @@ class GetFinalPlayersOut extends $pb.GeneratedMessage {
   GetFinalPlayersOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetFinalPlayersOut copyWith(void Function(GetFinalPlayersOut) updates) =>
-      super.copyWith((message) => updates(message as GetFinalPlayersOut))
-          as GetFinalPlayersOut;
+      super.copyWith((message) => updates(message as GetFinalPlayersOut)) as GetFinalPlayersOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3928,8 +3696,8 @@ class GetFinalPlayersOut extends $pb.GeneratedMessage {
   @$core.override
   GetFinalPlayersOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetFinalPlayersOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetFinalPlayersOut>(create);
+  static GetFinalPlayersOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFinalPlayersOut>(create);
   static GetFinalPlayersOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -3958,10 +3726,8 @@ class SeatingForTranslationEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SeatingForTranslationEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SeatingForTranslationEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'tournamentId', protoName: 'tournamentId')
     ..aI(2, _omitFieldNames ? '' : 'table')
     ..aI(3, _omitFieldNames ? '' : 'game')
@@ -3970,11 +3736,8 @@ class SeatingForTranslationEvent extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingForTranslationEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SeatingForTranslationEvent copyWith(
-          void Function(SeatingForTranslationEvent) updates) =>
-      super.copyWith(
-              (message) => updates(message as SeatingForTranslationEvent))
-          as SeatingForTranslationEvent;
+  SeatingForTranslationEvent copyWith(void Function(SeatingForTranslationEvent) updates) =>
+      super.copyWith((message) => updates(message as SeatingForTranslationEvent)) as SeatingForTranslationEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -3984,8 +3747,8 @@ class SeatingForTranslationEvent extends $pb.GeneratedMessage {
   @$core.override
   SeatingForTranslationEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SeatingForTranslationEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SeatingForTranslationEvent>(create);
+  static SeatingForTranslationEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SeatingForTranslationEvent>(create);
   static SeatingForTranslationEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4034,33 +3797,27 @@ class SeatingForTranslationEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SeatingForTranslationEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SeatingForTranslationEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'players')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SeatingForTranslationEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SeatingForTranslationEventOut copyWith(
-          void Function(SeatingForTranslationEventOut) updates) =>
-      super.copyWith(
-              (message) => updates(message as SeatingForTranslationEventOut))
-          as SeatingForTranslationEventOut;
+  SeatingForTranslationEventOut copyWith(void Function(SeatingForTranslationEventOut) updates) =>
+      super.copyWith((message) => updates(message as SeatingForTranslationEventOut)) as SeatingForTranslationEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SeatingForTranslationEventOut create() =>
-      SeatingForTranslationEventOut._();
+  static SeatingForTranslationEventOut create() => SeatingForTranslationEventOut._();
   @$core.override
   SeatingForTranslationEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SeatingForTranslationEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SeatingForTranslationEventOut>(create);
+  static SeatingForTranslationEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SeatingForTranslationEventOut>(create);
   static SeatingForTranslationEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4087,12 +3844,9 @@ class InsertSeatingEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'InsertSeatingEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'bytes', $pb.PbFieldType.OY)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InsertSeatingEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'bytes', $pb.PbFieldType.OY)
     ..aI(2, _omitFieldNames ? '' : 'tournamentId', protoName: 'tournamentId')
     ..hasRequiredFields = false;
 
@@ -4100,8 +3854,7 @@ class InsertSeatingEvent extends $pb.GeneratedMessage {
   InsertSeatingEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   InsertSeatingEvent copyWith(void Function(InsertSeatingEvent) updates) =>
-      super.copyWith((message) => updates(message as InsertSeatingEvent))
-          as InsertSeatingEvent;
+      super.copyWith((message) => updates(message as InsertSeatingEvent)) as InsertSeatingEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4111,8 +3864,8 @@ class InsertSeatingEvent extends $pb.GeneratedMessage {
   @$core.override
   InsertSeatingEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static InsertSeatingEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<InsertSeatingEvent>(create);
+  static InsertSeatingEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InsertSeatingEvent>(create);
   static InsertSeatingEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4152,21 +3905,16 @@ class GetTournamentsEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetTournamentsEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<Tournament>(1, _omitFieldNames ? '' : 'tournaments',
-        subBuilder: Tournament.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTournamentsEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<Tournament>(1, _omitFieldNames ? '' : 'tournaments', subBuilder: Tournament.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetTournamentsEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetTournamentsEventOut copyWith(
-          void Function(GetTournamentsEventOut) updates) =>
-      super.copyWith((message) => updates(message as GetTournamentsEventOut))
-          as GetTournamentsEventOut;
+  GetTournamentsEventOut copyWith(void Function(GetTournamentsEventOut) updates) =>
+      super.copyWith((message) => updates(message as GetTournamentsEventOut)) as GetTournamentsEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4176,8 +3924,8 @@ class GetTournamentsEventOut extends $pb.GeneratedMessage {
   @$core.override
   GetTournamentsEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetTournamentsEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetTournamentsEventOut>(create);
+  static GetTournamentsEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTournamentsEventOut>(create);
   static GetTournamentsEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4207,8 +3955,7 @@ class Tournament extends $pb.GeneratedMessage {
     if (gamesCount != null) result.gamesCount = gamesCount;
     if (billedPlayers != null) result.billedPlayers = billedPlayers;
     if (billedTranslation != null) result.billedTranslation = billedTranslation;
-    if (notificationEnabled != null)
-      result.notificationEnabled = notificationEnabled;
+    if (notificationEnabled != null) result.notificationEnabled = notificationEnabled;
     if (description != null) result.description = description;
     if (photoThemeId != null) result.photoThemeId = photoThemeId;
     return result;
@@ -4219,28 +3966,21 @@ class Tournament extends $pb.GeneratedMessage {
   factory Tournament.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Tournament.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory Tournament.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Tournament',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Tournament',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aE<Tournament_Status>(3, _omitFieldNames ? '' : 'status',
-        enumValues: Tournament_Status.values)
+    ..aE<Tournament_Status>(3, _omitFieldNames ? '' : 'status', enumValues: Tournament_Status.values)
     ..aOS(4, _omitFieldNames ? '' : 'dateStart', protoName: 'dateStart')
     ..aOS(5, _omitFieldNames ? '' : 'dateEnd', protoName: 'dateEnd')
     ..aI(6, _omitFieldNames ? '' : 'gamesCount', protoName: 'gamesCount')
     ..aI(7, _omitFieldNames ? '' : 'billedPlayers', protoName: 'billedPlayers')
-    ..aOB(8, _omitFieldNames ? '' : 'billedTranslation',
-        protoName: 'billedTranslation')
-    ..aOB(9, _omitFieldNames ? '' : 'notificationEnabled',
-        protoName: 'notificationEnabled')
-    ..aOM<TournamentDescription>(10, _omitFieldNames ? '' : 'description',
-        subBuilder: TournamentDescription.create)
+    ..aOB(8, _omitFieldNames ? '' : 'billedTranslation', protoName: 'billedTranslation')
+    ..aOB(9, _omitFieldNames ? '' : 'notificationEnabled', protoName: 'notificationEnabled')
+    ..aOM<TournamentDescription>(10, _omitFieldNames ? '' : 'description', subBuilder: TournamentDescription.create)
     ..aI(11, _omitFieldNames ? '' : 'photoThemeId', protoName: 'photoThemeId')
     ..hasRequiredFields = false;
 
@@ -4258,8 +3998,7 @@ class Tournament extends $pb.GeneratedMessage {
   @$core.override
   Tournament createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Tournament getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Tournament>(create);
+  static Tournament getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Tournament>(create);
   static Tournament? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4378,14 +4117,11 @@ class ErrorOut extends $pb.GeneratedMessage {
   factory ErrorOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory ErrorOut.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory ErrorOut.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ErrorOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ErrorOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..hasRequiredFields = false;
 
@@ -4403,8 +4139,7 @@ class ErrorOut extends $pb.GeneratedMessage {
   @$core.override
   ErrorOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ErrorOut getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ErrorOut>(create);
+  static ErrorOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ErrorOut>(create);
   static ErrorOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4439,13 +4174,10 @@ class BillTournamentEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'BillTournamentEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BillTournamentEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'players')
-    ..aOB(2, _omitFieldNames ? '' : 'hasTranslation',
-        protoName: 'hasTranslation')
+    ..aOB(2, _omitFieldNames ? '' : 'hasTranslation', protoName: 'hasTranslation')
     ..aOS(3, _omitFieldNames ? '' : 'redirectPath', protoName: 'redirectPath')
     ..hasRequiredFields = false;
 
@@ -4453,8 +4185,7 @@ class BillTournamentEvent extends $pb.GeneratedMessage {
   BillTournamentEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BillTournamentEvent copyWith(void Function(BillTournamentEvent) updates) =>
-      super.copyWith((message) => updates(message as BillTournamentEvent))
-          as BillTournamentEvent;
+      super.copyWith((message) => updates(message as BillTournamentEvent)) as BillTournamentEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4464,8 +4195,8 @@ class BillTournamentEvent extends $pb.GeneratedMessage {
   @$core.override
   BillTournamentEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BillTournamentEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BillTournamentEvent>(create);
+  static BillTournamentEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BillTournamentEvent>(create);
   static BillTournamentEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4512,14 +4243,11 @@ class BillClubEvent extends $pb.GeneratedMessage {
   factory BillClubEvent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory BillClubEvent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory BillClubEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'BillClubEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BillClubEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'days')
     ..aOS(2, _omitFieldNames ? '' : 'redirectPath', protoName: 'redirectPath')
     ..hasRequiredFields = false;
@@ -4528,8 +4256,7 @@ class BillClubEvent extends $pb.GeneratedMessage {
   BillClubEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BillClubEvent copyWith(void Function(BillClubEvent) updates) =>
-      super.copyWith((message) => updates(message as BillClubEvent))
-          as BillClubEvent;
+      super.copyWith((message) => updates(message as BillClubEvent)) as BillClubEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4539,8 +4266,7 @@ class BillClubEvent extends $pb.GeneratedMessage {
   @$core.override
   BillClubEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BillClubEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BillClubEvent>(create);
+  static BillClubEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BillClubEvent>(create);
   static BillClubEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4584,14 +4310,10 @@ class BillTournamentSubscriptionEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'BillTournamentSubscriptionEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..aE<TournamentSubscriptionType>(
-        1, _omitFieldNames ? '' : 'subscriptionType',
-        protoName: 'subscriptionType',
-        enumValues: TournamentSubscriptionType.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BillTournamentSubscriptionEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aE<TournamentSubscriptionType>(1, _omitFieldNames ? '' : 'subscriptionType',
+        protoName: 'subscriptionType', enumValues: TournamentSubscriptionType.values)
     ..aI(2, _omitFieldNames ? '' : 'days')
     ..aOS(3, _omitFieldNames ? '' : 'redirectPath', protoName: 'redirectPath')
     ..hasRequiredFields = false;
@@ -4599,31 +4321,26 @@ class BillTournamentSubscriptionEvent extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BillTournamentSubscriptionEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BillTournamentSubscriptionEvent copyWith(
-          void Function(BillTournamentSubscriptionEvent) updates) =>
-      super.copyWith(
-              (message) => updates(message as BillTournamentSubscriptionEvent))
+  BillTournamentSubscriptionEvent copyWith(void Function(BillTournamentSubscriptionEvent) updates) =>
+      super.copyWith((message) => updates(message as BillTournamentSubscriptionEvent))
           as BillTournamentSubscriptionEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static BillTournamentSubscriptionEvent create() =>
-      BillTournamentSubscriptionEvent._();
+  static BillTournamentSubscriptionEvent create() => BillTournamentSubscriptionEvent._();
   @$core.override
   BillTournamentSubscriptionEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BillTournamentSubscriptionEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BillTournamentSubscriptionEvent>(
-          create);
+  static BillTournamentSubscriptionEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BillTournamentSubscriptionEvent>(create);
   static BillTournamentSubscriptionEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
   TournamentSubscriptionType get subscriptionType => $_getN(0);
   @$pb.TagNumber(1)
-  set subscriptionType(TournamentSubscriptionType value) =>
-      $_setField(1, value);
+  set subscriptionType(TournamentSubscriptionType value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasSubscriptionType() => $_has(0);
   @$pb.TagNumber(1)
@@ -4666,20 +4383,16 @@ class BillTournamentEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'BillTournamentEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BillTournamentEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'redirectLink', protoName: 'redirectLink')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BillTournamentEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BillTournamentEventOut copyWith(
-          void Function(BillTournamentEventOut) updates) =>
-      super.copyWith((message) => updates(message as BillTournamentEventOut))
-          as BillTournamentEventOut;
+  BillTournamentEventOut copyWith(void Function(BillTournamentEventOut) updates) =>
+      super.copyWith((message) => updates(message as BillTournamentEventOut)) as BillTournamentEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4689,8 +4402,8 @@ class BillTournamentEventOut extends $pb.GeneratedMessage {
   @$core.override
   BillTournamentEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BillTournamentEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BillTournamentEventOut>(create);
+  static BillTournamentEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BillTournamentEventOut>(create);
   static BillTournamentEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4718,47 +4431,38 @@ class TournamentSubscriptionPlanEventOut extends $pb.GeneratedMessage {
 
   TournamentSubscriptionPlanEventOut._();
 
-  factory TournamentSubscriptionPlanEventOut.fromBuffer(
-          $core.List<$core.int> data,
+  factory TournamentSubscriptionPlanEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
   factory TournamentSubscriptionPlanEventOut.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TournamentSubscriptionPlanEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TournamentSubscriptionPlanEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'isActive', protoName: 'isActive')
-    ..aE<TournamentSubscriptionType>(
-        2, _omitFieldNames ? '' : 'subscriptionType',
-        protoName: 'subscriptionType',
-        enumValues: TournamentSubscriptionType.values)
+    ..aE<TournamentSubscriptionType>(2, _omitFieldNames ? '' : 'subscriptionType',
+        protoName: 'subscriptionType', enumValues: TournamentSubscriptionType.values)
     ..aOS(3, _omitFieldNames ? '' : 'billedFor', protoName: 'billedFor')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TournamentSubscriptionPlanEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TournamentSubscriptionPlanEventOut copyWith(
-          void Function(TournamentSubscriptionPlanEventOut) updates) =>
-      super.copyWith((message) =>
-              updates(message as TournamentSubscriptionPlanEventOut))
+  TournamentSubscriptionPlanEventOut copyWith(void Function(TournamentSubscriptionPlanEventOut) updates) =>
+      super.copyWith((message) => updates(message as TournamentSubscriptionPlanEventOut))
           as TournamentSubscriptionPlanEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static TournamentSubscriptionPlanEventOut create() =>
-      TournamentSubscriptionPlanEventOut._();
+  static TournamentSubscriptionPlanEventOut create() => TournamentSubscriptionPlanEventOut._();
   @$core.override
   TournamentSubscriptionPlanEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TournamentSubscriptionPlanEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TournamentSubscriptionPlanEventOut>(
-          create);
+  static TournamentSubscriptionPlanEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TournamentSubscriptionPlanEventOut>(create);
   static TournamentSubscriptionPlanEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4773,8 +4477,7 @@ class TournamentSubscriptionPlanEventOut extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   TournamentSubscriptionType get subscriptionType => $_getN(1);
   @$pb.TagNumber(2)
-  set subscriptionType(TournamentSubscriptionType value) =>
-      $_setField(2, value);
+  set subscriptionType(TournamentSubscriptionType value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasSubscriptionType() => $_has(1);
   @$pb.TagNumber(2)
@@ -4810,10 +4513,8 @@ class StartGameInfoEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'StartGameInfoEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartGameInfoEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'game')
     ..aOS(2, _omitFieldNames ? '' : 'localDate', protoName: 'localDate')
     ..hasRequiredFields = false;
@@ -4822,8 +4523,7 @@ class StartGameInfoEvent extends $pb.GeneratedMessage {
   StartGameInfoEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StartGameInfoEvent copyWith(void Function(StartGameInfoEvent) updates) =>
-      super.copyWith((message) => updates(message as StartGameInfoEvent))
-          as StartGameInfoEvent;
+      super.copyWith((message) => updates(message as StartGameInfoEvent)) as StartGameInfoEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4833,8 +4533,8 @@ class StartGameInfoEvent extends $pb.GeneratedMessage {
   @$core.override
   StartGameInfoEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static StartGameInfoEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<StartGameInfoEvent>(create);
+  static StartGameInfoEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StartGameInfoEvent>(create);
   static StartGameInfoEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4874,10 +4574,8 @@ class CustomTextInfoEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CustomTextInfoEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CustomTextInfoEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'text')
     ..hasRequiredFields = false;
 
@@ -4885,8 +4583,7 @@ class CustomTextInfoEvent extends $pb.GeneratedMessage {
   CustomTextInfoEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CustomTextInfoEvent copyWith(void Function(CustomTextInfoEvent) updates) =>
-      super.copyWith((message) => updates(message as CustomTextInfoEvent))
-          as CustomTextInfoEvent;
+      super.copyWith((message) => updates(message as CustomTextInfoEvent)) as CustomTextInfoEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4896,8 +4593,8 @@ class CustomTextInfoEvent extends $pb.GeneratedMessage {
   @$core.override
   CustomTextInfoEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CustomTextInfoEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CustomTextInfoEvent>(create);
+  static CustomTextInfoEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CustomTextInfoEvent>(create);
   static CustomTextInfoEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4928,20 +4625,16 @@ class TakeGomafiaSeatingEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TakeGomafiaSeatingEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TakeGomafiaSeatingEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TakeGomafiaSeatingEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TakeGomafiaSeatingEvent copyWith(
-          void Function(TakeGomafiaSeatingEvent) updates) =>
-      super.copyWith((message) => updates(message as TakeGomafiaSeatingEvent))
-          as TakeGomafiaSeatingEvent;
+  TakeGomafiaSeatingEvent copyWith(void Function(TakeGomafiaSeatingEvent) updates) =>
+      super.copyWith((message) => updates(message as TakeGomafiaSeatingEvent)) as TakeGomafiaSeatingEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -4951,8 +4644,8 @@ class TakeGomafiaSeatingEvent extends $pb.GeneratedMessage {
   @$core.override
   TakeGomafiaSeatingEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TakeGomafiaSeatingEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TakeGomafiaSeatingEvent>(create);
+  static TakeGomafiaSeatingEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TakeGomafiaSeatingEvent>(create);
   static TakeGomafiaSeatingEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -4983,21 +4676,16 @@ class TakeGomafiaSeatingEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TakeGomafiaSeatingEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TakeGomafiaSeatingEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pPS(1, _omitFieldNames ? '' : 'notFound', protoName: 'notFound')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TakeGomafiaSeatingEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TakeGomafiaSeatingEventOut copyWith(
-          void Function(TakeGomafiaSeatingEventOut) updates) =>
-      super.copyWith(
-              (message) => updates(message as TakeGomafiaSeatingEventOut))
-          as TakeGomafiaSeatingEventOut;
+  TakeGomafiaSeatingEventOut copyWith(void Function(TakeGomafiaSeatingEventOut) updates) =>
+      super.copyWith((message) => updates(message as TakeGomafiaSeatingEventOut)) as TakeGomafiaSeatingEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5007,8 +4695,8 @@ class TakeGomafiaSeatingEventOut extends $pb.GeneratedMessage {
   @$core.override
   TakeGomafiaSeatingEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TakeGomafiaSeatingEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TakeGomafiaSeatingEventOut>(create);
+  static TakeGomafiaSeatingEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TakeGomafiaSeatingEventOut>(create);
   static TakeGomafiaSeatingEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5028,17 +4716,13 @@ class User extends $pb.GeneratedMessage {
 
   User._();
 
-  factory User.fromBuffer($core.List<$core.int> data,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory User.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory User.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory User.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'User',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'email')
     ..hasRequiredFields = false;
@@ -5046,8 +4730,7 @@ class User extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   User clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  User copyWith(void Function(User) updates) =>
-      super.copyWith((message) => updates(message as User)) as User;
+  User copyWith(void Function(User) updates) => super.copyWith((message) => updates(message as User)) as User;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5057,8 +4740,7 @@ class User extends $pb.GeneratedMessage {
   @$core.override
   User createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static User getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<User>(create);
+  static User getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<User>(create);
   static User? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5098,20 +4780,16 @@ class TournamentOwnersEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TournamentOwnersEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TournamentOwnersEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pPM<User>(1, _omitFieldNames ? '' : 'owners', subBuilder: User.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TournamentOwnersEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TournamentOwnersEventOut copyWith(
-          void Function(TournamentOwnersEventOut) updates) =>
-      super.copyWith((message) => updates(message as TournamentOwnersEventOut))
-          as TournamentOwnersEventOut;
+  TournamentOwnersEventOut copyWith(void Function(TournamentOwnersEventOut) updates) =>
+      super.copyWith((message) => updates(message as TournamentOwnersEventOut)) as TournamentOwnersEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5121,8 +4799,8 @@ class TournamentOwnersEventOut extends $pb.GeneratedMessage {
   @$core.override
   TournamentOwnersEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TournamentOwnersEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TournamentOwnersEventOut>(create);
+  static TournamentOwnersEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TournamentOwnersEventOut>(create);
   static TournamentOwnersEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5147,10 +4825,8 @@ class ClubOwnersEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ClubOwnersEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ClubOwnersEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..pPM<User>(1, _omitFieldNames ? '' : 'owners', subBuilder: User.create)
     ..hasRequiredFields = false;
 
@@ -5158,8 +4834,7 @@ class ClubOwnersEventOut extends $pb.GeneratedMessage {
   ClubOwnersEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubOwnersEventOut copyWith(void Function(ClubOwnersEventOut) updates) =>
-      super.copyWith((message) => updates(message as ClubOwnersEventOut))
-          as ClubOwnersEventOut;
+      super.copyWith((message) => updates(message as ClubOwnersEventOut)) as ClubOwnersEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5169,8 +4844,8 @@ class ClubOwnersEventOut extends $pb.GeneratedMessage {
   @$core.override
   ClubOwnersEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ClubOwnersEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ClubOwnersEventOut>(create);
+  static ClubOwnersEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ClubOwnersEventOut>(create);
   static ClubOwnersEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5195,10 +4870,8 @@ class UpdateOwnerEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdateOwnerEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateOwnerEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'email')
     ..hasRequiredFields = false;
 
@@ -5206,8 +4879,7 @@ class UpdateOwnerEvent extends $pb.GeneratedMessage {
   UpdateOwnerEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UpdateOwnerEvent copyWith(void Function(UpdateOwnerEvent) updates) =>
-      super.copyWith((message) => updates(message as UpdateOwnerEvent))
-          as UpdateOwnerEvent;
+      super.copyWith((message) => updates(message as UpdateOwnerEvent)) as UpdateOwnerEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5217,8 +4889,8 @@ class UpdateOwnerEvent extends $pb.GeneratedMessage {
   @$core.override
   UpdateOwnerEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static UpdateOwnerEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdateOwnerEvent>(create);
+  static UpdateOwnerEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateOwnerEvent>(create);
   static UpdateOwnerEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5249,14 +4921,11 @@ class DesignItem extends $pb.GeneratedMessage {
   factory DesignItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory DesignItem.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory DesignItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'DesignItem',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DesignItem',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'designKey', protoName: 'designKey')
     ..aOS(2, _omitFieldNames ? '' : 'title')
     ..aOS(3, _omitFieldNames ? '' : 'preview')
@@ -5276,8 +4945,7 @@ class DesignItem extends $pb.GeneratedMessage {
   @$core.override
   DesignItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static DesignItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DesignItem>(create);
+  static DesignItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DesignItem>(create);
   static DesignItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5330,24 +4998,18 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TranslationKeyEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TranslationKeyEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'key')
-    ..pPM<DesignItem>(2, _omitFieldNames ? '' : 'designs',
-        subBuilder: DesignItem.create)
-    ..aOS(3, _omitFieldNames ? '' : 'selectedDesignKey',
-        protoName: 'selectedDesignKey')
+    ..pPM<DesignItem>(2, _omitFieldNames ? '' : 'designs', subBuilder: DesignItem.create)
+    ..aOS(3, _omitFieldNames ? '' : 'selectedDesignKey', protoName: 'selectedDesignKey')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TranslationKeyEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TranslationKeyEventOut copyWith(
-          void Function(TranslationKeyEventOut) updates) =>
-      super.copyWith((message) => updates(message as TranslationKeyEventOut))
-          as TranslationKeyEventOut;
+  TranslationKeyEventOut copyWith(void Function(TranslationKeyEventOut) updates) =>
+      super.copyWith((message) => updates(message as TranslationKeyEventOut)) as TranslationKeyEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5357,8 +5019,8 @@ class TranslationKeyEventOut extends $pb.GeneratedMessage {
   @$core.override
   TranslationKeyEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TranslationKeyEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TranslationKeyEventOut>(create);
+  static TranslationKeyEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TranslationKeyEventOut>(create);
   static TranslationKeyEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5399,14 +5061,11 @@ class TableInfoItem extends $pb.GeneratedMessage {
   factory TableInfoItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory TableInfoItem.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory TableInfoItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TableInfoItem',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TableInfoItem',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'table')
     ..aOS(2, _omitFieldNames ? '' : 'info')
     ..hasRequiredFields = false;
@@ -5415,8 +5074,7 @@ class TableInfoItem extends $pb.GeneratedMessage {
   TableInfoItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableInfoItem copyWith(void Function(TableInfoItem) updates) =>
-      super.copyWith((message) => updates(message as TableInfoItem))
-          as TableInfoItem;
+      super.copyWith((message) => updates(message as TableInfoItem)) as TableInfoItem;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5426,8 +5084,7 @@ class TableInfoItem extends $pb.GeneratedMessage {
   @$core.override
   TableInfoItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TableInfoItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TableInfoItem>(create);
+  static TableInfoItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TableInfoItem>(create);
   static TableInfoItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5463,24 +5120,19 @@ class TableInfoEvent extends $pb.GeneratedMessage {
   factory TableInfoEvent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory TableInfoEvent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory TableInfoEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'TableInfoEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<TableInfoItem>(1, _omitFieldNames ? '' : 'items',
-        subBuilder: TableInfoItem.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TableInfoEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<TableInfoItem>(1, _omitFieldNames ? '' : 'items', subBuilder: TableInfoItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableInfoEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TableInfoEvent copyWith(void Function(TableInfoEvent) updates) =>
-      super.copyWith((message) => updates(message as TableInfoEvent))
-          as TableInfoEvent;
+      super.copyWith((message) => updates(message as TableInfoEvent)) as TableInfoEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5490,8 +5142,7 @@ class TableInfoEvent extends $pb.GeneratedMessage {
   @$core.override
   TableInfoEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static TableInfoEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<TableInfoEvent>(create);
+  static TableInfoEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TableInfoEvent>(create);
   static TableInfoEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5516,34 +5167,27 @@ class FantasyParticipantsEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'FantasyParticipantsEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<User>(1, _omitFieldNames ? '' : 'participants',
-        subBuilder: User.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyParticipantsEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<User>(1, _omitFieldNames ? '' : 'participants', subBuilder: User.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FantasyParticipantsEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FantasyParticipantsEventOut copyWith(
-          void Function(FantasyParticipantsEventOut) updates) =>
-      super.copyWith(
-              (message) => updates(message as FantasyParticipantsEventOut))
-          as FantasyParticipantsEventOut;
+  FantasyParticipantsEventOut copyWith(void Function(FantasyParticipantsEventOut) updates) =>
+      super.copyWith((message) => updates(message as FantasyParticipantsEventOut)) as FantasyParticipantsEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static FantasyParticipantsEventOut create() =>
-      FantasyParticipantsEventOut._();
+  static FantasyParticipantsEventOut create() => FantasyParticipantsEventOut._();
   @$core.override
   FantasyParticipantsEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FantasyParticipantsEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FantasyParticipantsEventOut>(create);
+  static FantasyParticipantsEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyParticipantsEventOut>(create);
   static FantasyParticipantsEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5568,21 +5212,16 @@ class SetFantasyParticipantEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SetFantasyParticipantEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetFantasyParticipantEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'email')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetFantasyParticipantEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetFantasyParticipantEvent copyWith(
-          void Function(SetFantasyParticipantEvent) updates) =>
-      super.copyWith(
-              (message) => updates(message as SetFantasyParticipantEvent))
-          as SetFantasyParticipantEvent;
+  SetFantasyParticipantEvent copyWith(void Function(SetFantasyParticipantEvent) updates) =>
+      super.copyWith((message) => updates(message as SetFantasyParticipantEvent)) as SetFantasyParticipantEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5592,8 +5231,8 @@ class SetFantasyParticipantEvent extends $pb.GeneratedMessage {
   @$core.override
   SetFantasyParticipantEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SetFantasyParticipantEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SetFantasyParticipantEvent>(create);
+  static SetFantasyParticipantEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetFantasyParticipantEvent>(create);
   static SetFantasyParticipantEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5630,13 +5269,10 @@ class FantasyRatingRow extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'FantasyRatingRow',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyRatingRow',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'nickname')
-    ..pPM<FantasyPredictionItem>(2, _omitFieldNames ? '' : 'predictions',
-        subBuilder: FantasyPredictionItem.create)
+    ..pPM<FantasyPredictionItem>(2, _omitFieldNames ? '' : 'predictions', subBuilder: FantasyPredictionItem.create)
     ..aI(3, _omitFieldNames ? '' : 'totalPoints', protoName: 'totalPoints')
     ..aI(4, _omitFieldNames ? '' : 'playerId', protoName: 'playerId')
     ..hasRequiredFields = false;
@@ -5645,8 +5281,7 @@ class FantasyRatingRow extends $pb.GeneratedMessage {
   FantasyRatingRow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FantasyRatingRow copyWith(void Function(FantasyRatingRow) updates) =>
-      super.copyWith((message) => updates(message as FantasyRatingRow))
-          as FantasyRatingRow;
+      super.copyWith((message) => updates(message as FantasyRatingRow)) as FantasyRatingRow;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5656,8 +5291,8 @@ class FantasyRatingRow extends $pb.GeneratedMessage {
   @$core.override
   FantasyRatingRow createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FantasyRatingRow getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FantasyRatingRow>(create);
+  static FantasyRatingRow getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyRatingRow>(create);
   static FantasyRatingRow? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5715,25 +5350,19 @@ class FantasyPredictionItem extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'FantasyPredictionItem',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyPredictionItem',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'gameNumber', protoName: 'gameNumber')
-    ..aE<GameWin>(2, _omitFieldNames ? '' : 'prediction',
-        enumValues: GameWin.values)
-    ..aE<GameWin>(3, _omitFieldNames ? '' : 'actualResult',
-        protoName: 'actualResult', enumValues: GameWin.values)
+    ..aE<GameWin>(2, _omitFieldNames ? '' : 'prediction', enumValues: GameWin.values)
+    ..aE<GameWin>(3, _omitFieldNames ? '' : 'actualResult', protoName: 'actualResult', enumValues: GameWin.values)
     ..aI(4, _omitFieldNames ? '' : 'points')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FantasyPredictionItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FantasyPredictionItem copyWith(
-          void Function(FantasyPredictionItem) updates) =>
-      super.copyWith((message) => updates(message as FantasyPredictionItem))
-          as FantasyPredictionItem;
+  FantasyPredictionItem copyWith(void Function(FantasyPredictionItem) updates) =>
+      super.copyWith((message) => updates(message as FantasyPredictionItem)) as FantasyPredictionItem;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5743,8 +5372,8 @@ class FantasyPredictionItem extends $pb.GeneratedMessage {
   @$core.override
   FantasyPredictionItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FantasyPredictionItem getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FantasyPredictionItem>(create);
+  static FantasyPredictionItem getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyPredictionItem>(create);
   static FantasyPredictionItem? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5802,21 +5431,16 @@ class FantasyRatingEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'FantasyRatingEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<FantasyRatingRow>(1, _omitFieldNames ? '' : 'rows',
-        subBuilder: FantasyRatingRow.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyRatingEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<FantasyRatingRow>(1, _omitFieldNames ? '' : 'rows', subBuilder: FantasyRatingRow.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FantasyRatingEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FantasyRatingEventOut copyWith(
-          void Function(FantasyRatingEventOut) updates) =>
-      super.copyWith((message) => updates(message as FantasyRatingEventOut))
-          as FantasyRatingEventOut;
+  FantasyRatingEventOut copyWith(void Function(FantasyRatingEventOut) updates) =>
+      super.copyWith((message) => updates(message as FantasyRatingEventOut)) as FantasyRatingEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5826,8 +5450,8 @@ class FantasyRatingEventOut extends $pb.GeneratedMessage {
   @$core.override
   FantasyRatingEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FantasyRatingEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FantasyRatingEventOut>(create);
+  static FantasyRatingEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyRatingEventOut>(create);
   static FantasyRatingEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5850,14 +5474,11 @@ class AuthEvent extends $pb.GeneratedMessage {
   factory AuthEvent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory AuthEvent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory AuthEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AuthEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'deviceId', protoName: 'deviceId')
     ..aOS(2, _omitFieldNames ? '' : 'pushToken', protoName: 'pushToken')
     ..hasRequiredFields = false;
@@ -5876,8 +5497,7 @@ class AuthEvent extends $pb.GeneratedMessage {
   @$core.override
   AuthEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AuthEvent getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthEvent>(create);
+  static AuthEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthEvent>(create);
   static AuthEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5913,14 +5533,11 @@ class AuthEventOut extends $pb.GeneratedMessage {
   factory AuthEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory AuthEventOut.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory AuthEventOut.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AuthEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'userId', protoName: 'userId')
     ..hasRequiredFields = false;
 
@@ -5928,8 +5545,7 @@ class AuthEventOut extends $pb.GeneratedMessage {
   AuthEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AuthEventOut copyWith(void Function(AuthEventOut) updates) =>
-      super.copyWith((message) => updates(message as AuthEventOut))
-          as AuthEventOut;
+      super.copyWith((message) => updates(message as AuthEventOut)) as AuthEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5939,8 +5555,7 @@ class AuthEventOut extends $pb.GeneratedMessage {
   @$core.override
   AuthEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AuthEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AuthEventOut>(create);
+  static AuthEventOut getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthEventOut>(create);
   static AuthEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -5971,21 +5586,16 @@ class SetFantasyPredictionEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SetFantasyPredictionEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..aE<GameWin>(1, _omitFieldNames ? '' : 'prediction',
-        enumValues: GameWin.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetFantasyPredictionEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aE<GameWin>(1, _omitFieldNames ? '' : 'prediction', enumValues: GameWin.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetFantasyPredictionEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetFantasyPredictionEvent copyWith(
-          void Function(SetFantasyPredictionEvent) updates) =>
-      super.copyWith((message) => updates(message as SetFantasyPredictionEvent))
-          as SetFantasyPredictionEvent;
+  SetFantasyPredictionEvent copyWith(void Function(SetFantasyPredictionEvent) updates) =>
+      super.copyWith((message) => updates(message as SetFantasyPredictionEvent)) as SetFantasyPredictionEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -5995,8 +5605,8 @@ class SetFantasyPredictionEvent extends $pb.GeneratedMessage {
   @$core.override
   SetFantasyPredictionEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SetFantasyPredictionEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SetFantasyPredictionEvent>(create);
+  static SetFantasyPredictionEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetFantasyPredictionEvent>(create);
   static SetFantasyPredictionEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6031,24 +5641,18 @@ class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'FantasyCurrentGameEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FantasyCurrentGameEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'gameNumber', protoName: 'gameNumber')
     ..aOB(2, _omitFieldNames ? '' : 'canPredict', protoName: 'canPredict')
-    ..aOB(3, _omitFieldNames ? '' : 'canParticipate',
-        protoName: 'canParticipate')
+    ..aOB(3, _omitFieldNames ? '' : 'canParticipate', protoName: 'canParticipate')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FantasyCurrentGameEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FantasyCurrentGameEventOut copyWith(
-          void Function(FantasyCurrentGameEventOut) updates) =>
-      super.copyWith(
-              (message) => updates(message as FantasyCurrentGameEventOut))
-          as FantasyCurrentGameEventOut;
+  FantasyCurrentGameEventOut copyWith(void Function(FantasyCurrentGameEventOut) updates) =>
+      super.copyWith((message) => updates(message as FantasyCurrentGameEventOut)) as FantasyCurrentGameEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6058,8 +5662,8 @@ class FantasyCurrentGameEventOut extends $pb.GeneratedMessage {
   @$core.override
   FantasyCurrentGameEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FantasyCurrentGameEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FantasyCurrentGameEventOut>(create);
+  static FantasyCurrentGameEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FantasyCurrentGameEventOut>(create);
   static FantasyCurrentGameEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6108,10 +5712,8 @@ class ForgotPasswordEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ForgotPasswordEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ForgotPasswordEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'email')
     ..hasRequiredFields = false;
 
@@ -6119,8 +5721,7 @@ class ForgotPasswordEvent extends $pb.GeneratedMessage {
   ForgotPasswordEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ForgotPasswordEvent copyWith(void Function(ForgotPasswordEvent) updates) =>
-      super.copyWith((message) => updates(message as ForgotPasswordEvent))
-          as ForgotPasswordEvent;
+      super.copyWith((message) => updates(message as ForgotPasswordEvent)) as ForgotPasswordEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6130,8 +5731,8 @@ class ForgotPasswordEvent extends $pb.GeneratedMessage {
   @$core.override
   ForgotPasswordEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ForgotPasswordEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ForgotPasswordEvent>(create);
+  static ForgotPasswordEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ForgotPasswordEvent>(create);
   static ForgotPasswordEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6162,10 +5763,8 @@ class ForgotPasswordEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ForgotPasswordEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ForgotPasswordEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aE<ForgotPasswordEventOut_Error>(1, _omitFieldNames ? '' : 'error',
         enumValues: ForgotPasswordEventOut_Error.values)
     ..hasRequiredFields = false;
@@ -6173,10 +5772,8 @@ class ForgotPasswordEventOut extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ForgotPasswordEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ForgotPasswordEventOut copyWith(
-          void Function(ForgotPasswordEventOut) updates) =>
-      super.copyWith((message) => updates(message as ForgotPasswordEventOut))
-          as ForgotPasswordEventOut;
+  ForgotPasswordEventOut copyWith(void Function(ForgotPasswordEventOut) updates) =>
+      super.copyWith((message) => updates(message as ForgotPasswordEventOut)) as ForgotPasswordEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6186,8 +5783,8 @@ class ForgotPasswordEventOut extends $pb.GeneratedMessage {
   @$core.override
   ForgotPasswordEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ForgotPasswordEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ForgotPasswordEventOut>(create);
+  static ForgotPasswordEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ForgotPasswordEventOut>(create);
   static ForgotPasswordEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6222,10 +5819,8 @@ class ResetPasswordEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ResetPasswordEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResetPasswordEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'token')
     ..aOS(2, _omitFieldNames ? '' : 'newPassword', protoName: 'newPassword')
     ..aOS(3, _omitFieldNames ? '' : 'email')
@@ -6235,8 +5830,7 @@ class ResetPasswordEvent extends $pb.GeneratedMessage {
   ResetPasswordEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ResetPasswordEvent copyWith(void Function(ResetPasswordEvent) updates) =>
-      super.copyWith((message) => updates(message as ResetPasswordEvent))
-          as ResetPasswordEvent;
+      super.copyWith((message) => updates(message as ResetPasswordEvent)) as ResetPasswordEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6246,8 +5840,8 @@ class ResetPasswordEvent extends $pb.GeneratedMessage {
   @$core.override
   ResetPasswordEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ResetPasswordEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ResetPasswordEvent>(create);
+  static ResetPasswordEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPasswordEvent>(create);
   static ResetPasswordEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6296,21 +5890,16 @@ class ResetPasswordEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ResetPasswordEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..aE<ResetPasswordEventOut_Error>(1, _omitFieldNames ? '' : 'error',
-        enumValues: ResetPasswordEventOut_Error.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResetPasswordEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..aE<ResetPasswordEventOut_Error>(1, _omitFieldNames ? '' : 'error', enumValues: ResetPasswordEventOut_Error.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ResetPasswordEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ResetPasswordEventOut copyWith(
-          void Function(ResetPasswordEventOut) updates) =>
-      super.copyWith((message) => updates(message as ResetPasswordEventOut))
-          as ResetPasswordEventOut;
+  ResetPasswordEventOut copyWith(void Function(ResetPasswordEventOut) updates) =>
+      super.copyWith((message) => updates(message as ResetPasswordEventOut)) as ResetPasswordEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6320,8 +5909,8 @@ class ResetPasswordEventOut extends $pb.GeneratedMessage {
   @$core.override
   ResetPasswordEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ResetPasswordEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ResetPasswordEventOut>(create);
+  static ResetPasswordEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPasswordEventOut>(create);
   static ResetPasswordEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6356,28 +5945,23 @@ class PlayerRoleStats extends $pb.GeneratedMessage {
   factory PlayerRoleStats.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory PlayerRoleStats.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory PlayerRoleStats.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PlayerRoleStats',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlayerRoleStats',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'games')
     ..aI(2, _omitFieldNames ? '' : 'wins')
     ..aD(3, _omitFieldNames ? '' : 'winRate', protoName: 'winRate')
     ..aD(4, _omitFieldNames ? '' : 'avgBonusScore', protoName: 'avgBonusScore')
-    ..aI(5, _omitFieldNames ? '' : 'firstNightDeaths',
-        protoName: 'firstNightDeaths')
+    ..aI(5, _omitFieldNames ? '' : 'firstNightDeaths', protoName: 'firstNightDeaths')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PlayerRoleStats clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PlayerRoleStats copyWith(void Function(PlayerRoleStats) updates) =>
-      super.copyWith((message) => updates(message as PlayerRoleStats))
-          as PlayerRoleStats;
+      super.copyWith((message) => updates(message as PlayerRoleStats)) as PlayerRoleStats;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6387,8 +5971,8 @@ class PlayerRoleStats extends $pb.GeneratedMessage {
   @$core.override
   PlayerRoleStats createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayerRoleStats getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayerRoleStats>(create);
+  static PlayerRoleStats getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayerRoleStats>(create);
   static PlayerRoleStats? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6459,14 +6043,11 @@ class PlayerPairStat extends $pb.GeneratedMessage {
   factory PlayerPairStat.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory PlayerPairStat.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory PlayerPairStat.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PlayerPairStat',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlayerPairStat',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'playerId', protoName: 'playerId')
     ..aOS(2, _omitFieldNames ? '' : 'nickname')
     ..aI(3, _omitFieldNames ? '' : 'games')
@@ -6478,8 +6059,7 @@ class PlayerPairStat extends $pb.GeneratedMessage {
   PlayerPairStat clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PlayerPairStat copyWith(void Function(PlayerPairStat) updates) =>
-      super.copyWith((message) => updates(message as PlayerPairStat))
-          as PlayerPairStat;
+      super.copyWith((message) => updates(message as PlayerPairStat)) as PlayerPairStat;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6489,8 +6069,7 @@ class PlayerPairStat extends $pb.GeneratedMessage {
   @$core.override
   PlayerPairStat createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayerPairStat getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayerPairStat>(create);
+  static PlayerPairStat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayerPairStat>(create);
   static PlayerPairStat? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6563,10 +6142,8 @@ class BestMoveDistribution extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'BestMoveDistribution',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BestMoveDistribution',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'miss')
     ..aI(2, _omitFieldNames ? '' : 'one')
     ..aI(3, _omitFieldNames ? '' : 'half')
@@ -6577,8 +6154,7 @@ class BestMoveDistribution extends $pb.GeneratedMessage {
   BestMoveDistribution clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BestMoveDistribution copyWith(void Function(BestMoveDistribution) updates) =>
-      super.copyWith((message) => updates(message as BestMoveDistribution))
-          as BestMoveDistribution;
+      super.copyWith((message) => updates(message as BestMoveDistribution)) as BestMoveDistribution;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6588,8 +6164,8 @@ class BestMoveDistribution extends $pb.GeneratedMessage {
   @$core.override
   BestMoveDistribution createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static BestMoveDistribution getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<BestMoveDistribution>(create);
+  static BestMoveDistribution getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BestMoveDistribution>(create);
   static BestMoveDistribution? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6660,8 +6236,7 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
     if (sameCityBottom != null) result.sameCityBottom.addAll(sameCityBottom);
     if (sameMafiaBottom != null) result.sameMafiaBottom.addAll(sameMafiaBottom);
     if (diffTeamBottom != null) result.diffTeamBottom.addAll(diffTeamBottom);
-    if (bestMoveDistribution != null)
-      result.bestMoveDistribution = bestMoveDistribution;
+    if (bestMoveDistribution != null) result.bestMoveDistribution = bestMoveDistribution;
     return result;
   }
 
@@ -6674,22 +6249,15 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PlayerStatisticsEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PlayerStatisticsEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'playerId', protoName: 'playerId')
     ..aOS(2, _omitFieldNames ? '' : 'nickname')
-    ..aOM<PlayerRoleStats>(3, _omitFieldNames ? '' : 'overall',
-        subBuilder: PlayerRoleStats.create)
-    ..aOM<PlayerRoleStats>(4, _omitFieldNames ? '' : 'citizen',
-        subBuilder: PlayerRoleStats.create)
-    ..aOM<PlayerRoleStats>(5, _omitFieldNames ? '' : 'mafia',
-        subBuilder: PlayerRoleStats.create)
-    ..aOM<PlayerRoleStats>(6, _omitFieldNames ? '' : 'don',
-        subBuilder: PlayerRoleStats.create)
-    ..aOM<PlayerRoleStats>(7, _omitFieldNames ? '' : 'sheriff',
-        subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(3, _omitFieldNames ? '' : 'overall', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(4, _omitFieldNames ? '' : 'citizen', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(5, _omitFieldNames ? '' : 'mafia', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(6, _omitFieldNames ? '' : 'don', subBuilder: PlayerRoleStats.create)
+    ..aOM<PlayerRoleStats>(7, _omitFieldNames ? '' : 'sheriff', subBuilder: PlayerRoleStats.create)
     ..pPM<PlayerPairStat>(8, _omitFieldNames ? '' : 'sameCityTop',
         protoName: 'sameCityTop', subBuilder: PlayerPairStat.create)
     ..pPM<PlayerPairStat>(9, _omitFieldNames ? '' : 'sameMafiaTop',
@@ -6702,19 +6270,15 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
         protoName: 'sameMafiaBottom', subBuilder: PlayerPairStat.create)
     ..pPM<PlayerPairStat>(13, _omitFieldNames ? '' : 'diffTeamBottom',
         protoName: 'diffTeamBottom', subBuilder: PlayerPairStat.create)
-    ..aOM<BestMoveDistribution>(
-        14, _omitFieldNames ? '' : 'bestMoveDistribution',
-        protoName: 'bestMoveDistribution',
-        subBuilder: BestMoveDistribution.create)
+    ..aOM<BestMoveDistribution>(14, _omitFieldNames ? '' : 'bestMoveDistribution',
+        protoName: 'bestMoveDistribution', subBuilder: BestMoveDistribution.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PlayerStatisticsEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PlayerStatisticsEventOut copyWith(
-          void Function(PlayerStatisticsEventOut) updates) =>
-      super.copyWith((message) => updates(message as PlayerStatisticsEventOut))
-          as PlayerStatisticsEventOut;
+  PlayerStatisticsEventOut copyWith(void Function(PlayerStatisticsEventOut) updates) =>
+      super.copyWith((message) => updates(message as PlayerStatisticsEventOut)) as PlayerStatisticsEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6724,8 +6288,8 @@ class PlayerStatisticsEventOut extends $pb.GeneratedMessage {
   @$core.override
   PlayerStatisticsEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PlayerStatisticsEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PlayerStatisticsEventOut>(create);
+  static PlayerStatisticsEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PlayerStatisticsEventOut>(create);
   static PlayerStatisticsEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6851,14 +6415,11 @@ class PhotoTheme extends $pb.GeneratedMessage {
   factory PhotoTheme.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory PhotoTheme.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory PhotoTheme.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PhotoTheme',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PhotoTheme',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aI(3, _omitFieldNames ? '' : 'ownerId', protoName: 'ownerId')
@@ -6879,8 +6440,7 @@ class PhotoTheme extends $pb.GeneratedMessage {
   @$core.override
   PhotoTheme createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PhotoTheme getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PhotoTheme>(create);
+  static PhotoTheme getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PhotoTheme>(create);
   static PhotoTheme? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -6944,23 +6504,19 @@ class PhotoThemePlayer extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'PhotoThemePlayer',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PhotoThemePlayer',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'playerId', protoName: 'playerId')
     ..aOS(2, _omitFieldNames ? '' : 'nickname')
     ..aOS(3, _omitFieldNames ? '' : 'themeImageUrl', protoName: 'themeImageUrl')
-    ..aOS(4, _omitFieldNames ? '' : 'profileImageUrl',
-        protoName: 'profileImageUrl')
+    ..aOS(4, _omitFieldNames ? '' : 'profileImageUrl', protoName: 'profileImageUrl')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PhotoThemePlayer clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PhotoThemePlayer copyWith(void Function(PhotoThemePlayer) updates) =>
-      super.copyWith((message) => updates(message as PhotoThemePlayer))
-          as PhotoThemePlayer;
+      super.copyWith((message) => updates(message as PhotoThemePlayer)) as PhotoThemePlayer;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -6970,8 +6526,8 @@ class PhotoThemePlayer extends $pb.GeneratedMessage {
   @$core.override
   PhotoThemePlayer createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static PhotoThemePlayer getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<PhotoThemePlayer>(create);
+  static PhotoThemePlayer getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PhotoThemePlayer>(create);
   static PhotoThemePlayer? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7029,20 +6585,16 @@ class CreatePhotoThemeEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreatePhotoThemeEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePhotoThemeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreatePhotoThemeEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreatePhotoThemeEvent copyWith(
-          void Function(CreatePhotoThemeEvent) updates) =>
-      super.copyWith((message) => updates(message as CreatePhotoThemeEvent))
-          as CreatePhotoThemeEvent;
+  CreatePhotoThemeEvent copyWith(void Function(CreatePhotoThemeEvent) updates) =>
+      super.copyWith((message) => updates(message as CreatePhotoThemeEvent)) as CreatePhotoThemeEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7052,8 +6604,8 @@ class CreatePhotoThemeEvent extends $pb.GeneratedMessage {
   @$core.override
   CreatePhotoThemeEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreatePhotoThemeEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreatePhotoThemeEvent>(create);
+  static CreatePhotoThemeEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreatePhotoThemeEvent>(create);
   static CreatePhotoThemeEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7084,20 +6636,16 @@ class CreatePhotoThemeEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'CreatePhotoThemeEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreatePhotoThemeEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'id')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CreatePhotoThemeEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreatePhotoThemeEventOut copyWith(
-          void Function(CreatePhotoThemeEventOut) updates) =>
-      super.copyWith((message) => updates(message as CreatePhotoThemeEventOut))
-          as CreatePhotoThemeEventOut;
+  CreatePhotoThemeEventOut copyWith(void Function(CreatePhotoThemeEventOut) updates) =>
+      super.copyWith((message) => updates(message as CreatePhotoThemeEventOut)) as CreatePhotoThemeEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7107,8 +6655,8 @@ class CreatePhotoThemeEventOut extends $pb.GeneratedMessage {
   @$core.override
   CreatePhotoThemeEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static CreatePhotoThemeEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<CreatePhotoThemeEventOut>(create);
+  static CreatePhotoThemeEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreatePhotoThemeEventOut>(create);
   static CreatePhotoThemeEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7139,20 +6687,16 @@ class UpdatePhotoThemeEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'UpdatePhotoThemeEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePhotoThemeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UpdatePhotoThemeEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdatePhotoThemeEvent copyWith(
-          void Function(UpdatePhotoThemeEvent) updates) =>
-      super.copyWith((message) => updates(message as UpdatePhotoThemeEvent))
-          as UpdatePhotoThemeEvent;
+  UpdatePhotoThemeEvent copyWith(void Function(UpdatePhotoThemeEvent) updates) =>
+      super.copyWith((message) => updates(message as UpdatePhotoThemeEvent)) as UpdatePhotoThemeEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7162,8 +6706,8 @@ class UpdatePhotoThemeEvent extends $pb.GeneratedMessage {
   @$core.override
   UpdatePhotoThemeEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static UpdatePhotoThemeEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<UpdatePhotoThemeEvent>(create);
+  static UpdatePhotoThemeEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdatePhotoThemeEvent>(create);
   static UpdatePhotoThemeEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7194,21 +6738,16 @@ class GetPhotoThemesEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetPhotoThemesEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<PhotoTheme>(1, _omitFieldNames ? '' : 'themes',
-        subBuilder: PhotoTheme.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPhotoThemesEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<PhotoTheme>(1, _omitFieldNames ? '' : 'themes', subBuilder: PhotoTheme.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetPhotoThemesEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetPhotoThemesEventOut copyWith(
-          void Function(GetPhotoThemesEventOut) updates) =>
-      super.copyWith((message) => updates(message as GetPhotoThemesEventOut))
-          as GetPhotoThemesEventOut;
+  GetPhotoThemesEventOut copyWith(void Function(GetPhotoThemesEventOut) updates) =>
+      super.copyWith((message) => updates(message as GetPhotoThemesEventOut)) as GetPhotoThemesEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7218,8 +6757,8 @@ class GetPhotoThemesEventOut extends $pb.GeneratedMessage {
   @$core.override
   GetPhotoThemesEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetPhotoThemesEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetPhotoThemesEventOut>(create);
+  static GetPhotoThemesEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPhotoThemesEventOut>(create);
   static GetPhotoThemesEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7244,34 +6783,27 @@ class GetPhotoThemePlayersEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetPhotoThemePlayersEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<PhotoThemePlayer>(1, _omitFieldNames ? '' : 'players',
-        subBuilder: PhotoThemePlayer.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPhotoThemePlayersEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<PhotoThemePlayer>(1, _omitFieldNames ? '' : 'players', subBuilder: PhotoThemePlayer.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetPhotoThemePlayersEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetPhotoThemePlayersEventOut copyWith(
-          void Function(GetPhotoThemePlayersEventOut) updates) =>
-      super.copyWith(
-              (message) => updates(message as GetPhotoThemePlayersEventOut))
-          as GetPhotoThemePlayersEventOut;
+  GetPhotoThemePlayersEventOut copyWith(void Function(GetPhotoThemePlayersEventOut) updates) =>
+      super.copyWith((message) => updates(message as GetPhotoThemePlayersEventOut)) as GetPhotoThemePlayersEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetPhotoThemePlayersEventOut create() =>
-      GetPhotoThemePlayersEventOut._();
+  static GetPhotoThemePlayersEventOut create() => GetPhotoThemePlayersEventOut._();
   @$core.override
   GetPhotoThemePlayersEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetPhotoThemePlayersEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetPhotoThemePlayersEventOut>(create);
+  static GetPhotoThemePlayersEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPhotoThemePlayersEventOut>(create);
   static GetPhotoThemePlayersEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7296,33 +6828,27 @@ class SetTournamentPhotoThemeEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SetTournamentPhotoThemeEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetTournamentPhotoThemeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'themeId', protoName: 'themeId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetTournamentPhotoThemeEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetTournamentPhotoThemeEvent copyWith(
-          void Function(SetTournamentPhotoThemeEvent) updates) =>
-      super.copyWith(
-              (message) => updates(message as SetTournamentPhotoThemeEvent))
-          as SetTournamentPhotoThemeEvent;
+  SetTournamentPhotoThemeEvent copyWith(void Function(SetTournamentPhotoThemeEvent) updates) =>
+      super.copyWith((message) => updates(message as SetTournamentPhotoThemeEvent)) as SetTournamentPhotoThemeEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SetTournamentPhotoThemeEvent create() =>
-      SetTournamentPhotoThemeEvent._();
+  static SetTournamentPhotoThemeEvent create() => SetTournamentPhotoThemeEvent._();
   @$core.override
   SetTournamentPhotoThemeEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SetTournamentPhotoThemeEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SetTournamentPhotoThemeEvent>(create);
+  static SetTournamentPhotoThemeEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetTournamentPhotoThemeEvent>(create);
   static SetTournamentPhotoThemeEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7353,20 +6879,16 @@ class SetTournamentDesignEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SetTournamentDesignEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetTournamentDesignEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'designKey', protoName: 'designKey')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetTournamentDesignEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetTournamentDesignEvent copyWith(
-          void Function(SetTournamentDesignEvent) updates) =>
-      super.copyWith((message) => updates(message as SetTournamentDesignEvent))
-          as SetTournamentDesignEvent;
+  SetTournamentDesignEvent copyWith(void Function(SetTournamentDesignEvent) updates) =>
+      super.copyWith((message) => updates(message as SetTournamentDesignEvent)) as SetTournamentDesignEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7376,8 +6898,8 @@ class SetTournamentDesignEvent extends $pb.GeneratedMessage {
   @$core.override
   SetTournamentDesignEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SetTournamentDesignEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SetTournamentDesignEvent>(create);
+  static SetTournamentDesignEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetTournamentDesignEvent>(create);
   static SetTournamentDesignEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7408,20 +6930,16 @@ class AddPlayerToThemeEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AddPlayerToThemeEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPlayerToThemeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'playerId', protoName: 'playerId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AddPlayerToThemeEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AddPlayerToThemeEvent copyWith(
-          void Function(AddPlayerToThemeEvent) updates) =>
-      super.copyWith((message) => updates(message as AddPlayerToThemeEvent))
-          as AddPlayerToThemeEvent;
+  AddPlayerToThemeEvent copyWith(void Function(AddPlayerToThemeEvent) updates) =>
+      super.copyWith((message) => updates(message as AddPlayerToThemeEvent)) as AddPlayerToThemeEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7431,8 +6949,8 @@ class AddPlayerToThemeEvent extends $pb.GeneratedMessage {
   @$core.override
   AddPlayerToThemeEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AddPlayerToThemeEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AddPlayerToThemeEvent>(create);
+  static AddPlayerToThemeEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddPlayerToThemeEvent>(create);
   static AddPlayerToThemeEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7463,33 +6981,27 @@ class AddPlayersFromTournamentEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AddPlayersFromTournamentEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPlayersFromTournamentEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'tournamentId', protoName: 'tournamentId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AddPlayersFromTournamentEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AddPlayersFromTournamentEvent copyWith(
-          void Function(AddPlayersFromTournamentEvent) updates) =>
-      super.copyWith(
-              (message) => updates(message as AddPlayersFromTournamentEvent))
-          as AddPlayersFromTournamentEvent;
+  AddPlayersFromTournamentEvent copyWith(void Function(AddPlayersFromTournamentEvent) updates) =>
+      super.copyWith((message) => updates(message as AddPlayersFromTournamentEvent)) as AddPlayersFromTournamentEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static AddPlayersFromTournamentEvent create() =>
-      AddPlayersFromTournamentEvent._();
+  static AddPlayersFromTournamentEvent create() => AddPlayersFromTournamentEvent._();
   @$core.override
   AddPlayersFromTournamentEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AddPlayersFromTournamentEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AddPlayersFromTournamentEvent>(create);
+  static AddPlayersFromTournamentEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddPlayersFromTournamentEvent>(create);
   static AddPlayersFromTournamentEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7513,42 +7025,35 @@ class AddPlayersFromTournamentEventOut extends $pb.GeneratedMessage {
 
   AddPlayersFromTournamentEventOut._();
 
-  factory AddPlayersFromTournamentEventOut.fromBuffer(
-          $core.List<$core.int> data,
+  factory AddPlayersFromTournamentEventOut.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
   factory AddPlayersFromTournamentEventOut.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'AddPlayersFromTournamentEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddPlayersFromTournamentEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'addedCount', protoName: 'addedCount')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AddPlayersFromTournamentEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AddPlayersFromTournamentEventOut copyWith(
-          void Function(AddPlayersFromTournamentEventOut) updates) =>
-      super.copyWith(
-              (message) => updates(message as AddPlayersFromTournamentEventOut))
+  AddPlayersFromTournamentEventOut copyWith(void Function(AddPlayersFromTournamentEventOut) updates) =>
+      super.copyWith((message) => updates(message as AddPlayersFromTournamentEventOut))
           as AddPlayersFromTournamentEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static AddPlayersFromTournamentEventOut create() =>
-      AddPlayersFromTournamentEventOut._();
+  static AddPlayersFromTournamentEventOut create() => AddPlayersFromTournamentEventOut._();
   @$core.override
   AddPlayersFromTournamentEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static AddPlayersFromTournamentEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<AddPlayersFromTournamentEventOut>(
-          create);
+  static AddPlayersFromTournamentEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddPlayersFromTournamentEventOut>(create);
   static AddPlayersFromTournamentEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7581,21 +7086,17 @@ class RefereeAssignment extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'RefereeAssignment',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RefereeAssignment',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'table')
-    ..aOM<Player>(2, _omitFieldNames ? '' : 'referee',
-        subBuilder: Player.create)
+    ..aOM<Player>(2, _omitFieldNames ? '' : 'referee', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RefereeAssignment clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RefereeAssignment copyWith(void Function(RefereeAssignment) updates) =>
-      super.copyWith((message) => updates(message as RefereeAssignment))
-          as RefereeAssignment;
+      super.copyWith((message) => updates(message as RefereeAssignment)) as RefereeAssignment;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7605,8 +7106,8 @@ class RefereeAssignment extends $pb.GeneratedMessage {
   @$core.override
   RefereeAssignment createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static RefereeAssignment getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<RefereeAssignment>(create);
+  static RefereeAssignment getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RefereeAssignment>(create);
   static RefereeAssignment? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7646,25 +7147,20 @@ class SetRefereeEvent extends $pb.GeneratedMessage {
   factory SetRefereeEvent.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory SetRefereeEvent.fromJson($core.String json,
-          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+  factory SetRefereeEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SetRefereeEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetRefereeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'table')
-    ..aOM<Player>(2, _omitFieldNames ? '' : 'referee',
-        subBuilder: Player.create)
+    ..aOM<Player>(2, _omitFieldNames ? '' : 'referee', subBuilder: Player.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetRefereeEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SetRefereeEvent copyWith(void Function(SetRefereeEvent) updates) =>
-      super.copyWith((message) => updates(message as SetRefereeEvent))
-          as SetRefereeEvent;
+      super.copyWith((message) => updates(message as SetRefereeEvent)) as SetRefereeEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7674,8 +7170,8 @@ class SetRefereeEvent extends $pb.GeneratedMessage {
   @$core.override
   SetRefereeEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SetRefereeEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SetRefereeEvent>(create);
+  static SetRefereeEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetRefereeEvent>(create);
   static SetRefereeEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7717,10 +7213,8 @@ class DeleteRefereeEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'DeleteRefereeEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteRefereeEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'table')
     ..hasRequiredFields = false;
 
@@ -7728,8 +7222,7 @@ class DeleteRefereeEvent extends $pb.GeneratedMessage {
   DeleteRefereeEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DeleteRefereeEvent copyWith(void Function(DeleteRefereeEvent) updates) =>
-      super.copyWith((message) => updates(message as DeleteRefereeEvent))
-          as DeleteRefereeEvent;
+      super.copyWith((message) => updates(message as DeleteRefereeEvent)) as DeleteRefereeEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7739,8 +7232,8 @@ class DeleteRefereeEvent extends $pb.GeneratedMessage {
   @$core.override
   DeleteRefereeEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static DeleteRefereeEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<DeleteRefereeEvent>(create);
+  static DeleteRefereeEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteRefereeEvent>(create);
   static DeleteRefereeEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7771,20 +7264,16 @@ class GetRefereesEventOut extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetRefereesEventOut',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
-    ..pPM<RefereeAssignment>(1, _omitFieldNames ? '' : 'assignments',
-        subBuilder: RefereeAssignment.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetRefereesEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
+    ..pPM<RefereeAssignment>(1, _omitFieldNames ? '' : 'assignments', subBuilder: RefereeAssignment.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetRefereesEventOut clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   GetRefereesEventOut copyWith(void Function(GetRefereesEventOut) updates) =>
-      super.copyWith((message) => updates(message as GetRefereesEventOut))
-          as GetRefereesEventOut;
+      super.copyWith((message) => updates(message as GetRefereesEventOut)) as GetRefereesEventOut;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7794,8 +7283,8 @@ class GetRefereesEventOut extends $pb.GeneratedMessage {
   @$core.override
   GetRefereesEventOut createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetRefereesEventOut getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetRefereesEventOut>(create);
+  static GetRefereesEventOut getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetRefereesEventOut>(create);
   static GetRefereesEventOut? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7824,10 +7313,8 @@ class SubstitutePlayerEvent extends $pb.GeneratedMessage {
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'SubstitutePlayerEvent',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubstitutePlayerEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'), createEmptyInstance: create)
     ..aI(1, _omitFieldNames ? '' : 'oldPlayerId', protoName: 'oldPlayerId')
     ..aI(2, _omitFieldNames ? '' : 'newPlayerId', protoName: 'newPlayerId')
     ..p<$core.int>(3, _omitFieldNames ? '' : 'games', $pb.PbFieldType.K3)
@@ -7836,10 +7323,8 @@ class SubstitutePlayerEvent extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SubstitutePlayerEvent clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SubstitutePlayerEvent copyWith(
-          void Function(SubstitutePlayerEvent) updates) =>
-      super.copyWith((message) => updates(message as SubstitutePlayerEvent))
-          as SubstitutePlayerEvent;
+  SubstitutePlayerEvent copyWith(void Function(SubstitutePlayerEvent) updates) =>
+      super.copyWith((message) => updates(message as SubstitutePlayerEvent)) as SubstitutePlayerEvent;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -7849,8 +7334,8 @@ class SubstitutePlayerEvent extends $pb.GeneratedMessage {
   @$core.override
   SubstitutePlayerEvent createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static SubstitutePlayerEvent getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<SubstitutePlayerEvent>(create);
+  static SubstitutePlayerEvent getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubstitutePlayerEvent>(create);
   static SubstitutePlayerEvent? _defaultInstance;
 
   @$pb.TagNumber(1)
@@ -7875,7 +7360,5 @@ class SubstitutePlayerEvent extends $pb.GeneratedMessage {
   $pb.PbList<$core.int> get games => $_getList(2);
 }
 
-const $core.bool _omitFieldNames =
-    $core.bool.fromEnvironment('protobuf.omit_field_names');
-const $core.bool _omitMessageNames =
-    $core.bool.fromEnvironment('protobuf.omit_message_names');
+const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
+const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

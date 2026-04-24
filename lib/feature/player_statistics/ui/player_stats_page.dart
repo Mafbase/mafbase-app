@@ -246,6 +246,6 @@ extension _StatsExt on PlayerRoleStatsModel {
 
     if (games == 0) return '0% (0)';
 
-    return '${(dies/total*100).toStringAsFixed(1)}% ($dies)';
+    return '${(dies / total * 100).toStringAsFixed(1)}% ($dies)';
   }
 }

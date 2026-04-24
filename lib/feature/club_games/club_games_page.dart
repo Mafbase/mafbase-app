@@ -27,8 +27,7 @@ class ClubGamesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateStart = DateTime.tryParse(dateStartParam ?? '') ??
-        DateTime.now().subtract(const Duration(days: 30));
+    final dateStart = DateTime.tryParse(dateStartParam ?? '') ?? DateTime.now().subtract(const Duration(days: 30));
     final dateEnd = DateTime.tryParse(dateEndParam ?? '') ?? DateTime.now();
     final range = DateTimeRange(start: dateStart, end: dateEnd);
 
@@ -130,6 +129,5 @@ class _ClubGamesPageState extends CustomState<_ClubGamesPageContent> {
         ),
       );
 
-  void openGame(int gameId) =>
-      context.router.push(ClubGameDetailRoute(clubId: widget.clubId, gameId: gameId));
+  void openGame(int gameId) => context.router.push(ClubGameDetailRoute(clubId: widget.clubId, gameId: gameId));
 }
