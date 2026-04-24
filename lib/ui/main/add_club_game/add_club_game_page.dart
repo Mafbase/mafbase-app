@@ -442,18 +442,16 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                     switch (model) {
                       case RatingScheme.minusFSM:
                         return context.locale.minus_fsm_schema;
-                      case RatingScheme.mediagameMSL:
-                        return context.locale.msl_schema;
                       default:
                         return context.locale.old_fsm_schema;
                     }
                   },
-                  items: [RatingScheme.oldFSM, RatingScheme.minusFSM, RatingScheme.mediagameMSL],
+                  items: [RatingScheme.oldFSM, RatingScheme.minusFSM],
                   onChanged: (value) {
                     setState(() {
                       ratingScheme = value;
                       for (final c in addScoreControllers) {
-                        c.text = value == RatingScheme.mediagameMSL ? '2.5' : '0.0';
+                        c.text = '0.0';
                       }
                     });
                   },
