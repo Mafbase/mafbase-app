@@ -19,7 +19,8 @@ abstract class GameResultModel with _$GameResultModel {
     int? refereeId,
   }) = _GameResultModel;
 
-  factory GameResultModel.fromProto(TableSeatingItem proto) {
+  factory GameResultModel.fromProto(TableSeatingItem proto, {RatingScheme? ratingScheme}) {
+    final baseAddScore = ratingScheme == RatingScheme.mediagameMSL ? 2.5 : 0.0;
     return GameResultModel(
       gameId: proto.gameId,
       nicknames: proto.seating.nickname,
@@ -44,11 +45,11 @@ abstract class GameResultModel with _$GameResultModel {
                   return PlayerResultStatus.died;
                 }
               }
-              // Проверяем положительные баллы из addScore
-              if (proto.result.addScore[index] > 0) {
+              // Проверяем положительные баллы: выше базового допа
+              if (proto.result.addScore[index] > baseAddScore) {
                 return PlayerResultStatus.positive;
               }
-              // Проверяем отрицательные баллы из minusScore
+              // Красный если минус не нулевой
               if (proto.result.minusScore[index] > 0) {
                 return PlayerResultStatus.negative;
               }

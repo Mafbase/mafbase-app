@@ -21,6 +21,7 @@ import 'package:seating_generator_web/domain/models/game_result_model.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/downloader/downloader.dart';
 
@@ -83,11 +84,12 @@ class TournamentEditRepositoryImpl extends BaseRepository implements TournamentE
   @override
   Future<List<List<GameResultModel>>> getResultModels({
     required int tournamentId,
+    RatingScheme? ratingScheme,
   }) {
     return GetSeatingRequest(tournamentId: tournamentId).execute(client).then((value) {
       return value.item
           .splitBetween((first, second) => first.game != second.game)
-          .map((e) => e.map((e) => GameResultModel.fromProto(e)).toList())
+          .map((e) => e.map((item) => GameResultModel.fromProto(item, ratingScheme: ratingScheme)).toList())
           .toList();
     });
   }

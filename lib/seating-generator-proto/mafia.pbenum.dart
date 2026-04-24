@@ -151,14 +151,17 @@ class RatingScheme extends $pb.ProtobufEnum {
       RatingScheme._(0, _omitEnumNames ? '' : 'oldFSM');
   static const RatingScheme minusFSM =
       RatingScheme._(1, _omitEnumNames ? '' : 'minusFSM');
+  static const RatingScheme mediagameMSL =
+      RatingScheme._(2, _omitEnumNames ? '' : 'mediagameMSL');
 
   static const $core.List<RatingScheme> values = <RatingScheme>[
     oldFSM,
     minusFSM,
+    mediagameMSL,
   ];
 
   static final $core.List<RatingScheme?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 1);
+      $pb.ProtobufEnum.$_initByValueList(values, 2);
   static RatingScheme? valueOf($core.int value) =>
       value < 0 || value >= _byValue.length ? null : _byValue[value];
 
