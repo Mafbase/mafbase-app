@@ -6,7 +6,9 @@ import 'package:seating_generator_web/domain/interactors/delete_separation_inter
 import 'package:seating_generator_web/domain/interactors/generate_final_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
@@ -15,6 +17,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.da
 class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     with EffectEmitter<SeatingPageEffect, SeatingPageState> {
   late int tournamentId;
+  RatingScheme? _ratingScheme;
   final RepositoryFactory _repos;
   late final GetSeparationInteractor _getSeparationInteractor =
       GetSeparationInteractor(_repos.tournamentEditRepository);
@@ -26,6 +29,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
       DeleteSeparationInteractor(_repos.tournamentEditRepository);
   late final CreateSeatingInteractor _createSeatingInteractor = CreateSeatingInteractor(_repos.tournamentsRepository);
   late final GetSeatingInteractor _getSeatingInteractor = GetSeatingInteractor(_repos.tournamentEditRepository);
+  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_repos.tournamentEditRepository);
   late final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
       GenerateFinalSeatingInteractor(_repos.tournamentEditRepository);
   final SeatingPageRouter router;
@@ -125,7 +129,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
   }
 
   Future<void> _updateSeating(Emitter emit) async {
-    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId);
+    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId, ratingScheme: _ratingScheme);
     emit(state.copyWith(isLoading: false, games: seating));
   }
 
@@ -176,10 +180,10 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     Emitter emit,
   ) async {
     tournamentId = event.tournamentId;
-    final pairs = await _getSeparationInteractor.run(
-      tournamentId: tournamentId,
-    );
-    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId);
+    final pairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
+    final settings = await _getSettingsInteractor.run(tournamentId: tournamentId);
+    _ratingScheme = settings.ratingScheme;
+    final seating = await _getSeatingInteractor.run(tournamentId: tournamentId, ratingScheme: _ratingScheme);
 
     emit(state.copyWith(isLoading: false, cannotMeet: pairs, games: seating));
   }
