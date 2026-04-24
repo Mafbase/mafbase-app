@@ -196,14 +196,12 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
         );
         emit(state.copyWith(isLoading: false));
       } else {
-        final defaultScheme = await _settingsStorage.getDefaultRatingScheme() ?? RatingScheme.oldFSM;
+        final storedScheme = await _settingsStorage.getDefaultRatingScheme();
+        final defaultScheme = (storedScheme == null || storedScheme == RatingScheme.mediagameMSL)
+            ? RatingScheme.oldFSM
+            : storedScheme;
 
-        emitEffect(
-          AddClubGameEffect.setValues(
-            ratingsSchema: defaultScheme,
-            addScore: defaultScheme == RatingScheme.mediagameMSL ? List.filled(10, 2.5) : List.filled(10, 0.0),
-          ),
-        );
+        emitEffect(AddClubGameEffect.setValues(ratingsSchema: defaultScheme, addScore: List.filled(10, 0.0)));
       }
     } else {
       final list = await Future.wait([
