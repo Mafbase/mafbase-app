@@ -13,17 +13,13 @@ class BillTournamentInteractor extends BaseInteractor {
   @override
   String get interactorName => 'BillTournamentInteractor';
 
-  Future<BillingResult> call({
-    required int tournamentId,
-    required int playersCount,
-    required bool billedTranslation,
-  }) =>
+  Future<BillingResult> call({required int tournamentId, required int playersCount, required bool billedTranslation}) =>
       wrap(
         () => _purchaseRepository.billTranslation(
           tournamentId: tournamentId,
           playersCount: playersCount,
           billedTranslation: billedTranslation,
-          redirectPath: _context.router.currentUrl,
+          redirectPath: '/payment-waiting?nextPath=${Uri.encodeQueryComponent(_context.router.currentUrl)}',
         ),
       );
 }

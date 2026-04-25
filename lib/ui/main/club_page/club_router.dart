@@ -8,8 +8,6 @@ abstract class ClubRouter {
   void openWebView(String url);
 
   String getLocation();
-
-  void openPaymentWaiting({required int purchaseId, required String nextPath});
 }
 
 class ClubRouterImpl implements ClubRouter {
@@ -29,13 +27,6 @@ class ClubRouterImpl implements ClubRouter {
 
   @override
   void openWebView(String url) {
-    context.router.push(
-      WebViewRoute(url: url, title: 'Оплата'),
-    );
-  }
-
-  @override
-  void openPaymentWaiting({required int purchaseId, required String nextPath}) {
-    context.router.push(PaymentWaitingRoute(purchaseId: purchaseId, nextPath: nextPath));
+    context.router.push(WebViewRoute(url: url, title: 'Оплата'));
   }
 }

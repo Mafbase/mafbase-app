@@ -20,10 +20,6 @@ abstract class TournamentPageRouter {
 
   void openWebView(String url);
 
-  String getLocation();
-
-  void openPaymentWaiting({required int purchaseId, required String nextPath});
-
   Future<({int newPlayerId, List<int> games})?> openSubstituteDialog({
     required PlayerModel oldPlayer,
     required List<int> gameNumbers,
@@ -37,9 +33,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   Future<PlayerModel?> showAddPlayerDialog() async {
-    return AddPlayerDialog.open(
-      context: _context,
-    );
+    return AddPlayerDialog.open(context: _context);
   }
 
   @override
@@ -67,27 +61,11 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
     required PlayerModel oldPlayer,
     required List<int> gameNumbers,
   }) {
-    return SubstitutePlayerDialog.show(
-      context: _context,
-      oldPlayer: oldPlayer,
-      gameNumbers: gameNumbers,
-    );
+    return SubstitutePlayerDialog.show(context: _context, oldPlayer: oldPlayer, gameNumbers: gameNumbers);
   }
 
   @override
   void openWebView(String url) {
-    _context.router.push(
-      WebViewRoute(url: url, title: _context.locale.payment),
-    );
-  }
-
-  @override
-  String getLocation() {
-    return _context.router.currentUrl;
-  }
-
-  @override
-  void openPaymentWaiting({required int purchaseId, required String nextPath}) {
-    _context.router.push(PaymentWaitingRoute(purchaseId: purchaseId, nextPath: nextPath));
+    _context.router.push(WebViewRoute(url: url, title: _context.locale.payment));
   }
 }
