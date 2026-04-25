@@ -1064,5 +1064,9 @@
   "paymentWaitingTitle": "Ожидание оплаты",
   "@paymentWaitingTitle": {},
   "paymentWaitingMessage": "Ожидаем подтверждения оплаты...",
-  "@paymentWaitingMessage": {}
+  "@paymentWaitingMessage": {},
+  "paymentWaitingSuccessSnackbar": "Оплата прошла успешно",
+  "@paymentWaitingSuccessSnackbar": {},
+  "paymentWaitingCanceledSnackbar": "Оплата отменена",
+  "@paymentWaitingCanceledSnackbar": {}
 }

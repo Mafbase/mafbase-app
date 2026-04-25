@@ -56,10 +56,16 @@ class _PaymentWaitingViewState extends State<PaymentWaitingView>
   void registerEffectHandlers(Function<T>(EffectHandler<T> handler) on) {
     on<PaymentWaitingEffectNavigateNext>((effect) {
       if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.locale.paymentWaitingSuccessSnackbar)),
+      );
       context.router.navigatePath(effect.nextPath);
     });
     on<PaymentWaitingEffectPaymentCanceled>((effect) {
       if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.locale.paymentWaitingCanceledSnackbar)),
+      );
       context.router.navigatePath(effect.nextPath);
     });
   }
