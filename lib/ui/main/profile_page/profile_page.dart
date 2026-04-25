@@ -35,17 +35,15 @@ class _ProfilePageState extends State<ProfilePage>
     on<ProfileEffectNavigateBack>((effect) {
       if (mounted) context.router.navigate(const ClubsRoute());
     });
-    on<ProfileEffectOpenBillingUrl>((effect) {
+    on<ProfileEffectNavigateToPaymentWaiting>((effect) {
       if (!mounted) return;
-      final url = effect.url;
-      final uri = Uri.parse(url);
+      final uri = Uri.parse(effect.redirectLink);
       if (kIsWeb) {
-        launchUrl(uri, webOnlyWindowName: '_self');
+        launchUrl(uri, webOnlyWindowName: '_blank');
       } else {
-        context.router.push(
-          WebViewRoute(url: url, title: context.locale.profilePaymentTitle),
-        );
+        launchUrl(uri);
       }
+      context.router.push(PaymentWaitingRoute(purchaseId: effect.purchaseId, nextPath: effect.nextPath));
     });
   }
 

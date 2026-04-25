@@ -144,12 +144,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
   ) async {
     emit(state.copyWith(isBilling: true));
     try {
-      final redirectLink = await _profileRepository.billTournamentSubscription(
+      final result = await _profileRepository.billTournamentSubscription(
         subscriptionType: TournamentSubscriptionTypeModel.tournamentWithAllAddons10Players,
         days: event.days,
         redirectPath: event.redirectPath,
       );
-      emitEffect(ProfileEffect.openBillingUrl(redirectLink));
+      emitEffect(ProfileEffect.navigateToPaymentWaiting(
+        redirectLink: result.redirectLink,
+        purchaseId: result.purchaseId,
+        nextPath: event.redirectPath,
+      ),);
     } finally {
       emit(state.copyWith(isBilling: false));
     }

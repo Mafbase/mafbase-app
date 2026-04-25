@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/guards/auth_guard.dart';
 import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
+import 'package:seating_generator_web/feature/payment_waiting/ui/payment_waiting_page.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_page.dart';
 import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_page.dart';
@@ -61,6 +62,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: TempRoute.page, path: '/temp'),
         AutoRoute(page: TranslationControlRoute.page, path: '/translationControl'),
         AutoRoute(page: WebViewRoute.page, path: '/web-view'),
+        AutoRoute(page: PaymentWaitingRoute.page, path: '/payment-waiting'),
 
         // Redirect fragment-based deep links (/#/club → /club)
         RedirectRoute(path: '/', redirectTo: '/club'),

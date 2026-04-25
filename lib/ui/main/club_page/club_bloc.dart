@@ -94,19 +94,19 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
   }
 
   Future<void> _onBillClub(ClubEventBillClub event, Emitter emit) async {
-    final url = await _billClubInteractor(
+    final nextPath = router.getLocation();
+    final result = await _billClubInteractor(
       clubId: _clubId,
-      redirectPath: router.getLocation(),
+      redirectPath: nextPath,
       days: event.days,
-    ).then((str) => Uri.parse(str));
+    );
+    final uri = Uri.parse(result.redirectLink);
     if (kIsWeb) {
-      launchUrl(
-        url,
-        webOnlyWindowName: '_self',
-      );
+      launchUrl(uri, webOnlyWindowName: '_blank');
     } else {
-      router.openWebView(url.toString());
+      launchUrl(uri);
     }
+    router.openPaymentWaiting(purchaseId: result.purchaseId, nextPath: nextPath);
   }
 
   Future<void> _onEditDescription(

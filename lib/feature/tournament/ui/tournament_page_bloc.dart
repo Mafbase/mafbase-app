@@ -122,20 +122,19 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   }
 
   Future<void> _onBill(TournamentPageEventBill event, Emitter emit) async {
-    final url = await _billTournamentInteractor(
+    final result = await _billTournamentInteractor(
       tournamentId: tournamentId,
       playersCount: event.playersCount,
       billedTranslation: event.billedTranlsation,
     );
-
+    final nextPath = router.getLocation();
+    final uri = Uri.parse(result.redirectLink);
     if (kIsWeb) {
-      await launchUrl(
-        Uri.parse(url),
-        webOnlyWindowName: '_self',
-      );
+      await launchUrl(uri, webOnlyWindowName: '_blank');
     } else {
-      router.openWebView(url);
+      launchUrl(uri);
     }
+    router.openPaymentWaiting(purchaseId: result.purchaseId, nextPath: nextPath);
   }
 
   Future<void> _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {

@@ -6,5 +6,9 @@ part 'profile_effect.freezed.dart';
 sealed class ProfileEffect with _$ProfileEffect {
   const factory ProfileEffect.navigateBack() = ProfileEffectNavigateBack;
 
-  const factory ProfileEffect.openBillingUrl(String url) = ProfileEffectOpenBillingUrl;
+  const factory ProfileEffect.navigateToPaymentWaiting({
+    required String redirectLink,
+    required int purchaseId,
+    required String nextPath,
+  }) = ProfileEffectNavigateToPaymentWaiting;
 }
