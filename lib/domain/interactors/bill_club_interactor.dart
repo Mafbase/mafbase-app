@@ -1,4 +1,5 @@
 import 'package:seating_generator_web/domain/base_interactor.dart';
+import 'package:seating_generator_web/domain/models/billing_result.dart';
 import 'package:seating_generator_web/domain/repositories/purchase_repository.dart';
 
 class BillClubInteractor extends BaseInteractor {
@@ -6,7 +7,7 @@ class BillClubInteractor extends BaseInteractor {
 
   BillClubInteractor(this._purchaseRepository);
 
-  Future<String> call({
+  Future<BillingResult> call({
     required int clubId,
     required int days,
     required String redirectPath,

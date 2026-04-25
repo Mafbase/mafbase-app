@@ -1,4 +1,5 @@
 import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/domain/models/billing_result.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/profile/data/request/bill_tournament_subscription_request.dart';
 import 'package:seating_generator_web/feature/profile/data/request/delete_account_request.dart';
@@ -44,15 +45,16 @@ class ProfileRepositoryImpl extends BaseRepository implements ProfileRepository 
   }
 
   @override
-  Future<String> billTournamentSubscription({
+  Future<BillingResult> billTournamentSubscription({
     required TournamentSubscriptionTypeModel subscriptionType,
     required int days,
     required String redirectPath,
-  }) {
-    return BillTournamentSubscriptionRequest(
+  }) async {
+    final response = await BillTournamentSubscriptionRequest(
       subscriptionType: subscriptionType.toProto(),
       days: days,
       redirectPath: redirectPath,
-    ).execute(client).then((value) => value.redirectLink);
+    ).execute(client);
+    return BillingResult(redirectLink: response.redirectLink, purchaseId: response.purchaseId);
   }
 }

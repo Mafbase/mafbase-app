@@ -27,8 +27,6 @@ class ClubRouterImpl implements ClubRouter {
 
   @override
   void openWebView(String url) {
-    context.router.push(
-      WebViewRoute(url: url, title: 'Оплата'),
-    );
+    context.router.push(WebViewRoute(url: url, title: 'Оплата'));
   }
 }

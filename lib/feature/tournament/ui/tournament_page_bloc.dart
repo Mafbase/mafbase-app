@@ -27,26 +27,34 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   final RepositoryFactory _repos;
   final BuildContext? _context;
 
-  late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
-      GetTournamentsPlayersInteractor(_repos.playersRepository);
-  late final AddTournamentPlayerInteractor _addPlayerInteractor =
-      AddTournamentPlayerInteractor(_repos.playersRepository);
+  late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor = GetTournamentsPlayersInteractor(
+    _repos.playersRepository,
+  );
+  late final AddTournamentPlayerInteractor _addPlayerInteractor = AddTournamentPlayerInteractor(
+    _repos.playersRepository,
+  );
   late final DeletePlayerInteractor _deletePlayerInteractor = DeletePlayerInteractor(_repos.playersRepository);
   late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_repos.tournamentEditRepository);
-  late final UpdateSettingsInteractor _updateSettingsInteractor =
-      UpdateSettingsInteractor(_repos.tournamentEditRepository);
-  late final TournamentCheckInteractor _tournamentCheckInteractor =
-      TournamentCheckInteractor(_repos.tournamentsRepository);
+  late final UpdateSettingsInteractor _updateSettingsInteractor = UpdateSettingsInteractor(
+    _repos.tournamentEditRepository,
+  );
+  late final TournamentCheckInteractor _tournamentCheckInteractor = TournamentCheckInteractor(
+    _repos.tournamentsRepository,
+  );
   late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_repos.tournamentsRepository);
-  late final GetFinalPlayersInteractor _getFinalPlayersInteractor =
-      GetFinalPlayersInteractor(_repos.tournamentEditRepository);
-  late final SetFinalPlayersInteractor _setFinalPlayersInteractor =
-      SetFinalPlayersInteractor(_repos.tournamentEditRepository);
+  late final GetFinalPlayersInteractor _getFinalPlayersInteractor = GetFinalPlayersInteractor(
+    _repos.tournamentEditRepository,
+  );
+  late final SetFinalPlayersInteractor _setFinalPlayersInteractor = SetFinalPlayersInteractor(
+    _repos.tournamentEditRepository,
+  );
   late final CustomTextInfoInteractor _customTextInfoInteractor = CustomTextInfoInteractor(_repos.infoRepository);
   late final StartGameInfoInteractor _startGameInfoInteractor = StartGameInfoInteractor(_repos.infoRepository);
   late final PhotoThemeRepository _photoThemeRepository = _repos.photoThemeRepository;
-  late final BillTournamentInteractor _billTournamentInteractor =
-      BillTournamentInteractor(_repos.purchaseRepository, _context!);
+  late final BillTournamentInteractor _billTournamentInteractor = BillTournamentInteractor(
+    _repos.purchaseRepository,
+    _context!,
+  );
 
   @visibleForTesting
   final TournamentPageRouter router;
@@ -56,9 +64,9 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     required this.router,
     required this.tournamentId,
     BuildContext? context,
-  })  : _repos = repos,
-        _context = context,
-        super(const TournamentPageState()) {
+  }) : _repos = repos,
+       _context = context,
+       super(const TournamentPageState()) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);
     on<TournamentPageEventDeletePlayer>(_onDeletePlayer);
@@ -76,44 +84,23 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     on<TournamentPageEventSubstitutePlayer>(_onSubstitutePlayer);
   }
 
-  Future _onStartGameInfo(
-    TournamentPageEventStartGameInfo event,
-    Emitter emit,
-  ) async {
-    await _startGameInfoInteractor(
-      tournamentId: tournamentId,
-      game: event.game,
-      time: event.time,
-    );
+  Future _onStartGameInfo(TournamentPageEventStartGameInfo event, Emitter emit) async {
+    await _startGameInfoInteractor(tournamentId: tournamentId, game: event.game, time: event.time);
     emitEffect(const TournamentPageEffect.showNotificationSentSuccess());
   }
 
-  Future _onCustomTextInfo(
-    TournamentPageEventCustomTextInfo event,
-    Emitter emit,
-  ) async {
-    await _customTextInfoInteractor(
-      tournamentId: tournamentId,
-      text: event.text,
-    );
+  Future _onCustomTextInfo(TournamentPageEventCustomTextInfo event, Emitter emit) async {
+    await _customTextInfoInteractor(tournamentId: tournamentId, text: event.text);
     emitEffect(const TournamentPageEffect.showNotificationSentSuccess());
   }
 
   Future _updateFinalPlayers(Emitter emit) async {
-    final finalPlayer = await _getFinalPlayersInteractor(
-      tournamentId: tournamentId,
-    );
+    final finalPlayer = await _getFinalPlayersInteractor(tournamentId: tournamentId);
     emit(state.copyWith(finalPlayers: finalPlayer));
   }
 
-  Future<void> _onSetFinalPlayers(
-    TournamentPageEventSetFinalPlayers event,
-    Emitter emit,
-  ) async {
-    await _setFinalPlayersInteractor(
-      players: event.players,
-      tournamentId: tournamentId,
-    );
+  Future<void> _onSetFinalPlayers(TournamentPageEventSetFinalPlayers event, Emitter emit) async {
+    await _setFinalPlayersInteractor(players: event.players, tournamentId: tournamentId);
     await _updateFinalPlayers(emit);
   }
 
@@ -122,33 +109,26 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   }
 
   Future<void> _onBill(TournamentPageEventBill event, Emitter emit) async {
-    final url = await _billTournamentInteractor(
+    final result = await _billTournamentInteractor(
       tournamentId: tournamentId,
       playersCount: event.playersCount,
       billedTranslation: event.billedTranlsation,
     );
-
+    final uri = Uri.parse(result.redirectLink);
     if (kIsWeb) {
-      await launchUrl(
-        Uri.parse(url),
-        webOnlyWindowName: '_self',
-      );
+      await launchUrl(uri, webOnlyWindowName: '_blank');
     } else {
-      router.openWebView(url);
+      launchUrl(uri);
     }
   }
 
   Future<void> _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {
     await Future.wait([
-      _tournamentCheckInteractor(tournamentId: tournamentId).onError((error, _) => false).then(
-            (value) => emit(
-              state.copyWith(isMyTournament: value),
-            ),
-          ),
+      _tournamentCheckInteractor(
+        tournamentId: tournamentId,
+      ).onError((error, _) => false).then((value) => emit(state.copyWith(isMyTournament: value))),
       Future(() async {
-        final tournament = await _getTournamentInteractor(
-          tournamentId: tournamentId,
-        );
+        final tournament = await _getTournamentInteractor(tournamentId: tournamentId);
 
         emit(
           state.copyWith(
@@ -168,31 +148,20 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     ]);
   }
 
-  void _onPlayersListTapped(
-    TournamentPageEventPlayersListTapped event,
-    Emitter emit,
-  ) {
+  void _onPlayersListTapped(TournamentPageEventPlayersListTapped event, Emitter emit) {
     router.openPlayersList(tournamentId: tournamentId);
   }
 
-  void _onOpenSeatingPage(
-    TournamentPageEventOpenSeatingPage event,
-    Emitter emit,
-  ) {
+  void _onOpenSeatingPage(TournamentPageEventOpenSeatingPage event, Emitter emit) {
     router.openSeatingPage(tournamentId: tournamentId);
   }
 
-  Future<void> _onOpenProfile(
-    TournamentPageEventOpenProfileDialog event,
-    Emitter emit,
-  ) async {
+  Future<void> _onOpenProfile(TournamentPageEventOpenProfileDialog event, Emitter emit) async {
     final hasChange = await router.showPlayerProfileDialog(player: event.player);
     if (hasChange) {
       emit(state.copyWith(isLoading: true));
       try {
-        final players = await _getTournamentsPlayersInteractor.run(
-          tournamentId: tournamentId,
-        );
+        final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
         emit(state.copyWith(isLoading: false, tournamentPlayers: players));
       } catch (e) {
         emit(state.copyWith(isLoading: false));
@@ -204,39 +173,23 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   Future<void> _onDeletePlayer(TournamentPageEventDeletePlayer event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     try {
-      await _deletePlayerInteractor.run(
-        tournamentId: tournamentId,
-        playerModel: event.player,
-      );
-      final players = await _getTournamentsPlayersInteractor.run(
-        tournamentId: tournamentId,
-      );
-      emit(
-        state.copyWith(
-          isLoading: false,
-          tournamentPlayers: players,
-        ),
-      );
+      await _deletePlayerInteractor.run(tournamentId: tournamentId, playerModel: event.player);
+      final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
+      emit(state.copyWith(isLoading: false, tournamentPlayers: players));
     } catch (e) {
       emit(state.copyWith(isLoading: false));
       rethrow;
     }
   }
 
-  Future _onAddPlayerTapped(
-    TournamentPageEventAddPlayer event,
-    Emitter<TournamentPageState> emit,
-  ) async {
+  Future _onAddPlayerTapped(TournamentPageEventAddPlayer event, Emitter<TournamentPageState> emit) async {
     final player = await router.showAddPlayerDialog();
     if (player == null) {
       return;
     }
     emit(state.copyWith(isLoading: true));
     try {
-      await _addPlayerInteractor.run(
-        tournamentId: tournamentId,
-        playerModel: player,
-      );
+      await _addPlayerInteractor.run(tournamentId: tournamentId, playerModel: player);
       await _updatePlayers(emit);
       emit(state.copyWith(isLoading: false));
     } catch (e) {
@@ -245,34 +198,21 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     }
   }
 
-  Future _onUpdateSettings(
-    TournamentPageEventUpdateSettings event,
-    Emitter emit,
-  ) async {
+  Future _onUpdateSettings(TournamentPageEventUpdateSettings event, Emitter emit) async {
     emit(
       state.copyWith(
         settings: await _updateSettingsInteractor
-            .run(
-              tournamentId: tournamentId,
-              model: event.settings,
-            )
-            .then(
-              (_) => _getSettingsInteractor.run(
-                tournamentId: tournamentId,
-              ),
-            )
+            .run(tournamentId: tournamentId, model: event.settings)
+            .then((_) => _getSettingsInteractor.run(tournamentId: tournamentId))
             .then((settings) {
-          emitEffect(const TournamentPageEffect.showUpdateSettingsSuccess());
-          return settings;
-        }),
+              emitEffect(const TournamentPageEffect.showUpdateSettingsSuccess());
+              return settings;
+            }),
       ),
     );
   }
 
-  Future _onPlayerListOpened(
-    TournamentPagePlayerListOpenedEvent event,
-    Emitter<TournamentPageState> emit,
-  ) async {
+  Future _onPlayerListOpened(TournamentPagePlayerListOpenedEvent event, Emitter<TournamentPageState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
       await Future.wait([
@@ -280,9 +220,12 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
         _getSettingsInteractor.run(tournamentId: tournamentId).then((settings) {
           emit(state.copyWith(settings: settings));
         }),
-        _photoThemeRepository.getThemes().then((themes) {
-          emit(state.copyWith(photoThemes: themes));
-        }).onError((_, __) {}),
+        _photoThemeRepository
+            .getThemes()
+            .then((themes) {
+              emit(state.copyWith(photoThemes: themes));
+            })
+            .onError((_, __) {}),
       ]);
       if (state.activePhotoThemeId != null) {
         await _loadThemePhotos(state.activePhotoThemeId!, emit);
@@ -314,25 +257,19 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     emit(state.copyWith(tournamentPlayers: players));
   }
 
-  Future _onSubstitutePlayer(
-    TournamentPageEventSubstitutePlayer event,
-    Emitter<TournamentPageState> emit,
-  ) async {
+  Future _onSubstitutePlayer(TournamentPageEventSubstitutePlayer event, Emitter<TournamentPageState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final allGames = await _repos.tournamentEditRepository.getResultModels(
-        tournamentId: tournamentId,
-      );
+      final allGames = await _repos.tournamentEditRepository.getResultModels(tournamentId: tournamentId);
 
-      final playerGames =
-          allGames.expand((round) => round).where((game) => game.nicknames.contains(event.oldPlayer.nickname)).toList();
+      final playerGames = allGames
+          .expand((round) => round)
+          .where((game) => game.nicknames.contains(event.oldPlayer.nickname))
+          .toList();
 
       final gameNumbers = playerGames.map((g) => g.game).toSet().toList()..sort();
 
-      final result = await router.openSubstituteDialog(
-        oldPlayer: event.oldPlayer,
-        gameNumbers: gameNumbers,
-      );
+      final result = await router.openSubstituteDialog(oldPlayer: event.oldPlayer, gameNumbers: gameNumbers);
 
       if (result != null) {
         await _repos.tournamentEditRepository.substitutePlayer(
@@ -350,24 +287,13 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     }
   }
 
-  Future<void> _applyPhotoTheme(
-    TournamentPageEventSetActivePhotoTheme event,
-    Emitter<TournamentPageState> emit,
-  ) async {
+  Future<void> _applyPhotoTheme(TournamentPageEventSetActivePhotoTheme event, Emitter<TournamentPageState> emit) async {
     final themeId = event.themeId;
 
-    await _photoThemeRepository.setTournamentPhotoTheme(
-      tournamentId,
-      themeId,
-    );
+    await _photoThemeRepository.setTournamentPhotoTheme(tournamentId, themeId);
 
     if (themeId == null) {
-      emit(
-        state.copyWith(
-          activePhotoThemeId: null,
-          activeThemePhotos: {},
-        ),
-      );
+      emit(state.copyWith(activePhotoThemeId: null, activeThemePhotos: {}));
       return;
     }
 

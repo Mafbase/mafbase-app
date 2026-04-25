@@ -33,9 +33,7 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
 
   @override
   Future<PlayerModel?> showAddPlayerDialog() async {
-    return AddPlayerDialog.open(
-      context: _context,
-    );
+    return AddPlayerDialog.open(context: _context);
   }
 
   @override
@@ -63,17 +61,11 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
     required PlayerModel oldPlayer,
     required List<int> gameNumbers,
   }) {
-    return SubstitutePlayerDialog.show(
-      context: _context,
-      oldPlayer: oldPlayer,
-      gameNumbers: gameNumbers,
-    );
+    return SubstitutePlayerDialog.show(context: _context, oldPlayer: oldPlayer, gameNumbers: gameNumbers);
   }
 
   @override
   void openWebView(String url) {
-    _context.router.push(
-      WebViewRoute(url: url, title: _context.locale.payment),
-    );
+    _context.router.push(WebViewRoute(url: url, title: _context.locale.payment));
   }
 }

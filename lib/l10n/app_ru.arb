@@ -1060,5 +1060,13 @@
         "example": "5"
       }
     }
-  }
+  },
+  "paymentWaitingTitle": "Ожидание оплаты",
+  "@paymentWaitingTitle": {},
+  "paymentWaitingMessage": "Ожидаем подтверждения оплаты...",
+  "@paymentWaitingMessage": {},
+  "paymentWaitingSuccessSnackbar": "Оплата прошла успешно",
+  "@paymentWaitingSuccessSnackbar": {},
+  "paymentWaitingCanceledSnackbar": "Оплата отменена",
+  "@paymentWaitingCanceledSnackbar": {}
 }

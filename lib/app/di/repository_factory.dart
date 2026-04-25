@@ -36,6 +36,8 @@ import 'package:seating_generator_web/feature/player_statistics/data/repository/
 import 'package:seating_generator_web/feature/player_statistics/domain/repository/player_statistics_repository.dart';
 import 'package:seating_generator_web/feature/profile/data/repository/profile_repository_impl.dart';
 import 'package:seating_generator_web/feature/profile/domain/repository/profile_repository.dart';
+import 'package:seating_generator_web/feature/payment_waiting/data/repository/payment_waiting_repository_impl.dart';
+import 'package:seating_generator_web/feature/payment_waiting/domain/repository/payment_waiting_repository.dart';
 import 'package:seating_generator_web/feature/referee_assignments/data/referee_repository_impl.dart';
 import 'package:seating_generator_web/feature/referee_assignments/domain/referee_repository.dart';
 
@@ -82,4 +84,6 @@ class RepositoryFactory {
   late final FantasyRepository fantasyRepository = FantasyRepositoryImpl(client);
 
   late final RefereeRepository refereeRepository = RefereeRepositoryImpl(client);
+
+  late final PaymentWaitingRepository paymentWaitingRepository = PaymentWaitingRepositoryImpl(client);
 }

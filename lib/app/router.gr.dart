@@ -13,7 +13,8 @@ part of 'router.dart';
 /// generated route for
 /// [AddClubPage]
 class AddClubRoute extends PageRouteInfo<void> {
-  const AddClubRoute({List<PageRouteInfo>? children}) : super(AddClubRoute.name, initialChildren: children);
+  const AddClubRoute({List<PageRouteInfo>? children})
+      : super(AddClubRoute.name, initialChildren: children);
 
   static const String name = 'AddClubRoute';
 
@@ -46,7 +47,8 @@ class AdministrationRoute extends PageRouteInfo<AdministrationRouteArgs> {
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<AdministrationRouteArgs>(
-        orElse: () => AdministrationRouteArgs(tournamentId: pathParams.getInt('id')),
+        orElse: () =>
+            AdministrationRouteArgs(tournamentId: pathParams.getInt('id')),
       );
       return AdministrationPage(key: args.key, tournamentId: args.tournamentId);
     },
@@ -79,7 +81,8 @@ class AdministrationRouteArgs {
 /// generated route for
 /// [AppShellPage]
 class AppShellRoute extends PageRouteInfo<void> {
-  const AppShellRoute({List<PageRouteInfo>? children}) : super(AppShellRoute.name, initialChildren: children);
+  const AppShellRoute({List<PageRouteInfo>? children})
+      : super(AppShellRoute.name, initialChildren: children);
 
   static const String name = 'AppShellRoute';
 
@@ -162,11 +165,15 @@ class ClubGameDetailRouteArgs {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! ClubGameDetailRouteArgs) return false;
-    return key == other.key && clubId == other.clubId && gameId == other.gameId && editParam == other.editParam;
+    return key == other.key &&
+        clubId == other.clubId &&
+        gameId == other.gameId &&
+        editParam == other.editParam;
   }
 
   @override
-  int get hashCode => key.hashCode ^ clubId.hashCode ^ gameId.hashCode ^ editParam.hashCode;
+  int get hashCode =>
+      key.hashCode ^ clubId.hashCode ^ gameId.hashCode ^ editParam.hashCode;
 }
 
 /// generated route for
@@ -250,7 +257,11 @@ class ClubGamesRouteArgs {
   }
 
   @override
-  int get hashCode => key.hashCode ^ clubId.hashCode ^ dateStartParam.hashCode ^ dateEndParam.hashCode;
+  int get hashCode =>
+      key.hashCode ^
+      clubId.hashCode ^
+      dateStartParam.hashCode ^
+      dateEndParam.hashCode;
 }
 
 /// generated route for
@@ -308,7 +319,9 @@ class ClubRouteArgs {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! ClubRouteArgs) return false;
-    return key == other.key && clubId == other.clubId && cachedModel == other.cachedModel;
+    return key == other.key &&
+        clubId == other.clubId &&
+        cachedModel == other.cachedModel;
   }
 
   @override
@@ -446,7 +459,8 @@ class ClubRatingRouteArgs {
 /// generated route for
 /// [ClubsPage]
 class ClubsRoute extends PageRouteInfo<void> {
-  const ClubsRoute({List<PageRouteInfo>? children}) : super(ClubsRoute.name, initialChildren: children);
+  const ClubsRoute({List<PageRouteInfo>? children})
+      : super(ClubsRoute.name, initialChildren: children);
 
   static const String name = 'ClubsRoute';
 
@@ -461,7 +475,8 @@ class ClubsRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ContactsPage]
 class ContactsRoute extends PageRouteInfo<void> {
-  const ContactsRoute({List<PageRouteInfo>? children}) : super(ContactsRoute.name, initialChildren: children);
+  const ContactsRoute({List<PageRouteInfo>? children})
+      : super(ContactsRoute.name, initialChildren: children);
 
   static const String name = 'ContactsRoute';
 
@@ -475,7 +490,8 @@ class ContactsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CustomColumnsEditorPage]
-class CustomColumnsEditorRoute extends PageRouteInfo<CustomColumnsEditorRouteArgs> {
+class CustomColumnsEditorRoute
+    extends PageRouteInfo<CustomColumnsEditorRouteArgs> {
   CustomColumnsEditorRoute({
     Key? key,
     required int clubId,
@@ -494,7 +510,8 @@ class CustomColumnsEditorRoute extends PageRouteInfo<CustomColumnsEditorRouteArg
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<CustomColumnsEditorRouteArgs>(
-        orElse: () => CustomColumnsEditorRouteArgs(clubId: pathParams.getInt('clubId')),
+        orElse: () =>
+            CustomColumnsEditorRouteArgs(clubId: pathParams.getInt('clubId')),
       );
       return CustomColumnsEditorPage(key: args.key, clubId: args.clubId);
     },
@@ -545,7 +562,8 @@ class EditSeatingRoute extends PageRouteInfo<EditSeatingRouteArgs> {
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<EditSeatingRouteArgs>(
-        orElse: () => EditSeatingRouteArgs(tournamentId: pathParams.getInt('id')),
+        orElse: () =>
+            EditSeatingRouteArgs(tournamentId: pathParams.getInt('id')),
       );
       return EditSeatingPage(key: args.key, tournamentId: args.tournamentId);
     },
@@ -644,7 +662,8 @@ class ForgotPasswordPageRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [InfoTableDescriptionPage]
-class InfoTableDescriptionRoute extends PageRouteInfo<InfoTableDescriptionRouteArgs> {
+class InfoTableDescriptionRoute
+    extends PageRouteInfo<InfoTableDescriptionRouteArgs> {
   InfoTableDescriptionRoute({
     Key? key,
     required int tournamentId,
@@ -719,7 +738,8 @@ class LoginPageRoute extends PageRouteInfo<LoginPageRouteArgs> {
     builder: (data) {
       final queryParams = data.queryParams;
       final args = data.argsAs<LoginPageRouteArgs>(
-        orElse: () => LoginPageRouteArgs(nextPath: queryParams.optString('next')),
+        orElse: () =>
+            LoginPageRouteArgs(nextPath: queryParams.optString('next')),
       );
       return LoginPageBody(key: args.key, nextPath: args.nextPath);
     },
@@ -804,7 +824,9 @@ class NewClubGameRouteArgs {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! NewClubGameRouteArgs) return false;
-    return key == other.key && clubId == other.clubId && initDateTime == other.initDateTime;
+    return key == other.key &&
+        clubId == other.clubId &&
+        initDateTime == other.initDateTime;
   }
 
   @override
@@ -812,9 +834,77 @@ class NewClubGameRouteArgs {
 }
 
 /// generated route for
+/// [PaymentWaitingPage]
+class PaymentWaitingRoute extends PageRouteInfo<PaymentWaitingRouteArgs> {
+  PaymentWaitingRoute({
+    int? purchaseId,
+    String? nextPath,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PaymentWaitingRoute.name,
+          args: PaymentWaitingRouteArgs(
+            purchaseId: purchaseId,
+            nextPath: nextPath,
+            key: key,
+          ),
+          rawQueryParams: {'purchaseId': purchaseId, 'nextPath': nextPath},
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentWaitingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final queryParams = data.queryParams;
+      final args = data.argsAs<PaymentWaitingRouteArgs>(
+        orElse: () => PaymentWaitingRouteArgs(
+          purchaseId: queryParams.optInt('purchaseId'),
+          nextPath: queryParams.optString('nextPath'),
+        ),
+      );
+      return PaymentWaitingPage(
+        purchaseId: args.purchaseId,
+        nextPath: args.nextPath,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class PaymentWaitingRouteArgs {
+  const PaymentWaitingRouteArgs({this.purchaseId, this.nextPath, this.key});
+
+  final int? purchaseId;
+
+  final String? nextPath;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PaymentWaitingRouteArgs{purchaseId: $purchaseId, nextPath: $nextPath, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PaymentWaitingRouteArgs) return false;
+    return purchaseId == other.purchaseId &&
+        nextPath == other.nextPath &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode => purchaseId.hashCode ^ nextPath.hashCode ^ key.hashCode;
+}
+
+/// generated route for
 /// [PhotoThemesPage]
 class PhotoThemesRoute extends PageRouteInfo<void> {
-  const PhotoThemesRoute({List<PageRouteInfo>? children}) : super(PhotoThemesRoute.name, initialChildren: children);
+  const PhotoThemesRoute({List<PageRouteInfo>? children})
+      : super(PhotoThemesRoute.name, initialChildren: children);
 
   static const String name = 'PhotoThemesRoute';
 
@@ -828,7 +918,8 @@ class PhotoThemesRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [PhotoThemesTournamentPage]
-class PhotoThemesTournamentRoute extends PageRouteInfo<PhotoThemesTournamentRouteArgs> {
+class PhotoThemesTournamentRoute
+    extends PageRouteInfo<PhotoThemesTournamentRouteArgs> {
   PhotoThemesTournamentRoute({Key? key, List<PageRouteInfo>? children})
       : super(
           PhotoThemesTournamentRoute.name,
@@ -895,7 +986,8 @@ class PlayerStatsRoute extends PageRouteInfo<PlayerStatsRouteArgs> {
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<PlayerStatsRouteArgs>(
-        orElse: () => PlayerStatsRouteArgs(playerId: pathParams.getInt('playerId')),
+        orElse: () =>
+            PlayerStatsRouteArgs(playerId: pathParams.getInt('playerId')),
       );
       return PlayerStatsPage(key: args.key, playerId: args.playerId);
     },
@@ -944,7 +1036,8 @@ class TournamentPlayersRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute({List<PageRouteInfo>? children}) : super(ProfileRoute.name, initialChildren: children);
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
@@ -959,7 +1052,8 @@ class ProfileRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [RailWrapperPage]
 class RailWrapperRoute extends PageRouteInfo<void> {
-  const RailWrapperRoute({List<PageRouteInfo>? children}) : super(RailWrapperRoute.name, initialChildren: children);
+  const RailWrapperRoute({List<PageRouteInfo>? children})
+      : super(RailWrapperRoute.name, initialChildren: children);
 
   static const String name = 'RailWrapperRoute';
 
@@ -1129,7 +1223,8 @@ class SeatingRouteArgs {
 /// generated route for
 /// [SignUpPageBody]
 class SignUpPageRoute extends PageRouteInfo<void> {
-  const SignUpPageRoute({List<PageRouteInfo>? children}) : super(SignUpPageRoute.name, initialChildren: children);
+  const SignUpPageRoute({List<PageRouteInfo>? children})
+      : super(SignUpPageRoute.name, initialChildren: children);
 
   static const String name = 'SignUpPageRoute';
 
@@ -1144,7 +1239,8 @@ class SignUpPageRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [TempPage]
 class TempRoute extends PageRouteInfo<void> {
-  const TempRoute({List<PageRouteInfo>? children}) : super(TempRoute.name, initialChildren: children);
+  const TempRoute({List<PageRouteInfo>? children})
+      : super(TempRoute.name, initialChildren: children);
 
   static const String name = 'TempRoute';
 
@@ -1158,7 +1254,8 @@ class TempRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TournamentGameDetailPage]
-class TournamentGameDetailRoute extends PageRouteInfo<TournamentGameDetailRouteArgs> {
+class TournamentGameDetailRoute
+    extends PageRouteInfo<TournamentGameDetailRouteArgs> {
   TournamentGameDetailRoute({
     Key? key,
     int? tournamentId,
@@ -1234,7 +1331,11 @@ class TournamentGameDetailRouteArgs {
   }
 
   @override
-  int get hashCode => key.hashCode ^ tournamentId.hashCode ^ gameId.hashCode ^ editParam.hashCode;
+  int get hashCode =>
+      key.hashCode ^
+      tournamentId.hashCode ^
+      gameId.hashCode ^
+      editParam.hashCode;
 }
 
 /// generated route for
@@ -1258,7 +1359,8 @@ class TournamentRoute extends PageRouteInfo<TournamentRouteArgs> {
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<TournamentRouteArgs>(
-        orElse: () => TournamentRouteArgs(tournamentId: pathParams.getInt('id')),
+        orElse: () =>
+            TournamentRouteArgs(tournamentId: pathParams.getInt('id')),
       );
       return TournamentPage(key: args.key, tournamentId: args.tournamentId);
     },
@@ -1398,7 +1500,8 @@ class TournamentRatingRouteArgs {
 
 /// generated route for
 /// [TournamentSettingsPage]
-class TournamentSettingsRoute extends PageRouteInfo<TournamentSettingsRouteArgs> {
+class TournamentSettingsRoute
+    extends PageRouteInfo<TournamentSettingsRouteArgs> {
   TournamentSettingsRoute({
     Key? key,
     required int tournamentId,
@@ -1420,7 +1523,8 @@ class TournamentSettingsRoute extends PageRouteInfo<TournamentSettingsRouteArgs>
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<TournamentSettingsRouteArgs>(
-        orElse: () => TournamentSettingsRouteArgs(tournamentId: pathParams.getInt('id')),
+        orElse: () =>
+            TournamentSettingsRouteArgs(tournamentId: pathParams.getInt('id')),
       );
       return TournamentSettingsPage(
         key: args.key,
@@ -1456,7 +1560,8 @@ class TournamentSettingsRouteArgs {
 /// generated route for
 /// [TournamentsPage]
 class TournamentsRoute extends PageRouteInfo<void> {
-  const TournamentsRoute({List<PageRouteInfo>? children}) : super(TournamentsRoute.name, initialChildren: children);
+  const TournamentsRoute({List<PageRouteInfo>? children})
+      : super(TournamentsRoute.name, initialChildren: children);
 
   static const String name = 'TournamentsRoute';
 
@@ -1470,7 +1575,8 @@ class TournamentsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TranslationControlPage]
-class TranslationControlRoute extends PageRouteInfo<TranslationControlRouteArgs> {
+class TranslationControlRoute
+    extends PageRouteInfo<TranslationControlRouteArgs> {
   TranslationControlRoute({
     Key? key,
     int tournamentId = 0,
@@ -1548,7 +1654,11 @@ class TranslationControlRouteArgs {
   }
 
   @override
-  int get hashCode => key.hashCode ^ tournamentId.hashCode ^ table.hashCode ^ translationKey.hashCode;
+  int get hashCode =>
+      key.hashCode ^
+      tournamentId.hashCode ^
+      table.hashCode ^
+      translationKey.hashCode;
 }
 
 /// generated route for
