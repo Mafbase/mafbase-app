@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/feature/payment_waiting/domain/repository/payment_waiting_repository.dart';
 import 'package:seating_generator_web/feature/payment_waiting/ui/payment_waiting_effect.dart';
@@ -17,19 +18,27 @@ class PaymentWaitingBloc extends Bloc<PaymentWaitingEvent, PaymentWaitingState>
     emit(state.copyWith(isLoading: true));
     try {
       while (!isClosed) {
-        final status = await _repository.waitForPayment(purchaseId: event.purchaseId);
+        try {
+          final status = await _repository.waitForPayment(purchaseId: event.purchaseId);
 
-        if (status == WaitForPaymentStatus.succeeded) {
-          emitEffect(const PaymentWaitingEffect.navigateNext());
-          return;
-        } else if (status == WaitForPaymentStatus.canceled) {
-          emitEffect(const PaymentWaitingEffect.paymentCanceled());
-          return;
+          if (status == WaitForPaymentStatus.succeeded) {
+            emitEffect(const PaymentWaitingEffect.navigateNext());
+            return;
+          } else if (status == WaitForPaymentStatus.canceled) {
+            emitEffect(const PaymentWaitingEffect.paymentCanceled());
+            return;
+          }
+          // pending — poll again
+        } on DioException {
+          // Network error — wait before retrying to avoid spamming when offline
+          await Future.delayed(const Duration(seconds: 5));
         }
-        // pending — poll again
+        // RequestError (HTTP >= 400) propagates out and is handled by AppBlocObserver
       }
     } finally {
-      emit(state.copyWith(isLoading: false));
+      if (!isClosed) {
+        emit(state.copyWith(isLoading: false));
+      }
     }
   }
 }
