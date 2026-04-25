@@ -6,6 +6,5 @@ part 'payment_waiting_event.freezed.dart';
 abstract class PaymentWaitingEvent with _$PaymentWaitingEvent {
   const factory PaymentWaitingEvent.start({
     required int purchaseId,
-    required String nextPath,
   }) = PaymentWaitingEventStart;
 }

@@ -20,10 +20,10 @@ class PaymentWaitingBloc extends Bloc<PaymentWaitingEvent, PaymentWaitingState>
         final status = await _repository.waitForPayment(purchaseId: event.purchaseId);
 
         if (status == WaitForPaymentStatus.succeeded) {
-          emitEffect(PaymentWaitingEffect.navigateNext(event.nextPath));
+          emitEffect(const PaymentWaitingEffect.navigateNext());
           return;
         } else if (status == WaitForPaymentStatus.canceled) {
-          emitEffect(PaymentWaitingEffect.paymentCanceled(event.nextPath));
+          emitEffect(const PaymentWaitingEffect.paymentCanceled());
           return;
         }
         // pending — poll again

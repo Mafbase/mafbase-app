@@ -29,10 +29,7 @@ class PaymentWaitingPage extends StatelessWidget {
         );
         final id = purchaseId;
         if (id != null) {
-          bloc.add(PaymentWaitingEvent.start(
-            purchaseId: id,
-            nextPath: nextPath ?? '/',
-          ),);
+          bloc.add(PaymentWaitingEvent.start(purchaseId: id));
         }
         return bloc;
       },
@@ -59,14 +56,14 @@ class _PaymentWaitingViewState extends State<PaymentWaitingView>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.locale.paymentWaitingSuccessSnackbar)),
       );
-      context.router.navigatePath(effect.nextPath);
+      context.router.navigatePath(widget.nextPath ?? '/');
     });
     on<PaymentWaitingEffectPaymentCanceled>((effect) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.locale.paymentWaitingCanceledSnackbar)),
       );
-      context.router.navigatePath(effect.nextPath);
+      context.router.navigatePath(widget.nextPath ?? '/');
     });
   }
 
