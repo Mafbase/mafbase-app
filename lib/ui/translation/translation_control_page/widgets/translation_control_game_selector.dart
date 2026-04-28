@@ -6,12 +6,14 @@ class TranslationControlGameSelector extends StatelessWidget {
   final int game;
   final int totalGames;
   final ValueChanged<int> onChanged;
+  final VoidCallback? onClose;
 
   const TranslationControlGameSelector({
     super.key,
     required this.game,
     required this.totalGames,
     required this.onChanged,
+    this.onClose,
   });
 
   @override
@@ -22,19 +24,24 @@ class TranslationControlGameSelector extends StatelessWidget {
       height: 52,
       color: theme.background2,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(4),
-        child: CustomDropdown(
-          mapToString: (game) => 'Игра $game',
-          items: List.generate(
-            totalGames,
-            (i) => i + 1,
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: CustomDropdown(
+                mapToString: (game) => 'Игра $game',
+                items: List.generate(totalGames, (i) => i + 1),
+                initValue: game,
+                onChanged: (value) {
+                  if (value != null) onChanged(value);
+                },
+              ),
+            ),
           ),
-          initValue: game,
-          onChanged: (value) {
-            if (value != null) onChanged(value);
-          },
-        ),
+          if (onClose != null)
+            IconButton(onPressed: onClose, icon: const Icon(Icons.close), color: theme.defaultTextStyle.color),
+        ],
       ),
     );
   }
