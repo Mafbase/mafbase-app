@@ -40,6 +40,11 @@ private:
 
     int video_fps_ = 30;
 
+    // true если сессия включает аудио-трек (audio_extradata передан в open()).
+    // false означает video-only режим — аудио-стрим не создаётся, FLV header
+    // пишется сразу как только готова video_extradata_.
+    bool has_audio_ = false;
+
     // Кеш SPS/PPS, извлекаемых из первого keyframe в Annex-B, если extradata
     // не передан в params. Нужен FFmpeg для FLV-muxer (он требует extradata
     // при write_header). На практике задаём extradata перед open.

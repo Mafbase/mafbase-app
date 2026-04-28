@@ -203,9 +203,12 @@ ms_result RtmpPublisher::open(const std::string& url, const ms_session_params& p
     }
 
     video_fps_ = params.fps > 0 ? params.fps : 30;
+    has_audio_ = (params.audio_extradata != nullptr && params.audio_extradata_size > 0);
 
     if (auto r = init_video_stream(params); r != MS_OK) return r;
-    if (auto r = init_audio_stream(params); r != MS_OK) return r;
+    if (has_audio_) {
+        if (auto r = init_audio_stream(params); r != MS_OK) return r;
+    }
 
     if (params.video_extradata && params.video_extradata_size > 0) {
         std::vector<uint8_t> ed(params.video_extradata,
@@ -215,7 +218,7 @@ ms_result RtmpPublisher::open(const std::string& url, const ms_session_params& p
             MS_LOGW(kTag, "video_extradata в Annex-B без SPS+PPS — будет извлечена из первого keyframe");
         }
     }
-    if (params.audio_extradata && params.audio_extradata_size > 0) {
+    if (has_audio_) {
         audio_extradata_.assign(params.audio_extradata,
                                 params.audio_extradata + params.audio_extradata_size);
     }
@@ -234,8 +237,8 @@ ms_result RtmpPublisher::open(const std::string& url, const ms_session_params& p
     }
 
     // Если extradata уже известна — пишем header сразу. Иначе ждём первого
-    // ключевого кадра (там должны прийти SPS/PPS) и первого аудио-кадра.
-    if (!video_extradata_.empty() && !audio_extradata_.empty()) {
+    // ключевого кадра (там должны прийти SPS/PPS) и, если есть аудио, первого аудио-кадра.
+    if (!video_extradata_.empty() && (!has_audio_ || !audio_extradata_.empty())) {
         // Прокидываем extradata в AVCodecParameters перед write_header.
         auto set_extradata = [](AVStream* st, const std::vector<uint8_t>& ed) {
             uint8_t* buf = static_cast<uint8_t*>(av_mallocz(ed.size() + AV_INPUT_BUFFER_PADDING_SIZE));
@@ -244,7 +247,7 @@ ms_result RtmpPublisher::open(const std::string& url, const ms_session_params& p
             st->codecpar->extradata_size = static_cast<int>(ed.size());
         };
         set_extradata(video_stream_, video_extradata_);
-        set_extradata(audio_stream_, audio_extradata_);
+        if (has_audio_) set_extradata(audio_stream_, audio_extradata_);
 
         err = avformat_write_header(fmt_ctx_, nullptr);
         if (err < 0) {
@@ -324,8 +327,8 @@ ms_result RtmpPublisher::write_video(const uint8_t* data, size_t size, int64_t p
     }
 
     if (!header_written_) {
-        if (video_extradata_.empty() || audio_extradata_.empty()) {
-            // Аудио ещё не подвезло extradata — не можем писать header.
+        if (video_extradata_.empty() || (has_audio_ && audio_extradata_.empty())) {
+            // Ждём video extradata и, если есть аудио-трек, audio extradata.
             return MS_OK;
         }
         auto set_extradata = [](AVStream* st, const std::vector<uint8_t>& ed) {
@@ -336,7 +339,7 @@ ms_result RtmpPublisher::write_video(const uint8_t* data, size_t size, int64_t p
             st->codecpar->extradata_size = static_cast<int>(ed.size());
         };
         set_extradata(video_stream_, video_extradata_);
-        set_extradata(audio_stream_, audio_extradata_);
+        if (has_audio_) set_extradata(audio_stream_, audio_extradata_);
         const int err = avformat_write_header(fmt_ctx_, nullptr);
         if (err < 0) {
             MS_LOGE(kTag, "avformat_write_header (lazy) failed: " + av_err(err));
@@ -368,6 +371,7 @@ ms_result RtmpPublisher::write_video(const uint8_t* data, size_t size, int64_t p
 
 ms_result RtmpPublisher::write_audio(const uint8_t* data, size_t size, int64_t pts_us) {
     if (!fmt_ctx_) return MS_ERR_INVALID_STATE;
+    if (!audio_stream_) return MS_OK;  // video-only сессия
     if (!data || size == 0) return MS_ERR_INVALID_ARG;
 
     AacPayload aac = parse_adts(data, size);
@@ -387,7 +391,7 @@ ms_result RtmpPublisher::write_audio(const uint8_t* data, size_t size, int64_t p
             st->codecpar->extradata_size = static_cast<int>(ed.size());
         };
         set_extradata(video_stream_, video_extradata_);
-        set_extradata(audio_stream_, audio_extradata_);
+        if (audio_stream_) set_extradata(audio_stream_, audio_extradata_);
         const int err = avformat_write_header(fmt_ctx_, nullptr);
         if (err < 0) {
             MS_LOGE(kTag, "avformat_write_header (lazy/audio) failed: " + av_err(err));
@@ -432,6 +436,7 @@ ms_result RtmpPublisher::close() {
     video_stream_ = nullptr;
     audio_stream_ = nullptr;
     header_written_ = false;
+    has_audio_ = false;
     video_extradata_.clear();
     audio_extradata_.clear();
     return MS_OK;

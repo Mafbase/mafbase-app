@@ -11,7 +11,7 @@
 namespace ms = mafbase_stream;
 
 struct ms_session {
-    std::mutex mu;
+    mutable std::mutex mu;
     ms::StateMachine sm;
     std::unique_ptr<ms::RtmpPublisher> publisher;
     std::string url;
@@ -96,6 +96,7 @@ void ms_session_destroy(ms_session* session) {
 
 ms_state ms_session_get_state(const ms_session* session) {
     if (!session) return MS_STATE_STOPPED;
+    std::lock_guard lk(session->mu);
     return session->sm.state();
 }
 

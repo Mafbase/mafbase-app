@@ -330,11 +330,10 @@ class StreamSession(private val config: Config) {
     private fun extractH264Extradata(format: MediaFormat): ByteArray? {
         val sps = format.getByteBuffer("csd-0") ?: return null
         val pps = format.getByteBuffer("csd-1") ?: return null
-        val out = ByteArray(sps.remaining() + pps.remaining())
-        sps.get(out, 0, sps.remaining())
-        pps.get(out, sps.position(), pps.remaining())
-        // ByteBuffer.get(...) сдвигает позицию — после этого ridge может стать невалидным
-        // для последующих читателей. Т.к. format нам больше не нужен — это нормально.
+        val spsSize = sps.remaining()
+        val out = ByteArray(spsSize + pps.remaining())
+        sps.get(out, 0, spsSize)
+        pps.get(out, spsSize, pps.remaining())
         return out
     }
 
