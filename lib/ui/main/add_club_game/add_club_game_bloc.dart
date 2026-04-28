@@ -112,6 +112,10 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     if (event.gameResult.hasRatingScheme()) {
       _settingsStorage.saveScheme(event.gameResult.ratingScheme);
     }
+    if (clubId != null) {
+      final ciId = event.gameResult.hasCiId() ? event.gameResult.ciId : CiSchemeModel.empty.id;
+      _settingsStorage.saveDefaultCiSchemeId(ciId);
+    }
 
     emit(state.copyWith(isLoading: true));
     try {
@@ -195,12 +199,23 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
         );
         emit(state.copyWith(isLoading: false));
       } else {
-        final defaultScheme = await _settingsStorage.getDefaultRatingScheme() ?? RatingScheme.oldFSM;
+        final results = await Future.wait([
+          _settingsStorage.getDefaultRatingScheme(),
+          _settingsStorage.getDefaultCiSchemeId(),
+        ]);
+        final defaultScheme = (results[0] as RatingScheme?) ?? RatingScheme.oldFSM;
+        final savedCiId = results[1] as int?;
+        final defaultCiModel = savedCiId == null
+            ? null
+            : savedCiId == CiSchemeModel.empty.id
+                ? CiSchemeModel.empty
+                : state.ciSchemes.firstWhereOrNull((e) => e.id == savedCiId);
 
         emitEffect(
           AddClubGameEffect.setValues(
             ratingsSchema: defaultScheme,
             addScore: defaultScheme == RatingScheme.mediagameMSL ? List.filled(10, 2.5) : List.filled(10, 0.0),
+            ciModel: defaultCiModel,
           ),
         );
       }
