@@ -1,0 +1,16 @@
+# Локальный nginx с модулем nginx-rtmp для тестирования стрим-pipeline
+# плагина mafbase_stream. Подробнее: ../docs/dev/local_rtmp_setup.md
+services:
+  nginx-rtmp:
+    image: tiangolo/nginx-rtmp:latest
+    container_name: mafbase-nginx-rtmp
+    restart: unless-stopped
+    ports:
+      # RTMP — основной endpoint для публикации/чтения потоков
+      - "1935:1935"
+      # HTTP — статус-страница nginx-rtmp и (опционально) HLS-выход для отладки в браузере
+      - "8080:80"
+    volumes:
+      # Прозрачная кастомизация: правим nginx.conf — перезапускаем контейнер
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # Каталог для HLS-сегментов (создаётся внутри контейнера, наружу не маунтится — чисто tmp)
