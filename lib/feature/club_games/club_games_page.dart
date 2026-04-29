@@ -131,7 +131,7 @@ class _ClubGamesPageState extends CustomState<_ClubGamesPageContent> {
                     child: GestureDetector(
                       onTap: () => openGame(state.games[index].gameId),
                       child: GameResultWidget(
-                        model: state.games[index].copyWith(game: index + 1, table: 1),
+                        model: state.games[index],
                         width: GameResultWidget.baseWidth * coef,
                         height: GameResultWidget.baseHeight * coef,
                       ),
