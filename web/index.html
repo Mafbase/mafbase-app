@@ -20,9 +20,13 @@
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Mafbase">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Browser theme color (controls Safari/Chrome toolbar color) -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1A2D42">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A1620">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="img.png">
@@ -42,8 +46,14 @@
     body {
       margin: 0;
       min-height: 100%;
-      background-color: #DF5650;
-          background-size: 100% 100%;
+      background-color: #1A2D42;
+      background-size: 100% 100%;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0A1620;
+      }
     }
 
     .center {
@@ -97,6 +107,14 @@
       document.getElementById("splash")?.remove();
       document.getElementById("splash-branding")?.remove();
       document.body.style.background = "transparent";
+    }
+
+    function setFlutterThemeColor(color) {
+      document.querySelectorAll('meta[name="theme-color"]').forEach(function(el) { el.remove(); });
+      var meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      meta.content = color;
+      document.head.appendChild(meta);
     }
   </script>
 </head>

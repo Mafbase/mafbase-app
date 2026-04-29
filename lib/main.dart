@@ -18,6 +18,7 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
+import 'package:seating_generator_web/utils/web_theme_color/web_theme_color.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -109,6 +110,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
     navigatorKey: rootNavigationKey,
   );
   StreamSubscription? subscription;
+  Brightness? _lastBrightness;
 
   @override
   void initState() {
@@ -165,13 +167,20 @@ class _MafbaseAppState extends State<MafbaseApp> {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
-                builder: (context, child) => MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: TextScaler.noScaling,
-                    boldText: false,
-                  ),
-                  child: child ?? const SizedBox.shrink(),
-                ),
+                builder: (context, child) {
+                  final brightness = MediaQuery.platformBrightnessOf(context);
+                  if (brightness != _lastBrightness) {
+                    _lastBrightness = brightness;
+                    setWebThemeColor(brightness == Brightness.dark ? '#0A1620' : '#1A2D42');
+                  }
+                  return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(
+                      textScaler: TextScaler.noScaling,
+                      boldText: false,
+                    ),
+                    child: child ?? const SizedBox.shrink(),
+                  );
+                },
               );
             },
           ),
