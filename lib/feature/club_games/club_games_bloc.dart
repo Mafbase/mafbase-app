@@ -29,7 +29,10 @@ class ClubGamesBloc extends Bloc<ClubGamesEvent, ClubGamesState> {
       emit(
         state.copyWith(
           loading: false,
-          games: games.mapIndexed((index, e) => e.copyWith(table: 1, game: games.length - index)).toList(),
+          games: games.mapIndexed((index, e) {
+            final gameNumber = event.sort == 'desc' ? games.length - index : index + 1;
+            return e.copyWith(table: 1, game: gameNumber);
+          }).toList(),
         ),
       );
     } finally {
