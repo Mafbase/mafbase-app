@@ -10,6 +10,7 @@ import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_bloc.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_event.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_state.dart';
+import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
@@ -35,7 +36,7 @@ class ClubGamesPage extends StatelessWidget {
       create: (context) {
         final repository = RepositoryFactory.of(context).clubRepository;
         return ClubGamesBloc(const ClubGamesState(), repository)
-          ..add(ClubGamesEvent.init(clubId: clubId, range: range, sort: 'asc'));
+          ..add(ClubGamesEvent.init(clubId: clubId, range: range));
       },
       child: _ClubGamesPageContent(clubId: clubId, range: range),
     );
@@ -53,10 +54,29 @@ class _ClubGamesPageContent extends StatefulWidget {
 }
 
 class _ClubGamesPageState extends CustomState<_ClubGamesPageContent> {
+  void _toggleSort(BuildContext context, ClubGamesState state) {
+    final newSort = state.sort == 'desc' ? 'asc' : 'desc';
+    context.read<ClubGamesBloc>().add(ClubGamesEvent.init(clubId: widget.clubId, range: widget.range, sort: newSort));
+  }
+
+  Widget _buildSortButton(BuildContext context, ClubGamesState state) {
+    final l10n = AppLocalizations.of(context)!;
+    final isDesc = state.sort == 'desc';
+    return IconButton(
+      icon: Icon(isDesc ? Icons.arrow_downward : Icons.arrow_upward),
+      tooltip: isDesc ? l10n.clubGamesSortDesc : l10n.clubGamesSortAsc,
+      onPressed: state.loading ? null : () => _toggleSort(context, state),
+    );
+  }
+
   @override
   Widget buildDesktop(BuildContext context) => BlocBuilder<ClubGamesBloc, ClubGamesState>(
     builder: (context, state) => Scaffold(
-      appBar: AppBar(leading: const BackButton(), title: const Text('Игры клуба')),
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: const Text('Игры клуба'),
+        actions: [_buildSortButton(context, state)],
+      ),
       body: state.loading
           ? const LoadingOverlayWidget()
           : LayoutBuilder(
@@ -87,7 +107,11 @@ class _ClubGamesPageState extends CustomState<_ClubGamesPageContent> {
   @override
   Widget? buildMobile(BuildContext context) => BlocBuilder<ClubGamesBloc, ClubGamesState>(
     builder: (context, state) => Scaffold(
-      appBar: AppBar(leading: const BackButton(), title: const Text('Игры клуба')),
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: const Text('Игры клуба'),
+        actions: [_buildSortButton(context, state)],
+      ),
       body: state.loading
           ? const LoadingOverlayWidget()
           : PageView.builder(

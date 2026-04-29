@@ -5,9 +5,6 @@ part 'club_games_event.freezed.dart';
 
 @freezed
 abstract class ClubGamesEvent with _$ClubGamesEvent {
-  const factory ClubGamesEvent.init({
-    required int clubId,
-    required DateTimeRange range,
-    @Default('desc') String sort,
-  }) = ClubGamesEventInit;
+  const factory ClubGamesEvent.init({required int clubId, required DateTimeRange range, @Default('asc') String sort}) =
+      ClubGamesEventInit;
 }
