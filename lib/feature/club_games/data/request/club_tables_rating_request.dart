@@ -8,8 +8,9 @@ class ClubTablesRatingRequest extends BaseRequest<SeatingEventOut> {
   ClubTablesRatingRequest({
     required DateTimeRange range,
     required int clubId,
+    String sort = 'desc',
   }) : super(
-          '/api/club/$clubId/tables-rating?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}',
+          '/api/club/$clubId/tables-rating?date-start=${dateFormatForRequests.format(range.start)}&date-end=${dateFormatForRequests.format(range.end)}&sort=$sort',
         );
 
   @override

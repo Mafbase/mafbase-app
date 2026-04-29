@@ -8,5 +8,6 @@ abstract class ClubGamesEvent with _$ClubGamesEvent {
   const factory ClubGamesEvent.init({
     required int clubId,
     required DateTimeRange range,
+    @Default('desc') String sort,
   }) = ClubGamesEventInit;
 }

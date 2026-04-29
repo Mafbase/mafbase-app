@@ -18,16 +18,22 @@ class ClubGamesBloc extends Bloc<ClubGamesEvent, ClubGamesState> {
     ClubGamesEventInit event,
     Emitter<ClubGamesState> emit,
   ) async {
-    final games = await repository.getGames(
-      clubId: event.clubId,
-      range: event.range,
-    );
+    emit(state.copyWith(loading: true, sort: event.sort));
+    try {
+      final games = await repository.getGames(
+        clubId: event.clubId,
+        range: event.range,
+        sort: event.sort,
+      );
 
-    emit(
-      state.copyWith(
-        loading: false,
-        games: games.mapIndexed((index, e) => e.copyWith(table: 1, game: games.length - index)).toList(),
-      ),
-    );
+      emit(
+        state.copyWith(
+          loading: false,
+          games: games.mapIndexed((index, e) => e.copyWith(table: 1, game: games.length - index)).toList(),
+        ),
+      );
+    } finally {
+      emit(state.copyWith(loading: false));
+    }
   }
 }

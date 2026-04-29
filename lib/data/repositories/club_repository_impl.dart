@@ -47,8 +47,9 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   Future<List<GameResultModel>> getGames({
     required int clubId,
     required DateTimeRange range,
+    String sort = 'desc',
   }) {
-    return ClubTablesRatingRequest(range: range, clubId: clubId).execute(client).then((event) {
+    return ClubTablesRatingRequest(range: range, clubId: clubId, sort: sort).execute(client).then((event) {
       return event.item.map(GameResultModel.fromProto).toList();
     });
   }

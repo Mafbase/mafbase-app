@@ -8,5 +8,6 @@ abstract class ClubGamesState with _$ClubGamesState {
   const factory ClubGamesState({
     @Default([]) List<GameResultModel> games,
     @Default(true) bool loading,
+    @Default('desc') String sort,
   }) = _ClubGamesState;
 }
