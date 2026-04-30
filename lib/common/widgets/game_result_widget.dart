@@ -11,12 +11,7 @@ class GameResultWidget extends StatefulWidget {
   final double width;
   final double height;
 
-  const GameResultWidget({
-    super.key,
-    required this.model,
-    this.width = baseWidth,
-    this.height = baseHeight,
-  });
+  const GameResultWidget({super.key, required this.model, this.width = baseWidth, this.height = baseHeight});
 
   @override
   State<GameResultWidget> createState() => _GameResultWidgetState();
@@ -25,17 +20,10 @@ class GameResultWidget extends StatefulWidget {
 class _GameResultWidgetState extends State<GameResultWidget> {
   @override
   Widget build(BuildContext context) {
-    final BorderSide side = BorderSide(
-      color: context.theme.textColor.withValues(alpha: .26),
-      width: 1,
-    );
+    final BorderSide side = BorderSide(color: context.theme.textColor.withValues(alpha: .26), width: 1);
 
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(
-        textScaler: TextScaler.linear(
-          widget.height / GameResultWidget.baseHeight,
-        ),
-      ),
+      data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(widget.height / GameResultWidget.baseHeight)),
       child: Container(
         width: widget.width,
         height: widget.height,
@@ -54,15 +42,11 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                     Expanded(
                       child: Container(
                         height: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border(right: side),
-                        ),
+                        decoration: BoxDecoration(border: Border(right: side)),
                         child: Center(
                           child: Text(
                             '№',
-                            style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                  color: const Color(0xFF979A9D),
-                                ),
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(color: const Color(0xFF979A9D)),
                           ),
                         ),
                       ),
@@ -76,15 +60,9 @@ class _GameResultWidgetState extends State<GameResultWidget> {
                               '${context.locale.tableAndGame(widget.model.table, widget.model.game)}\n${widget.model.referee}',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                    color: const Color(0xFF979A9D),
-                                  ),
+                              style: MyTheme.of(context).defaultTextStyle.copyWith(color: const Color(0xFF979A9D)),
                             ),
-                          Expanded(
-                            child: _GameResultWidget(
-                              win: widget.model.gameWin,
-                            ),
-                          ),
+                          Expanded(child: _GameResultWidget(win: widget.model.gameWin)),
                         ],
                       ),
                     ),
@@ -120,61 +98,37 @@ class _PlayerRowWidget extends StatelessWidget {
   final int place;
   final double? score;
 
-  const _PlayerRowWidget({
-    this.role,
-    this.status,
-    this.score,
-    required this.nickname,
-    required this.place,
-  });
+  const _PlayerRowWidget({this.role, this.status, this.score, required this.nickname, required this.place});
 
   @override
   Widget build(BuildContext context) {
-    final BorderSide side = BorderSide(
-      color: context.theme.textColor.withValues(alpha: .26),
-      width: 1,
-    );
+    final BorderSide side = BorderSide(color: context.theme.textColor.withValues(alpha: .26), width: 1);
 
     return SelectionArea(
       child: Container(
-        decoration: BoxDecoration(
-          border: Border(top: side),
-        ),
+        decoration: BoxDecoration(border: Border(top: side)),
         child: Row(
           children: [
             Expanded(
               child: Container(
                 height: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border(right: side),
-                ),
+                decoration: BoxDecoration(border: Border(right: side)),
                 padding: const EdgeInsets.all(4),
-                child: Text(
-                  '$place',
-                  style: context.theme.defaultTextStyle,
-                ),
+                child: Text('$place', style: context.theme.defaultTextStyle),
               ),
             ),
             Expanded(
               flex: 3,
               child: Container(
                 height: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border(right: side),
-                ),
+                decoration: BoxDecoration(border: Border(right: side)),
                 padding: const EdgeInsets.all(4),
-                child: Text(
-                  nickname,
-                  style: context.theme.defaultTextStyle,
-                ),
+                child: Text(nickname, style: context.theme.defaultTextStyle),
               ),
             ),
             Expanded(
               flex: 2,
-              child: _RoleWidget(
-                role: role,
-                status: status,
-              ),
+              child: _RoleWidget(role: role, status: status),
             ),
             Expanded(
               child: Opacity(
@@ -183,10 +137,7 @@ class _PlayerRowWidget extends StatelessWidget {
                   width: 60,
                   height: double.infinity,
                   padding: const EdgeInsets.all(4),
-                  child: Text(
-                    '$score',
-                    style: context.theme.defaultTextStyle,
-                  ),
+                  child: Text(score != null ? score!.toStringAsFixed(2) : '', style: context.theme.defaultTextStyle),
                 ),
               ),
             ),
@@ -201,17 +152,11 @@ class _RoleWidget extends StatelessWidget {
   final PlayerRole? role;
   final PlayerResultStatus? status;
 
-  const _RoleWidget({
-    this.role,
-    this.status,
-  });
+  const _RoleWidget({this.role, this.status});
 
   @override
   Widget build(BuildContext context) {
-    final BorderSide side = BorderSide(
-      color: context.theme.textColor.withValues(alpha: .26),
-      width: 1,
-    );
+    final BorderSide side = BorderSide(color: context.theme.textColor.withValues(alpha: .26), width: 1);
 
     return Visibility(
       visible: role != null,
@@ -222,12 +167,7 @@ class _RoleWidget extends StatelessWidget {
           border: Border(right: side),
           color: background(context),
         ),
-        child: Center(
-          child: Text(
-            text,
-            style: textStyle(context),
-          ),
-        ),
+        child: Center(child: Text(text, style: textStyle(context))),
       ),
     );
   }
@@ -270,9 +210,7 @@ class _RoleWidget extends StatelessWidget {
 class _GameResultWidget extends StatelessWidget {
   final GameWin? win;
 
-  const _GameResultWidget({
-    required this.win,
-  });
+  const _GameResultWidget({required this.win});
 
   @override
   Widget build(BuildContext context) {

@@ -18,6 +18,7 @@ abstract class ClubRepository {
   Future<List<GameResultModel>> getGames({
     required int clubId,
     required DateTimeRange range,
+    String sort = 'desc',
   });
 
   Future<List<ClubModel>> getClubs({bool onlyMy = false});
