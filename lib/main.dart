@@ -18,6 +18,7 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
+import 'package:seating_generator_web/utils/web_theme_color/web_theme_color.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -165,16 +166,47 @@ class _MafbaseAppState extends State<MafbaseApp> {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
-                builder: (context, child) => MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: TextScaler.noScaling,
-                    boldText: false,
-                  ),
-                  child: child ?? const SizedBox.shrink(),
-                ),
+                builder: (context, child) {
+                  return _WebThemeColorUpdater(
+                    child: MediaQuery(
+                      data: MediaQuery.of(context).copyWith(
+                        textScaler: TextScaler.noScaling,
+                        boldText: false,
+                      ),
+                      child: child ?? const SizedBox.shrink(),
+                    ),
+                  );
+                },
               );
             },
           ),
         ),
       );
+}
+
+class _WebThemeColorUpdater extends StatefulWidget {
+  final Widget child;
+
+  const _WebThemeColorUpdater({required this.child});
+
+  @override
+  State<_WebThemeColorUpdater> createState() => _WebThemeColorUpdaterState();
+}
+
+class _WebThemeColorUpdaterState extends State<_WebThemeColorUpdater> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (kIsWeb) {
+      final color = Theme.of(context).appBarTheme.backgroundColor;
+      if (color != null) {
+        final argb = color.toARGB32();
+        final hex = '#${(argb & 0xFFFFFF).toRadixString(16).padLeft(6, '0')}';
+        setWebThemeColor(hex);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
