@@ -1,0 +1,1 @@
+void setWebThemeColor(String hexColor) {}
