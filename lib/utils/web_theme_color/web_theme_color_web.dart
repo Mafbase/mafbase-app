@@ -1,8 +1,8 @@
 import 'dart:js_interop';
 
 @JS('setFlutterThemeColor')
-external void _setFlutterThemeColor(String color);
+external void _setFlutterThemeColor(JSString color);
 
 void setWebThemeColor(String hexColor) {
-  _setFlutterThemeColor(hexColor);
+  _setFlutterThemeColor(hexColor.toJS);
 }

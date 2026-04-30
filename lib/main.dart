@@ -110,7 +110,6 @@ class _MafbaseAppState extends State<MafbaseApp> {
     navigatorKey: rootNavigationKey,
   );
   StreamSubscription? subscription;
-  Brightness? _lastBrightness;
 
   @override
   void initState() {
@@ -168,17 +167,14 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 builder: (context, child) {
-                  final brightness = MediaQuery.platformBrightnessOf(context);
-                  if (brightness != _lastBrightness) {
-                    _lastBrightness = brightness;
-                    setWebThemeColor(brightness == Brightness.dark ? '#0A1620' : '#1A2D42');
-                  }
-                  return MediaQuery(
-                    data: MediaQuery.of(context).copyWith(
-                      textScaler: TextScaler.noScaling,
-                      boldText: false,
+                  return _WebThemeColorUpdater(
+                    child: MediaQuery(
+                      data: MediaQuery.of(context).copyWith(
+                        textScaler: TextScaler.noScaling,
+                        boldText: false,
+                      ),
+                      child: child ?? const SizedBox.shrink(),
                     ),
-                    child: child ?? const SizedBox.shrink(),
                   );
                 },
               );
@@ -186,4 +182,31 @@ class _MafbaseAppState extends State<MafbaseApp> {
           ),
         ),
       );
+}
+
+class _WebThemeColorUpdater extends StatefulWidget {
+  final Widget child;
+
+  const _WebThemeColorUpdater({required this.child});
+
+  @override
+  State<_WebThemeColorUpdater> createState() => _WebThemeColorUpdaterState();
+}
+
+class _WebThemeColorUpdaterState extends State<_WebThemeColorUpdater> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (kIsWeb) {
+      final color = Theme.of(context).appBarTheme.backgroundColor;
+      if (color != null) {
+        final argb = color.toARGB32();
+        final hex = '#${(argb & 0xFFFFFF).toRadixString(16).padLeft(6, '0')}';
+        setWebThemeColor(hex);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
