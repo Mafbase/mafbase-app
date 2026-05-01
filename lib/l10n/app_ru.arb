@@ -941,7 +941,7 @@
   "@seatingEmptyState": {},
   "seatingActions": "Действия",
   "@seatingActions": {},
-  "seatingSeparations": "Разделения",
+  "seatingSeparations": "Рассадка",
   "@seatingSeparations": {},
   "seatingGenerate": "Сгенерировать рассадку",
   "@seatingGenerate": {},

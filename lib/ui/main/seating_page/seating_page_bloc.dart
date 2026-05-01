@@ -19,26 +19,29 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
   late int tournamentId;
   RatingScheme? _ratingScheme;
   final RepositoryFactory _repos;
-  late final GetSeparationInteractor _getSeparationInteractor =
-      GetSeparationInteractor(_repos.tournamentEditRepository);
-  late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor =
-      GetTournamentsPlayersInteractor(_repos.playersRepository);
-  late final AddSeparationInteractor _addSeparationInteractor =
-      AddSeparationInteractor(_repos.tournamentEditRepository);
-  late final DeleteSeparationInteractor _deleteSeparationInteractor =
-      DeleteSeparationInteractor(_repos.tournamentEditRepository);
+  late final GetSeparationInteractor _getSeparationInteractor = GetSeparationInteractor(
+    _repos.tournamentEditRepository,
+  );
+  late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor = GetTournamentsPlayersInteractor(
+    _repos.playersRepository,
+  );
+  late final AddSeparationInteractor _addSeparationInteractor = AddSeparationInteractor(
+    _repos.tournamentEditRepository,
+  );
+  late final DeleteSeparationInteractor _deleteSeparationInteractor = DeleteSeparationInteractor(
+    _repos.tournamentEditRepository,
+  );
   late final CreateSeatingInteractor _createSeatingInteractor = CreateSeatingInteractor(_repos.tournamentsRepository);
   late final GetSeatingInteractor _getSeatingInteractor = GetSeatingInteractor(_repos.tournamentEditRepository);
   late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_repos.tournamentEditRepository);
-  late final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor =
-      GenerateFinalSeatingInteractor(_repos.tournamentEditRepository);
+  late final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor = GenerateFinalSeatingInteractor(
+    _repos.tournamentEditRepository,
+  );
   final SeatingPageRouter router;
 
-  SeatingPageBloc({
-    required RepositoryFactory repos,
-    required this.router,
-  })  : _repos = repos,
-        super(const SeatingPageState()) {
+  SeatingPageBloc({required RepositoryFactory repos, required this.router})
+    : _repos = repos,
+      super(const SeatingPageState()) {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
@@ -52,32 +55,16 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     on<SeatingPageEventGetCrossStats>(_downloadCrossStats);
   }
 
-  Future<void> _downloadPlayersSeating(
-    SeatingPageEventGetPlayersSeating event,
-    Emitter emit,
-  ) async =>
-      _repos.tournamentEditRepository.downloadPlayersSeating(
-        tournamentId: tournamentId,
-      );
+  Future<void> _downloadPlayersSeating(SeatingPageEventGetPlayersSeating event, Emitter emit) async =>
+      _repos.tournamentEditRepository.downloadPlayersSeating(tournamentId: tournamentId);
 
-  Future<void> _downloadTablesSeating(
-    SeatingPageEventGetTablesSeating event,
-    Emitter emit,
-  ) async =>
-      _repos.tournamentEditRepository.downloadTablesSeating(
-        tournamentId: tournamentId,
-      );
+  Future<void> _downloadTablesSeating(SeatingPageEventGetTablesSeating event, Emitter emit) async =>
+      _repos.tournamentEditRepository.downloadTablesSeating(tournamentId: tournamentId);
 
-  Future<void> _downloadCrossStats(
-    SeatingPageEventGetCrossStats event,
-    Emitter emit,
-  ) async =>
+  Future<void> _downloadCrossStats(SeatingPageEventGetCrossStats event, Emitter emit) async =>
       _repos.tournamentEditRepository.downloadCrossStats(tournamentId: tournamentId);
 
-  Future<void> _autoFsmSeating(
-    SeatingPageEventAutoFsmSeating event,
-    Emitter emit,
-  ) async {
+  Future<void> _autoFsmSeating(SeatingPageEventAutoFsmSeating event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     final notFound = await _repos.tournamentEditRepository.getGomafiaSeating(
       tournamentId: tournamentId,
@@ -95,37 +82,21 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     emit(state.copyWith(isLoading: false));
   }
 
-  Future<void> _onSwissGameCreate(
-    SeatingPageEventCreateSwissGame event,
-    Emitter emit,
-  ) async {
-    await _repos.tournamentEditRepository.generateSwissGame(
-      tournamentId: tournamentId,
-      game: event.game,
-    );
+  Future<void> _onSwissGameCreate(SeatingPageEventCreateSwissGame event, Emitter emit) async {
+    await _repos.tournamentEditRepository.generateSwissGame(tournamentId: tournamentId, game: event.game);
 
     return _updateSeating(emit);
   }
 
-  Future<void> _onGenerateFinalSeating(
-    SeatingPageEventCreateFinalSeating event,
-    Emitter emit,
-  ) async {
+  Future<void> _onGenerateFinalSeating(SeatingPageEventCreateFinalSeating event, Emitter emit) async {
     await _generateFinalSeatingInteractor(tournamentId: tournamentId);
     await _updateSeating(emit);
   }
 
   void _onOpenGameEditing(SeatingPageEventGameEditing event, Emitter emit) {
     router
-        .openGameEditing(
-          gameId: event.gameId,
-          tournamentId: tournamentId,
-        )
-        .then(
-          (value) => add(
-            SeatingPageEvent.pageOpened(tournamentId: tournamentId),
-          ),
-        );
+        .openGameEditing(gameId: event.gameId, tournamentId: tournamentId)
+        .then((value) => add(SeatingPageEvent.pageOpened(tournamentId: tournamentId)));
   }
 
   Future<void> _updateSeating(Emitter emit) async {
@@ -133,10 +104,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     emit(state.copyWith(isLoading: false, games: seating));
   }
 
-  Future<void> _onCreateSeating(
-    SeatingPageEventCreateSeating event,
-    Emitter emit,
-  ) async {
+  Future<void> _onCreateSeating(SeatingPageEventCreateSeating event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     await _createSeatingInteractor.run(tournamentId: tournamentId);
     await _updateSeating(emit);
@@ -144,19 +112,14 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
 
   Future<void> _onAddPair(SeatingPageEventAddPair event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    final players = await _getTournamentsPlayersInteractor.run(
-      tournamentId: tournamentId,
-    );
-    final newPair = await router.openSeparationDialog(availablePlayers: players);
+    final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
+    final refereeAssignments = await _repos.refereeRepository.getReferees(tournamentId);
+    final referees = refereeAssignments.map((e) => e.referee).toList();
+    final allParticipants = [...players, ...referees.where((r) => players.every((p) => p.id != r.id))];
+    final newPair = await router.openSeparationDialog(availablePlayers: allParticipants);
     if (newPair != null) {
-      await _addSeparationInteractor.run(
-        first: newPair.first,
-        second: newPair.second,
-        tournamentId: tournamentId,
-      );
-      final newPairs = await _getSeparationInteractor.run(
-        tournamentId: tournamentId,
-      );
+      await _addSeparationInteractor.run(first: newPair.first, second: newPair.second, tournamentId: tournamentId);
+      final newPairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
       emit(state.copyWith(cannotMeet: newPairs));
     }
     emit(state.copyWith(isLoading: false));
@@ -164,21 +127,12 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
 
   Future<void> _onDeletePair(SeatingPageEventDeletePair event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _deleteSeparationInteractor.run(
-      first: event.first,
-      second: event.second,
-      tournamentId: tournamentId,
-    );
-    final newPairs = await _getSeparationInteractor.run(
-      tournamentId: tournamentId,
-    );
+    await _deleteSeparationInteractor.run(first: event.first, second: event.second, tournamentId: tournamentId);
+    final newPairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
     emit(state.copyWith(isLoading: false, cannotMeet: newPairs));
   }
 
-  Future<void> _onPageOpened(
-    SeatingPageEventPageOpened event,
-    Emitter emit,
-  ) async {
+  Future<void> _onPageOpened(SeatingPageEventPageOpened event, Emitter emit) async {
     tournamentId = event.tournamentId;
     final pairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
     final settings = await _getSettingsInteractor.run(tournamentId: tournamentId);
