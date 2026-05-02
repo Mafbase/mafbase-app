@@ -34,9 +34,11 @@
   <title>Mafbase</title>
   <link rel="manifest" href="manifest.json">
 
-  <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js" defer></script>
+  <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js" defer=""></script>
   
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  
+  
   
   <style id="splash-screen-style">
     html {
@@ -47,13 +49,7 @@
       margin: 0;
       min-height: 100%;
       background-color: #1A2D42;
-      background-size: 100% 100%;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #0A1620;
-      }
+          background-size: 100% 100%;
     }
 
     .center {
@@ -101,20 +97,18 @@
       bottom: 0;
       right: 0;
     }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0A1620;
+          }
+    }
   </style>
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
       document.getElementById("splash-branding")?.remove();
       document.body.style.background = "transparent";
-    }
-
-    function setFlutterThemeColor(color) {
-      document.querySelectorAll('meta[name="theme-color"]').forEach(function(el) { el.remove(); });
-      var meta = document.createElement('meta');
-      meta.name = 'theme-color';
-      meta.content = color;
-      document.head.appendChild(meta);
     }
   </script>
 </head>
@@ -124,5 +118,6 @@
       <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
       <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
-  <script src="flutter_bootstrap.js" async></script>
+  
+  <script src="flutter_bootstrap.js" async=""></script>
 </body></html>
