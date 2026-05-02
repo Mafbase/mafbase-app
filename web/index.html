@@ -111,6 +111,15 @@
       document.body.style.background = "transparent";
     }
   </script>
+  <!-- Custom script: DO NOT REMOVE. Called from Dart via JS-interop (web_theme_color_web.dart).
+       This block is intentionally separate from splash-screen-script so it survives flutter_native_splash regeneration. -->
+  <script>
+    function setFlutterThemeColor(color) {
+      document.querySelectorAll('meta[name="theme-color"]').forEach(function(el) {
+        el.setAttribute('content', color);
+      });
+    }
+  </script>
 </head>
 <body>
   <picture id="splash">
