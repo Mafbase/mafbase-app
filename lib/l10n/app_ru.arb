@@ -941,7 +941,7 @@
   "@seatingEmptyState": {},
   "seatingActions": "Действия",
   "@seatingActions": {},
-  "seatingSeparations": "Разделения",
+  "seatingSeparations": "Рассадка",
   "@seatingSeparations": {},
   "seatingGenerate": "Сгенерировать рассадку",
   "@seatingGenerate": {},
@@ -1068,5 +1068,9 @@
   "paymentWaitingSuccessSnackbar": "Оплата прошла успешно",
   "@paymentWaitingSuccessSnackbar": {},
   "paymentWaitingCanceledSnackbar": "Оплата отменена",
-  "@paymentWaitingCanceledSnackbar": {}
+  "@paymentWaitingCanceledSnackbar": {},
+  "clubGamesSortDesc": "Сначала новые",
+  "@clubGamesSortDesc": {},
+  "clubGamesSortAsc": "Сначала старые",
+  "@clubGamesSortAsc": {}
 }

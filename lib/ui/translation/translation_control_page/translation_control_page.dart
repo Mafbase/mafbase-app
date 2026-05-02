@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
@@ -50,10 +51,8 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
   }
 
   @override
-  Widget build(BuildContext context) => BlocProvider<TranslationControlBloc>(
-        create: (context) => bloc,
-        child: const TranslationControlContent(),
-      );
+  Widget build(BuildContext context) =>
+      BlocProvider<TranslationControlBloc>(create: (context) => bloc, child: const TranslationControlContent());
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -68,74 +67,59 @@ class TranslationControlContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TranslationControlBloc, TranslationContentState>(
-        builder: (context, state) {
-          final theme = context.theme;
-          return Scaffold(
-            backgroundColor: theme.background1,
-            appBar: AppBar(
-              backgroundColor: theme.background2,
-              elevation: 0,
-              title: Text(
-                context.locale.translationControlTitle,
-                style: theme.defaultTextStyle.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+    builder: (context, state) {
+      final theme = context.theme;
+      return Scaffold(
+        backgroundColor: theme.background1,
+        appBar: AppBar(
+          backgroundColor: theme.background2,
+          elevation: 0,
+          title: Text(
+            context.locale.translationControlTitle,
+            style: theme.defaultTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+        ),
+        body: Column(
+          children: [
+            if (state.totalGames > 0)
+              TranslationControlGameSelector(
+                game: state.game,
+                totalGames: state.totalGames,
+                onChanged: (index) {
+                  context.read<TranslationControlBloc>().add(TranslationControlEvent.selectGame(gameIndex: index));
+                },
+                onClose: kIsWeb ? null : context.backOrGoToDefault(),
               ),
-            ),
-            body: Column(
-              children: [
-                if (state.totalGames > 0)
-                  TranslationControlGameSelector(
-                    game: state.game,
-                    totalGames: state.totalGames,
-                    onChanged: (index) {
-                      context.read<TranslationControlBloc>().add(
-                            TranslationControlEvent.selectGame(gameIndex: index),
-                          );
-                    },
-                  ),
-                Expanded(
-                  child: state.isNotEmpty()
-                      ? ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            return TranslationControlPlayerCard(
-                              index: index,
-                              nickname: state.nicknames![index],
-                              imageUrl: state.images![index],
-                              role: state.roles![index],
-                              status: state.statuses![index],
-                              onRoleChanged: (role) {
-                                context.read<TranslationControlBloc>().add(
-                                      TranslationControlEvent.changeRole(
-                                        index: index,
-                                        role: role,
-                                      ),
-                                    );
-                              },
-                              onStatusChanged: (status) {
-                                context.read<TranslationControlBloc>().add(
-                                      TranslationControlEvent.changeStatus(
-                                        index: index,
-                                        status: status,
-                                      ),
-                                    );
-                              },
+            Expanded(
+              child: state.isNotEmpty()
+                  ? ListView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return TranslationControlPlayerCard(
+                          index: index,
+                          nickname: state.nicknames![index],
+                          imageUrl: state.images![index],
+                          role: state.roles![index],
+                          status: state.statuses![index],
+                          onRoleChanged: (role) {
+                            context.read<TranslationControlBloc>().add(
+                              TranslationControlEvent.changeRole(index: index, role: role),
                             );
                           },
-                        )
-                      : Center(
-                          child: Text(
-                            context.locale.translationControlEmpty,
-                            style: theme.hintTextStyle,
-                          ),
-                        ),
-                ),
-              ],
+                          onStatusChanged: (status) {
+                            context.read<TranslationControlBloc>().add(
+                              TranslationControlEvent.changeStatus(index: index, status: status),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  : Center(child: Text(context.locale.translationControlEmpty, style: theme.hintTextStyle)),
             ),
-          );
-        },
+          ],
+        ),
       );
+    },
+  );
 }
