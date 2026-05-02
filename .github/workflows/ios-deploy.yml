@@ -29,6 +29,12 @@ jobs:
         with:
           flutter-version: '3.41.3'
 
+      - name: Fetch FFmpeg from artifactory
+        run: |
+          if [ -d mafbase_stream ]; then
+            bash mafbase_stream/native/scripts/fetch_ffmpeg_ios.sh
+          fi
+
       - name: Install Flutter dependencies
         run: flutter pub get
 
