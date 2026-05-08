@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/domain/models/game_stream_admin_model.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class StreamExpansionTile extends StatelessWidget {
   final int tableNumber;
-  final List<GameStreamAdminModel> streams;
+  final List<GameStreamAdmin> streams;
   final void Function(int streamId) onStop;
 
   const StreamExpansionTile({super.key, required this.tableNumber, required this.streams, required this.onStop});
@@ -45,7 +45,7 @@ class StreamExpansionTile extends StatelessWidget {
 }
 
 class _StreamItem extends StatelessWidget {
-  final GameStreamAdminModel stream;
+  final GameStreamAdmin stream;
   final void Function(int streamId)? onStop;
 
   const _StreamItem({required this.stream, this.onStop});
@@ -93,17 +93,17 @@ class _StreamItem extends StatelessWidget {
                   ),
               ],
             ),
-            if (stream.viewerUrl != null) ...[
+            if (stream.hasViewerUrl()) ...[
               const SizedBox(height: 4),
-              _CopyRow(label: locale.streamsViewerUrl, value: stream.viewerUrl!),
+              _CopyRow(label: locale.streamsViewerUrl, value: stream.viewerUrl),
             ],
-            if (stream.rtmpServerUrl != null) ...[
+            if (stream.hasRtmpServerUrl()) ...[
               const SizedBox(height: 4),
-              _CopyRow(label: locale.streamsRtmpServer, value: stream.rtmpServerUrl!),
+              _CopyRow(label: locale.streamsRtmpServer, value: stream.rtmpServerUrl),
             ],
-            if (stream.rtmpKey != null) ...[
+            if (stream.hasRtmpKey()) ...[
               const SizedBox(height: 4),
-              _CopyRow(label: locale.streamsRtmpKey, value: stream.rtmpKey!),
+              _CopyRow(label: locale.streamsRtmpKey, value: stream.rtmpKey),
             ],
           ],
         ),

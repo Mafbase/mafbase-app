@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:seating_generator_web/domain/models/game_stream_admin_model.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_bloc.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_event.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_state.dart';
 import 'package:seating_generator_web/feature/streams/ui/streams_page.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 class MockStreamsAdminBloc extends MockBloc<StreamsAdminEvent, StreamsAdminState> implements StreamsAdminBloc {}
 
-const _activeStream = GameStreamAdminModel(
+final _activeStream = GameStreamAdmin(
   id: 1,
   tableNumber: 1,
   viewerUrl: 'https://mafbase.ru/stream/abc123',
@@ -22,22 +22,18 @@ const _activeStream = GameStreamAdminModel(
   startedAt: '2026-05-08T12:00:00Z',
 );
 
-const _inactiveStream = GameStreamAdminModel(
+final _inactiveStream = GameStreamAdmin(
   id: 2,
   tableNumber: 1,
   viewerUrl: 'https://mafbase.ru/stream/old456',
-  rtmpServerUrl: null,
-  rtmpKey: null,
   active: false,
   startedAt: '2026-05-08T10:30:00Z',
 );
 
-const _table2Stream = GameStreamAdminModel(
+final _table2Stream = GameStreamAdmin(
   id: 3,
   tableNumber: 2,
   viewerUrl: 'https://twitch.tv/mafbase2',
-  rtmpServerUrl: null,
-  rtmpKey: null,
   active: true,
   startedAt: '2026-05-08T11:45:00Z',
 );
@@ -91,7 +87,7 @@ void main() {
 
     testGoldens('with active stream', (tester) async {
       final bloc = _createMockBloc(
-        const StreamsAdminState(
+        StreamsAdminState(
           isLoading: false,
           streams: [_activeStream],
         ),
@@ -108,7 +104,7 @@ void main() {
 
     testGoldens('with multiple streams and tables', (tester) async {
       final bloc = _createMockBloc(
-        const StreamsAdminState(
+        StreamsAdminState(
           isLoading: false,
           streams: [_activeStream, _inactiveStream, _table2Stream],
         ),

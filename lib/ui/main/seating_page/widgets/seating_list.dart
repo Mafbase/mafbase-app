@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/game_result_widget.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
-import 'package:seating_generator_web/domain/models/game_stream_model.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/widgets/stream_row_widget.dart';
 
 class SeatingList extends StatelessWidget {
   final List<List<GameResultModel>> models;
-  final List<GameStreamModel> streams;
+  final List<GameStream> streams;
 
   const SeatingList({
     super.key,

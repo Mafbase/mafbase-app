@@ -1,12 +1,11 @@
-import 'package:seating_generator_web/domain/models/game_stream_admin_model.dart';
-import 'package:seating_generator_web/domain/models/game_stream_model.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 abstract class StreamRepository {
-  Future<List<GameStreamModel>> getStreams({required int tournamentId});
+  Future<List<GameStream>> getStreams({required int tournamentId});
 
-  Future<List<GameStreamAdminModel>> getStreamsAdmin({required int tournamentId});
+  Future<List<GameStreamAdmin>> getStreamsAdmin({required int tournamentId});
 
-  Future<GameStreamAdminModel> setStream({
+  Future<GameStreamAdmin> setStream({
     required int tournamentId,
     required int tableNumber,
     String? viewerUrl,
@@ -14,7 +13,7 @@ abstract class StreamRepository {
     String? rtmpKey,
   });
 
-  Future<GameStreamAdminModel> generateStream({
+  Future<GameStreamAdmin> generateStream({
     required int tournamentId,
     required int tableNumber,
   });

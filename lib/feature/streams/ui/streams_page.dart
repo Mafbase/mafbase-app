@@ -5,13 +5,13 @@ import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/domain/models/game_stream_admin_model.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_bloc.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_event.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_state.dart';
 import 'package:seating_generator_web/feature/streams/ui/widgets/add_stream_bottom_sheet.dart';
 import 'package:seating_generator_web/feature/streams/ui/widgets/stream_expansion_tile.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
 @RoutePage()
@@ -35,14 +35,18 @@ class StreamsPageContent extends StatelessWidget {
 
   const StreamsPageContent({required this.tournamentId});
 
-  Map<int, List<GameStreamAdminModel>> _groupByTable(List<GameStreamAdminModel> streams) {
-    final map = <int, List<GameStreamAdminModel>>{};
+  Map<int, List<GameStreamAdmin>> _groupByTable(List<GameStreamAdmin> streams) {
+    final map = <int, List<GameStreamAdmin>>{};
     for (final stream in streams) {
       map.putIfAbsent(stream.tableNumber, () => []).add(stream);
     }
-    // Sort active streams first within each table
+    // Sort active streams first, then by startedAt descending
     for (final list in map.values) {
-      list.sort((a, b) => b.active ? 1 : -1);
+      list.sort((a, b) {
+        final activeCompare = (b.active ? 1 : 0) - (a.active ? 1 : 0);
+        if (activeCompare != 0) return activeCompare;
+        return b.startedAt.compareTo(a.startedAt);
+      });
     }
     return Map.fromEntries(map.entries.toList()..sort((a, b) => a.key.compareTo(b.key)));
   }
