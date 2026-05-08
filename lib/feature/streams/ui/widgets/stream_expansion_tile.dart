@@ -9,45 +9,34 @@ class StreamExpansionTile extends StatelessWidget {
   final List<GameStreamAdminModel> streams;
   final void Function(int streamId) onStop;
 
-  const StreamExpansionTile({
-    super.key,
-    required this.tableNumber,
-    required this.streams,
-    required this.onStop,
-  });
+  const StreamExpansionTile({super.key, required this.tableNumber, required this.streams, required this.onStop});
 
   @override
   Widget build(BuildContext context) {
     final locale = context.locale;
     final activeStream = streams.where((s) => s.active).firstOrNull ?? streams.firstOrNull;
-    final inactiveStreams = streams.where((s) => !s.active).toList();
+    final inactiveStreams = streams.where((s) => !s.active && s.id != activeStream?.id).toList();
 
     if (activeStream == null) return const SizedBox.shrink();
 
     return ExpansionTile(
       tilePadding: const EdgeInsets.symmetric(horizontal: 16),
       childrenPadding: const EdgeInsets.only(bottom: 8),
-      title: Text(
-        locale.streamsTableTitle(tableNumber),
-        style: const TextStyle(fontWeight: FontWeight.w600),
-      ),
-      subtitle: _StreamItem(stream: activeStream, onStop: onStop),
+      title: Text(locale.streamsTableTitle(tableNumber), style: const TextStyle(fontWeight: FontWeight.w600)),
+      subtitle: _StreamItem(stream: activeStream, onStop: activeStream.active ? onStop : null),
       children: [
         if (inactiveStreams.isNotEmpty) ...[
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(
-                locale.streamsPrevious,
-                style: TextStyle(fontSize: 12, color: MyTheme.of(context).greyColor),
-              ),
+              child: Text(locale.streamsPrevious, style: TextStyle(fontSize: 12, color: MyTheme.of(context).greyColor)),
             ),
           ),
           for (final stream in inactiveStreams)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: _StreamItem(stream: stream, onStop: onStop),
+              child: _StreamItem(stream: stream, onStop: null),
             ),
         ],
       ],
@@ -57,9 +46,9 @@ class StreamExpansionTile extends StatelessWidget {
 
 class _StreamItem extends StatelessWidget {
   final GameStreamAdminModel stream;
-  final void Function(int streamId) onStop;
+  final void Function(int streamId)? onStop;
 
-  const _StreamItem({required this.stream, required this.onStop});
+  const _StreamItem({required this.stream, this.onStop});
 
   String _formatTime(String startedAt) {
     try {
@@ -93,9 +82,9 @@ class _StreamItem extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(time, style: TextStyle(fontSize: 12, color: theme.greyColor)),
                 const Spacer(),
-                if (isActive)
+                if (isActive && onStop != null)
                   IconButton(
-                    onPressed: () => onStop(stream.id),
+                    onPressed: () => onStop!(stream.id),
                     icon: const Icon(Icons.stop_circle_outlined),
                     tooltip: locale.streamsStop,
                     color: theme.redColor,
@@ -168,9 +157,7 @@ class _CopyRow extends StatelessWidget {
           onPressed: () async {
             await Clipboard.setData(ClipboardData(text: value));
             if (context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.locale.streamsCopied)),
-              );
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.locale.streamsCopied)));
             }
           },
           icon: const Icon(Icons.copy, size: 16),
