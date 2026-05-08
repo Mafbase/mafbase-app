@@ -122,6 +122,14 @@ class TournamentMenuBuilder {
           selected: isActive('referees'),
           onTap: () => context.router.push(RefereeRoute(tournamentId: tournamentId)),
         ),
+      if (state.isMyTournament)
+        TournamentMenuTapItem(
+          text: locale.streamsTitle,
+          icon: Icons.live_tv_outlined,
+          routeSegment: 'streams',
+          selected: isActive('streams'),
+          onTap: () => context.router.push(StreamsRoute(tournamentId: tournamentId)),
+        ),
       if (state.isMyTournament && showBill && !state.isLoading)
         TournamentMenuTapItem(
           text: locale.tournamentMenuPayment,
