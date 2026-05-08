@@ -243,6 +243,162 @@ class MyHttpClient {
     return response;
   }
 
+  Future<Map<String, dynamic>> getJson(String path, {bool useRecoveryToken = true}) async {
+    final token = await _storage.authToken;
+
+    final response = await _client.get<Map<String, dynamic>>(
+      path,
+      options: Options(
+        responseType: ResponseType.json,
+        headers: {
+          'Accept': 'application/json',
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode == HttpStatus.unauthorized) {
+      if (useRecoveryToken) {
+        final credentials = await _credentialStorage.read();
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(email: credentials.login, password: credentials.password),
+          ).execute(this);
+          if (authResponse.token.isEmpty) {
+            await _storage.clear();
+            return response.data ?? {};
+          } else {
+            await _storage.onTokensUpdated(authResponse.token, authResponse.recoveryToken);
+          }
+        }
+        return getJson(path, useRecoveryToken: false);
+      }
+      await _storage.clear();
+      throw UnauthenticatedError();
+    }
+    _checkJsonResponse(response);
+    return response.data ?? {};
+  }
+
+  Future<Map<String, dynamic>> putJson(
+    String path,
+    Map<String, dynamic> body, {
+    bool useRecoveryToken = true,
+  }) async {
+    final token = await _storage.authToken;
+
+    final response = await _client.put<Map<String, dynamic>>(
+      path,
+      data: body,
+      options: Options(
+        responseType: ResponseType.json,
+        contentType: 'application/json',
+        headers: {
+          'Accept': 'application/json',
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode == HttpStatus.unauthorized) {
+      if (useRecoveryToken) {
+        final credentials = await _credentialStorage.read();
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(email: credentials.login, password: credentials.password),
+          ).execute(this);
+          if (authResponse.token.isEmpty) {
+            await _storage.clear();
+            return response.data ?? {};
+          } else {
+            await _storage.onTokensUpdated(authResponse.token, authResponse.recoveryToken);
+          }
+        }
+        return putJson(path, body, useRecoveryToken: false);
+      }
+      await _storage.clear();
+      throw UnauthenticatedError();
+    }
+    _checkJsonResponse(response);
+    return response.data ?? {};
+  }
+
+  Future<Map<String, dynamic>> postJson(
+    String path,
+    Map<String, dynamic> body, {
+    bool useRecoveryToken = true,
+  }) async {
+    final token = await _storage.authToken;
+
+    final response = await _client.post<Map<String, dynamic>>(
+      path,
+      data: body,
+      options: Options(
+        responseType: ResponseType.json,
+        contentType: 'application/json',
+        headers: {
+          'Accept': 'application/json',
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode == HttpStatus.unauthorized) {
+      if (useRecoveryToken) {
+        final credentials = await _credentialStorage.read();
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(email: credentials.login, password: credentials.password),
+          ).execute(this);
+          if (authResponse.token.isEmpty) {
+            await _storage.clear();
+            return response.data ?? {};
+          } else {
+            await _storage.onTokensUpdated(authResponse.token, authResponse.recoveryToken);
+          }
+        }
+        return postJson(path, body, useRecoveryToken: false);
+      }
+      await _storage.clear();
+      throw UnauthenticatedError();
+    }
+    _checkJsonResponse(response);
+    return response.data ?? {};
+  }
+
+  Future<void> deleteJson(String path, {bool useRecoveryToken = true}) async {
+    final token = await _storage.authToken;
+
+    final response = await _client.delete<void>(
+      path,
+      options: Options(
+        headers: {
+          if (token != null && token.isNotEmpty) HttpHeaders.authorizationHeader: 'Bearer $token',
+        },
+      ),
+    );
+
+    if (response.statusCode == HttpStatus.unauthorized) {
+      if (useRecoveryToken) {
+        final credentials = await _credentialStorage.read();
+        if (credentials != null) {
+          final authResponse = await LoginRequest(
+            LoginEvent(email: credentials.login, password: credentials.password),
+          ).execute(this);
+          if (authResponse.token.isEmpty) {
+            await _storage.clear();
+            return;
+          } else {
+            await _storage.onTokensUpdated(authResponse.token, authResponse.recoveryToken);
+          }
+        }
+        return deleteJson(path, useRecoveryToken: false);
+      }
+      await _storage.clear();
+      throw UnauthenticatedError();
+    }
+  }
+
   Future<Response> putFile(
     String method,
     List<int> bytes, [
@@ -269,6 +425,14 @@ class MyHttpClient {
         return value;
       },
     );
+  }
+
+  void _checkJsonResponse(Response response) {
+    if ((response.statusCode ?? 500) >= 400) {
+      final message =
+          response.data is Map<String, dynamic> ? (response.data as Map<String, dynamic>)['message'] as String? : null;
+      throw RequestError(message);
+    }
   }
 
   void _checkResponse(Response response) {
