@@ -55,13 +55,13 @@ class StreamsPageContent extends StatelessWidget {
     AddStreamBottomSheet.show(context).then((result) {
       if (result != null && context.mounted) {
         context.read<StreamsAdminBloc>().add(
-              StreamsAdminEventSetStream(
-                tableNumber: result.tableNumber,
-                viewerUrl: result.viewerUrl,
-                rtmpServerUrl: result.rtmpServerUrl,
-                rtmpKey: result.rtmpKey,
-              ),
-            );
+          StreamsAdminEventSetStream(
+            tableNumber: result.tableNumber,
+            viewerUrl: result.viewerUrl,
+            rtmpServerUrl: result.rtmpServerUrl,
+            rtmpKey: result.rtmpKey,
+          ),
+        );
       }
     });
   }
@@ -87,16 +87,10 @@ class StreamsPageContent extends StatelessWidget {
       appBar: AppBar(
         leading: BackButton(onPressed: context.backOrGoToDefault()),
         title: Text(locale.streamsTitle),
-        actions: [
-          TournamentMenuAction(openDrawer: () => Scaffold.of(context).openEndDrawer()),
-        ],
+        actions: [TournamentMenuAction(openDrawer: () => Scaffold.of(context).openEndDrawer())],
       ),
       body: BlocBuilder<StreamsAdminBloc, StreamsAdminState>(
         builder: (context, state) {
-          if (state.isLoading) {
-            return const LoadingOverlayWidget();
-          }
-
           final grouped = _groupByTable(state.streams);
 
           return Stack(
@@ -120,10 +114,7 @@ class StreamsPageContent extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(horizontal: 32),
                                   child: Column(
                                     children: [
-                                      CustomButton(
-                                        text: locale.streamsAddButton,
-                                        onTap: () => _openAddStream(context),
-                                      ),
+                                      CustomButton(text: locale.streamsAddButton, onTap: () => _openAddStream(context)),
                                       const SizedBox(height: 12),
                                       CustomButton(
                                         text: locale.streamsGenerateButton,
@@ -148,10 +139,7 @@ class StreamsPageContent extends StatelessWidget {
                           ),
                   ),
                   if (grouped.isNotEmpty)
-                    _BottomBar(
-                      onAdd: () => _openAddStream(context),
-                      onGenerate: () => _openGenerateStream(context),
-                    ),
+                    _BottomBar(onAdd: () => _openAddStream(context), onGenerate: () => _openGenerateStream(context)),
                 ],
               ),
               if (state.isLoading) const Positioned.fill(child: LoadingOverlayWidget()),
@@ -181,9 +169,13 @@ class _BottomBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         children: [
-          Expanded(child: CustomButton(text: locale.streamsAddButton, onTap: onAdd)),
+          Expanded(
+            child: CustomButton(text: locale.streamsAddButton, onTap: onAdd),
+          ),
           const SizedBox(width: 12),
-          Expanded(child: CustomButton(text: locale.streamsGenerateButton, onTap: onGenerate)),
+          Expanded(
+            child: CustomButton(text: locale.streamsGenerateButton, onTap: onGenerate),
+          ),
         ],
       ),
     );

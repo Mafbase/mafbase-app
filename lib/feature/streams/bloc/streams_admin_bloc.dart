@@ -16,8 +16,12 @@ class StreamsAdminBloc extends Bloc<StreamsAdminEvent, StreamsAdminState> {
 
   Future<void> _onPageOpened(StreamsAdminEventPageOpened event, Emitter emit) async {
     _tournamentId = event.tournamentId;
-    final streams = await _streamRepository.getStreamsAdmin(tournamentId: _tournamentId);
-    emit(state.copyWith(streams: streams, isLoading: false));
+    try {
+      final streams = await _streamRepository.getStreamsAdmin(tournamentId: _tournamentId);
+      emit(state.copyWith(streams: streams));
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onSetStream(StreamsAdminEventSetStream event, Emitter emit) async {
