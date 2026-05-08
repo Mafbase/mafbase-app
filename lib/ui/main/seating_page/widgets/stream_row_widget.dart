@@ -150,9 +150,18 @@ class _StreamStatusChip extends StatelessWidget {
         color: active ? Colors.red : Colors.grey.shade400,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Text(
-        active ? '● ${locale.streamsLive}' : locale.streamsEnded,
-        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (active) ...[
+            const Icon(Icons.fiber_manual_record, size: 8, color: Colors.white),
+            const SizedBox(width: 3),
+          ],
+          Text(
+            active ? locale.streamsLive : locale.streamsEnded,
+            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+          ),
+        ],
       ),
     );
   }
