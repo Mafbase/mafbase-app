@@ -33,7 +33,7 @@ class StreamsPage extends StatelessWidget {
 class StreamsPageContent extends StatelessWidget {
   final int tournamentId;
 
-  const StreamsPageContent({required this.tournamentId});
+  const StreamsPageContent({super.key, required this.tournamentId});
 
   Map<int, List<GameStreamAdmin>> _groupByTable(List<GameStreamAdmin> streams) {
     final map = <int, List<GameStreamAdmin>>{};
@@ -55,13 +55,13 @@ class StreamsPageContent extends StatelessWidget {
     AddStreamBottomSheet.show(context).then((result) {
       if (result != null && context.mounted) {
         context.read<StreamsAdminBloc>().add(
-          StreamsAdminEventSetStream(
-            tableNumber: result.tableNumber,
-            viewerUrl: result.viewerUrl,
-            rtmpServerUrl: result.rtmpServerUrl,
-            rtmpKey: result.rtmpKey,
-          ),
-        );
+              StreamsAdminEventSetStream(
+                tableNumber: result.tableNumber,
+                viewerUrl: result.viewerUrl,
+                rtmpServerUrl: result.rtmpServerUrl,
+                rtmpKey: result.rtmpKey,
+              ),
+            );
       }
     });
   }
