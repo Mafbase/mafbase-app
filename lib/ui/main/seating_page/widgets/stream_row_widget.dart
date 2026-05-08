@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/domain/models/game_stream_model.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StreamRowWidget extends StatelessWidget {
   final int tableNumber;
-  final List<GameStreamModel> allStreams;
+  final List<GameStream> allStreams;
 
   const StreamRowWidget({
     super.key,
@@ -14,9 +14,9 @@ class StreamRowWidget extends StatelessWidget {
     required this.allStreams,
   });
 
-  List<GameStreamModel> get _tableStreams => allStreams.where((s) => s.tableNumber == tableNumber).toList();
+  List<GameStream> get _tableStreams => allStreams.where((s) => s.tableNumber == tableNumber).toList();
 
-  GameStreamModel? get _activeStream => _tableStreams.where((s) => s.active).firstOrNull;
+  GameStream? get _activeStream => _tableStreams.where((s) => s.active).firstOrNull;
 
   String _formatTime(String startedAt) {
     try {
@@ -72,7 +72,7 @@ class StreamRowWidget extends StatelessWidget {
                   return ListTile(
                     leading: _StreamStatusChip(active: isActive),
                     title: Text(
-                      stream.viewerUrl ?? '',
+                      stream.hasViewerUrl() ? stream.viewerUrl : '',
                       style: const TextStyle(fontSize: 13),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -80,7 +80,7 @@ class StreamRowWidget extends StatelessWidget {
                       _formatTime(stream.startedAt),
                       style: TextStyle(fontSize: 11, color: theme.greyColor),
                     ),
-                    onTap: stream.viewerUrl != null ? () => _openUrl(stream.viewerUrl!) : null,
+                    onTap: stream.hasViewerUrl() ? () => _openUrl(stream.viewerUrl) : null,
                   );
                 },
               ),
@@ -102,7 +102,7 @@ class StreamRowWidget extends StatelessWidget {
     final tableStreams = _tableStreams;
 
     return InkWell(
-      onTap: active.viewerUrl != null ? () => _openUrl(active.viewerUrl!) : null,
+      onTap: active.hasViewerUrl() ? () => _openUrl(active.viewerUrl) : null,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Row(
@@ -113,11 +113,11 @@ class StreamRowWidget extends StatelessWidget {
             const SizedBox(width: 6),
             Expanded(
               child: Text(
-                active.viewerUrl ?? locale.streamsNoUrl,
+                active.hasViewerUrl() ? active.viewerUrl : locale.streamsNoUrl,
                 style: TextStyle(
                   fontSize: 12,
-                  color: active.viewerUrl != null ? theme.darkBlueColor : theme.greyColor,
-                  decoration: active.viewerUrl != null ? TextDecoration.underline : null,
+                  color: active.hasViewerUrl() ? theme.darkBlueColor : theme.greyColor,
+                  decoration: active.hasViewerUrl() ? TextDecoration.underline : null,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
