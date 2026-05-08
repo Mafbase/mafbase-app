@@ -285,7 +285,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
                   Expanded(
                     child: state.games.isEmpty
                         ? _buildEmptyState(tournamentState.isMyTournament)
-                        : SeatingList(models: state.games),
+                        : SeatingList(models: state.games, streams: state.streams),
                   ),
                 ],
               ),
@@ -324,7 +324,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
                   Expanded(
                     child: state.games.isEmpty
                         ? _buildEmptyState(tournamentState.isMyTournament)
-                        : SeatingList(models: state.games),
+                        : SeatingList(models: state.games, streams: state.streams),
                   ),
                   if (tournamentState.isMyTournament) _buildDesktopBottomBar(tournamentState, state),
                 ],
