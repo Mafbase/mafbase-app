@@ -79,9 +79,9 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     );
     final uri = Uri.parse(result.redirectLink);
     if (kIsWeb) {
-      launchUrl(uri, webOnlyWindowName: '_blank');
+      launchUrl(uri, webOnlyWindowName: '_self');
     } else {
-      launchUrl(uri);
+      router.openWebView(result.redirectLink);
     }
   }
 

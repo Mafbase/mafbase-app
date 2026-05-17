@@ -114,11 +114,11 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
       playersCount: event.playersCount,
       billedTranslation: event.billedTranlsation,
     );
-    final uri = Uri.parse(result.redirectLink);
     if (kIsWeb) {
-      await launchUrl(uri, webOnlyWindowName: '_blank');
+      final uri = Uri.parse(result.redirectLink);
+      await launchUrl(uri, webOnlyWindowName: '_self');
     } else {
-      launchUrl(uri);
+      router.openWebView(result.redirectLink);
     }
   }
 
