@@ -56,14 +56,14 @@ class _PaymentWaitingViewState extends State<PaymentWaitingView>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.locale.paymentWaitingSuccessSnackbar)),
       );
-      context.router.navigatePath(widget.nextPath ?? '/');
+      context.router.navigatePath(widget.nextPath ?? '/', includePrefixMatches: true);
     });
     on<PaymentWaitingEffectPaymentCanceled>((effect) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.locale.paymentWaitingCanceledSnackbar)),
       );
-      context.router.navigatePath(widget.nextPath ?? '/');
+      context.router.navigatePath(widget.nextPath ?? '/', includePrefixMatches: true);
     });
   }
 

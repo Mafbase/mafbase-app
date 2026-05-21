@@ -12,6 +12,7 @@ analyzer:
   exclude:
     - "**/*.pb.dart"
     - "**/*.pbjson.dart"
+    - "**/*.pbenum.dart"
     - "**/*.g.dart"
     - "**/*.freezed.dart"
 

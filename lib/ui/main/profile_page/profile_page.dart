@@ -39,11 +39,10 @@ class _ProfilePageState extends State<ProfilePage>
       if (!mounted) return;
       final uri = Uri.parse(effect.redirectLink);
       if (kIsWeb) {
-        launchUrl(uri, webOnlyWindowName: '_blank');
+        launchUrl(uri, webOnlyWindowName: '_self');
       } else {
-        launchUrl(uri);
+        context.router.push(WebViewRoute(url: effect.redirectLink));
       }
-      context.router.push(PaymentWaitingRoute(purchaseId: effect.purchaseId, nextPath: effect.nextPath));
     });
   }
 
