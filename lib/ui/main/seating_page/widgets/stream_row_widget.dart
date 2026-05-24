@@ -98,40 +98,78 @@ class StreamRowWidget extends StatelessWidget {
 
     final theme = MyTheme.of(context);
     final locale = context.locale;
-    final time = _formatTime(active.startedAt);
-    final tableStreams = _tableStreams;
+    final hasUrl = active.hasViewerUrl();
+    final hasMultiple = _tableStreams.length > 1;
 
-    return InkWell(
-      onTap: active.hasViewerUrl() ? () => _openUrl(active.viewerUrl) : null,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: Row(
-          children: [
-            const _StreamStatusChip(active: true),
-            const SizedBox(width: 6),
-            Text(time, style: TextStyle(fontSize: 11, color: theme.greyColor)),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Text(
-                active.hasViewerUrl() ? active.viewerUrl : locale.streamsNoUrl,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: active.hasViewerUrl() ? theme.darkBlueColor : theme.greyColor,
-                  decoration: active.hasViewerUrl() ? TextDecoration.underline : null,
+    final onTap = hasMultiple
+        ? () => _showAllStreams(context)
+        : hasUrl
+            ? () => _openUrl(active.viewerUrl)
+            : null;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Material(
+        color: theme.btnColor2,
+        borderRadius: BorderRadius.circular(20),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            child: Row(
+              children: [
+                const _StreamLiveBadge(),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    hasUrl ? locale.streamsWatch : locale.streamsNoUrl,
+                    style: TextStyle(
+                      color: theme.btnTextColor,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                overflow: TextOverflow.ellipsis,
-              ),
+                const SizedBox(width: 6),
+                Icon(
+                  hasMultiple ? Icons.expand_more : Icons.open_in_new,
+                  size: 13,
+                  color: theme.btnTextColor.withValues(alpha: 0.7),
+                ),
+              ],
             ),
-            if (tableStreams.length > 1)
-              IconButton(
-                onPressed: () => _showAllStreams(context),
-                icon: const Icon(Icons.expand_more, size: 18),
-                tooltip: locale.streamsShowAll,
-                visualDensity: VisualDensity.compact,
-                padding: EdgeInsets.zero,
-              ),
-          ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class _StreamLiveBadge extends StatelessWidget {
+  const _StreamLiveBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    final locale = context.locale;
+    final theme = MyTheme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: theme.redColor.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.fiber_manual_record, size: 8, color: theme.btnTextColor),
+          const SizedBox(width: 3),
+          Text(
+            locale.streamsLive,
+            style: TextStyle(color: theme.btnTextColor, fontSize: 9, fontWeight: FontWeight.w700),
+          ),
+        ],
       ),
     );
   }

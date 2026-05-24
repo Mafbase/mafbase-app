@@ -1134,5 +1134,7 @@
   "streamsShowAll": "Все трансляции",
   "@streamsShowAll": {},
   "streamsNoUrl": "Ссылка не указана",
-  "@streamsNoUrl": {}
+  "@streamsNoUrl": {},
+  "streamsWatch": "Смотреть трансляцию",
+  "@streamsWatch": {}
 }

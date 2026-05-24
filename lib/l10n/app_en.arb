@@ -887,5 +887,7 @@
   "streamsShowAll": "All streams",
   "@streamsShowAll": {},
   "streamsNoUrl": "No URL provided",
-  "@streamsNoUrl": {}
+  "@streamsNoUrl": {},
+  "streamsWatch": "Watch stream",
+  "@streamsWatch": {}
 }
