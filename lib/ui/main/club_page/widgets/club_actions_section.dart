@@ -11,6 +11,8 @@ class ClubActionsSection extends StatelessWidget {
   final VoidCallback? onAddGame;
   final VoidCallback? onRenewSubscription;
   final VoidCallback? onCustomColumns;
+  final VoidCallback? onSetDefaultRatingPeriod;
+  final String? defaultRatingPeriodSubtitle;
   final VoidCallback? onHideRating;
 
   const ClubActionsSection({
@@ -21,6 +23,8 @@ class ClubActionsSection extends StatelessWidget {
     this.onAddGame,
     this.onRenewSubscription,
     this.onCustomColumns,
+    this.onSetDefaultRatingPeriod,
+    this.defaultRatingPeriodSubtitle,
     this.onHideRating,
   });
 
@@ -75,6 +79,17 @@ class ClubActionsSection extends StatelessWidget {
             title: locale.clubActionCustomColumns,
             subtitle: locale.clubActionCustomColumnsSubtitle,
             onTap: onCustomColumns!,
+          ),
+        );
+      }
+      if (onSetDefaultRatingPeriod != null) {
+        cards.add(
+          ClubActionCard(
+            icon: Icons.date_range_outlined,
+            iconBackgroundColor: theme.blueForCard,
+            title: locale.clubActionSetDefaultRatingPeriod,
+            subtitle: defaultRatingPeriodSubtitle ?? '',
+            onTap: onSetDefaultRatingPeriod!,
           ),
         );
       }
@@ -157,6 +172,18 @@ class ClubActionsSection extends StatelessWidget {
             title: locale.clubActionCustomColumns,
             subtitle: locale.clubActionCustomColumnsSubtitle,
             onTap: onCustomColumns!,
+            showChevron: true,
+          ),
+        );
+      }
+      if (onSetDefaultRatingPeriod != null) {
+        cards.add(
+          ClubActionCard(
+            icon: Icons.date_range_outlined,
+            iconBackgroundColor: theme.blueForCard,
+            title: locale.clubActionSetDefaultRatingPeriod,
+            subtitle: defaultRatingPeriodSubtitle ?? '',
+            onTap: onSetDefaultRatingPeriod!,
             showChevron: true,
           ),
         );

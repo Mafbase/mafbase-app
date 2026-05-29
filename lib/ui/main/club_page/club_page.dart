@@ -139,6 +139,9 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                             onAddGame: state.isOwner ? _addNewGame : null,
                             onRenewSubscription: state.isOwner && showBill ? _bill : null,
                             onCustomColumns: state.isOwner ? _editCustomColumns : null,
+                            onSetDefaultRatingPeriod: state.isOwner ? _setDefaultRatingPeriod : null,
+                            defaultRatingPeriodSubtitle:
+                                _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
                             onHideRating: state.isOwner ? _changeHideDate : null,
                           ),
                         ),
@@ -211,6 +214,8 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                       onAddGame: state.isOwner ? _addNewGame : null,
                       onRenewSubscription: state.isOwner && showBill ? _bill : null,
                       onCustomColumns: state.isOwner ? _editCustomColumns : null,
+                      onSetDefaultRatingPeriod: state.isOwner ? _setDefaultRatingPeriod : null,
+                      defaultRatingPeriodSubtitle: _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
                       onHideRating: state.isOwner ? _changeHideDate : null,
                     ),
                   ],
@@ -246,6 +251,30 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
     if (date == null) return;
 
     bloc.add(ClubEvent.changeHideDate(dateTime: date));
+  }
+
+  Future<void> _setDefaultRatingPeriod() async {
+    final bloc = context.read<ClubBloc>();
+
+    final range = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(3000),
+      initialDateRange: bloc.state.defaultRatingPeriod,
+      initialEntryMode: DatePickerEntryMode.input,
+    );
+
+    if (range == null) return;
+
+    bloc.add(ClubEvent.changeDefaultRatingPeriod(range: range));
+  }
+
+  String _defaultRatingPeriodSubtitle(BuildContext context, DateTimeRange? range) {
+    if (range == null) {
+      return context.locale.clubActionDefaultRatingPeriodEmpty;
+    }
+    final format = DateFormat('dd.MM.yyyy');
+    return '${format.format(range.start)} – ${format.format(range.end)}';
   }
 
   void _bill() async {

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'club_event.freezed.dart';
@@ -15,6 +16,9 @@ abstract class ClubEvent with _$ClubEvent {
   }) = ClubEventBillClub;
 
   const factory ClubEvent.changeHideDate({required DateTime? dateTime}) = ClubEventChangeHideDate;
+
+  const factory ClubEvent.changeDefaultRatingPeriod({required DateTimeRange? range}) =
+      ClubEventChangeDefaultRatingPeriod;
 
   const factory ClubEvent.editDescription({required String description}) = ClubEventEditDescription;
 

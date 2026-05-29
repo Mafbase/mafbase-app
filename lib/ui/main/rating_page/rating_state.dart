@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 
@@ -13,5 +14,6 @@ abstract class RatingState with _$RatingState {
     @Default(0) int citizenWins,
     @Default(true) bool isLoading,
     @Default(false) bool hasCustomColumns,
+    DateTimeRange? range,
   }) = _RatingState;
 }
