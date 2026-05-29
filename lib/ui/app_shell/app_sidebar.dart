@@ -21,7 +21,7 @@ class AppSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final currentPath = context.router.currentUrl;
+    final currentPath = context.watchRouter.currentUrl;
 
     return Container(
       width: width,
