@@ -127,6 +127,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
   Widget buildMobile(BuildContext context) {
     return BlocBuilder<RatingBloc, RatingState>(
       builder: (context, state) {
+        final range = state.range ?? widget.range;
         Widget ratingTable({bool singlePage = false}) => RatingTable(
           isTournament: widget.tournamentId != null,
           isMobile: true,
@@ -142,7 +143,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
           changeSort: (RatingSort sort, {int? customSortColumnIndex}) {
             context.read<RatingBloc>().add(
               RatingEvent.rangeChanged(
-                range: widget.range,
+                range: range,
                 clubId: widget.clubId,
                 tournamentId: widget.tournamentId,
                 style: widget.style,
@@ -190,8 +191,8 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                   onPressed: () => context.router.push(
                     ClubGamesRoute(
                       clubId: widget.clubId!,
-                      dateStartParam: widget.range != null ? dateFormatForRequests.format(widget.range!.start) : null,
-                      dateEndParam: widget.range != null ? dateFormatForRequests.format(widget.range!.end) : null,
+                      dateStartParam: range != null ? dateFormatForRequests.format(range.start) : null,
+                      dateEndParam: range != null ? dateFormatForRequests.format(range.end) : null,
                     ),
                   ),
                   icon: const Icon(Icons.table_chart_outlined),
@@ -206,13 +207,13 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 8),
-                  if (widget.range != null)
+                  if (range != null)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: TextButton(
                         onPressed: onChangeRangeTap,
                         child: Text(
-                          '${context.locale.period}\n${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
+                          '${context.locale.period}\n${format.format(range.start)} - ${format.format(range.end)}',
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -260,6 +261,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
   @override
   Widget buildDesktop(BuildContext context) => BlocBuilder<RatingBloc, RatingState>(
     builder: (context, state) {
+      final range = state.range ?? widget.range;
       return Scaffold(
         appBar: AppBar(
           leading: const BackButton(),
@@ -272,8 +274,8 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                 onPressed: () => context.router.push(
                   ClubGamesRoute(
                     clubId: widget.clubId!,
-                    dateStartParam: widget.range != null ? dateFormatForRequests.format(widget.range!.start) : null,
-                    dateEndParam: widget.range != null ? dateFormatForRequests.format(widget.range!.end) : null,
+                    dateStartParam: range != null ? dateFormatForRequests.format(range.start) : null,
+                    dateEndParam: range != null ? dateFormatForRequests.format(range.end) : null,
                   ),
                 ),
                 icon: const Icon(Icons.table_chart_outlined),
@@ -291,7 +293,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (widget.range != null)
+                        if (range != null)
                           Padding(
                             padding: const EdgeInsets.only(left: 16.0, right: 8),
                             child: Row(
@@ -301,7 +303,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                                 CustomButton(
                                   onTap: onChangeRangeTap,
                                   disabled: widget.tournamentId != null,
-                                  text: '${format.format(widget.range!.start)} - ${format.format(widget.range!.end)}',
+                                  text: '${format.format(range.start)} - ${format.format(range.end)}',
                                 ),
                               ],
                             ),
@@ -326,7 +328,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                           changeSort: (RatingSort sort, {int? customSortColumnIndex}) {
                             context.read<RatingBloc>().add(
                               RatingEvent.rangeChanged(
-                                range: widget.range,
+                                range: range,
                                 clubId: widget.clubId,
                                 style: widget.style,
                                 tournamentId: widget.tournamentId,
@@ -352,28 +354,32 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
     },
   );
 
-  Widget downloadRatingButton() => widget.clubId == null
-      ? Container()
-      : Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              onPressed: () {
-                context.read<RatingBloc>().add(
-                  RatingEvent.downloadRating(range: widget.range!, clubId: widget.clubId!),
-                );
-              },
-              icon: const Icon(Icons.download),
-            ),
-            const SizedBox(width: 4),
-            IconButton(
-              onPressed: () {
-                context.read<RatingBloc>().add(RatingEvent.downloadStats(range: widget.range!, clubId: widget.clubId!));
-              },
-              icon: const Icon(Icons.stacked_bar_chart),
-            ),
-          ],
-        );
+  Widget downloadRatingButton() {
+    final range = context.watch<RatingBloc>().state.range ?? widget.range;
+    if (widget.clubId == null || range == null) {
+      return Container();
+    }
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          onPressed: () {
+            context.read<RatingBloc>().add(
+              RatingEvent.downloadRating(range: range, clubId: widget.clubId!),
+            );
+          },
+          icon: const Icon(Icons.download),
+        ),
+        const SizedBox(width: 4),
+        IconButton(
+          onPressed: () {
+            context.read<RatingBloc>().add(RatingEvent.downloadStats(range: range, clubId: widget.clubId!));
+          },
+          icon: const Icon(Icons.stacked_bar_chart),
+        ),
+      ],
+    );
+  }
 
   Future<void> onChangeRangeTap() async {
     final bloc = context.read<RatingBloc>();
@@ -381,7 +387,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
       context: context,
       firstDate: DateTime(2000),
       lastDate: DateTime(3000),
-      initialDateRange: widget.range,
+      initialDateRange: bloc.state.range ?? widget.range,
       initialEntryMode: DatePickerEntryMode.input,
     );
     if (range != null) {
@@ -457,7 +463,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
     if (gameFilter != null && gameFilter != widget.gameFilter) {
       context.read<RatingBloc>().add(
         RatingEvent.rangeChanged(
-          range: widget.range,
+          range: context.read<RatingBloc>().state.range ?? widget.range,
           clubId: widget.clubId,
           tournamentId: widget.tournamentId,
           style: widget.style,
@@ -503,7 +509,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                 onPageChanged: (index, controller) {
                   context.read<RatingBloc>().add(
                     RatingEvent.rangeChanged(
-                      range: widget.range,
+                      range: context.read<RatingBloc>().state.range ?? widget.range,
                       clubId: widget.clubId,
                       tournamentId: widget.tournamentId,
                       style: items[index],

@@ -911,6 +911,8 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
     $core.int? games,
     $core.int? mafiaWins,
     $core.int? citizenWins,
+    $core.String? dateStart,
+    $core.String? dateEnd,
   }) {
     final result = create();
     if (row != null) result.row.addAll(row);
@@ -918,6 +920,8 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
     if (games != null) result.games = games;
     if (mafiaWins != null) result.mafiaWins = mafiaWins;
     if (citizenWins != null) result.citizenWins = citizenWins;
+    if (dateStart != null) result.dateStart = dateStart;
+    if (dateEnd != null) result.dateEnd = dateEnd;
     return result;
   }
 
@@ -940,6 +944,8 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
     ..aI(3, _omitFieldNames ? '' : 'games')
     ..aI(4, _omitFieldNames ? '' : 'mafiaWins', protoName: 'mafiaWins')
     ..aI(5, _omitFieldNames ? '' : 'citizenWins', protoName: 'citizenWins')
+    ..aOS(6, _omitFieldNames ? '' : 'dateStart', protoName: 'dateStart')
+    ..aOS(7, _omitFieldNames ? '' : 'dateEnd', protoName: 'dateEnd')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -999,6 +1005,89 @@ class ClubRatingEventOut extends $pb.GeneratedMessage {
   $core.bool hasCitizenWins() => $_has(4);
   @$pb.TagNumber(5)
   void clearCitizenWins() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get dateStart => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set dateStart($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasDateStart() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDateStart() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get dateEnd => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set dateEnd($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasDateEnd() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDateEnd() => $_clearField(7);
+}
+
+class ClubDefaultRatingPeriod extends $pb.GeneratedMessage {
+  factory ClubDefaultRatingPeriod({
+    $core.String? dateStart,
+    $core.String? dateEnd,
+  }) {
+    final result = create();
+    if (dateStart != null) result.dateStart = dateStart;
+    if (dateEnd != null) result.dateEnd = dateEnd;
+    return result;
+  }
+
+  ClubDefaultRatingPeriod._();
+
+  factory ClubDefaultRatingPeriod.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ClubDefaultRatingPeriod.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ClubDefaultRatingPeriod',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'dateStart', protoName: 'dateStart')
+    ..aOS(2, _omitFieldNames ? '' : 'dateEnd', protoName: 'dateEnd')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ClubDefaultRatingPeriod clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ClubDefaultRatingPeriod copyWith(void Function(ClubDefaultRatingPeriod) updates) =>
+      super.copyWith((message) => updates(message as ClubDefaultRatingPeriod)) as ClubDefaultRatingPeriod;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ClubDefaultRatingPeriod create() => ClubDefaultRatingPeriod._();
+  @$core.override
+  ClubDefaultRatingPeriod createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ClubDefaultRatingPeriod getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ClubDefaultRatingPeriod>(create);
+  static ClubDefaultRatingPeriod? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get dateStart => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set dateStart($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDateStart() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDateStart() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get dateEnd => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set dateEnd($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDateEnd() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDateEnd() => $_clearField(2);
 }
 
 class ClubRatingRow_GameItem extends $pb.GeneratedMessage {

@@ -78,7 +78,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
     if (event.clubId != null) {
       rating = await _getRatingRepository.run(
         clubId: event.clubId!,
-        range: event.range!,
+        range: event.range,
       );
     } else if (event.tournamentId != null) {
       rating = await _getTournamentRatingInteractor(
@@ -100,6 +100,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
         mafiaWins: rating.mafiaWins,
         citizenWins: rating.citizenWins,
         hasCustomColumns: hasCustomColumns,
+        range: rating.range ?? event.range,
       ),
     );
   }

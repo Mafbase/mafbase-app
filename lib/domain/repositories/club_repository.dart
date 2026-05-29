@@ -12,7 +12,7 @@ abstract class ClubRepository {
 
   Future<RatingModel> getRating({
     required int clubId,
-    required DateTimeRange range,
+    required DateTimeRange? range,
   });
 
   Future<List<GameResultModel>> getGames({
@@ -44,6 +44,15 @@ abstract class ClubRepository {
   Future<void> updateHideDate({
     required int id,
     required DateTime? dateTime,
+  });
+
+  /// Стандартный период отображения рейтинга клуба.
+  /// Возвращает `null`, если период не задан.
+  Future<DateTimeRange?> getDefaultRatingPeriod({required int id});
+
+  Future<void> updateDefaultRatingPeriod({
+    required int id,
+    required DateTimeRange? range,
   });
 
   Future<void> deleteGame({

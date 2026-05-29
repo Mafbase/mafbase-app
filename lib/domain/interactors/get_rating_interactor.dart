@@ -10,7 +10,7 @@ class GetRatingInteractor extends BaseInteractor {
 
   Future<RatingModel> run({
     required int clubId,
-    required DateTimeRange range,
+    required DateTimeRange? range,
   }) {
     return wrap(() => _clubRepository.getRating(clubId: clubId, range: range));
   }

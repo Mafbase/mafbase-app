@@ -35,16 +35,17 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     required BillClubInteractor billClubInteractor,
     required CheckClubInteractor checkClubInteractor,
     required ClubRepository clubRepository,
-  }) : _clubId = args.clubId,
-       _checkClubInteractor = checkClubInteractor,
-       _billClubInteractor = billClubInteractor,
-       _getClubInteractor = getClubInteractor,
-       _clubRepository = clubRepository,
-       super(args.cachedModel == null ? const ClubState() : ClubState(isLoading: false, model: args.cachedModel)) {
+  })  : _clubId = args.clubId,
+        _checkClubInteractor = checkClubInteractor,
+        _billClubInteractor = billClubInteractor,
+        _getClubInteractor = getClubInteractor,
+        _clubRepository = clubRepository,
+        super(args.cachedModel == null ? const ClubState() : ClubState(isLoading: false, model: args.cachedModel)) {
     on<ClubEventPageOpened>(_onPageOpened);
     on<ClubEventOpenRating>(_onOpenRating);
     on<ClubEventBillClub>(_onBillClub);
     on<ClubEventChangeHideDate>(_onChangeHideDate);
+    on<ClubEventChangeDefaultRatingPeriod>(_onChangeDefaultRatingPeriod);
     on<ClubEventEditDescription>(_onEditDescription);
     on<ClubEventEditPhoto>(_onEditPhoto);
   }
@@ -52,6 +53,12 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
   Future<void> _onChangeHideDate(ClubEventChangeHideDate event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     await _clubRepository.updateHideDate(id: _clubId, dateTime: event.dateTime);
+    add(const ClubEvent.pageOpened());
+  }
+
+  Future<void> _onChangeDefaultRatingPeriod(ClubEventChangeDefaultRatingPeriod event, Emitter emit) async {
+    emit(state.copyWith(isLoading: true));
+    await _clubRepository.updateDefaultRatingPeriod(id: _clubId, range: event.range);
     add(const ClubEvent.pageOpened());
   }
 
@@ -66,8 +73,17 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     ]);
 
     final hideDate = isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
+    final defaultRatingPeriod = isOwner ? await _clubRepository.getDefaultRatingPeriod(id: _clubId) : null;
 
-    emit(state.copyWith(isLoading: false, model: club, isOwner: isOwner, hideDate: hideDate));
+    emit(
+      state.copyWith(
+        isLoading: false,
+        model: club,
+        isOwner: isOwner,
+        hideDate: hideDate,
+        defaultRatingPeriod: defaultRatingPeriod,
+      ),
+    );
   }
 
   Future<void> _onBillClub(ClubEventBillClub event, Emitter emit) async {

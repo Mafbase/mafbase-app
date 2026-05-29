@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 
@@ -10,5 +11,6 @@ abstract class ClubState with _$ClubState {
     ClubModel? model,
     @Default(false) isOwner,
     DateTime? hideDate,
+    DateTimeRange? defaultRatingPeriod,
   }) = _ClubState;
 }

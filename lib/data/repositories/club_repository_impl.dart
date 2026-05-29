@@ -14,7 +14,9 @@ import 'package:seating_generator_web/data/requests/edit_club_game_request.dart'
 import 'package:seating_generator_web/data/requests/get_club_game_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_rating_request.dart';
 import 'package:seating_generator_web/data/requests/get_club_request.dart';
+import 'package:seating_generator_web/data/requests/get_default_rating_period_request.dart';
 import 'package:seating_generator_web/data/requests/get_hide_date_request.dart';
+import 'package:seating_generator_web/data/requests/update_default_rating_period_request.dart';
 import 'package:seating_generator_web/data/requests/update_hide_date_request.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/models/game_result_model.dart';
@@ -36,7 +38,7 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   @override
   Future<RatingModel> getRating({
     required int clubId,
-    required DateTimeRange range,
+    required DateTimeRange? range,
   }) {
     return GetClubRatingRequest(range: range, clubId: clubId).execute(client).then((event) {
       return RatingModel.fromProto(event);
@@ -126,6 +128,21 @@ class ClubRepositoryImpl extends BaseRepository implements ClubRepository {
   @override
   Future<void> updateHideDate({required int id, required DateTime? dateTime}) =>
       UpdateHideDateRequest(clubId: id.toString(), dateTime: dateTime).execute(client);
+
+  @override
+  Future<DateTimeRange?> getDefaultRatingPeriod({required int id}) =>
+      GetDefaultRatingPeriodRequest(id.toString()).execute(client).then((value) {
+        final start = dateFormatForRequests.tryParse(value.dateStart);
+        final end = dateFormatForRequests.tryParse(value.dateEnd);
+        if (start == null || end == null) {
+          return null;
+        }
+        return DateTimeRange(start: start, end: end);
+      });
+
+  @override
+  Future<void> updateDefaultRatingPeriod({required int id, required DateTimeRange? range}) =>
+      UpdateDefaultRatingPeriodRequest(clubId: id.toString(), range: range).execute(client);
 
   @override
   Future<void> deleteGame({required int gameId, required int clubId}) =>

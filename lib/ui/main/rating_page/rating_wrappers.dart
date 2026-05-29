@@ -29,6 +29,10 @@ class ClubRatingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Период из query-параметров URL (например, после ручной смены периода на
+    // странице рейтинга). Если его нет — range остаётся null, и бэкенд сам
+    // применит стандартный период клуба (ClubDefaultRatingPeriod), а при его
+    // отсутствии — текущий месяц, вернув фактический период в ответе.
     DateTimeRange? range;
     if (dateStart != null && dateEnd != null) {
       final start = dateFormatForRequests.tryParse(dateStart!);
@@ -37,13 +41,10 @@ class ClubRatingPage extends StatelessWidget {
         range = DateTimeRange(start: start, end: end);
       }
     }
+
     return RatingPage(
       clubId: clubId,
-      range: range ??
-          DateTimeRange(
-            start: DateTime.now().subtract(const Duration(days: 30)),
-            end: DateTime.now(),
-          ),
+      range: range,
       style: RatingTableStyle.values.firstWhereOrNull((e) => e.name == style) ?? RatingTableStyle.full,
       sort: RatingSort.values.firstWhereOrNull((e) => e.name == sort) ?? RatingSort.score,
       gameFilter: gameFilter ?? 0,
