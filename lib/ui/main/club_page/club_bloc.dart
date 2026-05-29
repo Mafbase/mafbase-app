@@ -58,8 +58,12 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
 
   Future<void> _onChangeDefaultRatingPeriod(ClubEventChangeDefaultRatingPeriod event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _clubRepository.updateDefaultRatingPeriod(id: _clubId, range: event.range);
-    add(const ClubEvent.pageOpened());
+    try {
+      await _clubRepository.updateDefaultRatingPeriod(id: _clubId, range: event.range);
+      add(const ClubEvent.pageOpened());
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onOpenRating(ClubEventOpenRating event, Emitter emit) async {
