@@ -9,7 +9,9 @@ import android.media.MediaFormat
 import android.media.MediaRecorder
 import android.os.SystemClock
 import android.util.Log
+import com.example.mafbase_stream.PhaseGate
 import java.nio.ByteBuffer
+import java.util.Arrays
 
 /**
  * Захват PCM с микрофона + AAC LC энкодер.
@@ -23,6 +25,7 @@ internal class AudioEncoder(
     private val channels: Int = 1,
     private val bitRate: Int = 128_000,
     private val sink: Sink,
+    private val phaseGate: PhaseGate? = null,
 ) {
     interface Sink {
         fun onAudioFormatReady(format: MediaFormat)
@@ -154,6 +157,11 @@ internal class AudioEncoder(
                 if (running) {
                     val read = record.read(pcm, 0, pcm.size)
                     if (read > 0) {
+                        // Mute: подаём тишину вместо реального PCM, но всё равно прокачиваем
+                        // через кодер — чтобы PTS наращивался и audio не отставал от видео.
+                        if (phaseGate?.muted == true) {
+                            Arrays.fill(pcm, 0, read, 0.toByte())
+                        }
                         feed(codec, pcm, read, eos = false)
                     }
                 } else if (!sentEos) {

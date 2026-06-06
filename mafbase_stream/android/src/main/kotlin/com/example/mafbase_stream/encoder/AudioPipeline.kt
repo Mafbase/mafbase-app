@@ -3,6 +3,7 @@ package com.example.mafbase_stream.encoder
 import android.media.MediaCodec
 import android.media.MediaFormat
 import android.util.Log
+import com.example.mafbase_stream.PhaseGate
 import java.nio.ByteBuffer
 
 /**
@@ -31,6 +32,7 @@ class AudioPipeline(
     private val sampleRate: Int = 44_100,
     private val channels: Int = 1,
     private val bitRate: Int = 128_000,
+    private val phaseGate: PhaseGate? = null,
 ) {
     interface Subscriber {
         fun onAudioFormatReady(format: MediaFormat) {}
@@ -59,6 +61,7 @@ class AudioPipeline(
                     channels = channels,
                     bitRate = bitRate,
                     sink = encoderSink,
+                    phaseGate = phaseGate,
                 )
                 try {
                     enc.prepare()

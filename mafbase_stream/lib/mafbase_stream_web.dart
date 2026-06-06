@@ -21,6 +21,7 @@ class MafbaseStreamWeb extends MafbaseStreamPlatform {
     String? overlayViewType,
     int? tournamentId,
     int? table,
+    String? breakPlaceholderImageUrl,
   }) async {}
 
   @override
