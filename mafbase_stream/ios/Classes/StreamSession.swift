@@ -89,8 +89,9 @@ final class StreamSession {
     private var videoFrameCounter: Int64 = 0
     private var audioFrameCounter: Int64 = 0
 
-    init(config: Config) {
+    init(config: Config, phaseGate: PhaseGate? = nil) {
         self.config = config
+        self.audioEncoder.phaseGate = phaseGate
         self.videoEncoder = H264Encoder(
             bitRate: config.videoBitrate,
             frameRate: config.fps,

@@ -34,6 +34,7 @@ class MethodChannelMafbaseStream extends MafbaseStreamPlatform {
     String? overlayViewType,
     int? tournamentId,
     int? table,
+    String? breakPlaceholderImageUrl,
   }) async {
     await methodChannel.invokeMethod<void>('openStreamScreen', <String, dynamic>{
       'rtmpUrl': ?rtmpUrl,
@@ -41,6 +42,7 @@ class MethodChannelMafbaseStream extends MafbaseStreamPlatform {
       'overlayViewType': ?overlayViewType,
       'tournamentId': ?tournamentId,
       'table': ?table,
+      'breakPlaceholderImageUrl': ?breakPlaceholderImageUrl,
     });
   }
 

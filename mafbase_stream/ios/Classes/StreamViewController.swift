@@ -42,6 +42,10 @@ final class StreamViewController: UIViewController {
     /// на seatingContent. Прокидываются в `OverlayCatalog.create`.
     var overlayParams: OverlayParams = OverlayParams()
 
+    /// Шарится между overlay'ем (writer) и StreamSession.audioEncoder (reader):
+    /// overlay выставляет muted=true когда `broadcastPhase` != day.
+    private let phaseGate = PhaseGate()
+
     // MARK: - Capture
 
     private let captureSession = AVCaptureSession()
@@ -225,9 +229,17 @@ final class StreamViewController: UIViewController {
         }
         NSLog("[Stream] attachOverlay: viewType=\(viewType) tournamentId=\(overlayParams.tournamentId.map(String.init) ?? "nil") table=\(overlayParams.table.map(String.init) ?? "nil")")
         let renderer = OverlayViewRenderer(width: Self.frameWidth, height: Self.frameHeight)
+        // Поднимаем phaseGate из плагина и breakPlaceholder из overlayParams в
+        // новый OverlayParams, который видит overlay.
+        let resolvedParams = OverlayParams(
+            tournamentId: overlayParams.tournamentId,
+            table: overlayParams.table,
+            phaseGate: phaseGate,
+            breakPlaceholderImageUrl: overlayParams.breakPlaceholderImageUrl
+        )
         guard let overlay = OverlayCatalog.create(
             viewType: viewType,
-            params: overlayParams,
+            params: resolvedParams,
             invalidator: renderer
         ) else {
             NSLog("[Stream] overlay '\(viewType)' not found in catalog")
@@ -623,7 +635,8 @@ final class StreamViewController: UIViewController {
                 rtmpUrl: composedRtmpUrl(),
                 width: Self.frameWidth,
                 height: Self.frameHeight
-            )
+            ),
+            phaseGate: phaseGate
         )
         session.onStarted = { [weak self] in
             DispatchQueue.main.async {

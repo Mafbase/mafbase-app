@@ -88,9 +88,13 @@ class StreamActivity :
     private var compositor: Compositor? = null
     private var overlayRenderer: OverlayViewRenderer? = null
 
+    // Шарится между overlay'ем (writer) и audio pipeline'ом (reader): overlay
+    // выставляет muted=true когда `broadcastPhase` != day.
+    private val phaseGate = PhaseGate()
+
     // Общий audio pipeline на жизнь камеры. Запись и стрим оба подписываются на него,
     // и AudioRecord(MIC) поднимается в одном экземпляре — иначе вторая инстанция конфликтует.
-    private val audioPipeline = AudioPipeline()
+    private val audioPipeline = AudioPipeline(phaseGate = phaseGate)
 
     @Volatile
     private var isTransitioning: Boolean = false
@@ -100,6 +104,7 @@ class StreamActivity :
     private var overlayViewType: String? = null
     private var overlayTournamentId: Int? = null
     private var overlayTable: Int? = null
+    private var breakPlaceholderImageUrl: String? = null
     // Сохраняем view от текущей сессии стрима, чтобы кнопка «Toggle overlay»
     // могла её дёрнуть. Один экземпляр на сессию — пересоздаётся в startStreaming.
     private var overlayView: View? = null
@@ -115,6 +120,7 @@ class StreamActivity :
         const val EXTRA_OVERLAY_VIEW_TYPE: String = "mafbase_stream.overlay_view_type"
         const val EXTRA_TOURNAMENT_ID: String = "mafbase_stream.tournament_id"
         const val EXTRA_TABLE: String = "mafbase_stream.table"
+        const val EXTRA_BREAK_PLACEHOLDER_URL: String = "mafbase_stream.break_placeholder_url"
 
         private val REQUIRED_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
@@ -135,6 +141,9 @@ class StreamActivity :
         }
         if (intent?.hasExtra(EXTRA_TABLE) == true) {
             overlayTable = intent.getIntExtra(EXTRA_TABLE, 0)
+        }
+        intent?.getStringExtra(EXTRA_BREAK_PLACEHOLDER_URL)?.takeIf { it.isNotBlank() }?.let {
+            breakPlaceholderImageUrl = it
         }
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -616,7 +625,12 @@ class StreamActivity :
         val viewType = overlayViewType ?: return
         Log.d(TAG, "attachOverlay: viewType=$viewType, frame=${width}x$height")
         val renderer = OverlayViewRenderer(width, height)
-        val params = OverlayParams(tournamentId = overlayTournamentId, table = overlayTable)
+        val params = OverlayParams(
+            tournamentId = overlayTournamentId,
+            table = overlayTable,
+            phaseGate = phaseGate,
+            breakPlaceholderImageUrl = breakPlaceholderImageUrl,
+        )
         val view = OverlayCatalog.create(viewType, this, renderer, params)
         if (view == null) {
             Log.w(TAG, "Overlay '$viewType' not found in catalog — running without overlay")

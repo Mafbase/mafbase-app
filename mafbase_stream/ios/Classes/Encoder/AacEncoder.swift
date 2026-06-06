@@ -58,6 +58,11 @@ final class AacEncoder {
     var onSample: ((CMSampleBuffer) -> Void)?
     var onError: ((Error) -> Void)?
 
+    /// Если выставлен и `muted == true` — PCM-данные зануляются перед feed'ом в
+    /// AudioConverter. Энкодер продолжает работать с правильным timing'ом, на
+    /// выходе идёт тишина с теми же PTS, что и реальный звук.
+    var phaseGate: PhaseGate?
+
     init(bitRate: UInt32 = 64_000) {
         targetBitRate = bitRate
     }
@@ -196,7 +201,13 @@ final class AacEncoder {
         if pcmBuffer.isEmpty {
             pcmBufferStartPts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
         }
-        pcmBuffer.append(Data(bytes: data, count: length))
+        if phaseGate?.muted == true {
+            // Подаём тишину с теми же timing'ами — PTS аудио продолжает идти
+            // параллельно видео, AV-sync не съезжает.
+            pcmBuffer.append(Data(count: length))
+        } else {
+            pcmBuffer.append(Data(bytes: data, count: length))
+        }
 
         let bytesPerFrame = Int(inputASBD.mBytesPerFrame)
         guard bytesPerFrame > 0 else { return }

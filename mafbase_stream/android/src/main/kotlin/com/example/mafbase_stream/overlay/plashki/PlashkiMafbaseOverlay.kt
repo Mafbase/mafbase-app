@@ -1,15 +1,24 @@
 package com.example.mafbase_stream.overlay.plashki
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
 import com.example.mafbase_stream.data.sockets.TournamentContentSocket
 import com.example.mafbase_stream.overlay.OverlayParams
+import generated.Mafia
 
 @Composable
 internal fun PlashkiMafbaseOverlay(params: OverlayParams) {
@@ -27,5 +36,48 @@ internal fun PlashkiMafbaseOverlay(params: OverlayParams) {
         onDispose { socket.dispose() }
     }
     val content by socket.state.collectAsState()
-    content?.let { MafbaseContent(it, modifier = Modifier.fillMaxSize()) }
+    val phase = content?.broadcastPhase
+
+    // Mute audio во всех фазах кроме `day`. Reset на dispose, чтобы между
+    // сессиями mute не "залипал".
+    LaunchedEffect(phase) {
+        params.phaseGate?.muted = phase != null && phase != Mafia.BroadcastPhase.day
+    }
+    DisposableEffect(params.phaseGate) {
+        onDispose { params.phaseGate?.muted = false }
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        content?.let { MafbaseContent(it, modifier = Modifier.fillMaxSize()) }
+        if (phase == Mafia.BroadcastPhase.break_phase) {
+            BreakPlaceholder(imageUrl = params.breakPlaceholderImageUrl)
+        }
+    }
+}
+
+/**
+ * Полноэкранная заглушка на фазе перерыва. Если задан URL — показываем
+ * картинку поверх (alpha-blend с непрозрачным фоном гарантирует, что камера
+ * полностью скрыта). Без URL — просто тёмный экран.
+ */
+@Composable
+private fun BreakPlaceholder(imageUrl: String?) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
+    ) {
+        if (!imageUrl.isNullOrBlank()) {
+            val context = LocalContext.current
+            AsyncImage(
+                model = ImageRequest.Builder(context)
+                    .data(imageUrl)
+                    .allowHardware(false)
+                    .build(),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Fit,
+            )
+        }
+    }
 }
