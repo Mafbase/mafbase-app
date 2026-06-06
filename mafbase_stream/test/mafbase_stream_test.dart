@@ -15,6 +15,7 @@ class MockMafbaseStreamPlatform with MockPlatformInterfaceMixin implements Mafba
     String? overlayViewType,
     int? tournamentId,
     int? table,
+    String? breakPlaceholderImageUrl,
   }) => Future.value();
 
   @override

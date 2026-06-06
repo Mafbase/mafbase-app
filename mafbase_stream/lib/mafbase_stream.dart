@@ -35,6 +35,12 @@ class MafbaseStream {
   /// и используются overlay'ем для подключения к серверному сокету. Если
   /// overlay не требует данных — оба можно не указывать.
   ///
+  /// [breakPlaceholderImageUrl] — URL картинки, которой overlay перекрывает
+  /// кадр камеры на фазе `break_phase` (перерыв). На фазах `night` и
+  /// `break_phase` плагин также мьютит звук с микрофона (подаёт тишину в
+  /// энкодер, чтобы не ломать AV-sync). Если overlay не подписан на
+  /// `broadcastPhase` — параметр не используется.
+  ///
   /// Future разрешается, когда пользователь закрывает экран.
   /// При отказе в системных разрешениях бросается [PlatformException]
   /// с кодом `PERMISSIONS_DENIED`.
@@ -44,6 +50,7 @@ class MafbaseStream {
     MafbaseOverlay? overlay,
     int? tournamentId,
     int? table,
+    String? breakPlaceholderImageUrl,
   }) {
     return MafbaseStreamPlatform.instance.openStreamScreen(
       rtmpUrl: rtmpUrl,
@@ -51,6 +58,7 @@ class MafbaseStream {
       overlayViewType: overlay?.viewType,
       tournamentId: tournamentId,
       table: table,
+      breakPlaceholderImageUrl: breakPlaceholderImageUrl,
     );
   }
 

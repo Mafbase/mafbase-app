@@ -97,10 +97,11 @@ class MafbaseStreamPlugin :
         val rawOverlay = call.argument<String>("overlayViewType")
         val tournamentId = call.argument<Number>("tournamentId")?.toInt()
         val table = call.argument<Number>("table")?.toInt()
+        val breakPlaceholderUrl = call.argument<String>("breakPlaceholderImageUrl")
         Log.d(
             "MafbaseStream",
             "openStreamScreen args: rtmpUrl=${call.argument<String>("rtmpUrl")} overlay=$rawOverlay " +
-                "tournamentId=$tournamentId table=$table",
+                "tournamentId=$tournamentId table=$table breakPlaceholder=$breakPlaceholderUrl",
         )
         val intent = Intent(act, StreamActivity::class.java).apply {
             call.argument<String>("rtmpUrl")?.let { putExtra(StreamActivity.EXTRA_RTMP_URL, it) }
@@ -108,6 +109,9 @@ class MafbaseStreamPlugin :
             rawOverlay?.let { putExtra(StreamActivity.EXTRA_OVERLAY_VIEW_TYPE, it) }
             tournamentId?.let { putExtra(StreamActivity.EXTRA_TOURNAMENT_ID, it) }
             table?.let { putExtra(StreamActivity.EXTRA_TABLE, it) }
+            breakPlaceholderUrl?.takeIf { it.isNotBlank() }?.let {
+                putExtra(StreamActivity.EXTRA_BREAK_PLACEHOLDER_URL, it)
+            }
         }
         act.startActivityForResult(intent, REQUEST_OPEN_STREAM)
     }

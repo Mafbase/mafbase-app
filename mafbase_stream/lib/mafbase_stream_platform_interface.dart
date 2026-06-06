@@ -34,6 +34,7 @@ abstract class MafbaseStreamPlatform extends PlatformInterface {
     String? overlayViewType,
     int? tournamentId,
     int? table,
+    String? breakPlaceholderImageUrl,
   }) {
     throw UnimplementedError('openStreamScreen() has not been implemented.');
   }
