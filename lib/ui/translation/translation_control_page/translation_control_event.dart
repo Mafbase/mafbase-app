@@ -19,6 +19,10 @@ abstract class TranslationControlEvent with _$TranslationControlEvent {
     required int gameIndex,
   }) = TranslationControlEventSelectGame;
 
+  const factory TranslationControlEvent.changeBroadcastPhase({
+    required BroadcastPhase phase,
+  }) = TranslationControlEventChangeBroadcastPhase;
+
   const factory TranslationControlEvent.stateReceived({
     required SeatingContent event,
   }) = TranslationControlEventStateReceived;

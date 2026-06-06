@@ -682,6 +682,8 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
     PlayerRole? role,
     PlayerStatus? status,
     $core.int? selectedGame,
+    BroadcastPhase? broadcastPhase,
+    $core.bool? soundEnabled,
   }) {
     final result = create();
     if (player != null) result.player = player;
@@ -689,6 +691,8 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
     if (role != null) result.role = role;
     if (status != null) result.status = status;
     if (selectedGame != null) result.selectedGame = selectedGame;
+    if (broadcastPhase != null) result.broadcastPhase = broadcastPhase;
+    if (soundEnabled != null) result.soundEnabled = soundEnabled;
     return result;
   }
 
@@ -712,6 +716,9 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
     ..aE<PlayerStatus>(4, _omitFieldNames ? '' : 'status',
         enumValues: PlayerStatus.values)
     ..aI(5, _omitFieldNames ? '' : 'selectedGame', protoName: 'selectedGame')
+    ..aE<BroadcastPhase>(6, _omitFieldNames ? '' : 'broadcastPhase',
+        protoName: 'broadcastPhase', enumValues: BroadcastPhase.values)
+    ..aOB(7, _omitFieldNames ? '' : 'soundEnabled', protoName: 'soundEnabled')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -777,6 +784,24 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
   $core.bool hasSelectedGame() => $_has(4);
   @$pb.TagNumber(5)
   void clearSelectedGame() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  BroadcastPhase get broadcastPhase => $_getN(5);
+  @$pb.TagNumber(6)
+  set broadcastPhase(BroadcastPhase value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBroadcastPhase() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBroadcastPhase() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.bool get soundEnabled => $_getBF(6);
+  @$pb.TagNumber(7)
+  set soundEnabled($core.bool value) => $_setBool(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasSoundEnabled() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSoundEnabled() => $_clearField(7);
 }
 
 class Club extends $pb.GeneratedMessage {
@@ -1056,8 +1081,10 @@ class ClubDefaultRatingPeriod extends $pb.GeneratedMessage {
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ClubDefaultRatingPeriod clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ClubDefaultRatingPeriod copyWith(void Function(ClubDefaultRatingPeriod) updates) =>
-      super.copyWith((message) => updates(message as ClubDefaultRatingPeriod)) as ClubDefaultRatingPeriod;
+  ClubDefaultRatingPeriod copyWith(
+          void Function(ClubDefaultRatingPeriod) updates) =>
+      super.copyWith((message) => updates(message as ClubDefaultRatingPeriod))
+          as ClubDefaultRatingPeriod;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
@@ -2522,6 +2549,8 @@ class SeatingContent extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? names,
     $core.int? game,
     $core.int? totalGames,
+    BroadcastPhase? broadcastPhase,
+    $core.bool? soundEnabled,
   }) {
     final result = create();
     if (roles != null) result.roles.addAll(roles);
@@ -2530,6 +2559,8 @@ class SeatingContent extends $pb.GeneratedMessage {
     if (names != null) result.names.addAll(names);
     if (game != null) result.game = game;
     if (totalGames != null) result.totalGames = totalGames;
+    if (broadcastPhase != null) result.broadcastPhase = broadcastPhase;
+    if (soundEnabled != null) result.soundEnabled = soundEnabled;
     return result;
   }
 
@@ -2558,6 +2589,9 @@ class SeatingContent extends $pb.GeneratedMessage {
     ..pPS(4, _omitFieldNames ? '' : 'names')
     ..aI(5, _omitFieldNames ? '' : 'game')
     ..aI(6, _omitFieldNames ? '' : 'totalGames', protoName: 'totalGames')
+    ..aE<BroadcastPhase>(7, _omitFieldNames ? '' : 'broadcastPhase',
+        protoName: 'broadcastPhase', enumValues: BroadcastPhase.values)
+    ..aOB(8, _omitFieldNames ? '' : 'soundEnabled', protoName: 'soundEnabled')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2608,6 +2642,24 @@ class SeatingContent extends $pb.GeneratedMessage {
   $core.bool hasTotalGames() => $_has(5);
   @$pb.TagNumber(6)
   void clearTotalGames() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  BroadcastPhase get broadcastPhase => $_getN(6);
+  @$pb.TagNumber(7)
+  set broadcastPhase(BroadcastPhase value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasBroadcastPhase() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearBroadcastPhase() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.bool get soundEnabled => $_getBF(7);
+  @$pb.TagNumber(8)
+  set soundEnabled($core.bool value) => $_setBool(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasSoundEnabled() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearSoundEnabled() => $_clearField(8);
 }
 
 class LoginByTokenEvent extends $pb.GeneratedMessage {
@@ -4865,11 +4917,13 @@ class TournamentSubscriptionPlanEventOut extends $pb.GeneratedMessage {
     $core.bool? isActive,
     TournamentSubscriptionType? subscriptionType,
     $core.String? billedFor,
+    $core.String? createdAt,
   }) {
     final result = create();
     if (isActive != null) result.isActive = isActive;
     if (subscriptionType != null) result.subscriptionType = subscriptionType;
     if (billedFor != null) result.billedFor = billedFor;
+    if (createdAt != null) result.createdAt = createdAt;
     return result;
   }
 
@@ -4893,6 +4947,7 @@ class TournamentSubscriptionPlanEventOut extends $pb.GeneratedMessage {
         protoName: 'subscriptionType',
         enumValues: TournamentSubscriptionType.values)
     ..aOS(3, _omitFieldNames ? '' : 'billedFor', protoName: 'billedFor')
+    ..aOS(4, _omitFieldNames ? '' : 'createdAt', protoName: 'createdAt')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4945,6 +5000,15 @@ class TournamentSubscriptionPlanEventOut extends $pb.GeneratedMessage {
   $core.bool hasBilledFor() => $_has(2);
   @$pb.TagNumber(3)
   void clearBilledFor() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get createdAt => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set createdAt($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCreatedAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCreatedAt() => $_clearField(4);
 }
 
 class StartGameInfoEvent extends $pb.GeneratedMessage {
@@ -8030,6 +8094,481 @@ class SubstitutePlayerEvent extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(3)
   $pb.PbList<$core.int> get games => $_getList(2);
+}
+
+/// Публичная инфо о стриме (без секретных ключей)
+class GameStream extends $pb.GeneratedMessage {
+  factory GameStream({
+    $core.int? id,
+    $core.int? tableNumber,
+    $core.String? viewerUrl,
+    $core.bool? active,
+    $core.String? startedAt,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (tableNumber != null) result.tableNumber = tableNumber;
+    if (viewerUrl != null) result.viewerUrl = viewerUrl;
+    if (active != null) result.active = active;
+    if (startedAt != null) result.startedAt = startedAt;
+    return result;
+  }
+
+  GameStream._();
+
+  factory GameStream.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GameStream.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GameStream',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'id')
+    ..aI(2, _omitFieldNames ? '' : 'tableNumber', protoName: 'tableNumber')
+    ..aOS(3, _omitFieldNames ? '' : 'viewerUrl', protoName: 'viewerUrl')
+    ..aOB(4, _omitFieldNames ? '' : 'active')
+    ..aOS(5, _omitFieldNames ? '' : 'startedAt', protoName: 'startedAt')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GameStream clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GameStream copyWith(void Function(GameStream) updates) =>
+      super.copyWith((message) => updates(message as GameStream)) as GameStream;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GameStream create() => GameStream._();
+  @$core.override
+  GameStream createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GameStream getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GameStream>(create);
+  static GameStream? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get tableNumber => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set tableNumber($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTableNumber() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTableNumber() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get viewerUrl => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set viewerUrl($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasViewerUrl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearViewerUrl() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get active => $_getBF(3);
+  @$pb.TagNumber(4)
+  set active($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasActive() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearActive() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get startedAt => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set startedAt($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasStartedAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearStartedAt() => $_clearField(5);
+}
+
+/// Инфо о стриме для администратора (включает RTMP)
+class GameStreamAdmin extends $pb.GeneratedMessage {
+  factory GameStreamAdmin({
+    $core.int? id,
+    $core.int? tableNumber,
+    $core.String? viewerUrl,
+    $core.String? rtmpServerUrl,
+    $core.String? rtmpKey,
+    $core.bool? active,
+    $core.String? startedAt,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (tableNumber != null) result.tableNumber = tableNumber;
+    if (viewerUrl != null) result.viewerUrl = viewerUrl;
+    if (rtmpServerUrl != null) result.rtmpServerUrl = rtmpServerUrl;
+    if (rtmpKey != null) result.rtmpKey = rtmpKey;
+    if (active != null) result.active = active;
+    if (startedAt != null) result.startedAt = startedAt;
+    return result;
+  }
+
+  GameStreamAdmin._();
+
+  factory GameStreamAdmin.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GameStreamAdmin.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GameStreamAdmin',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'id')
+    ..aI(2, _omitFieldNames ? '' : 'tableNumber', protoName: 'tableNumber')
+    ..aOS(3, _omitFieldNames ? '' : 'viewerUrl', protoName: 'viewerUrl')
+    ..aOS(4, _omitFieldNames ? '' : 'rtmpServerUrl', protoName: 'rtmpServerUrl')
+    ..aOS(5, _omitFieldNames ? '' : 'rtmpKey', protoName: 'rtmpKey')
+    ..aOB(6, _omitFieldNames ? '' : 'active')
+    ..aOS(7, _omitFieldNames ? '' : 'startedAt', protoName: 'startedAt')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GameStreamAdmin clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GameStreamAdmin copyWith(void Function(GameStreamAdmin) updates) =>
+      super.copyWith((message) => updates(message as GameStreamAdmin))
+          as GameStreamAdmin;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GameStreamAdmin create() => GameStreamAdmin._();
+  @$core.override
+  GameStreamAdmin createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GameStreamAdmin getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GameStreamAdmin>(create);
+  static GameStreamAdmin? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get tableNumber => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set tableNumber($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTableNumber() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTableNumber() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get viewerUrl => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set viewerUrl($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasViewerUrl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearViewerUrl() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get rtmpServerUrl => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set rtmpServerUrl($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasRtmpServerUrl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRtmpServerUrl() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get rtmpKey => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set rtmpKey($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasRtmpKey() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRtmpKey() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get active => $_getBF(5);
+  @$pb.TagNumber(6)
+  set active($core.bool value) => $_setBool(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasActive() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearActive() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get startedAt => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set startedAt($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasStartedAt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStartedAt() => $_clearField(7);
+}
+
+/// Запрос на ручную установку стрима
+class SetStreamEvent extends $pb.GeneratedMessage {
+  factory SetStreamEvent({
+    $core.int? tableNumber,
+    $core.String? viewerUrl,
+    $core.String? rtmpServerUrl,
+    $core.String? rtmpKey,
+  }) {
+    final result = create();
+    if (tableNumber != null) result.tableNumber = tableNumber;
+    if (viewerUrl != null) result.viewerUrl = viewerUrl;
+    if (rtmpServerUrl != null) result.rtmpServerUrl = rtmpServerUrl;
+    if (rtmpKey != null) result.rtmpKey = rtmpKey;
+    return result;
+  }
+
+  SetStreamEvent._();
+
+  factory SetStreamEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SetStreamEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'SetStreamEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'tableNumber', protoName: 'tableNumber')
+    ..aOS(2, _omitFieldNames ? '' : 'viewerUrl', protoName: 'viewerUrl')
+    ..aOS(3, _omitFieldNames ? '' : 'rtmpServerUrl', protoName: 'rtmpServerUrl')
+    ..aOS(4, _omitFieldNames ? '' : 'rtmpKey', protoName: 'rtmpKey')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetStreamEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetStreamEvent copyWith(void Function(SetStreamEvent) updates) =>
+      super.copyWith((message) => updates(message as SetStreamEvent))
+          as SetStreamEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetStreamEvent create() => SetStreamEvent._();
+  @$core.override
+  SetStreamEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static SetStreamEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetStreamEvent>(create);
+  static SetStreamEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get tableNumber => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set tableNumber($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTableNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTableNumber() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get viewerUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set viewerUrl($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasViewerUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearViewerUrl() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get rtmpServerUrl => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set rtmpServerUrl($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRtmpServerUrl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRtmpServerUrl() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get rtmpKey => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set rtmpKey($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasRtmpKey() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRtmpKey() => $_clearField(4);
+}
+
+/// Запрос на автогенерацию через VK API
+class StartVkStreamEvent extends $pb.GeneratedMessage {
+  factory StartVkStreamEvent({
+    $core.int? tableNumber,
+  }) {
+    final result = create();
+    if (tableNumber != null) result.tableNumber = tableNumber;
+    return result;
+  }
+
+  StartVkStreamEvent._();
+
+  factory StartVkStreamEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory StartVkStreamEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StartVkStreamEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'tableNumber', protoName: 'tableNumber')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartVkStreamEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StartVkStreamEvent copyWith(void Function(StartVkStreamEvent) updates) =>
+      super.copyWith((message) => updates(message as StartVkStreamEvent))
+          as StartVkStreamEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StartVkStreamEvent create() => StartVkStreamEvent._();
+  @$core.override
+  StartVkStreamEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static StartVkStreamEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<StartVkStreamEvent>(create);
+  static StartVkStreamEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get tableNumber => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set tableNumber($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTableNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTableNumber() => $_clearField(1);
+}
+
+/// Ответ с публичными стримами турнира
+class GetStreamsOut extends $pb.GeneratedMessage {
+  factory GetStreamsOut({
+    $core.Iterable<GameStream>? streams,
+  }) {
+    final result = create();
+    if (streams != null) result.streams.addAll(streams);
+    return result;
+  }
+
+  GetStreamsOut._();
+
+  factory GetStreamsOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetStreamsOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetStreamsOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..pPM<GameStream>(1, _omitFieldNames ? '' : 'streams',
+        subBuilder: GameStream.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStreamsOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStreamsOut copyWith(void Function(GetStreamsOut) updates) =>
+      super.copyWith((message) => updates(message as GetStreamsOut))
+          as GetStreamsOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetStreamsOut create() => GetStreamsOut._();
+  @$core.override
+  GetStreamsOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GetStreamsOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetStreamsOut>(create);
+  static GetStreamsOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<GameStream> get streams => $_getList(0);
+}
+
+/// Ответ с admin-стримами турнира
+class GetStreamsAdminOut extends $pb.GeneratedMessage {
+  factory GetStreamsAdminOut({
+    $core.Iterable<GameStreamAdmin>? streams,
+  }) {
+    final result = create();
+    if (streams != null) result.streams.addAll(streams);
+    return result;
+  }
+
+  GetStreamsAdminOut._();
+
+  factory GetStreamsAdminOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory GetStreamsAdminOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GetStreamsAdminOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..pPM<GameStreamAdmin>(1, _omitFieldNames ? '' : 'streams',
+        subBuilder: GameStreamAdmin.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStreamsAdminOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetStreamsAdminOut copyWith(void Function(GetStreamsAdminOut) updates) =>
+      super.copyWith((message) => updates(message as GetStreamsAdminOut))
+          as GetStreamsAdminOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetStreamsAdminOut create() => GetStreamsAdminOut._();
+  @$core.override
+  GetStreamsAdminOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static GetStreamsAdminOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetStreamsAdminOut>(create);
+  static GetStreamsAdminOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<GameStreamAdmin> get streams => $_getList(0);
 }
 
 const $core.bool _omitFieldNames =

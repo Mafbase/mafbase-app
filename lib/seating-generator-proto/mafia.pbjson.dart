@@ -136,6 +136,20 @@ final $typed_data.Uint8List ratingSchemeDescriptor = $convert.base64Decode(
     'CgxSYXRpbmdTY2hlbWUSCgoGb2xkRlNNEAASDAoIbWludXNGU00QARIQCgxtZWRpYWdhbWVNU0'
     'wQAg==');
 
+@$core.Deprecated('Use broadcastPhaseDescriptor instead')
+const BroadcastPhase$json = {
+  '1': 'BroadcastPhase',
+  '2': [
+    {'1': 'day', '2': 0},
+    {'1': 'night', '2': 1},
+    {'1': 'break_phase', '2': 2},
+  ],
+};
+
+/// Descriptor for `BroadcastPhase`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List broadcastPhaseDescriptor = $convert.base64Decode(
+    'Cg5Ccm9hZGNhc3RQaGFzZRIHCgNkYXkQABIJCgVuaWdodBABEg8KC2JyZWFrX3BoYXNlEAI=');
+
 @$core.Deprecated('Use loginEventDescriptor instead')
 const LoginEvent$json = {
   '1': 'LoginEvent',
@@ -415,6 +429,25 @@ const ChangeSeatingContent$json = {
       '10': 'selectedGame',
       '17': true
     },
+    {
+      '1': 'broadcastPhase',
+      '3': 6,
+      '4': 1,
+      '5': 14,
+      '6': '.generated.BroadcastPhase',
+      '9': 5,
+      '10': 'broadcastPhase',
+      '17': true
+    },
+    {
+      '1': 'soundEnabled',
+      '3': 7,
+      '4': 1,
+      '5': 8,
+      '9': 6,
+      '10': 'soundEnabled',
+      '17': true
+    },
   ],
   '8': [
     {'1': '_player'},
@@ -422,6 +455,8 @@ const ChangeSeatingContent$json = {
     {'1': '_role'},
     {'1': '_status'},
     {'1': '_selectedGame'},
+    {'1': '_broadcastPhase'},
+    {'1': '_soundEnabled'},
   ],
 };
 
@@ -431,8 +466,10 @@ final $typed_data.Uint8List changeSeatingContentDescriptor = $convert.base64Deco
     'ltYWdlVXJsGAIgASgJSAFSCGltYWdlVXJsiAEBEi4KBHJvbGUYAyABKA4yFS5nZW5lcmF0ZWQu'
     'UGxheWVyUm9sZUgCUgRyb2xliAEBEjQKBnN0YXR1cxgEIAEoDjIXLmdlbmVyYXRlZC5QbGF5ZX'
     'JTdGF0dXNIA1IGc3RhdHVziAEBEicKDHNlbGVjdGVkR2FtZRgFIAEoBUgEUgxzZWxlY3RlZEdh'
-    'bWWIAQFCCQoHX3BsYXllckILCglfaW1hZ2VVcmxCBwoFX3JvbGVCCQoHX3N0YXR1c0IPCg1fc2'
-    'VsZWN0ZWRHYW1l');
+    'bWWIAQESRgoOYnJvYWRjYXN0UGhhc2UYBiABKA4yGS5nZW5lcmF0ZWQuQnJvYWRjYXN0UGhhc2'
+    'VIBVIOYnJvYWRjYXN0UGhhc2WIAQESJwoMc291bmRFbmFibGVkGAcgASgISAZSDHNvdW5kRW5h'
+    'YmxlZIgBAUIJCgdfcGxheWVyQgsKCV9pbWFnZVVybEIHCgVfcm9sZUIJCgdfc3RhdHVzQg8KDV'
+    '9zZWxlY3RlZEdhbWVCEQoPX2Jyb2FkY2FzdFBoYXNlQg8KDV9zb3VuZEVuYWJsZWQ=');
 
 @$core.Deprecated('Use clubDescriptor instead')
 const Club$json = {
@@ -511,6 +548,28 @@ const ClubRatingEventOut$json = {
     {'1': 'games', '3': 3, '4': 1, '5': 5, '10': 'games'},
     {'1': 'mafiaWins', '3': 4, '4': 1, '5': 5, '10': 'mafiaWins'},
     {'1': 'citizenWins', '3': 5, '4': 1, '5': 5, '10': 'citizenWins'},
+    {
+      '1': 'dateStart',
+      '3': 6,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'dateStart',
+      '17': true
+    },
+    {
+      '1': 'dateEnd',
+      '3': 7,
+      '4': 1,
+      '5': 9,
+      '9': 1,
+      '10': 'dateEnd',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_dateStart'},
+    {'1': '_dateEnd'},
   ],
 };
 
@@ -519,7 +578,43 @@ final $typed_data.Uint8List clubRatingEventOutDescriptor = $convert.base64Decode
     'ChJDbHViUmF0aW5nRXZlbnRPdXQSKgoDcm93GAEgAygLMhguZ2VuZXJhdGVkLkNsdWJSYXRpbm'
     'dSb3dSA3JvdxIaCghjbHViTmFtZRgCIAEoCVIIY2x1Yk5hbWUSFAoFZ2FtZXMYAyABKAVSBWdh'
     'bWVzEhwKCW1hZmlhV2lucxgEIAEoBVIJbWFmaWFXaW5zEiAKC2NpdGl6ZW5XaW5zGAUgASgFUg'
-    'tjaXRpemVuV2lucw==');
+    'tjaXRpemVuV2lucxIhCglkYXRlU3RhcnQYBiABKAlIAFIJZGF0ZVN0YXJ0iAEBEh0KB2RhdGVF'
+    'bmQYByABKAlIAVIHZGF0ZUVuZIgBAUIMCgpfZGF0ZVN0YXJ0QgoKCF9kYXRlRW5k');
+
+@$core.Deprecated('Use clubDefaultRatingPeriodDescriptor instead')
+const ClubDefaultRatingPeriod$json = {
+  '1': 'ClubDefaultRatingPeriod',
+  '2': [
+    {
+      '1': 'dateStart',
+      '3': 1,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'dateStart',
+      '17': true
+    },
+    {
+      '1': 'dateEnd',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '9': 1,
+      '10': 'dateEnd',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_dateStart'},
+    {'1': '_dateEnd'},
+  ],
+};
+
+/// Descriptor for `ClubDefaultRatingPeriod`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List clubDefaultRatingPeriodDescriptor = $convert.base64Decode(
+    'ChdDbHViRGVmYXVsdFJhdGluZ1BlcmlvZBIhCglkYXRlU3RhcnQYASABKAlIAFIJZGF0ZVN0YX'
+    'J0iAEBEh0KB2RhdGVFbmQYAiABKAlIAVIHZGF0ZUVuZIgBAUIMCgpfZGF0ZVN0YXJ0QgoKCF9k'
+    'YXRlRW5k');
 
 @$core.Deprecated('Use clubRatingRowDescriptor instead')
 const ClubRatingRow$json = {
@@ -932,6 +1027,15 @@ const SeatingContent$json = {
     {'1': 'names', '3': 4, '4': 3, '5': 9, '10': 'names'},
     {'1': 'game', '3': 5, '4': 1, '5': 5, '10': 'game'},
     {'1': 'totalGames', '3': 6, '4': 1, '5': 5, '10': 'totalGames'},
+    {
+      '1': 'broadcastPhase',
+      '3': 7,
+      '4': 1,
+      '5': 14,
+      '6': '.generated.BroadcastPhase',
+      '10': 'broadcastPhase'
+    },
+    {'1': 'soundEnabled', '3': 8, '4': 1, '5': 8, '10': 'soundEnabled'},
   ],
 };
 
@@ -940,7 +1044,9 @@ final $typed_data.Uint8List seatingContentDescriptor = $convert.base64Decode(
     'Cg5TZWF0aW5nQ29udGVudBIrCgVyb2xlcxgBIAMoDjIVLmdlbmVyYXRlZC5QbGF5ZXJSb2xlUg'
     'Vyb2xlcxIvCgZzdGF0dXMYAiADKA4yFy5nZW5lcmF0ZWQuUGxheWVyU3RhdHVzUgZzdGF0dXMS'
     'FgoGaW1hZ2VzGAMgAygJUgZpbWFnZXMSFAoFbmFtZXMYBCADKAlSBW5hbWVzEhIKBGdhbWUYBS'
-    'ABKAVSBGdhbWUSHgoKdG90YWxHYW1lcxgGIAEoBVIKdG90YWxHYW1lcw==');
+    'ABKAVSBGdhbWUSHgoKdG90YWxHYW1lcxgGIAEoBVIKdG90YWxHYW1lcxJBCg5icm9hZGNhc3RQ'
+    'aGFzZRgHIAEoDjIZLmdlbmVyYXRlZC5Ccm9hZGNhc3RQaGFzZVIOYnJvYWRjYXN0UGhhc2USIg'
+    'oMc291bmRFbmFibGVkGAggASgIUgxzb3VuZEVuYWJsZWQ=');
 
 @$core.Deprecated('Use loginByTokenEventDescriptor instead')
 const LoginByTokenEvent$json = {
@@ -1768,10 +1874,20 @@ const TournamentSubscriptionPlanEventOut$json = {
       '10': 'billedFor',
       '17': true
     },
+    {
+      '1': 'createdAt',
+      '3': 4,
+      '4': 1,
+      '5': 9,
+      '9': 2,
+      '10': 'createdAt',
+      '17': true
+    },
   ],
   '8': [
     {'1': '_subscriptionType'},
     {'1': '_billedFor'},
+    {'1': '_createdAt'},
   ],
 };
 
@@ -1781,7 +1897,8 @@ final $typed_data.Uint8List tournamentSubscriptionPlanEventOutDescriptor =
         'CiJUb3VybmFtZW50U3Vic2NyaXB0aW9uUGxhbkV2ZW50T3V0EhoKCGlzQWN0aXZlGAEgASgIUg'
         'hpc0FjdGl2ZRJWChBzdWJzY3JpcHRpb25UeXBlGAIgASgOMiUuZ2VuZXJhdGVkLlRvdXJuYW1l'
         'bnRTdWJzY3JpcHRpb25UeXBlSABSEHN1YnNjcmlwdGlvblR5cGWIAQESIQoJYmlsbGVkRm9yGA'
-        'MgASgJSAFSCWJpbGxlZEZvcogBAUITChFfc3Vic2NyaXB0aW9uVHlwZUIMCgpfYmlsbGVkRm9y');
+        'MgASgJSAFSCWJpbGxlZEZvcogBARIhCgljcmVhdGVkQXQYBCABKAlIAlIJY3JlYXRlZEF0iAEB'
+        'QhMKEV9zdWJzY3JpcHRpb25UeXBlQgwKCl9iaWxsZWRGb3JCDAoKX2NyZWF0ZWRBdA==');
 
 @$core.Deprecated('Use startGameInfoEventDescriptor instead')
 const StartGameInfoEvent$json = {
@@ -2780,3 +2897,182 @@ final $typed_data.Uint8List substitutePlayerEventDescriptor = $convert.base64Dec
     'ChVTdWJzdGl0dXRlUGxheWVyRXZlbnQSIAoLb2xkUGxheWVySWQYASABKAVSC29sZFBsYXllck'
     'lkEiAKC25ld1BsYXllcklkGAIgASgFUgtuZXdQbGF5ZXJJZBIUCgVnYW1lcxgDIAMoBVIFZ2Ft'
     'ZXM=');
+
+@$core.Deprecated('Use gameStreamDescriptor instead')
+const GameStream$json = {
+  '1': 'GameStream',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'tableNumber', '3': 2, '4': 1, '5': 5, '10': 'tableNumber'},
+    {
+      '1': 'viewerUrl',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'viewerUrl',
+      '17': true
+    },
+    {'1': 'active', '3': 4, '4': 1, '5': 8, '10': 'active'},
+    {'1': 'startedAt', '3': 5, '4': 1, '5': 9, '10': 'startedAt'},
+  ],
+  '8': [
+    {'1': '_viewerUrl'},
+  ],
+};
+
+/// Descriptor for `GameStream`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List gameStreamDescriptor = $convert.base64Decode(
+    'CgpHYW1lU3RyZWFtEg4KAmlkGAEgASgFUgJpZBIgCgt0YWJsZU51bWJlchgCIAEoBVILdGFibG'
+    'VOdW1iZXISIQoJdmlld2VyVXJsGAMgASgJSABSCXZpZXdlclVybIgBARIWCgZhY3RpdmUYBCAB'
+    'KAhSBmFjdGl2ZRIcCglzdGFydGVkQXQYBSABKAlSCXN0YXJ0ZWRBdEIMCgpfdmlld2VyVXJs');
+
+@$core.Deprecated('Use gameStreamAdminDescriptor instead')
+const GameStreamAdmin$json = {
+  '1': 'GameStreamAdmin',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    {'1': 'tableNumber', '3': 2, '4': 1, '5': 5, '10': 'tableNumber'},
+    {
+      '1': 'viewerUrl',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'viewerUrl',
+      '17': true
+    },
+    {
+      '1': 'rtmpServerUrl',
+      '3': 4,
+      '4': 1,
+      '5': 9,
+      '9': 1,
+      '10': 'rtmpServerUrl',
+      '17': true
+    },
+    {
+      '1': 'rtmpKey',
+      '3': 5,
+      '4': 1,
+      '5': 9,
+      '9': 2,
+      '10': 'rtmpKey',
+      '17': true
+    },
+    {'1': 'active', '3': 6, '4': 1, '5': 8, '10': 'active'},
+    {'1': 'startedAt', '3': 7, '4': 1, '5': 9, '10': 'startedAt'},
+  ],
+  '8': [
+    {'1': '_viewerUrl'},
+    {'1': '_rtmpServerUrl'},
+    {'1': '_rtmpKey'},
+  ],
+};
+
+/// Descriptor for `GameStreamAdmin`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List gameStreamAdminDescriptor = $convert.base64Decode(
+    'Cg9HYW1lU3RyZWFtQWRtaW4SDgoCaWQYASABKAVSAmlkEiAKC3RhYmxlTnVtYmVyGAIgASgFUg'
+    't0YWJsZU51bWJlchIhCgl2aWV3ZXJVcmwYAyABKAlIAFIJdmlld2VyVXJsiAEBEikKDXJ0bXBT'
+    'ZXJ2ZXJVcmwYBCABKAlIAVINcnRtcFNlcnZlclVybIgBARIdCgdydG1wS2V5GAUgASgJSAJSB3'
+    'J0bXBLZXmIAQESFgoGYWN0aXZlGAYgASgIUgZhY3RpdmUSHAoJc3RhcnRlZEF0GAcgASgJUglz'
+    'dGFydGVkQXRCDAoKX3ZpZXdlclVybEIQCg5fcnRtcFNlcnZlclVybEIKCghfcnRtcEtleQ==');
+
+@$core.Deprecated('Use setStreamEventDescriptor instead')
+const SetStreamEvent$json = {
+  '1': 'SetStreamEvent',
+  '2': [
+    {'1': 'tableNumber', '3': 1, '4': 1, '5': 5, '10': 'tableNumber'},
+    {
+      '1': 'viewerUrl',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'viewerUrl',
+      '17': true
+    },
+    {
+      '1': 'rtmpServerUrl',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '9': 1,
+      '10': 'rtmpServerUrl',
+      '17': true
+    },
+    {
+      '1': 'rtmpKey',
+      '3': 4,
+      '4': 1,
+      '5': 9,
+      '9': 2,
+      '10': 'rtmpKey',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_viewerUrl'},
+    {'1': '_rtmpServerUrl'},
+    {'1': '_rtmpKey'},
+  ],
+};
+
+/// Descriptor for `SetStreamEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setStreamEventDescriptor = $convert.base64Decode(
+    'Cg5TZXRTdHJlYW1FdmVudBIgCgt0YWJsZU51bWJlchgBIAEoBVILdGFibGVOdW1iZXISIQoJdm'
+    'lld2VyVXJsGAIgASgJSABSCXZpZXdlclVybIgBARIpCg1ydG1wU2VydmVyVXJsGAMgASgJSAFS'
+    'DXJ0bXBTZXJ2ZXJVcmyIAQESHQoHcnRtcEtleRgEIAEoCUgCUgdydG1wS2V5iAEBQgwKCl92aW'
+    'V3ZXJVcmxCEAoOX3J0bXBTZXJ2ZXJVcmxCCgoIX3J0bXBLZXk=');
+
+@$core.Deprecated('Use startVkStreamEventDescriptor instead')
+const StartVkStreamEvent$json = {
+  '1': 'StartVkStreamEvent',
+  '2': [
+    {'1': 'tableNumber', '3': 1, '4': 1, '5': 5, '10': 'tableNumber'},
+  ],
+};
+
+/// Descriptor for `StartVkStreamEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List startVkStreamEventDescriptor = $convert.base64Decode(
+    'ChJTdGFydFZrU3RyZWFtRXZlbnQSIAoLdGFibGVOdW1iZXIYASABKAVSC3RhYmxlTnVtYmVy');
+
+@$core.Deprecated('Use getStreamsOutDescriptor instead')
+const GetStreamsOut$json = {
+  '1': 'GetStreamsOut',
+  '2': [
+    {
+      '1': 'streams',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.generated.GameStream',
+      '10': 'streams'
+    },
+  ],
+};
+
+/// Descriptor for `GetStreamsOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getStreamsOutDescriptor = $convert.base64Decode(
+    'Cg1HZXRTdHJlYW1zT3V0Ei8KB3N0cmVhbXMYASADKAsyFS5nZW5lcmF0ZWQuR2FtZVN0cmVhbV'
+    'IHc3RyZWFtcw==');
+
+@$core.Deprecated('Use getStreamsAdminOutDescriptor instead')
+const GetStreamsAdminOut$json = {
+  '1': 'GetStreamsAdminOut',
+  '2': [
+    {
+      '1': 'streams',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.generated.GameStreamAdmin',
+      '10': 'streams'
+    },
+  ],
+};
+
+/// Descriptor for `GetStreamsAdminOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getStreamsAdminOutDescriptor = $convert.base64Decode(
+    'ChJHZXRTdHJlYW1zQWRtaW5PdXQSNAoHc3RyZWFtcxgBIAMoCzIaLmdlbmVyYXRlZC5HYW1lU3'
+    'RyZWFtQWRtaW5SB3N0cmVhbXM=');

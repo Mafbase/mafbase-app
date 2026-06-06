@@ -25,6 +25,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     on<TranslationControlEventChangeRole>(_onRoleChanged);
     on<TranslationControlEventChangeStatus>(_onStatusChanged);
     on<TranslationControlEventSelectGame>(_onGameSelected);
+    on<TranslationControlEventChangeBroadcastPhase>(_onBroadcastPhaseChanged);
     on<TranslationControlEventPageOpened>(_onPageOpened);
   }
 
@@ -82,6 +83,15 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
+  Future<dynamic> _onBroadcastPhaseChanged(TranslationControlEventChangeBroadcastPhase event, Emitter emit) {
+    return _repository.changeBroadcastPhase(
+      phase: event.phase,
+      table: params.table,
+      tournamentId: params.tournamentId,
+      key: params.key,
+    );
+  }
+
   void _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
     emit(
       TranslationContentState(
@@ -91,6 +101,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
         nicknames: event.event.names,
         game: event.event.game,
         totalGames: event.event.totalGames,
+        broadcastPhase: event.event.broadcastPhase,
       ),
     );
   }

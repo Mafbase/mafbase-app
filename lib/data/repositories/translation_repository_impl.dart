@@ -63,6 +63,21 @@ class TranslationRepositoryImpl extends BaseRepository implements TranslationRep
   }
 
   @override
+  Future changeBroadcastPhase({
+    required BroadcastPhase phase,
+    required int table,
+    required int tournamentId,
+    required String key,
+  }) {
+    return ChangeSeatingContentRequest(
+      tournamentId: tournamentId,
+      table: table,
+      key: key,
+      content: ChangeSeatingContent(broadcastPhase: phase),
+    ).execute(client);
+  }
+
+  @override
   Future<TranslationKeyModel> getKey({required int tournamentId}) =>
       TranslationKeyRequest(tournamentId: tournamentId).execute(client).then(TranslationKeyModel.fromProto);
 

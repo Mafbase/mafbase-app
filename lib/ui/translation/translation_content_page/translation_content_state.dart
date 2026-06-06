@@ -5,6 +5,8 @@ part 'translation_content_state.freezed.dart';
 
 @freezed
 abstract class TranslationContentState with _$TranslationContentState {
+  const TranslationContentState._();
+
   const factory TranslationContentState({
     List<PlayerRole>? roles,
     List<PlayerStatus>? statuses,
@@ -12,6 +14,7 @@ abstract class TranslationContentState with _$TranslationContentState {
     List<String>? nicknames,
     @Default(0) int game,
     @Default(0) int totalGames,
+    @Default(BroadcastPhase.day) BroadcastPhase broadcastPhase,
   }) = _TranslationContentState;
 }
 

@@ -1052,6 +1052,14 @@
   "@translationControlRoleSheriff": {},
   "translationControlRoleCitizen": "Мирный",
   "@translationControlRoleCitizen": {},
+  "translationControlPhaseLabel": "Фаза",
+  "@translationControlPhaseLabel": {},
+  "translationControlPhaseDay": "День",
+  "@translationControlPhaseDay": {},
+  "translationControlPhaseNight": "Ночь",
+  "@translationControlPhaseNight": {},
+  "translationControlPhaseBreak": "Перерыв",
+  "@translationControlPhaseBreak": {},
   "translationControlGame": "Игра {game} / {total}",
   "@translationControlGame": {
     "placeholders": {
