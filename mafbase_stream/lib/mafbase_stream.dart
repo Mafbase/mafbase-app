@@ -17,6 +17,11 @@ enum MafbaseOverlay {
 }
 
 class MafbaseStream {
+  /// Дефолтная картинка-заглушка, которой плагин перекрывает кадр на фазе
+  /// `break_phase`, если хост-приложение не передало свой URL. Хостится на
+  /// `mafbase.ru` — брендированная плашка «ПЕРЕРЫВ» 1920×1080.
+  static const String defaultBreakPlaceholderImageUrl = 'https://mafbase.ru/images/mafbase_break_placeholder.png';
+
   Future<String> getPlatformVersion() {
     return MafbaseStreamPlatform.instance.getPlatformVersion();
   }
@@ -39,7 +44,8 @@ class MafbaseStream {
   /// кадр камеры на фазе `break_phase` (перерыв). На фазах `night` и
   /// `break_phase` плагин также мьютит звук с микрофона (подаёт тишину в
   /// энкодер, чтобы не ломать AV-sync). Если overlay не подписан на
-  /// `broadcastPhase` — параметр не используется.
+  /// `broadcastPhase` — параметр не используется. Если null —
+  /// используется [defaultBreakPlaceholderImageUrl].
   ///
   /// Future разрешается, когда пользователь закрывает экран.
   /// При отказе в системных разрешениях бросается [PlatformException]
@@ -58,7 +64,7 @@ class MafbaseStream {
       overlayViewType: overlay?.viewType,
       tournamentId: tournamentId,
       table: table,
-      breakPlaceholderImageUrl: breakPlaceholderImageUrl,
+      breakPlaceholderImageUrl: breakPlaceholderImageUrl ?? defaultBreakPlaceholderImageUrl,
     );
   }
 

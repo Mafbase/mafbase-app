@@ -70,8 +70,8 @@ class _MyAppState extends State<MyApp> {
         rtmpUrl: _rtmpUrlController.text.trim(),
         streamKey: _streamKeyController.text.trim(),
         overlay: overlay,
-        tournamentId: 520,
-        table: 1,
+        tournamentId: 543,
+        table: 4,
       );
       if (!mounted) return;
       setState(() => _status = 'Stream screen closed');
