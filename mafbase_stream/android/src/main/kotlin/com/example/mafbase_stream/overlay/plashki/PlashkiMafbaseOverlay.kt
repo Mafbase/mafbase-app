@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import android.util.Log
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -41,6 +42,7 @@ internal fun PlashkiMafbaseOverlay(params: OverlayParams) {
     // Mute audio во всех фазах кроме `day`. Reset на dispose, чтобы между
     // сессиями mute не "залипал".
     LaunchedEffect(phase) {
+        Log.d("Plashki", "phase=$phase breakUrl=${params.breakPlaceholderImageUrl}")
         params.phaseGate?.muted = phase != null && phase != Mafia.BroadcastPhase.day
     }
     DisposableEffect(params.phaseGate) {
@@ -73,6 +75,18 @@ private fun BreakPlaceholder(imageUrl: String?) {
                 model = ImageRequest.Builder(context)
                     .data(imageUrl)
                     .allowHardware(false)
+                    .listener(
+                        onStart = { Log.d("Plashki", "break placeholder load start: $imageUrl") },
+                        onSuccess = { _, result ->
+                            Log.d(
+                                "Plashki",
+                                "break placeholder load success (${result.image.width}x${result.image.height})",
+                            )
+                        },
+                        onError = { _, result ->
+                            Log.w("Plashki", "break placeholder load error: ${result.throwable}")
+                        },
+                    )
                     .build(),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
