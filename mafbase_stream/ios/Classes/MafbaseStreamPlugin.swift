@@ -48,6 +48,8 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
     let table = (args?["table"] as? NSNumber)?.intValue
     let breakPlaceholderImageUrl = (args?["breakPlaceholderImageUrl"] as? String)?
       .trimmingCharacters(in: .whitespacesAndNewlines)
+    let brandImageUrl = (args?["brandImageUrl"] as? String)?
+      .trimmingCharacters(in: .whitespacesAndNewlines)
 
     let controller = StreamViewController()
     controller.rtmpUrl = (rtmpUrl?.isEmpty == false) ? rtmpUrl! : "rtmp://10.0.2.2/live"
@@ -56,7 +58,8 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
     controller.overlayParams = OverlayParams(
       tournamentId: tournamentId,
       table: table,
-      breakPlaceholderImageUrl: (breakPlaceholderImageUrl?.isEmpty == false) ? breakPlaceholderImageUrl : nil
+      breakPlaceholderImageUrl: (breakPlaceholderImageUrl?.isEmpty == false) ? breakPlaceholderImageUrl : nil,
+      brandImageUrl: (brandImageUrl?.isEmpty == false) ? brandImageUrl : nil
     )
     controller.modalPresentationStyle = .fullScreen
     controller.onClose = { [weak self] reason in

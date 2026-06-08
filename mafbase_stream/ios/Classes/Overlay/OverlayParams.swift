@@ -11,21 +11,30 @@ import Foundation
 /// [breakPlaceholderImageUrl] — URL картинки-заглушки, которая показывается
 /// поверх кадра при `broadcastPhase == break_phase`. Если nil — overlay рисует
 /// только свою обычную вёрстку без замены кадра.
+///
+/// [brandImageUrl] — URL брендированной PNG-картинки (обычно с прозрачным
+/// фоном), которая постоянно накладывается под overlay-вёрсткой во всех
+/// выходах. Рисуется OverlayCatalog'ом независимо от overlay-view, поэтому
+/// работает даже если viewType не задан. На фазе перерыва перекрывается
+/// break-заглушкой.
 struct OverlayParams {
     let tournamentId: Int?
     let table: Int?
     let phaseGate: PhaseGate?
     let breakPlaceholderImageUrl: String?
+    let brandImageUrl: String?
 
     init(
         tournamentId: Int? = nil,
         table: Int? = nil,
         phaseGate: PhaseGate? = nil,
-        breakPlaceholderImageUrl: String? = nil
+        breakPlaceholderImageUrl: String? = nil,
+        brandImageUrl: String? = nil
     ) {
         self.tournamentId = tournamentId
         self.table = table
         self.phaseGate = phaseGate
         self.breakPlaceholderImageUrl = breakPlaceholderImageUrl
+        self.brandImageUrl = brandImageUrl
     }
 }

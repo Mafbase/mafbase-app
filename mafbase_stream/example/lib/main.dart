@@ -20,7 +20,15 @@ class _MyAppState extends State<MyApp> {
   final _mafbaseStreamPlugin = MafbaseStream();
   final _rtmpUrlController = TextEditingController(text: 'rtmp://192.168.0.179/live');
   final _streamKeyController = TextEditingController(text: 'test');
-  String _status = 'Press the button to ping native';
+  // Если оба поля пустые — стрим идёт без overlay'я, иначе включается
+  // plashki-mafbase с подпиской на seatingContent по этим параметрам.
+  final _tournamentIdController = TextEditingController(text: '553');
+  final _tableController = TextEditingController(text: '1');
+  // Пусто → brand-слой не подключается.
+  final _brandImageUrlController = TextEditingController(
+    text: 'https://mafbase.ru/images/brand_overlay_1920x1080.png',
+  );
+  String _status = 'Нажми «Открыть стрим», чтобы запустить нативный экран';
   String _lastEvent = '—';
   StreamSubscription<StreamEvent>? _eventsSub;
 
@@ -45,33 +53,28 @@ class _MyAppState extends State<MyApp> {
     _eventsSub?.cancel();
     _rtmpUrlController.dispose();
     _streamKeyController.dispose();
+    _tournamentIdController.dispose();
+    _tableController.dispose();
+    _brandImageUrlController.dispose();
     super.dispose();
   }
 
-  Future<void> _pingNative() async {
-    String platformVersion;
-    try {
-      platformVersion = await _mafbaseStreamPlugin.getPlatformVersion();
-    } on PlatformException catch (e) {
-      platformVersion = 'Failed to get platform version: ${e.message}';
-    }
+  Future<void> _openStreamScreen() async {
+    final tournamentId = int.tryParse(_tournamentIdController.text.trim());
+    final table = int.tryParse(_tableController.text.trim());
+    final hasOverlay = tournamentId != null && table != null;
+    final brand = _brandImageUrlController.text.trim();
+    final brandImageUrl = brand.isEmpty ? null : brand;
 
-    if (!mounted) return;
-
-    setState(() {
-      _status = platformVersion;
-    });
-  }
-
-  Future<void> _openStreamScreen({MafbaseOverlay? overlay}) async {
-    setState(() => _status = 'Opening stream screen…');
+    setState(() => _status = hasOverlay ? 'Открываю стрим с плашкой…' : 'Открываю стрим без overlay…');
     try {
       await _mafbaseStreamPlugin.openStreamScreen(
         rtmpUrl: _rtmpUrlController.text.trim(),
         streamKey: _streamKeyController.text.trim(),
-        overlay: overlay,
-        tournamentId: 543,
-        table: 4,
+        overlay: hasOverlay ? MafbaseOverlay.plashkiMafbase : null,
+        tournamentId: tournamentId,
+        table: table,
+        brandImageUrl: brandImageUrl,
       );
       if (!mounted) return;
       setState(() => _status = 'Stream screen closed');
@@ -82,12 +85,14 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _openOverlayPreview() async {
+    final tournamentId = int.tryParse(_tournamentIdController.text.trim());
+    final table = int.tryParse(_tableController.text.trim());
     setState(() => _status = 'Opening overlay preview…');
     try {
       await _mafbaseStreamPlugin.openOverlayPreview(
         overlay: MafbaseOverlay.plashkiMafbase,
-        tournamentId: 520,
-        table: 1,
+        tournamentId: tournamentId,
+        table: table,
       );
       if (!mounted) return;
       setState(() => _status = 'Overlay preview closed');
@@ -130,15 +135,46 @@ class _MyAppState extends State<MyApp> {
                   controller: _streamKeyController,
                   decoration: const InputDecoration(labelText: 'Stream key', border: OutlineInputBorder()),
                 ),
-                const SizedBox(height: 16),
-                ElevatedButton(onPressed: _pingNative, child: const Text('Ping native')),
                 const SizedBox(height: 12),
-                ElevatedButton(onPressed: () => _openStreamScreen(), child: const Text('Открыть стрим')),
-                const SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: () => _openStreamScreen(overlay: MafbaseOverlay.plashkiMafbase),
-                  child: const Text('Стрим с плашкой Mafbase'),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _tournamentIdController,
+                        decoration: const InputDecoration(
+                          labelText: 'Tournament ID',
+                          helperText: 'Пусто → без overlay',
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: TextField(
+                        controller: _tableController,
+                        decoration: const InputDecoration(
+                          labelText: 'Table',
+                          helperText: 'Пусто → без overlay',
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _brandImageUrlController,
+                  decoration: const InputDecoration(
+                    labelText: 'Brand image URL',
+                    helperText: 'PNG с прозрачным фоном · пусто → без брендирования',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.url,
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(onPressed: _openStreamScreen, child: const Text('Открыть стрим')),
                 const SizedBox(height: 12),
                 ElevatedButton(onPressed: _openOverlayPreview, child: const Text('Превью плашки')),
               ],

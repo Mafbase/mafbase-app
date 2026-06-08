@@ -22,6 +22,7 @@ class MafbaseStreamWeb extends MafbaseStreamPlatform {
     int? tournamentId,
     int? table,
     String? breakPlaceholderImageUrl,
+    String? brandImageUrl,
   }) async {}
 
   @override
