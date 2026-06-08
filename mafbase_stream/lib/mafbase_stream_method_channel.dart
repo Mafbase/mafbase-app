@@ -35,6 +35,7 @@ class MethodChannelMafbaseStream extends MafbaseStreamPlatform {
     int? tournamentId,
     int? table,
     String? breakPlaceholderImageUrl,
+    String? brandImageUrl,
   }) async {
     await methodChannel.invokeMethod<void>('openStreamScreen', <String, dynamic>{
       'rtmpUrl': ?rtmpUrl,
@@ -43,6 +44,7 @@ class MethodChannelMafbaseStream extends MafbaseStreamPlatform {
       'tournamentId': ?tournamentId,
       'table': ?table,
       'breakPlaceholderImageUrl': ?breakPlaceholderImageUrl,
+      'brandImageUrl': ?brandImageUrl,
     });
   }
 

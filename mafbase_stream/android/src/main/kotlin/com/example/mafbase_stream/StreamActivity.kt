@@ -105,6 +105,7 @@ class StreamActivity :
     private var overlayTournamentId: Int? = null
     private var overlayTable: Int? = null
     private var breakPlaceholderImageUrl: String? = null
+    private var brandImageUrl: String? = null
     // Сохраняем view от текущей сессии стрима, чтобы кнопка «Toggle overlay»
     // могла её дёрнуть. Один экземпляр на сессию — пересоздаётся в startStreaming.
     private var overlayView: View? = null
@@ -121,6 +122,7 @@ class StreamActivity :
         const val EXTRA_TOURNAMENT_ID: String = "mafbase_stream.tournament_id"
         const val EXTRA_TABLE: String = "mafbase_stream.table"
         const val EXTRA_BREAK_PLACEHOLDER_URL: String = "mafbase_stream.break_placeholder_url"
+        const val EXTRA_BRAND_IMAGE_URL: String = "mafbase_stream.brand_image_url"
 
         private val REQUIRED_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
@@ -144,6 +146,9 @@ class StreamActivity :
         }
         intent?.getStringExtra(EXTRA_BREAK_PLACEHOLDER_URL)?.takeIf { it.isNotBlank() }?.let {
             breakPlaceholderImageUrl = it
+        }
+        intent?.getStringExtra(EXTRA_BRAND_IMAGE_URL)?.takeIf { it.isNotBlank() }?.let {
+            brandImageUrl = it
         }
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -618,22 +623,27 @@ class StreamActivity :
     }
 
     /**
-     * Если задан [overlayViewType] — создаёт Compose-overlay и привязывает к [comp].
-     * Overlay живёт всю жизнь Compositor'а, поэтому видим в preview, recording и стриме.
+     * Подключает overlay-вёрстку и/или brand-картинку к [comp]. Поднимается если
+     * задан [overlayViewType] ИЛИ [brandImageUrl] — иначе overlay-слой не нужен.
+     * Compose-контейнер живёт всю жизнь Compositor'а, поэтому виден в preview,
+     * recording и стриме.
      */
     private fun attachOverlayIfNeeded(comp: Compositor, width: Int, height: Int) {
-        val viewType = overlayViewType ?: return
-        Log.d(TAG, "attachOverlay: viewType=$viewType, frame=${width}x$height")
+        val viewType = overlayViewType
+        val brandUrl = brandImageUrl
+        if (viewType == null && brandUrl.isNullOrBlank()) return
+        Log.d(TAG, "attachOverlay: viewType=$viewType brand=$brandUrl frame=${width}x$height")
         val renderer = OverlayViewRenderer(width, height)
         val params = OverlayParams(
             tournamentId = overlayTournamentId,
             table = overlayTable,
             phaseGate = phaseGate,
             breakPlaceholderImageUrl = breakPlaceholderImageUrl,
+            brandImageUrl = brandUrl,
         )
         val view = OverlayCatalog.create(viewType, this, renderer, params)
         if (view == null) {
-            Log.w(TAG, "Overlay '$viewType' not found in catalog — running without overlay")
+            Log.w(TAG, "Overlay '$viewType' not found in catalog and no brand image — running without overlay")
             return
         }
         renderer.setView(view)

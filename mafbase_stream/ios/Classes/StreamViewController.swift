@@ -220,29 +220,34 @@ final class StreamViewController: UIViewController {
         compositor = nil
     }
 
-    /// Если задан `overlayViewType` — создаёт overlay через каталог и привязывает
-    /// к compositor'у. Overlay живёт всю жизнь compositor'а и видим во всех выходах.
+    /// Подключает overlay-вёрстку и/или brand-картинку к compositor'у. Поднимается
+    /// если задан `overlayViewType` ИЛИ `overlayParams.brandImageUrl` — иначе
+    /// overlay-слой не нужен. Wrapper живёт всю жизнь compositor'а и видим во
+    /// всех выходах.
     private func attachOverlayIfNeeded(_ comp: Compositor) {
-        guard let viewType = overlayViewType else {
-            NSLog("[Stream] attachOverlay: NO overlayViewType set")
+        let viewType = overlayViewType
+        let hasBrand = (overlayParams.brandImageUrl?.isEmpty == false)
+        if viewType == nil && !hasBrand {
+            NSLog("[Stream] attachOverlay: no overlayViewType and no brand image")
             return
         }
-        NSLog("[Stream] attachOverlay: viewType=\(viewType) tournamentId=\(overlayParams.tournamentId.map(String.init) ?? "nil") table=\(overlayParams.table.map(String.init) ?? "nil")")
+        NSLog("[Stream] attachOverlay: viewType=\(viewType ?? "nil") brand=\(overlayParams.brandImageUrl ?? "nil") tournamentId=\(overlayParams.tournamentId.map(String.init) ?? "nil") table=\(overlayParams.table.map(String.init) ?? "nil")")
         let renderer = OverlayViewRenderer(width: Self.frameWidth, height: Self.frameHeight)
-        // Поднимаем phaseGate из плагина и breakPlaceholder из overlayParams в
-        // новый OverlayParams, который видит overlay.
+        // Поднимаем phaseGate из плагина и параметры из overlayParams в
+        // новый OverlayParams, который видит overlay и brand-слой.
         let resolvedParams = OverlayParams(
             tournamentId: overlayParams.tournamentId,
             table: overlayParams.table,
             phaseGate: phaseGate,
-            breakPlaceholderImageUrl: overlayParams.breakPlaceholderImageUrl
+            breakPlaceholderImageUrl: overlayParams.breakPlaceholderImageUrl,
+            brandImageUrl: overlayParams.brandImageUrl
         )
         guard let overlay = OverlayCatalog.create(
             viewType: viewType,
             params: resolvedParams,
             invalidator: renderer
         ) else {
-            NSLog("[Stream] overlay '\(viewType)' not found in catalog")
+            NSLog("[Stream] overlay '\(viewType ?? "nil")' not found in catalog and no brand image")
             return
         }
         renderer.setView(overlay)

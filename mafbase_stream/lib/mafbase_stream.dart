@@ -47,6 +47,15 @@ class MafbaseStream {
   /// `broadcastPhase` — параметр не используется. Если null —
   /// используется [defaultBreakPlaceholderImageUrl].
   ///
+  /// [brandImageUrl] — URL брендированной PNG-картинки (с прозрачным фоном),
+  /// которая постоянно накладывается поверх кадра во всех выходах (preview,
+  /// запись, стрим). Используется для размещения логотипов спонсоров на
+  /// трансляции. Растягивается на весь кадр в режиме `fit` — прозрачные
+  /// зоны пропускают изображение камеры. Работает независимо от выбранного
+  /// [overlay]: брендированная картинка видна даже если overlay не задан.
+  /// На фазе `break_phase` перекрывается [breakPlaceholderImageUrl]. Если
+  /// null — слой не рисуется.
+  ///
   /// Future разрешается, когда пользователь закрывает экран.
   /// При отказе в системных разрешениях бросается [PlatformException]
   /// с кодом `PERMISSIONS_DENIED`.
@@ -57,6 +66,7 @@ class MafbaseStream {
     int? tournamentId,
     int? table,
     String? breakPlaceholderImageUrl,
+    String? brandImageUrl,
   }) {
     return MafbaseStreamPlatform.instance.openStreamScreen(
       rtmpUrl: rtmpUrl,
@@ -65,6 +75,7 @@ class MafbaseStream {
       tournamentId: tournamentId,
       table: table,
       breakPlaceholderImageUrl: breakPlaceholderImageUrl ?? defaultBreakPlaceholderImageUrl,
+      brandImageUrl: brandImageUrl,
     );
   }
 
