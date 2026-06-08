@@ -14,6 +14,7 @@ class ClubActionsSection extends StatelessWidget {
   final VoidCallback? onSetDefaultRatingPeriod;
   final String? defaultRatingPeriodSubtitle;
   final VoidCallback? onHideRating;
+  final VoidCallback? onOpenTranslationLinks;
 
   const ClubActionsSection({
     super.key,
@@ -26,6 +27,7 @@ class ClubActionsSection extends StatelessWidget {
     this.onSetDefaultRatingPeriod,
     this.defaultRatingPeriodSubtitle,
     this.onHideRating,
+    this.onOpenTranslationLinks,
   });
 
   @override
@@ -101,6 +103,17 @@ class ClubActionsSection extends StatelessWidget {
             title: locale.clubActionHideRating,
             subtitle: locale.clubActionHideRatingSubtitle,
             onTap: onHideRating!,
+          ),
+        );
+      }
+      if (onOpenTranslationLinks != null) {
+        cards.add(
+          ClubActionCard(
+            icon: Icons.live_tv_outlined,
+            iconBackgroundColor: theme.btnColor2,
+            title: locale.clubActionOpenTranslation,
+            subtitle: locale.clubActionOpenTranslationSubtitle,
+            onTap: onOpenTranslationLinks!,
           ),
         );
       }
@@ -196,6 +209,18 @@ class ClubActionsSection extends StatelessWidget {
             title: locale.clubActionHideRating,
             subtitle: locale.clubActionHideRatingSubtitle,
             onTap: onHideRating!,
+            showChevron: true,
+          ),
+        );
+      }
+      if (onOpenTranslationLinks != null) {
+        cards.add(
+          ClubActionCard(
+            icon: Icons.live_tv_outlined,
+            iconBackgroundColor: theme.btnColor2,
+            title: locale.clubActionOpenTranslation,
+            subtitle: locale.clubActionOpenTranslationSubtitle,
+            onTap: onOpenTranslationLinks!,
             showChevron: true,
           ),
         );
