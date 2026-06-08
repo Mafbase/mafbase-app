@@ -39,7 +39,9 @@ class _BillPlanDialogState extends State<BillPlanDialog> {
 
     return RadioGroup(
       groupValue: _selected,
-      onChanged: (_) {},
+      onChanged: (value) {
+        if (value != null) setState(() => _selected = value);
+      },
       child: Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
@@ -176,7 +178,7 @@ class _OptionCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Radio(value: option),
+            IgnorePointer(child: Radio(value: option)),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
