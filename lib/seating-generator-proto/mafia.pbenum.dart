@@ -160,12 +160,9 @@ class RatingScheme extends $pb.ProtobufEnum {
 
 /// Фаза игры для трансляции
 class BroadcastPhase extends $pb.ProtobufEnum {
-  static const BroadcastPhase day =
-      BroadcastPhase._(0, _omitEnumNames ? '' : 'day');
-  static const BroadcastPhase night =
-      BroadcastPhase._(1, _omitEnumNames ? '' : 'night');
-  static const BroadcastPhase break_phase =
-      BroadcastPhase._(2, _omitEnumNames ? '' : 'break_phase');
+  static const BroadcastPhase day = BroadcastPhase._(0, _omitEnumNames ? '' : 'day');
+  static const BroadcastPhase night = BroadcastPhase._(1, _omitEnumNames ? '' : 'night');
+  static const BroadcastPhase break_phase = BroadcastPhase._(2, _omitEnumNames ? '' : 'break_phase');
 
   static const $core.List<BroadcastPhase> values = <BroadcastPhase>[
     day,
@@ -173,10 +170,8 @@ class BroadcastPhase extends $pb.ProtobufEnum {
     break_phase,
   ];
 
-  static final $core.List<BroadcastPhase?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static BroadcastPhase? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<BroadcastPhase?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static BroadcastPhase? valueOf($core.int value) => value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const BroadcastPhase._(super.value, super.name);
 }

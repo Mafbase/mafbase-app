@@ -12,6 +12,7 @@ import 'package:seating_generator_web/data/repositories/purchase_repository_impl
 import 'package:seating_generator_web/data/repositories/tournament_edit_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/tournament_result_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/tournaments_repository_impl.dart';
+import 'package:seating_generator_web/data/repositories/club_translation_repository_impl.dart';
 import 'package:seating_generator_web/data/repositories/translation_repository_impl.dart';
 import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
 import 'package:seating_generator_web/domain/repositories/cannot_meet_tournament_repository.dart';
@@ -23,6 +24,7 @@ import 'package:seating_generator_web/domain/repositories/purchase_repository.da
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_result_repository.dart';
 import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
+import 'package:seating_generator_web/domain/repositories/club_translation_repository.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/feature/custom_columns/data/repository/custom_columns_repository_impl.dart';
 import 'package:seating_generator_web/feature/custom_columns/domain/repository/custom_columns_repository.dart';
@@ -70,6 +72,8 @@ class RepositoryFactory {
   late final PlayersRepository playersRepository = PlayersRepositoryImpl(client);
 
   late final TranslationRepository translationRepository = TranslationRepositoryImpl(client);
+
+  late final ClubTranslationRepository clubTranslationRepository = ClubTranslationRepositoryImpl(client);
 
   late final CannotMeetTournamentRepository cannotMeetTournamentRepository = CannotMeetTournamentRepositoryImpl(client);
 

@@ -5,7 +5,7 @@ import 'package:seating_generator_web/data/base_request.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 class GenerateStreamRequest extends BaseRequest<GameStreamAdmin> {
-  GenerateStreamRequest({required int tournamentId, required GenerateStreamEvent body})
+  GenerateStreamRequest({required int tournamentId, required StartVkStreamEvent body})
       : super('/api/admin/tournament/$tournamentId/streams/generate', data: body);
 
   @override

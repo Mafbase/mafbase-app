@@ -66,6 +66,7 @@ class StreamsPageContent extends StatelessWidget {
     });
   }
 
+  // ignore: unused_element
   void _openGenerateStream(BuildContext context) {
     GenerateStreamBottomSheet.show(context).then((tableNumber) {
       if (tableNumber != null && context.mounted) {
@@ -112,15 +113,9 @@ class StreamsPageContent extends StatelessWidget {
                                 const SizedBox(height: 24),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 32),
-                                  child: Column(
-                                    children: [
-                                      CustomButton(text: locale.streamsAddButton, onTap: () => _openAddStream(context)),
-                                      const SizedBox(height: 12),
-                                      CustomButton(
-                                        text: locale.streamsGenerateButton,
-                                        onTap: () => _openGenerateStream(context),
-                                      ),
-                                    ],
+                                  child: CustomButton(
+                                    text: locale.streamsAddButton,
+                                    onTap: () => _openAddStream(context),
                                   ),
                                 ),
                               ],
@@ -138,8 +133,7 @@ class StreamsPageContent extends StatelessWidget {
                             },
                           ),
                   ),
-                  if (grouped.isNotEmpty)
-                    _BottomBar(onAdd: () => _openAddStream(context), onGenerate: () => _openGenerateStream(context)),
+                  if (grouped.isNotEmpty) _BottomBar(onAdd: () => _openAddStream(context)),
                 ],
               ),
               if (state.isLoading) const Positioned.fill(child: LoadingOverlayWidget()),
@@ -153,9 +147,8 @@ class StreamsPageContent extends StatelessWidget {
 
 class _BottomBar extends StatelessWidget {
   final VoidCallback onAdd;
-  final VoidCallback onGenerate;
 
-  const _BottomBar({required this.onAdd, required this.onGenerate});
+  const _BottomBar({required this.onAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -167,17 +160,7 @@ class _BottomBar extends StatelessWidget {
         border: Border(top: BorderSide(color: theme.borderColor)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: Row(
-        children: [
-          Expanded(
-            child: CustomButton(text: locale.streamsAddButton, onTap: onAdd),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: CustomButton(text: locale.streamsGenerateButton, onTap: onGenerate),
-          ),
-        ],
-      ),
+      child: CustomButton(text: locale.streamsAddButton, onTap: onAdd),
     );
   }
 }

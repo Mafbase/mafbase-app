@@ -1060,6 +1060,10 @@
   "@translationControlPhaseNight": {},
   "translationControlPhaseBreak": "Перерыв",
   "@translationControlPhaseBreak": {},
+  "translationControlPickPlayer": "Выберите игрока",
+  "@translationControlPickPlayer": {},
+  "translationControlChangePlayer": "Сменить игрока",
+  "@translationControlChangePlayer": {},
   "translationControlGame": "Игра {game} / {total}",
   "@translationControlGame": {
     "placeholders": {

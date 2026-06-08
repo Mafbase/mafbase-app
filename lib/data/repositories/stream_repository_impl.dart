@@ -40,7 +40,7 @@ class StreamRepositoryImpl extends BaseRepository implements StreamRepository {
   }) =>
       GenerateStreamRequest(
         tournamentId: tournamentId,
-        body: GenerateStreamEvent(tableNumber: tableNumber),
+        body: StartVkStreamEvent(tableNumber: tableNumber),
       ).execute(client);
 
   @override

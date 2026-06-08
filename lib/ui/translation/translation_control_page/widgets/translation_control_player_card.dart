@@ -14,6 +14,7 @@ class TranslationControlPlayerCard extends StatelessWidget {
   final PlayerStatus status;
   final ValueChanged<PlayerRole> onRoleChanged;
   final ValueChanged<PlayerStatus> onStatusChanged;
+  final VoidCallback? onPlayerSwap;
 
   const TranslationControlPlayerCard({
     super.key,
@@ -24,6 +25,7 @@ class TranslationControlPlayerCard extends StatelessWidget {
     required this.status,
     required this.onRoleChanged,
     required this.onStatusChanged,
+    this.onPlayerSwap,
   });
 
   bool get _isDead => status == PlayerStatus.killed || status == PlayerStatus.deleted || status == PlayerStatus.voted;
@@ -70,6 +72,17 @@ class TranslationControlPlayerCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (onPlayerSwap != null)
+                  IconButton(
+                    onPressed: onPlayerSwap,
+                    icon: const Icon(Icons.swap_horiz, size: 18),
+                    iconSize: 28,
+                    color: theme.hintColor,
+                    tooltip: context.locale.translationControlChangePlayer,
+                    visualDensity: VisualDensity.compact,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                  ),
               ],
             ),
             const SizedBox(height: 6),

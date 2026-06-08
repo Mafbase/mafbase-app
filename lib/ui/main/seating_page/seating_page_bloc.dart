@@ -40,8 +40,8 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
   final SeatingPageRouter router;
 
   SeatingPageBloc({required RepositoryFactory repos, required this.router})
-    : _repos = repos,
-      super(const SeatingPageState()) {
+      : _repos = repos,
+        super(const SeatingPageState()) {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
