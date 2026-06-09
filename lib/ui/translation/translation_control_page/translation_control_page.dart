@@ -2,7 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
+import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/club_translation_control_bloc.dart';
@@ -205,6 +210,54 @@ class _ClubTranslationControlContentState extends State<_ClubTranslationControlC
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
+  Future<void> _handleNewPlayer({required int index, required String initValue}) async {
+    final bloc = context.read<ClubTranslationControlBloc>();
+    final repos = RepositoryFactory.of(context);
+    final state = bloc.state;
+
+    final newPlayer = await AddPlayerDialog.open(context: context, initValue: initValue);
+    if (newPlayer == null || !mounted) return;
+
+    final id = await CreatePlayerInteractor(repos.playersRepository).run(playerModel: newPlayer);
+    if (!mounted) return;
+
+    bloc.add(ClubTranslationControlEvent.changePlayer(index: index, playerId: id));
+    _controllers[index].clear();
+    _focusNextEmptySlot(state, index);
+  }
+
+  Future<void> _handlePhotoEdit({required int index, required String nickname}) async {
+    final repos = RepositoryFactory.of(context);
+    final locale = context.locale;
+    final messenger = ScaffoldMessenger.of(context);
+
+    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (picked == null || !mounted) return;
+
+    final bytes = Uint8List.fromList(await picked.readAsBytes());
+    if (!mounted) return;
+
+    final playerId = await _findPlayerIdByNickname(repos.playersRepository, nickname);
+    if (playerId == null) {
+      if (!mounted) return;
+      messenger.showSnackBar(SnackBar(content: Text(locale.translationControlPhotoNotFound)));
+      return;
+    }
+
+    await repos.playersRepository.addPhoto(playerId, bytes, picked.name);
+    if (!mounted) return;
+    messenger.showSnackBar(SnackBar(content: Text(locale.translationControlPhotoUpdated)));
+  }
+
+  Future<int?> _findPlayerIdByNickname(PlayersRepository repo, String nickname) async {
+    final results = await repo.searchPlayers(nickname, limit: 10);
+    final exact = results.firstWhere(
+      (p) => p.nickname == nickname,
+      orElse: () => results.isNotEmpty ? results.first : const PlayerModel(nickname: ''),
+    );
+    return exact.id == PlayerModel.undefinedId ? null : exact.id;
+  }
+
   @override
   Widget build(BuildContext context) => BlocBuilder<ClubTranslationControlBloc, TranslationContentState>(
         builder: (context, state) {
@@ -251,6 +304,8 @@ class _ClubTranslationControlContentState extends State<_ClubTranslationControlC
                                   _controllers[index].clear();
                                   _focusNextEmptySlot(state, index);
                                 },
+                                onNewPlayer: ({required String initValue}) =>
+                                    _handleNewPlayer(index: index, initValue: initValue),
                               )
                             : TranslationControlPlayerCard(
                                 key: ValueKey('filled-$index'),
@@ -277,6 +332,7 @@ class _ClubTranslationControlContentState extends State<_ClubTranslationControlC
                                     _focusNodes[index].requestFocus();
                                   });
                                 },
+                                onPhotoTap: () => _handlePhotoEdit(index: index, nickname: state.nicknames![index]),
                               ),
                       );
                     },

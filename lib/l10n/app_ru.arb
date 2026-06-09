@@ -1074,6 +1074,10 @@
   "@translationControlPickPlayer": {},
   "translationControlChangePlayer": "Сменить игрока",
   "@translationControlChangePlayer": {},
+  "translationControlPhotoNotFound": "Не удалось найти игрока в базе",
+  "@translationControlPhotoNotFound": {},
+  "translationControlPhotoUpdated": "Фото обновлено",
+  "@translationControlPhotoUpdated": {},
   "translationControlGame": "Игра {game} / {total}",
   "@translationControlGame": {
     "placeholders": {

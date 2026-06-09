@@ -9,6 +9,7 @@ class TranslationControlEmptySlot extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final ValueChanged<PlayerModel> onPlayerSelected;
+  final void Function({required String initValue})? onNewPlayer;
 
   const TranslationControlEmptySlot({
     super.key,
@@ -16,6 +17,7 @@ class TranslationControlEmptySlot extends StatelessWidget {
     required this.controller,
     required this.focusNode,
     required this.onPlayerSelected,
+    this.onNewPlayer,
   });
 
   @override
@@ -55,6 +57,7 @@ class TranslationControlEmptySlot extends StatelessWidget {
                 focusNode: focusNode,
                 hint: context.locale.translationControlPickPlayer,
                 onSelected: onPlayerSelected,
+                onNewPlayer: onNewPlayer,
               ),
             ),
           ],
