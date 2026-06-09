@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/data/sockets/club_content_socket.dart';
+import 'package:seating_generator_web/domain/repositories/club_repository.dart';
 import 'package:seating_generator_web/domain/repositories/club_translation_repository.dart';
+import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/club_translation_control_event.dart';
@@ -17,13 +19,21 @@ class ClubTranslationControlBlocParams {
 
 class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, TranslationContentState> {
   final ClubTranslationRepository _repository;
+  final ClubRepository _clubRepository;
+  final PhotoThemeRepository _photoThemeRepository;
   final ClubTranslationControlBlocParams params;
   final List<StreamSubscription> _subscriptions = [];
   ClubContentSocket? _socket;
 
-  ClubTranslationControlBloc({required this.params, required ClubTranslationRepository repository})
-    : _repository = repository,
-      super(const TranslationContentState()) {
+  ClubTranslationControlBloc({
+    required this.params,
+    required ClubTranslationRepository repository,
+    required ClubRepository clubRepository,
+    required PhotoThemeRepository photoThemeRepository,
+  })  : _repository = repository,
+        _clubRepository = clubRepository,
+        _photoThemeRepository = photoThemeRepository,
+        super(const TranslationContentState()) {
     on<ClubTranslationControlEventPageOpened>(_onPageOpened);
     on<ClubTranslationControlEventStateReceived>(_onStateReceived);
     on<ClubTranslationControlEventChangeRole>(_onChangeRole);
@@ -31,9 +41,13 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
     on<ClubTranslationControlEventChangeBroadcastPhase>(_onChangeBroadcastPhase);
     on<ClubTranslationControlEventChangePlayer>(_onChangePlayer);
     on<ClubTranslationControlEventStartEditingPlayer>(_onStartEditingPlayer);
+    on<ClubTranslationControlEventSetActivePhotoTheme>(_onSetActivePhotoTheme);
   }
 
-  void _onPageOpened(ClubTranslationControlEventPageOpened event, Emitter<TranslationContentState> emit) {
+  Future<void> _onPageOpened(
+    ClubTranslationControlEventPageOpened event,
+    Emitter<TranslationContentState> emit,
+  ) async {
     for (final element in _subscriptions) {
       element.cancel();
     }
@@ -47,6 +61,17 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
         add(ClubTranslationControlEvent.stateReceived(content: ClubSeatingContent.fromBuffer(bytes)));
       }),
     );
+
+    await Future.wait([
+      _clubRepository
+          .getClub(id: params.clubId)
+          .then((club) => emit(state.copyWith(activePhotoThemeId: club.photoThemeId)))
+          .onError((_, __) {}),
+      _photoThemeRepository
+          .getThemes()
+          .then((themes) => emit(state.copyWith(availableThemes: themes)))
+          .onError((_, __) {}),
+    ]);
   }
 
   void _onStateReceived(ClubTranslationControlEventStateReceived event, Emitter<TranslationContentState> emit) {
@@ -61,7 +86,7 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
       return true;
     }).toSet();
     emit(
-      TranslationContentState(
+      state.copyWith(
         roles: content.roles,
         statuses: content.status,
         images: content.images,
@@ -119,6 +144,14 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
     Emitter<TranslationContentState> emit,
   ) {
     emit(state.copyWith(editingSlots: {...state.editingSlots, event.index}));
+  }
+
+  Future<void> _onSetActivePhotoTheme(
+    ClubTranslationControlEventSetActivePhotoTheme event,
+    Emitter<TranslationContentState> emit,
+  ) async {
+    await _photoThemeRepository.setClubPhotoTheme(params.clubId, event.themeId);
+    emit(state.copyWith(activePhotoThemeId: event.themeId));
   }
 
   @override

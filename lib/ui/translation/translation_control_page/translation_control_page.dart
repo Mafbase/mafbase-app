@@ -7,6 +7,7 @@ import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_selector.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
@@ -50,13 +51,16 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     if (widget.isClub) {
+      final repos = RepositoryFactory.of(context);
       _clubBloc = ClubTranslationControlBloc(
         params: ClubTranslationControlBlocParams(
           clubId: widget.clubId,
           table: widget.table,
           key: widget.translationKey,
         ),
-        repository: RepositoryFactory.of(context).clubTranslationRepository,
+        repository: repos.clubTranslationRepository,
+        clubRepository: repos.clubRepository,
+        photoThemeRepository: repos.photoThemeRepository,
       )..add(const ClubTranslationControlEvent.pageOpened());
     } else {
       _tournamentBloc = TranslationControlBloc(
@@ -271,6 +275,18 @@ class _ClubTranslationControlContentState extends State<_ClubTranslationControlC
         ),
         body: Column(
           children: [
+            if (state.availableThemes.isNotEmpty)
+              PhotoThemeSelector(
+                themes: state.availableThemes,
+                selectedTheme: state.availableThemes
+                    .where((theme) => theme.id == state.activePhotoThemeId)
+                    .firstOrNull,
+                onChanged: (theme) {
+                  context.read<ClubTranslationControlBloc>().add(
+                    ClubTranslationControlEvent.setActivePhotoTheme(themeId: theme?.id),
+                  );
+                },
+              ),
             TranslationControlPhaseSelector(
               phase: state.broadcastPhase,
               onChanged: (phase) {

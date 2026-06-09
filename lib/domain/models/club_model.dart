@@ -13,6 +13,7 @@ abstract class ClubModel with _$ClubModel {
     String? imageUrl,
     String? groupLink,
     String? city,
+    int? photoThemeId,
   }) = _ClubModel;
 
   factory ClubModel.fromProto(Club club) => ClubModel(
@@ -23,5 +24,6 @@ abstract class ClubModel with _$ClubModel {
         groupLink: club.hasGroupLink() ? club.groupLink : null,
         city: club.hasCity() ? club.city : null,
         billedFor: DateTime.tryParse(club.billedFor),
+        photoThemeId: club.hasPhotoThemeId() ? club.photoThemeId : null,
       );
 }

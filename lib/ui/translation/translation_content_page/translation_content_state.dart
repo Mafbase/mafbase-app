@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 
 part 'translation_content_state.freezed.dart';
@@ -16,6 +17,8 @@ abstract class TranslationContentState with _$TranslationContentState {
     @Default(0) int totalGames,
     @Default(BroadcastPhase.day) BroadcastPhase broadcastPhase,
     @Default(<int>{}) Set<int> editingSlots,
+    int? activePhotoThemeId,
+    @Default(<PhotoThemeModel>[]) List<PhotoThemeModel> availableThemes,
   }) = _TranslationContentState;
 }
 

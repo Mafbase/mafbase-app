@@ -11,6 +11,7 @@ import 'package:seating_generator_web/feature/photo_themes/data/requests/get_pho
 import 'package:seating_generator_web/feature/photo_themes/data/requests/get_theme_players_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/remove_player_from_theme_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/set_active_theme_request.dart';
+import 'package:seating_generator_web/feature/photo_themes/data/requests/set_club_photo_theme_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/update_photo_theme_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_entry_model.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
@@ -61,6 +62,10 @@ class PhotoThemeRepositoryImpl extends BaseRepository implements PhotoThemeRepos
   @override
   Future<void> setTournamentPhotoTheme(int tournamentId, int? themeId) =>
       SetActiveThemeRequest(tournamentId: tournamentId, themeId: themeId).execute(client);
+
+  @override
+  Future<void> setClubPhotoTheme(int clubId, int? themeId) =>
+      SetClubPhotoThemeRequest(clubId: clubId, themeId: themeId).execute(client);
 
   @override
   Future<void> addPlayerToTheme(int themeId, int playerId) =>

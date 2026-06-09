@@ -24,4 +24,7 @@ abstract class ClubTranslationControlEvent with _$ClubTranslationControlEvent {
 
   const factory ClubTranslationControlEvent.startEditingPlayer({required int index}) =
       ClubTranslationControlEventStartEditingPlayer;
+
+  const factory ClubTranslationControlEvent.setActivePhotoTheme({required int? themeId}) =
+      ClubTranslationControlEventSetActivePhotoTheme;
 }

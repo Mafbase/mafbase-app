@@ -25,6 +25,8 @@ abstract interface class PhotoThemeRepository {
 
   Future<void> setTournamentPhotoTheme(int tournamentId, int? themeId);
 
+  Future<void> setClubPhotoTheme(int clubId, int? themeId);
+
   Future<void> addPlayerToTheme(int themeId, int playerId);
 
   Future<int> addPlayersFromTournament(int themeId, int tournamentId);
