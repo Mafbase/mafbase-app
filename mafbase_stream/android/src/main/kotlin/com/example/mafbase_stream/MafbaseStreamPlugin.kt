@@ -96,13 +96,14 @@ class MafbaseStreamPlugin :
         pendingResult = result
         val rawOverlay = call.argument<String>("overlayViewType")
         val tournamentId = call.argument<Number>("tournamentId")?.toInt()
+        val clubId = call.argument<Number>("clubId")?.toInt()
         val table = call.argument<Number>("table")?.toInt()
         val breakPlaceholderUrl = call.argument<String>("breakPlaceholderImageUrl")
         val brandImageUrl = call.argument<String>("brandImageUrl")
         Log.d(
             "MafbaseStream",
             "openStreamScreen args: rtmpUrl=${call.argument<String>("rtmpUrl")} overlay=$rawOverlay " +
-                "tournamentId=$tournamentId table=$table breakPlaceholder=$breakPlaceholderUrl " +
+                "tournamentId=$tournamentId clubId=$clubId table=$table breakPlaceholder=$breakPlaceholderUrl " +
                 "brand=$brandImageUrl",
         )
         val intent = Intent(act, StreamActivity::class.java).apply {
@@ -110,6 +111,7 @@ class MafbaseStreamPlugin :
             call.argument<String>("streamKey")?.let { putExtra(StreamActivity.EXTRA_STREAM_KEY, it) }
             rawOverlay?.let { putExtra(StreamActivity.EXTRA_OVERLAY_VIEW_TYPE, it) }
             tournamentId?.let { putExtra(StreamActivity.EXTRA_TOURNAMENT_ID, it) }
+            clubId?.let { putExtra(StreamActivity.EXTRA_CLUB_ID, it) }
             table?.let { putExtra(StreamActivity.EXTRA_TABLE, it) }
             breakPlaceholderUrl?.takeIf { it.isNotBlank() }?.let {
                 putExtra(StreamActivity.EXTRA_BREAK_PLACEHOLDER_URL, it)
@@ -146,10 +148,12 @@ class MafbaseStreamPlugin :
         }
         pendingResult = result
         val tournamentId = call.argument<Number>("tournamentId")?.toInt()
+        val clubId = call.argument<Number>("clubId")?.toInt()
         val table = call.argument<Number>("table")?.toInt()
         val intent = Intent(act, OverlayPreviewActivity::class.java).apply {
             putExtra(OverlayPreviewActivity.EXTRA_OVERLAY_VIEW_TYPE, viewType)
             tournamentId?.let { putExtra(OverlayPreviewActivity.EXTRA_TOURNAMENT_ID, it) }
+            clubId?.let { putExtra(OverlayPreviewActivity.EXTRA_CLUB_ID, it) }
             table?.let { putExtra(OverlayPreviewActivity.EXTRA_TABLE, it) }
         }
         act.startActivityForResult(intent, REQUEST_OPEN_OVERLAY_PREVIEW)

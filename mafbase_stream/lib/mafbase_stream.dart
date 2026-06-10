@@ -40,6 +40,11 @@ class MafbaseStream {
   /// и используются overlay'ем для подключения к серверному сокету. Если
   /// overlay не требует данных — оба можно не указывать.
   ///
+  /// [clubId] — альтернатива [tournamentId] для клубных трансляций. Если задан
+  /// [clubId], overlay подписывается на `clubSeatingContent` (клубный вариант
+  /// оверлея с плашками). [tournamentId] и [clubId] взаимоисключающие —
+  /// если задан [clubId], значение [tournamentId] игнорируется.
+  ///
   /// [breakPlaceholderImageUrl] — URL картинки, которой overlay перекрывает
   /// кадр камеры на фазе `break_phase` (перерыв). На фазах `night` и
   /// `break_phase` плагин также мьютит звук с микрофона (подаёт тишину в
@@ -64,6 +69,7 @@ class MafbaseStream {
     String? streamKey,
     MafbaseOverlay? overlay,
     int? tournamentId,
+    int? clubId,
     int? table,
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
@@ -73,6 +79,7 @@ class MafbaseStream {
       streamKey: streamKey,
       overlayViewType: overlay?.viewType,
       tournamentId: tournamentId,
+      clubId: clubId,
       table: table,
       breakPlaceholderImageUrl: breakPlaceholderImageUrl ?? defaultBreakPlaceholderImageUrl,
       brandImageUrl: brandImageUrl,
@@ -83,15 +90,21 @@ class MafbaseStream {
   /// однотонного фона в реальном размере кадра, без камеры и стрима.
   ///
   /// Нужен для отладки вёрстки overlay-view: можно итерировать вёрстку, не
-  /// поднимая RTMP-сервер и не запуская стрим. [tournamentId] и [table] —
+  /// поднимая RTMP-сервер и не запуская стрим. [tournamentId]/[clubId] и [table] —
   /// те же, что и в [openStreamScreen]: позволяют overlay'ю поднять реальную
   /// подписку на сокет в preview-режиме.
   ///
   /// Future разрешается, когда пользователь закрывает экран.
-  Future<void> openOverlayPreview({required MafbaseOverlay overlay, int? tournamentId, int? table}) {
+  Future<void> openOverlayPreview({
+    required MafbaseOverlay overlay,
+    int? tournamentId,
+    int? clubId,
+    int? table,
+  }) {
     return MafbaseStreamPlatform.instance.openOverlayPreview(
       overlayViewType: overlay.viewType,
       tournamentId: tournamentId,
+      clubId: clubId,
       table: table,
     );
   }

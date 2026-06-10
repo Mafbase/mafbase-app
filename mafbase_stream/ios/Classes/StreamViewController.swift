@@ -231,12 +231,13 @@ final class StreamViewController: UIViewController {
             NSLog("[Stream] attachOverlay: no overlayViewType and no brand image")
             return
         }
-        NSLog("[Stream] attachOverlay: viewType=\(viewType ?? "nil") brand=\(overlayParams.brandImageUrl ?? "nil") tournamentId=\(overlayParams.tournamentId.map(String.init) ?? "nil") table=\(overlayParams.table.map(String.init) ?? "nil")")
+        NSLog("[Stream] attachOverlay: viewType=\(viewType ?? "nil") brand=\(overlayParams.brandImageUrl ?? "nil") tournamentId=\(overlayParams.tournamentId.map(String.init) ?? "nil") clubId=\(overlayParams.clubId.map(String.init) ?? "nil") table=\(overlayParams.table.map(String.init) ?? "nil")")
         let renderer = OverlayViewRenderer(width: Self.frameWidth, height: Self.frameHeight)
         // Поднимаем phaseGate из плагина и параметры из overlayParams в
         // новый OverlayParams, который видит overlay и brand-слой.
         let resolvedParams = OverlayParams(
             tournamentId: overlayParams.tournamentId,
+            clubId: overlayParams.clubId,
             table: overlayParams.table,
             phaseGate: phaseGate,
             breakPlaceholderImageUrl: overlayParams.breakPlaceholderImageUrl,
