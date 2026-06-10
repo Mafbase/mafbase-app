@@ -70,6 +70,7 @@ private:
     AVStream* video_stream_ = nullptr;
     AVStream* audio_stream_ = nullptr;
     bool header_written_ = false;
+    bool has_audio_ = true;  // false для video-only сессий (audio_extradata не передан)
 
     int video_fps_ = 30;
     int io_timeout_us_ = 10'000'000;
