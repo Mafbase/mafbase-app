@@ -149,11 +149,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with EffectEmitter<Pr
         days: event.days,
         redirectPath: event.redirectPath,
       );
-      emitEffect(ProfileEffect.navigateToPaymentWaiting(
-        redirectLink: result.redirectLink,
-        purchaseId: result.purchaseId,
-        nextPath: event.redirectPath,
-      ),);
+      emitEffect(
+        ProfileEffect.navigateToPaymentWaiting(
+          redirectLink: result.redirectLink,
+          purchaseId: result.purchaseId,
+          nextPath: event.redirectPath,
+        ),
+      );
     } finally {
       emit(state.copyWith(isBilling: false));
     }

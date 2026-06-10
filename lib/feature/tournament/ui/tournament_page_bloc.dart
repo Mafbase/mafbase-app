@@ -64,9 +64,9 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     required this.router,
     required this.tournamentId,
     BuildContext? context,
-  }) : _repos = repos,
-       _context = context,
-       super(const TournamentPageState()) {
+  })  : _repos = repos,
+        _context = context,
+        super(const TournamentPageState()) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
     on<TournamentPageEventAddPlayer>(_onAddPlayerTapped);
     on<TournamentPageEventDeletePlayer>(_onDeletePlayer);
@@ -205,9 +205,9 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
             .run(tournamentId: tournamentId, model: event.settings)
             .then((_) => _getSettingsInteractor.run(tournamentId: tournamentId))
             .then((settings) {
-              emitEffect(const TournamentPageEffect.showUpdateSettingsSuccess());
-              return settings;
-            }),
+          emitEffect(const TournamentPageEffect.showUpdateSettingsSuccess());
+          return settings;
+        }),
       ),
     );
   }
@@ -220,12 +220,9 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
         _getSettingsInteractor.run(tournamentId: tournamentId).then((settings) {
           emit(state.copyWith(settings: settings));
         }),
-        _photoThemeRepository
-            .getThemes()
-            .then((themes) {
-              emit(state.copyWith(photoThemes: themes));
-            })
-            .onError((_, __) {}),
+        _photoThemeRepository.getThemes().then((themes) {
+          emit(state.copyWith(photoThemes: themes));
+        }).onError((_, __) {}),
       ]);
       if (state.activePhotoThemeId != null) {
         await _loadThemePhotos(state.activePhotoThemeId!, emit);
@@ -262,10 +259,8 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     try {
       final allGames = await _repos.tournamentEditRepository.getResultModels(tournamentId: tournamentId);
 
-      final playerGames = allGames
-          .expand((round) => round)
-          .where((game) => game.nicknames.contains(event.oldPlayer.nickname))
-          .toList();
+      final playerGames =
+          allGames.expand((round) => round).where((game) => game.nicknames.contains(event.oldPlayer.nickname)).toList();
 
       final gameNumbers = playerGames.map((g) => g.game).toSet().toList()..sort();
 

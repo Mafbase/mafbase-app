@@ -837,5 +837,57 @@
         "example": "5"
       }
     }
-  }
+  },
+  "streamsTitle": "Streams",
+  "@streamsTitle": {},
+  "streamsTableTitle": "Table {table}",
+  "@streamsTableTitle": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
+  "streamsLive": "LIVE",
+  "@streamsLive": {},
+  "streamsEnded": "Ended",
+  "@streamsEnded": {},
+  "streamsEmpty": "No streams yet",
+  "@streamsEmpty": {},
+  "streamsAddTitle": "Add stream",
+  "@streamsAddTitle": {},
+  "streamsGenerateTitle": "Generate stream in Mafbase",
+  "@streamsGenerateTitle": {},
+  "streamsAddButton": "Add custom link",
+  "@streamsAddButton": {},
+  "streamsGenerateButton": "Generate in Mafbase",
+  "@streamsGenerateButton": {},
+  "streamsAdd": "Add",
+  "@streamsAdd": {},
+  "streamsGenerate": "Generate",
+  "@streamsGenerate": {},
+  "streamsTableNumber": "Table number",
+  "@streamsTableNumber": {},
+  "streamsTableNumberRequired": "Enter a valid table number",
+  "@streamsTableNumberRequired": {},
+  "streamsViewerUrl": "Stream URL",
+  "@streamsViewerUrl": {},
+  "streamsRtmpServer": "RTMP server (optional)",
+  "@streamsRtmpServer": {},
+  "streamsRtmpKey": "RTMP key (optional)",
+  "@streamsRtmpKey": {},
+  "streamsStop": "Stop",
+  "@streamsStop": {},
+  "streamsCopy": "Copy",
+  "@streamsCopy": {},
+  "streamsCopied": "Copied",
+  "@streamsCopied": {},
+  "streamsPrevious": "Previous streams",
+  "@streamsPrevious": {},
+  "streamsShowAll": "All streams",
+  "@streamsShowAll": {},
+  "streamsNoUrl": "No URL provided",
+  "@streamsNoUrl": {},
+  "streamsWatch": "Watch stream",
+  "@streamsWatch": {}
 }

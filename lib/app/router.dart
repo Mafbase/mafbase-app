@@ -12,6 +12,7 @@ import 'package:seating_generator_web/feature/info_table_description/ui/info_tab
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_page.dart';
+import 'package:seating_generator_web/feature/streams/ui/streams_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_settings_page.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/players_list_body.dart';
@@ -119,6 +120,7 @@ class AppRouter extends RootStackRouter {
                 AutoRoute(page: PhotoThemesTournamentRoute.page, path: 'photo-themes'),
                 AutoRoute(page: InfoTableDescriptionRoute.page, path: 'table-descriptions'),
                 AutoRoute(page: RefereeRoute.page, path: 'referees'),
+                AutoRoute(page: StreamsRoute.page, path: 'streams'),
               ],
             ),
           ],
