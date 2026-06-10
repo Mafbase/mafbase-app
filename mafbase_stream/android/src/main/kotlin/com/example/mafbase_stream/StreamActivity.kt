@@ -103,6 +103,7 @@ class StreamActivity :
     private var streamKey: String = "test"
     private var overlayViewType: String? = null
     private var overlayTournamentId: Int? = null
+    private var overlayClubId: Int? = null
     private var overlayTable: Int? = null
     private var breakPlaceholderImageUrl: String? = null
     private var brandImageUrl: String? = null
@@ -120,6 +121,7 @@ class StreamActivity :
         const val EXTRA_STREAM_KEY: String = "mafbase_stream.stream_key"
         const val EXTRA_OVERLAY_VIEW_TYPE: String = "mafbase_stream.overlay_view_type"
         const val EXTRA_TOURNAMENT_ID: String = "mafbase_stream.tournament_id"
+        const val EXTRA_CLUB_ID: String = "mafbase_stream.club_id"
         const val EXTRA_TABLE: String = "mafbase_stream.table"
         const val EXTRA_BREAK_PLACEHOLDER_URL: String = "mafbase_stream.break_placeholder_url"
         const val EXTRA_BRAND_IMAGE_URL: String = "mafbase_stream.brand_image_url"
@@ -140,6 +142,9 @@ class StreamActivity :
         }
         if (intent?.hasExtra(EXTRA_TOURNAMENT_ID) == true) {
             overlayTournamentId = intent.getIntExtra(EXTRA_TOURNAMENT_ID, 0)
+        }
+        if (intent?.hasExtra(EXTRA_CLUB_ID) == true) {
+            overlayClubId = intent.getIntExtra(EXTRA_CLUB_ID, 0)
         }
         if (intent?.hasExtra(EXTRA_TABLE) == true) {
             overlayTable = intent.getIntExtra(EXTRA_TABLE, 0)
@@ -636,6 +641,7 @@ class StreamActivity :
         val renderer = OverlayViewRenderer(width, height)
         val params = OverlayParams(
             tournamentId = overlayTournamentId,
+            clubId = overlayClubId,
             table = overlayTable,
             phaseGate = phaseGate,
             breakPlaceholderImageUrl = breakPlaceholderImageUrl,

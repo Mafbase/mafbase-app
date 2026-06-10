@@ -20,11 +20,17 @@ class MafbaseStreamWeb extends MafbaseStreamPlatform {
     String? streamKey,
     String? overlayViewType,
     int? tournamentId,
+    int? clubId,
     int? table,
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
   }) async {}
 
   @override
-  Future<void> openOverlayPreview({required String overlayViewType, int? tournamentId, int? table}) async {}
+  Future<void> openOverlayPreview({
+    required String overlayViewType,
+    int? tournamentId,
+    int? clubId,
+    int? table,
+  }) async {}
 }

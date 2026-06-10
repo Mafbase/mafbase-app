@@ -19,7 +19,8 @@ import UIKit
 final class PlashkiMafbaseOverlay: UIView {
 
     private let invalidator: OverlayInvalidator
-    private let socket: TournamentContentSocket?
+    private let tournamentSocket: TournamentContentSocket?
+    private let clubSocket: ClubContentSocket?
     private let phaseGate: PhaseGate?
     private var cancellables: Set<AnyCancellable> = []
 
@@ -47,10 +48,15 @@ final class PlashkiMafbaseOverlay: UIView {
     init(params: OverlayParams, invalidator: OverlayInvalidator) {
         self.invalidator = invalidator
         self.phaseGate = params.phaseGate
-        if let tournamentId = params.tournamentId, let table = params.table {
-            self.socket = TournamentContentSocket(tournamentId: tournamentId, table: table)
+        if let clubId = params.clubId, let table = params.table {
+            self.tournamentSocket = nil
+            self.clubSocket = ClubContentSocket(clubId: clubId, table: table)
+        } else if let tournamentId = params.tournamentId, let table = params.table {
+            self.tournamentSocket = TournamentContentSocket(tournamentId: tournamentId, table: table)
+            self.clubSocket = nil
         } else {
-            self.socket = nil
+            self.tournamentSocket = nil
+            self.clubSocket = nil
         }
         let viewModelRef = viewModel
         self.host = UIHostingController(
@@ -84,9 +90,24 @@ final class PlashkiMafbaseOverlay: UIView {
             host.view.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
 
-        NSLog("[Plashki] init params=\(params.tournamentId.map(String.init) ?? "nil")/\(params.table.map(String.init) ?? "nil")")
+        let contextLabel: String
+        if let clubId = params.clubId {
+            contextLabel = "club=\(clubId)/table=\(params.table.map(String.init) ?? "nil")"
+        } else {
+            contextLabel = "tournament=\(params.tournamentId.map(String.init) ?? "nil")/table=\(params.table.map(String.init) ?? "nil")"
+        }
+        NSLog("[Plashki] init params=\(contextLabel)")
 
-        socket?.$state
+        let statePublisher: AnyPublisher<Generated_SeatingContent?, Never>
+        if let cs = clubSocket {
+            statePublisher = cs.$state.eraseToAnyPublisher()
+        } else if let ts = tournamentSocket {
+            statePublisher = ts.$state.eraseToAnyPublisher()
+        } else {
+            statePublisher = Just(nil).eraseToAnyPublisher()
+        }
+
+        statePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] content in
                 guard let self = self else { return }
@@ -96,7 +117,8 @@ final class PlashkiMafbaseOverlay: UIView {
             }
             .store(in: &cancellables)
 
-        socket?.connect()
+        tournamentSocket?.connect()
+        clubSocket?.connect()
     }
 
     @available(*, unavailable)
@@ -170,7 +192,8 @@ final class PlashkiMafbaseOverlay: UIView {
         displayLink?.invalidate()
         displayLink = nil
         cancellables.removeAll()
-        socket?.dispose()
+        tournamentSocket?.dispose()
+        clubSocket?.dispose()
         // Снимаем mute, чтобы оставшаяся сессия (если такая случится) не "залипла".
         phaseGate?.muted = false
         host.willMove(toParent: nil)

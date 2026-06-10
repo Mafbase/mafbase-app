@@ -45,6 +45,7 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
     let streamKey = (args?["streamKey"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
     let overlayViewType = (args?["overlayViewType"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
     let tournamentId = (args?["tournamentId"] as? NSNumber)?.intValue
+    let clubId = (args?["clubId"] as? NSNumber)?.intValue
     let table = (args?["table"] as? NSNumber)?.intValue
     let breakPlaceholderImageUrl = (args?["breakPlaceholderImageUrl"] as? String)?
       .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -57,6 +58,7 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
     controller.overlayViewType = (overlayViewType?.isEmpty == false) ? overlayViewType : nil
     controller.overlayParams = OverlayParams(
       tournamentId: tournamentId,
+      clubId: clubId,
       table: table,
       breakPlaceholderImageUrl: (breakPlaceholderImageUrl?.isEmpty == false) ? breakPlaceholderImageUrl : nil,
       brandImageUrl: (brandImageUrl?.isEmpty == false) ? brandImageUrl : nil
@@ -119,8 +121,9 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
     pendingResult = result
 
     let tournamentId = (args["tournamentId"] as? NSNumber)?.intValue
+    let clubId = (args["clubId"] as? NSNumber)?.intValue
     let table = (args["table"] as? NSNumber)?.intValue
-    let params = OverlayParams(tournamentId: tournamentId, table: table)
+    let params = OverlayParams(tournamentId: tournamentId, clubId: clubId, table: table)
 
     let controller = OverlayPreviewViewController(overlayViewType: viewType, params: params)
     controller.modalPresentationStyle = .fullScreen

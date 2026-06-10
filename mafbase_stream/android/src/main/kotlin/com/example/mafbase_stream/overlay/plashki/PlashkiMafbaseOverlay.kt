@@ -17,26 +17,39 @@ import androidx.compose.ui.platform.LocalContext
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
+import com.example.mafbase_stream.data.sockets.ClubContentSocket
 import com.example.mafbase_stream.data.sockets.TournamentContentSocket
 import com.example.mafbase_stream.overlay.OverlayParams
 import generated.Mafia
 
 @Composable
 internal fun PlashkiMafbaseOverlay(params: OverlayParams) {
-    val tournamentId = params.tournamentId
     val table = params.table
-    if (tournamentId == null || table == null) {
+    val tournamentId = params.tournamentId
+    val clubId = params.clubId
+    if (table == null || (tournamentId == null && clubId == null)) {
         Box(Modifier.fillMaxSize())
         return
     }
 
-    val socket = remember(tournamentId, table) {
-        TournamentContentSocket(tournamentId, table).also { it.connect() }
+    // Используем клубный сокет если задан clubId, иначе турнирный
+    val content by if (clubId != null) {
+        val socket = remember(clubId, table) {
+            ClubContentSocket(clubId, table).also { it.connect() }
+        }
+        DisposableEffect(socket) {
+            onDispose { socket.dispose() }
+        }
+        socket.state.collectAsState()
+    } else {
+        val socket = remember(tournamentId, table) {
+            TournamentContentSocket(tournamentId!!, table).also { it.connect() }
+        }
+        DisposableEffect(socket) {
+            onDispose { socket.dispose() }
+        }
+        socket.state.collectAsState()
     }
-    DisposableEffect(socket) {
-        onDispose { socket.dispose() }
-    }
-    val content by socket.state.collectAsState()
     val phase = content?.broadcastPhase
 
     // Mute audio во всех фазах кроме `day`. Reset на dispose, чтобы между

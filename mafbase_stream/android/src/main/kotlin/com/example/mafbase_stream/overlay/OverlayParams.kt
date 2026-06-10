@@ -12,6 +12,10 @@ import com.example.mafbase_stream.PhaseGate
  * `broadcastPhase` из сокета (например, плашки mafbase), выставляют его в
  * `true` для всех фаз кроме `day`.
  *
+ * [tournamentId] / [clubId] — взаимоисключающие источники данных. Если задан
+ * [clubId] — overlay подписывается на `clubSeatingContent`; если задан
+ * [tournamentId] — на `seatingContent`. [table] используется в обоих случаях.
+ *
  * [breakPlaceholderImageUrl] — URL картинки-заглушки, которая показывается
  * поверх кадра при `broadcastPhase == break_phase`. Если null — overlay рисует
  * только свою обычную вёрстку без замены кадра.
@@ -23,6 +27,7 @@ import com.example.mafbase_stream.PhaseGate
  */
 internal data class OverlayParams(
     val tournamentId: Int? = null,
+    val clubId: Int? = null,
     val table: Int? = null,
     val phaseGate: PhaseGate? = null,
     val breakPlaceholderImageUrl: String? = null,
