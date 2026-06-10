@@ -69,7 +69,7 @@ class _ClubTranslationLinksBodyState extends State<_ClubTranslationLinksBody> {
   String _buildLink(String root, String path, String key, int table) =>
       '$root/$path?clubId=${widget.clubId}&table=$table&key=$key';
 
-  void _copyAll(String key) {
+  Future<void> _copyAll(String key) async {
     final root = _root();
     final locale = context.locale;
     final buffer = StringBuffer();
@@ -81,12 +81,14 @@ class _ClubTranslationLinksBodyState extends State<_ClubTranslationLinksBody> {
       buffer.writeln('${locale.translationControlLink}: $control');
       if (t < _tablesCount) buffer.writeln();
     }
-    Clipboard.setData(ClipboardData(text: buffer.toString()));
+    await Clipboard.setData(ClipboardData(text: buffer.toString()));
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(locale.translationCopiedSnackbar)));
   }
 
-  void _copyOne(String text) {
-    Clipboard.setData(ClipboardData(text: text));
+  Future<void> _copyOne(String text) async {
+    await Clipboard.setData(ClipboardData(text: text));
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.locale.translationCopiedSnackbar)));
   }
 

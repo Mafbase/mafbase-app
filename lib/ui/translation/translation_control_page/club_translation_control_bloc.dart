@@ -22,8 +22,8 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
   ClubContentSocket? _socket;
 
   ClubTranslationControlBloc({required this.params, required ClubTranslationRepository repository})
-      : _repository = repository,
-        super(const TranslationContentState()) {
+    : _repository = repository,
+      super(const TranslationContentState()) {
     on<ClubTranslationControlEventPageOpened>(_onPageOpened);
     on<ClubTranslationControlEventStateReceived>(_onStateReceived);
     on<ClubTranslationControlEventChangeRole>(_onChangeRole);
@@ -52,7 +52,14 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
   void _onStateReceived(ClubTranslationControlEventStateReceived event, Emitter<TranslationContentState> emit) {
     final content = event.content;
     final nicknames = content.names;
-    final editingSlots = state.editingSlots.where((i) => i < nicknames.length && nicknames[i].isEmpty).toSet();
+    // Preserve editingSlots for filled slots where the swap is still in progress.
+    // Remove a slot from editingSlots only when its nickname changes (player was successfully swapped).
+    final prevNicknames = state.nicknames;
+    final editingSlots = state.editingSlots.where((i) {
+      if (i >= nicknames.length) return false;
+      if (prevNicknames != null && i < prevNicknames.length && prevNicknames[i] != nicknames[i]) return false;
+      return true;
+    }).toSet();
     emit(
       TranslationContentState(
         roles: content.roles,
