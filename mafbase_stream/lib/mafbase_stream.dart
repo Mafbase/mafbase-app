@@ -74,6 +74,10 @@ class MafbaseStream {
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
   }) {
+    assert(
+      tournamentId == null || clubId == null,
+      'tournamentId и clubId взаимоисключающие — задайте только один из них',
+    );
     return MafbaseStreamPlatform.instance.openStreamScreen(
       rtmpUrl: rtmpUrl,
       streamKey: streamKey,
@@ -101,6 +105,10 @@ class MafbaseStream {
     int? clubId,
     int? table,
   }) {
+    assert(
+      tournamentId == null || clubId == null,
+      'tournamentId и clubId взаимоисключающие — задайте только один из них',
+    );
     return MafbaseStreamPlatform.instance.openOverlayPreview(
       overlayViewType: overlay.viewType,
       tournamentId: tournamentId,

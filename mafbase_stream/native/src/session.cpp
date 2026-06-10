@@ -30,7 +30,7 @@ bool is_critical(ms_event_type type) {
 }  // namespace
 
 struct ms_session {
-    std::mutex lifecycle_mu;
+    mutable std::mutex lifecycle_mu;
     ms::StateMachine sm;
     std::unique_ptr<ms::PacketQueue> queue;
     std::unique_ptr<ms::WriterThread> writer;
@@ -259,6 +259,7 @@ void ms_session_destroy(ms_session* session) {
 
 ms_state ms_session_get_state(const ms_session* session) {
     if (!session) return MS_STATE_STOPPED;
+    std::lock_guard lk(session->lifecycle_mu);
     return session->sm.state();
 }
 
