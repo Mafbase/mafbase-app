@@ -14,6 +14,8 @@ class TranslationControlPlayerCard extends StatelessWidget {
   final PlayerStatus status;
   final ValueChanged<PlayerRole> onRoleChanged;
   final ValueChanged<PlayerStatus> onStatusChanged;
+  final VoidCallback? onPlayerSwap;
+  final VoidCallback? onPhotoTap;
 
   const TranslationControlPlayerCard({
     super.key,
@@ -24,6 +26,8 @@ class TranslationControlPlayerCard extends StatelessWidget {
     required this.status,
     required this.onRoleChanged,
     required this.onStatusChanged,
+    this.onPlayerSwap,
+    this.onPhotoTap,
   });
 
   bool get _isDead => status == PlayerStatus.killed || status == PlayerStatus.deleted || status == PlayerStatus.voted;
@@ -58,7 +62,7 @@ class TranslationControlPlayerCard extends StatelessWidget {
               children: [
                 _PlayerNumber(index: index, theme: theme),
                 const SizedBox(width: 8),
-                _PlayerAvatar(imageUrl: imageUrl, nickname: nickname, theme: theme),
+                _PlayerAvatar(imageUrl: imageUrl, nickname: nickname, theme: theme, onTap: onPhotoTap),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
@@ -70,6 +74,17 @@ class TranslationControlPlayerCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (onPlayerSwap != null)
+                  IconButton(
+                    onPressed: onPlayerSwap,
+                    icon: const Icon(Icons.swap_horiz, size: 18),
+                    iconSize: 28,
+                    color: theme.hintColor,
+                    tooltip: context.locale.translationControlChangePlayer,
+                    visualDensity: VisualDensity.compact,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                  ),
               ],
             ),
             const SizedBox(height: 6),
@@ -127,11 +142,13 @@ class _PlayerAvatar extends StatelessWidget {
   final String imageUrl;
   final String nickname;
   final MyTheme theme;
+  final VoidCallback? onTap;
 
   const _PlayerAvatar({
     required this.imageUrl,
     required this.nickname,
     required this.theme,
+    this.onTap,
   });
 
   String get _initials {
@@ -144,19 +161,40 @@ class _PlayerAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (imageUrl.isNotEmpty) {
-      return ClipOval(
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          height: 40,
-          width: 40,
-          fit: BoxFit.cover,
-          placeholder: (_, __) => _AvatarPlaceholder(initials: _initials, theme: theme),
-          errorWidget: (_, __, ___) => _AvatarPlaceholder(initials: _initials, theme: theme),
-        ),
-      );
-    }
-    return _AvatarPlaceholder(initials: _initials, theme: theme);
+    final Widget avatar = imageUrl.isNotEmpty
+        ? ClipOval(
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              height: 40,
+              width: 40,
+              fit: BoxFit.cover,
+              placeholder: (_, __) => _AvatarPlaceholder(initials: _initials, theme: theme),
+              errorWidget: (_, __, ___) => _AvatarPlaceholder(initials: _initials, theme: theme),
+            ),
+          )
+        : _AvatarPlaceholder(initials: _initials, theme: theme);
+
+    if (onTap == null) return avatar;
+    return InkWell(
+      onTap: onTap,
+      customBorder: const CircleBorder(),
+      child: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          avatar,
+          Container(
+            width: 16,
+            height: 16,
+            decoration: BoxDecoration(
+              color: theme.background2,
+              shape: BoxShape.circle,
+              border: Border.all(color: theme.borderColor, width: 1),
+            ),
+            child: Icon(Icons.edit, size: 10, color: theme.hintColor),
+          ),
+        ],
+      ),
+    );
   }
 }
 

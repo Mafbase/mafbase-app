@@ -15,6 +15,7 @@ abstract class TranslationContentState with _$TranslationContentState {
     @Default(0) int game,
     @Default(0) int totalGames,
     @Default(BroadcastPhase.day) BroadcastPhase broadcastPhase,
+    @Default(<int>{}) Set<int> editingSlots,
   }) = _TranslationContentState;
 }
 

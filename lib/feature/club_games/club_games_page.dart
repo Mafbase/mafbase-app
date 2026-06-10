@@ -71,77 +71,77 @@ class _ClubGamesPageState extends CustomState<_ClubGamesPageContent> {
 
   @override
   Widget buildDesktop(BuildContext context) => BlocBuilder<ClubGamesBloc, ClubGamesState>(
-    builder: (context, state) => Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: const Text('Игры клуба'),
-        actions: [_buildSortButton(context, state)],
-      ),
-      body: state.loading
-          ? const LoadingOverlayWidget()
-          : LayoutBuilder(
-              builder: (context, constraints) {
-                final crossAxisCount = (constraints.maxWidth - 16) / (GameResultWidget.baseWidth + 16);
+        builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            leading: const BackButton(),
+            title: const Text('Игры клуба'),
+            actions: [_buildSortButton(context, state)],
+          ),
+          body: state.loading
+              ? const LoadingOverlayWidget()
+              : LayoutBuilder(
+                  builder: (context, constraints) {
+                    final crossAxisCount = (constraints.maxWidth - 16) / (GameResultWidget.baseWidth + 16);
 
-                return GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount.floor(),
-                    mainAxisSpacing: 16,
-                  ),
-                  itemCount: state.games.length,
-                  itemBuilder: (context, index) {
-                    return Center(
-                      child: GestureDetector(
-                        onTap: () => openGame(state.games[index].gameId),
-                        child: GameResultWidget(model: state.games[index]),
+                    return GridView.builder(
+                      padding: const EdgeInsets.all(16),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount.floor(),
+                        mainAxisSpacing: 16,
                       ),
+                      itemCount: state.games.length,
+                      itemBuilder: (context, index) {
+                        return Center(
+                          child: GestureDetector(
+                            onTap: () => openGame(state.games[index].gameId),
+                            child: GameResultWidget(model: state.games[index]),
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
-    ),
-  );
+                ),
+        ),
+      );
 
   @override
   Widget? buildMobile(BuildContext context) => BlocBuilder<ClubGamesBloc, ClubGamesState>(
-    builder: (context, state) => Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: const Text('Игры клуба'),
-        actions: [_buildSortButton(context, state)],
-      ),
-      body: state.loading
-          ? const LoadingOverlayWidget()
-          : PageView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: state.games.length,
-              itemBuilder: (context, index) => LayoutBuilder(
-                builder: (context, constraints) {
-                  final double coef;
+        builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            leading: const BackButton(),
+            title: const Text('Игры клуба'),
+            actions: [_buildSortButton(context, state)],
+          ),
+          body: state.loading
+              ? const LoadingOverlayWidget()
+              : PageView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: state.games.length,
+                  itemBuilder: (context, index) => LayoutBuilder(
+                    builder: (context, constraints) {
+                      final double coef;
 
-                  final widthCoef = (constraints.maxWidth - 32) / GameResultWidget.baseWidth;
+                      final widthCoef = (constraints.maxWidth - 32) / GameResultWidget.baseWidth;
 
-                  final heightCoef = (constraints.maxHeight - 32) / GameResultWidget.baseHeight;
+                      final heightCoef = (constraints.maxHeight - 32) / GameResultWidget.baseHeight;
 
-                  coef = min(widthCoef, heightCoef);
+                      coef = min(widthCoef, heightCoef);
 
-                  return Center(
-                    child: GestureDetector(
-                      onTap: () => openGame(state.games[index].gameId),
-                      child: GameResultWidget(
-                        model: state.games[index],
-                        width: GameResultWidget.baseWidth * coef,
-                        height: GameResultWidget.baseHeight * coef,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-    ),
-  );
+                      return Center(
+                        child: GestureDetector(
+                          onTap: () => openGame(state.games[index].gameId),
+                          child: GameResultWidget(
+                            model: state.games[index],
+                            width: GameResultWidget.baseWidth * coef,
+                            height: GameResultWidget.baseHeight * coef,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+        ),
+      );
 
   void openGame(int gameId) => context.router.push(ClubGameDetailRoute(clubId: widget.clubId, gameId: gameId));
 }

@@ -40,8 +40,8 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
   final SeatingPageRouter router;
 
   SeatingPageBloc({required RepositoryFactory repos, required this.router})
-    : _repos = repos,
-      super(const SeatingPageState()) {
+      : _repos = repos,
+        super(const SeatingPageState()) {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
@@ -139,6 +139,13 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     _ratingScheme = settings.ratingScheme;
     final seating = await _getSeatingInteractor.run(tournamentId: tournamentId, ratingScheme: _ratingScheme);
 
-    emit(state.copyWith(isLoading: false, cannotMeet: pairs, games: seating));
+    List<GameStream> streams;
+    try {
+      streams = await _repos.streamRepository.getStreams(tournamentId: tournamentId);
+    } catch (_) {
+      streams = [];
+    }
+
+    emit(state.copyWith(isLoading: false, cannotMeet: pairs, games: seating, streams: streams));
   }
 }

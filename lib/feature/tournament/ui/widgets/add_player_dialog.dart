@@ -72,84 +72,82 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
 
   @override
   Widget build(BuildContext context) => ListenableBuilder(
-    listenable: _controller,
-    builder: (context, _) {
-      final loading =
-          _isNicknameSearching ||
-          (_controller.text.isNotEmpty && _controller.text != (_lastNicknameSearchedQuery ?? ''));
+        listenable: _controller,
+        builder: (context, _) {
+          final loading = _isNicknameSearching ||
+              (_controller.text.isNotEmpty && _controller.text != (_lastNicknameSearchedQuery ?? ''));
 
-      return CustomDialog(
-        child: Container(
-          width: 580,
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
+          return CustomDialog(
+            child: Container(
+              width: 580,
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(width: 48),
-                    Expanded(
-                      child: Text(
-                        context.locale.addPlayerDialogTitle,
-                        textAlign: TextAlign.center,
-                        style: MyTheme.of(context).headerTextStyle,
-                      ),
+                    Row(
+                      children: [
+                        const SizedBox(width: 48),
+                        Expanded(
+                          child: Text(
+                            context.locale.addPlayerDialogTitle,
+                            textAlign: TextAlign.center,
+                            style: MyTheme.of(context).headerTextStyle,
+                          ),
+                        ),
+                        const CloseButton(),
+                      ],
                     ),
-                    const CloseButton(),
+                    const SizedBox(height: 24),
+                    PlayerAutoComplete(
+                      label: context.locale.nicknameHint,
+                      controller: _controller,
+                      focusNode: _focusNode,
+                      onSelected: _onPlayerSelected,
+                      onResultsChanged: (results) => _nicknameSearchResults = results,
+                      onSearchStateChanged: (isLoading, query) {
+                        setState(() {
+                          _isNicknameSearching = isLoading;
+                          _lastNicknameSearchedQuery = query;
+                        });
+                      },
+                      onSubmit: () {
+                        _focusNodeFsm.requestFocus();
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    PlayerAutoComplete(
+                      label: context.locale.fsmNicknameHint,
+                      controller: _controllerFsm,
+                      focusNode: _focusNodeFsm,
+                      displayStringForOption: (m) => m.fsmNickaname ?? '',
+                      onSelected: _onPlayerSelected,
+                      onSubmit: () {
+                        _focusNodeMafbank.requestFocus();
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    PlayerAutoComplete(
+                      label: context.locale.mafbankNicknameHint,
+                      controller: _controllerMafbank,
+                      focusNode: _focusNodeMafbank,
+                      displayStringForOption: (m) => m.mafbankNickname ?? '',
+                      onSelected: _onPlayerSelected,
+                      onSubmit: onSubmit,
+                    ),
+                    const SizedBox(height: 24),
+                    CustomButton(text: context.locale.add, onTap: onSubmit, isLoading: loading),
                   ],
                 ),
-                const SizedBox(height: 24),
-                PlayerAutoComplete(
-                  label: context.locale.nicknameHint,
-                  controller: _controller,
-                  focusNode: _focusNode,
-                  onSelected: _onPlayerSelected,
-                  onResultsChanged: (results) => _nicknameSearchResults = results,
-                  onSearchStateChanged: (isLoading, query) {
-                    setState(() {
-                      _isNicknameSearching = isLoading;
-                      _lastNicknameSearchedQuery = query;
-                    });
-                  },
-                  onSubmit: () {
-                    _focusNodeFsm.requestFocus();
-                  },
-                ),
-                const SizedBox(height: 8),
-                PlayerAutoComplete(
-                  label: context.locale.fsmNicknameHint,
-                  controller: _controllerFsm,
-                  focusNode: _focusNodeFsm,
-                  displayStringForOption: (m) => m.fsmNickaname ?? '',
-                  onSelected: _onPlayerSelected,
-                  onSubmit: () {
-                    _focusNodeMafbank.requestFocus();
-                  },
-                ),
-                const SizedBox(height: 8),
-                PlayerAutoComplete(
-                  label: context.locale.mafbankNicknameHint,
-                  controller: _controllerMafbank,
-                  focusNode: _focusNodeMafbank,
-                  displayStringForOption: (m) => m.mafbankNickname ?? '',
-                  onSelected: _onPlayerSelected,
-                  onSubmit: onSubmit,
-                ),
-                const SizedBox(height: 24),
-                CustomButton(text: context.locale.add, onTap: onSubmit, isLoading: loading),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       );
-    },
-  );
 
   void onSubmit() {
     final selectedPlayer = _selectedPlayer ?? _findExactMatch();
-    final player =
-        selectedPlayer?.copyWith(
+    final player = selectedPlayer?.copyWith(
           mafbankNickname: _controllerMafbank.text.isEmpty ? null : _controllerMafbank.text,
           fsmNickaname: _controllerFsm.text.isEmpty ? null : _controllerFsm.text,
         ) ??

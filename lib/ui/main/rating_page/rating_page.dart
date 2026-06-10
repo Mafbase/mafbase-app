@@ -84,17 +84,17 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
   final _carouselController = carousel.CarouselSliderController();
 
   List<RatingTableStyle> _buildItems(bool hasCustomColumns) => [
-    RatingTableStyle.score,
-    RatingTableStyle.full,
-    RatingTableStyle.stats,
-    if (hasCustomColumns) RatingTableStyle.custom,
-  ];
+        RatingTableStyle.score,
+        RatingTableStyle.full,
+        RatingTableStyle.stats,
+        if (hasCustomColumns) RatingTableStyle.custom,
+      ];
 
   @override
   void initState() {
     context.read<RatingBloc>().add(
-      RatingEvent.pageOpened(range: widget.range, clubId: widget.clubId, tournamentId: widget.tournamentId),
-    );
+          RatingEvent.pageOpened(range: widget.range, clubId: widget.clubId, tournamentId: widget.tournamentId),
+        );
     super.initState();
   }
 
@@ -117,8 +117,8 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
         oldWidget.clubId != widget.clubId ||
         oldWidget.tournamentId != widget.tournamentId) {
       context.read<RatingBloc>().add(
-        RatingEvent.pageOpened(range: widget.range, clubId: widget.clubId, tournamentId: widget.tournamentId),
-      );
+            RatingEvent.pageOpened(range: widget.range, clubId: widget.clubId, tournamentId: widget.tournamentId),
+          );
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -129,32 +129,32 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
       builder: (context, state) {
         final range = state.range ?? widget.range;
         Widget ratingTable({bool singlePage = false}) => RatingTable(
-          isTournament: widget.tournamentId != null,
-          isMobile: true,
-          style: widget.style,
-          rows: state.rows,
-          clubId: widget.clubId,
-          sort: widget.sort,
-          gameFilter: widget.gameFilter,
-          openGame: openGame,
-          pinNicknames: singlePage,
-          customSortColumnIndex: widget.customSortColumnIndex,
-          onPlayerTap: (playerId) => context.router.push(PlayerStatsRoute(playerId: playerId)),
-          changeSort: (RatingSort sort, {int? customSortColumnIndex}) {
-            context.read<RatingBloc>().add(
-              RatingEvent.rangeChanged(
-                range: range,
-                clubId: widget.clubId,
-                tournamentId: widget.tournamentId,
-                style: widget.style,
-                sort: sort,
-                gameFilter: widget.gameFilter,
-                customSortColumnIndex: customSortColumnIndex ?? 0,
-              ),
+              isTournament: widget.tournamentId != null,
+              isMobile: true,
+              style: widget.style,
+              rows: state.rows,
+              clubId: widget.clubId,
+              sort: widget.sort,
+              gameFilter: widget.gameFilter,
+              openGame: openGame,
+              pinNicknames: singlePage,
+              customSortColumnIndex: widget.customSortColumnIndex,
+              onPlayerTap: (playerId) => context.router.push(PlayerStatsRoute(playerId: playerId)),
+              changeSort: (RatingSort sort, {int? customSortColumnIndex}) {
+                context.read<RatingBloc>().add(
+                      RatingEvent.rangeChanged(
+                        range: range,
+                        clubId: widget.clubId,
+                        tournamentId: widget.tournamentId,
+                        style: widget.style,
+                        sort: sort,
+                        gameFilter: widget.gameFilter,
+                        customSortColumnIndex: customSortColumnIndex ?? 0,
+                      ),
+                    );
+              },
+              tournamentId: widget.tournamentId,
             );
-          },
-          tournamentId: widget.tournamentId,
-        );
 
         void openFullscreen() {
           Navigator.of(context, rootNavigator: true).push(
@@ -260,99 +260,99 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
 
   @override
   Widget buildDesktop(BuildContext context) => BlocBuilder<RatingBloc, RatingState>(
-    builder: (context, state) {
-      final range = state.range ?? widget.range;
-      return Scaffold(
-        appBar: AppBar(
-          leading: const BackButton(),
-          title: Text(state.clubName),
-          actions: [
-            downloadRatingButton(),
-            gameFilterWidget(),
-            if (widget.clubId != null)
-              IconButton(
-                onPressed: () => context.router.push(
-                  ClubGamesRoute(
-                    clubId: widget.clubId!,
-                    dateStartParam: range != null ? dateFormatForRequests.format(range.start) : null,
-                    dateEndParam: range != null ? dateFormatForRequests.format(range.end) : null,
-                  ),
-                ),
-                icon: const Icon(Icons.table_chart_outlined),
-              ),
-          ],
-        ),
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (range != null)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16.0, right: 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(context.locale.period),
-                                CustomButton(
-                                  onTap: onChangeRangeTap,
-                                  disabled: widget.tournamentId != null,
-                                  text: '${format.format(range.start)} - ${format.format(range.end)}',
-                                ),
-                              ],
-                            ),
-                          ),
-                        styleSwitcher(hasCustomColumns: state.hasCustomColumns),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    winRate(state),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: Center(
-                        child: RatingTable(
-                          style: widget.style,
-                          rows: state.rows,
-                          clubId: widget.clubId,
-                          sort: widget.sort,
-                          gameFilter: widget.gameFilter,
-                          openGame: openGame,
-                          customSortColumnIndex: widget.customSortColumnIndex,
-                          onPlayerTap: (playerId) => context.router.push(PlayerStatsRoute(playerId: playerId)),
-                          changeSort: (RatingSort sort, {int? customSortColumnIndex}) {
-                            context.read<RatingBloc>().add(
-                              RatingEvent.rangeChanged(
-                                range: range,
-                                clubId: widget.clubId,
-                                style: widget.style,
-                                tournamentId: widget.tournamentId,
-                                sort: sort,
-                                gameFilter: widget.gameFilter,
-                                customSortColumnIndex: customSortColumnIndex ?? 0,
-                              ),
-                            );
-                          },
-                          tournamentId: widget.tournamentId,
-                          isTournament: widget.tournamentId != null,
-                        ),
+        builder: (context, state) {
+          final range = state.range ?? widget.range;
+          return Scaffold(
+            appBar: AppBar(
+              leading: const BackButton(),
+              title: Text(state.clubName),
+              actions: [
+                downloadRatingButton(),
+                gameFilterWidget(),
+                if (widget.clubId != null)
+                  IconButton(
+                    onPressed: () => context.router.push(
+                      ClubGamesRoute(
+                        clubId: widget.clubId!,
+                        dateStartParam: range != null ? dateFormatForRequests.format(range.start) : null,
+                        dateEndParam: range != null ? dateFormatForRequests.format(range.end) : null,
                       ),
                     ),
-                  ],
-                ),
-              ),
+                    icon: const Icon(Icons.table_chart_outlined),
+                  ),
+              ],
             ),
-            if (state.isLoading) const LoadingOverlayWidget(),
-          ],
-        ),
+            body: Stack(
+              children: [
+                Positioned.fill(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (range != null)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0, right: 8),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(context.locale.period),
+                                    CustomButton(
+                                      onTap: onChangeRangeTap,
+                                      disabled: widget.tournamentId != null,
+                                      text: '${format.format(range.start)} - ${format.format(range.end)}',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            styleSwitcher(hasCustomColumns: state.hasCustomColumns),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        winRate(state),
+                        const SizedBox(height: 16),
+                        Expanded(
+                          child: Center(
+                            child: RatingTable(
+                              style: widget.style,
+                              rows: state.rows,
+                              clubId: widget.clubId,
+                              sort: widget.sort,
+                              gameFilter: widget.gameFilter,
+                              openGame: openGame,
+                              customSortColumnIndex: widget.customSortColumnIndex,
+                              onPlayerTap: (playerId) => context.router.push(PlayerStatsRoute(playerId: playerId)),
+                              changeSort: (RatingSort sort, {int? customSortColumnIndex}) {
+                                context.read<RatingBloc>().add(
+                                      RatingEvent.rangeChanged(
+                                        range: range,
+                                        clubId: widget.clubId,
+                                        style: widget.style,
+                                        tournamentId: widget.tournamentId,
+                                        sort: sort,
+                                        gameFilter: widget.gameFilter,
+                                        customSortColumnIndex: customSortColumnIndex ?? 0,
+                                      ),
+                                    );
+                              },
+                              tournamentId: widget.tournamentId,
+                              isTournament: widget.tournamentId != null,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (state.isLoading) const LoadingOverlayWidget(),
+              ],
+            ),
+          );
+        },
       );
-    },
-  );
 
   Widget downloadRatingButton() {
     final range = context.watch<RatingBloc>().state.range ?? widget.range;
@@ -365,8 +365,8 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
         IconButton(
           onPressed: () {
             context.read<RatingBloc>().add(
-              RatingEvent.downloadRating(range: range, clubId: widget.clubId!),
-            );
+                  RatingEvent.downloadRating(range: range, clubId: widget.clubId!),
+                );
           },
           icon: const Icon(Icons.download),
         ),
@@ -462,15 +462,15 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
 
     if (gameFilter != null && gameFilter != widget.gameFilter) {
       context.read<RatingBloc>().add(
-        RatingEvent.rangeChanged(
-          range: context.read<RatingBloc>().state.range ?? widget.range,
-          clubId: widget.clubId,
-          tournamentId: widget.tournamentId,
-          style: widget.style,
-          sort: widget.sort,
-          gameFilter: gameFilter,
-        ),
-      );
+            RatingEvent.rangeChanged(
+              range: context.read<RatingBloc>().state.range ?? widget.range,
+              clubId: widget.clubId,
+              tournamentId: widget.tournamentId,
+              style: widget.style,
+              sort: widget.sort,
+              gameFilter: gameFilter,
+            ),
+          );
     }
   }
 
@@ -508,15 +508,15 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                 height: 56,
                 onPageChanged: (index, controller) {
                   context.read<RatingBloc>().add(
-                    RatingEvent.rangeChanged(
-                      range: context.read<RatingBloc>().state.range ?? widget.range,
-                      clubId: widget.clubId,
-                      tournamentId: widget.tournamentId,
-                      style: items[index],
-                      sort: widget.sort,
-                      gameFilter: widget.gameFilter,
-                    ),
-                  );
+                        RatingEvent.rangeChanged(
+                          range: context.read<RatingBloc>().state.range ?? widget.range,
+                          clubId: widget.clubId,
+                          tournamentId: widget.tournamentId,
+                          style: items[index],
+                          sort: widget.sort,
+                          gameFilter: widget.gameFilter,
+                        ),
+                      );
                 },
               ),
             ),

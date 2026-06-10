@@ -24,6 +24,7 @@ import 'package:seating_generator_web/ui/main/club_page/widgets/club_description
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_edit_dialog.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_hero_card.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_owners_bottom_sheet.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_translation_links_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
@@ -143,6 +144,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                             defaultRatingPeriodSubtitle:
                                 _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
                             onHideRating: state.isOwner ? _changeHideDate : null,
+                            onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -217,6 +219,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                       onSetDefaultRatingPeriod: state.isOwner ? _setDefaultRatingPeriod : null,
                       defaultRatingPeriodSubtitle: _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
                       onHideRating: state.isOwner ? _changeHideDate : null,
+                      onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
                     ),
                   ],
                 ),
@@ -343,5 +346,11 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
     final clubId = context.read<ClubBloc>().state.model?.id;
     if (clubId == null) return;
     context.router.push(CustomColumnsEditorRoute(clubId: clubId));
+  }
+
+  void _openTranslationLinks() {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) return;
+    ClubTranslationLinksDialog.show(context, clubId: clubId);
   }
 }
