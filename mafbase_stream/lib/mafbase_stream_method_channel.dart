@@ -33,6 +33,7 @@ class MethodChannelMafbaseStream extends MafbaseStreamPlatform {
     String? streamKey,
     String? overlayViewType,
     int? tournamentId,
+    int? clubId,
     int? table,
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
@@ -42,6 +43,7 @@ class MethodChannelMafbaseStream extends MafbaseStreamPlatform {
       'streamKey': ?streamKey,
       'overlayViewType': ?overlayViewType,
       'tournamentId': ?tournamentId,
+      'clubId': ?clubId,
       'table': ?table,
       'breakPlaceholderImageUrl': ?breakPlaceholderImageUrl,
       'brandImageUrl': ?brandImageUrl,
@@ -49,10 +51,16 @@ class MethodChannelMafbaseStream extends MafbaseStreamPlatform {
   }
 
   @override
-  Future<void> openOverlayPreview({required String overlayViewType, int? tournamentId, int? table}) async {
+  Future<void> openOverlayPreview({
+    required String overlayViewType,
+    int? tournamentId,
+    int? clubId,
+    int? table,
+  }) async {
     await methodChannel.invokeMethod<void>('openOverlayPreview', <String, dynamic>{
       'overlayViewType': overlayViewType,
       'tournamentId': ?tournamentId,
+      'clubId': ?clubId,
       'table': ?table,
     });
   }

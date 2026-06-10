@@ -33,6 +33,7 @@ abstract class MafbaseStreamPlatform extends PlatformInterface {
     String? streamKey,
     String? overlayViewType,
     int? tournamentId,
+    int? clubId,
     int? table,
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
@@ -40,7 +41,12 @@ abstract class MafbaseStreamPlatform extends PlatformInterface {
     throw UnimplementedError('openStreamScreen() has not been implemented.');
   }
 
-  Future<void> openOverlayPreview({required String overlayViewType, int? tournamentId, int? table}) {
+  Future<void> openOverlayPreview({
+    required String overlayViewType,
+    int? tournamentId,
+    int? clubId,
+    int? table,
+  }) {
     throw UnimplementedError('openOverlayPreview() has not been implemented.');
   }
 

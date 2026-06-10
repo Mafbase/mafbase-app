@@ -32,6 +32,7 @@ class OverlayPreviewActivity : Activity() {
         private const val TAG = "OverlayPreviewActivity"
         const val EXTRA_OVERLAY_VIEW_TYPE: String = "mafbase_stream.overlay_view_type"
         const val EXTRA_TOURNAMENT_ID: String = "mafbase_stream.tournament_id"
+        const val EXTRA_CLUB_ID: String = "mafbase_stream.club_id"
         const val EXTRA_TABLE: String = "mafbase_stream.table"
 
         // Размер кадра пайплайна — должен совпадать с тем, что использует Compositor
@@ -69,8 +70,9 @@ class OverlayPreviewActivity : Activity() {
         // соблюдаем контракт каталога: invalidator передаётся, view может его дёргать.
         val invalidator = OverlayInvalidator { /* no-op in preview mode */ }
         val tournamentId = if (intent.hasExtra(EXTRA_TOURNAMENT_ID)) intent.getIntExtra(EXTRA_TOURNAMENT_ID, 0) else null
+        val clubId = if (intent.hasExtra(EXTRA_CLUB_ID)) intent.getIntExtra(EXTRA_CLUB_ID, 0) else null
         val table = if (intent.hasExtra(EXTRA_TABLE)) intent.getIntExtra(EXTRA_TABLE, 0) else null
-        val params = OverlayParams(tournamentId = tournamentId, table = table)
+        val params = OverlayParams(tournamentId = tournamentId, clubId = clubId, table = table)
         val view = OverlayCatalog.create(viewType, this, invalidator, params)
         if (view == null) {
             Log.w(TAG, "Overlay '$viewType' not found in catalog, finishing")
