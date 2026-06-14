@@ -107,7 +107,7 @@ class AppTheme {
           ),
       timePickerTheme: TimePickerThemeData(
         hourMinuteTextColor: WidgetStateColor.resolveWith(
-          (states) => states.contains(WidgetState.selected) ? myTheme.background1 : myTheme.textColor,
+          (states) => states.contains(WidgetState.selected) ? Colors.white : myTheme.textColor,
         ),
       ),
       datePickerTheme: DatePickerThemeData(
