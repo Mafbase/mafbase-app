@@ -121,32 +121,6 @@
     }
   </script>
 
-  <!-- One-time cache bust: clears stale service worker caches from the old hash-routing era.
-       Uses localStorage to ensure this runs only once per browser, not on every page load. -->
-  <script>
-    (function() {
-      var CACHE_BUST_KEY = 'cache_bust_v2';
-      if (!localStorage.getItem(CACHE_BUST_KEY)) {
-        localStorage.setItem(CACHE_BUST_KEY, '1');
-        var cleared = [];
-        if ('serviceWorker' in navigator) {
-          cleared.push(
-            navigator.serviceWorker.getRegistrations().then(function(regs) {
-              return Promise.all(regs.map(function(r) { return r.unregister(); }));
-            })
-          );
-        }
-        if ('caches' in window) {
-          cleared.push(
-            caches.keys().then(function(keys) {
-              return Promise.all(keys.map(function(k) { return caches.delete(k); }));
-            })
-          );
-        }
-        Promise.all(cleared).then(function() { window.location.reload(); });
-      }
-    })();
-  </script>
 </head>
 <body>
   <picture id="splash">
