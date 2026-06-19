@@ -8275,6 +8275,7 @@ class GameStreamAdmin extends $pb.GeneratedMessage {
     $core.String? rtmpKey,
     $core.bool? active,
     $core.String? startedAt,
+    $core.String? broadcastToken,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -8284,6 +8285,7 @@ class GameStreamAdmin extends $pb.GeneratedMessage {
     if (rtmpKey != null) result.rtmpKey = rtmpKey;
     if (active != null) result.active = active;
     if (startedAt != null) result.startedAt = startedAt;
+    if (broadcastToken != null) result.broadcastToken = broadcastToken;
     return result;
   }
 
@@ -8307,6 +8309,8 @@ class GameStreamAdmin extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'rtmpKey', protoName: 'rtmpKey')
     ..aOB(6, _omitFieldNames ? '' : 'active')
     ..aOS(7, _omitFieldNames ? '' : 'startedAt', protoName: 'startedAt')
+    ..aOS(8, _omitFieldNames ? '' : 'broadcastToken',
+        protoName: 'broadcastToken')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8390,6 +8394,15 @@ class GameStreamAdmin extends $pb.GeneratedMessage {
   $core.bool hasStartedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearStartedAt() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get broadcastToken => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set broadcastToken($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasBroadcastToken() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBroadcastToken() => $_clearField(8);
 }
 
 /// Запрос на ручную установку стрима
@@ -8910,6 +8923,264 @@ class ClubTranslationKeyEventOut extends $pb.GeneratedMessage {
   $core.bool hasKey() => $_has(0);
   @$pb.TagNumber(1)
   void clearKey() => $_clearField(1);
+}
+
+/// Ответ на GET /api/broadcast/credentials — RTMP-креды стола для оператора
+class BroadcastCredentialsOut extends $pb.GeneratedMessage {
+  factory BroadcastCredentialsOut({
+    $core.int? tableNumber,
+    $core.String? rtmpServerUrl,
+    $core.String? rtmpKey,
+    $core.String? breakPlaceholderImageUrl,
+    $core.String? brandImageUrl,
+    $core.String? overlayDesignKey,
+  }) {
+    final result = create();
+    if (tableNumber != null) result.tableNumber = tableNumber;
+    if (rtmpServerUrl != null) result.rtmpServerUrl = rtmpServerUrl;
+    if (rtmpKey != null) result.rtmpKey = rtmpKey;
+    if (breakPlaceholderImageUrl != null)
+      result.breakPlaceholderImageUrl = breakPlaceholderImageUrl;
+    if (brandImageUrl != null) result.brandImageUrl = brandImageUrl;
+    if (overlayDesignKey != null) result.overlayDesignKey = overlayDesignKey;
+    return result;
+  }
+
+  BroadcastCredentialsOut._();
+
+  factory BroadcastCredentialsOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory BroadcastCredentialsOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'BroadcastCredentialsOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'tableNumber', protoName: 'tableNumber')
+    ..aOS(2, _omitFieldNames ? '' : 'rtmpServerUrl', protoName: 'rtmpServerUrl')
+    ..aOS(3, _omitFieldNames ? '' : 'rtmpKey', protoName: 'rtmpKey')
+    ..aOS(4, _omitFieldNames ? '' : 'breakPlaceholderImageUrl',
+        protoName: 'breakPlaceholderImageUrl')
+    ..aOS(5, _omitFieldNames ? '' : 'brandImageUrl', protoName: 'brandImageUrl')
+    ..aOS(6, _omitFieldNames ? '' : 'overlayDesignKey',
+        protoName: 'overlayDesignKey')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BroadcastCredentialsOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BroadcastCredentialsOut copyWith(
+          void Function(BroadcastCredentialsOut) updates) =>
+      super.copyWith((message) => updates(message as BroadcastCredentialsOut))
+          as BroadcastCredentialsOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BroadcastCredentialsOut create() => BroadcastCredentialsOut._();
+  @$core.override
+  BroadcastCredentialsOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static BroadcastCredentialsOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<BroadcastCredentialsOut>(create);
+  static BroadcastCredentialsOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get tableNumber => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set tableNumber($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTableNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTableNumber() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get rtmpServerUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set rtmpServerUrl($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRtmpServerUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRtmpServerUrl() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get rtmpKey => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set rtmpKey($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRtmpKey() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRtmpKey() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get breakPlaceholderImageUrl => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set breakPlaceholderImageUrl($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBreakPlaceholderImageUrl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBreakPlaceholderImageUrl() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get brandImageUrl => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set brandImageUrl($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBrandImageUrl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBrandImageUrl() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get overlayDesignKey => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set overlayDesignKey($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasOverlayDesignKey() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearOverlayDesignKey() => $_clearField(6);
+}
+
+/// Запрос на установку overlay-настроек стримов (турнир/клуб)
+class SetStreamSettingsEvent extends $pb.GeneratedMessage {
+  factory SetStreamSettingsEvent({
+    $core.String? breakPlaceholderImageUrl,
+    $core.String? brandImageUrl,
+  }) {
+    final result = create();
+    if (breakPlaceholderImageUrl != null)
+      result.breakPlaceholderImageUrl = breakPlaceholderImageUrl;
+    if (brandImageUrl != null) result.brandImageUrl = brandImageUrl;
+    return result;
+  }
+
+  SetStreamSettingsEvent._();
+
+  factory SetStreamSettingsEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SetStreamSettingsEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'SetStreamSettingsEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'breakPlaceholderImageUrl',
+        protoName: 'breakPlaceholderImageUrl')
+    ..aOS(2, _omitFieldNames ? '' : 'brandImageUrl', protoName: 'brandImageUrl')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetStreamSettingsEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetStreamSettingsEvent copyWith(
+          void Function(SetStreamSettingsEvent) updates) =>
+      super.copyWith((message) => updates(message as SetStreamSettingsEvent))
+          as SetStreamSettingsEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetStreamSettingsEvent create() => SetStreamSettingsEvent._();
+  @$core.override
+  SetStreamSettingsEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static SetStreamSettingsEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetStreamSettingsEvent>(create);
+  static SetStreamSettingsEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get breakPlaceholderImageUrl => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set breakPlaceholderImageUrl($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBreakPlaceholderImageUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBreakPlaceholderImageUrl() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get brandImageUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set brandImageUrl($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBrandImageUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBrandImageUrl() => $_clearField(2);
+}
+
+/// Ответ с текущими overlay-настройками стримов (турнир/клуб)
+class StreamSettingsOut extends $pb.GeneratedMessage {
+  factory StreamSettingsOut({
+    $core.String? breakPlaceholderImageUrl,
+    $core.String? brandImageUrl,
+  }) {
+    final result = create();
+    if (breakPlaceholderImageUrl != null)
+      result.breakPlaceholderImageUrl = breakPlaceholderImageUrl;
+    if (brandImageUrl != null) result.brandImageUrl = brandImageUrl;
+    return result;
+  }
+
+  StreamSettingsOut._();
+
+  factory StreamSettingsOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory StreamSettingsOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'StreamSettingsOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'breakPlaceholderImageUrl',
+        protoName: 'breakPlaceholderImageUrl')
+    ..aOS(2, _omitFieldNames ? '' : 'brandImageUrl', protoName: 'brandImageUrl')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamSettingsOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamSettingsOut copyWith(void Function(StreamSettingsOut) updates) =>
+      super.copyWith((message) => updates(message as StreamSettingsOut))
+          as StreamSettingsOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamSettingsOut create() => StreamSettingsOut._();
+  @$core.override
+  StreamSettingsOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static StreamSettingsOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<StreamSettingsOut>(create);
+  static StreamSettingsOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get breakPlaceholderImageUrl => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set breakPlaceholderImageUrl($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBreakPlaceholderImageUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBreakPlaceholderImageUrl() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get brandImageUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set brandImageUrl($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBrandImageUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBrandImageUrl() => $_clearField(2);
 }
 
 const $core.bool _omitFieldNames =

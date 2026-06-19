@@ -2998,11 +2998,21 @@ const GameStreamAdmin$json = {
     },
     {'1': 'active', '3': 6, '4': 1, '5': 8, '10': 'active'},
     {'1': 'startedAt', '3': 7, '4': 1, '5': 9, '10': 'startedAt'},
+    {
+      '1': 'broadcastToken',
+      '3': 8,
+      '4': 1,
+      '5': 9,
+      '9': 3,
+      '10': 'broadcastToken',
+      '17': true
+    },
   ],
   '8': [
     {'1': '_viewerUrl'},
     {'1': '_rtmpServerUrl'},
     {'1': '_rtmpKey'},
+    {'1': '_broadcastToken'},
   ],
 };
 
@@ -3012,7 +3022,9 @@ final $typed_data.Uint8List gameStreamAdminDescriptor = $convert.base64Decode(
     't0YWJsZU51bWJlchIhCgl2aWV3ZXJVcmwYAyABKAlIAFIJdmlld2VyVXJsiAEBEikKDXJ0bXBT'
     'ZXJ2ZXJVcmwYBCABKAlIAVINcnRtcFNlcnZlclVybIgBARIdCgdydG1wS2V5GAUgASgJSAJSB3'
     'J0bXBLZXmIAQESFgoGYWN0aXZlGAYgASgIUgZhY3RpdmUSHAoJc3RhcnRlZEF0GAcgASgJUglz'
-    'dGFydGVkQXRCDAoKX3ZpZXdlclVybEIQCg5fcnRtcFNlcnZlclVybEIKCghfcnRtcEtleQ==');
+    'dGFydGVkQXQSKwoOYnJvYWRjYXN0VG9rZW4YCCABKAlIA1IOYnJvYWRjYXN0VG9rZW6IAQFCDA'
+    'oKX3ZpZXdlclVybEIQCg5fcnRtcFNlcnZlclVybEIKCghfcnRtcEtleUIRCg9fYnJvYWRjYXN0'
+    'VG9rZW4=');
 
 @$core.Deprecated('Use setStreamEventDescriptor instead')
 const SetStreamEvent$json = {
@@ -3241,3 +3253,127 @@ const ClubTranslationKeyEventOut$json = {
 final $typed_data.Uint8List clubTranslationKeyEventOutDescriptor =
     $convert.base64Decode(
         'ChpDbHViVHJhbnNsYXRpb25LZXlFdmVudE91dBIQCgNrZXkYASABKAlSA2tleQ==');
+
+@$core.Deprecated('Use broadcastCredentialsOutDescriptor instead')
+const BroadcastCredentialsOut$json = {
+  '1': 'BroadcastCredentialsOut',
+  '2': [
+    {'1': 'tableNumber', '3': 1, '4': 1, '5': 5, '10': 'tableNumber'},
+    {'1': 'rtmpServerUrl', '3': 2, '4': 1, '5': 9, '10': 'rtmpServerUrl'},
+    {'1': 'rtmpKey', '3': 3, '4': 1, '5': 9, '10': 'rtmpKey'},
+    {
+      '1': 'breakPlaceholderImageUrl',
+      '3': 4,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'breakPlaceholderImageUrl',
+      '17': true
+    },
+    {
+      '1': 'brandImageUrl',
+      '3': 5,
+      '4': 1,
+      '5': 9,
+      '9': 1,
+      '10': 'brandImageUrl',
+      '17': true
+    },
+    {
+      '1': 'overlayDesignKey',
+      '3': 6,
+      '4': 1,
+      '5': 9,
+      '9': 2,
+      '10': 'overlayDesignKey',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_breakPlaceholderImageUrl'},
+    {'1': '_brandImageUrl'},
+    {'1': '_overlayDesignKey'},
+  ],
+};
+
+/// Descriptor for `BroadcastCredentialsOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List broadcastCredentialsOutDescriptor = $convert.base64Decode(
+    'ChdCcm9hZGNhc3RDcmVkZW50aWFsc091dBIgCgt0YWJsZU51bWJlchgBIAEoBVILdGFibGVOdW'
+    '1iZXISJAoNcnRtcFNlcnZlclVybBgCIAEoCVINcnRtcFNlcnZlclVybBIYCgdydG1wS2V5GAMg'
+    'ASgJUgdydG1wS2V5Ej8KGGJyZWFrUGxhY2Vob2xkZXJJbWFnZVVybBgEIAEoCUgAUhhicmVha1'
+    'BsYWNlaG9sZGVySW1hZ2VVcmyIAQESKQoNYnJhbmRJbWFnZVVybBgFIAEoCUgBUg1icmFuZElt'
+    'YWdlVXJsiAEBEi8KEG92ZXJsYXlEZXNpZ25LZXkYBiABKAlIAlIQb3ZlcmxheURlc2lnbktleY'
+    'gBAUIbChlfYnJlYWtQbGFjZWhvbGRlckltYWdlVXJsQhAKDl9icmFuZEltYWdlVXJsQhMKEV9v'
+    'dmVybGF5RGVzaWduS2V5');
+
+@$core.Deprecated('Use setStreamSettingsEventDescriptor instead')
+const SetStreamSettingsEvent$json = {
+  '1': 'SetStreamSettingsEvent',
+  '2': [
+    {
+      '1': 'breakPlaceholderImageUrl',
+      '3': 1,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'breakPlaceholderImageUrl',
+      '17': true
+    },
+    {
+      '1': 'brandImageUrl',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '9': 1,
+      '10': 'brandImageUrl',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_breakPlaceholderImageUrl'},
+    {'1': '_brandImageUrl'},
+  ],
+};
+
+/// Descriptor for `SetStreamSettingsEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setStreamSettingsEventDescriptor = $convert.base64Decode(
+    'ChZTZXRTdHJlYW1TZXR0aW5nc0V2ZW50Ej8KGGJyZWFrUGxhY2Vob2xkZXJJbWFnZVVybBgBIA'
+    'EoCUgAUhhicmVha1BsYWNlaG9sZGVySW1hZ2VVcmyIAQESKQoNYnJhbmRJbWFnZVVybBgCIAEo'
+    'CUgBUg1icmFuZEltYWdlVXJsiAEBQhsKGV9icmVha1BsYWNlaG9sZGVySW1hZ2VVcmxCEAoOX2'
+    'JyYW5kSW1hZ2VVcmw=');
+
+@$core.Deprecated('Use streamSettingsOutDescriptor instead')
+const StreamSettingsOut$json = {
+  '1': 'StreamSettingsOut',
+  '2': [
+    {
+      '1': 'breakPlaceholderImageUrl',
+      '3': 1,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'breakPlaceholderImageUrl',
+      '17': true
+    },
+    {
+      '1': 'brandImageUrl',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '9': 1,
+      '10': 'brandImageUrl',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_breakPlaceholderImageUrl'},
+    {'1': '_brandImageUrl'},
+  ],
+};
+
+/// Descriptor for `StreamSettingsOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamSettingsOutDescriptor = $convert.base64Decode(
+    'ChFTdHJlYW1TZXR0aW5nc091dBI/ChhicmVha1BsYWNlaG9sZGVySW1hZ2VVcmwYASABKAlIAF'
+    'IYYnJlYWtQbGFjZWhvbGRlckltYWdlVXJsiAEBEikKDWJyYW5kSW1hZ2VVcmwYAiABKAlIAVIN'
+    'YnJhbmRJbWFnZVVybIgBAUIbChlfYnJlYWtQbGFjZWhvbGRlckltYWdlVXJsQhAKDl9icmFuZE'
+    'ltYWdlVXJs');
