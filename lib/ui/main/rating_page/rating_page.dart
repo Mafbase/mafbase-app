@@ -166,7 +166,7 @@ class _RatingPageState extends CustomState<_RatingPageContent> {
                   backgroundColor: MyTheme.of(context).darkBlueColor,
                   foregroundColor: Colors.white,
                 ),
-                backgroundColor: MyTheme.of(context).background1,
+                backgroundColor: Colors.white,
                 body: SafeArea(
                   top: false,
                   child: Padding(
