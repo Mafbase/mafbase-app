@@ -68,6 +68,12 @@ jobs:
           test -n "$RUSTORE_KEY_ID" || (echo "RUSTORE_KEY_ID is not set" && exit 1)
           test -n "$RUSTORE_PRIVATE_KEY" || (echo "RUSTORE_PRIVATE_KEY is not set" && exit 1)
 
+      - name: Fetch FFmpeg from artifactory
+        run: |
+          if [ -d mafbase_stream ]; then
+            bash mafbase_stream/native/scripts/fetch_ffmpeg_android.sh
+          fi
+
       - name: Install Flutter dependencies
         run: flutter pub get
 
