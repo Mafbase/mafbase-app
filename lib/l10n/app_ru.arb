@@ -1154,5 +1154,30 @@
   "streamsNoUrl": "Ссылка не указана",
   "@streamsNoUrl": {},
   "streamsWatch": "Смотреть трансляцию",
-  "@streamsWatch": {}
+  "@streamsWatch": {},
+  "streamsOperatorLink": "Ссылка оператора",
+  "@streamsOperatorLink": {},
+  "broadcastLoading": "Подключаемся к трансляции…",
+  "@broadcastLoading": {},
+  "broadcastLinkExpired": "Ссылка устарела. Запросите у организатора новую ссылку оператора.",
+  "@broadcastLinkExpired": {},
+  "broadcastTableNotConfigured": "Для этого стола ещё не настроена трансляция. Обратитесь к организатору.",
+  "@broadcastTableNotConfigured": {},
+  "broadcastCameraPermissionDenied": "Нет доступа к камере или микрофону. Разрешите доступ в настройках устройства и попробуйте снова.",
+  "@broadcastCameraPermissionDenied": {},
+  "broadcastError": "Не удалось запустить трансляцию: {error}",
+  "@broadcastError": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Ошибка сети"
+      }
+    }
+  },
+  "broadcastRetry": "Повторить",
+  "@broadcastRetry": {},
+  "broadcastGoHome": "На главную",
+  "@broadcastGoHome": {},
+  "broadcastOperatorLinkCopied": "Ссылка оператора скопирована",
+  "@broadcastOperatorLinkCopied": {}
 }

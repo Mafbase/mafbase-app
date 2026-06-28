@@ -80,6 +80,8 @@ dependencies:
   fullscreen_image_viewer: ^1.2.0
   bloc_concurrency: ^0.3.0
   bloc_event_transformers: ^2.0.0
+  mafbase_stream:
+    path: mafbase_stream
 
 dev_dependencies:
   integration_test:

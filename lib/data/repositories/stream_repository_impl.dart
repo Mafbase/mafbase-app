@@ -1,6 +1,7 @@
 import 'package:seating_generator_web/data/base_repository.dart';
 import 'package:seating_generator_web/domain/repositories/stream_repository.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/generate_stream_request.dart';
+import 'package:seating_generator_web/feature/streams/data/requests/get_broadcast_credentials_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/get_streams_admin_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/get_streams_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/set_stream_request.dart';
@@ -49,4 +50,18 @@ class StreamRepositoryImpl extends BaseRepository implements StreamRepository {
     required int streamId,
   }) =>
       StopStreamRequest(tournamentId: tournamentId, streamId: streamId).execute(client);
+
+  @override
+  Future<BroadcastCredentialsOut> getBroadcastCredentials({
+    int? tournamentId,
+    int? clubId,
+    required int table,
+    required String key,
+  }) =>
+      GetBroadcastCredentialsRequest(
+        tournamentId: tournamentId,
+        clubId: clubId,
+        table: table,
+        key: key,
+      ).execute(client);
 }

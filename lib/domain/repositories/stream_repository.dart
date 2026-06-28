@@ -22,4 +22,16 @@ abstract class StreamRepository {
     required int tournamentId,
     required int streamId,
   });
+
+  /// Публичный запрос креденшелов оператора по одноразовому ключу из диплинка.
+  ///
+  /// Передавать заполненный идентификатор контекста: либо [tournamentId], либо
+  /// [clubId] (второй оставить null/0). Бросает [BroadcastCredentialsException]
+  /// со статус-кодом при не-2xx ответе (403 — ключ устарел, 404 — стол без RTMP).
+  Future<BroadcastCredentialsOut> getBroadcastCredentials({
+    int? tournamentId,
+    int? clubId,
+    required int table,
+    required String key,
+  });
 }

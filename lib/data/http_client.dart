@@ -145,6 +145,24 @@ class MyHttpClient {
     return response;
   }
 
+  /// Публичный GET без авторизации и без recovery-токена.
+  ///
+  /// В отличие от [get], НЕ запускает перелогин по сохранённым кредам и НЕ
+  /// бросает исключение на 4xx — возвращает сырой [Response], чтобы вызывающий
+  /// код мог сам разнести статус-коды (например, 403 vs 404). Используется для
+  /// эндпоинтов, авторизуемых одноразовым ключом из диплинка.
+  Future<Response> getPublic(String method) {
+    return _client.get(
+      method,
+      options: Options(
+        // Любой статус считаем «успешным» с точки зрения Dio — обработку 4xx/5xx
+        // отдаём вызывающему коду.
+        validateStatus: (_) => true,
+        headers: const {},
+      ),
+    );
+  }
+
   Future<Response> post(
     String method,
     dynamic data,

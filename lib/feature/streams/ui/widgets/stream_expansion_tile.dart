@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/feature/streams/domain/broadcast_link.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class StreamExpansionTile extends StatelessWidget {
+  final int tournamentId;
   final int tableNumber;
   final List<GameStreamAdmin> streams;
   final void Function(int streamId) onStop;
 
-  const StreamExpansionTile({super.key, required this.tableNumber, required this.streams, required this.onStop});
+  const StreamExpansionTile({
+    super.key,
+    required this.tournamentId,
+    required this.tableNumber,
+    required this.streams,
+    required this.onStop,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +31,12 @@ class StreamExpansionTile extends StatelessWidget {
       tilePadding: const EdgeInsets.symmetric(horizontal: 16),
       childrenPadding: const EdgeInsets.only(bottom: 8),
       title: Text(locale.streamsTableTitle(tableNumber), style: const TextStyle(fontWeight: FontWeight.w600)),
-      subtitle: _StreamItem(stream: activeStream, onStop: activeStream.active ? onStop : null),
+      subtitle: _StreamItem(
+        tournamentId: tournamentId,
+        tableNumber: tableNumber,
+        stream: activeStream,
+        onStop: activeStream.active ? onStop : null,
+      ),
       children: [
         if (inactiveStreams.isNotEmpty) ...[
           Padding(
@@ -36,7 +49,12 @@ class StreamExpansionTile extends StatelessWidget {
           for (final stream in inactiveStreams)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: _StreamItem(stream: stream, onStop: null),
+              child: _StreamItem(
+                tournamentId: tournamentId,
+                tableNumber: tableNumber,
+                stream: stream,
+                onStop: null,
+              ),
             ),
         ],
       ],
@@ -45,10 +63,17 @@ class StreamExpansionTile extends StatelessWidget {
 }
 
 class _StreamItem extends StatelessWidget {
+  final int tournamentId;
+  final int tableNumber;
   final GameStreamAdmin stream;
   final void Function(int streamId)? onStop;
 
-  const _StreamItem({required this.stream, this.onStop});
+  const _StreamItem({
+    required this.tournamentId,
+    required this.tableNumber,
+    required this.stream,
+    this.onStop,
+  });
 
   String _formatTime(String startedAt) {
     try {
@@ -105,8 +130,46 @@ class _StreamItem extends StatelessWidget {
               const SizedBox(height: 4),
               _CopyRow(label: locale.streamsRtmpKey, value: stream.rtmpKey),
             ],
+            if (stream.broadcastToken.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              _OperatorLinkButton(
+                tournamentId: tournamentId,
+                tableNumber: tableNumber,
+                token: stream.broadcastToken,
+              ),
+            ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _OperatorLinkButton extends StatelessWidget {
+  final int tournamentId;
+  final int tableNumber;
+  final String token;
+
+  const _OperatorLinkButton({required this.tournamentId, required this.tableNumber, required this.token});
+
+  @override
+  Widget build(BuildContext context) {
+    final locale = context.locale;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: TextButton.icon(
+        onPressed: () async {
+          final link = buildBroadcastDeeplink(tournamentId: tournamentId, table: tableNumber, token: token);
+          await Clipboard.setData(ClipboardData(text: link));
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(locale.broadcastOperatorLinkCopied)),
+            );
+          }
+        },
+        icon: const Icon(Icons.link, size: 18),
+        label: Text(locale.streamsOperatorLink),
+        style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
       ),
     );
   }
