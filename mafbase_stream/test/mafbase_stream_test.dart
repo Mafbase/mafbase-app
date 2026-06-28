@@ -14,13 +14,15 @@ class MockMafbaseStreamPlatform with MockPlatformInterfaceMixin implements Mafba
     String? streamKey,
     String? overlayViewType,
     int? tournamentId,
+    int? clubId,
     int? table,
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
   }) => Future.value();
 
   @override
-  Future<void> openOverlayPreview({required String overlayViewType, int? tournamentId, int? table}) => Future.value();
+  Future<void> openOverlayPreview({required String overlayViewType, int? tournamentId, int? clubId, int? table}) =>
+      Future.value();
 
   @override
   Stream<StreamEvent> get events => const Stream<StreamEvent>.empty();
