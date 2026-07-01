@@ -16,15 +16,18 @@ class PaymentWaitingBloc extends Bloc<PaymentWaitingEvent, PaymentWaitingState>
 
   Future<void> _onStart(PaymentWaitingEventStart event, Emitter<PaymentWaitingState> emit) async {
     emit(state.copyWith(isLoading: true));
+    final startTime = DateTime.now();
     try {
       while (!isClosed) {
         try {
           final status = await _repository.waitForPayment(purchaseId: event.purchaseId);
 
           if (status == WaitForPaymentStatus.succeeded) {
+            await _waitMinimumTime(startTime);
             emitEffect(const PaymentWaitingEffect.navigateNext());
             return;
           } else if (status == WaitForPaymentStatus.canceled) {
+            await _waitMinimumTime(startTime);
             emitEffect(const PaymentWaitingEffect.paymentCanceled());
             return;
           }
@@ -39,6 +42,15 @@ class PaymentWaitingBloc extends Bloc<PaymentWaitingEvent, PaymentWaitingState>
       if (!isClosed) {
         emit(state.copyWith(isLoading: false));
       }
+    }
+  }
+
+  Future<void> _waitMinimumTime(DateTime startTime) async {
+    const minimumDuration = Duration(seconds: 2);
+    final elapsed = DateTime.now().difference(startTime);
+    final remaining = minimumDuration - elapsed;
+    if (remaining > Duration.zero) {
+      await Future.delayed(remaining);
     }
   }
 }
