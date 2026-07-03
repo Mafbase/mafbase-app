@@ -18,6 +18,17 @@ INCLUDE_DIR="${ANDROID_MAIN}/cpp/third_party/ffmpeg/include"
 ARTIFACTORY_URL="${MS_ARTIFACTORY_URL:-https://artifactory.mafbase.ru/ffmpeg}"
 ARCHIVE="ffmpeg-android.tar.gz"
 
+# Guard идемпотентности: если критичные артефакты уже на месте (рантайм .so и
+# заголовок), пропускаем скачивание. Это позволяет вызывать fetch перед каждой
+# Gradle-сборкой без повторной тяги архива. Форсировать re-fetch — удалить каталоги.
+# MS_FFMPEG_FORCE=1 обходит guard (нужно после апгрейда версии FFmpeg).
+if [ "${MS_FFMPEG_FORCE:-0}" != "1" ] \
+    && [ -f "${JNILIBS_DIR}/arm64-v8a/libavformat.so" ] \
+    && [ -f "${INCLUDE_DIR}/libavformat/avformat.h" ]; then
+    echo "[fetch_ffmpeg_android] артефакты уже на месте, пропускаю fetch"
+    exit 0
+fi
+
 WORK_DIR="$(mktemp -d "${TMPDIR:-/tmp}/ms-fetch-android.XXXXXX")"
 trap 'rm -rf "${WORK_DIR}"' EXIT
 

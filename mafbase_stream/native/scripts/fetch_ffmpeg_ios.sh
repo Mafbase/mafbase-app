@@ -20,6 +20,20 @@ OUT_DIR="${ROOT_DIR}/ios/Frameworks/ffmpeg"
 ARTIFACTORY_URL="${MS_ARTIFACTORY_URL:-https://artifactory.mafbase.ru/ffmpeg}"
 ARCHIVE="ffmpeg-ios.tar.gz"
 
+# Guard идемпотентности: если все 5 xcframework-ов уже распакованы, пропускаем
+# скачивание. Нужно, потому что prepare_command в podspec запускается при каждом
+# pod install — без guard'а архив тянулся бы заново на каждой сборке.
+# Форсировать re-fetch — удалить ios/Frameworks/ffmpeg/ (или MS_FFMPEG_FORCE=1).
+if [ "${MS_FFMPEG_FORCE:-0}" != "1" ] \
+    && [ -d "${OUT_DIR}/libavformat.xcframework" ] \
+    && [ -d "${OUT_DIR}/libavcodec.xcframework" ] \
+    && [ -d "${OUT_DIR}/libavutil.xcframework" ] \
+    && [ -d "${OUT_DIR}/libswresample.xcframework" ] \
+    && [ -d "${OUT_DIR}/libswscale.xcframework" ]; then
+    echo "[fetch_ffmpeg_ios] артефакты уже на месте, пропускаю fetch"
+    exit 0
+fi
+
 WORK_DIR="$(mktemp -d "${TMPDIR:-/tmp}/ms-fetch-ios.XXXXXX")"
 trap 'rm -rf "${WORK_DIR}"' EXIT
 

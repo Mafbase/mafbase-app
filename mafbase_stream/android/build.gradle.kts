@@ -35,6 +35,26 @@ kotlin {
     }
 }
 
+// FFmpeg (.so + заголовки) не хранится в git — его тянет из artifactory
+// native/scripts/fetch_ffmpeg_android.sh. CMakeLists.txt на configure-фазе
+// требует и jniLibs/<abi>/lib*.so, и cpp/third_party/ffmpeg/include/, иначе
+// падает. Регистрируем fetch как Gradle-task и привязываем к preBuild, чтобы
+// он гарантированно отработал ДО externalNativeBuild (CMake configure).
+//
+// projectDir здесь = mafbase_stream/android; workingDir поднимаем на уровень
+// выше (mafbase_stream/), откуда относительный путь native/scripts/... валиден.
+// Сам скрипт идемпотентен: если артефакты уже на месте — сразу выходит (guard
+// внутри скрипта), поэтому повторные сборки не тянут архив заново.
+val fetchFfmpegAndroid = tasks.register<Exec>("fetchFfmpegAndroid") {
+    description = "Скачивает prebuilt FFmpeg (.so + headers) из artifactory, если их ещё нет"
+    workingDir = projectDir.parentFile
+    commandLine("bash", "native/scripts/fetch_ffmpeg_android.sh")
+}
+
+tasks.named("preBuild") {
+    dependsOn(fetchFfmpegAndroid)
+}
+
 android {
     namespace = "com.example.mafbase_stream"
 

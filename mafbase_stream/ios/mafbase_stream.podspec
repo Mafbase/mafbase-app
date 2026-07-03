@@ -30,6 +30,15 @@ A new Flutter plugin project.
   s.libraries = 'c++'
   s.requires_arc = true
 
+  # FFmpeg xcframework-и не хранятся в git (ios/Frameworks/ исключён в .gitignore).
+  # vendored_frameworks ниже ссылается на них, и pod install падает, если их нет
+  # на диске. prepare_command выполняется при pod install ДО валидации
+  # vendored_frameworks, поэтому тянем архив из artifactory именно здесь.
+  # cwd prepare_command = каталог podspec (ios/), поэтому путь относительный от него.
+  # Скрипт идемпотентен: если все 5 xcframework-ов уже распакованы — сразу выходит
+  # (guard внутри скрипта), так что повторный pod install не тянет архив заново.
+  s.prepare_command = 'bash ../native/scripts/fetch_ffmpeg_ios.sh'
+
   # CocoaPods 1.16 не добавляет -framework <name> для динамических xcframework-ов
   # автоматически (только -l для static .a). Прописываем флаги и для pod target
   # (Obj-C++ bridge ядра вызывает FFmpeg API напрямую — без них упадёт линковка
