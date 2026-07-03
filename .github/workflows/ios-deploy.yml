@@ -35,6 +35,14 @@ jobs:
             bash mafbase_stream/native/scripts/fetch_ffmpeg_ios.sh
           fi
 
+      # Собирает mafbase_stream_core.xcframework (C++ ядро плагина, ~7 сек) —
+      # он не хранится в git, без него podspec не находит заголовки ядра.
+      - name: Build mafbase_stream core
+        run: |
+          if [ -d mafbase_stream ]; then
+            bash mafbase_stream/native/scripts/build_ios.sh
+          fi
+
       - name: Install Flutter dependencies
         run: flutter pub get
 
