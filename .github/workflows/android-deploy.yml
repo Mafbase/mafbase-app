@@ -29,6 +29,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # seating-generator-proto — сабмодуль с mafia.proto, из которого gradle
+          # генерирует классы generated.Mafia для mafbase_stream. Доступ по
+          # ssh-алиасу github-alt настроен на self-hosted runner'е (deploy key).
+          submodules: recursive
 
       - name: Setup Java
         uses: actions/setup-java@v4
