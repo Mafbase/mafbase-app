@@ -55,13 +55,13 @@ class StreamsPageContent extends StatelessWidget {
     AddStreamBottomSheet.show(context).then((result) {
       if (result != null && context.mounted) {
         context.read<StreamsAdminBloc>().add(
-          StreamsAdminEventSetStream(
-            tableNumber: result.tableNumber,
-            viewerUrl: result.viewerUrl,
-            rtmpServerUrl: result.rtmpServerUrl,
-            rtmpKey: result.rtmpKey,
-          ),
-        );
+              StreamsAdminEventSetStream(
+                tableNumber: result.tableNumber,
+                viewerUrl: result.viewerUrl,
+                rtmpServerUrl: result.rtmpServerUrl,
+                rtmpKey: result.rtmpKey,
+              ),
+            );
       }
     });
   }
@@ -127,6 +127,7 @@ class StreamsPageContent extends StatelessWidget {
                             itemBuilder: (ctx, index) {
                               final entry = entries[index];
                               return StreamExpansionTile(
+                                tournamentId: tournamentId,
                                 tableNumber: entry.key,
                                 streams: entry.value,
                                 onStop: (streamId) => _onStop(context, streamId),
