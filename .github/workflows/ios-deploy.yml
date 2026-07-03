@@ -40,6 +40,9 @@ jobs:
       - name: Build mafbase_stream core
         run: |
           if [ -d mafbase_stream ]; then
+            if ! command -v cmake >/dev/null; then
+              brew install cmake
+            fi
             bash mafbase_stream/native/scripts/build_ios.sh
           fi
 
