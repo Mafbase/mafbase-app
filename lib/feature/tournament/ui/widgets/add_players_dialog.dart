@@ -111,25 +111,28 @@ class _AddPlayersDialogState extends State<AddPlayersDialog> {
 
     setState(() => _isSubmitting = true);
 
-    // Эндпоинт атомарен (одна транзакция): либо добавлены все, либо никто.
-    // При ошибке оставляем всех в _staged — ничего не потеряно.
-    var addedAny = false;
     try {
-      final addedCount = await RepositoryFactory.of(context).playersRepository.addPlayers(
-            widget.tournamentId,
-            List<PlayerModel>.of(_staged),
-          );
-      addedAny = addedCount > 0;
-    } catch (_) {
-      if (mounted) {
-        setState(() => _isSubmitting = false);
-        _showTransientMessage(context.locale.addPlayersError);
-      }
-      return;
-    }
+      final repo = RepositoryFactory.of(context).playersRepository;
 
-    if (!mounted) return;
-    Navigator.pop(context, addedAny);
+      // Для новых игроков (id == undefinedId) сначала создаём их и получаем реальный id.
+      final resolvedPlayers = <PlayerModel>[];
+      for (final player in _staged) {
+        if (player.id == PlayerModel.undefinedId) {
+          final newId = await repo.createPlayer(player);
+          resolvedPlayers.add(player.copyWith(id: newId));
+        } else {
+          resolvedPlayers.add(player);
+        }
+      }
+
+      // Эндпоинт атомарен (одна транзакция): либо добавлены все, либо никто.
+      final addedCount = await repo.addPlayers(widget.tournamentId, resolvedPlayers);
+      if (mounted) Navigator.pop(context, addedCount > 0);
+    } catch (_) {
+      if (mounted) _showTransientMessage(context.locale.addPlayersError);
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
   }
 
   @override
