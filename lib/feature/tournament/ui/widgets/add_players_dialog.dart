@@ -36,6 +36,7 @@ class AddPlayersDialog extends StatefulWidget {
   }) =>
       showDialog<bool>(
         context: context,
+        barrierDismissible: false,
         builder: (context) => AddPlayersDialog(
           tournamentId: tournamentId,
           existingPlayers: existingPlayers,
@@ -187,21 +188,24 @@ class _AddPlayersDialogState extends State<AddPlayersDialog> {
       ),
     );
 
-    return CustomDialog(
-      child: Stack(
-        children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: isMobile ? size.width : 580,
-              maxHeight: size.height * (isMobile ? 0.9 : 0.8),
+    return PopScope(
+      canPop: !_isSubmitting,
+      child: CustomDialog(
+        child: Stack(
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: isMobile ? size.width : 580,
+                maxHeight: size.height * (isMobile ? 0.9 : 0.8),
+              ),
+              child: content,
             ),
-            child: content,
-          ),
-          if (_isSubmitting)
-            const Positioned.fill(
-              child: LoadingOverlayWidget(),
-            ),
-        ],
+            if (_isSubmitting)
+              const Positioned.fill(
+                child: LoadingOverlayWidget(),
+              ),
+          ],
+        ),
       ),
     );
   }
