@@ -16,12 +16,7 @@ class AddPlayersStagedRow extends StatefulWidget {
   final ValueChanged<PlayerModel> onChanged;
   final VoidCallback onRemove;
 
-  const AddPlayersStagedRow({
-    super.key,
-    required this.player,
-    required this.onChanged,
-    required this.onRemove,
-  });
+  const AddPlayersStagedRow({super.key, required this.player, required this.onChanged, required this.onRemove});
 
   @override
   State<AddPlayersStagedRow> createState() => _AddPlayersStagedRowState();
@@ -32,8 +27,9 @@ class _AddPlayersStagedRowState extends State<AddPlayersStagedRow> {
 
   late final TextEditingController _nicknameController = TextEditingController(text: widget.player.nickname);
   late final TextEditingController _fsmController = TextEditingController(text: widget.player.fsmNickaname ?? '');
-  late final TextEditingController _mafbankController =
-      TextEditingController(text: widget.player.mafbankNickname ?? '');
+  late final TextEditingController _mafbankController = TextEditingController(
+    text: widget.player.mafbankNickname ?? '',
+  );
 
   final FocusNode _nicknameFocus = FocusNode();
   final FocusNode _fsmFocus = FocusNode();
@@ -89,24 +85,13 @@ class _AddPlayersStagedRowState extends State<AddPlayersStagedRow> {
               PlayerAvatarWidget(player: widget.player, size: 40),
               const SizedBox(width: 12),
               Expanded(
-                child: Text(
-                  widget.player.nickname,
-                  style: theme.fieldTextStyle,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                child: Text(widget.player.nickname, style: theme.fieldTextStyle, overflow: TextOverflow.ellipsis),
               ),
-              if (_isNew) ...[
-                _NewBadge(text: context.locale.addPlayersNewBadge),
-                const SizedBox(width: 8),
-              ],
+              if (_isNew) ...[_NewBadge(text: context.locale.addPlayersNewBadge), const SizedBox(width: 8)],
               IconButton(
                 tooltip: context.locale.add,
                 onPressed: _toggleExpanded,
-                icon: Icon(
-                  _expanded ? Icons.expand_less : Icons.edit_outlined,
-                  color: theme.darkBlueColor,
-                  size: 20,
-                ),
+                icon: Icon(_expanded ? Icons.expand_less : Icons.edit_outlined, color: theme.darkBlueColor, size: 20),
               ),
               IconButton(
                 onPressed: widget.onRemove,
@@ -120,7 +105,12 @@ class _AddPlayersStagedRowState extends State<AddPlayersStagedRow> {
               label: context.locale.nicknameHint,
               controller: _nicknameController,
               focusNode: _nicknameFocus,
-              onSelected: (_) {},
+              onSelected: (selectedPlayer) {
+                _fsmController.text = selectedPlayer.fsmNickaname ?? '';
+                _mafbankController.text = selectedPlayer.mafbankNickname ?? '';
+                widget.onChanged(selectedPlayer);
+                setState(() => _expanded = false);
+              },
               openDirection: OptionsViewOpenDirection.down,
               onSubmit: () => _fsmFocus.requestFocus(),
             ),
