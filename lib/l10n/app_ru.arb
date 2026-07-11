@@ -59,6 +59,32 @@
   "@addPlayerDialogTitle": {},
   "add": "Добавить",
   "@add": {},
+  "addPlayersDialogTitle": "Добавление участников",
+  "@addPlayersDialogTitle": {},
+  "addPlayersSelected": "Выбрано ({count})",
+  "@addPlayersSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "addPlayersSubmit": "Добавить {count} участников",
+  "@addPlayersSubmit": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "addPlayersError": "Не удалось добавить участников. Попробуйте ещё раз",
+  "@addPlayersError": {},
+  "addPlayersNewBadge": "новый",
+  "@addPlayersNewBadge": {},
+  "addPlayersAlreadyAdded": "Участник уже добавлен",
+  "@addPlayersAlreadyAdded": {},
   "finalGamesHint": "Количество финальных игр",
   "@finalGamesHint": {},
   "swissGamesHint": "Количество игр в швейцарке",

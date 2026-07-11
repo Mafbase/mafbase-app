@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:seating_generator_web/data/requests/add_photo_request.dart';
 import 'package:seating_generator_web/data/requests/add_player_request.dart';
+import 'package:seating_generator_web/data/requests/add_players_request.dart';
 import 'package:seating_generator_web/data/requests/create_player_request.dart';
 import 'package:seating_generator_web/data/requests/delete_player_request.dart';
 import 'package:seating_generator_web/data/requests/edit_player_request.dart';
@@ -22,6 +23,14 @@ class PlayersRepositoryImpl extends BaseRepository implements PlayersRepository 
       tournamentId: tournamentId,
       event: AddPlayerEvent(player: player.toProto()),
     ).execute(client);
+  }
+
+  @override
+  Future<int> addPlayers(int tournamentId, List<PlayerModel> players) {
+    return AddPlayersRequest(
+      tournamentId: tournamentId,
+      event: AddPlayersEvent(players: players.map((p) => p.toProto()).toList()),
+    ).execute(client).then((value) => value.addedCount);
   }
 
   @override

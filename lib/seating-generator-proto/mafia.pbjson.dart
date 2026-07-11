@@ -2844,6 +2844,38 @@ final $typed_data.Uint8List addPlayersFromTournamentEventOutDescriptor =
         'CiBBZGRQbGF5ZXJzRnJvbVRvdXJuYW1lbnRFdmVudE91dBIeCgphZGRlZENvdW50GAEgASgFUg'
         'phZGRlZENvdW50');
 
+@$core.Deprecated('Use addPlayersEventDescriptor instead')
+const AddPlayersEvent$json = {
+  '1': 'AddPlayersEvent',
+  '2': [
+    {
+      '1': 'players',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.generated.Player',
+      '10': 'players'
+    },
+  ],
+};
+
+/// Descriptor for `AddPlayersEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addPlayersEventDescriptor = $convert.base64Decode(
+    'Cg9BZGRQbGF5ZXJzRXZlbnQSKwoHcGxheWVycxgBIAMoCzIRLmdlbmVyYXRlZC5QbGF5ZXJSB3'
+    'BsYXllcnM=');
+
+@$core.Deprecated('Use addPlayersEventOutDescriptor instead')
+const AddPlayersEventOut$json = {
+  '1': 'AddPlayersEventOut',
+  '2': [
+    {'1': 'addedCount', '3': 1, '4': 1, '5': 5, '10': 'addedCount'},
+  ],
+};
+
+/// Descriptor for `AddPlayersEventOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List addPlayersEventOutDescriptor = $convert.base64Decode(
+    'ChJBZGRQbGF5ZXJzRXZlbnRPdXQSHgoKYWRkZWRDb3VudBgBIAEoBVIKYWRkZWRDb3VudA==');
+
 @$core.Deprecated('Use refereeAssignmentDescriptor instead')
 const RefereeAssignment$json = {
   '1': 'RefereeAssignment',

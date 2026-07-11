@@ -7849,6 +7849,109 @@ class AddPlayersFromTournamentEventOut extends $pb.GeneratedMessage {
   void clearAddedCount() => $_clearField(1);
 }
 
+class AddPlayersEvent extends $pb.GeneratedMessage {
+  factory AddPlayersEvent({
+    $core.Iterable<Player>? players,
+  }) {
+    final result = create();
+    if (players != null) result.players.addAll(players);
+    return result;
+  }
+
+  AddPlayersEvent._();
+
+  factory AddPlayersEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory AddPlayersEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'AddPlayersEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..pPM<Player>(1, _omitFieldNames ? '' : 'players',
+        subBuilder: Player.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddPlayersEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddPlayersEvent copyWith(void Function(AddPlayersEvent) updates) =>
+      super.copyWith((message) => updates(message as AddPlayersEvent))
+          as AddPlayersEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersEvent create() => AddPlayersEvent._();
+  @$core.override
+  AddPlayersEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AddPlayersEvent>(create);
+  static AddPlayersEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<Player> get players => $_getList(0);
+}
+
+class AddPlayersEventOut extends $pb.GeneratedMessage {
+  factory AddPlayersEventOut({
+    $core.int? addedCount,
+  }) {
+    final result = create();
+    if (addedCount != null) result.addedCount = addedCount;
+    return result;
+  }
+
+  AddPlayersEventOut._();
+
+  factory AddPlayersEventOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory AddPlayersEventOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'AddPlayersEventOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aI(1, _omitFieldNames ? '' : 'addedCount', protoName: 'addedCount')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddPlayersEventOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddPlayersEventOut copyWith(void Function(AddPlayersEventOut) updates) =>
+      super.copyWith((message) => updates(message as AddPlayersEventOut))
+          as AddPlayersEventOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersEventOut create() => AddPlayersEventOut._();
+  @$core.override
+  AddPlayersEventOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static AddPlayersEventOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<AddPlayersEventOut>(create);
+  static AddPlayersEventOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get addedCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set addedCount($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasAddedCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAddedCount() => $_clearField(1);
+}
+
 class RefereeAssignment extends $pb.GeneratedMessage {
   factory RefereeAssignment({
     $core.int? table,

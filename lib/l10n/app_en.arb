@@ -59,6 +59,32 @@
   "@addPlayerDialogTitle": {},
   "add": "Add",
   "@add": {},
+  "addPlayersDialogTitle": "Add participants",
+  "@addPlayersDialogTitle": {},
+  "addPlayersSelected": "Selected ({count})",
+  "@addPlayersSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "addPlayersSubmit": "Add {count} participants",
+  "@addPlayersSubmit": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "addPlayersError": "Failed to add participants. Please try again",
+  "@addPlayersError": {},
+  "addPlayersNewBadge": "new",
+  "@addPlayersNewBadge": {},
+  "addPlayersAlreadyAdded": "Participant already added",
+  "@addPlayersAlreadyAdded": {},
   "finalGamesHint": "Number of final games",
   "@finalGamesHint": {},
   "swissGamesHint": "Number of Swiss games",
