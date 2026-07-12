@@ -109,6 +109,18 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
   late final bool _ownsFocusNode;
   Timer? _debounce;
 
+  /// Монотонный счётчик для форсированного пересоздания внутреннего [RawAutocomplete].
+  ///
+  /// У [RawAutocomplete] нет публичного API для сброса подсветки клавиатурной опции
+  /// (`_highlightedOptionIndex`): при обновлении списка опций он пересчитывает индекс как
+  /// `старыйИндекс % длина`, а не сбрасывает в 0. Так как экземпляр [PlayerAutoComplete]
+  /// может переиспользоваться (диалог батч-добавления очищает поле и возвращает фокус),
+  /// старая подсветка «переезжает» на следующий поиск. Чтобы гарантированно сбросить
+  /// подсветку на верхнюю опцию, после каждого выбора меняем `key` у [RawAutocomplete] —
+  /// это пересоздаёт его State (и `_highlightedOptionIndex = 0`), но НЕ трогает наши
+  /// внешние `_controller`/`_focusNode`, которые живут в этом State.
+  int _resetToken = 0;
+
   @override
   void initState() {
     super.initState();
@@ -128,6 +140,28 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
 
   Completer<Iterable<PlayerModel>>? _completer;
 
+  /// Сбрасывает клавиатурную подсветку опций на верхнюю, пересоздавая [RawAutocomplete]
+  /// через смену `key`. Пересоздание может «уронить» фокус текущего поля, поэтому после
+  /// ребилда аккуратно восстанавливаем его — но только если фокус не забрал кто-то другой.
+  ///
+  /// Это важно для сценария диалога батч-добавления (фокус должен остаться в поиске), при этом
+  /// не ломает потребителей, которые в `onSubmit` уводят фокус в следующее поле: их
+  /// синхронный `requestFocus` уже отработал к моменту пост-фрейм колбэка, и мы его не трогаем.
+  void _resetHighlight() {
+    if (!mounted) return;
+    setState(() => _resetToken++);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (_focusNode.hasFocus) return;
+      // Если фокус перехватило другое реальное поле (FocusNode, не FocusScopeNode) —
+      // значит потребитель осознанно увёл фокус, не мешаем ему.
+      final primary = FocusManager.instance.primaryFocus;
+      final anotherFieldFocused = primary != null && primary != _focusNode && primary is! FocusScopeNode;
+      if (anotherFieldFocused) return;
+      _focusNode.requestFocus();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<PlayerAutoCompleteBloc, PlayerAutoCompleteState>(
@@ -136,6 +170,7 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
         widget.onSearchStateChanged?.call(state.isLoading, state.query);
       },
       child: RawAutocomplete<PlayerModel>(
+        key: ValueKey(_resetToken),
         optionsBuilder: widget.readOnly
             ? (_) async => []
             : (event) async {
@@ -243,6 +278,7 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
             _controller.text = widget.displayStringForOption(playerModel);
             widget.onSelected(playerModel);
           }
+          _resetHighlight();
         },
         fieldViewBuilder: (context, controller, focusNode, onSubmit) {
           return CustomTextField(
