@@ -69,15 +69,18 @@ class _AddPlayersDialogState extends State<AddPlayersDialog> {
   }
 
   bool _isDuplicate(PlayerModel player) {
-    bool sameAsNew(PlayerModel other) =>
-        other.id == PlayerModel.undefinedId && other.nickname.toLowerCase() == player.nickname.toLowerCase();
-
     if (player.id == PlayerModel.undefinedId) {
-      return _staged.any(sameAsNew) || widget.existingPlayers.any(sameAsNew);
+      bool sameNick(PlayerModel other) => other.nickname.toLowerCase() == player.nickname.toLowerCase();
+      return _staged.any(sameNick) || widget.existingPlayers.any(sameNick);
     }
 
     return _staged.any((p) => p.id == player.id) || widget.existingPlayers.any((p) => p.id == player.id);
   }
+
+  Set<int> get _excludedIds => {
+        ...widget.existingPlayers.map((p) => p.id),
+        ..._staged.where((p) => p.id != PlayerModel.undefinedId).map((p) => p.id),
+      };
 
   void _addPlayer(PlayerModel player) {
     if (_isDuplicate(player)) {
@@ -115,11 +118,16 @@ class _AddPlayersDialogState extends State<AddPlayersDialog> {
       final repo = RepositoryFactory.of(context).playersRepository;
 
       // Для новых игроков (id == undefinedId) сначала создаём их и получаем реальный id.
+      // Обновляем _staged[i] сразу после createPlayer — при retry уже созданные игроки
+      // не будут созданы повторно.
       final resolvedPlayers = <PlayerModel>[];
-      for (final player in _staged) {
+      for (int i = 0; i < _staged.length; i++) {
+        final player = _staged[i];
         if (player.id == PlayerModel.undefinedId) {
           final newId = await repo.createPlayer(player);
-          resolvedPlayers.add(player.copyWith(id: newId));
+          final resolved = player.copyWith(id: newId);
+          setState(() => _staged[i] = resolved);
+          resolvedPlayers.add(resolved);
         } else {
           resolvedPlayers.add(player);
         }
@@ -157,6 +165,7 @@ class _AddPlayersDialogState extends State<AddPlayersDialog> {
               if (initValue.trim().isEmpty) return;
               _addPlayer(PlayerModel(nickname: initValue.trim()));
             },
+            excludeIds: _excludedIds,
           ),
           const SizedBox(height: 16),
           Text(

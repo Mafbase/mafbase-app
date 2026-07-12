@@ -27,6 +27,7 @@ class PlayerAutoComplete extends StatelessWidget {
   final FocusNode? focusNode;
   final String Function(PlayerModel model)? displayStringForOption;
   final List<PlayerModel>? availablePlayers;
+  final Set<int>? excludeIds;
 
   const PlayerAutoComplete({
     super.key,
@@ -43,6 +44,7 @@ class PlayerAutoComplete extends StatelessWidget {
     this.focusNode,
     this.displayStringForOption,
     this.availablePlayers,
+    this.excludeIds,
   });
 
   @override
@@ -65,6 +67,7 @@ class PlayerAutoComplete extends StatelessWidget {
         externalController: controller,
         externalFocusNode: focusNode,
         displayStringForOption: displayStringForOption ?? (model) => model.nickname,
+        excludeIds: excludeIds,
       ),
     );
   }
@@ -83,6 +86,7 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
   final TextEditingController? externalController;
   final FocusNode? externalFocusNode;
   final String Function(PlayerModel model) displayStringForOption;
+  final Set<int>? excludeIds;
 
   const _PlayerAutoCompleteBody({
     required this.onSelected,
@@ -97,6 +101,7 @@ class _PlayerAutoCompleteBody extends StatefulWidget {
     this.externalController,
     this.externalFocusNode,
     required this.displayStringForOption,
+    this.excludeIds,
   });
 
   @override
@@ -151,7 +156,11 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
                     return;
                   }
 
-                  completer.complete(e.results);
+                  final excluded = widget.excludeIds;
+                  final results = excluded != null && excluded.isNotEmpty
+                      ? e.results.where((p) => !excluded.contains(p.id))
+                      : e.results;
+                  completer.complete(results);
                   _completer = null;
                 });
 

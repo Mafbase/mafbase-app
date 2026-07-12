@@ -78,6 +78,7 @@ class PlayersRepositoryImpl extends BaseRepository implements PlayersRepository 
       player: Player(
         nickname: player.nickname,
         fsmNickname: player.fsmNickaname,
+        mafbankNickname: player.mafbankNickname,
       ),
     ).execute(client).then((value) => value.id);
   }
