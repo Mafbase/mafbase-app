@@ -83,6 +83,8 @@
   "@addPlayersError": {},
   "addPlayersNewBadge": "new",
   "@addPlayersNewBadge": {},
+  "addPlayersEditTooltip": "Edit",
+  "@addPlayersEditTooltip": {},
   "addPlayersAlreadyAdded": "Participant already added",
   "@addPlayersAlreadyAdded": {},
   "finalGamesHint": "Number of final games",

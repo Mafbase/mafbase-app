@@ -83,6 +83,8 @@
   "@addPlayersError": {},
   "addPlayersNewBadge": "новый",
   "@addPlayersNewBadge": {},
+  "addPlayersEditTooltip": "Редактировать",
+  "@addPlayersEditTooltip": {},
   "addPlayersAlreadyAdded": "Участник уже добавлен",
   "@addPlayersAlreadyAdded": {},
   "finalGamesHint": "Количество финальных игр",

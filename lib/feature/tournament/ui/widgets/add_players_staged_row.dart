@@ -89,7 +89,7 @@ class _AddPlayersStagedRowState extends State<AddPlayersStagedRow> {
               ),
               if (_isNew) ...[_NewBadge(text: context.locale.addPlayersNewBadge), const SizedBox(width: 8)],
               IconButton(
-                tooltip: context.locale.add,
+                tooltip: context.locale.addPlayersEditTooltip,
                 onPressed: _toggleExpanded,
                 icon: Icon(_expanded ? Icons.expand_less : Icons.edit_outlined, color: theme.darkGreyColor, size: 20),
               ),
