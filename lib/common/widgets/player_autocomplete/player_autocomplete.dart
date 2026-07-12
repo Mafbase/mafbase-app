@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/assets.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/common/widgets/player_autocomplete/patched_raw_autocomplete.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_bloc.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_event.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_state.dart';
@@ -135,7 +136,7 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
         widget.onResultsChanged?.call(state.results);
         widget.onSearchStateChanged?.call(state.isLoading, state.query);
       },
-      child: RawAutocomplete<PlayerModel>(
+      child: PatchedRawAutocomplete<PlayerModel>(
         optionsBuilder: widget.readOnly
             ? (_) async => []
             : (event) async {
