@@ -91,7 +91,7 @@ class _AddPlayersStagedRowState extends State<AddPlayersStagedRow> {
               IconButton(
                 tooltip: context.locale.add,
                 onPressed: _toggleExpanded,
-                icon: Icon(_expanded ? Icons.expand_less : Icons.edit_outlined, color: theme.darkBlueColor, size: 20),
+                icon: Icon(_expanded ? Icons.expand_less : Icons.edit_outlined, color: theme.darkGreyColor, size: 20),
               ),
               IconButton(
                 onPressed: widget.onRemove,
