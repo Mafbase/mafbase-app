@@ -70,7 +70,7 @@
       }
     }
   },
-  "addPlayersSubmit": "Добавить {count} участников",
+  "addPlayersSubmit": "Добавить {count, plural, one{{count} участника} few{{count} участника} many{{count} участников} other{{count} участников}}",
   "@addPlayersSubmit": {
     "placeholders": {
       "count": {
