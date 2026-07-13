@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/interactors/add_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/bill_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/custom_text_info_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
@@ -28,9 +27,6 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   final BuildContext? _context;
 
   late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor = GetTournamentsPlayersInteractor(
-    _repos.playersRepository,
-  );
-  late final AddTournamentPlayerInteractor _addPlayerInteractor = AddTournamentPlayerInteractor(
     _repos.playersRepository,
   );
   late final DeletePlayerInteractor _deletePlayerInteractor = DeletePlayerInteractor(_repos.playersRepository);
@@ -183,13 +179,15 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   }
 
   Future _onAddPlayerTapped(TournamentPageEventAddPlayer event, Emitter<TournamentPageState> emit) async {
-    final player = await router.showAddPlayerDialog();
-    if (player == null) {
+    final addedAny = await router.showAddPlayersDialog(
+      tournamentId: tournamentId,
+      existingPlayers: state.tournamentPlayers,
+    );
+    if (!addedAny) {
       return;
     }
     emit(state.copyWith(isLoading: true));
     try {
-      await _addPlayerInteractor.run(tournamentId: tournamentId, playerModel: player);
       await _updatePlayers(emit);
       emit(state.copyWith(isLoading: false));
     } catch (e) {

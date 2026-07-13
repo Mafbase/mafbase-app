@@ -15,6 +15,8 @@ abstract class PlayersRepository {
 
   Future addPlayer(int tournamentId, PlayerModel player);
 
+  Future<int> addPlayers(int tournamentId, List<PlayerModel> players);
+
   Future deletePlayer(int tournamentId, PlayerModel player);
 
   Future addPhoto(int playerId, Uint8List bytes, String filename);

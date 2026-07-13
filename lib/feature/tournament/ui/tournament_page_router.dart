@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_dialog.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/substitute_player_dialog.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog.dart';
 
 abstract class TournamentPageRouter {
-  Future<PlayerModel?> showAddPlayerDialog();
+  /// Открывает диалог батч-добавления участников. Отправка выполняется внутри
+  /// диалога с прогрессом; возвращает `true`, если хотя бы один участник был добавлен.
+  Future<bool> showAddPlayersDialog({
+    required int tournamentId,
+    required List<PlayerModel> existingPlayers,
+  });
 
   Future<bool> showPlayerProfileDialog({required PlayerModel player});
 
@@ -32,8 +37,15 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
   TournamentPageRouterImpl(this._context);
 
   @override
-  Future<PlayerModel?> showAddPlayerDialog() async {
-    return AddPlayerDialog.open(context: _context);
+  Future<bool> showAddPlayersDialog({
+    required int tournamentId,
+    required List<PlayerModel> existingPlayers,
+  }) {
+    return AddPlayersDialog.open(
+      context: _context,
+      tournamentId: tournamentId,
+      existingPlayers: existingPlayers,
+    );
   }
 
   @override
