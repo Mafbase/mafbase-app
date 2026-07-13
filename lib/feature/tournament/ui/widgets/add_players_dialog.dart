@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_effect.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_staged_row.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 /// Единый диалог батч-добавления участников на турнир (Вариант A «Поиск + накопление»).
 ///
-/// Сверху — один [PlayerAutoComplete] с автофокусом. Выбранные игроки копятся в
-/// [_staged], поле после выбора очищается и фокус возвращается — чтобы вводить
-/// следующего, не закрывая диалог. Снизу — кнопка батч-отправки.
+/// Бизнес-логика (дедуп, создание новых игроков, батч-отправка) инкапсулирована в
+/// [AddPlayersBloc]. Диалог отвечает только за UI: поле поиска с автофокусом, список
+/// staged-участников, индикатор загрузки и переходы по [AddPlayersEffect].
 ///
-/// Отправка выполняется внутри диалога с прогрессом ([LoadingOverlayWidget]).
 /// [open] возвращает `true`, если хотя бы один участник был успешно добавлен —
 /// вызывающий код должен один раз перезагрузить список участников.
 class AddPlayersDialog extends StatefulWidget {
-  final int tournamentId;
-  final List<PlayerModel> existingPlayers;
-
-  const AddPlayersDialog({
-    super.key,
-    required this.tournamentId,
-    required this.existingPlayers,
-  });
+  const AddPlayersDialog({super.key});
 
   static Future<bool> open({
     required BuildContext context,
@@ -37,9 +34,13 @@ class AddPlayersDialog extends StatefulWidget {
       showDialog<bool>(
         context: context,
         barrierDismissible: false,
-        builder: (context) => AddPlayersDialog(
-          tournamentId: tournamentId,
-          existingPlayers: existingPlayers,
+        builder: (context) => BlocProvider(
+          create: (context) => AddPlayersBloc(
+            playersRepository: RepositoryFactory.of(context).playersRepository,
+            tournamentId: tournamentId,
+            existingPlayers: existingPlayers,
+          ),
+          child: const AddPlayersDialog(),
         ),
       ).then((value) => value ?? false);
 
@@ -47,13 +48,16 @@ class AddPlayersDialog extends StatefulWidget {
   State<AddPlayersDialog> createState() => _AddPlayersDialogState();
 }
 
-class _AddPlayersDialogState extends State<AddPlayersDialog> {
+class _AddPlayersDialogState extends State<AddPlayersDialog>
+    with EffectListener<AddPlayersEffect, AddPlayersState, AddPlayersBloc, AddPlayersDialog> {
   final FocusNode _searchFocus = FocusNode();
   final TextEditingController _searchController = TextEditingController();
 
-  final List<PlayerModel> _staged = [];
-
-  bool _isSubmitting = false;
+  @override
+  void registerEffectHandlers(on) {
+    on<AddPlayersEffectShowDuplicateWarning>((_) => _showTransientMessage(context.locale.addPlayersAlreadyAdded));
+    on<AddPlayersEffectSubmitCompleted>((effect) => Navigator.pop(context, effect.addedAny));
+  }
 
   @override
   void initState() {
@@ -68,26 +72,8 @@ class _AddPlayersDialogState extends State<AddPlayersDialog> {
     super.dispose();
   }
 
-  bool _isDuplicate(PlayerModel player) {
-    if (player.id == PlayerModel.undefinedId) {
-      bool sameNick(PlayerModel other) => other.nickname.toLowerCase() == player.nickname.toLowerCase();
-      return _staged.any(sameNick) || widget.existingPlayers.any(sameNick);
-    }
-
-    return _staged.any((p) => p.id == player.id) || widget.existingPlayers.any((p) => p.id == player.id);
-  }
-
-  Set<int> get _excludedIds => {
-        ...widget.existingPlayers.map((p) => p.id),
-        ..._staged.where((p) => p.id != PlayerModel.undefinedId).map((p) => p.id),
-      };
-
   void _addPlayer(PlayerModel player) {
-    if (_isDuplicate(player)) {
-      _showTransientMessage(context.locale.addPlayersAlreadyAdded);
-    } else {
-      setState(() => _staged.add(player));
-    }
+    context.read<AddPlayersBloc>().add(AddPlayersEvent.playerAdded(player: player));
     _searchController.clear();
     _searchFocus.requestFocus();
   }
@@ -101,124 +87,88 @@ class _AddPlayersDialogState extends State<AddPlayersDialog> {
       );
   }
 
-  void _updateStagedAt(int index, PlayerModel player) {
-    setState(() => _staged[index] = player);
-  }
-
-  void _removeStagedAt(int index) {
-    setState(() => _staged.removeAt(index));
-  }
-
-  Future<void> _submit() async {
-    if (_staged.isEmpty || _isSubmitting) return;
-
-    setState(() => _isSubmitting = true);
-
-    try {
-      final repo = RepositoryFactory.of(context).playersRepository;
-
-      // Для новых игроков (id == undefinedId) сначала создаём их и получаем реальный id.
-      // Обновляем _staged[i] сразу после createPlayer — при retry уже созданные игроки
-      // не будут созданы повторно.
-      final resolvedPlayers = <PlayerModel>[];
-      for (int i = 0; i < _staged.length; i++) {
-        final player = _staged[i];
-        if (player.id == PlayerModel.undefinedId) {
-          final newId = await repo.createPlayer(player);
-          final resolved = player.copyWith(id: newId);
-          setState(() => _staged[i] = resolved);
-          resolvedPlayers.add(resolved);
-        } else {
-          resolvedPlayers.add(player);
-        }
-      }
-
-      // Эндпоинт атомарен (одна транзакция): либо добавлены все, либо никто.
-      final addedCount = await repo.addPlayers(widget.tournamentId, resolvedPlayers);
-      if (mounted) Navigator.pop(context, addedCount > 0);
-    } catch (_) {
-      if (mounted) _showTransientMessage(context.locale.addPlayersError);
-    } finally {
-      if (mounted) setState(() => _isSubmitting = false);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final isMobile = context.isMobile;
     final size = MediaQuery.sizeOf(context);
 
-    final content = Padding(
-      padding: EdgeInsets.symmetric(vertical: isMobile ? 24 : 40, horizontal: isMobile ? 20 : 40),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _header(context),
-          const SizedBox(height: 24),
-          PlayerAutoComplete(
-            label: context.locale.nicknameHint,
-            controller: _searchController,
-            focusNode: _searchFocus,
-            onSelected: _addPlayer,
-            onNewPlayer: ({required String initValue}) {
-              if (initValue.trim().isEmpty) return;
-              _addPlayer(PlayerModel(nickname: initValue.trim()));
-            },
-            excludeIds: _excludedIds,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            context.locale.addPlayersSelected(_staged.length),
-            style: MyTheme.of(context).hintTextStyle,
-          ),
-          const SizedBox(height: 8),
-          Flexible(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (var i = 0; i < _staged.length; i++)
-                    AddPlayersStagedRow(
-                      key: ValueKey('${_staged[i].id}_${_staged[i].nickname}_$i'),
-                      player: _staged[i],
-                      onChanged: (updated) => _updateStagedAt(i, updated),
-                      onRemove: () => _removeStagedAt(i),
-                    ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          CustomButton(
-            text: context.locale.addPlayersSubmit(_staged.length),
-            onTap: _submit,
-            disabled: _staged.isEmpty,
-            isLoading: _isSubmitting,
-          ),
-        ],
-      ),
-    );
+    return BlocBuilder<AddPlayersBloc, AddPlayersState>(
+      builder: (context, state) {
+        final bloc = context.read<AddPlayersBloc>();
 
-    return PopScope(
-      canPop: !_isSubmitting,
-      child: CustomDialog(
-        child: Stack(
-          children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: isMobile ? size.width : 580,
-                maxHeight: size.height * (isMobile ? 0.9 : 0.8),
+        final content = Padding(
+          padding: EdgeInsets.symmetric(vertical: isMobile ? 24 : 40, horizontal: isMobile ? 20 : 40),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _header(context),
+              const SizedBox(height: 24),
+              PlayerAutoComplete(
+                label: context.locale.nicknameHint,
+                controller: _searchController,
+                focusNode: _searchFocus,
+                onSelected: _addPlayer,
+                onNewPlayer: ({required String initValue}) {
+                  if (initValue.trim().isEmpty) return;
+                  _addPlayer(PlayerModel(nickname: initValue.trim()));
+                },
+                excludeIds: bloc.excludedIds,
               ),
-              child: content,
+              const SizedBox(height: 16),
+              Text(
+                context.locale.addPlayersSelected(state.staged.length),
+                style: MyTheme.of(context).hintTextStyle,
+              ),
+              const SizedBox(height: 8),
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (var i = 0; i < state.staged.length; i++)
+                        AddPlayersStagedRow(
+                          key: ValueKey('${state.staged[i].id}_${state.staged[i].nickname}_$i'),
+                          player: state.staged[i],
+                          onChanged: (updated) => bloc.add(AddPlayersEvent.playerUpdated(index: i, player: updated)),
+                          onRemove: () => bloc.add(AddPlayersEvent.playerRemoved(index: i)),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              CustomButton(
+                text: context.locale.addPlayersSubmit(state.staged.length),
+                onTap: () => bloc.add(const AddPlayersEvent.submitted()),
+                disabled: state.staged.isEmpty,
+                isLoading: state.isSubmitting,
+              ),
+            ],
+          ),
+        );
+
+        return PopScope(
+          canPop: !state.isSubmitting,
+          child: CustomDialog(
+            child: Stack(
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: isMobile ? size.width : 580,
+                    maxHeight: size.height * (isMobile ? 0.9 : 0.8),
+                  ),
+                  child: content,
+                ),
+                if (state.isSubmitting)
+                  const Positioned.fill(
+                    child: LoadingOverlayWidget(),
+                  ),
+              ],
             ),
-            if (_isSubmitting)
-              const Positioned.fill(
-                child: LoadingOverlayWidget(),
-              ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
