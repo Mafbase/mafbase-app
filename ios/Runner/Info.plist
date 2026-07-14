@@ -32,6 +32,8 @@
 		<true/>
 		<key>NSCameraUsageDescription</key>
 		<string>Необходимо для загрузки фотографий игроков</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Необходимо для записи звука во время трансляции игры</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Необходимо для загрузки фотографий игроков</string>
 		<key>UIApplicationSceneManifest</key>
