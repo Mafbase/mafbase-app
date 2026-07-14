@@ -112,6 +112,15 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   generate: true
+
+  # Собираем iOS/macOS только через CocoaPods. SwiftPackageManager отключён
+  # на уровне проекта: плагин mafbase_stream (mixed-language + vendored
+  # xcframeworks + prepare_command для FFmpeg) не переносится на SPM, поэтому
+  # CocoaPods из проекта всё равно не убрать. Флаг не даёт flutter повторно
+  # мигрировать проект на SPM при pub get. Убрать — когда mafbase_stream,
+  # flutter_inappwebview и permission_handler получат SPM-поддержку.
+  config:
+    enable-swift-package-manager: false
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

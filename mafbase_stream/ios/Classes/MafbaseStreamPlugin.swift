@@ -146,11 +146,18 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
 
   private func activeKeyWindow() -> UIWindow? {
     if #available(iOS 13.0, *) {
-      let scenes = UIApplication.shared.connectedScenes
-        .compactMap { $0 as? UIWindowScene }
-        .filter { $0.activationState == .foregroundActive }
-      if let window = scenes.flatMap({ $0.windows }).first(where: { $0.isKeyWindow }) {
-        return window
+      let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+      // Предпочитаем активную сцену, но не требуем её: при cold-start по диплинку
+      // сцена ещё .foregroundInactive, хотя окно с rootViewController уже готово.
+      let states: [UIScene.ActivationState] = [.foregroundActive, .foregroundInactive, .background, .unattached]
+      for state in states {
+        let windows = scenes.filter { $0.activationState == state }.flatMap { $0.windows }
+        if let key = windows.first(where: { $0.isKeyWindow }) {
+          return key
+        }
+        if let withRoot = windows.first(where: { $0.rootViewController != nil }) {
+          return withRoot
+        }
       }
       return scenes.flatMap { $0.windows }.first
     }
