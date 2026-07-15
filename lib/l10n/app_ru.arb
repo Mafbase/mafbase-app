@@ -955,7 +955,7 @@
   "@clubActionHideRating": {},
   "clubActionHideRatingSubtitle": "Установить дату скрытия",
   "@clubActionHideRatingSubtitle": {},
-  "clubActionHideRatingActiveSubtitle": "Скрыто до: {date}",
+  "clubActionHideRatingActiveSubtitle": "Скрыто с: {date}",
   "@clubActionHideRatingActiveSubtitle": {
     "placeholders": {
       "date": {
