@@ -33,21 +33,14 @@ class ClubPage extends StatelessWidget {
   final int clubId;
   final ClubModel? cachedModel;
 
-  const ClubPage({
-    super.key,
-    @PathParam('clubId') required this.clubId,
-    this.cachedModel,
-  });
+  const ClubPage({super.key, @PathParam('clubId') required this.clubId, this.cachedModel});
 
   @override
   Widget build(BuildContext context) {
     final repos = RepositoryFactory.of(context);
     return BlocProvider<ClubBloc>(
       create: (context) {
-        final args = ClubBlocArgs(
-          clubId: clubId,
-          cachedModel: cachedModel,
-        );
+        final args = ClubBlocArgs(clubId: clubId, cachedModel: cachedModel);
         return ClubBloc(
           router: ClubRouterImpl(context),
           args: args,
@@ -90,10 +83,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
             BlocBuilder<ClubBloc, ClubState>(
               builder: (context, state) {
                 if (!state.isOwner) return const SizedBox.shrink();
-                return IconButton(
-                  icon: const Icon(Icons.settings_outlined),
-                  onPressed: _editOwners,
-                );
+                return IconButton(icon: const Icon(Icons.settings_outlined), onPressed: _editOwners);
               },
             ),
           ],
@@ -106,10 +96,8 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
             final model = state.model;
             if (model == null) return const SizedBox.shrink();
 
-            final showBill = !(context.watch<AuthNotifier>().value.mapOrNull(
-                      authorized: (m) => m.hideBilling,
-                    ) ??
-                false);
+            final showBill =
+                !(context.watch<AuthNotifier>().value.mapOrNull(authorized: (m) => m.hideBilling) ?? false);
 
             return Column(
               children: [
@@ -144,6 +132,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                             defaultRatingPeriodSubtitle:
                                 _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
                             onHideRating: state.isOwner ? _changeHideDate : null,
+                            hideRatingSubtitle: state.isOwner ? _hideRatingSubtitle(context, state.hideDate) : null,
                             onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
                           ),
                         ),
@@ -161,10 +150,8 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
 
   @override
   Widget buildDesktop(BuildContext context) {
-    final showBill = !(context.watch<AuthNotifier>().value.mapOrNull(
-              authorized: (model) => model.hideBilling,
-            ) ??
-        false);
+    final showBill =
+        !(context.watch<AuthNotifier>().value.mapOrNull(authorized: (model) => model.hideBilling) ?? false);
 
     return Scaffold(
       appBar: AppBar(
@@ -174,10 +161,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
           BlocBuilder<ClubBloc, ClubState>(
             builder: (context, state) {
               if (!state.isOwner) return const SizedBox.shrink();
-              return IconButton(
-                icon: const Icon(Icons.settings_outlined),
-                onPressed: _editOwners,
-              );
+              return IconButton(icon: const Icon(Icons.settings_outlined), onPressed: _editOwners);
             },
           ),
         ],
@@ -219,6 +203,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                       onSetDefaultRatingPeriod: state.isOwner ? _setDefaultRatingPeriod : null,
                       defaultRatingPeriodSubtitle: _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
                       onHideRating: state.isOwner ? _changeHideDate : null,
+                      hideRatingSubtitle: state.isOwner ? _hideRatingSubtitle(context, state.hideDate) : null,
                       onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
                     ),
                   ],
@@ -243,12 +228,39 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
 
   void _changeHideDate() async {
     final bloc = context.read<ClubBloc>();
+    final currentHideDate = bloc.state.hideDate;
+
+    if (currentHideDate != null) {
+      final action = await showDialog<_HideRatingAction>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(ctx.locale.clubActionHideRating),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(_HideRatingAction.remove),
+              child: Text(ctx.locale.clubActionRemoveHideRating),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(_HideRatingAction.change),
+              child: Text(ctx.locale.clubActionChangeHideDate),
+            ),
+          ],
+        ),
+      );
+
+      if (!mounted || action == null) return;
+
+      if (action == _HideRatingAction.remove) {
+        bloc.add(const ClubEvent.changeHideDate(dateTime: null));
+        return;
+      }
+    }
 
     final date = await showDatePicker(
       context: context,
       firstDate: DateTime(1990),
-      lastDate: DateTime.now(),
-      initialDate: bloc.state.hideDate,
+      lastDate: DateTime(3000),
+      initialDate: currentHideDate,
     );
 
     if (date == null) return;
@@ -311,10 +323,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
       return;
     }
 
-    final value = await ClubDescriptionEditDialog.show(
-      context: context,
-      initialValue: currentClub.description ?? '',
-    );
+    final value = await ClubDescriptionEditDialog.show(context: context, initialValue: currentClub.description ?? '');
 
     if (!mounted || value == null) {
       return;
@@ -353,4 +362,11 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
     if (clubId == null) return;
     ClubTranslationLinksDialog.show(context, clubId: clubId);
   }
+
+  String? _hideRatingSubtitle(BuildContext context, DateTime? hideDate) {
+    if (hideDate == null) return null;
+    return context.locale.clubActionHideRatingActiveSubtitle(DateFormat('dd.MM.yyyy').format(hideDate));
+  }
 }
+
+enum _HideRatingAction { change, remove }

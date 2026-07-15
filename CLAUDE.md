@@ -64,7 +64,7 @@ dart format --line-length 120 .
 
 Всегда используй готовые компоненты проекта вместо стандартных Flutter-виджетов:
 
-- `CustomButton` вместо `ElevatedButton` / `TextButton` / `OutlinedButton`
+- `CustomButton` вместо `ElevatedButton` / `OutlinedButton`
 - `CustomDropdown` вместо стандартного `DropdownButton`
 
 Компоненты находятся в `lib/common/widgets/`.
