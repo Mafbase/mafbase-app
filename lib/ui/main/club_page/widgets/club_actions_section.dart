@@ -14,6 +14,7 @@ class ClubActionsSection extends StatelessWidget {
   final VoidCallback? onSetDefaultRatingPeriod;
   final String? defaultRatingPeriodSubtitle;
   final VoidCallback? onHideRating;
+  final String? hideRatingSubtitle;
   final VoidCallback? onOpenTranslationLinks;
 
   const ClubActionsSection({
@@ -27,6 +28,7 @@ class ClubActionsSection extends StatelessWidget {
     this.onSetDefaultRatingPeriod,
     this.defaultRatingPeriodSubtitle,
     this.onHideRating,
+    this.hideRatingSubtitle,
     this.onOpenTranslationLinks,
   });
 
@@ -64,11 +66,7 @@ class ClubActionsSection extends StatelessWidget {
             icon: Icons.star_outline,
             iconBackgroundColor: theme.positiveColor,
             title: locale.clubActionRenewSubscription,
-            subtitle: billedFor != null
-                ? locale.clubActionPaidUntil(
-                    DateFormat('dd.MM.yyyy').format(billedFor!),
-                  )
-                : '',
+            subtitle: billedFor != null ? locale.clubActionPaidUntil(DateFormat('dd.MM.yyyy').format(billedFor!)) : '',
             onTap: onRenewSubscription!,
           ),
         );
@@ -101,7 +99,7 @@ class ClubActionsSection extends StatelessWidget {
             icon: Icons.visibility_off_outlined,
             iconBackgroundColor: theme.redColor,
             title: locale.clubActionHideRating,
-            subtitle: locale.clubActionHideRatingSubtitle,
+            subtitle: hideRatingSubtitle ?? locale.clubActionHideRatingSubtitle,
             onTap: onHideRating!,
           ),
         );
@@ -167,11 +165,7 @@ class ClubActionsSection extends StatelessWidget {
             icon: Icons.star_outline,
             iconBackgroundColor: theme.positiveColor,
             title: locale.clubActionRenewSubscription,
-            subtitle: billedFor != null
-                ? locale.clubActionPaidUntil(
-                    DateFormat('dd.MM.yyyy').format(billedFor!),
-                  )
-                : '',
+            subtitle: billedFor != null ? locale.clubActionPaidUntil(DateFormat('dd.MM.yyyy').format(billedFor!)) : '',
             onTap: onRenewSubscription!,
             showChevron: true,
           ),
@@ -207,7 +201,7 @@ class ClubActionsSection extends StatelessWidget {
             icon: Icons.visibility_off_outlined,
             iconBackgroundColor: theme.redColor,
             title: locale.clubActionHideRating,
-            subtitle: locale.clubActionHideRatingSubtitle,
+            subtitle: hideRatingSubtitle ?? locale.clubActionHideRatingSubtitle,
             onTap: onHideRating!,
             showChevron: true,
           ),
@@ -229,10 +223,7 @@ class ClubActionsSection extends StatelessWidget {
 
     return Column(
       children: [
-        for (int i = 0; i < cards.length; i++) ...[
-          cards[i],
-          if (i < cards.length - 1) const SizedBox(height: 8),
-        ],
+        for (int i = 0; i < cards.length; i++) ...[cards[i], if (i < cards.length - 1) const SizedBox(height: 8)],
       ],
     );
   }

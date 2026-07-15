@@ -955,6 +955,18 @@
   "@clubActionHideRating": {},
   "clubActionHideRatingSubtitle": "Установить дату скрытия",
   "@clubActionHideRatingSubtitle": {},
+  "clubActionHideRatingActiveSubtitle": "Скрыто до: {date}",
+  "@clubActionHideRatingActiveSubtitle": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "clubActionRemoveHideRating": "Убрать скрытие",
+  "@clubActionRemoveHideRating": {},
+  "clubActionChangeHideDate": "Изменить дату скрытия",
+  "@clubActionChangeHideDate": {},
   "clubActionOpenTranslation": "Трансляция клуба",
   "@clubActionOpenTranslation": {},
   "clubActionOpenTranslationSubtitle": "Получить ссылки для трансляции",
