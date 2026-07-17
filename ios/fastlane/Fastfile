@@ -24,6 +24,11 @@ platform :ios do
 
     sh("flutter pub get", chdir: "../..")
 
+    # Обновляем CocoaPods spec-репозиторий перед сборкой: без этого pod install,
+    # запускаемый внутри `flutter build ipa`, использует устаревший локальный CDN-кэш
+    # раннера и не находит свежие версии зависимостей (например, SwiftProtobuf).
+    cocoapods(repo_update: true, podfile: File.expand_path("../Podfile", __dir__))
+
     export_options_plist = File.expand_path("ExportOptions.plist", __dir__)
 
     sh(
