@@ -1,6 +1,7 @@
 import AVFoundation
 import CoreMedia
 import CoreVideo
+import Photos
 import UIKit
 
 /// Полноэкранный нативный экран превью камеры через AVFoundation.
@@ -482,7 +483,29 @@ final class StreamViewController: UIViewController {
 
     @objc private func closeTapped() {
         if isRecording {
-            stopRecordingSync()
+            // Останавливаем запись корректно и сохраняем в Фото перед закрытием
+            closeButton.isEnabled = false
+            recordButton.isEnabled = false
+            guard let recorder = mp4Recorder else {
+                if isStreaming { stopStreamingSync() }
+                dismissWithReason(.user)
+                return
+            }
+            isRecording = false
+            mp4Recorder = nil
+            recorder.stop { [weak self] url, _ in
+                guard let self = self else { return }
+                let doClose = {
+                    if self.isStreaming { self.stopStreamingSync() }
+                    self.dismissWithReason(.user)
+                }
+                guard let url = url else {
+                    doClose()
+                    return
+                }
+                self.saveToPhotoLibrary(url: url) { _ in doClose() }
+            }
+            return
         }
         if isStreaming {
             stopStreamingSync()
@@ -567,25 +590,57 @@ final class StreamViewController: UIViewController {
                 self.showAlert(title: "Запись пуста", message: "Файл не создан.")
                 return
             }
-            self.presentShareSheet(for: url)
+            // Сначала сохраняем в Фото, затем показываем диалог шеринга
+            self.saveToPhotoLibrary(url: url) { saved in
+                self.presentShareSheet(for: url, savedToPhotos: saved)
+            }
         }
     }
 
-    /// Синхронная версия для onPause/закрытия — без UI-фидбека.
+    /// Синхронная версия для системных прерываний — сохраняет запись в Фото без UI.
     private func stopRecordingSync() {
         guard let recorder = mp4Recorder else { return }
         isRecording = false
-        recorder.stop { _, _ in }
+        recorder.stop { url, _ in
+            guard let url = url else { return }
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+                guard status == .authorized || status == .limited else { return }
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+                }) { _, error in
+                    if let error = error {
+                        NSLog("[mafbase_stream] Failed to save video to Photos (sync): \(error)")
+                    }
+                }
+            }
+        }
         mp4Recorder = nil
         recordButton.setTitle("Запись", for: .normal)
     }
 
-    private func presentShareSheet(for url: URL) {
-        let alert = UIAlertController(
-            title: "Запись сохранена",
-            message: url.lastPathComponent,
-            preferredStyle: .alert
-        )
+    /// Сохраняет видеофайл в библиотеку Фото. Completion вызывается на main queue.
+    private func saveToPhotoLibrary(url: URL, completion: @escaping (Bool) -> Void) {
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+            guard status == .authorized || status == .limited else {
+                NSLog("[mafbase_stream] Photos access denied: \(status.rawValue)")
+                DispatchQueue.main.async { completion(false) }
+                return
+            }
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+            }) { success, error in
+                if let error = error {
+                    NSLog("[mafbase_stream] Failed to save video to Photos: \(error)")
+                }
+                DispatchQueue.main.async { completion(success) }
+            }
+        }
+    }
+
+    private func presentShareSheet(for url: URL, savedToPhotos: Bool) {
+        let title = savedToPhotos ? "Запись сохранена в Фото" : "Запись завершена"
+        let message = savedToPhotos ? nil : url.lastPathComponent
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Поделиться", style: .default) { [weak self] _ in
             guard let self = self else { return }
             let share = UIActivityViewController(activityItems: [url], applicationActivities: nil)
