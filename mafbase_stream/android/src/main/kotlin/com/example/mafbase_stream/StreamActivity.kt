@@ -3,6 +3,8 @@ package com.example.mafbase_stream
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,9 +17,11 @@ import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CaptureRequest
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
+import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
 import android.view.Gravity
@@ -126,10 +130,19 @@ class StreamActivity :
         const val EXTRA_BREAK_PLACEHOLDER_URL: String = "mafbase_stream.break_placeholder_url"
         const val EXTRA_BRAND_IMAGE_URL: String = "mafbase_stream.brand_image_url"
 
-        private val REQUIRED_PERMISSIONS = arrayOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO,
-        )
+        private fun requiredPermissions(): Array<String> =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                )
+            } else {
+                arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.RECORD_AUDIO,
+                )
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -301,7 +314,7 @@ class StreamActivity :
         setContentView(container)
 
         if (!hasAllPermissions()) {
-            requestPermissions(REQUIRED_PERMISSIONS, REQUEST_PERMISSIONS)
+            requestPermissions(requiredPermissions(), REQUEST_PERMISSIONS)
         }
     }
 
@@ -365,7 +378,7 @@ class StreamActivity :
         closeCamera()
     }
 
-    private fun hasAllPermissions(): Boolean = REQUIRED_PERMISSIONS.all {
+    private fun hasAllPermissions(): Boolean = requiredPermissions().all {
         checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
     }
 
@@ -742,12 +755,10 @@ class StreamActivity :
                 recordButton.isEnabled = true
 
                 if (file != null && file.exists() && file.length() > 0) {
-                    Toast.makeText(
-                        this@StreamActivity,
-                        "Сохранено: ${file.absolutePath}",
-                        Toast.LENGTH_LONG,
-                    ).show()
-                    shareRecording(file)
+                    // Сначала сохраняем в галерею, затем показываем диалог шеринга
+                    saveToGallery(file) { saved ->
+                        showRecordingDoneDialog(file, saved)
+                    }
                 } else {
                     Toast.makeText(this@StreamActivity, "Запись пуста", Toast.LENGTH_SHORT).show()
                 }
@@ -755,18 +766,22 @@ class StreamActivity :
         }, "Mp4Recorder-stop").start()
     }
 
-    /** Синхронный вариант для onPause: останавливает запись прямо в UI-потоке. */
+    /** Синхронный вариант для onPause/закрытия: сохраняет запись в галерею без UI. */
     private fun stopRecordingSync() {
         val recorder = mp4Recorder ?: return
         compositor?.detachOutput(Compositor.OutputId.RECORD_ENCODER)
-        try {
+        val file = try {
             recorder.stop()
         } catch (e: Exception) {
             Log.w(TAG, "Mp4Recorder.stop (sync) failed", e)
+            null
         }
         mp4Recorder = null
         isRecording = false
         recordButton.text = "Запись"
+        if (file != null && file.exists() && file.length() > 0) {
+            saveToGallery(file) { /* без UI, фоновое сохранение */ }
+        }
     }
 
     // --- Стрим ---
@@ -933,6 +948,51 @@ class StreamActivity :
         isStreaming = false
         setStreamButtonLabel("Стрим")
         setStreamButtonLoading(false)
+    }
+
+    /** Сохраняет видеофайл в галерею (MediaStore). Callback вызывается на main thread. */
+    private fun saveToGallery(file: File, callback: (Boolean) -> Unit) {
+        Thread({
+            try {
+                val values = ContentValues().apply {
+                    put(MediaStore.Video.Media.DISPLAY_NAME, file.name)
+                    put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+                    put(MediaStore.Video.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+                    put(MediaStore.Video.Media.DATE_MODIFIED, System.currentTimeMillis() / 1000)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        put(MediaStore.Video.Media.RELATIVE_PATH, Environment.DIRECTORY_MOVIES)
+                        put(MediaStore.Video.Media.IS_PENDING, 1)
+                    }
+                }
+                val resolver = contentResolver
+                val uri = resolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
+                if (uri != null) {
+                    resolver.openOutputStream(uri)?.use { out ->
+                        file.inputStream().use { it.copyTo(out) }
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        values.clear()
+                        values.put(MediaStore.Video.Media.IS_PENDING, 0)
+                        resolver.update(uri, values, null, null)
+                    }
+                    mainHandler.post { callback(true) }
+                } else {
+                    mainHandler.post { callback(false) }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "saveToGallery failed", e)
+                mainHandler.post { callback(false) }
+            }
+        }, "SaveToGallery").start()
+    }
+
+    private fun showRecordingDoneDialog(file: File, savedToGallery: Boolean) {
+        val title = if (savedToGallery) "Запись сохранена в галерею" else "Запись завершена"
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setPositiveButton("Поделиться") { _, _ -> shareRecording(file) }
+            .setNegativeButton("OK", null)
+            .show()
     }
 
     private fun shareRecording(file: File) {
