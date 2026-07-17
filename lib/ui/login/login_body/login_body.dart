@@ -56,12 +56,29 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    _passwordController.addListener(_onPasswordChanged);
+  }
+
+  @override
   void dispose() {
+    _passwordController.removeListener(_onPasswordChanged);
     _emailController.dispose();
     _passwordController.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
+  }
+
+  // Handles autofill: when password is populated without focus (only possible via autofill)
+  // and email is also filled, automatically trigger login.
+  void _onPasswordChanged() {
+    if (!_passwordFocusNode.hasFocus && _passwordController.text.isNotEmpty && _emailController.text.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _onSubmit();
+      });
+    }
   }
 
   @override
@@ -80,20 +97,14 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                 key: const Key('loginBox'),
                 child: AutofillGroup(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 24,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CustomTextField(
                           key: const Key('login_field'),
-                          autoFillHints: const [
-                            AutofillHints.username,
-                            AutofillHints.email,
-                          ],
+                          autoFillHints: const [AutofillHints.username, AutofillHints.email],
                           validate: (value) {
                             if (value != null) {
                               if (EmailValidator.validate(value)) {
@@ -107,14 +118,14 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           errorText: state.hasError ? context.locale.invalidEmailOrPassword : null,
                           focusNode: _emailFocusNode,
                           onSubmit: (_) {
-                            _emailFocusNode.unfocus();
-                            _passwordFocusNode.requestFocus();
+                            if (_passwordController.text.isNotEmpty) {
+                              _onSubmit();
+                            } else {
+                              _emailFocusNode.unfocus();
+                              _passwordFocusNode.requestFocus();
+                            }
                           },
-                          icon: Icon(
-                            Icons.email_outlined,
-                            color: MyTheme.of(context).borderColor,
-                            size: 20,
-                          ),
+                          icon: Icon(Icons.email_outlined, color: MyTheme.of(context).borderColor, size: 20),
                         ),
                         const SizedBox(height: 20),
                         CustomTextField(
@@ -127,11 +138,7 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                             _onSubmit();
                           },
                           canObscure: true,
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: MyTheme.of(context).borderColor,
-                            size: 20,
-                          ),
+                          icon: Icon(Icons.lock_outline, color: MyTheme.of(context).borderColor, size: 20),
                         ),
                         const SizedBox(height: 16),
                         Align(
@@ -143,15 +150,13 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {
-                              context.read<LoginBloc>().add(
-                                    const LoginEvent.forgotPasswordTapped(),
-                                  );
+                              context.read<LoginBloc>().add(const LoginEvent.forgotPasswordTapped());
                             },
                             child: Text(
                               AppLocalizations.of(context)!.loginForgotPassword,
-                              style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                    color: MyTheme.of(context).darkGreyColor,
-                                  ),
+                              style: MyTheme.of(
+                                context,
+                              ).defaultTextStyle.copyWith(color: MyTheme.of(context).darkGreyColor),
                             ),
                           ),
                         ),
@@ -167,13 +172,7 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           const Padding(
                             padding: EdgeInsets.only(top: 12),
                             child: Center(
-                              child: SizedBox(
-                                width: 32,
-                                height: 32,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                ),
-                              ),
+                              child: SizedBox(width: 32, height: 32, child: CircularProgressIndicator(strokeWidth: 3)),
                             ),
                           ),
                         const SizedBox(height: 12),
@@ -190,15 +189,9 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                                 text: context.locale.politicaHref,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    launchUrl(
-                                      Uri.parse(
-                                        'https://mafbase.ru/images/politika.pdf',
-                                      ),
-                                    );
+                                    launchUrl(Uri.parse('https://mafbase.ru/images/politika.pdf'));
                                   },
-                                style: const TextStyle(
-                                  decoration: TextDecoration.underline,
-                                ),
+                                style: const TextStyle(decoration: TextDecoration.underline),
                               ),
                             ],
                           ),
@@ -209,9 +202,9 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                             onPressed: _onSignUpTapped,
                             child: Text(
                               AppLocalizations.of(context)!.loginRegistration,
-                              style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                    color: MyTheme.of(context).darkGreyColor,
-                                  ),
+                              style: MyTheme.of(
+                                context,
+                              ).defaultTextStyle.copyWith(color: MyTheme.of(context).darkGreyColor),
                             ),
                           ),
                         ),
@@ -250,10 +243,7 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                       children: [
                         CustomTextField(
                           key: const Key('login_field'),
-                          autoFillHints: const [
-                            AutofillHints.username,
-                            AutofillHints.email,
-                          ],
+                          autoFillHints: const [AutofillHints.username, AutofillHints.email],
                           validate: (value) {
                             if (value != null) {
                               if (EmailValidator.validate(value)) {
@@ -267,14 +257,14 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           errorText: state.hasError ? context.locale.invalidEmailOrPassword : null,
                           focusNode: _emailFocusNode,
                           onSubmit: (_) {
-                            _emailFocusNode.unfocus();
-                            _passwordFocusNode.requestFocus();
+                            if (_passwordController.text.isNotEmpty) {
+                              _onSubmit();
+                            } else {
+                              _emailFocusNode.unfocus();
+                              _passwordFocusNode.requestFocus();
+                            }
                           },
-                          icon: Icon(
-                            Icons.email_outlined,
-                            color: MyTheme.of(context).borderColor,
-                            size: 20,
-                          ),
+                          icon: Icon(Icons.email_outlined, color: MyTheme.of(context).borderColor, size: 20),
                         ),
                         const SizedBox(height: 20),
                         CustomTextField(
@@ -287,11 +277,7 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                             _onSubmit();
                           },
                           canObscure: true,
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: MyTheme.of(context).borderColor,
-                            size: 20,
-                          ),
+                          icon: Icon(Icons.lock_outline, color: MyTheme.of(context).borderColor, size: 20),
                         ),
                         const SizedBox(height: 20),
                         Align(
@@ -303,15 +289,13 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {
-                              context.read<LoginBloc>().add(
-                                    const LoginEvent.forgotPasswordTapped(),
-                                  );
+                              context.read<LoginBloc>().add(const LoginEvent.forgotPasswordTapped());
                             },
                             child: Text(
                               AppLocalizations.of(context)!.loginForgotPassword,
-                              style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                    color: MyTheme.of(context).darkGreyColor,
-                                  ),
+                              style: MyTheme.of(
+                                context,
+                              ).defaultTextStyle.copyWith(color: MyTheme.of(context).darkGreyColor),
                             ),
                           ),
                         ),
@@ -326,13 +310,7 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           const Padding(
                             padding: EdgeInsets.only(top: 12),
                             child: Center(
-                              child: SizedBox(
-                                width: 32,
-                                height: 32,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                ),
-                              ),
+                              child: SizedBox(width: 32, height: 32, child: CircularProgressIndicator(strokeWidth: 3)),
                             ),
                           ),
                         const SizedBox(height: 12),
@@ -349,15 +327,9 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                                 text: context.locale.politicaHref,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    launchUrl(
-                                      Uri.parse(
-                                        'https://mafbase.ru/images/politika.pdf',
-                                      ),
-                                    );
+                                    launchUrl(Uri.parse('https://mafbase.ru/images/politika.pdf'));
                                   },
-                                style: const TextStyle(
-                                  decoration: TextDecoration.underline,
-                                ),
+                                style: const TextStyle(decoration: TextDecoration.underline),
                               ),
                             ],
                           ),
@@ -368,9 +340,9 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                             onPressed: _onSignUpTapped,
                             child: Text(
                               AppLocalizations.of(context)!.loginRegistration,
-                              style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                    color: MyTheme.of(context).darkGreyColor,
-                                  ),
+                              style: MyTheme.of(
+                                context,
+                              ).defaultTextStyle.copyWith(color: MyTheme.of(context).darkGreyColor),
                             ),
                           ),
                         ),
@@ -390,11 +362,8 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
     if (_formKey.currentState?.validate() == true) {
       TextInput.finishAutofillContext();
       context.read<LoginBloc>().add(
-            LoginEvent.loginButtonTapped(
-              email: _emailController.text,
-              password: _passwordController.text,
-            ),
-          );
+        LoginEvent.loginButtonTapped(email: _emailController.text, password: _passwordController.text),
+      );
     }
   }
 
