@@ -108,7 +108,6 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           errorText: state.hasError ? context.locale.invalidEmailOrPassword : null,
                           focusNode: _emailFocusNode,
                           onSubmit: (_) {
-                            _emailFocusNode.unfocus();
                             if (!kIsWeb) _passwordFocusNode.requestFocus();
                           },
                           icon: Icon(
@@ -268,7 +267,6 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           errorText: state.hasError ? context.locale.invalidEmailOrPassword : null,
                           focusNode: _emailFocusNode,
                           onSubmit: (_) {
-                            _emailFocusNode.unfocus();
                             if (!kIsWeb) _passwordFocusNode.requestFocus();
                           },
                           icon: Icon(
