@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -108,7 +109,7 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           focusNode: _emailFocusNode,
                           onSubmit: (_) {
                             _emailFocusNode.unfocus();
-                            _passwordFocusNode.requestFocus();
+                            if (!kIsWeb) _passwordFocusNode.requestFocus();
                           },
                           icon: Icon(
                             Icons.email_outlined,
@@ -268,7 +269,7 @@ class _LoginPageContentState extends CustomState<_LoginPageContent> {
                           focusNode: _emailFocusNode,
                           onSubmit: (_) {
                             _emailFocusNode.unfocus();
-                            _passwordFocusNode.requestFocus();
+                            if (!kIsWeb) _passwordFocusNode.requestFocus();
                           },
                           icon: Icon(
                             Icons.email_outlined,
