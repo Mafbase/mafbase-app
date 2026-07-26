@@ -110,6 +110,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
     navigatorKey: rootNavigationKey,
   );
   StreamSubscription? subscription;
+  bool _initLocationConsumed = false;
 
   @override
   void initState() {
@@ -147,8 +148,9 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 routerConfig: _appRouter.config(
                   includePrefixMatches: true,
                   deepLinkBuilder: (deepLink) {
-                    // Handle initial push notification deep link
-                    if (widget.initLocation != null) {
+                    // Handle initial push notification deep link (only once)
+                    if (widget.initLocation != null && !_initLocationConsumed) {
+                      _initLocationConsumed = true;
                       return DeepLink.path(widget.initLocation!);
                     }
                     // Redirect fragment-based deep links (/#/club → /club)
