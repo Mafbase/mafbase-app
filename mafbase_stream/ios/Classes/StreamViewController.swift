@@ -493,17 +493,19 @@ final class StreamViewController: UIViewController {
             }
             isRecording = false
             mp4Recorder = nil
+            // Останавливаем стрим сразу — до async-операций с Фото и запроса разрешений,
+            // чтобы камера и микрофон не продолжали вещание пока идёт сохранение.
+            if isStreaming { stopStreamingSync() }
             recorder.stop { [weak self] url, _ in
                 guard let self = self else { return }
-                let doClose = {
-                    if self.isStreaming { self.stopStreamingSync() }
-                    self.dismissWithReason(.user)
-                }
                 guard let url = url else {
-                    doClose()
+                    self.dismissWithReason(.user)
                     return
                 }
-                self.saveToPhotoLibrary(url: url) { _ in doClose() }
+                // Показываем диалог шеринга перед закрытием экрана (как при нажатии «Стоп»)
+                self.saveToPhotoLibrary(url: url) { saved in
+                    self.presentShareSheet(for: url, savedToPhotos: saved, dismissAfter: true)
+                }
             }
             return
         }
@@ -637,7 +639,7 @@ final class StreamViewController: UIViewController {
         }
     }
 
-    private func presentShareSheet(for url: URL, savedToPhotos: Bool) {
+    private func presentShareSheet(for url: URL, savedToPhotos: Bool, dismissAfter: Bool = false) {
         let title = savedToPhotos ? "Запись сохранена в Фото" : "Запись завершена"
         let message = savedToPhotos ? nil : url.lastPathComponent
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -645,9 +647,16 @@ final class StreamViewController: UIViewController {
             guard let self = self else { return }
             let share = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             share.popoverPresentationController?.sourceView = self.recordButton
+            if dismissAfter {
+                share.completionWithItemsHandler = { [weak self] _, _, _, _ in
+                    self?.dismissWithReason(.user)
+                }
+            }
             self.present(share, animated: true)
         })
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
+            if dismissAfter { self?.dismissWithReason(.user) }
+        })
         present(alert, animated: true)
     }
 
