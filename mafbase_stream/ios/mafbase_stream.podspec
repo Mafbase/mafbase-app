@@ -62,13 +62,15 @@ A new Flutter plugin project.
   s.swift_version = '5.0'
 
   # Системные фреймворки — VideoToolbox/AudioToolbox для энкодеров,
-  # CoreVideo/CoreMedia/AVFoundation для capture, OpenGLES для композитора.
+  # CoreVideo/CoreMedia/AVFoundation для capture, OpenGLES для композитора,
+  # Photos для сохранения записи в библиотеку Фото.
   s.frameworks = [
     'AVFoundation',
     'AudioToolbox',
     'CoreMedia',
     'CoreVideo',
     'OpenGLES',
+    'Photos',
     'VideoToolbox',
   ]
 
