@@ -30,6 +30,8 @@
 	<string>Доступ к камере нужен для предпросмотра и стрима видео.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Доступ к микрофону нужен для записи звука во время стрима.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Доступ нужен, чтобы сохранить запись стрима в галерею.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

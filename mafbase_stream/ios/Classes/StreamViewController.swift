@@ -549,6 +549,12 @@ final class StreamViewController: UIViewController {
 
     private func startRecording() {
         guard captureSession.isRunning else { return }
+        // Запрашиваем доступ к Фото заранее — в момент старта записи, а не при её
+        // завершении. Если статус ещё не определён, показываем системный диалог сейчас;
+        // при остановке используется уже полученный статус без повторного запроса.
+        if PHPhotoLibrary.authorizationStatus(for: .addOnly) == .notDetermined {
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { _ in }
+        }
         isTransitioning = true
         recordButton.isEnabled = false
 
@@ -605,14 +611,14 @@ final class StreamViewController: UIViewController {
         isRecording = false
         recorder.stop { url, _ in
             guard let url = url else { return }
-            PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-                guard status == .authorized || status == .limited else { return }
-                PHPhotoLibrary.shared().performChanges({
-                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-                }) { _, error in
-                    if let error = error {
-                        NSLog("[mafbase_stream] Failed to save video to Photos (sync): \(error)")
-                    }
+            // Разрешение уже запрошено при старте записи — используем текущий статус.
+            let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+            guard status == .authorized || status == .limited else { return }
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+            }) { _, error in
+                if let error = error {
+                    NSLog("[mafbase_stream] Failed to save video to Photos (sync): \(error)")
                 }
             }
         }
@@ -622,20 +628,21 @@ final class StreamViewController: UIViewController {
 
     /// Сохраняет видеофайл в библиотеку Фото. Completion вызывается на main queue.
     private func saveToPhotoLibrary(url: URL, completion: @escaping (Bool) -> Void) {
-        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-            guard status == .authorized || status == .limited else {
-                NSLog("[mafbase_stream] Photos access denied: \(status.rawValue)")
-                DispatchQueue.main.async { completion(false) }
-                return
+        // Разрешение уже запрошено при старте записи — используем текущий статус,
+        // чтобы не показывать диалог повторно в момент остановки.
+        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+        guard status == .authorized || status == .limited else {
+            NSLog("[mafbase_stream] Photos access denied: \(status.rawValue)")
+            DispatchQueue.main.async { completion(false) }
+            return
+        }
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+        }) { success, error in
+            if let error = error {
+                NSLog("[mafbase_stream] Failed to save video to Photos: \(error)")
             }
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-            }) { success, error in
-                if let error = error {
-                    NSLog("[mafbase_stream] Failed to save video to Photos: \(error)")
-                }
-                DispatchQueue.main.async { completion(success) }
-            }
+            DispatchQueue.main.async { completion(success) }
         }
     }
 

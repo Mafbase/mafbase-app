@@ -1,7 +1,5 @@
 PODS:
   - Flutter (1.0.0)
-  - integration_test (0.0.1):
-    - Flutter
   - mafbase_stream (0.0.1):
     - Flutter
     - SwiftProtobuf (~> 1.25)
@@ -9,7 +7,6 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - mafbase_stream (from `.symlinks/plugins/mafbase_stream/ios`)
 
 SPEC REPOS:
@@ -19,15 +16,12 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  integration_test:
-    :path: ".symlinks/plugins/integration_test/ios"
   mafbase_stream:
     :path: ".symlinks/plugins/mafbase_stream/ios"
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
-  mafbase_stream: 0c5f89fd7141c93c67e1904a5c614043cfea9bdc
+  mafbase_stream: 2c053ded6e1e3f3999059f13b7009c253474775e
   SwiftProtobuf: 3fafd1b2fb97e6d95ad9c8adb2215da9afec7c83
 
 PODFILE CHECKSUM: d71a8f9d234bf288cee64b372c30c196c8075224
