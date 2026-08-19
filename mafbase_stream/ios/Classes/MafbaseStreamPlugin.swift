@@ -51,6 +51,7 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
       .trimmingCharacters(in: .whitespacesAndNewlines)
     let brandImageUrl = (args?["brandImageUrl"] as? String)?
       .trimmingCharacters(in: .whitespacesAndNewlines)
+    let segmentDurationMinutes = (args?["segmentDurationMinutes"] as? NSNumber)?.intValue
 
     let controller = StreamViewController()
     controller.rtmpUrl = (rtmpUrl?.isEmpty == false) ? rtmpUrl! : "rtmp://10.0.2.2/live"
@@ -63,6 +64,10 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
       breakPlaceholderImageUrl: (breakPlaceholderImageUrl?.isEmpty == false) ? breakPlaceholderImageUrl : nil,
       brandImageUrl: (brandImageUrl?.isEmpty == false) ? brandImageUrl : nil
     )
+    // nil = платформенный дефолт (iOS: 40 минут)
+    if let minutes = segmentDurationMinutes {
+      controller.segmentDurationSeconds = minutes > 0 ? TimeInterval(minutes * 60) : 0
+    }
     controller.modalPresentationStyle = .fullScreen
     controller.onClose = { [weak self] reason in
       guard let self = self, let pending = self.pendingResult else { return }

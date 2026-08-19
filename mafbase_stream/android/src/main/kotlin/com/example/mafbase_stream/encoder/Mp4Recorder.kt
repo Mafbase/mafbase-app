@@ -4,10 +4,13 @@ import android.content.Context
 import android.media.MediaCodec
 import android.media.MediaFormat
 import android.media.MediaMuxer
+import android.os.Build
 import android.os.Environment
 import android.util.Log
 import android.view.Surface
+import androidx.annotation.RequiresApi
 import java.io.File
+import java.io.FileDescriptor
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -56,10 +59,29 @@ class Mp4Recorder(
         }
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
         val file = File(dir, "mafbase_stream_$timestamp.mp4")
+        return start(width, height, file)
+    }
+
+    /** Запускает запись в указанный файл. */
+    fun start(width: Int, height: Int, file: File): File {
         outputFile = file
-
         muxer = MediaMuxer(file.absolutePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+        startEncoders(width, height)
+        return file
+    }
 
+    /**
+     * Запускает запись напрямую в [fd] без создания промежуточного файла.
+     * Используется для прямой записи в MediaStore на API 26+.
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun start(width: Int, height: Int, fd: FileDescriptor) {
+        outputFile = null
+        muxer = MediaMuxer(fd, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+        startEncoders(width, height)
+    }
+
+    private fun startEncoders(width: Int, height: Int) {
         videoEncoder = VideoEncoder(width, height, sink = videoSink).also { it.prepare() }
         if (audioPipeline != null) {
             try {
@@ -82,7 +104,6 @@ class Mp4Recorder(
 
         videoEncoder?.start()
         audioEncoder?.start()
-        return file
     }
 
     fun stop(): File? {

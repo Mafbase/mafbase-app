@@ -58,19 +58,28 @@ final class Mp4Recorder {
 
     // MARK: - Инициализация
 
-    init() {
+    /// [segmentName] — имя файла сегмента (без пути). Если nil, имя генерируется автоматически.
+    init(segmentName: String? = nil) {
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             ?? URL(fileURLWithPath: NSTemporaryDirectory())
         outputDirectory = dir
+        self.customSegmentName = segmentName
     }
+
+    private let customSegmentName: String?
 
     // MARK: - Public API
 
     func start(width: Int32, height: Int32) throws -> URL {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd_HHmmss"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        let filename = "mafbase_stream_\(formatter.string(from: Date())).mp4"
+        let filename: String
+        if let custom = customSegmentName {
+            filename = custom
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMdd_HHmmss"
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            filename = "mafbase_stream_\(formatter.string(from: Date())).mp4"
+        }
         let url = outputDirectory.appendingPathComponent(filename)
         try? FileManager.default.removeItem(at: url)
 
