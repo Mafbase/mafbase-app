@@ -24,6 +24,7 @@ class MafbaseStreamWeb extends MafbaseStreamPlatform {
     int? table,
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
+    int? segmentDurationMinutes,
   }) async {}
 
   @override
