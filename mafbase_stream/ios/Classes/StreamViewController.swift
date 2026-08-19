@@ -512,9 +512,8 @@ final class StreamViewController: UIViewController {
                     self.dismissWithReason(.user)
                     return
                 }
-                // Показываем диалог шеринга перед закрытием экрана (как при нажатии «Стоп»)
-                self.saveToPhotoLibraryAndDelete(url: url) { saved in
-                    self.presentShareSheet(for: url, savedToPhotos: saved, dismissAfter: true)
+                self.saveToPhotoLibraryAndDelete(url: url) { _ in
+                    self.dismissWithReason(.user)
                 }
             }
             return
@@ -638,10 +637,10 @@ final class StreamViewController: UIViewController {
                 self.recordButton.isEnabled = true
                 return
             }
-            self.saveToPhotoLibraryAndDelete(url: url) { _ in
-                // completion вызывается на main queue (из saveToPhotoLibraryAndDelete)
-                self.startRecordingSegment(isRollover: true)
-            }
+            // Сначала запускаем следующий сегмент — без паузы ожидания импорта в Фото.
+            self.startRecordingSegment(isRollover: true)
+            // Сохраняем предыдущий сегмент в Фото параллельно.
+            self.saveToPhotoLibraryAndDelete(url: url) { _ in }
         }
     }
 
@@ -669,10 +668,7 @@ final class StreamViewController: UIViewController {
                 self.showAlert(title: "Запись пуста", message: "Файл не создан.")
                 return
             }
-            // Сначала сохраняем в Фото, затем показываем диалог шеринга
-            self.saveToPhotoLibraryAndDelete(url: url) { saved in
-                self.presentShareSheet(for: url, savedToPhotos: saved)
-            }
+            self.saveToPhotoLibraryAndDelete(url: url) { _ in }
         }
     }
 
@@ -722,27 +718,6 @@ final class StreamViewController: UIViewController {
             }
             DispatchQueue.main.async { completion(success) }
         }
-    }
-
-    private func presentShareSheet(for url: URL, savedToPhotos: Bool, dismissAfter: Bool = false) {
-        let title = savedToPhotos ? "Запись сохранена в Фото" : "Запись завершена"
-        let message = savedToPhotos ? nil : url.lastPathComponent
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Поделиться", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            let share = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            share.popoverPresentationController?.sourceView = self.recordButton
-            if dismissAfter {
-                share.completionWithItemsHandler = { [weak self] _, _, _, _ in
-                    self?.dismissWithReason(.user)
-                }
-            }
-            self.present(share, animated: true)
-        })
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
-            if dismissAfter { self?.dismissWithReason(.user) }
-        })
-        present(alert, animated: true)
     }
 
     private func showAlert(title: String, message: String?) {

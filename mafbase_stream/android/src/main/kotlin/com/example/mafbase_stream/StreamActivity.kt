@@ -3,10 +3,8 @@ package com.example.mafbase_stream
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -36,7 +34,6 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import com.example.mafbase_stream.encoder.AudioPipeline
 import com.example.mafbase_stream.encoder.Mp4Recorder
 import com.example.mafbase_stream.events.StreamEventBus
@@ -1008,13 +1005,11 @@ class StreamActivity :
                     isTransitioning = false
                     recordButton.isEnabled = true
                     if (file != null && file.exists() && file.length() > 0) {
-                        // Сохраняем в галерею (оригинальный файл удаляется после копирования)
                         saveToGallery(file) { saved ->
                             if (saved) {
                                 Toast.makeText(this@StreamActivity, "Запись сохранена в галерею", Toast.LENGTH_SHORT).show()
                             } else {
-                                // Сохранение не удалось — файл ещё существует, предлагаем поделиться
-                                showRecordingDoneDialog(file, savedToGallery = false)
+                                Toast.makeText(this@StreamActivity, "Не удалось сохранить запись", Toast.LENGTH_SHORT).show()
                             }
                         }
                     } else {
@@ -1282,27 +1277,4 @@ class StreamActivity :
         }, "SaveToGallery").start()
     }
 
-    private fun showRecordingDoneDialog(file: File, savedToGallery: Boolean) {
-        val title = if (savedToGallery) "Запись сохранена в галерею" else "Запись завершена"
-        AlertDialog.Builder(this)
-            .setTitle(title)
-            .setPositiveButton("Поделиться") { _, _ -> shareRecording(file) }
-            .setNegativeButton("OK", null)
-            .show()
-    }
-
-    private fun shareRecording(file: File) {
-        try {
-            val authority = "${packageName}.mafbase_stream.fileprovider"
-            val uri = FileProvider.getUriForFile(this, authority, file)
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                type = "video/mp4"
-                putExtra(Intent.EXTRA_STREAM, uri)
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            }
-            startActivity(Intent.createChooser(intent, "Поделиться записью"))
-        } catch (e: Exception) {
-            Log.w(TAG, "share failed", e)
-        }
-    }
 }
