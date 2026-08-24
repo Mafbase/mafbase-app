@@ -30,6 +30,8 @@ final class Mp4Recorder {
     // MARK: - Конфигурация
 
     private let outputDirectory: URL
+    /// Имя файла сегмента (без пути) — задаётся вызывающим, он же нумерует сегменты.
+    private let segmentName: String
     private let lock = NSLock()
 
     // MARK: - Энкодеры
@@ -58,20 +60,17 @@ final class Mp4Recorder {
 
     // MARK: - Инициализация
 
-    init() {
+    init(segmentName: String) {
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             ?? URL(fileURLWithPath: NSTemporaryDirectory())
         outputDirectory = dir
+        self.segmentName = segmentName
     }
 
     // MARK: - Public API
 
     func start(width: Int32, height: Int32) throws -> URL {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd_HHmmss"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        let filename = "mafbase_stream_\(formatter.string(from: Date())).mp4"
-        let url = outputDirectory.appendingPathComponent(filename)
+        let url = outputDirectory.appendingPathComponent(segmentName)
         try? FileManager.default.removeItem(at: url)
 
         let writer: AVAssetWriter
@@ -80,7 +79,9 @@ final class Mp4Recorder {
         } catch {
             throw RecorderError.writerCreate(error)
         }
-        writer.shouldOptimizeForNetworkUse = true
+        // Запись уходит в галерею, faststart не нужен, а с ним finishWriting
+        // на многочасовых файлах заметно дольше (writer переносит moov в начало).
+        writer.shouldOptimizeForNetworkUse = false
         self.writer = writer
         outputURL = url
 

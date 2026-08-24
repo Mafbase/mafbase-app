@@ -1,23 +1,21 @@
 package com.example.mafbase_stream.encoder
 
-import android.content.Context
 import android.media.MediaCodec
 import android.media.MediaFormat
 import android.media.MediaMuxer
-import android.os.Environment
+import android.os.Build
 import android.util.Log
 import android.view.Surface
+import androidx.annotation.RequiresApi
 import java.io.File
+import java.io.FileDescriptor
 import java.nio.ByteBuffer
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 /**
  * Оркестратор аппаратного энкодинга и записи MP4.
  *
  * Шаги:
- *  1. start(width, height) — создаёт MediaMuxer и оба энкодера. После этого
+ *  1. start(width, height, file|fd) — создаёт MediaMuxer и оба энкодера. После этого
  *     [videoInputSurface] становится доступным для добавления в Camera2 capture session.
  *  2. Когда оба энкодера сообщают output-format, добавляем треки в muxer и стартуем его.
  *  3. Каждый закодированный сэмпл нормализуется по PTS (зануляется относительно первого
@@ -27,7 +25,6 @@ import java.util.Locale
  * Если AudioRecord/AAC недоступен (например, эмулятор без микрофона) — пишется только видео.
  */
 class Mp4Recorder(
-    private val context: Context,
     private val audioPipeline: AudioPipeline? = null,
 ) {
 
@@ -48,18 +45,26 @@ class Mp4Recorder(
 
     val videoInputSurface: Surface? get() = videoEncoder?.surface
 
-    fun start(width: Int, height: Int): File {
-        val dir = context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)
-            ?: context.filesDir
-        if (!dir.exists()) {
-            dir.mkdirs()
-        }
-        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-        val file = File(dir, "mafbase_stream_$timestamp.mp4")
+    /** Запускает запись в указанный файл. Именование сегментов — на стороне вызывающего. */
+    fun start(width: Int, height: Int, file: File): File {
         outputFile = file
-
         muxer = MediaMuxer(file.absolutePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+        startEncoders(width, height)
+        return file
+    }
 
+    /**
+     * Запускает запись напрямую в [fd] без создания промежуточного файла.
+     * Используется для прямой записи в MediaStore на API 26+.
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun start(width: Int, height: Int, fd: FileDescriptor) {
+        outputFile = null
+        muxer = MediaMuxer(fd, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+        startEncoders(width, height)
+    }
+
+    private fun startEncoders(width: Int, height: Int) {
         videoEncoder = VideoEncoder(width, height, sink = videoSink).also { it.prepare() }
         if (audioPipeline != null) {
             try {
@@ -82,7 +87,6 @@ class Mp4Recorder(
 
         videoEncoder?.start()
         audioEncoder?.start()
-        return file
     }
 
     fun stop(): File? {

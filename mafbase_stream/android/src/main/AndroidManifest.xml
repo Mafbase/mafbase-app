@@ -4,6 +4,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Прогресс сохранения записи показывается нотификацией; на API 33+ без этого
+         разрешения нотификация молча подавляется. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -24,14 +28,11 @@
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.mafbase_stream.fileprovider"
+        <!-- shortService: сохранение занимает секунды-минуты и не требует ни отдельного
+             разрешения, ни декларации типа в Play Console (в отличие от dataSync). -->
+        <service
+            android:name=".SaveToGalleryService"
             android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/mafbase_stream_file_paths" />
-        </provider>
+            android:foregroundServiceType="shortService" />
     </application>
 </manifest>

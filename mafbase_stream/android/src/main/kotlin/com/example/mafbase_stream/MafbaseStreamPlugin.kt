@@ -100,11 +100,12 @@ class MafbaseStreamPlugin :
         val table = call.argument<Number>("table")?.toInt()
         val breakPlaceholderUrl = call.argument<String>("breakPlaceholderImageUrl")
         val brandImageUrl = call.argument<String>("brandImageUrl")
+        val segmentDurationMinutes = call.argument<Number>("segmentDurationMinutes")?.toInt()
         Log.d(
             "MafbaseStream",
             "openStreamScreen args: rtmpUrl=${call.argument<String>("rtmpUrl")} overlay=$rawOverlay " +
                 "tournamentId=$tournamentId clubId=$clubId table=$table breakPlaceholder=$breakPlaceholderUrl " +
-                "brand=$brandImageUrl",
+                "brand=$brandImageUrl segmentDurationMinutes=$segmentDurationMinutes",
         )
         val intent = Intent(act, StreamActivity::class.java).apply {
             call.argument<String>("rtmpUrl")?.let { putExtra(StreamActivity.EXTRA_RTMP_URL, it) }
@@ -119,6 +120,7 @@ class MafbaseStreamPlugin :
             brandImageUrl?.takeIf { it.isNotBlank() }?.let {
                 putExtra(StreamActivity.EXTRA_BRAND_IMAGE_URL, it)
             }
+            segmentDurationMinutes?.let { putExtra(StreamActivity.EXTRA_SEGMENT_DURATION_MINUTES, it) }
         }
         act.startActivityForResult(intent, REQUEST_OPEN_STREAM)
     }

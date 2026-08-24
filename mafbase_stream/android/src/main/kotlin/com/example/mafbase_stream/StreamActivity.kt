@@ -3,10 +3,8 @@ package com.example.mafbase_stream
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -15,12 +13,14 @@ import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CaptureRequest
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
+import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
@@ -34,7 +34,6 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import com.example.mafbase_stream.encoder.AudioPipeline
 import com.example.mafbase_stream.encoder.Mp4Recorder
 import com.example.mafbase_stream.events.StreamEventBus
@@ -45,6 +44,9 @@ import com.example.mafbase_stream.overlay.OverlayDebugTarget
 import com.example.mafbase_stream.overlay.OverlayParams
 import com.example.mafbase_stream.overlay.OverlayViewRenderer
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * Полноэкранный нативный экран с превью камеры по Camera2 API и записью MP4.
@@ -53,10 +55,11 @@ import java.io.File
  * При нажатии «Закрыть» — возвращает RESULT_OK; при отказе в разрешениях — RESULT_PERMISSIONS_DENIED.
  *
  * Кнопка «Запись»:
- *  - старт: пересобираем capture session с двумя выходами (preview + энкодер) и
- *    TEMPLATE_RECORD, начинаем писать MP4 в getExternalFilesDir(DIRECTORY_MOVIES);
- *  - стоп: возвращаем preview-only session, останавливаем энкодеры на фоновом потоке,
- *    показываем toast и предлагаем share через FileProvider.
+ *  - старт: подключаем энкодер как ещё один выход Compositor'а и начинаем писать MP4.
+ *    На API 29+ пишем напрямую в MediaStore через FileDescriptor, ниже — во временный
+ *    файл в getExternalFilesDir(DIRECTORY_MOVIES);
+ *  - стоп: отцепляем энкодер, финализируем запись на фоновом потоке и показываем toast.
+ *    На API < 29 файл копируется в галерею через [SaveToGalleryService].
  */
 class StreamActivity :
     Activity(),
@@ -79,6 +82,16 @@ class StreamActivity :
 
     private var mp4Recorder: Mp4Recorder? = null
     private var isRecording: Boolean = false
+
+    // Сегментация записи
+    private var segmentDurationMs: Long = 0L  // 0 = выключено
+    private var segmentIndex: Int = 1
+    private var recordingSessionId: String = ""
+    private var segmentTimerRunnable: Runnable? = null
+
+    // Текущая активная запись в MediaStore (API 29+)
+    private var activeMediaStoreUri: Uri? = null
+    private var activeMediaStorePfd: ParcelFileDescriptor? = null
 
     private var streamSession: StreamSession? = null
     private var isStreaming: Boolean = false
@@ -129,7 +142,9 @@ class StreamActivity :
         const val EXTRA_TABLE: String = "mafbase_stream.table"
         const val EXTRA_BREAK_PLACEHOLDER_URL: String = "mafbase_stream.break_placeholder_url"
         const val EXTRA_BRAND_IMAGE_URL: String = "mafbase_stream.brand_image_url"
+        const val EXTRA_SEGMENT_DURATION_MINUTES: String = "mafbase_stream.segment_duration_minutes"
 
+        /** Без этих разрешений экран работать не может — при отказе закрываемся. */
         private fun requiredPermissions(): Array<String> =
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 arrayOf(
@@ -143,6 +158,19 @@ class StreamActivity :
                     Manifest.permission.RECORD_AUDIO,
                 )
             }
+
+        /**
+         * Что запрашиваем при открытии экрана: обязательные плюс POST_NOTIFICATIONS.
+         * Уведомление показывает прогресс сохранения записи; без разрешения оно молча
+         * подавляется, но сама запись работает — поэтому отказ не блокирует экран.
+         */
+        private fun requestedPermissions(): Array<String> {
+            val permissions = requiredPermissions().toMutableList()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                permissions += Manifest.permission.POST_NOTIFICATIONS
+            }
+            return permissions.toTypedArray()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -168,6 +196,11 @@ class StreamActivity :
         intent?.getStringExtra(EXTRA_BRAND_IMAGE_URL)?.takeIf { it.isNotBlank() }?.let {
             brandImageUrl = it
         }
+        if (intent?.hasExtra(EXTRA_SEGMENT_DURATION_MINUTES) == true) {
+            val minutes = intent.getIntExtra(EXTRA_SEGMENT_DURATION_MINUTES, 0)
+            segmentDurationMs = if (minutes > 0) minutes * 60_000L else 0L
+        }
+        // Android: по умолчанию сегментация выключена (segmentDurationMs = 0)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.decorView.systemUiVisibility = (
@@ -313,8 +346,8 @@ class StreamActivity :
 
         setContentView(container)
 
-        if (!hasAllPermissions()) {
-            requestPermissions(requiredPermissions(), REQUEST_PERMISSIONS)
+        if (!hasAllPermissions() || !hasNotificationsPermission()) {
+            requestPermissions(requestedPermissions(), REQUEST_PERMISSIONS)
         }
     }
 
@@ -346,14 +379,15 @@ class StreamActivity :
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode != REQUEST_PERMISSIONS) return
 
-        val granted = grantResults.isNotEmpty() &&
-            grantResults.all { it == PackageManager.PERMISSION_GRANTED }
-        if (granted) {
-            if (hasSurface && cameraDevice == null) {
-                openCamera()
-            }
-        } else {
+        // Отказ в POST_NOTIFICATIONS экран не закрывает — проверяем только обязательные.
+        val required = requiredPermissions().toSet()
+        val requiredDenied = grantResults.isEmpty() || permissions.indices.any { i ->
+            permissions[i] in required && grantResults[i] != PackageManager.PERMISSION_GRANTED
+        }
+        if (requiredDenied) {
             finishWithResult(RESULT_PERMISSIONS_DENIED)
+        } else if (hasSurface && cameraDevice == null) {
+            openCamera()
         }
     }
 
@@ -381,6 +415,10 @@ class StreamActivity :
     private fun hasAllPermissions(): Boolean = requiredPermissions().all {
         checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
     }
+
+    private fun hasNotificationsPermission(): Boolean =
+        Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
 
     private fun startBackgroundThread() {
         if (backgroundThread != null) return
@@ -697,41 +735,264 @@ class StreamActivity :
         isTransitioning = true
         recordButton.isEnabled = false
 
-        val recorder = Mp4Recorder(this, audioPipeline)
-        try {
-            recorder.start(size.width, size.height)
+        recordingSessionId = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+        segmentIndex = 1
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startRecordingMediaStore(size, comp, isRollover = false)
+        } else {
+            startRecordingFile(size, comp, isRollover = false)
+        }
+    }
+
+    /**
+     * Общий сброс состояния, когда старт записи или очередного сегмента не удался.
+     * При провале ролловера запись фактически прекращается — возвращаем кнопку в
+     * исходное состояние и гасим таймер, иначе пользователь видит «Стоп» на экране,
+     * где ничего не пишется.
+     */
+    private fun abortRecordingStart(isRollover: Boolean, message: String) {
+        isTransitioning = false
+        recordButton.isEnabled = true
+        if (isRollover) {
+            cancelSegmentTimer()
+            isRecording = false
+            recordButton.text = "Запись"
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    /** Запускает запись напрямую в MediaStore через FileDescriptor. Только API 29+. */
+    private fun startRecordingMediaStore(size: Size, comp: Compositor, isRollover: Boolean) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return
+        val name = buildSegmentName()
+        val values = ContentValues().apply {
+            put(MediaStore.Video.Media.DISPLAY_NAME, name)
+            put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+            put(MediaStore.Video.Media.RELATIVE_PATH, Environment.DIRECTORY_MOVIES)
+            put(MediaStore.Video.Media.IS_PENDING, 1)
+        }
+        val uri = contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
+        if (uri == null) {
+            Log.e(TAG, "startRecordingMediaStore: failed to create MediaStore entry")
+            abortRecordingStart(isRollover, "Не удалось создать запись в галерее")
+            return
+        }
+        val pfd = try {
+            contentResolver.openFileDescriptor(uri, "w")
         } catch (e: Exception) {
-            Log.e(TAG, "Mp4Recorder.start failed", e)
-            recorder.stop()
-            Toast.makeText(this, "Не удалось начать запись: ${e.message}", Toast.LENGTH_LONG).show()
-            isTransitioning = false
-            recordButton.isEnabled = true
+            Log.e(TAG, "startRecordingMediaStore: failed to open FD", e)
+            contentResolver.delete(uri, null, null)
+            abortRecordingStart(isRollover, "Не удалось открыть файл галереи")
+            return
+        }
+        if (pfd == null) {
+            contentResolver.delete(uri, null, null)
+            abortRecordingStart(isRollover, "Не удалось открыть файл галереи")
+            return
+        }
+
+        activeMediaStoreUri = uri
+        activeMediaStorePfd = pfd
+
+        val recorder = Mp4Recorder(audioPipeline)
+        try {
+            @Suppress("NewApi")
+            recorder.start(size.width, size.height, pfd.fileDescriptor)
+        } catch (e: Exception) {
+            Log.e(TAG, "Mp4Recorder.start (FD) failed", e)
+            pfd.close()
+            contentResolver.delete(uri, null, null)
+            activeMediaStoreUri = null
+            activeMediaStorePfd = null
+            abortRecordingStart(isRollover, "Не удалось начать запись: ${e.message}")
             return
         }
         val encoderSurface = recorder.videoInputSurface
         if (encoderSurface == null) {
-            Log.e(TAG, "encoder input surface is null")
+            Log.e(TAG, "startRecordingMediaStore: encoder surface is null")
             recorder.stop()
-            isTransitioning = false
-            recordButton.isEnabled = true
+            pfd.close()
+            contentResolver.delete(uri, null, null)
+            activeMediaStoreUri = null
+            activeMediaStorePfd = null
+            abortRecordingStart(isRollover, "Не удалось начать запись")
             return
         }
         mp4Recorder = recorder
-
         // Capture session не трогаем — добавляем encoder как новый output Compositor'а.
-        comp.attachOutput(
-            Compositor.OutputId.RECORD_ENCODER,
-            encoderSurface,
-            needsPresentationTime = true,
-        )
+        comp.attachOutput(Compositor.OutputId.RECORD_ENCODER, encoderSurface, needsPresentationTime = true)
         isRecording = true
         isTransitioning = false
-        recordButton.text = "Стоп"
-        recordButton.isEnabled = true
+        if (!isRollover) {
+            recordButton.text = "Стоп"
+            recordButton.isEnabled = true
+        }
+        scheduleNextSegment()
+    }
+
+    /** Запускает запись в файл во временное хранилище. Для API < 29. */
+    private fun startRecordingFile(size: Size, comp: Compositor, isRollover: Boolean) {
+        val recorder = Mp4Recorder(audioPipeline)
+        try {
+            val dir = getExternalFilesDir(Environment.DIRECTORY_MOVIES) ?: filesDir
+            if (!dir.exists()) dir.mkdirs()
+            recorder.start(size.width, size.height, File(dir, buildSegmentName()))
+        } catch (e: Exception) {
+            Log.e(TAG, "Mp4Recorder.start failed", e)
+            recorder.stop()
+            abortRecordingStart(isRollover, "Не удалось начать запись: ${e.message}")
+            return
+        }
+        val encoderSurface = recorder.videoInputSurface
+        if (encoderSurface == null) {
+            Log.e(TAG, "startRecordingFile: encoder surface is null")
+            recorder.stop()
+            abortRecordingStart(isRollover, "Не удалось начать запись")
+            return
+        }
+        mp4Recorder = recorder
+        comp.attachOutput(Compositor.OutputId.RECORD_ENCODER, encoderSurface, needsPresentationTime = true)
+        isRecording = true
+        isTransitioning = false
+        if (!isRollover) {
+            recordButton.text = "Стоп"
+            recordButton.isEnabled = true
+        }
+        scheduleNextSegment()
+    }
+
+    private fun buildSegmentName(): String = if (segmentDurationMs > 0) {
+        "mafbase_stream_${recordingSessionId}_part${segmentIndex}.mp4"
+    } else {
+        "mafbase_stream_${recordingSessionId}.mp4"
+    }
+
+    private fun scheduleNextSegment() {
+        if (segmentDurationMs <= 0) return
+        val runnable = Runnable { rolloverSegment() }
+        segmentTimerRunnable = runnable
+        mainHandler.postDelayed(runnable, segmentDurationMs)
+    }
+
+    private fun cancelSegmentTimer() {
+        segmentTimerRunnable?.let { mainHandler.removeCallbacks(it) }
+        segmentTimerRunnable = null
+    }
+
+    /** Автоматически завершает текущий сегмент и сразу начинает следующий. */
+    private fun rolloverSegment() {
+        if (!isRecording || isTransitioning) return
+        val recorder = mp4Recorder ?: return
+        val size = previewSize ?: return
+        val comp = compositor ?: return
+
+        isTransitioning = true
+        comp.detachOutput(Compositor.OutputId.RECORD_ENCODER)
+        mp4Recorder = null
+        segmentIndex++
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val oldUri = activeMediaStoreUri
+            val oldPfd = activeMediaStorePfd
+            activeMediaStoreUri = null
+            activeMediaStorePfd = null
+            SaveToGalleryService.beginKeepAlive(this)
+            Thread({
+                try {
+                    finalizeMediaStoreEntry(oldUri, oldPfd, stopRecorder(recorder))
+                } finally {
+                    SaveToGalleryService.endKeepAlive(applicationContext)
+                }
+                mainHandler.post { continueSegmentation(size, comp) }
+            }, "Mp4Segment-rollover").start()
+        } else {
+            SaveToGalleryService.beginKeepAlive(this)
+            Thread({
+                val file = stopRecorderToFile(recorder)
+                if (file != null) {
+                    SaveToGalleryService.enqueueCopy(applicationContext, file, showToast = false)
+                }
+                SaveToGalleryService.endKeepAlive(applicationContext)
+                mainHandler.post { continueSegmentation(size, comp) }
+            }, "Mp4Segment-rollover").start()
+        }
+    }
+
+    /**
+     * Начинает следующий сегмент после финализации предыдущего. Пока сегмент дописывался,
+     * запись могли остановить — в том числе из onPause, который успел освободить compositor.
+     * Тогда новый сегмент начинать нельзя: он повиснет на мёртвом пайплайне и будет
+     * бесконечно перезаводить таймер уже на приостановленном экране.
+     */
+    private fun continueSegmentation(size: Size, comp: Compositor) {
+        isTransitioning = false
+        if (!isRecording || compositor !== comp) return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startRecordingMediaStore(size, comp, isRollover = true)
+        } else {
+            startRecordingFile(size, comp, isRollover = true)
+        }
+    }
+
+    /** Останавливает рекордер, возвращая признак того, что стоп не бросил исключение. */
+    private fun stopRecorder(recorder: Mp4Recorder): Boolean = try {
+        recorder.stop()
+        true
+    } catch (e: Exception) {
+        Log.e(TAG, "Mp4Recorder.stop failed", e)
+        false
+    }
+
+    /** Вариант для файловой записи: возвращает файл, только если в нём есть данные. */
+    private fun stopRecorderToFile(recorder: Mp4Recorder): File? {
+        val file = try {
+            recorder.stop()
+        } catch (e: Exception) {
+            Log.e(TAG, "Mp4Recorder.stop failed", e)
+            null
+        }
+        return file?.takeIf { it.exists() && it.length() > 0 }
+    }
+
+    /**
+     * Закрывает дескриптор и снимает IS_PENDING, делая запись видимой в галерее.
+     *
+     * Одного лишь [stopOk] мало: Mp4Recorder.stop() гасит ошибки муксера внутри себя и
+     * почти никогда не бросает, поэтому пустая или нефинализированная запись иначе уехала
+     * бы в галерею как валидная. Настоящий признак — сколько байт реально записано.
+     */
+    private fun finalizeMediaStoreEntry(uri: Uri?, pfd: ParcelFileDescriptor?, stopOk: Boolean): Boolean {
+        val written = try { pfd?.statSize ?: -1L } catch (e: Exception) { -1L }
+        try { pfd?.close() } catch (e: Exception) { Log.w(TAG, "pfd close failed", e) }
+        val ok = stopOk && written > 0
+        if (uri == null) return ok
+        return try {
+            if (ok) {
+                val values = ContentValues().apply { put(MediaStore.Video.Media.IS_PENDING, 0) }
+                contentResolver.update(uri, values, null, null)
+            } else {
+                contentResolver.delete(uri, null, null)
+            }
+            ok
+        } catch (e: Exception) {
+            Log.e(TAG, "не удалось финализировать запись в галерее", e)
+            false
+        }
     }
 
     private fun stopRecording() {
-        val recorder = mp4Recorder ?: return
+        // Состояние сбрасываем до раннего выхода: если прямо сейчас идёт ролловер,
+        // mp4Recorder уже null, и отложенный старт следующего сегмента должен увидеть,
+        // что запись прекращена.
+        cancelSegmentTimer()
+        val recorder = mp4Recorder
+        mp4Recorder = null
+        isRecording = false
+        if (recorder == null) {
+            recordButton.text = "Запись"
+            return
+        }
         isTransitioning = true
         recordButton.isEnabled = false
 
@@ -739,48 +1000,82 @@ class StreamActivity :
         // иначе Compositor продолжит eglSwapBuffers на разрушенный BufferQueue.
         compositor?.detachOutput(Compositor.OutputId.RECORD_ENCODER)
 
-        Thread({
-            val file = try {
-                recorder.stop()
-            } catch (e: Exception) {
-                Log.e(TAG, "Mp4Recorder.stop failed", e)
-                null
-            }
-
-            mainHandler.post {
-                mp4Recorder = null
-                isRecording = false
-                recordButton.text = "Запись"
-                isTransitioning = false
-                recordButton.isEnabled = true
-
-                if (file != null && file.exists() && file.length() > 0) {
-                    // Сначала сохраняем в галерею, затем показываем диалог шеринга
-                    saveToGallery(file) { saved ->
-                        showRecordingDoneDialog(file, saved)
-                    }
-                } else {
-                    Toast.makeText(this@StreamActivity, "Запись пуста", Toast.LENGTH_SHORT).show()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val uri = activeMediaStoreUri
+            val pfd = activeMediaStorePfd
+            activeMediaStoreUri = null
+            activeMediaStorePfd = null
+            SaveToGalleryService.beginKeepAlive(this)
+            Thread({
+                val ok = try {
+                    finalizeMediaStoreEntry(uri, pfd, stopRecorder(recorder))
+                } finally {
+                    SaveToGalleryService.endKeepAlive(applicationContext)
                 }
-            }
-        }, "Mp4Recorder-stop").start()
+                mainHandler.post {
+                    recordButton.text = "Запись"
+                    isTransitioning = false
+                    recordButton.isEnabled = true
+                    val message = if (ok) "Запись сохранена в галерею" else "Не удалось сохранить запись"
+                    Toast.makeText(this@StreamActivity, message, Toast.LENGTH_SHORT).show()
+                }
+            }, "Mp4Recorder-stop").start()
+        } else {
+            Thread({
+                val file = stopRecorderToFile(recorder)
+                mainHandler.post {
+                    recordButton.text = "Запись"
+                    isTransitioning = false
+                    recordButton.isEnabled = true
+                    if (file != null) {
+                        // Копирование в галерею идёт в foreground service — переживает
+                        // сворачивание и закрытие приложения; тост показывает сервис.
+                        SaveToGalleryService.enqueueCopy(this@StreamActivity, file, showToast = true)
+                    } else {
+                        Toast.makeText(this@StreamActivity, "Запись пуста", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }, "Mp4Recorder-stop").start()
+        }
     }
 
-    /** Синхронный вариант для onPause/закрытия: сохраняет запись в галерею без UI. */
+    /**
+     * Вариант для onPause/закрытия: сохраняет запись в галерею без UI.
+     *
+     * Приложение в этот момент уходит в фон, а финализация занимает секунды (запись
+     * moov-атома) — без foreground-приоритета процесс успевают заморозить или убить,
+     * и запись не доезжает до галереи. Поэтому на обеих ветках держим сервис.
+     */
     private fun stopRecordingSync() {
-        val recorder = mp4Recorder ?: return
-        compositor?.detachOutput(Compositor.OutputId.RECORD_ENCODER)
-        val file = try {
-            recorder.stop()
-        } catch (e: Exception) {
-            Log.w(TAG, "Mp4Recorder.stop (sync) failed", e)
-            null
-        }
+        cancelSegmentTimer()
+        val recorder = mp4Recorder
         mp4Recorder = null
         isRecording = false
         recordButton.text = "Запись"
-        if (file != null && file.exists() && file.length() > 0) {
-            saveToGallery(file) { /* без UI, фоновое сохранение */ }
+        if (recorder == null) return
+        compositor?.detachOutput(Compositor.OutputId.RECORD_ENCODER)
+
+        SaveToGalleryService.beginKeepAlive(this)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val uri = activeMediaStoreUri
+            val pfd = activeMediaStorePfd
+            activeMediaStoreUri = null
+            activeMediaStorePfd = null
+            Thread({
+                try {
+                    finalizeMediaStoreEntry(uri, pfd, stopRecorder(recorder))
+                } finally {
+                    SaveToGalleryService.endKeepAlive(applicationContext)
+                }
+            }, "Mp4Recorder-stop-sync").start()
+        } else {
+            Thread({
+                val file = stopRecorderToFile(recorder)
+                if (file != null) {
+                    SaveToGalleryService.enqueueCopy(applicationContext, file, showToast = false)
+                }
+                SaveToGalleryService.endKeepAlive(applicationContext)
+            }, "Mp4Recorder-stop-sync").start()
         }
     }
 
@@ -950,63 +1245,4 @@ class StreamActivity :
         setStreamButtonLoading(false)
     }
 
-    /** Сохраняет видеофайл в галерею (MediaStore). Callback вызывается на main thread. */
-    private fun saveToGallery(file: File, callback: (Boolean) -> Unit) {
-        Thread({
-            try {
-                val values = ContentValues().apply {
-                    put(MediaStore.Video.Media.DISPLAY_NAME, file.name)
-                    put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
-                    put(MediaStore.Video.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
-                    put(MediaStore.Video.Media.DATE_MODIFIED, System.currentTimeMillis() / 1000)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        put(MediaStore.Video.Media.RELATIVE_PATH, Environment.DIRECTORY_MOVIES)
-                        put(MediaStore.Video.Media.IS_PENDING, 1)
-                    }
-                }
-                val resolver = contentResolver
-                val uri = resolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
-                if (uri != null) {
-                    resolver.openOutputStream(uri)?.use { out ->
-                        file.inputStream().use { it.copyTo(out) }
-                    }
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        values.clear()
-                        values.put(MediaStore.Video.Media.IS_PENDING, 0)
-                        resolver.update(uri, values, null, null)
-                    }
-                    mainHandler.post { callback(true) }
-                } else {
-                    mainHandler.post { callback(false) }
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "saveToGallery failed", e)
-                mainHandler.post { callback(false) }
-            }
-        }, "SaveToGallery").start()
-    }
-
-    private fun showRecordingDoneDialog(file: File, savedToGallery: Boolean) {
-        val title = if (savedToGallery) "Запись сохранена в галерею" else "Запись завершена"
-        AlertDialog.Builder(this)
-            .setTitle(title)
-            .setPositiveButton("Поделиться") { _, _ -> shareRecording(file) }
-            .setNegativeButton("OK", null)
-            .show()
-    }
-
-    private fun shareRecording(file: File) {
-        try {
-            val authority = "${packageName}.mafbase_stream.fileprovider"
-            val uri = FileProvider.getUriForFile(this, authority, file)
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                type = "video/mp4"
-                putExtra(Intent.EXTRA_STREAM, uri)
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            }
-            startActivity(Intent.createChooser(intent, "Поделиться записью"))
-        } catch (e: Exception) {
-            Log.w(TAG, "share failed", e)
-        }
-    }
 }

@@ -73,6 +73,11 @@ class MafbaseStream {
     int? table,
     String? breakPlaceholderImageUrl,
     String? brandImageUrl,
+
+    /// Длина сегмента записи в минутах. null или 0 — сегментация выключена
+    /// (дефолт на обеих платформах). Положительное число — длина сегмента
+    /// в минутах для обеих платформ.
+    int? segmentDurationMinutes,
   }) {
     assert(
       tournamentId == null || clubId == null,
@@ -87,6 +92,7 @@ class MafbaseStream {
       table: table,
       breakPlaceholderImageUrl: breakPlaceholderImageUrl ?? defaultBreakPlaceholderImageUrl,
       brandImageUrl: brandImageUrl,
+      segmentDurationMinutes: segmentDurationMinutes,
     );
   }
 
@@ -99,12 +105,7 @@ class MafbaseStream {
   /// подписку на сокет в preview-режиме.
   ///
   /// Future разрешается, когда пользователь закрывает экран.
-  Future<void> openOverlayPreview({
-    required MafbaseOverlay overlay,
-    int? tournamentId,
-    int? clubId,
-    int? table,
-  }) {
+  Future<void> openOverlayPreview({required MafbaseOverlay overlay, int? tournamentId, int? clubId, int? table}) {
     assert(
       tournamentId == null || clubId == null,
       'tournamentId и clubId взаимоисключающие — задайте только один из них',
