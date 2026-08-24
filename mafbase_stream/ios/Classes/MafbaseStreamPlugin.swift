@@ -64,7 +64,7 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
       breakPlaceholderImageUrl: (breakPlaceholderImageUrl?.isEmpty == false) ? breakPlaceholderImageUrl : nil,
       brandImageUrl: (brandImageUrl?.isEmpty == false) ? brandImageUrl : nil
     )
-    // nil = платформенный дефолт (iOS: 40 минут)
+    // nil = сегментация выключена (дефолт StreamViewController)
     if let minutes = segmentDurationMinutes {
       controller.segmentDurationSeconds = minutes > 0 ? TimeInterval(minutes * 60) : 0
     }

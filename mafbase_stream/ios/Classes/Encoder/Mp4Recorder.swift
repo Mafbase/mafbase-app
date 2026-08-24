@@ -89,7 +89,9 @@ final class Mp4Recorder {
         } catch {
             throw RecorderError.writerCreate(error)
         }
-        writer.shouldOptimizeForNetworkUse = true
+        // Запись уходит в галерею, faststart не нужен, а с ним finishWriting
+        // на многочасовых файлах заметно дольше (writer переносит moov в начало).
+        writer.shouldOptimizeForNetworkUse = false
         self.writer = writer
         outputURL = url
 

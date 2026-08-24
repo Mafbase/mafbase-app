@@ -94,8 +94,8 @@ final class StreamViewController: UIViewController {
 
     // MARK: - Segmentation
 
-    /// Длина сегмента записи в секундах. 0 = выключено. По умолчанию 40 минут.
-    var segmentDurationSeconds: TimeInterval = 40 * 60
+    /// Длина сегмента записи в секундах. 0 = выключено (по умолчанию).
+    var segmentDurationSeconds: TimeInterval = 0
 
     private var segmentIndex: Int = 1
     private var recordingSessionId: String = ""
@@ -506,14 +506,21 @@ final class StreamViewController: UIViewController {
             // Останавливаем стрим сразу — до async-операций с Фото и запроса разрешений,
             // чтобы камера и микрофон не продолжали вещание пока идёт сохранение.
             if isStreaming { stopStreamingSync() }
-            recorder.stop { [weak self] url, _ in
-                guard let self = self else { return }
-                guard let url = url else {
-                    self.dismissWithReason(.user)
-                    return
-                }
-                self.saveToPhotoLibraryAndDelete(url: url) { _ in
-                    self.dismissWithReason(.user)
+            Self.runProtectedFromSuspension { done in
+                recorder.stop { [weak self] url, _ in
+                    guard let self = self else {
+                        done()
+                        return
+                    }
+                    guard let url = url else {
+                        done()
+                        self.dismissWithReason(.user)
+                        return
+                    }
+                    self.moveToPhotoLibrary(url: url) { _ in
+                        done()
+                        self.dismissWithReason(.user)
+                    }
                 }
             }
             return
@@ -626,21 +633,27 @@ final class StreamViewController: UIViewController {
         mp4Recorder = nil
         segmentIndex += 1
 
-        recorder.stop { [weak self] url, error in
-            guard let self = self else { return }
-            guard let url = url, error == nil else {
-                NSLog("[mafbase_stream] rollover: stop failed: \(String(describing: error))")
-                // completion уже на main queue
-                self.isRecording = false
-                self.isTransitioning = false
-                self.recordButton.setTitle("Запись", for: .normal)
-                self.recordButton.isEnabled = true
-                return
+        Self.runProtectedFromSuspension { done in
+            recorder.stop { [weak self] url, error in
+                guard let self = self else {
+                    done()
+                    return
+                }
+                guard let url = url, error == nil else {
+                    NSLog("[mafbase_stream] rollover: stop failed: \(String(describing: error))")
+                    // completion уже на main queue
+                    self.isRecording = false
+                    self.isTransitioning = false
+                    self.recordButton.setTitle("Запись", for: .normal)
+                    self.recordButton.isEnabled = true
+                    done()
+                    return
+                }
+                // Сначала запускаем следующий сегмент — без паузы ожидания импорта в Фото.
+                self.startRecordingSegment(isRollover: true)
+                // Переносим предыдущий сегмент в Фото параллельно.
+                self.moveToPhotoLibrary(url: url) { _ in done() }
             }
-            // Сначала запускаем следующий сегмент — без паузы ожидания импорта в Фото.
-            self.startRecordingSegment(isRollover: true)
-            // Сохраняем предыдущий сегмент в Фото параллельно.
-            self.saveToPhotoLibraryAndDelete(url: url) { _ in }
         }
     }
 
@@ -653,22 +666,29 @@ final class StreamViewController: UIViewController {
         // в writer'ы, пока он финишит.
         isRecording = false
 
-        recorder.stop { [weak self] url, error in
-            guard let self = self else { return }
-            self.mp4Recorder = nil
-            self.isTransitioning = false
-            self.recordButton.setTitle("Запись", for: .normal)
-            self.recordButton.isEnabled = true
+        Self.runProtectedFromSuspension { done in
+            recorder.stop { [weak self] url, error in
+                guard let self = self else {
+                    done()
+                    return
+                }
+                self.mp4Recorder = nil
+                self.isTransitioning = false
+                self.recordButton.setTitle("Запись", for: .normal)
+                self.recordButton.isEnabled = true
 
-            if let error = error {
-                self.showAlert(title: "Ошибка записи", message: "\(error)")
-                return
+                if let error = error {
+                    self.showAlert(title: "Ошибка записи", message: "\(error)")
+                    done()
+                    return
+                }
+                guard let url = url else {
+                    self.showAlert(title: "Запись пуста", message: "Файл не создан.")
+                    done()
+                    return
+                }
+                self.moveToPhotoLibrary(url: url) { _ in done() }
             }
-            guard let url = url else {
-                self.showAlert(title: "Запись пуста", message: "Файл не создан.")
-                return
-            }
-            self.saveToPhotoLibraryAndDelete(url: url) { _ in }
         }
     }
 
@@ -677,28 +697,23 @@ final class StreamViewController: UIViewController {
         guard let recorder = mp4Recorder else { return }
         cancelSegmentTimer()
         isRecording = false
-        recorder.stop { url, _ in
-            guard let url = url else { return }
-            // Разрешение уже запрошено при старте записи — используем текущий статус.
-            let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
-            guard status == .authorized || status == .limited else { return }
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-            }) { success, error in
-                if let error = error {
-                    NSLog("[mafbase_stream] Failed to save video to Photos (sync): \(error)")
+        Self.runProtectedFromSuspension { done in
+            recorder.stop { [weak self] url, _ in
+                guard let self = self, let url = url else {
+                    done()
+                    return
                 }
-                if success {
-                    try? FileManager.default.removeItem(at: url)
-                }
+                self.moveToPhotoLibrary(url: url) { _ in done() }
             }
         }
         mp4Recorder = nil
         recordButton.setTitle("Запись", for: .normal)
     }
 
-    /// Сохраняет видеофайл в библиотеку Фото и удаляет оригинал. Completion вызывается на main queue.
-    private func saveToPhotoLibraryAndDelete(url: URL, completion: @escaping (Bool) -> Void) {
+    /// Переносит видеофайл в библиотеку Фото. Файл забирается перемещением на том же
+    /// томе (shouldMoveFile), без копирования данных — операция мгновенна для любого
+    /// размера записи; при ошибке оригинал остаётся в Documents. Completion — на main queue.
+    private func moveToPhotoLibrary(url: URL, completion: @escaping (Bool) -> Void) {
         // Разрешение уже запрошено при старте записи — используем текущий статус,
         // чтобы не показывать диалог повторно в момент остановки.
         let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
@@ -708,16 +723,34 @@ final class StreamViewController: UIViewController {
             return
         }
         PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+            let options = PHAssetResourceCreationOptions()
+            options.shouldMoveFile = true
+            PHAssetCreationRequest.forAsset().addResource(with: .video, fileURL: url, options: options)
         }) { success, error in
             if let error = error {
-                NSLog("[mafbase_stream] Failed to save video to Photos: \(error)")
-            }
-            if success {
-                try? FileManager.default.removeItem(at: url)
+                NSLog("[mafbase_stream] Failed to move video to Photos: \(error)")
             }
             DispatchQueue.main.async { completion(success) }
         }
+    }
+
+    /// Выполняет финализацию записи (finishWriting + перенос в Фото) под защитой
+    /// background task: если приложение свернули сразу после остановки, iOS даёт
+    /// ~30 секунд фонового времени — этого хватает, т.к. перенос в Фото мгновенный.
+    /// `work` обязан вызвать переданный ему callback по завершении (на main queue).
+    private static func runProtectedFromSuspension(_ work: (@escaping () -> Void) -> Void) {
+        var taskId = UIBackgroundTaskIdentifier.invalid
+        let finish = {
+            if taskId != .invalid {
+                UIApplication.shared.endBackgroundTask(taskId)
+                taskId = .invalid
+            }
+        }
+        taskId = UIApplication.shared.beginBackgroundTask(
+            withName: "mafbase_stream.save-recording",
+            expirationHandler: finish
+        )
+        work(finish)
     }
 
     private func showAlert(title: String, message: String?) {

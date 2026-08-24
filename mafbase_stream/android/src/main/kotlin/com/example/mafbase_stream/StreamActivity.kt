@@ -937,10 +937,12 @@ class StreamActivity :
                     Log.e(TAG, "rollover: stop failed", e)
                     null
                 }
-                if (file != null && file.exists() && file.length() > 0) {
-                    saveToGallerySync(file)
+                mainHandler.post {
+                    if (file != null && file.exists() && file.length() > 0) {
+                        SaveToGalleryService.enqueue(this, file, showToast = false)
+                    }
+                    startRecordingFile(size, comp, isRollover = true)
                 }
-                mainHandler.post { startRecordingFile(size, comp, isRollover = true) }
             }, "Mp4Segment-rollover").start()
         }
     }
@@ -1005,13 +1007,9 @@ class StreamActivity :
                     isTransitioning = false
                     recordButton.isEnabled = true
                     if (file != null && file.exists() && file.length() > 0) {
-                        saveToGallery(file) { saved ->
-                            if (saved) {
-                                Toast.makeText(this@StreamActivity, "Запись сохранена в галерею", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(this@StreamActivity, "Не удалось сохранить запись", Toast.LENGTH_SHORT).show()
-                            }
-                        }
+                        // Копирование в галерею идёт в foreground service — переживает
+                        // сворачивание и закрытие приложения; тост показывает сервис.
+                        SaveToGalleryService.enqueue(this@StreamActivity, file, showToast = true)
                     } else {
                         Toast.makeText(this@StreamActivity, "Запись пуста", Toast.LENGTH_SHORT).show()
                     }
@@ -1060,7 +1058,7 @@ class StreamActivity :
                 null
             }
             if (file != null && file.exists() && file.length() > 0) {
-                saveToGallery(file) { /* без UI, фоновое сохранение */ }
+                SaveToGalleryService.enqueue(this, file, showToast = false)
             }
         }
     }
@@ -1229,52 +1227,6 @@ class StreamActivity :
         isStreaming = false
         setStreamButtonLabel("Стрим")
         setStreamButtonLoading(false)
-    }
-
-    /**
-     * Сохраняет видеофайл в галерею (MediaStore) синхронно. Вызывается из фонового потока.
-     * После успешного копирования оригинальный файл удаляется.
-     */
-    private fun saveToGallerySync(file: File): Boolean {
-        return try {
-            val values = ContentValues().apply {
-                put(MediaStore.Video.Media.DISPLAY_NAME, file.name)
-                put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
-                put(MediaStore.Video.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
-                put(MediaStore.Video.Media.DATE_MODIFIED, System.currentTimeMillis() / 1000)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    put(MediaStore.Video.Media.RELATIVE_PATH, Environment.DIRECTORY_MOVIES)
-                    put(MediaStore.Video.Media.IS_PENDING, 1)
-                }
-            }
-            val resolver = contentResolver
-            val uri = resolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
-            if (uri != null) {
-                resolver.openOutputStream(uri)?.use { out ->
-                    file.inputStream().use { it.copyTo(out) }
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    values.clear()
-                    values.put(MediaStore.Video.Media.IS_PENDING, 0)
-                    resolver.update(uri, values, null, null)
-                }
-                try { file.delete() } catch (e: Exception) { Log.w(TAG, "failed to delete original file", e) }
-                true
-            } else {
-                false
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "saveToGallerySync failed", e)
-            false
-        }
-    }
-
-    /** Сохраняет видеофайл в галерею (MediaStore). Callback вызывается на main thread. */
-    private fun saveToGallery(file: File, callback: (Boolean) -> Unit) {
-        Thread({
-            val saved = saveToGallerySync(file)
-            mainHandler.post { callback(saved) }
-        }, "SaveToGallery").start()
     }
 
 }
