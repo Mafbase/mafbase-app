@@ -100,6 +100,11 @@ final class StreamViewController: UIViewController {
     private var segmentIndex: Int = 1
     private var recordingSessionId: String = ""
     private var segmentTimer: Timer?
+    /// Сессия записи активна и ролловеры разрешены. В отличие от `isRecording`,
+    /// который остаётся true на время асинхронной финализации сегмента, этот флаг
+    /// сбрасывается сразу при любой остановке — по нему завершившийся ролловер
+    /// понимает, что следующий сегмент начинать уже не нужно.
+    private var segmentingActive = false
 
     // MARK: - View lifecycle
 
@@ -496,30 +501,40 @@ final class StreamViewController: UIViewController {
             cancelSegmentTimer()
             closeButton.isEnabled = false
             recordButton.isEnabled = false
+            isRecording = false
             guard let recorder = mp4Recorder else {
+                // Идёт финализация ролловера — он сам сохранит свой сегмент.
                 if isStreaming { stopStreamingSync() }
                 dismissWithReason(.user)
                 return
             }
-            isRecording = false
             mp4Recorder = nil
             // Останавливаем стрим сразу — до async-операций с Фото и запроса разрешений,
             // чтобы камера и микрофон не продолжали вещание пока идёт сохранение.
             if isStreaming { stopStreamingSync() }
             Self.runProtectedFromSuspension { done in
                 recorder.stop { [weak self] url, _ in
-                    guard let self = self else {
-                        done()
-                        return
-                    }
                     guard let url = url else {
                         done()
-                        self.dismissWithReason(.user)
+                        self?.dismissWithReason(.user)
                         return
                     }
-                    self.moveToPhotoLibrary(url: url) { _ in
+                    Self.moveToPhotoLibrary(url: url) { success in
                         done()
-                        self.dismissWithReason(.user)
+                        guard let self = self else {
+                            if !success { NSLog("[mafbase_stream] close: не удалось перенести запись в Фото") }
+                            return
+                        }
+                        if success {
+                            self.dismissWithReason(.user)
+                        } else {
+                            self.showAlert(
+                                title: "Не удалось сохранить в Фото",
+                                message: Self.photoLibraryFailureMessage(for: url)
+                            ) { [weak self] in
+                                self?.dismissWithReason(.user)
+                            }
+                        }
                     }
                 }
             }
@@ -579,6 +594,7 @@ final class StreamViewController: UIViewController {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         recordingSessionId = formatter.string(from: Date())
         segmentIndex = 1
+        segmentingActive = true
 
         startRecordingSegment(isRollover: false)
     }
@@ -589,11 +605,15 @@ final class StreamViewController: UIViewController {
             _ = try recorder.start(width: Int32(Self.frameWidth), height: Int32(Self.frameHeight))
         } catch {
             NSLog("[mafbase_stream] Mp4Recorder.start failed: \(error)")
+            cancelSegmentTimer()
+            isRecording = false
             isTransitioning = false
+            recordButton.setTitle("Запись", for: .normal)
             recordButton.isEnabled = true
-            if !isRollover {
-                showAlert(title: "Не удалось начать запись", message: "\(error)")
-            }
+            showAlert(
+                title: isRollover ? "Запись прервана" : "Не удалось начать запись",
+                message: "\(error)"
+            )
             return
         }
         mp4Recorder = recorder
@@ -624,96 +644,132 @@ final class StreamViewController: UIViewController {
     private func cancelSegmentTimer() {
         segmentTimer?.invalidate()
         segmentTimer = nil
+        segmentingActive = false
     }
 
+    /// `isRecording` не сбрасывается на время финализации сегмента (как на Android):
+    /// иначе закрытие экрана посреди ролловера не увидит активной записи, пропустит
+    /// сохранение, а зависшая финализация потом стартует сегмент на мёртвом пайплайне.
     private func rolloverSegment() {
         guard isRecording, !isTransitioning, let recorder = mp4Recorder else { return }
         isTransitioning = true
-        isRecording = false
         mp4Recorder = nil
         segmentIndex += 1
 
         Self.runProtectedFromSuspension { done in
             recorder.stop { [weak self] url, error in
-                guard let self = self else {
-                    done()
-                    return
-                }
                 guard let url = url, error == nil else {
                     NSLog("[mafbase_stream] rollover: stop failed: \(String(describing: error))")
                     // completion уже на main queue
-                    self.isRecording = false
-                    self.isTransitioning = false
-                    self.recordButton.setTitle("Запись", for: .normal)
-                    self.recordButton.isEnabled = true
+                    if let self = self {
+                        self.cancelSegmentTimer()
+                        self.isRecording = false
+                        self.isTransitioning = false
+                        self.recordButton.setTitle("Запись", for: .normal)
+                        self.recordButton.isEnabled = true
+                    }
                     done()
                     return
                 }
-                // Сначала запускаем следующий сегмент — без паузы ожидания импорта в Фото.
-                self.startRecordingSegment(isRollover: true)
-                // Переносим предыдущий сегмент в Фото параллельно.
-                self.moveToPhotoLibrary(url: url) { _ in done() }
+                // Следующий сегмент запускаем до переноса в Фото — без паузы в записи.
+                // Запись за время финализации могли остановить (кнопка «Стоп», закрытие
+                // экрана) — тогда пайплайна уже нет и продолжать нечего.
+                if let self = self, self.segmentingActive, self.isRecording, self.compositor != nil {
+                    self.startRecordingSegment(isRollover: true)
+                } else {
+                    self?.isTransitioning = false
+                }
+                Self.moveToPhotoLibrary(url: url) { success in
+                    if !success {
+                        NSLog("[mafbase_stream] rollover: сегмент \(url.lastPathComponent) не перенесён в Фото")
+                    }
+                    done()
+                }
             }
         }
     }
 
     private func stopRecording() {
-        guard let recorder = mp4Recorder else { return }
-        isTransitioning = true
-        recordButton.isEnabled = false
         cancelSegmentTimer()
         // Сначала отписываемся от compositor.onFrame, чтобы не приходили новые кадры
         // в writer'ы, пока он финишит.
         isRecording = false
+        guard let recorder = mp4Recorder else {
+            // Идёт финализация ролловера — она сохранит сегмент сама и, увидев
+            // сброшенный segmentingActive, не начнёт следующий.
+            recordButton.setTitle("Запись", for: .normal)
+            return
+        }
+        mp4Recorder = nil
+        isTransitioning = true
+        recordButton.isEnabled = false
 
         Self.runProtectedFromSuspension { done in
             recorder.stop { [weak self] url, error in
-                guard let self = self else {
-                    done()
-                    return
-                }
-                self.mp4Recorder = nil
-                self.isTransitioning = false
-                self.recordButton.setTitle("Запись", for: .normal)
-                self.recordButton.isEnabled = true
+                self?.isTransitioning = false
+                self?.recordButton.setTitle("Запись", for: .normal)
+                self?.recordButton.isEnabled = true
 
                 if let error = error {
-                    self.showAlert(title: "Ошибка записи", message: "\(error)")
+                    self?.showAlert(title: "Ошибка записи", message: "\(error)")
                     done()
                     return
                 }
                 guard let url = url else {
-                    self.showAlert(title: "Запись пуста", message: "Файл не создан.")
+                    self?.showAlert(title: "Запись пуста", message: "Файл не создан.")
                     done()
                     return
                 }
-                self.moveToPhotoLibrary(url: url) { _ in done() }
+                Self.moveToPhotoLibrary(url: url) { success in
+                    done()
+                    guard !success else { return }
+                    if let self = self {
+                        self.showAlert(
+                            title: "Не удалось сохранить в Фото",
+                            message: Self.photoLibraryFailureMessage(for: url)
+                        )
+                    } else {
+                        NSLog("[mafbase_stream] stop: не удалось перенести запись в Фото")
+                    }
+                }
             }
         }
     }
 
     /// Синхронная версия для системных прерываний — сохраняет запись в Фото без UI.
+    /// Сохранение не должно зависеть от жизни контроллера: метод вызывается из
+    /// `viewWillDisappear`, а finishWriting многочасового файла длится секунды.
     private func stopRecordingSync() {
-        guard let recorder = mp4Recorder else { return }
         cancelSegmentTimer()
         isRecording = false
+        recordButton.setTitle("Запись", for: .normal)
+        // Ролловер в этот момент мог уже забрать recorder себе — тогда он и сохранит
+        // сегмент, а сброшенный segmentingActive не даст ему начать следующий.
+        guard let recorder = mp4Recorder else { return }
+        mp4Recorder = nil
         Self.runProtectedFromSuspension { done in
-            recorder.stop { [weak self] url, _ in
-                guard let self = self, let url = url else {
+            recorder.stop { url, _ in
+                guard let url = url else {
                     done()
                     return
                 }
-                self.moveToPhotoLibrary(url: url) { _ in done() }
+                Self.moveToPhotoLibrary(url: url) { success in
+                    if !success {
+                        NSLog("[mafbase_stream] sync stop: запись \(url.lastPathComponent) не перенесена в Фото")
+                    }
+                    done()
+                }
             }
         }
-        mp4Recorder = nil
-        recordButton.setTitle("Запись", for: .normal)
     }
 
     /// Переносит видеофайл в библиотеку Фото. Файл забирается перемещением на том же
     /// томе (shouldMoveFile), без копирования данных — операция мгновенна для любого
     /// размера записи; при ошибке оригинал остаётся в Documents. Completion — на main queue.
-    private func moveToPhotoLibrary(url: URL, completion: @escaping (Bool) -> Void) {
+    ///
+    /// Статический намеренно: перенос запускается из завершения `recorder.stop`, которое
+    /// может прийти уже после освобождения контроллера, и не должен от него зависеть.
+    private static func moveToPhotoLibrary(url: URL, completion: @escaping (Bool) -> Void) {
         // Разрешение уже запрошено при старте записи — используем текущий статус,
         // чтобы не показывать диалог повторно в момент остановки.
         let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
@@ -753,9 +809,19 @@ final class StreamViewController: UIViewController {
         work(finish)
     }
 
-    private func showAlert(title: String, message: String?) {
+    /// Текст для пользователя, когда перенос в Фото не состоялся: файл никуда не пропал,
+    /// но лежит внутри приложения и сам в галерее не появится.
+    private static func photoLibraryFailureMessage(for url: URL) -> String {
+        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+        if status != .authorized && status != .limited {
+            return "Нет доступа к Фото. Разрешите его в Настройках, запись сохранена в файлах приложения: \(url.lastPathComponent)"
+        }
+        return "Запись сохранена в файлах приложения: \(url.lastPathComponent)"
+    }
+
+    private func showAlert(title: String, message: String?, onDismiss: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in onDismiss?() })
         present(alert, animated: true)
     }
 
