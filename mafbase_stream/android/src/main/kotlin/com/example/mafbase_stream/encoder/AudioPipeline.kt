@@ -78,7 +78,13 @@ class AudioPipeline(
                 encoder = enc
                 recordStartUptimeUs = enc.recordStartUptimeUs
             } else {
-                cachedFormat?.let { subscriber.onAudioFormatReady(it) }
+                cachedFormat?.let {
+                    // csd-буферы MediaFormat — общие и позиционные: предыдущий подписчик
+                    // (или muxer.addTrack) мог сдвинуть их позицию. Перематываем перед
+                    // отдачей, иначе второй подписчик получит пустой codec-config.
+                    rewindCsd(it)
+                    subscriber.onAudioFormatReady(it)
+                }
                 cachedCsd?.let { csd ->
                     val bb = ByteBuffer.wrap(csd)
                     val info = MediaCodec.BufferInfo().apply {
@@ -178,6 +184,16 @@ class AudioPipeline(
                         Log.w(TAG, "subscriber onAudioError error", e)
                     }
                 }
+            }
+        }
+    }
+
+    private fun rewindCsd(format: MediaFormat) {
+        for (key in arrayOf("csd-0", "csd-1", "csd-2")) {
+            try {
+                format.getByteBuffer(key)?.rewind()
+            } catch (t: Throwable) {
+                Log.w(TAG, "rewind $key failed", t)
             }
         }
     }

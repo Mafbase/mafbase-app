@@ -31,6 +31,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -74,6 +75,9 @@ class StreamActivity :
     private var streamButtonLabel: String = "Стрим"
     private var cameraDevice: CameraDevice? = null
     private var captureSession: CameraCaptureSession? = null
+    // Builder repeating-запроса живой сессии — нужен для смены CONTROL_ZOOM_RATIO
+    // без пересоздания сессии (путь ультраширокой без отдельного camera id).
+    private var captureRequestBuilder: CaptureRequest.Builder? = null
     private var backgroundThread: HandlerThread? = null
     private var backgroundHandler: Handler? = null
     private val mainHandler = Handler(Looper.getMainLooper())
@@ -128,6 +132,19 @@ class StreamActivity :
     // могла её дёрнуть. Один экземпляр на сессию — пересоздаётся в startStreaming.
     private var overlayView: View? = null
     private var overlayToggleButton: Button? = null
+
+    // Качество трансляции и выбор объектива
+    private lateinit var rootContainer: FrameLayout
+    private lateinit var quality: StreamQuality
+    private lateinit var qualityButton: ImageButton
+    private var lensSwitcher: SegmentedPillView? = null
+    private var qualityPanel: QualitySettingsPanel? = null
+    private var qualityScrim: View? = null
+    private var cameraSelector: CameraSelector? = null
+    private var useUltraWide: Boolean = false
+
+    @Volatile
+    private var isLensSwitching: Boolean = false
 
     companion object {
         private const val TAG = "StreamActivity"
@@ -202,6 +219,9 @@ class StreamActivity :
         }
         // Android: по умолчанию сегментация выключена (segmentDurationMs = 0)
 
+        quality = StreamQualityStore.load(this)
+        cameraSelector = CameraSelector(getSystemService(Context.CAMERA_SERVICE) as CameraManager)
+
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.decorView.systemUiVisibility = (
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -215,6 +235,7 @@ class StreamActivity :
         val container = FrameLayout(this).apply {
             setBackgroundColor(Color.BLACK)
         }
+        rootContainer = container
 
         surfaceView = SurfaceView(this)
         surfaceView.holder.addCallback(this)
@@ -251,6 +272,26 @@ class StreamActivity :
             setMargins(margin, margin, margin, margin)
         }
         container.addView(closeButton, closeParams)
+
+        qualityButton = ImageButton(this).apply {
+            setImageResource(android.R.drawable.ic_menu_preferences)
+            setColorFilter(Color.WHITE)
+            scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
+            val iconPadding = (resources.displayMetrics.density * 8).toInt()
+            setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
+            background = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                setColor(Color.argb(115, 0, 0, 0))
+            }
+            setOnClickListener { onQualityButtonClicked() }
+        }
+        val qualityButtonSize = (resources.displayMetrics.density * 40).toInt()
+        val qualityParams = FrameLayout.LayoutParams(qualityButtonSize, qualityButtonSize).apply {
+            gravity = Gravity.TOP or Gravity.START
+            val margin = (resources.displayMetrics.density * 16).toInt()
+            setMargins(margin, margin, margin, margin)
+        }
+        container.addView(qualityButton, qualityParams)
 
         recordButton = Button(this).apply {
             text = "Запись"
@@ -334,6 +375,35 @@ class StreamActivity :
                 ),
             )
         }
+        // Колонка снизу по центру: переключатель объектива (если есть ultra-wide)
+        // над рядом основных кнопок.
+        val bottomColumn = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER_HORIZONTAL
+        }
+        if (cameraSelector?.hasUltraWide == true) {
+            val uwLabel = cameraSelector?.ultraWideZoomRatio
+                ?.let { String.format(Locale.US, "%.1f×", it) }
+                ?: "0.5×"
+            val switcher = SegmentedPillView(this, listOf(uwLabel, "1×"), initialIndex = 1).apply {
+                onSegmentSelected = { index -> switchLens(toUltraWide = index == 0) }
+            }
+            lensSwitcher = switcher
+            bottomColumn.addView(
+                switcher,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                ).apply { bottomMargin = (resources.displayMetrics.density * 14).toInt() },
+            )
+        }
+        bottomColumn.addView(
+            buttonsRow,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+            ),
+        )
         val rowParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT,
@@ -342,7 +412,7 @@ class StreamActivity :
             val margin = (resources.displayMetrics.density * 24).toInt()
             setMargins(margin, margin, margin, margin)
         }
-        container.addView(buttonsRow, rowParams)
+        container.addView(bottomColumn, rowParams)
 
         setContentView(container)
 
@@ -441,17 +511,21 @@ class StreamActivity :
     private fun openCamera() {
         val manager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
         try {
-            val cameraId = pickBackCameraId(manager) ?: run {
-                Log.e(TAG, "Подходящая камера не найдена")
-                finishWithResult(Activity.RESULT_CANCELED)
-                return
-            }
+            val selector = cameraSelector ?: CameraSelector(manager).also { cameraSelector = it }
+            val cameraId = (if (useUltraWide) selector.ultraWideCameraId else null)
+                ?: selector.defaultBackCameraId
+                ?: run {
+                    Log.e(TAG, "Подходящая камера не найдена")
+                    finishWithResult(Activity.RESULT_CANCELED)
+                    return
+                }
 
             val characteristics = manager.getCameraCharacteristics(cameraId)
             sensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION) ?: 0
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-            val chosen = map?.getOutputSizes(SurfaceHolder::class.java)?.let(::chooseOptimalSize)
-                ?: Size(1280, 720)
+            val chosen = map?.getOutputSizes(SurfaceHolder::class.java)
+                ?.let { chooseSizeFor(quality.resolution, it) }
+                ?: Size(quality.resolution.width, quality.resolution.height)
             previewSize = chosen
             surfaceView.holder.setFixedSize(chosen.width, chosen.height)
             // Activity заблокирована в landscape, и Compositor рисует FBO в этих же
@@ -502,14 +576,135 @@ class StreamActivity :
         }
     }
 
-    private fun pickBackCameraId(manager: CameraManager): String? {
-        val ids = manager.cameraIdList
-        val backId = ids.firstOrNull { id ->
-            val characteristics = manager.getCameraCharacteristics(id)
-            characteristics.get(CameraCharacteristics.LENS_FACING) ==
-                CameraCharacteristics.LENS_FACING_BACK
+    /**
+     * Смена объектива «на лету»: закрываем только CameraDevice и capture session,
+     * Compositor с подключёнными выходами (preview/recorder/stream encoder) живёт
+     * дальше — поэтому переключение доступно и во время записи/стрима. Целевая
+     * камера обязана поддерживать текущий размер кадра: Compositor фиксирован.
+     */
+    private fun switchLens(toUltraWide: Boolean) {
+        if (isLensSwitching || toUltraWide == useUltraWide) return
+        val selector = cameraSelector ?: return
+        if (selector.ultraWideCameraId == null) {
+            switchLensByZoomRatio(toUltraWide, selector.ultraWideZoomRatio ?: return)
+            return
         }
-        return backId ?: ids.firstOrNull()
+        val targetId = (if (toUltraWide) selector.ultraWideCameraId else selector.defaultBackCameraId)
+            ?: return
+        if (compositor == null || cameraDevice == null) {
+            // Камера ещё не поднята — openCamera применит выбор сам.
+            useUltraWide = toUltraWide
+            return
+        }
+        val size = previewSize
+        if (size != null && !selector.supportsSize(targetId, size)) {
+            lensSwitcher?.select(if (useUltraWide) 0 else 1)
+            Toast.makeText(this, "Эта камера не поддерживает текущее качество", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        isLensSwitching = true
+        val previousUltraWide = useUltraWide
+        useUltraWide = toUltraWide
+        lensSwitcher?.setInteractionEnabled(false)
+        try {
+            captureSession?.close()
+        } catch (e: Exception) {
+            Log.w(TAG, "captureSession close failed", e)
+        }
+        captureSession = null
+        try {
+            cameraDevice?.close()
+        } catch (e: Exception) {
+            Log.w(TAG, "cameraDevice close failed", e)
+        }
+        cameraDevice = null
+
+        openCameraDeviceOnly(targetId) { success ->
+            if (success) {
+                finishLensSwitch()
+                return@openCameraDeviceOnly
+            }
+            // Возвращаемся на прежний объектив, чтобы экран не остался без превью.
+            useUltraWide = previousUltraWide
+            lensSwitcher?.select(if (previousUltraWide) 0 else 1)
+            val fallbackId =
+                if (previousUltraWide) selector.ultraWideCameraId else selector.defaultBackCameraId
+            if (fallbackId != null) {
+                openCameraDeviceOnly(fallbackId) { finishLensSwitch() }
+            } else {
+                finishLensSwitch()
+            }
+        }
+    }
+
+    private fun finishLensSwitch() {
+        isLensSwitching = false
+        lensSwitcher?.setInteractionEnabled(true)
+    }
+
+    /**
+     * Переключение объектива логической камеры через CONTROL_ZOOM_RATIO — путь для
+     * устройств, прячущих ультраширокую как физическую камеру (Pixel и т.п.).
+     * Меняется только repeating-запрос: без пересоздания устройства и сессии,
+     * мгновенно и безопасно во время записи/стрима.
+     */
+    private fun switchLensByZoomRatio(toUltraWide: Boolean, uwRatio: Float) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return
+        if (compositor == null || cameraDevice == null) {
+            useUltraWide = toUltraWide
+            return
+        }
+        val session = captureSession
+        val builder = captureRequestBuilder
+        if (session == null || builder == null) {
+            lensSwitcher?.select(if (useUltraWide) 0 else 1)
+            return
+        }
+        try {
+            builder.set(CaptureRequest.CONTROL_ZOOM_RATIO, if (toUltraWide) uwRatio else 1.0f)
+            session.setRepeatingRequest(builder.build(), null, backgroundHandler)
+            useUltraWide = toUltraWide
+        } catch (e: Exception) {
+            Log.e(TAG, "switchLensByZoomRatio failed", e)
+            lensSwitcher?.select(if (useUltraWide) 0 else 1)
+        }
+    }
+
+    /** Открывает камеру [cameraId] на живой Compositor, не пересоздавая пайплайн. */
+    @SuppressLint("MissingPermission")
+    private fun openCameraDeviceOnly(cameraId: String, onResult: (Boolean) -> Unit) {
+        val manager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        try {
+            manager.openCamera(
+                cameraId,
+                object : CameraDevice.StateCallback() {
+                    override fun onOpened(device: CameraDevice) {
+                        cameraDevice = device
+                        startSingleCaptureSession()
+                        mainHandler.post { onResult(true) }
+                    }
+
+                    override fun onDisconnected(device: CameraDevice) {
+                        device.close()
+                        cameraDevice = null
+                        mainHandler.post { onResult(false) }
+                    }
+
+                    override fun onError(device: CameraDevice, error: Int) {
+                        Log.e(TAG, "openCameraDeviceOnly onError: $error")
+                        device.close()
+                        cameraDevice = null
+                        mainHandler.post { onResult(false) }
+                    }
+                },
+                backgroundHandler,
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "openCameraDeviceOnly failed", e)
+            mainHandler.post { onResult(false) }
+        }
     }
 
     /**
@@ -532,10 +727,16 @@ class StreamActivity :
         return deg
     }
 
-    private fun chooseOptimalSize(sizes: Array<Size>): Size {
-        if (sizes.isEmpty()) return Size(1280, 720)
+    /**
+     * Ближайший к запрошенному разрешению поддерживаемый размер: точное совпадение,
+     * иначе 16:9 с минимальной разницей по высоте, иначе прежняя эвристика.
+     */
+    private fun chooseSizeFor(resolution: StreamResolution, sizes: Array<Size>): Size {
+        if (sizes.isEmpty()) return Size(resolution.width, resolution.height)
+        sizes.firstOrNull { it.width == resolution.width && it.height == resolution.height }
+            ?.let { return it }
         val widescreen = sizes.filter { it.width * 9 == it.height * 16 && it.width <= 1920 }
-        return widescreen.maxByOrNull { it.width.toLong() * it.height }
+        return widescreen.minByOrNull { kotlin.math.abs(it.height - resolution.height) }
             ?: sizes.filter { it.width <= 1920 }.maxByOrNull { it.width.toLong() * it.height }
             ?: sizes.first()
     }
@@ -560,6 +761,11 @@ class StreamActivity :
             CaptureRequest.CONTROL_AF_MODE,
             CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO,
         )
+        val uwRatio = cameraSelector?.ultraWideZoomRatio
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && uwRatio != null) {
+            builder.set(CaptureRequest.CONTROL_ZOOM_RATIO, if (useUltraWide) uwRatio else 1.0f)
+        }
+        captureRequestBuilder = builder
         createCaptureSession(device, listOf(cameraSurface), builder, onConfigured = null)
     }
 
@@ -652,6 +858,7 @@ class StreamActivity :
             Log.w(TAG, "captureSession close failed", e)
         }
         captureSession = null
+        captureRequestBuilder = null
 
         try {
             cameraDevice?.close()
@@ -717,6 +924,93 @@ class StreamActivity :
         finish()
     }
 
+    // --- Качество трансляции ---
+
+    /**
+     * Качество меняется только в простое: смена разрешения пересоздаёт пайплайн,
+     * а битрейт применяется при старте стрима.
+     */
+    private val isQualityLocked: Boolean get() = isRecording || isStreaming
+
+    private fun updateQualityButtonState() {
+        val locked = isQualityLocked
+        qualityButton.setImageResource(
+            if (locked) android.R.drawable.ic_lock_lock else android.R.drawable.ic_menu_preferences,
+        )
+        qualityButton.alpha = if (locked) 0.2f else 1f
+    }
+
+    private fun onQualityButtonClicked() {
+        if (isQualityLocked) {
+            Toast.makeText(
+                this,
+                "Качество можно менять только до начала трансляции",
+                Toast.LENGTH_SHORT,
+            ).show()
+            return
+        }
+        openQualityPanel()
+    }
+
+    private fun openQualityPanel() {
+        if (qualityPanel != null) return
+        val scrim = View(this).apply {
+            setBackgroundColor(Color.argb(97, 0, 0, 0))
+            alpha = 0f
+            setOnClickListener { closeQualityPanel() }
+        }
+        rootContainer.addView(
+            scrim,
+            FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT,
+            ),
+        )
+
+        val panel = QualitySettingsPanel(this, quality).apply {
+            onQualityChanged = { applyQuality(it) }
+            onCloseRequested = { closeQualityPanel() }
+        }
+        val panelWidth = maxOf(
+            (resources.displayMetrics.density * 300).toInt(),
+            (resources.displayMetrics.widthPixels * 0.4f).toInt(),
+        )
+        rootContainer.addView(
+            panel,
+            FrameLayout.LayoutParams(panelWidth, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.START),
+        )
+        panel.translationX = -panelWidth.toFloat()
+
+        qualityScrim = scrim
+        qualityPanel = panel
+        scrim.animate().alpha(1f).setDuration(240).start()
+        panel.animate().translationX(0f).setDuration(240).start()
+    }
+
+    private fun closeQualityPanel() {
+        val panel = qualityPanel ?: return
+        val scrim = qualityScrim
+        qualityPanel = null
+        qualityScrim = null
+        scrim?.animate()?.alpha(0f)?.setDuration(220)
+            ?.withEndAction { rootContainer.removeView(scrim) }?.start()
+        panel.animate().translationX(-panel.width.toFloat()).setDuration(220)
+            .withEndAction { rootContainer.removeView(panel) }.start()
+    }
+
+    private fun applyQuality(newQuality: StreamQuality) {
+        val previousResolution = quality.resolution
+        quality = newQuality
+        StreamQualityStore.save(this, newQuality)
+        if (newQuality.resolution != previousResolution && !isQualityLocked) {
+            // Новый размер кадра — полное пересоздание пайплайна, только в простое.
+            closeCamera()
+            if (hasSurface && hasAllPermissions()) {
+                openCamera()
+            }
+        }
+    }
+
     // --- Запись ---
 
     private fun onRecordButtonClicked() {
@@ -759,6 +1053,7 @@ class StreamActivity :
             isRecording = false
             recordButton.text = "Запись"
         }
+        updateQualityButtonState()
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
@@ -824,6 +1119,7 @@ class StreamActivity :
         comp.attachOutput(Compositor.OutputId.RECORD_ENCODER, encoderSurface, needsPresentationTime = true)
         isRecording = true
         isTransitioning = false
+        updateQualityButtonState()
         if (!isRollover) {
             recordButton.text = "Стоп"
             recordButton.isEnabled = true
@@ -855,6 +1151,7 @@ class StreamActivity :
         comp.attachOutput(Compositor.OutputId.RECORD_ENCODER, encoderSurface, needsPresentationTime = true)
         isRecording = true
         isTransitioning = false
+        updateQualityButtonState()
         if (!isRollover) {
             recordButton.text = "Стоп"
             recordButton.isEnabled = true
@@ -989,6 +1286,7 @@ class StreamActivity :
         val recorder = mp4Recorder
         mp4Recorder = null
         isRecording = false
+        updateQualityButtonState()
         if (recorder == null) {
             recordButton.text = "Запись"
             return
@@ -1051,6 +1349,7 @@ class StreamActivity :
         val recorder = mp4Recorder
         mp4Recorder = null
         isRecording = false
+        updateQualityButtonState()
         recordButton.text = "Запись"
         if (recorder == null) return
         compositor?.detachOutput(Compositor.OutputId.RECORD_ENCODER)
@@ -1122,6 +1421,7 @@ class StreamActivity :
                 rtmpUrl = fullUrl,
                 width = size.width,
                 height = size.height,
+                videoBitrate = quality.bitrateBps,
             ),
             audioPipeline = audioPipeline,
         )
@@ -1196,6 +1496,7 @@ class StreamActivity :
                 )
                 isStreaming = true
                 isTransitioning = false
+                updateQualityButtonState()
                 setStreamButtonLabel("Стоп")
                 setStreamButtonLoading(false)
                 streamButton.isEnabled = true
@@ -1222,6 +1523,7 @@ class StreamActivity :
             mainHandler.post {
                 streamSession = null
                 isStreaming = false
+                updateQualityButtonState()
                 setStreamButtonLabel("Стрим")
                 setStreamButtonLoading(false)
                 isTransitioning = false
@@ -1241,6 +1543,7 @@ class StreamActivity :
         }
         streamSession = null
         isStreaming = false
+        updateQualityButtonState()
         setStreamButtonLabel("Стрим")
         setStreamButtonLoading(false)
     }
