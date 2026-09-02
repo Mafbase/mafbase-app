@@ -16,6 +16,7 @@ class ClubActionsSection extends StatelessWidget {
   final VoidCallback? onHideRating;
   final String? hideRatingSubtitle;
   final VoidCallback? onOpenTranslationLinks;
+  final VoidCallback? onOpenStreams;
 
   const ClubActionsSection({
     super.key,
@@ -30,6 +31,7 @@ class ClubActionsSection extends StatelessWidget {
     this.onHideRating,
     this.hideRatingSubtitle,
     this.onOpenTranslationLinks,
+    this.onOpenStreams,
   });
 
   @override
@@ -112,6 +114,17 @@ class ClubActionsSection extends StatelessWidget {
             title: locale.clubActionOpenTranslation,
             subtitle: locale.clubActionOpenTranslationSubtitle,
             onTap: onOpenTranslationLinks!,
+          ),
+        );
+      }
+      if (onOpenStreams != null) {
+        cards.add(
+          ClubActionCard(
+            icon: Icons.videocam_outlined,
+            iconBackgroundColor: theme.redColor,
+            title: locale.clubActionOpenStreams,
+            subtitle: locale.clubActionOpenStreamsSubtitle,
+            onTap: onOpenStreams!,
           ),
         );
       }
@@ -215,6 +228,18 @@ class ClubActionsSection extends StatelessWidget {
             title: locale.clubActionOpenTranslation,
             subtitle: locale.clubActionOpenTranslationSubtitle,
             onTap: onOpenTranslationLinks!,
+            showChevron: true,
+          ),
+        );
+      }
+      if (onOpenStreams != null) {
+        cards.add(
+          ClubActionCard(
+            icon: Icons.videocam_outlined,
+            iconBackgroundColor: theme.redColor,
+            title: locale.clubActionOpenStreams,
+            subtitle: locale.clubActionOpenStreamsSubtitle,
+            onTap: onOpenStreams!,
             showChevron: true,
           ),
         );
