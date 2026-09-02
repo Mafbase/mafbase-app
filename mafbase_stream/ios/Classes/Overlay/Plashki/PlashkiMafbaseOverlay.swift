@@ -19,8 +19,7 @@ import UIKit
 final class PlashkiMafbaseOverlay: UIView {
 
     private let invalidator: OverlayInvalidator
-    private let tournamentSocket: TournamentContentSocket?
-    private let clubSocket: ClubContentSocket?
+    private let socket: SeatingContentSocket?
     private let phaseGate: PhaseGate?
     private var cancellables: Set<AnyCancellable> = []
 
@@ -49,14 +48,11 @@ final class PlashkiMafbaseOverlay: UIView {
         self.invalidator = invalidator
         self.phaseGate = params.phaseGate
         if let clubId = params.clubId, let table = params.table {
-            self.tournamentSocket = nil
-            self.clubSocket = ClubContentSocket(clubId: clubId, table: table)
+            self.socket = ClubContentSocket(clubId: clubId, table: table)
         } else if let tournamentId = params.tournamentId, let table = params.table {
-            self.tournamentSocket = TournamentContentSocket(tournamentId: tournamentId, table: table)
-            self.clubSocket = nil
+            self.socket = TournamentContentSocket(tournamentId: tournamentId, table: table)
         } else {
-            self.tournamentSocket = nil
-            self.clubSocket = nil
+            self.socket = nil
         }
         let viewModelRef = viewModel
         self.host = UIHostingController(
@@ -98,14 +94,8 @@ final class PlashkiMafbaseOverlay: UIView {
         }
         NSLog("[Plashki] init params=\(contextLabel)")
 
-        let statePublisher: AnyPublisher<Generated_SeatingContent?, Never>
-        if let cs = clubSocket {
-            statePublisher = cs.$state.eraseToAnyPublisher()
-        } else if let ts = tournamentSocket {
-            statePublisher = ts.$state.eraseToAnyPublisher()
-        } else {
-            statePublisher = Just(nil).eraseToAnyPublisher()
-        }
+        let statePublisher: AnyPublisher<Generated_SeatingContent?, Never> =
+            socket?.$state.eraseToAnyPublisher() ?? Just(nil).eraseToAnyPublisher()
 
         statePublisher
             .receive(on: DispatchQueue.main)
@@ -117,8 +107,7 @@ final class PlashkiMafbaseOverlay: UIView {
             }
             .store(in: &cancellables)
 
-        tournamentSocket?.connect()
-        clubSocket?.connect()
+        socket?.connect()
     }
 
     @available(*, unavailable)
@@ -192,8 +181,7 @@ final class PlashkiMafbaseOverlay: UIView {
         displayLink?.invalidate()
         displayLink = nil
         cancellables.removeAll()
-        tournamentSocket?.dispose()
-        clubSocket?.dispose()
+        socket?.dispose()
         // Снимаем mute, чтобы оставшаяся сессия (если такая случится) не "залипла".
         phaseGate?.muted = false
         host.willMove(toParent: nil)

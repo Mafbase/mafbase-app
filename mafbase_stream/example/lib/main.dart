@@ -25,9 +25,7 @@ class _MyAppState extends State<MyApp> {
   final _tournamentIdController = TextEditingController(text: '553');
   final _tableController = TextEditingController(text: '1');
   // Пусто → brand-слой не подключается.
-  final _brandImageUrlController = TextEditingController(
-    text: 'https://mafbase.ru/images/brand_overlay_1920x1080.png',
-  );
+  final _brandImageUrlController = TextEditingController(text: 'https://mafbase.ru/images/brand_overlay_1920x1080.png');
   String _status = 'Нажми «Открыть стрим», чтобы запустить нативный экран';
   String _lastEvent = '—';
   StreamSubscription<StreamEvent>? _eventsSub;

@@ -55,15 +55,28 @@ final class StreamViewController: UIViewController {
     private let audioDataQueue = DispatchQueue(label: "com.example.mafbase_stream.audio.data")
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private let audioDataOutput = AVCaptureAudioDataOutput()
+    private var videoDeviceInput: AVCaptureDeviceInput?
     private var didFireOnClose = false
+
+    // MARK: - Lens
+
+    private enum Lens: Int {
+        case ultraWide = 0
+        case wide = 1
+    }
+
+    private let ultraWideCamera = AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back)
+    private var activeLens: Lens = .wide
+    private var isLensSwitching = false
 
     // MARK: - Pipeline (compositor as source of truth)
 
-    /// Жёстко зафиксированный размер кадра пайплайна. Совпадает с
-    /// `sessionPreset = .hd1280x720`, и дальше — фиксированный размер
-    /// Compositor'а / VTCompressionSession / AVAssetWriter.
-    private static let frameWidth: Int = 1280
-    private static let frameHeight: Int = 720
+    /// Размер кадра пайплайна. Определяется выбранным качеством и меняется только
+    /// в простое (applyResolutionChange) — session preset, Compositor,
+    /// VTCompressionSession и AVAssetWriter всегда видят один и тот же размер.
+    private var qualitySettings = StreamQualityStore.load()
+    private lazy var frameWidth: Int = qualitySettings.resolution.width
+    private lazy var frameHeight: Int = qualitySettings.resolution.height
 
     private var compositor: Compositor?
     private var overlayRenderer: OverlayViewRenderer?
@@ -81,6 +94,11 @@ final class StreamViewController: UIViewController {
     private var streamButton: UIButton!
     private var streamSpinner: UIActivityIndicatorView!
     private var overlayToggleButton: UIButton?
+    private var bottomButtonsStack: UIStackView!
+    private var qualityButton: UIButton!
+    private var lensSwitcher: SegmentedPillControl?
+    private var qualityPanel: QualitySettingsPanel?
+    private var qualityScrim: UIView?
 
     // MARK: - Recording / Streaming state
 
@@ -116,6 +134,8 @@ final class StreamViewController: UIViewController {
         setupPreviewDisplayLayer()
         setupCloseButton()
         setupBottomButtons()
+        setupQualityButton()
+        setupLensSwitcher()
         registerInterruptionObserver()
 
         requestPermissions { [weak self] granted in
@@ -209,7 +229,7 @@ final class StreamViewController: UIViewController {
     // MARK: - Compositor pipeline
 
     private func startCompositorPipeline() {
-        let comp = Compositor(width: Self.frameWidth, height: Self.frameHeight)
+        let comp = Compositor(width: frameWidth, height: frameHeight)
         comp.onFrame = { [weak self] outBuf, pts in
             self?.dispatchProcessedFrame(outBuf, pts: pts)
         }
@@ -247,7 +267,7 @@ final class StreamViewController: UIViewController {
             return
         }
         NSLog("[Stream] attachOverlay: viewType=\(viewType ?? "nil") brand=\(overlayParams.brandImageUrl ?? "nil") tournamentId=\(overlayParams.tournamentId.map(String.init) ?? "nil") clubId=\(overlayParams.clubId.map(String.init) ?? "nil") table=\(overlayParams.table.map(String.init) ?? "nil")")
-        let renderer = OverlayViewRenderer(width: Self.frameWidth, height: Self.frameHeight)
+        let renderer = OverlayViewRenderer(width: frameWidth, height: frameHeight)
         // Поднимаем phaseGate из плагина и параметры из overlayParams в
         // новый OverlayParams, который видит overlay и brand-слой.
         let resolvedParams = OverlayParams(
@@ -335,19 +355,17 @@ final class StreamViewController: UIViewController {
     // MARK: - Capture session
 
     private func configureSession() {
+        let preferredPreset = sessionPreset(for: qualitySettings.resolution)
         sessionQueue.async { [weak self] in
             guard let self = self else { return }
             self.captureSession.beginConfiguration()
-            if self.captureSession.canSetSessionPreset(.hd1280x720) {
-                self.captureSession.sessionPreset = .hd1280x720
-            } else {
-                self.captureSession.sessionPreset = .high
-            }
+            self.applySessionPreset(preferredPreset)
 
-            if let videoDevice = self.bestBackCamera(),
+            if let videoDevice = self.captureDevice(for: self.activeLens),
                let videoInput = try? AVCaptureDeviceInput(device: videoDevice),
                self.captureSession.canAddInput(videoInput) {
                 self.captureSession.addInput(videoInput)
+                self.videoDeviceInput = videoInput
             } else {
                 NSLog("[mafbase_stream] не удалось добавить видео-вход")
             }
@@ -388,6 +406,69 @@ final class StreamViewController: UIViewController {
             return device
         }
         return AVCaptureDevice.default(for: .video)
+    }
+
+    private func captureDevice(for lens: Lens) -> AVCaptureDevice? {
+        switch lens {
+        case .ultraWide: return ultraWideCamera ?? bestBackCamera()
+        case .wide: return bestBackCamera()
+        }
+    }
+
+    private func sessionPreset(for resolution: StreamResolution) -> AVCaptureSession.Preset {
+        resolution == .fullHd1080 ? .hd1920x1080 : .hd1280x720
+    }
+
+    /// Вызывается на sessionQueue внутри begin/commitConfiguration.
+    private func applySessionPreset(_ preset: AVCaptureSession.Preset) {
+        if captureSession.canSetSessionPreset(preset) {
+            captureSession.sessionPreset = preset
+        } else {
+            captureSession.sessionPreset = .high
+        }
+    }
+
+    /// Смена объектива «на лету»: заменяется только AVCaptureDeviceInput, размер
+    /// кадра и энкодеры не затрагиваются, поэтому доступна и во время записи/стрима.
+    private func switchLens(to lens: Lens) {
+        guard lens != activeLens, !isLensSwitching else { return }
+        guard let device = captureDevice(for: lens) else { return }
+        let previousLens = activeLens
+        activeLens = lens
+        isLensSwitching = true
+        lensSwitcher?.setInteractionEnabled(false)
+
+        sessionQueue.async { [weak self] in
+            guard let self = self else { return }
+            var switched = false
+            self.captureSession.beginConfiguration()
+            let previousInput = self.videoDeviceInput
+            if let current = previousInput {
+                self.captureSession.removeInput(current)
+            }
+            if let newInput = try? AVCaptureDeviceInput(device: device),
+               self.captureSession.canAddInput(newInput) {
+                self.captureSession.addInput(newInput)
+                self.videoDeviceInput = newInput
+                switched = true
+            } else if let fallback = previousInput, self.captureSession.canAddInput(fallback) {
+                self.captureSession.addInput(fallback)
+            }
+            self.captureSession.commitConfiguration()
+
+            DispatchQueue.main.async {
+                self.isLensSwitching = false
+                self.lensSwitcher?.setInteractionEnabled(true)
+                if !switched {
+                    self.activeLens = previousLens
+                    self.lensSwitcher?.setSelectedIndex(previousLens.rawValue, animated: true)
+                }
+                if let connection = self.videoDataOutput.connection(with: .video),
+                   connection.isVideoOrientationSupported {
+                    connection.videoOrientation = self.preferredVideoOrientation()
+                }
+            }
+        }
     }
 
     private func startSession() {
@@ -489,6 +570,171 @@ final class StreamViewController: UIViewController {
         recordButton = record
         streamButton = stream
         streamSpinner = spinner
+        bottomButtonsStack = stack
+    }
+
+    private func setupQualityButton() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.45)
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(qualityTapped), for: .touchUpInside)
+        view.addSubview(button)
+
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            button.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            button.widthAnchor.constraint(equalToConstant: 40),
+            button.heightAnchor.constraint(equalToConstant: 40),
+        ])
+        qualityButton = button
+    }
+
+    private func setupLensSwitcher() {
+        guard ultraWideCamera != nil else { return }
+        let switcher = SegmentedPillControl(titles: ["0.5×", "1×"], selectedIndex: Lens.wide.rawValue)
+        switcher.onChange = { [weak self] index in
+            guard let self = self, let lens = Lens(rawValue: index) else { return }
+            self.switchLens(to: lens)
+        }
+        switcher.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(switcher)
+
+        NSLayoutConstraint.activate([
+            switcher.bottomAnchor.constraint(equalTo: bottomButtonsStack.topAnchor, constant: -14),
+            switcher.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            switcher.heightAnchor.constraint(equalToConstant: 36),
+        ])
+        lensSwitcher = switcher
+    }
+
+    // MARK: - Quality settings
+
+    /// Качество меняется только в простое: смена разрешения пересоздаёт пайплайн,
+    /// а битрейт применяется при старте стрима.
+    private var isQualityLocked: Bool { isRecording || isStreaming }
+
+    private func updateQualityButtonState() {
+        let locked = isQualityLocked
+        qualityButton.setImage(
+            UIImage(systemName: locked ? "lock.fill" : "gearshape.fill"),
+            for: .normal
+        )
+        qualityButton.alpha = locked ? 0.2 : 1.0
+    }
+
+    @objc private func qualityTapped() {
+        if isQualityLocked {
+            showToast("Качество можно менять только до начала трансляции")
+            return
+        }
+        openQualityPanel()
+    }
+
+    private func openQualityPanel() {
+        guard qualityPanel == nil else { return }
+        let scrim = UIView()
+        scrim.backgroundColor = UIColor.black.withAlphaComponent(0.38)
+        scrim.frame = view.bounds
+        scrim.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        scrim.alpha = 0
+        scrim.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeQualityPanel)))
+        view.addSubview(scrim)
+
+        let panel = QualitySettingsPanel(settings: qualitySettings)
+        panel.onCloseTapped = { [weak self] in self?.closeQualityPanel() }
+        panel.onSettingsChanged = { [weak self] settings in
+            self?.applyQualitySettings(settings)
+        }
+        let width = max(300, view.bounds.width * 0.4)
+        panel.frame = CGRect(x: -width, y: 0, width: width, height: view.bounds.height)
+        panel.autoresizingMask = [.flexibleHeight, .flexibleRightMargin]
+        view.addSubview(panel)
+
+        qualityScrim = scrim
+        qualityPanel = panel
+        UIView.animate(withDuration: 0.24, delay: 0, options: [.curveEaseOut]) {
+            scrim.alpha = 1
+            panel.frame.origin.x = 0
+        }
+    }
+
+    @objc private func closeQualityPanel() {
+        guard let panel = qualityPanel, let scrim = qualityScrim else { return }
+        qualityPanel = nil
+        qualityScrim = nil
+        UIView.animate(
+            withDuration: 0.22,
+            delay: 0,
+            options: [.curveEaseIn],
+            animations: {
+                scrim.alpha = 0
+                panel.frame.origin.x = -panel.frame.width
+            },
+            completion: { _ in
+                panel.removeFromSuperview()
+                scrim.removeFromSuperview()
+            }
+        )
+    }
+
+    private func applyQualitySettings(_ settings: StreamQualitySettings) {
+        let previousResolution = qualitySettings.resolution
+        qualitySettings = settings
+        StreamQualityStore.save(settings)
+        guard settings.resolution != previousResolution, !isQualityLocked else { return }
+        applyResolutionChange(to: settings.resolution)
+    }
+
+    /// Пересобирает пайплайн под новое разрешение. Вызывается только в простое:
+    /// запись/стрим блокируют панель, энкодеры ещё не созданы.
+    private func applyResolutionChange(to resolution: StreamResolution) {
+        stopCompositorPipeline()
+        frameWidth = resolution.width
+        frameHeight = resolution.height
+        previewFormatDescription = nil
+        startCompositorPipeline()
+
+        let preset = sessionPreset(for: resolution)
+        sessionQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.captureSession.beginConfiguration()
+            self.applySessionPreset(preset)
+            self.captureSession.commitConfiguration()
+        }
+    }
+
+    private func showToast(_ text: String) {
+        let container = UIView()
+        container.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        container.layer.cornerRadius = 16
+        container.alpha = 0
+        container.translatesAutoresizingMaskIntoConstraints = false
+
+        let label = UILabel()
+        label.text = text
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(label)
+        view.addSubview(container)
+
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
+            label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8),
+            label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+            container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 72),
+        ])
+
+        UIView.animate(withDuration: 0.2, animations: { container.alpha = 1 }) { _ in
+            UIView.animate(withDuration: 0.3, delay: 1.8, options: [], animations: { container.alpha = 0 }) { _ in
+                container.removeFromSuperview()
+            }
+        }
     }
 
     @objc private func toggleOverlayTapped() {
@@ -602,12 +848,13 @@ final class StreamViewController: UIViewController {
     private func startRecordingSegment(isRollover: Bool) {
         let recorder = Mp4Recorder(segmentName: buildSegmentName())
         do {
-            _ = try recorder.start(width: Int32(Self.frameWidth), height: Int32(Self.frameHeight))
+            _ = try recorder.start(width: Int32(frameWidth), height: Int32(frameHeight))
         } catch {
             NSLog("[mafbase_stream] Mp4Recorder.start failed: \(error)")
             cancelSegmentTimer()
             isRecording = false
             isTransitioning = false
+            updateQualityButtonState()
             recordButton.setTitle("Запись", for: .normal)
             recordButton.isEnabled = true
             showAlert(
@@ -619,6 +866,7 @@ final class StreamViewController: UIViewController {
         mp4Recorder = recorder
         isRecording = true
         isTransitioning = false
+        updateQualityButtonState()
         if !isRollover {
             recordButton.setTitle("Стоп", for: .normal)
             recordButton.isEnabled = true
@@ -665,6 +913,7 @@ final class StreamViewController: UIViewController {
                         self.cancelSegmentTimer()
                         self.isRecording = false
                         self.isTransitioning = false
+                        self.updateQualityButtonState()
                         self.recordButton.setTitle("Запись", for: .normal)
                         self.recordButton.isEnabled = true
                     }
@@ -694,6 +943,7 @@ final class StreamViewController: UIViewController {
         // Сначала отписываемся от compositor.onFrame, чтобы не приходили новые кадры
         // в writer'ы, пока он финишит.
         isRecording = false
+        updateQualityButtonState()
         guard let recorder = mp4Recorder else {
             // Идёт финализация ролловера — она сохранит сегмент сама и, увидев
             // сброшенный segmentingActive, не начнёт следующий.
@@ -742,6 +992,7 @@ final class StreamViewController: UIViewController {
     private func stopRecordingSync() {
         cancelSegmentTimer()
         isRecording = false
+        updateQualityButtonState()
         recordButton.setTitle("Запись", for: .normal)
         // Ролловер в этот момент мог уже забрать recorder себе — тогда он и сохранит
         // сегмент, а сброшенный segmentingActive не даст ему начать следующий.
@@ -862,8 +1113,9 @@ final class StreamViewController: UIViewController {
         let session = StreamSession(
             config: StreamSession.Config(
                 rtmpUrl: composedRtmpUrl(),
-                width: Self.frameWidth,
-                height: Self.frameHeight
+                width: frameWidth,
+                height: frameHeight,
+                videoBitrate: qualitySettings.bitrateBps
             ),
             phaseGate: phaseGate
         )
@@ -905,6 +1157,7 @@ final class StreamViewController: UIViewController {
                 self.streamSession = session
                 self.isStreaming = true
                 self.isTransitioning = false
+                self.updateQualityButtonState()
                 self.setStreamButtonLabel("Стоп")
                 self.setStreamButtonLoading(false)
                 self.streamButton.isEnabled = true
@@ -921,6 +1174,7 @@ final class StreamViewController: UIViewController {
         setStreamButtonLoading(true)
         // Сначала отписываемся, потом дренируем энкодер.
         isStreaming = false
+        updateQualityButtonState()
 
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             session.stop()
@@ -940,6 +1194,7 @@ final class StreamViewController: UIViewController {
     private func stopStreamingSync() {
         guard let session = streamSession else { return }
         isStreaming = false
+        updateQualityButtonState()
         session.stop()
         streamSession = nil
         setStreamButtonLabel("Стрим")
