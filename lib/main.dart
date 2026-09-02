@@ -6,23 +6,23 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/guards/auth_guard.dart';
 import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
+import 'package:seating_generator_web/firebase_options.dart';
+import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:seating_generator_web/utils/web_theme_color/web_theme_color.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:seating_generator_web/firebase_options.dart';
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices

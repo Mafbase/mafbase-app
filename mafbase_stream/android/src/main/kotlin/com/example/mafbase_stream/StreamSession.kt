@@ -468,8 +468,12 @@ class StreamSession(
      * Склеиваем их подряд — ядро (RtmpPublisher) умеет распознавать Annex-B.
      */
     private fun extractH264Extradata(format: MediaFormat): ByteArray? {
-        val sps = format.getByteBuffer("csd-0") ?: return null
-        val pps = format.getByteBuffer("csd-1") ?: return null
+        // duplicate(): getByteBuffer возвращает внутренний буфер MediaFormat, и get()
+        // сдвинул бы его позицию. Тот же формат аудио кешируется в AudioPipeline и
+        // переигрывается второму подписчику (запись во время стрима) — сдвинутый csd
+        // отдал бы muxer'у пустой конфиг. Читаем из независимой копии.
+        val sps = format.getByteBuffer("csd-0")?.duplicate() ?: return null
+        val pps = format.getByteBuffer("csd-1")?.duplicate() ?: return null
         val spsSize = sps.remaining()
         val out = ByteArray(spsSize + pps.remaining())
         sps.get(out, 0, spsSize)
@@ -479,7 +483,7 @@ class StreamSession(
 
     /** AAC LC: AudioSpecificConfig в KEY_CSD-0 (обычно 2 байта). */
     private fun extractAacExtradata(format: MediaFormat): ByteArray? {
-        val csd = format.getByteBuffer("csd-0") ?: return null
+        val csd = format.getByteBuffer("csd-0")?.duplicate() ?: return null
         val out = ByteArray(csd.remaining())
         csd.get(out)
         return out

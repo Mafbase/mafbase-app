@@ -4,6 +4,7 @@
 #include <memory>
 #include <mutex>
 #include <string>
+#include <vector>
 
 #include "log.h"
 #include "network/bitrate_controller.h"
@@ -27,6 +28,21 @@ bool is_critical(ms_event_type type) {
            type == MS_EVENT_FAILED || type == MS_EVENT_STATE ||
            type == MS_EVENT_BITRATE;
 }
+
+// Забирает extradata во владение сессии: копирует байты в [buf] и переводит
+// указатель на копию. Исходный буфер живёт только до возврата ms_session_start
+// (NSData/JNI-массив освобождает вызывающий), а WriterThread перечитывает
+// params при каждом реконнекте.
+void own_extradata(std::vector<uint8_t>& buf, const uint8_t*& ptr, size_t& size) {
+    if (ptr != nullptr && size > 0) {
+        buf.assign(ptr, ptr + size);
+        ptr = buf.data();
+    } else {
+        buf.clear();
+        ptr = nullptr;
+        size = 0;
+    }
+}
 }  // namespace
 
 struct ms_session {
@@ -37,6 +53,11 @@ struct ms_session {
     std::unique_ptr<ms::BitrateController> bitrate;
     std::string url;
     ms_session_params params{};
+    // Владеющие копии extradata; params.video_extradata/audio_extradata указывают
+    // сюда после ms_session_start. Writer держит копию этих указателей, поэтому
+    // буферы перезаписываются только когда writer отсутствует (до старта).
+    std::vector<uint8_t> video_extradata;
+    std::vector<uint8_t> audio_extradata;
     bool adaptive_bitrate_enabled = true;
 
     // Накопленное число дропов на момент прошлого queue-depth события. Нужно,
@@ -114,6 +135,10 @@ ms_result ms_session_start(ms_session* session, const char* rtmp_url, const ms_s
     }
     session->url = rtmp_url;
     session->params = *params;
+    own_extradata(session->video_extradata, session->params.video_extradata,
+                  session->params.video_extradata_size);
+    own_extradata(session->audio_extradata, session->params.audio_extradata,
+                  session->params.audio_extradata_size);
     session->adaptive_bitrate_enabled = params->adaptive_bitrate_enabled;
 
     // Listener state-machine передаёт переходы в Dart как ms_event STATE.
