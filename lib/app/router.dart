@@ -5,6 +5,7 @@ import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
 import 'package:seating_generator_web/feature/payment_waiting/ui/payment_waiting_page.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
+import 'package:seating_generator_web/feature/club_streams/ui/club_streams_page.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_page.dart';
 import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_page.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
@@ -106,6 +107,7 @@ class AppRouter extends RootStackRouter {
             AutoRoute(page: ClubGamesRoute.page, path: 'club/:clubId/games'),
             AutoRoute(page: CustomColumnsEditorRoute.page, path: 'club/:clubId/custom-columns'),
             AutoRoute(page: ClubRatingRoute.page, path: 'club/:clubId/rating'),
+            AutoRoute(page: ClubStreamsRoute.page, path: 'club/:clubId/streams'),
 
             // Tournament detail with sub-routes
             AutoRoute(

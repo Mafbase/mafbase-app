@@ -6,6 +6,8 @@ import 'package:seating_generator_web/domain/interactors/check_club_interactor.d
 import 'package:seating_generator_web/domain/interactors/get_club_interactor.dart';
 import 'package:seating_generator_web/domain/models/club_model.dart';
 import 'package:seating_generator_web/domain/repositories/club_repository.dart';
+import 'package:seating_generator_web/domain/repositories/stream_repository.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
@@ -26,6 +28,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
   final CheckClubInteractor _checkClubInteractor;
   final BillClubInteractor _billClubInteractor;
   final ClubRepository _clubRepository;
+  final StreamRepository _streamRepository;
 
   ClubBloc({
     BuildContext? context,
@@ -35,11 +38,13 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     required BillClubInteractor billClubInteractor,
     required CheckClubInteractor checkClubInteractor,
     required ClubRepository clubRepository,
+    required StreamRepository streamRepository,
   })  : _clubId = args.clubId,
         _checkClubInteractor = checkClubInteractor,
         _billClubInteractor = billClubInteractor,
         _getClubInteractor = getClubInteractor,
         _clubRepository = clubRepository,
+        _streamRepository = streamRepository,
         super(args.cachedModel == null ? const ClubState() : ClubState(isLoading: false, model: args.cachedModel)) {
     on<ClubEventPageOpened>(_onPageOpened);
     on<ClubEventOpenRating>(_onOpenRating);
@@ -71,9 +76,10 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
   }
 
   Future<void> _onPageOpened(ClubEventPageOpened event, Emitter emit) async {
-    final [ClubModel club, bool isOwner] = await Future.wait<dynamic>([
+    final [ClubModel club, bool isOwner, List<GameStream> streams] = await Future.wait<dynamic>([
       _getClubInteractor.run(clubId: _clubId),
       _checkClubInteractor(_clubId),
+      _streamRepository.getClubStreams(clubId: _clubId),
     ]);
 
     final hideDate = isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
@@ -86,6 +92,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
         isOwner: isOwner,
         hideDate: hideDate,
         defaultRatingPeriod: defaultRatingPeriod,
+        streams: streams,
       ),
     );
   }

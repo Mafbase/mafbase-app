@@ -18,6 +18,7 @@ import 'package:seating_generator_web/ui/main/club_page/club_bloc.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_event.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_router.dart';
 import 'package:seating_generator_web/ui/main/club_page/club_state.dart';
+import 'package:seating_generator_web/ui/main/club_page/widgets/club_active_streams_card.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_actions_section.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_bottom_bar.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_description_card.dart';
@@ -48,6 +49,7 @@ class ClubPage extends StatelessWidget {
           billClubInteractor: BillClubInteractor(repos.purchaseRepository),
           checkClubInteractor: CheckClubInteractor(repos.clubRepository),
           clubRepository: repos.clubRepository,
+          streamRepository: repos.streamRepository,
         );
       },
       child: Container(
@@ -111,6 +113,13 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                           onEditPhoto: state.isOwner ? _editPhoto : null,
                         ),
                         const SizedBox(height: 12),
+                        if (state.streams.isNotEmpty) ...[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: ClubActiveStreamsCard(streams: state.streams),
+                          ),
+                          const SizedBox(height: 12),
+                        ],
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: ClubDescriptionCard(
@@ -134,6 +143,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                             onHideRating: state.isOwner ? _changeHideDate : null,
                             hideRatingSubtitle: state.isOwner ? _hideRatingSubtitle(context, state.hideDate) : null,
                             onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
+                            onOpenStreams: state.isOwner ? _openStreams : null,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -187,6 +197,10 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                       isOwner: state.isOwner,
                       onEditPhoto: state.isOwner ? _editPhoto : null,
                     ),
+                    if (state.streams.isNotEmpty) ...[
+                      const SizedBox(height: 24),
+                      ClubActiveStreamsCard(streams: state.streams),
+                    ],
                     const SizedBox(height: 24),
                     ClubDescriptionCard(
                       description: model.description,
@@ -205,6 +219,7 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
                       onHideRating: state.isOwner ? _changeHideDate : null,
                       hideRatingSubtitle: state.isOwner ? _hideRatingSubtitle(context, state.hideDate) : null,
                       onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
+                      onOpenStreams: state.isOwner ? _openStreams : null,
                     ),
                   ],
                 ),
@@ -361,6 +376,12 @@ class _ClubPageContentState extends CustomState<_ClubPageContent> {
     final clubId = context.read<ClubBloc>().state.model?.id;
     if (clubId == null) return;
     ClubTranslationLinksDialog.show(context, clubId: clubId);
+  }
+
+  void _openStreams() {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) return;
+    context.router.push(ClubStreamsRoute(clubId: clubId));
   }
 
   String? _hideRatingSubtitle(BuildContext context, DateTime? hideDate) {
