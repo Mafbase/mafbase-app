@@ -45,9 +45,9 @@ internal class ClubContentSocket(
             Request.Builder().url(url).build(),
             object : WebSocketListener() {
                 override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
-                    runCatching { Mafia.SeatingContent.parseFrom(bytes.toByteArray()) }
-                        .onSuccess { _state.value = it }
-                        .onFailure { Log.w(TAG, "parse SeatingContent failed", it) }
+                    runCatching { Mafia.ClubSeatingContent.parseFrom(bytes.toByteArray()) }
+                        .onSuccess { _state.value = it.toSeatingContent() }
+                        .onFailure { Log.w(TAG, "parse ClubSeatingContent failed", it) }
                 }
 
                 override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
@@ -81,3 +81,17 @@ internal class ClubContentSocket(
         private const val RECONNECT_DELAY_MS = 3_000L
     }
 }
+
+/**
+ * У клуба нет нумерации игр, поэтому в [Mafia.ClubSeatingContent] фаза и звук стоят
+ * на полях 5 и 6 вместо 7 и 8 — разбор как [Mafia.SeatingContent] молча терял фазу.
+ */
+private fun Mafia.ClubSeatingContent.toSeatingContent(): Mafia.SeatingContent =
+    Mafia.SeatingContent.newBuilder()
+        .addAllRoles(rolesList)
+        .addAllStatus(statusList)
+        .addAllImages(imagesList)
+        .addAllNames(namesList)
+        .setBroadcastPhase(broadcastPhase)
+        .setSoundEnabled(soundEnabled)
+        .build()

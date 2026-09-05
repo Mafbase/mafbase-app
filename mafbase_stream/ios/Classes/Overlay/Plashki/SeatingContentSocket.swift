@@ -123,10 +123,19 @@ class SeatingContentSocket: NSObject, ObservableObject {
         }
     }
 
+    /// Разбирает бинарный кадр сокета. Турнирный эндпоинт отдаёт `SeatingContent`;
+    /// клубный — своё сообщение, см. переопределение в [ClubContentSocket].
+    func decode(_ data: Data) throws -> Generated_SeatingContent {
+        try Generated_SeatingContent(serializedBytes: data)
+    }
+
     private func parsePayload(_ data: Data) {
         do {
-            let parsed = try Generated_SeatingContent(serializedBytes: data)
-            NSLog("[\(logTag)] parsed: roles=\(parsed.roles.count) names=\(parsed.names.count) game=\(parsed.game)")
+            let parsed = try decode(data)
+            NSLog(
+                "[\(logTag)] parsed: roles=\(parsed.roles.count) names=\(parsed.names.count)"
+                    + " images=\(parsed.images.count) game=\(parsed.game) phase=\(parsed.broadcastPhase)"
+            )
             DispatchQueue.main.async { [weak self] in
                 self?.state = parsed
             }

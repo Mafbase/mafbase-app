@@ -747,6 +747,15 @@ public struct Generated_Club: Sendable {
   /// Clears the value of `billedFor`. Subsequent reads from it will return its default value.
   public mutating func clearBilledFor() {self._billedFor = nil}
 
+  public var photoThemeID: Int32 {
+    get {_photoThemeID ?? 0}
+    set {_photoThemeID = newValue}
+  }
+  /// Returns true if `photoThemeID` has been explicitly set.
+  public var hasPhotoThemeID: Bool {self._photoThemeID != nil}
+  /// Clears the value of `photoThemeID`. Subsequent reads from it will return its default value.
+  public mutating func clearPhotoThemeID() {self._photoThemeID = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -756,6 +765,7 @@ public struct Generated_Club: Sendable {
   fileprivate var _groupLink: String? = nil
   fileprivate var _city: String? = nil
   fileprivate var _billedFor: String? = nil
+  fileprivate var _photoThemeID: Int32? = nil
 }
 
 public struct Generated_ClubRatingEventOut: Sendable {
@@ -773,9 +783,61 @@ public struct Generated_ClubRatingEventOut: Sendable {
 
   public var citizenWins: Int32 = 0
 
+  public var dateStart: String {
+    get {_dateStart ?? String()}
+    set {_dateStart = newValue}
+  }
+  /// Returns true if `dateStart` has been explicitly set.
+  public var hasDateStart: Bool {self._dateStart != nil}
+  /// Clears the value of `dateStart`. Subsequent reads from it will return its default value.
+  public mutating func clearDateStart() {self._dateStart = nil}
+
+  public var dateEnd: String {
+    get {_dateEnd ?? String()}
+    set {_dateEnd = newValue}
+  }
+  /// Returns true if `dateEnd` has been explicitly set.
+  public var hasDateEnd: Bool {self._dateEnd != nil}
+  /// Clears the value of `dateEnd`. Subsequent reads from it will return its default value.
+  public mutating func clearDateEnd() {self._dateEnd = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _dateStart: String? = nil
+  fileprivate var _dateEnd: String? = nil
+}
+
+public struct Generated_ClubDefaultRatingPeriod: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var dateStart: String {
+    get {_dateStart ?? String()}
+    set {_dateStart = newValue}
+  }
+  /// Returns true if `dateStart` has been explicitly set.
+  public var hasDateStart: Bool {self._dateStart != nil}
+  /// Clears the value of `dateStart`. Subsequent reads from it will return its default value.
+  public mutating func clearDateStart() {self._dateStart = nil}
+
+  public var dateEnd: String {
+    get {_dateEnd ?? String()}
+    set {_dateEnd = newValue}
+  }
+  /// Returns true if `dateEnd` has been explicitly set.
+  public var hasDateEnd: Bool {self._dateEnd != nil}
+  /// Clears the value of `dateEnd`. Subsequent reads from it will return its default value.
+  public mutating func clearDateEnd() {self._dateEnd = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _dateStart: String? = nil
+  fileprivate var _dateEnd: String? = nil
 }
 
 public struct Generated_ClubRatingRow: @unchecked Sendable {
@@ -2902,6 +2964,27 @@ public struct Generated_SetTournamentPhotoThemeEvent: Sendable {
   fileprivate var _themeID: Int32? = nil
 }
 
+public struct Generated_SetClubPhotoThemeEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var themeID: Int32 {
+    get {_themeID ?? 0}
+    set {_themeID = newValue}
+  }
+  /// Returns true if `themeID` has been explicitly set.
+  public var hasThemeID: Bool {self._themeID != nil}
+  /// Clears the value of `themeID`. Subsequent reads from it will return its default value.
+  public mutating func clearThemeID() {self._themeID = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _themeID: Int32? = nil
+}
+
 public struct Generated_SetTournamentDesignEvent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -2948,6 +3031,30 @@ public struct Generated_AddPlayersFromTournamentEvent: Sendable {
 }
 
 public struct Generated_AddPlayersFromTournamentEventOut: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var addedCount: Int32 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Generated_AddPlayersEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var players: [Generated_Player] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Generated_AddPlayersEventOut: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -3121,6 +3228,16 @@ public struct Generated_GameStreamAdmin: Sendable {
   /// время начала трансляции (ISO 8601)
   public var startedAt: String = String()
 
+  /// токен диплинка оператора, для построения ссылки на клиенте
+  public var broadcastToken: String {
+    get {_broadcastToken ?? String()}
+    set {_broadcastToken = newValue}
+  }
+  /// Returns true if `broadcastToken` has been explicitly set.
+  public var hasBroadcastToken: Bool {self._broadcastToken != nil}
+  /// Clears the value of `broadcastToken`. Subsequent reads from it will return its default value.
+  public mutating func clearBroadcastToken() {self._broadcastToken = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -3128,6 +3245,7 @@ public struct Generated_GameStreamAdmin: Sendable {
   fileprivate var _viewerURL: String? = nil
   fileprivate var _rtmpServerURL: String? = nil
   fileprivate var _rtmpKey: String? = nil
+  fileprivate var _broadcastToken: String? = nil
 }
 
 /// Запрос на ручную установку стрима
@@ -3211,6 +3329,226 @@ public struct Generated_GetStreamsAdminOut: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+}
+
+/// Текущее состояние плашки для стола клуба
+public struct Generated_ClubSeatingContent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var roles: [Generated_PlayerRole] = []
+
+  public var status: [Generated_PlayerStatus] = []
+
+  public var images: [String] = []
+
+  public var names: [String] = []
+
+  public var broadcastPhase: Generated_BroadcastPhase = .day
+
+  public var soundEnabled: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+/// Запрос на изменение плашки клуба
+public struct Generated_ChangeClubSeatingContent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var player: Int32 {
+    get {_player ?? 0}
+    set {_player = newValue}
+  }
+  /// Returns true if `player` has been explicitly set.
+  public var hasPlayer: Bool {self._player != nil}
+  /// Clears the value of `player`. Subsequent reads from it will return its default value.
+  public mutating func clearPlayer() {self._player = nil}
+
+  public var playerID: Int32 {
+    get {_playerID ?? 0}
+    set {_playerID = newValue}
+  }
+  /// Returns true if `playerID` has been explicitly set.
+  public var hasPlayerID: Bool {self._playerID != nil}
+  /// Clears the value of `playerID`. Subsequent reads from it will return its default value.
+  public mutating func clearPlayerID() {self._playerID = nil}
+
+  public var role: Generated_PlayerRole {
+    get {_role ?? .citizen}
+    set {_role = newValue}
+  }
+  /// Returns true if `role` has been explicitly set.
+  public var hasRole: Bool {self._role != nil}
+  /// Clears the value of `role`. Subsequent reads from it will return its default value.
+  public mutating func clearRole() {self._role = nil}
+
+  public var status: Generated_PlayerStatus {
+    get {_status ?? .alive}
+    set {_status = newValue}
+  }
+  /// Returns true if `status` has been explicitly set.
+  public var hasStatus: Bool {self._status != nil}
+  /// Clears the value of `status`. Subsequent reads from it will return its default value.
+  public mutating func clearStatus() {self._status = nil}
+
+  public var broadcastPhase: Generated_BroadcastPhase {
+    get {_broadcastPhase ?? .day}
+    set {_broadcastPhase = newValue}
+  }
+  /// Returns true if `broadcastPhase` has been explicitly set.
+  public var hasBroadcastPhase: Bool {self._broadcastPhase != nil}
+  /// Clears the value of `broadcastPhase`. Subsequent reads from it will return its default value.
+  public mutating func clearBroadcastPhase() {self._broadcastPhase = nil}
+
+  public var soundEnabled: Bool {
+    get {_soundEnabled ?? false}
+    set {_soundEnabled = newValue}
+  }
+  /// Returns true if `soundEnabled` has been explicitly set.
+  public var hasSoundEnabled: Bool {self._soundEnabled != nil}
+  /// Clears the value of `soundEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearSoundEnabled() {self._soundEnabled = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _player: Int32? = nil
+  fileprivate var _playerID: Int32? = nil
+  fileprivate var _role: Generated_PlayerRole? = nil
+  fileprivate var _status: Generated_PlayerStatus? = nil
+  fileprivate var _broadcastPhase: Generated_BroadcastPhase? = nil
+  fileprivate var _soundEnabled: Bool? = nil
+}
+
+/// Ответ на GET /api/club-translation-key/{id}
+public struct Generated_ClubTranslationKeyEventOut: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var key: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+/// Ответ на GET /api/broadcast/credentials — RTMP-креды стола для оператора
+public struct Generated_BroadcastCredentialsOut: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var tableNumber: Int32 = 0
+
+  public var rtmpServerURL: String = String()
+
+  public var rtmpKey: String = String()
+
+  public var breakPlaceholderImageURL: String {
+    get {_breakPlaceholderImageURL ?? String()}
+    set {_breakPlaceholderImageURL = newValue}
+  }
+  /// Returns true if `breakPlaceholderImageURL` has been explicitly set.
+  public var hasBreakPlaceholderImageURL: Bool {self._breakPlaceholderImageURL != nil}
+  /// Clears the value of `breakPlaceholderImageURL`. Subsequent reads from it will return its default value.
+  public mutating func clearBreakPlaceholderImageURL() {self._breakPlaceholderImageURL = nil}
+
+  public var brandImageURL: String {
+    get {_brandImageURL ?? String()}
+    set {_brandImageURL = newValue}
+  }
+  /// Returns true if `brandImageURL` has been explicitly set.
+  public var hasBrandImageURL: Bool {self._brandImageURL != nil}
+  /// Clears the value of `brandImageURL`. Subsequent reads from it will return its default value.
+  public mutating func clearBrandImageURL() {self._brandImageURL = nil}
+
+  public var overlayDesignKey: String {
+    get {_overlayDesignKey ?? String()}
+    set {_overlayDesignKey = newValue}
+  }
+  /// Returns true if `overlayDesignKey` has been explicitly set.
+  public var hasOverlayDesignKey: Bool {self._overlayDesignKey != nil}
+  /// Clears the value of `overlayDesignKey`. Subsequent reads from it will return its default value.
+  public mutating func clearOverlayDesignKey() {self._overlayDesignKey = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _breakPlaceholderImageURL: String? = nil
+  fileprivate var _brandImageURL: String? = nil
+  fileprivate var _overlayDesignKey: String? = nil
+}
+
+/// Запрос на установку overlay-настроек стримов (турнир/клуб)
+public struct Generated_SetStreamSettingsEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var breakPlaceholderImageURL: String {
+    get {_breakPlaceholderImageURL ?? String()}
+    set {_breakPlaceholderImageURL = newValue}
+  }
+  /// Returns true if `breakPlaceholderImageURL` has been explicitly set.
+  public var hasBreakPlaceholderImageURL: Bool {self._breakPlaceholderImageURL != nil}
+  /// Clears the value of `breakPlaceholderImageURL`. Subsequent reads from it will return its default value.
+  public mutating func clearBreakPlaceholderImageURL() {self._breakPlaceholderImageURL = nil}
+
+  public var brandImageURL: String {
+    get {_brandImageURL ?? String()}
+    set {_brandImageURL = newValue}
+  }
+  /// Returns true if `brandImageURL` has been explicitly set.
+  public var hasBrandImageURL: Bool {self._brandImageURL != nil}
+  /// Clears the value of `brandImageURL`. Subsequent reads from it will return its default value.
+  public mutating func clearBrandImageURL() {self._brandImageURL = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _breakPlaceholderImageURL: String? = nil
+  fileprivate var _brandImageURL: String? = nil
+}
+
+/// Ответ с текущими overlay-настройками стримов (турнир/клуб)
+public struct Generated_StreamSettingsOut: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var breakPlaceholderImageURL: String {
+    get {_breakPlaceholderImageURL ?? String()}
+    set {_breakPlaceholderImageURL = newValue}
+  }
+  /// Returns true if `breakPlaceholderImageURL` has been explicitly set.
+  public var hasBreakPlaceholderImageURL: Bool {self._breakPlaceholderImageURL != nil}
+  /// Clears the value of `breakPlaceholderImageURL`. Subsequent reads from it will return its default value.
+  public mutating func clearBreakPlaceholderImageURL() {self._breakPlaceholderImageURL = nil}
+
+  public var brandImageURL: String {
+    get {_brandImageURL ?? String()}
+    set {_brandImageURL = newValue}
+  }
+  /// Returns true if `brandImageURL` has been explicitly set.
+  public var hasBrandImageURL: Bool {self._brandImageURL != nil}
+  /// Clears the value of `brandImageURL`. Subsequent reads from it will return its default value.
+  public mutating func clearBrandImageURL() {self._brandImageURL = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _breakPlaceholderImageURL: String? = nil
+  fileprivate var _brandImageURL: String? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -3728,7 +4066,7 @@ extension Generated_ChangeSeatingContent: SwiftProtobuf.Message, SwiftProtobuf._
 
 extension Generated_Club: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Club"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}name\0\u{1}description\0\u{1}imageUrl\0\u{1}groupLink\0\u{1}city\0\u{1}billedFor\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}name\0\u{1}description\0\u{1}imageUrl\0\u{1}groupLink\0\u{1}city\0\u{1}billedFor\0\u{1}photoThemeId\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -3743,6 +4081,7 @@ extension Generated_Club: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       case 5: try { try decoder.decodeSingularStringField(value: &self._groupLink) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self._city) }()
       case 7: try { try decoder.decodeSingularStringField(value: &self._billedFor) }()
+      case 8: try { try decoder.decodeSingularInt32Field(value: &self._photoThemeID) }()
       default: break
       }
     }
@@ -3774,6 +4113,9 @@ extension Generated_Club: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     try { if let v = self._billedFor {
       try visitor.visitSingularStringField(value: v, fieldNumber: 7)
     } }()
+    try { if let v = self._photoThemeID {
+      try visitor.visitSingularInt32Field(value: v, fieldNumber: 8)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -3785,6 +4127,7 @@ extension Generated_Club: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if lhs._groupLink != rhs._groupLink {return false}
     if lhs._city != rhs._city {return false}
     if lhs._billedFor != rhs._billedFor {return false}
+    if lhs._photoThemeID != rhs._photoThemeID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -3792,7 +4135,7 @@ extension Generated_Club: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
 extension Generated_ClubRatingEventOut: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ClubRatingEventOut"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}row\0\u{1}clubName\0\u{1}games\0\u{1}mafiaWins\0\u{1}citizenWins\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}row\0\u{1}clubName\0\u{1}games\0\u{1}mafiaWins\0\u{1}citizenWins\0\u{1}dateStart\0\u{1}dateEnd\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -3805,12 +4148,18 @@ extension Generated_ClubRatingEventOut: SwiftProtobuf.Message, SwiftProtobuf._Me
       case 3: try { try decoder.decodeSingularInt32Field(value: &self.games) }()
       case 4: try { try decoder.decodeSingularInt32Field(value: &self.mafiaWins) }()
       case 5: try { try decoder.decodeSingularInt32Field(value: &self.citizenWins) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self._dateStart) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._dateEnd) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.row.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.row, fieldNumber: 1)
     }
@@ -3826,6 +4175,12 @@ extension Generated_ClubRatingEventOut: SwiftProtobuf.Message, SwiftProtobuf._Me
     if self.citizenWins != 0 {
       try visitor.visitSingularInt32Field(value: self.citizenWins, fieldNumber: 5)
     }
+    try { if let v = self._dateStart {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._dateEnd {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -3835,6 +4190,47 @@ extension Generated_ClubRatingEventOut: SwiftProtobuf.Message, SwiftProtobuf._Me
     if lhs.games != rhs.games {return false}
     if lhs.mafiaWins != rhs.mafiaWins {return false}
     if lhs.citizenWins != rhs.citizenWins {return false}
+    if lhs._dateStart != rhs._dateStart {return false}
+    if lhs._dateEnd != rhs._dateEnd {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_ClubDefaultRatingPeriod: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ClubDefaultRatingPeriod"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}dateStart\0\u{1}dateEnd\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self._dateStart) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self._dateEnd) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._dateStart {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._dateEnd {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_ClubDefaultRatingPeriod, rhs: Generated_ClubDefaultRatingPeriod) -> Bool {
+    if lhs._dateStart != rhs._dateStart {return false}
+    if lhs._dateEnd != rhs._dateEnd {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -7462,6 +7858,40 @@ extension Generated_SetTournamentPhotoThemeEvent: SwiftProtobuf.Message, SwiftPr
   }
 }
 
+extension Generated_SetClubPhotoThemeEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetClubPhotoThemeEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}themeId\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self._themeID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._themeID {
+      try visitor.visitSingularInt32Field(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_SetClubPhotoThemeEvent, rhs: Generated_SetClubPhotoThemeEvent) -> Bool {
+    if lhs._themeID != rhs._themeID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Generated_SetTournamentDesignEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetTournamentDesignEvent"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}designKey\0")
@@ -7580,6 +8010,66 @@ extension Generated_AddPlayersFromTournamentEventOut: SwiftProtobuf.Message, Swi
   }
 
   public static func ==(lhs: Generated_AddPlayersFromTournamentEventOut, rhs: Generated_AddPlayersFromTournamentEventOut) -> Bool {
+    if lhs.addedCount != rhs.addedCount {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_AddPlayersEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AddPlayersEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}players\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.players) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.players.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.players, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_AddPlayersEvent, rhs: Generated_AddPlayersEvent) -> Bool {
+    if lhs.players != rhs.players {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_AddPlayersEventOut: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AddPlayersEventOut"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}addedCount\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.addedCount) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.addedCount != 0 {
+      try visitor.visitSingularInt32Field(value: self.addedCount, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_AddPlayersEventOut, rhs: Generated_AddPlayersEventOut) -> Bool {
     if lhs.addedCount != rhs.addedCount {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -7820,7 +8310,7 @@ extension Generated_GameStream: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
 extension Generated_GameStreamAdmin: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GameStreamAdmin"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}tableNumber\0\u{1}viewerUrl\0\u{1}rtmpServerUrl\0\u{1}rtmpKey\0\u{1}active\0\u{1}startedAt\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}tableNumber\0\u{1}viewerUrl\0\u{1}rtmpServerUrl\0\u{1}rtmpKey\0\u{1}active\0\u{1}startedAt\0\u{1}broadcastToken\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -7835,6 +8325,7 @@ extension Generated_GameStreamAdmin: SwiftProtobuf.Message, SwiftProtobuf._Messa
       case 5: try { try decoder.decodeSingularStringField(value: &self._rtmpKey) }()
       case 6: try { try decoder.decodeSingularBoolField(value: &self.active) }()
       case 7: try { try decoder.decodeSingularStringField(value: &self.startedAt) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._broadcastToken) }()
       default: break
       }
     }
@@ -7866,6 +8357,9 @@ extension Generated_GameStreamAdmin: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if !self.startedAt.isEmpty {
       try visitor.visitSingularStringField(value: self.startedAt, fieldNumber: 7)
     }
+    try { if let v = self._broadcastToken {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -7877,6 +8371,7 @@ extension Generated_GameStreamAdmin: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if lhs._rtmpKey != rhs._rtmpKey {return false}
     if lhs.active != rhs.active {return false}
     if lhs.startedAt != rhs.startedAt {return false}
+    if lhs._broadcastToken != rhs._broadcastToken {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -8016,6 +8511,287 @@ extension Generated_GetStreamsAdminOut: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public static func ==(lhs: Generated_GetStreamsAdminOut, rhs: Generated_GetStreamsAdminOut) -> Bool {
     if lhs.streams != rhs.streams {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_ClubSeatingContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ClubSeatingContent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}roles\0\u{1}status\0\u{1}images\0\u{1}names\0\u{1}broadcastPhase\0\u{1}soundEnabled\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedEnumField(value: &self.roles) }()
+      case 2: try { try decoder.decodeRepeatedEnumField(value: &self.status) }()
+      case 3: try { try decoder.decodeRepeatedStringField(value: &self.images) }()
+      case 4: try { try decoder.decodeRepeatedStringField(value: &self.names) }()
+      case 5: try { try decoder.decodeSingularEnumField(value: &self.broadcastPhase) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self.soundEnabled) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.roles.isEmpty {
+      try visitor.visitPackedEnumField(value: self.roles, fieldNumber: 1)
+    }
+    if !self.status.isEmpty {
+      try visitor.visitPackedEnumField(value: self.status, fieldNumber: 2)
+    }
+    if !self.images.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.images, fieldNumber: 3)
+    }
+    if !self.names.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.names, fieldNumber: 4)
+    }
+    if self.broadcastPhase != .day {
+      try visitor.visitSingularEnumField(value: self.broadcastPhase, fieldNumber: 5)
+    }
+    if self.soundEnabled != false {
+      try visitor.visitSingularBoolField(value: self.soundEnabled, fieldNumber: 6)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_ClubSeatingContent, rhs: Generated_ClubSeatingContent) -> Bool {
+    if lhs.roles != rhs.roles {return false}
+    if lhs.status != rhs.status {return false}
+    if lhs.images != rhs.images {return false}
+    if lhs.names != rhs.names {return false}
+    if lhs.broadcastPhase != rhs.broadcastPhase {return false}
+    if lhs.soundEnabled != rhs.soundEnabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_ChangeClubSeatingContent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ChangeClubSeatingContent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}player\0\u{1}playerId\0\u{1}role\0\u{1}status\0\u{1}broadcastPhase\0\u{1}soundEnabled\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self._player) }()
+      case 2: try { try decoder.decodeSingularInt32Field(value: &self._playerID) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self._role) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self._status) }()
+      case 5: try { try decoder.decodeSingularEnumField(value: &self._broadcastPhase) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._soundEnabled) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._player {
+      try visitor.visitSingularInt32Field(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._playerID {
+      try visitor.visitSingularInt32Field(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._role {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._status {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._broadcastPhase {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._soundEnabled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_ChangeClubSeatingContent, rhs: Generated_ChangeClubSeatingContent) -> Bool {
+    if lhs._player != rhs._player {return false}
+    if lhs._playerID != rhs._playerID {return false}
+    if lhs._role != rhs._role {return false}
+    if lhs._status != rhs._status {return false}
+    if lhs._broadcastPhase != rhs._broadcastPhase {return false}
+    if lhs._soundEnabled != rhs._soundEnabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_ClubTranslationKeyEventOut: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ClubTranslationKeyEventOut"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}key\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.key) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.key.isEmpty {
+      try visitor.visitSingularStringField(value: self.key, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_ClubTranslationKeyEventOut, rhs: Generated_ClubTranslationKeyEventOut) -> Bool {
+    if lhs.key != rhs.key {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_BroadcastCredentialsOut: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".BroadcastCredentialsOut"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}tableNumber\0\u{1}rtmpServerUrl\0\u{1}rtmpKey\0\u{1}breakPlaceholderImageUrl\0\u{1}brandImageUrl\0\u{1}overlayDesignKey\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.tableNumber) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.rtmpServerURL) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.rtmpKey) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._breakPlaceholderImageURL) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self._brandImageURL) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self._overlayDesignKey) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.tableNumber != 0 {
+      try visitor.visitSingularInt32Field(value: self.tableNumber, fieldNumber: 1)
+    }
+    if !self.rtmpServerURL.isEmpty {
+      try visitor.visitSingularStringField(value: self.rtmpServerURL, fieldNumber: 2)
+    }
+    if !self.rtmpKey.isEmpty {
+      try visitor.visitSingularStringField(value: self.rtmpKey, fieldNumber: 3)
+    }
+    try { if let v = self._breakPlaceholderImageURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._brandImageURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._overlayDesignKey {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_BroadcastCredentialsOut, rhs: Generated_BroadcastCredentialsOut) -> Bool {
+    if lhs.tableNumber != rhs.tableNumber {return false}
+    if lhs.rtmpServerURL != rhs.rtmpServerURL {return false}
+    if lhs.rtmpKey != rhs.rtmpKey {return false}
+    if lhs._breakPlaceholderImageURL != rhs._breakPlaceholderImageURL {return false}
+    if lhs._brandImageURL != rhs._brandImageURL {return false}
+    if lhs._overlayDesignKey != rhs._overlayDesignKey {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_SetStreamSettingsEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SetStreamSettingsEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}breakPlaceholderImageUrl\0\u{1}brandImageUrl\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self._breakPlaceholderImageURL) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self._brandImageURL) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._breakPlaceholderImageURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._brandImageURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_SetStreamSettingsEvent, rhs: Generated_SetStreamSettingsEvent) -> Bool {
+    if lhs._breakPlaceholderImageURL != rhs._breakPlaceholderImageURL {return false}
+    if lhs._brandImageURL != rhs._brandImageURL {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Generated_StreamSettingsOut: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".StreamSettingsOut"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}breakPlaceholderImageUrl\0\u{1}brandImageUrl\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self._breakPlaceholderImageURL) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self._brandImageURL) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._breakPlaceholderImageURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._brandImageURL {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Generated_StreamSettingsOut, rhs: Generated_StreamSettingsOut) -> Bool {
+    if lhs._breakPlaceholderImageURL != rhs._breakPlaceholderImageURL {return false}
+    if lhs._brandImageURL != rhs._brandImageURL {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
