@@ -152,7 +152,6 @@ struct MafbaseCard: View {
 
 /// Загрузка картинки игрока с фоллбеком на placeholder. SwiftUI-нативный
 /// `AsyncImage` доступен только с iOS 15, а плагин таргетится в iOS 14.
-/// Используем `URLSession` + `@State` + locally bundled placeholder.
 ///
 /// При успешной загрузке вызывает `onImageLoaded` через environment — оверлей
 /// использует это, чтобы продлить CADisplayLink-pump invalidate'ов и снять
@@ -161,12 +160,12 @@ struct MafbaseCard: View {
 private struct AsyncImageView: View {
     let urlString: String?
 
-    @State private var loaded: UIImage?
+    @StateObject private var loader = RemoteImageLoader()
     @Environment(\.overlayImageLoaded) private var onImageLoaded
 
     var body: some View {
         Group {
-            if let image = loaded {
+            if let image = loader.image {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -176,22 +175,41 @@ private struct AsyncImageView: View {
                     .aspectRatio(contentMode: .fill)
             }
         }
-        .onAppear { load() }
-        .onChange(of: urlString) { _ in
-            loaded = nil
-            load()
+        .onAppear { loader.load(urlString, onLoaded: onImageLoaded) }
+        .onChange(of: urlString) { newValue in
+            loader.load(newValue, onLoaded: onImageLoaded)
         }
     }
+}
 
-    private func load() {
-        guard let s = urlString, let url = URL(string: s) else { return }
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            guard let data = data, let image = decodeImage(data) else { return }
-            DispatchQueue.main.async {
-                self.loaded = image
-                self.onImageLoaded?()
+/// Держит фото одной карточки. Ответ применяется, только если его url всё ещё
+/// актуален, — иначе поздний ответ предыдущей игры перезаписал бы новое фото.
+private final class RemoteImageLoader: ObservableObject {
+    @Published private(set) var image: UIImage?
+
+    private var requested: String?
+    private var task: URLSessionDataTask?
+
+    func load(_ urlString: String?, onLoaded: (() -> Void)?) {
+        guard requested != urlString else { return }
+        requested = urlString
+        task?.cancel()
+        task = nil
+        image = nil
+        guard let s = urlString, !s.isEmpty, let url = URL(string: s) else { return }
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            guard let data = data, let decoded = decodeImage(data) else {
+                NSLog("[Plashki] photo load failed \(s): \(error.map(String.init(describing:)) ?? "no data")")
+                return
             }
-        }.resume()
+            DispatchQueue.main.async {
+                guard let self = self, self.requested == s else { return }
+                self.image = decoded
+                onLoaded?()
+            }
+        }
+        self.task = task
+        task.resume()
     }
 }
 

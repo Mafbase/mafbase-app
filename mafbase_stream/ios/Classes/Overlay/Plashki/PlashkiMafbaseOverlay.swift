@@ -261,14 +261,14 @@ private struct BreakAsyncImage: View {
                 Color.clear
             }
         }
-        .onAppear { load() }
-        .onChange(of: urlString) { _ in
+        .onAppear { load(urlString) }
+        .onChange(of: urlString) { newValue in
             loaded = nil
-            load()
+            load(newValue)
         }
     }
 
-    private func load() {
+    private func load(_ urlString: String) {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, _, _ in
             guard let data = data, let image = UIImage(data: data) else { return }
