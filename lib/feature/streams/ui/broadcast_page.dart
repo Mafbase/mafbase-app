@@ -96,6 +96,7 @@ class _BroadcastPageState extends State<BroadcastPage> {
         breakPlaceholderImageUrl:
             credentials.hasBreakPlaceholderImageUrl() ? credentials.breakPlaceholderImageUrl : null,
         brandImageUrl: credentials.hasBrandImageUrl() ? credentials.brandImageUrl : null,
+        segmentDurationMinutes: 60,
       );
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSIONS_DENIED') {
