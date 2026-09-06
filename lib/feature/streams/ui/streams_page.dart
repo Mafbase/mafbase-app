@@ -162,7 +162,10 @@ class _BottomBar extends StatelessWidget {
         border: Border(top: BorderSide(color: theme.borderColor)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: CustomButton(text: locale.streamsAddButton, onTap: onAdd),
+      child: SafeArea(
+        top: false,
+        child: CustomButton(text: locale.streamsAddButton, onTap: onAdd),
+      ),
     );
   }
 }
