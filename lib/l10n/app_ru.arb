@@ -1197,6 +1197,16 @@
   "@streamsWatch": {},
   "streamsOperatorLink": "Ссылка оператора",
   "@streamsOperatorLink": {},
+  "streamsRotateToken": "Перевыпустить ссылку оператора",
+  "@streamsRotateToken": {},
+  "streamsRotateTokenConfirm": "Перевыпустить ссылку оператора для стола {table}? Прежняя ссылка перестанет работать.",
+  "@streamsRotateTokenConfirm": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
   "broadcastLoading": "Подключаемся к трансляции…",
   "@broadcastLoading": {},
   "broadcastLinkExpired": "Ссылка устарела. Запросите у организатора новую ссылку оператора.",
@@ -1228,8 +1238,6 @@
   "@clubStreamsTitle": {},
   "clubStreamsPublicTitle": "Трансляции",
   "@clubStreamsPublicTitle": {},
-  "clubStreamsRotateToken": "Перевыпустить токен оператора",
-  "@clubStreamsRotateToken": {},
   "clubStreamSettingsTitle": "Оформление трансляций",
   "@clubStreamSettingsTitle": {},
   "clubStreamSettingsBreakPlaceholder": "Заглушка на перерыве (ссылка на картинку)",

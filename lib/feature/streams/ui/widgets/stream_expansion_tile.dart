@@ -10,6 +10,7 @@ class StreamExpansionTile extends StatelessWidget {
   final int tableNumber;
   final List<GameStreamAdmin> streams;
   final void Function(int streamId) onStop;
+  final void Function(int streamId) onRotateToken;
 
   const StreamExpansionTile({
     super.key,
@@ -17,6 +18,7 @@ class StreamExpansionTile extends StatelessWidget {
     required this.tableNumber,
     required this.streams,
     required this.onStop,
+    required this.onRotateToken,
   });
 
   @override
@@ -36,6 +38,7 @@ class StreamExpansionTile extends StatelessWidget {
         tableNumber: tableNumber,
         stream: activeStream,
         onStop: activeStream.active ? onStop : null,
+        onRotateToken: onRotateToken,
       ),
       children: [
         if (inactiveStreams.isNotEmpty) ...[
@@ -54,6 +57,7 @@ class StreamExpansionTile extends StatelessWidget {
                 tableNumber: tableNumber,
                 stream: stream,
                 onStop: null,
+                onRotateToken: null,
               ),
             ),
         ],
@@ -67,12 +71,14 @@ class _StreamItem extends StatelessWidget {
   final int tableNumber;
   final GameStreamAdmin stream;
   final void Function(int streamId)? onStop;
+  final void Function(int streamId)? onRotateToken;
 
   const _StreamItem({
     required this.tournamentId,
     required this.tableNumber,
     required this.stream,
     this.onStop,
+    this.onRotateToken,
   });
 
   String _formatTime(String startedAt) {
@@ -107,6 +113,15 @@ class _StreamItem extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(time, style: TextStyle(fontSize: 12, color: theme.greyColor)),
                 const Spacer(),
+                if (onRotateToken != null && stream.broadcastToken.isNotEmpty)
+                  IconButton(
+                    onPressed: () => onRotateToken!(stream.id),
+                    icon: const Icon(Icons.autorenew),
+                    tooltip: locale.streamsRotateToken,
+                    color: theme.darkGreyColor,
+                    iconSize: 20,
+                    visualDensity: VisualDensity.compact,
+                  ),
                 if (isActive && onStop != null)
                   IconButton(
                     onPressed: () => onStop!(stream.id),

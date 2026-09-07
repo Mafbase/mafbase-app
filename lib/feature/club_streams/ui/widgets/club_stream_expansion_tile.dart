@@ -38,7 +38,7 @@ class ClubStreamExpansionTile extends StatelessWidget {
         tableNumber: tableNumber,
         stream: activeStream,
         onStop: activeStream.active ? onStop : null,
-        onRotateToken: activeStream.active ? onRotateToken : null,
+        onRotateToken: onRotateToken,
       ),
       children: [
         if (inactiveStreams.isNotEmpty) ...[
@@ -113,11 +113,11 @@ class _ClubStreamItem extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(time, style: TextStyle(fontSize: 12, color: theme.greyColor)),
                 const Spacer(),
-                if (isActive && onRotateToken != null)
+                if (onRotateToken != null && stream.broadcastToken.isNotEmpty)
                   IconButton(
                     onPressed: () => onRotateToken!(stream.id),
                     icon: const Icon(Icons.autorenew),
-                    tooltip: locale.clubStreamsRotateToken,
+                    tooltip: locale.streamsRotateToken,
                     color: theme.darkGreyColor,
                     iconSize: 20,
                     visualDensity: VisualDensity.compact,

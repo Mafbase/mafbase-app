@@ -28,3 +28,8 @@ class StreamsAdminEventStopStream extends StreamsAdminEvent {
   final int streamId;
   StreamsAdminEventStopStream({required this.streamId});
 }
+
+class StreamsAdminEventRotateToken extends StreamsAdminEvent {
+  final int streamId;
+  StreamsAdminEventRotateToken({required this.streamId});
+}

@@ -8,6 +8,7 @@ import 'package:seating_generator_web/feature/streams/data/requests/get_club_str
 import 'package:seating_generator_web/feature/streams/data/requests/get_streams_admin_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/get_streams_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/rotate_club_stream_token_request.dart';
+import 'package:seating_generator_web/feature/streams/data/requests/rotate_stream_token_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/set_club_stream_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/set_club_stream_settings_request.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/set_stream_request.dart';
@@ -57,6 +58,13 @@ class StreamRepositoryImpl extends BaseRepository implements StreamRepository {
     required int streamId,
   }) =>
       StopStreamRequest(tournamentId: tournamentId, streamId: streamId).execute(client);
+
+  @override
+  Future<GameStreamAdmin> rotateStreamToken({
+    required int tournamentId,
+    required int streamId,
+  }) =>
+      RotateStreamTokenRequest(tournamentId: tournamentId, streamId: streamId).execute(client);
 
   @override
   Future<BroadcastCredentialsOut> getBroadcastCredentials({

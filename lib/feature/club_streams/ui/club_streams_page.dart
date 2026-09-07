@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_bloc.dart';
@@ -70,8 +71,12 @@ class ClubStreamsPageContent extends StatelessWidget {
     context.read<ClubStreamsAdminBloc>().add(ClubStreamsAdminEventStopStream(streamId: streamId));
   }
 
-  void _onRotateToken(BuildContext context, int streamId) {
-    context.read<ClubStreamsAdminBloc>().add(ClubStreamsAdminEventRotateToken(streamId: streamId));
+  void _onRotateToken(BuildContext context, int streamId, int tableNumber) {
+    ConfirmDialog.open(context, context.locale.streamsRotateTokenConfirm(tableNumber)).then((confirmed) {
+      if (confirmed == true && context.mounted) {
+        context.read<ClubStreamsAdminBloc>().add(ClubStreamsAdminEventRotateToken(streamId: streamId));
+      }
+    });
   }
 
   @override
@@ -132,7 +137,7 @@ class ClubStreamsPageContent extends StatelessWidget {
                                 tableNumber: entry.key,
                                 streams: entry.value,
                                 onStop: (streamId) => _onStop(context, streamId),
-                                onRotateToken: (streamId) => _onRotateToken(context, streamId),
+                                onRotateToken: (streamId) => _onRotateToken(context, streamId, entry.key),
                               );
                             },
                           ),

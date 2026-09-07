@@ -12,6 +12,7 @@ class StreamsAdminBloc extends Bloc<StreamsAdminEvent, StreamsAdminState> {
     on<StreamsAdminEventSetStream>(_onSetStream);
     on<StreamsAdminEventGenerateStream>(_onGenerateStream);
     on<StreamsAdminEventStopStream>(_onStopStream);
+    on<StreamsAdminEventRotateToken>(_onRotateToken);
   }
 
   Future<void> _onPageOpened(StreamsAdminEventPageOpened event, Emitter emit) async {
@@ -56,6 +57,17 @@ class StreamsAdminBloc extends Bloc<StreamsAdminEvent, StreamsAdminState> {
     emit(state.copyWith(isLoading: true));
     try {
       await _streamRepository.stopStream(tournamentId: _tournamentId, streamId: event.streamId);
+      final streams = await _streamRepository.getStreamsAdmin(tournamentId: _tournamentId);
+      emit(state.copyWith(streams: streams));
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<void> _onRotateToken(StreamsAdminEventRotateToken event, Emitter emit) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      await _streamRepository.rotateStreamToken(tournamentId: _tournamentId, streamId: event.streamId);
       final streams = await _streamRepository.getStreamsAdmin(tournamentId: _tournamentId);
       emit(state.copyWith(streams: streams));
     } finally {

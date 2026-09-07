@@ -23,6 +23,12 @@ abstract class StreamRepository {
     required int streamId,
   });
 
+  /// Перевыпустить токен оператора трансляции турнира (инвалидирует старую ссылку).
+  Future<GameStreamAdmin> rotateStreamToken({
+    required int tournamentId,
+    required int streamId,
+  });
+
   /// Публичный запрос креденшелов оператора по одноразовому ключу из диплинка.
   ///
   /// Передавать заполненный идентификатор контекста: либо [tournamentId], либо

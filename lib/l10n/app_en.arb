@@ -917,5 +917,15 @@
   "streamsNoUrl": "No URL provided",
   "@streamsNoUrl": {},
   "streamsWatch": "Watch stream",
-  "@streamsWatch": {}
+  "@streamsWatch": {},
+  "streamsRotateToken": "Reissue operator link",
+  "@streamsRotateToken": {},
+  "streamsRotateTokenConfirm": "Reissue the operator link for table {table}? The previous link will stop working.",
+  "@streamsRotateTokenConfirm": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  }
 }

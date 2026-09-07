@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
+import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_bloc.dart';
@@ -79,6 +80,14 @@ class StreamsPageContent extends StatelessWidget {
     context.read<StreamsAdminBloc>().add(StreamsAdminEventStopStream(streamId: streamId));
   }
 
+  void _onRotateToken(BuildContext context, int streamId, int tableNumber) {
+    ConfirmDialog.open(context, context.locale.streamsRotateTokenConfirm(tableNumber)).then((confirmed) {
+      if (confirmed == true && context.mounted) {
+        context.read<StreamsAdminBloc>().add(StreamsAdminEventRotateToken(streamId: streamId));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final locale = context.locale;
@@ -131,6 +140,7 @@ class StreamsPageContent extends StatelessWidget {
                                 tableNumber: entry.key,
                                 streams: entry.value,
                                 onStop: (streamId) => _onStop(context, streamId),
+                                onRotateToken: (streamId) => _onRotateToken(context, streamId, entry.key),
                               );
                             },
                           ),
