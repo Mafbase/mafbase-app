@@ -37,6 +37,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.mafbase_stream.encoder.AudioPipeline
 import com.example.mafbase_stream.encoder.Mp4Recorder
+import com.example.mafbase_stream.encoder.VideoEncoder
 import com.example.mafbase_stream.events.StreamEventBus
 import com.example.mafbase_stream.gl.Compositor
 import com.example.mafbase_stream.jni.StreamSessionNative
@@ -172,7 +173,7 @@ class StreamActivity :
         /**
          * Аудио-битрейт записи не настраивается пользователем (см. [AudioEncoder]/[AudioPipeline] —
          * 128 kbps AAC по умолчанию), поэтому для оценки объёма записи берём его константой,
-         * прибавляя к текущему видео-битрейту качества.
+         * прибавляя к битрейту видео-энкодера записи (см. [VideoEncoder.DEFAULT_BIT_RATE_BPS]).
          */
         private const val ESTIMATED_AUDIO_BITRATE_BPS = 128_000
 
@@ -1207,7 +1208,10 @@ class StreamActivity :
      * (< [StorageMonitor.CRITICAL_FREE_BYTES]) останавливает текущую запись.
      */
     private fun checkStorageAndMaybeStop() {
-        val totalBitrateBps = quality.bitrateBps + ESTIMATED_AUDIO_BITRATE_BPS
+        // Битрейт стрима (quality.bitrateBps) на объём MP4-записи не влияет — Mp4Recorder
+        // всегда пишет видео с фиксированным VideoEncoder.DEFAULT_BIT_RATE_BPS, поэтому и
+        // оценку места считаем по нему, а не по настройке качества стрима.
+        val totalBitrateBps = VideoEncoder.DEFAULT_BIT_RATE_BPS + ESTIMATED_AUDIO_BITRATE_BPS
         val check = StorageMonitor.check(recordingStorageDir(), totalBitrateBps)
         if (check.isCritical) {
             Log.w(TAG, "Свободного места критически мало (${check.freeBytes} байт) — останавливаем запись")

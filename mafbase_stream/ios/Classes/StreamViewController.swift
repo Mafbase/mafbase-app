@@ -131,7 +131,8 @@ final class StreamViewController: UIViewController {
     private static let storageCheckIntervalSeconds: TimeInterval = 30
 
     /// Аудио-битрейт записи не настраивается пользователем (128 kbps AAC, см. `AacEncoder`),
-    /// поэтому для оценки объёма записи берём его константой, прибавляя к видео-битрейту качества.
+    /// поэтому для оценки объёма записи берём его константой, прибавляя к битрейту видео-энкодера
+    /// записи (см. `H264Encoder.defaultBitRateBps`).
     private static let estimatedAudioBitrateBps = 128_000
 
     private var storageCheckTimer: Timer?
@@ -925,7 +926,10 @@ final class StreamViewController: UIViewController {
     /// не появится снова. При критическом остатке (< `StorageMonitor.criticalFreeBytes`)
     /// останавливает текущую запись.
     private func checkStorageAndMaybeStop() {
-        let totalBitrateBps = qualitySettings.bitrateBps + Self.estimatedAudioBitrateBps
+        // Битрейт стрима (qualitySettings.bitrateBps) на объём MP4-записи не влияет —
+        // Mp4Recorder всегда пишет видео с фиксированным H264Encoder.defaultBitRateBps,
+        // поэтому и оценку места считаем по нему, а не по настройке качества стрима.
+        let totalBitrateBps = H264Encoder.defaultBitRateBps + Self.estimatedAudioBitrateBps
         let check = StorageMonitor.check(at: recordingStorageDirectory, totalBitrateBps: totalBitrateBps)
         if check.isCritical {
             NSLog("[mafbase_stream] Свободного места критически мало (\(check.freeBytes) байт) — останавливаем запись")
