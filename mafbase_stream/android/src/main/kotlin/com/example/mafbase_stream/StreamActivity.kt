@@ -37,6 +37,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.mafbase_stream.encoder.AudioPipeline
 import com.example.mafbase_stream.encoder.Mp4Recorder
+import com.example.mafbase_stream.encoder.VideoEncoder
 import com.example.mafbase_stream.events.StreamEventBus
 import com.example.mafbase_stream.gl.Compositor
 import com.example.mafbase_stream.jni.StreamSessionNative
@@ -92,6 +93,11 @@ class StreamActivity :
     private var segmentIndex: Int = 1
     private var recordingSessionId: String = ""
     private var segmentTimerRunnable: Runnable? = null
+
+    // Проверка свободного места (см. StorageMonitor). Не блокирует запись — только
+    // предупреждает и, при критически малом остатке, останавливает её.
+    private var storageCheckRunnable: Runnable? = null
+    private var storageWarningReported = false
 
     // Текущая активная запись в MediaStore (API 29+)
     private var activeMediaStoreUri: Uri? = null
@@ -160,6 +166,16 @@ class StreamActivity :
         const val EXTRA_BREAK_PLACEHOLDER_URL: String = "mafbase_stream.break_placeholder_url"
         const val EXTRA_BRAND_IMAGE_URL: String = "mafbase_stream.brand_image_url"
         const val EXTRA_SEGMENT_DURATION_MINUTES: String = "mafbase_stream.segment_duration_minutes"
+
+        /** Как часто перепроверяем свободное место, пока идёт запись. */
+        private const val STORAGE_CHECK_INTERVAL_MS = 30_000L
+
+        /**
+         * Аудио-битрейт записи не настраивается пользователем (см. [AudioEncoder]/[AudioPipeline] —
+         * 128 kbps AAC по умолчанию), поэтому для оценки объёма записи берём его константой,
+         * прибавляя к битрейту видео-энкодера записи (см. [VideoEncoder.DEFAULT_BIT_RATE_BPS]).
+         */
+        private const val ESTIMATED_AUDIO_BITRATE_BPS = 128_000
 
         /** Без этих разрешений экран работать не может — при отказе закрываемся. */
         private fun requiredPermissions(): Array<String> =
@@ -1037,6 +1053,10 @@ class StreamActivity :
         } else {
             startRecordingFile(size, comp, isRollover = false)
         }
+        if (isRecording) {
+            storageWarningReported = false
+            checkStorageAndMaybeStop()
+        }
     }
 
     /**
@@ -1050,6 +1070,7 @@ class StreamActivity :
         recordButton.isEnabled = true
         if (isRollover) {
             cancelSegmentTimer()
+            cancelStorageCheck()
             isRecording = false
             recordButton.text = "Запись"
         }
@@ -1177,6 +1198,64 @@ class StreamActivity :
         segmentTimerRunnable = null
     }
 
+    private fun recordingStorageDir(): File = getExternalFilesDir(Environment.DIRECTORY_MOVIES) ?: filesDir
+
+    /**
+     * Проверяет свободное место и сама себя переставляет каждые [STORAGE_CHECK_INTERVAL_MS],
+     * пока запись активна. Не блокирует запись: при нехватке места на ~8ч (см. [StorageMonitor])
+     * только предупреждает тостом и событием [StreamEventBus.emitStorageEvent] — предупреждение
+     * показывается один раз, пока место не появится снова. При критическом остатке
+     * (< [StorageMonitor.CRITICAL_FREE_BYTES]) останавливает текущую запись.
+     */
+    private fun checkStorageAndMaybeStop() {
+        // Битрейт стрима (quality.bitrateBps) на объём MP4-записи не влияет — Mp4Recorder
+        // всегда пишет видео с фиксированным VideoEncoder.DEFAULT_BIT_RATE_BPS, поэтому и
+        // оценку места считаем по нему, а не по настройке качества стрима.
+        val totalBitrateBps = VideoEncoder.DEFAULT_BIT_RATE_BPS + ESTIMATED_AUDIO_BITRATE_BPS
+        val check = StorageMonitor.check(recordingStorageDir(), totalBitrateBps)
+        if (check.isCritical) {
+            Log.w(TAG, "Свободного места критически мало (${check.freeBytes} байт) — останавливаем запись")
+            StreamEventBus.emitStorageEvent(
+                StreamEventBus.StorageEventType.Low,
+                "low_free_space:freeBytes=${check.freeBytes}",
+            )
+            if (isRecording) {
+                Toast.makeText(this, "Запись остановлена: на устройстве закончилось место", Toast.LENGTH_LONG).show()
+                stopRecording()
+            }
+            return
+        }
+        if (check.isBelowTarget) {
+            if (!storageWarningReported) {
+                storageWarningReported = true
+                Toast.makeText(
+                    this,
+                    "Мало места на устройстве: может не хватить на ${StorageMonitor.TARGET_RECORDING_HOURS}ч записи",
+                    Toast.LENGTH_LONG,
+                ).show()
+            }
+            StreamEventBus.emitStorageEvent(
+                StreamEventBus.StorageEventType.Warning,
+                "insufficient_free_space:freeBytes=${check.freeBytes},requiredBytes=${check.requiredBytesForTarget}",
+            )
+        } else {
+            storageWarningReported = false
+        }
+        scheduleStorageCheck()
+    }
+
+    private fun scheduleStorageCheck() {
+        val runnable = Runnable { checkStorageAndMaybeStop() }
+        storageCheckRunnable = runnable
+        mainHandler.postDelayed(runnable, STORAGE_CHECK_INTERVAL_MS)
+    }
+
+    private fun cancelStorageCheck() {
+        storageCheckRunnable?.let { mainHandler.removeCallbacks(it) }
+        storageCheckRunnable = null
+        storageWarningReported = false
+    }
+
     /** Автоматически завершает текущий сегмент и сразу начинает следующий. */
     private fun rolloverSegment() {
         if (!isRecording || isTransitioning) return
@@ -1283,6 +1362,7 @@ class StreamActivity :
         // mp4Recorder уже null, и отложенный старт следующего сегмента должен увидеть,
         // что запись прекращена.
         cancelSegmentTimer()
+        cancelStorageCheck()
         val recorder = mp4Recorder
         mp4Recorder = null
         isRecording = false
@@ -1346,6 +1426,7 @@ class StreamActivity :
      */
     private fun stopRecordingSync() {
         cancelSegmentTimer()
+        cancelStorageCheck()
         val recorder = mp4Recorder
         mp4Recorder = null
         isRecording = false
