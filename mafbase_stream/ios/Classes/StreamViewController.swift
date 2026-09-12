@@ -124,6 +124,19 @@ final class StreamViewController: UIViewController {
     /// понимает, что следующий сегмент начинать уже не нужно.
     private var segmentingActive = false
 
+    // MARK: - Storage check
+
+    /// Проверка свободного места (см. `StorageMonitor`). Не блокирует запись — только
+    /// предупреждает и, при критически малом остатке, останавливает её.
+    private static let storageCheckIntervalSeconds: TimeInterval = 30
+
+    /// Аудио-битрейт записи не настраивается пользователем (128 kbps AAC, см. `AacEncoder`),
+    /// поэтому для оценки объёма записи берём его константой, прибавляя к видео-битрейту качества.
+    private static let estimatedAudioBitrateBps = 128_000
+
+    private var storageCheckTimer: Timer?
+    private var storageWarningReported = false
+
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
@@ -843,6 +856,10 @@ final class StreamViewController: UIViewController {
         segmentingActive = true
 
         startRecordingSegment(isRollover: false)
+        if isRecording {
+            storageWarningReported = false
+            checkStorageAndMaybeStop()
+        }
     }
 
     private func startRecordingSegment(isRollover: Bool) {
@@ -852,6 +869,7 @@ final class StreamViewController: UIViewController {
         } catch {
             NSLog("[mafbase_stream] Mp4Recorder.start failed: \(error)")
             cancelSegmentTimer()
+            cancelStorageCheck()
             isRecording = false
             isTransitioning = false
             updateQualityButtonState()
@@ -895,6 +913,62 @@ final class StreamViewController: UIViewController {
         segmentingActive = false
     }
 
+    private var recordingStorageDirectory: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            ?? URL(fileURLWithPath: NSTemporaryDirectory())
+    }
+
+    /// Проверяет свободное место и сама себя переставляет каждые
+    /// `storageCheckIntervalSeconds`, пока запись активна. Не блокирует запись: при нехватке
+    /// места на ~8ч (см. `StorageMonitor`) только предупреждает алертом и событием
+    /// `StreamEventBus.emitStorageEvent` — предупреждение показывается один раз, пока место
+    /// не появится снова. При критическом остатке (< `StorageMonitor.criticalFreeBytes`)
+    /// останавливает текущую запись.
+    private func checkStorageAndMaybeStop() {
+        let totalBitrateBps = qualitySettings.bitrateBps + Self.estimatedAudioBitrateBps
+        let check = StorageMonitor.check(at: recordingStorageDirectory, totalBitrateBps: totalBitrateBps)
+        if check.isCritical {
+            NSLog("[mafbase_stream] Свободного места критически мало (\(check.freeBytes) байт) — останавливаем запись")
+            StreamEventBus.shared.emitStorageEvent(type: .low, reason: "low_free_space:freeBytes=\(check.freeBytes)")
+            if isRecording {
+                // Алерт — до stopRecording(): у неё есть свои алерты об ошибке остановки,
+                // но они приходят асинхронно из completion recorder.stop, так что этот успеет
+                // показаться первым.
+                showAlert(title: "Запись остановлена", message: "На устройстве закончилось место")
+                stopRecording()
+            }
+            return
+        }
+        if check.isBelowTarget {
+            if !storageWarningReported {
+                storageWarningReported = true
+                showAlert(
+                    title: "Мало места на устройстве",
+                    message: "Может не хватить на \(StorageMonitor.targetRecordingHours)ч записи"
+                )
+            }
+            StreamEventBus.shared.emitStorageEvent(
+                type: .warning,
+                reason: "insufficient_free_space:freeBytes=\(check.freeBytes),requiredBytes=\(check.requiredBytesForTarget)"
+            )
+        } else {
+            storageWarningReported = false
+        }
+        scheduleStorageCheck()
+    }
+
+    private func scheduleStorageCheck() {
+        storageCheckTimer = Timer.scheduledTimer(withTimeInterval: Self.storageCheckIntervalSeconds, repeats: false) { [weak self] _ in
+            self?.checkStorageAndMaybeStop()
+        }
+    }
+
+    private func cancelStorageCheck() {
+        storageCheckTimer?.invalidate()
+        storageCheckTimer = nil
+        storageWarningReported = false
+    }
+
     /// `isRecording` не сбрасывается на время финализации сегмента (как на Android):
     /// иначе закрытие экрана посреди ролловера не увидит активной записи, пропустит
     /// сохранение, а зависшая финализация потом стартует сегмент на мёртвом пайплайне.
@@ -911,6 +985,7 @@ final class StreamViewController: UIViewController {
                     // completion уже на main queue
                     if let self = self {
                         self.cancelSegmentTimer()
+                        self.cancelStorageCheck()
                         self.isRecording = false
                         self.isTransitioning = false
                         self.updateQualityButtonState()
@@ -940,6 +1015,7 @@ final class StreamViewController: UIViewController {
 
     private func stopRecording() {
         cancelSegmentTimer()
+        cancelStorageCheck()
         // Сначала отписываемся от compositor.onFrame, чтобы не приходили новые кадры
         // в writer'ы, пока он финишит.
         isRecording = false
@@ -991,6 +1067,7 @@ final class StreamViewController: UIViewController {
     /// `viewWillDisappear`, а finishWriting многочасового файла длится секунды.
     private func stopRecordingSync() {
         cancelSegmentTimer()
+        cancelStorageCheck()
         isRecording = false
         updateQualityButtonState()
         recordButton.setTitle("Запись", for: .normal)

@@ -43,4 +43,21 @@ void main() {
 
     expect(await mafbaseStreamPlugin.getPlatformVersion(), '42');
   });
+
+  test('StreamEvent.fromMap parses storage warning event', () {
+    final event = StreamEvent.fromMap(<String, dynamic>{
+      'type': 6,
+      'reason': 'insufficient_free_space:freeBytes=100,requiredBytes=200',
+    });
+
+    expect(event.type, StreamEventType.storageWarning);
+    expect(event.reason, 'insufficient_free_space:freeBytes=100,requiredBytes=200');
+  });
+
+  test('StreamEvent.fromMap parses storage low (auto-stop) event', () {
+    final event = StreamEvent.fromMap(<String, dynamic>{'type': 7, 'reason': 'low_free_space:freeBytes=50'});
+
+    expect(event.type, StreamEventType.storageLow);
+    expect(event.reason, 'low_free_space:freeBytes=50');
+  });
 }
