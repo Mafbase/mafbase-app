@@ -9,6 +9,14 @@ import Foundation
 /// sink через VC, держим один глобальный.
 final class StreamEventBus: NSObject, FlutterStreamHandler {
 
+    /// Синтетические типы событий — не приходят из C-ядра, см. `emitStorageEvent`.
+    enum StorageEventType: Int {
+        /// Места может не хватить примерно на `StorageMonitor.targetRecordingHours` часов записи.
+        case warning = 6
+        /// Свободного места критически мало — запись остановлена.
+        case low = 7
+    }
+
     static let shared = StreamEventBus()
 
     private var sink: FlutterEventSink?
@@ -42,6 +50,30 @@ final class StreamEventBus: NSObject, FlutterStreamHandler {
         ]
         DispatchQueue.main.async {
             // sink мог отвалиться к моменту диспатча.
+            self.sink?(payload.compactMapValues { $0 })
+        }
+    }
+
+    /// Публикует событие о состоянии свободного места на устройстве — источник не C-ядро
+    /// RTMP-сессии (как в `emit`), а `StorageMonitor` на host-стороне записи. Остальные поля
+    /// события заполняются нулями — они не имеют смысла для этого типа, значение несёт
+    /// только `type` и `reason`.
+    func emitStorageEvent(type: StorageEventType, reason: String) {
+        guard sink != nil else { return }
+        let payload: [String: Any?] = [
+            "type": type.rawValue,
+            "state": 0,
+            "bitrate_bps": 0,
+            "queue_depth_video_ms": 0,
+            "queue_depth_audio_ms": 0,
+            "dropped_frames_total": 0,
+            "backpressure": 0,
+            "network_quality": 0,
+            "reconnect_attempt": 0,
+            "io_subcode": 0,
+            "reason": reason,
+        ]
+        DispatchQueue.main.async {
             self.sink?(payload.compactMapValues { $0 })
         }
     }

@@ -16,6 +16,15 @@ import io.flutter.plugin.common.EventChannel
  */
 object StreamEventBus : EventChannel.StreamHandler {
 
+    /** Синтетические типы событий — не приходят из C-ядра, см. [emitStorageEvent]. */
+    enum class StorageEventType(val code: Int) {
+        /** Места может не хватить примерно на [StorageMonitor.TARGET_RECORDING_HOURS] часов записи. */
+        Warning(6),
+
+        /** Свободного места критически мало — запись остановлена. */
+        Low(7),
+    }
+
     private val mainHandler = Handler(Looper.getMainLooper())
 
     @Volatile
@@ -48,6 +57,33 @@ object StreamEventBus : EventChannel.StreamHandler {
             "reconnect_attempt" to event.reconnectAttempt,
             "io_subcode" to event.ioSubcode.ordinal,
             "reason" to event.reason,
+        )
+        mainHandler.post {
+            // sink мог отвалиться, пока пост ехал.
+            sink?.success(payload)
+        }
+    }
+
+    /**
+     * Публикует событие о состоянии свободного места на устройстве — источник не
+     * C-ядро RTMP-сессии (как в [emit]), а [StorageMonitor] на host-стороне записи.
+     * Остальные поля события заполняются нулями/дефолтами — они не имеют смысла для
+     * этого типа событий, значение несёт только [type] и [reason].
+     */
+    fun emitStorageEvent(type: StorageEventType, reason: String) {
+        sink ?: return
+        val payload = mapOf(
+            "type" to type.code,
+            "state" to 0,
+            "bitrate_bps" to 0,
+            "queue_depth_video_ms" to 0,
+            "queue_depth_audio_ms" to 0,
+            "dropped_frames_total" to 0,
+            "backpressure" to 0,
+            "network_quality" to 0,
+            "reconnect_attempt" to 0,
+            "io_subcode" to 0,
+            "reason" to reason,
         )
         mainHandler.post {
             // sink мог отвалиться, пока пост ехал.

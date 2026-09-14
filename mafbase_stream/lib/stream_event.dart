@@ -10,6 +10,12 @@
 ///  - [reconnectAttempt] — номер текущей попытки реконнекта (0 в штатном режиме).
 ///  - [reason] / [ioSubcode] — заполнены при `failed` и при логировании
 ///    причины разрыва.
+///
+/// [StreamEventType.storageWarning] / [StreamEventType.storageLow] — синтетические
+/// события от нативной стороны про свободное место на устройстве во время записи (не
+/// приходят из RTMP-ядра). [reason] в этих событиях содержит `freeBytes`/`requiredBytes`
+/// в виде строки вида `insufficient_free_space:freeBytes=123,requiredBytes=456`
+/// (предупреждение) или `low_free_space:freeBytes=123` (авто-остановка записи).
 class StreamEvent {
   final StreamEventType type;
   final StreamSessionState state;
@@ -75,7 +81,22 @@ class StreamEvent {
   }
 }
 
-enum StreamEventType { state, queueDepth, bitrate, reconnecting, reconnected, failed }
+enum StreamEventType {
+  state,
+  queueDepth,
+  bitrate,
+  reconnecting,
+  reconnected,
+  failed,
+
+  /// Места на устройстве осталось меньше, чем нужно примерно на 8 часов записи.
+  /// Не блокирует запись — только предупреждение.
+  storageWarning,
+
+  /// Свободного места осталось критически мало (меньше 100 МБ) — нативная сторона
+  /// сама остановила текущую запись.
+  storageLow,
+}
 
 enum StreamSessionState { idle, connecting, streaming, reconnecting, stopped }
 
@@ -99,6 +120,10 @@ StreamEventType _typeFromInt(int v) {
       return StreamEventType.reconnected;
     case 5:
       return StreamEventType.failed;
+    case 6:
+      return StreamEventType.storageWarning;
+    case 7:
+      return StreamEventType.storageLow;
     default:
       return StreamEventType.state;
   }
