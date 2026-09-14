@@ -1233,11 +1233,11 @@ class StreamActivity :
                     "Мало места на устройстве: может не хватить на ${StorageMonitor.TARGET_RECORDING_HOURS}ч записи",
                     Toast.LENGTH_LONG,
                 ).show()
+                StreamEventBus.emitStorageEvent(
+                    StreamEventBus.StorageEventType.Warning,
+                    "insufficient_free_space:freeBytes=${check.freeBytes},requiredBytes=${check.requiredBytesForTarget}",
+                )
             }
-            StreamEventBus.emitStorageEvent(
-                StreamEventBus.StorageEventType.Warning,
-                "insufficient_free_space:freeBytes=${check.freeBytes},requiredBytes=${check.requiredBytesForTarget}",
-            )
         } else {
             storageWarningReported = false
         }

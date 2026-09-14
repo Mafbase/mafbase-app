@@ -935,9 +935,10 @@ final class StreamViewController: UIViewController {
             NSLog("[mafbase_stream] Свободного места критически мало (\(check.freeBytes) байт) — останавливаем запись")
             StreamEventBus.shared.emitStorageEvent(type: .low, reason: "low_free_space:freeBytes=\(check.freeBytes)")
             if isRecording {
-                // Алерт — до stopRecording(): у неё есть свои алерты об ошибке остановки,
-                // но они приходят асинхронно из completion recorder.stop, так что этот успеет
-                // показаться первым.
+                // Алерт показываем сразу, чтобы пользователь сразу узнал причину; алерты об
+                // ошибке остановки из completion recorder.stop (вызывается внутри
+                // stopRecording()) приходят асинхронно позже — showAlert дожидается закрытия
+                // текущего алерта и покажет следующий по очереди, а не молча его отбросит.
                 showAlert(title: "Запись остановлена", message: "На устройстве закончилось место")
                 stopRecording()
             }
@@ -950,11 +951,11 @@ final class StreamViewController: UIViewController {
                     title: "Мало места на устройстве",
                     message: "Может не хватить на \(StorageMonitor.targetRecordingHours)ч записи"
                 )
+                StreamEventBus.shared.emitStorageEvent(
+                    type: .warning,
+                    reason: "insufficient_free_space:freeBytes=\(check.freeBytes),requiredBytes=\(check.requiredBytesForTarget)"
+                )
             }
-            StreamEventBus.shared.emitStorageEvent(
-                type: .warning,
-                reason: "insufficient_free_space:freeBytes=\(check.freeBytes),requiredBytes=\(check.requiredBytesForTarget)"
-            )
         } else {
             storageWarningReported = false
         }
@@ -1151,10 +1152,19 @@ final class StreamViewController: UIViewController {
         return "Запись сохранена в файлах приложения: \(url.lastPathComponent)"
     }
 
+    /// Если поверх контроллера уже показан другой алерт (например, предупреждение о месте
+    /// на диске), UIKit молча проигнорирует второй `present` — новый алерт нужно дождаться
+    /// закрытия предыдущего, иначе пользователь никогда его не увидит.
     private func showAlert(title: String, message: String?, onDismiss: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in onDismiss?() })
-        present(alert, animated: true)
+        if presentedViewController != nil {
+            dismiss(animated: false) { [weak self] in
+                self?.present(alert, animated: true)
+            }
+        } else {
+            present(alert, animated: true)
+        }
     }
 
     // MARK: - Streaming
