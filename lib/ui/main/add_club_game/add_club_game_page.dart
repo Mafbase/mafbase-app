@@ -462,55 +462,56 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                 ),
                 const SizedBox(height: 8),
               ],
-              StatefulBuilder(
-                builder: (context, setState) => InkWell(
-                  customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  onTap: widget.readOnly || state.isTournament
-                      ? null
-                      : () {
-                          showDatePicker(
-                            context: context,
-                            initialDate: date,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime.now(),
-                          ).then((value) async {
-                            if (!context.mounted) return null;
-                            if (value != null) {
-                              final timeOfDay = await showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay.fromDateTime(date),
-                                initialEntryMode: TimePickerEntryMode.input,
-                                builder: (context, child) => MediaQuery(
-                                  data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-                                  child: child ?? Container(),
-                                ),
-                              );
-                              if (timeOfDay != null) {
-                                return DateTime(value.year, value.month, value.day, timeOfDay.hour, timeOfDay.minute);
+              if (!state.isTournament)
+                StatefulBuilder(
+                  builder: (context, setState) => InkWell(
+                    customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    onTap: widget.readOnly
+                        ? null
+                        : () {
+                            showDatePicker(
+                              context: context,
+                              initialDate: date,
+                              firstDate: DateTime(2000),
+                              lastDate: DateTime.now(),
+                            ).then((value) async {
+                              if (!context.mounted) return null;
+                              if (value != null) {
+                                final timeOfDay = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(date),
+                                  initialEntryMode: TimePickerEntryMode.input,
+                                  builder: (context, child) => MediaQuery(
+                                    data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                                    child: child ?? Container(),
+                                  ),
+                                );
+                                if (timeOfDay != null) {
+                                  return DateTime(value.year, value.month, value.day, timeOfDay.hour, timeOfDay.minute);
+                                }
                               }
-                            }
-                            return null;
-                          }).then((value) {
-                            setState(() {
-                              date = value ?? date;
+                              return null;
+                            }).then((value) {
+                              setState(() {
+                                date = value ?? date;
+                              });
                             });
-                          });
-                        },
-                  child: DefaultTextStyle(
-                    style: MyTheme.of(context).defaultTextStyle.copyWith(color: Theme.of(context).hintColor),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        children: [
-                          Text(context.locale.date),
-                          const Spacer(),
-                          Text(DateFormat('dd:MM:yyy HH:mm').format(date)),
-                        ],
+                          },
+                    child: DefaultTextStyle(
+                      style: MyTheme.of(context).defaultTextStyle.copyWith(color: Theme.of(context).hintColor),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Text(context.locale.date),
+                            const Spacer(),
+                            Text(DateFormat('dd:MM:yyy HH:mm').format(date)),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
               if (state.canEdit)
                 Column(
                   mainAxisSize: MainAxisSize.min,
