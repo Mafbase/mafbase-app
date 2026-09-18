@@ -20,10 +20,7 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 class ResetPasswordPageBody extends StatelessWidget {
   final String email;
 
-  const ResetPasswordPageBody({
-    super.key,
-    @QueryParam('email') this.email = '',
-  });
+  const ResetPasswordPageBody({super.key, @QueryParam('email') this.email = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +77,7 @@ class _ResetPasswordPageContentState extends CustomState<_ResetPasswordPageConte
               children: [
                 AutofillGroup(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 24,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -92,9 +86,7 @@ class _ResetPasswordPageContentState extends CustomState<_ResetPasswordPageConte
                           Text(
                             context.locale.resetPasswordDescription,
                             textAlign: TextAlign.center,
-                            style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                  fontSize: 12,
-                                ),
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(fontSize: 12),
                           ),
                           const SizedBox(height: 20),
                           CustomTextField(
@@ -109,50 +101,45 @@ class _ResetPasswordPageContentState extends CustomState<_ResetPasswordPageConte
                             canObscure: true,
                             controller: _passwordController,
                             autoFillHints: const [AutofillHints.newPassword],
-                            icon: Icon(
-                              Icons.lock_outline,
-                              color: MyTheme.of(context).borderColor,
-                              size: 20,
-                            ),
+                            icon: Icon(Icons.lock_outline, color: MyTheme.of(context).borderColor, size: 20),
                             hint: context.locale.enterPassword,
-                            errorText:
-                                state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
+                            errorText: state.error == ResetPasswordError.weakPassword
+                                ? context.locale.invalidPassword
+                                : null,
                           ),
                           const SizedBox(height: 20),
                           CustomTextField(
                             canObscure: true,
                             controller: _repeatPasswordController,
                             autoFillHints: const [AutofillHints.newPassword],
-                            icon: Icon(
-                              Icons.lock_outline,
-                              color: MyTheme.of(context).borderColor,
-                              size: 20,
-                            ),
+                            icon: Icon(Icons.lock_outline, color: MyTheme.of(context).borderColor, size: 20),
                             hint: context.locale.repeatPassword,
                             errorText: setRepeatError ? context.locale.notMatchPasswords : null,
                           ),
                           const SizedBox(height: 20),
-                          CustomButton(
-                            disabled: _tokenController.text.isEmpty ||
-                                _passwordController.text.isEmpty ||
-                                _passwordController.text.length < 8,
-                            text: context.locale.save,
-                            minimize: true,
-                            onTap: _onSubmit,
+                          ListenableBuilder(
+                            listenable: Listenable.merge([_tokenController, _passwordController]),
+                            builder: (_, __) => CustomButton(
+                              disabled:
+                                  _tokenController.text.isEmpty ||
+                                  _passwordController.text.isEmpty ||
+                                  _passwordController.text.length < 8,
+                              text: context.locale.save,
+                              minimize: true,
+                              onTap: _onSubmit,
+                            ),
                           ),
                           const SizedBox(height: 14),
                           Center(
                             child: TextButton(
                               onPressed: () {
-                                context.read<ResetPasswordBloc>().add(
-                                      const ResetPasswordEvents.backButtonTapped(),
-                                    );
+                                context.read<ResetPasswordBloc>().add(const ResetPasswordEvents.backButtonTapped());
                               },
                               child: Text(
                                 context.locale.authorization,
-                                style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                      color: MyTheme.of(context).darkGreyColor,
-                                    ),
+                                style: MyTheme.of(
+                                  context,
+                                ).defaultTextStyle.copyWith(color: MyTheme.of(context).darkGreyColor),
                               ),
                             ),
                           ),
@@ -193,9 +180,7 @@ class _ResetPasswordPageContentState extends CustomState<_ResetPasswordPageConte
                           Text(
                             context.locale.resetPasswordDescription,
                             textAlign: TextAlign.center,
-                            style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                  fontSize: 14,
-                                ),
+                            style: MyTheme.of(context).defaultTextStyle.copyWith(fontSize: 14),
                           ),
                           const SizedBox(height: 28),
                           CustomTextField(
@@ -210,35 +195,27 @@ class _ResetPasswordPageContentState extends CustomState<_ResetPasswordPageConte
                             canObscure: true,
                             controller: _passwordController,
                             autoFillHints: const [AutofillHints.newPassword],
-                            icon: Icon(
-                              Icons.lock_outline,
-                              color: MyTheme.of(context).borderColor,
-                              size: 20,
-                            ),
+                            icon: Icon(Icons.lock_outline, color: MyTheme.of(context).borderColor, size: 20),
                             hint: context.locale.enterPassword,
-                            errorText:
-                                state.error == ResetPasswordError.weakPassword ? context.locale.invalidPassword : null,
+                            errorText: state.error == ResetPasswordError.weakPassword
+                                ? context.locale.invalidPassword
+                                : null,
                           ),
                           const SizedBox(height: 20),
                           CustomTextField(
                             canObscure: true,
                             controller: _repeatPasswordController,
                             autoFillHints: const [AutofillHints.newPassword],
-                            icon: Icon(
-                              Icons.lock_outline,
-                              color: MyTheme.of(context).borderColor,
-                              size: 20,
-                            ),
+                            icon: Icon(Icons.lock_outline, color: MyTheme.of(context).borderColor, size: 20),
                             hint: context.locale.repeatPassword,
                             errorText: setRepeatError ? context.locale.notMatchPasswords : null,
                           ),
                           const SizedBox(height: 24),
                           ListenableBuilder(
-                            listenable: Listenable.merge(
-                              [_tokenController, _passwordController],
-                            ),
+                            listenable: Listenable.merge([_tokenController, _passwordController]),
                             builder: (_, __) => CustomButton(
-                              disabled: _tokenController.text.isEmpty ||
+                              disabled:
+                                  _tokenController.text.isEmpty ||
                                   _passwordController.text.isEmpty ||
                                   _passwordController.text.length < 8,
                               text: context.locale.save,
@@ -249,15 +226,13 @@ class _ResetPasswordPageContentState extends CustomState<_ResetPasswordPageConte
                           Center(
                             child: TextButton(
                               onPressed: () {
-                                context.read<ResetPasswordBloc>().add(
-                                      const ResetPasswordEvents.backButtonTapped(),
-                                    );
+                                context.read<ResetPasswordBloc>().add(const ResetPasswordEvents.backButtonTapped());
                               },
                               child: Text(
                                 context.locale.authorization,
-                                style: MyTheme.of(context).defaultTextStyle.copyWith(
-                                      color: MyTheme.of(context).darkGreyColor,
-                                    ),
+                                style: MyTheme.of(
+                                  context,
+                                ).defaultTextStyle.copyWith(color: MyTheme.of(context).darkGreyColor),
                               ),
                             ),
                           ),
