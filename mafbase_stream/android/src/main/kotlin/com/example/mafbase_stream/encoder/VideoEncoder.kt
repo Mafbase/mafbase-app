@@ -22,7 +22,7 @@ internal class VideoEncoder(
     private val width: Int,
     private val height: Int,
     private val frameRate: Int = 30,
-    private val bitRate: Int = 4_000_000,
+    private val bitRate: Int = DEFAULT_BIT_RATE_BPS,
     private val iFrameIntervalSec: Int = 2,
     private val sink: Sink,
 ) {
@@ -202,5 +202,14 @@ internal class VideoEncoder(
     companion object {
         private const val TAG = "VideoEncoder"
         private const val TIMEOUT_US = 10_000L
+
+        /**
+         * Битрейт записи не настраивается пользователем (в отличие от битрейта стрима,
+         * см. `StreamQuality.bitrateBps`) — Mp4Recorder всегда создаёт VideoEncoder с этим
+         * значением по умолчанию. Используется и здесь, и при оценке свободного места
+         * (см. `StorageMonitor` в `StreamActivity`), чтобы расчёт не разъезжался с реальным
+         * битрейтом записываемого файла.
+         */
+        const val DEFAULT_BIT_RATE_BPS = 4_000_000
     }
 }

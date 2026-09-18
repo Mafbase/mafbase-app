@@ -22,6 +22,13 @@ final class H264Encoder {
         case propertyConfigure(OSStatus)
     }
 
+    /// Битрейт записи не настраивается пользователем (в отличие от битрейта стрима,
+    /// см. `StreamQualitySettings.bitrateBps`) — `Mp4Recorder` всегда создаёт `H264Encoder`
+    /// с этим значением по умолчанию. Используется и здесь, и при оценке свободного места
+    /// (см. `StorageMonitor` в `StreamViewController`), чтобы расчёт не разъезжался с
+    /// реальным битрейтом записываемого файла.
+    static let defaultBitRateBps = 4_000_000
+
     /// Битрейт `kVTCompressionPropertyKey_AverageBitRate`. По умолчанию 4 Мбит/с —
     /// разумный компромисс для 720p30 на iPhone.
     private let bitRate: Int
@@ -49,7 +56,7 @@ final class H264Encoder {
     var onSample: ((CMSampleBuffer) -> Void)?
     var onError: ((Error) -> Void)?
 
-    init(bitRate: Int = 4_000_000, frameRate: Int = 30, keyFrameIntervalSec: Int = 2) {
+    init(bitRate: Int = H264Encoder.defaultBitRateBps, frameRate: Int = 30, keyFrameIntervalSec: Int = 2) {
         self.bitRate = bitRate
         self.frameRate = frameRate
         self.keyFrameIntervalSec = keyFrameIntervalSec
