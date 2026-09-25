@@ -14,7 +14,8 @@ import Foundation
 ///  - Входной PCM накапливается в `pcmBuffer`. Когда накопилось ≥1024 семпла —
 ///    выдаём один AAC frame через `AudioConverterFillComplexBuffer`.
 ///  - PTS считается от первого PCM-семпла в накопителе и сдвигается на
-///    `1024/sampleRate` для каждого следующего фрейма (монотонная шкала).
+///    `1024/sampleRate` для каждого следующего фрейма (монотонная шкала). Разрыв во
+///    входных PTS больше одного фрейма сбрасывает накопитель и начинает отсчёт заново.
 ///
 /// Эта реализация переиспользуется в задаче 09 для отправки сырых AAC-фреймов
 /// в RTMP — поэтому энкодер работает независимо от AVAssetWriter и выдаёт
@@ -198,8 +199,22 @@ final class AacEncoder {
         let length = Int(buffer.mDataByteSize)
         guard length > 0 else { return }
 
+        let bytesPerFrame = Int(inputASBD.mBytesPerFrame)
+        guard bytesPerFrame > 0 else { return }
+        let sampleRate = CMTimeScale(inputASBD.mSampleRate)
+        let incomingPts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
         if pcmBuffer.isEmpty {
-            pcmBufferStartPts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+            pcmBufferStartPts = incomingPts
+        } else if pcmBufferStartPts.isValid, incomingPts.isValid {
+            let expectedPts = CMTimeAdd(
+                pcmBufferStartPts,
+                CMTime(value: Int64(pcmBuffer.count / bytesPerFrame), timescale: sampleRate)
+            )
+            let gap = CMTimeAbsoluteValue(CMTimeSubtract(incomingPts, expectedPts))
+            if CMTimeCompare(gap, CMTime(value: Int64(aacFrameSize), timescale: sampleRate)) > 0 {
+                pcmBuffer.removeAll(keepingCapacity: true)
+                pcmBufferStartPts = incomingPts
+            }
         }
         if phaseGate?.muted == true {
             // Подаём тишину с теми же timing'ами — PTS аудио продолжает идти
@@ -209,8 +224,6 @@ final class AacEncoder {
             pcmBuffer.append(Data(bytes: data, count: length))
         }
 
-        let bytesPerFrame = Int(inputASBD.mBytesPerFrame)
-        guard bytesPerFrame > 0 else { return }
         let bytesPerAacFrame = Int(aacFrameSize) * bytesPerFrame
 
         while pcmBuffer.count >= bytesPerAacFrame {

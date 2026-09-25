@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.FrameLayout
 import com.example.mafbase_stream.overlay.OverlayCatalog
+import com.example.mafbase_stream.overlay.OverlayComposeContainer
 import com.example.mafbase_stream.overlay.OverlayDebugTarget
 import com.example.mafbase_stream.overlay.OverlayInvalidator
 import com.example.mafbase_stream.overlay.OverlayParams
@@ -123,5 +124,11 @@ class OverlayPreviewActivity : Activity() {
         }
 
         setContentView(container)
+    }
+
+    override fun onDestroy() {
+        (overlayView as? OverlayComposeContainer)?.dispose()
+        overlayView = null
+        super.onDestroy()
     }
 }

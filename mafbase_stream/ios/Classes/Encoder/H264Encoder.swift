@@ -25,7 +25,7 @@ final class H264Encoder {
     /// Битрейт записи не настраивается пользователем (в отличие от битрейта стрима,
     /// см. `StreamQualitySettings.bitrateBps`) — `Mp4Recorder` всегда создаёт `H264Encoder`
     /// с этим значением по умолчанию. Используется и здесь, и при оценке свободного места
-    /// (см. `StorageMonitor` в `StreamViewController`), чтобы расчёт не разъезжался с
+    /// (см. `StorageMonitor` в `StreamPipeline`), чтобы расчёт не разъезжался с
     /// реальным битрейтом записываемого файла.
     static let defaultBitRateBps = 4_000_000
 

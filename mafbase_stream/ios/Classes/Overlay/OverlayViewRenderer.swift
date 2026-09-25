@@ -11,13 +11,15 @@ import UIKit
 ///
 /// Поток работы:
 ///  1. Конструктор + `setView(_:)` — приложение создаёт UIView и привязывает её.
-///  2. `attach(compositor:)` — задаёт frame, вызывает `layoutIfNeeded`, делает
+///  2. `hostIn(_:)` — контроллер, в `view` которого overlay живёт невидимо. При смене
+///     контроллера вызывается заново и даёт свежий снимок; `unhost()` снимает view.
+///  3. `attach(compositor:)` — задаёт frame, вызывает `layoutIfNeeded`, делает
 ///     первый снимок и сразу заливает в Compositor (чтобы первый кадр стрима
 ///     уже шёл с оверлеем).
-///  3. View вызывает `invalidate()` при изменениях. Renderer ре-рендерит UIView
+///  4. View вызывает `invalidate()` при изменениях. Renderer ре-рендерит UIView
 ///     в тот же CVPixelBuffer и передаёт компоситору. В простое — `Compositor`
 ///     переиспользует прошлую текстуру (F3.8 BRD).
-///  4. `detach()` — снимает overlay в Compositor и освобождает буфер.
+///  5. `detach()` — снимает overlay в Compositor и освобождает буфер.
 ///
 /// `view.layer.render(in:)` делается на main thread (UIView требует UI-потока).
 /// Загрузка в GL — на render queue Compositor через `Compositor.setOverlayBitmap`.
@@ -28,6 +30,7 @@ final class OverlayViewRenderer: NSObject, OverlayInvalidator {
     private let height: Int
     private weak var view: UIView?
     private weak var compositor: Compositor?
+    private weak var hostViewController: UIViewController?
 
     /// Двойная буферизация: пишем CGContext в один buffer, отдаём compositor'у
     /// для GL upload — другой. Без этого `view.layer.render(in: ctx)` на main thread
@@ -38,7 +41,6 @@ final class OverlayViewRenderer: NSObject, OverlayInvalidator {
     private var pixelBuffers: [CVPixelBuffer] = []
     private var writeIndex: Int = 0
     private var attached = false
-    private var hostedInWindow = false
 
     init(width: Int, height: Int) {
         self.width = width
@@ -48,6 +50,30 @@ final class OverlayViewRenderer: NSObject, OverlayInvalidator {
 
     func setView(_ view: UIView) {
         self.view = view
+    }
+
+    /// Хостит overlay-view в `view` контроллера. SwiftUI-вьюшки внутри `UIHostingController`
+    /// без window не получают полноценный lifecycle, а `PlashkiMafbaseOverlay.didMoveToWindow`
+    /// ищет parent VC через responder chain — поэтому именно `viewController.view`, а не
+    /// `UIWindow`. До `attach` только запоминает хост.
+    func hostIn(_ viewController: UIViewController) {
+        runOnMain { [weak self] in
+            guard let self = self else { return }
+            self.hostViewController = viewController
+            guard self.attached, let view = self.view else { return }
+            self.mount(view, in: viewController)
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            self.refreshLocked()
+        }
+    }
+
+    func unhost() {
+        runOnMain { [weak self] in
+            guard let self = self else { return }
+            self.hostViewController = nil
+            self.view?.removeFromSuperview()
+        }
     }
 
     func attach(compositor: Compositor) {
@@ -61,7 +87,11 @@ final class OverlayViewRenderer: NSObject, OverlayInvalidator {
             view.frame = CGRect(x: 0, y: 0, width: self.width, height: self.height)
             view.isOpaque = false
             view.backgroundColor = .clear
-            self.hostInActiveWindowIfPossible(view)
+            if let host = self.hostViewController {
+                self.mount(view, in: host)
+            } else {
+                NSLog("[OvlRenderer] attach: no host view controller yet")
+            }
             NSLog("[OvlRenderer] attach: hosted superview=\(type(of: view.superview)) bounds=\(view.bounds)")
             view.setNeedsLayout()
             view.layoutIfNeeded()
@@ -78,9 +108,8 @@ final class OverlayViewRenderer: NSObject, OverlayInvalidator {
             self.compositor?.clearOverlay()
             self.compositor = nil
             self.pixelBuffers.removeAll()
-            if let view = self.view {
-                self.unhostFromWindow(view)
-            }
+            self.hostViewController = nil
+            self.view?.removeFromSuperview()
         }
     }
 
@@ -94,74 +123,17 @@ final class OverlayViewRenderer: NSObject, OverlayInvalidator {
         }
     }
 
-    /// SwiftUI-вьюшки внутри `UIHostingController` без window не получают полноценный
-    /// lifecycle (приходящие через `@Published` обновления могут не пересчитать layout
-    /// до тех пор, пока view не attached). Прячем overlay-view невидимо в `view`
-    /// самого верхнего presented `UIViewController`: `alpha = 0` + сдвиг за экран.
-    /// Важно вешать именно на `viewController.view`, а не в `UIWindow` напрямую —
-    /// иначе responder chain overlay'я не содержит ни одного VC, и
-    /// `PlashkiMafbaseOverlay.didMoveToWindow()` не сможет найти parent VC, чтобы
-    /// сделать `addChild(host)` для `UIHostingController` (без этого SwiftUI
-    /// `@Published` обновления не пересчитывают layout-tree → пустой кадр).
-    /// `view.layer.render(in:)` всё равно рисует реальный контент в наш CVPixelBuffer.
-    private func hostInActiveWindowIfPossible(_ view: UIView) {
-        if view.superview != nil {
-            NSLog("[OvlRenderer] host: already in superview=\(type(of: view.superview))")
-            return
-        }
-        guard let host = topMostHostView() else {
-            NSLog("[OvlRenderer] host: no host view found")
-            return
-        }
-        // ВНИМАНИЕ: НЕ ставим alpha=0 — `view.layer.render(in:)` учитывает opacity
-        // слоя при рендере, и результат был бы полностью прозрачным. Поэтому скрываем
-        // overlay от пользователя только через `transform` (сдвиг за экран). Transform
-        // на render(in:) не влияет, потому что render(in:) работает в bounds-координатах.
+    private func mount(_ view: UIView, in viewController: UIViewController) {
+        let hostView: UIView = viewController.view
+        if view.superview === hostView { return }
+        view.removeFromSuperview()
+        // НЕ ставим alpha=0 — `drawHierarchy` учитывает opacity слоя, и снимок был бы
+        // полностью прозрачным. Прячем overlay только через `transform` (сдвиг за экран):
+        // на снимок он не влияет, тот работает в bounds-координатах.
         view.isUserInteractionEnabled = false
         view.transform = CGAffineTransform(translationX: -CGFloat(width) * 4, y: 0)
-        host.addSubview(view)
-        hostedInWindow = true
-        NSLog("[OvlRenderer] host: addSubview to \(type(of: host))")
-    }
-
-    private func topMostHostView() -> UIView? {
-        guard let window = activeKeyWindow() else {
-            NSLog("[OvlRenderer] topMostHostView: no keyWindow")
-            return nil
-        }
-        var vc = window.rootViewController
-        while let presented = vc?.presentedViewController {
-            vc = presented
-        }
-        NSLog("[OvlRenderer] topMostHostView: vc=\(vc.map { String(describing: type(of: $0)) } ?? "nil")")
-        return vc?.view ?? window
-    }
-
-    private func unhostFromWindow(_ view: UIView) {
-        if !hostedInWindow { return }
-        hostedInWindow = false
-        view.removeFromSuperview()
-    }
-
-    private func activeKeyWindow() -> UIWindow? {
-        if #available(iOS 13.0, *) {
-            let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
-            // Предпочитаем активную сцену, но не требуем её: при cold-start по диплинку
-            // сцена ещё .foregroundInactive, хотя окно с rootViewController уже готово.
-            let states: [UIScene.ActivationState] = [.foregroundActive, .foregroundInactive, .background, .unattached]
-            for state in states {
-                let windows = scenes.filter { $0.activationState == state }.flatMap { $0.windows }
-                if let key = windows.first(where: { $0.isKeyWindow }) {
-                    return key
-                }
-                if let withRoot = windows.first(where: { $0.rootViewController != nil }) {
-                    return withRoot
-                }
-            }
-            return scenes.flatMap { $0.windows }.first
-        }
-        return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
-            ?? UIApplication.shared.windows.first
+        hostView.addSubview(view)
+        NSLog("[OvlRenderer] host: addSubview to \(type(of: viewController))")
     }
 
     private func refreshLocked() {

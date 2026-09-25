@@ -14,8 +14,8 @@ import java.nio.ByteBuffer
  * Оркестратор RTMP-стрима для Android.
  *
  * GL-композитинг (камера → FBO → encoder Surface) живёт в [com.example.mafbase_stream.gl.Compositor],
- * который держит [StreamActivity]. Сюда передаётся только ссылка на Surface энкодера —
- * её хост-активити сама прицепит к Compositor через `attachOutput`.
+ * который держит [com.example.mafbase_stream.pipeline.StreamPipeline]. Сюда передаётся только ссылка на Surface энкодера —
+ * её пайплайн сам прицепит к Compositor через `attachOutput`.
  *
  * Жизненный цикл:
  *  1. [start] — поднимает [VideoEncoder] (через него получаем encoder input-Surface) и
@@ -191,7 +191,7 @@ class StreamSession(
             }
         }
         synchronized(lock) {
-            // Compositor отцепляет encoder Surface ДО stop() — это делает StreamActivity
+            // Compositor отцепляет encoder Surface ДО stop() — это делает StreamPipeline
             // через compositor.detachOutput(STREAM_ENCODER). Иначе compositor продолжил бы
             // eglSwapBuffers на разрушенный BufferQueue → "BufferQueue has been abandoned".
             try {
@@ -389,6 +389,9 @@ class StreamSession(
                 audioBitrate = cfg.audioBitrate,
                 videoExtradata = v,
                 audioExtradata = a,
+                maxReconnectAttempts = Int.MAX_VALUE,
+                reconnectBaseDelayMs = RECONNECT_BASE_DELAY_MS,
+                reconnectCapDelayMs = RECONNECT_CAP_DELAY_MS,
             )
             synchronized(lock) {
                 rtmpStarting = false
@@ -491,5 +494,11 @@ class StreamSession(
 
     companion object {
         private const val TAG = "StreamSession"
+
+        // Ядро переподключается без лимита попыток: разрыв сети на часовой трансляции
+        // не должен переводить сессию в FAILED. Остановка по кнопке будит цикл
+        // реконнекта сразу, cap на задержку не влияет на время stop().
+        private const val RECONNECT_BASE_DELAY_MS = 1000
+        private const val RECONNECT_CAP_DELAY_MS = 30_000
     }
 }

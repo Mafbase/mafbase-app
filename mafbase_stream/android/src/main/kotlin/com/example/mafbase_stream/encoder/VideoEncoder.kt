@@ -207,7 +207,7 @@ internal class VideoEncoder(
          * Битрейт записи не настраивается пользователем (в отличие от битрейта стрима,
          * см. `StreamQuality.bitrateBps`) — Mp4Recorder всегда создаёт VideoEncoder с этим
          * значением по умолчанию. Используется и здесь, и при оценке свободного места
-         * (см. `StorageMonitor` в `StreamActivity`), чтобы расчёт не разъезжался с реальным
+         * (см. `StorageMonitor` в `StreamPipeline`), чтобы расчёт не разъезжался с реальным
          * битрейтом записываемого файла.
          */
         const val DEFAULT_BIT_RATE_BPS = 4_000_000

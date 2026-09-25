@@ -148,6 +148,15 @@ final class PlashkiMafbaseOverlay: UIView {
         invalidator.invalidate()
     }
 
+    /// При снятии с окна host отвязывается от старого контроллера, чтобы следующий
+    /// `didMoveToWindow` снова сделал `addChild` уже к живому parent.
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        guard newWindow == nil, host.parent != nil else { return }
+        host.willMove(toParent: nil)
+        host.removeFromParent()
+    }
+
     private func nearestParentViewController() -> UIViewController? {
         var responder: UIResponder? = self.next
         while let r = responder {

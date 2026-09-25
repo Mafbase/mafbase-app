@@ -14,6 +14,10 @@ import OpenGLES.ES3
 /// Сейчас shader — passthrough; точка расширения для оверлея в задаче 10
 /// (рисуем плашки тем же FBO поверх кадра).
 ///
+/// Режим заглушки: пока камеры нет (фон, звонок, чужое приложение), кадр «последний кадр
+/// камеры + overlay + карточка паузы» рендерится один раз, пока GL ещё разрешён, и дальше
+/// повторяется таймером 2 fps без единого GL-вызова — в фоне iOS убивает процесс за любой из них.
+///
 /// Жизненный цикл:
 ///  1. `prepare()` (sync) — создаёт EAGL context, текстурные кэши, pool, шейдер.
 ///  2. `processFrame(pixelBuffer:pts:)` (async на собственном serial queue).
@@ -28,6 +32,8 @@ final class Compositor {
         case programLink(String)
         case framebufferIncomplete(GLenum)
     }
+
+    private static let placeholderInterval: DispatchTimeInterval = .milliseconds(500)
 
     private let width: Int
     private let height: Int
@@ -53,12 +59,28 @@ final class Compositor {
     private var overlayTexture: CVOpenGLESTexture?
     private var overlayPixelBuffer: CVPixelBuffer?
     private var overlayEnabled = false
+    /// Overlay, пришедший при приостановленном рендере — заливается в GL при возобновлении.
+    private var pendingOverlayPixelBuffer: CVPixelBuffer?
+
+    // Карточка паузы: своя текстура, создаётся лениво при первом рендере заглушки.
+    private var cardTextureCache: CVOpenGLESTextureCache?
+    private var cardTexture: CVOpenGLESTexture?
+    private var cardPixelBuffer: CVPixelBuffer?
+
+    private var lastInputBuffer: CVPixelBuffer?
+    private var lastOutputBuffer: CVPixelBuffer?
+    private var placeholderBuffer: CVPixelBuffer?
+    private var placeholderMode = false
+    private var placeholderTimer: DispatchSourceTimer?
+    private var renderingSuspended = false
 
     /// Колбэк выполняется на `renderQueue`. Pixel buffer допустимо удерживать
     /// сколь угодно долго — он взят из CVPixelBufferPool и автоматически
     /// возвращается в pool при release'е CVPixelBuffer.
     var onFrame: ((CVPixelBuffer, CMTime) -> Void)?
     var onError: ((Error) -> Void)?
+    /// Часы для PTS кадров заглушки — те же, которыми capture session штампует кадры камеры.
+    var clock: () -> CMTime = { CMClockGetTime(CMClockGetHostTimeClock()) }
 
     init(width: Int, height: Int) {
         self.width = width
@@ -84,25 +106,10 @@ final class Compositor {
         EAGLContext.setCurrent(ctx)
         context = ctx
 
-        var inputCache: CVOpenGLESTextureCache?
-        let inRet = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, ctx, nil, &inputCache)
-        guard inRet == kCVReturnSuccess, let ic = inputCache else {
-            throw CompositorError.textureCache(inRet)
-        }
-        var outputCache: CVOpenGLESTextureCache?
-        let outRet = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, ctx, nil, &outputCache)
-        guard outRet == kCVReturnSuccess, let oc = outputCache else {
-            throw CompositorError.textureCache(outRet)
-        }
-        inputTextureCache = ic
-        outputTextureCache = oc
-
-        var overlayCache: CVOpenGLESTextureCache?
-        let ovRet = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, ctx, nil, &overlayCache)
-        guard ovRet == kCVReturnSuccess, let ovc = overlayCache else {
-            throw CompositorError.textureCache(ovRet)
-        }
-        overlayTextureCache = ovc
+        inputTextureCache = try makeTextureCache(ctx)
+        outputTextureCache = try makeTextureCache(ctx)
+        overlayTextureCache = try makeTextureCache(ctx)
+        cardTextureCache = try makeTextureCache(ctx)
 
         let poolAttrs: [String: Any] = [
             kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA,
@@ -122,6 +129,15 @@ final class Compositor {
 
         glGenFramebuffers(1, &fbo)
         prepared = true
+    }
+
+    private func makeTextureCache(_ ctx: EAGLContext) throws -> CVOpenGLESTextureCache {
+        var cache: CVOpenGLESTextureCache?
+        let ret = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, ctx, nil, &cache)
+        guard ret == kCVReturnSuccess, let created = cache else {
+            throw CompositorError.textureCache(ret)
+        }
+        return created
     }
 
     private func buildProgram() throws {
@@ -212,10 +228,16 @@ final class Compositor {
         return shader
     }
 
+    // MARK: - Frames
+
     /// Async: рендер выполняется на собственной очереди, output отдаётся через `onFrame`.
+    /// При приостановленном рендере и в режиме заглушки кадр только запоминается.
     func processFrame(pixelBuffer: CVPixelBuffer, pts: CMTime) {
         renderQueue.async { [weak self] in
-            self?.renderOnQueue(pixelBuffer: pixelBuffer, pts: pts)
+            guard let self = self else { return }
+            self.lastInputBuffer = pixelBuffer
+            guard !self.renderingSuspended, !self.placeholderMode else { return }
+            self.renderOnQueue(pixelBuffer: pixelBuffer, pts: pts)
         }
     }
 
@@ -236,17 +258,133 @@ final class Compositor {
             self.overlayEnabled = false
             self.overlayTexture = nil
             self.overlayPixelBuffer = nil
-            if let cache = self.overlayTextureCache {
+            self.pendingOverlayPixelBuffer = nil
+            if !self.renderingSuspended, let cache = self.overlayTextureCache {
                 CVOpenGLESTextureCacheFlush(cache, 0)
             }
         }
     }
 
+    /// Карточка «Трансляция на паузе» (BGRA premultiplied размера кадра) — рисуется поверх
+    /// overlay только в кадре заглушки. `nil` убирает карточку.
+    func setPlaceholderCard(_ pixelBuffer: CVPixelBuffer?) {
+        renderQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.cardPixelBuffer = pixelBuffer
+            self.cardTexture = nil
+        }
+    }
+
+    // MARK: - Placeholder mode
+
+    /// Sync: пока GL ещё разрешён, рендерит и кеширует кадр заглушки
+    /// (последний кадр камеры + overlay + карточка) для `enterPlaceholderMode()`.
+    func prepareForBackground() {
+        renderQueue.sync {
+            guard !renderingSuspended, let input = lastInputBuffer else { return }
+            placeholderBuffer = drawFrame(input: input, withCard: true)
+            glFinish()
+        }
+    }
+
+    /// Пока режим включён, таймер 2 fps отдаёт в `onFrame` кадр заглушки (или последний
+    /// выходной кадр, если заглушку отрендерить было нельзя) с PTS от `clock`, без GL.
+    /// Кадры камеры в это время только обновляют последний входной кадр. Идемпотентно.
+    func enterPlaceholderMode() {
+        renderQueue.async { [weak self] in
+            guard let self = self, !self.placeholderMode else { return }
+            self.placeholderMode = true
+            if !self.renderingSuspended, let input = self.lastInputBuffer {
+                self.placeholderBuffer = self.drawFrame(input: input, withCard: true)
+            }
+            NSLog(
+                "[mafbase_stream] placeholder mode on (card=\(self.placeholderBuffer != nil) fallback=\(self.lastOutputBuffer != nil))"
+            )
+            let timer = DispatchSource.makeTimerSource(queue: self.renderQueue)
+            timer.schedule(deadline: .now(), repeating: Self.placeholderInterval)
+            timer.setEventHandler { [weak self] in self?.emitPlaceholderFrame() }
+            timer.resume()
+            self.placeholderTimer = timer
+        }
+    }
+
+    func exitPlaceholderMode() {
+        renderQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.placeholderBuffer = nil
+            guard self.placeholderMode else { return }
+            self.placeholderMode = false
+            self.placeholderTimer?.cancel()
+            self.placeholderTimer = nil
+            NSLog("[mafbase_stream] placeholder mode off")
+        }
+    }
+
+    /// Sync: дожидается GPU и запрещает GL до `resumeRendering()` — в фоне iOS убивает
+    /// процесс за любой GL-вызов.
+    func suspendRendering() {
+        renderQueue.sync {
+            guard !renderingSuspended else { return }
+            renderingSuspended = true
+            if let ctx = context {
+                EAGLContext.setCurrent(ctx)
+                glFinish()
+            }
+        }
+    }
+
+    func resumeRendering() {
+        renderQueue.async { [weak self] in
+            guard let self = self, self.renderingSuspended else { return }
+            self.renderingSuspended = false
+            if let pending = self.pendingOverlayPixelBuffer {
+                self.pendingOverlayPixelBuffer = nil
+                self.uploadOverlayPixelBuffer(pending)
+            }
+        }
+    }
+
+    private func emitPlaceholderFrame() {
+        guard placeholderMode, let buffer = placeholderBuffer ?? lastOutputBuffer else { return }
+        onFrame?(buffer, clock())
+    }
+
+    // MARK: - Rendering (render queue, GL allowed)
+
     private func uploadOverlayPixelBuffer(_ pixelBuffer: CVPixelBuffer) {
         guard prepared, let ctx = context, let cache = overlayTextureCache else { return }
+        if renderingSuspended {
+            pendingOverlayPixelBuffer = pixelBuffer
+            return
+        }
         EAGLContext.setCurrent(ctx)
-        let w = CVPixelBufferGetWidth(pixelBuffer)
-        let h = CVPixelBufferGetHeight(pixelBuffer)
+        do {
+            overlayTexture = try makeTexture(from: pixelBuffer, cache: cache)
+        } catch {
+            onError?(error)
+            return
+        }
+        overlayPixelBuffer = pixelBuffer
+        overlayEnabled = true
+    }
+
+    private func cardTextureIfAvailable() -> CVOpenGLESTexture? {
+        if let texture = cardTexture { return texture }
+        guard let pixelBuffer = cardPixelBuffer, let cache = cardTextureCache else { return nil }
+        CVOpenGLESTextureCacheFlush(cache, 0)
+        do {
+            let texture = try makeTexture(from: pixelBuffer, cache: cache)
+            cardTexture = texture
+            return texture
+        } catch {
+            onError?(error)
+            return nil
+        }
+    }
+
+    /// Оборачивает BGRA pixel buffer в GL-текстуру через кэш. Параметры сэмплирования —
+    /// состояние текстуры, поэтому выставляются один раз здесь.
+    private func makeTexture(from pixelBuffer: CVPixelBuffer, cache: CVOpenGLESTextureCache) throws -> CVOpenGLESTexture {
         var texture: CVOpenGLESTexture?
         let ret = CVOpenGLESTextureCacheCreateTextureFromImage(
             kCFAllocatorDefault,
@@ -255,16 +393,15 @@ final class Compositor {
             nil,
             GLenum(GL_TEXTURE_2D),
             GLint(GL_RGBA),
-            GLsizei(w),
-            GLsizei(h),
+            GLsizei(CVPixelBufferGetWidth(pixelBuffer)),
+            GLsizei(CVPixelBufferGetHeight(pixelBuffer)),
             GLenum(GL_BGRA),
             GLenum(GL_UNSIGNED_BYTE),
             0,
             &texture
         )
         guard ret == kCVReturnSuccess, let tex = texture else {
-            onError?(CompositorError.textureCache(ret))
-            return
+            throw CompositorError.textureCache(ret)
         }
         glBindTexture(CVOpenGLESTextureGetTarget(tex), CVOpenGLESTextureGetName(tex))
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
@@ -272,48 +409,38 @@ final class Compositor {
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
         glBindTexture(CVOpenGLESTextureGetTarget(tex), 0)
-        overlayTexture = tex
-        overlayPixelBuffer = pixelBuffer
-        overlayEnabled = true
+        return tex
     }
 
     private func renderOnQueue(pixelBuffer: CVPixelBuffer, pts: CMTime) {
+        guard let outBuf = drawFrame(input: pixelBuffer, withCard: false) else { return }
+        lastOutputBuffer = outBuf
+        onFrame?(outBuf, pts)
+    }
+
+    /// Рисует кадр в новый буфер из пула: камера, поверх — overlay и (для заглушки) карточка.
+    private func drawFrame(input pixelBuffer: CVPixelBuffer, withCard: Bool) -> CVPixelBuffer? {
         guard prepared,
               let ctx = context,
               let ic = inputTextureCache,
               let oc = outputTextureCache,
-              let pool = bufferPool else { return }
+              let pool = bufferPool else { return nil }
 
         EAGLContext.setCurrent(ctx)
 
-        let inputW = CVPixelBufferGetWidth(pixelBuffer)
-        let inputH = CVPixelBufferGetHeight(pixelBuffer)
-
-        var inputTexture: CVOpenGLESTexture?
-        let inRet = CVOpenGLESTextureCacheCreateTextureFromImage(
-            kCFAllocatorDefault,
-            ic,
-            pixelBuffer,
-            nil,
-            GLenum(GL_TEXTURE_2D),
-            GLint(GL_RGBA),
-            GLsizei(inputW),
-            GLsizei(inputH),
-            GLenum(GL_BGRA),
-            GLenum(GL_UNSIGNED_BYTE),
-            0,
-            &inputTexture
-        )
-        guard inRet == kCVReturnSuccess, let inTex = inputTexture else {
-            onError?(CompositorError.textureCache(inRet))
-            return
+        let inTex: CVOpenGLESTexture
+        do {
+            inTex = try makeTexture(from: pixelBuffer, cache: ic)
+        } catch {
+            onError?(error)
+            return nil
         }
 
         var outputBuffer: CVPixelBuffer?
         let poolRet = CVPixelBufferPoolCreatePixelBuffer(kCFAllocatorDefault, pool, &outputBuffer)
         guard poolRet == kCVReturnSuccess, let outBuf = outputBuffer else {
             onError?(CompositorError.bufferPool(poolRet))
-            return
+            return nil
         }
 
         var outputTexture: CVOpenGLESTexture?
@@ -333,7 +460,7 @@ final class Compositor {
         )
         guard outRet == kCVReturnSuccess, let outTex = outputTexture else {
             onError?(CompositorError.textureCache(outRet))
-            return
+            return nil
         }
 
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), fbo)
@@ -348,7 +475,7 @@ final class Compositor {
         if status != GLenum(GL_FRAMEBUFFER_COMPLETE) {
             onError?(CompositorError.framebufferIncomplete(status))
             glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
-            return
+            return nil
         }
 
         glViewport(0, 0, GLsizei(width), GLsizei(height))
@@ -356,13 +483,36 @@ final class Compositor {
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 
         glUseProgram(program)
+        drawTexturedQuad(inTex)
 
+        // Overlay и карточка: alpha-blend поверх FBO (FBO всё ещё привязан к output buffer'у).
+        // Bitmap, который приходит из UIView через CGContext premultipliedFirst —
+        // premultiplied alpha. Поэтому blend = (ONE, ONE_MINUS_SRC_ALPHA).
+        let overlay = overlayEnabled ? overlayTexture : nil
+        let card = withCard ? cardTextureIfAvailable() : nil
+        if overlay != nil || card != nil {
+            glEnable(GLenum(GL_BLEND))
+            glBlendFunc(GLenum(GL_ONE), GLenum(GL_ONE_MINUS_SRC_ALPHA))
+            if let overlay = overlay { drawTexturedQuad(overlay) }
+            if let card = card { drawTexturedQuad(card) }
+            glDisable(GLenum(GL_BLEND))
+        }
+
+        glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
+
+        glFlush()
+
+        // CV держит ссылки на текущий output buffer через CVOpenGLESTexture —
+        // освобождаем прежние слоты в кэше, чтобы pool мог переиспользовать буферы.
+        CVOpenGLESTextureCacheFlush(ic, 0)
+        CVOpenGLESTextureCacheFlush(oc, 0)
+
+        return outBuf
+    }
+
+    private func drawTexturedQuad(_ texture: CVOpenGLESTexture) {
         glActiveTexture(GLenum(GL_TEXTURE0))
-        glBindTexture(CVOpenGLESTextureGetTarget(inTex), CVOpenGLESTextureGetName(inTex))
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
+        glBindTexture(CVOpenGLESTextureGetTarget(texture), CVOpenGLESTextureGetName(texture))
         if textureUniform >= 0 {
             glUniform1i(textureUniform, 0)
         }
@@ -389,81 +539,50 @@ final class Compositor {
         if positionAttr >= 0 { glDisableVertexAttribArray(GLuint(positionAttr)) }
         if texCoordAttr >= 0 { glDisableVertexAttribArray(GLuint(texCoordAttr)) }
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0)
-        glBindTexture(CVOpenGLESTextureGetTarget(inTex), 0)
-
-        // Overlay: alpha-blend поверх FBO (FBO всё ещё привязан к output buffer'у).
-        // Bitmap, который приходит из UIView через CGContext premultipliedFirst —
-        // premultiplied alpha. Поэтому blend = (ONE, ONE_MINUS_SRC_ALPHA).
-        if overlayEnabled, let overlay = overlayTexture {
-            glEnable(GLenum(GL_BLEND))
-            glBlendFunc(GLenum(GL_ONE), GLenum(GL_ONE_MINUS_SRC_ALPHA))
-
-            glActiveTexture(GLenum(GL_TEXTURE0))
-            glBindTexture(CVOpenGLESTextureGetTarget(overlay), CVOpenGLESTextureGetName(overlay))
-            if textureUniform >= 0 {
-                glUniform1i(textureUniform, 0)
-            }
-
-            glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexVbo)
-            if positionAttr >= 0 {
-                glEnableVertexAttribArray(GLuint(positionAttr))
-                glVertexAttribPointer(
-                    GLuint(positionAttr), 2, GLenum(GL_FLOAT), GLboolean(GL_FALSE),
-                    stride, UnsafeRawPointer(bitPattern: 0)
-                )
-            }
-            if texCoordAttr >= 0 {
-                glEnableVertexAttribArray(GLuint(texCoordAttr))
-                glVertexAttribPointer(
-                    GLuint(texCoordAttr), 2, GLenum(GL_FLOAT), GLboolean(GL_FALSE),
-                    stride, UnsafeRawPointer(bitPattern: MemoryLayout<GLfloat>.size * 2)
-                )
-            }
-            glDrawArrays(GLenum(GL_TRIANGLE_STRIP), 0, 4)
-            if positionAttr >= 0 { glDisableVertexAttribArray(GLuint(positionAttr)) }
-            if texCoordAttr >= 0 { glDisableVertexAttribArray(GLuint(texCoordAttr)) }
-            glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0)
-            glBindTexture(CVOpenGLESTextureGetTarget(overlay), 0)
-            glDisable(GLenum(GL_BLEND))
-        }
-
-        glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0)
-
-        glFlush()
-
-        // CV держит ссылки на текущий output buffer через CVOpenGLESTexture —
-        // освобождаем прежние слоты в кэше, чтобы pool мог переиспользовать буферы.
-        CVOpenGLESTextureCacheFlush(ic, 0)
-        CVOpenGLESTextureCacheFlush(oc, 0)
-
-        onFrame?(outBuf, pts)
+        glBindTexture(CVOpenGLESTextureGetTarget(texture), 0)
     }
 
     func release() {
         renderQueue.sync {
-            if let ctx = context {
-                EAGLContext.setCurrent(ctx)
+            placeholderTimer?.cancel()
+            placeholderTimer = nil
+            placeholderMode = false
+            placeholderBuffer = nil
+            lastInputBuffer = nil
+            lastOutputBuffer = nil
+            pendingOverlayPixelBuffer = nil
+            // При приостановленном рендере (фон) GL-вызовы запрещены — ресурсы уходят вместе
+            // с контекстом.
+            if !renderingSuspended {
+                if let ctx = context {
+                    EAGLContext.setCurrent(ctx)
+                }
+                if program != 0 { glDeleteProgram(program) }
+                if fbo != 0 {
+                    var fboCopy = fbo
+                    glDeleteFramebuffers(1, &fboCopy)
+                }
+                if vertexVbo != 0 {
+                    var vboCopy = vertexVbo
+                    glDeleteBuffers(1, &vboCopy)
+                }
+                if let ic = inputTextureCache { CVOpenGLESTextureCacheFlush(ic, 0) }
+                if let oc = outputTextureCache { CVOpenGLESTextureCacheFlush(oc, 0) }
+                if let ovc = overlayTextureCache { CVOpenGLESTextureCacheFlush(ovc, 0) }
+                if let cc = cardTextureCache { CVOpenGLESTextureCacheFlush(cc, 0) }
             }
-            if program != 0 { glDeleteProgram(program); program = 0 }
-            if fbo != 0 {
-                var fboCopy = fbo
-                glDeleteFramebuffers(1, &fboCopy)
-                fbo = 0
-            }
-            if vertexVbo != 0 {
-                var vboCopy = vertexVbo
-                glDeleteBuffers(1, &vboCopy)
-                vertexVbo = 0
-            }
-            if let ic = inputTextureCache { CVOpenGLESTextureCacheFlush(ic, 0) }
-            if let oc = outputTextureCache { CVOpenGLESTextureCacheFlush(oc, 0) }
-            if let ovc = overlayTextureCache { CVOpenGLESTextureCacheFlush(ovc, 0) }
+            program = 0
+            fbo = 0
+            vertexVbo = 0
             inputTextureCache = nil
             outputTextureCache = nil
             overlayTextureCache = nil
+            cardTextureCache = nil
             overlayTexture = nil
             overlayPixelBuffer = nil
             overlayEnabled = false
+            cardTexture = nil
+            cardPixelBuffer = nil
             bufferPool = nil
             EAGLContext.setCurrent(nil)
             context = nil

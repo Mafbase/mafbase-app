@@ -22,12 +22,17 @@ import java.util.concurrent.atomic.AtomicBoolean
  *
  * Поток работы:
  *  1. Конструктор + [setView] — приложение создаёт view и привязывает её к renderer.
- *  2. [attach] — измеряет/layout-ит view под размер кадра, делает первый снимок и
+ *  2. [hostIn] — прячет view в окно activity: без window-attach `View.invalidate()`
+ *     no-op'ится, и Compose-overlay не сообщал бы об изменениях. Activity может
+ *     смениться ([unhost] + [hostIn] новой) — пайплайн при этом живёт дальше.
+ *  3. [attach] — измеряет/layout-ит view под размер кадра, делает первый снимок и
  *     сразу заливает в Compositor (чтобы первый кадр стрима уже шёл с оверлеем).
- *  3. View вызывает [invalidate] при любом изменении содержимого. Renderer
+ *  4. View вызывает [invalidate] при любом изменении содержимого. Renderer
  *     ре-рендерит view в свободный bitmap из пула и отдаёт его компоситору.
  *     В простое вызовов нет — Compositor переиспользует прошлую текстуру (F3.8 BRD).
- *  4. [detach] — снимает overlay в Compositor и освобождает Bitmap'ы.
+ *     Пока view не захощена ни в одном окне, инвалидации теряются; следующий
+ *     [hostIn] делает свежий снимок.
+ *  5. [detach] — снимает overlay в Compositor, освобождает Bitmap'ы и Compose-окружение.
  *
  * Двойная буферизация: чтобы не было race между `view.draw(Canvas)` на main-потоке
  * и `glTexSubImage2D(bitmap)` на GL-потоке (последний читает тот же буфер
@@ -60,10 +65,40 @@ internal class OverlayViewRenderer(
     private val pendingInvalidate = AtomicBoolean(false)
 
     private var attached: Boolean = false
-    private var hostedInDecor: Boolean = false
+    private var hostDecor: ViewGroup? = null
 
     fun setView(view: View) {
         this.view = view
+    }
+
+    /**
+     * Прячет view невидимо в `decorView` активити: `alpha = 0` + сдвиг за экран.
+     * `view.draw(canvas)` всё равно рисует реальный контент в наш bitmap. Если
+     * overlay уже подключён к Compositor — сразу делает свежий снимок.
+     */
+    fun hostIn(activity: Activity) {
+        runOnMain {
+            val v = view ?: return@runOnMain
+            val decor = activity.window.decorView as? ViewGroup ?: return@runOnMain
+            if (v.parent === decor) return@runOnMain
+            unhostNow(v)
+            v.alpha = 0f
+            v.translationX = -(width.toFloat() * 4f)
+            decor.addView(v, ViewGroup.LayoutParams(width, height))
+            hostDecor = decor
+            if (attached) {
+                try {
+                    measureAndLayout(v)
+                    refreshLocked()
+                } catch (t: Throwable) {
+                    Log.e(TAG, "OverlayViewRenderer rehost refresh failed", t)
+                }
+            }
+        }
+    }
+
+    fun unhost() {
+        runOnMain { view?.let { unhostNow(it) } }
     }
 
     fun attach(compositor: Compositor) {
@@ -77,11 +112,7 @@ internal class OverlayViewRenderer(
             attached = true
             try {
                 v.setBackgroundColor(Color.TRANSPARENT)
-                hostInActivityDecorIfPossible(v)
-                val widthSpec = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
-                val heightSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
-                v.measure(widthSpec, heightSpec)
-                v.layout(0, 0, width, height)
+                measureAndLayout(v)
                 for (i in 0 until BUFFER_COUNT) {
                     val bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
                     bitmaps[i] = bm
@@ -97,43 +128,37 @@ internal class OverlayViewRenderer(
 
     fun detach() {
         runOnMain {
-            if (!attached) return@runOnMain
-            attached = false
-            compositor?.clearOverlay()
-            compositor = null
-            synchronized(poolLock) {
-                for (i in 0 until BUFFER_COUNT) {
-                    bitmaps[i]?.recycle()
-                    bitmaps[i] = null
-                    canvases[i] = null
-                    bitmapBusy[i] = false
+            if (attached) {
+                attached = false
+                compositor?.clearOverlay()
+                compositor = null
+                synchronized(poolLock) {
+                    for (i in 0 until BUFFER_COUNT) {
+                        bitmaps[i]?.recycle()
+                        bitmaps[i] = null
+                        canvases[i] = null
+                        bitmapBusy[i] = false
+                    }
                 }
             }
-            view?.let { unhostFromActivityDecor(it) }
+            view?.let {
+                unhostNow(it)
+                (it as? OverlayComposeContainer)?.dispose()
+            }
         }
     }
 
-    /**
-     * Off-screen Compose-overlay'ям нужно реальное window-attach, чтобы
-     * `ComposeView` поднял `WindowRecomposer`, дотриггерил initial composition и
-     * пометил `mAttachInfo` (без него `View.invalidate()` no-op'ится). Прячем
-     * view невидимо в `decorView` активити: `alpha = 0` + сдвиг за экран.
-     * `view.draw(canvas)` всё равно рисует реальный контент в наш bitmap.
-     */
-    private fun hostInActivityDecorIfPossible(v: View) {
-        if (v.parent != null) return
-        val activity = v.context as? Activity ?: return
-        val decor = activity.window.decorView as? ViewGroup ?: return
-        v.alpha = 0f
-        v.translationX = -(width.toFloat() * 4f)
-        decor.addView(v, ViewGroup.LayoutParams(width, height))
-        hostedInDecor = true
+    private fun unhostNow(v: View) {
+        val decor = hostDecor ?: return
+        hostDecor = null
+        if (v.parent === decor) decor.removeView(v)
     }
 
-    private fun unhostFromActivityDecor(v: View) {
-        if (!hostedInDecor) return
-        hostedInDecor = false
-        (v.parent as? ViewGroup)?.removeView(v)
+    private fun measureAndLayout(v: View) {
+        val widthSpec = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
+        val heightSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
+        v.measure(widthSpec, heightSpec)
+        v.layout(0, 0, width, height)
     }
 
     override fun invalidate() {

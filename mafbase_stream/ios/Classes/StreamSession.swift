@@ -10,7 +10,7 @@ import Foundation
 ///     [AacEncoder] поднимается лениво при первом аудио-сэмпле — точный source ASBD
 ///     известен только из CMSampleBuffer микрофона.
 ///  2. `appendProcessedVideo(...)` принимает уже скомпонованный (через Compositor)
-///     CVPixelBuffer от хост-контроллера. Compositor живёт у `StreamViewController`
+///     CVPixelBuffer от хоста. Compositor живёт у `StreamPipeline`
 ///     и параллельно фанаутит кадр в preview (AVSampleBufferDisplayLayer) и в
 ///     Mp4Recorder. `appendAudioSample(_:)` принимает CMSampleBuffer от микрофона.
 ///  3. Когда оба формата готовы (avcC из VT + ASC из AAC) — открываем RTMP-сессию
@@ -55,11 +55,20 @@ final class StreamSession {
         }
     }
 
-    enum SessionError: Error {
+    enum SessionError: Error, CustomStringConvertible {
         case alreadyStarted
         case h264Prepare(Error)
         case bridgeInit
         case bridgeStart(MafbaseStreamCoreResult)
+
+        var description: String {
+            switch self {
+            case .alreadyStarted: return "сессия уже запущена"
+            case .h264Prepare(let error): return "видеоэнкодер: \(error)"
+            case .bridgeInit: return "ядро не создано"
+            case .bridgeStart(let result): return "RTMP: \(MafbaseStreamCoreBridge.resultName(result))"
+            }
+        }
     }
 
     var onStarted: (() -> Void)?
@@ -69,6 +78,20 @@ final class StreamSession {
 
     private let config: Config
     private let lock = NSLock()
+
+    /// Под `stateLock`: пишут колбэки ядра, читают main и `setBitrateScale`.
+    private let stateLock = NSLock()
+    private var coreState: MafbaseStreamCoreState = .idle
+    private var bitrateScale = 1.0
+    /// Целевой битрейт без коэффициента: стартовый из конфига или последний от ядра.
+    private var targetVideoBitrate: Int
+
+    /// Последнее состояние ядра из его событий.
+    var lastCoreState: MafbaseStreamCoreState {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return coreState
+    }
 
     private let videoEncoder: H264Encoder
     private let audioEncoder = AacEncoder()
@@ -91,6 +114,7 @@ final class StreamSession {
 
     init(config: Config, phaseGate: PhaseGate? = nil) {
         self.config = config
+        self.targetVideoBitrate = config.videoBitrate
         self.audioEncoder.phaseGate = phaseGate
         self.videoEncoder = H264Encoder(
             bitRate: config.videoBitrate,
@@ -125,6 +149,12 @@ final class StreamSession {
             started = false
             throw SessionError.h264Prepare(error)
         }
+        stateLock.lock()
+        let scaledStart = bitrateScale == 1 ? nil : effectiveBitrateLocked()
+        stateLock.unlock()
+        if let bitrate = scaledStart {
+            videoEncoder.setBitrate(bitrate)
+        }
 
         audioEncoder.onFormat = { [weak self] format in
             self?.handleAudioFormat(format)
@@ -142,15 +172,42 @@ final class StreamSession {
             throw SessionError.bridgeInit
         }
         newBridge.onEvent = { [weak self] event in
-            self?.onEvent?(event)
+            guard let self = self else { return }
+            self.stateLock.lock()
+            self.coreState = event.state
+            self.stateLock.unlock()
+            self.onEvent?(event)
         }
         newBridge.onRequestKeyframe = { [weak self] in
             self?.videoEncoder.forceKeyFrame()
         }
         newBridge.onSetVideoBitrate = { [weak self] bps in
-            self?.videoEncoder.setBitrate(Int(bps))
+            self?.applyCoreBitrate(Int(bps))
         }
         bridge = newBridge
+    }
+
+    /// Коэффициент к битрейту видео (1.0 — без изменений): применяется к текущему целевому
+    /// битрейту и ко всем последующим значениям от ядра; само ядро коэффициента не видит.
+    func setBitrateScale(_ scale: Double) {
+        stateLock.lock()
+        bitrateScale = scale
+        let effective = effectiveBitrateLocked()
+        stateLock.unlock()
+        videoEncoder.setBitrate(effective)
+    }
+
+    private func applyCoreBitrate(_ bitrateBps: Int) {
+        stateLock.lock()
+        targetVideoBitrate = bitrateBps
+        let effective = effectiveBitrateLocked()
+        stateLock.unlock()
+        videoEncoder.setBitrate(effective)
+    }
+
+    /// Вызывать под `stateLock`.
+    private func effectiveBitrateLocked() -> Int {
+        Int(Double(targetVideoBitrate) * bitrateScale)
     }
 
     func stop() {
@@ -189,7 +246,7 @@ final class StreamSession {
     // MARK: - Frame ingest
 
     /// Принимает уже обработанный через Compositor (с overlay) pixel buffer.
-    /// Compositor живёт в `StreamViewController` и фанаутит этот же кадр
+    /// Compositor живёт в `StreamPipeline` и фанаутит этот же кадр
     /// одновременно в preview и Mp4Recorder.
     func appendProcessedVideo(pixelBuffer: CVPixelBuffer, pts: CMTime) {
         guard !stopped else { return }
@@ -339,9 +396,9 @@ final class StreamSession {
                 videoExtradata: videoEx,
                 audioExtradata: audioEx,
                 adaptiveBitrate: true,
-                maxReconnectAttempts: 0,
-                reconnectBaseDelayMs: 0,
-                reconnectCapDelayMs: 0,
+                maxReconnectAttempts: Int32.max,
+                reconnectBaseDelayMs: 1000,
+                reconnectCapDelayMs: 30000,
                 ioTimeoutUs: 0
             )
             defer { group.leave() }

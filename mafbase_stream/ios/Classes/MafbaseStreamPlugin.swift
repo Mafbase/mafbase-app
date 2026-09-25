@@ -4,6 +4,9 @@ import UIKit
 public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
   private var pendingResult: FlutterResult?
 
+  /// Единственный пайплайн процесса: новый экран присоединяется к нему, если он активен.
+  static var pipeline: StreamPipeline?
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "mafbase_stream", binaryMessenger: registrar.messenger())
     let instance = MafbaseStreamPlugin()
@@ -51,27 +54,41 @@ public class MafbaseStreamPlugin: NSObject, FlutterPlugin {
       .trimmingCharacters(in: .whitespacesAndNewlines)
     let brandImageUrl = (args?["brandImageUrl"] as? String)?
       .trimmingCharacters(in: .whitespacesAndNewlines)
-    let segmentDurationMinutes = (args?["segmentDurationMinutes"] as? NSNumber)?.intValue
+    let segmentDurationMinutes = (args?["segmentDurationMinutes"] as? NSNumber)?.intValue ?? 0
 
-    let controller = StreamViewController()
-    controller.rtmpUrl = (rtmpUrl?.isEmpty == false) ? rtmpUrl! : "rtmp://10.0.2.2/live"
-    controller.streamKey = (streamKey?.isEmpty == false) ? streamKey! : "test"
-    controller.overlayViewType = (overlayViewType?.isEmpty == false) ? overlayViewType : nil
-    controller.overlayParams = OverlayParams(
-      tournamentId: tournamentId,
-      clubId: clubId,
-      table: table,
-      breakPlaceholderImageUrl: (breakPlaceholderImageUrl?.isEmpty == false) ? breakPlaceholderImageUrl : nil,
-      brandImageUrl: (brandImageUrl?.isEmpty == false) ? brandImageUrl : nil
+    let config = StreamPipeline.Config(
+      rtmpUrl: (rtmpUrl?.isEmpty == false) ? rtmpUrl! : "rtmp://10.0.2.2/live",
+      streamKey: (streamKey?.isEmpty == false) ? streamKey! : "test",
+      overlayViewType: (overlayViewType?.isEmpty == false) ? overlayViewType : nil,
+      overlayParams: OverlayParams(
+        tournamentId: tournamentId,
+        clubId: clubId,
+        table: table,
+        breakPlaceholderImageUrl: (breakPlaceholderImageUrl?.isEmpty == false) ? breakPlaceholderImageUrl : nil,
+        brandImageUrl: (brandImageUrl?.isEmpty == false) ? brandImageUrl : nil
+      ),
+      segmentDurationSeconds: segmentDurationMinutes > 0 ? TimeInterval(segmentDurationMinutes * 60) : 0
     )
-    // nil = сегментация выключена (дефолт StreamViewController)
-    if let minutes = segmentDurationMinutes {
-      controller.segmentDurationSeconds = minutes > 0 ? TimeInterval(minutes * 60) : 0
+
+    let pipeline: StreamPipeline
+    if let existing = Self.pipeline, !existing.isReleased, existing.isActive {
+      // Одна трансляция на процесс: присоединяемся к живой, новые аргументы игнорируем.
+      NSLog("[mafbase_stream] joining active pipeline")
+      pipeline = existing
+    } else {
+      Self.pipeline?.release()
+      pipeline = StreamPipeline(config: config)
+      Self.pipeline = pipeline
     }
+
+    let controller = StreamViewController(pipeline: pipeline)
     controller.modalPresentationStyle = .fullScreen
     controller.onClose = { [weak self] reason in
       guard let self = self, let pending = self.pendingResult else { return }
       self.pendingResult = nil
+      if Self.pipeline?.isReleased == true {
+        Self.pipeline = nil
+      }
       switch reason {
       case .user:
         pending(nil)

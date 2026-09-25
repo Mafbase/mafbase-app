@@ -79,9 +79,10 @@ final class Mp4Recorder {
         } catch {
             throw RecorderError.writerCreate(error)
         }
-        // Запись уходит в галерею, faststart не нужен, а с ним finishWriting
-        // на многочасовых файлах заметно дольше (writer переносит moov в начало).
+        // Фрагментированный MP4 читается, даже если процесс убили; faststart не нужен —
+        // запись уходит в галерею, а с ним finishWriting многочасовых файлов заметно дольше.
         writer.shouldOptimizeForNetworkUse = false
+        writer.movieFragmentInterval = CMTime(seconds: 10, preferredTimescale: 600)
         self.writer = writer
         outputURL = url
 
@@ -111,7 +112,7 @@ final class Mp4Recorder {
     }
 
     /// Кодирует уже обработанный (через Compositor) pixel buffer и кладёт в writer.
-    /// Вызывается из колбэка Compositor'а, который живёт в `StreamViewController` —
+    /// Вызывается из колбэка Compositor'а, который живёт в `StreamPipeline` —
     /// тот же кадр одновременно уходит на preview, в Mp4Recorder и в StreamSession.
     func appendVideo(pixelBuffer: CVPixelBuffer, pts: CMTime) {
         guard !isStopped else { return }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Recomposer
 import androidx.compose.ui.platform.AndroidUiDispatcher
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -25,14 +26,18 @@ import kotlinx.coroutines.launch
 /**
  * Хост для Compose-overlay'ев. Принимает любой `@Composable () -> Unit` и
  * заворачивает его в [ComposeView] вместе со всем окружением, нужным для работы
- * Compose off-screen — оверлей никогда не приклеивается к window, его рисует
- * [OverlayViewRenderer] напрямую через `view.draw(canvas)`.
+ * Compose off-screen — оверлей рисует [OverlayViewRenderer] напрямую через
+ * `view.draw(canvas)`, а в окно activity он подкладывается только ради
+ * window-attach (без него `View.invalidate()` no-op).
  *
  * Что приходится поднимать вручную, потому что `ComposeView` обычно делает это в
  * `onAttachedToWindow`:
  *  - [LifecycleOwner] и [SavedStateRegistryOwner] для view-trees;
  *  - [Recomposer] на main-потоке через [AndroidUiDispatcher.CurrentThread] —
  *    он же даёт `MonotonicFrameClock` для `withFrameNanos`.
+ *
+ * Отсоединение от окна композицию не трогает: view переживает смену окна
+ * (activity пересоздана, пайплайн жив) и освобождается только явным [dispose].
  *
  * Compose сам вызывает `View.invalidate()`, когда нужна перерисовка. Мы ловим
  * это в [onDescendantInvalidated] и дёргаем [OverlayInvalidator.invalidate],
@@ -49,11 +54,13 @@ internal class OverlayComposeContainer(
     private val lifecycleOwner = OffscreenLifecycleOwner()
     private val recomposer = Recomposer(AndroidUiDispatcher.Main)
     private val composeScope = CoroutineScope(AndroidUiDispatcher.Main)
+    private var disposed = false
 
     private val composeView = ComposeView(context).apply {
         setViewTreeLifecycleOwner(lifecycleOwner)
         setViewTreeSavedStateRegistryOwner(lifecycleOwner)
         setParentCompositionContext(recomposer)
+        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             MaterialTheme { content(params) }
         }
@@ -81,6 +88,13 @@ internal class OverlayComposeContainer(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         Log.d(TAG, "onDetachedFromWindow")
+    }
+
+    /** Освобождает композицию и Recomposer. После этого view использовать нельзя. */
+    fun dispose() {
+        if (disposed) return
+        disposed = true
+        Log.d(TAG, "dispose")
         composeView.disposeComposition()
         recomposer.cancel()
         lifecycleOwner.destroy()

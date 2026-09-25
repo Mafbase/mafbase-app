@@ -32,7 +32,7 @@ modally в полноэкранном режиме. Экран запускае�
 
 ### Архитектура
 
-`StreamViewController` поверх `AVCaptureSession` добавляет два data output'а
+`StreamPipeline` поверх `AVCaptureSession` добавляет два data output'а
 (`AVCaptureVideoDataOutput` + `AVCaptureAudioDataOutput`) и оркестратор
 [`Mp4Recorder`](ios/Classes/Encoder/Mp4Recorder.swift), который соединяет
 два аппаратных энкодера c `AVAssetWriter`:
@@ -88,16 +88,34 @@ NAL/AAC-фреймов в RTMP без перекодирования.
 
 ### Жизненный цикл
 
+- Пайплайн (`StreamPipeline`: capture session, компоситор, `Mp4Recorder`, `StreamSession`,
+  overlay) живёт отдельно от `StreamViewController` — единственный экземпляр на процесс
+  держит `MafbaseStreamPlugin`. Экран только подключает превью и отражает состояние:
+  «Закрыть» при активных стриме или записи спрашивает подтверждение, повторный
+  `openStreamScreen` присоединяется к живому пайплайну.
 - Старт записи кнопкой «Запись» — создаём `Mp4Recorder`, готовим
   `H264Encoder` сразу (размеры известны), `AacEncoder` — лениво при первом
-  PCM-сэмпле (нужен ASBD от микрофона).
+  PCM-сэмпле (нужен ASBD от микрофона). MP4 фрагментированный
+  (`movieFragmentInterval` 10 с) — файл читается, даже если процесс убили.
 - Стоп кнопкой «Стоп» — `videoEncoder.finish()` (`VTCompressionSessionCompleteFrames`)
   + `audioEncoder.finish()` дренируют буферизованные кадры синхронно, после
   чего `markAsFinished` на оба `AVAssetWriterInput` и асинхронный
   `writer.finishWriting`.
-- При входящем звонке / Control Center — `AVAudioSession.interruptionNotification`
-  с типом `.began` приводит к корректной остановке записи: файл валидно
-  закрывается через `finishWriting`.
+- Фон и прерывания: `UIBackgroundModes: audio`, `AVAudioSession` `.playAndRecord` активна,
+  пока пайплайн активен. При уходе в фон, звонке, Siri или чужом приложении с камерой стрим
+  и запись не останавливаются — идёт звук (пропавший микрофон подменяет тишина) и заглушка
+  «Трансляция на паузе» 2 fps из последнего кадра камеры; после возврата камера
+  включается без пересоздания энкодеров. Умершая capture session пересобирается
+  с backoff 1→10 с.
+- Сеть: ядро переподключается без лимита попыток (backoff 1→30 с); после `Failed` или
+  ошибки энкодера `StreamingController` пересоздаёт `StreamSession` с backoff 2→15 с,
+  пока стрим не остановил пользователь; смена сетевого пути (`NWPathMonitor`) —
+  немедленное пересоздание вместо ожидания backoff.
+- Экран: через 60 с без касаний при активном пайплайне яркость опускается до 0.05,
+  превью скрывается, поверх кнопок ложится чёрная шторка; касание возвращает всё обратно.
+- Нагрев (`ProcessInfo.thermalState` и `systemPressureState` камеры): `.serious` — 24 fps
+  и битрейт стрима ×0.5, `.critical` — 15 fps; при возврате к норме — исходные значения.
+  Разрешение не меняется.
 
 ## Android — RTMP-стрим (задача 06)
 

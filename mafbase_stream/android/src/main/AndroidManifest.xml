@@ -5,8 +5,12 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!-- Прогресс сохранения записи показывается нотификацией; на API 33+ без этого
-         разрешения нотификация молча подавляется. -->
+    <!-- API 34+: типы foreground service стрима (camera|microphone) требуют своих разрешений. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Нотификации фоновой трансляции и прогресса сохранения записи; на API 33+ без этого
+         разрешения они молча подавляются. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-feature
@@ -34,5 +38,12 @@
             android:name=".SaveToGalleryService"
             android:exported="false"
             android:foregroundServiceType="shortService" />
+
+        <!-- Держит камеру, запись и стрим живыми, пока StreamActivity свёрнута или
+             перекрыта другим окном. -->
+        <service
+            android:name=".service.StreamForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="camera|microphone" />
     </application>
 </manifest>
