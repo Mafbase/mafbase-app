@@ -1,6 +1,7 @@
 name: CI Tests
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -22,9 +23,15 @@ jobs:
 
       - name: Check for golden image changes
         id: golden-check
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_BRANCH: ${{ github.base_ref }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_REF="origin/${{ github.base_ref }}"
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            BASE_REF="origin/$PR_BASE_BRANCH"
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            BASE_REF="origin/$DEFAULT_BRANCH"
           else
             BASE_REF="HEAD~1"
           fi
@@ -38,22 +45,38 @@ jobs:
             echo "No golden PNG changes detected, skipping regeneration"
           fi
 
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.41.3'
+      - name: Setup FVM and Flutter
+        run: |
+          if [[ "$(uname -m)" != x86_64 ]]; then
+            echo 'FVM setup requires a Linux x64 runner' >&2
+            exit 1
+          fi
+          fvm_dir="$(mktemp -d "${RUNNER_TEMP}/fvm-4.3.1.XXXXXX")"
+          curl -fsSL --retry 3 \
+            https://github.com/leoafarias/fvm/releases/download/4.3.1/fvm-4.3.1-linux-x64.tar.gz \
+            -o "$fvm_dir/fvm.tar.gz"
+          printf '%s  %s\n' \
+            ad59c861bdbef80c9f262d30ab28debd374afad0ef4b10b99a47bbab77e08bde \
+            "$fvm_dir/fvm.tar.gz" | sha256sum -c -
+          tar -xzf "$fvm_dir/fvm.tar.gz" -C "$fvm_dir"
+          export PATH="$fvm_dir/fvm:$PATH"
+          printf '%s\n' "$fvm_dir/fvm" >> "$GITHUB_PATH"
+          fvm install 3.41.3
+          fvm flutter --version
+          fvm dart --version
 
       - name: Install dependencies
-        run: flutter pub get
+        run: fvm flutter pub get
 
       - name: Generate localizations
-        run: flutter gen-l10n
+        run: fvm flutter gen-l10n
 
       - name: Generate code
-        run: dart run build_runner build --delete-conflicting-outputs
+        run: fvm dart run build_runner build --delete-conflicting-outputs
 
       - name: Update CI golden images
         if: steps.golden-check.outputs.has_changes == 'true'
-        run: flutter test --update-goldens test/golden/
+        run: fvm flutter test --update-goldens test/golden/
 
       - name: Verify only CI golden images changed
         if: steps.golden-check.outputs.has_changes == 'true'
@@ -87,4 +110,4 @@ jobs:
           git push
 
       - name: Run tests
-        run: flutter test
+        run: fvm flutter test

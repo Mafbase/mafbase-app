@@ -1,10 +1,10 @@
-name: "\U0001FA7A Claude Workflow Doctor"
+name: "\U0001FA7A Codex Workflow Doctor"
 
 on:
   workflow_run:
     workflows:
-      - "Claude Code Review"
-      - "Claude Code"
+      - "Codex Code Review"
+      - "Codex Code"
     types:
       - completed
 
@@ -15,8 +15,11 @@ permissions:
 
 jobs:
   diagnose:
-    if: github.event.workflow_run.conclusion != 'skipped'
-    uses: Mafbase/Mafbase-workflows/.github/workflows/reusable-claude-doctor.yml@main
+    if: >-
+      github.event.workflow_run.conclusion != 'skipped' &&
+      github.event.workflow_run.conclusion != 'cancelled' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    uses: Mafbase/Mafbase-workflows/.github/workflows/reusable-codex-doctor.yml@main
     secrets: inherit
     with:
       workflow_name: ${{ github.event.workflow_run.name }}

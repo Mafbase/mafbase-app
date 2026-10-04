@@ -1,0 +1,52 @@
+name: Codex Code Review
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened, synchronize]
+
+concurrency:
+  group: codex-review-${{ github.repository }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  codex-review:
+    if: '!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository'
+    runs-on: [self-hosted, macOS]
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup FVM and Flutter
+        run: |
+          if [[ "$(uname -m)" != arm64 ]]; then
+            echo 'FVM setup requires a macOS ARM64 runner' >&2
+            exit 1
+          fi
+          fvm_dir="$(mktemp -d "${RUNNER_TEMP}/fvm-4.3.1.XXXXXX")"
+          curl -fsSL --retry 3 \
+            https://github.com/leoafarias/fvm/releases/download/4.3.1/fvm-4.3.1-macos-arm64.tar.gz \
+            -o "$fvm_dir/fvm.tar.gz"
+          printf '%s  %s\n' \
+            9c69d11d792963ce52a2dce457d4ec7f1d9c5da38d17d3088cdfcae4a6e3c525 \
+            "$fvm_dir/fvm.tar.gz" | shasum -a 256 -c -
+          tar -xzf "$fvm_dir/fvm.tar.gz" -C "$fvm_dir"
+          export PATH="$fvm_dir/fvm:$PATH"
+          printf '%s\n' "$fvm_dir/fvm" >> "$GITHUB_PATH"
+          fvm install 3.41.3
+          fvm flutter --version
+          fvm dart --version
+
+      - name: Run Codex Code Review
+        uses: Mafbase/Mafbase-workflows/.github/actions/codex-code-review@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          system_prompt: 'Используй fvm flutter и fvm dart. Flutter 3.41.3 установлен; если .fvmrc требует другую версию, установи её через fvm install <version>.'
