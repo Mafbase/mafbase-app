@@ -86,8 +86,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
           context.read<SeatingPageBloc>().add(
                 SeatingPageEvent.autoFsmSeating(id, completer: completer),
               );
-          await completer.future;
-          if (!mounted) return;
+          if (await completer.future == false || !mounted) return;
 
           context.read<TournamentPageBloc>()
             ..add(const TournamentPageEvent.pageOpened())
@@ -356,8 +355,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
           SeatingPageEvent.autoFsmSeating(effect.gomafiaId, completer: completer),
         );
 
-    await completer.future;
-    if (!mounted) return;
+    if (await completer.future == false || !mounted) return;
 
     context.read<TournamentPageBloc>()
       ..add(const TournamentPageEvent.pageOpened())

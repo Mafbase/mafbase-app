@@ -27,6 +27,7 @@ class _SeatingPlayerNicknameFieldState extends State<SeatingPlayerNicknameField>
   List<PlayerModel> _results = [];
   String? _searchedNickname;
   bool _searchFailed = false;
+  bool _isSearching = false;
   late String _text = widget.controller.text;
 
   @override
@@ -48,6 +49,7 @@ class _SeatingPlayerNicknameFieldState extends State<SeatingPlayerNicknameField>
       _searchedNickname = null;
       _results = [];
       _searchFailed = false;
+      if (_text.trim().isEmpty) _isSearching = false;
     });
     widget.onChanged();
   }
@@ -73,9 +75,7 @@ class _SeatingPlayerNicknameFieldState extends State<SeatingPlayerNicknameField>
         ? context.locale.seatingNicknameAlreadyExists
         : _searchFailed
             ? context.locale.seatingNicknameSearchFailed
-            : !_searchCompleted
-                ? context.locale.seatingNicknameSearchRequired
-                : null;
+            : null;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -93,6 +93,7 @@ class _SeatingPlayerNicknameFieldState extends State<SeatingPlayerNicknameField>
                   onResultsChanged: (results) => _results = results,
                   onSearchStateChanged: (isLoading, query) {
                     setState(() {
+                      _isSearching = isLoading;
                       _searchedNickname = !isLoading ? query : null;
                       _searchFailed = !isLoading && query == null;
                     });
@@ -102,7 +103,13 @@ class _SeatingPlayerNicknameFieldState extends State<SeatingPlayerNicknameField>
               IconButton(
                 tooltip: context.locale.seatingCreatePlayer,
                 onPressed: _canCreate ? _createPlayer : null,
-                icon: const Icon(Icons.add),
+                icon: _isSearching
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.add),
               ),
             ],
           ),

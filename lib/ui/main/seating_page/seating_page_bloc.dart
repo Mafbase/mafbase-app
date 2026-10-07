@@ -66,20 +66,24 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
 
   Future<void> _autoFsmSeating(SeatingPageEventAutoFsmSeating event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    final notFound = await _repos.tournamentEditRepository.getGomafiaSeating(
-      tournamentId: tournamentId,
-      gomafiaId: event.gomafiaId,
-    );
+    var success = false;
+    try {
+      final notFound = await _repos.tournamentEditRepository.getGomafiaSeating(
+        tournamentId: tournamentId,
+        gomafiaId: event.gomafiaId,
+      );
 
-    event.completer?.complete();
-
-    if (notFound.isEmpty) {
-      add(SeatingPageEvent.pageOpened(tournamentId: tournamentId));
-      return;
+      if (notFound.isEmpty) {
+        await _onPageOpened(SeatingPageEventPageOpened(tournamentId: tournamentId), emit);
+      } else {
+        emitEffect(SeatingPageEffect.fixPlayers(notFound, event.gomafiaId));
+      }
+      success = true;
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+      final completer = event.completer;
+      if (completer != null && !completer.isCompleted) completer.complete(success);
     }
-
-    emitEffect(SeatingPageEffect.fixPlayers(notFound, event.gomafiaId));
-    emit(state.copyWith(isLoading: false));
   }
 
   Future<void> _onSwissGameCreate(SeatingPageEventCreateSwissGame event, Emitter emit) async {
