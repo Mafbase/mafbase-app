@@ -283,8 +283,13 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
       _onChangedCallId += 1;
     }
     _lastFieldText = value.text;
+    final T? selection = _selection;
+    if (selection != null && value.text != widget.displayStringForOption(selection)) {
+      _selection = null;
+    }
     final int callId = _onChangedCallId;
     final Iterable<T> options = await widget.optionsBuilder(value);
+    if (!mounted) return;
 
     // Makes sure that previous call results do not replace new ones.
     if (callId != _onChangedCallId || !shouldUpdateOptions) {
@@ -297,11 +302,6 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
     // patched: сброс подсветки на верхнюю опцию при новом вводе текста.
     // Оригинал: _updateHighlight(_highlightedOptionIndex.value);
     _updateHighlight(0);
-    final T? selection = _selection;
-    if (selection != null && value.text != widget.displayStringForOption(selection)) {
-      _selection = null;
-    }
-
     _updateOptionsViewVisibility();
   }
 

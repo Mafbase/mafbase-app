@@ -4,11 +4,11 @@ import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_page.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_state.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/widgets/seating_player_nickname_field.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class SeatingPageDialog extends StatefulWidget {
@@ -54,6 +54,7 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
   Widget build(BuildContext context) => BlocConsumer<SeatingPageDialogBloc, SeatingPageDialogState>(
         listenWhen: (prev, curr) => prev.loading && !curr.loading,
         listener: (context, state) {
+          selectedPlayer = null;
           controller.text = state.incorrectPlayer ?? '';
           focusNode.requestFocus();
         },
@@ -95,18 +96,17 @@ class _SeatingPageDialogState extends State<SeatingPageDialog>
                               Text(
                                 context.locale.seatingSelectOrCreatePlayer,
                               ),
-                              NicknameField(
+                              SeatingPlayerNicknameField(
                                 controller: controller,
                                 focusNode: focusNode,
-                                readOnly: false,
-                                label: context.locale.nicknameHint,
-                                down: true,
-                                onNewPlayer: ({initValue}) {
-                                  if (initValue == null) return;
-
+                                onNewPlayer: (nickname) {
                                   context.read<SeatingPageDialogBloc>().add(
-                                        SeatingPageDialogEvent.newPlayer(initValue),
+                                        SeatingPageDialogEvent.newPlayer(nickname),
                                       );
+                                },
+                                onChanged: () {
+                                  if (selectedPlayer == null) return;
+                                  setState(() => selectedPlayer = null);
                                 },
                                 onSelected: (player) {
                                   setState(

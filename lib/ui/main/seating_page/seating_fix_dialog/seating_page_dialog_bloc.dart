@@ -44,13 +44,17 @@ class SeatingPageDialogBloc extends Bloc<SeatingPageDialogEvent, SeatingPageDial
   ) async {
     emit(state.copyWith(loading: true));
 
-    await _playersRepository.editPlayer(
-      event.player.copyWith(
-        fsmNickaname: state.incorrectPlayer,
-      ),
-    );
+    try {
+      await _playersRepository.editPlayer(
+        event.player.copyWith(
+          fsmNickaname: state.incorrectPlayer,
+        ),
+      );
 
-    _finishEdit(emit);
+      _finishEdit(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(loading: false));
+    }
   }
 
   Future<void> _newPlayer(
@@ -59,14 +63,18 @@ class SeatingPageDialogBloc extends Bloc<SeatingPageDialogEvent, SeatingPageDial
   ) async {
     emit(state.copyWith(loading: true));
 
-    await _playersRepository.createPlayer(
-      PlayerModel(
-        nickname: event.nickname,
-        fsmNickaname: state.incorrectPlayer,
-      ),
-    );
+    try {
+      await _playersRepository.createPlayer(
+        PlayerModel(
+          nickname: event.nickname,
+          fsmNickaname: state.incorrectPlayer,
+        ),
+      );
 
-    _finishEdit(emit);
+      _finishEdit(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(loading: false));
+    }
   }
 
   Future<void> _init(

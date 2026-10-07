@@ -113,7 +113,6 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
   late final FocusNode _focusNode;
   late final bool _ownsController;
   late final bool _ownsFocusNode;
-  Timer? _debounce;
 
   @override
   void initState() {
@@ -126,13 +125,14 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
 
   @override
   void dispose() {
-    _debounce?.cancel();
+    if (_completer?.isCompleted == false) _completer!.complete([]);
+    _completer = null;
     if (_ownsController) _controller.dispose();
     if (_ownsFocusNode) _focusNode.dispose();
     super.dispose();
   }
 
-  Completer<Iterable<PlayerModel>>? _completer;
+  Completer<List<PlayerModel>>? _completer;
 
   @override
   Widget build(BuildContext context) {
@@ -145,28 +145,22 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
         optionsBuilder: widget.readOnly
             ? (_) async => []
             : (event) async {
-                _completer?.complete([]);
-                final completer = Completer<Iterable<PlayerModel>>();
+                if (_completer?.isCompleted == false) _completer!.complete([]);
+                final bloc = context.read<PlayerAutoCompleteBloc>();
+                final query = event.text.trim();
+                final completer = Completer<List<PlayerModel>>();
                 _completer = completer;
-                final future =
-                    context.read<PlayerAutoCompleteBloc>().stream.firstWhere((element) => element.query == event.text);
-                context.read<PlayerAutoCompleteBloc>().add(PlayerAutoCompleteEvent.search(event.text));
-                future.then((e) {
-                  if (completer.isCompleted) {
-                    return;
-                  }
+                bloc.add(PlayerAutoCompleteEvent.search(query, completer: completer));
+                final results = await completer.future;
+                if (!mounted || _completer != completer) return [];
+                _completer = null;
 
-                  final excluded = widget.excludeIds;
-                  final results = excluded != null && excluded.isNotEmpty
-                      ? e.results.where((p) => !excluded.contains(p.id))
-                      : e.results;
-                  completer.complete(results);
-                  _completer = null;
-                });
-
+                final excluded = widget.excludeIds;
+                final options =
+                    excluded != null && excluded.isNotEmpty ? results.where((p) => !excluded.contains(p.id)) : results;
                 return [
-                  ...(await completer.future),
-                  if (widget.onNewPlayer != null && _controller.text.isNotEmpty)
+                  ...options,
+                  if (widget.onNewPlayer != null && query.isNotEmpty && bloc.state.query == query)
                     PlayerModel(nickname: _controller.text),
                 ];
               },
