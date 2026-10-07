@@ -113,7 +113,6 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
   late final FocusNode _focusNode;
   late final bool _ownsController;
   late final bool _ownsFocusNode;
-  Timer? _debounce;
 
   @override
   void initState() {
@@ -126,7 +125,8 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
 
   @override
   void dispose() {
-    _debounce?.cancel();
+    _completer?.complete([]);
+    _completer = null;
     if (_ownsController) _controller.dispose();
     if (_ownsFocusNode) _focusNode.dispose();
     super.dispose();
@@ -146,11 +146,14 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
             ? (_) async => []
             : (event) async {
                 _completer?.complete([]);
+                final bloc = context.read<PlayerAutoCompleteBloc>();
                 final completer = Completer<Iterable<PlayerModel>>();
                 _completer = completer;
-                final future =
-                    context.read<PlayerAutoCompleteBloc>().stream.firstWhere((element) => element.query == event.text);
-                context.read<PlayerAutoCompleteBloc>().add(PlayerAutoCompleteEvent.search(event.text));
+                final future = bloc.stream.firstWhere(
+                  (element) => !element.isLoading && (element.query == event.text || element.query == null),
+                  orElse: () => const PlayerAutoCompleteState(),
+                );
+                bloc.add(PlayerAutoCompleteEvent.search(event.text));
                 future.then((e) {
                   if (completer.isCompleted) {
                     return;
@@ -164,9 +167,12 @@ class _PlayerAutoCompleteBodyState extends State<_PlayerAutoCompleteBody> {
                   _completer = null;
                 });
 
+                final results = await completer.future;
+                if (!mounted) return [];
+
                 return [
-                  ...(await completer.future),
-                  if (widget.onNewPlayer != null && _controller.text.isNotEmpty)
+                  ...results,
+                  if (widget.onNewPlayer != null && _controller.text.isNotEmpty && bloc.state.query == event.text)
                     PlayerModel(nickname: _controller.text),
                 ];
               },

@@ -1,4 +1,4 @@
-import 'package:bloc_event_transformers/bloc_event_transformers.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_event.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_state.dart';
@@ -8,13 +8,14 @@ import 'package:seating_generator_web/domain/repositories/players_repository.dar
 class PlayerAutoCompleteBloc extends Bloc<PlayerAutoCompleteEvent, PlayerAutoCompleteState> {
   final PlayersRepository? _repository;
   final List<PlayerModel>? _availablePlayers;
+  int _searchGeneration = 0;
 
   PlayerAutoCompleteBloc(this._repository, {List<PlayerModel>? availablePlayers})
       : _availablePlayers = availablePlayers,
         super(const PlayerAutoCompleteState()) {
     on<PlayerAutoCompleteEventSearch>(
       _onSearch,
-      transformer: availablePlayers != null ? null : debounce(const Duration(milliseconds: 300)),
+      transformer: restartable(),
     );
     on<PlayerAutoCompleteEventClear>(_onClear);
   }
@@ -23,8 +24,9 @@ class PlayerAutoCompleteBloc extends Bloc<PlayerAutoCompleteEvent, PlayerAutoCom
     PlayerAutoCompleteEventSearch event,
     Emitter<PlayerAutoCompleteState> emit,
   ) async {
+    final generation = ++_searchGeneration;
     if (event.query.isEmpty) {
-      emit(state.copyWith(results: []));
+      emit(const PlayerAutoCompleteState(query: ''));
       return;
     }
 
@@ -35,12 +37,18 @@ class PlayerAutoCompleteBloc extends Bloc<PlayerAutoCompleteEvent, PlayerAutoCom
       return;
     }
 
-    emit(state.copyWith(isLoading: true));
+    emit(const PlayerAutoCompleteState(isLoading: true));
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+    if (emit.isDone || generation != _searchGeneration) return;
+
     try {
       final results = await _repository!.searchPlayers(event.query, limit: 5);
+      if (emit.isDone || generation != _searchGeneration) return;
       emit(state.copyWith(results: results, query: event.query, isLoading: false));
-    } finally {
-      emit(state.copyWith(isLoading: false));
+    } catch (_) {
+      if (emit.isDone || generation != _searchGeneration) return;
+      // A failed search must not validate the nickname for player creation.
+      emit(const PlayerAutoCompleteState());
     }
   }
 
@@ -48,6 +56,7 @@ class PlayerAutoCompleteBloc extends Bloc<PlayerAutoCompleteEvent, PlayerAutoCom
     PlayerAutoCompleteEventClear event,
     Emitter<PlayerAutoCompleteState> emit,
   ) {
+    _searchGeneration++;
     emit(const PlayerAutoCompleteState());
   }
 }
