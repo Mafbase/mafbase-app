@@ -52,7 +52,7 @@ class _SeatingPlayerNicknameFieldState extends State<SeatingPlayerNicknameField>
     widget.onChanged();
   }
 
-  bool get _searchCompleted => _searchedNickname == _text && _text.trim().isNotEmpty;
+  bool get _searchCompleted => _searchedNickname == _text.trim() && _text.trim().isNotEmpty;
 
   bool get _nicknameExists =>
       _searchCompleted &&
