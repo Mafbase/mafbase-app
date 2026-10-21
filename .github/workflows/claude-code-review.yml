@@ -27,4 +27,3 @@ jobs:
         uses: Mafbase/Mafbase-workflows/.github/actions/claude-code-review@main
         with:
           system_prompt: 'IMPORTANT: Ты запущен в CI-окружении. Используй команды flutter и dart напрямую (без fvm). Не используй fvm flutter или fvm dart.'
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
