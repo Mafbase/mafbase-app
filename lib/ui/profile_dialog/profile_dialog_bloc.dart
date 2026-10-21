@@ -46,8 +46,8 @@ class ProfileDialogBloc extends Bloc<ProfileDialogEvent, ProfileDialogState> {
       PlayerModel(
         id: playerId,
         nickname: event.nickname,
-        mafbankNickname: event.mafbankNickname.isEmpty ? null : event.mafbankNickname,
-        fsmNickaname: event.fsmNickname.isEmpty ? null : event.fsmNickname,
+        mafbankNickname: event.mafbankNickname,
+        fsmNickaname: event.fsmNickname,
       ),
     );
     router.close();
