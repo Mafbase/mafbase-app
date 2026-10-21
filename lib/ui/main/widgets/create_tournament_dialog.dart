@@ -13,25 +13,16 @@ class CreateTournamentDialog extends StatefulWidget {
   State<CreateTournamentDialog> createState() => _CreateTournamentDialogState();
 
   static Future<CreateTournamentData?> open(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (context) => const CreateTournamentDialog(),
-    );
+    return showDialog(context: context, builder: (context) => const CreateTournamentDialog());
   }
 }
 
 class _CreateTournamentDialogState extends State<CreateTournamentDialog> {
   final controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   static final _format = DateFormat('dd MM yyyy');
   DateTimeRange? range;
-
-  @override
-  void initState() {
-    controller.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
+  bool dateError = false;
 
   @override
   void dispose() {
@@ -41,62 +32,93 @@ class _CreateTournamentDialogState extends State<CreateTournamentDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
+
     return CustomDialog(
       child: SizedBox(
         width: 600,
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Align(
-                alignment: Alignment.centerRight,
-                child: CloseButton(),
-              ),
-              CustomTextField(
-                controller: controller,
-                label: context.locale.createTournamentLabel,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              TextButton(
-                onPressed: () {
-                  showDateRangePicker(
-                    context: context,
-                    firstDate: DateTime.now().subtract(
-                      const Duration(days: 356),
-                    ),
-                    lastDate: DateTime.now().add(
-                      const Duration(days: 356),
-                    ),
-                  ).then((value) => setState(() => range = value ?? range));
-                },
-                child: Text(
-                  range == null
-                      ? context.locale.dateTimeRangePlaceholder
-                      : '${_format.format(range!.start)} - ${_format.format(range!.end)}',
-                  style: MyTheme.of(context).textBtnTextStyle,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Align(alignment: Alignment.centerRight, child: CloseButton()),
+                CustomTextField(
+                  controller: controller,
+                  label: context.locale.createTournamentLabel,
+                  validate: (value) {
+                    if (value == null || value.isEmpty) {
+                      return context.locale.createTournamentNameRequired;
+                    }
+                    return null;
+                  },
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomButton(
-                text: context.locale.create,
-                disabled: range == null || controller.text.isEmpty,
-                onTap: () {
-                  Navigator.pop(
-                    context,
-                    CreateTournamentData(range!, controller.text),
-                  );
-                },
-              ),
-            ],
+                const SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: dateError ? theme.redColor : Colors.transparent, width: 1.5),
+                        ),
+                        child: TextButton(
+                          onPressed: pickDateRange,
+                          child: Text(
+                            range == null
+                                ? context.locale.dateTimeRangePlaceholder
+                                : '${_format.format(range!.start)} - ${_format.format(range!.end)}',
+                            style: theme.textBtnTextStyle,
+                          ),
+                        ),
+                      ),
+                      if (dateError)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12, top: 4),
+                          child: Text(
+                            context.locale.createTournamentDateRequired,
+                            style: TextStyle(color: theme.redColor, fontSize: 12),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                CustomButton(text: context.locale.create, onTap: onSubmit),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> pickDateRange() async {
+    final value = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime.now().subtract(const Duration(days: 356)),
+      lastDate: DateTime.now().add(const Duration(days: 356)),
+    );
+    if (value != null) {
+      setState(() {
+        range = value;
+        dateError = false;
+      });
+    }
+  }
+
+  void onSubmit() {
+    final isNameValid = _formKey.currentState?.validate() ?? false;
+    final selectedRange = range;
+    setState(() => dateError = selectedRange == null);
+
+    if (isNameValid && selectedRange != null) {
+      Navigator.pop(context, CreateTournamentData(selectedRange, controller.text));
+    }
   }
 }
 
