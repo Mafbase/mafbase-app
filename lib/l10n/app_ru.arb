@@ -1141,6 +1141,38 @@
       }
     }
   },
+  "translationControlObsTitle": "OBS",
+  "@translationControlObsTitle": {},
+  "translationControlObsDisconnected": "Не подключён",
+  "@translationControlObsDisconnected": {},
+  "translationControlObsNoRights": "Нет прав на переключение сцен",
+  "@translationControlObsNoRights": {},
+  "translationControlObsConnected": "Подключён",
+  "@translationControlObsConnected": {},
+  "translationControlObsDisconnectedHint": "Добавьте ссылку для встраивания в OBS как источник «Браузер»",
+  "@translationControlObsDisconnectedHint": {},
+  "translationControlObsNoRightsHint": "Откройте свойства источника «Браузер» и в правах доступа страницы выберите расширенный или полный доступ к OBS — тот, что разрешает переключать сцены",
+  "@translationControlObsNoRightsHint": {},
+  "translationControlObsNoSwitch": "Не переключать",
+  "@translationControlObsNoSwitch": {},
+  "translationControlObsMissingScene": "{scene} (нет в OBS)",
+  "@translationControlObsMissingScene": {
+    "placeholders": {
+      "scene": {
+        "type": "String",
+        "example": "Ночь"
+      }
+    }
+  },
+  "translationControlObsCurrentScene": "В эфире: {scene}",
+  "@translationControlObsCurrentScene": {
+    "placeholders": {
+      "scene": {
+        "type": "String",
+        "example": "День"
+      }
+    }
+  },
   "paymentWaitingTitle": "Ожидание оплаты",
   "@paymentWaitingTitle": {},
   "paymentWaitingMessage": "Ожидаем подтверждения оплаты...",

@@ -684,6 +684,7 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
     $core.int? selectedGame,
     BroadcastPhase? broadcastPhase,
     $core.bool? soundEnabled,
+    ObsSceneMapping? obsScenes,
   }) {
     final result = create();
     if (player != null) result.player = player;
@@ -693,6 +694,7 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
     if (selectedGame != null) result.selectedGame = selectedGame;
     if (broadcastPhase != null) result.broadcastPhase = broadcastPhase;
     if (soundEnabled != null) result.soundEnabled = soundEnabled;
+    if (obsScenes != null) result.obsScenes = obsScenes;
     return result;
   }
 
@@ -719,6 +721,8 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
     ..aE<BroadcastPhase>(6, _omitFieldNames ? '' : 'broadcastPhase',
         protoName: 'broadcastPhase', enumValues: BroadcastPhase.values)
     ..aOB(7, _omitFieldNames ? '' : 'soundEnabled', protoName: 'soundEnabled')
+    ..aOM<ObsSceneMapping>(8, _omitFieldNames ? '' : 'obsScenes',
+        protoName: 'obsScenes', subBuilder: ObsSceneMapping.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -802,6 +806,17 @@ class ChangeSeatingContent extends $pb.GeneratedMessage {
   $core.bool hasSoundEnabled() => $_has(6);
   @$pb.TagNumber(7)
   void clearSoundEnabled() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  ObsSceneMapping get obsScenes => $_getN(7);
+  @$pb.TagNumber(8)
+  set obsScenes(ObsSceneMapping value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasObsScenes() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearObsScenes() => $_clearField(8);
+  @$pb.TagNumber(8)
+  ObsSceneMapping ensureObsScenes() => $_ensure(7);
 }
 
 class Club extends $pb.GeneratedMessage {
@@ -2563,6 +2578,8 @@ class SeatingContent extends $pb.GeneratedMessage {
     $core.int? totalGames,
     BroadcastPhase? broadcastPhase,
     $core.bool? soundEnabled,
+    ObsSceneMapping? obsScenes,
+    ObsState? obs,
   }) {
     final result = create();
     if (roles != null) result.roles.addAll(roles);
@@ -2573,6 +2590,8 @@ class SeatingContent extends $pb.GeneratedMessage {
     if (totalGames != null) result.totalGames = totalGames;
     if (broadcastPhase != null) result.broadcastPhase = broadcastPhase;
     if (soundEnabled != null) result.soundEnabled = soundEnabled;
+    if (obsScenes != null) result.obsScenes = obsScenes;
+    if (obs != null) result.obs = obs;
     return result;
   }
 
@@ -2604,6 +2623,10 @@ class SeatingContent extends $pb.GeneratedMessage {
     ..aE<BroadcastPhase>(7, _omitFieldNames ? '' : 'broadcastPhase',
         protoName: 'broadcastPhase', enumValues: BroadcastPhase.values)
     ..aOB(8, _omitFieldNames ? '' : 'soundEnabled', protoName: 'soundEnabled')
+    ..aOM<ObsSceneMapping>(9, _omitFieldNames ? '' : 'obsScenes',
+        protoName: 'obsScenes', subBuilder: ObsSceneMapping.create)
+    ..aOM<ObsState>(10, _omitFieldNames ? '' : 'obs',
+        subBuilder: ObsState.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2672,6 +2695,28 @@ class SeatingContent extends $pb.GeneratedMessage {
   $core.bool hasSoundEnabled() => $_has(7);
   @$pb.TagNumber(8)
   void clearSoundEnabled() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  ObsSceneMapping get obsScenes => $_getN(8);
+  @$pb.TagNumber(9)
+  set obsScenes(ObsSceneMapping value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasObsScenes() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearObsScenes() => $_clearField(9);
+  @$pb.TagNumber(9)
+  ObsSceneMapping ensureObsScenes() => $_ensure(8);
+
+  @$pb.TagNumber(10)
+  ObsState get obs => $_getN(9);
+  @$pb.TagNumber(10)
+  set obs(ObsState value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasObs() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearObs() => $_clearField(10);
+  @$pb.TagNumber(10)
+  ObsState ensureObs() => $_ensure(9);
 }
 
 class LoginByTokenEvent extends $pb.GeneratedMessage {
@@ -8266,6 +8311,169 @@ class SubstitutePlayerEvent extends $pb.GeneratedMessage {
   $pb.PbList<$core.int> get games => $_getList(2);
 }
 
+/// Сцены OBS для фаз трансляции. Пустое поле — не переключать сцену.
+class ObsSceneMapping extends $pb.GeneratedMessage {
+  factory ObsSceneMapping({
+    $core.String? day,
+    $core.String? night,
+    $core.String? breakPhase,
+  }) {
+    final result = create();
+    if (day != null) result.day = day;
+    if (night != null) result.night = night;
+    if (breakPhase != null) result.breakPhase = breakPhase;
+    return result;
+  }
+
+  ObsSceneMapping._();
+
+  factory ObsSceneMapping.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ObsSceneMapping.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ObsSceneMapping',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'day')
+    ..aOS(2, _omitFieldNames ? '' : 'night')
+    ..aOS(3, _omitFieldNames ? '' : 'breakPhase', protoName: 'breakPhase')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ObsSceneMapping clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ObsSceneMapping copyWith(void Function(ObsSceneMapping) updates) =>
+      super.copyWith((message) => updates(message as ObsSceneMapping))
+          as ObsSceneMapping;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ObsSceneMapping create() => ObsSceneMapping._();
+  @$core.override
+  ObsSceneMapping createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ObsSceneMapping getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ObsSceneMapping>(create);
+  static ObsSceneMapping? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get day => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set day($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDay() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDay() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get night => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set night($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNight() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNight() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get breakPhase => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set breakPhase($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBreakPhase() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBreakPhase() => $_clearField(3);
+}
+
+/// Состояние OBS, в котором открыт оверлей стола. Оверлей отправляет его бинарным кадром в сокет seatingContent/clubSeatingContent.
+class ObsState extends $pb.GeneratedMessage {
+  factory ObsState({
+    $core.bool? connected,
+    $core.int? controlLevel,
+    $core.Iterable<$core.String>? scenes,
+    $core.String? currentScene,
+  }) {
+    final result = create();
+    if (connected != null) result.connected = connected;
+    if (controlLevel != null) result.controlLevel = controlLevel;
+    if (scenes != null) result.scenes.addAll(scenes);
+    if (currentScene != null) result.currentScene = currentScene;
+    return result;
+  }
+
+  ObsState._();
+
+  factory ObsState.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ObsState.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ObsState',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'connected')
+    ..aI(2, _omitFieldNames ? '' : 'controlLevel', protoName: 'controlLevel')
+    ..pPS(3, _omitFieldNames ? '' : 'scenes')
+    ..aOS(4, _omitFieldNames ? '' : 'currentScene', protoName: 'currentScene')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ObsState clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ObsState copyWith(void Function(ObsState) updates) =>
+      super.copyWith((message) => updates(message as ObsState)) as ObsState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ObsState create() => ObsState._();
+  @$core.override
+  ObsState createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ObsState getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ObsState>(create);
+  static ObsState? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get connected => $_getBF(0);
+  @$pb.TagNumber(1)
+  set connected($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasConnected() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearConnected() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get controlLevel => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set controlLevel($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasControlLevel() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearControlLevel() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $pb.PbList<$core.String> get scenes => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.String get currentScene => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set currentScene($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCurrentScene() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCurrentScene() => $_clearField(4);
+}
+
 /// Публичная инфо о стриме (без секретных ключей)
 class GameStream extends $pb.GeneratedMessage {
   factory GameStream({
@@ -8763,6 +8971,8 @@ class ClubSeatingContent extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? names,
     BroadcastPhase? broadcastPhase,
     $core.bool? soundEnabled,
+    ObsSceneMapping? obsScenes,
+    ObsState? obs,
   }) {
     final result = create();
     if (roles != null) result.roles.addAll(roles);
@@ -8771,6 +8981,8 @@ class ClubSeatingContent extends $pb.GeneratedMessage {
     if (names != null) result.names.addAll(names);
     if (broadcastPhase != null) result.broadcastPhase = broadcastPhase;
     if (soundEnabled != null) result.soundEnabled = soundEnabled;
+    if (obsScenes != null) result.obsScenes = obsScenes;
+    if (obs != null) result.obs = obs;
     return result;
   }
 
@@ -8800,6 +9012,10 @@ class ClubSeatingContent extends $pb.GeneratedMessage {
     ..aE<BroadcastPhase>(5, _omitFieldNames ? '' : 'broadcastPhase',
         protoName: 'broadcastPhase', enumValues: BroadcastPhase.values)
     ..aOB(6, _omitFieldNames ? '' : 'soundEnabled', protoName: 'soundEnabled')
+    ..aOM<ObsSceneMapping>(7, _omitFieldNames ? '' : 'obsScenes',
+        protoName: 'obsScenes', subBuilder: ObsSceneMapping.create)
+    ..aOM<ObsState>(8, _omitFieldNames ? '' : 'obs',
+        subBuilder: ObsState.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8850,6 +9066,28 @@ class ClubSeatingContent extends $pb.GeneratedMessage {
   $core.bool hasSoundEnabled() => $_has(5);
   @$pb.TagNumber(6)
   void clearSoundEnabled() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  ObsSceneMapping get obsScenes => $_getN(6);
+  @$pb.TagNumber(7)
+  set obsScenes(ObsSceneMapping value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasObsScenes() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearObsScenes() => $_clearField(7);
+  @$pb.TagNumber(7)
+  ObsSceneMapping ensureObsScenes() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  ObsState get obs => $_getN(7);
+  @$pb.TagNumber(8)
+  set obs(ObsState value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasObs() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearObs() => $_clearField(8);
+  @$pb.TagNumber(8)
+  ObsState ensureObs() => $_ensure(7);
 }
 
 /// Запрос на изменение плашки клуба
@@ -8861,6 +9099,7 @@ class ChangeClubSeatingContent extends $pb.GeneratedMessage {
     PlayerStatus? status,
     BroadcastPhase? broadcastPhase,
     $core.bool? soundEnabled,
+    ObsSceneMapping? obsScenes,
   }) {
     final result = create();
     if (player != null) result.player = player;
@@ -8869,6 +9108,7 @@ class ChangeClubSeatingContent extends $pb.GeneratedMessage {
     if (status != null) result.status = status;
     if (broadcastPhase != null) result.broadcastPhase = broadcastPhase;
     if (soundEnabled != null) result.soundEnabled = soundEnabled;
+    if (obsScenes != null) result.obsScenes = obsScenes;
     return result;
   }
 
@@ -8894,6 +9134,8 @@ class ChangeClubSeatingContent extends $pb.GeneratedMessage {
     ..aE<BroadcastPhase>(5, _omitFieldNames ? '' : 'broadcastPhase',
         protoName: 'broadcastPhase', enumValues: BroadcastPhase.values)
     ..aOB(6, _omitFieldNames ? '' : 'soundEnabled', protoName: 'soundEnabled')
+    ..aOM<ObsSceneMapping>(7, _omitFieldNames ? '' : 'obsScenes',
+        protoName: 'obsScenes', subBuilder: ObsSceneMapping.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8969,6 +9211,17 @@ class ChangeClubSeatingContent extends $pb.GeneratedMessage {
   $core.bool hasSoundEnabled() => $_has(5);
   @$pb.TagNumber(6)
   void clearSoundEnabled() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  ObsSceneMapping get obsScenes => $_getN(6);
+  @$pb.TagNumber(7)
+  set obsScenes(ObsSceneMapping value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasObsScenes() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearObsScenes() => $_clearField(7);
+  @$pb.TagNumber(7)
+  ObsSceneMapping ensureObsScenes() => $_ensure(6);
 }
 
 /// Ответ на GET /api/club-translation-key/{id}

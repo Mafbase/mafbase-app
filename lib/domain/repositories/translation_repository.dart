@@ -34,6 +34,13 @@ abstract class TranslationRepository {
     required String key,
   });
 
+  Future changeObsScenes({
+    required ObsSceneMapping mapping,
+    required int table,
+    required int tournamentId,
+    required String key,
+  });
+
   Future<TranslationKeyModel> getKey({required int tournamentId});
 
   Future<void> saveDesign({required int tournamentId, required String designKey});

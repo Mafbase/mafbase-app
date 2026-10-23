@@ -39,6 +39,7 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
     on<ClubTranslationControlEventChangeRole>(_onChangeRole);
     on<ClubTranslationControlEventChangeStatus>(_onChangeStatus);
     on<ClubTranslationControlEventChangeBroadcastPhase>(_onChangeBroadcastPhase);
+    on<ClubTranslationControlEventChangeObsScenes>(_onChangeObsScenes);
     on<ClubTranslationControlEventChangePlayer>(_onChangePlayer);
     on<ClubTranslationControlEventStartEditingPlayer>(_onStartEditingPlayer);
     on<ClubTranslationControlEventSetActivePhotoTheme>(_onSetActivePhotoTheme);
@@ -93,6 +94,8 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
         nicknames: nicknames,
         broadcastPhase: content.broadcastPhase,
         editingSlots: editingSlots,
+        obsScenes: content.hasObsScenes() ? content.obsScenes : null,
+        obs: content.hasObs() ? content.obs : null,
       ),
     );
   }
@@ -123,6 +126,18 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
   ) {
     return _repository.changeBroadcastPhase(
       phase: event.phase,
+      clubId: params.clubId,
+      table: params.table,
+      key: params.key,
+    );
+  }
+
+  Future<void> _onChangeObsScenes(
+    ClubTranslationControlEventChangeObsScenes event,
+    Emitter<TranslationContentState> emit,
+  ) {
+    return _repository.changeObsScenes(
+      mapping: event.mapping,
       clubId: params.clubId,
       table: params.table,
       key: params.key,

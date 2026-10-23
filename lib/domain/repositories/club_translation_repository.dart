@@ -24,6 +24,13 @@ abstract class ClubTranslationRepository {
     required String key,
   });
 
+  Future<void> changeObsScenes({
+    required ObsSceneMapping mapping,
+    required int clubId,
+    required int table,
+    required String key,
+  });
+
   Future<void> changePlayer({
     required int playerIndex,
     required int playerId,
