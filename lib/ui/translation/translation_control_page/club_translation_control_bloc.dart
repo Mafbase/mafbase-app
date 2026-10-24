@@ -132,16 +132,24 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
     );
   }
 
+  /// Применяет сопоставление сразу, не дожидаясь эха из сокета: следующий выбор сцены собирается из state.
   Future<void> _onChangeObsScenes(
     ClubTranslationControlEventChangeObsScenes event,
     Emitter<TranslationContentState> emit,
-  ) {
-    return _repository.changeObsScenes(
-      mapping: event.mapping,
-      clubId: params.clubId,
-      table: params.table,
-      key: params.key,
-    );
+  ) async {
+    final previous = state.obsScenes;
+    emit(state.copyWith(obsScenes: event.mapping));
+    try {
+      await _repository.changeObsScenes(
+        mapping: event.mapping,
+        clubId: params.clubId,
+        table: params.table,
+        key: params.key,
+      );
+    } catch (_) {
+      if (identical(state.obsScenes, event.mapping)) emit(state.copyWith(obsScenes: previous));
+      rethrow;
+    }
   }
 
   Future<void> _onChangePlayer(ClubTranslationControlEventChangePlayer event, Emitter<TranslationContentState> emit) {

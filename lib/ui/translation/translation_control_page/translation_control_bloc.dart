@@ -93,13 +93,24 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
-  Future<dynamic> _onObsScenesChanged(TranslationControlEventChangeObsScenes event, Emitter emit) {
-    return _repository.changeObsScenes(
-      mapping: event.mapping,
-      table: params.table,
-      tournamentId: params.tournamentId,
-      key: params.key,
-    );
+  /// Применяет сопоставление сразу, не дожидаясь эха из сокета: следующий выбор сцены собирается из state.
+  Future<void> _onObsScenesChanged(
+    TranslationControlEventChangeObsScenes event,
+    Emitter<TranslationContentState> emit,
+  ) async {
+    final previous = state.obsScenes;
+    emit(state.copyWith(obsScenes: event.mapping));
+    try {
+      await _repository.changeObsScenes(
+        mapping: event.mapping,
+        table: params.table,
+        tournamentId: params.tournamentId,
+        key: params.key,
+      );
+    } catch (_) {
+      if (identical(state.obsScenes, event.mapping)) emit(state.copyWith(obsScenes: previous));
+      rethrow;
+    }
   }
 
   void _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
