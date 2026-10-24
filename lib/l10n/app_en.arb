@@ -876,6 +876,38 @@
       }
     }
   },
+  "translationControlObsTitle": "OBS",
+  "@translationControlObsTitle": {},
+  "translationControlObsDisconnected": "Not connected",
+  "@translationControlObsDisconnected": {},
+  "translationControlObsNoRights": "No permission to switch scenes",
+  "@translationControlObsNoRights": {},
+  "translationControlObsConnected": "Connected",
+  "@translationControlObsConnected": {},
+  "translationControlObsDisconnectedHint": "Add the embed link to OBS as a Browser source",
+  "@translationControlObsDisconnectedHint": {},
+  "translationControlObsNoRightsHint": "Open the Browser source properties and set the page permissions to advanced or full access to OBS, the level that allows changing scenes",
+  "@translationControlObsNoRightsHint": {},
+  "translationControlObsNoSwitch": "Don't switch",
+  "@translationControlObsNoSwitch": {},
+  "translationControlObsMissingScene": "{scene} (not in OBS)",
+  "@translationControlObsMissingScene": {
+    "placeholders": {
+      "scene": {
+        "type": "String",
+        "example": "Night"
+      }
+    }
+  },
+  "translationControlObsCurrentScene": "On air: {scene}",
+  "@translationControlObsCurrentScene": {
+    "placeholders": {
+      "scene": {
+        "type": "String",
+        "example": "Day"
+      }
+    }
+  },
   "streamsTitle": "Streams",
   "@streamsTitle": {},
   "streamsTableTitle": "Table {table}",

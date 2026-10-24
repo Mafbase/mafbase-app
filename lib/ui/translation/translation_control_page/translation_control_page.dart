@@ -17,6 +17,7 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_empty_slot.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_game_selector.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_obs_block.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_phase_selector.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_player_card.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -133,7 +134,7 @@ class TranslationControlContent extends StatelessWidget {
                 },
                 onClose: kIsWeb ? null : context.backOrGoToDefault(),
               ),
-            if (state.isNotEmpty())
+            if (state.isNotEmpty()) ...[
               TranslationControlPhaseSelector(
                 phase: state.broadcastPhase,
                 onChanged: (phase) {
@@ -142,6 +143,14 @@ class TranslationControlContent extends StatelessWidget {
                   );
                 },
               ),
+              TranslationControlObsBlock(
+                obs: state.obs,
+                mapping: state.obsScenes,
+                onMappingChanged: (mapping) {
+                  context.read<TranslationControlBloc>().add(TranslationControlEvent.changeObsScenes(mapping: mapping));
+                },
+              ),
+            ],
             Expanded(
               child: state.isNotEmpty()
                   ? ListView.builder(
@@ -292,6 +301,15 @@ class _ClubTranslationControlContentState extends State<_ClubTranslationControlC
               onChanged: (phase) {
                 context.read<ClubTranslationControlBloc>().add(
                   ClubTranslationControlEvent.changeBroadcastPhase(phase: phase),
+                );
+              },
+            ),
+            TranslationControlObsBlock(
+              obs: state.obs,
+              mapping: state.obsScenes,
+              onMappingChanged: (mapping) {
+                context.read<ClubTranslationControlBloc>().add(
+                  ClubTranslationControlEvent.changeObsScenes(mapping: mapping),
                 );
               },
             ),

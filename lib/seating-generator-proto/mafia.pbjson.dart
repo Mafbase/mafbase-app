@@ -448,6 +448,16 @@ const ChangeSeatingContent$json = {
       '10': 'soundEnabled',
       '17': true
     },
+    {
+      '1': 'obsScenes',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.ObsSceneMapping',
+      '9': 7,
+      '10': 'obsScenes',
+      '17': true
+    },
   ],
   '8': [
     {'1': '_player'},
@@ -457,6 +467,7 @@ const ChangeSeatingContent$json = {
     {'1': '_selectedGame'},
     {'1': '_broadcastPhase'},
     {'1': '_soundEnabled'},
+    {'1': '_obsScenes'},
   ],
 };
 
@@ -468,8 +479,10 @@ final $typed_data.Uint8List changeSeatingContentDescriptor = $convert.base64Deco
     'JTdGF0dXNIA1IGc3RhdHVziAEBEicKDHNlbGVjdGVkR2FtZRgFIAEoBUgEUgxzZWxlY3RlZEdh'
     'bWWIAQESRgoOYnJvYWRjYXN0UGhhc2UYBiABKA4yGS5nZW5lcmF0ZWQuQnJvYWRjYXN0UGhhc2'
     'VIBVIOYnJvYWRjYXN0UGhhc2WIAQESJwoMc291bmRFbmFibGVkGAcgASgISAZSDHNvdW5kRW5h'
-    'YmxlZIgBAUIJCgdfcGxheWVyQgsKCV9pbWFnZVVybEIHCgVfcm9sZUIJCgdfc3RhdHVzQg8KDV'
-    '9zZWxlY3RlZEdhbWVCEQoPX2Jyb2FkY2FzdFBoYXNlQg8KDV9zb3VuZEVuYWJsZWQ=');
+    'YmxlZIgBARI9CglvYnNTY2VuZXMYCCABKAsyGi5nZW5lcmF0ZWQuT2JzU2NlbmVNYXBwaW5nSA'
+    'dSCW9ic1NjZW5lc4gBAUIJCgdfcGxheWVyQgsKCV9pbWFnZVVybEIHCgVfcm9sZUIJCgdfc3Rh'
+    'dHVzQg8KDV9zZWxlY3RlZEdhbWVCEQoPX2Jyb2FkY2FzdFBoYXNlQg8KDV9zb3VuZEVuYWJsZW'
+    'RCDAoKX29ic1NjZW5lcw==');
 
 @$core.Deprecated('Use clubDescriptor instead')
 const Club$json = {
@@ -1047,6 +1060,22 @@ const SeatingContent$json = {
       '10': 'broadcastPhase'
     },
     {'1': 'soundEnabled', '3': 8, '4': 1, '5': 8, '10': 'soundEnabled'},
+    {
+      '1': 'obsScenes',
+      '3': 9,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.ObsSceneMapping',
+      '10': 'obsScenes'
+    },
+    {
+      '1': 'obs',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.ObsState',
+      '10': 'obs'
+    },
   ],
 };
 
@@ -1057,7 +1086,9 @@ final $typed_data.Uint8List seatingContentDescriptor = $convert.base64Decode(
     'FgoGaW1hZ2VzGAMgAygJUgZpbWFnZXMSFAoFbmFtZXMYBCADKAlSBW5hbWVzEhIKBGdhbWUYBS'
     'ABKAVSBGdhbWUSHgoKdG90YWxHYW1lcxgGIAEoBVIKdG90YWxHYW1lcxJBCg5icm9hZGNhc3RQ'
     'aGFzZRgHIAEoDjIZLmdlbmVyYXRlZC5Ccm9hZGNhc3RQaGFzZVIOYnJvYWRjYXN0UGhhc2USIg'
-    'oMc291bmRFbmFibGVkGAggASgIUgxzb3VuZEVuYWJsZWQ=');
+    'oMc291bmRFbmFibGVkGAggASgIUgxzb3VuZEVuYWJsZWQSOAoJb2JzU2NlbmVzGAkgASgLMhou'
+    'Z2VuZXJhdGVkLk9ic1NjZW5lTWFwcGluZ1IJb2JzU2NlbmVzEiUKA29icxgKIAEoCzITLmdlbm'
+    'VyYXRlZC5PYnNTdGF0ZVIDb2Jz');
 
 @$core.Deprecated('Use loginByTokenEventDescriptor instead')
 const LoginByTokenEvent$json = {
@@ -2966,6 +2997,63 @@ final $typed_data.Uint8List substitutePlayerEventDescriptor = $convert.base64Dec
     'lkEiAKC25ld1BsYXllcklkGAIgASgFUgtuZXdQbGF5ZXJJZBIUCgVnYW1lcxgDIAMoBVIFZ2Ft'
     'ZXM=');
 
+@$core.Deprecated('Use obsSceneMappingDescriptor instead')
+const ObsSceneMapping$json = {
+  '1': 'ObsSceneMapping',
+  '2': [
+    {'1': 'day', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'day', '17': true},
+    {'1': 'night', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'night', '17': true},
+    {
+      '1': 'breakPhase',
+      '3': 3,
+      '4': 1,
+      '5': 9,
+      '9': 2,
+      '10': 'breakPhase',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_day'},
+    {'1': '_night'},
+    {'1': '_breakPhase'},
+  ],
+};
+
+/// Descriptor for `ObsSceneMapping`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List obsSceneMappingDescriptor = $convert.base64Decode(
+    'Cg9PYnNTY2VuZU1hcHBpbmcSFQoDZGF5GAEgASgJSABSA2RheYgBARIZCgVuaWdodBgCIAEoCU'
+    'gBUgVuaWdodIgBARIjCgpicmVha1BoYXNlGAMgASgJSAJSCmJyZWFrUGhhc2WIAQFCBgoEX2Rh'
+    'eUIICgZfbmlnaHRCDQoLX2JyZWFrUGhhc2U=');
+
+@$core.Deprecated('Use obsStateDescriptor instead')
+const ObsState$json = {
+  '1': 'ObsState',
+  '2': [
+    {'1': 'connected', '3': 1, '4': 1, '5': 8, '10': 'connected'},
+    {'1': 'controlLevel', '3': 2, '4': 1, '5': 5, '10': 'controlLevel'},
+    {'1': 'scenes', '3': 3, '4': 3, '5': 9, '10': 'scenes'},
+    {
+      '1': 'currentScene',
+      '3': 4,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'currentScene',
+      '17': true
+    },
+  ],
+  '8': [
+    {'1': '_currentScene'},
+  ],
+};
+
+/// Descriptor for `ObsState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List obsStateDescriptor = $convert.base64Decode(
+    'CghPYnNTdGF0ZRIcCgljb25uZWN0ZWQYASABKAhSCWNvbm5lY3RlZBIiCgxjb250cm9sTGV2ZW'
+    'wYAiABKAVSDGNvbnRyb2xMZXZlbBIWCgZzY2VuZXMYAyADKAlSBnNjZW5lcxInCgxjdXJyZW50'
+    'U2NlbmUYBCABKAlIAFIMY3VycmVudFNjZW5liAEBQg8KDV9jdXJyZW50U2NlbmU=');
+
 @$core.Deprecated('Use gameStreamDescriptor instead')
 const GameStream$json = {
   '1': 'GameStream',
@@ -3188,6 +3276,22 @@ const ClubSeatingContent$json = {
       '10': 'broadcastPhase'
     },
     {'1': 'soundEnabled', '3': 6, '4': 1, '5': 8, '10': 'soundEnabled'},
+    {
+      '1': 'obsScenes',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.ObsSceneMapping',
+      '10': 'obsScenes'
+    },
+    {
+      '1': 'obs',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.ObsState',
+      '10': 'obs'
+    },
   ],
 };
 
@@ -3197,7 +3301,9 @@ final $typed_data.Uint8List clubSeatingContentDescriptor = $convert.base64Decode
     '9sZVIFcm9sZXMSLwoGc3RhdHVzGAIgAygOMhcuZ2VuZXJhdGVkLlBsYXllclN0YXR1c1IGc3Rh'
     'dHVzEhYKBmltYWdlcxgDIAMoCVIGaW1hZ2VzEhQKBW5hbWVzGAQgAygJUgVuYW1lcxJBCg5icm'
     '9hZGNhc3RQaGFzZRgFIAEoDjIZLmdlbmVyYXRlZC5Ccm9hZGNhc3RQaGFzZVIOYnJvYWRjYXN0'
-    'UGhhc2USIgoMc291bmRFbmFibGVkGAYgASgIUgxzb3VuZEVuYWJsZWQ=');
+    'UGhhc2USIgoMc291bmRFbmFibGVkGAYgASgIUgxzb3VuZEVuYWJsZWQSOAoJb2JzU2NlbmVzGA'
+    'cgASgLMhouZ2VuZXJhdGVkLk9ic1NjZW5lTWFwcGluZ1IJb2JzU2NlbmVzEiUKA29icxgIIAEo'
+    'CzITLmdlbmVyYXRlZC5PYnNTdGF0ZVIDb2Jz');
 
 @$core.Deprecated('Use changeClubSeatingContentDescriptor instead')
 const ChangeClubSeatingContent$json = {
@@ -3252,6 +3358,16 @@ const ChangeClubSeatingContent$json = {
       '10': 'soundEnabled',
       '17': true
     },
+    {
+      '1': 'obsScenes',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.ObsSceneMapping',
+      '9': 6,
+      '10': 'obsScenes',
+      '17': true
+    },
   ],
   '8': [
     {'1': '_player'},
@@ -3260,6 +3376,7 @@ const ChangeClubSeatingContent$json = {
     {'1': '_status'},
     {'1': '_broadcastPhase'},
     {'1': '_soundEnabled'},
+    {'1': '_obsScenes'},
   ],
 };
 
@@ -3270,8 +3387,10 @@ final $typed_data.Uint8List changeClubSeatingContentDescriptor = $convert.base64
     'dGVkLlBsYXllclJvbGVIAlIEcm9sZYgBARI0CgZzdGF0dXMYBCABKA4yFy5nZW5lcmF0ZWQuUG'
     'xheWVyU3RhdHVzSANSBnN0YXR1c4gBARJGCg5icm9hZGNhc3RQaGFzZRgFIAEoDjIZLmdlbmVy'
     'YXRlZC5Ccm9hZGNhc3RQaGFzZUgEUg5icm9hZGNhc3RQaGFzZYgBARInCgxzb3VuZEVuYWJsZW'
-    'QYBiABKAhIBVIMc291bmRFbmFibGVkiAEBQgkKB19wbGF5ZXJCCwoJX3BsYXllcklkQgcKBV9y'
-    'b2xlQgkKB19zdGF0dXNCEQoPX2Jyb2FkY2FzdFBoYXNlQg8KDV9zb3VuZEVuYWJsZWQ=');
+    'QYBiABKAhIBVIMc291bmRFbmFibGVkiAEBEj0KCW9ic1NjZW5lcxgHIAEoCzIaLmdlbmVyYXRl'
+    'ZC5PYnNTY2VuZU1hcHBpbmdIBlIJb2JzU2NlbmVziAEBQgkKB19wbGF5ZXJCCwoJX3BsYXllck'
+    'lkQgcKBV9yb2xlQgkKB19zdGF0dXNCEQoPX2Jyb2FkY2FzdFBoYXNlQg8KDV9zb3VuZEVuYWJs'
+    'ZWRCDAoKX29ic1NjZW5lcw==');
 
 @$core.Deprecated('Use clubTranslationKeyEventOutDescriptor instead')
 const ClubTranslationKeyEventOut$json = {

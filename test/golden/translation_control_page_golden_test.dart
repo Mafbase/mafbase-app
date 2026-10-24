@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
@@ -64,6 +64,24 @@ const _dataState = TranslationContentState(
   totalGames: 5,
 );
 
+const _obsScenes = ['Игровой стол', 'Ночь крупно', 'Перерыв', 'Камера ведущего'];
+
+final _savedMapping = ObsSceneMapping(day: 'Игровой стол', night: 'Ночь крупно');
+
+final _obsDisconnectedState = _dataState.copyWith(
+  obs: ObsState(connected: false),
+  obsScenes: _savedMapping,
+);
+
+final _obsNoRightsState = _dataState.copyWith(
+  obs: ObsState(connected: true, controlLevel: 2, scenes: _obsScenes, currentScene: 'Игровой стол'),
+);
+
+final _obsConnectedState = _dataState.copyWith(
+  obs: ObsState(connected: true, controlLevel: 4, scenes: _obsScenes, currentScene: 'Игровой стол'),
+  obsScenes: ObsSceneMapping(day: 'Игровой стол', night: 'Старая ночь'),
+);
+
 MockTranslationControlBloc _createMockBloc(TranslationContentState state) {
   final bloc = MockTranslationControlBloc();
   whenListen(
@@ -115,6 +133,76 @@ void main() {
       await screenMatchesGolden(
         tester,
         goldenName('translation_control/data'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('obs disconnected with saved scenes', (tester) async {
+      final bloc = _createMockBloc(_obsDisconnectedState);
+      addTearDown(bloc.close);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'obs_disconnected');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('translation_control/obs_disconnected'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('obs without scene switch permission', (tester) async {
+      final bloc = _createMockBloc(_obsNoRightsState);
+      addTearDown(bloc.close);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'obs_no_rights');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('translation_control/obs_no_rights'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('obs connected and configured is collapsed', (tester) async {
+      final bloc = _createMockBloc(_obsConnectedState);
+      addTearDown(bloc.close);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'obs_connected_collapsed');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      await screenMatchesGolden(
+        tester,
+        goldenName('translation_control/obs_connected_collapsed'),
+        customPump: (t) => t.pump(),
+      );
+    });
+
+    testGoldens('obs connected expanded with missing scene', (tester) async {
+      final bloc = _createMockBloc(_obsConnectedState);
+      addTearDown(bloc.close);
+
+      final builder = DeviceBuilder()
+        ..overrideDevicesForAllScenarios(devices: appDevices)
+        ..addScenario(widget: _pageWidget(bloc), name: 'obs_connected');
+
+      await tester.pumpDeviceBuilder(builder, wrapper: appWrapper());
+      final headers = find.text('OBS');
+      for (var i = 0; i < headers.evaluate().length; i++) {
+        await tester.tap(headers.at(i));
+      }
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+      await screenMatchesGolden(
+        tester,
+        goldenName('translation_control/obs_connected'),
         customPump: (t) => t.pump(),
       );
     });

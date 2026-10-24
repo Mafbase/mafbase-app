@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
-import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 part 'translation_content_state.freezed.dart';
 
@@ -19,6 +19,8 @@ abstract class TranslationContentState with _$TranslationContentState {
     @Default(<int>{}) Set<int> editingSlots,
     int? activePhotoThemeId,
     @Default(<PhotoThemeModel>[]) List<PhotoThemeModel> availableThemes,
+    ObsSceneMapping? obsScenes,
+    ObsState? obs,
   }) = _TranslationContentState;
 }
 

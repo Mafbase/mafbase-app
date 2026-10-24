@@ -39,6 +39,7 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
     on<ClubTranslationControlEventChangeRole>(_onChangeRole);
     on<ClubTranslationControlEventChangeStatus>(_onChangeStatus);
     on<ClubTranslationControlEventChangeBroadcastPhase>(_onChangeBroadcastPhase);
+    on<ClubTranslationControlEventChangeObsScenes>(_onChangeObsScenes);
     on<ClubTranslationControlEventChangePlayer>(_onChangePlayer);
     on<ClubTranslationControlEventStartEditingPlayer>(_onStartEditingPlayer);
     on<ClubTranslationControlEventSetActivePhotoTheme>(_onSetActivePhotoTheme);
@@ -93,6 +94,8 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
         nicknames: nicknames,
         broadcastPhase: content.broadcastPhase,
         editingSlots: editingSlots,
+        obsScenes: content.hasObsScenes() ? content.obsScenes : null,
+        obs: content.hasObs() ? content.obs : null,
       ),
     );
   }
@@ -127,6 +130,26 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
       table: params.table,
       key: params.key,
     );
+  }
+
+  /// Применяет сопоставление сразу, не дожидаясь эха из сокета: следующий выбор сцены собирается из state.
+  Future<void> _onChangeObsScenes(
+    ClubTranslationControlEventChangeObsScenes event,
+    Emitter<TranslationContentState> emit,
+  ) async {
+    final previous = state.obsScenes;
+    emit(state.copyWith(obsScenes: event.mapping));
+    try {
+      await _repository.changeObsScenes(
+        mapping: event.mapping,
+        clubId: params.clubId,
+        table: params.table,
+        key: params.key,
+      );
+    } catch (_) {
+      if (identical(state.obsScenes, event.mapping)) emit(state.copyWith(obsScenes: previous));
+      rethrow;
+    }
   }
 
   Future<void> _onChangePlayer(ClubTranslationControlEventChangePlayer event, Emitter<TranslationContentState> emit) {

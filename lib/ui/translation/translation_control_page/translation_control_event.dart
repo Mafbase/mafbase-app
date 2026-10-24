@@ -23,6 +23,10 @@ abstract class TranslationControlEvent with _$TranslationControlEvent {
     required BroadcastPhase phase,
   }) = TranslationControlEventChangeBroadcastPhase;
 
+  const factory TranslationControlEvent.changeObsScenes({
+    required ObsSceneMapping mapping,
+  }) = TranslationControlEventChangeObsScenes;
+
   const factory TranslationControlEvent.stateReceived({
     required SeatingContent event,
   }) = TranslationControlEventStateReceived;
