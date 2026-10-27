@@ -24,6 +24,9 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
   final ClubTranslationControlBlocParams params;
   final List<StreamSubscription> _subscriptions = [];
   ClubContentSocket? _socket;
+  // Сокет может прислать контент, собранный до записи, поэтому выбор держится поверх него до ответа на запрос.
+  ObsSceneMapping? _serverObsScenes;
+  ObsSceneMapping? _pendingObsScenes;
 
   ClubTranslationControlBloc({
     required this.params,
@@ -86,6 +89,7 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
       if (prevNicknames != null && i < prevNicknames.length && prevNicknames[i] != nicknames[i]) return false;
       return true;
     }).toSet();
+    _serverObsScenes = content.hasObsScenes() ? content.obsScenes : null;
     emit(
       state.copyWith(
         roles: content.roles,
@@ -94,7 +98,7 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
         nicknames: nicknames,
         broadcastPhase: content.broadcastPhase,
         editingSlots: editingSlots,
-        obsScenes: content.hasObsScenes() ? content.obsScenes : null,
+        obsScenes: _pendingObsScenes ?? _serverObsScenes,
         obs: content.hasObs() ? content.obs : null,
       ),
     );
@@ -132,12 +136,11 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
     );
   }
 
-  /// Применяет сопоставление сразу, не дожидаясь эха из сокета: следующий выбор сцены собирается из state.
   Future<void> _onChangeObsScenes(
     ClubTranslationControlEventChangeObsScenes event,
     Emitter<TranslationContentState> emit,
   ) async {
-    final previous = state.obsScenes;
+    _pendingObsScenes = event.mapping;
     emit(state.copyWith(obsScenes: event.mapping));
     try {
       await _repository.changeObsScenes(
@@ -146,8 +149,16 @@ class ClubTranslationControlBloc extends Bloc<ClubTranslationControlEvent, Trans
         table: params.table,
         key: params.key,
       );
+      if (identical(_pendingObsScenes, event.mapping)) {
+        _pendingObsScenes = null;
+        _serverObsScenes = event.mapping;
+        emit(state.copyWith(obsScenes: event.mapping));
+      }
     } catch (_) {
-      if (identical(state.obsScenes, event.mapping)) emit(state.copyWith(obsScenes: previous));
+      if (identical(_pendingObsScenes, event.mapping)) {
+        _pendingObsScenes = null;
+        emit(state.copyWith(obsScenes: _serverObsScenes));
+      }
       rethrow;
     }
   }

@@ -96,6 +96,7 @@ final _readyObs = ObsState(connected: true, controlLevel: 4, scenes: ['Стол'
 final _saved = ObsSceneMapping(day: 'Стол');
 final _changed = ObsSceneMapping(day: 'Стол', night: 'Ночной план');
 final _fromSocket = ObsSceneMapping(breakPhase: 'Заставка');
+final _stale = ObsSceneMapping(night: 'Заставка');
 
 /// BLoC пробрасывает ошибку обработчика в зону, где он создан; blocTest в этом случае не проверяет `expect`,
 /// поэтому сценарии с ошибкой запроса идут в своей зоне, которая собирает такие ошибки.
@@ -179,6 +180,26 @@ void main() {
       await tester.runAsync(bloc.close);
     });
 
+    testWidgets('stale socket content during the save keeps the choice', (tester) async {
+      final bloc = _tournamentBloc(repository);
+      await tester.pumpWidget(
+        _obsSectionFor(bloc, (mapping) => bloc.add(TranslationControlEvent.changeObsScenes(mapping: mapping))),
+      );
+      await _expandObsPanel(tester);
+
+      await _select(tester, row: 0, item: 'Стол');
+      bloc.add(TranslationControlEvent.stateReceived(event: SeatingContent(obsScenes: _stale)));
+      await tester.pumpAndSettle();
+      expect(bloc.state.obsScenes, _saved);
+
+      await _select(tester, row: 1, item: 'Ночной план');
+
+      expect(repository.obsRequests.requests, [_saved, _changed]);
+      repository.obsRequests.completeAll();
+      await tester.pump();
+      await tester.runAsync(bloc.close);
+    });
+
     blocTest<TranslationControlBloc, TranslationContentState>(
       'applies the mapping before the request completes',
       build: () => _tournamentBloc(repository),
@@ -210,7 +231,7 @@ void main() {
       expect(errors, [isA<_RequestFailed>()]);
     });
 
-    test('keeps a newer mapping from the socket when the request fails', () async {
+    test('falls back to the latest mapping from the socket when the request fails', () async {
       final states = <TranslationContentState>[];
       final errors = await _runCollectingErrors(() async {
         final bloc = _tournamentBloc(repository)
@@ -221,6 +242,7 @@ void main() {
         await pumpEventQueue();
         bloc.add(TranslationControlEvent.stateReceived(event: SeatingContent(obsScenes: _fromSocket)));
         await pumpEventQueue();
+        expect(bloc.state.obsScenes, _changed);
         repository.obsRequests.failAll();
         await pumpEventQueue();
         await bloc.close();
@@ -255,6 +277,26 @@ void main() {
       await tester.runAsync(bloc.close);
     });
 
+    testWidgets('stale socket content during the save keeps the choice', (tester) async {
+      final bloc = _clubBloc(repository);
+      await tester.pumpWidget(
+        _obsSectionFor(bloc, (mapping) => bloc.add(ClubTranslationControlEvent.changeObsScenes(mapping: mapping))),
+      );
+      await _expandObsPanel(tester);
+
+      await _select(tester, row: 0, item: 'Стол');
+      bloc.add(ClubTranslationControlEvent.stateReceived(content: ClubSeatingContent(obsScenes: _stale)));
+      await tester.pumpAndSettle();
+      expect(bloc.state.obsScenes, _saved);
+
+      await _select(tester, row: 1, item: 'Ночной план');
+
+      expect(repository.obsRequests.requests, [_saved, _changed]);
+      repository.obsRequests.completeAll();
+      await tester.pump();
+      await tester.runAsync(bloc.close);
+    });
+
     blocTest<ClubTranslationControlBloc, TranslationContentState>(
       'applies the mapping before the request completes',
       build: () => _clubBloc(repository),
@@ -286,7 +328,7 @@ void main() {
       expect(errors, [isA<_RequestFailed>()]);
     });
 
-    test('keeps a newer mapping from the socket when the request fails', () async {
+    test('falls back to the latest mapping from the socket when the request fails', () async {
       final states = <TranslationContentState>[];
       final errors = await _runCollectingErrors(() async {
         final bloc = _clubBloc(repository)
@@ -297,6 +339,7 @@ void main() {
         await pumpEventQueue();
         bloc.add(ClubTranslationControlEvent.stateReceived(content: ClubSeatingContent(obsScenes: _fromSocket)));
         await pumpEventQueue();
+        expect(bloc.state.obsScenes, _changed);
         repository.obsRequests.failAll();
         await pumpEventQueue();
         await bloc.close();

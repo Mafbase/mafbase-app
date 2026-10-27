@@ -13,6 +13,9 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
   final TranslationRepository _repository;
   final TranslationContentBlocParams params;
   final List<StreamSubscription> toDispose = [];
+  // Сокет может прислать контент, собранный до записи, поэтому выбор держится поверх него до ответа на запрос.
+  ObsSceneMapping? _serverObsScenes;
+  ObsSceneMapping? _pendingObsScenes;
 
   TranslationControlBloc({
     required this.params,
@@ -93,12 +96,11 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
-  /// Применяет сопоставление сразу, не дожидаясь эха из сокета: следующий выбор сцены собирается из state.
   Future<void> _onObsScenesChanged(
     TranslationControlEventChangeObsScenes event,
     Emitter<TranslationContentState> emit,
   ) async {
-    final previous = state.obsScenes;
+    _pendingObsScenes = event.mapping;
     emit(state.copyWith(obsScenes: event.mapping));
     try {
       await _repository.changeObsScenes(
@@ -107,14 +109,23 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
         tournamentId: params.tournamentId,
         key: params.key,
       );
+      if (identical(_pendingObsScenes, event.mapping)) {
+        _pendingObsScenes = null;
+        _serverObsScenes = event.mapping;
+        emit(state.copyWith(obsScenes: event.mapping));
+      }
     } catch (_) {
-      if (identical(state.obsScenes, event.mapping)) emit(state.copyWith(obsScenes: previous));
+      if (identical(_pendingObsScenes, event.mapping)) {
+        _pendingObsScenes = null;
+        emit(state.copyWith(obsScenes: _serverObsScenes));
+      }
       rethrow;
     }
   }
 
   void _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
     final content = event.event;
+    _serverObsScenes = content.hasObsScenes() ? content.obsScenes : null;
     emit(
       TranslationContentState(
         roles: content.roles,
@@ -124,7 +135,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
         game: content.game,
         totalGames: content.totalGames,
         broadcastPhase: content.broadcastPhase,
-        obsScenes: content.hasObsScenes() ? content.obsScenes : null,
+        obsScenes: _pendingObsScenes ?? _serverObsScenes,
         obs: content.hasObs() ? content.obs : null,
       ),
     );
