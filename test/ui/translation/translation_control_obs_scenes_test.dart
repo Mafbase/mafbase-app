@@ -20,7 +20,7 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/cl
 import 'package:seating_generator_web/ui/translation/translation_control_page/club_translation_control_event.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_obs_block.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_obs_section.dart';
 
 class _RequestFailed implements Exception {}
 
@@ -119,8 +119,8 @@ Future<List<Object>> _runCollectingErrors(Future<void> Function() body) {
 Matcher _withObsScenes(ObsSceneMapping? mapping) =>
     isA<TranslationContentState>().having((s) => s.obsScenes, 'obsScenes', mapping);
 
-/// Блок OBS, подключённый к BLoC так же, как на странице управления.
-Widget _obsBlockFor<B extends StateStreamable<TranslationContentState>>(
+/// Секция OBS, подключённая к BLoC так же, как на странице управления.
+Widget _obsSectionFor<B extends StateStreamable<TranslationContentState>>(
   B bloc,
   void Function(ObsSceneMapping mapping) onChanged,
 ) =>
@@ -132,14 +132,20 @@ Widget _obsBlockFor<B extends StateStreamable<TranslationContentState>>(
       home: Scaffold(
         body: BlocBuilder<B, TranslationContentState>(
           bloc: bloc,
-          builder: (context, state) => TranslationControlObsBlock(
+          builder: (context, state) => TranslationControlObsSection(
             obs: _readyObs,
             mapping: state.obsScenes,
             onMappingChanged: onChanged,
+            rowBuilder: (obsHeader) => Row(children: [const Expanded(child: SizedBox(height: 52)), obsHeader]),
           ),
         ),
       ),
     );
+
+Future<void> _expandObsPanel(WidgetTester tester) async {
+  await tester.tap(find.text('OBS'));
+  await tester.pumpAndSettle();
+}
 
 Future<void> _select(WidgetTester tester, {required int row, required String item}) async {
   await tester.tap(find.byType(DropdownButton<String>).at(row));
@@ -159,8 +165,9 @@ void main() {
     testWidgets('quick selections without socket echo keep both phases', (tester) async {
       final bloc = _tournamentBloc(repository);
       await tester.pumpWidget(
-        _obsBlockFor(bloc, (mapping) => bloc.add(TranslationControlEvent.changeObsScenes(mapping: mapping))),
+        _obsSectionFor(bloc, (mapping) => bloc.add(TranslationControlEvent.changeObsScenes(mapping: mapping))),
       );
+      await _expandObsPanel(tester);
 
       await _select(tester, row: 0, item: 'Стол');
       await _select(tester, row: 1, item: 'Ночной план');
@@ -234,8 +241,9 @@ void main() {
     testWidgets('quick selections without socket echo keep both phases', (tester) async {
       final bloc = _clubBloc(repository);
       await tester.pumpWidget(
-        _obsBlockFor(bloc, (mapping) => bloc.add(ClubTranslationControlEvent.changeObsScenes(mapping: mapping))),
+        _obsSectionFor(bloc, (mapping) => bloc.add(ClubTranslationControlEvent.changeObsScenes(mapping: mapping))),
       );
+      await _expandObsPanel(tester);
 
       await _select(tester, row: 0, item: 'Стол');
       await _select(tester, row: 1, item: 'Ночной план');
