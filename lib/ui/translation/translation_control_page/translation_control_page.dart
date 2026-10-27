@@ -17,6 +17,7 @@ import 'package:seating_generator_web/ui/translation/translation_control_page/tr
 import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_empty_slot.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_game_selector.dart';
+import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_obs_section.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_phase_selector.dart';
 import 'package:seating_generator_web/ui/translation/translation_control_page/widgets/translation_control_player_card.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -87,7 +88,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
     if (widget.isClub) {
       return BlocProvider<ClubTranslationControlBloc>.value(
         value: _clubBloc!,
-        child: const _ClubTranslationControlContent(),
+        child: const ClubTranslationControlContent(),
       );
     }
     return BlocProvider<TranslationControlBloc>.value(
@@ -112,6 +113,28 @@ class TranslationControlContent extends StatelessWidget {
   Widget build(BuildContext context) => BlocBuilder<TranslationControlBloc, TranslationContentState>(
     builder: (context, state) {
       final theme = context.theme;
+      final hasGames = state.totalGames > 0;
+
+      Widget gameSelector({Widget? trailing}) => TranslationControlGameSelector(
+        game: state.game,
+        totalGames: state.totalGames,
+        onChanged: (index) {
+          context.read<TranslationControlBloc>().add(TranslationControlEvent.selectGame(gameIndex: index));
+        },
+        onClose: kIsWeb ? null : context.backOrGoToDefault(),
+        trailing: trailing,
+      );
+
+      Widget phaseSelector({Widget? trailing}) => TranslationControlPhaseSelector(
+        phase: state.broadcastPhase,
+        onChanged: (phase) {
+          context.read<TranslationControlBloc>().add(
+            TranslationControlEvent.changeBroadcastPhase(phase: phase),
+          );
+        },
+        trailing: trailing,
+      );
+
       return Scaffold(
         backgroundColor: theme.background1,
         appBar: AppBar(
@@ -124,24 +147,19 @@ class TranslationControlContent extends StatelessWidget {
         ),
         body: Column(
           children: [
-            if (state.totalGames > 0)
-              TranslationControlGameSelector(
-                game: state.game,
-                totalGames: state.totalGames,
-                onChanged: (index) {
-                  context.read<TranslationControlBloc>().add(TranslationControlEvent.selectGame(gameIndex: index));
+            if (state.isNotEmpty()) ...[
+              TranslationControlObsSection(
+                obs: state.obs,
+                mapping: state.obsScenes,
+                onMappingChanged: (mapping) {
+                  context.read<TranslationControlBloc>().add(TranslationControlEvent.changeObsScenes(mapping: mapping));
                 },
-                onClose: kIsWeb ? null : context.backOrGoToDefault(),
+                rowBuilder: (obsHeader) =>
+                    hasGames ? gameSelector(trailing: obsHeader) : phaseSelector(trailing: obsHeader),
               ),
-            if (state.isNotEmpty())
-              TranslationControlPhaseSelector(
-                phase: state.broadcastPhase,
-                onChanged: (phase) {
-                  context.read<TranslationControlBloc>().add(
-                    TranslationControlEvent.changeBroadcastPhase(phase: phase),
-                  );
-                },
-              ),
+              if (hasGames) phaseSelector(),
+            ] else if (hasGames)
+              gameSelector(),
             Expanded(
               child: state.isNotEmpty()
                   ? ListView.builder(
@@ -176,14 +194,14 @@ class TranslationControlContent extends StatelessWidget {
   );
 }
 
-class _ClubTranslationControlContent extends StatefulWidget {
-  const _ClubTranslationControlContent();
+class ClubTranslationControlContent extends StatefulWidget {
+  const ClubTranslationControlContent({super.key});
 
   @override
-  State<_ClubTranslationControlContent> createState() => _ClubTranslationControlContentState();
+  State<ClubTranslationControlContent> createState() => _ClubTranslationControlContentState();
 }
 
-class _ClubTranslationControlContentState extends State<_ClubTranslationControlContent> {
+class _ClubTranslationControlContentState extends State<ClubTranslationControlContent> {
   late final List<TextEditingController> _controllers = List.generate(10, (_) => TextEditingController());
   late final List<FocusNode> _focusNodes = List.generate(10, (_) => FocusNode());
 
@@ -287,13 +305,23 @@ class _ClubTranslationControlContentState extends State<_ClubTranslationControlC
                   );
                 },
               ),
-            TranslationControlPhaseSelector(
-              phase: state.broadcastPhase,
-              onChanged: (phase) {
+            TranslationControlObsSection(
+              obs: state.obs,
+              mapping: state.obsScenes,
+              onMappingChanged: (mapping) {
                 context.read<ClubTranslationControlBloc>().add(
-                  ClubTranslationControlEvent.changeBroadcastPhase(phase: phase),
+                  ClubTranslationControlEvent.changeObsScenes(mapping: mapping),
                 );
               },
+              rowBuilder: (obsHeader) => TranslationControlPhaseSelector(
+                phase: state.broadcastPhase,
+                onChanged: (phase) {
+                  context.read<ClubTranslationControlBloc>().add(
+                    ClubTranslationControlEvent.changeBroadcastPhase(phase: phase),
+                  );
+                },
+                trailing: obsHeader,
+              ),
             ),
             Expanded(
               child: ListView.builder(

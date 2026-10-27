@@ -81,7 +81,7 @@ jobs:
       - name: Verify only CI golden images changed
         if: steps.golden-check.outputs.has_changes == 'true'
         run: |
-          CHANGED=$(git diff --name-only)
+          CHANGED=$(git diff --name-only --ignore-submodules=all)
           UNTRACKED=$(git ls-files --others --exclude-standard)
           ALL_CHANGES=$(printf '%s\n%s' "$CHANGED" "$UNTRACKED" | sed '/^$/d')
 

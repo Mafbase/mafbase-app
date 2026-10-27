@@ -19,6 +19,9 @@ abstract class ClubTranslationControlEvent with _$ClubTranslationControlEvent {
   const factory ClubTranslationControlEvent.changeBroadcastPhase({required BroadcastPhase phase}) =
       ClubTranslationControlEventChangeBroadcastPhase;
 
+  const factory ClubTranslationControlEvent.changeObsScenes({required ObsSceneMapping mapping}) =
+      ClubTranslationControlEventChangeObsScenes;
+
   const factory ClubTranslationControlEvent.changePlayer({required int index, required int playerId}) =
       ClubTranslationControlEventChangePlayer;
 

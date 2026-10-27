@@ -13,6 +13,9 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
   final TranslationRepository _repository;
   final TranslationContentBlocParams params;
   final List<StreamSubscription> toDispose = [];
+  // Сокет может прислать контент, собранный до записи, поэтому выбор держится поверх него до ответа на запрос.
+  ObsSceneMapping? _serverObsScenes;
+  ObsSceneMapping? _pendingObsScenes;
 
   TranslationControlBloc({
     required this.params,
@@ -26,6 +29,7 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     on<TranslationControlEventChangeStatus>(_onStatusChanged);
     on<TranslationControlEventSelectGame>(_onGameSelected);
     on<TranslationControlEventChangeBroadcastPhase>(_onBroadcastPhaseChanged);
+    on<TranslationControlEventChangeObsScenes>(_onObsScenesChanged);
     on<TranslationControlEventPageOpened>(_onPageOpened);
   }
 
@@ -92,16 +96,47 @@ class TranslationControlBloc extends Bloc<TranslationControlEvent, TranslationCo
     );
   }
 
+  Future<void> _onObsScenesChanged(
+    TranslationControlEventChangeObsScenes event,
+    Emitter<TranslationContentState> emit,
+  ) async {
+    _pendingObsScenes = event.mapping;
+    emit(state.copyWith(obsScenes: event.mapping));
+    try {
+      await _repository.changeObsScenes(
+        mapping: event.mapping,
+        table: params.table,
+        tournamentId: params.tournamentId,
+        key: params.key,
+      );
+      if (identical(_pendingObsScenes, event.mapping)) {
+        _pendingObsScenes = null;
+        _serverObsScenes = event.mapping;
+        emit(state.copyWith(obsScenes: event.mapping));
+      }
+    } catch (_) {
+      if (identical(_pendingObsScenes, event.mapping)) {
+        _pendingObsScenes = null;
+        emit(state.copyWith(obsScenes: _serverObsScenes));
+      }
+      rethrow;
+    }
+  }
+
   void _onStateReceived(TranslationControlEventStateReceived event, Emitter emit) {
+    final content = event.event;
+    _serverObsScenes = content.hasObsScenes() ? content.obsScenes : null;
     emit(
       TranslationContentState(
-        roles: event.event.roles,
-        statuses: event.event.status,
-        images: event.event.images,
-        nicknames: event.event.names,
-        game: event.event.game,
-        totalGames: event.event.totalGames,
-        broadcastPhase: event.event.broadcastPhase,
+        roles: content.roles,
+        statuses: content.status,
+        images: content.images,
+        nicknames: content.names,
+        game: content.game,
+        totalGames: content.totalGames,
+        broadcastPhase: content.broadcastPhase,
+        obsScenes: _pendingObsScenes ?? _serverObsScenes,
+        obs: content.hasObs() ? content.obs : null,
       ),
     );
   }

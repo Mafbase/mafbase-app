@@ -7,6 +7,7 @@ class TranslationControlGameSelector extends StatelessWidget {
   final int totalGames;
   final ValueChanged<int> onChanged;
   final VoidCallback? onClose;
+  final Widget? trailing;
 
   const TranslationControlGameSelector({
     super.key,
@@ -14,6 +15,7 @@ class TranslationControlGameSelector extends StatelessWidget {
     required this.totalGames,
     required this.onChanged,
     this.onClose,
+    this.trailing,
   });
 
   @override
@@ -39,6 +41,7 @@ class TranslationControlGameSelector extends StatelessWidget {
               ),
             ),
           ),
+          if (trailing case final trailing?) trailing,
           if (onClose != null)
             IconButton(onPressed: onClose, icon: const Icon(Icons.close), color: theme.defaultTextStyle.color),
         ],

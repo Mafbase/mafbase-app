@@ -12,8 +12,9 @@ import 'package:seating_generator_web/utils.dart';
 class TranslationControlPhaseSelector extends StatelessWidget {
   final BroadcastPhase phase;
   final ValueChanged<BroadcastPhase> onChanged;
+  final Widget? trailing;
 
-  const TranslationControlPhaseSelector({super.key, required this.phase, required this.onChanged});
+  const TranslationControlPhaseSelector({super.key, required this.phase, required this.onChanged, this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +59,7 @@ class TranslationControlPhaseSelector extends StatelessWidget {
               ),
             ),
           ),
+          if (trailing case final trailing?) trailing,
         ],
       ),
     );

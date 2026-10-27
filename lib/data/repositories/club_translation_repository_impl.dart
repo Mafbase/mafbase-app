@@ -55,6 +55,21 @@ class ClubTranslationRepositoryImpl extends BaseRepository implements ClubTransl
   }
 
   @override
+  Future<void> changeObsScenes({
+    required ObsSceneMapping mapping,
+    required int clubId,
+    required int table,
+    required String key,
+  }) {
+    return ChangeClubSeatingContentRequest(
+      clubId: clubId,
+      table: table,
+      key: key,
+      content: ChangeClubSeatingContent(obsScenes: mapping),
+    ).execute(client);
+  }
+
+  @override
   Future<void> changePlayer({
     required int playerIndex,
     required int playerId,
