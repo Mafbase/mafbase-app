@@ -59,7 +59,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     emit(state.copyWith(isLoading: true));
     try {
       await _clubRepository.updateHideDate(id: _clubId, dateTime: event.dateTime);
-      add(const ClubEvent.pageOpened());
+      await _loadData(emit);
     } finally {
       if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
@@ -69,9 +69,9 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     emit(state.copyWith(isLoading: true));
     try {
       await _clubRepository.updateDefaultRatingPeriod(id: _clubId, range: event.range);
-      add(const ClubEvent.pageOpened());
+      await _loadData(emit);
     } finally {
-      emit(state.copyWith(isLoading: false));
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
   }
 
@@ -80,6 +80,10 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
   }
 
   Future<void> _onPageOpened(ClubEventPageOpened event, Emitter emit) async {
+    await _loadData(emit);
+  }
+
+  Future<void> _loadData(Emitter emit) async {
     final [ClubModel club, bool isOwner, List<GameStream> streams] = await Future.wait<dynamic>([
       _getClubInteractor.run(clubId: _clubId),
       _checkClubInteractor(_clubId),
@@ -89,16 +93,18 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     final hideDate = isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
     final defaultRatingPeriod = isOwner ? await _clubRepository.getDefaultRatingPeriod(id: _clubId) : null;
 
-    emit(
-      state.copyWith(
-        isLoading: false,
-        model: club,
-        isOwner: isOwner,
-        hideDate: hideDate,
-        defaultRatingPeriod: defaultRatingPeriod,
-        streams: streams,
-      ),
-    );
+    if (!emit.isDone) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          model: club,
+          isOwner: isOwner,
+          hideDate: hideDate,
+          defaultRatingPeriod: defaultRatingPeriod,
+          streams: streams,
+        ),
+      );
+    }
   }
 
   Future<void> _onBillClub(ClubEventBillClub event, Emitter emit) async {
@@ -128,7 +134,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
         clubId: _clubId,
         club: model.copyWith(description: event.description.trim().isEmpty ? null : event.description.trim()),
       );
-      add(const ClubEvent.pageOpened());
+      await _loadData(emit);
     } finally {
       if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
@@ -138,7 +144,7 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     emit(state.copyWith(isLoading: true));
     try {
       await _clubRepository.updatePhoto(clubId: _clubId, bytes: event.bytes, fileName: event.fileName);
-      add(const ClubEvent.pageOpened());
+      await _loadData(emit);
     } finally {
       if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
