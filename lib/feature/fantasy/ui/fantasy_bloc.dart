@@ -8,10 +8,7 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
   final FantasyRepository _repository;
   int? _currentUserId;
 
-  FantasyBloc(
-    super.initialState,
-    this._repository,
-  ) {
+  FantasyBloc(super.initialState, this._repository) {
     on<FantasyEventInit>(_onInit);
     on<FantasyEventRefresh>(_onRefresh);
     on<FantasyEventSetPrediction>(_onSetPrediction);
@@ -20,10 +17,7 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
     on<FantasyEventLoadParticipants>(_onLoadParticipants);
   }
 
-  Future<void> _onInit(
-    FantasyEventInit event,
-    Emitter<FantasyState> emit,
-  ) async {
+  Future<void> _onInit(FantasyEventInit event, Emitter<FantasyState> emit) async {
     _currentUserId = event.userId;
     emit(state.copyWith(isLoading: true, isOwner: event.isOwner));
     await _loadData(event.tournamentId, emit);
@@ -32,10 +26,7 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
     }
   }
 
-  Future<void> _onRefresh(
-    FantasyEventRefresh event,
-    Emitter<FantasyState> emit,
-  ) async {
+  Future<void> _onRefresh(FantasyEventRefresh event, Emitter<FantasyState> emit) async {
     try {
       await _loadData(event.tournamentId, emit);
       if (state.isOwner) {
@@ -46,10 +37,7 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
     }
   }
 
-  Future<void> _onSetPrediction(
-    FantasyEventSetPrediction event,
-    Emitter<FantasyState> emit,
-  ) async {
+  Future<void> _onSetPrediction(FantasyEventSetPrediction event, Emitter<FantasyState> emit) async {
     final currentGameInfo = state.currentGameInfo;
     if (currentGameInfo != null && !currentGameInfo.canParticipate) {
       return;
@@ -59,41 +47,32 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
       await _repository.setPrediction(event.tournamentId, event.prediction);
       emit(state.copyWith(selectedPrediction: event.prediction));
       await _loadData(event.tournamentId, emit);
-    } catch (e) {
-      rethrow;
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
   }
 
-  Future<void> _onAddParticipant(
-    FantasyEventAddParticipant event,
-    Emitter<FantasyState> emit,
-  ) async {
+  Future<void> _onAddParticipant(FantasyEventAddParticipant event, Emitter<FantasyState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
       await _repository.addParticipant(event.tournamentId, event.email);
       await _loadParticipants(event.tournamentId, emit);
-    } catch (e) {
-      rethrow;
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
   }
 
-  Future<void> _onRemoveParticipant(
-    FantasyEventRemoveParticipant event,
-    Emitter<FantasyState> emit,
-  ) async {
+  Future<void> _onRemoveParticipant(FantasyEventRemoveParticipant event, Emitter<FantasyState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
       await _repository.removeParticipant(event.tournamentId, event.userId);
       await _loadParticipants(event.tournamentId, emit);
-    } catch (e) {
-      rethrow;
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
   }
 
-  Future<void> _onLoadParticipants(
-    FantasyEventLoadParticipants event,
-    Emitter<FantasyState> emit,
-  ) async {
+  Future<void> _onLoadParticipants(FantasyEventLoadParticipants event, Emitter<FantasyState> emit) async {
     await _loadParticipants(event.tournamentId, emit);
   }
 
@@ -106,9 +85,7 @@ class FantasyBloc extends Bloc<FantasyEvent, FantasyState> {
       GameWin? userPrediction;
       if (_currentUserId != null && rating.rows.isNotEmpty) {
         try {
-          final userRow = rating.rows.firstWhere(
-            (row) => row.playerId == _currentUserId,
-          );
+          final userRow = rating.rows.firstWhere((row) => row.playerId == _currentUserId);
 
           final prediction = userRow.predictions.firstWhere(
             (p) => p.gameNumber == currentGameInfo.gameNumber && p.prediction != null,

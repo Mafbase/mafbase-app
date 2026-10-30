@@ -39,13 +39,13 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     required CheckClubInteractor checkClubInteractor,
     required ClubRepository clubRepository,
     required StreamRepository streamRepository,
-  })  : _clubId = args.clubId,
-        _checkClubInteractor = checkClubInteractor,
-        _billClubInteractor = billClubInteractor,
-        _getClubInteractor = getClubInteractor,
-        _clubRepository = clubRepository,
-        _streamRepository = streamRepository,
-        super(args.cachedModel == null ? const ClubState() : ClubState(isLoading: false, model: args.cachedModel)) {
+  }) : _clubId = args.clubId,
+       _checkClubInteractor = checkClubInteractor,
+       _billClubInteractor = billClubInteractor,
+       _getClubInteractor = getClubInteractor,
+       _clubRepository = clubRepository,
+       _streamRepository = streamRepository,
+       super(args.cachedModel == null ? const ClubState() : ClubState(isLoading: false, model: args.cachedModel)) {
     on<ClubEventPageOpened>(_onPageOpened);
     on<ClubEventOpenRating>(_onOpenRating);
     on<ClubEventBillClub>(_onBillClub);
@@ -57,17 +57,21 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
 
   Future<void> _onChangeHideDate(ClubEventChangeHideDate event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _clubRepository.updateHideDate(id: _clubId, dateTime: event.dateTime);
-    add(const ClubEvent.pageOpened());
+    try {
+      await _clubRepository.updateHideDate(id: _clubId, dateTime: event.dateTime);
+      await _loadData(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onChangeDefaultRatingPeriod(ClubEventChangeDefaultRatingPeriod event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     try {
       await _clubRepository.updateDefaultRatingPeriod(id: _clubId, range: event.range);
-      add(const ClubEvent.pageOpened());
+      await _loadData(emit);
     } finally {
-      emit(state.copyWith(isLoading: false));
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
   }
 
@@ -76,6 +80,10 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
   }
 
   Future<void> _onPageOpened(ClubEventPageOpened event, Emitter emit) async {
+    await _loadData(emit);
+  }
+
+  Future<void> _loadData(Emitter emit) async {
     final [ClubModel club, bool isOwner, List<GameStream> streams] = await Future.wait<dynamic>([
       _getClubInteractor.run(clubId: _clubId),
       _checkClubInteractor(_clubId),
@@ -85,16 +93,18 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     final hideDate = isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
     final defaultRatingPeriod = isOwner ? await _clubRepository.getDefaultRatingPeriod(id: _clubId) : null;
 
-    emit(
-      state.copyWith(
-        isLoading: false,
-        model: club,
-        isOwner: isOwner,
-        hideDate: hideDate,
-        defaultRatingPeriod: defaultRatingPeriod,
-        streams: streams,
-      ),
-    );
+    if (!emit.isDone) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          model: club,
+          isOwner: isOwner,
+          hideDate: hideDate,
+          defaultRatingPeriod: defaultRatingPeriod,
+          streams: streams,
+        ),
+      );
+    }
   }
 
   Future<void> _onBillClub(ClubEventBillClub event, Emitter emit) async {
@@ -119,16 +129,24 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
     }
 
     emit(state.copyWith(isLoading: true));
-    await _clubRepository.updateDescription(
-      clubId: _clubId,
-      club: model.copyWith(description: event.description.trim().isEmpty ? null : event.description.trim()),
-    );
-    add(const ClubEvent.pageOpened());
+    try {
+      await _clubRepository.updateDescription(
+        clubId: _clubId,
+        club: model.copyWith(description: event.description.trim().isEmpty ? null : event.description.trim()),
+      );
+      await _loadData(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onEditPhoto(ClubEventEditPhoto event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _clubRepository.updatePhoto(clubId: _clubId, bytes: event.bytes, fileName: event.fileName);
-    add(const ClubEvent.pageOpened());
+    try {
+      await _clubRepository.updatePhoto(clubId: _clubId, bytes: event.bytes, fileName: event.fileName);
+      await _loadData(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 }

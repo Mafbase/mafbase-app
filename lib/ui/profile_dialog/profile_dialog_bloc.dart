@@ -14,42 +14,38 @@ class ProfileDialogBloc extends Bloc<ProfileDialogEvent, ProfileDialogState> {
   final RepositoryFactory _repos;
   final int playerId;
 
-  ProfileDialogBloc({
-    required PlayerModel player,
-    required RepositoryFactory repos,
-    required this.router,
-  })  : playerId = player.id,
-        _repos = repos,
-        super(
-          ProfileDialogState(
-            imageUrl: player.imageUrl,
-            isLoading: false,
-          ),
-        ) {
+  ProfileDialogBloc({required PlayerModel player, required RepositoryFactory repos, required this.router})
+    : playerId = player.id,
+      _repos = repos,
+      super(ProfileDialogState(imageUrl: player.imageUrl, isLoading: false)) {
     on<ProfileDialogEventSubmit>(_onSubmit);
     on<ProfileDialogEventEditImage>(_onEditImage);
   }
 
   Future<void> _onEditImage(ProfileDialogEventEditImage event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _addPhotoInteractor.run(
-      bytes: event.bytes,
-      filename: event.fileName,
-      playerId: playerId,
-    );
-    router.close();
+    try {
+      await _addPhotoInteractor.run(bytes: event.bytes, filename: event.fileName, playerId: playerId);
+      router.close();
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onSubmit(ProfileDialogEventSubmit event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _editPlayerInteractor.run(
-      PlayerModel(
-        id: playerId,
-        nickname: event.nickname,
-        mafbankNickname: event.mafbankNickname,
-        fsmNickaname: event.fsmNickname,
-      ),
-    );
-    router.close();
+    try {
+      await _editPlayerInteractor.run(
+        PlayerModel(
+          id: playerId,
+          nickname: event.nickname,
+          mafbankNickname: event.mafbankNickname,
+          fsmNickaname: event.fsmNickname,
+        ),
+      );
+      router.close();
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 }

@@ -18,29 +18,27 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvents, ForgotPasswordState>
     on<BackButtonTapped>(_onBackButtonTapped);
   }
 
-  Future _onSubmit(
-    Submit event,
-    Emitter<ForgotPasswordState> emit,
-  ) async {
+  Future _onSubmit(Submit event, Emitter<ForgotPasswordState> emit) async {
     emit(state.copyWith(isLoading: true, hasError: false, isSuccess: false));
 
-    final result = await _authRepository.forgotPassword(event.email);
+    try {
+      final result = await _authRepository.forgotPassword(event.email);
 
-    result.when(
-      success: () {
-        emit(state.copyWith(isLoading: false, isSuccess: true));
-        router.openResetPasswordPage(event.email);
-      },
-      error: () {
-        emit(state.copyWith(isLoading: false, hasError: true));
-      },
-    );
+      result.when(
+        success: () {
+          emit(state.copyWith(isLoading: false, isSuccess: true));
+          router.openResetPasswordPage(event.email);
+        },
+        error: () {
+          emit(state.copyWith(isLoading: false, hasError: true));
+        },
+      );
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 
-  Future _onBackButtonTapped(
-    BackButtonTapped event,
-    Emitter<ForgotPasswordState> emit,
-  ) async {
+  Future _onBackButtonTapped(BackButtonTapped event, Emitter<ForgotPasswordState> emit) async {
     router.openLoginPage();
   }
 }

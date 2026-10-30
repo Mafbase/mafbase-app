@@ -54,10 +54,10 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     required RepositoryFactory repos,
     required this.router,
     BuildContext? context,
-  })  : assert((clubId == null) != (tournamentId == null)),
-        _repos = repos,
-        _context = context,
-        super(AddClubGameState(isTournament: tournamentId != null)) {
+  }) : assert((clubId == null) != (tournamentId == null)),
+       _repos = repos,
+       _context = context,
+       super(AddClubGameState(isTournament: tournamentId != null)) {
     on<AddClubGameEventPageOpened>(_onPageOpened);
     on<AddClubGameEventSubmit>(_onSubmit);
     on<AddClubGameEventPageEdit>(_onEdit);
@@ -145,6 +145,14 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
 
   Future<void> _onPageOpened(AddClubGameEventPageOpened event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
+    try {
+      await _onPageOpenedBody(event, emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<void> _onPageOpenedBody(AddClubGameEventPageOpened event, Emitter emit) async {
     if (clubId != null) {
       final list = await Future.wait([
         _repository.isOwner(clubId!),
@@ -194,7 +202,8 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
             refereePlayer: refereePlayer,
             died: game.hasFirstDie() ? game.firstDie : null,
             date: DateTime.parse(game.date),
-            ciModel: (game.hasCiId()
+            ciModel:
+                (game.hasCiId()
                     ? state.ciSchemes.firstWhereOrNull((element) => element.id == game.ciId)
                     : CiSchemeModel.empty) ??
                 CiSchemeModel.empty,
@@ -211,8 +220,8 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
         final defaultCiModel = savedCiId == null
             ? null
             : savedCiId == CiSchemeModel.empty.id
-                ? CiSchemeModel.empty
-                : state.ciSchemes.firstWhereOrNull((e) => e.id == savedCiId);
+            ? CiSchemeModel.empty
+            : state.ciSchemes.firstWhereOrNull((e) => e.id == savedCiId);
 
         emitEffect(
           AddClubGameEffect.setValues(

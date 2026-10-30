@@ -14,44 +14,35 @@ class VerificationBloc extends Bloc<VerificationEvents, VerificationState> {
   final VerificationInteractor _interactor;
   final int _id;
 
-  VerificationBloc(
-    this.router,
-    this._interactor,
-    this._id,
-  ) : super(const VerificationState(isLoading: false)) {
+  VerificationBloc(this.router, this._interactor, this._id) : super(const VerificationState(isLoading: false)) {
     on<VerificationEventSubmit>(_onSubmit);
     on<OnSignUpButtonTapped>(onRegistrationButtonTapped);
     on<OnLoginButtonTapped>(onAuthButtonTapped);
   }
 
-  Future _onSubmit(
-    VerificationEventSubmit event,
-    Emitter<VerificationState> emit,
-  ) async {
+  Future _onSubmit(VerificationEventSubmit event, Emitter<VerificationState> emit) async {
     emit(state.copyWith(isLoading: true, hasError: false));
-    final result = await _interactor.run(_id, event.token.trim());
-    switch (result) {
-      case false:
-        emit(state.copyWith(isLoading: false, hasError: true));
-        break;
-      case true:
-        emit(state.copyWith(isLoading: false, hasError: false));
-        router.openMainPage();
-        break;
+    try {
+      final result = await _interactor.run(_id, event.token.trim());
+      switch (result) {
+        case false:
+          emit(state.copyWith(isLoading: false, hasError: true));
+          break;
+        case true:
+          emit(state.copyWith(isLoading: false, hasError: false));
+          router.openMainPage();
+          break;
+      }
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
   }
 
-  Future onAuthButtonTapped(
-    OnLoginButtonTapped event,
-    Emitter<VerificationState> emit,
-  ) async {
+  Future onAuthButtonTapped(OnLoginButtonTapped event, Emitter<VerificationState> emit) async {
     router.openLoginPage();
   }
 
-  Future onRegistrationButtonTapped(
-    OnSignUpButtonTapped event,
-    Emitter<VerificationState> emit,
-  ) async {
+  Future onRegistrationButtonTapped(OnSignUpButtonTapped event, Emitter<VerificationState> emit) async {
     router.openSignUpPage();
   }
 }
