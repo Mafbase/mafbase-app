@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:seating_generator_web/app/api_host.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -56,7 +57,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
               },
               shouldOverrideUrlLoading: (controller, action) async {
                 final url = action.request.url;
-                if (url != null && url.host == 'mafbase.ru') {
+                if (url != null && url.host == apiHost) {
                   context.router
                     ..removeLast()
                     ..navigatePath(url.hasFragment ? url.fragment : '${url.path}?${url.query}');

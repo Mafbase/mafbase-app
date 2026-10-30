@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:protobuf/protobuf.dart';
+import 'package:seating_generator_web/app/api_host.dart';
 import 'package:seating_generator_web/data/base_request.dart';
 import 'package:seating_generator_web/data/requests/login_request.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
@@ -303,7 +304,7 @@ class MyHttpClient {
     }
   }
 
-  MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage) : baseUrl = 'https://mafbase.ru';
+  MyHttpClient.withDefaultUrl(this._storage, this._credentialStorage) : baseUrl = 'https://$apiHost';
 
   MyHttpClient.autoForWeb(this._storage, this._credentialStorage)
       : baseUrl = '${Uri.base.scheme}://${Uri.base.host}:${Uri.base.port}';

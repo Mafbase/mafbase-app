@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:seating_generator_web/app/api_host.dart';
 import 'package:seating_generator_web/data/base_socket.dart';
 
 class TournamentContentSocket extends BaseSocket {
@@ -21,5 +22,5 @@ String getHost() {
     return '${Uri.base.host}:${Uri.base.port}';
   }
 
-  return 'mafbase.ru';
+  return apiHost;
 }
