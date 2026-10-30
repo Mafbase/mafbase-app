@@ -40,8 +40,8 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
   final SeatingPageRouter router;
 
   SeatingPageBloc({required RepositoryFactory repos, required this.router})
-      : _repos = repos,
-        super(const SeatingPageState()) {
+    : _repos = repos,
+      super(const SeatingPageState()) {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
     on<SeatingPageEventAddPair>(_onAddPair);
@@ -110,30 +110,41 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
 
   Future<void> _onCreateSeating(SeatingPageEventCreateSeating event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _createSeatingInteractor.run(tournamentId: tournamentId);
-    await _updateSeating(emit);
+    try {
+      await _createSeatingInteractor.run(tournamentId: tournamentId);
+      await _updateSeating(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onAddPair(SeatingPageEventAddPair event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
-    final refereeAssignments = await _repos.refereeRepository.getReferees(tournamentId);
-    final referees = refereeAssignments.map((e) => e.referee).toList();
-    final allParticipants = [...players, ...referees.where((r) => players.every((p) => p.id != r.id))];
-    final newPair = await router.openSeparationDialog(availablePlayers: allParticipants);
-    if (newPair != null) {
-      await _addSeparationInteractor.run(first: newPair.first, second: newPair.second, tournamentId: tournamentId);
-      final newPairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
-      emit(state.copyWith(cannotMeet: newPairs));
+    try {
+      final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
+      final refereeAssignments = await _repos.refereeRepository.getReferees(tournamentId);
+      final referees = refereeAssignments.map((e) => e.referee).toList();
+      final allParticipants = [...players, ...referees.where((r) => players.every((p) => p.id != r.id))];
+      final newPair = await router.openSeparationDialog(availablePlayers: allParticipants);
+      if (newPair != null) {
+        await _addSeparationInteractor.run(first: newPair.first, second: newPair.second, tournamentId: tournamentId);
+        final newPairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
+        emit(state.copyWith(cannotMeet: newPairs));
+      }
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
-    emit(state.copyWith(isLoading: false));
   }
 
   Future<void> _onDeletePair(SeatingPageEventDeletePair event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    await _deleteSeparationInteractor.run(first: event.first, second: event.second, tournamentId: tournamentId);
-    final newPairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
-    emit(state.copyWith(isLoading: false, cannotMeet: newPairs));
+    try {
+      await _deleteSeparationInteractor.run(first: event.first, second: event.second, tournamentId: tournamentId);
+      final newPairs = await _getSeparationInteractor.run(tournamentId: tournamentId);
+      emit(state.copyWith(cannotMeet: newPairs));
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onPageOpened(SeatingPageEventPageOpened event, Emitter emit) async {

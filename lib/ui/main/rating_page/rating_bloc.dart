@@ -13,15 +13,14 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
   final RatingRouter _router;
   late final DownloadRatingInteractor _downloadRatingInteractor = DownloadRatingInteractor(_repos.clubRepository);
   late final GetRatingInteractor _getRatingRepository = GetRatingInteractor(_repos.clubRepository);
-  late final GetTournamentRatingInteractor _getTournamentRatingInteractor =
-      GetTournamentRatingInteractor(_repos.tournamentResultRepository);
+  late final GetTournamentRatingInteractor _getTournamentRatingInteractor = GetTournamentRatingInteractor(
+    _repos.tournamentResultRepository,
+  );
 
-  RatingBloc({
-    required RepositoryFactory repos,
-    required RatingRouter router,
-  })  : _repos = repos,
-        _router = router,
-        super(const RatingState()) {
+  RatingBloc({required RepositoryFactory repos, required RatingRouter router})
+    : _repos = repos,
+      _router = router,
+      super(const RatingState()) {
     on<RatingEventPageOpened>(_onPageOpened);
     on<RatingEventRangeChanged>(_onRangeChanged);
     on<RatingEventGameSelected>(_onGameSelected);
@@ -29,10 +28,8 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
     on<RatingEventDownloadStats>(_onStatsDownload);
   }
 
-  Future<dynamic> _onStatsDownload(RatingEventDownloadStats event, Emitter emit) => _repos.clubRepository.downloadStats(
-        clubId: event.clubId,
-        range: event.range,
-      );
+  Future<dynamic> _onStatsDownload(RatingEventDownloadStats event, Emitter emit) =>
+      _repos.clubRepository.downloadStats(clubId: event.clubId, range: event.range);
 
   void _onGameSelected(RatingEventGameSelected event, Emitter emit) {
     final clubId = event.clubId;
@@ -43,21 +40,12 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
 
     final tournamentId = event.tournamentId;
     if (tournamentId != null) {
-      _router.openTournamentGame(
-        tournamentId,
-        event.gameId,
-      );
+      _router.openTournamentGame(tournamentId, event.gameId);
     }
   }
 
-  Future<void> _onDownloadRatingClicked(
-    RatingEventDownload event,
-    Emitter emit,
-  ) async {
-    await _downloadRatingInteractor.run(
-      clubId: event.clubId,
-      range: event.range,
-    );
+  Future<void> _onDownloadRatingClicked(RatingEventDownload event, Emitter emit) async {
+    await _downloadRatingInteractor.run(clubId: event.clubId, range: event.range);
   }
 
   void _onRangeChanged(RatingEventRangeChanged event, Emitter emit) {
@@ -74,34 +62,30 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
 
   Future<void> _onPageOpened(RatingEventPageOpened event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
-    final RatingModel rating;
-    if (event.clubId != null) {
-      rating = await _getRatingRepository.run(
-        clubId: event.clubId!,
-        range: event.range,
+    try {
+      final RatingModel rating;
+      if (event.clubId != null) {
+        rating = await _getRatingRepository.run(clubId: event.clubId!, range: event.range);
+      } else if (event.tournamentId != null) {
+        rating = await _getTournamentRatingInteractor(tournamentId: event.tournamentId!);
+      } else {
+        throw ArgumentError();
+      }
+      final hasCustomColumns = rating.rows.any((row) => row.customColumns.isNotEmpty);
+      emit(
+        state.copyWith(
+          isLoading: false,
+          rows: rating.rows,
+          clubName: rating.clubName,
+          games: rating.games,
+          mafiaWins: rating.mafiaWins,
+          citizenWins: rating.citizenWins,
+          hasCustomColumns: hasCustomColumns,
+          range: rating.range ?? event.range,
+        ),
       );
-    } else if (event.tournamentId != null) {
-      rating = await _getTournamentRatingInteractor(
-        tournamentId: event.tournamentId!,
-      );
-    } else {
-      throw ArgumentError();
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
     }
-    rating;
-    final hasCustomColumns = rating.rows.any(
-      (row) => row.customColumns.isNotEmpty,
-    );
-    emit(
-      state.copyWith(
-        isLoading: false,
-        rows: rating.rows,
-        clubName: rating.clubName,
-        games: rating.games,
-        mafiaWins: rating.mafiaWins,
-        citizenWins: rating.citizenWins,
-        hasCustomColumns: hasCustomColumns,
-        range: rating.range ?? event.range,
-      ),
-    );
   }
 }
