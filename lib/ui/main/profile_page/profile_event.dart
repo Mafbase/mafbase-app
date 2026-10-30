@@ -19,7 +19,7 @@ abstract class ProfileEvent with _$ProfileEvent {
 
   const factory ProfileEvent.billSubscription(
     int days,
-    String redirectPath,
+    String nextPath,
   ) = ProfileEventBillSubscription;
 
   const factory ProfileEvent.reset() = ProfileEventReset;

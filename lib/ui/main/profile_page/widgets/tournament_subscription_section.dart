@@ -284,9 +284,9 @@ class TournamentSubscriptionSection extends StatelessWidget {
 
     if (!context.mounted || days == null) return;
 
-    final redirectPath = context.router.currentUrl;
+    final nextPath = context.router.currentUrl;
     context.read<ProfileBloc>().add(
-          ProfileEvent.billSubscription(days, redirectPath),
+          ProfileEvent.billSubscription(days, nextPath),
         );
   }
 

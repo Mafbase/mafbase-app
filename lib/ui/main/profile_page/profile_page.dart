@@ -46,6 +46,14 @@ class _ProfilePageState extends State<ProfilePage>
     });
   }
 
+  void _onBackPressed() {
+    if (context.router.canPop(ignoreParentRoutes: true)) {
+      Navigator.maybePop(context);
+    } else {
+      context.router.replace(const ClubsRoute());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = MyTheme.of(context);
@@ -58,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       backgroundColor: theme.background1,
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(onPressed: _onBackPressed),
         title: Text(context.locale.profile),
       ),
       body: BlocBuilder<ProfileBloc, ProfileState>(

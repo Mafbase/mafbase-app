@@ -8,7 +8,5 @@ sealed class ProfileEffect with _$ProfileEffect {
 
   const factory ProfileEffect.navigateToPaymentWaiting({
     required String redirectLink,
-    required int purchaseId,
-    required String nextPath,
   }) = ProfileEffectNavigateToPaymentWaiting;
 }
