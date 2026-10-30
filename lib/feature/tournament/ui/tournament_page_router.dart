@@ -23,7 +23,7 @@ abstract class TournamentPageRouter {
 
   void openRating({required int tournamentId});
 
-  void openWebView(String url);
+  void openWebView(String url, {String? nextPath, int? purchaseId});
 
   Future<({int newPlayerId, List<int> games})?> openSubstituteDialog({
     required PlayerModel oldPlayer,
@@ -77,7 +77,9 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
   }
 
   @override
-  void openWebView(String url) {
-    _context.router.push(WebViewRoute(url: url, title: _context.locale.payment));
+  void openWebView(String url, {String? nextPath, int? purchaseId}) {
+    _context.router.push(
+      WebViewRoute(url: url, title: _context.locale.payment, nextPath: nextPath, purchaseId: purchaseId),
+    );
   }
 }

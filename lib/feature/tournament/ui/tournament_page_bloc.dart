@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
@@ -49,7 +50,6 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   late final PhotoThemeRepository _photoThemeRepository = _repos.photoThemeRepository;
   late final BillTournamentInteractor _billTournamentInteractor = BillTournamentInteractor(
     _repos.purchaseRepository,
-    _context!,
   );
 
   @visibleForTesting
@@ -105,16 +105,18 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   }
 
   Future<void> _onBill(TournamentPageEventBill event, Emitter emit) async {
+    final nextPath = _context?.router.currentUrl ?? '/tournament/$tournamentId';
     final result = await _billTournamentInteractor(
       tournamentId: tournamentId,
       playersCount: event.playersCount,
       billedTranslation: event.billedTranlsation,
+      nextPath: nextPath,
     );
     if (kIsWeb) {
       final uri = Uri.parse(result.redirectLink);
       await launchUrl(uri, webOnlyWindowName: '_self');
     } else {
-      router.openWebView(result.redirectLink);
+      router.openWebView(result.redirectLink, nextPath: nextPath, purchaseId: result.purchaseId);
     }
   }
 
