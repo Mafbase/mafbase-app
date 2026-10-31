@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:seating_generator_web/app/api_host.dart';
 import 'package:seating_generator_web/data/base_request.dart';
+import 'package:seating_generator_web/data/connection_retry_interceptor.dart';
 import 'package:seating_generator_web/data/requests/login_request.dart';
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
@@ -51,6 +52,7 @@ class MyHttpClient {
           handler.resolve(await _fetch(options));
         },
       ),
+      ConnectionRetryInterceptor(_fetch),
     ]);
 
   Future<Response> _fetch(RequestOptions options) => _client.fetch(options);
