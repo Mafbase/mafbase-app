@@ -21,17 +21,12 @@ import 'package:seating_generator_web/utils.dart';
 class EditSeatingPage extends StatelessWidget {
   final int tournamentId;
 
-  const EditSeatingPage({
-    super.key,
-    @PathParam('id') required this.tournamentId,
-  });
+  const EditSeatingPage({super.key, @PathParam('id') required this.tournamentId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EditSeatingBloc(
-        repos: RepositoryFactory.of(context),
-      ),
+      create: (context) => EditSeatingBloc(repos: RepositoryFactory.of(context)),
       child: _EditSeatingPageContent(tournamentId: tournamentId),
     );
   }
@@ -58,19 +53,13 @@ class _EditSeatingPageContentState extends State<_EditSeatingPageContent>
   }
 
   @override
-  void registerEffectHandlers(
-    void Function<T>(EffectHandler<T> handler) on,
-  ) {
+  void registerEffectHandlers(void Function<T>(EffectHandler<T> handler) on) {
     on<EditSeatingPageEffectSaveSuccess>(_onSaveSuccess);
   }
 
   void _onSaveSuccess(EditSeatingPageEffectSaveSuccess effect) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(context.locale.editSeatingSaveSuccess)),
-    );
-    context.read<SeatingPageBloc>().add(
-          SeatingPageEvent.pageOpened(tournamentId: widget.tournamentId),
-        );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.locale.editSeatingSaveSuccess)));
+    context.read<SeatingPageBloc>().add(SeatingPageEvent.pageOpened(tournamentId: widget.tournamentId));
   }
 
   void _initFromSeatingState(SeatingPageState seatingState) {
@@ -79,17 +68,10 @@ class _EditSeatingPageContentState extends State<_EditSeatingPageContent>
 
     _initialized = true;
     final seating = seatingState.games
-        .map(
-          (round) => round.map((g) => EditableTableModel.fromGameResult(g)).toList(),
-        )
+        .map((round) => round.map((g) => EditableTableModel.fromGameResult(g)).toList())
         .toList();
 
-    context.read<EditSeatingBloc>().add(
-          EditSeatingPageEvent.init(
-            tournamentId: widget.tournamentId,
-            seating: seating,
-          ),
-        );
+    context.read<EditSeatingBloc>().add(EditSeatingPageEvent.init(tournamentId: widget.tournamentId, seating: seating));
   }
 
   @override
@@ -105,38 +87,34 @@ class _EditSeatingPageContentState extends State<_EditSeatingPageContent>
           return BlocBuilder<EditSeatingBloc, EditSeatingPageState>(
             builder: (context, state) {
               if (state.isLoading) {
-                return const Scaffold(
-                  body: Center(child: CircularProgressIndicator()),
-                );
+                return const Scaffold(body: Center(child: CircularProgressIndicator()));
               }
 
               final hasChanges = _hasChanges(state);
 
               return Scaffold(
-                appBar: AppBar(
-                  title: Text(context.locale.editSeatingTitle),
-                ),
-                body: Column(
-                  children: [
-                    EditSeatingRoundSelector(
-                      roundCount: state.editedSeating.length,
-                      selectedRound: state.selectedRound,
-                      onSelected: (index) {
-                        context.read<EditSeatingBloc>().add(EditSeatingPageEvent.selectRound(index));
-                      },
-                    ),
-                    Expanded(
-                      child: _buildTablesGrid(context, state),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: CustomButton(
-                        disabled: !hasChanges || state.isSaving,
-                        onTap: () => context.read<EditSeatingBloc>().add(const EditSeatingPageEvent.save()),
-                        text: context.locale.editSeatingSave,
+                appBar: AppBar(title: Text(context.locale.editSeatingTitle)),
+                body: SafeArea(
+                  child: Column(
+                    children: [
+                      EditSeatingRoundSelector(
+                        roundCount: state.editedSeating.length,
+                        selectedRound: state.selectedRound,
+                        onSelected: (index) {
+                          context.read<EditSeatingBloc>().add(EditSeatingPageEvent.selectRound(index));
+                        },
                       ),
-                    ),
-                  ],
+                      Expanded(child: _buildTablesGrid(context, state)),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: CustomButton(
+                          disabled: !hasChanges || state.isSaving,
+                          onTap: () => context.read<EditSeatingBloc>().add(const EditSeatingPageEvent.save()),
+                          text: context.locale.editSeatingSave,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -174,13 +152,13 @@ class _EditSeatingPageContentState extends State<_EditSeatingPageContent>
               tableIndex: tableIndex,
               onSwap: (PlayerDragData source, int targetSlot) {
                 context.read<EditSeatingBloc>().add(
-                      EditSeatingPageEvent.swapPlayers(
-                        sourceTable: source.tableIndex,
-                        sourceSlot: source.slotIndex,
-                        targetTable: tableIndex,
-                        targetSlot: targetSlot,
-                      ),
-                    );
+                  EditSeatingPageEvent.swapPlayers(
+                    sourceTable: source.tableIndex,
+                    sourceSlot: source.slotIndex,
+                    targetTable: tableIndex,
+                    targetSlot: targetSlot,
+                  ),
+                );
               },
             );
           }),

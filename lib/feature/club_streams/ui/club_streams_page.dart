@@ -56,13 +56,13 @@ class ClubStreamsPageContent extends StatelessWidget {
     AddStreamBottomSheet.show(context).then((result) {
       if (result != null && context.mounted) {
         context.read<ClubStreamsAdminBloc>().add(
-              ClubStreamsAdminEventSetStream(
-                tableNumber: result.tableNumber,
-                viewerUrl: result.viewerUrl,
-                rtmpServerUrl: result.rtmpServerUrl,
-                rtmpKey: result.rtmpKey,
-              ),
-            );
+          ClubStreamsAdminEventSetStream(
+            tableNumber: result.tableNumber,
+            viewerUrl: result.viewerUrl,
+            rtmpServerUrl: result.rtmpServerUrl,
+            rtmpKey: result.rtmpKey,
+          ),
+        );
       }
     });
   }
@@ -169,7 +169,10 @@ class _BottomBar extends StatelessWidget {
         border: Border(top: BorderSide(color: theme.borderColor)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: CustomButton(text: locale.streamsAddButton, onTap: onAdd),
+      child: SafeArea(
+        top: false,
+        child: CustomButton(text: locale.streamsAddButton, onTap: onAdd),
+      ),
     );
   }
 }
