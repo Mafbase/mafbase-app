@@ -190,7 +190,13 @@ class _InfoTableDescriptionPageState extends State<_InfoTableDescriptionPageCont
                         disabled: !_areAllDescriptionsFilled(state.tableDescriptions),
                         onTap: () async {
                           final completer = Completer<void>();
-                          _bloc.add(InfoTableDescriptionEventSave(completer: completer));
+                          _bloc.add(
+                            InfoTableDescriptionEventSave(
+                              completer: completer,
+                              pendingTable: int.tryParse(_tableController.text),
+                              pendingDescription: _descriptionController.text,
+                            ),
+                          );
                           await completer.future;
                           if (context.mounted) {
                             context.backOrGoToDefault(

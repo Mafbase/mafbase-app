@@ -75,11 +75,16 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
   ) async {
     emit(state.copyWith(loading: true));
     try {
+      var descriptions = state.tableDescriptions;
+      final pendingTable = event.pendingTable;
+      if (pendingTable != null && !descriptions.any((e) => e.key == pendingTable)) {
+        descriptions = [...descriptions, MapEntry(pendingTable, event.pendingDescription ?? '')];
+      }
       await _repository.setDescriptions(
         tournamentId: _tournamentId,
-        description: state.tableDescriptions,
+        description: descriptions,
       );
-      emit(state.copyWith(loading: false));
+      emit(state.copyWith(tableDescriptions: descriptions, loading: false));
       event.completer.complete();
     } catch (e) {
       event.completer.completeError(e);
