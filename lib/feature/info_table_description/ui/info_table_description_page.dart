@@ -73,6 +73,19 @@ class _InfoTableDescriptionPageState extends State<_InfoTableDescriptionPageCont
     return descriptions.every((entry) => entry.value.isNotEmpty);
   }
 
+  bool _isSaveDisabled(List<MapEntry<int, String>> descriptions) {
+    if (!_areAllDescriptionsFilled(descriptions)) return true;
+
+    final pendingTable = int.tryParse(_tableController.text);
+    if (pendingTable != null &&
+        !descriptions.any((e) => e.key == pendingTable) &&
+        _descriptionController.text.isEmpty) {
+      return true;
+    }
+
+    return false;
+  }
+
   void _addTable() {
     final tableNumber = int.tryParse(_tableController.text);
     if (tableNumber == null) return;
@@ -185,25 +198,28 @@ class _InfoTableDescriptionPageState extends State<_InfoTableDescriptionPageCont
                         ),
                       ),
                       const SizedBox(height: 24),
-                      CustomButton(
-                        text: locale.save,
-                        disabled: !_areAllDescriptionsFilled(state.tableDescriptions),
-                        onTap: () async {
-                          final completer = Completer<void>();
-                          _bloc.add(
-                            InfoTableDescriptionEventSave(
-                              completer: completer,
-                              pendingTable: int.tryParse(_tableController.text),
-                              pendingDescription: _descriptionController.text,
-                            ),
-                          );
-                          await completer.future;
-                          if (context.mounted) {
-                            context.backOrGoToDefault(
-                              (c) => '/tournament/${widget.tournamentId}',
-                            )();
-                          }
-                        },
+                      ListenableBuilder(
+                        listenable: Listenable.merge([_tableController, _descriptionController]),
+                        builder: (context, _) => CustomButton(
+                          text: locale.save,
+                          disabled: _isSaveDisabled(state.tableDescriptions),
+                          onTap: () async {
+                            final completer = Completer<void>();
+                            _bloc.add(
+                              InfoTableDescriptionEventSave(
+                                completer: completer,
+                                pendingTable: int.tryParse(_tableController.text),
+                                pendingDescription: _descriptionController.text,
+                              ),
+                            );
+                            await completer.future;
+                            if (context.mounted) {
+                              context.backOrGoToDefault(
+                                (c) => '/tournament/${widget.tournamentId}',
+                              )();
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),
