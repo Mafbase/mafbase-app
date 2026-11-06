@@ -27,4 +27,4 @@ RTMP реконнектится без лимита, сессия пересоз
 
 **Регресс:** скилл `stream-regression` в `mafbase-app/.claude/skills/` — эмулятор + example + ffmpeg-приёмник,
 девять сценариев за ~6 минут; тест-кейсы и история прогонов в `mafbase_stream/docs/dev/android_lifecycle_tests.md`.
-Задача по iOS — `mafbase_stream/docs/19_ios_stream_resilience.md`.
+Задача по iOS — `docs/tasks/mafbase-stream/19_ios_stream_resilience.md` в корне workspace mafbase (до 2026-11-06 лежала в `mafbase_stream/docs/`).
