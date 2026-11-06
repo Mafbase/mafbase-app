@@ -1721,5 +1721,85 @@
   "checklistSheetPhoneOperatorApp": "Оператору нужно приложение Mafbase — оно есть в App Store и RuStore.",
   "@checklistSheetPhoneOperatorApp": {},
   "checklistSheetPhoneOperatorSelf": "Начать трансляцию можно и со своего телефона: в приложении у стола есть кнопка «Начать с этого телефона».",
-  "@checklistSheetPhoneOperatorSelf": {}
+  "@checklistSheetPhoneOperatorSelf": {},
+  "checklistCoverageTitle": "Охват оповещений",
+  "@checklistCoverageTitle": {},
+  "checklistCoverageSummary": "Получат оповещения: {reachable} из {total}",
+  "@checklistCoverageSummary": {
+    "placeholders": {
+      "reachable": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistCoverageTelegram": "Telegram",
+  "@checklistCoverageTelegram": {},
+  "checklistCoverageTelegramHint": "Подписаны на бота",
+  "@checklistCoverageTelegramHint": {},
+  "checklistCoverageVk": "ВКонтакте",
+  "@checklistCoverageVk": {},
+  "checklistCoverageVkHint": "По ФСМ-нику",
+  "@checklistCoverageVkHint": {},
+  "checklistCoveragePush": "Push в приложении",
+  "@checklistCoveragePush": {},
+  "checklistCoveragePushHint": "Только оповещение о начале игры, в общий счёт не входит",
+  "@checklistCoveragePushHint": {},
+  "checklistCoverageFsmNote": "Участники с ФСМ-ником получат оповещения в ВК автоматически",
+  "@checklistCoverageFsmNote": {},
+  "checklistCoverageUnavailable": "Не удалось получить данные о подписках",
+  "@checklistCoverageUnavailable": {},
+  "checklistCoverageLoadError": "Не удалось загрузить охват оповещений",
+  "@checklistCoverageLoadError": {},
+  "checklistCoverageUnreachable": "Не получат оповещения ({count})",
+  "@checklistCoverageUnreachable": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistCoverageAllReachable": "Оповещения получат все участники",
+  "@checklistCoverageAllReachable": {},
+  "checklistCoverageNoFsmNickname": "Нет ФСМ-ника — оповещение в ВК не придёт",
+  "@checklistCoverageNoFsmNickname": {},
+  "checklistCoverageNotSubscribed": "Не подписан на бота в Telegram",
+  "@checklistCoverageNotSubscribed": {},
+  "checklistCoverageSetFsmNickname": "Указать ФСМ-ник",
+  "@checklistCoverageSetFsmNickname": {},
+  "checklistCoverageInviteTitle": "Приглашение для чата турнира",
+  "@checklistCoverageInviteTitle": {},
+  "checklistCoverageInviteAbout": "Отправьте его в чат турнира: по нему игроки подпишутся на бота и будут получать оповещения.",
+  "@checklistCoverageInviteAbout": {},
+  "checklistCoverageInviteText": "Чтобы получать номер своего стола и время начала игры, напишите боту {botUrl} свой ФСМ-ник с учётом регистра и цифр.\n\nЕсли ФСМ-ника нет, отправьте боту /pair и через пробел свой ник в Mafbase — как в списке участников турнира. Например: /pair Шерлок",
+  "@checklistCoverageInviteText": {
+    "placeholders": {
+      "botUrl": {
+        "type": "String",
+        "example": "https://t.me/mafbase_notification_bot"
+      }
+    }
+  },
+  "checklistCoverageInviteCopy": "Скопировать приглашение",
+  "@checklistCoverageInviteCopy": {},
+  "checklistCoverageInviteCopied": "Приглашение скопировано",
+  "@checklistCoverageInviteCopied": {},
+  "checklistCoverageFormCounter": "Получат: {current} из {total}",
+  "@checklistCoverageFormCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  }
 }

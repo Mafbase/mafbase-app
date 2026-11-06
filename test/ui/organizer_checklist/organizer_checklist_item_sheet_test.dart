@@ -64,6 +64,7 @@ class _TestRouter extends RootStackRouter {
     TournamentSettingsRoute.name,
     SeatingRoute.name,
     InfoTableDescriptionRoute.name,
+    NotificationCoverageRoute.name,
     StreamsRoute.name,
     TranslationControlRoute.name,
   ];
@@ -192,8 +193,9 @@ void main() {
     expect(harness.current.queryParams.optInt('gomafia'), 1);
   });
 
-  testWidgets('table descriptions and phone items lead to their pages', (tester) async {
+  testWidgets('notification reach, table descriptions and phone items lead to their pages', (tester) async {
     final cases = {
+      ChecklistKey.notifyCoverage: NotificationCoverageRoute.name,
       ChecklistKey.tableDescriptions: InfoTableDescriptionRoute.name,
       ChecklistKey.phoneStream: StreamsRoute.name,
       ChecklistKey.phoneOperator: StreamsRoute.name,

@@ -1405,5 +1405,85 @@
   "checklistSheetPhoneOperatorApp": "The operator needs the Mafbase app from the App Store or RuStore.",
   "@checklistSheetPhoneOperatorApp": {},
   "checklistSheetPhoneOperatorSelf": "You can also stream from your own phone: in the app every table has a Start on this phone button.",
-  "@checklistSheetPhoneOperatorSelf": {}
+  "@checklistSheetPhoneOperatorSelf": {},
+  "checklistCoverageTitle": "Notification reach",
+  "@checklistCoverageTitle": {},
+  "checklistCoverageSummary": "Will receive notifications: {reachable} of {total}",
+  "@checklistCoverageSummary": {
+    "placeholders": {
+      "reachable": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistCoverageTelegram": "Telegram",
+  "@checklistCoverageTelegram": {},
+  "checklistCoverageTelegramHint": "Subscribed to the bot",
+  "@checklistCoverageTelegramHint": {},
+  "checklistCoverageVk": "VK",
+  "@checklistCoverageVk": {},
+  "checklistCoverageVkHint": "By FSM nickname",
+  "@checklistCoverageVkHint": {},
+  "checklistCoveragePush": "Push in the app",
+  "@checklistCoveragePush": {},
+  "checklistCoveragePushHint": "Only the game start notification, not counted in the total",
+  "@checklistCoveragePushHint": {},
+  "checklistCoverageFsmNote": "Participants with an FSM nickname get notifications in VK automatically",
+  "@checklistCoverageFsmNote": {},
+  "checklistCoverageUnavailable": "Couldn't get subscription data",
+  "@checklistCoverageUnavailable": {},
+  "checklistCoverageLoadError": "Couldn't load the notification reach",
+  "@checklistCoverageLoadError": {},
+  "checklistCoverageUnreachable": "Won't receive notifications ({count})",
+  "@checklistCoverageUnreachable": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistCoverageAllReachable": "All participants will receive notifications",
+  "@checklistCoverageAllReachable": {},
+  "checklistCoverageNoFsmNickname": "No FSM nickname, so the VK notification won't arrive",
+  "@checklistCoverageNoFsmNickname": {},
+  "checklistCoverageNotSubscribed": "Not subscribed to the Telegram bot",
+  "@checklistCoverageNotSubscribed": {},
+  "checklistCoverageSetFsmNickname": "Set FSM nickname",
+  "@checklistCoverageSetFsmNickname": {},
+  "checklistCoverageInviteTitle": "Invitation for the tournament chat",
+  "@checklistCoverageInviteTitle": {},
+  "checklistCoverageInviteAbout": "Post it to the tournament chat: players will subscribe to the bot and get notifications.",
+  "@checklistCoverageInviteAbout": {},
+  "checklistCoverageInviteText": "To get your table number and the game start time, send your FSM nickname to the bot {botUrl}, keeping the exact case and digits.\n\nIf you don't have an FSM nickname, send the bot /pair followed by a space and your Mafbase nickname as it appears in the tournament participants list. For example: /pair Sherlock",
+  "@checklistCoverageInviteText": {
+    "placeholders": {
+      "botUrl": {
+        "type": "String",
+        "example": "https://t.me/mafbase_notification_bot"
+      }
+    }
+  },
+  "checklistCoverageInviteCopy": "Copy invitation",
+  "@checklistCoverageInviteCopy": {},
+  "checklistCoverageInviteCopied": "Invitation copied",
+  "@checklistCoverageInviteCopied": {},
+  "checklistCoverageFormCounter": "Will receive: {current} of {total}",
+  "@checklistCoverageFormCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  }
 }

@@ -135,11 +135,12 @@ class OrganizerChecklistItemContent {
       ChecklistKey.players => _addPlayers(),
       ChecklistKey.seating => _open(SeatingRoute(tournamentId: tournamentId, gomafia: _isFsm ? 1 : null)),
       ChecklistKey.billing => canPay ? _pay() : null,
+      ChecklistKey.notifyCoverage => _open(NotificationCoverageRoute(tournamentId: tournamentId)),
       ChecklistKey.tableDescriptions => _open(InfoTableDescriptionRoute(tournamentId: tournamentId)),
       ChecklistKey.translationBilling => canPay && !item.isDone ? _pay(preselectTranslation: true) : null,
       ChecklistKey.obsScenes => _openControlPage(),
       ChecklistKey.phoneStream || ChecklistKey.phoneOperator => _open(StreamsRoute(tournamentId: tournamentId)),
-      ChecklistKey.notifyCoverage || ChecklistKey.streamMethod || ChecklistKey.obsWidget => null,
+      ChecklistKey.streamMethod || ChecklistKey.obsWidget => null,
     };
   }
 
