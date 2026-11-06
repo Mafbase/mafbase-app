@@ -213,6 +213,82 @@ class BroadcastPhase extends $pb.ProtobufEnum {
   const BroadcastPhase._(super.value, super.name);
 }
 
+class ChecklistItemKey extends $pb.ProtobufEnum {
+  static const ChecklistItemKey unknownChecklistItemKey =
+      ChecklistItemKey._(0, _omitEnumNames ? '' : 'unknownChecklistItemKey');
+  static const ChecklistItemKey checklistGamesCount =
+      ChecklistItemKey._(1, _omitEnumNames ? '' : 'checklistGamesCount');
+  static const ChecklistItemKey checklistPlayers =
+      ChecklistItemKey._(2, _omitEnumNames ? '' : 'checklistPlayers');
+  static const ChecklistItemKey checklistSeating =
+      ChecklistItemKey._(3, _omitEnumNames ? '' : 'checklistSeating');
+  static const ChecklistItemKey checklistBilling =
+      ChecklistItemKey._(4, _omitEnumNames ? '' : 'checklistBilling');
+  static const ChecklistItemKey checklistNotifyCoverage =
+      ChecklistItemKey._(5, _omitEnumNames ? '' : 'checklistNotifyCoverage');
+  static const ChecklistItemKey checklistTableDescriptions =
+      ChecklistItemKey._(6, _omitEnumNames ? '' : 'checklistTableDescriptions');
+  static const ChecklistItemKey checklistTranslationBilling =
+      ChecklistItemKey._(
+          7, _omitEnumNames ? '' : 'checklistTranslationBilling');
+  static const ChecklistItemKey checklistObsWidget =
+      ChecklistItemKey._(8, _omitEnumNames ? '' : 'checklistObsWidget');
+  static const ChecklistItemKey checklistObsScenes =
+      ChecklistItemKey._(9, _omitEnumNames ? '' : 'checklistObsScenes');
+
+  static const $core.List<ChecklistItemKey> values = <ChecklistItemKey>[
+    unknownChecklistItemKey,
+    checklistGamesCount,
+    checklistPlayers,
+    checklistSeating,
+    checklistBilling,
+    checklistNotifyCoverage,
+    checklistTableDescriptions,
+    checklistTranslationBilling,
+    checklistObsWidget,
+    checklistObsScenes,
+  ];
+
+  static final $core.List<ChecklistItemKey?> _byValue =
+      $pb.ProtobufEnum.$_initByValueList(values, 9);
+  static ChecklistItemKey? valueOf($core.int value) =>
+      value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const ChecklistItemKey._(super.value, super.name);
+}
+
+class ChecklistItemStatus extends $pb.ProtobufEnum {
+  static const ChecklistItemStatus unknownChecklistItemStatus =
+      ChecklistItemStatus._(
+          0, _omitEnumNames ? '' : 'unknownChecklistItemStatus');
+  static const ChecklistItemStatus checklistTodo =
+      ChecklistItemStatus._(1, _omitEnumNames ? '' : 'checklistTodo');
+  static const ChecklistItemStatus checklistDone =
+      ChecklistItemStatus._(2, _omitEnumNames ? '' : 'checklistDone');
+  static const ChecklistItemStatus checklistWarning =
+      ChecklistItemStatus._(3, _omitEnumNames ? '' : 'checklistWarning');
+  static const ChecklistItemStatus checklistLocked =
+      ChecklistItemStatus._(4, _omitEnumNames ? '' : 'checklistLocked');
+  static const ChecklistItemStatus checklistDismissed =
+      ChecklistItemStatus._(5, _omitEnumNames ? '' : 'checklistDismissed');
+
+  static const $core.List<ChecklistItemStatus> values = <ChecklistItemStatus>[
+    unknownChecklistItemStatus,
+    checklistTodo,
+    checklistDone,
+    checklistWarning,
+    checklistLocked,
+    checklistDismissed,
+  ];
+
+  static final $core.List<ChecklistItemStatus?> _byValue =
+      $pb.ProtobufEnum.$_initByValueList(values, 5);
+  static ChecklistItemStatus? valueOf($core.int value) =>
+      value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const ChecklistItemStatus._(super.value, super.name);
+}
+
 class LoginEventOut_Error extends $pb.ProtobufEnum {
   static const LoginEventOut_Error noError =
       LoginEventOut_Error._(0, _omitEnumNames ? '' : 'noError');

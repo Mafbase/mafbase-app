@@ -150,6 +150,51 @@ const BroadcastPhase$json = {
 final $typed_data.Uint8List broadcastPhaseDescriptor = $convert.base64Decode(
     'Cg5Ccm9hZGNhc3RQaGFzZRIHCgNkYXkQABIJCgVuaWdodBABEg8KC2JyZWFrX3BoYXNlEAI=');
 
+@$core.Deprecated('Use checklistItemKeyDescriptor instead')
+const ChecklistItemKey$json = {
+  '1': 'ChecklistItemKey',
+  '2': [
+    {'1': 'unknownChecklistItemKey', '2': 0},
+    {'1': 'checklistGamesCount', '2': 1},
+    {'1': 'checklistPlayers', '2': 2},
+    {'1': 'checklistSeating', '2': 3},
+    {'1': 'checklistBilling', '2': 4},
+    {'1': 'checklistNotifyCoverage', '2': 5},
+    {'1': 'checklistTableDescriptions', '2': 6},
+    {'1': 'checklistTranslationBilling', '2': 7},
+    {'1': 'checklistObsWidget', '2': 8},
+    {'1': 'checklistObsScenes', '2': 9},
+  ],
+};
+
+/// Descriptor for `ChecklistItemKey`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List checklistItemKeyDescriptor = $convert.base64Decode(
+    'ChBDaGVja2xpc3RJdGVtS2V5EhsKF3Vua25vd25DaGVja2xpc3RJdGVtS2V5EAASFwoTY2hlY2'
+    'tsaXN0R2FtZXNDb3VudBABEhQKEGNoZWNrbGlzdFBsYXllcnMQAhIUChBjaGVja2xpc3RTZWF0'
+    'aW5nEAMSFAoQY2hlY2tsaXN0QmlsbGluZxAEEhsKF2NoZWNrbGlzdE5vdGlmeUNvdmVyYWdlEA'
+    'USHgoaY2hlY2tsaXN0VGFibGVEZXNjcmlwdGlvbnMQBhIfChtjaGVja2xpc3RUcmFuc2xhdGlv'
+    'bkJpbGxpbmcQBxIWChJjaGVja2xpc3RPYnNXaWRnZXQQCBIWChJjaGVja2xpc3RPYnNTY2VuZX'
+    'MQCQ==');
+
+@$core.Deprecated('Use checklistItemStatusDescriptor instead')
+const ChecklistItemStatus$json = {
+  '1': 'ChecklistItemStatus',
+  '2': [
+    {'1': 'unknownChecklistItemStatus', '2': 0},
+    {'1': 'checklistTodo', '2': 1},
+    {'1': 'checklistDone', '2': 2},
+    {'1': 'checklistWarning', '2': 3},
+    {'1': 'checklistLocked', '2': 4},
+    {'1': 'checklistDismissed', '2': 5},
+  ],
+};
+
+/// Descriptor for `ChecklistItemStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List checklistItemStatusDescriptor = $convert.base64Decode(
+    'ChNDaGVja2xpc3RJdGVtU3RhdHVzEh4KGnVua25vd25DaGVja2xpc3RJdGVtU3RhdHVzEAASEQ'
+    'oNY2hlY2tsaXN0VG9kbxABEhEKDWNoZWNrbGlzdERvbmUQAhIUChBjaGVja2xpc3RXYXJuaW5n'
+    'EAMSEwoPY2hlY2tsaXN0TG9ja2VkEAQSFgoSY2hlY2tsaXN0RGlzbWlzc2VkEAU=');
+
 @$core.Deprecated('Use loginEventDescriptor instead')
 const LoginEvent$json = {
   '1': 'LoginEvent',
@@ -3528,3 +3573,144 @@ final $typed_data.Uint8List streamSettingsOutDescriptor = $convert.base64Decode(
     'IYYnJlYWtQbGFjZWhvbGRlckltYWdlVXJsiAEBEikKDWJyYW5kSW1hZ2VVcmwYAiABKAlIAVIN'
     'YnJhbmRJbWFnZVVybIgBAUIbChlfYnJlYWtQbGFjZWhvbGRlckltYWdlVXJsQhAKDl9icmFuZE'
     'ltYWdlVXJs');
+
+@$core.Deprecated('Use checklistItemDescriptor instead')
+const ChecklistItem$json = {
+  '1': 'ChecklistItem',
+  '2': [
+    {
+      '1': 'key',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.generated.ChecklistItemKey',
+      '10': 'key'
+    },
+    {
+      '1': 'status',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.generated.ChecklistItemStatus',
+      '10': 'status'
+    },
+    {
+      '1': 'current',
+      '3': 3,
+      '4': 1,
+      '5': 5,
+      '9': 0,
+      '10': 'current',
+      '17': true
+    },
+    {'1': 'total', '3': 4, '4': 1, '5': 5, '9': 1, '10': 'total', '17': true},
+    {'1': 'unavailable', '3': 5, '4': 1, '5': 8, '10': 'unavailable'},
+  ],
+  '8': [
+    {'1': '_current'},
+    {'1': '_total'},
+  ],
+};
+
+/// Descriptor for `ChecklistItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List checklistItemDescriptor = $convert.base64Decode(
+    'Cg1DaGVja2xpc3RJdGVtEi0KA2tleRgBIAEoDjIbLmdlbmVyYXRlZC5DaGVja2xpc3RJdGVtS2'
+    'V5UgNrZXkSNgoGc3RhdHVzGAIgASgOMh4uZ2VuZXJhdGVkLkNoZWNrbGlzdEl0ZW1TdGF0dXNS'
+    'BnN0YXR1cxIdCgdjdXJyZW50GAMgASgFSABSB2N1cnJlbnSIAQESGQoFdG90YWwYBCABKAVIAV'
+    'IFdG90YWyIAQESIAoLdW5hdmFpbGFibGUYBSABKAhSC3VuYXZhaWxhYmxlQgoKCF9jdXJyZW50'
+    'QggKBl90b3RhbA==');
+
+@$core.Deprecated('Use tournamentChecklistOutDescriptor instead')
+const TournamentChecklistOut$json = {
+  '1': 'TournamentChecklistOut',
+  '2': [
+    {
+      '1': 'items',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.generated.ChecklistItem',
+      '10': 'items'
+    },
+    {'1': 'isFsm', '3': 2, '4': 1, '5': 8, '10': 'isFsm'},
+  ],
+};
+
+/// Descriptor for `TournamentChecklistOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tournamentChecklistOutDescriptor =
+    $convert.base64Decode(
+        'ChZUb3VybmFtZW50Q2hlY2tsaXN0T3V0Ei4KBWl0ZW1zGAEgAygLMhguZ2VuZXJhdGVkLkNoZW'
+        'NrbGlzdEl0ZW1SBWl0ZW1zEhQKBWlzRnNtGAIgASgIUgVpc0ZzbQ==');
+
+@$core.Deprecated('Use setChecklistDismissedEventDescriptor instead')
+const SetChecklistDismissedEvent$json = {
+  '1': 'SetChecklistDismissedEvent',
+  '2': [
+    {
+      '1': 'keys',
+      '3': 1,
+      '4': 3,
+      '5': 14,
+      '6': '.generated.ChecklistItemKey',
+      '10': 'keys'
+    },
+    {'1': 'dismissed', '3': 2, '4': 1, '5': 8, '10': 'dismissed'},
+  ],
+};
+
+/// Descriptor for `SetChecklistDismissedEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setChecklistDismissedEventDescriptor =
+    $convert.base64Decode(
+        'ChpTZXRDaGVja2xpc3REaXNtaXNzZWRFdmVudBIvCgRrZXlzGAEgAygOMhsuZ2VuZXJhdGVkLk'
+        'NoZWNrbGlzdEl0ZW1LZXlSBGtleXMSHAoJZGlzbWlzc2VkGAIgASgIUglkaXNtaXNzZWQ=');
+
+@$core.Deprecated('Use notificationCoverageOutDescriptor instead')
+const NotificationCoverageOut$json = {
+  '1': 'NotificationCoverageOut',
+  '2': [
+    {'1': 'isFsm', '3': 1, '4': 1, '5': 8, '10': 'isFsm'},
+    {'1': 'total', '3': 2, '4': 1, '5': 5, '10': 'total'},
+    {'1': 'reachable', '3': 3, '4': 1, '5': 5, '10': 'reachable'},
+    {'1': 'telegram', '3': 4, '4': 1, '5': 5, '10': 'telegram'},
+    {'1': 'vk', '3': 5, '4': 1, '5': 5, '10': 'vk'},
+    {'1': 'push', '3': 6, '4': 1, '5': 5, '10': 'push'},
+    {
+      '1': 'unreachable',
+      '3': 7,
+      '4': 3,
+      '5': 11,
+      '6': '.generated.UnreachablePlayer',
+      '10': 'unreachable'
+    },
+    {'1': 'unavailable', '3': 8, '4': 1, '5': 8, '10': 'unavailable'},
+  ],
+};
+
+/// Descriptor for `NotificationCoverageOut`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List notificationCoverageOutDescriptor = $convert.base64Decode(
+    'ChdOb3RpZmljYXRpb25Db3ZlcmFnZU91dBIUCgVpc0ZzbRgBIAEoCFIFaXNGc20SFAoFdG90YW'
+    'wYAiABKAVSBXRvdGFsEhwKCXJlYWNoYWJsZRgDIAEoBVIJcmVhY2hhYmxlEhoKCHRlbGVncmFt'
+    'GAQgASgFUgh0ZWxlZ3JhbRIOCgJ2axgFIAEoBVICdmsSEgoEcHVzaBgGIAEoBVIEcHVzaBI+Cg'
+    't1bnJlYWNoYWJsZRgHIAMoCzIcLmdlbmVyYXRlZC5VbnJlYWNoYWJsZVBsYXllclILdW5yZWFj'
+    'aGFibGUSIAoLdW5hdmFpbGFibGUYCCABKAhSC3VuYXZhaWxhYmxl');
+
+@$core.Deprecated('Use unreachablePlayerDescriptor instead')
+const UnreachablePlayer$json = {
+  '1': 'UnreachablePlayer',
+  '2': [
+    {
+      '1': 'player',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.generated.Player',
+      '10': 'player'
+    },
+    {'1': 'hasFsmNickname', '3': 2, '4': 1, '5': 8, '10': 'hasFsmNickname'},
+  ],
+};
+
+/// Descriptor for `UnreachablePlayer`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List unreachablePlayerDescriptor = $convert.base64Decode(
+    'ChFVbnJlYWNoYWJsZVBsYXllchIpCgZwbGF5ZXIYASABKAsyES5nZW5lcmF0ZWQuUGxheWVyUg'
+    'ZwbGF5ZXISJgoOaGFzRnNtTmlja25hbWUYAiABKAhSDmhhc0ZzbU5pY2tuYW1l');
