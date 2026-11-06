@@ -164,6 +164,9 @@ const ChecklistItemKey$json = {
     {'1': 'checklistTranslationBilling', '2': 7},
     {'1': 'checklistObsWidget', '2': 8},
     {'1': 'checklistObsScenes', '2': 9},
+    {'1': 'checklistStreamMethod', '2': 10},
+    {'1': 'checklistPhoneStream', '2': 11},
+    {'1': 'checklistPhoneOperator', '2': 12},
   ],
 };
 
@@ -174,7 +177,8 @@ final $typed_data.Uint8List checklistItemKeyDescriptor = $convert.base64Decode(
     'aW5nEAMSFAoQY2hlY2tsaXN0QmlsbGluZxAEEhsKF2NoZWNrbGlzdE5vdGlmeUNvdmVyYWdlEA'
     'USHgoaY2hlY2tsaXN0VGFibGVEZXNjcmlwdGlvbnMQBhIfChtjaGVja2xpc3RUcmFuc2xhdGlv'
     'bkJpbGxpbmcQBxIWChJjaGVja2xpc3RPYnNXaWRnZXQQCBIWChJjaGVja2xpc3RPYnNTY2VuZX'
-    'MQCQ==');
+    'MQCRIZChVjaGVja2xpc3RTdHJlYW1NZXRob2QQChIYChRjaGVja2xpc3RQaG9uZVN0cmVhbRAL'
+    'EhoKFmNoZWNrbGlzdFBob25lT3BlcmF0b3IQDA==');
 
 @$core.Deprecated('Use checklistItemStatusDescriptor instead')
 const ChecklistItemStatus$json = {

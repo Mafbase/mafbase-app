@@ -235,6 +235,12 @@ class ChecklistItemKey extends $pb.ProtobufEnum {
       ChecklistItemKey._(8, _omitEnumNames ? '' : 'checklistObsWidget');
   static const ChecklistItemKey checklistObsScenes =
       ChecklistItemKey._(9, _omitEnumNames ? '' : 'checklistObsScenes');
+  static const ChecklistItemKey checklistStreamMethod =
+      ChecklistItemKey._(10, _omitEnumNames ? '' : 'checklistStreamMethod');
+  static const ChecklistItemKey checklistPhoneStream =
+      ChecklistItemKey._(11, _omitEnumNames ? '' : 'checklistPhoneStream');
+  static const ChecklistItemKey checklistPhoneOperator =
+      ChecklistItemKey._(12, _omitEnumNames ? '' : 'checklistPhoneOperator');
 
   static const $core.List<ChecklistItemKey> values = <ChecklistItemKey>[
     unknownChecklistItemKey,
@@ -247,10 +253,13 @@ class ChecklistItemKey extends $pb.ProtobufEnum {
     checklistTranslationBilling,
     checklistObsWidget,
     checklistObsScenes,
+    checklistStreamMethod,
+    checklistPhoneStream,
+    checklistPhoneOperator,
   ];
 
   static final $core.List<ChecklistItemKey?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 9);
+      $pb.ProtobufEnum.$_initByValueList(values, 12);
   static ChecklistItemKey? valueOf($core.int value) =>
       value < 0 || value >= _byValue.length ? null : _byValue[value];
 
