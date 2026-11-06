@@ -136,7 +136,10 @@ void main() {
     await _pumpSection(tester, obs: ObsState(connected: true, controlLevel: 3, scenes: ['Стол']), mapping: null);
     await _toggle(tester);
 
-    expect(find.textContaining('расширенный или полный доступ к OBS'), findsOneWidget);
+    expect(
+      find.textContaining('в поле «Разрешение страницы» выберите «Продвинутый доступ к OBS» или «Полный доступ к OBS»'),
+      findsOneWidget,
+    );
     expect(find.byType(DropdownButton<String>), findsNothing);
   });
 

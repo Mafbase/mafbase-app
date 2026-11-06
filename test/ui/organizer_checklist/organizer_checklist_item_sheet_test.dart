@@ -19,6 +19,7 @@ import 'package:seating_generator_web/feature/organizer_checklist/domain/checkli
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_state.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_help_image.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_item_sheet.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
@@ -231,6 +232,29 @@ void main() {
     await _pumpSheet(tester, checklistItem(ChecklistKey.tableDescriptions, ChecklistStatus.locked));
     await _tapAndSettle(tester, 'Оплатить');
     expect(tester.widget<Checkbox>(find.byType(Checkbox)).value, isFalse);
+  });
+
+  testWidgets('OBS help shows a screenshot under every step that has one', (tester) async {
+    // Список листа строит только пункты рядом с видимой частью, а лист занимает долю высоты экрана.
+    tester.view.physicalSize = const Size(800, 3000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    List<String> screenshots() => tester
+        .widgetList<OrganizerChecklistHelpImage>(find.byType(OrganizerChecklistHelpImage, skipOffstage: false))
+        .map((image) => image.asset)
+        .toList();
+
+    await _pumpSheet(tester, checklistItem(ChecklistKey.obsWidget, ChecklistStatus.locked));
+    expect(screenshots(), [
+      'assets/checklist/obs_add_browser_source.png',
+      'assets/checklist/obs_browser_source_size.png',
+      'assets/checklist/obs_browser_source_permissions.png',
+    ]);
+
+    await tester.pumpWidget(const SizedBox());
+    await _pumpSheet(tester, checklistItem(ChecklistKey.obsScenes, ChecklistStatus.todo));
+    expect(screenshots(), ['assets/checklist/translation_control_obs_panel.png']);
   });
 
   testWidgets('paid overlays and hidden billing leave no payment button', (tester) async {
