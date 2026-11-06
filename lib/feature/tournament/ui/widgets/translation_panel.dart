@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
@@ -9,19 +7,24 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/design_picker_dialog.dart';
+import 'package:seating_generator_web/feature/translation_links/translation_table_links.dart';
+import 'package:seating_generator_web/feature/translation_links/widgets/translation_table_links_row.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/link_actions.dart';
 
 class TranslationPanel extends StatefulWidget {
   final int tournamentId;
   final int tablesCount;
+  final TranslationLinksFont font;
 
   const TranslationPanel({
     super.key,
     required this.tournamentId,
     required this.tablesCount,
+    this.font = GoogleFonts.inter,
   });
 
   @override
@@ -40,12 +43,6 @@ class _TranslationPanelState extends State<TranslationPanel> {
     _keyFuture = _repository.getKey(tournamentId: widget.tournamentId);
   }
 
-  String _buildLink(String root, String path, String key, int table, DesignModel? design) {
-    final base = '$root/$path?tournamentId=${widget.tournamentId}&table=$table&key=$key';
-    if (design != null) return '$base&design=${design.designKey}';
-    return base;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,8 +51,9 @@ class _TranslationPanelState extends State<TranslationPanel> {
       children: [
         BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
           selector: (state) => !state.isLoading && state.games.isEmpty,
-          builder: (context, noSeating) =>
-              noSeating ? _NoSeatingWarning(tournamentId: widget.tournamentId) : const SizedBox.shrink(),
+          builder: (context, noSeating) => noSeating
+              ? _NoSeatingWarning(tournamentId: widget.tournamentId, font: widget.font)
+              : const SizedBox.shrink(),
         ),
         _buildLinks(context),
       ],
@@ -82,17 +80,21 @@ class _TranslationPanelState extends State<TranslationPanel> {
         }
 
         final data = snapshot.data!;
-        final root = kIsWeb && !kDebugMode
-            ? '${Uri.base.scheme}://${Uri.base.host}${Uri.base.port != 80 && Uri.base.port != 443 ? ':${Uri.base.port}' : ''}'
-            : 'https://mafbase.ru';
-
         final savedDesign = data.selectedDesignKey != null
             ? data.designs.where((d) => d.designKey == data.selectedDesignKey).firstOrNull
             : null;
         final fallbackDesign =
             data.designs.where((d) => d.designKey == 'mafbase').firstOrNull ?? data.designs.firstOrNull;
         final effectiveDesign = _selectedDesign ?? savedDesign ?? fallbackDesign;
-        final key = data.key;
+        final tables = [
+          for (var table = 1; table <= widget.tablesCount; table++)
+            TranslationTableLinks.tournament(
+              tournamentId: widget.tournamentId,
+              table: table,
+              key: data.key,
+              designKey: effectiveDesign?.designKey,
+            ),
+        ];
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -102,7 +104,7 @@ class _TranslationPanelState extends State<TranslationPanel> {
               if (data.designs.isNotEmpty) ...[
                 Text(
                   locale.translationDesignLabel,
-                  style: GoogleFonts.inter(
+                  style: widget.font(
                     color: Colors.white38,
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
@@ -146,7 +148,7 @@ class _TranslationPanelState extends State<TranslationPanel> {
                         Expanded(
                           child: Text(
                             effectiveDesign?.title ?? '',
-                            style: GoogleFonts.inter(fontSize: 12),
+                            style: widget.font(fontSize: 12),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -169,30 +171,24 @@ class _TranslationPanelState extends State<TranslationPanel> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: widget.tablesCount == 0
+                  onPressed: tables.isEmpty
                       ? null
-                      : () {
-                          final buffer = StringBuffer();
-                          for (var t = 1; t <= widget.tablesCount; t++) {
-                            final content = _buildLink(root, 'translation', key, t, effectiveDesign);
-                            final control = _buildLink(root, 'translationControl', key, t, effectiveDesign);
-                            buffer.writeln(locale.translationCopyAllTable(t));
-                            buffer.writeln('${locale.translationContentLink}: $content');
-                            buffer.writeln('${locale.translationControlLink}: $control');
-                            if (t < widget.tablesCount) buffer.writeln();
-                          }
-                          Clipboard.setData(ClipboardData(text: buffer.toString()));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(locale.translationCopiedSnackbar)),
-                          );
-                        },
+                      : () => copyLink(
+                            context,
+                            translationLinksClipboardText(locale, tables),
+                            message: locale.translationCopiedSnackbar,
+                          ),
                   icon: const Icon(Icons.copy, size: 16),
                   label: Text(
                     locale.translationCopyAllButton,
-                    style: GoogleFonts.inter(fontSize: 12),
+                    style: widget.font(fontSize: 12),
                   ),
                 ),
               ),
+              if (tables.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                _TablesLinks(tables: tables, font: widget.font),
+              ],
             ],
           ),
         );
@@ -201,10 +197,77 @@ class _TranslationPanelState extends State<TranslationPanel> {
   }
 }
 
+class _TablesLinks extends StatefulWidget {
+  final List<TranslationTableLinks> tables;
+  final TranslationLinksFont font;
+
+  const _TablesLinks({required this.tables, required this.font});
+
+  @override
+  State<_TablesLinks> createState() => _TablesLinksState();
+}
+
+class _TablesLinksState extends State<_TablesLinks> {
+  static const _maxExpandedTables = 4;
+
+  late bool _expanded = widget.tables.length <= _maxExpandedTables;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    final rows = [
+      for (final links in widget.tables)
+        TranslationTableLinksRow(
+          links: links,
+          font: widget.font,
+          foregroundColor: theme.sidebarInactiveTextColor,
+        ),
+    ];
+
+    if (widget.tables.length <= _maxExpandedTables) {
+      return Column(spacing: 4, children: rows);
+    }
+
+    return Column(
+      spacing: 4,
+      children: [
+        InkWell(
+          onTap: () => setState(() => _expanded = !_expanded),
+          borderRadius: BorderRadius.circular(8),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    context.locale.translationTablesLinks,
+                    style: widget.font(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: theme.sidebarInactiveTextColor,
+                    ),
+                  ),
+                ),
+                Icon(
+                  _expanded ? Icons.expand_less : Icons.expand_more,
+                  size: 18,
+                  color: theme.sidebarInactiveTextColor,
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (_expanded) ...rows,
+      ],
+    );
+  }
+}
+
 class _NoSeatingWarning extends StatelessWidget {
   final int tournamentId;
+  final TranslationLinksFont font;
 
-  const _NoSeatingWarning({required this.tournamentId});
+  const _NoSeatingWarning({required this.tournamentId, required this.font});
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +287,7 @@ class _NoSeatingWarning extends StatelessWidget {
               Expanded(
                 child: Text(
                   locale.translationNoSeatingWarning,
-                  style: GoogleFonts.inter(color: theme.redColor, fontSize: 12),
+                  style: font(color: theme.redColor, fontSize: 12),
                 ),
               ),
             ],
@@ -232,14 +295,14 @@ class _NoSeatingWarning extends StatelessWidget {
           TextButton.icon(
             style: TextButton.styleFrom(
               foregroundColor: theme.sidebarInactiveTextColor,
-              textStyle: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600),
+              textStyle: font(fontSize: 12, fontWeight: FontWeight.w600),
               padding: const EdgeInsets.symmetric(horizontal: 4),
               minimumSize: const Size(0, 32),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: () {
               Scaffold.maybeOf(context)?.closeEndDrawer();
-              context.router.push(SeatingRoute(tournamentId: tournamentId));
+              context.router.navigate(SeatingRoute(tournamentId: tournamentId));
             },
             icon: const Icon(Icons.arrow_forward, size: 16),
             iconAlignment: IconAlignment.end,

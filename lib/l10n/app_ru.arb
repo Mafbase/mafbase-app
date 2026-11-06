@@ -365,6 +365,28 @@
   "@translationNoSeatingWarning": {},
   "translationGoToSeating": "К рассадке",
   "@translationGoToSeating": {},
+  "translationTablesLinks": "Ссылки по столам",
+  "@translationTablesLinks": {},
+  "translationTableTitle": "Стол {table}",
+  "@translationTableTitle": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
+  "translationTableControl": "Управление",
+  "@translationTableControl": {},
+  "translationTableObs": "Ссылка для OBS",
+  "@translationTableObs": {},
+  "translationLinkOpen": "Открыть",
+  "@translationLinkOpen": {},
+  "translationLinkCopy": "Скопировать",
+  "@translationLinkCopy": {},
+  "translationLinkShare": "Поделиться",
+  "@translationLinkShare": {},
+  "translationLinkCopied": "Ссылка скопирована",
+  "@translationLinkCopied": {},
   "bucketFieldTitle": "Корзины для полуфинального этапа",
   "bucketFieldHint": "30;20;30",
   "hideResult": "Скрыть результат",

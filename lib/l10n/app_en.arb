@@ -353,6 +353,28 @@
   "@translationNoSeatingWarning": {},
   "translationGoToSeating": "Go to seating",
   "@translationGoToSeating": {},
+  "translationTablesLinks": "Links by table",
+  "@translationTablesLinks": {},
+  "translationTableTitle": "Table {table}",
+  "@translationTableTitle": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
+  "translationTableControl": "Control",
+  "@translationTableControl": {},
+  "translationTableObs": "OBS link",
+  "@translationTableObs": {},
+  "translationLinkOpen": "Open",
+  "@translationLinkOpen": {},
+  "translationLinkCopy": "Copy",
+  "@translationLinkCopy": {},
+  "translationLinkShare": "Share",
+  "@translationLinkShare": {},
+  "translationLinkCopied": "Link copied",
+  "@translationLinkCopied": {},
   "gomafiaInputTitle": "Enter the tournament link",
   "@gomafiaInputTitle": {},
   "gomafiaInputReplaceWarning": "The current list of participants ({count}) will be replaced with participants from GoMafia",
