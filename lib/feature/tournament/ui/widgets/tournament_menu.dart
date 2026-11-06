@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_locked_tile.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentMenu extends StatefulWidget {
@@ -106,6 +107,13 @@ class _TournamentMenuState extends State<TournamentMenu> {
                     });
                   },
                   onCollapse: _collapse,
+                ),
+              TournamentMenuLockedItem() => TournamentMenuLockedTile(
+                  item: item,
+                  iconSize: 20,
+                  minHeight: 42,
+                  textStyle: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500),
+                  hintStyle: GoogleFonts.inter(fontSize: 11),
                 ),
             },
           ),

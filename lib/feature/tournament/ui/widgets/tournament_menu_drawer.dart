@@ -7,6 +7,7 @@ import 'package:seating_generator_web/feature/tournament/ui/models/tournament_me
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_builder.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_locked_tile.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
@@ -96,6 +97,13 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
                                     child: switch (item) {
                                       TournamentMenuTapItem() => _buildTapItem(context, item, theme),
                                       TournamentMenuExpandableItem() => _buildExpandableItem(context, item, theme),
+                                      TournamentMenuLockedItem() => TournamentMenuLockedTile(
+                                          item: item,
+                                          iconSize: 22,
+                                          minHeight: 46,
+                                          textStyle: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w500),
+                                          hintStyle: GoogleFonts.inter(fontSize: 12),
+                                        ),
                                     },
                                   ),
                                 ),

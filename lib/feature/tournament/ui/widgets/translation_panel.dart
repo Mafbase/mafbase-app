@@ -1,12 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/design_picker_dialog.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
+import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/utils.dart';
 
 class TranslationPanel extends StatefulWidget {
   final int tournamentId;
@@ -42,6 +48,21 @@ class _TranslationPanelState extends State<TranslationPanel> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
+          selector: (state) => !state.isLoading && state.games.isEmpty,
+          builder: (context, noSeating) =>
+              noSeating ? _NoSeatingWarning(tournamentId: widget.tournamentId) : const SizedBox.shrink(),
+        ),
+        _buildLinks(context),
+      ],
+    );
+  }
+
+  Widget _buildLinks(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
 
     return FutureBuilder<TranslationKeyModel>(
@@ -141,27 +162,30 @@ class _TranslationPanelState extends State<TranslationPanel> {
                 child: OutlinedButton.icon(
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.white70,
+                    disabledForegroundColor: context.theme.sidebarSectionTitleColor,
                     side: const BorderSide(color: Colors.white24),
                     minimumSize: const Size(0, 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {
-                    final buffer = StringBuffer();
-                    for (var t = 1; t <= widget.tablesCount; t++) {
-                      final content = _buildLink(root, 'translation', key, t, effectiveDesign);
-                      final control = _buildLink(root, 'translationControl', key, t, effectiveDesign);
-                      buffer.writeln(locale.translationCopyAllTable(t));
-                      buffer.writeln('${locale.translationContentLink}: $content');
-                      buffer.writeln('${locale.translationControlLink}: $control');
-                      if (t < widget.tablesCount) buffer.writeln();
-                    }
-                    Clipboard.setData(ClipboardData(text: buffer.toString()));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(locale.translationCopiedSnackbar)),
-                    );
-                  },
+                  onPressed: widget.tablesCount == 0
+                      ? null
+                      : () {
+                          final buffer = StringBuffer();
+                          for (var t = 1; t <= widget.tablesCount; t++) {
+                            final content = _buildLink(root, 'translation', key, t, effectiveDesign);
+                            final control = _buildLink(root, 'translationControl', key, t, effectiveDesign);
+                            buffer.writeln(locale.translationCopyAllTable(t));
+                            buffer.writeln('${locale.translationContentLink}: $content');
+                            buffer.writeln('${locale.translationControlLink}: $control');
+                            if (t < widget.tablesCount) buffer.writeln();
+                          }
+                          Clipboard.setData(ClipboardData(text: buffer.toString()));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(locale.translationCopiedSnackbar)),
+                          );
+                        },
                   icon: const Icon(Icons.copy, size: 16),
                   label: Text(
                     locale.translationCopyAllButton,
@@ -173,6 +197,56 @@ class _TranslationPanelState extends State<TranslationPanel> {
           ),
         );
       },
+    );
+  }
+}
+
+class _NoSeatingWarning extends StatelessWidget {
+  final int tournamentId;
+
+  const _NoSeatingWarning({required this.tournamentId});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    final locale = context.locale;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.warning_amber_rounded, size: 16, color: theme.redColor),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  locale.translationNoSeatingWarning,
+                  style: GoogleFonts.inter(color: theme.redColor, fontSize: 12),
+                ),
+              ),
+            ],
+          ),
+          TextButton.icon(
+            style: TextButton.styleFrom(
+              foregroundColor: theme.sidebarInactiveTextColor,
+              textStyle: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600),
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              minimumSize: const Size(0, 32),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: () {
+              Scaffold.maybeOf(context)?.closeEndDrawer();
+              context.router.push(SeatingRoute(tournamentId: tournamentId));
+            },
+            icon: const Icon(Icons.arrow_forward, size: 16),
+            iconAlignment: IconAlignment.end,
+            label: Text(locale.translationGoToSeating),
+          ),
+        ],
+      ),
     );
   }
 }

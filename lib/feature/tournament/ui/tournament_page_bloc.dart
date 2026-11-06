@@ -131,6 +131,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
             billedPlayers: tournament.billedPlayers,
             billedTranslation: tournament.billedTranslation,
             notificationEnabled: tournament.notificationEnabled,
+            isBillingLoaded: true,
             gomafiaUrl: tournament.gomafiaUrl,
             activePhotoThemeId: tournament.photoThemeId,
           ),

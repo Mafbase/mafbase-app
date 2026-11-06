@@ -79,7 +79,11 @@ class _SeatingPageState extends CustomState<SeatingPage>
       ),
       (
         onTap: () async {
-          final id = await GomafiaInputDialog.show(context, tournamentState.gomafiaUrl);
+          final id = await GomafiaInputDialog.show(
+            context,
+            gomafiaUrl: tournamentState.gomafiaUrl,
+            playersCount: tournamentState.tournamentPlayers.length,
+          );
           if (id == null || !mounted) return;
 
           final completer = Completer();

@@ -325,7 +325,7 @@
       }
     }
   },
-  "translationDialogTitle": "Broadcast",
+  "translationDialogTitle": "Stream overlays",
   "@translationDialogTitle": {},
   "translationContentLink": "Embed link for OBS",
   "@translationContentLink": {},
@@ -349,6 +349,21 @@
   "@translationDesignPickerTitle": {},
   "translationDesignSelect": "Select",
   "@translationDesignSelect": {},
+  "translationNoSeatingWarning": "Without a seating the overlays will be empty",
+  "@translationNoSeatingWarning": {},
+  "translationGoToSeating": "Go to seating",
+  "@translationGoToSeating": {},
+  "gomafiaInputTitle": "Enter the tournament link",
+  "@gomafiaInputTitle": {},
+  "gomafiaInputReplaceWarning": "The current list of participants ({count}) will be replaced with participants from GoMafia",
+  "@gomafiaInputReplaceWarning": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
   "bucketFieldTitle": "Buckets for semi-final stage",
   "bucketFieldHint": "30;20;30",
   "hideResult": "Hide result",
@@ -786,6 +801,10 @@
   "tournamentMenuGameNotification": "Game notification",
   "tournamentMenuTextNotification": "Text notification",
   "tournamentMenuNoPlayers": "No participants added yet",
+  "tournamentMenuNotifications": "Notifications",
+  "@tournamentMenuNotifications": {},
+  "tournamentMenuLockedHint": "Available after payment",
+  "@tournamentMenuLockedHint": {},
 
   "tournamentCardGames": "{count, plural, =1{{count} game} other{{count} games}}",
   "@tournamentCardGames": {
@@ -969,5 +988,34 @@
         "type": "int"
       }
     }
-  }
+  },
+  "checklistSheetAskQuestion": "Ask a question",
+  "@checklistSheetAskQuestion": {},
+  "checklistSheetPay": "Pay",
+  "@checklistSheetPay": {},
+  "checklistLockedTranslationAbout": "Overlays show the nicknames, roles and statuses of the players at the table on top of the video.",
+  "@checklistLockedTranslationAbout": {},
+  "checklistLockedTranslationWays": "They work in two ways: in OBS on a computer and in a phone stream through the Mafbase app — every table has an operator link in the Streams section.",
+  "@checklistLockedTranslationWays": {},
+  "checklistLockedTranslationSeating": "Overlays take the players at each table from the seating, so without a seating they will be empty.",
+  "@checklistLockedTranslationSeating": {},
+  "checklistLockedTranslationPrice": "Overlays for a tournament with {players} participants cost {price} ₽.",
+  "@checklistLockedTranslationPrice": {
+    "placeholders": {
+      "players": {
+        "type": "int",
+        "example": "10"
+      },
+      "price": {
+        "type": "int",
+        "example": "300"
+      }
+    }
+  },
+  "checklistLockedNotificationsAbout": "Notifications tell players when a game starts and which table they are at, and deliver your text messages.",
+  "@checklistLockedNotificationsAbout": {},
+  "checklistLockedNotificationsChannels": "Players receive them from the Telegram bot @mafbase_notification_bot, and in FSM tournaments also on VK by their FSM nickname.",
+  "@checklistLockedNotificationsChannels": {},
+  "checklistLockedNotificationsBilling": "Notifications are enabled with any tournament payment: 20 or more participants, or stream overlays.",
+  "@checklistLockedNotificationsBilling": {}
 }
