@@ -21,6 +21,7 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_even
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
+import 'package:seating_generator_web/utils/browser_url.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
@@ -64,10 +65,16 @@ class _SeatingPageState extends CustomState<SeatingPage>
     bool isReady(TournamentPageState state) => state.isMyTournament && state.isBillingLoaded;
 
     if (isReady(tournamentBloc.state)) {
-      _importFromGomafia(tournamentBloc.state);
+      _openGomafiaImportFromLink(tournamentBloc.state);
     } else {
-      _gomafiaImportSubscription = tournamentBloc.stream.where(isReady).take(1).listen(_importFromGomafia);
+      _gomafiaImportSubscription = tournamentBloc.stream.where(isReady).take(1).listen(_openGomafiaImportFromLink);
     }
+  }
+
+  void _openGomafiaImportFromLink(TournamentPageState tournamentState) {
+    if (!mounted) return;
+    _importFromGomafia(tournamentState);
+    removeQueryParameterFromBrowserUrl(context, 'gomafia');
   }
 
   Future<void> _importFromGomafia(TournamentPageState tournamentState) async {

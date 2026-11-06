@@ -1485,5 +1485,75 @@
         "example": "20"
       }
     }
-  }
+  },
+  "checklistSetupCaption": "Tournament setup",
+  "@checklistSetupCaption": {},
+  "checklistSetupStepCaption": "Tournament setup · step {step} of {total}",
+  "@checklistSetupStepCaption": {
+    "placeholders": {
+      "step": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistSetupFsmQuestion": "Is the tournament held on GoMafia (FSM)?",
+  "@checklistSetupFsmQuestion": {},
+  "checklistSetupFsmAbout": "Then participants and seating can be loaded from GoMafia, and players with an FSM nickname will get notifications in VK.",
+  "@checklistSetupFsmAbout": {},
+  "checklistSetupFsmYes": "Yes",
+  "@checklistSetupFsmYes": {},
+  "checklistSetupFsmYesHint": "You'll add the link to the tournament on GoMafia",
+  "@checklistSetupFsmYesHint": {},
+  "checklistSetupFsmNo": "No",
+  "@checklistSetupFsmNo": {},
+  "checklistSetupFsmNoHint": "You'll add participants yourself",
+  "@checklistSetupFsmNoHint": {},
+  "checklistSetupGomafiaTitle": "Link to the tournament on GoMafia",
+  "@checklistSetupGomafiaTitle": {},
+  "checklistSetupGomafiaAbout": "Copy the address of the tournament page on gomafia.pro.",
+  "@checklistSetupGomafiaAbout": {},
+  "checklistSetupGomafiaInvalid": "The link should look like {example}",
+  "@checklistSetupGomafiaInvalid": {
+    "placeholders": {
+      "example": {
+        "type": "String",
+        "example": "https://gomafia.pro/tournament/1"
+      }
+    }
+  },
+  "checklistSetupSave": "Save",
+  "@checklistSetupSave": {},
+  "checklistSetupBack": "Back",
+  "@checklistSetupBack": {},
+  "checklistSetupTranslationQuestion": "Will you stream with overlays?",
+  "@checklistSetupTranslationQuestion": {},
+  "checklistSetupTranslationAbout": "Overlays show the nicknames, roles and statuses of the players at the table on top of the video. You can change the answer in the checklist.",
+  "@checklistSetupTranslationAbout": {},
+  "checklistSetupTranslationObs": "Yes, from a computer via OBS",
+  "@checklistSetupTranslationObs": {},
+  "checklistSetupTranslationPhone": "Yes, from a phone via the Mafbase app",
+  "@checklistSetupTranslationPhone": {},
+  "checklistSetupTranslationNone": "No",
+  "@checklistSetupTranslationNone": {},
+  "checklistSetupTranslationNoneHint": "Streaming items will be hidden from the checklist",
+  "@checklistSetupTranslationNoneHint": {},
+  "checklistSetupTranslationUnknown": "Not sure yet",
+  "@checklistSetupTranslationUnknown": {},
+  "checklistSetupTranslationUnknownHint": "Decide later in the checklist",
+  "@checklistSetupTranslationUnknownHint": {},
+  "checklistSetupDoneTitle": "All set",
+  "@checklistSetupDoneTitle": {},
+  "checklistSetupDoneAbout": "The checklist shows what's left to do before the tournament. Items are checked off automatically once they're done.",
+  "@checklistSetupDoneAbout": {},
+  "checklistSetupDoneFsm": "You can load participants and seating from GoMafia right now.",
+  "@checklistSetupDoneFsm": {},
+  "checklistSetupImportGomafia": "Load participants and seating from GoMafia",
+  "@checklistSetupImportGomafia": {},
+  "checklistSetupOpenChecklist": "Open checklist",
+  "@checklistSetupOpenChecklist": {}
 }

@@ -1801,5 +1801,75 @@
         "example": "20"
       }
     }
-  }
+  },
+  "checklistSetupCaption": "Настройка турнира",
+  "@checklistSetupCaption": {},
+  "checklistSetupStepCaption": "Настройка турнира · шаг {step} из {total}",
+  "@checklistSetupStepCaption": {
+    "placeholders": {
+      "step": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistSetupFsmQuestion": "Турнир проходит на GoMafia (ФСМ)?",
+  "@checklistSetupFsmQuestion": {},
+  "checklistSetupFsmAbout": "Тогда участников и рассадку можно загрузить с GoMafia, а игроки с ФСМ-ником получат оповещения в ВК.",
+  "@checklistSetupFsmAbout": {},
+  "checklistSetupFsmYes": "Да",
+  "@checklistSetupFsmYes": {},
+  "checklistSetupFsmYesHint": "Укажете ссылку на турнир на GoMafia",
+  "@checklistSetupFsmYesHint": {},
+  "checklistSetupFsmNo": "Нет",
+  "@checklistSetupFsmNo": {},
+  "checklistSetupFsmNoHint": "Участников добавите сами",
+  "@checklistSetupFsmNoHint": {},
+  "checklistSetupGomafiaTitle": "Ссылка на турнир на GoMafia",
+  "@checklistSetupGomafiaTitle": {},
+  "checklistSetupGomafiaAbout": "Скопируйте адрес страницы турнира на gomafia.pro.",
+  "@checklistSetupGomafiaAbout": {},
+  "checklistSetupGomafiaInvalid": "Нужна ссылка вида {example}",
+  "@checklistSetupGomafiaInvalid": {
+    "placeholders": {
+      "example": {
+        "type": "String",
+        "example": "https://gomafia.pro/tournament/1"
+      }
+    }
+  },
+  "checklistSetupSave": "Сохранить",
+  "@checklistSetupSave": {},
+  "checklistSetupBack": "Назад",
+  "@checklistSetupBack": {},
+  "checklistSetupTranslationQuestion": "Будете вести трансляцию с плашками?",
+  "@checklistSetupTranslationQuestion": {},
+  "checklistSetupTranslationAbout": "Плашки показывают поверх видео ники, роли и статусы игроков за столом. Ответ можно поменять в чеклисте.",
+  "@checklistSetupTranslationAbout": {},
+  "checklistSetupTranslationObs": "Да, с компьютера через OBS",
+  "@checklistSetupTranslationObs": {},
+  "checklistSetupTranslationPhone": "Да, с телефона через приложение Mafbase",
+  "@checklistSetupTranslationPhone": {},
+  "checklistSetupTranslationNone": "Нет",
+  "@checklistSetupTranslationNone": {},
+  "checklistSetupTranslationNoneHint": "Пункты трансляции скроются из чеклиста",
+  "@checklistSetupTranslationNoneHint": {},
+  "checklistSetupTranslationUnknown": "Пока не знаю",
+  "@checklistSetupTranslationUnknown": {},
+  "checklistSetupTranslationUnknownHint": "Решите позже в чеклисте",
+  "@checklistSetupTranslationUnknownHint": {},
+  "checklistSetupDoneTitle": "Готово",
+  "@checklistSetupDoneTitle": {},
+  "checklistSetupDoneAbout": "В чеклисте видно, что ещё осталось сделать к турниру. Пункты отмечаются сами, когда всё готово.",
+  "@checklistSetupDoneAbout": {},
+  "checklistSetupDoneFsm": "Участников и рассадку можно загрузить с GoMafia прямо сейчас.",
+  "@checklistSetupDoneFsm": {},
+  "checklistSetupImportGomafia": "Загрузить участников и рассадку с GoMafia",
+  "@checklistSetupImportGomafia": {},
+  "checklistSetupOpenChecklist": "Открыть чеклист",
+  "@checklistSetupOpenChecklist": {}
 }

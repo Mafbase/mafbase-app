@@ -55,6 +55,12 @@ abstract class TournamentEditRepository {
     required int gomafiaId,
   });
 
+  /// Описание турнира перезаписывается целиком: ссылки ВК, если они были, сбросятся.
+  Future<void> setGomafiaUrl({
+    required int tournamentId,
+    required String gomafiaUrl,
+  });
+
   Future<void> downloadPlayersSeating({required int tournamentId});
 
   Future<void> downloadTablesSeating({required int tournamentId});

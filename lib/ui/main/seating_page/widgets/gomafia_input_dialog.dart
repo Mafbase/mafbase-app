@@ -3,6 +3,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/gomafia_tournament_url.dart';
 
 class GomafiaInputDialog extends StatefulWidget {
   final String? gomafiaUrl;
@@ -47,7 +48,7 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
     super.dispose();
   }
 
-  bool get validate => RegExp('https:\\/\\/gomafia.pro\\/tournament\\/\\d+').hasMatch(controller.value.text);
+  bool get validate => isGomafiaTournamentUrl(controller.value.text);
 
   @override
   Widget build(BuildContext context) => CustomDialog(
@@ -80,7 +81,7 @@ class _GomafiaInputDialogState extends State<GomafiaInputDialog> {
                 TextField(
                   controller: controller,
                   decoration: const InputDecoration(
-                    hintText: 'https://gomafia.pro/tournament/1',
+                    hintText: gomafiaTournamentUrlExample,
                   ),
                 ),
                 const SizedBox(height: 16),

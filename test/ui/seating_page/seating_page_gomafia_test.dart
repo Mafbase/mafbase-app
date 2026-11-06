@@ -3,9 +3,11 @@ library;
 
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
@@ -16,6 +18,7 @@ import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.da
 import 'package:seating_generator_web/ui/main/seating_page/widgets/gomafia_input_dialog.dart';
 
 import '../../feature/organizer_checklist/organizer_checklist_fixtures.dart';
+import '../fake_browser_history.dart';
 
 const _gomafiaUrl = 'https://gomafia.pro/tournament/42';
 
@@ -88,4 +91,68 @@ void main() {
 
     expect(find.byType(GomafiaInputDialog), findsNothing);
   });
+
+  testWidgets('the browser address loses gomafia=1 once the import opens, so a refresh does not reopen it',
+      (tester) async {
+    final history = FakeBrowserHistory()..attach(tester);
+    final router = await _pumpSeatingRouter(tester, url: '/tournament/1', tournament: loaded);
+
+    router.push(SeatingRoute(tournamentId: 1, gomafia: 1));
+    await tester.pumpAndSettle();
+    expect(find.byType(GomafiaInputDialog), findsOneWidget);
+    expect(history.url, '/tournament/1/editSeating');
+
+    await tester.tap(find.byType(CloseButton));
+    await tester.pumpAndSettle();
+    expect(find.byType(SeatingPage), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+    await _pumpSeatingRouter(tester, url: history.url, tournament: loaded);
+    expect(find.byType(SeatingPage), findsOneWidget);
+    expect(find.byType(GomafiaInputDialog), findsNothing);
+  });
+}
+
+class _SeatingRouter extends RootStackRouter {
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(
+          page: PageInfo('TournamentRoute', builder: (_) => const AutoRouter()),
+          path: '/tournament/:id',
+          children: [
+            AutoRoute(page: PageInfo('PlayersRoute', builder: (_) => const Text('players')), path: ''),
+            AutoRoute(page: SeatingRoute.page, path: 'editSeating'),
+          ],
+        ),
+      ];
+}
+
+Future<_SeatingRouter> _pumpSeatingRouter(
+  WidgetTester tester, {
+  required String url,
+  required TournamentPageState tournament,
+}) async {
+  final tournamentBloc = RecordingTournamentPageBloc(tournament);
+  final seatingBloc = RecordingSeatingPageBloc(const SeatingPageState(isLoading: false));
+  addTearDown(tournamentBloc.close);
+  addTearDown(seatingBloc.close);
+
+  final router = _SeatingRouter();
+  await tester.pumpWidget(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<TournamentPageBloc>.value(value: tournamentBloc),
+        BlocProvider<SeatingPageBloc>.value(value: seatingBloc),
+      ],
+      child: MaterialApp.router(
+        theme: AppTheme.light(isMobile: true),
+        locale: const Locale('ru'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        routerConfig: router.config(deepLinkBuilder: (_) => DeepLink.path(url)),
+      ),
+    ),
+  );
+  await tester.pumpAndSettle();
+  return router;
 }

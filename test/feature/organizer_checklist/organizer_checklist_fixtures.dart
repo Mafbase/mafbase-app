@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
+import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
@@ -64,6 +67,23 @@ class RecordingSeatingPageBloc extends MockBloc<SeatingPageEvent, SeatingPageSta
 
   @override
   void add(SeatingPageEvent event) => added.add(event);
+}
+
+/// Сохранение ссылки GoMafia без сети: [pending] задерживает ответ, [error] — ответ backend с ошибкой.
+class RecordingTournamentEditRepository implements TournamentEditRepository {
+  final savedGomafiaUrls = <String>[];
+  Completer<void>? pending;
+  Object? error;
+
+  @override
+  Future<void> setGomafiaUrl({required int tournamentId, required String gomafiaUrl}) async {
+    savedGomafiaUrls.add(gomafiaUrl);
+    await pending?.future;
+    if (error case final error?) throw error;
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 const ownerTournament = TournamentPageState(isLoading: false, isMyTournament: true, isBillingLoaded: true);

@@ -6,6 +6,7 @@ import 'package:seating_generator_web/app/di/storage_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/setup/widgets/organizer_setup_launcher.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_reloader.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
@@ -27,9 +28,13 @@ import 'package:seating_generator_web/utils/widget_extensions.dart';
 class TournamentPage extends StatelessWidget {
   final int tournamentId;
 
+  /// 1 — турнир только что создан: показать мастер настройки.
+  final int? setup;
+
   const TournamentPage({
     super.key,
     @PathParam('id') required this.tournamentId,
+    @QueryParam('setup') this.setup,
   });
 
   @override
@@ -75,7 +80,11 @@ class TournamentPage extends StatelessWidget {
       ],
       child: OrganizerChecklistReloader(
         tournamentId: tournamentId,
-        child: _TournamentPageContent(tournamentId: tournamentId),
+        child: OrganizerSetupLauncher(
+          tournamentId: tournamentId,
+          enabled: setup == 1,
+          child: _TournamentPageContent(tournamentId: tournamentId),
+        ),
       ),
     );
   }
