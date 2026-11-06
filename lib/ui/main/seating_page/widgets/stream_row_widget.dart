@@ -8,11 +8,7 @@ class StreamRowWidget extends StatelessWidget {
   final int tableNumber;
   final List<GameStream> allStreams;
 
-  const StreamRowWidget({
-    super.key,
-    required this.tableNumber,
-    required this.allStreams,
-  });
+  const StreamRowWidget({super.key, required this.tableNumber, required this.allStreams});
 
   List<GameStream> get _tableStreams => allStreams.where((s) => s.tableNumber == tableNumber).toList();
 
@@ -33,7 +29,7 @@ class StreamRowWidget extends StatelessWidget {
   Future<void> _openUrl(String url) async {
     final uri = Uri.tryParse(url);
     if (uri == null) return;
-    await launchUrl(uri, webOnlyWindowName: '_blank');
+    await launchUrl(uri, mode: LaunchMode.externalApplication, webOnlyWindowName: '_blank');
   }
 
   void _showAllStreams(BuildContext context) {
@@ -104,8 +100,8 @@ class StreamRowWidget extends StatelessWidget {
     final onTap = hasMultiple
         ? () => _showAllStreams(context)
         : hasUrl
-            ? () => _openUrl(active.viewerUrl)
-            : null;
+        ? () => _openUrl(active.viewerUrl)
+        : null;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -124,11 +120,7 @@ class StreamRowWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     hasUrl ? locale.streamsWatch : locale.streamsNoUrl,
-                    style: TextStyle(
-                      color: theme.btnTextColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: TextStyle(color: theme.btnTextColor, fontSize: 11, fontWeight: FontWeight.w500),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -156,10 +148,7 @@ class _StreamLiveBadge extends StatelessWidget {
     final theme = MyTheme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(
-        color: theme.redColor.withValues(alpha: 0.25),
-        borderRadius: BorderRadius.circular(8),
-      ),
+      decoration: BoxDecoration(color: theme.redColor.withValues(alpha: 0.25), borderRadius: BorderRadius.circular(8)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -14,7 +14,7 @@ class ClubActiveStreamsCard extends StatelessWidget {
   Future<void> _openUrl(String url) async {
     final uri = Uri.tryParse(url);
     if (uri == null) return;
-    await launchUrl(uri, webOnlyWindowName: '_blank');
+    await launchUrl(uri, mode: LaunchMode.externalApplication, webOnlyWindowName: '_blank');
   }
 
   @override
@@ -30,13 +30,7 @@ class ClubActiveStreamsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.background2,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: theme.cardShadowColor,
-            blurRadius: 3,
-            offset: const Offset(0, 1),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: theme.cardShadowColor, blurRadius: 3, offset: const Offset(0, 1))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
