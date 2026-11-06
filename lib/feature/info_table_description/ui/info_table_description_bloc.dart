@@ -16,20 +16,14 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
     on<InfoTableDescriptionEventSave>(_save);
   }
 
-  Future<void> _init(
-    InfoTableDescriptionEventInit event,
-    Emitter<InfoTableState> emit,
-  ) async {
+  Future<void> _init(InfoTableDescriptionEventInit event, Emitter<InfoTableState> emit) async {
     _tournamentId = event.tournamentId;
     final descriptions = await _repository.getDescriptions(event.tournamentId);
 
     emit(state.copyWith(tableDescriptions: descriptions, loading: false));
   }
 
-  Future<void> _add(
-    InfoTableDescriptionEventAdd event,
-    Emitter<InfoTableState> emit,
-  ) async {
+  Future<void> _add(InfoTableDescriptionEventAdd event, Emitter<InfoTableState> emit) async {
     final descriptions = List<MapEntry<int, String>>.from(state.tableDescriptions);
     if (!descriptions.any((e) => e.key == event.table)) {
       descriptions.add(MapEntry(event.table, ''));
@@ -48,18 +42,12 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
     emit(state.copyWith(tableDescriptions: descriptions));
   }
 
-  Future<void> _delete(
-    InfoTableDescriptionEventDelete event,
-    Emitter<InfoTableState> emit,
-  ) async {
+  Future<void> _delete(InfoTableDescriptionEventDelete event, Emitter<InfoTableState> emit) async {
     final descriptions = state.tableDescriptions.where((entry) => entry.key != event.table).toList();
     emit(state.copyWith(tableDescriptions: descriptions));
   }
 
-  Future<void> _change(
-    InfoTableDescriptionEventChange event,
-    Emitter<InfoTableState> emit,
-  ) async {
+  Future<void> _change(InfoTableDescriptionEventChange event, Emitter<InfoTableState> emit) async {
     final descriptions = state.tableDescriptions.map((entry) {
       if (entry.key == event.table) {
         return MapEntry(entry.key, event.description);
@@ -69,21 +57,19 @@ class InfoTableDescriptionBloc extends Bloc<InfoTableDescriptionEvent, InfoTable
     emit(state.copyWith(tableDescriptions: descriptions));
   }
 
-  Future<void> _save(
-    InfoTableDescriptionEventSave event,
-    Emitter<InfoTableState> emit,
-  ) async {
+  Future<void> _save(InfoTableDescriptionEventSave event, Emitter<InfoTableState> emit) async {
     emit(state.copyWith(loading: true));
     try {
       var descriptions = state.tableDescriptions;
       final pendingTable = event.pendingTable;
-      if (pendingTable != null && !descriptions.any((e) => e.key == pendingTable)) {
-        descriptions = [...descriptions, MapEntry(pendingTable, event.pendingDescription ?? '')];
+      final pendingDescription = event.pendingDescription;
+      if (pendingTable != null &&
+          pendingDescription != null &&
+          pendingDescription.isNotEmpty &&
+          !descriptions.any((e) => e.key == pendingTable)) {
+        descriptions = [...descriptions, MapEntry(pendingTable, pendingDescription)];
       }
-      await _repository.setDescriptions(
-        tournamentId: _tournamentId,
-        description: descriptions,
-      );
+      await _repository.setDescriptions(tournamentId: _tournamentId, description: descriptions);
       emit(state.copyWith(tableDescriptions: descriptions, loading: false));
       event.completer.complete();
     } catch (e) {
