@@ -20,11 +20,15 @@ class TranslationPanel extends StatefulWidget {
   final int tablesCount;
   final TranslationLinksFont font;
 
+  /// Заменяет переход «К рассадке» из меню: лист чеклиста сначала закрывает себя.
+  final VoidCallback? onGoToSeating;
+
   const TranslationPanel({
     super.key,
     required this.tournamentId,
     required this.tablesCount,
     this.font = GoogleFonts.inter,
+    this.onGoToSeating,
   });
 
   @override
@@ -52,7 +56,11 @@ class _TranslationPanelState extends State<TranslationPanel> {
         BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
           selector: (state) => !state.isLoading && state.games.isEmpty,
           builder: (context, noSeating) => noSeating
-              ? _NoSeatingWarning(tournamentId: widget.tournamentId, font: widget.font)
+              ? _NoSeatingWarning(
+                  tournamentId: widget.tournamentId,
+                  font: widget.font,
+                  onGoToSeating: widget.onGoToSeating,
+                )
               : const SizedBox.shrink(),
         ),
         _buildLinks(context),
@@ -266,8 +274,9 @@ class _TablesLinksState extends State<_TablesLinks> {
 class _NoSeatingWarning extends StatelessWidget {
   final int tournamentId;
   final TranslationLinksFont font;
+  final VoidCallback? onGoToSeating;
 
-  const _NoSeatingWarning({required this.tournamentId, required this.font});
+  const _NoSeatingWarning({required this.tournamentId, required this.font, this.onGoToSeating});
 
   @override
   Widget build(BuildContext context) {
@@ -300,10 +309,11 @@ class _NoSeatingWarning extends StatelessWidget {
               minimumSize: const Size(0, 32),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            onPressed: () {
-              Scaffold.maybeOf(context)?.closeEndDrawer();
-              context.router.navigate(SeatingRoute(tournamentId: tournamentId));
-            },
+            onPressed: onGoToSeating ??
+                () {
+                  Scaffold.maybeOf(context)?.closeEndDrawer();
+                  context.router.navigate(SeatingRoute(tournamentId: tournamentId));
+                },
             icon: const Icon(Icons.arrow_forward, size: 16),
             iconAlignment: IconAlignment.end,
             label: Text(locale.translationGoToSeating),

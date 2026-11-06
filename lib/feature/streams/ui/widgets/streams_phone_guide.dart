@@ -7,9 +7,13 @@ import 'package:seating_generator_web/utils.dart';
 class StreamsPhoneGuide extends StatelessWidget {
   final bool initiallyExpanded;
 
+  /// «Подробнее» под шагами.
+  final VoidCallback? onMore;
+
   const StreamsPhoneGuide({
     super.key,
     required this.initiallyExpanded,
+    this.onMore,
   });
 
   @override
@@ -37,6 +41,14 @@ class StreamsPhoneGuide extends StatelessWidget {
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
         children: [
           for (final (index, step) in steps.indexed) StreamsGuideStep(number: index + 1, text: step),
+          if (onMore case final onMore?)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                onPressed: onMore,
+                child: Text(locale.checklistSheetMore),
+              ),
+            ),
         ],
       ),
     );

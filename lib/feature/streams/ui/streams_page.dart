@@ -6,6 +6,9 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_item_sheet.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_bloc.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_event.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_state.dart';
@@ -78,6 +81,18 @@ class StreamsPageContent extends StatelessWidget {
     });
   }
 
+  void _openOperatorDetails(BuildContext context) {
+    OrganizerChecklistItemSheet.show(
+      context,
+      tournamentId: tournamentId,
+      item: const ChecklistItemModel(key: ChecklistKey.phoneOperator, status: ChecklistStatus.todo),
+      title: context.locale.streamsOperatorLink,
+      showStatus: false,
+      showAction: false,
+      showDismiss: false,
+    );
+  }
+
   void _onStop(BuildContext context, int streamId) {
     context.read<StreamsAdminBloc>().add(StreamsAdminEventStopStream(streamId: streamId));
   }
@@ -112,7 +127,11 @@ class StreamsPageContent extends StatelessWidget {
                     child: ListView(
                       padding: const EdgeInsets.only(bottom: 8),
                       children: [
-                        StreamsPhoneGuide(key: ValueKey(grouped.isEmpty), initiallyExpanded: grouped.isEmpty),
+                        StreamsPhoneGuide(
+                          key: ValueKey(grouped.isEmpty),
+                          initiallyExpanded: grouped.isEmpty,
+                          onMore: () => _openOperatorDetails(context),
+                        ),
                         const StreamsOverlayBillingHint(),
                         if (grouped.isEmpty)
                           _EmptyState(onAdd: () => _openAddStream(context))

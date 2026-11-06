@@ -14,6 +14,7 @@ class TournamentMenuTapItem extends TournamentMenuItemModel {
   final VoidCallback onTap;
   final String? routeSegment;
   final bool selected;
+  final String? trailingText;
 
   const TournamentMenuTapItem({
     required super.text,
@@ -21,6 +22,7 @@ class TournamentMenuTapItem extends TournamentMenuItemModel {
     required this.onTap,
     this.routeSegment,
     this.selected = false,
+    this.trailingText,
   });
 }
 

@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
@@ -57,6 +60,7 @@ Future<(List<TournamentMenuSection>, _RecordingTournamentPageBloc)> _pumpSection
   WidgetTester tester,
   TournamentPageState state, {
   bool showBill = true,
+  OrganizerChecklistModel? checklist,
 }) async {
   final bloc = _RecordingTournamentPageBloc();
   whenListen(bloc, const Stream<TournamentPageState>.empty(), initialState: state);
@@ -75,6 +79,7 @@ Future<(List<TournamentMenuSection>, _RecordingTournamentPageBloc)> _pumpSection
               1,
               showBill: showBill,
               seatingLoading: false,
+              checklist: checklist,
             );
             return const SizedBox.expand();
           },
@@ -103,6 +108,34 @@ TournamentMenuSection? _notificationsSection(List<TournamentMenuSection> section
     sections.where((section) => section.title == 'ОПОВЕЩЕНИЯ').firstOrNull;
 
 void main() {
+  testWidgets('owner sees the checklist first in the main section, with progress once it is loaded', (tester) async {
+    const checklist = OrganizerChecklistModel(
+      isFsm: false,
+      items: [
+        ChecklistItemModel(key: ChecklistKey.gamesCount, status: ChecklistStatus.done),
+        ChecklistItemModel(key: ChecklistKey.players, status: ChecklistStatus.warning, current: 23),
+        ChecklistItemModel(key: ChecklistKey.billing, status: ChecklistStatus.dismissed),
+      ],
+    );
+
+    var (sections, _) = await _pumpSections(tester, _paidOwner, checklist: checklist);
+    final item = sections.first.items.first as TournamentMenuTapItem;
+    expect(item.text, 'Чеклист организатора');
+    expect(item.routeSegment, 'checklist');
+    expect(item.trailingText, '1/2');
+
+    await tester.pumpWidget(const SizedBox());
+    (sections, _) = await _pumpSections(tester, _paidOwner);
+    expect((sections.first.items.first as TournamentMenuTapItem).trailingText, isNull);
+
+    await tester.pumpWidget(const SizedBox());
+    (sections, _) = await _pumpSections(tester, _paidOwner.copyWith(isMyTournament: false), checklist: checklist);
+    expect(
+      sections.expand((section) => section.items).map((item) => item.text),
+      isNot(contains('Чеклист организатора')),
+    );
+  });
+
   testWidgets('owner of an unpaid tournament sees locked overlays and notifications', (tester) async {
     final (sections, _) = await _pumpSections(tester, _unpaidOwner);
 

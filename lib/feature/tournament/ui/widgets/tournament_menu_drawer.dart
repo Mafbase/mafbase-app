@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_builder.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_locked_tile.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_trailing_text.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
@@ -41,6 +44,9 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
       child: BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
         selector: (state) => state.isLoading,
         builder: (context, seatingLoading) {
+          final checklist = context.select<OrganizerChecklistBloc, OrganizerChecklistModel?>(
+            (bloc) => bloc.state.checklist,
+          );
           return BlocBuilder<TournamentPageBloc, TournamentPageState>(
             builder: (context, state) {
               final showBill = context.read<AuthNotifier>().value.mapOrNull(
@@ -53,6 +59,7 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
                 widget.tournamentId,
                 showBill: showBill,
                 seatingLoading: seatingLoading,
+                checklist: checklist,
               );
 
               return SafeArea(
@@ -178,6 +185,15 @@ class _TournamentMenuDrawerState extends State<TournamentMenuDrawer> {
                   ),
                 ),
               ),
+              if (item.trailingText case final trailingText?)
+                TournamentMenuTrailingText(
+                  text: trailingText,
+                  style: GoogleFonts.inter(
+                    color: item.selected ? Colors.white : theme.sidebarInactiveTextColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
             ],
           ),
         ),

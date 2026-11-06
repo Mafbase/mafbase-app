@@ -1,18 +1,42 @@
 import 'golden_utils.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_info_sheet.dart';
-import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_locked_sheets.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_item_sheet.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
+import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
+import 'package:seating_generator_web/utils.dart';
+
+class _MockTournamentPageBloc extends MockBloc<TournamentPageEvent, TournamentPageState>
+    implements TournamentPageBloc {}
 
 /// Свой Navigator у каждого сценария держит модальный лист внутри рамки устройства.
-Widget _sheetScenario(void Function(BuildContext context) open) => adaptiveThemedWidget(
-      Navigator(
+Widget _sheetScenario(void Function(BuildContext context) open) {
+  final tournamentBloc = _MockTournamentPageBloc();
+  whenListen(
+    tournamentBloc,
+    const Stream<TournamentPageState>.empty(),
+    initialState: const TournamentPageState(isLoading: false, isMyTournament: true, isBillingLoaded: true),
+  );
+  addTearDown(tournamentBloc.close);
+
+  return adaptiveThemedWidget(
+    BlocProvider<TournamentPageBloc>.value(
+      value: tournamentBloc,
+      child: Navigator(
         onGenerateRoute: (_) => MaterialPageRoute<void>(
           builder: (_) => Scaffold(body: _SheetOpener(open: open)),
         ),
       ),
-    );
+    ),
+  );
+}
 
 class _SheetOpener extends StatefulWidget {
   final void Function(BuildContext context) open;
@@ -59,10 +83,13 @@ void main() {
       await _matchGolden(
         tester,
         _sheetScenario(
-          (context) => OrganizerChecklistLockedSheets.showTranslation(
+          (context) => OrganizerChecklistItemSheet.show(
             context,
-            billedPlayers: 10,
-            onPay: () {},
+            tournamentId: 1,
+            item: const ChecklistItemModel(key: ChecklistKey.translationBilling, status: ChecklistStatus.todo),
+            title: context.locale.translationDialogTitle,
+            showStatus: false,
+            showDismiss: false,
           ),
         ),
         'info_sheet_translation',
@@ -73,9 +100,13 @@ void main() {
       await _matchGolden(
         tester,
         _sheetScenario(
-          (context) => OrganizerChecklistLockedSheets.showNotifications(
+          (context) => OrganizerChecklistItemSheet.show(
             context,
-            onPay: () {},
+            tournamentId: 1,
+            item: const ChecklistItemModel(key: ChecklistKey.notifyCoverage, status: ChecklistStatus.locked),
+            title: context.locale.tournamentMenuNotifications,
+            showStatus: false,
+            showDismiss: false,
           ),
         ),
         'info_sheet_notifications',

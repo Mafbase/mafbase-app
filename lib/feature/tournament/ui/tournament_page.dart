@@ -2,7 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/storage_factory.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_reloader.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_router.dart';
@@ -60,8 +64,19 @@ class TournamentPage extends StatelessWidget {
               );
           },
         ),
+        BlocProvider<OrganizerChecklistBloc>(
+          key: const Key('OrganizerChecklistBloc'),
+          create: (context) => OrganizerChecklistBloc(
+            repository: RepositoryFactory.of(context).organizerChecklistRepository,
+            bannerStorage: StorageFactory.of(context).checklistBannerStorage,
+            tournamentId: tournamentId,
+          ),
+        ),
       ],
-      child: _TournamentPageContent(tournamentId: tournamentId),
+      child: OrganizerChecklistReloader(
+        tournamentId: tournamentId,
+        child: _TournamentPageContent(tournamentId: tournamentId),
+      ),
     );
   }
 }
@@ -101,6 +116,9 @@ class _TournamentPageContentState extends CustomState<_TournamentPageContent>
                             authorized: (model) => !model.hideBilling,
                           ) ??
                       true;
+                  final checklist = context.select<OrganizerChecklistBloc, OrganizerChecklistModel?>(
+                    (bloc) => bloc.state.checklist,
+                  );
 
                   final sections = TournamentMenuBuilder.buildSections(
                     context,
@@ -108,6 +126,7 @@ class _TournamentPageContentState extends CustomState<_TournamentPageContent>
                     widget.tournamentId,
                     showBill: showBill,
                     seatingLoading: seatingLoading,
+                    checklist: checklist,
                   );
 
                   return TournamentMenu(

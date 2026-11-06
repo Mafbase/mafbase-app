@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
-import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_locked_sheets.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_item_sheet.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
@@ -19,12 +22,14 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart'
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentMenuBuilder {
+  /// Без [checklist] пункт чеклиста идёт без прогресса.
   static List<TournamentMenuSection> buildSections(
     BuildContext context,
     TournamentPageState state,
     int tournamentId, {
     required bool showBill,
     required bool seatingLoading,
+    OrganizerChecklistModel? checklist,
   }) {
     final locale = context.locale;
     final currentPath = context.watchRouter.currentUrl;
@@ -45,6 +50,18 @@ class TournamentMenuBuilder {
     final sections = <TournamentMenuSection>[];
 
     final mainItems = <TournamentMenuItemModel>[
+      if (state.isMyTournament)
+        TournamentMenuTapItem(
+          text: locale.checklistTitle,
+          icon: Icons.fact_check_outlined,
+          routeSegment: 'checklist',
+          selected: isActive('checklist'),
+          trailingText: switch (checklist?.progress) {
+            (:final done, :final total) => '$done/$total',
+            null => null,
+          },
+          onTap: () => context.router.push(OrganizerChecklistRoute(tournamentId: tournamentId)),
+        ),
       TournamentMenuTapItem(
         text: locale.tournamentPageListOfPlayers,
         icon: Icons.people_outline,
@@ -177,10 +194,13 @@ class TournamentMenuBuilder {
           text: locale.translationDialogTitle,
           icon: Icons.layers_outlined,
           hint: locale.tournamentMenuLockedHint,
-          onTap: () => OrganizerChecklistLockedSheets.showTranslation(
+          onTap: () => OrganizerChecklistItemSheet.show(
             context,
-            billedPlayers: state.billedPlayers,
-            onPay: () => openTournamentBilling(context, preselectTranslation: true),
+            tournamentId: tournamentId,
+            item: const ChecklistItemModel(key: ChecklistKey.translationBilling, status: ChecklistStatus.todo),
+            title: locale.translationDialogTitle,
+            showStatus: false,
+            showDismiss: false,
           ),
         ),
       if (state.isMyTournament)
@@ -245,9 +265,13 @@ class TournamentMenuBuilder {
               text: locale.tournamentMenuNotifications,
               icon: Icons.notifications_outlined,
               hint: locale.tournamentMenuLockedHint,
-              onTap: () => OrganizerChecklistLockedSheets.showNotifications(
+              onTap: () => OrganizerChecklistItemSheet.show(
                 context,
-                onPay: () => openTournamentBilling(context),
+                tournamentId: tournamentId,
+                item: const ChecklistItemModel(key: ChecklistKey.notifyCoverage, status: ChecklistStatus.locked),
+                title: locale.tournamentMenuNotifications,
+                showStatus: false,
+                showDismiss: false,
               ),
             ),
           ],
