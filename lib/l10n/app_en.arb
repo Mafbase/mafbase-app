@@ -325,7 +325,7 @@
       }
     }
   },
-  "translationDialogTitle": "Broadcast",
+  "translationDialogTitle": "Stream overlays",
   "@translationDialogTitle": {},
   "translationContentLink": "Embed link for OBS",
   "@translationContentLink": {},
@@ -349,6 +349,43 @@
   "@translationDesignPickerTitle": {},
   "translationDesignSelect": "Select",
   "@translationDesignSelect": {},
+  "translationNoSeatingWarning": "Without a seating the overlays will be empty",
+  "@translationNoSeatingWarning": {},
+  "translationGoToSeating": "Go to seating",
+  "@translationGoToSeating": {},
+  "translationTablesLinks": "Links by table",
+  "@translationTablesLinks": {},
+  "translationTableTitle": "Table {table}",
+  "@translationTableTitle": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
+  "translationTableControl": "Control",
+  "@translationTableControl": {},
+  "translationTableObs": "OBS link",
+  "@translationTableObs": {},
+  "translationLinkOpen": "Open",
+  "@translationLinkOpen": {},
+  "translationLinkCopy": "Copy",
+  "@translationLinkCopy": {},
+  "translationLinkShare": "Share",
+  "@translationLinkShare": {},
+  "translationLinkCopied": "Link copied",
+  "@translationLinkCopied": {},
+  "gomafiaInputTitle": "Enter the tournament link",
+  "@gomafiaInputTitle": {},
+  "gomafiaInputReplaceWarning": "The current list of participants ({count}) will be replaced with participants from GoMafia",
+  "@gomafiaInputReplaceWarning": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
   "bucketFieldTitle": "Buckets for semi-final stage",
   "bucketFieldHint": "30;20;30",
   "hideResult": "Hide result",
@@ -786,6 +823,10 @@
   "tournamentMenuGameNotification": "Game notification",
   "tournamentMenuTextNotification": "Text notification",
   "tournamentMenuNoPlayers": "No participants added yet",
+  "tournamentMenuNotifications": "Notifications",
+  "@tournamentMenuNotifications": {},
+  "tournamentMenuLockedHint": "Available after payment",
+  "@tournamentMenuLockedHint": {},
 
   "tournamentCardGames": "{count, plural, =1{{count} game} other{{count} games}}",
   "@tournamentCardGames": {
@@ -886,7 +927,7 @@
   "@translationControlObsConnected": {},
   "translationControlObsDisconnectedHint": "Add the embed link to OBS as a Browser source",
   "@translationControlObsDisconnectedHint": {},
-  "translationControlObsNoRightsHint": "Open the Browser source properties and set the page permissions to advanced or full access to OBS, the level that allows changing scenes",
+  "translationControlObsNoRightsHint": "Open the Browser source properties and set Page permissions to Advanced access to OBS or Full access to OBS",
   "@translationControlObsNoRightsHint": {},
   "translationControlObsNoSwitch": "Don't switch",
   "@translationControlObsNoSwitch": {},
@@ -969,5 +1010,662 @@
         "type": "int"
       }
     }
-  }
+  },
+  "streamsPhoneGuideTitle": "How to stream from a phone",
+  "@streamsPhoneGuideTitle": {},
+  "streamsPhoneGuideStepCreate": "Add a stream for the table with the \"Add custom link\" button and enter the RTMP server and key, for example from VK Video.",
+  "@streamsPhoneGuideStepCreate": {},
+  "streamsPhoneGuideStepSend": "Send the table's operator link to the operator.",
+  "@streamsPhoneGuideStepSend": {},
+  "streamsPhoneGuideStepStart": "The operator opens it on a phone with the Mafbase app and starts the stream.",
+  "@streamsPhoneGuideStepStart": {},
+  "streamsOverlaysNotPaid": "Without paid overlays the video goes out without overlays",
+  "@streamsOverlaysNotPaid": {},
+  "streamsOverlaysPay": "Pay",
+  "@streamsOverlaysPay": {},
+  "streamsOperatorNoRtmpHint": "To stream from a phone, add a stream for this table with an RTMP server and key",
+  "@streamsOperatorNoRtmpHint": {},
+  "streamsShareOperatorLink": "Share",
+  "@streamsShareOperatorLink": {},
+  "streamsStartOnThisPhone": "Start on this phone",
+  "@streamsStartOnThisPhone": {},
+  "broadcastOperatorLinkCopied": "Link copied. The operator needs to open it on a phone with the Mafbase app",
+  "@broadcastOperatorLinkCopied": {},
+  "broadcastAppRequiredTitle": "The stream starts in the Mafbase app on a phone",
+  "@broadcastAppRequiredTitle": {},
+  "broadcastAppRequiredInstall": "Install the Mafbase app",
+  "@broadcastAppRequiredInstall": {},
+  "broadcastAppRequiredOpenLink": "Open this link on the phone",
+  "@broadcastAppRequiredOpenLink": {},
+  "broadcastAppStore": "App Store",
+  "@broadcastAppStore": {},
+  "broadcastRuStore": "RuStore",
+  "@broadcastRuStore": {},
+  "broadcastCopyLink": "Copy link",
+  "@broadcastCopyLink": {},
+  "broadcastLinkCopied": "Link copied",
+  "@broadcastLinkCopied": {},
+  "broadcastMessengerBrowserTip": "If the app is already installed but the link opened in a messenger's built-in browser, open it in the phone's browser.",
+  "@broadcastMessengerBrowserTip": {},
+  "checklistSheetAskQuestion": "Ask a question",
+  "@checklistSheetAskQuestion": {},
+  "checklistSheetPay": "Pay",
+  "@checklistSheetPay": {},
+  "checklistTitle": "Organizer checklist",
+  "@checklistTitle": {},
+  "checklistProgress": "Tournament readiness {done}/{total}",
+  "@checklistProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int",
+        "example": "5"
+      },
+      "total": {
+        "type": "int",
+        "example": "9"
+      }
+    }
+  },
+  "checklistProgressComplete": "Everything is ready for the tournament",
+  "@checklistProgressComplete": {},
+  "checklistLoadError": "Could not load the checklist",
+  "@checklistLoadError": {},
+  "checklistRetry": "Retry",
+  "@checklistRetry": {},
+  "checklistGroupPreparation": "Preparation",
+  "@checklistGroupPreparation": {},
+  "checklistGroupNotifications": "Notifications",
+  "@checklistGroupNotifications": {},
+  "checklistGroupTranslation": "Stream",
+  "@checklistGroupTranslation": {},
+  "checklistGroupNotNeeded": "Not needed",
+  "@checklistGroupNotNeeded": {},
+  "checklistStreamMethodObsSection": "Via OBS on a computer",
+  "@checklistStreamMethodObsSection": {},
+  "checklistStreamMethodPhoneSection": "From a phone with the Mafbase app",
+  "@checklistStreamMethodPhoneSection": {},
+  "checklistHidden": "Hidden ({count})",
+  "@checklistHidden": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistRestore": "Restore",
+  "@checklistRestore": {},
+  "checklistHiddenGroup": "The whole group is hidden",
+  "@checklistHiddenGroup": {},
+  "checklistBannerNext": "Next: {title}",
+  "@checklistBannerNext": {
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Рассадка"
+      }
+    }
+  },
+  "checklistBannerOpen": "Open",
+  "@checklistBannerOpen": {},
+  "checklistBannerClose": "Hide",
+  "@checklistBannerClose": {},
+  "checklistItemGamesCount": "Number of games",
+  "@checklistItemGamesCount": {},
+  "checklistItemPlayers": "Participants",
+  "@checklistItemPlayers": {},
+  "checklistItemSeating": "Seating",
+  "@checklistItemSeating": {},
+  "checklistItemBilling": "Payment",
+  "@checklistItemBilling": {},
+  "checklistItemNotifyCoverage": "Players will get notifications",
+  "@checklistItemNotifyCoverage": {},
+  "checklistItemTableDescriptions": "Where the tables are",
+  "@checklistItemTableDescriptions": {},
+  "checklistItemStreamMethod": "Streaming method",
+  "@checklistItemStreamMethod": {},
+  "checklistItemTranslationBilling": "Overlays are paid",
+  "@checklistItemTranslationBilling": {},
+  "checklistItemObsWidget": "Widget added to OBS",
+  "@checklistItemObsWidget": {},
+  "checklistItemObsScenes": "Automatic scene switching (optional)",
+  "@checklistItemObsScenes": {},
+  "checklistItemPhoneStream": "Phone stream is set up",
+  "@checklistItemPhoneStream": {},
+  "checklistItemPhoneOperator": "Operator opened the link",
+  "@checklistItemPhoneOperator": {},
+  "checklistStatusDone": "Done",
+  "@checklistStatusDone": {},
+  "checklistStatusLocked": "Available after payment",
+  "@checklistStatusLocked": {},
+  "checklistStatusLockedTranslation": "Available after paying for overlays",
+  "@checklistStatusLockedTranslation": {},
+  "checklistStatusUnavailable": "Could not check",
+  "@checklistStatusUnavailable": {},
+  "checklistCounter": "{current} of {total}",
+  "@checklistCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "checklistGamesCountDone": "Set in the tournament settings",
+  "@checklistGamesCountDone": {},
+  "checklistGamesCountTodo": "Not set in the tournament settings",
+  "@checklistGamesCountTodo": {},
+  "checklistPlayersCount": "Participants: {count}",
+  "@checklistPlayersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistPlayersNotMultiple": "Participants: {count}, not a multiple of 10. The seating will be generated once the number is a multiple of 10",
+  "@checklistPlayersNotMultiple": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "23"
+      }
+    }
+  },
+  "checklistPlayersTooFew": "Participants: {count}, at least 10 are needed",
+  "@checklistPlayersTooFew": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "checklistSeatingCounter": "Games with seating: {current} of {total}",
+  "@checklistSeatingCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "checklistSeatingTodo": "No seating yet",
+  "@checklistSeatingTodo": {},
+  "checklistSeatingTodoFsm": "Import the seating from GoMafia",
+  "@checklistSeatingTodoFsm": {},
+  "checklistSeatingDoneFsm": "Seating imported from GoMafia",
+  "@checklistSeatingDoneFsm": {},
+  "checklistSeatingNoGames": "Set the number of games first",
+  "@checklistSeatingNoGames": {},
+  "checklistNoTables": "No tables yet",
+  "@checklistNoTables": {},
+  "checklistBillingDone": "The tournament is paid",
+  "@checklistBillingDone": {},
+  "checklistBillingTodo": "Without payment there are no notifications and no more than 10 participants",
+  "@checklistBillingTodo": {},
+  "checklistNotifyCoverageCounter": "{current} of {total} will get them",
+  "@checklistNotifyCoverageCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistNotifyCoverageTodo": "The tournament has no participants yet",
+  "@checklistNotifyCoverageTodo": {},
+  "checklistTableDescriptionsCounter": "Tables described: {current} of {total}",
+  "@checklistTableDescriptionsCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistTableDescriptionsTodo": "Tables are not described",
+  "@checklistTableDescriptionsTodo": {},
+  "checklistStreamMethodTodo": "OBS on a computer or a phone",
+  "@checklistStreamMethodTodo": {},
+  "checklistStreamMethodObs": "From a computer via OBS",
+  "@checklistStreamMethodObs": {},
+  "checklistStreamMethodPhone": "From a phone with the Mafbase app",
+  "@checklistStreamMethodPhone": {},
+  "checklistTranslationBillingTodo": "Without payment the video goes without overlays",
+  "@checklistTranslationBillingTodo": {},
+  "checklistObsWidgetCounter": "Tables with OBS: {current} of {total}",
+  "@checklistObsWidgetCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "checklistObsWidgetWarning": "Scene switching needs the advanced OBS access",
+  "@checklistObsWidgetWarning": {},
+  "checklistObsWidgetTodo": "OBS has not connected yet",
+  "@checklistObsWidgetTodo": {},
+  "checklistObsScenesDone": "Scenes are selected",
+  "@checklistObsScenesDone": {},
+  "checklistObsScenesTodo": "Scenes are not selected",
+  "@checklistObsScenesTodo": {},
+  "checklistPhoneStreamCounter": "Tables with a stream: {current} of {total}",
+  "@checklistPhoneStreamCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "checklistPhoneStreamTodo": "No streams with an RTMP server and key",
+  "@checklistPhoneStreamTodo": {},
+  "checklistPhoneOperatorCounter": "Link opened: {current} of {total}",
+  "@checklistPhoneOperatorCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistPhoneOperatorTodo": "The operator has not opened the link yet",
+  "@checklistPhoneOperatorTodo": {},
+  "checklistPhoneOperatorNoStreams": "Set up a phone stream first",
+  "@checklistPhoneOperatorNoStreams": {},
+  "checklistSheetDo": "Do it",
+  "@checklistSheetDo": {},
+  "checklistSheetNotNeeded": "Not needed",
+  "@checklistSheetNotNeeded": {},
+  "checklistSheetEnough": "Good enough",
+  "@checklistSheetEnough": {},
+  "checklistSheetMore": "Learn more",
+  "@checklistSheetMore": {},
+  "checklistSheetUnavailable": "Could not check: the notification service is not responding. Check back later.",
+  "@checklistSheetUnavailable": {},
+  "checklistSheetNotifyCoverageCount": "Right now {current} of {total} participants will get notifications.",
+  "@checklistSheetNotifyCoverageCount": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistSheetStreamMethodObsHint": "A computer with OBS and a camera",
+  "@checklistSheetStreamMethodObsHint": {},
+  "checklistSheetStreamMethodPhoneHint": "A phone on a tripod with the Mafbase app",
+  "@checklistSheetStreamMethodPhoneHint": {},
+  "checklistSheetStreamMethodSelected": "Selected",
+  "@checklistSheetStreamMethodSelected": {},
+  "checklistHelpImageZoom": "Open full screen",
+  "@checklistHelpImageZoom": {},
+  "checklistHelpGamesCountAbout": "Without the number of games you cannot generate the seating or send players a game start notification.",
+  "@checklistHelpGamesCountAbout": {},
+  "checklistHelpGamesCountHow": "On the Tournament settings page, enter the number of regular games and tap Save.",
+  "@checklistHelpGamesCountHow": {},
+  "checklistHelpGamesCountOptional": "Swiss and final games are optional: enter them if your tournament has these stages.",
+  "@checklistHelpGamesCountOptional": {},
+  "checklistHelpPlayersMultiple": "The seating generator puts exactly 10 players at each table, so there must be 10, 20, 30 and so on participants. With any other number the seating cannot be generated.",
+  "@checklistHelpPlayersMultiple": {},
+  "checklistHelpPlayersManual": "To add participants manually, use Add participant in the tournament menu: find a player by nickname or create a new one.",
+  "@checklistHelpPlayersManual": {},
+  "checklistHelpPlayersGomafia": "You can also import participants from GoMafia together with the seating. The import replaces the whole participant list with the players from the GoMafia seating.",
+  "@checklistHelpPlayersGomafia": {},
+  "checklistHelpPlayersFsmNickname": "In an FSM tournament the FSM nickname matters — the player's nickname on GoMafia. It is used to match players during the import, to subscribe to the Telegram bot and to deliver notifications on VK.",
+  "@checklistHelpPlayersFsmNickname": {},
+  "checklistHelpPlayersFsmNicknameEdit": "You can set the FSM nickname on the player card: tap the player in the participant list.",
+  "@checklistHelpPlayersFsmNicknameEdit": {},
+  "checklistHelpPlayersLimit": "You can add as many participants as you have paid for: up to 10 without payment.",
+  "@checklistHelpPlayersLimit": {},
+  "checklistHelpSeatingAbout": "The seating tells players their table and seat in the notification, and tells the overlays who sits at each table.",
+  "@checklistHelpSeatingAbout": {},
+  "checklistHelpSeatingGenerate": "To generate the seating in Mafbase, tap Generate seating on the Seating page: Mafbase seats the participants for all regular games of the tournament.",
+  "@checklistHelpSeatingGenerate": {},
+  "checklistHelpSeatingGomafia": "To import the seating from GoMafia, tap Upload from Gomafia on the Seating page and paste the link to the tournament on gomafia.pro. The participant list is replaced with the players from that seating.",
+  "@checklistHelpSeatingGomafia": {},
+  "checklistHelpSeatingMatching": "If a GoMafia player cannot be found by FSM nickname, Mafbase asks you to pick them from the list or create a new player. You do this only once: the FSM nickname is saved and later imports need no matching.",
+  "@checklistHelpSeatingMatching": {},
+  "checklistHelpSeatingFsmRounds": "In an FSM tournament the next rounds are pulled from GoMafia automatically when you send a game start notification. If the players on GoMafia have changed, import the seating manually.",
+  "@checklistHelpSeatingFsmRounds": {},
+  "checklistHelpBillingFree": "Without payment a tournament can have up to 10 participants and has no notifications or overlays.",
+  "@checklistHelpBillingFree": {},
+  "checklistHelpBillingGives": "Payment opens the tournament for the number of participants you need. The Overlays checkbox in the payment window adds stream overlays.",
+  "@checklistHelpBillingGives": {},
+  "checklistHelpBillingNotifications": "Notifications are enabled with any tournament payment: 20 or more participants, or overlays.",
+  "@checklistHelpBillingNotifications": {},
+  "checklistHelpBillingPriceFree": "A tournament with 10 participants is free, with overlays it costs {price} ₽.",
+  "@checklistHelpBillingPriceFree": {
+    "placeholders": {
+      "price": {
+        "type": "int",
+        "example": "300"
+      }
+    }
+  },
+  "checklistHelpBillingPrice": "A tournament with {players} participants costs {price} ₽, with overlays {priceWithOverlays} ₽.",
+  "@checklistHelpBillingPrice": {
+    "placeholders": {
+      "players": {
+        "type": "int",
+        "example": "20"
+      },
+      "price": {
+        "type": "int",
+        "example": "600"
+      },
+      "priceWithOverlays": {
+        "type": "int",
+        "example": "800"
+      }
+    }
+  },
+  "checklistHelpNotifyCoverageAbout": "Notifications tell players when a game starts, their table and seat, and deliver your text messages.",
+  "@checklistHelpNotifyCoverageAbout": {},
+  "checklistHelpNotifyCoverageTelegram": "Telegram — the player sends their FSM nickname to @mafbase_notification_bot, or /pair and their Mafbase nickname if they have none. One subscription works for all tournaments.",
+  "@checklistHelpNotifyCoverageTelegram": {},
+  "checklistHelpNotifyCoverageVk": "VK — only in FSM tournaments: notifications arrive automatically by FSM nickname through the player's GoMafia profile.",
+  "@checklistHelpNotifyCoverageVk": {},
+  "checklistHelpNotifyCoveragePush": "Push in the Mafbase app — for those who signed in to the app and linked their account to their player profile. Push comes only with the game start notification, so it is not counted in the reach.",
+  "@checklistHelpNotifyCoveragePush": {},
+  "checklistHelpNotifyCoverageInvite": "Invite players to subscribe to the bot in advance, before the first game: the reach page has a ready text for the tournament chat and a list of those who will not get notifications yet.",
+  "@checklistHelpNotifyCoverageInvite": {},
+  "checklistHelpTableDescriptionsAbout": "A table description is included in the game start notification, so players see not only the table number but also where the table is.",
+  "@checklistHelpTableDescriptionsAbout": {},
+  "checklistHelpTableDescriptionsHow": "On the Location descriptions page, write where each table is, for example \"2nd floor, room by the stairs\".",
+  "@checklistHelpTableDescriptionsHow": {},
+  "checklistHelpTableDescriptionsOptional": "If all tables are in one hall and easy to find, you can skip the descriptions — tap Not needed.",
+  "@checklistHelpTableDescriptionsOptional": {},
+  "checklistHelpStreamMethodAbout": "Overlays can be shown in a stream in two ways. Choose yours and the items of the other way will be hidden from the checklist.",
+  "@checklistHelpStreamMethodAbout": {},
+  "checklistHelpStreamMethodObs": "From a computer with OBS you need a computer with OBS Studio and a camera. It suits you if you want several cameras, scenes and splash screens.",
+  "@checklistHelpStreamMethodObs": {},
+  "checklistHelpStreamMethodPhone": "From a phone with the Mafbase app you only need a phone on a tripod above the table: the app adds the overlays and sends the video to the streaming service. It suits you if there is no computer with OBS.",
+  "@checklistHelpStreamMethodPhone": {},
+  "checklistHelpStreamMethodControl": "Both ways need paid overlays, and the host changes player statuses and roles on the control page: in Stream overlays in the menu, tap Open next to the table.",
+  "@checklistHelpStreamMethodControl": {},
+  "checklistHelpStreamMethodBoth": "If some tables go through OBS and others from a phone, do not choose a way — the checklist keeps the items of both.",
+  "@checklistHelpStreamMethodBoth": {},
+  "checklistHelpTranslationBillingAbout": "Overlays show the nicknames of the players at the table on top of the stream video.",
+  "@checklistHelpTranslationBillingAbout": {},
+  "checklistHelpTranslationBillingManual": "With manual control the host changes player roles and statuses on the table's control page, and the overlays show them right away.",
+  "@checklistHelpTranslationBillingManual": {},
+  "checklistHelpTranslationBillingAuto": "Without manual control the overlays show only nicknames and move to the next game by themselves when you send its start notification.",
+  "@checklistHelpTranslationBillingAuto": {},
+  "checklistHelpTranslationBillingWays": "Overlays work in both streaming ways — in OBS on a computer and from a phone with the Mafbase app — and both need paid overlays.",
+  "@checklistHelpTranslationBillingWays": {},
+  "checklistHelpTranslationBillingSeating": "Overlays take the players at each table from the seating, so without a seating they will be empty.",
+  "@checklistHelpTranslationBillingSeating": {},
+  "checklistHelpTranslationBillingPrice": "Overlays for a tournament with {players} participants cost {price} ₽.",
+  "@checklistHelpTranslationBillingPrice": {
+    "placeholders": {
+      "players": {
+        "type": "int",
+        "example": "10"
+      },
+      "price": {
+        "type": "int",
+        "example": "300"
+      }
+    }
+  },
+  "checklistHelpTranslationBillingNotifications": "Paying for overlays also enables player notifications.",
+  "@checklistHelpTranslationBillingNotifications": {},
+  "checklistHelpObsWidgetAbout": "The widget is the table's overlay page that OBS shows on top of the video as a Browser source. Each table has its own link.",
+  "@checklistHelpObsWidgetAbout": {},
+  "checklistHelpObsWidgetDesign": "The overlay design is part of the link: if you change it, paste the new link into OBS.",
+  "@checklistHelpObsWidgetDesign": {},
+  "checklistHelpObsWidgetStepSource": "In OBS, click + in the Sources panel and choose Browser.",
+  "@checklistHelpObsWidgetStepSource": {},
+  "checklistHelpObsWidgetStepLink": "Paste the table's OBS link into the URL field and set Width and Height to 1920 and 1080: the overlays are made for this size, and on a small source the widget shows a warning.",
+  "@checklistHelpObsWidgetStepLink": {},
+  "checklistHelpObsWidgetStepPermissions": "For OBS to switch scenes by itself, set Page permissions to Advanced access to OBS. Full access to OBS works too.",
+  "@checklistHelpObsWidgetStepPermissions": {},
+  "checklistHelpObsWidgetStepShutdown": "Do not enable Shutdown source when not visible: otherwise the source turns off on a scene without the widget and OBS will not switch back.",
+  "@checklistHelpObsWidgetStepShutdown": {},
+  "checklistHelpObsWidgetDone": "The item is checked once the widget opens in OBS on at least one table. Streams often show a single table — that is enough.",
+  "@checklistHelpObsWidgetDone": {},
+  "checklistHelpObsWidgetWarning": "On a table with selected scenes the widget lacks the rights to switch them: in the source properties set Page permissions to Advanced access to OBS.",
+  "@checklistHelpObsWidgetWarning": {},
+  "checklistHelpObsWidgetLocked": "Without paid overlays the OBS widget will not work.",
+  "@checklistHelpObsWidgetLocked": {},
+  "checklistHelpObsScenesAbout": "OBS can switch scenes by itself when the host changes the game phase: for example, show the table during the day, another shot at night and a splash screen during a break.",
+  "@checklistHelpObsScenesAbout": {},
+  "checklistHelpObsScenesRights": "The scene list comes from OBS, so you can choose scenes only while the widget is open in OBS with Page permissions set to Advanced or Full access to OBS.",
+  "@checklistHelpObsScenesRights": {},
+  "checklistHelpObsScenesStepOpen": "Open the table's control page and tap OBS next to the game selector. A green dot means OBS is connected.",
+  "@checklistHelpObsScenesStepOpen": {},
+  "checklistHelpObsScenesStepChoose": "For the Day, Night and Break phases choose a scene or Don't switch. The choice is saved at once and shared by everyone who has this table's control page open.",
+  "@checklistHelpObsScenesStepChoose": {},
+  "checklistHelpObsScenesWhen": "The scene switches only when the phase changes on the control page. Reloading the source or reopening the widget does not change the scene.",
+  "@checklistHelpObsScenesWhen": {},
+  "checklistHelpObsScenesMissing": "If a scene was renamed or deleted in OBS, it stays in the list marked \"(not in OBS)\" — choose another one.",
+  "@checklistHelpObsScenesMissing": {},
+  "checklistHelpObsScenesOtherTables": "Do it opens the control page of table 1. Control pages of other tables are under Stream overlays in the menu: Open next to the table.",
+  "@checklistHelpObsScenesOtherTables": {},
+  "checklistHelpObsScenesDone": "The item is checked once scenes are chosen for at least one table.",
+  "@checklistHelpObsScenesDone": {},
+  "checklistHelpPhoneStreamAbout": "The phone sends video to a streaming service such as VK Video, just like OBS does. For this the table's stream needs an RTMP server and key.",
+  "@checklistHelpPhoneStreamAbout": {},
+  "checklistHelpPhoneStreamStepService": "Create a stream in VK Video or another service the same way as for OBS. The service gives you the RTMP server address and key, and the viewer link is the address of that stream.",
+  "@checklistHelpPhoneStreamStepService": {},
+  "checklistHelpPhoneStreamStepAdd": "In Mafbase, tap Add custom link on the Streams page.",
+  "@checklistHelpPhoneStreamStepAdd": {},
+  "checklistHelpPhoneStreamStepFields": "Fill in the table number, paste the viewer link into Stream URL and the server address and key into RTMP server and RTMP key. Tap Add.",
+  "@checklistHelpPhoneStreamStepFields": {},
+  "checklistHelpPhoneStreamOperatorLink": "Then the table gets an operator link — send it to whoever films. Without an RTMP server and key there is no operator link.",
+  "@checklistHelpPhoneStreamOperatorLink": {},
+  "checklistHelpPhoneStreamWithoutBilling": "Without paid overlays the phone video goes without overlays.",
+  "@checklistHelpPhoneStreamWithoutBilling": {},
+  "checklistHelpPhoneStreamDone": "The item is checked once at least one table has such a stream.",
+  "@checklistHelpPhoneStreamDone": {},
+  "checklistHelpPhoneOperatorAbout": "The operator link opens the table's streaming screen in the Mafbase app on a phone. Every table with an RTMP server and key has its own link on the Streams page.",
+  "@checklistHelpPhoneOperatorAbout": {},
+  "checklistHelpPhoneOperatorStepApp": "The operator installs the Mafbase app from the App Store or RuStore.",
+  "@checklistHelpPhoneOperatorStepApp": {},
+  "checklistHelpPhoneOperatorStepSend": "Send the table's operator link from the Streams page to the operator.",
+  "@checklistHelpPhoneOperatorStepSend": {},
+  "checklistHelpPhoneOperatorStepOpen": "The operator opens the link on the phone — it opens in the app — and allows camera and microphone access.",
+  "@checklistHelpPhoneOperatorStepOpen": {},
+  "checklistHelpPhoneOperatorStepStream": "On the streaming screen the operator taps Stream: the stream starts and the button turns into Stop.",
+  "@checklistHelpPhoneOperatorStepStream": {},
+  "checklistHelpPhoneOperatorRecord": "The Record button separately saves the video to the phone gallery and does not affect the stream.",
+  "@checklistHelpPhoneOperatorRecord": {},
+  "checklistHelpPhoneOperatorTips": "Put the phone horizontally on a tripod above the table, plug it into a charger and connect it to good Wi-Fi.",
+  "@checklistHelpPhoneOperatorTips": {},
+  "checklistHelpPhoneOperatorIos": "On an iPhone do not lock the screen or leave the app while streaming: iOS does not send video in the background.",
+  "@checklistHelpPhoneOperatorIos": {},
+  "checklistHelpPhoneOperatorSelf": "You can also stream from your own phone: in the Mafbase app tap Start on this phone next to the table on the Streams page — no need to copy the link.",
+  "@checklistHelpPhoneOperatorSelf": {},
+  "checklistHelpPhoneOperatorReissue": "If the link reached the wrong person, tap Reissue operator link (the circular arrows icon) on the table's stream. The old link stops working; send the new one to the operator.",
+  "@checklistHelpPhoneOperatorReissue": {},
+  "checklistHelpPhoneOperatorBrowser": "If the link is opened in a browser — on a computer or on a phone without the app — the page suggests installing Mafbase: streaming starts only in the app.",
+  "@checklistHelpPhoneOperatorBrowser": {},
+  "checklistHelpPhoneOperatorDone": "The item is checked once the operator link has been opened in the app for every table with a phone stream. It does not yet mean the stream is live: check it with the viewer link.",
+  "@checklistHelpPhoneOperatorDone": {},
+  "checklistCoverageTitle": "Notification reach",
+  "@checklistCoverageTitle": {},
+  "checklistCoverageSummary": "Will receive notifications: {reachable} of {total}",
+  "@checklistCoverageSummary": {
+    "placeholders": {
+      "reachable": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistCoverageTelegram": "Telegram",
+  "@checklistCoverageTelegram": {},
+  "checklistCoverageTelegramHint": "Subscribed to the bot",
+  "@checklistCoverageTelegramHint": {},
+  "checklistCoverageVk": "VK",
+  "@checklistCoverageVk": {},
+  "checklistCoverageVkHint": "By FSM nickname",
+  "@checklistCoverageVkHint": {},
+  "checklistCoveragePush": "Push in the app",
+  "@checklistCoveragePush": {},
+  "checklistCoveragePushHint": "Only the game start notification, not counted in the total",
+  "@checklistCoveragePushHint": {},
+  "checklistCoverageFsmNote": "Participants with an FSM nickname get notifications in VK automatically",
+  "@checklistCoverageFsmNote": {},
+  "checklistCoverageUnavailable": "Couldn't get subscription data",
+  "@checklistCoverageUnavailable": {},
+  "checklistCoverageLoadError": "Couldn't load the notification reach",
+  "@checklistCoverageLoadError": {},
+  "checklistCoverageUnreachable": "Won't receive notifications ({count})",
+  "@checklistCoverageUnreachable": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistCoverageAllReachable": "All participants will receive notifications",
+  "@checklistCoverageAllReachable": {},
+  "checklistCoverageNoFsmNickname": "No FSM nickname, so the VK notification won't arrive",
+  "@checklistCoverageNoFsmNickname": {},
+  "checklistCoverageNotSubscribed": "Not subscribed to the Telegram bot",
+  "@checklistCoverageNotSubscribed": {},
+  "checklistCoverageSetFsmNickname": "Set FSM nickname",
+  "@checklistCoverageSetFsmNickname": {},
+  "checklistCoverageInviteTitle": "Invitation for the tournament chat",
+  "@checklistCoverageInviteTitle": {},
+  "checklistCoverageInviteAbout": "Post it to the tournament chat: players will subscribe to the bot and get notifications.",
+  "@checklistCoverageInviteAbout": {},
+  "checklistCoverageInviteText": "To get your table number and the game start time, send your FSM nickname to the bot {botUrl}, keeping the exact case and digits.\n\nIf you don't have an FSM nickname, send the bot /pair followed by a space and your Mafbase nickname as it appears in the tournament participants list. For example: /pair Sherlock",
+  "@checklistCoverageInviteText": {
+    "placeholders": {
+      "botUrl": {
+        "type": "String",
+        "example": "https://t.me/mafbase_notification_bot"
+      }
+    }
+  },
+  "checklistCoverageInviteCopy": "Copy invitation",
+  "@checklistCoverageInviteCopy": {},
+  "checklistCoverageInviteCopied": "Invitation copied",
+  "@checklistCoverageInviteCopied": {},
+  "checklistCoverageFormCounter": "Will receive: {current} of {total}",
+  "@checklistCoverageFormCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistSetupCaption": "Tournament setup",
+  "@checklistSetupCaption": {},
+  "checklistSetupStepCaption": "Tournament setup · step {step} of {total}",
+  "@checklistSetupStepCaption": {
+    "placeholders": {
+      "step": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistSetupFsmQuestion": "Is the tournament held on GoMafia (FSM)?",
+  "@checklistSetupFsmQuestion": {},
+  "checklistSetupFsmAbout": "Then participants and seating can be loaded from GoMafia, and players with an FSM nickname will get notifications in VK.",
+  "@checklistSetupFsmAbout": {},
+  "checklistSetupFsmYes": "Yes",
+  "@checklistSetupFsmYes": {},
+  "checklistSetupFsmYesHint": "You'll add the link to the tournament on GoMafia",
+  "@checklistSetupFsmYesHint": {},
+  "checklistSetupFsmNo": "No",
+  "@checklistSetupFsmNo": {},
+  "checklistSetupFsmNoHint": "You'll add participants yourself",
+  "@checklistSetupFsmNoHint": {},
+  "checklistSetupGomafiaTitle": "Link to the tournament on GoMafia",
+  "@checklistSetupGomafiaTitle": {},
+  "checklistSetupGomafiaAbout": "Copy the address of the tournament page on gomafia.pro.",
+  "@checklistSetupGomafiaAbout": {},
+  "checklistSetupGomafiaInvalid": "The link should look like {example}",
+  "@checklistSetupGomafiaInvalid": {
+    "placeholders": {
+      "example": {
+        "type": "String",
+        "example": "https://gomafia.pro/tournament/1"
+      }
+    }
+  },
+  "checklistSetupSave": "Save",
+  "@checklistSetupSave": {},
+  "checklistSetupBack": "Back",
+  "@checklistSetupBack": {},
+  "checklistSetupTranslationQuestion": "Will you stream with overlays?",
+  "@checklistSetupTranslationQuestion": {},
+  "checklistSetupTranslationAbout": "Overlays show the nicknames, roles and statuses of the players at the table on top of the video. You can change the answer in the checklist.",
+  "@checklistSetupTranslationAbout": {},
+  "checklistSetupTranslationObs": "Yes, from a computer via OBS",
+  "@checklistSetupTranslationObs": {},
+  "checklistSetupTranslationPhone": "Yes, from a phone via the Mafbase app",
+  "@checklistSetupTranslationPhone": {},
+  "checklistSetupTranslationNone": "No",
+  "@checklistSetupTranslationNone": {},
+  "checklistSetupTranslationNoneHint": "Streaming items will be hidden from the checklist",
+  "@checklistSetupTranslationNoneHint": {},
+  "checklistSetupTranslationUnknown": "Not sure yet",
+  "@checklistSetupTranslationUnknown": {},
+  "checklistSetupTranslationUnknownHint": "Decide later in the checklist",
+  "@checklistSetupTranslationUnknownHint": {},
+  "checklistSetupDoneTitle": "All set",
+  "@checklistSetupDoneTitle": {},
+  "checklistSetupDoneAbout": "The checklist shows what's left to do before the tournament. Items are checked off automatically once they're done.",
+  "@checklistSetupDoneAbout": {},
+  "checklistSetupDoneFsm": "You can load participants and seating from GoMafia right now.",
+  "@checklistSetupDoneFsm": {},
+  "checklistSetupImportGomafia": "Load participants and seating from GoMafia",
+  "@checklistSetupImportGomafia": {},
+  "checklistSetupOpenChecklist": "Open checklist",
+  "@checklistSetupOpenChecklist": {}
 }

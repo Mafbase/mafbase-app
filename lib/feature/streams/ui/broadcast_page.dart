@@ -7,8 +7,10 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/get_broadcast_credentials_request.dart';
+import 'package:seating_generator_web/feature/streams/ui/widgets/broadcast_app_required_view.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/platform.dart';
 
 /// Резолвер диплинка оператора трансляции (`/broadcast`).
 ///
@@ -16,6 +18,9 @@ import 'package:seating_generator_web/utils.dart';
 /// одноразовому `key` из ссылки запрашивает RTMP-креды и открывает нативный
 /// экран стрима. Не использует Bloc — простой stateful-резолвер с тремя
 /// состояниями: загрузка, ошибка, переход на нативный экран.
+///
+/// В браузере креды не запрашивает: стримить там нечем, а выдача кредов
+/// отмечает на backend, что оператор открыл ссылку.
 @RoutePage()
 class BroadcastPage extends StatefulWidget {
   final int tournamentId;
@@ -47,6 +52,7 @@ class _BroadcastPageState extends State<BroadcastPage> {
   @override
   void initState() {
     super.initState();
+    if (isWebPlatform) return;
     WidgetsBinding.instance.addPostFrameCallback((_) => _resolve());
   }
 
@@ -110,11 +116,14 @@ class _BroadcastPageState extends State<BroadcastPage> {
       return;
     }
 
-    // Нативный экран закрыт пользователем (в т.ч. cold-start через диплинк):
-    // уводим на /club как разумный дефолт. TODO(точка возврата обсуждаема):
-    // возможно стоит возвращать в админку турнира/клуба по контексту ссылки.
     if (!mounted) return;
-    context.router.replaceAll([const ClubsRoute()]);
+    final router = context.router;
+    if (router.canPop()) {
+      router.maybePop();
+    } else {
+      // После холодного старта по диплинку под страницей ничего нет.
+      router.replaceAll([const ClubsRoute()]);
+    }
   }
 
   void _showError(_BroadcastErrorKind kind, {String? message}) {
@@ -133,9 +142,11 @@ class _BroadcastPageState extends State<BroadcastPage> {
       backgroundColor: theme.background1,
       body: SafeArea(
         child: Center(
-          child: _loading
-              ? const _BroadcastLoading()
-              : _BroadcastError(kind: _errorKind!, message: _genericErrorMessage, onRetry: _resolve),
+          child: isWebPlatform
+              ? BroadcastAppRequiredView(link: Uri.base.toString())
+              : _loading
+                  ? const _BroadcastLoading()
+                  : _BroadcastError(kind: _errorKind!, message: _genericErrorMessage, onRetry: _resolve),
         ),
       ),
     );

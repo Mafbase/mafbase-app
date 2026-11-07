@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seating_generator_web/common/widgets/custom_button.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/widgets/notification_coverage_counter_link.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
@@ -97,32 +99,24 @@ class _CustomTextInfoFormState extends State<CustomTextInfoForm> {
           ListenableBuilder(
             listenable: controller,
             builder: (context, _) {
-              return ElevatedButton(
+              return CustomButton(
                 key: _fieldKey,
-                onPressed: controller.text.isNotEmpty
-                    ? () {
-                        context.read<TournamentPageBloc>().add(
-                              TournamentPageEvent.customTextInfo(
-                                text: controller.text,
-                              ),
-                            );
-                        widget.onCollapse();
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(0, 40),
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black87,
-                  disabledBackgroundColor: Colors.white24,
-                  disabledForegroundColor: Colors.white38,
-                ),
-                child: Text(
-                  locale.send,
-                  style: GoogleFonts.inter(fontSize: 14),
-                ),
+                text: locale.send,
+                minimize: true,
+                isInverted: true,
+                disabled: controller.text.isEmpty,
+                onTap: () {
+                  context.read<TournamentPageBloc>().add(
+                        TournamentPageEvent.customTextInfo(
+                          text: controller.text,
+                        ),
+                      );
+                  widget.onCollapse();
+                },
               );
             },
           ),
+          const NotificationCoverageCounterLink(),
         ],
       ),
     );

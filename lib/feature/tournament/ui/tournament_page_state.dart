@@ -24,6 +24,7 @@ abstract class TournamentPageState with _$TournamentPageState {
     @Default(false) bool billedTranslation,
     @Default(false) bool isMyTournament,
     @Default(false) bool notificationEnabled,
+    @Default(false) bool isBillingLoaded,
     String? gomafiaUrl,
     int? activePhotoThemeId,
     @Default({}) Map<int, String> activeThemePhotos,

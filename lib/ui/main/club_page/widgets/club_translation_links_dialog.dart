@@ -1,13 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/domain/repositories/club_translation_repository.dart';
+import 'package:seating_generator_web/feature/translation_links/translation_table_links.dart';
+import 'package:seating_generator_web/feature/translation_links/widgets/translation_table_links_row.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/link_actions.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class ClubTranslationLinksDialog {
@@ -58,39 +59,10 @@ class _ClubTranslationLinksBodyState extends State<_ClubTranslationLinksBody> {
     super.dispose();
   }
 
-  String _root() {
-    if (kIsWeb && !kDebugMode) {
-      final port = Uri.base.port != 80 && Uri.base.port != 443 ? ':${Uri.base.port}' : '';
-      return '${Uri.base.scheme}://${Uri.base.host}$port';
-    }
-    return 'https://mafbase.ru';
-  }
-
-  String _buildLink(String root, String path, String key, int table) =>
-      '$root/$path?clubId=${widget.clubId}&table=$table&key=$key';
-
-  Future<void> _copyAll(String key) async {
-    final root = _root();
-    final locale = context.locale;
-    final buffer = StringBuffer();
-    for (var t = 1; t <= _tablesCount; t++) {
-      final content = _buildLink(root, 'translation', key, t);
-      final control = _buildLink(root, 'translationControl', key, t);
-      buffer.writeln(locale.translationCopyAllTable(t));
-      buffer.writeln('${locale.translationContentLink}: $content');
-      buffer.writeln('${locale.translationControlLink}: $control');
-      if (t < _tablesCount) buffer.writeln();
-    }
-    await Clipboard.setData(ClipboardData(text: buffer.toString()));
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(locale.translationCopiedSnackbar)));
-  }
-
-  Future<void> _copyOne(String text) async {
-    await Clipboard.setData(ClipboardData(text: text));
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.locale.translationCopiedSnackbar)));
-  }
+  List<TranslationTableLinks> _tables(String key) => [
+        for (var table = 1; table <= _tablesCount; table++)
+          TranslationTableLinks.club(clubId: widget.clubId, table: table, key: key),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +105,7 @@ class _ClubTranslationLinksBodyState extends State<_ClubTranslationLinksBody> {
   Widget _buildContent(String key) {
     final theme = MyTheme.of(context);
     final locale = context.locale;
-    final root = _root();
+    final tables = _tables(key);
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -158,73 +130,25 @@ class _ClubTranslationLinksBodyState extends State<_ClubTranslationLinksBody> {
             },
           ),
           const SizedBox(height: 16),
-          for (var t = 1; t <= _tablesCount; t++) ...[
-            Text(
-              locale.translationCopyAllTable(t),
-              style: theme.defaultTextStyle.copyWith(fontWeight: FontWeight.w600),
+          for (final links in tables)
+            Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.fromLTRB(10, 4, 4, 4),
+              decoration: BoxDecoration(
+                color: theme.background1,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: theme.borderColor.withValues(alpha: 0.5)),
+              ),
+              child: TranslationTableLinksRow(links: links),
             ),
-            const SizedBox(height: 6),
-            _LinkRow(
-              label: locale.translationContentLink,
-              link: _buildLink(root, 'translation', key, t),
-              onCopy: _copyOne,
-            ),
-            const SizedBox(height: 6),
-            _LinkRow(
-              label: locale.translationControlLink,
-              link: _buildLink(root, 'translationControl', key, t),
-              onCopy: _copyOne,
-            ),
-            const SizedBox(height: 12),
-          ],
           const SizedBox(height: 8),
-          CustomButton(text: locale.translationCopyAllButton, onTap: () => _copyAll(key)),
-        ],
-      ),
-    );
-  }
-}
-
-class _LinkRow extends StatelessWidget {
-  final String label;
-  final String link;
-  final ValueChanged<String> onCopy;
-
-  const _LinkRow({required this.label, required this.link, required this.onCopy});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = MyTheme.of(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: theme.background1,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: theme.borderColor.withValues(alpha: 0.5)),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(label, style: theme.defaultTextStyle.copyWith(fontSize: 12, color: theme.darkGreyColor)),
-                const SizedBox(height: 2),
-                Text(
-                  link,
-                  style: theme.defaultTextStyle.copyWith(fontSize: 12),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+          CustomButton(
+            text: locale.translationCopyAllButton,
+            onTap: () => copyLink(
+              context,
+              translationLinksClipboardText(locale, tables),
+              message: locale.translationCopiedSnackbar,
             ),
-          ),
-          IconButton(
-            onPressed: () => onCopy(link),
-            icon: const Icon(Icons.copy, size: 18),
-            tooltip: context.locale.translationCopyAllButton,
-            color: theme.hintColor,
           ),
         ],
       ),

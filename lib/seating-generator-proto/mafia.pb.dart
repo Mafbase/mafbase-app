@@ -9539,6 +9539,440 @@ class StreamSettingsOut extends $pb.GeneratedMessage {
   void clearBrandImageUrl() => $_clearField(2);
 }
 
+class ChecklistItem extends $pb.GeneratedMessage {
+  factory ChecklistItem({
+    ChecklistItemKey? key,
+    ChecklistItemStatus? status,
+    $core.int? current,
+    $core.int? total,
+    $core.bool? unavailable,
+  }) {
+    final result = create();
+    if (key != null) result.key = key;
+    if (status != null) result.status = status;
+    if (current != null) result.current = current;
+    if (total != null) result.total = total;
+    if (unavailable != null) result.unavailable = unavailable;
+    return result;
+  }
+
+  ChecklistItem._();
+
+  factory ChecklistItem.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory ChecklistItem.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ChecklistItem',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aE<ChecklistItemKey>(1, _omitFieldNames ? '' : 'key',
+        enumValues: ChecklistItemKey.values)
+    ..aE<ChecklistItemStatus>(2, _omitFieldNames ? '' : 'status',
+        enumValues: ChecklistItemStatus.values)
+    ..aI(3, _omitFieldNames ? '' : 'current')
+    ..aI(4, _omitFieldNames ? '' : 'total')
+    ..aOB(5, _omitFieldNames ? '' : 'unavailable')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ChecklistItem clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ChecklistItem copyWith(void Function(ChecklistItem) updates) =>
+      super.copyWith((message) => updates(message as ChecklistItem))
+          as ChecklistItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ChecklistItem create() => ChecklistItem._();
+  @$core.override
+  ChecklistItem createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static ChecklistItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ChecklistItem>(create);
+  static ChecklistItem? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ChecklistItemKey get key => $_getN(0);
+  @$pb.TagNumber(1)
+  set key(ChecklistItemKey value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearKey() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  ChecklistItemStatus get status => $_getN(1);
+  @$pb.TagNumber(2)
+  set status(ChecklistItemStatus value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasStatus() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStatus() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get current => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set current($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCurrent() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCurrent() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get total => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set total($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTotal() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTotal() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.bool get unavailable => $_getBF(4);
+  @$pb.TagNumber(5)
+  set unavailable($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasUnavailable() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearUnavailable() => $_clearField(5);
+}
+
+class TournamentChecklistOut extends $pb.GeneratedMessage {
+  factory TournamentChecklistOut({
+    $core.Iterable<ChecklistItem>? items,
+    $core.bool? isFsm,
+  }) {
+    final result = create();
+    if (items != null) result.items.addAll(items);
+    if (isFsm != null) result.isFsm = isFsm;
+    return result;
+  }
+
+  TournamentChecklistOut._();
+
+  factory TournamentChecklistOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory TournamentChecklistOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'TournamentChecklistOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..pPM<ChecklistItem>(1, _omitFieldNames ? '' : 'items',
+        subBuilder: ChecklistItem.create)
+    ..aOB(2, _omitFieldNames ? '' : 'isFsm', protoName: 'isFsm')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TournamentChecklistOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TournamentChecklistOut copyWith(
+          void Function(TournamentChecklistOut) updates) =>
+      super.copyWith((message) => updates(message as TournamentChecklistOut))
+          as TournamentChecklistOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TournamentChecklistOut create() => TournamentChecklistOut._();
+  @$core.override
+  TournamentChecklistOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static TournamentChecklistOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<TournamentChecklistOut>(create);
+  static TournamentChecklistOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<ChecklistItem> get items => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get isFsm => $_getBF(1);
+  @$pb.TagNumber(2)
+  set isFsm($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasIsFsm() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIsFsm() => $_clearField(2);
+}
+
+class SetChecklistDismissedEvent extends $pb.GeneratedMessage {
+  factory SetChecklistDismissedEvent({
+    $core.Iterable<ChecklistItemKey>? keys,
+    $core.bool? dismissed,
+  }) {
+    final result = create();
+    if (keys != null) result.keys.addAll(keys);
+    if (dismissed != null) result.dismissed = dismissed;
+    return result;
+  }
+
+  SetChecklistDismissedEvent._();
+
+  factory SetChecklistDismissedEvent.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory SetChecklistDismissedEvent.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'SetChecklistDismissedEvent',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..pc<ChecklistItemKey>(1, _omitFieldNames ? '' : 'keys', $pb.PbFieldType.KE,
+        valueOf: ChecklistItemKey.valueOf,
+        enumValues: ChecklistItemKey.values,
+        defaultEnumValue: ChecklistItemKey.unknownChecklistItemKey)
+    ..aOB(2, _omitFieldNames ? '' : 'dismissed')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetChecklistDismissedEvent clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SetChecklistDismissedEvent copyWith(
+          void Function(SetChecklistDismissedEvent) updates) =>
+      super.copyWith(
+              (message) => updates(message as SetChecklistDismissedEvent))
+          as SetChecklistDismissedEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SetChecklistDismissedEvent create() => SetChecklistDismissedEvent._();
+  @$core.override
+  SetChecklistDismissedEvent createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static SetChecklistDismissedEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<SetChecklistDismissedEvent>(create);
+  static SetChecklistDismissedEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<ChecklistItemKey> get keys => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get dismissed => $_getBF(1);
+  @$pb.TagNumber(2)
+  set dismissed($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDismissed() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDismissed() => $_clearField(2);
+}
+
+class NotificationCoverageOut extends $pb.GeneratedMessage {
+  factory NotificationCoverageOut({
+    $core.bool? isFsm,
+    $core.int? total,
+    $core.int? reachable,
+    $core.int? telegram,
+    $core.int? vk,
+    $core.int? push,
+    $core.Iterable<UnreachablePlayer>? unreachable,
+    $core.bool? unavailable,
+  }) {
+    final result = create();
+    if (isFsm != null) result.isFsm = isFsm;
+    if (total != null) result.total = total;
+    if (reachable != null) result.reachable = reachable;
+    if (telegram != null) result.telegram = telegram;
+    if (vk != null) result.vk = vk;
+    if (push != null) result.push = push;
+    if (unreachable != null) result.unreachable.addAll(unreachable);
+    if (unavailable != null) result.unavailable = unavailable;
+    return result;
+  }
+
+  NotificationCoverageOut._();
+
+  factory NotificationCoverageOut.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory NotificationCoverageOut.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NotificationCoverageOut',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'isFsm', protoName: 'isFsm')
+    ..aI(2, _omitFieldNames ? '' : 'total')
+    ..aI(3, _omitFieldNames ? '' : 'reachable')
+    ..aI(4, _omitFieldNames ? '' : 'telegram')
+    ..aI(5, _omitFieldNames ? '' : 'vk')
+    ..aI(6, _omitFieldNames ? '' : 'push')
+    ..pPM<UnreachablePlayer>(7, _omitFieldNames ? '' : 'unreachable',
+        subBuilder: UnreachablePlayer.create)
+    ..aOB(8, _omitFieldNames ? '' : 'unavailable')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotificationCoverageOut clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  NotificationCoverageOut copyWith(
+          void Function(NotificationCoverageOut) updates) =>
+      super.copyWith((message) => updates(message as NotificationCoverageOut))
+          as NotificationCoverageOut;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static NotificationCoverageOut create() => NotificationCoverageOut._();
+  @$core.override
+  NotificationCoverageOut createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static NotificationCoverageOut getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotificationCoverageOut>(create);
+  static NotificationCoverageOut? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get isFsm => $_getBF(0);
+  @$pb.TagNumber(1)
+  set isFsm($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasIsFsm() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIsFsm() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get total => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set total($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTotal() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTotal() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get reachable => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set reachable($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasReachable() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearReachable() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get telegram => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set telegram($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTelegram() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTelegram() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get vk => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set vk($core.int value) => $_setSignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasVk() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearVk() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get push => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set push($core.int value) => $_setSignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasPush() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPush() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $pb.PbList<UnreachablePlayer> get unreachable => $_getList(6);
+
+  @$pb.TagNumber(8)
+  $core.bool get unavailable => $_getBF(7);
+  @$pb.TagNumber(8)
+  set unavailable($core.bool value) => $_setBool(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasUnavailable() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearUnavailable() => $_clearField(8);
+}
+
+class UnreachablePlayer extends $pb.GeneratedMessage {
+  factory UnreachablePlayer({
+    Player? player,
+    $core.bool? hasFsmNickname,
+  }) {
+    final result = create();
+    if (player != null) result.player = player;
+    if (hasFsmNickname != null) result.hasFsmNickname = hasFsmNickname;
+    return result;
+  }
+
+  UnreachablePlayer._();
+
+  factory UnreachablePlayer.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory UnreachablePlayer.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'UnreachablePlayer',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'generated'),
+      createEmptyInstance: create)
+    ..aOM<Player>(1, _omitFieldNames ? '' : 'player', subBuilder: Player.create)
+    ..aOB(2, _omitFieldNames ? '' : 'hasFsmNickname',
+        protoName: 'hasFsmNickname')
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnreachablePlayer clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UnreachablePlayer copyWith(void Function(UnreachablePlayer) updates) =>
+      super.copyWith((message) => updates(message as UnreachablePlayer))
+          as UnreachablePlayer;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UnreachablePlayer create() => UnreachablePlayer._();
+  @$core.override
+  UnreachablePlayer createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static UnreachablePlayer getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UnreachablePlayer>(create);
+  static UnreachablePlayer? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Player get player => $_getN(0);
+  @$pb.TagNumber(1)
+  set player(Player value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPlayer() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlayer() => $_clearField(1);
+  @$pb.TagNumber(1)
+  Player ensurePlayer() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get hasFsmNickname => $_getBF(1);
+  @$pb.TagNumber(2)
+  set hasFsmNickname($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasHasFsmNickname() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHasFsmNickname() => $_clearField(2);
+}
+
 const $core.bool _omitFieldNames =
     $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames =

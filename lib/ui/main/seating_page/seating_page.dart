@@ -21,13 +21,21 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_even
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
+import 'package:seating_generator_web/utils/browser_url.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
 class SeatingPage extends StatefulWidget {
   final int tournamentId;
 
-  const SeatingPage({super.key, @PathParam('id') required this.tournamentId});
+  /// 1 — сразу открыть загрузку рассадки с GoMafia, когда данные турнира загружены.
+  final int? gomafia;
+
+  const SeatingPage({
+    super.key,
+    @PathParam('id') required this.tournamentId,
+    @QueryParam('gomafia') this.gomafia,
+  });
 
   @override
   State<SeatingPage> createState() => _SeatingPageState();
@@ -35,6 +43,59 @@ class SeatingPage extends StatefulWidget {
 
 class _SeatingPageState extends CustomState<SeatingPage>
     with EffectListener<SeatingPageEffect, SeatingPageState, SeatingPageBloc, SeatingPage> {
+  StreamSubscription<TournamentPageState>? _gomafiaImportSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.gomafia == 1) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _openGomafiaImportWhenReady());
+    }
+  }
+
+  @override
+  void dispose() {
+    _gomafiaImportSubscription?.cancel();
+    super.dispose();
+  }
+
+  void _openGomafiaImportWhenReady() {
+    if (!mounted) return;
+    final tournamentBloc = context.read<TournamentPageBloc>();
+    bool isReady(TournamentPageState state) => state.isMyTournament && state.isBillingLoaded;
+
+    if (isReady(tournamentBloc.state)) {
+      _openGomafiaImportFromLink(tournamentBloc.state);
+    } else {
+      _gomafiaImportSubscription = tournamentBloc.stream.where(isReady).take(1).listen(_openGomafiaImportFromLink);
+    }
+  }
+
+  void _openGomafiaImportFromLink(TournamentPageState tournamentState) {
+    if (!mounted) return;
+    _importFromGomafia(tournamentState);
+    removeQueryParameterFromBrowserUrl(context, 'gomafia');
+  }
+
+  Future<void> _importFromGomafia(TournamentPageState tournamentState) async {
+    final id = await GomafiaInputDialog.show(
+      context,
+      gomafiaUrl: tournamentState.gomafiaUrl,
+      playersCount: tournamentState.tournamentPlayers.length,
+    );
+    if (id == null || !mounted) return;
+
+    final completer = Completer();
+    context.read<SeatingPageBloc>().add(
+          SeatingPageEvent.autoFsmSeating(id, completer: completer),
+        );
+    if (await completer.future == false || !mounted) return;
+
+    context.read<TournamentPageBloc>()
+      ..add(const TournamentPageEvent.pageOpened())
+      ..add(const TournamentPageEvent.playersListOpened());
+  }
+
   List<({VoidCallback onTap, String title})> _actions(
     TournamentPageState tournamentState,
     SeatingPageState state,
@@ -78,20 +139,7 @@ class _SeatingPageState extends CustomState<SeatingPage>
         title: locale.seatingGenerate,
       ),
       (
-        onTap: () async {
-          final id = await GomafiaInputDialog.show(context, tournamentState.gomafiaUrl);
-          if (id == null || !mounted) return;
-
-          final completer = Completer();
-          context.read<SeatingPageBloc>().add(
-                SeatingPageEvent.autoFsmSeating(id, completer: completer),
-              );
-          if (await completer.future == false || !mounted) return;
-
-          context.read<TournamentPageBloc>()
-            ..add(const TournamentPageEvent.pageOpened())
-            ..add(const TournamentPageEvent.playersListOpened());
-        },
+        onTap: () => _importFromGomafia(tournamentState),
         title: locale.seatingUploadGomafia,
       ),
       if (state.games.isNotEmpty)

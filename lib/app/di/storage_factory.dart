@@ -4,6 +4,7 @@ import 'package:seating_generator_web/data/storages/credential_secure_storage_im
 import 'package:seating_generator_web/data/storages/credential_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage.dart';
 import 'package:seating_generator_web/data/storages/token_storage_impl.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/data/checklist_banner_storage.dart';
 
 class StorageFactory {
   StorageFactory();
@@ -11,6 +12,8 @@ class StorageFactory {
   late final TokenStorage tokenStorage = TokenStorageImpl();
 
   late final CredentialStorage credentialStorage = CredentialSecureStorageImpl();
+
+  late final ChecklistBannerStorage checklistBannerStorage = ChecklistBannerStorageImpl();
 
   static StorageFactory of(BuildContext context) => DependencyScope.of(context).storageFactory;
 }

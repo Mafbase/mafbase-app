@@ -44,6 +44,28 @@ Widget themedWidget(Widget child) => Builder(
       },
     );
 
+/// Как appWrapper(), но с русской локалью, в которой работает приложение.
+WidgetWrapper ruAppWrapper() => (child) => MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light(isMobile: false),
+      locale: const Locale('ru'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Material(child: child),
+    );
+
+/// Как themedWidget(), но мобильная тема включается по ширине устройства, как в приложении.
+Widget adaptiveThemedWidget(Widget child) => Builder(
+      builder: (context) {
+        final isDark = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
+        final isMobile = MediaQuery.sizeOf(context).width < 1050;
+        return Theme(
+          data: isDark ? AppTheme.dark(isMobile: isMobile) : AppTheme.light(isMobile: isMobile),
+          child: child,
+        );
+      },
+    );
+
 // CI-friendly имя для screenMatchesGolden
 String goldenName(String name) {
   final isCi = Platform.environment['GOLDEN_CI'] == 'true';

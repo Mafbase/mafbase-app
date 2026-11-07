@@ -6,25 +6,30 @@ import 'package:seating_generator_web/utils.dart';
 class TournamentBillingDialog extends StatefulWidget {
   final int playersCount;
   final bool billedTranslation;
+  final bool preselectTranslation;
 
   const TournamentBillingDialog._({
     required this.playersCount,
     required this.billedTranslation,
+    required this.preselectTranslation,
   });
 
   @override
   State<TournamentBillingDialog> createState() => _TournamentBillingDialogState();
 
+  /// [preselectTranslation] открывает диалог с уже отмеченными плашками, если они ещё не оплачены.
   static Future<TournamentBillingDialogResult?> open({
     required BuildContext context,
     required int billedPlayers,
     required bool hasTranslation,
+    bool preselectTranslation = false,
   }) =>
       showDialog(
         context: context,
         builder: (context) => TournamentBillingDialog._(
           billedTranslation: hasTranslation,
           playersCount: billedPlayers,
+          preselectTranslation: preselectTranslation,
         ),
       );
 }
@@ -37,7 +42,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
   @override
   void initState() {
     count = widget.playersCount;
-    enableTranslation = widget.billedTranslation;
+    enableTranslation = widget.billedTranslation || widget.preselectTranslation;
 
     super.initState();
   }
@@ -141,7 +146,7 @@ class _TournamentBillingDialogState extends State<TournamentBillingDialog> {
                   ),
                   const SizedBox(height: 20),
                   FormField<bool>(
-                    initialValue: widget.billedTranslation,
+                    initialValue: widget.billedTranslation || widget.preselectTranslation,
                     validator: (value) => value != null ? null : context.locale.invalidValue,
                     onSaved: (value) => enableTranslation = value ?? enableTranslation,
                     builder: (field) {

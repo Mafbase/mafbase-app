@@ -4,13 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_item_sheet.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/custom_text_info_form.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/start_game_info_form.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_billing_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_billing_flow.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/translation_panel.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
@@ -18,12 +22,14 @@ import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart'
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentMenuBuilder {
+  /// Без [checklist] пункт чеклиста идёт без прогресса.
   static List<TournamentMenuSection> buildSections(
     BuildContext context,
     TournamentPageState state,
     int tournamentId, {
     required bool showBill,
     required bool seatingLoading,
+    OrganizerChecklistModel? checklist,
   }) {
     final locale = context.locale;
     final currentPath = context.watchRouter.currentUrl;
@@ -39,9 +45,23 @@ class TournamentMenuBuilder {
       return false;
     }
 
+    final showLockedItems = state.isMyTournament && !state.isLoading && state.isBillingLoaded && showBill;
+
     final sections = <TournamentMenuSection>[];
 
     final mainItems = <TournamentMenuItemModel>[
+      if (state.isMyTournament)
+        TournamentMenuTapItem(
+          text: locale.checklistTitle,
+          icon: Icons.fact_check_outlined,
+          routeSegment: 'checklist',
+          selected: isActive('checklist'),
+          trailingText: switch (checklist?.progress) {
+            (:final done, :final total) => '$done/$total',
+            null => null,
+          },
+          onTap: () => context.router.push(OrganizerChecklistRoute(tournamentId: tournamentId)),
+        ),
       TournamentMenuTapItem(
         text: locale.tournamentPageListOfPlayers,
         icon: Icons.people_outline,
@@ -134,23 +154,7 @@ class TournamentMenuBuilder {
         TournamentMenuTapItem(
           text: locale.tournamentMenuPayment,
           icon: Icons.payment_outlined,
-          onTap: () async {
-            final bloc = context.read<TournamentPageBloc>();
-            final result = await TournamentBillingDialog.open(
-              context: context,
-              billedPlayers: state.billedPlayers,
-              hasTranslation: state.billedTranslation,
-            );
-
-            if (result != null) {
-              bloc.add(
-                TournamentPageEvent.bill(
-                  playersCount: result.billedPlayers,
-                  billedTranlsation: result.billedTranslation,
-                ),
-              );
-            }
-          },
+          onTap: () => openTournamentBilling(context),
         ),
     ];
     if (managementItems.isNotEmpty) {
@@ -179,10 +183,24 @@ class TournamentMenuBuilder {
       if (state.billedTranslation && state.isMyTournament && !state.isLoading)
         TournamentMenuExpandableItem(
           text: locale.translationDialogTitle,
-          icon: Icons.live_tv_outlined,
+          icon: Icons.layers_outlined,
           contentBuilder: (onCollapse) => TranslationPanel(
             tournamentId: tournamentId,
             tablesCount: (state.tournamentPlayers.length / 10).floor(),
+          ),
+        ),
+      if (!state.billedTranslation && showLockedItems)
+        TournamentMenuLockedItem(
+          text: locale.translationDialogTitle,
+          icon: Icons.layers_outlined,
+          hint: locale.tournamentMenuLockedHint,
+          onTap: () => OrganizerChecklistItemSheet.show(
+            context,
+            tournamentId: tournamentId,
+            item: const ChecklistItemModel(key: ChecklistKey.translationBilling, status: ChecklistStatus.todo),
+            title: locale.translationDialogTitle,
+            showStatus: false,
+            showDismiss: false,
           ),
         ),
       if (state.isMyTournament)
@@ -236,6 +254,27 @@ class TournamentMenuBuilder {
         TournamentMenuSection(
           title: locale.tournamentMenuSectionNotifications,
           items: notificationItems,
+        ),
+      );
+    } else if (!state.notificationEnabled && showLockedItems) {
+      sections.add(
+        TournamentMenuSection(
+          title: locale.tournamentMenuSectionNotifications,
+          items: [
+            TournamentMenuLockedItem(
+              text: locale.tournamentMenuNotifications,
+              icon: Icons.notifications_outlined,
+              hint: locale.tournamentMenuLockedHint,
+              onTap: () => OrganizerChecklistItemSheet.show(
+                context,
+                tournamentId: tournamentId,
+                item: const ChecklistItemModel(key: ChecklistKey.notifyCoverage, status: ChecklistStatus.locked),
+                title: locale.tournamentMenuNotifications,
+                showStatus: false,
+                showDismiss: false,
+              ),
+            ),
+          ],
         ),
       );
     }
