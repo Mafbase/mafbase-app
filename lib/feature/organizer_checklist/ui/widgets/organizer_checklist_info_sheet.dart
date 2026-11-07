@@ -1,3 +1,5 @@
+import 'dart:ui' show SemanticsHitTestBehavior;
+
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -22,7 +24,6 @@ class OrganizerChecklistInfoSheet extends StatelessWidget {
   final List<Widget> body;
   final OrganizerChecklistInfoSheetAction? primaryAction;
   final OrganizerChecklistInfoSheetAction? secondaryAction;
-  final ScrollController? scrollController;
 
   const OrganizerChecklistInfoSheet({
     super.key,
@@ -30,7 +31,6 @@ class OrganizerChecklistInfoSheet extends StatelessWidget {
     required this.body,
     this.primaryAction,
     this.secondaryAction,
-    this.scrollController,
   });
 
   /// Завершается, когда лист закрыт — кнопкой действия, крестиком или жестом.
@@ -41,23 +41,18 @@ class OrganizerChecklistInfoSheet extends StatelessWidget {
     OrganizerChecklistInfoSheetAction? primaryAction,
     OrganizerChecklistInfoSheetAction? secondaryAction,
   }) {
-    return showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      constraints: const BoxConstraints(maxWidth: 640),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (_) => DraggableScrollableSheet(
-        initialChildSize: 0.6,
-        minChildSize: 0.4,
-        maxChildSize: 0.95,
-        expand: false,
-        builder: (_, scrollController) => OrganizerChecklistInfoSheet(
+    final navigator = Navigator.of(context);
+    return navigator.push(
+      _InfoSheetRoute(
+        sheet: OrganizerChecklistInfoSheet(
           title: title,
           body: body,
           primaryAction: primaryAction,
           secondaryAction: secondaryAction,
-          scrollController: scrollController,
         ),
+        capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
+        barrierColor: Theme.of(context).bottomSheetTheme.modalBarrierColor ?? Colors.black54,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       ),
     );
   }
@@ -78,6 +73,7 @@ class OrganizerChecklistInfoSheet extends StatelessWidget {
     final theme = context.theme;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(24, 16, 12, 0),
@@ -90,11 +86,11 @@ class OrganizerChecklistInfoSheet extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
+        Flexible(
           child: DefaultTextStyle.merge(
-            style: theme.defaultTextStyle.copyWith(height: 1.4),
+            style: theme.defaultTextStyle.copyWith(fontSize: 16, height: 1.4),
             child: ListView.separated(
-              controller: scrollController,
+              shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
               itemCount: body.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
@@ -132,4 +128,102 @@ class OrganizerChecklistInfoSheet extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Модальный лист снизу. Это [PageRoute], а не PopupRoute: только из него Hero скриншота летит в полноэкранный
+/// просмотр.
+class _InfoSheetRoute extends PageRoute<void> {
+  final OrganizerChecklistInfoSheet sheet;
+  final CapturedThemes capturedThemes;
+
+  @override
+  final Color barrierColor;
+
+  @override
+  final String barrierLabel;
+
+  _InfoSheetRoute({
+    required this.sheet,
+    required this.capturedThemes,
+    required this.barrierColor,
+    required this.barrierLabel,
+  });
+
+  ParametricCurve<double> _curve = Easing.legacyDecelerate;
+
+  @override
+  bool get opaque => false;
+
+  @override
+  bool get barrierDismissible => true;
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 250);
+
+  @override
+  Duration get reverseTransitionDuration => const Duration(milliseconds: 200);
+
+  @override
+  AnimationController createAnimationController() => BottomSheet.createAnimationController(navigator!);
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return capturedThemes.wrap(
+      // Как в ModalBottomSheetRoute: в вебе с семантикой клик по тексту листа иначе уходит сквозь него на барьер.
+      Semantics(
+        hitTestBehavior: SemanticsHitTestBehavior.opaque,
+        child: Semantics(
+          scopesRoute: true,
+          namesRoute: true,
+          label: sheet.title,
+          explicitChildNodes: true,
+          child: ClipRect(
+            child: AnimatedBuilder(
+              animation: animation,
+              builder: (_, child) => CustomSingleChildLayout(
+                delegate: _InfoSheetLayout(_curve.transform(animation.value)),
+                child: child,
+              ),
+              child: BottomSheet(
+                animationController: controller,
+                onClosing: () {
+                  if (isCurrent) navigator!.pop();
+                },
+                onDragStart: (_) => _curve = Curves.linear,
+                onDragEnd: (_, {required isClosing}) =>
+                    _curve = Split(animation.value, endCurve: Easing.legacyDecelerate),
+                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+                constraints: const BoxConstraints(maxWidth: 640),
+                builder: (_) => sheet,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _InfoSheetLayout extends SingleChildLayoutDelegate {
+  final double progress;
+
+  const _InfoSheetLayout(this.progress);
+
+  static const _maxHeightFactor = 0.9;
+
+  @override
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) => BoxConstraints(
+        minWidth: constraints.maxWidth,
+        maxWidth: constraints.maxWidth,
+        maxHeight: constraints.maxHeight * _maxHeightFactor,
+      );
+
+  @override
+  Offset getPositionForChild(Size size, Size childSize) => Offset(0, size.height - childSize.height * progress);
+
+  @override
+  bool shouldRelayout(_InfoSheetLayout oldDelegate) => progress != oldDelegate.progress;
 }

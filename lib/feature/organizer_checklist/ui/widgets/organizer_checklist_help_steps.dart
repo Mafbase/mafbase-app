@@ -37,7 +37,7 @@ class _HelpStepRow extends StatelessWidget {
 
   const _HelpStepRow({required this.number, required this.step});
 
-  static const _badgeSize = 20.0;
+  static const _badgeSize = 24.0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class _HelpStepRow extends StatelessWidget {
             decoration: BoxDecoration(color: theme.btnColor2, shape: BoxShape.circle),
             child: Text(
               '$number',
-              style: TextStyle(color: theme.btnTextColor, fontSize: 11, fontWeight: FontWeight.w600, height: 1),
+              style: TextStyle(color: theme.btnTextColor, fontSize: 13, fontWeight: FontWeight.w600, height: 1),
             ),
           ),
         ),

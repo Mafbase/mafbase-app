@@ -77,13 +77,13 @@ class _MethodOption extends StatelessWidget {
                   children: [
                     Text(
                       locale.checklistStreamMethodName(method),
-                      style: theme.defaultTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.w600),
+                      style: theme.defaultTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                     Text(
                       method == ChecklistStreamMethod.obs
                           ? locale.checklistSheetStreamMethodObsHint
                           : locale.checklistSheetStreamMethodPhoneHint,
-                      style: theme.defaultTextStyle.copyWith(fontSize: 12, color: theme.darkGreyColor),
+                      style: theme.defaultTextStyle.copyWith(fontSize: 14, color: theme.darkGreyColor),
                     ),
                   ],
                 ),
@@ -94,7 +94,7 @@ class _MethodOption extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   locale.checklistSheetStreamMethodSelected,
-                  style: theme.defaultTextStyle.copyWith(fontSize: 12, color: theme.successColor),
+                  style: theme.defaultTextStyle.copyWith(fontSize: 14, color: theme.successColor),
                 ),
               ] else
                 Icon(Icons.chevron_right, color: theme.hintColor),
