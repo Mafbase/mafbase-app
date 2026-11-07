@@ -1772,7 +1772,7 @@
   "@checklistHelpObsWidgetStepLink": {},
   "checklistHelpObsWidgetStepPermissions": "Чтобы OBS сам переключал сцены, в поле «Разрешение страницы» выберите «Продвинутый доступ к OBS». «Полный доступ к OBS» тоже подойдёт.",
   "@checklistHelpObsWidgetStepPermissions": {},
-  "checklistHelpObsWidgetStepShutdown": "Не включайте «Отключать источник, когда он не виден»: иначе на сцене без виджета источник выключится и обратно OBS уже не переключится.",
+  "checklistHelpObsWidgetStepShutdown": "Не включайте «Отключать источник, когда не видим»: иначе на сцене без виджета источник выключится и обратно OBS уже не переключится.",
   "@checklistHelpObsWidgetStepShutdown": {},
   "checklistHelpObsWidgetDone": "Пункт отметится, когда виджет откроется в OBS хотя бы на одном столе. Часто транслируют один стол — этого достаточно.",
   "@checklistHelpObsWidgetDone": {},

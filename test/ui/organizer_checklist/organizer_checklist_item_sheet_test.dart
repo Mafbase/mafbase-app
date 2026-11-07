@@ -250,6 +250,7 @@ void main() {
       'assets/checklist/obs_add_browser_source.png',
       'assets/checklist/obs_browser_source_size.png',
       'assets/checklist/obs_browser_source_permissions.png',
+      'assets/checklist/obs_browser_source_shutdown.png',
     ]);
 
     await tester.pumpWidget(const SizedBox());

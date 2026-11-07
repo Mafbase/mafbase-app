@@ -125,6 +125,7 @@ class OrganizerChecklistItemHelp {
           ),
           OrganizerChecklistHelpStep(
             locale.checklistHelpObsWidgetStepShutdown,
+            image: 'assets/checklist/obs_browser_source_shutdown.png',
           ),
         ]),
         if (!item.isDone) Text(locale.checklistHelpObsWidgetDone),
