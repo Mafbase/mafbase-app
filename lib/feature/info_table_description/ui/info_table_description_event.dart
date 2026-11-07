@@ -36,6 +36,12 @@ class InfoTableDescriptionEventChange implements InfoTableDescriptionEvent {
 
 class InfoTableDescriptionEventSave implements InfoTableDescriptionEvent {
   final Completer<void> completer;
+  final int? pendingTable;
+  final String? pendingDescription;
 
-  InfoTableDescriptionEventSave({Completer<void>? completer}) : completer = completer ?? Completer<void>();
+  InfoTableDescriptionEventSave({
+    Completer<void>? completer,
+    this.pendingTable,
+    this.pendingDescription,
+  }) : completer = completer ?? Completer<void>();
 }
