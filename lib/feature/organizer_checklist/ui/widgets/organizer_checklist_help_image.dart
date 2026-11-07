@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_image_viewer.dart';
+import 'package:fullscreen_image_viewer/fullscreen_image_viewer.dart';
 import 'package:seating_generator_web/utils.dart';
 
 /// Скриншот справки: вписан в ширину листа, по нажатию открывается на весь экран.
@@ -9,6 +9,8 @@ class OrganizerChecklistHelpImage extends StatelessWidget {
   const OrganizerChecklistHelpImage({super.key, required this.asset});
 
   static const _maxHeight = 320.0;
+
+  String get _heroTag => 'checklist-help-$asset';
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class OrganizerChecklistHelpImage extends StatelessWidget {
               // До загрузки у картинки нулевой размер: значок и область нажатия появляются вместе с ней.
               frameBuilder: (context, image, frame, _) => Stack(
                 children: [
-                  image,
+                  Hero(tag: _heroTag, child: image),
                   if (frame != null) ...[
                     PositionedDirectional(
                       end: 6,
@@ -56,7 +58,11 @@ class OrganizerChecklistHelpImage extends StatelessWidget {
                           child: Material(
                             type: MaterialType.transparency,
                             child: InkWell(
-                              onTap: () => OrganizerChecklistImageViewer.show(context, asset: asset),
+                              onTap: () => FullscreenImageViewer.open(
+                                context: context,
+                                child: Hero(tag: _heroTag, child: Image.asset(asset, excludeFromSemantics: true)),
+                                closeWidget: const CloseButton(color: Colors.white),
+                              ),
                               child: const SizedBox.expand(),
                             ),
                           ),
