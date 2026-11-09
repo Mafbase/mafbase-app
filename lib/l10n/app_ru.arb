@@ -337,7 +337,7 @@
       }
     }
   },
-  "translationDialogTitle": "Трансляция",
+  "translationDialogTitle": "Плашки для трансляции",
   "@translationDialogTitle": {},
   "translationContentLink": "Ссылка для встраивания в обс",
   "@translationContentLink": {},
@@ -361,6 +361,32 @@
   "@translationDesignPickerTitle": {},
   "translationDesignSelect": "Выбрать",
   "@translationDesignSelect": {},
+  "translationNoSeatingWarning": "Без рассадки плашки будут пустыми",
+  "@translationNoSeatingWarning": {},
+  "translationGoToSeating": "К рассадке",
+  "@translationGoToSeating": {},
+  "translationTablesLinks": "Ссылки по столам",
+  "@translationTablesLinks": {},
+  "translationTableTitle": "Стол {table}",
+  "@translationTableTitle": {
+    "placeholders": {
+      "table": {
+        "type": "int"
+      }
+    }
+  },
+  "translationTableControl": "Управление",
+  "@translationTableControl": {},
+  "translationTableObs": "Ссылка для OBS",
+  "@translationTableObs": {},
+  "translationLinkOpen": "Открыть",
+  "@translationLinkOpen": {},
+  "translationLinkCopy": "Скопировать",
+  "@translationLinkCopy": {},
+  "translationLinkShare": "Поделиться",
+  "@translationLinkShare": {},
+  "translationLinkCopied": "Ссылка скопирована",
+  "@translationLinkCopied": {},
   "bucketFieldTitle": "Корзины для полуфинального этапа",
   "bucketFieldHint": "30;20;30",
   "hideResult": "Скрыть результат",
@@ -901,6 +927,10 @@
   "@tournamentMenuTextNotification": {},
   "tournamentMenuNoPlayers": "Пока не добавлен ни один участник",
   "@tournamentMenuNoPlayers": {},
+  "tournamentMenuNotifications": "Оповещения",
+  "@tournamentMenuNotifications": {},
+  "tournamentMenuLockedHint": "Доступно после оплаты",
+  "@tournamentMenuLockedHint": {},
   "tournamentCardGames": "{count, plural, =1{{count} игра} few{{count} игры} many{{count} игр} other{{count} игр}}",
   "@tournamentCardGames": {
     "placeholders": {
@@ -1017,6 +1047,17 @@
   "@seatingGenerateFinal": {},
   "seatingUploadGomafia": "Загрузить с Gomafia",
   "@seatingUploadGomafia": {},
+  "gomafiaInputTitle": "Укажите ссылку на турнир",
+  "@gomafiaInputTitle": {},
+  "gomafiaInputReplaceWarning": "Текущий список участников ({count}) будет заменён участниками с GoMafia",
+  "@gomafiaInputReplaceWarning": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
   "seatingReplaceWarning": "Новая рассадка заменит старую",
   "@seatingReplaceWarning": {},
   "notificationNoGamesWarning": "Укажите количество игр в настройках турнира",
@@ -1155,7 +1196,7 @@
   "@translationControlObsConnected": {},
   "translationControlObsDisconnectedHint": "Добавьте ссылку для встраивания в OBS как источник «Браузер»",
   "@translationControlObsDisconnectedHint": {},
-  "translationControlObsNoRightsHint": "Откройте свойства источника «Браузер» и в правах доступа страницы выберите расширенный или полный доступ к OBS — тот, что разрешает переключать сцены",
+  "translationControlObsNoRightsHint": "Откройте свойства источника «Браузер» и в поле «Разрешение страницы» выберите «Продвинутый доступ к OBS» или «Полный доступ к OBS»",
   "@translationControlObsNoRightsHint": {},
   "translationControlObsNoSwitch": "Не переключать",
   "@translationControlObsNoSwitch": {},
@@ -1253,6 +1294,24 @@
       }
     }
   },
+  "streamsPhoneGuideTitle": "Как вести трансляцию с телефона",
+  "@streamsPhoneGuideTitle": {},
+  "streamsPhoneGuideStepCreate": "Добавьте трансляцию стола кнопкой «Добавить свою ссылку» и укажите RTMP-сервер и ключ, например из VK Видео.",
+  "@streamsPhoneGuideStepCreate": {},
+  "streamsPhoneGuideStepSend": "Отправьте оператору «Ссылку оператора» этого стола.",
+  "@streamsPhoneGuideStepSend": {},
+  "streamsPhoneGuideStepStart": "Оператор открывает её на телефоне с приложением Mafbase и нажимает «Стрим».",
+  "@streamsPhoneGuideStepStart": {},
+  "streamsOverlaysNotPaid": "Без оплаты плашек видео пойдёт без плашек",
+  "@streamsOverlaysNotPaid": {},
+  "streamsOverlaysPay": "Оплатить",
+  "@streamsOverlaysPay": {},
+  "streamsOperatorNoRtmpHint": "Для трансляции с телефона добавьте трансляцию этого стола с RTMP-сервером и ключом",
+  "@streamsOperatorNoRtmpHint": {},
+  "streamsShareOperatorLink": "Поделиться",
+  "@streamsShareOperatorLink": {},
+  "streamsStartOnThisPhone": "Начать с этого телефона",
+  "@streamsStartOnThisPhone": {},
   "broadcastLoading": "Подключаемся к трансляции…",
   "@broadcastLoading": {},
   "broadcastLinkExpired": "Ссылка устарела. Запросите у организатора новую ссылку оператора.",
@@ -1274,8 +1333,24 @@
   "@broadcastRetry": {},
   "broadcastGoHome": "На главную",
   "@broadcastGoHome": {},
-  "broadcastOperatorLinkCopied": "Ссылка оператора скопирована",
+  "broadcastOperatorLinkCopied": "Ссылка скопирована. Оператору нужно открыть её на телефоне с приложением Mafbase",
   "@broadcastOperatorLinkCopied": {},
+  "broadcastAppRequiredTitle": "Трансляция запускается в приложении Mafbase на телефоне",
+  "@broadcastAppRequiredTitle": {},
+  "broadcastAppRequiredInstall": "Установите приложение Mafbase",
+  "@broadcastAppRequiredInstall": {},
+  "broadcastAppRequiredOpenLink": "Откройте эту ссылку на телефоне",
+  "@broadcastAppRequiredOpenLink": {},
+  "broadcastAppStore": "App Store",
+  "@broadcastAppStore": {},
+  "broadcastRuStore": "RuStore",
+  "@broadcastRuStore": {},
+  "broadcastCopyLink": "Скопировать ссылку",
+  "@broadcastCopyLink": {},
+  "broadcastLinkCopied": "Ссылка скопирована",
+  "@broadcastLinkCopied": {},
+  "broadcastMessengerBrowserTip": "Если приложение уже установлено, а ссылка открылась во встроенном браузере мессенджера, откройте её в браузере телефона.",
+  "@broadcastMessengerBrowserTip": {},
   "clubActionOpenStreams": "Трансляции клуба",
   "@clubActionOpenStreams": {},
   "clubActionOpenStreamsSubtitle": "Управление RTMP-трансляциями столов",
@@ -1291,5 +1366,626 @@
   "clubStreamSettingsBrandImage": "Брендирование трансляции (ссылка на картинку)",
   "@clubStreamSettingsBrandImage": {},
   "clubStreamSettingsSave": "Сохранить",
-  "@clubStreamSettingsSave": {}
+  "@clubStreamSettingsSave": {},
+  "checklistSheetAskQuestion": "Задать вопрос",
+  "@checklistSheetAskQuestion": {},
+  "checklistSheetPay": "Оплатить",
+  "@checklistSheetPay": {},
+  "checklistTitle": "Чеклист организатора",
+  "@checklistTitle": {},
+  "checklistProgress": "Готовность турнира {done}/{total}",
+  "@checklistProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int",
+        "example": "5"
+      },
+      "total": {
+        "type": "int",
+        "example": "9"
+      }
+    }
+  },
+  "checklistProgressComplete": "Всё готово к турниру",
+  "@checklistProgressComplete": {},
+  "checklistLoadError": "Не удалось загрузить чеклист",
+  "@checklistLoadError": {},
+  "checklistRetry": "Повторить",
+  "@checklistRetry": {},
+  "checklistGroupPreparation": "Подготовка",
+  "@checklistGroupPreparation": {},
+  "checklistGroupNotifications": "Оповещения",
+  "@checklistGroupNotifications": {},
+  "checklistGroupTranslation": "Трансляция",
+  "@checklistGroupTranslation": {},
+  "checklistGroupNotNeeded": "Не нужна",
+  "@checklistGroupNotNeeded": {},
+  "checklistStreamMethodObsSection": "Через OBS на компьютере",
+  "@checklistStreamMethodObsSection": {},
+  "checklistStreamMethodPhoneSection": "С телефона через приложение Mafbase",
+  "@checklistStreamMethodPhoneSection": {},
+  "checklistHidden": "Скрытые ({count})",
+  "@checklistHidden": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistRestore": "Вернуть",
+  "@checklistRestore": {},
+  "checklistHiddenGroup": "Скрыта вся группа",
+  "@checklistHiddenGroup": {},
+  "checklistBannerNext": "Дальше: {title}",
+  "@checklistBannerNext": {
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Рассадка"
+      }
+    }
+  },
+  "checklistBannerOpen": "Открыть",
+  "@checklistBannerOpen": {},
+  "checklistBannerClose": "Скрыть",
+  "@checklistBannerClose": {},
+  "checklistItemGamesCount": "Количество игр",
+  "@checklistItemGamesCount": {},
+  "checklistItemPlayers": "Участники",
+  "@checklistItemPlayers": {},
+  "checklistItemSeating": "Рассадка",
+  "@checklistItemSeating": {},
+  "checklistItemBilling": "Оплата",
+  "@checklistItemBilling": {},
+  "checklistItemNotifyCoverage": "Игроки получат оповещения",
+  "@checklistItemNotifyCoverage": {},
+  "checklistItemTableDescriptions": "Где стоят столы",
+  "@checklistItemTableDescriptions": {},
+  "checklistItemStreamMethod": "Способ трансляции",
+  "@checklistItemStreamMethod": {},
+  "checklistItemTranslationBilling": "Плашки оплачены",
+  "@checklistItemTranslationBilling": {},
+  "checklistItemObsWidget": "Виджет добавлен в OBS",
+  "@checklistItemObsWidget": {},
+  "checklistItemObsScenes": "Автопереключение сцен (необязательно)",
+  "@checklistItemObsScenes": {},
+  "checklistItemPhoneStream": "Трансляция с телефона настроена",
+  "@checklistItemPhoneStream": {},
+  "checklistItemPhoneOperator": "Оператор открыл ссылку",
+  "@checklistItemPhoneOperator": {},
+  "checklistStatusDone": "Готово",
+  "@checklistStatusDone": {},
+  "checklistStatusLocked": "Доступно после оплаты",
+  "@checklistStatusLocked": {},
+  "checklistStatusLockedTranslation": "Доступно после оплаты плашек",
+  "@checklistStatusLockedTranslation": {},
+  "checklistStatusUnavailable": "Не удалось проверить",
+  "@checklistStatusUnavailable": {},
+  "checklistCounter": "{current} из {total}",
+  "@checklistCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "checklistGamesCountDone": "Указано в настройках турнира",
+  "@checklistGamesCountDone": {},
+  "checklistGamesCountTodo": "Не указано в настройках турнира",
+  "@checklistGamesCountTodo": {},
+  "checklistPlayersCount": "Участников: {count}",
+  "@checklistPlayersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistPlayersNotMultiple": "Участников: {count} — не кратно 10. Рассадка сгенерируется, когда участников станет кратно 10",
+  "@checklistPlayersNotMultiple": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "23"
+      }
+    }
+  },
+  "checklistPlayersTooFew": "Участников: {count} — нужно не меньше 10",
+  "@checklistPlayersTooFew": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "6"
+      }
+    }
+  },
+  "checklistSeatingCounter": "Игр с рассадкой: {current} из {total}",
+  "@checklistSeatingCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "checklistSeatingTodo": "Рассадки пока нет",
+  "@checklistSeatingTodo": {},
+  "checklistSeatingTodoFsm": "Загрузите рассадку с GoMafia",
+  "@checklistSeatingTodoFsm": {},
+  "checklistSeatingDoneFsm": "Рассадка загружена с GoMafia",
+  "@checklistSeatingDoneFsm": {},
+  "checklistSeatingNoGames": "Сначала укажите количество игр",
+  "@checklistSeatingNoGames": {},
+  "checklistNoTables": "Столов пока нет",
+  "@checklistNoTables": {},
+  "checklistBillingDone": "Турнир оплачен",
+  "@checklistBillingDone": {},
+  "checklistBillingTodo": "Без оплаты нет оповещений и больше 10 участников",
+  "@checklistBillingTodo": {},
+  "checklistNotifyCoverageCounter": "Получат {current} из {total}",
+  "@checklistNotifyCoverageCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistNotifyCoverageTodo": "В турнире пока нет участников",
+  "@checklistNotifyCoverageTodo": {},
+  "checklistTableDescriptionsCounter": "Описано столов: {current} из {total}",
+  "@checklistTableDescriptionsCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistTableDescriptionsTodo": "Столы не описаны",
+  "@checklistTableDescriptionsTodo": {},
+  "checklistStreamMethodTodo": "OBS на компьютере или телефон",
+  "@checklistStreamMethodTodo": {},
+  "checklistStreamMethodObs": "С компьютера через OBS",
+  "@checklistStreamMethodObs": {},
+  "checklistStreamMethodPhone": "С телефона через приложение Mafbase",
+  "@checklistStreamMethodPhone": {},
+  "checklistTranslationBillingTodo": "Без оплаты видео пойдёт без плашек",
+  "@checklistTranslationBillingTodo": {},
+  "checklistObsWidgetCounter": "Столов с OBS: {current} из {total}",
+  "@checklistObsWidgetCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "checklistObsWidgetWarning": "Для смены сцен нужен «Продвинутый доступ к OBS»",
+  "@checklistObsWidgetWarning": {},
+  "checklistObsWidgetTodo": "OBS ещё не подключался",
+  "@checklistObsWidgetTodo": {},
+  "checklistObsScenesDone": "Сцены выбраны",
+  "@checklistObsScenesDone": {},
+  "checklistObsScenesTodo": "Сцены не выбраны",
+  "@checklistObsScenesTodo": {},
+  "checklistPhoneStreamCounter": "Столов с трансляцией: {current} из {total}",
+  "@checklistPhoneStreamCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "checklistPhoneStreamTodo": "Нет трансляций с RTMP-сервером и ключом",
+  "@checklistPhoneStreamTodo": {},
+  "checklistPhoneOperatorCounter": "Открыли ссылку: {current} из {total}",
+  "@checklistPhoneOperatorCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistPhoneOperatorTodo": "Оператор ещё не открывал ссылку",
+  "@checklistPhoneOperatorTodo": {},
+  "checklistPhoneOperatorNoStreams": "Сначала настройте трансляцию с телефона",
+  "@checklistPhoneOperatorNoStreams": {},
+  "checklistSheetDo": "Сделать",
+  "@checklistSheetDo": {},
+  "checklistSheetNotNeeded": "Не нужно",
+  "@checklistSheetNotNeeded": {},
+  "checklistSheetEnough": "Достаточно",
+  "@checklistSheetEnough": {},
+  "checklistSheetMore": "Подробнее",
+  "@checklistSheetMore": {},
+  "checklistSheetUnavailable": "Не удалось проверить: сервис оповещений сейчас не отвечает. Загляните сюда позже.",
+  "@checklistSheetUnavailable": {},
+  "checklistSheetNotifyCoverageCount": "Сейчас оповещения получат: {current} из {total}.",
+  "@checklistSheetNotifyCoverageCount": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistSheetStreamMethodObsHint": "Компьютер с OBS и камерой",
+  "@checklistSheetStreamMethodObsHint": {},
+  "checklistSheetStreamMethodPhoneHint": "Телефон на штативе с приложением Mafbase",
+  "@checklistSheetStreamMethodPhoneHint": {},
+  "checklistSheetStreamMethodSelected": "Выбрано",
+  "@checklistSheetStreamMethodSelected": {},
+  "checklistHelpImageZoom": "Открыть на весь экран",
+  "@checklistHelpImageZoom": {},
+  "checklistHelpGamesCountAbout": "Без количества игр не получится сгенерировать рассадку и отправить игрокам оповещение о начале игры.",
+  "@checklistHelpGamesCountAbout": {},
+  "checklistHelpGamesCountHow": "На странице «Настройки турнира» укажите «Количество обычных игр» и нажмите «Сохранить».",
+  "@checklistHelpGamesCountHow": {},
+  "checklistHelpGamesCountOptional": "Игры по швейцарке и финальные — по желанию: укажите их, если в турнире будут эти этапы.",
+  "@checklistHelpGamesCountOptional": {},
+  "checklistHelpPlayersMultiple": "Генератор рассадки сажает за каждый стол ровно 10 игроков, поэтому участников должно быть 10, 20, 30 и так далее. При другом числе сгенерировать рассадку не получится.",
+  "@checklistHelpPlayersMultiple": {},
+  "checklistHelpPlayersManual": "Вручную участников добавляют кнопкой «Добавить участника» в меню турнира: найдите игрока по никнейму или создайте нового.",
+  "@checklistHelpPlayersManual": {},
+  "checklistHelpPlayersGomafia": "Участников можно загрузить с GoMafia вместе с рассадкой. Импорт заменяет весь список участников турнира игроками из рассадки GoMafia.",
+  "@checklistHelpPlayersGomafia": {},
+  "checklistHelpPlayersFsmNickname": "В турнире ФСМ важен ФСМ-ник — ник игрока на GoMafia. По нему игроки сопоставляются при импорте, подписываются на Telegram-бота и получают оповещения во ВКонтакте.",
+  "@checklistHelpPlayersFsmNickname": {},
+  "checklistHelpPlayersFsmNicknameEdit": "ФСМ-ник можно указать в карточке игрока: нажмите на игрока в списке участников.",
+  "@checklistHelpPlayersFsmNicknameEdit": {},
+  "checklistHelpPlayersLimit": "В турнир можно добавить столько участников, сколько оплачено: без оплаты — до 10.",
+  "@checklistHelpPlayersLimit": {},
+  "checklistHelpSeatingAbout": "Из рассадки игроки узнают в оповещении свой стол и место, а плашки — кто сидит за столом.",
+  "@checklistHelpSeatingAbout": {},
+  "checklistHelpSeatingGenerate": "Чтобы сгенерировать рассадку в Mafbase, на странице «Рассадка» нажмите «Сгенерировать рассадку»: Mafbase рассадит участников на все обычные игры турнира.",
+  "@checklistHelpSeatingGenerate": {},
+  "checklistHelpSeatingGomafia": "Чтобы загрузить рассадку с GoMafia, на странице «Рассадка» нажмите «Загрузить с Gomafia» и вставьте ссылку на турнир на gomafia.pro. Список участников турнира заменится игроками из этой рассадки.",
+  "@checklistHelpSeatingGomafia": {},
+  "checklistHelpSeatingMatching": "Если игрока с GoMafia не удастся найти по ФСМ-нику, Mafbase попросит выбрать его из списка или создать нового. Это нужно один раз: ФСМ-ник сохранится, и при следующих импортах сопоставлять не придётся.",
+  "@checklistHelpSeatingMatching": {},
+  "checklistHelpSeatingFsmRounds": "В турнире ФСМ следующие туры подтянутся с GoMafia сами, когда вы отправите оповещение о начале игры. Если на GoMafia поменялся состав игроков, загрузите рассадку вручную.",
+  "@checklistHelpSeatingFsmRounds": {},
+  "checklistHelpBillingFree": "Без оплаты в турнире может быть до 10 участников, а оповещений и плашек нет.",
+  "@checklistHelpBillingFree": {},
+  "checklistHelpBillingGives": "Оплата открывает турнир на нужное число участников. Галочка «Плашки» в окне оплаты добавляет плашки для трансляции.",
+  "@checklistHelpBillingGives": {},
+  "checklistHelpBillingNotifications": "Оповещения включаются при любой оплате турнира: от 20 участников или с плашками.",
+  "@checklistHelpBillingNotifications": {},
+  "checklistHelpBillingPriceFree": "Турнир на 10 участников бесплатный, с плашками — {price} ₽.",
+  "@checklistHelpBillingPriceFree": {
+    "placeholders": {
+      "price": {
+        "type": "int",
+        "example": "300"
+      }
+    }
+  },
+  "checklistHelpBillingPrice": "Турнир на {players} участников — {price} ₽, с плашками — {priceWithOverlays} ₽.",
+  "@checklistHelpBillingPrice": {
+    "placeholders": {
+      "players": {
+        "type": "int",
+        "example": "20"
+      },
+      "price": {
+        "type": "int",
+        "example": "600"
+      },
+      "priceWithOverlays": {
+        "type": "int",
+        "example": "800"
+      }
+    }
+  },
+  "checklistHelpNotifyCoverageAbout": "Оповещения сообщают игрокам о начале игры, их столе и месте, а ещё передают ваши текстовые сообщения.",
+  "@checklistHelpNotifyCoverageAbout": {},
+  "checklistHelpNotifyCoverageTelegram": "Telegram — игрок сам пишет боту @mafbase_notification_bot свой ФСМ-ник, а если его нет, то /pair и свой ник в Mafbase. Подписаться нужно один раз: дальше оповещения приходят во всех турнирах.",
+  "@checklistHelpNotifyCoverageTelegram": {},
+  "checklistHelpNotifyCoverageVk": "ВКонтакте — только в турнирах ФСМ: оповещение приходит само, по ФСМ-нику через профиль игрока на GoMafia.",
+  "@checklistHelpNotifyCoverageVk": {},
+  "checklistHelpNotifyCoveragePush": "Push в приложении Mafbase — тем, кто вошёл в приложение и связал аккаунт со своим профилем игрока. Push приходит только с оповещением о начале игры, поэтому в счёт охвата не входит.",
+  "@checklistHelpNotifyCoveragePush": {},
+  "checklistHelpNotifyCoverageInvite": "Позовите игроков подписаться на бота заранее, до первой игры: на странице охвата есть готовый текст для чата турнира и список тех, кому оповещения пока не придут.",
+  "@checklistHelpNotifyCoverageInvite": {},
+  "checklistHelpTableDescriptionsAbout": "Описание стола попадает в оповещение о начале игры: игрок видит не только номер стола, но и где он стоит.",
+  "@checklistHelpTableDescriptionsAbout": {},
+  "checklistHelpTableDescriptionsHow": "На странице «Описания локаций» напишите для каждого стола, где он находится, например «2 этаж, комната у лестницы».",
+  "@checklistHelpTableDescriptionsHow": {},
+  "checklistHelpTableDescriptionsOptional": "Если все столы в одном зале и их легко найти, описания можно не заполнять — нажмите «Не нужно».",
+  "@checklistHelpTableDescriptionsOptional": {},
+  "checklistHelpStreamMethodAbout": "Плашки можно показывать в трансляции двумя способами. Выберите свой — пункты другого способа скроются из чеклиста.",
+  "@checklistHelpStreamMethodAbout": {},
+  "checklistHelpStreamMethodObs": "С компьютера через OBS нужны компьютер с OBS Studio и камера. Подойдёт, если хотите несколько камер, сцены и заставки.",
+  "@checklistHelpStreamMethodObs": {},
+  "checklistHelpStreamMethodPhone": "С телефона через приложение Mafbase нужен только телефон на штативе над столом: приложение само наложит плашки и отправит видео в сервис трансляций. Подойдёт, если компьютера с OBS нет.",
+  "@checklistHelpStreamMethodPhone": {},
+  "checklistHelpStreamMethodControl": "В обоих способах плашкам нужна оплата, а статусы и роли игроков ведущий меняет на странице управления: в пункте меню «Плашки для трансляции» нажмите «Открыть» у нужного стола.",
+  "@checklistHelpStreamMethodControl": {},
+  "checklistHelpStreamMethodBoth": "Если одни столы транслируете через OBS, а другие с телефона, способ не выбирайте — в чеклисте останутся пункты обоих.",
+  "@checklistHelpStreamMethodBoth": {},
+  "checklistHelpTranslationBillingAbout": "Плашки показывают поверх видео трансляции ники игроков за столом.",
+  "@checklistHelpTranslationBillingAbout": {},
+  "checklistHelpTranslationBillingManual": "С ручным управлением ведущий на странице управления стола меняет роли и статусы игроков, и плашки сразу их показывают.",
+  "@checklistHelpTranslationBillingManual": {},
+  "checklistHelpTranslationBillingAuto": "Без ручного управления на плашках только ники, а на следующую игру они переходят сами, когда вы отправляете оповещение о её начале.",
+  "@checklistHelpTranslationBillingAuto": {},
+  "checklistHelpTranslationBillingWays": "Плашки работают в обоих способах трансляции — в OBS на компьютере и с телефона через приложение Mafbase, — и в обоих их нужно оплатить.",
+  "@checklistHelpTranslationBillingWays": {},
+  "checklistHelpTranslationBillingSeating": "Игроков за столами плашки берут из рассадки, поэтому без неё они будут пустыми.",
+  "@checklistHelpTranslationBillingSeating": {},
+  "checklistHelpTranslationBillingPrice": "Плашки для турнира на {players} участников — {price} ₽.",
+  "@checklistHelpTranslationBillingPrice": {
+    "placeholders": {
+      "players": {
+        "type": "int",
+        "example": "10"
+      },
+      "price": {
+        "type": "int",
+        "example": "300"
+      }
+    }
+  },
+  "checklistHelpTranslationBillingNotifications": "С оплатой плашек включатся и оповещения игрокам.",
+  "@checklistHelpTranslationBillingNotifications": {},
+  "checklistHelpObsWidgetAbout": "Виджет — страница с плашками стола, которую OBS показывает поверх видео как источник «Браузер». У каждого стола своя ссылка.",
+  "@checklistHelpObsWidgetAbout": {},
+  "checklistHelpObsWidgetDesign": "Дизайн плашек входит в ссылку: если смените его, вставьте в OBS новую ссылку.",
+  "@checklistHelpObsWidgetDesign": {},
+  "checklistHelpObsWidgetStepSource": "В OBS в панели «Источники» нажмите «+» и выберите «Браузер».",
+  "@checklistHelpObsWidgetStepSource": {},
+  "checklistHelpObsWidgetStepLink": "В поле «Ссылка» вставьте ссылку для OBS нужного стола, а в полях «Ширина» и «Высота» укажите 1920 и 1080: плашки рассчитаны на этот размер, а на маленьком источнике виджет покажет предупреждение.",
+  "@checklistHelpObsWidgetStepLink": {},
+  "checklistHelpObsWidgetStepPermissions": "Чтобы OBS сам переключал сцены, в поле «Разрешение страницы» выберите «Продвинутый доступ к OBS». «Полный доступ к OBS» тоже подойдёт.",
+  "@checklistHelpObsWidgetStepPermissions": {},
+  "checklistHelpObsWidgetStepShutdown": "Не включайте «Отключать источник, когда не видим»: иначе на сцене без виджета источник выключится и обратно OBS уже не переключится.",
+  "@checklistHelpObsWidgetStepShutdown": {},
+  "checklistHelpObsWidgetDone": "Пункт отметится, когда виджет откроется в OBS хотя бы на одном столе. Часто транслируют один стол — этого достаточно.",
+  "@checklistHelpObsWidgetDone": {},
+  "checklistHelpObsWidgetWarning": "На столе с выбранными сценами у виджета не хватает прав их переключать: в свойствах источника в поле «Разрешение страницы» выберите «Продвинутый доступ к OBS».",
+  "@checklistHelpObsWidgetWarning": {},
+  "checklistHelpObsWidgetLocked": "Без оплаты плашек виджет в OBS не заработает.",
+  "@checklistHelpObsWidgetLocked": {},
+  "checklistHelpObsScenesAbout": "OBS может сам переключать сцены, когда ведущий меняет фазу игры: например, днём показывать стол, ночью — другой план, а в перерыве — заставку.",
+  "@checklistHelpObsScenesAbout": {},
+  "checklistHelpObsScenesRights": "Список сцен приходит из OBS, поэтому выбрать их можно, только пока виджет открыт в OBS и в поле «Разрешение страницы» у него выбран «Продвинутый доступ к OBS» или «Полный доступ к OBS».",
+  "@checklistHelpObsScenesRights": {},
+  "checklistHelpObsScenesStepOpen": "Откройте страницу управления стола и нажмите «OBS» рядом с выбором игры. Зелёная точка значит, что OBS подключён.",
+  "@checklistHelpObsScenesStepOpen": {},
+  "checklistHelpObsScenesStepChoose": "Для фаз «День», «Ночь» и «Перерыв» выберите сцену или «Не переключать». Выбор сохраняется сразу и общий для всех, у кого открыта страница управления этого стола.",
+  "@checklistHelpObsScenesStepChoose": {},
+  "checklistHelpObsScenesWhen": "Сцена переключается только в момент смены фазы на странице управления. Перезагрузка источника или повторное открытие виджета сцену не меняют.",
+  "@checklistHelpObsScenesWhen": {},
+  "checklistHelpObsScenesMissing": "Если сцену переименовали или удалили в OBS, она останется в списке с пометкой «(нет в OBS)» — выберите другую.",
+  "@checklistHelpObsScenesMissing": {},
+  "checklistHelpObsScenesOtherTables": "«Сделать» откроет страницу управления стола 1. Страницы других столов — в пункте меню «Плашки для трансляции»: «Открыть» у нужного стола.",
+  "@checklistHelpObsScenesOtherTables": {},
+  "checklistHelpObsScenesDone": "Пункт отметится, когда сцены будут выбраны хотя бы у одного стола.",
+  "@checklistHelpObsScenesDone": {},
+  "checklistHelpPhoneStreamAbout": "Телефон отправляет видео в сервис трансляций, например в VK Видео, так же, как это делает OBS. Для этого у трансляции стола должны быть RTMP-сервер и ключ.",
+  "@checklistHelpPhoneStreamAbout": {},
+  "checklistHelpPhoneStreamStepService": "Создайте трансляцию в VK Видео или другом сервисе — так же, как для OBS. Сервис выдаст адрес RTMP-сервера и ключ, а ссылка для зрителей — адрес этой трансляции.",
+  "@checklistHelpPhoneStreamStepService": {},
+  "checklistHelpPhoneStreamStepAdd": "В Mafbase на странице «Трансляции» нажмите «Добавить свою ссылку».",
+  "@checklistHelpPhoneStreamStepAdd": {},
+  "checklistHelpPhoneStreamStepFields": "Заполните «Номер стола», в поле «Ссылка на трансляцию» вставьте ссылку для зрителей, а в поля «RTMP сервер» и «RTMP ключ» — адрес сервера и ключ. Нажмите «Добавить».",
+  "@checklistHelpPhoneStreamStepFields": {},
+  "checklistHelpPhoneStreamOperatorLink": "После этого у стола появится «Ссылка оператора» — её отправляют тому, кто будет снимать. Без RTMP-сервера и ключа ссылки оператора не будет.",
+  "@checklistHelpPhoneStreamOperatorLink": {},
+  "checklistHelpPhoneStreamWithoutBilling": "Без оплаты плашек видео с телефона пойдёт без плашек.",
+  "@checklistHelpPhoneStreamWithoutBilling": {},
+  "checklistHelpPhoneStreamDone": "Пункт отметится, когда такая трансляция появится хотя бы у одного стола.",
+  "@checklistHelpPhoneStreamDone": {},
+  "checklistHelpPhoneOperatorAbout": "По «Ссылке оператора» телефон открывает в приложении Mafbase экран трансляции стола. Ссылка своя у каждого стола с RTMP-сервером и ключом — она на странице «Трансляции».",
+  "@checklistHelpPhoneOperatorAbout": {},
+  "checklistHelpPhoneOperatorStepApp": "Оператор ставит на телефон приложение Mafbase из App Store или RuStore.",
+  "@checklistHelpPhoneOperatorStepApp": {},
+  "checklistHelpPhoneOperatorStepSend": "Отправьте оператору «Ссылку оператора» стола со страницы «Трансляции».",
+  "@checklistHelpPhoneOperatorStepSend": {},
+  "checklistHelpPhoneOperatorStepOpen": "Оператор открывает ссылку на телефоне — она откроется в приложении — и разрешает доступ к камере и микрофону.",
+  "@checklistHelpPhoneOperatorStepOpen": {},
+  "checklistHelpPhoneOperatorStepStream": "На экране трансляции оператор нажимает «Стрим»: трансляция начнётся, а кнопка сменится на «Стоп».",
+  "@checklistHelpPhoneOperatorStepStream": {},
+  "checklistHelpPhoneOperatorRecord": "Кнопка «Запись» отдельно сохраняет видео в галерею телефона и на трансляцию не влияет.",
+  "@checklistHelpPhoneOperatorRecord": {},
+  "checklistHelpPhoneOperatorTips": "Телефон лучше поставить горизонтально на штатив над столом и подключить к зарядке и к хорошему Wi-Fi.",
+  "@checklistHelpPhoneOperatorTips": {},
+  "checklistHelpPhoneOperatorIos": "На iPhone нельзя блокировать экран и сворачивать приложение, пока идёт трансляция: в фоне iOS видео не передаёт.",
+  "@checklistHelpPhoneOperatorIos": {},
+  "checklistHelpPhoneOperatorSelf": "Вести трансляцию можно и со своего телефона: в приложении Mafbase на странице «Трансляции» нажмите «Начать с этого телефона» у нужного стола — ссылку копировать не нужно.",
+  "@checklistHelpPhoneOperatorSelf": {},
+  "checklistHelpPhoneOperatorReissue": "Если ссылка попала не тому, нажмите у трансляции стола «Перевыпустить ссылку оператора» — значок с круговыми стрелками. Прежняя ссылка перестанет работать, а новую отправьте оператору.",
+  "@checklistHelpPhoneOperatorReissue": {},
+  "checklistHelpPhoneOperatorBrowser": "Если открыть ссылку в браузере — на компьютере или на телефоне без приложения, — страница предложит установить Mafbase: трансляция запускается только в приложении.",
+  "@checklistHelpPhoneOperatorBrowser": {},
+  "checklistHelpPhoneOperatorDone": "Пункт отметится, когда ссылку оператора откроют в приложении на всех столах с трансляцией с телефона. Это ещё не значит, что трансляция идёт: проверьте её по ссылке для зрителей.",
+  "@checklistHelpPhoneOperatorDone": {},
+  "checklistCoverageTitle": "Охват оповещений",
+  "@checklistCoverageTitle": {},
+  "checklistCoverageSummary": "Получат оповещения: {reachable} из {total}",
+  "@checklistCoverageSummary": {
+    "placeholders": {
+      "reachable": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistCoverageTelegram": "Telegram",
+  "@checklistCoverageTelegram": {},
+  "checklistCoverageTelegramHint": "Подписаны на бота",
+  "@checklistCoverageTelegramHint": {},
+  "checklistCoverageVk": "ВКонтакте",
+  "@checklistCoverageVk": {},
+  "checklistCoverageVkHint": "По ФСМ-нику",
+  "@checklistCoverageVkHint": {},
+  "checklistCoveragePush": "Push в приложении",
+  "@checklistCoveragePush": {},
+  "checklistCoveragePushHint": "Только оповещение о начале игры, в общий счёт не входит",
+  "@checklistCoveragePushHint": {},
+  "checklistCoverageFsmNote": "Участники с ФСМ-ником получат оповещения в ВК автоматически",
+  "@checklistCoverageFsmNote": {},
+  "checklistCoverageUnavailable": "Не удалось получить данные о подписках",
+  "@checklistCoverageUnavailable": {},
+  "checklistCoverageLoadError": "Не удалось загрузить охват оповещений",
+  "@checklistCoverageLoadError": {},
+  "checklistCoverageUnreachable": "Не получат оповещения ({count})",
+  "@checklistCoverageUnreachable": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistCoverageAllReachable": "Оповещения получат все участники",
+  "@checklistCoverageAllReachable": {},
+  "checklistCoverageNoFsmNickname": "Нет ФСМ-ника — оповещение в ВК не придёт",
+  "@checklistCoverageNoFsmNickname": {},
+  "checklistCoverageNotSubscribed": "Не подписан на бота в Telegram",
+  "@checklistCoverageNotSubscribed": {},
+  "checklistCoverageSetFsmNickname": "Указать ФСМ-ник",
+  "@checklistCoverageSetFsmNickname": {},
+  "checklistCoverageInviteTitle": "Приглашение для чата турнира",
+  "@checklistCoverageInviteTitle": {},
+  "checklistCoverageInviteAbout": "Отправьте его в чат турнира: по нему игроки подпишутся на бота и будут получать оповещения.",
+  "@checklistCoverageInviteAbout": {},
+  "checklistCoverageInviteText": "Чтобы получать номер своего стола и время начала игры, напишите боту {botUrl} свой ФСМ-ник с учётом регистра и цифр.\n\nЕсли ФСМ-ника нет, отправьте боту /pair и через пробел свой ник в Mafbase — как в списке участников турнира. Например: /pair Шерлок",
+  "@checklistCoverageInviteText": {
+    "placeholders": {
+      "botUrl": {
+        "type": "String",
+        "example": "https://t.me/mafbase_notification_bot"
+      }
+    }
+  },
+  "checklistCoverageInviteCopy": "Скопировать приглашение",
+  "@checklistCoverageInviteCopy": {},
+  "checklistCoverageInviteCopied": "Приглашение скопировано",
+  "@checklistCoverageInviteCopied": {},
+  "checklistCoverageFormCounter": "Получат: {current} из {total}",
+  "@checklistCoverageFormCounter": {
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "18"
+      },
+      "total": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "checklistSetupCaption": "Настройка турнира",
+  "@checklistSetupCaption": {},
+  "checklistSetupStepCaption": "Настройка турнира · шаг {step} из {total}",
+  "@checklistSetupStepCaption": {
+    "placeholders": {
+      "step": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "checklistSetupFsmQuestion": "Турнир проходит на GoMafia (ФСМ)?",
+  "@checklistSetupFsmQuestion": {},
+  "checklistSetupFsmAbout": "Тогда участников и рассадку можно загрузить с GoMafia, а игроки с ФСМ-ником получат оповещения в ВК.",
+  "@checklistSetupFsmAbout": {},
+  "checklistSetupFsmYes": "Да",
+  "@checklistSetupFsmYes": {},
+  "checklistSetupFsmYesHint": "Укажете ссылку на турнир на GoMafia",
+  "@checklistSetupFsmYesHint": {},
+  "checklistSetupFsmNo": "Нет",
+  "@checklistSetupFsmNo": {},
+  "checklistSetupFsmNoHint": "Участников добавите сами",
+  "@checklistSetupFsmNoHint": {},
+  "checklistSetupGomafiaTitle": "Ссылка на турнир на GoMafia",
+  "@checklistSetupGomafiaTitle": {},
+  "checklistSetupGomafiaAbout": "Скопируйте адрес страницы турнира на gomafia.pro.",
+  "@checklistSetupGomafiaAbout": {},
+  "checklistSetupGomafiaInvalid": "Нужна ссылка вида {example}",
+  "@checklistSetupGomafiaInvalid": {
+    "placeholders": {
+      "example": {
+        "type": "String",
+        "example": "https://gomafia.pro/tournament/1"
+      }
+    }
+  },
+  "checklistSetupSave": "Сохранить",
+  "@checklistSetupSave": {},
+  "checklistSetupBack": "Назад",
+  "@checklistSetupBack": {},
+  "checklistSetupTranslationQuestion": "Будете вести трансляцию с плашками?",
+  "@checklistSetupTranslationQuestion": {},
+  "checklistSetupTranslationAbout": "Плашки показывают поверх видео ники, роли и статусы игроков за столом. Ответ можно поменять в чеклисте.",
+  "@checklistSetupTranslationAbout": {},
+  "checklistSetupTranslationObs": "Да, с компьютера через OBS",
+  "@checklistSetupTranslationObs": {},
+  "checklistSetupTranslationPhone": "Да, с телефона через приложение Mafbase",
+  "@checklistSetupTranslationPhone": {},
+  "checklistSetupTranslationNone": "Нет",
+  "@checklistSetupTranslationNone": {},
+  "checklistSetupTranslationNoneHint": "Пункты трансляции скроются из чеклиста",
+  "@checklistSetupTranslationNoneHint": {},
+  "checklistSetupTranslationUnknown": "Пока не знаю",
+  "@checklistSetupTranslationUnknown": {},
+  "checklistSetupTranslationUnknownHint": "Решите позже в чеклисте",
+  "@checklistSetupTranslationUnknownHint": {},
+  "checklistSetupDoneTitle": "Готово",
+  "@checklistSetupDoneTitle": {},
+  "checklistSetupDoneAbout": "В чеклисте видно, что ещё осталось сделать к турниру. Пункты отмечаются сами, когда всё готово.",
+  "@checklistSetupDoneAbout": {},
+  "checklistSetupDoneFsm": "Участников и рассадку можно загрузить с GoMafia прямо сейчас.",
+  "@checklistSetupDoneFsm": {},
+  "checklistSetupImportGomafia": "Загрузить участников и рассадку с GoMafia",
+  "@checklistSetupImportGomafia": {},
+  "checklistSetupOpenChecklist": "Открыть чеклист",
+  "@checklistSetupOpenChecklist": {}
 }

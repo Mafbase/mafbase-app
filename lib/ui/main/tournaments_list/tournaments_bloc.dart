@@ -41,7 +41,7 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
           range: data.range,
         );
 
-        router.openTournament(id);
+        router.openTournament(id, setup: true);
         emit(state.copyWith(isLoading: false));
       } catch (e) {
         emit(state.copyWith(isLoading: false));

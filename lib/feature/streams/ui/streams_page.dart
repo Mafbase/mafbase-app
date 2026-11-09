@@ -6,11 +6,16 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_item_sheet.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_bloc.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_event.dart';
 import 'package:seating_generator_web/feature/streams/bloc/streams_admin_state.dart';
 import 'package:seating_generator_web/feature/streams/ui/widgets/add_stream_bottom_sheet.dart';
 import 'package:seating_generator_web/feature/streams/ui/widgets/stream_expansion_tile.dart';
+import 'package:seating_generator_web/feature/streams/ui/widgets/streams_overlay_billing_hint.dart';
+import 'package:seating_generator_web/feature/streams/ui/widgets/streams_phone_guide.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -76,6 +81,18 @@ class StreamsPageContent extends StatelessWidget {
     });
   }
 
+  void _openOperatorDetails(BuildContext context) {
+    OrganizerChecklistItemSheet.show(
+      context,
+      tournamentId: tournamentId,
+      item: const ChecklistItemModel(key: ChecklistKey.phoneOperator, status: ChecklistStatus.todo),
+      title: context.locale.streamsOperatorLink,
+      showStatus: false,
+      showAction: false,
+      showDismiss: false,
+    );
+  }
+
   void _onStop(BuildContext context, int streamId) {
     context.read<StreamsAdminBloc>().add(StreamsAdminEventStopStream(streamId: streamId));
   }
@@ -91,7 +108,6 @@ class StreamsPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = context.locale;
-    final theme = MyTheme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -102,48 +118,34 @@ class StreamsPageContent extends StatelessWidget {
       body: BlocBuilder<StreamsAdminBloc, StreamsAdminState>(
         builder: (context, state) {
           final grouped = _groupByTable(state.streams);
-          final entries = grouped.entries.toList();
 
           return Stack(
             children: [
               Column(
                 children: [
                   Expanded(
-                    child: grouped.isEmpty
-                        ? Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(Icons.videocam_off_outlined, size: 64, color: theme.greyColor),
-                                const SizedBox(height: 16),
-                                Text(
-                                  locale.streamsEmpty,
-                                  style: theme.defaultTextStyle.copyWith(color: theme.greyColor),
-                                ),
-                                const SizedBox(height: 24),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                                  child: CustomButton(
-                                    text: locale.streamsAddButton,
-                                    onTap: () => _openAddStream(context),
-                                  ),
-                                ),
-                              ],
+                    child: ListView(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      children: [
+                        StreamsPhoneGuide(
+                          key: ValueKey(grouped.isEmpty),
+                          initiallyExpanded: grouped.isEmpty,
+                          onMore: () => _openOperatorDetails(context),
+                        ),
+                        const StreamsOverlayBillingHint(),
+                        if (grouped.isEmpty)
+                          _EmptyState(onAdd: () => _openAddStream(context))
+                        else
+                          for (final entry in grouped.entries)
+                            StreamExpansionTile(
+                              tournamentId: tournamentId,
+                              tableNumber: entry.key,
+                              streams: entry.value,
+                              onStop: (streamId) => _onStop(context, streamId),
+                              onRotateToken: (streamId) => _onRotateToken(context, streamId, entry.key),
                             ),
-                          )
-                        : ListView.builder(
-                            itemCount: entries.length,
-                            itemBuilder: (ctx, index) {
-                              final entry = entries[index];
-                              return StreamExpansionTile(
-                                tournamentId: tournamentId,
-                                tableNumber: entry.key,
-                                streams: entry.value,
-                                onStop: (streamId) => _onStop(context, streamId),
-                                onRotateToken: (streamId) => _onRotateToken(context, streamId, entry.key),
-                              );
-                            },
-                          ),
+                      ],
+                    ),
                   ),
                   if (grouped.isNotEmpty) _BottomBar(onAdd: () => _openAddStream(context)),
                 ],
@@ -152,6 +154,34 @@ class StreamsPageContent extends StatelessWidget {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  final VoidCallback onAdd;
+
+  const _EmptyState({required this.onAdd});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = MyTheme.of(context);
+    final locale = context.locale;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+      child: Column(
+        children: [
+          Icon(Icons.videocam_off_outlined, size: 64, color: theme.greyColor),
+          const SizedBox(height: 16),
+          Text(
+            locale.streamsEmpty,
+            style: theme.defaultTextStyle.copyWith(color: theme.greyColor),
+          ),
+          const SizedBox(height: 24),
+          CustomButton(text: locale.streamsAddButton, onTap: onAdd),
+        ],
       ),
     );
   }

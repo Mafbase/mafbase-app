@@ -10,6 +10,8 @@ import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_e
 import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_page.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_page.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_page.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_page.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
 import 'package:seating_generator_web/feature/streams/ui/broadcast_page.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
@@ -126,6 +128,8 @@ class AppRouter extends RootStackRouter {
                 AutoRoute(page: InfoTableDescriptionRoute.page, path: 'table-descriptions'),
                 AutoRoute(page: RefereeRoute.page, path: 'referees'),
                 AutoRoute(page: StreamsRoute.page, path: 'streams'),
+                AutoRoute(page: OrganizerChecklistRoute.page, path: 'checklist'),
+                AutoRoute(page: NotificationCoverageRoute.page, path: 'notification-coverage'),
               ],
             ),
           ],

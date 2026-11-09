@@ -6,7 +6,8 @@ import 'package:seating_generator_web/ui/main/widgets/create_tournament_dialog.d
 abstract class TournamentsRouter {
   Future<CreateTournamentData?> openCreateTournamentDialog();
 
-  void openTournament(int id);
+  /// [setup] — турнир только что создан: страница покажет мастер настройки.
+  void openTournament(int id, {bool setup = false});
 }
 
 class TournamentsRouterImpl implements TournamentsRouter {
@@ -20,7 +21,7 @@ class TournamentsRouterImpl implements TournamentsRouter {
   }
 
   @override
-  void openTournament(int id) {
-    context.router.push(TournamentRoute(tournamentId: id));
+  void openTournament(int id, {bool setup = false}) {
+    context.router.push(TournamentRoute(tournamentId: id, setup: setup ? 1 : null));
   }
 }

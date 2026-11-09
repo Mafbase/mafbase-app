@@ -32,6 +32,8 @@ import 'package:seating_generator_web/feature/fantasy/data/fantasy_repository_im
 import 'package:seating_generator_web/feature/fantasy/domain/fantasy_repository.dart';
 import 'package:seating_generator_web/feature/info_table_description/data/info_table_description_repository_impl.dart';
 import 'package:seating_generator_web/feature/info_table_description/domain/info_table_description_repository.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/data/organizer_checklist_repository_impl.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_repository.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/photo_theme_repository_impl.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 import 'package:seating_generator_web/feature/player_statistics/data/repository/player_statistics_repository_impl.dart';
@@ -94,4 +96,6 @@ class RepositoryFactory {
   late final RefereeRepository refereeRepository = RefereeRepositoryImpl(client);
 
   late final PaymentWaitingRepository paymentWaitingRepository = PaymentWaitingRepositoryImpl(client);
+
+  late final OrganizerChecklistRepository organizerChecklistRepository = OrganizerChecklistRepositoryImpl(client);
 }

@@ -4,7 +4,7 @@ description: Задача 19 (iOS-устойчивость стрима mafbase_
 type: project
 ---
 
-Задача `mafbase_stream/docs/19_ios_stream_resilience.md` (все 19 пунктов) реализована 2026-09-24
+Задача `docs/tasks/mafbase-stream/19_ios_stream_resilience.md` в корне workspace mafbase (до 2026-11-06 лежала в `mafbase_stream/docs/`) (все 19 пунктов) реализована 2026-09-24
 в `mafbase-app`, коммит `25c1674` (2026-09-25), вошла в релиз 4.3.0 (`chore: релиз 4.3.0`, тег в сторы на момент записи не ставился): `ios/Classes/Pipeline/`
 (`StreamPipeline`, `StreamingController`, `SilenceGenerator`, `PauseCardRenderer`, `RetryBackoff`),
 тонкий `StreamViewController`, режим заглушки в `GL/Compositor.swift`, `UIBackgroundModes: audio`

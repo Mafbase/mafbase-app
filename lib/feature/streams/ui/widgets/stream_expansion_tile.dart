@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/feature/streams/domain/broadcast_link.dart';
+import 'package:seating_generator_web/feature/streams/ui/widgets/stream_operator_link_section.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
 
@@ -147,44 +147,10 @@ class _StreamItem extends StatelessWidget {
             ],
             if (stream.broadcastToken.isNotEmpty) ...[
               const SizedBox(height: 8),
-              _OperatorLinkButton(
-                tournamentId: tournamentId,
-                tableNumber: tableNumber,
-                token: stream.broadcastToken,
-              ),
+              StreamOperatorLinkSection(tournamentId: tournamentId, table: tableNumber, stream: stream),
             ],
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _OperatorLinkButton extends StatelessWidget {
-  final int tournamentId;
-  final int tableNumber;
-  final String token;
-
-  const _OperatorLinkButton({required this.tournamentId, required this.tableNumber, required this.token});
-
-  @override
-  Widget build(BuildContext context) {
-    final locale = context.locale;
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: TextButton.icon(
-        onPressed: () async {
-          final link = buildBroadcastDeeplink(tournamentId: tournamentId, table: tableNumber, token: token);
-          await Clipboard.setData(ClipboardData(text: link));
-          if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(locale.broadcastOperatorLinkCopied)),
-            );
-          }
-        },
-        icon: const Icon(Icons.link, size: 18),
-        label: Text(locale.streamsOperatorLink),
-        style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
       ),
     );
   }

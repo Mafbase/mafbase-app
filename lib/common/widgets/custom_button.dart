@@ -10,6 +10,9 @@ class CustomButton extends StatelessWidget {
   final bool expand;
   final bool isLoading;
 
+  /// Светлая кнопка для бокового меню турнира: обычная сливается с его тёмным фоном.
+  final bool isInverted;
+
   const CustomButton({
     super.key,
     required this.text,
@@ -19,16 +22,19 @@ class CustomButton extends StatelessWidget {
     this.minimize = false,
     this.expand = true,
     this.isLoading = false,
+    this.isInverted = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = MyTheme.of(context);
 
+    final enabled = !disabled && !isLoading;
     final textWidget = Text(
       text,
       style: theme.btnTextStyle.copyWith(
         fontSize: minimize ? 15 : 18,
+        color: isInverted ? (enabled ? theme.darkBlueColor : theme.sidebarSectionTitleColor) : null,
       ),
       textAlign: TextAlign.center,
     );
@@ -49,6 +55,12 @@ class CustomButton extends StatelessWidget {
         elevation: const WidgetStatePropertyAll(0),
         backgroundColor: WidgetStateProperty.resolveWith(
           (states) {
+            if (isInverted) {
+              if (states.contains(WidgetState.disabled)) return theme.sidebarActiveItemBgColor;
+              return states.contains(WidgetState.pressed)
+                  ? theme.btnTextColor.withValues(alpha: 0.7)
+                  : theme.btnTextColor;
+            }
             if (states.contains(WidgetState.disabled)) {
               return theme.buttonDisabledColor;
             }
@@ -60,7 +72,7 @@ class CustomButton extends StatelessWidget {
           },
         ),
       ),
-      onPressed: (disabled || isLoading) ? null : onTap,
+      onPressed: enabled ? onTap : null,
       child: expand
           ? Center(
               child: isLoading
