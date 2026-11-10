@@ -15,6 +15,7 @@ import 'package:seating_generator_web/app/guards/auth_guard.dart';
 import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
+import 'package:seating_generator_web/common/widgets/side_status_bar_adapter.dart';
 import 'package:seating_generator_web/firebase_options.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -175,7 +176,7 @@ class _MafbaseAppState extends State<MafbaseApp> {
                         textScaler: TextScaler.noScaling,
                         boldText: false,
                       ),
-                      child: child ?? const SizedBox.shrink(),
+                      child: SideStatusBarAdapter(child: child ?? const SizedBox.shrink()),
                     ),
                   );
                 },
