@@ -36,13 +36,21 @@ jobs:
             BASE_REF="HEAD~1"
           fi
           CHANGED=$(git diff --name-only "$BASE_REF" -- 'test/golden/' | grep '\.png$' | grep -v '_ci\.png$' || true)
+          FVMRC_CHANGED=$(git diff --name-only "$BASE_REF" -- .fvmrc || true)
+          HAS_CHANGES=false
           if [ -n "$CHANGED" ]; then
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "Golden PNG changes detected:"
+            HAS_CHANGES=true
+            echo "Trigger: golden PNG changes detected:"
             echo "$CHANGED"
-          else
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-            echo "No golden PNG changes detected, skipping regeneration"
+          fi
+          if [ -n "$FVMRC_CHANGED" ]; then
+            HAS_CHANGES=true
+            echo "Trigger: Flutter version changed in .fvmrc:"
+            git diff -U0 "$BASE_REF" -- .fvmrc | grep '^[-+][^-+]' || true
+          fi
+          echo "has_changes=$HAS_CHANGES" >> "$GITHUB_OUTPUT"
+          if [ "$HAS_CHANGES" = false ]; then
+            echo "No golden PNG or .fvmrc changes detected, skipping regeneration"
           fi
 
       - name: Setup FVM and Flutter
@@ -61,7 +69,7 @@ jobs:
           tar -xzf "$fvm_dir/fvm.tar.gz" -C "$fvm_dir"
           export PATH="$fvm_dir/fvm:$PATH"
           printf '%s\n' "$fvm_dir/fvm" >> "$GITHUB_PATH"
-          fvm install 3.41.3
+          fvm install 3.47.9
           fvm flutter --version
           fvm dart --version
 

@@ -1,9 +1,9 @@
 // Вендоренная (скопированная) версия Flutter-виджета `RawAutocomplete`.
 //
-// Источник: Flutter SDK 3.41.3 (channel stable, revision 48c32af034),
+// Источник: Flutter SDK 3.47.9 (channel stable, revision c197ca5199),
 //   packages/flutter/lib/src/widgets/autocomplete.dart
 //   https://github.com/flutter/flutter/blob/stable/packages/flutter/lib/src/widgets/autocomplete.dart
-// Дата копирования: 2026-07-12.
+// Дата синхронизации: 2026-11-10.
 // Лицензия оригинала: BSD-3-Clause (Copyright 2014 The Flutter Authors).
 //
 // Зачем скопировано:
@@ -15,13 +15,16 @@
 //   `EditableText` и роняло фокус поля. Поэтому виджет вендорен, чтобы поправить
 //   ровно одну строку без пересоздания поля.
 //
-// НАША МОДИФИКАЦИЯ (единственное отличие от оригинала):
-//   В обработчике изменения текста поля `_onChangedField` вызов
-//     _updateHighlight(_highlightedOptionIndex.value);
-//   заменён на
-//     _updateHighlight(0); // patched: сброс подсветки на верхнюю опцию
-//   Таким образом при каждом новом вводе подсвечивается верхняя опция.
-//   Клавиатурная навигация стрелками (_highlightPrevious/Next и т.п.) не тронута.
+// НАШИ МОДИФИКАЦИИ (единственные отличия от оригинала), обе в `_onChangedField`:
+//   1. Вызов
+//        _updateHighlight(_highlightedOptionIndex.value);
+//      заменён на
+//        _updateHighlight(0); // patched: сброс подсветки на верхнюю опцию
+//      Таким образом при каждом новом вводе подсвечивается верхняя опция.
+//      Клавиатурная навигация стрелками (_highlightPrevious/Next и т.п.) не тронута.
+//   2. Сброс `_selection` при изменении текста перенесён до `await widget.optionsBuilder(value)`
+//      (#172): в оригинале он стоит после проверки `callId` и пропускается, если ответ
+//      устарел.
 //
 // Всё, что публично экспортируется Flutter (типы `OptionsViewOpenDirection`,
 // `AutocompleteHighlightedOption`, Intent-классы, typedef'ы билдеров),
@@ -248,7 +251,7 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
   void _updateOptionsViewVisibility() {
     if (_canShowOptionsView) {
       _optionsViewController.show();
-    } else {
+    } else if (_optionsViewController.isShowing) {
       _optionsViewController.hide();
     }
   }
@@ -259,8 +262,20 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
     }
     final WidgetsLocalizations localizations = WidgetsLocalizations.of(context);
     final String optionsHint = resultsAvailable ? localizations.searchResultsFound : localizations.noResultsFound;
-    // ignore: deprecated_member_use — сохраняем поведение оригинала из SDK.
-    SemanticsService.announce(optionsHint, localizations.textDirection);
+    SemanticsService.sendAnnouncement(
+      View.of(context),
+      optionsHint,
+      localizations.textDirection,
+    ).catchError((Object exception, StackTrace stack) {
+      FlutterError.reportError(
+        FlutterErrorDetails(
+          exception: exception,
+          stack: stack,
+          library: 'widgets library',
+          context: ErrorDescription('while sending semantics announcement'),
+        ),
+      );
+    });
   }
 
   // Assigning an ID to every call of _onChangedField is necessary to avoid a
@@ -289,7 +304,10 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
     }
     final int callId = _onChangedCallId;
     final Iterable<T> options = await widget.optionsBuilder(value);
-    if (!mounted) return;
+
+    if (!mounted) {
+      return;
+    }
 
     // Makes sure that previous call results do not replace new ones.
     if (callId != _onChangedCallId || !shouldUpdateOptions) {
@@ -324,6 +342,7 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
       selection: TextSelection.collapsed(offset: selectionString.length),
       text: selectionString,
     );
+    _lastFieldText = selectionString;
     widget.onSelected?.call(nextSelection);
     if (_optionsViewController.isShowing) {
       _optionsViewController.hide(); // Close the options view after a selection is made.
@@ -392,10 +411,17 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
     final Size fieldSize = layoutInfo.childSize;
     final Matrix4 invertTransform = layoutInfo.childPaintTransform.clone()..invert();
 
+    final EdgeInsets mediaQueryPadding = MediaQuery.paddingOf(context);
+    final EdgeInsets viewInsets = MediaQuery.viewInsetsOf(context);
+
+    final Rect overlayRect = mediaQueryPadding.deflateRect(
+      viewInsets.deflateRect(Offset.zero & layoutInfo.overlaySize),
+    );
+
     // This may not work well if the paint transform has rotation in it.
     // MatrixUtils.transformRect returns the bounding rect of the rotated overlay
     // rect.
-    final Rect overlayRectInField = MatrixUtils.transformRect(invertTransform, Offset.zero & layoutInfo.overlaySize);
+    final Rect overlayRectInField = MatrixUtils.transformRect(invertTransform, overlayRect);
 
     final double spaceAbove = -overlayRectInField.top;
     final double spaceBelow = overlayRectInField.bottom - fieldSize.height;
@@ -425,7 +451,17 @@ class _PatchedRawAutocompleteState<T extends Object> extends State<PatchedRawAut
           child: Align(
             alignment: opensUp ? AlignmentDirectional.bottomStart : AlignmentDirectional.topStart,
             child: TextFieldTapRegion(
-              child: AutocompleteHighlightedOption(highlightIndexNotifier: _highlightedOptionIndex, child: child),
+              child: AutocompleteHighlightedOption(
+                highlightIndexNotifier: _highlightedOptionIndex,
+                // Exclude the options overlay from the ambient focus
+                // traversal tree. Autocomplete options are navigated by
+                // arrow keys (via the widget's own shortcuts) and selected
+                // via Enter or tap, so they don't participate in TAB
+                // traversal. Without this, TAB from the field would
+                // detour into focusable items in the options overlay
+                // instead of advancing to the next form field.
+                child: ExcludeFocus(child: child),
+              ),
             ),
           ),
         ),
