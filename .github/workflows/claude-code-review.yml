@@ -21,7 +21,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.41.3'
+          flutter-version: '3.47.9'
 
       - name: Run Claude Code Review
         uses: Mafbase/Mafbase-workflows/.github/actions/claude-code-review@main
