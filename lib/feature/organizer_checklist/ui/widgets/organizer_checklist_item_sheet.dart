@@ -12,12 +12,13 @@ class OrganizerChecklistItemSheet {
   OrganizerChecklistItemSheet._();
 
   /// [context] должен пережить лист и видеть блоки страницы турнира. Вне страницы чеклиста пункт может быть
-  /// не загружен — тогда выключают [showStatus] и [showDismiss].
+  /// не загружен — тогда выключают [showStatus] и [showDismiss], а признак ФСМ передают в [isFsm].
   static Future<void> show(
     BuildContext context, {
     required int tournamentId,
     required ChecklistItemModel item,
     OrganizerChecklistModel? checklist,
+    bool? isFsm,
     String? title,
     bool showStatus = true,
     bool showAction = true,
@@ -29,7 +30,9 @@ class OrganizerChecklistItemSheet {
       tournamentId: tournamentId,
       item: item,
       checklist: checklist,
+      isFsm: isFsm,
     );
+    final fsm = isFsm ?? checklist?.isFsm ?? false;
 
     return OrganizerChecklistInfoSheet.show(
       context,
@@ -40,7 +43,7 @@ class OrganizerChecklistItemSheet {
             status: item.status,
             text: locale.checklistItemSubtitle(
               item,
-              isFsm: checklist?.isFsm ?? false,
+              isFsm: fsm,
               streamMethod: checklist?.streamMethod,
             ),
           ),

@@ -46,6 +46,8 @@ class TournamentMenuBuilder {
     }
 
     final showLockedItems = state.isMyTournament && !state.isLoading && state.isBillingLoaded && showBill;
+    final isFsm = checklist?.isFsm ?? state.gomafiaUrl?.isNotEmpty ?? false;
+    final lockedHint = isFsm ? locale.tournamentMenuLockedHintFsm : locale.tournamentMenuLockedHint;
 
     final sections = <TournamentMenuSection>[];
 
@@ -193,11 +195,12 @@ class TournamentMenuBuilder {
         TournamentMenuLockedItem(
           text: locale.translationDialogTitle,
           icon: Icons.layers_outlined,
-          hint: locale.tournamentMenuLockedHint,
+          hint: lockedHint,
           onTap: () => OrganizerChecklistItemSheet.show(
             context,
             tournamentId: tournamentId,
             item: const ChecklistItemModel(key: ChecklistKey.translationBilling, status: ChecklistStatus.todo),
+            isFsm: isFsm,
             title: locale.translationDialogTitle,
             showStatus: false,
             showDismiss: false,
@@ -264,11 +267,12 @@ class TournamentMenuBuilder {
             TournamentMenuLockedItem(
               text: locale.tournamentMenuNotifications,
               icon: Icons.notifications_outlined,
-              hint: locale.tournamentMenuLockedHint,
+              hint: lockedHint,
               onTap: () => OrganizerChecklistItemSheet.show(
                 context,
                 tournamentId: tournamentId,
                 item: const ChecklistItemModel(key: ChecklistKey.notifyCoverage, status: ChecklistStatus.locked),
+                isFsm: isFsm,
                 title: locale.tournamentMenuNotifications,
                 showStatus: false,
                 showDismiss: false,

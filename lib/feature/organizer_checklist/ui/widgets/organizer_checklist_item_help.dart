@@ -33,6 +33,7 @@ class OrganizerChecklistItemHelp {
           Text(locale.checklistHelpPlayersManual),
           Text(locale.checklistHelpPlayersGomafia),
         ],
+        if (isFsm) Text(locale.checklistHelpFsmAutoBilling),
         if (showBilling) Text(locale.checklistHelpPlayersLimit),
       ];
 
@@ -41,7 +42,15 @@ class OrganizerChecklistItemHelp {
         if (!isFsm) Text(locale.checklistHelpSeatingGenerate),
         Text(locale.checklistHelpSeatingGomafia),
         Text(locale.checklistHelpSeatingMatching),
-        if (isFsm) Text(locale.checklistHelpSeatingFsmRounds),
+        if (isFsm) ...[
+          Text(locale.checklistHelpSeatingFsmRounds),
+          Text(locale.checklistHelpFsmAutoBilling),
+        ],
+      ];
+
+  List<Widget> billingFsm() => [
+        Text(locale.checklistHelpBillingFsm),
+        Text(locale.checklistHelpBillingFsmGives),
       ];
 
   List<Widget> billing({String? price}) => [
@@ -51,7 +60,7 @@ class OrganizerChecklistItemHelp {
         if (price != null) Text(price),
       ];
 
-  List<Widget> notifyCoverage() => [
+  List<Widget> notifyCoverage({bool isFsm = false}) => [
         Text(locale.checklistHelpNotifyCoverageAbout),
         if (item.unavailable && !item.isLocked)
           Text(locale.checklistSheetUnavailable)
@@ -61,7 +70,7 @@ class OrganizerChecklistItemHelp {
         Text(locale.checklistHelpNotifyCoverageVk),
         Text(locale.checklistHelpNotifyCoveragePush),
         if (item.isLocked)
-          Text(locale.checklistHelpBillingNotifications)
+          Text(isFsm ? locale.checklistHelpNotificationsLockedFsm : locale.checklistHelpBillingNotifications)
         else if (!item.isDone)
           Text(locale.checklistHelpNotifyCoverageInvite),
       ];
@@ -72,10 +81,10 @@ class OrganizerChecklistItemHelp {
         _ => null,
       };
 
-  List<Widget> tableDescriptions() => [
+  List<Widget> tableDescriptions({bool isFsm = false}) => [
         Text(locale.checklistHelpTableDescriptionsAbout),
         if (item.isLocked)
-          Text(locale.checklistHelpBillingNotifications)
+          Text(isFsm ? locale.checklistHelpNotificationsLockedFsm : locale.checklistHelpBillingNotifications)
         else if (item.unavailable)
           Text(locale.checklistSheetUnavailable),
         Text(locale.checklistHelpTableDescriptionsHow),
@@ -101,11 +110,20 @@ class OrganizerChecklistItemHelp {
         if (enablesNotifications) Text(locale.checklistHelpTranslationBillingNotifications),
       ];
 
+  List<Widget> translationBillingFsm() => [
+        Text(locale.checklistHelpTranslationBillingAbout),
+        Text(locale.checklistHelpTranslationBillingManual),
+        Text(locale.checklistHelpTranslationBillingAuto),
+        Text(locale.checklistHelpBillingFsm),
+        Text(locale.checklistHelpBillingFsmGives),
+        Text(locale.checklistHelpTranslationBillingSeating),
+      ];
+
   /// [links] — ссылки для OBS по столам; у неоплаченных плашек их нет.
-  List<Widget> obsWidget({Widget? links}) => [
+  List<Widget> obsWidget({Widget? links, bool isFsm = false}) => [
         if (item.status == ChecklistStatus.warning) Text(locale.checklistHelpObsWidgetWarning),
         Text(locale.checklistHelpObsWidgetAbout),
-        if (item.isLocked) Text(locale.checklistHelpObsWidgetLocked),
+        if (item.isLocked) Text(_overlaysLocked(isFsm)),
         if (links != null) ...[
           links,
           Text(locale.checklistHelpObsWidgetDesign),
@@ -131,9 +149,9 @@ class OrganizerChecklistItemHelp {
         if (!item.isDone) Text(locale.checklistHelpObsWidgetDone),
       ];
 
-  List<Widget> obsScenes() => [
+  List<Widget> obsScenes({bool isFsm = false}) => [
         Text(locale.checklistHelpObsScenesAbout),
-        if (item.isLocked) Text(locale.checklistHelpObsWidgetLocked),
+        if (item.isLocked) Text(_overlaysLocked(isFsm)),
         Text(locale.checklistHelpObsScenesRights),
         OrganizerChecklistHelpSteps([
           OrganizerChecklistHelpStep(locale.checklistHelpObsScenesStepOpen),
@@ -147,6 +165,9 @@ class OrganizerChecklistItemHelp {
         if (!item.isLocked) Text(locale.checklistHelpObsScenesOtherTables),
         if (!item.isDone) Text(locale.checklistHelpObsScenesDone),
       ];
+
+  String _overlaysLocked(bool isFsm) =>
+      isFsm ? locale.checklistHelpOverlaysLockedFsm : locale.checklistHelpObsWidgetLocked;
 
   List<Widget> phoneStream({required bool overlaysPaid}) => [
         Text(locale.checklistHelpPhoneStreamAbout),

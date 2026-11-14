@@ -43,6 +43,7 @@ extension OrganizerChecklistTexts on AppLocalizations {
   }) {
     if (item.unavailable) return checklistStatusUnavailable;
     if (item.isLocked) {
+      if (isFsm) return checklistStatusLockedFsm;
       return item.key.group == ChecklistGroup.translation ? checklistStatusLockedTranslation : checklistStatusLocked;
     }
 
@@ -77,14 +78,16 @@ extension OrganizerChecklistTexts on AppLocalizations {
         },
       ChecklistKey.seating when isFsm => done ? checklistSeatingDoneFsm : checklistSeatingTodoFsm,
       ChecklistKey.seating => done ? checklistStatusDone : checklistSeatingTodo,
-      ChecklistKey.billing => done ? checklistBillingDone : checklistBillingTodo,
+      ChecklistKey.billing when done => checklistBillingDone,
+      ChecklistKey.billing => isFsm ? checklistBillingTodoFsm : checklistBillingTodo,
       ChecklistKey.notifyCoverage => done ? checklistStatusDone : checklistNotifyCoverageTodo,
       ChecklistKey.tableDescriptions => done ? checklistStatusDone : checklistTableDescriptionsTodo,
       ChecklistKey.streamMethod => switch (streamMethod) {
           final method? when done => checklistStreamMethodName(method),
           _ => done ? checklistStatusDone : checklistStreamMethodTodo,
         },
-      ChecklistKey.translationBilling => done ? checklistStatusDone : checklistTranslationBillingTodo,
+      ChecklistKey.translationBilling when done => checklistStatusDone,
+      ChecklistKey.translationBilling => isFsm ? checklistTranslationBillingTodoFsm : checklistTranslationBillingTodo,
       ChecklistKey.obsWidget => done ? checklistStatusDone : checklistObsWidgetTodo,
       ChecklistKey.obsScenes => done ? checklistObsScenesDone : checklistObsScenesTodo,
       ChecklistKey.phoneStream => done ? checklistStatusDone : checklistPhoneStreamTodo,

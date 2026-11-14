@@ -33,16 +33,22 @@ class OrganizerChecklistItemContent {
   final ChecklistItemModel item;
   final OrganizerChecklistModel? checklist;
 
+  /// Признак ФСМ для листа, открытого без чеклиста; иначе он берётся из [checklist].
+  final bool? isFsm;
+
   const OrganizerChecklistItemContent(
     this.context, {
     required this.tournamentId,
     required this.item,
     this.checklist,
+    this.isFsm,
   });
 
   AppLocalizations get _locale => context.locale;
 
-  bool get _isFsm => checklist?.isFsm ?? false;
+  bool get _isFsm => isFsm ?? checklist?.isFsm ?? false;
+
+  bool get _awaitsFsmBilling => _isFsm && !item.isDone;
 
   TournamentPageState get _tournament => context.read<TournamentPageBloc>().state;
 
@@ -54,25 +60,29 @@ class OrganizerChecklistItemContent {
       ChecklistKey.gamesCount => help.gamesCount(),
       ChecklistKey.players => help.players(isFsm: _isFsm, showBilling: showBilling),
       ChecklistKey.seating => help.seating(isFsm: _isFsm),
+      ChecklistKey.billing when _awaitsFsmBilling => help.billingFsm(),
       ChecklistKey.billing => help.billing(price: !item.isDone && showBilling ? _billingPrice() : null),
-      ChecklistKey.notifyCoverage => help.notifyCoverage(),
-      ChecklistKey.tableDescriptions => help.tableDescriptions(),
+      ChecklistKey.notifyCoverage => help.notifyCoverage(isFsm: _isFsm),
+      ChecklistKey.tableDescriptions => help.tableDescriptions(isFsm: _isFsm),
       ChecklistKey.streamMethod => help.streamMethod(options: _streamMethodOptions()),
+      ChecklistKey.translationBilling when _awaitsFsmBilling => help.translationBillingFsm(),
       ChecklistKey.translationBilling => help.translationBilling(
           price: !item.isDone && showBilling ? _translationPrice() : null,
           enablesNotifications: !item.isDone && showBilling && !_tournament.notificationEnabled,
         ),
-      ChecklistKey.obsWidget => help.obsWidget(links: item.isLocked ? null : _obsLinks()),
-      ChecklistKey.obsScenes => help.obsScenes(),
+      ChecklistKey.obsWidget => help.obsWidget(links: item.isLocked ? null : _obsLinks(), isFsm: _isFsm),
+      ChecklistKey.obsScenes => help.obsScenes(isFsm: _isFsm),
       ChecklistKey.phoneStream => help.phoneStream(overlaysPaid: _tournament.billedTranslation),
       ChecklistKey.phoneOperator => help.phoneOperator(stores: _storeLinks()),
     };
   }
 
-  /// У заблокированного пункта вместо «Сделать» — оплата, которая его откроет.
+  /// У заблокированного пункта вместо «Сделать» — оплата, которая его откроет; у турнира ФСМ — загрузка рассадки
+  /// с GoMafia, после которой турнир оплачивается сам.
   OrganizerChecklistInfoSheetAction? primaryAction() {
     final canPay = isTournamentBillingVisible(context);
     if (item.isLocked) {
+      if (_isFsm) return _importSeating();
       return canPay ? _pay(preselectTranslation: item.key.group == ChecklistGroup.translation) : null;
     }
 
@@ -81,6 +91,7 @@ class OrganizerChecklistItemContent {
       ChecklistKey.players when _isFsm => _open(SeatingRoute(tournamentId: tournamentId, gomafia: 1)),
       ChecklistKey.players => _addPlayers(),
       ChecklistKey.seating => _open(SeatingRoute(tournamentId: tournamentId, gomafia: _isFsm ? 1 : null)),
+      ChecklistKey.billing || ChecklistKey.translationBilling when _awaitsFsmBilling => _importSeating(),
       ChecklistKey.billing => canPay ? _pay() : null,
       ChecklistKey.notifyCoverage => _open(NotificationCoverageRoute(tournamentId: tournamentId)),
       ChecklistKey.tableDescriptions => _open(InfoTableDescriptionRoute(tournamentId: tournamentId)),
@@ -175,6 +186,13 @@ class OrganizerChecklistItemContent {
   OrganizerChecklistInfoSheetAction _pay({bool preselectTranslation = false}) => OrganizerChecklistInfoSheetAction(
         text: _locale.checklistSheetPay,
         onTap: () => openTournamentBilling(context, preselectTranslation: preselectTranslation),
+      );
+
+  OrganizerChecklistInfoSheetAction _importSeating() => OrganizerChecklistInfoSheetAction(
+        text: _locale.checklistSheetImportSeating,
+        onTap: () {
+          if (context.mounted) context.router.push(SeatingRoute(tournamentId: tournamentId, gomafia: 1));
+        },
       );
 
   /// Ключ запрашивается при открытии листа: в браузере новая вкладка должна открыться прямо по нажатию.
