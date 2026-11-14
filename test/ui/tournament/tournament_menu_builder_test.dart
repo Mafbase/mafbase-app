@@ -6,6 +6,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
@@ -33,6 +34,7 @@ class _TestRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: PageInfo('MenuRoute', builder: (_) => page), path: '/'),
+        AutoRoute(page: PageInfo(SeatingRoute.name, builder: (_) => const Text('seating page')), path: '/seating'),
       ];
 }
 
@@ -56,7 +58,7 @@ const _paidOwner = TournamentPageState(
 );
 
 /// Строит секции меню там же, где их строит приложение: под роутером и блоком турнира.
-Future<(List<TournamentMenuSection>, _RecordingTournamentPageBloc)> _pumpSections(
+Future<(List<TournamentMenuSection>, _RecordingTournamentPageBloc, _TestRouter)> _pumpSections(
   WidgetTester tester,
   TournamentPageState state, {
   bool showBill = true,
@@ -98,7 +100,7 @@ Future<(List<TournamentMenuSection>, _RecordingTournamentPageBloc)> _pumpSection
     ),
   );
   await tester.pumpAndSettle();
-  return (sections, bloc);
+  return (sections, bloc, router);
 }
 
 List<TournamentMenuLockedItem> _locked(List<TournamentMenuSection> sections) =>
@@ -118,18 +120,18 @@ void main() {
       ],
     );
 
-    var (sections, _) = await _pumpSections(tester, _paidOwner, checklist: checklist);
+    var (sections, _, _) = await _pumpSections(tester, _paidOwner, checklist: checklist);
     final item = sections.first.items.first as TournamentMenuTapItem;
     expect(item.text, 'Чеклист организатора');
     expect(item.routeSegment, 'checklist');
     expect(item.trailingText, '1/2');
 
     await tester.pumpWidget(const SizedBox());
-    (sections, _) = await _pumpSections(tester, _paidOwner);
+    (sections, _, _) = await _pumpSections(tester, _paidOwner);
     expect((sections.first.items.first as TournamentMenuTapItem).trailingText, isNull);
 
     await tester.pumpWidget(const SizedBox());
-    (sections, _) = await _pumpSections(tester, _paidOwner.copyWith(isMyTournament: false), checklist: checklist);
+    (sections, _, _) = await _pumpSections(tester, _paidOwner.copyWith(isMyTournament: false), checklist: checklist);
     expect(
       sections.expand((section) => section.items).map((item) => item.text),
       isNot(contains('Чеклист организатора')),
@@ -137,7 +139,7 @@ void main() {
   });
 
   testWidgets('owner of an unpaid tournament sees locked overlays and notifications', (tester) async {
-    final (sections, _) = await _pumpSections(tester, _unpaidOwner);
+    final (sections, _, _) = await _pumpSections(tester, _unpaidOwner);
 
     final locked = _locked(sections);
     expect(locked.map((item) => item.text), [_overlaysTitle, _notificationsTitle]);
@@ -150,7 +152,7 @@ void main() {
   });
 
   testWidgets('paid tournament keeps the regular items under the new name', (tester) async {
-    final (sections, _) = await _pumpSections(tester, _paidOwner);
+    final (sections, _, _) = await _pumpSections(tester, _paidOwner);
 
     expect(_locked(sections), isEmpty);
     final overlays = sections
@@ -171,14 +173,14 @@ void main() {
     ];
     for (final (state, showBill) in cases) {
       await tester.pumpWidget(const SizedBox());
-      final (sections, _) = await _pumpSections(tester, state, showBill: showBill);
+      final (sections, _, _) = await _pumpSections(tester, state, showBill: showBill);
       expect(_locked(sections), isEmpty, reason: '$state, showBill: $showBill');
       expect(_notificationsSection(sections), isNull, reason: '$state, showBill: $showBill');
     }
   });
 
   testWidgets('locked overlays open the sheet and pay with overlays already checked', (tester) async {
-    final (sections, bloc) = await _pumpSections(tester, _unpaidOwner);
+    final (sections, bloc, _) = await _pumpSections(tester, _unpaidOwner);
 
     _locked(sections).first.onTap();
     await tester.pumpAndSettle();
@@ -195,7 +197,7 @@ void main() {
   });
 
   testWidgets('locked notifications open billing without preselected overlays', (tester) async {
-    final (sections, bloc) = await _pumpSections(tester, _unpaidOwner);
+    final (sections, bloc, _) = await _pumpSections(tester, _unpaidOwner);
 
     _locked(sections).last.onTap();
     await tester.pumpAndSettle();
@@ -206,5 +208,50 @@ void main() {
     expect(tester.widget<Checkbox>(find.byType(Checkbox)).value, isFalse);
     expect(tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed, isNull);
     expect(bloc.added, isEmpty);
+  });
+
+  testWidgets('locked items of an FSM tournament promise auto billing and open the GoMafia import', (tester) async {
+    tester.view.physicalSize = const Size(800, 3000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    const fsmChecklist = OrganizerChecklistModel(isFsm: true, items: []);
+    final cases = <(String, TournamentPageState, OrganizerChecklistModel?)>[
+      ('checklist', _unpaidOwner, fsmChecklist),
+      ('gomafiaUrl', _unpaidOwner.copyWith(gomafiaUrl: 'https://gomafia.pro/tournament/1'), null),
+    ];
+    for (final (reason, state, checklist) in cases) {
+      for (final index in [0, 1]) {
+        await tester.pumpWidget(const SizedBox());
+        final (sections, bloc, router) = await _pumpSections(tester, state, checklist: checklist);
+        final locked = _locked(sections);
+        expect(locked.map((item) => item.hint), everyElement('Доступно после загрузки рассадки'), reason: reason);
+
+        locked[index].onTap();
+        await tester.pumpAndSettle();
+        expect(find.text('Оплатить'), findsNothing, reason: '$reason, $index');
+        expect(find.textContaining('автоматически и бесплатно'), findsWidgets, reason: '$reason, $index');
+
+        await tester.tap(find.text('Загрузить рассадку'));
+        await tester.pumpAndSettle();
+        expect(router.current.name, SeatingRoute.name, reason: '$reason, $index');
+        expect(router.current.queryParams.optInt('gomafia'), 1, reason: '$reason, $index');
+        expect(bloc.added, isEmpty, reason: '$reason, $index');
+      }
+    }
+  });
+
+  testWidgets('a loaded checklist without FSM wins over the GoMafia link', (tester) async {
+    const checklist = OrganizerChecklistModel(isFsm: false, items: []);
+    final (sections, _, _) = await _pumpSections(
+      tester,
+      _unpaidOwner.copyWith(gomafiaUrl: 'https://gomafia.pro/tournament/1'),
+      checklist: checklist,
+    );
+
+    expect(_locked(sections).map((item) => item.hint), everyElement(_lockedHint));
+    _locked(sections).first.onTap();
+    await tester.pumpAndSettle();
+    expect(find.text('Оплатить'), findsOneWidget);
+    expect(find.text('Загрузить рассадку'), findsNothing);
   });
 }

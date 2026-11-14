@@ -931,6 +931,8 @@
   "@tournamentMenuNotifications": {},
   "tournamentMenuLockedHint": "Доступно после оплаты",
   "@tournamentMenuLockedHint": {},
+  "tournamentMenuLockedHintFsm": "Доступно после загрузки рассадки",
+  "@tournamentMenuLockedHintFsm": {},
   "tournamentCardGames": "{count, plural, =1{{count} игра} few{{count} игры} many{{count} игр} other{{count} игр}}",
   "@tournamentCardGames": {
     "placeholders": {
@@ -1371,6 +1373,8 @@
   "@checklistSheetAskQuestion": {},
   "checklistSheetPay": "Оплатить",
   "@checklistSheetPay": {},
+  "checklistSheetImportSeating": "Загрузить рассадку",
+  "@checklistSheetImportSeating": {},
   "checklistTitle": "Чеклист организатора",
   "@checklistTitle": {},
   "checklistProgress": "Готовность турнира {done}/{total}",
@@ -1460,6 +1464,8 @@
   "@checklistStatusLocked": {},
   "checklistStatusLockedTranslation": "Доступно после оплаты плашек",
   "@checklistStatusLockedTranslation": {},
+  "checklistStatusLockedFsm": "Откроется после загрузки рассадки с GoMafia",
+  "@checklistStatusLockedFsm": {},
   "checklistStatusUnavailable": "Не удалось проверить",
   "@checklistStatusUnavailable": {},
   "checklistCounter": "{current} из {total}",
@@ -1533,6 +1539,8 @@
   "@checklistBillingDone": {},
   "checklistBillingTodo": "Без оплаты нет оповещений и больше 10 участников",
   "@checklistBillingTodo": {},
+  "checklistBillingTodoFsm": "Оплатится автоматически при загрузке рассадки с GoMafia",
+  "@checklistBillingTodoFsm": {},
   "checklistNotifyCoverageCounter": "Получат {current} из {total}",
   "@checklistNotifyCoverageCounter": {
     "placeholders": {
@@ -1571,6 +1579,8 @@
   "@checklistStreamMethodPhone": {},
   "checklistTranslationBillingTodo": "Без оплаты видео пойдёт без плашек",
   "@checklistTranslationBillingTodo": {},
+  "checklistTranslationBillingTodoFsm": "Включатся автоматически при загрузке рассадки с GoMafia",
+  "@checklistTranslationBillingTodoFsm": {},
   "checklistObsWidgetCounter": "Столов с OBS: {current} из {total}",
   "@checklistObsWidgetCounter": {
     "placeholders": {
@@ -1683,12 +1693,20 @@
   "@checklistHelpSeatingMatching": {},
   "checklistHelpSeatingFsmRounds": "В турнире ФСМ следующие туры подтянутся с GoMafia сами, когда вы отправите оповещение о начале игры. Если на GoMafia поменялся состав игроков, загрузите рассадку вручную.",
   "@checklistHelpSeatingFsmRounds": {},
+  "checklistHelpFsmAutoBilling": "При загрузке рассадки с GoMafia турнир ФСМ оплатится автоматически и бесплатно: участники по числу столов, плашки для трансляции и оповещения.",
+  "@checklistHelpFsmAutoBilling": {},
   "checklistHelpBillingFree": "Без оплаты в турнире может быть до 10 участников, а оповещений и плашек нет.",
   "@checklistHelpBillingFree": {},
   "checklistHelpBillingGives": "Оплата открывает турнир на нужное число участников. Галочка «Плашки» в окне оплаты добавляет плашки для трансляции.",
   "@checklistHelpBillingGives": {},
   "checklistHelpBillingNotifications": "Оповещения включаются при любой оплате турнира: от 20 участников или с плашками.",
   "@checklistHelpBillingNotifications": {},
+  "checklistHelpBillingFsm": "Турниры ФСМ оплачиваются автоматически и бесплатно.",
+  "@checklistHelpBillingFsm": {},
+  "checklistHelpBillingFsmGives": "После загрузки рассадки с GoMafia турнир получит оплату на всех участников из рассадки, плашки для трансляции и оповещения.",
+  "@checklistHelpBillingFsmGives": {},
+  "checklistHelpNotificationsLockedFsm": "В турнире ФСМ оповещения включатся автоматически и бесплатно после загрузки рассадки с GoMafia.",
+  "@checklistHelpNotificationsLockedFsm": {},
   "checklistHelpBillingPriceFree": "Турнир на 10 участников бесплатный, с плашками — {price} ₽.",
   "@checklistHelpBillingPriceFree": {
     "placeholders": {
@@ -1784,6 +1802,8 @@
   "@checklistHelpObsWidgetWarning": {},
   "checklistHelpObsWidgetLocked": "Без оплаты плашек виджет в OBS не заработает.",
   "@checklistHelpObsWidgetLocked": {},
+  "checklistHelpOverlaysLockedFsm": "В турнире ФСМ плашки включатся автоматически и бесплатно после загрузки рассадки с GoMafia.",
+  "@checklistHelpOverlaysLockedFsm": {},
   "checklistHelpObsScenesAbout": "OBS может сам переключать сцены, когда ведущий меняет фазу игры: например, днём показывать стол, ночью — другой план, а в перерыве — заставку.",
   "@checklistHelpObsScenesAbout": {},
   "checklistHelpObsScenesRights": "Список сцен приходит из OBS, поэтому выбрать их можно, только пока виджет открыт в OBS и в поле «Разрешение страницы» у него выбран «Продвинутый доступ к OBS» или «Полный доступ к OBS».",

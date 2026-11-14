@@ -30,6 +30,10 @@ class _TestRouter extends RootStackRouter {
           page: PageInfo(OrganizerChecklistRoute.name, builder: (_) => const Text('checklist page')),
           path: '/checklist',
         ),
+        AutoRoute(
+          page: PageInfo(SeatingRoute.name, builder: (_) => const Text('seating page')),
+          path: '/seating',
+        ),
       ];
 }
 
@@ -62,8 +66,8 @@ Future<(RecordingOrganizerChecklistBloc, _TestRouter)> _pumpBanner(
   return (bloc, router);
 }
 
-OrganizerChecklistModel _nextLocked(ChecklistKey locked) => OrganizerChecklistModel(
-      isFsm: false,
+OrganizerChecklistModel _nextLocked(ChecklistKey locked, {bool isFsm = false}) => OrganizerChecklistModel(
+      isFsm: isFsm,
       items: [
         for (final key in ChecklistKey.values)
           checklistItem(
@@ -132,5 +136,33 @@ void main() {
     await tester.tap(find.text('Оплатить'));
     await tester.pumpAndSettle();
     expect(tester.widget<Checkbox>(find.byType(Checkbox)).value, isFalse);
+  });
+
+  testWidgets('in an FSM tournament a locked next item leads to the GoMafia import', (tester) async {
+    for (final key in [ChecklistKey.notifyCoverage, ChecklistKey.obsWidget]) {
+      await tester.pumpWidget(const SizedBox());
+      final (_, router) = await _pumpBanner(
+        tester,
+        OrganizerChecklistState(checklist: _nextLocked(key, isFsm: true)),
+      );
+      expect(find.text('Оплатить'), findsNothing, reason: '$key');
+
+      await tester.tap(find.text('Загрузить рассадку'));
+      await tester.pumpAndSettle();
+      expect(router.current.name, SeatingRoute.name, reason: '$key');
+      expect(router.current.queryParams.optInt('gomafia'), 1, reason: '$key');
+    }
+  });
+
+  testWidgets('in an FSM tournament an unlocked next item still opens the checklist', (tester) async {
+    final (_, router) = await _pumpBanner(
+      tester,
+      OrganizerChecklistState(checklist: checklistMethodNotChosen(isFsm: true)),
+    );
+    expect(find.text('Загрузить рассадку'), findsNothing);
+
+    await tester.tap(find.text('Открыть'));
+    await tester.pumpAndSettle();
+    expect(router.current.name, OrganizerChecklistRoute.name);
   });
 }

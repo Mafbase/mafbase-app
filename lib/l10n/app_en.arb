@@ -827,6 +827,8 @@
   "@tournamentMenuNotifications": {},
   "tournamentMenuLockedHint": "Available after payment",
   "@tournamentMenuLockedHint": {},
+  "tournamentMenuLockedHintFsm": "Available after importing the seating",
+  "@tournamentMenuLockedHintFsm": {},
 
   "tournamentCardGames": "{count, plural, =1{{count} game} other{{count} games}}",
   "@tournamentCardGames": {
@@ -1051,6 +1053,8 @@
   "@checklistSheetAskQuestion": {},
   "checklistSheetPay": "Pay",
   "@checklistSheetPay": {},
+  "checklistSheetImportSeating": "Import seating",
+  "@checklistSheetImportSeating": {},
   "checklistTitle": "Organizer checklist",
   "@checklistTitle": {},
   "checklistProgress": "Tournament readiness {done}/{total}",
@@ -1140,6 +1144,8 @@
   "@checklistStatusLocked": {},
   "checklistStatusLockedTranslation": "Available after paying for overlays",
   "@checklistStatusLockedTranslation": {},
+  "checklistStatusLockedFsm": "Opens after importing the seating from GoMafia",
+  "@checklistStatusLockedFsm": {},
   "checklistStatusUnavailable": "Could not check",
   "@checklistStatusUnavailable": {},
   "checklistCounter": "{current} of {total}",
@@ -1213,6 +1219,8 @@
   "@checklistBillingDone": {},
   "checklistBillingTodo": "Without payment there are no notifications and no more than 10 participants",
   "@checklistBillingTodo": {},
+  "checklistBillingTodoFsm": "Paid automatically when you import the seating from GoMafia",
+  "@checklistBillingTodoFsm": {},
   "checklistNotifyCoverageCounter": "{current} of {total} will get them",
   "@checklistNotifyCoverageCounter": {
     "placeholders": {
@@ -1251,6 +1259,8 @@
   "@checklistStreamMethodPhone": {},
   "checklistTranslationBillingTodo": "Without payment the video goes without overlays",
   "@checklistTranslationBillingTodo": {},
+  "checklistTranslationBillingTodoFsm": "Turned on automatically when you import the seating from GoMafia",
+  "@checklistTranslationBillingTodoFsm": {},
   "checklistObsWidgetCounter": "Tables with OBS: {current} of {total}",
   "@checklistObsWidgetCounter": {
     "placeholders": {
@@ -1363,12 +1373,20 @@
   "@checklistHelpSeatingMatching": {},
   "checklistHelpSeatingFsmRounds": "In an FSM tournament the next rounds are pulled from GoMafia automatically when you send a game start notification. If the players on GoMafia have changed, import the seating manually.",
   "@checklistHelpSeatingFsmRounds": {},
+  "checklistHelpFsmAutoBilling": "When you import the seating from GoMafia, an FSM tournament is paid automatically and for free: participants by the number of tables, broadcast overlays and notifications.",
+  "@checklistHelpFsmAutoBilling": {},
   "checklistHelpBillingFree": "Without payment a tournament can have up to 10 participants and has no notifications or overlays.",
   "@checklistHelpBillingFree": {},
   "checklistHelpBillingGives": "Payment opens the tournament for the number of participants you need. The Overlays checkbox in the payment window adds stream overlays.",
   "@checklistHelpBillingGives": {},
   "checklistHelpBillingNotifications": "Notifications are enabled with any tournament payment: 20 or more participants, or overlays.",
   "@checklistHelpBillingNotifications": {},
+  "checklistHelpBillingFsm": "FSM tournaments are paid automatically and for free.",
+  "@checklistHelpBillingFsm": {},
+  "checklistHelpBillingFsmGives": "After you import the seating from GoMafia, the tournament gets payment for all participants in the seating, broadcast overlays and notifications.",
+  "@checklistHelpBillingFsmGives": {},
+  "checklistHelpNotificationsLockedFsm": "In an FSM tournament notifications are turned on automatically and for free after you import the seating from GoMafia.",
+  "@checklistHelpNotificationsLockedFsm": {},
   "checklistHelpBillingPriceFree": "A tournament with 10 participants is free, with overlays it costs {price} ₽.",
   "@checklistHelpBillingPriceFree": {
     "placeholders": {
@@ -1464,6 +1482,8 @@
   "@checklistHelpObsWidgetWarning": {},
   "checklistHelpObsWidgetLocked": "Without paid overlays the OBS widget will not work.",
   "@checklistHelpObsWidgetLocked": {},
+  "checklistHelpOverlaysLockedFsm": "In an FSM tournament overlays are turned on automatically and for free after you import the seating from GoMafia.",
+  "@checklistHelpOverlaysLockedFsm": {},
   "checklistHelpObsScenesAbout": "OBS can switch scenes by itself when the host changes the game phase: for example, show the table during the day, another shot at night and a splash screen during a break.",
   "@checklistHelpObsScenesAbout": {},
   "checklistHelpObsScenesRights": "The scene list comes from OBS, so you can choose scenes only while the widget is open in OBS with Page permissions set to Advanced or Full access to OBS.",

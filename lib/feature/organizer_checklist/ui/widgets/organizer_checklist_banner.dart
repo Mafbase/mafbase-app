@@ -46,7 +46,20 @@ class _BannerContent extends StatelessWidget {
     final isMobile = context.isMobile;
     final accent = theme.btnColor2;
     final (:done, :total) = checklist.progress;
-    final pay = next.isLocked && isTournamentBillingVisible(context);
+    final (String buttonText, VoidCallback onButtonTap) = switch (next.isLocked) {
+      true when checklist.isFsm => (
+          locale.checklistSheetImportSeating,
+          () => context.router.push(SeatingRoute(tournamentId: bloc.tournamentId, gomafia: 1)),
+        ),
+      true when isTournamentBillingVisible(context) => (
+          locale.checklistSheetPay,
+          () => openTournamentBilling(context, preselectTranslation: next.key.group == ChecklistGroup.translation),
+        ),
+      _ => (
+          locale.checklistBannerOpen,
+          () => context.router.push(OrganizerChecklistRoute(tournamentId: bloc.tournamentId)),
+        ),
+    };
 
     final texts = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,15 +77,10 @@ class _BannerContent extends StatelessWidget {
       ],
     );
     final button = CustomButton(
-      text: pay ? locale.checklistSheetPay : locale.checklistBannerOpen,
+      text: buttonText,
       minimize: true,
       expand: false,
-      onTap: pay
-          ? () => openTournamentBilling(
-                context,
-                preselectTranslation: next.key.group == ChecklistGroup.translation,
-              )
-          : () => context.router.push(OrganizerChecklistRoute(tournamentId: bloc.tournamentId)),
+      onTap: onButtonTap,
     );
     final close = IconButton(
       onPressed: () => bloc.add(const OrganizerChecklistEventHideBanner()),

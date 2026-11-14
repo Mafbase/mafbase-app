@@ -234,6 +234,96 @@ void main() {
     expect(tester.widget<Checkbox>(find.byType(Checkbox)).value, isFalse);
   });
 
+  testWidgets('unpaid billing of an FSM tournament explains auto billing and opens the GoMafia import', (tester) async {
+    tester.view.physicalSize = const Size(800, 3000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    for (final (key, hideBilling) in [
+      (ChecklistKey.billing, false),
+      (ChecklistKey.translationBilling, false),
+      (ChecklistKey.billing, true),
+    ]) {
+      await tester.pumpWidget(const SizedBox());
+      final harness = await _pumpSheet(
+        tester,
+        checklistItem(key, ChecklistStatus.todo),
+        isFsm: true,
+        hideBilling: hideBilling,
+      );
+      final reason = '$key, hideBilling: $hideBilling';
+      expect(find.text('Турниры ФСМ оплачиваются автоматически и бесплатно.'), findsOneWidget, reason: reason);
+      expect(find.textContaining('₽'), findsNothing, reason: reason);
+      expect(find.text('Оплатить'), findsNothing, reason: reason);
+
+      await _tapAndSettle(tester, 'Загрузить рассадку');
+      expect(harness.current.name, SeatingRoute.name, reason: reason);
+      expect(harness.current.queryParams.optInt('gomafia'), 1, reason: reason);
+    }
+  });
+
+  testWidgets('locked items of an FSM tournament open the GoMafia import instead of payment', (tester) async {
+    tester.view.physicalSize = const Size(800, 3000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    const notifications =
+        'В турнире ФСМ оповещения включатся автоматически и бесплатно после загрузки рассадки с GoMafia.';
+    const overlays = 'В турнире ФСМ плашки включатся автоматически и бесплатно после загрузки рассадки с GoMafia.';
+    final cases = {
+      ChecklistKey.notifyCoverage: notifications,
+      ChecklistKey.tableDescriptions: notifications,
+      ChecklistKey.obsWidget: overlays,
+      ChecklistKey.obsScenes: overlays,
+    };
+    for (final MapEntry(:key, :value) in cases.entries) {
+      await tester.pumpWidget(const SizedBox());
+      final harness = await _pumpSheet(tester, checklistItem(key, ChecklistStatus.locked), isFsm: true);
+      expect(find.text('Откроется после загрузки рассадки с GoMafia'), findsOneWidget, reason: '$key');
+      expect(find.text(value), findsOneWidget, reason: '$key');
+      expect(find.text('Оплатить'), findsNothing, reason: '$key');
+      expect(find.text('Сделать'), findsNothing, reason: '$key');
+
+      await _tapAndSettle(tester, 'Загрузить рассадку');
+      expect(harness.current.name, SeatingRoute.name, reason: '$key');
+      expect(harness.current.queryParams.optInt('gomafia'), 1, reason: '$key');
+    }
+  });
+
+  testWidgets('participants and seating help of an FSM tournament mention auto billing', (tester) async {
+    tester.view.physicalSize = const Size(800, 3000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final autoBilling = find.textContaining('турнир ФСМ оплатится автоматически');
+
+    for (final key in [ChecklistKey.players, ChecklistKey.seating]) {
+      for (final isFsm in [true, false]) {
+        await tester.pumpWidget(const SizedBox());
+        await _pumpSheet(tester, checklistItem(key, ChecklistStatus.todo), isFsm: isFsm);
+        expect(autoBilling, isFsm ? findsOneWidget : findsNothing, reason: '$key, isFsm: $isFsm');
+      }
+    }
+  });
+
+  testWidgets('without GoMafia and once paid, billing is offered as before', (tester) async {
+    tester.view.physicalSize = const Size(800, 3000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await _pumpSheet(tester, checklistItem(ChecklistKey.billing, ChecklistStatus.todo));
+    expect(find.text('Без оплаты нет оповещений и больше 10 участников'), findsOneWidget);
+    expect(find.textContaining('₽'), findsOneWidget);
+    expect(find.text('Загрузить рассадку'), findsNothing);
+    await _tapAndSettle(tester, 'Оплатить');
+    expect(find.byType(Checkbox), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+    await _pumpSheet(tester, checklistItem(ChecklistKey.billing, ChecklistStatus.done), isFsm: true);
+    expect(find.text('Турнир оплачен'), findsOneWidget);
+    expect(find.text('Загрузить рассадку'), findsNothing);
+    expect(find.text('Оплатить'), findsOneWidget);
+  });
+
   testWidgets('OBS help shows a screenshot under every step that has one', (tester) async {
     // Список листа строит только пункты рядом с видимой частью, а лист занимает долю высоты экрана.
     tester.view.physicalSize = const Size(800, 3000);

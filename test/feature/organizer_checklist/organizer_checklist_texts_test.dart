@@ -36,6 +36,39 @@ void main() {
     );
   });
 
+  test('an unpaid FSM tournament is promised automatic billing instead of payment', () {
+    const auto = 'Оплатится автоматически при загрузке рассадки с GoMafia';
+    const autoOverlays = 'Включатся автоматически при загрузке рассадки с GoMafia';
+    const afterImport = 'Откроется после загрузки рассадки с GoMafia';
+
+    expect(subtitle(ChecklistKey.billing, ChecklistStatus.todo, isFsm: true), auto);
+    expect(subtitle(ChecklistKey.translationBilling, ChecklistStatus.todo, isFsm: true), autoOverlays);
+    for (final key in [
+      ChecklistKey.notifyCoverage,
+      ChecklistKey.tableDescriptions,
+      ChecklistKey.obsWidget,
+      ChecklistKey.obsScenes,
+    ]) {
+      expect(subtitle(key, ChecklistStatus.locked, isFsm: true), afterImport, reason: '$key');
+    }
+    expect(subtitle(ChecklistKey.billing, ChecklistStatus.done, isFsm: true), 'Турнир оплачен');
+    expect(subtitle(ChecklistKey.translationBilling, ChecklistStatus.done, isFsm: true), 'Готово');
+    expect(
+      subtitle(ChecklistKey.notifyCoverage, ChecklistStatus.locked, isFsm: true, unavailable: true),
+      'Не удалось проверить',
+    );
+  });
+
+  test('a tournament without GoMafia is still asked to pay', () {
+    expect(
+      subtitle(ChecklistKey.billing, ChecklistStatus.todo),
+      'Без оплаты нет оповещений и больше 10 участников',
+    );
+    expect(subtitle(ChecklistKey.translationBilling, ChecklistStatus.todo), 'Без оплаты видео пойдёт без плашек');
+    expect(subtitle(ChecklistKey.tableDescriptions, ChecklistStatus.locked), 'Доступно после оплаты');
+    expect(subtitle(ChecklistKey.obsScenes, ChecklistStatus.locked), 'Доступно после оплаты плашек');
+  });
+
   test('counters use the item wording and are skipped when there is nothing to count', () {
     expect(subtitle(ChecklistKey.notifyCoverage, ChecklistStatus.warning, current: 18, total: 20), 'Получат 18 из 20');
     expect(subtitle(ChecklistKey.seating, ChecklistStatus.warning, current: 3, total: 5), 'Игр с рассадкой: 3 из 5');

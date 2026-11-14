@@ -85,13 +85,20 @@ class _SeatingPageState extends CustomState<SeatingPage>
     );
     if (id == null || !mounted) return;
 
+    await _runGomafiaImport(id);
+  }
+
+  /// Импорт меняет участников, а у турнира ФСМ ещё и оплату, поэтому турнир перечитывается целиком — даже если
+  /// со страницы рассадки уже ушли.
+  Future<void> _runGomafiaImport(int gomafiaId) async {
+    final tournamentBloc = context.read<TournamentPageBloc>();
     final completer = Completer();
     context.read<SeatingPageBloc>().add(
-          SeatingPageEvent.autoFsmSeating(id, completer: completer),
+          SeatingPageEvent.autoFsmSeating(gomafiaId, completer: completer),
         );
-    if (await completer.future == false || !mounted) return;
+    if (await completer.future == false || tournamentBloc.isClosed) return;
 
-    context.read<TournamentPageBloc>()
+    tournamentBloc
       ..add(const TournamentPageEvent.pageOpened())
       ..add(const TournamentPageEvent.playersListOpened());
   }
@@ -398,15 +405,6 @@ class _SeatingPageState extends CustomState<SeatingPage>
 
     if (!mounted || !success) return;
 
-    final completer = Completer();
-    context.read<SeatingPageBloc>().add(
-          SeatingPageEvent.autoFsmSeating(effect.gomafiaId, completer: completer),
-        );
-
-    if (await completer.future == false || !mounted) return;
-
-    context.read<TournamentPageBloc>()
-      ..add(const TournamentPageEvent.pageOpened())
-      ..add(const TournamentPageEvent.playersListOpened());
+    await _runGomafiaImport(effect.gomafiaId);
   }
 }
