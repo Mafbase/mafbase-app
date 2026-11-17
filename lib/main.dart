@@ -7,12 +7,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/app/bloc_observer.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/guards/auth_guard.dart';
 import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
+import 'package:seating_generator_web/app/l10n/app_framework_localizations.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/common/widgets/side_status_bar_adapter.dart';
@@ -164,9 +164,9 @@ class _MafbaseAppState extends State<MafbaseApp> {
                 ),
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
+                  AppFrameworkLocalizations.materialDelegate,
+                  AppFrameworkLocalizations.widgetsDelegate,
+                  AppFrameworkLocalizations.cupertinoDelegate,
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 builder: (context, child) {
