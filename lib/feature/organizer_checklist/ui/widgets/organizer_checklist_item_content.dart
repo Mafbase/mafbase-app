@@ -23,7 +23,7 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_b
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_billing_flow.dart';
 import 'package:seating_generator_web/feature/translation_links/translation_table_links.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_bloc.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/link_actions.dart';
 

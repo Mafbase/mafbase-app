@@ -12,11 +12,11 @@ import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_bloc.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_effect.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_event.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_page.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_state.dart';
 
 final _initCounts = <String, int>{};
 

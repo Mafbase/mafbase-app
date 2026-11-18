@@ -11,10 +11,10 @@ import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_c
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_effect.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_bloc.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_effect.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_event.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_state.dart';
 
 /// Блок чеклиста без логики: события только записываются.
 class RecordingOrganizerChecklistBloc extends MockBloc<OrganizerChecklistEvent, OrganizerChecklistState>

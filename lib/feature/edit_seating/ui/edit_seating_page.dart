@@ -12,9 +12,9 @@ import 'package:seating_generator_web/feature/edit_seating/ui/widgets/auto_scrol
 import 'package:seating_generator_web/feature/edit_seating/ui/widgets/draggable_player_row.dart';
 import 'package:seating_generator_web/feature/edit_seating/ui/widgets/edit_seating_round_selector.dart';
 import 'package:seating_generator_web/feature/edit_seating/ui/widgets/edit_seating_table_card.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_bloc.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_event.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 @RoutePage()

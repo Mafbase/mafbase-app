@@ -12,8 +12,8 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_m
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_locked_tile.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_trailing_text.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_bloc.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentMenuDrawer extends StatefulWidget {

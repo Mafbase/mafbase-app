@@ -5,7 +5,7 @@ import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_dialog.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/substitute_player_dialog.dart';
-import 'package:seating_generator_web/ui/profile_dialog/profile_dialog.dart';
+import 'package:seating_generator_web/feature/profile_dialog/ui/profile_dialog.dart';
 
 abstract class TournamentPageRouter {
   /// Открывает диалог батч-добавления участников. Отправка выполняется внутри

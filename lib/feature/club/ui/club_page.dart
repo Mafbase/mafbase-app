@@ -1,0 +1,396 @@
+import 'dart:typed_data';
+
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/router.dart';
+import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
+import 'package:seating_generator_web/shared/club/data/club_repository_dependency.dart';
+import 'package:seating_generator_web/shared/billing/data/purchase_repository_dependency.dart';
+import 'package:seating_generator_web/shared/stream/data/stream_repository_dependency.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
+import 'package:seating_generator_web/feature/club/domain/interactors/bill_club_interactor.dart';
+import 'package:seating_generator_web/feature/club/domain/interactors/check_club_interactor.dart';
+import 'package:seating_generator_web/shared/club/domain/interactors/get_club_interactor.dart';
+import 'package:seating_generator_web/shared/club/domain/models/club_model.dart';
+import 'package:seating_generator_web/feature/club/ui/club_bloc.dart';
+import 'package:seating_generator_web/feature/club/ui/club_event.dart';
+import 'package:seating_generator_web/feature/club/ui/club_router.dart';
+import 'package:seating_generator_web/feature/club/ui/club_state.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_active_streams_card.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_actions_section.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_bottom_bar.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_description_card.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_description_edit_dialog.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_hero_card.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_owners_bottom_sheet.dart';
+import 'package:seating_generator_web/feature/club/ui/widgets/club_translation_links_dialog.dart';
+import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/widget_extensions.dart';
+
+@RoutePage()
+class ClubPage extends StatelessWidget {
+  final int clubId;
+  final ClubModel? cachedModel;
+
+  const ClubPage({super.key, @PathParam('clubId') required this.clubId, this.cachedModel});
+
+  @override
+  Widget build(BuildContext context) {
+    final scope = DependencyScope.of(context);
+    return BlocProvider<ClubBloc>(
+      create: (context) {
+        final args = ClubBlocArgs(clubId: clubId, cachedModel: cachedModel);
+        return ClubBloc(
+          router: ClubRouterImpl(context),
+          args: args,
+          getClubInteractor: GetClubInteractor(scope.clubRepository),
+          billClubInteractor: BillClubInteractor(scope.purchaseRepository),
+          checkClubInteractor: CheckClubInteractor(scope.clubRepository),
+          clubRepository: scope.clubRepository,
+          streamRepository: scope.streamRepository,
+        );
+      },
+      child: Container(
+        color: context.theme.background1,
+        child: _ClubPageContent(clubId: clubId),
+      ),
+    );
+  }
+}
+
+class _ClubPageContent extends StatefulWidget {
+  final int clubId;
+
+  const _ClubPageContent({required this.clubId});
+
+  @override
+  State<_ClubPageContent> createState() => _ClubPageContentState();
+}
+
+class _ClubPageContentState extends CustomState<_ClubPageContent> {
+  @override
+  void initState() {
+    context.read<ClubBloc>().add(const ClubEvent.pageOpened());
+    super.initState();
+  }
+
+  @override
+  Widget? buildMobile(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: const BackButton(),
+          title: Text(context.locale.clubPageTitle),
+          actions: [
+            BlocBuilder<ClubBloc, ClubState>(
+              builder: (context, state) {
+                if (!state.isOwner) return const SizedBox.shrink();
+                return IconButton(icon: const Icon(Icons.settings_outlined), onPressed: _editOwners);
+              },
+            ),
+          ],
+        ),
+        body: BlocBuilder<ClubBloc, ClubState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            final model = state.model;
+            if (model == null) return const SizedBox.shrink();
+
+            final showBill =
+                !(context.watch<AuthNotifier>().value.mapOrNull(authorized: (m) => m.hideBilling) ?? false);
+
+            return Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ClubHeroCard(
+                          clubModel: model,
+                          isOwner: state.isOwner,
+                          onEditPhoto: state.isOwner ? _editPhoto : null,
+                        ),
+                        const SizedBox(height: 12),
+                        if (state.streams.isNotEmpty) ...[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: ClubActiveStreamsCard(streams: state.streams),
+                          ),
+                          const SizedBox(height: 12),
+                        ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: ClubDescriptionCard(
+                            description: model.description,
+                            onEditDescription: state.isOwner ? _editDescription : null,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: ClubActionsSection(
+                            isOwner: state.isOwner,
+                            billedFor: model.billedFor,
+                            onOpenRating: _openRating,
+                            onAddGame: state.isOwner ? _addNewGame : null,
+                            onRenewSubscription: state.isOwner && showBill ? _bill : null,
+                            onCustomColumns: state.isOwner ? _editCustomColumns : null,
+                            onSetDefaultRatingPeriod: state.isOwner ? _setDefaultRatingPeriod : null,
+                            defaultRatingPeriodSubtitle:
+                                _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
+                            onHideRating: state.isOwner ? _changeHideDate : null,
+                            hideRatingSubtitle: state.isOwner ? _hideRatingSubtitle(context, state.hideDate) : null,
+                            onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
+                            onOpenStreams: state.isOwner ? _openStreams : null,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+                  ),
+                ),
+                ClubBottomBar(onOpenRating: _openRating),
+              ],
+            );
+          },
+        ),
+      );
+
+  @override
+  Widget buildDesktop(BuildContext context) {
+    final showBill =
+        !(context.watch<AuthNotifier>().value.mapOrNull(authorized: (model) => model.hideBilling) ?? false);
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: Text(context.locale.clubPageTitle),
+        actions: [
+          BlocBuilder<ClubBloc, ClubState>(
+            builder: (context, state) {
+              if (!state.isOwner) return const SizedBox.shrink();
+              return IconButton(icon: const Icon(Icons.settings_outlined), onPressed: _editOwners);
+            },
+          ),
+        ],
+      ),
+      body: BlocBuilder<ClubBloc, ClubState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final model = state.model;
+          if (model == null) return const SizedBox.shrink();
+
+          return SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 720),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClubHeroCard(
+                      clubModel: model,
+                      isOwner: state.isOwner,
+                      onEditPhoto: state.isOwner ? _editPhoto : null,
+                    ),
+                    if (state.streams.isNotEmpty) ...[
+                      const SizedBox(height: 24),
+                      ClubActiveStreamsCard(streams: state.streams),
+                    ],
+                    const SizedBox(height: 24),
+                    ClubDescriptionCard(
+                      description: model.description,
+                      onEditDescription: state.isOwner ? _editDescription : null,
+                    ),
+                    const SizedBox(height: 24),
+                    ClubActionsSection(
+                      isOwner: state.isOwner,
+                      billedFor: model.billedFor,
+                      onOpenRating: _openRating,
+                      onAddGame: state.isOwner ? _addNewGame : null,
+                      onRenewSubscription: state.isOwner && showBill ? _bill : null,
+                      onCustomColumns: state.isOwner ? _editCustomColumns : null,
+                      onSetDefaultRatingPeriod: state.isOwner ? _setDefaultRatingPeriod : null,
+                      defaultRatingPeriodSubtitle: _defaultRatingPeriodSubtitle(context, state.defaultRatingPeriod),
+                      onHideRating: state.isOwner ? _changeHideDate : null,
+                      hideRatingSubtitle: state.isOwner ? _hideRatingSubtitle(context, state.hideDate) : null,
+                      onOpenTranslationLinks: state.isOwner ? _openTranslationLinks : null,
+                      onOpenStreams: state.isOwner ? _openStreams : null,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void _openRating() {
+    context.read<ClubBloc>().add(const ClubEvent.openRating());
+  }
+
+  void _addNewGame() {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) return;
+    context.router.push(NewClubGameRoute(clubId: clubId));
+  }
+
+  void _changeHideDate() async {
+    final bloc = context.read<ClubBloc>();
+    final currentHideDate = bloc.state.hideDate;
+
+    if (currentHideDate != null) {
+      final action = await showDialog<_HideRatingAction>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(ctx.locale.clubActionHideRating),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(_HideRatingAction.remove),
+              child: Text(ctx.locale.clubActionRemoveHideRating),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(_HideRatingAction.change),
+              child: Text(ctx.locale.clubActionChangeHideDate),
+            ),
+          ],
+        ),
+      );
+
+      if (!mounted || action == null) return;
+
+      if (action == _HideRatingAction.remove) {
+        bloc.add(const ClubEvent.changeHideDate(dateTime: null));
+        return;
+      }
+    }
+
+    final date = await showDatePicker(
+      context: context,
+      firstDate: DateTime(1990),
+      lastDate: DateTime(3000),
+      initialDate: currentHideDate,
+    );
+
+    if (date == null) return;
+
+    bloc.add(ClubEvent.changeHideDate(dateTime: date));
+  }
+
+  Future<void> _setDefaultRatingPeriod() async {
+    final bloc = context.read<ClubBloc>();
+
+    final range = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(3000),
+      initialDateRange: bloc.state.defaultRatingPeriod,
+      initialEntryMode: DatePickerEntryMode.input,
+    );
+
+    if (range == null) return;
+
+    bloc.add(ClubEvent.changeDefaultRatingPeriod(range: range));
+  }
+
+  String _defaultRatingPeriodSubtitle(BuildContext context, DateTimeRange? range) {
+    if (range == null) {
+      return context.locale.clubActionDefaultRatingPeriodEmpty;
+    }
+    final format = DateFormat('dd.MM.yyyy');
+    return '${format.format(range.start)} – ${format.format(range.end)}';
+  }
+
+  void _bill() async {
+    final bloc = context.read<ClubBloc>();
+    final locale = context.locale;
+    final billedFor = bloc.state.model?.billedFor;
+
+    String? subtitle;
+    if (billedFor != null) {
+      final localeCode = Localizations.localeOf(context).languageCode;
+      final formatted = DateFormat('dd MMMM yyyy', localeCode).format(billedFor);
+      subtitle = locale.billedFor(formatted);
+    }
+
+    final days = await BillPlanDialog.open(
+      context: context,
+      title: locale.profileBillDialogTitle,
+      subtitle: subtitle ?? locale.profileBillDialogSubtitle,
+    );
+
+    if (!context.mounted) return;
+    if (days != null) {
+      bloc.add(ClubEvent.billClub(days: days));
+    }
+  }
+
+  Future<void> _editDescription() async {
+    final bloc = context.read<ClubBloc>();
+    final currentClub = bloc.state.model;
+    if (currentClub == null) {
+      return;
+    }
+
+    final value = await ClubDescriptionEditDialog.show(context: context, initialValue: currentClub.description ?? '');
+
+    if (!mounted || value == null) {
+      return;
+    }
+
+    bloc.add(ClubEvent.editDescription(description: value));
+  }
+
+  Future<void> _editPhoto() async {
+    final bloc = context.read<ClubBloc>();
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (!mounted || image == null) {
+      return;
+    }
+
+    final bytes = Uint8List.fromList(await image.readAsBytes());
+    bloc.add(ClubEvent.editPhoto(bytes: bytes, fileName: image.name));
+  }
+
+  Future<void> _editOwners() async {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) {
+      return;
+    }
+    await ClubOwnersBottomSheet.show(context, clubId: clubId);
+  }
+
+  void _editCustomColumns() {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) return;
+    context.router.push(CustomColumnsEditorRoute(clubId: clubId));
+  }
+
+  void _openTranslationLinks() {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) return;
+    ClubTranslationLinksDialog.show(context, clubId: clubId);
+  }
+
+  void _openStreams() {
+    final clubId = context.read<ClubBloc>().state.model?.id;
+    if (clubId == null) return;
+    context.router.push(ClubStreamsRoute(clubId: clubId));
+  }
+
+  String? _hideRatingSubtitle(BuildContext context, DateTime? hideDate) {
+    if (hideDate == null) return null;
+    return context.locale.clubActionHideRatingActiveSubtitle(DateFormat('dd.MM.yyyy').format(hideDate));
+  }
+}
+
+enum _HideRatingAction { change, remove }

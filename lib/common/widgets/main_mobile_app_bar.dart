@@ -6,8 +6,8 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
-import 'package:seating_generator_web/ui/main/main_bloc.dart';
-import 'package:seating_generator_web/ui/main/main_event.dart';
+import 'package:seating_generator_web/feature/app_shell/ui/main_bloc.dart';
+import 'package:seating_generator_web/feature/app_shell/ui/main_event.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class MainMobileAppBar extends StatelessWidget implements PreferredSizeWidget {
