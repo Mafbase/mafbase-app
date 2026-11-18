@@ -23,6 +23,7 @@ import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_event.
 import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/number_display.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 class AddClubGamePage extends StatelessWidget {
@@ -158,7 +159,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
       // Обрабатываем minusScore если он есть
       switch (effect.minusScore) {
         case List<double> minusScore when minusScore.length == 10:
-          minusScoreControllers[i].text = minusScore[i].toString();
+          minusScoreControllers[i].text = minusScore[i].toDisplayString();
         default:
           minusScoreControllers[i].text = '0.0';
       }
@@ -166,7 +167,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
       // Обрабатываем addScore
       switch (effect.addScore) {
         case List<double> addScore when addScore.length == 10:
-          addScoreControllers[i].text = addScore[i].toString();
+          addScoreControllers[i].text = addScore[i].toDisplayString();
         default:
           addScoreControllers[i].text = '0.0';
       }

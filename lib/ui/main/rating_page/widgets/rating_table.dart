@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:seating_generator_web/domain/models/club_rating_row.dart';
 import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/number_display.dart';
 
 enum RatingTableStyle {
   full,
@@ -298,26 +299,33 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget get scorePrototype => wrap(
         Text(
-          widget.sortedRows.map((e) => e.score.toString()).sortedBy<num>((element) => element.length).lastOrNull ?? '',
+          widget.sortedRows
+                  .map((e) => e.score.toDisplayString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
+              '',
         ),
       );
 
   Widget scores(int index) => wrap(
         Text(
-          widget.sortedRows[index].score.toString(),
+          widget.sortedRows[index].score.toDisplayString(),
         ),
       );
 
   Widget get addScorePrototype => wrap(
         Text(
-          widget.sortedRows.map((e) => e.addScore.toString()).sortedBy<num>((element) => element.length).lastOrNull ??
+          widget.sortedRows
+                  .map((e) => e.addScore.toDisplayString())
+                  .sortedBy<num>((element) => element.length)
+                  .lastOrNull ??
               '',
         ),
       );
 
   Widget addScores(int index) => wrap(
         Text(
-          widget.sortedRows[index].addScore.toString(),
+          widget.sortedRows[index].addScore.toDisplayString(),
         ),
         boldRight: true,
       );
@@ -355,7 +363,7 @@ class _RatingTableState extends State<RatingTable> {
 
   Widget ciWidget(int index) => wrap(
         Text(
-          (widget.sortedRows[index].ci / 100).toString(),
+          (widget.sortedRows[index].ci / 100).toDisplayString(),
           maxLines: 1,
           overflow: TextOverflow.visible,
         ),
@@ -453,7 +461,7 @@ class _RatingTableState extends State<RatingTable> {
                 ),
                 child: Center(
                   child: Text(
-                    widget.sortedRows[rowIndex].games[index].score?.toString() ?? '',
+                    widget.sortedRows[rowIndex].games[index].score?.toDisplayString() ?? '',
                   ),
                 ),
               ),
@@ -610,45 +618,69 @@ class _RatingTableState extends State<RatingTable> {
   Widget diesStat(int index) => diesStatFromModel(widget.sortedRows[index]);
 
   Widget scorePerGame(int index) => wrap(
-        Text('${customDivide(
-          widget.sortedRows[index].score,
-          widget.sortedRows[index].gamesCount,
-        )}'),
+        Text(
+          customDivide(
+            widget.sortedRows[index].score,
+            widget.sortedRows[index].gamesCount,
+          ).toDisplayString(),
+        ),
       );
 
   Widget addScorePerGame(int index) => wrap(
-        Text('${customDivide(
-          widget.sortedRows[index].addScore,
-          widget.sortedRows[index].gamesCount,
-        )}'),
+        Text(
+          customDivide(
+            widget.sortedRows[index].addScore,
+            widget.sortedRows[index].gamesCount,
+          ).toDisplayString(),
+        ),
       );
 
   Widget citizenAddScorePerGame(int index) => wrap(
-        Text('${widget.isTournament ? widget.sortedRows[index].citizenAddScore : customDivide(
-            widget.sortedRows[index].citizenAddScore,
-            widget.sortedRows[index].citizenGamesCount,
-          )}'),
+        Text(
+          (widget.isTournament
+                  ? widget.sortedRows[index].citizenAddScore
+                  : customDivide(
+                      widget.sortedRows[index].citizenAddScore,
+                      widget.sortedRows[index].citizenGamesCount,
+                    ))
+              .toDisplayString(),
+        ),
       );
 
   Widget sheriffAddScorePerGame(int index) => wrap(
-        Text('${widget.isTournament ? widget.sortedRows[index].sheriffAddScore : customDivide(
-            widget.sortedRows[index].sheriffAddScore,
-            widget.sortedRows[index].sheriffGamesCount,
-          )}'),
+        Text(
+          (widget.isTournament
+                  ? widget.sortedRows[index].sheriffAddScore
+                  : customDivide(
+                      widget.sortedRows[index].sheriffAddScore,
+                      widget.sortedRows[index].sheriffGamesCount,
+                    ))
+              .toDisplayString(),
+        ),
       );
 
   Widget donAddScorePerGame(int index) => wrap(
-        Text('${widget.isTournament ? widget.sortedRows[index].donAddScore : customDivide(
-            widget.sortedRows[index].donAddScore,
-            widget.sortedRows[index].donsGamesCount,
-          )}'),
+        Text(
+          (widget.isTournament
+                  ? widget.sortedRows[index].donAddScore
+                  : customDivide(
+                      widget.sortedRows[index].donAddScore,
+                      widget.sortedRows[index].donsGamesCount,
+                    ))
+              .toDisplayString(),
+        ),
       );
 
   Widget mafiaAddScorePerGame(int index) => wrap(
-        Text('${widget.isTournament ? widget.sortedRows[index].mafiaAddScore : customDivide(
-            widget.sortedRows[index].mafiaAddScore,
-            widget.sortedRows[index].mafiaGamesCount,
-          )}'),
+        Text(
+          (widget.isTournament
+                  ? widget.sortedRows[index].mafiaAddScore
+                  : customDivide(
+                      widget.sortedRows[index].mafiaAddScore,
+                      widget.sortedRows[index].mafiaGamesCount,
+                    ))
+              .toDisplayString(),
+        ),
       );
 
   @override
@@ -811,7 +843,7 @@ class _RatingTableState extends State<RatingTable> {
           builder: (index) => wrap(
             Text(
               widget.sortedRows[index].customColumns.length > i
-                  ? widget.sortedRows[index].customColumns[i].value?.toString() ?? '—'
+                  ? widget.sortedRows[index].customColumns[i].value?.toDisplayString() ?? '—'
                   : '—',
             ),
           ),
