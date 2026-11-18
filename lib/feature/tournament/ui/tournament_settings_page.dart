@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';

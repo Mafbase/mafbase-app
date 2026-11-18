@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/players_repository.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_state.dart';

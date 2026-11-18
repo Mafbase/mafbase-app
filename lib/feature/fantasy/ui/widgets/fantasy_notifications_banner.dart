@@ -4,7 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
-import 'package:seating_generator_web/domain/services/notification_permission_service.dart';
+import 'package:seating_generator_web/core/push/notification_permission_service.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class FantasyNotificationsBanner extends StatefulWidget {

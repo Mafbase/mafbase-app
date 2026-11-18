@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 
 part 'profile_event.freezed.dart';
 

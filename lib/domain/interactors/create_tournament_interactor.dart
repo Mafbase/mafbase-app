@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/tournaments_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournaments_repository.dart';
 
 class CreateTournamentInteractor extends BaseInteractor {
   final TournamentsRepository _tournamentsRepository;

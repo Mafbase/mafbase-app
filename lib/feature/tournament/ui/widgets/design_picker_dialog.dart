@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fullscreen_image_viewer/fullscreen_image_viewer.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/domain/models/translation_key_model.dart';
+import 'package:seating_generator_web/shared/translation/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 

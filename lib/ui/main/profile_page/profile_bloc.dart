@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
+import 'package:seating_generator_web/shared/player/domain/interactors/add_photo_interactor.dart';
+import 'package:seating_generator_web/shared/player/domain/interactors/create_player_interactor.dart';
+import 'package:seating_generator_web/core/auth/domain/interactors/logout_interactor.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
 import 'package:seating_generator_web/feature/profile/domain/model/tournament_subscription_plan_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/repository/profile_repository.dart';

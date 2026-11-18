@@ -1,0 +1,19 @@
+import 'package:seating_generator_web/core/auth/domain/models/login_model.dart';
+import 'package:seating_generator_web/core/auth/domain/models/password_reset_model.dart';
+import 'package:seating_generator_web/core/auth/domain/models/sign_up_model.dart';
+
+abstract class AuthRepository {
+  Future<LoginModel> login(String email, String password);
+
+  Future<SignUpModel> signUp(String email, String password);
+
+  Future<bool> verificate(int id, String token);
+
+  Future<ForgotPasswordModel> forgotPassword(String email);
+
+  Future<ResetPasswordModel> resetPassword(String token, String email, String newPassword);
+
+  /// Отправить запрос авторизации с push token и deviceId
+  /// Возвращает userId если авторизация успешна, null если нет
+  Future<int?> auth({String? pushToken, String? deviceId});
+}

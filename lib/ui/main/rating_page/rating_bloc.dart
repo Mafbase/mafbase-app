@@ -1,11 +1,11 @@
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
-import 'package:seating_generator_web/data/dependencies/tournament_result_repository_dependency.dart';
+import 'package:seating_generator_web/shared/club/data/club_repository_dependency.dart';
+import 'package:seating_generator_web/shared/tournament/data/tournament_result_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_rating_interactor.dart';
-import 'package:seating_generator_web/domain/models/rating_model.dart';
+import 'package:seating_generator_web/shared/club/domain/models/rating_model.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_event.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';

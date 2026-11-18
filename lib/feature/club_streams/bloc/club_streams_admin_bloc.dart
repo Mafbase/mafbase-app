@@ -1,5 +1,5 @@
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/repositories/stream_repository.dart';
+import 'package:seating_generator_web/shared/stream/domain/stream_repository.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_event.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_state.dart';
 

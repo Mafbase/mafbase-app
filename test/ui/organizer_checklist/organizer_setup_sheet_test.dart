@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_event.dart';

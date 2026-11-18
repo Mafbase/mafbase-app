@@ -1,4 +1,4 @@
-import 'package:seating_generator_web/data/base_socket.dart';
+import 'package:seating_generator_web/core/network/base_socket.dart';
 import 'package:seating_generator_web/data/sockets/tournament_content_socket.dart';
 
 class ClubContentSocket extends BaseSocket {

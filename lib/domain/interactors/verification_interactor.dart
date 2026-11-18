@@ -1,5 +1,5 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/core/auth/domain/auth_repository.dart';
 
 class VerificationInteractor extends BaseInteractor {
   final AuthRepository _authRepository;

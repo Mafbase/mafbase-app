@@ -8,7 +8,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/domain/models/password_reset_model.dart';
+import 'package:seating_generator_web/core/auth/domain/models/password_reset_model.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_bloc.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_events.dart';
 import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_state.dart';

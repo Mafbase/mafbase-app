@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/ci_scheme_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 part 'add_club_game_effect.freezed.dart';

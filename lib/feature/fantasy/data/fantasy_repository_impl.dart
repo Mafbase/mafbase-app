@@ -1,5 +1,5 @@
-import 'package:seating_generator_web/data/base_repository.dart';
-import 'package:seating_generator_web/domain/models/user_model.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
+import 'package:seating_generator_web/shared/user/domain/models/user_model.dart';
 import 'package:seating_generator_web/feature/fantasy/data/fantasy_extensions.dart';
 import 'package:seating_generator_web/feature/fantasy/data/requests/add_fantasy_participant_request.dart';
 import 'package:seating_generator_web/feature/fantasy/data/requests/get_fantasy_current_game_request.dart';

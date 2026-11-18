@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:seating_generator_web/common/widgets/club_avatar.dart';
-import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/shared/club/domain/models/club_model.dart';
 import 'package:seating_generator_web/ui/main/club_page/widgets/club_subscription_badge.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:url_launcher/url_launcher.dart';

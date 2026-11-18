@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/shared/club/domain/models/club_model.dart';
 
 part 'clubs_state.freezed.dart';
 

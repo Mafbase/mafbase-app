@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
-import 'package:seating_generator_web/domain/repositories/stream_repository.dart';
+import 'package:seating_generator_web/shared/stream/domain/stream_repository.dart';
 import 'package:seating_generator_web/feature/streams/ui/broadcast_page.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';

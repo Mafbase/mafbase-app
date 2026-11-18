@@ -1,5 +1,5 @@
-import 'package:seating_generator_web/data/base_repository.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/referee_assignments/data/requests/delete_referee_request.dart';
 import 'package:seating_generator_web/feature/referee_assignments/data/requests/get_referees_request.dart';
 import 'package:seating_generator_web/feature/referee_assignments/data/requests/set_referee_request.dart';

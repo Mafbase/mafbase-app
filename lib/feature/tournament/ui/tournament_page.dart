@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/route_loading_placeholder.dart';
@@ -12,7 +12,7 @@ import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/org
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_drawer.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_router.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_router.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';

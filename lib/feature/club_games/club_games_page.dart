@@ -7,7 +7,7 @@ import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/widgets/game_result_widget.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
+import 'package:seating_generator_web/shared/club/data/club_repository_dependency.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_bloc.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_event.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_state.dart';

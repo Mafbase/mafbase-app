@@ -1,4 +1,4 @@
-import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/data/requests/get_checklist_request.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/data/requests/get_notification_coverage_request.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/data/requests/set_checklist_dismissed_request.dart';

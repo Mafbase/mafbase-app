@@ -1,4 +1,4 @@
-import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/feature/player_statistics/data/request/get_player_statistics_request.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/repository/player_statistics_repository.dart';

@@ -1,5 +1,5 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/club_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/club/domain/club_repository.dart';
 
 class CheckClubInteractor extends BaseInteractor {
   final ClubRepository _clubRepository;

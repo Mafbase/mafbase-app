@@ -1,5 +1,5 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/owners_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/club/domain/owners_repository.dart';
 
 class AddOwnerInteractor extends BaseInteractor {
   final OwnersRepository _ownersRepository;

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 
 class PlayerAvatarWidget extends StatelessWidget {
   final PlayerModel? player;

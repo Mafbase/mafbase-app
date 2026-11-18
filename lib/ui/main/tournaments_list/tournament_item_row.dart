@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/domain/models/tournament_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournament_status_widget.dart';

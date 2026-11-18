@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 part 'notification_coverage_model.freezed.dart';

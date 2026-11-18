@@ -11,8 +11,8 @@ import 'package:seating_generator_web/common/widgets/player_autocomplete/patched
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_bloc.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_event.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_state.dart';
-import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/data/players_repository_dependency.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 
 class PlayerAutoComplete extends StatelessWidget {
   final Function(PlayerModel model) onSelected;

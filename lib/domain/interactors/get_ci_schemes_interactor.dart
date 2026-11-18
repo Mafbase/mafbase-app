@@ -1,6 +1,6 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/models/ci_scheme_model.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/ci_scheme_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
 
 class GetCiSchemesInteractor extends BaseInteractor {
   final TournamentEditRepository _tournamentEditRepository;

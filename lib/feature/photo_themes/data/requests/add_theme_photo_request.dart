@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:seating_generator_web/data/base_request.dart';
-import 'package:seating_generator_web/data/http_client.dart';
+import 'package:seating_generator_web/core/network/base_request.dart';
+import 'package:seating_generator_web/core/network/http_client.dart';
 
 class AddThemePhotoRequest extends BaseRequest<void> {
   final Uint8List bytes;

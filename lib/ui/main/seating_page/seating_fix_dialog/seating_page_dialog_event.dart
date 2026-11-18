@@ -1,4 +1,4 @@
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 
 sealed class SeatingPageDialogEvent {
   const factory SeatingPageDialogEvent.newPlayer(String nickname) = SeatingPageDialogEventNewPlayer;

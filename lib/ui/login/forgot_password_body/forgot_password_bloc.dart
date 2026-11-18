@@ -4,8 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/models/password_reset_model.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
+import 'package:seating_generator_web/core/auth/domain/models/password_reset_model.dart';
+import 'package:seating_generator_web/core/auth/domain/auth_repository.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_events.dart';
 import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_state.dart';
 

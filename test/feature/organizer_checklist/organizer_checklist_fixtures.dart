@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';

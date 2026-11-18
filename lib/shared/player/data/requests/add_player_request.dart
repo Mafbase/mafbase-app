@@ -1,0 +1,10 @@
+import 'package:seating_generator_web/core/network/base_request.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+
+class AddPlayerRequest extends BaseRequest<void> {
+  AddPlayerRequest({required int tournamentId, required AddPlayerEvent event})
+      : super('/api/tournament/$tournamentId/addPlayer', data: event);
+
+  @override
+  void parse(List<int> bytes) {}
+}

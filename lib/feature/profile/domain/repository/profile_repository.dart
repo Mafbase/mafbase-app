@@ -1,5 +1,5 @@
-import 'package:seating_generator_web/domain/models/billing_result.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/billing/domain/models/billing_result.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/model/tournament_subscription_plan_model.dart';
 
 abstract interface class ProfileRepository {

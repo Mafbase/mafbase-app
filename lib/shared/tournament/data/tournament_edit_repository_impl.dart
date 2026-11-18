@@ -1,0 +1,242 @@
+import 'dart:typed_data';
+
+import 'package:collection/collection.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/create_swiss_game_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/delete_separation_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/generate_final_seating_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/get_ci_schemes_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/substitute_player_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/edit_seating_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/get_final_players_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/get_seating_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/get_separations_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/get_settings_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/separate_players_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/set_final_players_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/set_tournament_description_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/take_gomafia_seating_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/update_settings_request.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/ci_scheme_model.dart';
+import 'package:seating_generator_web/shared/game/domain/models/game_result_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+import 'package:seating_generator_web/utils.dart';
+import 'package:seating_generator_web/utils/downloader/downloader.dart';
+
+class TournamentEditRepositoryImpl extends BaseRepository implements TournamentEditRepository {
+  TournamentEditRepositoryImpl(super.client);
+
+  @override
+  Future<List<Pair<PlayerModel, PlayerModel>>> getSeparations({
+    required int tournamentId,
+  }) {
+    return GetSeparationsRequest(tournamentId: tournamentId).execute(client).then(
+          (value) => value.pairs
+              .map(
+                (e) => Pair(
+                  PlayerModel.fromProto(e.player1),
+                  PlayerModel.fromProto(e.player2),
+                ),
+              )
+              .toList(),
+        );
+  }
+
+  @override
+  Future deleteSeparation({
+    required int tournamentId,
+    required PlayerModel player1,
+    required PlayerModel player2,
+  }) {
+    return DeleteSeparationRequest(
+      tournamentId: tournamentId,
+      first: player1.toProto(),
+      second: player2.toProto(),
+    ).execute(client);
+  }
+
+  @override
+  Future insertSeparation({
+    required int tournamentId,
+    required PlayerModel player1,
+    required PlayerModel player2,
+  }) {
+    return SeparatePlayersRequest(
+      tournamentId: tournamentId,
+      first: player1.toProto(),
+      second: player2.toProto(),
+    ).execute(client);
+  }
+
+  @override
+  Future<List<CiSchemeModel>> getCiSchemeModels() {
+    return GetCiSchemesRequest().execute(client).then(
+          (value) => value.schemes
+              .map(
+                (e) => CiSchemeModel.fromProto(e),
+              )
+              .toList(),
+        );
+  }
+
+  @override
+  Future<List<List<GameResultModel>>> getResultModels({
+    required int tournamentId,
+    RatingScheme? ratingScheme,
+  }) {
+    return GetSeatingRequest(tournamentId: tournamentId).execute(client).then((value) {
+      return value.item
+          .splitBetween((first, second) => first.game != second.game)
+          .map((e) => e.map((item) => GameResultModel.fromProto(item, ratingScheme: ratingScheme)).toList())
+          .toList();
+    });
+  }
+
+  @override
+  Future<TournamentSettingsModel> getSettings({required int tournamentId}) {
+    return GetSettingsRequest(tournamentId: tournamentId)
+        .execute(client)
+        .then((value) => TournamentSettingsModel.fromProto(value));
+  }
+
+  @override
+  Future updateSetting({
+    required int tournamentId,
+    required TournamentSettingsModel settings,
+  }) {
+    return UpdateSettingsRequest(
+      tournamentId: tournamentId,
+      settings: settings.toProto(),
+    ).execute(client);
+  }
+
+  @override
+  Future setFinalPlayers({
+    required List<PlayerModel> players,
+    required int tournamentId,
+  }) {
+    return SetFinalPlayersRequest(
+      tournamentId: tournamentId,
+      players: players.map((e) => e.id).toList(),
+    ).execute(client);
+  }
+
+  @override
+  Future<List<PlayerModel>> getFinalPlayers({required int tournamentId}) {
+    return GetFinalPlayersRequest(tournamentId: tournamentId).execute(client).then(
+          (value) => value.player.map((e) => PlayerModel.fromProto(e)).toList(),
+        );
+  }
+
+  @override
+  Future generateFinalGames({required int tournamentId}) {
+    return GenerateFinalSeatingRequest(tournamentId: tournamentId).execute(client);
+  }
+
+  @override
+  Future<void> generateSwissGame({
+    required int tournamentId,
+    required int game,
+  }) async {
+    await CreateSwissGameRequest(tournamentId: tournamentId, game: game).execute(client);
+  }
+
+  @override
+  Future<List<String>> getGomafiaSeating({
+    required int tournamentId,
+    required int gomafiaId,
+  }) =>
+      TakeGomafiaSeatingRequest(
+        tournamentId: tournamentId,
+        gomafiaId: gomafiaId,
+      ).execute(client).then(
+            (value) => value.notFound,
+          );
+
+  @override
+  Future<void> setGomafiaUrl({
+    required int tournamentId,
+    required String gomafiaUrl,
+  }) =>
+      SetTournamentDescriptionRequest(
+        tournamentId: tournamentId,
+        description: TournamentDescription(gomafiaUrl: gomafiaUrl),
+      ).execute(client);
+
+  @override
+  Future<void> downloadPlayersSeating({required int tournamentId}) async {
+    final response = await client.get<Uint8List>(
+      '/api/tournament/$tournamentId/playersSeating',
+    );
+
+    final bytes = response.data ?? Uint8List(0);
+
+    return downloadFile(
+      bytes: bytes,
+      fileName: 'players-seating.txt',
+    );
+  }
+
+  @override
+  Future<void> downloadCrossStats({required int tournamentId}) async {
+    final response = await client.get<Uint8List>(
+      '/api/tournament/$tournamentId/crossStats',
+    );
+
+    final bytes = response.data ?? Uint8List(0);
+
+    return downloadFile(
+      bytes: bytes,
+      fileName: 'cross-stats.txt',
+    );
+  }
+
+  @override
+  Future<void> downloadTablesSeating({required int tournamentId}) async {
+    final response = await client.get<Uint8List>(
+      '/api/tournament/$tournamentId/tablesSeating',
+    );
+
+    final bytes = response.data ?? Uint8List(0);
+
+    return downloadFile(
+      bytes: bytes,
+      fileName: 'tables-seating.txt',
+    );
+  }
+
+  @override
+  Future<void> substitutePlayer({
+    required int tournamentId,
+    required int oldPlayerId,
+    required int newPlayerId,
+    required List<int> games,
+  }) async {
+    await SubstitutePlayerRequest(
+      tournamentId: tournamentId,
+      oldPlayerId: oldPlayerId,
+      newPlayerId: newPlayerId,
+      games: games,
+    ).execute(client);
+  }
+
+  @override
+  Future<void> editSeating({
+    required int tournamentId,
+    required int game,
+    required int table,
+    required List<int> playerIds,
+    required int refereeId,
+  }) async {
+    await EditSeatingRequest(
+      tournamentId: tournamentId,
+      game: game,
+      table: table,
+      playerIds: playerIds,
+      refereeId: refereeId,
+    ).execute(client);
+  }
+}

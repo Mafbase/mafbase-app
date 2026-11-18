@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/notification_coverage_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_page.dart';

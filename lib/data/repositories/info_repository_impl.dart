@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/data/requests/custom_text_info_request.dart';
 import 'package:seating_generator_web/data/requests/start_game_info_request.dart';
 import 'package:seating_generator_web/domain/repositories/info_repository.dart';

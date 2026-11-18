@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/domain/models/tournament_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentStatusWidget extends StatelessWidget {

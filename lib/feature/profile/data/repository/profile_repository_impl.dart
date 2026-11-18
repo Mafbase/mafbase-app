@@ -1,6 +1,6 @@
-import 'package:seating_generator_web/data/base_repository.dart';
-import 'package:seating_generator_web/domain/models/billing_result.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
+import 'package:seating_generator_web/shared/billing/domain/models/billing_result.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/profile/data/request/bill_tournament_subscription_request.dart';
 import 'package:seating_generator_web/feature/profile/data/request/delete_account_request.dart';
 import 'package:seating_generator_web/feature/profile/data/request/get_user_profile_request.dart';

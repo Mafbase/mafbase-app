@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/referee_assignments/referee_assignments_dependencies.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_bloc.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_event.dart';

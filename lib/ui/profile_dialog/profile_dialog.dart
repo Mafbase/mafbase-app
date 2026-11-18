@@ -12,7 +12,7 @@ import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_bloc.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_event.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_state.dart';

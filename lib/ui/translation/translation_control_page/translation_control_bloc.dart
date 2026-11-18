@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/data/sockets/tournament_content_socket.dart';
-import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
+import 'package:seating_generator_web/shared/translation/domain/translation_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';

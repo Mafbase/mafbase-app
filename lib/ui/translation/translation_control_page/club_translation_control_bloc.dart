@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/data/sockets/club_content_socket.dart';
-import 'package:seating_generator_web/domain/repositories/club_repository.dart';
-import 'package:seating_generator_web/domain/repositories/club_translation_repository.dart';
+import 'package:seating_generator_web/shared/club/domain/club_repository.dart';
+import 'package:seating_generator_web/shared/club/domain/club_translation_repository.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';

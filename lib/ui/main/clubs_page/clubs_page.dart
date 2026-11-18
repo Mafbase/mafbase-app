@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
+import 'package:seating_generator_web/shared/club/data/club_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/get_clubs_interactor.dart';
 import 'package:seating_generator_web/ui/main/clubs_page/clubs_router.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';

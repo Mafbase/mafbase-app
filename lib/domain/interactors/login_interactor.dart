@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/data/storages/credential_storage.dart';
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/models/login_model.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
+import 'package:seating_generator_web/core/storage/credential_storage.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/core/auth/domain/models/login_model.dart';
+import 'package:seating_generator_web/core/auth/domain/auth_repository.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class LoginInteractor extends BaseInteractor {

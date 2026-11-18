@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
+import 'package:seating_generator_web/shared/club/data/club_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/create_club_interactor.dart';
 import 'package:seating_generator_web/ui/main/add_club/add_club_bloc.dart';
 import 'package:seating_generator_web/ui/main/add_club/add_club_event.dart';

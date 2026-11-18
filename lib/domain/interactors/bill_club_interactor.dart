@@ -1,6 +1,6 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/models/billing_result.dart';
-import 'package:seating_generator_web/domain/repositories/purchase_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/billing/domain/models/billing_result.dart';
+import 'package:seating_generator_web/shared/billing/domain/purchase_repository.dart';
 
 class BillClubInteractor extends BaseInteractor {
   final PurchaseRepository _purchaseRepository;

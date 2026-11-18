@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/user_model.dart';
+import 'package:seating_generator_web/shared/user/domain/models/user_model.dart';
 
 part 'administration_state.freezed.dart';
 

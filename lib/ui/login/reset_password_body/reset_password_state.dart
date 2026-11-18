@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/password_reset_model.dart';
+import 'package:seating_generator_web/core/auth/domain/models/password_reset_model.dart';
 
 part 'reset_password_state.freezed.dart';
 

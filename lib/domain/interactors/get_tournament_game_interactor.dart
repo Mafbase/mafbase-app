@@ -1,5 +1,5 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_result_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_result_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 
 class GetTournamentGameInteractor extends BaseInteractor {

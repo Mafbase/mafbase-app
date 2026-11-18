@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:seating_generator_web/data/base_request.dart';
+import 'package:seating_generator_web/core/network/base_request.dart';
 
 class DeleteThemePhotoRequest extends BaseRequest<void> {
   DeleteThemePhotoRequest({required int themeId, required int playerId})

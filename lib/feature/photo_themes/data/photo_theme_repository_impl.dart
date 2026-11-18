@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/add_theme_photo_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/add_player_to_theme_request.dart';
 import 'package:seating_generator_web/feature/photo_themes/data/requests/add_players_from_tournament_request.dart';

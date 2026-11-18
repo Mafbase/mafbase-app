@@ -1,6 +1,6 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/models/rating_model.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_result_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/club/domain/models/rating_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_result_repository.dart';
 
 class GetTournamentRatingInteractor extends BaseInteractor {
   final TournamentResultRepository _repository;

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:seating_generator_web/domain/models/tournament_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/tournament_model.dart';
 part 'tournaments_state.freezed.dart';
 
 @freezed

@@ -1,9 +1,9 @@
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
-import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
+import 'package:seating_generator_web/shared/player/data/players_repository_dependency.dart';
+import 'package:seating_generator_web/shared/player/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/edit_player_interactor.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_event.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_router.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_state.dart';

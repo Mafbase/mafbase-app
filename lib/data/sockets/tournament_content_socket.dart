@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:seating_generator_web/app/api_host.dart';
-import 'package:seating_generator_web/data/base_socket.dart';
+import 'package:seating_generator_web/core/network/base_socket.dart';
 
 class TournamentContentSocket extends BaseSocket {
   TournamentContentSocket({required int tournamentId, required int table})

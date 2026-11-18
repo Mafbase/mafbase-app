@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/data/services/device_id_service.dart';
-import 'package:seating_generator_web/data/services/notification_permission_service_impl.dart';
-import 'package:seating_generator_web/data/services/push_token_service.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
-import 'package:seating_generator_web/domain/services/notification_permission_service.dart';
+import 'package:seating_generator_web/core/push/device_id_service.dart';
+import 'package:seating_generator_web/core/push/notification_permission_service_impl.dart';
+import 'package:seating_generator_web/core/push/push_token_service.dart';
+import 'package:seating_generator_web/core/auth/domain/auth_repository.dart';
+import 'package:seating_generator_web/core/push/notification_permission_service.dart';
 
 class ServiceProvider {
   final AuthRepository _authRepository;

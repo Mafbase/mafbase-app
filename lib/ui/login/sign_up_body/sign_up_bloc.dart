@@ -6,8 +6,8 @@ import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/sign_up_interactor.dart';
-import 'package:seating_generator_web/domain/models/login_model.dart';
-import 'package:seating_generator_web/domain/models/sign_up_model.dart';
+import 'package:seating_generator_web/core/auth/domain/models/login_model.dart';
+import 'package:seating_generator_web/core/auth/domain/models/sign_up_model.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_events.dart';
 import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_state.dart';
 

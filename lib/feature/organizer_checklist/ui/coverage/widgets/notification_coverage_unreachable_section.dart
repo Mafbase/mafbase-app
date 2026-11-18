@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/notification_coverage_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/widgets/notification_coverage_unreachable_row.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_group_section.dart';

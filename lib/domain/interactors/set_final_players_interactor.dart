@@ -1,6 +1,6 @@
-import 'package:seating_generator_web/domain/base_interactor.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
 
 class SetFinalPlayersInteractor extends BaseInteractor {
   final TournamentEditRepository _repository;
