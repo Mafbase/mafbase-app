@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/data/dependencies/stream_repository_dependency.dart';
 import 'package:seating_generator_web/domain/repositories/stream_repository.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -49,7 +50,7 @@ class _ClubStreamSettingsBodyState extends State<_ClubStreamSettingsBody> {
   @override
   void initState() {
     super.initState();
-    _repository = RepositoryFactory.of(context).streamRepository;
+    _repository = DependencyScope.of(context).streamRepository;
     _settingsFuture = _repository.getClubStreamSettings(clubId: widget.clubId).then((settings) {
       _breakPlaceholderController.text = settings.breakPlaceholderImageUrl;
       _brandImageController.text = settings.brandImageUrl;

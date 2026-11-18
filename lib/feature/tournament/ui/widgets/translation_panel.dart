@@ -2,8 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/router.dart';
+import 'package:seating_generator_web/data/dependencies/translation_repository_dependency.dart';
 import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/design_picker_dialog.dart';
@@ -43,7 +44,7 @@ class _TranslationPanelState extends State<TranslationPanel> {
   @override
   void initState() {
     super.initState();
-    _repository = RepositoryFactory.of(context).translationRepository;
+    _repository = DependencyScope.of(context).translationRepository;
     _keyFuture = _repository.getKey(tournamentId: widget.tournamentId);
   }
 

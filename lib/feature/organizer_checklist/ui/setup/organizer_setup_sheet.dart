@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/dependencies/tournament_edit_repository_dependency.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/setup/organizer_setup_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/setup/organizer_setup_result.dart';
@@ -22,7 +23,7 @@ class OrganizerSetupSheet extends StatelessWidget {
   static Future<OrganizerSetupResult?> show(BuildContext context, {required int tournamentId}) {
     final tournamentBloc = context.read<TournamentPageBloc>();
     final checklistBloc = context.read<OrganizerChecklistBloc>();
-    final repository = RepositoryFactory.of(context).tournamentEditRepository;
+    final repository = DependencyScope.of(context).tournamentEditRepository;
 
     return showWithBloc(
       context,

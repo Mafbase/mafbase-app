@@ -2,10 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mafbase_stream/mafbase_stream.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
+import 'package:seating_generator_web/data/dependencies/stream_repository_dependency.dart';
 import 'package:seating_generator_web/feature/streams/data/requests/get_broadcast_credentials_request.dart';
 import 'package:seating_generator_web/feature/streams/ui/widgets/broadcast_app_required_view.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
@@ -57,7 +58,7 @@ class _BroadcastPageState extends State<BroadcastPage> {
   }
 
   Future<void> _resolve() async {
-    final repository = RepositoryFactory.of(context).streamRepository;
+    final repository = DependencyScope.of(context).streamRepository;
 
     setState(() {
       _loading = true;

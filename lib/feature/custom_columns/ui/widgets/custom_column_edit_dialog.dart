@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/feature/custom_columns/custom_columns_dependencies.dart';
 import 'package:seating_generator_web/feature/custom_columns/domain/models/custom_column_model.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/widgets/formula_variables_hint.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -78,7 +79,7 @@ class _CustomColumnEditDialogState extends State<CustomColumnEditDialog> {
     final formula = _formulaController.text.trim();
     if (formula.isEmpty) return;
     try {
-      final repository = RepositoryFactory.of(context).customColumnsRepository;
+      final repository = DependencyScope.of(context).customColumnsRepository;
       final result = await repository.validateFormula(
         clubId: widget.clubId,
         formula: formula,

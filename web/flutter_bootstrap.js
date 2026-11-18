@@ -7,9 +7,6 @@ window.addEventListener('load', async function () {
       serviceWorkerVersion: {{flutter_service_worker_version}},
       serviceWorkerUrl: 'flutter_service_worker.js',
     },
-    config: {
-      renderer: 'canvaskit',
-    },
     onEntrypointLoaded: async function (engineInitializer) {
       const appRunner = await engineInitializer.initializeEngine();
       await appRunner.runApp();

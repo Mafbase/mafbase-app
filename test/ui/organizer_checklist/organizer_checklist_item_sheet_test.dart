@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
@@ -34,22 +33,6 @@ class _FakeTranslationRepository implements TranslationRepository {
   @override
   Future<TranslationKeyModel> getKey({required int tournamentId}) =>
       Future.value(const TranslationKeyModel(key: 'tournament-key', designs: []));
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeRepositoryFactory implements RepositoryFactory {
-  @override
-  final TranslationRepository translationRepository = _FakeTranslationRepository();
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeDependencyScope implements DependencyScope {
-  @override
-  final RepositoryFactory repositoryFactory = _FakeRepositoryFactory();
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -124,7 +107,7 @@ Future<_Harness> _pumpSheet(
 
   await tester.pumpWidget(
     DependencyScopeWidget(
-      scope: _FakeDependencyScope(),
+      scope: DependencyScope(overrides: {TranslationRepository: _FakeTranslationRepository()}),
       child: ChangeNotifierProvider<AuthNotifier>.value(
         value: authNotifier,
         child: MultiBlocProvider(

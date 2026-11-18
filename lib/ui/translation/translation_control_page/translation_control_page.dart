@@ -3,10 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/club_translation_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/translation_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/feature/photo_themes/photo_themes_dependencies.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/widgets/photo_theme_selector.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_dialog.dart';
 import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_bloc.dart';
@@ -52,16 +57,16 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     if (widget.isClub) {
-      final repos = RepositoryFactory.of(context);
+      final scope = DependencyScope.of(context);
       _clubBloc = ClubTranslationControlBloc(
         params: ClubTranslationControlBlocParams(
           clubId: widget.clubId,
           table: widget.table,
           key: widget.translationKey,
         ),
-        repository: repos.clubTranslationRepository,
-        clubRepository: repos.clubRepository,
-        photoThemeRepository: repos.photoThemeRepository,
+        repository: scope.clubTranslationRepository,
+        clubRepository: scope.clubRepository,
+        photoThemeRepository: scope.photoThemeRepository,
       )..add(const ClubTranslationControlEvent.pageOpened());
     } else {
       _tournamentBloc = TranslationControlBloc(
@@ -70,7 +75,7 @@ class _TranslationControlPageState extends State<TranslationControlPage> with Wi
           table: widget.table,
           key: widget.translationKey,
         ),
-        repository: RepositoryFactory.of(context).translationRepository,
+        repository: DependencyScope.of(context).translationRepository,
       )..add(const TranslationControlEvent.pageOpened());
     }
   }
@@ -234,13 +239,13 @@ class _ClubTranslationControlContentState extends State<ClubTranslationControlCo
 
   Future<void> _handleNewPlayer({required int index, required String initValue}) async {
     final bloc = context.read<ClubTranslationControlBloc>();
-    final repos = RepositoryFactory.of(context);
+    final scope = DependencyScope.of(context);
     final state = bloc.state;
 
     final newPlayer = await AddPlayerDialog.open(context: context, initValue: initValue);
     if (newPlayer == null || !mounted) return;
 
-    final id = await CreatePlayerInteractor(repos.playersRepository).run(playerModel: newPlayer);
+    final id = await CreatePlayerInteractor(scope.playersRepository).run(playerModel: newPlayer);
     if (!mounted) return;
 
     bloc.add(ClubTranslationControlEvent.changePlayer(index: index, playerId: id));
@@ -249,7 +254,7 @@ class _ClubTranslationControlContentState extends State<ClubTranslationControlCo
   }
 
   Future<void> _handlePhotoEdit({required int index, required String nickname}) async {
-    final repos = RepositoryFactory.of(context);
+    final scope = DependencyScope.of(context);
     final locale = context.locale;
     final messenger = ScaffoldMessenger.of(context);
 
@@ -259,14 +264,14 @@ class _ClubTranslationControlContentState extends State<ClubTranslationControlCo
     final bytes = Uint8List.fromList(await picked.readAsBytes());
     if (!mounted) return;
 
-    final playerId = await _findPlayerIdByNickname(repos.playersRepository, nickname);
+    final playerId = await _findPlayerIdByNickname(scope.playersRepository, nickname);
     if (playerId == null) {
       if (!mounted) return;
       messenger.showSnackBar(SnackBar(content: Text(locale.translationControlPhotoNotFound)));
       return;
     }
 
-    await repos.playersRepository.addPhoto(playerId, bytes, picked.name);
+    await scope.playersRepository.addPhoto(playerId, bytes, picked.name);
     if (!mounted) return;
     messenger.showSnackBar(SnackBar(content: Text(locale.translationControlPhotoUpdated)));
   }

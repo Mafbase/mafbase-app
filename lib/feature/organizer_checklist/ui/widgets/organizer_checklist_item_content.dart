@@ -3,8 +3,9 @@ import 'dart:math' as math;
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/router.dart';
+import 'package:seating_generator_web/data/dependencies/translation_repository_dependency.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
@@ -197,7 +198,7 @@ class OrganizerChecklistItemContent {
 
   /// Ключ запрашивается при открытии листа: в браузере новая вкладка должна открыться прямо по нажатию.
   OrganizerChecklistInfoSheetAction _openControlPage() {
-    final keyFuture = RepositoryFactory.of(context).translationRepository.getKey(tournamentId: tournamentId);
+    final keyFuture = DependencyScope.of(context).translationRepository.getKey(tournamentId: tournamentId);
     keyFuture.ignore();
     return _action(
       () => keyFuture.then(

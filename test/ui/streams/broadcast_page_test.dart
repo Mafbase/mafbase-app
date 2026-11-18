@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/domain/repositories/stream_repository.dart';
 import 'package:seating_generator_web/feature/streams/ui/broadcast_page.dart';
@@ -33,26 +32,6 @@ class _RecordingStreamRepository implements StreamRepository {
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class _FakeRepositoryFactory implements RepositoryFactory {
-  _FakeRepositoryFactory(this.streamRepository);
-
-  @override
-  final StreamRepository streamRepository;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeDependencyScope implements DependencyScope {
-  _FakeDependencyScope(this.repositoryFactory);
-
-  @override
-  final RepositoryFactory repositoryFactory;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
 Future<_RecordingStreamRepository> _pumpPage(WidgetTester tester, {required bool isWeb}) async {
   debugIsWebOverride = isWeb;
   addTearDown(() => debugIsWebOverride = null);
@@ -60,7 +39,7 @@ Future<_RecordingStreamRepository> _pumpPage(WidgetTester tester, {required bool
   final repository = _RecordingStreamRepository();
   await tester.pumpWidget(
     DependencyScopeWidget(
-      scope: _FakeDependencyScope(_FakeRepositoryFactory(repository)),
+      scope: DependencyScope(overrides: {StreamRepository: repository}),
       child: MaterialApp(
         theme: AppTheme.light(isMobile: true),
         locale: const Locale('ru'),

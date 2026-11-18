@@ -1,5 +1,9 @@
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/stream_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournament_edit_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournaments_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/add_separation_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_seating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_separation_interactor.dart';
@@ -8,6 +12,7 @@ import 'package:seating_generator_web/domain/interactors/get_seating_interactor.
 import 'package:seating_generator_web/domain/interactors/get_separations_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_settings_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournaments_players_interactor.dart';
+import 'package:seating_generator_web/feature/referee_assignments/referee_assignments_dependencies.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_effect.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
@@ -18,29 +23,29 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     with EffectEmitter<SeatingPageEffect, SeatingPageState> {
   late int tournamentId;
   RatingScheme? _ratingScheme;
-  final RepositoryFactory _repos;
+  final DependencyScope _scope;
   late final GetSeparationInteractor _getSeparationInteractor = GetSeparationInteractor(
-    _repos.tournamentEditRepository,
+    _scope.tournamentEditRepository,
   );
   late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor = GetTournamentsPlayersInteractor(
-    _repos.playersRepository,
+    _scope.playersRepository,
   );
   late final AddSeparationInteractor _addSeparationInteractor = AddSeparationInteractor(
-    _repos.tournamentEditRepository,
+    _scope.tournamentEditRepository,
   );
   late final DeleteSeparationInteractor _deleteSeparationInteractor = DeleteSeparationInteractor(
-    _repos.tournamentEditRepository,
+    _scope.tournamentEditRepository,
   );
-  late final CreateSeatingInteractor _createSeatingInteractor = CreateSeatingInteractor(_repos.tournamentsRepository);
-  late final GetSeatingInteractor _getSeatingInteractor = GetSeatingInteractor(_repos.tournamentEditRepository);
-  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_repos.tournamentEditRepository);
+  late final CreateSeatingInteractor _createSeatingInteractor = CreateSeatingInteractor(_scope.tournamentsRepository);
+  late final GetSeatingInteractor _getSeatingInteractor = GetSeatingInteractor(_scope.tournamentEditRepository);
+  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_scope.tournamentEditRepository);
   late final GenerateFinalSeatingInteractor _generateFinalSeatingInteractor = GenerateFinalSeatingInteractor(
-    _repos.tournamentEditRepository,
+    _scope.tournamentEditRepository,
   );
   final SeatingPageRouter router;
 
-  SeatingPageBloc({required RepositoryFactory repos, required this.router})
-    : _repos = repos,
+  SeatingPageBloc({required DependencyScope scope, required this.router})
+    : _scope = scope,
       super(const SeatingPageState()) {
     on<SeatingPageEventPageOpened>(_onPageOpened);
     on<SeatingPageEventDeletePair>(_onDeletePair);
@@ -56,19 +61,19 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
   }
 
   Future<void> _downloadPlayersSeating(SeatingPageEventGetPlayersSeating event, Emitter emit) async =>
-      _repos.tournamentEditRepository.downloadPlayersSeating(tournamentId: tournamentId);
+      _scope.tournamentEditRepository.downloadPlayersSeating(tournamentId: tournamentId);
 
   Future<void> _downloadTablesSeating(SeatingPageEventGetTablesSeating event, Emitter emit) async =>
-      _repos.tournamentEditRepository.downloadTablesSeating(tournamentId: tournamentId);
+      _scope.tournamentEditRepository.downloadTablesSeating(tournamentId: tournamentId);
 
   Future<void> _downloadCrossStats(SeatingPageEventGetCrossStats event, Emitter emit) async =>
-      _repos.tournamentEditRepository.downloadCrossStats(tournamentId: tournamentId);
+      _scope.tournamentEditRepository.downloadCrossStats(tournamentId: tournamentId);
 
   Future<void> _autoFsmSeating(SeatingPageEventAutoFsmSeating event, Emitter emit) async {
     emit(state.copyWith(isLoading: true));
     var success = false;
     try {
-      final notFound = await _repos.tournamentEditRepository.getGomafiaSeating(
+      final notFound = await _scope.tournamentEditRepository.getGomafiaSeating(
         tournamentId: tournamentId,
         gomafiaId: event.gomafiaId,
       );
@@ -87,7 +92,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
   }
 
   Future<void> _onSwissGameCreate(SeatingPageEventCreateSwissGame event, Emitter emit) async {
-    await _repos.tournamentEditRepository.generateSwissGame(tournamentId: tournamentId, game: event.game);
+    await _scope.tournamentEditRepository.generateSwissGame(tournamentId: tournamentId, game: event.game);
 
     return _updateSeating(emit);
   }
@@ -122,7 +127,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
     emit(state.copyWith(isLoading: true));
     try {
       final players = await _getTournamentsPlayersInteractor.run(tournamentId: tournamentId);
-      final refereeAssignments = await _repos.refereeRepository.getReferees(tournamentId);
+      final refereeAssignments = await _scope.refereeRepository.getReferees(tournamentId);
       final referees = refereeAssignments.map((e) => e.referee).toList();
       final allParticipants = [...players, ...referees.where((r) => players.every((p) => p.id != r.id))];
       final newPair = await router.openSeparationDialog(availablePlayers: allParticipants);
@@ -156,7 +161,7 @@ class SeatingPageBloc extends Bloc<SeatingPageEvent, SeatingPageState>
 
     List<GameStream> streams;
     try {
-      streams = await _repos.streamRepository.getStreams(tournamentId: tournamentId);
+      streams = await _scope.streamRepository.getStreams(tournamentId: tournamentId);
     } catch (_) {
       streams = [];
     }

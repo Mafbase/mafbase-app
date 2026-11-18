@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/feature/info_table_description/info_table_description_dependencies.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_bloc.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_event.dart';
 import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_state.dart';
@@ -22,7 +23,7 @@ class InfoTableDescriptionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          InfoTableDescriptionBloc(const InfoTableState(), RepositoryFactory.of(context).infoTableDescriptionRepository)
+          InfoTableDescriptionBloc(const InfoTableState(), DependencyScope.of(context).infoTableDescriptionRepository)
             ..add(InfoTableDescriptionEventInit(tournamentId.toString())),
       child: _InfoTableDescriptionPageContent(tournamentId: tournamentId),
     );

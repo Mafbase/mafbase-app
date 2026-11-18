@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/organizer_checklist_dependencies.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_event.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_state.dart';
@@ -26,7 +27,7 @@ class NotificationCoveragePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<NotificationCoverageBloc>(
       create: (context) => NotificationCoverageBloc(
-        repository: RepositoryFactory.of(context).organizerChecklistRepository,
+        repository: DependencyScope.of(context).organizerChecklistRepository,
         tournamentId: tournamentId,
       )..add(const NotificationCoverageEventLoad()),
       child: NotificationCoverageContent(tournamentId: tournamentId),

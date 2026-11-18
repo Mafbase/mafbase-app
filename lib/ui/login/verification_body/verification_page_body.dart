@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/domain/interactors/verification_interactor.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -27,10 +27,10 @@ class VerificationPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<VerificationBloc>(
       create: (BuildContext context) {
-        final repos = RepositoryFactory.of(context);
+        final scope = DependencyScope.of(context);
         return VerificationBloc(
           VerificationPageRouterImpl(context),
-          VerificationInteractor(repos.authRepository),
+          VerificationInteractor(scope.authRepository),
           id,
         );
       },

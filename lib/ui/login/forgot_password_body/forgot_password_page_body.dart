@@ -3,7 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
@@ -24,7 +24,7 @@ class ForgotPasswordPageBody extends StatelessWidget {
     return BlocProvider<ForgotPasswordBloc>(
       key: const Key('ForgotPasswordBlocProvider'),
       create: (context) => ForgotPasswordBloc(
-        RepositoryFactory.of(context).authRepository,
+        DependencyScope.of(context).authRepository,
         ForgotPasswordPageRouterImpl(context),
       ),
       child: const _ForgotPasswordPageContent(),

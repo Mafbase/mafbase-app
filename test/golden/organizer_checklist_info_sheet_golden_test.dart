@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
@@ -34,22 +33,6 @@ class _FakeTranslationRepository implements TranslationRepository {
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class _FakeRepositoryFactory implements RepositoryFactory {
-  @override
-  final TranslationRepository translationRepository = _FakeTranslationRepository();
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeDependencyScope implements DependencyScope {
-  @override
-  final RepositoryFactory repositoryFactory = _FakeRepositoryFactory();
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
 /// Справка длинная: на высоких экранах лист со скриншотами виден целиком.
 List<Device> _tallDevices(double height) => [
       Device(name: 'light_desktop', size: Size(1100, height)),
@@ -72,7 +55,7 @@ Widget _sheetScenario(void Function(BuildContext context) open) {
 
   return adaptiveThemedWidget(
     DependencyScopeWidget(
-      scope: _FakeDependencyScope(),
+      scope: DependencyScope(overrides: {TranslationRepository: _FakeTranslationRepository()}),
       child: MultiBlocProvider(
         providers: [
           BlocProvider<TournamentPageBloc>.value(value: tournamentBloc),

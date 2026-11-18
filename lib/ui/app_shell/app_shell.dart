@@ -2,10 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/common/widgets/route_loading_placeholder.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/add_photo_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/logout_interactor.dart';
 import 'package:seating_generator_web/feature/profile/domain/interactor/delete_profile_interactor.dart';
+import 'package:seating_generator_web/feature/profile/profile_dependencies.dart';
 import 'package:seating_generator_web/ui/app_shell/app_sidebar.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
@@ -40,11 +43,11 @@ class _AppShellState extends CustomState<AppShellPage> {
               logoutInteractor,
               DeleteProfileInteractor(
                 logoutInteractor,
-                scope.repositoryFactory.profileRepository,
+                scope.profileRepository,
               ),
-              scope.repositoryFactory.profileRepository,
-              CreatePlayerInteractor(scope.repositoryFactory.playersRepository),
-              AddPhotoInteractor(scope.repositoryFactory.playersRepository),
+              scope.profileRepository,
+              CreatePlayerInteractor(scope.playersRepository),
+              AddPhotoInteractor(scope.playersRepository),
               scope.authNotifier,
             );
           },
@@ -60,12 +63,12 @@ class _AppShellState extends CustomState<AppShellPage> {
       body: Row(
         children: [
           AppSidebar(),
-          Expanded(child: AutoRouter()),
+          Expanded(child: AutoRouter(placeholder: RouteLoadingPlaceholder.builder)),
         ],
       ),
     );
   }
 
   @override
-  Widget? buildMobile(BuildContext context) => const AutoRouter();
+  Widget? buildMobile(BuildContext context) => const AutoRouter(placeholder: RouteLoadingPlaceholder.builder);
 }

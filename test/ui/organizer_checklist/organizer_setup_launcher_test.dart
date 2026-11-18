@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
@@ -23,26 +22,6 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_route
 
 import '../../feature/organizer_checklist/organizer_checklist_fixtures.dart';
 import '../fake_browser_history.dart';
-
-class _FakeRepositoryFactory implements RepositoryFactory {
-  _FakeRepositoryFactory(this.tournamentEditRepository);
-
-  @override
-  final TournamentEditRepository tournamentEditRepository;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeDependencyScope implements DependencyScope {
-  _FakeDependencyScope(this.repositoryFactory);
-
-  @override
-  final RepositoryFactory repositoryFactory;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
 
 /// Страница турнира — запуск мастера над вложенным роутером, её параметры собираются так же, как
 /// в сгенерированном TournamentRoute. Дочерние страницы — заглушки с теми же именами маршрутов.
@@ -106,7 +85,7 @@ Future<_TestRouter> _pumpApp(
   final router = _TestRouter();
   await tester.pumpWidget(
     DependencyScopeWidget(
-      scope: _FakeDependencyScope(_FakeRepositoryFactory(repository ?? RecordingTournamentEditRepository())),
+      scope: DependencyScope(overrides: {TournamentEditRepository: repository ?? RecordingTournamentEditRepository()}),
       child: MultiBlocProvider(
         providers: [
           BlocProvider<TournamentPageBloc>.value(value: tournamentBloc),

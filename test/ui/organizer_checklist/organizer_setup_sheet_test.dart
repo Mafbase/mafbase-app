@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
@@ -22,26 +21,6 @@ import 'package:seating_generator_web/l10n/app_localizations.dart';
 import '../../feature/organizer_checklist/organizer_checklist_fixtures.dart';
 
 const _gomafiaUrl = 'https://gomafia.pro/tournament/42';
-
-class _FakeRepositoryFactory implements RepositoryFactory {
-  _FakeRepositoryFactory(this.tournamentEditRepository);
-
-  @override
-  final TournamentEditRepository tournamentEditRepository;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeDependencyScope implements DependencyScope {
-  _FakeDependencyScope(this.repositoryFactory);
-
-  @override
-  final RepositoryFactory repositoryFactory;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
 
 class _Harness {
   _Harness(this.repository, this.tournamentBloc, this.checklistBloc);
@@ -63,7 +42,7 @@ Future<_Harness> _openWizard(WidgetTester tester) async {
 
   await tester.pumpWidget(
     DependencyScopeWidget(
-      scope: _FakeDependencyScope(_FakeRepositoryFactory(harness.repository)),
+      scope: DependencyScope(overrides: {TournamentEditRepository: harness.repository}),
       child: MultiBlocProvider(
         providers: [
           BlocProvider<TournamentPageBloc>.value(value: harness.tournamentBloc),

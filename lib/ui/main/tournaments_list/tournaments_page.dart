@@ -5,11 +5,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/common/widgets/main_mobile_app_bar.dart';
+import 'package:seating_generator_web/data/dependencies/tournaments_repository_dependency.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/domain/interactors/create_tournament_interactor.dart';
+import 'package:seating_generator_web/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/ui/main/main_bloc.dart';
 import 'package:seating_generator_web/ui/main/main_event.dart';
@@ -17,20 +21,38 @@ import 'package:seating_generator_web/ui/main/tournaments_list/tournament_item_r
 import 'package:seating_generator_web/ui/main/tournaments_list/tournament_status_widget.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_bloc.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_events.dart';
+import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_router.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_search_field.dart';
 import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_state.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 
 @RoutePage()
-class TournamentsPage extends StatefulWidget {
+class TournamentsPage extends StatelessWidget {
   const TournamentsPage({super.key});
 
   @override
-  State<TournamentsPage> createState() => _TournamentsPageState();
+  Widget build(BuildContext context) {
+    final scope = DependencyScope.of(context);
+    return BlocProvider<TournamentsBloc>(
+      create: (context) => TournamentsBloc(
+        GetTournamentsInteractor(scope.tournamentsRepository),
+        CreateTournamentInteractor(scope.tournamentsRepository),
+        TournamentsRouterImpl(context),
+      ),
+      child: const _TournamentsPageContent(),
+    );
+  }
 }
 
-class _TournamentsPageState extends CustomState<TournamentsPage> {
+class _TournamentsPageContent extends StatefulWidget {
+  const _TournamentsPageContent();
+
+  @override
+  State<_TournamentsPageContent> createState() => _TournamentsPageContentState();
+}
+
+class _TournamentsPageContentState extends CustomState<_TournamentsPageContent> {
   final _scrollController = ScrollController();
   final _searchController = TextEditingController();
 

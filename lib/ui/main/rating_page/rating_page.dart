@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:intl/intl.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
@@ -41,7 +41,7 @@ class RatingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RatingBloc>(
-      create: (context) => RatingBloc(repos: RepositoryFactory.of(context), router: RatingRouterImpl(context)),
+      create: (context) => RatingBloc(scope: DependencyScope.of(context), router: RatingRouterImpl(context)),
       child: _RatingPageContent(
         clubId: clubId,
         tournamentId: tournamentId,

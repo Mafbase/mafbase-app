@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/data/dependencies/owners_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/add_owner_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_owner_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_administration_interactor.dart';
@@ -28,7 +29,7 @@ class AdministrationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OwnersRepository ownersRepository = RepositoryFactory.of(context).ownersRepository;
+    final OwnersRepository ownersRepository = DependencyScope.of(context).ownersRepository;
     final getAdministrationInteractor = GetAdministrationInteractor(ownersRepository);
     final addOwnerInteractor = AddOwnerInteractor(ownersRepository);
     final deleteOwnerInteractor = DeleteOwnerInteractor(ownersRepository);
