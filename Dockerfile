@@ -1,6 +1,6 @@
 # Stage 1 - Install dependencies and build the app in a build environment
 ARG REGISTRY_HOST
-FROM registry.mafbase.ru/flutter-builder:3.47.9 AS build-env
+FROM registry.mafbase.ru/flutter-builder:3.50.0 AS build-env
 
 RUN mkdir /app/
 COPY . /app/

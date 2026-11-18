@@ -1,9 +1,9 @@
 # Базовый образ для сборки web-приложения. Собирается вручную и пушится в registry:
-#   docker build -t registry.mafbase.ru/flutter-builder:3.47.9 .
-#   docker push registry.mafbase.ru/flutter-builder:3.47.9
+#   docker build -t registry.mafbase.ru/flutter-builder:3.50.0 .
+#   docker push registry.mafbase.ru/flutter-builder:3.50.0
 FROM debian:bookworm-slim
 
-ARG FLUTTER_VERSION=3.47.9
+ARG FLUTTER_VERSION=3.50.0
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl git unzip xz-utils zip \

@@ -1,9 +1,9 @@
 // Вендоренная (скопированная) версия Flutter-виджета `RawAutocomplete`.
 //
-// Источник: Flutter SDK 3.47.9 (channel stable, revision c197ca5199),
+// Источник: Flutter SDK 3.50.0 (channel stable, revision ab2912035e),
 //   packages/flutter/lib/src/widgets/autocomplete.dart
 //   https://github.com/flutter/flutter/blob/stable/packages/flutter/lib/src/widgets/autocomplete.dart
-// Дата синхронизации: 2026-11-10.
+// Дата синхронизации: 2026-11-18.
 // Лицензия оригинала: BSD-3-Clause (Copyright 2014 The Flutter Authors).
 //
 // Зачем скопировано:
