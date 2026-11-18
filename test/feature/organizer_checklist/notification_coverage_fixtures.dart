@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/notification_coverage_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_event.dart';

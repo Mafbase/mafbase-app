@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/models/tournament_menu_models.dart';
@@ -11,9 +11,9 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_stat
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_builder.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_locked_tile.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_trailing_text.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_bloc.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class TournamentMenuDrawer extends StatefulWidget {

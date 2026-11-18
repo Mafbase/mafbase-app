@@ -5,8 +5,8 @@ import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_c
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_bloc.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_state.dart';
 
 /// Загружает чеклист своего турнира и перезагружает его при смене дочернего маршрута и после изменений,
 /// от которых зависят пункты.

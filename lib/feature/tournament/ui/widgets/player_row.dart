@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/ui/main/profile_page/widgets/player_avatar_widget.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
+import 'package:seating_generator_web/common/widgets/player_avatar_widget.dart';
 
 class PlayerRow extends StatelessWidget {
   final VoidCallback? onTap;

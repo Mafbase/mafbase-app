@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/di/service_provider.dart';
 import 'package:seating_generator_web/app/di/storage_factory.dart';
-import 'package:seating_generator_web/data/http_client.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/data/repositories/auth_repository_impl.dart';
-import 'package:seating_generator_web/domain/repositories/auth_repository.dart';
+import 'package:seating_generator_web/core/network/http_client.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/data/auth_repository_impl.dart';
+import 'package:seating_generator_web/core/auth/domain/auth_repository.dart';
 
 class DependencyScopeWidget extends InheritedWidget {
   final DependencyScope scope;

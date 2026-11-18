@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
-import 'package:seating_generator_web/ui/translation/translation_content_page/translation_content_state.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/club_translation_control_bloc.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/club_translation_control_event.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_bloc.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_event.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
+import 'package:seating_generator_web/feature/translation_control/ui/translation_content_page/translation_content_state.dart';
+import 'package:seating_generator_web/feature/translation_control/ui/club_translation_control_bloc.dart';
+import 'package:seating_generator_web/feature/translation_control/ui/club_translation_control_event.dart';
+import 'package:seating_generator_web/feature/translation_control/ui/translation_control_bloc.dart';
+import 'package:seating_generator_web/feature/translation_control/ui/translation_control_event.dart';
+import 'package:seating_generator_web/feature/translation_control/ui/translation_control_page.dart';
 
 class MockTranslationControlBloc
     extends MockBloc<TranslationControlEvent, TranslationContentState>

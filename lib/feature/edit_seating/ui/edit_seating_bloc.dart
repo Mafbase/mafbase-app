@@ -1,6 +1,6 @@
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/data/dependencies/tournament_edit_repository_dependency.dart';
+import 'package:seating_generator_web/shared/tournament/data/tournament_edit_repository_dependency.dart';
 import 'package:seating_generator_web/feature/edit_seating/domain/models/editable_table_model.dart';
 import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_effect.dart';
 import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_event.dart';

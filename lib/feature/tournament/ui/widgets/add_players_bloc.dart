@@ -1,6 +1,6 @@
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
-import 'package:seating_generator_web/domain/repositories/players_repository.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
+import 'package:seating_generator_web/shared/player/domain/players_repository.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_effect.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_state.dart';

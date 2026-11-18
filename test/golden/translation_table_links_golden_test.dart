@@ -5,14 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/domain/models/translation_key_model.dart';
-import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
+import 'package:seating_generator_web/shared/translation/domain/models/translation_key_model.dart';
+import 'package:seating_generator_web/shared/translation/domain/translation_repository.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/translation_panel.dart';
 import 'package:seating_generator_web/feature/translation_links/translation_table_links.dart';
 import 'package:seating_generator_web/feature/translation_links/widgets/translation_table_links_row.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_bloc.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_event.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page_state.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_bloc.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_event.dart';
+import 'package:seating_generator_web/feature/seating/ui/seating_page_state.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class _MockSeatingPageBloc extends MockBloc<SeatingPageEvent, SeatingPageState> implements SeatingPageBloc {}

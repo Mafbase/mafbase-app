@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/repositories/club_repository.dart';
+import 'package:seating_generator_web/shared/club/domain/club_repository.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_event.dart';
 import 'package:seating_generator_web/feature/club_games/club_games_state.dart';
 

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/domain/models/club_model.dart';
+import 'package:seating_generator_web/shared/club/domain/models/club_model.dart';
 import 'package:seating_generator_web/utils.dart';
 
 class ClubAvatar extends StatelessWidget {

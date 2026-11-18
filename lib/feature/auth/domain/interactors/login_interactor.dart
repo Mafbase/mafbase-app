@@ -1,0 +1,49 @@
+import 'package:flutter/widgets.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
+import 'package:seating_generator_web/core/storage/credential_storage.dart';
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/core/auth/domain/models/login_model.dart';
+import 'package:seating_generator_web/core/auth/domain/auth_repository.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+
+class LoginInteractor extends BaseInteractor {
+  static const hideBillEmails = ['test@mail.ru'];
+  final AuthRepository _authRepository;
+  final CredentialStorage _credentialStorage;
+  final AuthNotifier _authNotifier;
+
+  LoginInteractor(
+    this._authRepository,
+    this._credentialStorage,
+    this._authNotifier,
+  );
+
+  Future<LoginModel> run(
+    String email,
+    String password, {
+    BuildContext? context,
+  }) =>
+      wrap(() async {
+        final model = await _authRepository.login(email, password);
+        if (model is Success) {
+          Sentry.configureScope(
+            (p0) => p0.setUser(
+              SentryUser(username: email),
+            ),
+          );
+
+          _credentialStorage.save(Credentials(email, password));
+
+          _authNotifier.value = AuthNotifierModel.authorized(
+            userId: model.userId,
+            hideBilling: hideBillEmails.contains(email),
+          );
+        }
+
+        return model;
+      });
+
+  @override
+  String get interactorName => 'LoginInteractor';
+}

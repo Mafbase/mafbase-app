@@ -1,4 +1,4 @@
-import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/feature/info_table_description/data/requests/get_table_description_request.dart';
 import 'package:seating_generator_web/feature/info_table_description/data/requests/set_table_description_request.dart';
 import 'package:seating_generator_web/feature/info_table_description/domain/info_table_description_repository.dart';

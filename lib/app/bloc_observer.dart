@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/router.dart';
-import 'package:seating_generator_web/data/http_client.dart';
+import 'package:seating_generator_web/core/network/http_client.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 

@@ -1,6 +1,6 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/repositories/tournament_edit_repository.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/setup/organizer_setup_event.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/setup/organizer_setup_state.dart';

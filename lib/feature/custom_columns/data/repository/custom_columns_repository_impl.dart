@@ -1,4 +1,4 @@
-import 'package:seating_generator_web/data/base_repository.dart';
+import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/feature/custom_columns/data/requests/create_custom_column_request.dart';
 import 'package:seating_generator_web/feature/custom_columns/data/requests/delete_custom_column_request.dart';
 import 'package:seating_generator_web/feature/custom_columns/data/requests/get_custom_columns_request.dart';

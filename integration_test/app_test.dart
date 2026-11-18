@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
-import 'package:seating_generator_web/data/storages/credential_storage.dart';
+import 'package:seating_generator_web/core/storage/credential_storage.dart';
 import 'package:seating_generator_web/main.dart';
 
 void main() {

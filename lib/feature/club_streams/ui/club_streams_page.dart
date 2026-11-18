@@ -6,7 +6,7 @@ import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/data/dependencies/stream_repository_dependency.dart';
+import 'package:seating_generator_web/shared/stream/data/stream_repository_dependency.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_bloc.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_event.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_state.dart';

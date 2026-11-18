@@ -1,0 +1,16 @@
+import 'package:seating_generator_web/core/domain/base_interactor.dart';
+import 'package:seating_generator_web/shared/game/domain/models/game_result_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+
+class GetSeatingInteractor extends BaseInteractor {
+  final TournamentEditRepository _repository;
+
+  GetSeatingInteractor(this._repository);
+
+  @override
+  String get interactorName => 'GetSeatingInteractor';
+
+  Future<List<List<GameResultModel>>> run({required int tournamentId, RatingScheme? ratingScheme}) =>
+      wrap(() => _repository.getResultModels(tournamentId: tournamentId, ratingScheme: ratingScheme));
+}

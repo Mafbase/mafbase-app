@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:seating_generator_web/app/router.dart';
-import 'package:seating_generator_web/domain/models/tournament_settings_model.dart';
+import 'package:seating_generator_web/shared/tournament/domain/models/tournament_settings_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';

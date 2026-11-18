@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
 import 'package:seating_generator_web/feature/fantasy/fantasy_dependencies.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_bloc.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/fantasy_event.dart';
@@ -13,7 +13,7 @@ import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_notific
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_participants_bottom_sheet.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_prediction_section.dart';
 import 'package:seating_generator_web/feature/fantasy/ui/widgets/fantasy_rating_section.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/utils.dart';

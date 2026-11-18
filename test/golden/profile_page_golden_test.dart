@@ -5,15 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:provider/provider.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/profile/domain/model/tournament_subscription_plan_model.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_bloc.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_effect.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_event.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_state.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_bloc.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_effect.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_event.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_page.dart';
+import 'package:seating_generator_web/feature/profile/ui/profile_state.dart';
 
 class MockProfileBloc extends MockBloc<ProfileEvent, ProfileState> implements ProfileBloc {
   @override

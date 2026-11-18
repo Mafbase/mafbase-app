@@ -1,0 +1,17 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:seating_generator_web/shared/game/domain/models/game_result_model.dart';
+import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+import 'package:seating_generator_web/utils.dart';
+
+part 'seating_page_state.freezed.dart';
+
+@freezed
+abstract class SeatingPageState with _$SeatingPageState {
+  const factory SeatingPageState({
+    @Default([]) List<Pair<PlayerModel, PlayerModel>> cannotMeet,
+    @Default(true) bool isLoading,
+    @Default([]) List<List<GameResultModel>> games,
+    @Default([]) List<GameStream> streams,
+  }) = _SeatingPageState;
+}

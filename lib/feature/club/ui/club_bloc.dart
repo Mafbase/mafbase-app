@@ -1,0 +1,152 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/feature/club/domain/interactors/bill_club_interactor.dart';
+import 'package:seating_generator_web/feature/club/domain/interactors/check_club_interactor.dart';
+import 'package:seating_generator_web/shared/club/domain/interactors/get_club_interactor.dart';
+import 'package:seating_generator_web/shared/club/domain/models/club_model.dart';
+import 'package:seating_generator_web/shared/club/domain/club_repository.dart';
+import 'package:seating_generator_web/shared/stream/domain/stream_repository.dart';
+import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';
+import 'package:seating_generator_web/feature/club/ui/club_event.dart';
+import 'package:seating_generator_web/feature/club/ui/club_router.dart';
+import 'package:seating_generator_web/feature/club/ui/club_state.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class ClubBlocArgs {
+  final int clubId;
+  final ClubModel? cachedModel;
+
+  ClubBlocArgs({required this.clubId, this.cachedModel});
+}
+
+class ClubBloc extends Bloc<ClubEvent, ClubState> {
+  final int _clubId;
+  final GetClubInteractor _getClubInteractor;
+  @visibleForTesting
+  final ClubRouter router;
+  final CheckClubInteractor _checkClubInteractor;
+  final BillClubInteractor _billClubInteractor;
+  final ClubRepository _clubRepository;
+  final StreamRepository _streamRepository;
+
+  ClubBloc({
+    BuildContext? context,
+    required this.router,
+    required ClubBlocArgs args,
+    required GetClubInteractor getClubInteractor,
+    required BillClubInteractor billClubInteractor,
+    required CheckClubInteractor checkClubInteractor,
+    required ClubRepository clubRepository,
+    required StreamRepository streamRepository,
+  }) : _clubId = args.clubId,
+       _checkClubInteractor = checkClubInteractor,
+       _billClubInteractor = billClubInteractor,
+       _getClubInteractor = getClubInteractor,
+       _clubRepository = clubRepository,
+       _streamRepository = streamRepository,
+       super(args.cachedModel == null ? const ClubState() : ClubState(isLoading: false, model: args.cachedModel)) {
+    on<ClubEventPageOpened>(_onPageOpened);
+    on<ClubEventOpenRating>(_onOpenRating);
+    on<ClubEventBillClub>(_onBillClub);
+    on<ClubEventChangeHideDate>(_onChangeHideDate);
+    on<ClubEventChangeDefaultRatingPeriod>(_onChangeDefaultRatingPeriod);
+    on<ClubEventEditDescription>(_onEditDescription);
+    on<ClubEventEditPhoto>(_onEditPhoto);
+  }
+
+  Future<void> _onChangeHideDate(ClubEventChangeHideDate event, Emitter emit) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      await _clubRepository.updateHideDate(id: _clubId, dateTime: event.dateTime);
+      await _loadData(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<void> _onChangeDefaultRatingPeriod(ClubEventChangeDefaultRatingPeriod event, Emitter emit) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      await _clubRepository.updateDefaultRatingPeriod(id: _clubId, range: event.range);
+      await _loadData(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<void> _onOpenRating(ClubEventOpenRating event, Emitter emit) async {
+    router.openRating(clubId: _clubId);
+  }
+
+  Future<void> _onPageOpened(ClubEventPageOpened event, Emitter emit) async {
+    await _loadData(emit);
+  }
+
+  Future<void> _loadData(Emitter emit) async {
+    final [ClubModel club, bool isOwner, List<GameStream> streams] = await Future.wait<dynamic>([
+      _getClubInteractor.run(clubId: _clubId),
+      _checkClubInteractor(_clubId),
+      _streamRepository.getClubStreams(clubId: _clubId),
+    ]);
+
+    final hideDate = isOwner ? await _clubRepository.getHideDate(id: _clubId) : null;
+    final defaultRatingPeriod = isOwner ? await _clubRepository.getDefaultRatingPeriod(id: _clubId) : null;
+
+    if (!emit.isDone) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          model: club,
+          isOwner: isOwner,
+          hideDate: hideDate,
+          defaultRatingPeriod: defaultRatingPeriod,
+          streams: streams,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onBillClub(ClubEventBillClub event, Emitter emit) async {
+    final nextPath = router.getLocation();
+    final result = await _billClubInteractor(
+      clubId: _clubId,
+      redirectPath: '/payment-waiting?nextPath=${Uri.encodeQueryComponent(nextPath)}',
+      days: event.days,
+    );
+    final uri = Uri.parse(result.redirectLink);
+    if (kIsWeb) {
+      launchUrl(uri, webOnlyWindowName: '_self');
+    } else {
+      router.openWebView(result.redirectLink);
+    }
+  }
+
+  Future<void> _onEditDescription(ClubEventEditDescription event, Emitter emit) async {
+    final model = state.model;
+    if (model == null) {
+      return;
+    }
+
+    emit(state.copyWith(isLoading: true));
+    try {
+      await _clubRepository.updateDescription(
+        clubId: _clubId,
+        club: model.copyWith(description: event.description.trim().isEmpty ? null : event.description.trim()),
+      );
+      await _loadData(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<void> _onEditPhoto(ClubEventEditPhoto event, Emitter emit) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      await _clubRepository.updatePhoto(clubId: _clubId, bytes: event.bytes, fileName: event.fileName);
+      await _loadData(emit);
+    } finally {
+      if (!emit.isDone) emit(state.copyWith(isLoading: false));
+    }
+  }
+}

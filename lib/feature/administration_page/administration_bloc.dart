@@ -1,7 +1,7 @@
 import 'package:seating_generator_web/common/bloc_extension.dart';
-import 'package:seating_generator_web/domain/interactors/add_owner_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/delete_owner_interactor.dart';
-import 'package:seating_generator_web/domain/interactors/get_administration_interactor.dart';
+import 'package:seating_generator_web/feature/administration_page/domain/interactors/add_owner_interactor.dart';
+import 'package:seating_generator_web/feature/administration_page/domain/interactors/delete_owner_interactor.dart';
+import 'package:seating_generator_web/feature/administration_page/domain/interactors/get_administration_interactor.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_event.dart';
 import 'package:seating_generator_web/feature/administration_page/administration_state.dart';
 

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
-import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/domain/interactors/login_interactor.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier.dart';
+import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
+import 'package:seating_generator_web/feature/auth/domain/interactors/login_interactor.dart';
 import 'package:seating_generator_web/utils/splash_manager.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
