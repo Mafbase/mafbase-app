@@ -130,6 +130,27 @@ Text('${context.locale.fantasyGame(gameNumber)}: ${context.locale.fantasyYourPre
 
 # Правила организации кода и виджетов
 
+## Структура lib/
+
+```
+lib/
+  app/        — корень композиции: роутер, guards, DI-контейнер (app/di)
+  core/       — инфраструктура всего приложения
+    network/  — http-клиент, BaseRequest, BaseRepository, BaseSocket
+    storage/  — хранилища токена и учётных данных
+    auth/     — AuthNotifier, AuthRepository с запросами и моделями, LogoutInteractor
+    push/     — device id, push-токен, разрешение на уведомления
+    domain/   — BaseInteractor
+  shared/<сущность>/{data,domain}/  — то, что нужно двум и более фичам (club, tournament, player, ...)
+  feature/<фича>/{data,domain,ui}/  — всё, что нужно одной фиче
+  common/     — общие виджеты и тема
+  utils/, l10n/, seating-generator-proto/
+```
+
+1. **`core` не импортирует `shared` и `feature`, `shared` не импортирует `feature`**
+2. **Код с одним потребителем — в его фиче.** Понадобился второй фиче — переносите в `shared/<сущность>`
+3. **Между папками `shared` не должно быть циклов** — общую для двух сущностей модель выносите в отдельную папку (так появилась `shared/game`)
+
 ## Разделение на виджеты
 
 1. **Большие файлы должны быть разбиты на более мелкие виджеты** - если файл страницы превышает 300-400 строк, его необходимо разбить на отдельные виджеты
@@ -168,22 +189,33 @@ class FantasyPage extends StatefulWidget {
 ### Структура папок для фичи:
 
 ```
-lib/feature/fantasy/ui/
-  - fantasy_page.dart (основная страница)
-  - fantasy_bloc.dart
-  - fantasy_state.dart
-  - fantasy_event.dart
-  - widgets/
-    - fantasy_rating_section.dart
-    - fantasy_prediction_section.dart
-    - fantasy_notifications_banner.dart
-    - fantasy_participants_bottom_sheet.dart
-    - fantasy_add_participant_dialog.dart
-    - fantasy_rating_row.dart
-    - fantasy_prediction_chip.dart
-    - fantasy_header.dart
-    - fantasy_game_win_utils.dart (утилиты)
+lib/feature/fantasy/
+  data/
+    - fantasy_repository_impl.dart
+    - fantasy_repository_dependency.dart (DI-extension, см. «Правила Dependency Injection»)
+    - requests/
+  domain/
+    - fantasy_repository.dart
+    - models/
+    - interactors/
+  ui/
+    - fantasy_page.dart (основная страница)
+    - fantasy_bloc.dart
+    - fantasy_state.dart
+    - fantasy_event.dart
+    - widgets/
+      - fantasy_rating_section.dart
+      - fantasy_prediction_section.dart
+      - fantasy_notifications_banner.dart
+      - fantasy_participants_bottom_sheet.dart
+      - fantasy_add_participant_dialog.dart
+      - fantasy_rating_row.dart
+      - fantasy_prediction_chip.dart
+      - fantasy_header.dart
+      - fantasy_game_win_utils.dart (утилиты)
 ```
+
+`shared/<сущность>/` устроена так же, но без `ui/`. В старых фичах DI-extension лежит в `<фича>_dependencies.dart` в корне фичи, а у некоторых репозитории разложены по `data/repository/` и `domain/repository/`. Новый код раскладывайте по схеме выше.
 
 ## Правила именования виджетов
 
@@ -235,57 +267,36 @@ class _FantasyPageState extends State<FantasyPage> {
 ## Структура DI
 
 ### DependencyScope
-- Основной контейнер зависимостей, доступный через `DependencyScope.of(context)`
-- Содержит `StorageFactory`, `RepositoryFactory`, `ServiceProvider` и `AuthNotifier`
-- Используется для получения доступа к фабрикам и провайдерам зависимостей
+- Контейнер зависимостей в `lib/app/di/dependency_scope.dart`, доступ через `DependencyScope.of(context)`
+- Сам содержит только то, что нужно при старте: `client`, `storageFactory` (`tokenStorage`, `credentialStorage`), `serviceProvider` (`deviceIdService`, `pushTokenService`, `notificationPermissionService`), `authNotifier`, `authRepository`
+- Остальные репозитории подключаются extension'ами на `DependencyScope`
 
-### StorageFactory
-- Фабрика для создания и получения хранилищ (Storage)
-- Доступ через `StorageFactory.of(context)`
-- Примеры: `tokenStorage`, `credentialStorage`
-
-### RepositoryFactory
-- Фабрика для создания и получения репозиториев
-- Доступ через `RepositoryFactory.of(context)`
-- Примеры: `authRepository`, `clubRepository`, `profileRepository`
-
-### ServiceProvider
-- Провайдер для создания и получения сервисов
-- Доступ через `ServiceProvider.of(context)`
-- Примеры: `deviceIdService`, `pushTokenService`, `notificationPermissionService`
-
-## Использование в коде
+### DI-extension репозитория
+- Один файл на репозиторий, рядом с реализацией: `lib/{shared/<сущность>,feature/<фича>}/data/<x>_repository_dependency.dart`
+- `resolve<T>` — ленивый синглтон по типу; в тестах подменяется через `DependencyScope(overrides: {XRepository: FakeXRepository()})`
+- Импортируйте extension только из кода фичи. Страницы грузятся deferred, поэтому репозиторий не попадает в стартовый бандл. Импорт из `lib/app` или `main.dart` затянет его туда
 
 ```dart
-class MyWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final repository = RepositoryFactory.of(context).authRepository;
-    final storage = StorageFactory.of(context).tokenStorage;
-    final service = ServiceProvider.of(context).pushTokenService;
-    // ...
-  }
+// lib/shared/club/data/club_repository_dependency.dart
+extension ClubRepositoryDependency on DependencyScope {
+  ClubRepository get clubRepository => resolve<ClubRepository>(() => ClubRepositoryImpl(client));
 }
 ```
 
-### Получение зависимостей в виджетах
+## Использование в коде
 
 ```dart
 class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Получение репозитория
-    final authRepository = RepositoryFactory.of(context).authRepository;
+    final scope = DependencyScope.of(context);
 
-    // Получение хранилища
-    final tokenStorage = StorageFactory.of(context).tokenStorage;
-    final credentialStorage = StorageFactory.of(context).credentialStorage;
+    // Репозиторий через extension: import '.../shared/club/data/club_repository_dependency.dart'
+    final clubRepository = scope.clubRepository;
 
-    // Получение сервиса
-    final pushTokenService = ServiceProvider.of(context).pushTokenService;
-
-    // Получение notifier через DependencyScope
-    final authNotifier = DependencyScope.of(context).authNotifier;
+    final credentialStorage = scope.storageFactory.credentialStorage;
+    final pushTokenService = scope.serviceProvider.pushTokenService;
+    final authNotifier = scope.authNotifier;
 
     return Scaffold(
       // ...
