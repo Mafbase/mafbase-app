@@ -2,49 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/app/guards/auth_guard.dart';
 import 'package:seating_generator_web/app/guards/rail_wrapper_guard.dart';
-import 'package:seating_generator_web/feature/administration_page/administration_page.dart';
-import 'package:seating_generator_web/feature/payment_waiting/ui/payment_waiting_page.dart';
-import 'package:seating_generator_web/feature/club_games/club_games_page.dart';
-import 'package:seating_generator_web/feature/club_streams/ui/club_streams_page.dart';
-import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_page.dart';
-import 'package:seating_generator_web/feature/edit_seating/ui/edit_seating_page.dart';
-import 'package:seating_generator_web/feature/fantasy/ui/fantasy_page.dart';
-import 'package:seating_generator_web/feature/info_table_description/ui/info_table_description_page.dart';
-import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/notification_coverage_page.dart';
-import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_page.dart';
-import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_page.dart';
-import 'package:seating_generator_web/feature/streams/ui/broadcast_page.dart';
-import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_page.dart';
-import 'package:seating_generator_web/feature/referee_assignments/ui/referee_page.dart';
-import 'package:seating_generator_web/feature/streams/ui/streams_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/tournament_settings_page.dart';
-import 'package:seating_generator_web/feature/tournament/ui/widgets/players_list_body.dart';
-import 'package:seating_generator_web/feature/webview/web_view_screen.dart';
-import 'package:seating_generator_web/ui/app_shell/app_shell.dart';
-import 'package:seating_generator_web/ui/contacts/contacts_page.dart';
-import 'package:seating_generator_web/ui/login/forgot_password_body/forgot_password_page_body.dart';
-import 'package:seating_generator_web/ui/login/login_body/login_body.dart';
-import 'package:seating_generator_web/ui/login/reset_password_body/reset_password_page_body.dart';
-import 'package:seating_generator_web/ui/login/sign_up_body/sign_up_page_body.dart';
-import 'package:seating_generator_web/ui/login/verification_body/verification_page_body.dart';
-import 'package:seating_generator_web/ui/main/add_club_game/add_club_game_wrappers.dart';
-import 'package:seating_generator_web/ui/main/add_club/add_club_page.dart';
-import 'package:seating_generator_web/ui/main/club_page/club_page.dart';
-import 'package:seating_generator_web/ui/main/clubs_page/clubs_page.dart';
+import 'package:seating_generator_web/app/router.gr.dart';
 import 'package:seating_generator_web/utils.dart';
-import 'package:seating_generator_web/ui/main/profile_page/profile_page.dart';
-import 'package:seating_generator_web/ui/main/rating_page/rating_wrappers.dart';
-import 'package:seating_generator_web/ui/main/seating_page/seating_page.dart';
-import 'package:seating_generator_web/ui/main/tournaments_list/tournaments_page.dart';
-import 'package:seating_generator_web/ui/rail_wrapper/rail_wrapper.dart';
-import 'package:seating_generator_web/domain/models/club_model.dart';
-import 'package:seating_generator_web/ui/temp/temp_page.dart';
-import 'package:seating_generator_web/ui/translation/translation_control_page/translation_control_page.dart';
 
-part 'router.gr.dart';
+export 'package:seating_generator_web/app/router.gr.dart';
 
-@AutoRouterConfig(replaceInRouteName: 'Page|Body|Screen,Route')
+@AutoRouterConfig(replaceInRouteName: 'Page|Body|Screen,Route', deferredLoading: true)
 class AppRouter extends RootStackRouter {
   final AuthGuard authGuard;
   final RailWrapperGuard railWrapperGuard;

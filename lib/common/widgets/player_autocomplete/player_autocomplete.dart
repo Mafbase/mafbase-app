@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/patched_raw_autocomplete.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_bloc.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_event.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete_state.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 
 class PlayerAutoComplete extends StatelessWidget {
@@ -51,7 +52,7 @@ class PlayerAutoComplete extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<PlayerAutoCompleteBloc>(
       create: (context) => PlayerAutoCompleteBloc(
-        availablePlayers != null ? null : RepositoryFactory.of(context).playersRepository,
+        availablePlayers != null ? null : DependencyScope.of(context).playersRepository,
         availablePlayers: availablePlayers,
       ),
       child: _PlayerAutoCompleteBody(

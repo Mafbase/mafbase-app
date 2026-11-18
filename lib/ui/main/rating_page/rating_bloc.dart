@@ -1,5 +1,7 @@
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournament_result_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/download_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_rating_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/get_tournament_rating_interactor.dart';
@@ -9,16 +11,16 @@ import 'package:seating_generator_web/ui/main/rating_page/rating_router.dart';
 import 'package:seating_generator_web/ui/main/rating_page/rating_state.dart';
 
 class RatingBloc extends Bloc<RatingEvent, RatingState> {
-  final RepositoryFactory _repos;
+  final DependencyScope _scope;
   final RatingRouter _router;
-  late final DownloadRatingInteractor _downloadRatingInteractor = DownloadRatingInteractor(_repos.clubRepository);
-  late final GetRatingInteractor _getRatingRepository = GetRatingInteractor(_repos.clubRepository);
+  late final DownloadRatingInteractor _downloadRatingInteractor = DownloadRatingInteractor(_scope.clubRepository);
+  late final GetRatingInteractor _getRatingRepository = GetRatingInteractor(_scope.clubRepository);
   late final GetTournamentRatingInteractor _getTournamentRatingInteractor = GetTournamentRatingInteractor(
-    _repos.tournamentResultRepository,
+    _scope.tournamentResultRepository,
   );
 
-  RatingBloc({required RepositoryFactory repos, required RatingRouter router})
-    : _repos = repos,
+  RatingBloc({required DependencyScope scope, required RatingRouter router})
+    : _scope = scope,
       _router = router,
       super(const RatingState()) {
     on<RatingEventPageOpened>(_onPageOpened);
@@ -29,7 +31,7 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
   }
 
   Future<dynamic> _onStatsDownload(RatingEventDownloadStats event, Emitter emit) =>
-      _repos.clubRepository.downloadStats(clubId: event.clubId, range: event.range);
+      _scope.clubRepository.downloadStats(clubId: event.clubId, range: event.range);
 
   void _onGameSelected(RatingEventGameSelected event, Emitter emit) {
     final clubId = event.clubId;

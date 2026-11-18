@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
-import 'package:seating_generator_web/app/di/storage_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/common/widgets/route_loading_placeholder.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/organizer_checklist_model.dart';
+import 'package:seating_generator_web/feature/organizer_checklist/organizer_checklist_dependencies.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/setup/widgets/organizer_setup_launcher.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_reloader.dart';
@@ -44,9 +45,9 @@ class TournamentPage extends StatelessWidget {
         BlocProvider<TournamentPageBloc>(
           key: const Key('TournamentPageBloc'),
           create: (context) {
-            final repos = RepositoryFactory.of(context);
+            final scope = DependencyScope.of(context);
             return TournamentPageBloc(
-              repos: repos,
+              scope: scope,
               router: TournamentPageRouterImpl(context),
               tournamentId: tournamentId,
               context: context,
@@ -58,9 +59,9 @@ class TournamentPage extends StatelessWidget {
         BlocProvider<SeatingPageBloc>(
           key: const Key('SeatingPageBloc'),
           create: (context) {
-            final repos = RepositoryFactory.of(context);
+            final scope = DependencyScope.of(context);
             return SeatingPageBloc(
-              repos: repos,
+              scope: scope,
               router: SeatingPageRouterImpl(context),
             )..add(
                 SeatingPageEvent.pageOpened(
@@ -72,8 +73,8 @@ class TournamentPage extends StatelessWidget {
         BlocProvider<OrganizerChecklistBloc>(
           key: const Key('OrganizerChecklistBloc'),
           create: (context) => OrganizerChecklistBloc(
-            repository: RepositoryFactory.of(context).organizerChecklistRepository,
-            bannerStorage: StorageFactory.of(context).checklistBannerStorage,
+            repository: DependencyScope.of(context).organizerChecklistRepository,
+            bannerStorage: DependencyScope.of(context).checklistBannerStorage,
             tournamentId: tournamentId,
           ),
         ),
@@ -105,7 +106,7 @@ class _TournamentPageContentState extends CustomState<_TournamentPageContent>
   Widget? buildMobile(BuildContext context) {
     return Scaffold(
       endDrawer: TournamentMenuDrawer(tournamentId: widget.tournamentId),
-      body: const AutoRouter(),
+      body: const AutoRouter(placeholder: RouteLoadingPlaceholder.builder),
     );
   }
 
@@ -113,7 +114,7 @@ class _TournamentPageContentState extends CustomState<_TournamentPageContent>
   Widget buildDesktop(BuildContext context) {
     return Row(
       children: [
-        const Expanded(child: AutoRouter()),
+        const Expanded(child: AutoRouter(placeholder: RouteLoadingPlaceholder.builder)),
         BlocSelector<SeatingPageBloc, SeatingPageState, bool>(
           selector: (state) => state.isLoading,
           builder: (context, seatingLoading) {

@@ -29,10 +29,9 @@ class LoginPageBody extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         final scope = DependencyScope.of(context);
-        final repos = scope.repositoryFactory;
         final storages = scope.storageFactory;
         return LoginBloc(
-          LoginInteractor(repos.authRepository, storages.credentialStorage, scope.authNotifier),
+          LoginInteractor(scope.authRepository, storages.credentialStorage, scope.authNotifier),
           LoginPageRouterImpl(context, nextPath),
         );
       },

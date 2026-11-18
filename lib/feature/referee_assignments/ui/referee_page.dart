@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
+import 'package:seating_generator_web/feature/referee_assignments/referee_assignments_dependencies.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_bloc.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_event.dart';
 import 'package:seating_generator_web/feature/referee_assignments/ui/referee_state.dart';
@@ -25,7 +26,7 @@ class RefereePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => RefereeBloc(
         const RefereeState(),
-        RepositoryFactory.of(context).refereeRepository,
+        DependencyScope.of(context).refereeRepository,
       )..add(RefereeEventInit(tournamentId)),
       child: _RefereePageContent(tournamentId: tournamentId),
     );

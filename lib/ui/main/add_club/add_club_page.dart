@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_text_field.dart';
+import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/create_club_interactor.dart';
 import 'package:seating_generator_web/ui/main/add_club/add_club_bloc.dart';
 import 'package:seating_generator_web/ui/main/add_club/add_club_event.dart';
@@ -17,10 +18,10 @@ class AddClubPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repos = RepositoryFactory.of(context);
+    final scope = DependencyScope.of(context);
     return BlocProvider<AddClubBloc>(
       create: (context) => AddClubBloc(
-        createClubInteractor: CreateClubInteractor(repos.clubRepository),
+        createClubInteractor: CreateClubInteractor(scope.clubRepository),
         router: AddClubRouterImpl(context),
       ),
       child: const _AddClubPageContent(),

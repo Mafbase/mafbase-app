@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
+import 'package:seating_generator_web/data/dependencies/owners_repository_dependency.dart';
 import 'package:seating_generator_web/domain/models/user_model.dart';
 import 'package:seating_generator_web/domain/repositories/owners_repository.dart';
 import 'package:seating_generator_web/feature/administration_page/widgets/add_owner_dialog.dart';
@@ -55,7 +56,7 @@ class _ClubOwnersBodyState extends State<_ClubOwnersBody> {
   @override
   void initState() {
     super.initState();
-    _ownersRepository = RepositoryFactory.of(context).ownersRepository;
+    _ownersRepository = DependencyScope.of(context).ownersRepository;
     _loadOwners();
   }
 

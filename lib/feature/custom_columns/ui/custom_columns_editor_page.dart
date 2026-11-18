@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/feature/custom_columns/custom_columns_dependencies.dart';
 import 'package:seating_generator_web/feature/custom_columns/domain/models/custom_column_model.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_bloc.dart';
 import 'package:seating_generator_web/feature/custom_columns/ui/custom_columns_editor_event.dart';
@@ -18,7 +19,7 @@ class CustomColumnsEditorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repository = RepositoryFactory.of(context).customColumnsRepository;
+    final repository = DependencyScope.of(context).customColumnsRepository;
     return BlocProvider<CustomColumnsEditorBloc>(
       create: (context) =>
           CustomColumnsEditorBloc(repository, clubId)..add(const CustomColumnsEditorEvent.pageOpened()),

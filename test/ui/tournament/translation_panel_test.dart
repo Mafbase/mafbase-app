@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/domain/models/translation_key_model.dart';
@@ -30,22 +29,6 @@ class _FakeTranslationRepository implements TranslationRepository {
           designs: [DesignModel(designKey: 'mafbase', title: 'Mafbase', preview: '')],
         ),
       );
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeRepositoryFactory implements RepositoryFactory {
-  @override
-  final TranslationRepository translationRepository = _FakeTranslationRepository();
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeDependencyScope implements DependencyScope {
-  @override
-  final RepositoryFactory repositoryFactory = _FakeRepositoryFactory();
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -90,7 +73,7 @@ Future<_TestRouter> _pumpPanel(WidgetTester tester, {required int tablesCount, b
   );
   await tester.pumpWidget(
     DependencyScopeWidget(
-      scope: _FakeDependencyScope(),
+      scope: DependencyScope(overrides: {TranslationRepository: _FakeTranslationRepository()}),
       child: MaterialApp.router(
         theme: AppTheme.light(isMobile: false),
         locale: const Locale('ru'),

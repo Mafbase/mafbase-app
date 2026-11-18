@@ -28,10 +28,9 @@ class ResetPasswordPageBody extends StatelessWidget {
       key: const Key('ResetPasswordBlocProvider'),
       create: (context) {
         final scope = DependencyScope.of(context);
-        final repos = scope.repositoryFactory;
         return ResetPasswordBloc(
-          repos.authRepository,
-          LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
+          scope.authRepository,
+          LoginInteractor(scope.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
           ResetPasswordPageRouterImpl(context),
           email,
         );

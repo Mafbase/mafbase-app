@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/feature/edit_seating/domain/models/editable_table_model.dart';
@@ -26,7 +26,7 @@ class EditSeatingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EditSeatingBloc(repos: RepositoryFactory.of(context)),
+      create: (context) => EditSeatingBloc(scope: DependencyScope.of(context)),
       child: _EditSeatingPageContent(tournamentId: tournamentId),
     );
   }

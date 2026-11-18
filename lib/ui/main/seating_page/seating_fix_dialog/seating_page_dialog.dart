@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_bloc.dart';
 import 'package:seating_generator_web/ui/main/seating_page/seating_fix_dialog/seating_page_dialog_effect.dart';
@@ -26,7 +27,7 @@ class SeatingPageDialog extends StatefulWidget {
   static Widget create(List<String> players) => BlocProvider<SeatingPageDialogBloc>(
         create: (context) => SeatingPageDialogBloc(
           SeatingPageDialogState(notFound: players),
-          RepositoryFactory.of(context).playersRepository,
+          DependencyScope.of(context).playersRepository,
           context,
         )..add(const SeatingPageDialogEvent.init()),
         child: const SeatingPageDialog._(),

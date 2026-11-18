@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
 import 'package:seating_generator_web/domain/models/translation_key_model.dart';
 import 'package:seating_generator_web/domain/repositories/translation_repository.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/translation_panel.dart';
@@ -26,22 +25,6 @@ class _FakeTranslationRepository implements TranslationRepository {
           designs: [DesignModel(designKey: 'mafbase', title: 'Mafbase', preview: '')],
         ),
       );
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeRepositoryFactory implements RepositoryFactory {
-  @override
-  final TranslationRepository translationRepository = _FakeTranslationRepository();
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeDependencyScope implements DependencyScope {
-  @override
-  final RepositoryFactory repositoryFactory = _FakeRepositoryFactory();
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -89,7 +72,7 @@ Widget _clubRows() => themedWidget(
 
 Widget _sidebarPanel(SeatingPageBloc seatingBloc) => themedWidget(
       DependencyScopeWidget(
-        scope: _FakeDependencyScope(),
+        scope: DependencyScope(overrides: {TranslationRepository: _FakeTranslationRepository()}),
         child: BlocProvider<SeatingPageBloc>.value(
           value: seatingBloc,
           child: Builder(

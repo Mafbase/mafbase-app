@@ -1,7 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/dependencies/info_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/purchase_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournament_edit_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournaments_repository_dependency.dart';
 import 'package:seating_generator_web/domain/interactors/bill_tournament_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/custom_text_info_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/delete_player_interactor.dart';
@@ -14,6 +19,7 @@ import 'package:seating_generator_web/domain/interactors/start_game_info_interac
 import 'package:seating_generator_web/domain/interactors/tournament_check_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/update_settings_interactor.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/photo_theme_repository.dart';
+import 'package:seating_generator_web/feature/photo_themes/photo_themes_dependencies.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_effect.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_router.dart';
@@ -23,32 +29,32 @@ import 'package:url_launcher/url_launcher.dart';
 class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     with EffectEmitter<TournamentPageEffect, TournamentPageState> {
   final int tournamentId;
-  final RepositoryFactory _repos;
+  final DependencyScope _scope;
   final BuildContext? _context;
 
   late final GetTournamentsPlayersInteractor _getTournamentsPlayersInteractor = GetTournamentsPlayersInteractor(
-    _repos.playersRepository,
+    _scope.playersRepository,
   );
-  late final DeletePlayerInteractor _deletePlayerInteractor = DeletePlayerInteractor(_repos.playersRepository);
-  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_repos.tournamentEditRepository);
+  late final DeletePlayerInteractor _deletePlayerInteractor = DeletePlayerInteractor(_scope.playersRepository);
+  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_scope.tournamentEditRepository);
   late final UpdateSettingsInteractor _updateSettingsInteractor = UpdateSettingsInteractor(
-    _repos.tournamentEditRepository,
+    _scope.tournamentEditRepository,
   );
   late final TournamentCheckInteractor _tournamentCheckInteractor = TournamentCheckInteractor(
-    _repos.tournamentsRepository,
+    _scope.tournamentsRepository,
   );
-  late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_repos.tournamentsRepository);
+  late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_scope.tournamentsRepository);
   late final GetFinalPlayersInteractor _getFinalPlayersInteractor = GetFinalPlayersInteractor(
-    _repos.tournamentEditRepository,
+    _scope.tournamentEditRepository,
   );
   late final SetFinalPlayersInteractor _setFinalPlayersInteractor = SetFinalPlayersInteractor(
-    _repos.tournamentEditRepository,
+    _scope.tournamentEditRepository,
   );
-  late final CustomTextInfoInteractor _customTextInfoInteractor = CustomTextInfoInteractor(_repos.infoRepository);
-  late final StartGameInfoInteractor _startGameInfoInteractor = StartGameInfoInteractor(_repos.infoRepository);
-  late final PhotoThemeRepository _photoThemeRepository = _repos.photoThemeRepository;
+  late final CustomTextInfoInteractor _customTextInfoInteractor = CustomTextInfoInteractor(_scope.infoRepository);
+  late final StartGameInfoInteractor _startGameInfoInteractor = StartGameInfoInteractor(_scope.infoRepository);
+  late final PhotoThemeRepository _photoThemeRepository = _scope.photoThemeRepository;
   late final BillTournamentInteractor _billTournamentInteractor = BillTournamentInteractor(
-    _repos.purchaseRepository,
+    _scope.purchaseRepository,
     _context!,
   );
 
@@ -56,11 +62,11 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   final TournamentPageRouter router;
 
   TournamentPageBloc({
-    required RepositoryFactory repos,
+    required DependencyScope scope,
     required this.router,
     required this.tournamentId,
     BuildContext? context,
-  })  : _repos = repos,
+  })  : _scope = scope,
         _context = context,
         super(const TournamentPageState()) {
     on<TournamentPagePlayerListOpenedEvent>(_onPlayerListOpened);
@@ -256,7 +262,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
   Future _onSubstitutePlayer(TournamentPageEventSubstitutePlayer event, Emitter<TournamentPageState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final allGames = await _repos.tournamentEditRepository.getResultModels(tournamentId: tournamentId);
+      final allGames = await _scope.tournamentEditRepository.getResultModels(tournamentId: tournamentId);
 
       final playerGames =
           allGames.expand((round) => round).where((game) => game.nicknames.contains(event.oldPlayer.nickname)).toList();
@@ -266,7 +272,7 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
       final result = await router.openSubstituteDialog(oldPlayer: event.oldPlayer, gameNumbers: gameNumbers);
 
       if (result != null) {
-        await _repos.tournamentEditRepository.substitutePlayer(
+        await _scope.tournamentEditRepository.substitutePlayer(
           tournamentId: tournamentId,
           oldPlayerId: event.oldPlayer.id,
           newPlayerId: result.newPlayerId,

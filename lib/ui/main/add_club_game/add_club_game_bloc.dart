@@ -1,7 +1,12 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:flutter/widgets.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
+import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournament_edit_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournament_result_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/tournaments_repository_dependency.dart';
 import 'package:seating_generator_web/data/storages/prefer_add_game_settings_storage.dart';
 import 'package:seating_generator_web/domain/interactors/add_club_game_interactor.dart';
 import 'package:seating_generator_web/domain/interactors/create_player_interactor.dart';
@@ -27,35 +32,35 @@ import 'package:seating_generator_web/feature/tournament/ui/widgets/add_player_d
 
 class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
     with EffectEmitter<AddClubGameEffect, AddClubGameState> {
-  final RepositoryFactory _repos;
-  late final AddClubGameInteractor _addClubGameInteractor = AddClubGameInteractor(_repos.clubRepository);
-  late final ClubRepository _repository = _repos.clubRepository;
+  final DependencyScope _scope;
+  late final AddClubGameInteractor _addClubGameInteractor = AddClubGameInteractor(_scope.clubRepository);
+  late final ClubRepository _repository = _scope.clubRepository;
   final int? clubId;
   final int? tournamentId;
   final BuildContext? _context;
   final AddClubGameRouter router;
-  late final CreatePlayerInteractor _createPlayerInteractor = CreatePlayerInteractor(_repos.playersRepository);
-  late final GetCiSchemesInteractor _getCiSchemesInteractor = GetCiSchemesInteractor(_repos.tournamentEditRepository);
-  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_repos.tournamentEditRepository);
-  late final GetClubInteractor _getClubInteractor = GetClubInteractor(_repos.clubRepository);
+  late final CreatePlayerInteractor _createPlayerInteractor = CreatePlayerInteractor(_scope.playersRepository);
+  late final GetCiSchemesInteractor _getCiSchemesInteractor = GetCiSchemesInteractor(_scope.tournamentEditRepository);
+  late final GetSettingsInteractor _getSettingsInteractor = GetSettingsInteractor(_scope.tournamentEditRepository);
+  late final GetClubInteractor _getClubInteractor = GetClubInteractor(_scope.clubRepository);
   late final EditTournamentGameInteractor _editTournamentGameInteractor = EditTournamentGameInteractor(
-    _repos.tournamentResultRepository,
+    _scope.tournamentResultRepository,
   );
   late final GetTournamentGameInteractor _getTournamentGameInteractor = GetTournamentGameInteractor(
-    _repos.tournamentResultRepository,
+    _scope.tournamentResultRepository,
   );
-  late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_repos.tournamentsRepository);
-  late final TournamentsRepository _tournamentsRepository = _repos.tournamentsRepository;
+  late final GetTournamentInteractor _getTournamentInteractor = GetTournamentInteractor(_scope.tournamentsRepository);
+  late final TournamentsRepository _tournamentsRepository = _scope.tournamentsRepository;
   final PreferAddGameSettingsStorage _settingsStorage = PreferAddGameSettingsStorageImpl();
 
   AddClubGameBloc({
     this.clubId,
     this.tournamentId,
-    required RepositoryFactory repos,
+    required DependencyScope scope,
     required this.router,
     BuildContext? context,
   }) : assert((clubId == null) != (tournamentId == null)),
-       _repos = repos,
+       _scope = scope,
        _context = context,
        super(AddClubGameState(isTournament: tournamentId != null)) {
     on<AddClubGameEventPageOpened>(_onPageOpened);
@@ -173,7 +178,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       if (event.gameId != null) {
         final game = await _repository.getGame(event.gameId!, clubId!);
         final allIds = [...game.players, game.referee];
-        final players = await _repos.playersRepository.getPlayersByIds(allIds);
+        final players = await _scope.playersRepository.getPlayersByIds(allIds);
         final refereePlayer = players.firstWhereOrNull((element) => element.id == game.referee);
         emitEffect(
           AddClubGameEffect.setValues(
@@ -244,7 +249,7 @@ class AddClubGameBloc extends Bloc<AddClubGameEvent, AddClubGameState>
       final settings = list[3] as TournamentSettingsModel;
 
       final allIds = [...game.players, game.referee];
-      final players = await _repos.playersRepository.getPlayersByIds(allIds);
+      final players = await _scope.playersRepository.getPlayersByIds(allIds);
 
       final refereePlayer = players.firstWhereOrNull((element) => element.id == game.referee);
       final hasScores = game.addScore.any((s) => s != 0);

@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/feature/player_statistics/player_statistics_dependencies.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_bloc.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_event.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_state.dart';
@@ -25,7 +26,7 @@ class PlayerStatsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<PlayerStatsBloc>(
       create: (context) => PlayerStatsBloc(
-        RepositoryFactory.of(context).playerStatisticsRepository,
+        DependencyScope.of(context).playerStatisticsRepository,
       )..add(PlayerStatsEvent.pageOpened(playerId: playerId)),
       child: PlayerStatsView(playerId: playerId),
     );

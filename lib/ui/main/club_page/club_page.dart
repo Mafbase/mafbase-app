@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/widgets/bill_plan_dialog.dart';
+import 'package:seating_generator_web/data/dependencies/club_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/purchase_repository_dependency.dart';
+import 'package:seating_generator_web/data/dependencies/stream_repository_dependency.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier.dart';
 import 'package:seating_generator_web/data/notifiers/auth_notifier_model.dart';
 import 'package:seating_generator_web/domain/interactors/bill_club_interactor.dart';
@@ -38,18 +41,18 @@ class ClubPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repos = RepositoryFactory.of(context);
+    final scope = DependencyScope.of(context);
     return BlocProvider<ClubBloc>(
       create: (context) {
         final args = ClubBlocArgs(clubId: clubId, cachedModel: cachedModel);
         return ClubBloc(
           router: ClubRouterImpl(context),
           args: args,
-          getClubInteractor: GetClubInteractor(repos.clubRepository),
-          billClubInteractor: BillClubInteractor(repos.purchaseRepository),
-          checkClubInteractor: CheckClubInteractor(repos.clubRepository),
-          clubRepository: repos.clubRepository,
-          streamRepository: repos.streamRepository,
+          getClubInteractor: GetClubInteractor(scope.clubRepository),
+          billClubInteractor: BillClubInteractor(scope.purchaseRepository),
+          checkClubInteractor: CheckClubInteractor(scope.clubRepository),
+          clubRepository: scope.clubRepository,
+          streamRepository: scope.streamRepository,
         );
       },
       child: Container(

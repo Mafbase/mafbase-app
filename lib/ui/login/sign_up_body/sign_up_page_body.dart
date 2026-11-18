@@ -29,10 +29,9 @@ class SignUpPageBody extends StatelessWidget {
       key: const Key('SignUpBlocProvider'),
       create: (context) {
         final scope = DependencyScope.of(context);
-        final repos = scope.repositoryFactory;
         return SignUpBloc(
-          SignUpInteractor(repos.authRepository),
-          LoginInteractor(repos.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
+          SignUpInteractor(scope.authRepository),
+          LoginInteractor(scope.authRepository, scope.storageFactory.credentialStorage, scope.authNotifier),
           SignUpPageRouterImpl(context),
         );
       },

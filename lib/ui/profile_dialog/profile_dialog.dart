@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seating_generator_web/app/assets.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/ui/profile_dialog/profile_dialog_router.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
@@ -29,7 +29,7 @@ class ProfileDialog extends StatefulWidget {
       builder: (context) => BlocProvider<ProfileDialogBloc>(
         create: (context) => ProfileDialogBloc(
           player: player,
-          repos: RepositoryFactory.of(context),
+          scope: DependencyScope.of(context),
           router: ProfileDialogRouterImpl(context),
         ),
         child: ProfileDialog(

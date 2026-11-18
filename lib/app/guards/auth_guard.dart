@@ -17,7 +17,7 @@ class AuthGuard extends AutoRouteGuard {
     // Bootstrap auth state on first navigation
     if (_authNotifier.value is AuthNotifierLoadingModel) {
       try {
-        final authRepository = _scope.repositoryFactory.authRepository;
+        final authRepository = _scope.authRepository;
         final pushTokenService = _scope.serviceProvider.pushTokenService;
 
         final fcmToken = await pushTokenService.getFcmToken();

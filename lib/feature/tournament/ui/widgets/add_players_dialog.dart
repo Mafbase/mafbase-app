@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/custom_dialog.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
 import 'package:seating_generator_web/common/widgets/player_autocomplete/player_autocomplete.dart';
+import 'package:seating_generator_web/data/dependencies/players_repository_dependency.dart';
 import 'package:seating_generator_web/domain/models/player_model.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_bloc.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/add_players_effect.dart';
@@ -36,7 +37,7 @@ class AddPlayersDialog extends StatefulWidget {
         barrierDismissible: false,
         builder: (context) => BlocProvider(
           create: (context) => AddPlayersBloc(
-            playersRepository: RepositoryFactory.of(context).playersRepository,
+            playersRepository: DependencyScope.of(context).playersRepository,
             tournamentId: tournamentId,
             existingPlayers: existingPlayers,
           ),

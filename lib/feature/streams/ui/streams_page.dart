@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/data/dependencies/stream_repository_dependency.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_item_model.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_item_sheet.dart';
@@ -28,7 +29,7 @@ class StreamsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final streamRepository = RepositoryFactory.of(context).streamRepository;
+    final streamRepository = DependencyScope.of(context).streamRepository;
     return BlocProvider<StreamsAdminBloc>(
       create: (_) => StreamsAdminBloc(streamRepository)..add(StreamsAdminEventPageOpened(tournamentId: tournamentId)),
       child: StreamsPageContent(tournamentId: tournamentId),

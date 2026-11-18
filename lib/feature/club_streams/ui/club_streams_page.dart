@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:seating_generator_web/app/di/repository_factory.dart';
+import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/common/widgets/confirm_dialog.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/common/widgets/loading_overlay.dart';
+import 'package:seating_generator_web/data/dependencies/stream_repository_dependency.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_bloc.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_event.dart';
 import 'package:seating_generator_web/feature/club_streams/bloc/club_streams_admin_state.dart';
@@ -23,7 +24,7 @@ class ClubStreamsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final streamRepository = RepositoryFactory.of(context).streamRepository;
+    final streamRepository = DependencyScope.of(context).streamRepository;
     return BlocProvider<ClubStreamsAdminBloc>(
       create: (_) => ClubStreamsAdminBloc(streamRepository)..add(ClubStreamsAdminEventPageOpened(clubId: clubId)),
       child: ClubStreamsPageContent(clubId: clubId),
