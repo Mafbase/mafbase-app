@@ -100,7 +100,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
   int? firstDie;
   BestMove? bestMove;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
-  late DateTime date = widget.initDateTime ?? DateTime.now();
+  late DateTime? date = widget.initDateTime;
   CiSchemeModel? ciSchemeModel;
   RatingScheme? ratingScheme;
   final Set<PlayerModel> players = {};
@@ -472,7 +472,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                         : () {
                             showDatePicker(
                               context: context,
-                              initialDate: date,
+                              initialDate: date ?? DateTime.now(),
                               firstDate: DateTime(2000),
                               lastDate: DateTime.now(),
                             ).then((value) async {
@@ -480,7 +480,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                               if (value != null) {
                                 final timeOfDay = await showTimePicker(
                                   context: context,
-                                  initialTime: TimeOfDay.fromDateTime(date),
+                                  initialTime: TimeOfDay.fromDateTime(date ?? DateTime.now()),
                                   initialEntryMode: TimePickerEntryMode.input,
                                   builder: (context, child) => MediaQuery(
                                     data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
@@ -506,7 +506,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                           children: [
                             Text(context.locale.date),
                             const Spacer(),
-                            Text(DateFormat('dd:MM:yyy HH:mm').format(date)),
+                            Text(date == null ? 'Не выбрана' : DateFormat('dd:MM:yyy HH:mm').format(date!)),
                           ],
                         ),
                       ),
@@ -532,7 +532,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                         padding: const EdgeInsets.all(16.0),
                         child: TextButton(
                           onPressed: () {
-                            context.read<AddClubGameBloc>().add(AddClubGameEvent.newGame(dateTime: date));
+                            context.read<AddClubGameBloc>().add(AddClubGameEvent.newGame(dateTime: date!));
                           },
                           child: Text(context.locale.addGame),
                         ),
@@ -646,6 +646,11 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
       return;
     }
 
+    if (date == null) {
+      AppRouterHelper.showErrorDialog(context, 'Не указана дата игры');
+      return;
+    }
+
     // Проверка что все значения addScore неотрицательные
     final addScores = addScoreControllers.map((e) => double.parse(e.text.replaceAll(',', '.'))).toList();
     if (addScores.any((score) => score < 0)) {
@@ -666,7 +671,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     context.read<AddClubGameBloc>().add(
           AddClubGameEvent.submit(
             gameResult: ClubGameResult(
-              date: date.toIso8601String(),
+              date: date!.toIso8601String(),
               addScore: addScores.map((e) => (e * 100).floor()).toList(),
               minusScore: minusScores.map((e) => (e * 100).floor()).toList(),
               players: controllers.map((e) => players.firstWhere((element) => e.text == element.nickname).id),
