@@ -547,6 +547,79 @@
   },
   "date": "Дата:",
   "@date": {},
+  "dateNotSelected": "Не выбрана",
+  "@dateNotSelected": {},
+  "clubGameDateRequired": "Не указана дата игры",
+  "@clubGameDateRequired": {},
+  "clubGameRefereeLabel": "Судья",
+  "@clubGameRefereeLabel": {},
+  "clubGameFirstDieLabel": "Первый отстрел:",
+  "@clubGameFirstDieLabel": {},
+  "clubGameFirstDieNotSelected": "Не указан",
+  "@clubGameFirstDieNotSelected": {},
+  "clubGameFirstDieMiss": "Промах",
+  "@clubGameFirstDieMiss": {},
+  "clubGameBestMoveLabel": "Лучший ход:",
+  "@clubGameBestMoveLabel": {},
+  "clubGameBestMoveFull": "Полный лучший ход",
+  "@clubGameBestMoveFull": {},
+  "clubGameBestMoveHalf": "Двойка черных",
+  "@clubGameBestMoveHalf": {},
+  "clubGameBestMoveMiss": "Мимо",
+  "@clubGameBestMoveMiss": {},
+  "clubGameBestMoveOne": "Один маф",
+  "@clubGameBestMoveOne": {},
+  "clubGameResultLabel": "Результат:",
+  "@clubGameResultLabel": {},
+  "clubGameWinCity": "Победа города",
+  "@clubGameWinCity": {},
+  "clubGameWinDraw": "Ничья",
+  "@clubGameWinDraw": {},
+  "clubGameWinMafia": "Победа мафии",
+  "@clubGameWinMafia": {},
+  "clubGameEditButton": "Изменить",
+  "@clubGameEditButton": {},
+  "clubGamePlayerLabel": "Игрок {number}",
+  "@clubGamePlayerLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "clubGameCheckRolesError": "Проверьте роли",
+  "@clubGameCheckRolesError": {},
+  "clubGameWinRequired": "Не выбран результат игры",
+  "@clubGameWinRequired": {},
+  "clubGamePlayerNotFound": "Не найден игрок: {nickname}",
+  "@clubGamePlayerNotFound": {
+    "placeholders": {
+      "nickname": {
+        "type": "String",
+        "example": "ivan"
+      }
+    }
+  },
+  "clubGameRefereeNotFound": "Не найден судья: {nickname}",
+  "@clubGameRefereeNotFound": {
+    "placeholders": {
+      "nickname": {
+        "type": "String",
+        "example": "ivan"
+      }
+    }
+  },
+  "clubGameBestMoveRequired": "Установите лучший ход",
+  "@clubGameBestMoveRequired": {},
+  "clubGameFirstDieRequired": "Не указан первый отстрел",
+  "@clubGameFirstDieRequired": {},
+  "clubGameCiSchemeRequired": "Не указана схема компенсации",
+  "@clubGameCiSchemeRequired": {},
+  "clubGameAddScoreNegativeError": "Положительные баллы не могут быть отрицательными",
+  "@clubGameAddScoreNegativeError": {},
+  "clubGameMinusScoreNegativeError": "Отрицательные баллы не могут быть отрицательными (используйте положительное значение)",
+  "@clubGameMinusScoreNegativeError": {},
   "error": "Ошибка",
   "@error": {},
   "cancel": "Закрыть",

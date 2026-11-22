@@ -528,6 +528,79 @@
   "@ratingGames": {},
   "date": "Date:",
   "@date": {},
+  "dateNotSelected": "Not selected",
+  "@dateNotSelected": {},
+  "clubGameDateRequired": "Game date is not set",
+  "@clubGameDateRequired": {},
+  "clubGameRefereeLabel": "Referee",
+  "@clubGameRefereeLabel": {},
+  "clubGameFirstDieLabel": "First shoot:",
+  "@clubGameFirstDieLabel": {},
+  "clubGameFirstDieNotSelected": "Not specified",
+  "@clubGameFirstDieNotSelected": {},
+  "clubGameFirstDieMiss": "Miss",
+  "@clubGameFirstDieMiss": {},
+  "clubGameBestMoveLabel": "Best move:",
+  "@clubGameBestMoveLabel": {},
+  "clubGameBestMoveFull": "Full best move",
+  "@clubGameBestMoveFull": {},
+  "clubGameBestMoveHalf": "Two black cards",
+  "@clubGameBestMoveHalf": {},
+  "clubGameBestMoveMiss": "Miss",
+  "@clubGameBestMoveMiss": {},
+  "clubGameBestMoveOne": "One mafia",
+  "@clubGameBestMoveOne": {},
+  "clubGameResultLabel": "Result:",
+  "@clubGameResultLabel": {},
+  "clubGameWinCity": "City wins",
+  "@clubGameWinCity": {},
+  "clubGameWinDraw": "Draw",
+  "@clubGameWinDraw": {},
+  "clubGameWinMafia": "Mafia wins",
+  "@clubGameWinMafia": {},
+  "clubGameEditButton": "Edit",
+  "@clubGameEditButton": {},
+  "clubGamePlayerLabel": "Player {number}",
+  "@clubGamePlayerLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "clubGameCheckRolesError": "Check the roles",
+  "@clubGameCheckRolesError": {},
+  "clubGameWinRequired": "Game result is not selected",
+  "@clubGameWinRequired": {},
+  "clubGamePlayerNotFound": "Player not found: {nickname}",
+  "@clubGamePlayerNotFound": {
+    "placeholders": {
+      "nickname": {
+        "type": "String",
+        "example": "ivan"
+      }
+    }
+  },
+  "clubGameRefereeNotFound": "Referee not found: {nickname}",
+  "@clubGameRefereeNotFound": {
+    "placeholders": {
+      "nickname": {
+        "type": "String",
+        "example": "ivan"
+      }
+    }
+  },
+  "clubGameBestMoveRequired": "Set the best move",
+  "@clubGameBestMoveRequired": {},
+  "clubGameFirstDieRequired": "First shoot is not specified",
+  "@clubGameFirstDieRequired": {},
+  "clubGameCiSchemeRequired": "Compensation scheme is not specified",
+  "@clubGameCiSchemeRequired": {},
+  "clubGameAddScoreNegativeError": "Positive score cannot be negative",
+  "@clubGameAddScoreNegativeError": {},
+  "clubGameMinusScoreNegativeError": "Negative score cannot be negative (use a positive value)",
+  "@clubGameMinusScoreNegativeError": {},
   "error": "Error",
   "@error": {},
   "cancel": "Cancel",

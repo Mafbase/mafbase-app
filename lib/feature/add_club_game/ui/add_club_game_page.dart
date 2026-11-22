@@ -100,7 +100,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
   int? firstDie;
   BestMove? bestMove;
   List<PlayerRole> roles = List.generate(10, (index) => PlayerRole.citizen);
-  late DateTime date = widget.initDateTime ?? DateTime.now();
+  late DateTime? date = widget.initDateTime;
   CiSchemeModel? ciSchemeModel;
   RatingScheme? ratingScheme;
   final Set<PlayerModel> players = {};
@@ -309,7 +309,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                 focusNode: refereeFocusNode,
                 onSelected: (player) => players.add(player),
                 readOnly: widget.readOnly || state.isTournament,
-                label: 'Судья',
+                label: context.locale.clubGameRefereeLabel,
                 onNewPlayer: ({String? initValue}) async {
                   context
                       .read<AddClubGameBloc>()
@@ -317,7 +317,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                 },
               ),
               const SizedBox(height: 8),
-              Text('Первый отстрел:', style: MyTheme.of(context).defaultTextStyle),
+              Text(context.locale.clubGameFirstDieLabel, style: MyTheme.of(context).defaultTextStyle),
               const SizedBox(height: 4),
               CustomDropdown<int>(
                 readOnly: widget.readOnly,
@@ -326,9 +326,9 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                   return index - 1;
                 }),
                 mapToString: (index) => index == null
-                    ? 'Не указан'
+                    ? context.locale.clubGameFirstDieNotSelected
                     : index == -1
-                        ? 'Промах'
+                        ? context.locale.clubGameFirstDieMiss
                         : (index + 1).toString(),
                 onChanged: widget.readOnly
                     ? null
@@ -343,7 +343,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
               ),
               const SizedBox(height: 8),
               if (firstDie != null && firstDie != -1) ...[
-                Text('Лучший ход:', style: MyTheme.of(context).defaultTextStyle),
+                Text(context.locale.clubGameBestMoveLabel, style: MyTheme.of(context).defaultTextStyle),
                 const SizedBox(height: 4),
                 CustomDropdown<BestMove>(
                   readOnly: widget.readOnly,
@@ -353,16 +353,16 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                     final String text;
                     switch (bestMove) {
                       case BestMove.full:
-                        text = 'Полный лучший ход';
+                        text = context.locale.clubGameBestMoveFull;
                         break;
                       case BestMove.half:
-                        text = 'Двойка черных';
+                        text = context.locale.clubGameBestMoveHalf;
                         break;
                       case BestMove.miss:
-                        text = 'Мимо';
+                        text = context.locale.clubGameBestMoveMiss;
                         break;
                       case BestMove.one:
-                        text = 'Один маф';
+                        text = context.locale.clubGameBestMoveOne;
                         break;
                       default:
                         text = '';
@@ -374,7 +374,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                 ),
                 const SizedBox(height: 8),
               ],
-              Text('Результат:', style: MyTheme.of(context).defaultTextStyle),
+              Text(context.locale.clubGameResultLabel, style: MyTheme.of(context).defaultTextStyle),
               const SizedBox(height: 4),
               StatefulBuilder(
                 builder: (context, setState) {
@@ -385,13 +385,13 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                       final String text;
                       switch (win) {
                         case GameWin.city:
-                          text = 'Победа города';
+                          text = context.locale.clubGameWinCity;
                           break;
                         case GameWin.draw:
-                          text = 'Ничья';
+                          text = context.locale.clubGameWinDraw;
                           break;
                         case GameWin.mafia:
-                          text = 'Победа мафии';
+                          text = context.locale.clubGameWinMafia;
                           break;
                         default:
                           text = '';
@@ -472,7 +472,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                         : () {
                             showDatePicker(
                               context: context,
-                              initialDate: date,
+                              initialDate: date ?? DateTime.now(),
                               firstDate: DateTime(2000),
                               lastDate: DateTime.now(),
                             ).then((value) async {
@@ -480,7 +480,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                               if (value != null) {
                                 final timeOfDay = await showTimePicker(
                                   context: context,
-                                  initialTime: TimeOfDay.fromDateTime(date),
+                                  initialTime: TimeOfDay.fromDateTime(date ?? DateTime.now()),
                                   initialEntryMode: TimePickerEntryMode.input,
                                   builder: (context, child) => MediaQuery(
                                     data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
@@ -506,7 +506,11 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                           children: [
                             Text(context.locale.date),
                             const Spacer(),
-                            Text(DateFormat('dd:MM:yyy HH:mm').format(date)),
+                            Text(
+                              date == null
+                                  ? context.locale.dateNotSelected
+                                  : DateFormat('dd:MM:yyy HH:mm').format(date!),
+                            ),
                           ],
                         ),
                       ),
@@ -522,7 +526,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                       width: 400,
                       padding: const EdgeInsets.all(20),
                       child: CustomButton(
-                        text: widget.readOnly ? 'Изменить' : 'Сохранить',
+                        text: widget.readOnly ? context.locale.clubGameEditButton : context.locale.save,
                         onTap: () => submit(state),
                         disabled: state.isLoading,
                       ),
@@ -532,7 +536,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                         padding: const EdgeInsets.all(16.0),
                         child: TextButton(
                           onPressed: () {
-                            context.read<AddClubGameBloc>().add(AddClubGameEvent.newGame(dateTime: date));
+                            context.read<AddClubGameBloc>().add(AddClubGameEvent.newGame(dateTime: date!));
                           },
                           child: Text(context.locale.addGame),
                         ),
@@ -579,7 +583,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
               nicknameController: controllers[i],
               focusNode: focusNodes[i],
               readOnly: widget.readOnly,
-              label: 'Игрок ${i + 1}',
+              label: context.locale.clubGamePlayerLabel(i + 1),
               onSelected: (player) {
                 players.add(player);
                 if (i < 9) {
@@ -610,63 +614,67 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     if (roles.where((element) => element == PlayerRole.maf).length != 2 ||
         roles.where((element) => element == PlayerRole.don).length != 1 ||
         roles.where((element) => element == PlayerRole.sheriff).length != 1) {
-      AppRouterHelper.showErrorDialog(context, 'Проверьте роли');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameCheckRolesError);
       return;
     }
     if (winSelected == null) {
-      AppRouterHelper.showErrorDialog(context, 'Не выбран результат игры');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameWinRequired);
       return;
     }
 
     if (controllers.any((e) => players.firstWhereOrNull((element) => e.text == element.nickname) == null)) {
       AppRouterHelper.showErrorDialog(
         context,
-        'Не найден игрок: ${controllers.firstWhere((e) => players.firstWhereOrNull((element) => e.text == element.nickname) == null).text}',
+        context.locale.clubGamePlayerNotFound(
+          controllers.firstWhere((e) => players.firstWhereOrNull((element) => e.text == element.nickname) == null).text,
+        ),
       );
       return;
     }
 
     if (players.firstWhereOrNull((element) => refereeController.text == element.nickname) == null &&
         !state.isTournament) {
-      AppRouterHelper.showErrorDialog(context, 'Не найден судья: ${refereeController.text}');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameRefereeNotFound(refereeController.text));
       return;
     }
 
     if (firstDie != -1 && bestMove == null) {
-      AppRouterHelper.showErrorDialog(context, 'Установите лучший ход');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameBestMoveRequired);
       return;
     }
 
     if (firstDie == null) {
-      AppRouterHelper.showErrorDialog(context, 'Не указан первый отстрел');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameFirstDieRequired);
       return;
     }
     if (ciSchemeModel == null) {
-      AppRouterHelper.showErrorDialog(context, 'Не указана схема компенсации');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameCiSchemeRequired);
+      return;
+    }
+
+    if (date == null) {
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameDateRequired);
       return;
     }
 
     // Проверка что все значения addScore неотрицательные
     final addScores = addScoreControllers.map((e) => double.parse(e.text.replaceAll(',', '.'))).toList();
     if (addScores.any((score) => score < 0)) {
-      AppRouterHelper.showErrorDialog(context, 'Положительные баллы не могут быть отрицательными');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameAddScoreNegativeError);
       return;
     }
 
     // Проверка что все значения minusScore неотрицательные
     final minusScores = minusScoreControllers.map((e) => double.parse(e.text.replaceAll(',', '.'))).toList();
     if (minusScores.any((score) => score < 0)) {
-      AppRouterHelper.showErrorDialog(
-        context,
-        'Отрицательные баллы не могут быть отрицательными (используйте положительное значение)',
-      );
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameMinusScoreNegativeError);
       return;
     }
 
     context.read<AddClubGameBloc>().add(
           AddClubGameEvent.submit(
             gameResult: ClubGameResult(
-              date: date.toIso8601String(),
+              date: date!.toIso8601String(),
               addScore: addScores.map((e) => (e * 100).floor()).toList(),
               minusScore: minusScores.map((e) => (e * 100).floor()).toList(),
               players: controllers.map((e) => players.firstWhere((element) => e.text == element.nickname).id),
