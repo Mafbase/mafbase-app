@@ -506,7 +506,11 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
                           children: [
                             Text(context.locale.date),
                             const Spacer(),
-                            Text(date == null ? 'Не выбрана' : DateFormat('dd:MM:yyy HH:mm').format(date!)),
+                            Text(
+                              date == null
+                                  ? context.locale.dateNotSelected
+                                  : DateFormat('dd:MM:yyy HH:mm').format(date!),
+                            ),
                           ],
                         ),
                       ),
@@ -647,7 +651,7 @@ class _AddClubGamePageState extends CustomState<_AddClubGamePageContent>
     }
 
     if (date == null) {
-      AppRouterHelper.showErrorDialog(context, 'Не указана дата игры');
+      AppRouterHelper.showErrorDialog(context, context.locale.clubGameDateRequired);
       return;
     }
 
