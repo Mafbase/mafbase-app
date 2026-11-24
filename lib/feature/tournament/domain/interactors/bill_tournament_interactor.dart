@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/core/domain/base_interactor.dart';
 import 'package:seating_generator_web/shared/billing/domain/models/billing_result.dart';
 import 'package:seating_generator_web/shared/billing/domain/purchase_repository.dart';

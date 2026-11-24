@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Отступ сверху и заголовки AppBar слева для iPhone Duo, где статус-бар — капсула сбоку, а сверху отступа нет.
 /// Обход https://github.com/flutter/flutter/issues/193202: убрать, когда Flutter научится этой раскладке сам.

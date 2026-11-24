@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/utils.dart';
 
 /// Плашка справа от названия пункта меню; шрифт задаёт само меню.

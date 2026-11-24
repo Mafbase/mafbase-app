@@ -1,10 +1,11 @@
 @Timeout(Duration(seconds: 30))
 library;
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/shared/tournament/domain/tournament_edit_repository.dart';
@@ -51,7 +52,7 @@ Future<_Harness> _openWizard(WidgetTester tester) async {
         child: MaterialApp(
           theme: AppTheme.light(isMobile: true),
           locale: const Locale('ru'),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Builder(

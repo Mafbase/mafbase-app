@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/photo_themes/domain/models/photo_theme_model.dart';
 import 'package:seating_generator_web/utils.dart';

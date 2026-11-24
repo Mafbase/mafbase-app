@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:seating_generator_web/common/widgets/club_avatar.dart';
 import 'package:seating_generator_web/shared/club/domain/models/club_model.dart';

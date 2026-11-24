@@ -14,7 +14,9 @@ analyzer:
     - "**/*.pbjson.dart"
     - "**/*.pbenum.dart"
     - "**/*.g.dart"
+    - "**/*.gr.dart"
     - "**/*.freezed.dart"
+    - lib/l10n/app_localizations*.dart
     - build/**
     - android/**
     - ios/**

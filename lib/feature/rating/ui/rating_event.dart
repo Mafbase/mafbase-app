@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/feature/rating/ui/widgets/rating_table.dart';
 
 part 'rating_event.freezed.dart';

@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_help_image.dart';
 import 'package:seating_generator_web/utils.dart';
 

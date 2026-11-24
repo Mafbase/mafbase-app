@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_texts.dart';
 import 'package:seating_generator_web/utils.dart';

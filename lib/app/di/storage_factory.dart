@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/core/storage/credential_secure_storage_impl.dart';
 import 'package:seating_generator_web/core/storage/credential_storage.dart';

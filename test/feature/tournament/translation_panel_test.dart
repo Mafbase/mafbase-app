@@ -3,11 +3,12 @@ library;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/shared/translation/domain/models/translation_key_model.dart';
@@ -77,7 +78,7 @@ Future<_TestRouter> _pumpPanel(WidgetTester tester, {required int tablesCount, b
       child: MaterialApp.router(
         theme: AppTheme.light(isMobile: false),
         locale: const Locale('ru'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         routerConfig: router.config(),
       ),

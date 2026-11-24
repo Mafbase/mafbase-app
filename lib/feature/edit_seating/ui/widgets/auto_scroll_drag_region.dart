@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Wraps a scrollable area and auto-scrolls when a pointer (drag) is near
 /// the top or bottom edges.

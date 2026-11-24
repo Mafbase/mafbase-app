@@ -2,9 +2,10 @@
 library;
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/feature/translation_links/translation_table_links.dart';
@@ -51,7 +52,7 @@ Future<void> _pumpRow(WidgetTester tester, {bool isWeb = false, double width = 6
     MaterialApp.router(
       theme: AppTheme.light(isMobile: false),
       locale: const Locale('ru'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router.config(),
     ),

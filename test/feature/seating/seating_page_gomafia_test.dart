@@ -4,9 +4,10 @@ library;
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';
@@ -43,7 +44,7 @@ Future<StreamController<TournamentPageState>> _pumpSeating(
       child: MaterialApp(
         theme: AppTheme.light(isMobile: true),
         locale: const Locale('ru'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: SeatingPage(tournamentId: 1, gomafia: gomafia),
       ),
@@ -147,7 +148,7 @@ Future<_SeatingRouter> _pumpSeatingRouter(
       child: MaterialApp.router(
         theme: AppTheme.light(isMobile: true),
         locale: const Locale('ru'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         routerConfig: router.config(deepLinkBuilder: (_) => DeepLink.path(url)),
       ),

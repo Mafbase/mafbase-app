@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/feature/photo_themes/photo_themes_dependencies.dart';
 import 'package:seating_generator_web/feature/photo_themes/ui/photo_themes_bloc.dart';

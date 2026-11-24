@@ -40,10 +40,10 @@ import 'dart:async';
 import 'dart:math' as math show max;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show kMinInteractiveDimension;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show kMinInteractiveDimension;
 
 /// Копия приватного `_AutocompleteCallbackAction` из Flutter SDK.
 ///

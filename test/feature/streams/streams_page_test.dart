@@ -2,10 +2,11 @@
 library;
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
@@ -54,7 +55,7 @@ Future<void> _pumpPage(
     MaterialApp(
       theme: AppTheme.light(isMobile: true),
       locale: const Locale('ru'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: ChangeNotifierProvider<AuthNotifier>.value(
         value: authNotifier,

@@ -70,7 +70,7 @@ await tester.pump();  // render final frame
 
 ### Widget wrapper — standard setup
 
-Always wrap the page in the full app context:
+Always wrap the page in the full app context. Import Material from `package:material_ui/material_ui.dart` and take the delegates from `appLocalizationsDelegates` (`lib/app/localization_delegates.dart`): `AppLocalizations.localizationsDelegates` holds the legacy `flutter_localizations` delegates, and `material_ui` widgets fail with "No MaterialLocalizations found" under the `ru` locale.
 
 ```dart
 Widget _buildPage(XxxBloc bloc) {
@@ -78,7 +78,7 @@ Widget _buildPage(XxxBloc bloc) {
     value: MyTheme.light(false),
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: const Locale('ru'),
       home: BlocProvider<XxxBloc>.value(

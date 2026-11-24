@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/shared/tournament/domain/models/tournament_model.dart';
 
 abstract class TournamentsRepository {

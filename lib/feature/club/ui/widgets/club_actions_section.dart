@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/utils/widget_extensions.dart';
 import 'package:seating_generator_web/feature/club/ui/widgets/club_action_card.dart';
 import 'package:seating_generator_web/utils.dart';
