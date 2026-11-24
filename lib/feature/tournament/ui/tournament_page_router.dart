@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/router.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/shared/player/domain/models/player_model.dart';

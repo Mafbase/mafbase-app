@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A page that fades in. Currently unused after auto_route migration.
 class FadeTransitionPage extends Page<void> {

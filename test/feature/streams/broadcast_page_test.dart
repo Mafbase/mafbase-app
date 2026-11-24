@@ -1,10 +1,11 @@
 @Timeout(Duration(seconds: 10))
 library;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/shared/stream/domain/stream_repository.dart';
 import 'package:seating_generator_web/feature/streams/ui/broadcast_page.dart';
@@ -43,7 +44,7 @@ Future<_RecordingStreamRepository> _pumpPage(WidgetTester tester, {required bool
       child: MaterialApp(
         theme: AppTheme.light(isMobile: true),
         locale: const Locale('ru'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: const BroadcastPage(tournamentId: 7, table: 2, broadcastKey: 'operator-token'),
       ),

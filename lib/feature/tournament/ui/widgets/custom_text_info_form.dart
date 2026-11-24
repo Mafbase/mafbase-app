@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/common/widgets/custom_button.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/coverage/widgets/notification_coverage_counter_link.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc.dart';

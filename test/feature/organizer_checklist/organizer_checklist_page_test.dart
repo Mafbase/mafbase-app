@@ -1,9 +1,10 @@
 @Timeout(Duration(seconds: 20))
 library;
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/domain/checklist_key.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/organizer_checklist_bloc.dart';
@@ -39,7 +40,7 @@ Future<RecordingOrganizerChecklistBloc> _pumpPage(WidgetTester tester, Organizer
       child: MaterialApp(
         theme: AppTheme.light(isMobile: true),
         locale: const Locale('ru'),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: appLocalizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: const OrganizerChecklistPage(tournamentId: 1),
       ),

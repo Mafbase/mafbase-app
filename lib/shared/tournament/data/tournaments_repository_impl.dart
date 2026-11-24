@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/core/network/http_client.dart';
 import 'package:seating_generator_web/shared/tournament/data/requests/create_seating_request.dart';

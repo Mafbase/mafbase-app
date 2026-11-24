@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/shared/club/data/requests/add_club_game_request.dart';
 import 'package:seating_generator_web/shared/club/data/requests/create_club_request.dart';

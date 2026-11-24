@@ -1,6 +1,7 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
 
@@ -27,7 +28,7 @@ const appDevices = [lightDesktop, lightMobile, darkDesktop, darkMobile];
 WidgetWrapper appWrapper() => (child) => MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(isMobile: false),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: Material(child: child),
     );
@@ -49,7 +50,7 @@ WidgetWrapper ruAppWrapper() => (child) => MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(isMobile: false),
       locale: const Locale('ru'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: Material(child: child),
     );

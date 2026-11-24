@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/feature/tournaments/domain/interactors/create_tournament_interactor.dart';
 import 'package:seating_generator_web/feature/tournaments/domain/interactors/get_tournaments_interactor.dart';
 import 'package:seating_generator_web/shared/tournament/domain/tournaments_repository.dart';

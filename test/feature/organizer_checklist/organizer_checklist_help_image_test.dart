@@ -1,8 +1,9 @@
 @Timeout(Duration(seconds: 20))
 library;
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/feature/organizer_checklist/ui/widgets/organizer_checklist_help_image.dart';
 import 'package:seating_generator_web/l10n/app_localizations.dart';
@@ -14,7 +15,7 @@ Future<void> _pumpLoadedImage(WidgetTester tester) async {
     MaterialApp(
       theme: AppTheme.light(isMobile: false),
       locale: const Locale('ru'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const Scaffold(
         body: SizedBox(width: 400, child: OrganizerChecklistHelpImage(asset: _asset)),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Индикатор загрузки на месте страницы, пока роутер подгружает её deferred-часть.
 class RouteLoadingPlaceholder extends StatelessWidget {

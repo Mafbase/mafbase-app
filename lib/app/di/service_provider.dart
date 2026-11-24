@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/di/dependency_scope.dart';
 import 'package:seating_generator_web/core/push/device_id_service.dart';
 import 'package:seating_generator_web/core/push/notification_permission_service_impl.dart';

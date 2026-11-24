@@ -3,11 +3,12 @@ library;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:seating_generator_web/app/fresh_stack_navigation.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier.dart';
 import 'package:seating_generator_web/core/auth/auth_notifier_model.dart';
@@ -95,7 +96,7 @@ Future<_TestRouter> _pumpRouter(WidgetTester tester, {Widget? profile}) async {
   await tester.pumpWidget(
     MaterialApp.router(
       theme: AppTheme.light(isMobile: true),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router.config(),
     ),

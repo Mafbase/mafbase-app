@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/feature/rating/ui/rating_page.dart';
 import 'package:seating_generator_web/feature/rating/ui/widgets/rating_table.dart';
 import 'package:seating_generator_web/utils.dart';

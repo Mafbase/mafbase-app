@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/common/theme/my_theme.dart';
 import 'package:seating_generator_web/feature/streams/ui/widgets/stream_operator_link_section.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pb.dart';

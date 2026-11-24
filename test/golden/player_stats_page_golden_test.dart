@@ -1,9 +1,9 @@
 import 'golden_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/feature/player_statistics/domain/model/player_statistics_model.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_bloc.dart';
 import 'package:seating_generator_web/feature/player_statistics/ui/player_stats_event.dart';

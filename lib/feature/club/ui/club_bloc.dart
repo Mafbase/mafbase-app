@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
 import 'package:seating_generator_web/feature/club/domain/interactors/bill_club_interactor.dart';
 import 'package:seating_generator_web/feature/club/domain/interactors/check_club_interactor.dart';

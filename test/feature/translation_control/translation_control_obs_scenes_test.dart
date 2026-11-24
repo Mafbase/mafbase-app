@@ -4,9 +4,10 @@ library;
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:seating_generator_web/app/localization_delegates.dart';
 import 'package:seating_generator_web/common/theme/app_theme.dart';
 import 'package:seating_generator_web/shared/club/domain/club_repository.dart';
 import 'package:seating_generator_web/shared/club/domain/club_translation_repository.dart';
@@ -128,7 +129,7 @@ Widget _obsSectionFor<B extends StateStreamable<TranslationContentState>>(
     MaterialApp(
       theme: AppTheme.light(isMobile: false),
       locale: const Locale('ru'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         body: BlocBuilder<B, TranslationContentState>(

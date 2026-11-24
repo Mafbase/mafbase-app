@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/app/di/service_provider.dart';
 import 'package:seating_generator_web/app/di/storage_factory.dart';
 import 'package:seating_generator_web/core/network/http_client.dart';

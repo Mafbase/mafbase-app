@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/shared/club/domain/models/club_rating_row.dart';
 import 'package:seating_generator_web/utils.dart';
 import 'package:seating_generator_web/utils/number_display.dart';

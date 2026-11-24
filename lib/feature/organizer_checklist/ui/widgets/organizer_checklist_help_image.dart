@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:fullscreen_image_viewer/fullscreen_image_viewer.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/utils.dart';
 
 /// Скриншот справки: вписан в ширину листа, по нажатию открывается на весь экран.
