@@ -64,34 +64,36 @@ class NotificationCoverageContent extends StatelessWidget {
         ],
       ),
       // После правки в диалоге профиля игрока TournamentPageBloc перезагружает участников турнира.
-      body: BlocListener<TournamentPageBloc, TournamentPageState>(
-        listenWhen: (previous, current) => previous.tournamentPlayers != current.tournamentPlayers,
-        listener: (context, _) => _reload(context),
-        child: BlocBuilder<NotificationCoverageBloc, NotificationCoverageState>(
-          builder: (context, state) {
-            if (state.coverage case final coverage?) {
-              return Stack(
-                children: [
-                  NotificationCoverageView(coverage: coverage, onRetry: () => _reload(context)),
-                  if (state.isLoading) const LinearProgressIndicator(),
-                ],
-              );
-            }
-            if (state.isLoading) return const Center(child: CircularProgressIndicator());
+      body: SafeArea(
+        child: BlocListener<TournamentPageBloc, TournamentPageState>(
+          listenWhen: (previous, current) => previous.tournamentPlayers != current.tournamentPlayers,
+          listener: (context, _) => _reload(context),
+          child: BlocBuilder<NotificationCoverageBloc, NotificationCoverageState>(
+            builder: (context, state) {
+              if (state.coverage case final coverage?) {
+                return Stack(
+                  children: [
+                    NotificationCoverageView(coverage: coverage, onRetry: () => _reload(context)),
+                    if (state.isLoading) const LinearProgressIndicator(),
+                  ],
+                );
+              }
+              if (state.isLoading) return const Center(child: CircularProgressIndicator());
 
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 720),
-                  child: NotificationCoverageRetry(
-                    text: locale.checklistCoverageLoadError,
-                    onRetry: () => _reload(context),
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 720),
+                    child: NotificationCoverageRetry(
+                      text: locale.checklistCoverageLoadError,
+                      onRetry: () => _reload(context),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

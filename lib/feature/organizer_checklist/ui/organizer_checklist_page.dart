@@ -50,27 +50,29 @@ class _OrganizerChecklistPageState extends State<OrganizerChecklistPage> {
           ),
         ],
       ),
-      body: BlocBuilder<OrganizerChecklistBloc, OrganizerChecklistState>(
-        builder: (context, state) {
-          if (state.checklist case final checklist?) {
-            return Stack(
-              children: [
-                OrganizerChecklistView(
-                  tournamentId: widget.tournamentId,
-                  checklist: checklist,
-                  isUpdating: state.isUpdating,
-                ),
-                if (state.isUpdating) const LinearProgressIndicator(),
-              ],
-            );
-          }
-          if (state.hasError) {
-            return _LoadError(
-              onRetry: () => context.read<OrganizerChecklistBloc>().add(const OrganizerChecklistEventLoad()),
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
+      body: SafeArea(
+        child: BlocBuilder<OrganizerChecklistBloc, OrganizerChecklistState>(
+          builder: (context, state) {
+            if (state.checklist case final checklist?) {
+              return Stack(
+                children: [
+                  OrganizerChecklistView(
+                    tournamentId: widget.tournamentId,
+                    checklist: checklist,
+                    isUpdating: state.isUpdating,
+                  ),
+                  if (state.isUpdating) const LinearProgressIndicator(),
+                ],
+              );
+            }
+            if (state.hasError) {
+              return _LoadError(
+                onRetry: () => context.read<OrganizerChecklistBloc>().add(const OrganizerChecklistEventLoad()),
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }
