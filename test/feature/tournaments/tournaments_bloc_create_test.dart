@@ -36,7 +36,12 @@ void main() {
 
   TournamentsBloc buildBloc() {
     final repository = _FakeTournamentsRepository();
-    return TournamentsBloc(GetTournamentsInteractor(repository), CreateTournamentInteractor(repository), router);
+    return TournamentsBloc(
+      GetTournamentsInteractor(repository),
+      CreateTournamentInteractor(repository),
+      router,
+      const Stream.empty(),
+    );
   }
 
   blocTest<TournamentsBloc, TournamentsState>(

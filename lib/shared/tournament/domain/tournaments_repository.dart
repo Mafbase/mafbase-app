@@ -18,4 +18,11 @@ abstract class TournamentsRepository {
   Future<TournamentModel> getTournament({required int tournamentId});
 
   Future<bool> isOwner(int tournamentId);
+
+  Future<bool> canDelete(int tournamentId);
+
+  Future<void> deleteTournament(int tournamentId);
+
+  /// Id турниров, удалённых через [deleteTournament].
+  Stream<int> get deletedTournamentIds;
 }

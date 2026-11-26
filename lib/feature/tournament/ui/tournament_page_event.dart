@@ -58,4 +58,6 @@ abstract class TournamentPageEvent with _$TournamentPageEvent {
   const factory TournamentPageEvent.substitutePlayer({
     required PlayerModel oldPlayer,
   }) = TournamentPageEventSubstitutePlayer;
+
+  const factory TournamentPageEvent.deleteTournament() = TournamentPageEventDeleteTournament;
 }

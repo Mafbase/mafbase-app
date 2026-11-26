@@ -25,6 +25,9 @@ abstract class TournamentPageRouter {
 
   void openWebView(String url);
 
+  /// Оставляет в стеке только список турниров: страница удалённого турнира не должна остаться позади.
+  void openTournamentsList();
+
   Future<({int newPlayerId, List<int> games})?> openSubstituteDialog({
     required PlayerModel oldPlayer,
     required List<int> gameNumbers,
@@ -79,5 +82,10 @@ class TournamentPageRouterImpl implements TournamentPageRouter {
   @override
   void openWebView(String url) {
     _context.router.push(WebViewRoute(url: url, title: _context.locale.payment));
+  }
+
+  @override
+  void openTournamentsList() {
+    _context.router.replaceAll([const TournamentsRoute()]);
   }
 }

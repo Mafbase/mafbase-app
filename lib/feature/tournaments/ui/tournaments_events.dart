@@ -13,4 +13,6 @@ abstract class TournamentsEvent with _$TournamentsEvent {
   const factory TournamentsEvent.loadMore() = TournamentsEventLoadMore;
 
   const factory TournamentsEvent.search(String query) = TournamentsEventSearch;
+
+  const factory TournamentsEvent.tournamentDeleted(int tournamentId) = TournamentsEventTournamentDeleted;
 }

@@ -84,6 +84,17 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
     on<TournamentPageEventCustomTextInfo>(_onCustomTextInfo);
     on<TournamentPageEventSetActivePhotoTheme>(_applyPhotoTheme);
     on<TournamentPageEventSubstitutePlayer>(_onSubstitutePlayer);
+    on<TournamentPageEventDeleteTournament>(_onDeleteTournament);
+  }
+
+  Future<void> _onDeleteTournament(TournamentPageEventDeleteTournament event, Emitter emit) async {
+    emit(state.copyWith(isDeletingTournament: true));
+    try {
+      await _scope.tournamentsRepository.deleteTournament(tournamentId);
+    } finally {
+      emit(state.copyWith(isDeletingTournament: false));
+    }
+    router.openTournamentsList();
   }
 
   Future _onStartGameInfo(TournamentPageEventStartGameInfo event, Emitter emit) async {
@@ -126,14 +137,20 @@ class TournamentPageBloc extends Bloc<TournamentPageEvent, TournamentPageState>
 
   Future<void> _onPageOpened(TournamentPageEventPageOpened event, Emitter emit) async {
     await Future.wait([
-      _tournamentCheckInteractor(
-        tournamentId: tournamentId,
-      ).onError((error, _) => false).then((value) => emit(state.copyWith(isMyTournament: value))),
+      Future(() async {
+        final isMyTournament = await _tournamentCheckInteractor(tournamentId: tournamentId).onError((_, __) => false);
+        emit(state.copyWith(isMyTournament: isMyTournament));
+        if (!isMyTournament) return;
+
+        final canDelete = await _scope.tournamentsRepository.canDelete(tournamentId).onError((_, __) => false);
+        emit(state.copyWith(canDeleteTournament: canDelete));
+      }),
       Future(() async {
         final tournament = await _getTournamentInteractor(tournamentId: tournamentId);
 
         emit(
           state.copyWith(
+            tournamentName: tournament.name,
             billedPlayers: tournament.billedPlayers,
             billedTranslation: tournament.billedTranslation,
             notificationEnabled: tournament.notificationEnabled,
