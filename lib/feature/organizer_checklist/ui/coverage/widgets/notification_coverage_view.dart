@@ -35,7 +35,8 @@ class NotificationCoverageView extends StatelessWidget {
     final isMobile = context.isMobile;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(isMobile ? 16 : 24),
+      // Отступ под системные панели и вырез, чтобы контент не уходил под них при прокрутке до конца.
+      padding: EdgeInsets.all(isMobile ? 16 : 24) + MediaQuery.paddingOf(context),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 720),

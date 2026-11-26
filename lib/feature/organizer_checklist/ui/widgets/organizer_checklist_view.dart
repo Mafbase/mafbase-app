@@ -72,7 +72,9 @@ class OrganizerChecklistView extends StatelessWidget {
     final visible = checklist.visibleItems;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24, vertical: isMobile ? 16 : 24),
+      // Отступ под системные панели и вырез, чтобы контент не уходил под них при прокрутке до конца.
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 24, vertical: isMobile ? 16 : 24) +
+          MediaQuery.paddingOf(context),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 720),
