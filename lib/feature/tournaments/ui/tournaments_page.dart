@@ -39,6 +39,7 @@ class TournamentsPage extends StatelessWidget {
         GetTournamentsInteractor(scope.tournamentsRepository),
         CreateTournamentInteractor(scope.tournamentsRepository),
         TournamentsRouterImpl(context),
+        scope.tournamentsRepository.deletedTournamentIds,
       ),
       child: const _TournamentsPageContent(),
     );

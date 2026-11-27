@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:seating_generator_web/common/bloc_extension.dart';
@@ -14,11 +16,13 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
   final CreateTournamentInteractor _createTournamentInteractor;
   @visibleForTesting
   final TournamentsRouter router;
+  late final StreamSubscription<int> _deletedTournamentsSubscription;
 
   TournamentsBloc(
     this._getTournamentsInteractor,
     this._createTournamentInteractor,
     this.router,
+    Stream<int> deletedTournamentIds,
   ) : super(
           const TournamentsState(tournaments: [], isLoading: true),
         ) {
@@ -28,6 +32,24 @@ class TournamentsBloc extends Bloc<TournamentsEvent, TournamentsState> {
     on<TournamentsEventSearch>(
       _onSearch,
       transformer: (events, mapper) => events.debounceTime(const Duration(milliseconds: 300)).switchMap(mapper),
+    );
+    on<TournamentsEventTournamentDeleted>(_onTournamentDeleted);
+    _deletedTournamentsSubscription = deletedTournamentIds.listen(
+      (id) => add(TournamentsEvent.tournamentDeleted(id)),
+    );
+  }
+
+  @override
+  Future<void> close() async {
+    await _deletedTournamentsSubscription.cancel();
+    return super.close();
+  }
+
+  void _onTournamentDeleted(TournamentsEventTournamentDeleted event, Emitter<TournamentsState> emit) {
+    emit(
+      state.copyWith(
+        tournaments: state.tournaments.where((tournament) => tournament.id != event.tournamentId).toList(),
+      ),
     );
   }
 

@@ -9,6 +9,7 @@ import 'package:seating_generator_web/feature/tournament/ui/tournament_page_bloc
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_event.dart';
 import 'package:seating_generator_web/feature/tournament/ui/tournament_page_state.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/final_players_dialog.dart';
+import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_delete_section.dart';
 import 'package:seating_generator_web/feature/tournament/ui/widgets/tournament_menu_action.dart';
 import 'package:seating_generator_web/seating-generator-proto/mafia.pbenum.dart';
 import 'package:seating_generator_web/utils.dart';
@@ -277,6 +278,7 @@ class _TournamentSettingsPageState extends State<TournamentSettingsPage> {
                             context.backOrGoToDefault()();
                           },
                         ),
+                        const TournamentDeleteSection(),
                       ],
                     ),
                   ),

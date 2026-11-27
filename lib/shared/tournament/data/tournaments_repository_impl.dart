@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:seating_generator_web/core/network/base_repository.dart';
 import 'package:seating_generator_web/core/network/http_client.dart';
 import 'package:seating_generator_web/shared/tournament/data/requests/create_seating_request.dart';
 import 'package:seating_generator_web/shared/tournament/data/requests/create_tournament_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/delete_tournament_request.dart';
 import 'package:seating_generator_web/shared/tournament/data/requests/get_tournament_request.dart';
 import 'package:seating_generator_web/shared/tournament/data/requests/get_tournaments_request.dart';
+import 'package:seating_generator_web/shared/tournament/data/requests/tournament_can_delete_request.dart';
 import 'package:seating_generator_web/shared/tournament/data/requests/tournament_check_request.dart';
 import 'package:seating_generator_web/shared/tournament/domain/models/tournament_model.dart';
 import 'package:seating_generator_web/shared/tournament/domain/tournaments_repository.dart';
@@ -13,6 +17,8 @@ import 'package:seating_generator_web/utils.dart';
 
 class TournamentsRepositoryImpl extends BaseRepository implements TournamentsRepository {
   TournamentsRepositoryImpl(super.client);
+
+  final _deletedTournamentIds = StreamController<int>.broadcast();
 
   @override
   Future<int> createTournament({
@@ -52,6 +58,23 @@ class TournamentsRepositoryImpl extends BaseRepository implements TournamentsRep
           onError: (err) => err is UnauthenticatedError ? false : throw err,
         );
   }
+
+  @override
+  Future<bool> canDelete(int tournamentId) {
+    return TournamentCanDeleteRequest(tournamentId: tournamentId).execute(client).then(
+          (value) => value,
+          onError: (err) => err is UnauthenticatedError ? false : throw err,
+        );
+  }
+
+  @override
+  Future<void> deleteTournament(int tournamentId) async {
+    await DeleteTournamentRequest(tournamentId: tournamentId).execute(client);
+    _deletedTournamentIds.add(tournamentId);
+  }
+
+  @override
+  Stream<int> get deletedTournamentIds => _deletedTournamentIds.stream;
 }
 
 extension TournamentExt on Tournament {

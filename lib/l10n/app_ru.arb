@@ -188,6 +188,17 @@
   "@resultUnknown": {},
   "tournamentSettingsUpdateSuccess": "Настройки турнира успешно обновлены",
   "@tournamentSettingsUpdateSuccess": {},
+  "tournamentDelete": "Удалить турнир",
+  "@tournamentDelete": {},
+  "tournamentDeleteConfirm": "Турнир «{name}» будет удалён без возможности восстановления. Вместе с ним пропадут участники, рассадки, игры и результаты.",
+  "@tournamentDeleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Кубок города"
+      }
+    }
+  },
   "clubsHeader": "Клубы",
   "@clubsHeader": {},
   "addClubTitle": "Создать клуб",

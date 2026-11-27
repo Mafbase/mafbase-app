@@ -188,6 +188,17 @@
   "@resultUnknown": {},
   "tournamentSettingsUpdateSuccess": "Tournament settings successfully updated",
   "@tournamentSettingsUpdateSuccess": {},
+  "tournamentDelete": "Delete tournament",
+  "@tournamentDelete": {},
+  "tournamentDeleteConfirm": "The tournament “{name}” will be deleted permanently, along with its participants, seatings, games and results.",
+  "@tournamentDeleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "City Cup"
+      }
+    }
+  },
   "clubsHeader": "Clubs",
   "@clubsHeader": {},
   "description": "Description",
